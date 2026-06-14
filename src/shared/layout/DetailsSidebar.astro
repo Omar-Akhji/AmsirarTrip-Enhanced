@@ -1,0 +1,91 @@
+---
+interface Props {
+  sidebarTitle: string;
+  mainBrand: string;
+  intro: string;
+  details: string;
+  sidebarItems: string[];
+  conclusion: string;
+  ctaTitle: string;
+  ctaDescription: string;
+  ctaPoint01: string;
+  ctaPoint02: string;
+  ctaPoint03: string;
+}
+
+const {
+  sidebarTitle,
+  mainBrand,
+  intro,
+  details,
+  sidebarItems,
+  conclusion,
+  ctaTitle,
+  ctaDescription,
+  ctaPoint01,
+  ctaPoint02,
+  ctaPoint03,
+} = Astro.props;
+---
+
+<aside class="space-y-6 self-start lg:sticky lg:top-24">
+  <div
+    class="inline-full"
+    data-animate="fade-left"
+    data-delay="150"
+  >
+    <div class="overflow-hidden rounded-3xl bg-slate-950 text-white shadow-xl">
+      <div class="p-8">
+        <p class="text-center text-xs tracking-[0.45em] text-orange-300 uppercase">
+          {sidebarTitle}
+        </p>
+        <h3 class="mbs-2 text-center text-2xl font-semibold">{mainBrand}</h3>
+        <div
+          aria-hidden="true"
+          class="my-4 border-t border-slate-700"
+        >
+        </div>
+        <p class="mbs-2 text-sm text-slate-200">{intro}</p>
+        <p class="mbs-4 text-sm text-slate-200">{details}</p>
+        <ul class="mbs-4 grid gap-3 text-sm text-slate-100">
+          {
+            sidebarItems.map((item, index) => (
+              <li class="grid grid-cols-[40px_1fr] items-center gap-3">
+                <span class="inline-flex items-center justify-center justify-self-end rounded-full bg-orange-500 text-xs font-semibold text-white block-5 inline-5">
+                  {index + 1}
+                </span>
+                <p class="text-sm leading-relaxed">{item}</p>
+              </li>
+            ))
+          }
+        </ul>
+        <p class="mbs-4 text-sm text-slate-200">{conclusion}</p>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="inline-full"
+    data-animate="fade-left"
+    data-delay="300"
+  >
+    <div class="rounded-3xl border border-dashed border-slate-200 bg-white p-6 shadow-xs">
+      <h4 class="text-lg font-semibold text-slate-900">{ctaTitle}</h4>
+      <p class="mbs-2 text-sm text-slate-500">{ctaDescription}</p>
+      <ul class="m-0 mbs-4 grid list-none gap-3 p-0 text-sm text-slate-600">
+        <li class="grid grid-cols-[40px_1fr] items-center gap-3">
+          <span class="justify-self-end rounded-full bg-orange-500 block-2 inline-2"></span>
+          <p>{ctaPoint01}</p>
+        </li>
+        <li class="grid grid-cols-[40px_1fr] items-center gap-3">
+          <span class="justify-self-end rounded-full bg-orange-500 block-2 inline-2"></span>
+          <p>{ctaPoint02}</p>
+        </li>
+        <li class="grid grid-cols-[40px_1fr] items-center gap-3">
+          <span class="justify-self-end rounded-full bg-orange-500 block-2 inline-2"></span>
+          <p>{ctaPoint03}</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</aside>

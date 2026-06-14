@@ -1,0 +1,46 @@
+---
+import { Check } from "lucide-astro";
+
+interface Props {
+  highlights: string[];
+  overview: string;
+  highlightsTitle: string;
+  overviewTitle: string;
+}
+
+const { highlights, overview, highlightsTitle, overviewTitle } = Astro.props;
+---
+
+<div
+  data-animate="fade-up"
+  style="transition-delay:300ms"
+>
+  <div>
+    <h2 class="text-xl font-semibold text-zinc-900 sm:text-2xl md:text-3xl">{highlightsTitle}</h2>
+    <ul class="mbs-4 grid gap-3">
+      {
+        highlights.map((item) => (
+          <li class="grid grid-cols-[40px_1fr] items-center gap-4">
+            <span class="inline-flex shrink-0 items-center justify-center justify-self-end rounded-full bg-orange-500 text-white block-8 inline-8">
+              <Check
+                aria-hidden
+                class="size-4"
+              />
+            </span>
+            <p class="text-start text-sm leading-relaxed sm:text-base">{item}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</div>
+
+<div
+  data-animate="fade-up"
+  style="transition-delay:450ms"
+>
+  <div class="space-y-4">
+    <h2 class="text-xl font-semibold text-zinc-900 sm:text-2xl md:text-3xl">{overviewTitle}</h2>
+    <p class="text-sm leading-relaxed whitespace-pre-line text-zinc-600 sm:text-base">{overview}</p>
+  </div>
+</div>

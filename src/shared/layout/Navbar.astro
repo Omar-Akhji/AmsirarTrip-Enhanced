@@ -1,0 +1,288 @@
+---
+import { useTranslations } from "@/i18n/utils";
+import { setGlobalLocale } from "@/lib/hooks/useTranslation";
+import { LANGUAGES, NAV_LINKS } from "./navbar/constants";
+import { LanguageSelector } from "./navbar/LanguageSelector";
+import { MobileMenu } from "./navbar/MobileMenu";
+import SocialLinks from "./navbar/SocialLinks.astro";
+
+const locale = Astro.currentLocale || "en";
+setGlobalLocale(locale);
+const t = useTranslations(locale);
+
+const localize = (path: string) =>
+  locale === "en" ? path : `/${locale}${path === "/" ? "" : path}`;
+
+const pathname = Astro.url.pathname;
+const segments = pathname.split("/").filter(Boolean);
+const normalizedPath =
+  (LANGUAGES.some((l) => l.code === segments[0]) ?
+    "/" + segments.slice(1).join("/")
+  : pathname
+  ).replace(/\/$/, "") || "/";
+
+const isActive = (to: string) =>
+  normalizedPath === to || (to !== "/" && normalizedPath.startsWith(to + "/"));
+---
+
+<nav
+  class="navbar fixed start-1/2 top-2 z-50 translate-x-[-50%] rounded-2xl border border-white/10 px-4 py-2 shadow-[0_10px_30px_rgba(3,7,18,0.12)] backdrop-blur-xl transition-colors duration-200 will-change-auto inline-[min(1100px,calc(100%-2rem))] has-data-[state=open]:backdrop-blur-[8px]"
+  id="main-navbar"
+>
+  <div
+    class="helpline-bar relative hidden items-center justify-center px-0 py-3 pbe-5 inline-full lg:flex"
+  >
+    <a
+      aria-label={`${t("helplineTitle")} ${t("helplineNumber")}`}
+      class="absolute inset-s-4 flex gap-2.5 rounded-md text-white transition focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-white pointer-fine:hover:opacity-90"
+      href="tel:+212661173144"
+    >
+      <div
+        class="flex size-11 items-center justify-center rounded-full border-2 border-white/60 bg-white/10 text-white transition-all duration-150 pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:shadow-[0_8px_18px_rgba(0,0,0,0.28)]"
+      >
+        <img
+          alt=""
+          class="size-5 object-contain sm:size-6"
+          height={20}
+          src="/icons/nav-phone.png"
+          width={20}
+        />
+      </div>
+      <div class="leading-tight">
+        <p class="m-0 text-sm opacity-80">{t("helplineTitle")}</p>
+        <p class="m-0 text-base font-semibold">{t("helplineNumber")}</p>
+      </div>
+    </a>
+    <a
+      aria-label="Amsirar Trip Home"
+      class="text-[1.5rem] font-semibold tracking-tight text-white"
+      href={localize("/")}
+    >
+      Amsirar<span class="ms-1 font-brand font-light">Trip</span>
+    </a>
+  </div>
+
+  <div class="relative flex items-center gap-2.5 px-4 py-2">
+    <div class="me-auto hidden items-center gap-0.5 lg:flex">
+      <SocialLinks class="me-2" />
+      <LanguageSelector client:load />
+    </div>
+
+    <ul class="absolute inset-s-1/2 z-10 hidden -translate-x-1/2 items-center gap-3 lg:flex">
+      {
+        NAV_LINKS.map((link) => {
+          const active = isActive(link.to);
+          return (
+            <li>
+              <a
+                class:list={[
+                  "desktop-nav-link inline-flex items-center gap-2 rounded-full px-3 py-2 text-[0.98rem] font-medium tracking-tight transition-all duration-200",
+                  active && "desktop-nav-link-active",
+                  "pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:bg-white/10 pointer-fine:hover:shadow-[0_8px_26px_rgba(3,7,18,0.12)]",
+                ]}
+                href={localize(link.to)}
+              >
+                <span class="nav-label">{t(link.labelKey)}</span>
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+
+    <MobileMenu client:load />
+  </div>
+</nav>
+
+<style is:global>
+  .navbar {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+  }
+
+  .navbar[data-scrolled] {
+    background: white;
+    color: #0f172a;
+    box-shadow: 0 12px 30px rgba(3, 7, 18, 0.08);
+  }
+
+  .navbar[data-scrolled] .helpline-bar {
+    display: none;
+  }
+
+  .desktop-nav-link {
+    color: inherit;
+    background: transparent;
+  }
+
+  .desktop-nav-link-active {
+    background: rgba(255, 255, 255, 0.1);
+    color: white !important;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+
+  .navbar[data-scrolled] .desktop-nav-link-active {
+    background: var(--color-orange);
+    color: white !important;
+    box-shadow: 0 10px 26px rgba(229, 74, 31, 0.12);
+  }
+
+  .navbar:not([data-scrolled]) a[class*="social-link"],
+  .navbar:not([data-scrolled]) .navbar-toggle {
+    border-color: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+  }
+
+  .navbar:not([data-scrolled]) .lang-btn {
+    border-color: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+  }
+
+  .navbar[data-scrolled] .lang-btn {
+    border-color: var(--color-orange);
+    background: var(--color-orange);
+    color: white;
+    box-shadow: 0 10px 24px rgba(229, 74, 31, 0.35);
+  }
+
+  .navbar:not([data-scrolled]) .lang-dropdown {
+    border-color: rgba(255, 255, 255, 0.1);
+    background: rgba(24, 24, 27, 0.9);
+    color: white;
+  }
+
+  .navbar[data-scrolled] .lang-dropdown {
+    border-color: rgba(228, 228, 231, 0.6);
+    background: rgba(255, 255, 255, 0.9);
+    color: #18181b;
+  }
+
+  .navbar:not([data-scrolled]) .lang-dropdown-item {
+    color: #d4d4d8;
+  }
+
+  .navbar:not([data-scrolled]) .lang-dropdown-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+  }
+
+  .navbar[data-scrolled] .lang-dropdown-item {
+    color: #52525b;
+  }
+
+  .navbar[data-scrolled] .lang-dropdown-item:hover {
+    background: #f4f4f5;
+    color: #18181b;
+  }
+
+  .navbar:not([data-scrolled]) .lang-dropdown-item-selected {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+  }
+
+  .navbar[data-scrolled] .lang-dropdown-item-selected {
+    background: rgba(229, 74, 31, 0.1);
+    color: #ea580c;
+  }
+
+  .navbar:not([data-scrolled]) .lang-dropdown-dot {
+    background: white;
+  }
+
+  .navbar[data-scrolled] .lang-dropdown-dot {
+    background: var(--color-orange);
+  }
+
+  .navbar:not([data-scrolled]) .navbar-collapse {
+    border-color: rgba(255, 255, 255, 0.2);
+    background: #1f2937;
+    color: white;
+  }
+
+  .navbar[data-scrolled] .navbar-collapse {
+    border-color: rgba(255, 255, 255, 0.1);
+    background: white;
+    color: #0f172a;
+  }
+
+  .navbar:not([data-scrolled]) .navbar-link {
+    color: white;
+  }
+
+  .navbar[data-scrolled] .navbar-link {
+    color: #18181b;
+  }
+
+  .navbar:not([data-scrolled]) .navbar-trip {
+    color: white;
+  }
+
+  .navbar[data-scrolled] .navbar-trip {
+    color: var(--color-orange);
+  }
+
+  .navbar:not([data-scrolled]) .navbar-toggle {
+    background: rgba(0, 0, 0, 0.35);
+    color: white;
+  }
+
+  .navbar[data-scrolled] .navbar-toggle {
+    background: white;
+    color: #18181b;
+  }
+
+  .navbar:not([data-scrolled]) .mobile-nav-link {
+    color: white;
+    background: transparent;
+  }
+
+  .navbar:not([data-scrolled]) .mobile-nav-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .navbar:not([data-scrolled]) .mobile-nav-link-active {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+
+  .navbar[data-scrolled] .mobile-nav-link {
+    color: #0f172a;
+    background: transparent;
+  }
+
+  .navbar[data-scrolled] .mobile-nav-link:hover {
+    background: #f4f4f5;
+  }
+
+  .navbar[data-scrolled] .mobile-nav-link-active {
+    background: var(--color-orange);
+    color: white;
+    box-shadow: 0 10px 26px rgba(229, 74, 31, 0.12);
+  }
+
+  .navbar:not([data-scrolled]) .navbar-mobile-social {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .navbar[data-scrolled] .navbar-mobile-social {
+    border-bottom: 1px solid rgba(228, 228, 231, 0.3);
+  }
+
+  @media (min-width: 768px) and (max-width: 1089px) {
+    .navbar-collapse {
+      inset-inline-end: 0.25rem !important;
+      inset-inline-start: auto !important;
+      translate: 0 !important;
+      inline-size: 50% !important;
+    }
+  }
+</style>
+
+<script src="../../scripts/navbar-scroll.ts"></script>

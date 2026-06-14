@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+
+# Build and cache outputs
+dist/
+.astro/
+
+# AI and local workspace agents/caches
+.gemini/
+.kiro/
+.agent/
+.agents/
+
+# Lockfiles and TS build cache
+bun.lock
+bun.lockb
+tsconfig.tsbuildinfo
+
+# Static assets and public files
+public/

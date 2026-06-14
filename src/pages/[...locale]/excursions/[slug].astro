@@ -1,0 +1,65 @@
+---
+import BookingForm from "../../../features/booking/components/BookingForm";
+import ExcursionLayout from "../../../features/excursions/components/ExcursionLayout.astro";
+import {
+  getExcursionBySlug,
+  getExcursionSlugs,
+} from "../../../features/excursions/data/excursionsMetadata";
+import { useTranslations } from "../../../i18n/utils";
+import Layout from "../../../layouts/Layout.astro";
+import { generateExcursionJsonLd } from "../../../lib/structuredData";
+import JsonLd from "../../../shared/ui/JsonLd.astro";
+
+const { slug } = Astro.params;
+const locale = Astro.currentLocale || "en";
+
+const slugs = getExcursionSlugs();
+const matchedSlug = slugs.find((s) => s.toLowerCase() === (slug || "").toLowerCase());
+const excursion = matchedSlug ? getExcursionBySlug(matchedSlug) : undefined;
+
+if (!excursion) {
+  Astro.response.status = 404;
+  // eslint-disable-next-line unicorn/prefer-module
+  return Astro.redirect("/404");
+}
+
+const t = useTranslations(locale);
+const keyPrefix = `excursion.list.${excursion.i18nKeyPrefix}`;
+
+const title = t(`${keyPrefix}.title`);
+const description = t(`${keyPrefix}.description`) + " " + t(`${keyPrefix}.tagline`);
+
+const excursionJsonLd = generateExcursionJsonLd({
+  name: excursion.jsonLd.name,
+  description: excursion.jsonLd.description,
+  provider: "Amsirar Trip",
+  image: `https://amsirartrip.com${excursion.image}`,
+  duration: excursion.duration,
+  location: { point: excursion.location },
+  url: `https://amsirartrip.com/excursions/${excursion.slug}`,
+});
+
+const excursionTitleClean = t(`${keyPrefix}.title`);
+---
+
+<Layout
+  description={description}
+  title={title}
+>
+  <JsonLd
+    data={excursionJsonLd}
+    id={`${excursion.excursionKey}-jsonld`}
+  />
+  <ExcursionLayout
+    excursionKey={excursion.excursionKey}
+    imageSrc={excursion.image}
+    locale={locale}
+  >
+    <BookingForm
+      client:only="react"
+      excursionId={String(excursion.bookingId)}
+      excursionTitle={excursionTitleClean}
+      fullWidth
+    />
+  </ExcursionLayout>
+</Layout>

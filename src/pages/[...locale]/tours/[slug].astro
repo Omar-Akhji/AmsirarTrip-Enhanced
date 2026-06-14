@@ -1,0 +1,99 @@
+---
+import BookingForm from "../../../features/booking/components/BookingForm";
+import TourLayout from "../../../features/tours/components/TourLayout.astro";
+import { getTourBySlug, getTourSlugs } from "../../../features/tours/data/toursMetadata";
+import { useTranslations } from "../../../i18n/utils";
+import Layout from "../../../layouts/Layout.astro";
+import { generateFaqJsonLd, generateTourJsonLd } from "../../../lib/structuredData";
+import JsonLd from "../../../shared/ui/JsonLd.astro";
+
+const { slug } = Astro.params;
+const locale = Astro.currentLocale || "en";
+
+const slugs = getTourSlugs();
+const matchedSlug = slugs.find((s) => s.toLowerCase() === (slug || "").toLowerCase());
+const tour = matchedSlug ? getTourBySlug(matchedSlug) : undefined;
+
+if (!tour) {
+  Astro.response.status = 404;
+  // eslint-disable-next-line unicorn/prefer-module
+  return Astro.redirect("/404");
+}
+
+const t = useTranslations(locale);
+const isEnglish = locale === "en";
+
+const title =
+  isEnglish ?
+    tour.seo.title
+  : `${t(`${tour.tourKey}.title`)} (${tour.durationDays} ${t("tours.days")})`;
+
+const description =
+  isEnglish ?
+    tour.seo.metaDescription
+  : `${t("tours." + tour.tourKey + ".description")} ${t(`${tour.tourKey}.overview`)}`;
+
+const itinerary = Array.from({ length: tour.durationDays }, (_, index) => {
+  const dayNumber = index + 1;
+  const dayKey = `${tour.tourKey}.day${dayNumber}`;
+  let name = `Day ${dayNumber}`;
+  let dayDesc = "";
+
+  try {
+    name = t(`${dayKey}.title`);
+  } catch {}
+
+  try {
+    const dayText = t.raw(`${dayKey}.text`);
+    if (Array.isArray(dayText)) {
+      dayDesc = dayText.slice(0, 2).join(" ");
+    }
+  } catch {}
+
+  return { position: dayNumber, name: `Day ${dayNumber}: ${name}`, description: dayDesc };
+});
+
+const tourJsonLd = generateTourJsonLd({
+  name: tour.jsonLd.name,
+  description: tour.seo.lead || tour.jsonLd.description,
+  provider: "Amsirar Trip",
+  image: `https://amsirartrip.com${tour.image}`,
+  price: tour.jsonLd.price,
+  currency: tour.jsonLd.currency,
+  duration: tour.duration,
+  location: { start: tour.startLocation, end: tour.endLocation },
+  url: `https://amsirartrip.com/tours/${slug}`,
+  itinerary,
+});
+
+const faqJsonLd = generateFaqJsonLd(tour.seo.faqs);
+const tourTitleClean = isEnglish ? tour.seo.title : t(`${tour.tourKey}.title`);
+---
+
+<Layout
+  description={description}
+  title={title}
+>
+  <JsonLd
+    data={tourJsonLd}
+    id={`${tour.tourKey}-jsonld`}
+  />
+  <JsonLd
+    data={faqJsonLd}
+    id={`${tour.tourKey}-faq-jsonld`}
+  />
+  <TourLayout
+    bookingId={tour.bookingId}
+    imageSrc={tour.image}
+    locale={locale}
+    seo={tour.seo}
+    tourKey={tour.tourKey}
+  >
+    <BookingForm
+      client:only="react"
+      fullWidth
+      tourId={tour.bookingId.toString()}
+      tourTitle={tourTitleClean}
+    />
+  </TourLayout>
+</Layout>

@@ -1,0 +1,110 @@
+---
+import { useTranslations } from "@/i18n/utils";
+import Image from "@/shared/ui/Image";
+
+const locale = Astro.currentLocale || "en";
+const t = useTranslations(locale);
+
+const cities = [
+  {
+    key: "marrakech",
+    image: "/images/Home/Marrakech-tourist.webp",
+    titleKey: "featured.cards.marrakech.title",
+    descriptionKey: "featured.marrakech.description",
+    altKey: "featured.cards.marrakech.alt",
+  },
+  {
+    key: "casablanca",
+    image: "/images/Home/Casablanca-tourist.webp",
+    titleKey: "featured.cards.casablanca.title",
+    descriptionKey: "featured.casablanca.description",
+    altKey: "featured.cards.casablanca.alt",
+  },
+  {
+    key: "fez",
+    image: "/images/Home/Fez-tourist.webp",
+    titleKey: "featured.cards.fez.title",
+    descriptionKey: "featured.fez.description",
+    altKey: "featured.cards.fez.alt",
+  },
+  {
+    key: "dadesValley",
+    image: "/images/Home/valley-tourisit.webp",
+    titleKey: "featured.cards.dadesValley.title",
+    descriptionKey: "featured.dadesValley.description",
+    altKey: "featured.cards.dadesValley.alt",
+  },
+  {
+    key: "chefchaouen",
+    image: "/images/Home/Chefchaouen-tourist.webp",
+    titleKey: "featured.cards.chefchaouen.title",
+    descriptionKey: "featured.chefchaouen.description",
+    altKey: "featured.cards.chefchaouen.alt",
+  },
+  {
+    key: "rabat",
+    image: "/images/Home/Rabat-tourist.webp",
+    titleKey: "featured.cards.rabat.title",
+    descriptionKey: "featured.rabat.description",
+    altKey: "featured.cards.rabat.alt",
+  },
+];
+---
+
+<section
+  aria-labelledby="featured-heading"
+  class="relative isolate overflow-hidden bg-neutral-50 py-24 text-neutral-900"
+  id="featured"
+>
+  <div
+    aria-hidden="true"
+    class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(248,250,252,0.3),transparent_70%)]"
+  >
+  </div>
+  <div class="relative z-10 mx-auto px-4 max-inline-7xl">
+    <div class="mx-auto mbe-16 space-y-4 text-center max-inline-4xl">
+      <p
+        class="inline-flex items-center justify-center rounded-full border-2 border-orange-400 px-6 py-3 text-sm font-semibold tracking-[0.45em] text-orange-600 uppercase"
+      >
+        {t("featured.smTitle")}
+      </p>
+      <h2
+        class="mt-6 text-2xl leading-tight font-semibold tracking-widest text-neutral-900 uppercase text-shadow-md sm:text-3xl sm:tracking-[0.15em] md:text-4xl md:tracking-[0.2em]"
+        id="featured-heading"
+      >
+        {t("featured.lgTitle")}
+      </h2>
+      <div
+        aria-hidden="true"
+        class="mx-auto mbs-4 rounded-full bg-orange-500 block-1 inline-20"
+      >
+      </div>
+    </div>
+
+    <div class="featured-row grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
+      {
+        cities.map((city, index) => (
+          <div
+            class="block-75 inline-full"
+            data-animate="fade-up"
+            style={`transition-delay: ${index * 150}ms`}
+          >
+            <article class="card-article relative block overflow-hidden rounded-xl block-full inline-full">
+              <Image
+                alt={t(city.altKey)}
+                className="card-img object-cover"
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1090px) 50vw, 33vw"
+                src={city.image}
+              />
+              <div class="card-data">
+                <h3 class="card-title text-shadow-md">{t(city.titleKey)}</h3>
+                <p class="card-text">{t(city.descriptionKey)}</p>
+              </div>
+            </article>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

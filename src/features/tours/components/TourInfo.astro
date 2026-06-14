@@ -1,0 +1,90 @@
+---
+import { Check } from "lucide-astro";
+
+interface Props {
+  includes: string;
+  excludes: string;
+  goodToKnow: string;
+  includedTitle: string;
+  excludedTitle: string;
+  goodToKnowTitle: string;
+}
+
+const { includes, excludes, goodToKnow, includedTitle, excludedTitle, goodToKnowTitle } =
+  Astro.props;
+---
+
+{
+  includes && (
+    <div data-animate="fade-up">
+      <div>
+        <h2 class="mbe-4 text-xl font-semibold text-zinc-900 sm:text-2xl md:text-3xl">
+          {includedTitle}
+        </h2>
+        <div class="rounded-lg border border-green-200 bg-green-50 p-6">
+          <ul class="space-y-2">
+            {includes.split("\n").map((item: string) => (
+              <li class="flex items-start gap-3">
+                <span class="mbs-0.5 inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-green-500 text-xs text-white">
+                  <Check
+                    aria-hidden
+                    class="size-3"
+                  />
+                </span>
+                <span class="flex-1 text-start text-sm text-neutral-700 sm:text-base">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+{
+  excludes && (
+    <div data-animate="fade-up">
+      <div class="mbs-8">
+        <h2 class="mbe-4 text-xl font-semibold text-zinc-900 sm:text-2xl md:text-3xl">
+          {excludedTitle}
+        </h2>
+        <div class="rounded-lg border border-red-200 bg-red-50 p-6">
+          <ul class="space-y-2">
+            {excludes.split("\n").map((item: string) => (
+              <li class="flex items-start gap-3">
+                <span class="mbs-0.5 inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-red-500 text-xs text-white">
+                  ✕
+                </span>
+                <span class="flex-1 text-start text-sm text-neutral-700 sm:text-base">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+{
+  goodToKnow && (
+    <div data-animate="fade-up">
+      <div class="mbs-8">
+        <h2 class="mbe-4 text-xl font-semibold text-zinc-900 sm:text-2xl md:text-3xl">
+          {goodToKnowTitle}
+        </h2>
+        <div class="rounded-lg border border-blue-200 bg-blue-50 p-6">
+          <ul class="space-y-2">
+            {goodToKnow.split("\n").map((item: string) => (
+              <li class="flex items-start gap-3">
+                <span class="mbs-0.5 inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-blue-500 text-xs font-bold text-white">
+                  i
+                </span>
+                <span class="flex-1 text-start text-sm text-neutral-700 sm:text-base">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  )
+}

@@ -1,0 +1,18 @@
+---
+import ToursView from "../../../features/tours/components/ToursView.astro";
+import { useTranslations } from "../../../i18n/utils";
+import Layout from "../../../layouts/Layout.astro";
+
+const locale = Astro.currentLocale || "en";
+const t = useTranslations(locale);
+
+const title = t("tours.meta.title");
+const description = t("tours.meta.description");
+---
+
+<Layout
+  description={description}
+  title={title}
+>
+  <ToursView />
+</Layout>

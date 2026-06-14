@@ -1,0 +1,21 @@
+{
+  "name": "Amsirar Trip - Morocco Travel & Tours",
+  "short_name": "Amsirar Trip",
+  "description": "Discover the magic of Morocco with our authentic desert tours, cultural excursions, and adventure experiences",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ea580c",
+  "icons": [
+    { "src": "/favicon.png", "sizes": "1024x1024", "type": "image/png", "purpose": "any" },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    { "src": "/horse-head.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ],
+  "categories": ["travel", "tourism"],
+  "lang": "en"
+}

@@ -1,0 +1,138 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import Image from "@/shared/ui/Image";
+
+type Breadcrumb = { label: string; href?: string };
+
+interface Props {
+  title: string;
+  subtitle?: string;
+  smTitle?: string;
+  headingId?: string;
+  gradientPosition?: "top" | "top-right" | "center";
+  bgImage?: string;
+  breadcrumbs?: Breadcrumb[];
+}
+
+const {
+  title,
+  subtitle,
+  smTitle,
+  headingId,
+  gradientPosition = "top",
+  bgImage,
+  breadcrumbs,
+} = Astro.props;
+
+const locale = Astro.currentLocale || "en";
+
+let gradientValue = "bg-[radial-gradient(circle_at_top,rgba(249,115,22,0.35),transparent_65%)]";
+if (gradientPosition === "top-right") {
+  gradientValue = "bg-[radial-gradient(circle_at_top_right,rgba(249,115,22,0.35),transparent_65%)]";
+} else if (gradientPosition === "center") {
+  gradientValue = "bg-[radial-gradient(circle_at_center,rgba(249,115,22,0.35),transparent_65%)]";
+}
+---
+
+<header
+  class="page-hero relative isolate overflow-hidden bg-zinc-950 text-white shadow-xl inline-full min-block-[40vh] sm:min-block-[45vh] lg:min-block-[50vh]"
+>
+  {
+    bgImage ?
+      <Image
+        alt=""
+        className="-z-30 object-cover"
+        fill
+        priority
+        quality={85}
+        sizes="100vw"
+        src={bgImage}
+      />
+    : null
+  }
+
+  <div
+    aria-hidden="true"
+    class:list={[`absolute inset-0`, `${gradientValue}`]}
+  >
+  </div>
+  <div
+    aria-hidden="true"
+    class="absolute inset-0 z-10 bg-linear-to-br from-zinc-900/80 via-zinc-900/60 to-zinc-900 opacity-80"
+  >
+  </div>
+  <div
+    aria-hidden="true"
+    class="absolute inset-0 z-10 bg-linear-to-br from-black/60 via-black/20 to-transparent"
+  >
+  </div>
+
+  <div
+    class="relative z-20 mx-auto flex flex-col items-center justify-center gap-12 px-4 pbs-8 pbe-16 text-center inline-full max-inline-7xl lg:py-20"
+  >
+    <div class="flex-1 space-y-6 pbs-0 text-center lg:pbs-8">
+      {
+        breadcrumbs && breadcrumbs.length > 0 ?
+          <nav
+            aria-label="Breadcrumb"
+            class="mbe-8 flex items-center justify-center gap-3"
+          >
+            <div class="flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 py-2 backdrop-blur-md">
+              {breadcrumbs.map((crumb, index) => (
+                <>
+                  {crumb.href ?
+                    <a
+                      class="text-sm font-medium text-white/80 transition-colors pointer-fine:hover:text-white"
+                      href={getRelativeLocaleUrl(locale, crumb.href)}
+                    >
+                      {crumb.label}
+                    </a>
+                  : <span class="text-sm font-semibold text-orange-300">{crumb.label}</span>}
+                  {index < breadcrumbs.length - 1 && (
+                    <svg
+                      class="size-3 text-white/40"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M9 5l7 7-7 7"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                      />
+                    </svg>
+                  )}
+                </>
+              ))}
+            </div>
+          </nav>
+        : null
+      }
+
+      {
+        smTitle && !breadcrumbs ?
+          <div class="flex items-center justify-center gap-4">
+            <span class="bg-orange-400/60 block-px inline-8" />
+            <p class="text-xs font-bold tracking-[0.2em] text-orange-300 uppercase sm:tracking-[0.3em]">
+              {smTitle}
+            </p>
+            <span class="bg-orange-400/60 block-px inline-8" />
+          </div>
+        : null
+      }
+
+      <h1
+        class="lg:text-shadow-xl text-3xl font-semibold tracking-widest text-orange-200 uppercase text-shadow-black/60 text-shadow-lg sm:text-4xl sm:tracking-[0.15em] lg:text-5xl lg:tracking-[0.2em] lg:text-shadow-black/60"
+        id={headingId}
+      >
+        {title}
+      </h1>
+
+      {subtitle ? <p class="font-fancy text-lg text-zinc-200 lg:text-xl">{subtitle}</p> : null}
+      <div class="flex flex-wrap items-center justify-center gap-4 pbs-2">
+        <slot />
+      </div>
+    </div>
+  </div>
+</header>

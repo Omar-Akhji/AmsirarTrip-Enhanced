@@ -1,0 +1,28 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { useTranslations } from "@/i18n/utils";
+
+const locale = Astro.currentLocale || "en";
+const t = useTranslations(locale);
+---
+
+<div class="lg:col-span-1">
+  <a
+    aria-label="Amsirar Trip homepage"
+    class="group mbe-2 inline-flex items-center gap-1"
+    href={getRelativeLocaleUrl(locale, "/")}
+  >
+    <span
+      class="text-3xl font-bold tracking-tight text-white transition-transform duration-300 group-hover:scale-105"
+      >Amsirar</span
+    >
+    <span
+      class="font-brand text-3xl text-orange transition-all duration-300 group-hover:text-amber-400"
+      >Trip</span
+    >
+  </a>
+  <span class="mbe-6 block rounded bg-orange block-1 inline-12"></span>
+  <p class="font-fancy text-xl leading-relaxed text-zinc-400 lg:max-inline-sm">
+    {t("footer.description")}
+  </p>
+</div>

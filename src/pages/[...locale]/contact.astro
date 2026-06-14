@@ -1,0 +1,21 @@
+---
+import ContactForm from "../../features/contact/components/ContactForm";
+import ContactView from "../../features/contact/components/ContactView.astro";
+import { useTranslations } from "../../i18n/utils";
+import Layout from "../../layouts/Layout.astro";
+
+const locale = Astro.currentLocale || "en";
+const t = useTranslations(locale);
+
+const title = t("contact.meta.title");
+const description = t("contact.meta.description");
+---
+
+<Layout
+  description={description}
+  title={title}
+>
+  <ContactView>
+    <ContactForm client:only="react" />
+  </ContactView>
+</Layout>

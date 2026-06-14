@@ -1,0 +1,82 @@
+---
+import { Mail, MapPin, Phone, Smartphone } from "lucide-astro";
+import { useTranslations } from "@/i18n/utils";
+
+const locale = Astro.currentLocale || "en";
+const t = useTranslations(locale);
+---
+
+<div class="space-y-6 lg:col-span-1">
+  <h3 class="mbe-2 text-sm font-semibold tracking-wider text-white uppercase">
+    {t("footer.office")}
+  </h3>
+  <span class="mbe-6 block rounded bg-orange block-1 inline-12"></span>
+  <address class="not-italic">
+    <ul class="space-y-4">
+      <li class="group grid grid-cols-[36px_1fr] items-start gap-x-3">
+        <div
+          class="flex size-9 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 text-orange transition-colors duration-300 group-hover:bg-orange/10"
+        >
+          <MapPin
+            class="size-4"
+            stroke-width={1.5}
+          />
+        </div>
+        <p class="text-sm leading-relaxed text-zinc-400 max-inline-67.5">
+          Imm. J appt N° 5, Résidence La Perle de l'Atlas, angle Rue aboubakr, Marrakech
+        </p>
+      </li>
+
+      <li class="group grid grid-cols-[36px_1fr] items-center gap-x-3">
+        <div
+          class="flex size-9 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 text-orange transition-colors duration-300 group-hover:bg-orange/10"
+        >
+          <Mail
+            class="size-4"
+            stroke-width={1.5}
+          />
+        </div>
+        <a
+          class="break-anywhere text-sm text-zinc-400 transition-colors duration-300 pointer-fine:hover:text-orange"
+          href="mailto:amsirare@gmail.com"
+        >
+          amsirare@gmail.com
+        </a>
+      </li>
+
+      <li class="group grid grid-cols-[36px_1fr] items-center gap-x-3">
+        <div
+          class="flex size-9 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 text-orange transition-colors duration-300 group-hover:bg-orange/10"
+        >
+          <Smartphone
+            class="size-4"
+            stroke-width={1.5}
+          />
+        </div>
+        <a
+          class="text-sm text-zinc-400 transition-colors duration-300 pointer-fine:hover:text-orange"
+          href="tel:+212661173144"
+        >
+          +212 (0) 6 61 17 31 44
+        </a>
+      </li>
+
+      <li class="group grid grid-cols-[36px_1fr] items-center gap-x-3">
+        <div
+          class="flex size-9 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 text-orange transition-colors duration-300 group-hover:bg-orange/10"
+        >
+          <Phone
+            class="size-4"
+            stroke-width={1.5}
+          />
+        </div>
+        <a
+          class="text-sm text-zinc-400 transition-colors duration-300 pointer-fine:hover:text-orange"
+          href="tel:+21205661731444"
+        >
+          +212 (0) 5 6 61 73 14 44
+        </a>
+      </li>
+    </ul>
+  </address>
+</div>

@@ -1,0 +1,247 @@
+---
+import "../styles/global.css";
+import { ClientRouter } from "astro:transitions";
+import { setGlobalLocale } from "../lib/hooks/useTranslation";
+import { generateOrganizationJsonLd, generateWebsiteJsonLd } from "../lib/structuredData";
+import Footer from "../shared/layout/Footer.astro";
+import Navbar from "../shared/layout/Navbar.astro";
+import JsonLd from "../shared/ui/JsonLd.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Amsirar Trip — Morocco Tours & Desert Adventures",
+  description = "Explore Morocco with local experts. Authentic Sahara desert tours, imperial city excursions, Atlas Mountains treks, and private guided experiences. 20+ years serving travelers. Book your dream Morocco adventure today.",
+} = Astro.props;
+
+const locale = Astro.currentLocale || "en";
+
+setGlobalLocale(locale);
+
+const site = Astro.site!;
+const pathname = Astro.url.pathname;
+
+const segments = pathname.replace(/^\/+/, "").split("/").filter(Boolean);
+const baseSegments = locale === "en" ? segments : segments.slice(1);
+const basePath = "/" + baseSegments.join("/");
+
+const canonicalURL = new URL(basePath, site).href;
+const defaultOgImage = new URL("/images/Header/header-1.webp", site).href;
+
+const LOCALES = ["en", "fr", "de", "es"] as const;
+const DEFAULT_LOCALE = "en";
+---
+
+<!doctype html>
+<html
+  class="no-js"
+  itemscope
+  itemtype="https://schema.org/WebPage"
+  lang={locale}
+>
+  <head>
+    <meta charset="UTF-8" />
+    <script src="../scripts/no-js.ts"></script>
+
+    <ClientRouter />
+    <meta
+      content="width=device-width, initial-scale=1.0"
+      name="viewport"
+    />
+    <meta
+      content={Astro.generator}
+      name="generator"
+    />
+    <meta
+      content="#f97316"
+      name="theme-color"
+    />
+
+    <title>{title}</title>
+    <meta
+      content={description}
+      name="description"
+    />
+
+    <meta
+      content={title}
+      property="og:title"
+    />
+    <meta
+      content={description}
+      property="og:description"
+    />
+    <meta
+      content={defaultOgImage}
+      property="og:image"
+    />
+    <meta
+      content={canonicalURL}
+      property="og:url"
+    />
+    <meta
+      content="website"
+      property="og:type"
+    />
+    <meta
+      content={locale}
+      property="og:locale"
+    />
+
+    <meta
+      content="summary_large_image"
+      name="twitter:card"
+    />
+    <meta
+      content={title}
+      name="twitter:title"
+    />
+    <meta
+      content={description}
+      name="twitter:description"
+    />
+    <meta
+      content={defaultOgImage}
+      name="twitter:image"
+    />
+
+    <link
+      href={canonicalURL}
+      rel="canonical"
+    />
+
+    {
+      LOCALES.map((l) => {
+        const href = l === DEFAULT_LOCALE ? canonicalURL : new URL(`/${l}${basePath}`, site).href;
+        return (
+          <link
+            href={href}
+            hreflang={l}
+            rel="alternate"
+          />
+        );
+      })
+    }
+    <link
+      href={canonicalURL}
+      hreflang="x-default"
+      rel="alternate"
+    />
+
+    <link
+      href="/sitemap-index.xml"
+      rel="sitemap"
+    />
+
+    <link
+      href="/favicon.png"
+      rel="icon"
+      type="image/png"
+    />
+    <link
+      href="/horse-head.svg"
+      rel="icon"
+      type="image/svg+xml"
+    />
+    <link
+      href="/favicon.png"
+      rel="shortcut icon"
+    />
+    <link
+      href="/icons/icon-512.png"
+      rel="apple-touch-icon"
+    />
+    <link
+      href="/site.webmanifest"
+      rel="manifest"
+    />
+
+    <link
+      as="image"
+      href="/images/Header/header-1.webp"
+      rel="preload"
+      type="image/webp"
+    />
+
+    <JsonLd
+      data={generateOrganizationJsonLd()}
+      id="organization-jsonld"
+    />
+    <JsonLd
+      data={generateWebsiteJsonLd()}
+      id="website-jsonld"
+    />
+  </head>
+  <body>
+    <div
+      class="fixed inset-0 z-999999 flex items-center justify-center bg-zinc-100"
+      id="initial-loader"
+      transition:persist
+    >
+      <svg
+        class="origin-center animate-loader-rotate block-12 inline-12"
+        height="48px"
+        width="48px"
+      >
+        <circle
+          cx="24"
+          cy="24"
+          fill="none"
+          r="22"
+          stroke="var(--color-light-grey-alt2)"
+          stroke-width="4"
+        ></circle>
+        <circle
+          class="animate-loader-dash stroke-orange-500"
+          cx="24"
+          cy="24"
+          fill="none"
+          r="22"
+          stroke-dasharray="1 200"
+          stroke-dashoffset="0"
+          stroke-linecap="round"
+          stroke-width="4"
+        ></circle>
+      </svg>
+    </div>
+    <script src="../scripts/loader.ts"></script>
+
+    <Navbar />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+
+    <a
+      aria-label="Contact us on WhatsApp"
+      class="fixed inset-e-6 bottom-6 z-50 flex items-center justify-center rounded-full border-[3px] border-whatsapp bg-white text-whatsapp shadow-lg transition-all duration-300 block-16 inline-16 pointer-fine:hover:scale-110 pointer-fine:hover:shadow-xl pointer-fine:hover:brightness-110"
+      href="https://wa.me/212661173144"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      <span
+        aria-hidden="true"
+        class="absolute inset-0 -z-10 animate-ping rounded-full bg-whatsapp opacity-20 duration-1000"
+      ></span>
+      <img
+        alt="WhatsApp"
+        class="size-10"
+        height={40}
+        src="/icons/whatsapp.svg"
+        width={40}
+      />
+    </a>
+  </body>
+</html>
+
+<style is:global>
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    min-height: 100%;
+  }
+</style>

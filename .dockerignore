@@ -1,0 +1,10 @@
+.DS_Store
+node_modules
+dist
+.astro
+.git
+.gitignore
+.env
+.env.production
+*.md
+.DS_Store

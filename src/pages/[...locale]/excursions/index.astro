@@ -1,0 +1,18 @@
+---
+import ExcursionView from "../../../features/excursions/components/ExcursionsView.astro";
+import { useTranslations } from "../../../i18n/utils";
+import Layout from "../../../layouts/Layout.astro";
+
+const locale = Astro.currentLocale || "en";
+const t = useTranslations(locale);
+
+const title = t("excursion.meta.title");
+const description = t("excursion.meta.description");
+---
+
+<Layout
+  description={description}
+  title={title}
+>
+  <ExcursionView />
+</Layout>

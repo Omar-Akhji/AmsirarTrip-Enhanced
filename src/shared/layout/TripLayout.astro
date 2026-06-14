@@ -1,0 +1,122 @@
+---
+import DetailsSidebar from "@/shared/layout/DetailsSidebar.astro";
+import PageHeader from "@/shared/layout/PageHeader.astro";
+import Image from "@/shared/ui/Image";
+
+interface SidebarProps {
+  sidebarTitle: string;
+  mainBrand: string;
+  intro: string;
+  details: string;
+  sidebarItems: string[];
+  conclusion: string;
+  ctaTitle: string;
+  ctaDescription: string;
+  ctaPoint01: string;
+  ctaPoint02: string;
+  ctaPoint03: string;
+}
+
+interface Props {
+  title: string;
+  pageTitle: string;
+  pageSubtitle: string;
+  smTitle: string;
+  breadcrumbs: { label: string; href?: string }[];
+  imageSrc: string;
+  imageAlt: string;
+  sectionId: string;
+  headingId: string;
+  sidebar: SidebarProps;
+}
+
+const {
+  title,
+  pageTitle,
+  pageSubtitle,
+  smTitle,
+  breadcrumbs,
+  imageSrc,
+  imageAlt,
+  sectionId,
+  headingId,
+  sidebar,
+} = Astro.props;
+const sl = Astro.slots.has("default");
+---
+
+<PageHeader
+  bgImage="/images/Header/header-1.webp"
+  breadcrumbs={breadcrumbs}
+  smTitle={smTitle}
+  subtitle={pageSubtitle}
+  title={pageTitle}
+/>
+
+<main>
+  <section
+    aria-labelledby={headingId}
+    class="py-14"
+    id={sectionId}
+  >
+    <div class="mx-auto grid gap-10 px-4 max-inline-7xl lg:grid-cols-[4fr_2fr]">
+      <article
+        class="rounded-[20px] bg-white p-4 pbe-8 shadow-xs ring-1 ring-zinc-100 sm:p-6 sm:pbe-12"
+      >
+        <div data-animate="zoom-in">
+          <figure
+            class="relative mbe-8 aspect-4/3 overflow-hidden rounded-[20px] border border-zinc-50 shadow-md inline-full"
+          >
+            <Image
+              alt={imageAlt}
+              className="object-cover"
+              fill
+              priority
+              sizes="(max-width: 1024px) 100vw, 66vw"
+              src={imageSrc}
+            />
+          </figure>
+        </div>
+
+        <div
+          data-animate="fade-up"
+          style="transition-delay:150ms"
+        >
+          <div class="mbe-6 text-center">
+            <div class="mx-auto inline-block">
+              <span
+                aria-hidden="true"
+                class="mbe-3 hidden rounded-full bg-amber-300 block-1 inline-16 sm:block"
+              ></span>
+              <h2
+                class="mbs-2 text-2xl leading-tight font-semibold text-amber-600 sm:text-3xl md:text-4xl"
+                id={headingId}
+              >
+                {title}
+              </h2>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-8">
+          <slot name="content" />
+        </div>
+      </article>
+
+      <DetailsSidebar
+        conclusion={sidebar.conclusion}
+        ctaDescription={sidebar.ctaDescription}
+        ctaPoint01={sidebar.ctaPoint01}
+        ctaPoint02={sidebar.ctaPoint02}
+        ctaPoint03={sidebar.ctaPoint03}
+        ctaTitle={sidebar.ctaTitle}
+        details={sidebar.details}
+        intro={sidebar.intro}
+        mainBrand={sidebar.mainBrand}
+        sidebarItems={sidebar.sidebarItems}
+        sidebarTitle={sidebar.sidebarTitle}
+      />
+    </div>
+  </section>
+  {sl && <slot />}
+</main>

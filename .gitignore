@@ -1,0 +1,55 @@
+# Build output
+dist/
+dist-*
+
+# Generated types and cache
+.astro/
+.cache/
+.vite/
+.eslintcache
+
+# Dependencies
+node_modules/
+
+# Logs and databases
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+bun-debug.log*
+*.local.db
+*.sqlite
+
+# Environment variables
+.env
+.env.local
+.env.production
+.env.production.local
+.env.development.local
+.env.test.local
+.env*.local
+
+# macOS/Windows system files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDEs and Editors
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# AI Agents & Tooling (Kiro, Junie, MiMo, etc.)
+.agents/
+.kiro/
+.junie/
+

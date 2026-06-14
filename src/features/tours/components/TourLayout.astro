@@ -1,0 +1,179 @@
+---
+import { useTranslations } from "@/i18n/utils";
+import TripLayout from "@/shared/layout/TripLayout.astro";
+import { TOURS_DATA } from "../data/toursData";
+import type { TourSeoContent } from "../data/toursMetadata";
+import TourInfo from "./TourInfo.astro";
+import TourItinerary from "./TourItinerary.astro";
+import TourSeoSections from "./TourSeoSections.astro";
+
+interface Props {
+  tourKey: string;
+  bookingId: number;
+  imageSrc: string;
+  seo: TourSeoContent;
+  locale: string;
+}
+
+const { tourKey, bookingId, imageSrc, seo, locale } = Astro.props;
+const t = useTranslations(locale);
+
+const tourData = TOURS_DATA.find((tour) => tour.id === bookingId);
+
+const rawSidebarItems = t.raw("tours.sidebar.items");
+const sidebarItems = Array.isArray(rawSidebarItems) ? (rawSidebarItems as string[]) : [];
+
+const title = t(`${tourKey}.title`);
+const overview = t(`${tourKey}.overview`);
+const includes = t(`${tourKey}.includes`);
+const excludes = t(`${tourKey}.excludes`);
+const goodToKnow = t(`${tourKey}.goodToKnow`);
+const endCity = t(tourData?.end || "tours.cities.marrakech");
+const startCity = t(tourData?.start || "tours.cities.marrakech");
+
+const highlightsTitle = t("tours.highlightsTitle", "Tour Highlights");
+const pricingTitle = t("tours.pricingTitle", "Pricing & Booking");
+const priceLabel = t("tours.priceLabel", "Starting price");
+const faqTitle = t("tours.faqTitle", "Frequently Asked Questions");
+const reserveNow = t("booking.checkAvailability", "Reserve Now");
+const pageTitle = locale === "en" ? seo.title : title;
+const pageSubtitle = locale === "en" ? seo.lead : overview;
+
+const accommodationLabel = t("tours.accommodationLabel");
+const mealsLabel = t("tours.mealsLabel");
+const activitiesLabel = t("tours.activitiesLabel");
+const arrivalLabel = t("tours.arrivalLabel");
+
+const days = [];
+const duration = tourData?.duration || 3;
+for (let index = 1; index <= duration; index++) {
+  const dayKey = `${tourKey}.day${index}`;
+  let dayTitle = t.has(`${dayKey}.title`) ? t(`${dayKey}.title`) : `Day ${index}`;
+  if (!dayTitle || dayTitle === `${dayKey}.title`) {
+    dayTitle = `Day ${index}`;
+  }
+  const rawDayText = t.raw(`${dayKey}.text`);
+  const dayText = Array.isArray(rawDayText) ? (rawDayText as string[]) : [];
+
+  let accommodation = "";
+  let meals = "";
+  let activities = "";
+  let arrival = "";
+
+  if (t.has(`${dayKey}.accommodation`)) {
+    accommodation = t(`${dayKey}.accommodation`);
+  }
+  if (t.has(`${dayKey}.meals`)) {
+    meals = t(`${dayKey}.meals`);
+  }
+  if (t.has(`${dayKey}.activities`)) {
+    activities = t(`${dayKey}.activities`);
+  }
+  if (t.has(`${dayKey}.arrival`)) {
+    arrival = t(`${dayKey}.arrival`);
+  }
+
+  if (dayTitle && dayTitle !== dayKey) {
+    days.push({
+      number: index,
+      title: dayTitle,
+      text: Array.isArray(dayText) ? dayText : [],
+      accommodation,
+      meals,
+      activities,
+      arrival,
+    });
+  }
+}
+---
+
+<TripLayout
+  breadcrumbs={[
+    { label: t("nav.home"), href: "/" },
+    { label: t("nav.tours"), href: "/tours" },
+    { label: title },
+  ]}
+  headingId="tour-title"
+  imageAlt={seo.imageAlt}
+  imageSrc={imageSrc}
+  pageSubtitle={pageSubtitle}
+  pageTitle={pageTitle}
+  sectionId="tour-single"
+  sidebar={{
+    sidebarTitle: t("tours.sidebar.title"),
+    mainBrand: t("tours.sidebar.mainBrand"),
+    intro: t("tours.sidebar.intro"),
+    details: t("tours.sidebar.details"),
+    sidebarItems,
+    conclusion: t("tours.sidebar.conclusion"),
+    ctaTitle: t("tours.sidebar.ctaTitle"),
+    ctaDescription: t("tours.sidebar.ctaDescription"),
+    ctaPoint01: t("tours.sidebar.ctaPoint01"),
+    ctaPoint02: t("tours.sidebar.ctaPoint02"),
+    ctaPoint03: t("tours.sidebar.ctaPoint03"),
+  }}
+  smTitle={t("tours.detailsTitle")}
+  title={title}
+>
+  <Fragment slot="content">
+    <TourSeoSections
+      daysLabel={t("tours.days")}
+      duration={tourData?.duration}
+      durationLabel={t("tours.duration")}
+      endCity={endCity}
+      endLabel={t("tours.end")}
+      faqs={seo.faqs}
+      faqTitle={faqTitle}
+      highlights={seo.highlights}
+      highlightsTitle={highlightsTitle}
+      price={seo.price}
+      priceLabel={priceLabel}
+      pricingTitle={pricingTitle}
+      reserveNow={reserveNow}
+      startCity={startCity}
+      startLabel={t("tours.start")}
+    />
+
+    <div
+      data-animate="fade-up"
+      style="transition-delay:300ms"
+    >
+      <div>
+        <h2 class="mbe-4 text-xl font-semibold text-zinc-900 sm:text-2xl md:text-3xl">
+          {t("tours.overview")}
+        </h2>
+        <p class="text-sm leading-relaxed whitespace-pre-line text-neutral-700 sm:text-base">
+          {overview}
+        </p>
+      </div>
+    </div>
+
+    <div
+      data-animate="fade-up"
+      style="transition-delay:450ms"
+    >
+      <div>
+        <h2 class="mbe-8 text-xl font-semibold text-zinc-900 sm:text-2xl md:text-3xl">
+          {t("tours.itinerary")}
+        </h2>
+        <TourItinerary
+          accommodationLabel={accommodationLabel}
+          activitiesLabel={activitiesLabel}
+          arrivalLabel={arrivalLabel}
+          days={days}
+          mealsLabel={mealsLabel}
+        />
+      </div>
+    </div>
+
+    <TourInfo
+      excludedTitle={t("tours.excluded")}
+      excludes={excludes}
+      goodToKnow={goodToKnow}
+      goodToKnowTitle={t("tours.goodToKnow")}
+      includedTitle={t("tours.included")}
+      includes={includes}
+    />
+  </Fragment>
+  <slot />
+</TripLayout>

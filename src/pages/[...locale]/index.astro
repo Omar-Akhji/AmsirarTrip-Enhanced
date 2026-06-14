@@ -1,0 +1,30 @@
+---
+import FeaturedTours from "../../features/home/components/FeaturedTours.astro";
+import HomeHero from "../../features/home/components/HomeHero";
+import HomeStats from "../../features/home/components/HomeStats.astro";
+import ServicesSection from "../../features/home/components/ServicesSection.astro";
+import TestimonialsSection from "../../features/home/components/TestimonialsSection.astro";
+import VideoSection from "../../features/home/components/VideoSection";
+import { useTranslations } from "../../i18n/utils";
+import Layout from "../../layouts/Layout.astro";
+
+const locale = Astro.currentLocale || "en";
+const t = useTranslations(locale);
+
+const title = t("home.meta.title");
+const description = t("home.meta.description");
+---
+
+<Layout
+  description={description}
+  title={title}
+>
+  <HomeHero client:load />
+  <main class="text-zinc-900">
+    <HomeStats />
+    <FeaturedTours />
+    <ServicesSection />
+    <TestimonialsSection />
+    <VideoSection client:visible />
+  </main>
+</Layout>

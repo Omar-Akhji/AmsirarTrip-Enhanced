@@ -1,0 +1,114 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { ArrowRight } from "lucide-astro";
+import Image from "@/shared/ui/Image";
+
+interface Props {
+  item: { image: string; imageAlt: string; title: string; description: string; route: string };
+  translations: { title: string; description: string; exploreLink: string };
+  badge: string;
+  priority?: boolean;
+  tagline?: string;
+  start?: string;
+  end?: string;
+  startLabel?: string;
+  endLabel?: string;
+}
+
+const {
+  item,
+  translations,
+  badge,
+  priority = false,
+  tagline,
+  start,
+  end,
+  startLabel,
+  endLabel,
+} = Astro.props;
+const locale = Astro.currentLocale || "en";
+---
+
+<article
+  class="group relative flex flex-col overflow-hidden rounded-[20px] bg-white p-2.5 shadow-xs ring-1 ring-zinc-100 transition-all duration-500 block-full pointer-fine:hover:-translate-y-2 pointer-fine:hover:shadow-2xl pointer-fine:hover:shadow-orange-900/5"
+>
+  <a
+    class="absolute inset-0 z-20"
+    href={getRelativeLocaleUrl(locale, item.route)}
+  >
+    <span class="sr-only">
+      {translations.exploreLink} - {translations.title}
+    </span>
+  </a>
+
+  <div class="relative aspect-4/3 shrink-0 overflow-hidden rounded-[15px] bg-zinc-100 inline-full">
+    <Image
+      alt={item.imageAlt}
+      className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+      fill
+      priority={priority}
+      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+      src={item.image}
+    />
+    <div
+      class="absolute inset-0 bg-linear-to-t from-zinc-900/60 via-transparent to-transparent opacity-60 transition-opacity duration-300 group-hover:opacity-40"
+    >
+    </div>
+
+    <div class="absolute inset-s-4 top-4 z-10">
+      <span
+        class="inline-flex rounded-full bg-white/90 px-4 py-1.5 text-xs font-bold tracking-widest text-orange-600 uppercase shadow-xs backdrop-blur-md"
+      >
+        {badge}
+      </span>
+    </div>
+  </div>
+
+  <div class="flex flex-1 flex-col px-6 pbs-8 pbe-6">
+    <h3
+      class="mbe-2 line-clamp-2 text-xl leading-snug font-semibold text-zinc-900 transition-colors duration-300 text-shadow-md group-hover:text-orange-600"
+    >
+      {translations.title}
+    </h3>
+
+    {
+      tagline && (
+        <p class="mbe-4 text-sm font-semibold tracking-wide text-orange-500 uppercase">{tagline}</p>
+      )
+    }
+
+    <p class="mbe-8 line-clamp-3 flex-1 text-sm leading-relaxed text-zinc-600">
+      {translations.description}
+    </p>
+
+    {
+      start && end && (
+        <div class="mbe-6 grid grid-cols-2 gap-4 text-sm">
+          <div class="flex flex-col">
+            <span class="text-xs font-medium tracking-widest text-zinc-400 uppercase">
+              {startLabel}
+            </span>
+            <span class="truncate font-bold text-zinc-900">{start}</span>
+          </div>
+          <div class="flex flex-col border-s border-zinc-100 ps-4">
+            <span class="text-xs font-medium tracking-widest text-zinc-400 uppercase">
+              {endLabel}
+            </span>
+            <span class="truncate font-bold text-zinc-900">{end}</span>
+          </div>
+        </div>
+      )
+    }
+
+    <div class="mbs-auto flex items-center justify-between border-t border-zinc-100 pbs-5">
+      <span class="font-bold tracking-wide text-orange-600">{translations.exploreLink}</span>
+      <div
+        class="flex items-center justify-center rounded-full bg-zinc-50 text-orange-600 transition-all duration-300 block-10 inline-10 group-hover:bg-orange-500 group-hover:text-white"
+      >
+        <ArrowRight
+          class="size-4 -rotate-45 transition-transform duration-300 group-hover:rotate-0"
+        />
+      </div>
+    </div>
+  </div>
+</article>

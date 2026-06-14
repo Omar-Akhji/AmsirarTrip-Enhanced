@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "astro/tsconfigs/strictest",
+
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist", "node_modules"],
+
+  "compilerOptions": {
+    // ─── Target & Lib ──────────────────────────────────────────────────────
+    // TS6 defaults to ES2025 but explicit is clearer
+    "target": "ES2025",
+    "lib": ["ES2025", "DOM", "DOM.Iterable"],
+    "ignoreDeprecations": "6.0",
+
+    // ─── React JSX ─────────────────────────────────────────────────────────
+    // Required for @astrojs/react — not in Astro base preset
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+
+    // ─── Module ────────────────────────────────────────────────────────────
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    // Forces every file to be treated as a module, not a global script
+    "moduleDetection": "force",
+    // Allows .ts extensions in imports — required for Bun native TS execution
+    "allowImportingTsExtensions": true,
+
+    // ─── Interop ───────────────────────────────────────────────────────────
+    // Enforces `import type` for type-only imports
+    // Modern replacement for esModuleInterop (deprecated in TS6)
+    "verbatimModuleSyntax": true,
+
+    // ─── TS6 Strictness ────────────────────────────────────────────────────
+    // No enums/namespaces — required for Bun native TS stripping
+    "erasableSyntaxOnly": true,
+    // Explicit even though TS6 default — important behavior to document
+    "noUncheckedSideEffectImports": true,
+    // Prevents dot-access on index-signature types
+    "noPropertyAccessFromIndexSignature": true,
+
+    // ─── Types ─────────────────────────────────────────────────────────────
+    // CRITICAL in TS6: @types/* no longer auto-discovered
+    // Add bun-types only if you use Bun APIs (Bun.serve, Bun.file, etc.)
+    // Add node if you use Node APIs (process.env, path, fs, etc.)
+    "types": [],
+
+    // ─── Astro TS Plugin ───────────────────────────────────────────────────
+    // Enables IntelliSense for .astro files in editors
+    "plugins": [{ "name": "@astrojs/ts-plugin" }],
+
+    // ─── Path aliases ──────────────────────────────────────────────────────
+    "paths": { "@/*": ["./src/*"] }
+  }
+}

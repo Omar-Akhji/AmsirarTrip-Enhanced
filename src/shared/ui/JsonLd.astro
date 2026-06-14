@@ -1,0 +1,11 @@
+---
+interface Props {
+  data: Record<string, unknown>;
+  id: string;
+}
+
+const json = JSON.stringify(Astro.props.data);
+const html = `<script type="application/ld+json" id="${Astro.props.id}">${json}</script>`;
+---
+
+<Fragment set:html={html} />

@@ -1,0 +1,38 @@
+---
+import { SOCIAL_LINKS } from "./constants";
+
+interface Props {
+  class?: string;
+  compact?: boolean;
+}
+const { class: className, compact = false } = Astro.props;
+---
+
+<ul class:list={["flex items-center gap-2.5", className]}>
+  {
+    SOCIAL_LINKS.map((link) => (
+      <li>
+        <a
+          class:list={[
+            `social-link flex items-center justify-center rounded-full border-2 transition-all duration-150 pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:shadow-[0_8px_18px_rgba(0,0,0,0.28)]`,
+            ` ${link.accent}`,
+            { "size-10": compact, "size-11": !compact },
+          ]}
+          href={link.href}
+          {...(link.href.startsWith("http") ?
+            { target: "_blank", rel: "noopener noreferrer" }
+          : {})}
+          aria-label={link.label}
+        >
+          <img
+            alt=""
+            class:list={{ "size-5 object-contain": compact, "size-6.25 object-contain": !compact }}
+            height={compact ? 20 : 25}
+            src={link.icon}
+            width={compact ? 20 : 25}
+          />
+        </a>
+      </li>
+    ))
+  }
+</ul>

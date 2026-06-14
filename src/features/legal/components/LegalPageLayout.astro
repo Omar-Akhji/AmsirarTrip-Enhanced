@@ -1,0 +1,72 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { useTranslations } from "@/i18n/utils";
+import PageHeader from "@/shared/layout/PageHeader.astro";
+import type { LegalPageConfig } from "../types";
+import LegalSectionCard from "./LegalSectionCard.astro";
+
+interface Props {
+  config: LegalPageConfig;
+  headingId: string;
+}
+
+const { config, headingId } = Astro.props;
+const locale = Astro.currentLocale || "en";
+const t = useTranslations(locale);
+---
+
+<PageHeader
+  breadcrumbs={[{ label: t("nav.home"), href: "/" }, { label: t(config.titleKey) }]}
+  headingId={headingId}
+  subtitle={t(config.subtitleKey)}
+  title={t(config.titleKey)}
+/>
+
+<main>
+  <section
+    aria-labelledby={headingId}
+    class="relative isolate overflow-hidden bg-neutral-50 py-16 text-neutral-900 sm:py-24"
+  >
+    <div
+      aria-hidden="true"
+      class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(248,250,252,0.3),transparent_70%)]"
+    >
+    </div>
+    <div class="relative z-10 mx-auto px-4 max-inline-7xl">
+      <div class="mbe-8 text-center text-sm text-neutral-500">{t(config.lastUpdatedKey)}</div>
+
+      <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        {
+          config.sections.map((section, index) => (
+            <LegalSectionCard
+              index={index}
+              section={section}
+            />
+          ))
+        }
+      </div>
+
+      <div class="mbs-12 text-center">
+        <a
+          class="inline-flex items-center gap-2 text-orange-600 transition-colors pointer-fine:hover:text-orange-700"
+          href={getRelativeLocaleUrl(locale, "/")}
+        >
+          <svg
+            class="size-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            ></path>
+          </svg>
+          {t("legal.backToHome")}
+        </a>
+      </div>
+    </div>
+  </section>
+</main>

@@ -1,0 +1,117 @@
+---
+import { Quote } from "lucide-astro";
+import { useTranslations } from "@/i18n/utils";
+import Image from "@/shared/ui/Image";
+
+const locale = Astro.currentLocale || "en";
+const t = useTranslations(locale);
+const testimonials = [{ key: "kevin" }, { key: "ben" }, { key: "sara" }];
+---
+
+<section
+  class="bg-zinc-50 py-12"
+  id="testimonials"
+>
+  <div class="mx-auto px-4 max-inline-330">
+    <div
+      class="mx-auto mbe-10 space-y-4 text-center max-inline-4xl"
+      data-animate="fade-up"
+    >
+      <p
+        class="inline-flex items-center justify-center rounded-full border-2 border-orange-400 px-6 py-3 text-sm font-semibold tracking-[0.45em] text-orange-600 uppercase"
+      >
+        {t("testimonials.smTitle")}
+      </p>
+      <h2
+        class="mbs-6 text-2xl leading-tight font-semibold tracking-widest text-neutral-900 uppercase text-shadow-md sm:text-3xl sm:tracking-[0.15em] md:text-4xl md:tracking-[0.2em]"
+      >
+        {t("testimonials.lgTitle")}
+      </h2>
+      <div
+        aria-hidden="true"
+        class="mx-auto mbs-4 rounded-full bg-orange-500 block-1 inline-20"
+      >
+      </div>
+    </div>
+    <div class="relative">
+      <div class="relative">
+        <div class="grid grid-cols-1 justify-items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {
+            testimonials.map((tst, idx) => (
+              <div
+                class:list={[
+                  `flex block-full inline-full`,
+                  { "md:col-span-2 lg:col-span-1": idx === 2 },
+                ]}
+                data-animate="fade-up"
+                style={`transition-delay: ${idx * 150}ms`}
+              >
+                <article class="relative flex transform flex-col justify-between overflow-hidden rounded-2xl bg-slate-950 p-6 text-start text-orange-200 shadow-lg ring-1 ring-white/10 transition-transform block-full inline-full pointer-fine:hover:-translate-y-1 pointer-fine:hover:shadow-xl">
+                  <div
+                    aria-hidden="true"
+                    class="absolute inset-e-4 top-2 -rotate-12 opacity-10 select-none"
+                  >
+                    <Quote
+                      className="text-white"
+                      style={{ width: "5rem", height: "5rem" }}
+                    />
+                  </div>
+                  <div class="mbe-4 flex items-center gap-4 self-start">
+                    <div class="inline-flex items-center justify-center rounded-full bg-white/5 ring-1 ring-white/10 block-25 inline-25">
+                      <Image
+                        alt="User Avatar"
+                        className="object-contain block-15 inline-15"
+                        height={60}
+                        src="/icons/face-img.svg"
+                        width={60}
+                      />
+                    </div>
+                    <div
+                      aria-hidden
+                      class="mx-2 bg-white/10 block-8 inline-px"
+                    />
+                    <div>
+                      <cite class="text-sm font-semibold text-white not-italic">
+                        {t(`testimonials.items.${tst.key}.name`)}
+                      </cite>
+                      <p class="mbs-0.5 text-xs text-zinc-300">
+                        {t(`testimonials.items.${tst.key}.country`)}
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    aria-hidden
+                    class="my-3 bg-white/10 block-px inline-full"
+                  />
+                  <div class="block-full">
+                    <blockquote class="mbe-4 text-sm leading-snug text-zinc-300 italic sm:text-sm">
+                      {t(`testimonials.items.${tst.key}.quote`)}
+                    </blockquote>
+                  </div>
+
+                  <div
+                    aria-hidden
+                    class="mbs-4 flex items-center justify-start text-orange-400"
+                  >
+                    {Array.from({ length: 5 }).map(() => (
+                      <svg
+                        aria-hidden
+                        class="mx-0.5"
+                        fill="currentColor"
+                        height={14}
+                        viewBox="0 0 24 24"
+                        width={14}
+                      >
+                        <path d="M12 17.27L18.18 21 16.54 13.97 22 9.24 14.81 8.63 12 2 9.19 8.63 2 9.24 7.46 13.97 5.82 21z" />
+                      </svg>
+                    ))}
+                  </div>
+                </article>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

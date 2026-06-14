@@ -1,0 +1,52 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { useTranslations } from "@/i18n/utils";
+
+const locale = Astro.currentLocale || "en";
+const t = useTranslations(locale);
+const currentYear = new Date().getFullYear();
+---
+
+<div class="border-t border-white/5 bg-black/20">
+  <div class="mx-auto px-4 py-6 max-inline-7xl sm:px-6 lg:px-8">
+    <div class="flex flex-col items-center justify-between gap-6 sm:flex-row">
+      <div class="order-2 text-center sm:order-1 sm:text-start">
+        <p class="text-sm font-medium text-zinc-500">
+          &copy; <time datetime={currentYear.toString()}>{currentYear}</time>
+          <span class="text-zinc-400">Amsirar Trip. Ltd.</span>
+          <span class="mx-1.5 hidden opacity-20 sm:inline-block">&bull;</span>
+          {t("footer.copyright")}
+        </p>
+      </div>
+
+      <nav
+        aria-label="Privacy and Terms"
+        class="order-1 sm:order-2"
+      >
+        <ul class="flex flex-wrap items-center justify-center gap-6 sm:gap-8">
+          <li>
+            <a
+              class="text-sm font-medium text-zinc-500 transition-colors duration-200 pointer-fine:hover:text-white"
+              href={getRelativeLocaleUrl(locale, "/privacy-policy")}
+            >
+              {t("legal.footer.privacyPolicy")}
+            </a>
+          </li>
+          <li
+            aria-hidden="true"
+            class="hidden bg-white/10 block-3 inline-px sm:block"
+          >
+          </li>
+          <li>
+            <a
+              class="text-sm font-medium text-zinc-500 transition-colors duration-200 pointer-fine:hover:text-white"
+              href={getRelativeLocaleUrl(locale, "/terms-of-service")}
+            >
+              {t("legal.footer.termsOfService")}
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,151 @@
+---
+import { ArrowRight } from "lucide-astro";
+import { useTranslations } from "@/i18n/utils";
+import PageHeader from "@/shared/layout/PageHeader.astro";
+import StatHighlights from "@/shared/ui/StatHighlights.astro";
+import TripCard from "@/shared/ui/TripCard.astro";
+import { TOURS_DATA } from "../data/toursData";
+
+const locale = Astro.currentLocale || "en";
+const t = useTranslations(locale);
+
+const tourStats = [
+  {
+    id: "routes",
+    value: "12+",
+    label: t("tours.stats.routes") || "Signature itineraries",
+    description:
+      t("tours.stats.routesDesc")
+      || "Multi-day journeys curated across imperial cities, desert dunes, and Atlas passes.",
+  },
+  {
+    id: "comfort",
+    value: "4x4",
+    label: t("tours.stats.comfort") || "Comfort fleet",
+    description:
+      t("tours.stats.comfortDesc")
+      || "Modern 4x4s and mini-coaches with seasoned driver-guides on every route.",
+  },
+  {
+    id: "support",
+    value: "24/7",
+    label: t("tours.stats.support") || "Concierge support",
+    description:
+      t("tours.stats.supportDesc")
+      || "On-trip coordination for hotels, dietary requests, and schedule tweaks.",
+  },
+];
+---
+
+<PageHeader
+  bgImage="/images/Header/header-1.webp"
+  breadcrumbs={[{ label: t("nav.home"), href: "/" }, { label: t("nav.tours") }]}
+  subtitle={t("tours.headerSubtitle")}
+  title={t("tours.title")}
+>
+  <a
+    class="inline-flex items-center gap-2 rounded-full border border-white/60 px-6 py-3 text-sm font-semibold text-white/90 transition text-shadow-xs pointer-fine:hover:bg-white/10"
+    href="#tours-grid"
+  >
+    <span>{t("tours.detailsTitle")}</span>
+    <ArrowRight className="size-4" />
+  </a>
+  <a
+    class="inline-flex items-center gap-2 rounded-full bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur transition text-shadow-xs pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:bg-white/20"
+    href="https://www.tripadvisor.de/Attraction_Review-g293734-d32584739-Reviews-Amsirar_Travel-Marrakech_Marrakech_Safi.html"
+    rel="noopener noreferrer"
+    target="_blank"
+  >
+    Offers on TripAdvisor
+  </a>
+</PageHeader>
+
+<main class="text-zinc-900">
+  <section
+    aria-labelledby="tour-highlights"
+    class="py-12"
+  >
+    <div class="mx-auto px-4 max-inline-7xl">
+      <div class="mx-auto mbe-10 text-center max-inline-3xl">
+        <p
+          class="inline-flex items-center justify-center rounded-full border-2 border-white bg-orange-600 px-6 py-3 text-sm font-semibold tracking-[0.45em] text-white uppercase"
+        >
+          {t("tours.tour.smTitle")}
+        </p>
+        <h2
+          class="mbs-4 text-2xl leading-tight font-semibold text-shadow-md sm:text-3xl md:text-4xl"
+          id="tour-highlights"
+        >
+          {t("tours.detailsTitle")}
+        </h2>
+        <div
+          aria-hidden="true"
+          class="mx-auto mbs-4 rounded-full bg-orange-500 block-1 inline-20"
+        >
+        </div>
+        <p class="mbs-4 text-base text-taupe-600">{t("tours.detailsSubtitle")}</p>
+      </div>
+
+      <div data-animate="fade-up">
+        <StatHighlights stats={tourStats} />
+      </div>
+    </div>
+  </section>
+
+  <section
+    aria-labelledby="tours-grid-heading"
+    class="border-t border-zinc-200 bg-linear-to-b from-zinc-50 to-white py-16"
+    id="tours-grid"
+  >
+    <div class="mx-auto px-4 max-inline-7xl">
+      <div class="mbe-12 text-center">
+        <h2
+          class="mbs-4 text-2xl leading-tight font-semibold text-shadow-md sm:text-3xl md:text-4xl"
+          id="tours-grid-heading"
+        >
+          {t("tours.tour.lgTitle")}
+        </h2>
+        <div
+          aria-hidden="true"
+          class="mx-auto mbs-4 rounded-full bg-orange-500 block-1 inline-20"
+        >
+        </div>
+        <p class="mbs-4 text-base text-taupe-600">
+          {t("tours.sectionSubtitle") || t("tours.detailsSubtitle")}
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 gap-8 min-[901px]:grid-cols-2 min-[1150px]:grid-cols-3">
+        {
+          TOURS_DATA.map((tour, idx) => (
+            <div
+              class="flex block-full inline-full"
+              data-animate="fade-up"
+              style={`transition-delay: ${idx * 150}ms`}
+            >
+              <TripCard
+                badge={`${tour.duration} Days`}
+                end={t(tour.end)}
+                endLabel={t("tours.endLabelShort") || "End"}
+                item={{
+                  image: tour.image,
+                  imageAlt: t(tour.title),
+                  title: t(tour.title),
+                  description: t(tour.description),
+                  route: tour.route,
+                }}
+                start={t(tour.start)}
+                startLabel={t("tours.startLabelShort") || "Start"}
+                translations={{
+                  title: t(tour.title),
+                  description: t(tour.description),
+                  exploreLink: t("tours.exploreLink"),
+                }}
+              />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</main>
