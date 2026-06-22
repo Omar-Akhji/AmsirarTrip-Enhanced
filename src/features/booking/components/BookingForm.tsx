@@ -63,7 +63,7 @@ function formUIReducer(state: FormUIState, action: FormUIAction): FormUIState {
   }
 }
 
-type BookingFormProps = {
+type BookingFormProperties = {
   tourTitle?: string;
   tourId?: string;
   excursionTitle?: string;
@@ -100,9 +100,9 @@ function BookingForm({
   excursionTitle,
   excursionId,
   fullWidth = false,
-}: BookingFormProps) {
+}: BookingFormProperties) {
   const { t, i18n } = useTranslation();
-  const recaptchaRef = useRef<any>(null);
+  const recaptchaReference = useRef<any>(null);
 
   const [formKey, setFormKey] = useState(0);
 
@@ -129,13 +129,13 @@ function BookingForm({
         }
     : null;
 
-  const stateRef = useRef(state);
+  const stateReference = useRef(state);
   useEffect(() => {
-    stateRef.current = state;
-  });
+    stateReference.current = state;
+  }, [state]);
 
   useEffect(() => {
-    const currentState = stateRef.current;
+    const currentState = stateReference.current;
     if (!currentState?.["success"]) return;
 
     dispatch({ type: "RESET_UI_ONLY" });
@@ -149,10 +149,10 @@ function BookingForm({
   }, [actionResult, dispatch, setFormKey]);
 
   useEffect(() => {
-    const currentState = stateRef.current;
+    const currentState = stateReference.current;
     if (currentState && !currentState["success"] && currentState["errors"]) {
       dispatch({ type: "SET_CAPTCHA", token: "" });
-      recaptchaRef.current?.reset();
+      recaptchaReference.current?.reset();
       const firstError = document.querySelector('[aria-invalid="true"]');
       firstError?.scrollIntoView({ behavior: "smooth", block: "center" });
     }
@@ -254,7 +254,7 @@ function BookingForm({
                           }
                         >
                           <ReCAPTCHA
-                            ref={recaptchaRef}
+                            ref={recaptchaReference}
                             sitekey={RECAPTCHA_V2_SITE_KEY}
                             onChange={(token: string | null) =>
                               dispatch({ type: "SET_CAPTCHA", token: token || "" })

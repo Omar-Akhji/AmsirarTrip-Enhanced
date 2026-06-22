@@ -78,11 +78,11 @@ const contactMethods = [
   <div class="mx-auto px-4 max-inline-7xl">
     <div class="grid gap-6 md:grid-cols-3">
       {
-        contactMethods.map((method, idx) => (
+        contactMethods.map((method, index) => (
           <div
             class="flex block-full inline-full"
             data-animate="fade-up"
-            style={`transition-delay: ${idx * 150}ms`}
+            style={`transition-delay: ${index * 150}ms`}
           >
             <article
               aria-label={typeof method.title === "string" ? method.title : undefined}

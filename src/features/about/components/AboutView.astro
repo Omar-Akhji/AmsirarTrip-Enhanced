@@ -192,11 +192,11 @@ const factStats = [
 
       <div class="mbs-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
         {
-          factStats.map((fact, idx) => (
+          factStats.map((fact, index) => (
             <div
               class="flex block-full inline-full"
               data-animate="fade-up"
-              style={`transition-delay: ${idx * 150}ms`}
+              style={`transition-delay: ${index * 150}ms`}
             >
               <article
                 aria-labelledby={`fact-${fact.id}-label`}

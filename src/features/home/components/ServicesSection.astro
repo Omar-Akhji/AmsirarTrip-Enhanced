@@ -1,6 +1,5 @@
 ---
 import { useTranslations } from "@/i18n/utils";
-import Image from "@/shared/ui/Image";
 
 const locale = Astro.currentLocale || "en";
 const t = useTranslations(locale);
@@ -17,12 +16,11 @@ const services = [
   class="relative isolate overflow-hidden py-20 text-orange-200 sm:py-24"
   id="services"
 >
-  <Image
+  <img
     alt=""
-    className="-z-20 object-cover"
-    fill
-    quality={85}
-    sizes="100vw"
+    class="absolute inset-0 -z-20 h-full w-full object-cover"
+    decoding="async"
+    loading="lazy"
     src="/images/services-bg.webp"
   />
   <div
@@ -57,20 +55,20 @@ const services = [
 
     <div class="mbs-12 grid justify-items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3">
       {
-        services.map((service, idx) => (
+        services.map((service, index) => (
           <div
             class:list={[
               `flex block-full inline-full`,
-              { "md:col-span-2 lg:col-span-1": idx === 2 },
+              { "md:col-span-2 lg:col-span-1": index === 2 },
             ]}
             data-animate="fade-up"
-            style={`transition-delay: ${idx * 150}ms`}
+            style={`transition-delay: ${index * 150}ms`}
           >
             <article class="group relative flex flex-col items-center rounded-3xl border border-white/10 bg-white/5 p-8 text-center shadow-xs ring-1 ring-black/5 backdrop-blur-sm transition inline-full pointer-fine:hover:-translate-y-1 pointer-fine:hover:bg-white/10 pointer-fine:hover:shadow-md">
               <div class="mbe-6 inline-flex size-25 items-center justify-center rounded-full bg-white/5 ring-1 ring-white/10">
-                <Image
+                <img
                   alt={t(service.altKey)}
-                  className="size-15"
+                  class="size-15"
                   height={60}
                   src={service.icon}
                   width={60}

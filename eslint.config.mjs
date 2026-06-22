@@ -1,6 +1,5 @@
 import tsPlugin from "@typescript-eslint/eslint-plugin";
 import tsParser from "@typescript-eslint/parser";
-import astroParser from "astro-eslint-parser";
 import eslintPluginAstro from "eslint-plugin-astro";
 import nounsanitized from "eslint-plugin-no-unsanitized";
 import prettierRecommended from "eslint-plugin-prettier/recommended";
@@ -140,11 +139,9 @@ const eslintConfig = defineConfig(
   // ─── Astro overrides ──────────────────────────────────────────────────────
   {
     files: ["**/*.astro"],
-    languageOptions: {
-      parser: astroParser,
-      parserOptions: { parser: tsParser, extraFileExtensions: [".astro"] },
-    },
     rules: {
+      // Astro requires the interface to be named "Props" for type inference
+      "unicorn/prevent-abbreviations": ["error", { allowList: { Props: true } }],
       // All Astro-specific non-recommended rules
       "astro/no-set-html-directive": "error",
       "astro/no-unsafe-inline-scripts": ["error", { allowModuleScripts: true }],

@@ -14,21 +14,21 @@ function getLocalizedPath(locale: string, path: string): string {
 const LOCALES = ["en", "fr", "de", "es"] as const;
 type Locale = (typeof LOCALES)[number];
 
-type LinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
+type LinkProperties = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
   href: string;
   prefetch?: boolean;
   children?: React.ReactNode;
 };
 
-export function Link({ href, prefetch: _prefetch, children, ...props }: LinkProps) {
+export function Link({ href, prefetch: _prefetch, children, ...properties }: LinkProperties) {
   const locale = getGlobalLocale();
   const localizedHref = getLocalizedPath(locale, href);
-  return React.createElement("a", { href: localizedHref, ...props }, children);
+  return React.createElement("a", { href: localizedHref, ...properties }, children);
 }
 
 function computePathname(): string {
-  if (globalThis.window === undefined) return "/";
-  const path = globalThis.location.pathname;
+  if (globalThis === undefined) return "/";
+  const path = location.pathname;
   const segments = path.split("/").filter(Boolean);
 
   let normalizedPath = path;
@@ -68,14 +68,14 @@ export function useRouter() {
   return {
     push: (href: string, options?: { locale?: Locale }) => {
       const locale = options?.locale ?? getGlobalLocale();
-      globalThis.location.href = getLocalizedPath(locale, href);
+      location.assign(getLocalizedPath(locale, href));
     },
     replace: (href: string, options?: { locale?: Locale }) => {
       const locale = options?.locale ?? getGlobalLocale();
-      globalThis.location.replace(getLocalizedPath(locale, href));
+      location.replace(getLocalizedPath(locale, href));
     },
     prefetch: (_href: string) => {},
-    back: () => globalThis.history.back(),
-    forward: () => globalThis.history.forward(),
+    back: () => history.back(),
+    forward: () => history.forward(),
   };
 }

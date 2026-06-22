@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import { EnhancedCalendar } from "@/shared/ui/calendar";
 import { NativePopover } from "@/shared/ui/NativePopover";
 
-type BookingTripDetailsProps = {
+type BookingTripDetailsProperties = {
   state: FormState | null;
   locale: string;
   calendarOpen: boolean;
@@ -29,21 +29,21 @@ export function BookingTripDetails({
   reservationDate,
   onCalendarOpenChange,
   onDateSelect,
-}: BookingTripDetailsProps) {
+}: BookingTripDetailsProperties) {
   const { t } = useTranslation();
   const [minimumReservationDate, setMinimumReservationDate] = useState<Date | null>(null);
 
   useEffect(() => {
-    let mounted = true;
+    let isMounted = true;
 
     queueMicrotask(() => {
-      if (mounted) {
+      if (isMounted) {
         setMinimumReservationDate(getStartOfToday());
       }
     });
 
     return () => {
-      mounted = false;
+      isMounted = false;
     };
   }, []);
 

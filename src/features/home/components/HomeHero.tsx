@@ -23,10 +23,10 @@ export default function HomeHero() {
     t("home.heroAlt1", "Adventure Awaits Beyond the Dunes"),
     t("home.heroAlt2", "Pack your bags — Morocco calls"),
   ];
-  const heroTextsRef = useRef(heroTexts);
+  const heroTextsReference = useRef(heroTexts);
 
   useEffect(() => {
-    heroTextsRef.current = heroTexts;
+    heroTextsReference.current = heroTexts;
   });
 
   useEffect(() => {
@@ -37,10 +37,10 @@ export default function HomeHero() {
     return () => clearInterval(interval);
   }, []);
 
-  const headerRef = useRef<HTMLElement>(null);
+  const headerReference = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    if (isMobileOrTablet || !headerRef.current) return;
+    if (isMobileOrTablet || !headerReference.current) return;
 
     let textIndex = 0;
     let charIndex = 0;
@@ -70,7 +70,7 @@ export default function HomeHero() {
 
       if (timestamp - lastUpdate >= speed) {
         lastUpdate = timestamp;
-        const current = heroTextsRef.current.at(textIndex) || "";
+        const current = heroTextsReference.current.at(textIndex) || "";
 
         if (isDeleting) {
           charIndex = Math.max(0, charIndex - 1);
@@ -78,7 +78,7 @@ export default function HomeHero() {
 
           if (charIndex <= 0) {
             isDeleting = false;
-            textIndex = (textIndex + 1) % heroTextsRef.current.length;
+            textIndex = (textIndex + 1) % heroTextsReference.current.length;
             pauseUntil = timestamp + PAUSE_AFTER_DELETING;
           }
         } else {
@@ -108,7 +108,7 @@ export default function HomeHero() {
       { threshold: 0 },
     );
 
-    observer.observe(headerRef.current);
+    observer.observe(headerReference.current);
 
     return () => {
       cancelAnimationFrame(rafId);
@@ -120,7 +120,7 @@ export default function HomeHero() {
     if (!isMobileOrTablet) return;
 
     const interval = setInterval(() => {
-      setCurrentTextIndex((previous) => (previous + 1) % heroTextsRef.current.length);
+      setCurrentTextIndex((previous) => (previous + 1) % heroTextsReference.current.length);
     }, 4000);
 
     return () => clearInterval(interval);
@@ -128,20 +128,20 @@ export default function HomeHero() {
 
   return (
     <header
-      ref={headerRef}
+      ref={headerReference}
       className="page-hero home-header relative isolate overflow-hidden bg-zinc-950 text-white shadow-xl inline-full min-block-[40vh] sm:min-block-[45vh] lg:min-block-[50vh]"
       aria-labelledby="hero-heading"
     >
       <div className="absolute inset-0 z-0">
-        {HEADER_IMAGES.map((src, index) => (
+        {HEADER_IMAGES.map((source, index) => (
           <div
-            key={src}
+            key={source}
             className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
               index === currentImageIndex ? "opacity-100" : "opacity-0"
             }`}
           >
             <Image
-              src={src}
+              src={source}
               alt=""
               fill
               className="object-cover"

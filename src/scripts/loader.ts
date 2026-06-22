@@ -1,10 +1,10 @@
-const el = document.querySelector<HTMLElement>("#initial-loader");
-if (el) {
+const element = document.querySelector<HTMLElement>("#initial-loader");
+if (element) {
   document.addEventListener("astro:before-preparation", () => {
-    el.style.display = "flex";
+    element.style.display = "flex";
   });
   document.addEventListener("astro:page-load", () => {
-    el.style.display = "none";
+    element.style.display = "none";
   });
-  el.style.display = "none";
+  element.style.display = "none";
 }

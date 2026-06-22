@@ -1,34 +1,6 @@
 ---
 import DetailsSidebar from "@/shared/layout/DetailsSidebar.astro";
 import PageHeader from "@/shared/layout/PageHeader.astro";
-import Image from "@/shared/ui/Image";
-
-interface SidebarProps {
-  sidebarTitle: string;
-  mainBrand: string;
-  intro: string;
-  details: string;
-  sidebarItems: string[];
-  conclusion: string;
-  ctaTitle: string;
-  ctaDescription: string;
-  ctaPoint01: string;
-  ctaPoint02: string;
-  ctaPoint03: string;
-}
-
-interface Props {
-  title: string;
-  pageTitle: string;
-  pageSubtitle: string;
-  smTitle: string;
-  breadcrumbs: { label: string; href?: string }[];
-  imageSrc: string;
-  imageAlt: string;
-  sectionId: string;
-  headingId: string;
-  sidebar: SidebarProps;
-}
 
 const {
   title,
@@ -67,11 +39,11 @@ const sl = Astro.slots.has("default");
           <figure
             class="relative mbe-8 aspect-4/3 overflow-hidden rounded-[20px] border border-zinc-50 shadow-md inline-full"
           >
-            <Image
+            <img
               alt={imageAlt}
-              className="object-cover"
-              fill
-              priority
+              class="absolute inset-0 h-full w-full object-cover"
+              decoding="async"
+              loading="eager"
               sizes="(max-width: 1024px) 100vw, 66vw"
               src={imageSrc}
             />

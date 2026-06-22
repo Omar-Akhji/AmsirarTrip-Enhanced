@@ -3,7 +3,7 @@ import { CalendarIcon, ChevronLeft, ChevronRight } from "lucide-react";
 import { DayPicker } from "react-day-picker";
 import { cn } from "@/lib/utils";
 
-type EnhancedCalendarProps = {
+type EnhancedCalendarProperties = {
   initialDate?: Date | undefined;
   onSelect?: (date: Date | undefined) => void;
   disabled?: (date: Date) => boolean;
@@ -51,7 +51,7 @@ export function EnhancedCalendar({
   disabled,
   className,
   onClose,
-}: EnhancedCalendarProps) {
+}: EnhancedCalendarProperties) {
   const [calendarState, dispatch] = React.useReducer(
     calendarReducer,
     initialDate,
@@ -75,10 +75,12 @@ export function EnhancedCalendar({
   };
 
   const handleApply = () => {
-    if (selectedDate) {
-      onSelect?.(selectedDate);
-      onClose?.();
+    if (!selectedDate) {
+      return;
     }
+
+    onSelect?.(selectedDate);
+    onClose?.();
   };
 
   return (

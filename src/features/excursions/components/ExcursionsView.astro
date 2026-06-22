@@ -112,11 +112,11 @@ const highlightStats = [
 
       <div class="grid grid-cols-1 gap-8 min-[901px]:grid-cols-2 min-[1150px]:grid-cols-3">
         {
-          EXCURSIONS_DATA.map((excursion, idx) => (
+          EXCURSIONS_DATA.map((excursion, index) => (
             <div
               class="flex block-full inline-full"
               data-animate="fade-up"
-              style={`transition-delay: ${idx * 150}ms`}
+              style={`transition-delay: ${index * 150}ms`}
             >
               <TripCard
                 badge={t("excursion.card.category")}
@@ -127,7 +127,7 @@ const highlightStats = [
                   description: t(excursion.description),
                   route: excursion.route,
                 }}
-                priority={idx < 2}
+                priority={index < 2}
                 tagline={t(excursion.tagline)}
                 translations={{
                   title: t(excursion.title),

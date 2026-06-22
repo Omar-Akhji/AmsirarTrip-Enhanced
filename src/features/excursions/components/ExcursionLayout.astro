@@ -3,12 +3,6 @@ import { useTranslations } from "@/i18n/utils";
 import TripLayout from "@/shared/layout/TripLayout.astro";
 import ExcursionInfo from "./ExcursionInfo.astro";
 
-interface Props {
-  excursionKey: string;
-  imageSrc: string;
-  locale: string;
-}
-
 const { excursionKey, imageSrc, locale } = Astro.props;
 const t = useTranslations(locale);
 

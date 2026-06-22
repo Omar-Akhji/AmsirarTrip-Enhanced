@@ -1,9 +1,9 @@
 import type { FormState } from "@/lib/form-types";
 import { useTranslation } from "@/lib/hooks/useTranslation";
 
-type ContactFormFieldsProps = { state: FormState | null };
+type ContactFormFieldsProperties = { state: FormState | null };
 
-export function ContactFormFields({ state }: ContactFormFieldsProps) {
+export function ContactFormFields({ state }: ContactFormFieldsProperties) {
   const { t } = useTranslation();
 
   return (

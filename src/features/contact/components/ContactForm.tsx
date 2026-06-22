@@ -67,7 +67,7 @@ const alertClasses: Record<string, string> = {
 
 const ContactForm = () => {
   const { t } = useTranslation();
-  const recaptchaRef = useRef<any>(null);
+  const recaptchaReference = useRef<any>(null);
   const [uiState, dispatch] = useReducer(contactFormUIReducer, initialContactFormUIState);
 
   type AstroActionResult = { data?: FormState; error?: { message: string } };
@@ -91,19 +91,19 @@ const ContactForm = () => {
         }
     : null;
 
-  const stateRef = useRef(state);
+  const stateReference = useRef(state);
   useEffect(() => {
-    stateRef.current = state;
+    stateReference.current = state;
   });
 
   useEffect(() => {
-    const currentState = stateRef.current;
+    const currentState = stateReference.current;
     if (!currentState) return;
 
     if (currentState["success"]) {
       queueMicrotask(() => dispatch({ type: "RESET_AFTER_SUCCESS" }));
     } else if (currentState["errors"]) {
-      recaptchaRef.current?.reset();
+      recaptchaReference.current?.reset();
       queueMicrotask(() => dispatch({ type: "RESET_CAPTCHA" }));
       const firstError = document.querySelector('[aria-invalid="true"]');
       firstError?.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -220,7 +220,7 @@ const ContactForm = () => {
                           }
                         >
                           <ReCAPTCHA
-                            ref={recaptchaRef}
+                            ref={recaptchaReference}
                             sitekey={RECAPTCHA_V2_SITE_KEY}
                             onChange={(token: string | null) =>
                               dispatch({ type: "SET_CAPTCHA", token: token || "" })

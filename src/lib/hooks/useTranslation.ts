@@ -10,8 +10,8 @@ export function setGlobalLocale(locale: string) {
 }
 
 export function getGlobalLocale(): string {
-  if (globalThis.window !== undefined) {
-    const segment = globalThis.location.pathname.split("/").find(Boolean);
+  if (typeof location !== "undefined") {
+    const segment = location.pathname.split("/").find(Boolean);
     if (segment && (LOCALES as readonly string[]).includes(segment)) {
       return segment;
     }

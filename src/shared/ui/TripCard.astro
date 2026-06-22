@@ -1,19 +1,6 @@
 ---
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { ArrowRight } from "lucide-astro";
-import Image from "@/shared/ui/Image";
-
-interface Props {
-  item: { image: string; imageAlt: string; title: string; description: string; route: string };
-  translations: { title: string; description: string; exploreLink: string };
-  badge: string;
-  priority?: boolean;
-  tagline?: string;
-  start?: string;
-  end?: string;
-  startLabel?: string;
-  endLabel?: string;
-}
 
 const {
   item,
@@ -42,11 +29,11 @@ const locale = Astro.currentLocale || "en";
   </a>
 
   <div class="relative aspect-4/3 shrink-0 overflow-hidden rounded-[15px] bg-zinc-100 inline-full">
-    <Image
+    <img
       alt={item.imageAlt}
-      className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-      fill
-      priority={priority}
+      class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+      decoding="async"
+      loading={priority ? "eager" : "lazy"}
       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
       src={item.image}
     />

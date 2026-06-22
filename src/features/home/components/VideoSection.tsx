@@ -7,27 +7,29 @@ const VideoSection = () => {
   const [videoError, setVideoError] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const videoSrc = "/videos/Morocco-Video.mp4";
+  const videoReference = useRef<HTMLVideoElement>(null);
+  const videoSource = "/videos/Morocco-Video.mp4";
 
   useEffect(() => {
-    if (videoRef.current) videoRef.current.load();
+    if (videoReference.current) videoReference.current.load();
   }, []);
 
   const handleVideoError = () => setVideoError(true);
   const handleVideoLoad = () => setVideoLoaded(true);
 
   const handlePlay = () => {
-    if (videoRef.current) {
-      videoRef.current.play();
-      setIsPlaying(true);
+    if (!videoReference.current) {
+      return;
     }
+
+    videoReference.current.play();
+    setIsPlaying(true);
   };
 
   const handleVideoEnd = () => setIsPlaying(false);
 
   const handleVideoClick = () => {
-    const video = videoRef.current;
+    const video = videoReference.current;
     if (!video) return;
     if (video.paused) {
       video.play();
@@ -70,7 +72,7 @@ const VideoSection = () => {
                 </div>
               )}
               <video
-                ref={videoRef}
+                ref={videoReference}
                 loop
                 muted
                 playsInline
@@ -84,7 +86,7 @@ const VideoSection = () => {
                 }`}
               >
                 <source
-                  src={videoSrc}
+                  src={videoSource}
                   type="video/mp4"
                 />
                 {t("video.unsupported")}

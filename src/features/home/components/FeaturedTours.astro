@@ -1,6 +1,5 @@
 ---
 import { useTranslations } from "@/i18n/utils";
-import Image from "@/shared/ui/Image";
 
 const locale = Astro.currentLocale || "en";
 const t = useTranslations(locale);
@@ -90,11 +89,11 @@ const cities = [
             style={`transition-delay: ${index * 150}ms`}
           >
             <article class="card-article relative block overflow-hidden rounded-xl block-full inline-full">
-              <Image
+              <img
                 alt={t(city.altKey)}
-                className="card-img object-cover"
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1090px) 50vw, 33vw"
+                class="card-img absolute inset-0 h-full w-full object-cover"
+                decoding="async"
+                loading="lazy"
                 src={city.image}
               />
               <div class="card-data">

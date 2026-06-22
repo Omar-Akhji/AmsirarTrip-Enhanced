@@ -8,7 +8,7 @@ export const env = {
     return GMAIL_PASS;
   },
   get RECAPTCHA_SECRET_KEY() {
-    return RECAPTCHA_SECRET_KEY || "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe";
+    return RECAPTCHA_SECRET_KEY;
   },
   get MAIL_TO() {
     return MAIL_TO || "";

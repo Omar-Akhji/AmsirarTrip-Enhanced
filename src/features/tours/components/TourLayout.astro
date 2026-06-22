@@ -2,18 +2,9 @@
 import { useTranslations } from "@/i18n/utils";
 import TripLayout from "@/shared/layout/TripLayout.astro";
 import { TOURS_DATA } from "../data/toursData";
-import type { TourSeoContent } from "../data/toursMetadata";
 import TourInfo from "./TourInfo.astro";
 import TourItinerary from "./TourItinerary.astro";
 import TourSeoSections from "./TourSeoSections.astro";
-
-interface Props {
-  tourKey: string;
-  bookingId: number;
-  imageSrc: string;
-  seo: TourSeoContent;
-  locale: string;
-}
 
 const { tourKey, bookingId, imageSrc, seo, locale } = Astro.props;
 const t = useTranslations(locale);

@@ -2,11 +2,23 @@
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { useTranslations } from "@/i18n/utils";
 import PageHeader from "@/shared/layout/PageHeader.astro";
-import type { LegalPageConfig } from "../types";
 import LegalSectionCard from "./LegalSectionCard.astro";
 
+interface LegalSection {
+  id: string;
+  titleKey: string;
+  contentKey: string;
+}
+
+interface LegalConfig {
+  titleKey: string;
+  subtitleKey: string;
+  lastUpdatedKey: string;
+  sections: LegalSection[];
+}
+
 interface Props {
-  config: LegalPageConfig;
+  config: LegalConfig;
   headingId: string;
 }
 

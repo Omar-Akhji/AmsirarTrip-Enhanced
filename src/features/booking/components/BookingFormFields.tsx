@@ -3,7 +3,7 @@ import { useTranslation } from "@/lib/hooks/useTranslation";
 import { BookingPersonalFields } from "./BookingPersonalFields";
 import { BookingTripDetails } from "./BookingTripDetails";
 
-type BookingFormFieldsProps = {
+type BookingFormFieldsProperties = {
   state: FormState | null;
   selectedTour: string;
   tourTitle?: string | undefined;
@@ -31,7 +31,7 @@ export function BookingFormFields({
   reservationDate,
   onCalendarOpenChange,
   onDateSelect,
-}: BookingFormFieldsProps) {
+}: BookingFormFieldsProperties) {
   const { t } = useTranslation();
 
   return (

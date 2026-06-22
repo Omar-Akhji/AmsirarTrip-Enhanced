@@ -117,11 +117,11 @@ const tourStats = [
 
       <div class="grid grid-cols-1 gap-8 min-[901px]:grid-cols-2 min-[1150px]:grid-cols-3">
         {
-          TOURS_DATA.map((tour, idx) => (
+          TOURS_DATA.map((tour, index) => (
             <div
               class="flex block-full inline-full"
               data-animate="fade-up"
-              style={`transition-delay: ${idx * 150}ms`}
+              style={`transition-delay: ${index * 150}ms`}
             >
               <TripCard
                 badge={`${tour.duration} Days`}

@@ -18,18 +18,18 @@ export function MobileMenu() {
   const [asideOpen, setAsideOpen] = useState(false);
   const [viewport, setViewport] = useState<"mobile" | "tablet">(() => {
     if (
-      typeof globalThis.matchMedia === "function"
-      && globalThis.matchMedia("(min-width: 768px) and (max-width: 1089px)").matches
+      typeof matchMedia === "function"
+      && matchMedia("(min-width: 768px) and (max-width: 1089px)").matches
     )
       return "tablet";
     return "mobile";
   });
-  const collapseRef = useRef<HTMLDivElement>(null);
-  const btnRef = useRef<HTMLButtonElement>(null);
+  const collapseReference = useRef<HTMLDialogElement>(null);
+  const buttonReference = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    const mqTablet = globalThis.matchMedia("(min-width: 768px) and (max-width: 1089px)");
-    const mqMobile = globalThis.matchMedia("(max-width: 767px)");
+    const mqTablet = matchMedia("(min-width: 768px) and (max-width: 1089px)");
+    const mqMobile = matchMedia("(max-width: 767px)");
 
     const update = () => {
       if (mqTablet.matches) setViewport("tablet");
@@ -47,13 +47,13 @@ export function MobileMenu() {
   useEffect(() => {
     if (!asideOpen) return;
 
-    const handleClick = (e: MouseEvent) => {
-      const target = e.target as Node;
+    const handleClick = (event: MouseEvent) => {
+      const target = event.target as Node;
       if (
-        collapseRef.current
-        && btnRef.current
-        && !collapseRef.current.contains(target)
-        && !btnRef.current.contains(target)
+        collapseReference.current
+        && buttonReference.current
+        && !collapseReference.current.contains(target)
+        && !buttonReference.current.contains(target)
       ) {
         setAsideOpen(false);
       }
@@ -64,8 +64,43 @@ export function MobileMenu() {
   }, [asideOpen]);
 
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && asideOpen) setAsideOpen(false);
+    if (!asideOpen) return;
+
+    const collapse = collapseReference.current;
+    if (!collapse) return;
+
+    const focusableSelector =
+      'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== "Tab") return;
+
+      const focusableElements = collapse.querySelectorAll<HTMLElement>(focusableSelector);
+      if (focusableElements.length === 0) return;
+
+      const firstFocusable = focusableElements[0];
+      const lastFocusable = focusableElements[focusableElements.length - 1];
+
+      if (event.shiftKey) {
+        if (document.activeElement === firstFocusable) {
+          event.preventDefault();
+          lastFocusable?.focus();
+        }
+      } else {
+        if (document.activeElement === lastFocusable) {
+          event.preventDefault();
+          firstFocusable?.focus();
+        }
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [asideOpen]);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && asideOpen) setAsideOpen(false);
     };
 
     document.addEventListener("keydown", handleKeyDown);
@@ -154,17 +189,19 @@ export function MobileMenu() {
         aria-expanded={asideOpen}
         aria-controls="navbar-collapse"
         onClick={() => setAsideOpen((s) => !s)}
-        ref={btnRef}
+        ref={buttonReference}
       >
         {asideOpen ?
           <X className="pointer-events-none size-5" />
         : <Menu className="pointer-events-none size-5" />}
       </button>
 
-      <div
+      <dialog
         id="navbar-collapse"
-        ref={collapseRef}
+        ref={collapseReference}
         className={cn(getCollapseClasses())}
+        aria-modal="true"
+        aria-label="Navigation menu"
       >
         {viewport === "mobile" && (
           <div className="navbar-mobile-social flex items-center justify-center gap-4 px-4 py-4">
@@ -206,7 +243,7 @@ export function MobileMenu() {
             </li>
           ))}
         </ul>
-      </div>
+      </dialog>
     </div>
   );
 }

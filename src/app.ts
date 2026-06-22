@@ -6,17 +6,20 @@ import { actions, i18n, middleware, pages, sessions } from "astro/hono";
 
 const app = new Hono();
 
-const isDev = import.meta.env.DEV;
+const isDevelopment = import.meta.env.DEV;
 
-app.onError((err, c) => {
-  if (err instanceof HTTPException) {
-    return err.getResponse();
+app.onError((error, c) => {
+  if (error instanceof HTTPException) {
+    return error.getResponse();
   }
 
-  console.error("[Hono Error]", err);
+  console.error("[Hono Error]", error);
 
   return c.json(
-    { error: "Internal Server Error", ...(isDev && { message: err.message, stack: err.stack }) },
+    {
+      error: "Internal Server Error",
+      ...(isDevelopment && { message: error.message, stack: error.stack }),
+    },
     500,
   );
 });

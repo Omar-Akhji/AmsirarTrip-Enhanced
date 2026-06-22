@@ -1,4 +1,4 @@
-type FormStatusMessagesProps = {
+type FormStatusMessagesProperties = {
   submitError?: string | undefined;
   success?: boolean | undefined;
   successMessage?: string | undefined;
@@ -8,7 +8,7 @@ export function FormStatusMessages({
   submitError,
   success,
   successMessage,
-}: FormStatusMessagesProps) {
+}: FormStatusMessagesProperties) {
   return (
     <>
       {submitError ?

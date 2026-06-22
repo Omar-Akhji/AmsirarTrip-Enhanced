@@ -6,7 +6,7 @@ const getServerSnapshot = () => {
 
 export function useMediaQuery(query: string): boolean {
   const subscribe = (callback: () => void) => {
-    if (globalThis.window === undefined) return () => {};
+    if (globalThis === undefined) return () => {};
     const matchMedia = globalThis.matchMedia(query);
     matchMedia.addEventListener("change", callback);
     return () => {
@@ -15,7 +15,7 @@ export function useMediaQuery(query: string): boolean {
   };
 
   const getSnapshot = () => {
-    if (globalThis.window === undefined) return false;
+    if (globalThis === undefined) return false;
     return globalThis.matchMedia(query).matches;
   };
 

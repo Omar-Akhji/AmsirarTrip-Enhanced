@@ -17,7 +17,7 @@ export default function Image({
   priority,
   style,
   className,
-  ...props
+  ...properties
 }: ImageProps) {
   const fillStyle: CSSProperties =
     fill ?
@@ -31,7 +31,7 @@ export default function Image({
       style={{ ...fillStyle, ...style }}
       className={className}
       loading={priority ? "eager" : "lazy"}
-      {...props}
+      {...properties}
     />
   );
 }

@@ -1,7 +1,6 @@
 ---
 import { Quote } from "lucide-astro";
 import { useTranslations } from "@/i18n/utils";
-import Image from "@/shared/ui/Image";
 
 const locale = Astro.currentLocale || "en";
 const t = useTranslations(locale);
@@ -37,14 +36,14 @@ const testimonials = [{ key: "kevin" }, { key: "ben" }, { key: "sara" }];
       <div class="relative">
         <div class="grid grid-cols-1 justify-items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3">
           {
-            testimonials.map((tst, idx) => (
+            testimonials.map((tst, index) => (
               <div
                 class:list={[
                   `flex block-full inline-full`,
-                  { "md:col-span-2 lg:col-span-1": idx === 2 },
+                  { "md:col-span-2 lg:col-span-1": index === 2 },
                 ]}
                 data-animate="fade-up"
-                style={`transition-delay: ${idx * 150}ms`}
+                style={`transition-delay: ${index * 150}ms`}
               >
                 <article class="relative flex transform flex-col justify-between overflow-hidden rounded-2xl bg-slate-950 p-6 text-start text-orange-200 shadow-lg ring-1 ring-white/10 transition-transform block-full inline-full pointer-fine:hover:-translate-y-1 pointer-fine:hover:shadow-xl">
                   <div
@@ -58,12 +57,12 @@ const testimonials = [{ key: "kevin" }, { key: "ben" }, { key: "sara" }];
                   </div>
                   <div class="mbe-4 flex items-center gap-4 self-start">
                     <div class="inline-flex items-center justify-center rounded-full bg-white/5 ring-1 ring-white/10 block-25 inline-25">
-                      <Image
+                      <img
                         alt="User Avatar"
-                        className="object-contain block-15 inline-15"
-                        height={60}
+                        class="object-contain block-15 inline-15"
+                        decoding="async"
+                        loading="lazy"
                         src="/icons/face-img.svg"
-                        width={60}
                       />
                     </div>
                     <div
@@ -93,7 +92,7 @@ const testimonials = [{ key: "kevin" }, { key: "ben" }, { key: "sara" }];
                     aria-hidden
                     class="mbs-4 flex items-center justify-start text-orange-400"
                   >
-                    {Array.from({ length: 5 }).map(() => (
+                    {Array.from({ length: 5 }, () => (
                       <svg
                         aria-hidden
                         class="mx-0.5"

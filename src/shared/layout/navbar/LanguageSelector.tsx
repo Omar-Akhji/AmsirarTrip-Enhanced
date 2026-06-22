@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import Image from "@/shared/ui/Image";
 import { LANGUAGES } from "./constants";
 
-type LanguageSelectorProps = {
+type LanguageSelectorProperties = {
   placement?: "left" | "right";
   size?: "sm" | "md";
   className?: string;
@@ -31,20 +31,20 @@ export function LanguageSelector({
   placement = "right",
   size = "md",
   className = "",
-}: LanguageSelectorProps) {
+}: LanguageSelectorProperties) {
   const { t, i18n } = useTranslation();
   const { replace } = useRouter();
   const currentPath = usePathname();
   const [langOpen, setLangOpen] = useState(false);
-  const langRef = useRef<HTMLDivElement>(null);
+  const langReference = useRef<HTMLDivElement>(null);
 
   const currentLanguage = LANGUAGES.find((l) => l.code === i18n.language) || LANGUAGES[0]!;
 
   const changeLanguage = (code: string) => {
-    const validLanguage = LANGUAGES.some((l) => l.code === code);
-    if (!validLanguage) return;
+    const isValidLanguage = LANGUAGES.some((l) => l.code === code);
+    if (!isValidLanguage) return;
 
-    if (globalThis.window !== undefined) {
+    if (globalThis !== undefined) {
       try {
         localStorage.setItem("site-language", code);
       } catch {}
@@ -57,8 +57,8 @@ export function LanguageSelector({
   useEffect(() => {
     if (!langOpen) return;
 
-    const handleClick = (e: MouseEvent) => {
-      if (langRef.current && !langRef.current.contains(e.target as Node)) {
+    const handleClick = (event: MouseEvent) => {
+      if (langReference.current && !langReference.current.contains(event.target as Node)) {
         setLangOpen(false);
       }
     };
@@ -70,7 +70,7 @@ export function LanguageSelector({
   return (
     <div
       className={cn("relative", className)}
-      ref={langRef}
+      ref={langReference}
     >
       <button
         type="button"
@@ -78,15 +78,15 @@ export function LanguageSelector({
         aria-haspopup="listbox"
         aria-expanded={langOpen}
         aria-label={t("language") || "Language"}
-        onClick={(e) => {
-          e.stopPropagation();
+        onClick={(event) => {
+          event.stopPropagation();
           setLangOpen(!langOpen);
         }}
-        onKeyDown={(e) => {
-          if (e.key === "Escape" && langOpen) {
+        onKeyDown={(event) => {
+          if (event.key === "Escape" && langOpen) {
             setLangOpen(false);
-          } else if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
+          } else if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
             setLangOpen(!langOpen);
           }
         }}
@@ -118,23 +118,23 @@ export function LanguageSelector({
         >
           <div className="flex flex-col gap-1 p-1">
             {LANGUAGES.map((lang) => {
-              const selected = lang.code === currentLanguage.code;
+              const isSelected = lang.code === currentLanguage.code;
               return (
                 <button
                   key={lang.code}
                   type="button"
                   role="menuitemradio"
-                  aria-checked={selected}
+                  aria-checked={isSelected}
                   onClick={() => changeLanguage(lang.code)}
                   className={cn(
                     "lang-dropdown-item flex items-center justify-between rounded-lg px-3 py-2 text-sm inline-full",
-                    selected && "lang-dropdown-item-selected",
+                    isSelected && "lang-dropdown-item-selected",
                   )}
                 >
                   <span className="flex items-center gap-3">
                     <span className="font-medium">{lang.name}</span>
                   </span>
-                  {selected ?
+                  {isSelected ?
                     <div className="lang-dropdown-dot me-1 size-2 rounded-full" />
                   : null}
                 </button>

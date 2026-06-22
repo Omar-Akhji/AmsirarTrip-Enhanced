@@ -2,7 +2,7 @@ import { defineAction, type ActionAPIContext } from "astro:actions";
 import { z } from "astro/zod";
 import { useTranslations as getTranslations } from "../i18n/utils";
 import { checkRateLimit } from "../lib/api-utils";
-import { env } from "../lib/env";
+import { env as environment } from "../lib/env";
 import { createErrorResponse, type FormState } from "../lib/form-types";
 import { getBookingSchema, getContactSchema, getNewsletterSchema } from "../lib/schemas";
 import {
@@ -67,9 +67,9 @@ export const server = {
 
         if (!validationResult.success) {
           const errors: Record<string, string> = {};
-          for (const err of validationResult.error.issues) {
-            const path = err.path[0] as string;
-            errors[path] = err.message;
+          for (const error of validationResult.error.issues) {
+            const path = error.path[0] as string;
+            errors[path] = error.message;
           }
           return { success: false, message: "Please check the form for errors", errors };
         }
@@ -83,7 +83,7 @@ export const server = {
         }
 
         const transporter = createMailer();
-        const mailTo = env.MAIL_TO || env.GMAIL_USER;
+        const mailTo = environment.MAIL_TO || environment.GMAIL_USER;
 
         const html = `
           <h2>New Booking Request</h2>
@@ -109,7 +109,7 @@ export const server = {
         `;
 
         await transporter.sendMail({
-          from: `Amsirar Trip Bookings <${env.GMAIL_USER}>`,
+          from: `Amsirar Trip Bookings <${environment.GMAIL_USER}>`,
           to: mailTo,
           replyTo: data.email,
           subject: `Booking: ${data.fullName} (${cleanReservationType(data.reservationType)})`,
@@ -166,9 +166,9 @@ Number of people : ${data.persons}${data.message ? `\nMessage : ${data.message}`
 
         if (!validationResult.success) {
           const errors: Record<string, string> = {};
-          for (const err of validationResult.error.issues) {
-            const path = err.path[0] as string;
-            errors[path] = err.message;
+          for (const error of validationResult.error.issues) {
+            const path = error.path[0] as string;
+            errors[path] = error.message;
           }
           return { success: false, message: "Please check the form for errors", errors };
         }
@@ -184,7 +184,7 @@ Number of people : ${data.persons}${data.message ? `\nMessage : ${data.message}`
         }
 
         const transporter = createMailer();
-        const mailTo = env.MAIL_TO || env.GMAIL_USER;
+        const mailTo = environment.MAIL_TO || environment.GMAIL_USER;
 
         const html = `
           <h2>New Contact Message</h2>
@@ -195,7 +195,7 @@ Number of people : ${data.persons}${data.message ? `\nMessage : ${data.message}`
         `;
 
         await transporter.sendMail({
-          from: `Amsirar Trip Contact <${env.GMAIL_USER}>`,
+          from: `Amsirar Trip Contact <${environment.GMAIL_USER}>`,
           to: mailTo,
           replyTo: data.email,
           subject: `Contact from ${data.name}`,
@@ -245,7 +245,7 @@ Number of people : ${data.persons}${data.message ? `\nMessage : ${data.message}`
         }
 
         const transporter = createMailer();
-        const mailTo = env.MAIL_TO || env.GMAIL_USER;
+        const mailTo = environment.MAIL_TO || environment.GMAIL_USER;
 
         const safeName = data.name.replaceAll(/[^\p{L}\p{N}\s]/gu, "");
 
@@ -256,7 +256,7 @@ Number of people : ${data.persons}${data.message ? `\nMessage : ${data.message}`
         `;
 
         await transporter.sendMail({
-          from: `Amsirar Trip Newsletter <${env.GMAIL_USER}>`,
+          from: `Amsirar Trip Newsletter <${environment.GMAIL_USER}>`,
           to: mailTo,
           replyTo: data.email,
           subject: `Newsletter Subscription: ${safeName} (${data.email})`,

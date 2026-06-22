@@ -1,9 +1,9 @@
 import type { FormState } from "@/lib/form-types";
 import { useTranslation } from "@/lib/hooks/useTranslation";
 
-type BookingPersonalFieldsProps = { state: FormState | null };
+type BookingPersonalFieldsProperties = { state: FormState | null };
 
-export function BookingPersonalFields({ state }: BookingPersonalFieldsProps) {
+export function BookingPersonalFields({ state }: BookingPersonalFieldsProperties) {
   const { t } = useTranslation();
 
   return (

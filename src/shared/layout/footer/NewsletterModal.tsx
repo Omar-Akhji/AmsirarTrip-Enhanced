@@ -1,4 +1,4 @@
-import { lazy, Suspense, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { actions } from "astro:actions";
 import { Loader2, Mail, User, X } from "lucide-react";
 import { hasRecaptchaV2, RECAPTCHA_V2_SITE_KEY } from "@/lib/client-env";
@@ -18,25 +18,38 @@ export default function NewsletterModal({
   const [email, setEmail] = useState("");
   const [statusKey, setStatusKey] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const recaptchaRef = useRef<any>(null);
-  const dialogRef = useRef<HTMLDialogElement>(null);
+  const recaptchaReference = useRef<any>(null);
+  const dialogReference = useRef<HTMLDialogElement>(null);
+  const timerReference = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const handleBackdropClick = (e: React.MouseEvent<HTMLDialogElement>) => {
-    if (e.target === dialogRef.current) {
+  useEffect(() => {
+    return () => {
+      if (timerReference.current !== null) {
+        clearTimeout(timerReference.current);
+      }
+    };
+  }, []);
+
+  const handleBackdropClick = (event: React.MouseEvent<HTMLDialogElement>) => {
+    if (event.target === dialogReference.current) {
       onCloseAction();
     }
   };
 
-  const dialogRefCallback = (el: HTMLDialogElement | null) => {
-    dialogRef.current = el;
-    if (el && isOpen && !el.open) el.showModal();
+  if (!isOpen) return null;
+
+  const dialogReferenceCallback = (element: HTMLDialogElement | null) => {
+    dialogReference.current = element;
+    if (element && isOpen && !element.open) element.showModal();
   };
 
-  const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  if (!isOpen) return null;
+
+  const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
+    event.preventDefault();
     if (!name.trim() || !email.trim() || isSubmitting) return;
 
-    const recaptchaToken = recaptchaRef.current?.getValue() || "";
+    const recaptchaToken = recaptchaReference.current?.getValue() || "";
     if (!recaptchaToken) {
       setStatusKey("footer.newsletterCaptchaError");
       return;
@@ -51,33 +64,42 @@ export default function NewsletterModal({
       if (data.ok) {
         setName("");
         setEmail("");
-        recaptchaRef.current?.reset();
-        setTimeout(() => onCloseAction(), 2000);
+        recaptchaReference.current?.reset();
+        timerReference.current = setTimeout(() => {
+          timerReference.current = null;
+          onCloseAction();
+        }, 2000);
       }
       setStatusKey(data.statusKey);
     }
     setIsSubmitting(false);
   };
 
-  if (!isOpen) return null;
-
   return (
     <dialog
-      ref={dialogRefCallback}
+      ref={dialogReferenceCallback}
       onClick={handleBackdropClick}
-      onKeyDown={(e) => {
-        if (e.key === "Escape") {
-          e.preventDefault();
-          onCloseAction();
+      onKeyDown={(event) => {
+        if (event.key !== "Escape") {
+          return;
         }
+
+        event.preventDefault();
+        onCloseAction();
       }}
       aria-modal="true"
+      aria-labelledby="newsletter-dialog-title"
       className="fixed inset-0 z-50 m-auto overflow-visible rounded-3xl border border-neutral-200 bg-white p-0 text-neutral-900 shadow-2xl transition-all duration-300 inline-[95vw] max-inline-md backdrop:bg-black/50 backdrop:backdrop-blur-sm backdrop:transition-all backdrop:duration-300 open:flex open:flex-col starting:backdrop:bg-black/0 starting:open:scale-95 starting:open:opacity-0"
     >
       <div className="p-6 sm:p-8">
         <div className="mbe-6 flex items-start justify-between">
           <div>
-            <h2 className="text-xl font-semibold text-neutral-900">{t("footer.newsletter")}</h2>
+            <h2
+              id="newsletter-dialog-title"
+              className="text-xl font-semibold text-neutral-900"
+            >
+              {t("footer.newsletter")}
+            </h2>
             <p className="mbs-1.5 text-sm leading-relaxed text-neutral-500">
               {t("footer.newsletterDescription")}
             </p>
@@ -112,7 +134,7 @@ export default function NewsletterModal({
                   name="name"
                   placeholder={t("footer.newsletterNamePlaceholder")}
                   value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  onChange={(event) => setName(event.target.value)}
                   required
                   minLength={2}
                   autoComplete="name"
@@ -136,7 +158,7 @@ export default function NewsletterModal({
                   name="email"
                   placeholder={t("footer.newsletterPlaceholder")}
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(event) => setEmail(event.target.value)}
                   required
                   autoComplete="email"
                   className="rounded-full border border-neutral-200 bg-neutral-50 ps-10 pe-4 text-sm text-neutral-900 transition-all duration-200 block-11 inline-full placeholder:text-neutral-400 user-valid:border-green-500 user-invalid:border-red-500 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden"
@@ -159,7 +181,7 @@ export default function NewsletterModal({
                     }
                   >
                     <ReCAPTCHA
-                      ref={recaptchaRef}
+                      ref={recaptchaReference}
                       sitekey={RECAPTCHA_V2_SITE_KEY}
                       theme="light"
                       size="normal"

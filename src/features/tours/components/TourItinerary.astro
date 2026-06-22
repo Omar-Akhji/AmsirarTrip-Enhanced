@@ -10,7 +10,7 @@ const getOrdinalSuffix = (number_: number) => {
   return number_ + "th";
 };
 
-interface DayData {
+interface ItineraryDay {
   number: number;
   title: string;
   text: string[];
@@ -21,7 +21,7 @@ interface DayData {
 }
 
 interface Props {
-  days: DayData[];
+  days: ItineraryDay[];
   accommodationLabel: string;
   mealsLabel: string;
   activitiesLabel: string;
@@ -33,10 +33,10 @@ const { days, accommodationLabel, mealsLabel, activitiesLabel, arrivalLabel } = 
 
 <div class="space-y-8">
   {
-    days.map((day, idx) => (
+    days.map((day, index) => (
       <div
         data-animate="fade-up"
-        style={`transition-delay:${idx * 100}ms`}
+        style={`transition-delay:${index * 100}ms`}
       >
         <div class="group relative">
           <div class="mbe-6">
@@ -51,12 +51,12 @@ const { days, accommodationLabel, mealsLabel, activitiesLabel, arrivalLabel } = 
 
           <div class="relative space-y-3 border-s-0 ps-0 sm:ms-5.5 sm:border-s-2 sm:border-orange-200/50 sm:ps-8">
             <div class="mbe-4 flex flex-wrap items-center gap-2">
-              {day.title.split("➜").map((location, idx, array) => (
+              {day.title.split("➜").map((location, index, array) => (
                 <>
                   <span class="inline-flex items-center rounded-full border border-orange-200/50 bg-linear-to-r from-orange-50 to-amber-50 px-3 py-1 text-sm font-medium text-orange-700">
                     {location.trim()}
                   </span>
-                  {idx < array.length - 1 && (
+                  {index < array.length - 1 && (
                     <Navigation2
                       aria-hidden
                       class="size-3.5 shrink-0 rotate-90 text-orange-400"

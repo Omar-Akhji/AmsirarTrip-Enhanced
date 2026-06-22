@@ -1,9 +1,8 @@
 ---
 import { useTranslations } from "@/i18n/utils";
-import type { LegalSection } from "../types";
 
 interface Props {
-  section: LegalSection;
+  section: { id: string; titleKey: string; contentKey: string };
   index: number;
 }
 

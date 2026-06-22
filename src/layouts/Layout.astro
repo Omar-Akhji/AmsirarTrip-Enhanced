@@ -7,11 +7,6 @@ import Footer from "../shared/layout/Footer.astro";
 import Navbar from "../shared/layout/Navbar.astro";
 import JsonLd from "../shared/ui/JsonLd.astro";
 
-interface Props {
-  title?: string;
-  description?: string;
-}
-
 const {
   title = "Amsirar Trip — Morocco Tours & Desert Adventures",
   description = "Explore Morocco with local experts. Authentic Sahara desert tours, imperial city excursions, Atlas Mountains treks, and private guided experiences. 20+ years serving travelers. Book your dream Morocco adventure today.",
@@ -210,9 +205,7 @@ const DEFAULT_LOCALE = "en";
     <script src="../scripts/loader.ts"></script>
 
     <Navbar />
-    <main>
-      <slot />
-    </main>
+    <slot />
     <Footer />
 
     <a

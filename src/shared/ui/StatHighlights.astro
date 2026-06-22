@@ -1,8 +1,6 @@
 ---
-type Stat = { id: string; value: string; label: string; description: string };
-
 interface Props {
-  stats: Stat[];
+  stats: { value: string; label: string; description: string }[];
 }
 
 const { stats } = Astro.props;

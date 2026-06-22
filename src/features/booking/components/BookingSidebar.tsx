@@ -3,9 +3,9 @@ import Image from "@/shared/ui/Image";
 
 type Perk = { id: string; text: string };
 
-type BookingSidebarProps = { perks: Perk[] };
+type BookingSidebarProperties = { perks: Perk[] };
 
-export function BookingSidebar({ perks }: BookingSidebarProps) {
+export function BookingSidebar({ perks }: BookingSidebarProperties) {
   const { t } = useTranslation();
 
   return (
@@ -56,13 +56,13 @@ export function BookingSidebar({ perks }: BookingSidebarProps) {
         </p>
 
         <ul className="grid gap-6 text-sm">
-          {perks.map((perk, idx) => (
+          {perks.map((perk, index) => (
             <li
               key={perk.id}
               className="inline-flex items-center gap-3"
             >
               <span className="inline-flex items-center justify-center rounded-full bg-white/15 text-xs font-semibold block-6 inline-6">
-                {idx + 1}
+                {index + 1}
               </span>
               <span className="flex-1 text-slate-100">{perk.text}</span>
             </li>

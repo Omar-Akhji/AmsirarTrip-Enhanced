@@ -18,7 +18,7 @@ export default defineConfig({
     compress({
       CSS: true,
       HTML: true,
-      Image: false, // handled by Astro's built-in <Image /> + sharp
+      Image: false, // handled by Astro's built-in <Image /> + Bun.Image
       JavaScript: true,
       SVG: true,
     }),
@@ -28,11 +28,7 @@ export default defineConfig({
   vite: { plugins: [tailwindcss()], resolve: { alias: { "@": "/src" } } },
 
   // ─── Image ───────────────────────────────────────────────────────────────
-  image: {
-    service: { entrypoint: "astro/assets/services/sharp" },
-    domains: [],
-    remotePatterns: [],
-  },
+  image: { service: { entrypoint: "@/services/bun-image" }, domains: [], remotePatterns: [] },
 
   // ─── Security ────────────────────────────────────────────────────────────
   security: { checkOrigin: true },
@@ -46,9 +42,6 @@ export default defineConfig({
     defaultLocale: "en",
     routing: { prefixDefaultLocale: false },
   },
-
-  // ─── Experimental Features ───────────────────────────────────────────────
-  experimental: { advancedRouting: true },
 
   // ─── Type-safe environment variables (Astro 5+) ──────────────────────────
   env: {

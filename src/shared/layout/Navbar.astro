@@ -102,8 +102,8 @@ const isActive = (to: string) =>
 
   .navbar[data-scrolled] {
     background: white;
-    color: #0f172a;
-    box-shadow: 0 12px 30px rgba(3, 7, 18, 0.08);
+    color: var(--color-dark);
+    box-shadow: 0 12px 30px oklch(0% 0 0deg / 0.08);
   }
 
   .navbar[data-scrolled] .helpline-bar {
@@ -126,7 +126,7 @@ const isActive = (to: string) =>
   .navbar[data-scrolled] .desktop-nav-link-active {
     background: var(--color-orange);
     color: white !important;
-    box-shadow: 0 10px 26px rgba(229, 74, 31, 0.12);
+    box-shadow: 0 10px 26px oklch(56% 0.19 33deg / 0.12);
   }
 
   .navbar:not([data-scrolled]) a[class*="social-link"],
@@ -146,47 +146,47 @@ const isActive = (to: string) =>
     border-color: var(--color-orange);
     background: var(--color-orange);
     color: white;
-    box-shadow: 0 10px 24px rgba(229, 74, 31, 0.35);
+    box-shadow: 0 10px 24px oklch(56% 0.19 33deg / 0.35);
   }
 
   .navbar:not([data-scrolled]) .lang-dropdown {
-    border-color: rgba(255, 255, 255, 0.1);
-    background: rgba(24, 24, 27, 0.9);
+    border-color: oklch(100% 0 0deg / 0.1);
+    background: oklch(10% 0.004 200deg / 0.9);
     color: white;
   }
 
   .navbar[data-scrolled] .lang-dropdown {
-    border-color: rgba(228, 228, 231, 0.6);
-    background: rgba(255, 255, 255, 0.9);
-    color: #18181b;
+    border-color: oklch(91% 0.01 248deg / 0.6);
+    background: oklch(100% 0 0deg / 0.9);
+    color: var(--color-dark-grey);
   }
 
   .navbar:not([data-scrolled]) .lang-dropdown-item {
-    color: #d4d4d8;
+    color: var(--color-light-grey-alt2);
   }
 
   .navbar:not([data-scrolled]) .lang-dropdown-item:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: oklch(100% 0 0deg / 0.1);
     color: white;
   }
 
   .navbar[data-scrolled] .lang-dropdown-item {
-    color: #52525b;
+    color: var(--color-grey);
   }
 
   .navbar[data-scrolled] .lang-dropdown-item:hover {
-    background: #f4f4f5;
-    color: #18181b;
+    background: var(--color-light-grey);
+    color: var(--color-dark-grey);
   }
 
   .navbar:not([data-scrolled]) .lang-dropdown-item-selected {
-    background: rgba(255, 255, 255, 0.1);
+    background: oklch(100% 0 0deg / 0.1);
     color: white;
   }
 
   .navbar[data-scrolled] .lang-dropdown-item-selected {
-    background: rgba(229, 74, 31, 0.1);
-    color: #ea580c;
+    background: oklch(56% 0.19 33deg / 0.1);
+    color: var(--color-orange);
   }
 
   .navbar:not([data-scrolled]) .lang-dropdown-dot {
@@ -198,15 +198,15 @@ const isActive = (to: string) =>
   }
 
   .navbar:not([data-scrolled]) .navbar-collapse {
-    border-color: rgba(255, 255, 255, 0.2);
-    background: #1f2937;
+    border-color: oklch(100% 0 0deg / 0.2);
+    background: var(--color-dark-grey);
     color: white;
   }
 
   .navbar[data-scrolled] .navbar-collapse {
-    border-color: rgba(255, 255, 255, 0.1);
+    border-color: oklch(100% 0 0deg / 0.1);
     background: white;
-    color: #0f172a;
+    color: var(--color-dark);
   }
 
   .navbar:not([data-scrolled]) .navbar-link {
@@ -214,7 +214,7 @@ const isActive = (to: string) =>
   }
 
   .navbar[data-scrolled] .navbar-link {
-    color: #18181b;
+    color: var(--color-dark-grey);
   }
 
   .navbar:not([data-scrolled]) .navbar-trip {
@@ -232,7 +232,7 @@ const isActive = (to: string) =>
 
   .navbar[data-scrolled] .navbar-toggle {
     background: white;
-    color: #18181b;
+    color: var(--color-dark-grey);
   }
 
   .navbar:not([data-scrolled]) .mobile-nav-link {
@@ -253,18 +253,18 @@ const isActive = (to: string) =>
   }
 
   .navbar[data-scrolled] .mobile-nav-link {
-    color: #0f172a;
+    color: var(--color-dark);
     background: transparent;
   }
 
   .navbar[data-scrolled] .mobile-nav-link:hover {
-    background: #f4f4f5;
+    background: var(--color-light-grey);
   }
 
   .navbar[data-scrolled] .mobile-nav-link-active {
     background: var(--color-orange);
     color: white;
-    box-shadow: 0 10px 26px rgba(229, 74, 31, 0.12);
+    box-shadow: 0 10px 26px oklch(56% 0.19 33deg / 0.12);
   }
 
   .navbar:not([data-scrolled]) .navbar-mobile-social {
@@ -272,7 +272,7 @@ const isActive = (to: string) =>
   }
 
   .navbar[data-scrolled] .navbar-mobile-social {
-    border-bottom: 1px solid rgba(228, 228, 231, 0.3);
+    border-bottom: 1px solid oklch(91% 0.01 248deg / 0.3);
   }
 
   @media (min-width: 768px) and (max-width: 1089px) {

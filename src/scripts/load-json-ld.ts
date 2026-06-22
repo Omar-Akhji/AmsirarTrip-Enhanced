@@ -1,7 +1,7 @@
 function injectJsonLd() {
-  for (const el of document.querySelectorAll<HTMLElement>("[data-jsonld]")) {
-    const raw = el.dataset["jsonld"];
-    const id = el.dataset["jsonldId"];
+  for (const element of document.querySelectorAll<HTMLElement>("[data-jsonld]")) {
+    const raw = element.dataset["jsonld"];
+    const id = element.dataset["jsonldId"];
     if (!raw || !id) continue;
     if (document.querySelector(`#${CSS.escape(id)}`)) continue;
     const s = document.createElement("script");
@@ -9,7 +9,7 @@ function injectJsonLd() {
     s.id = id;
     s.textContent = raw;
     document.head.append(s);
-    el.remove();
+    element.remove();
   }
 }
 

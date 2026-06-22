@@ -13,7 +13,8 @@ export function checkRateLimit(
   const blockExpiry = blockedIPs.get(identifier);
   if (blockExpiry && now < blockExpiry) {
     return { allowed: false, remaining: 0, blocked: true };
-  } else if (blockExpiry) {
+  }
+  if (blockExpiry) {
     blockedIPs.delete(identifier);
   }
 
@@ -48,15 +49,15 @@ export function checkRateLimit(
   return { allowed: true, remaining: maxRequests - record.count };
 }
 
-if (globalThis.window === undefined) {
+if (globalThis === undefined) {
   setInterval(() => {
     const now = Date.now();
-    for (const [key, value] of rateLimitMap.entries()) {
+    for (const [key, value] of rateLimitMap) {
       if (now > value.resetAt) {
         rateLimitMap.delete(key);
       }
     }
-    for (const [key, expiry] of blockedIPs.entries()) {
+    for (const [key, expiry] of blockedIPs) {
       if (now > expiry) {
         blockedIPs.delete(key);
       }
