@@ -33,7 +33,7 @@ export function useTranslations(locale: string) {
     if (typeof result === "string" && values && typeof values === "object") {
       let text: string = result;
       for (const [k, value] of Object.entries(values)) {
-        text = text.replaceAll(`{${k}}`, String(value));
+        text = text.replaceAll(`{${k}}`, () => String(value));
       }
       return text;
     }

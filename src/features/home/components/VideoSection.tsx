@@ -22,7 +22,7 @@ const VideoSection = () => {
       return;
     }
 
-    videoReference.current.play();
+    void videoReference.current.play();
     setIsPlaying(true);
   };
 
@@ -32,7 +32,7 @@ const VideoSection = () => {
     const video = videoReference.current;
     if (!video) return;
     if (video.paused) {
-      video.play();
+      void video.play();
       setIsPlaying(true);
     } else {
       video.pause();

@@ -2,6 +2,7 @@ import { lazy, Suspense, useActionState, useEffect, useReducer, useRef, useState
 import { withState } from "@astrojs/react/actions";
 import { actions } from "astro:actions";
 import { useFormStatus } from "react-dom";
+import type ReCAPTCHAComponent from "react-google-recaptcha";
 import { TOURS_DATA } from "@/features/tours/data/toursData";
 import { hasRecaptchaV2, RECAPTCHA_V2_SITE_KEY } from "@/lib/client-env";
 import type { FormState } from "@/lib/form-types";
@@ -102,7 +103,7 @@ function BookingForm({
   fullWidth = false,
 }: BookingFormProperties) {
   const { t, i18n } = useTranslation();
-  const recaptchaReference = useRef<any>(null);
+  const recaptchaReference = useRef<ReCAPTCHAComponent>(null);
 
   const [formKey, setFormKey] = useState(0);
 
@@ -132,7 +133,7 @@ function BookingForm({
   const stateReference = useRef(state);
   useEffect(() => {
     stateReference.current = state;
-  }, [state]);
+  });
 
   useEffect(() => {
     const currentState = stateReference.current;
@@ -277,7 +278,7 @@ function BookingForm({
                       id="recaptchaToken-error"
                       className="mbs-1 text-xs text-red-600"
                     >
-                      {state["errors"]["recaptchaToken"] as string}
+                      {state["errors"]["recaptchaToken"]}
                     </p>
                   : null}
                   <SubmitButton buttonText={uiState.buttonText} />

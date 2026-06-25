@@ -53,10 +53,10 @@ const fitMap: Record<ImageFit, "fill" | "inside"> = {
 };
 
 function isESMImportedImage(
-  source: any,
+  source: unknown,
 ): source is { src: string; width: number; height: number; format: string } {
   return (
-    source
+    source !== null
     && typeof source === "object"
     && "src" in source
     && "width" in source
@@ -64,13 +64,13 @@ function isESMImportedImage(
   );
 }
 
-function isRemoteImage(source: any): source is string {
+function isRemoteImage(source: unknown): source is string {
   return (
     typeof source === "string" && (source.startsWith("http://") || source.startsWith("https://"))
   );
 }
 
-function isLocalImage(source: any): source is string {
+function isLocalImage(source: unknown): source is string {
   return typeof source === "string" && source.startsWith("/");
 }
 
@@ -90,7 +90,7 @@ function getTargetDimensions(options: ImageTransform) {
       targetHeight = options.src.height;
     }
   }
-  return { targetWidth: targetWidth!, targetHeight: targetHeight! };
+  return { targetWidth: targetWidth ?? 0, targetHeight: targetHeight ?? 0 };
 }
 
 const bunImageService: LocalImageService<BunImageServiceConfig> = {
@@ -156,11 +156,14 @@ const bunImageService: LocalImageService<BunImageServiceConfig> = {
 
   parseURL(url) {
     const parameters = url.searchParams;
-    if (!parameters.has("href")) return;
+    const href = parameters.get("href");
+    if (!href) return;
+    const widthParam = parameters.get("w");
+    const heightParam = parameters.get("h");
     return {
-      src: parameters.get("href")!,
-      width: parameters.has("w") ? Number.parseInt(parameters.get("w")!) : undefined,
-      height: parameters.has("h") ? Number.parseInt(parameters.get("h")!) : undefined,
+      src: href,
+      width: widthParam ? Number.parseInt(widthParam) : undefined,
+      height: heightParam ? Number.parseInt(heightParam) : undefined,
       format: parameters.has("f") ? parameters.get("f") : undefined,
       quality: parameters.get("q"),
       fit: parameters.get("fit") as ImageFit,
@@ -171,6 +174,7 @@ const bunImageService: LocalImageService<BunImageServiceConfig> = {
 
   getHTMLAttributes(options) {
     const { targetWidth, targetHeight } = getTargetDimensions(options);
+    const optionsRecord = options as Record<string, unknown>;
     const {
       src: _source,
       width: _width,
@@ -186,13 +190,13 @@ const bunImageService: LocalImageService<BunImageServiceConfig> = {
       position: _position,
       background: _background,
       ...attributes
-    } = options as any;
+    } = optionsRecord;
     return {
       ...attributes,
       width: targetWidth,
       height: targetHeight,
-      loading: attributes.loading ?? "lazy",
-      decoding: attributes.decoding ?? "async",
+      loading: (attributes["loading"] as string | undefined) ?? "lazy",
+      decoding: (attributes["decoding"] as string | undefined) ?? "async",
     };
   },
 
@@ -205,16 +209,23 @@ const bunImageService: LocalImageService<BunImageServiceConfig> = {
     let maxWidth = Infinity;
     if (isESMImportedImage(options.src)) {
       maxWidth = options.src.width;
-      if (transformedWidths.length > 0 && transformedWidths.at(-1)! > maxWidth) {
+      const lastWidth = transformedWidths.at(-1);
+      if (transformedWidths.length > 0 && lastWidth !== undefined && lastWidth > maxWidth) {
         transformedWidths = transformedWidths.filter((w) => w <= maxWidth);
         transformedWidths.push(maxWidth);
       }
     }
     transformedWidths = [...new Set(transformedWidths)];
-    const { width: _w, height: _h, ...transformWithoutDimensions } = options as any;
+    const {
+      width: _w,
+      height: _h,
+      ...transformWithoutDimensions
+    } = options as Omit<ImageTransform, "width" | "height"> & { width?: number; height?: number };
     let allWidths: { width: number; descriptor: string }[] = [];
     if (densities) {
-      const densityValues = densities.map((d: any) => (typeof d === "number" ? d : Number(d)));
+      const densityValues = densities.map((d: number | string) =>
+        typeof d === "number" ? d : Number(d),
+      );
       const densityWidths = densityValues
         .toSorted(sortNumeric)
         .map((d: number) => Math.round(targetWidth * d));
@@ -228,7 +239,7 @@ const bunImageService: LocalImageService<BunImageServiceConfig> = {
     return allWidths.map(({ width, descriptor }) => {
       const height = Math.round(width / aspectRatio);
       return {
-        transform: { ...transformWithoutDimensions, width, height },
+        transform: { ...transformWithoutDimensions, width, height } as ImageTransform,
         descriptor,
         attributes: targetFormat ? { type: `image/${targetFormat}` } : {},
       };
@@ -236,32 +247,29 @@ const bunImageService: LocalImageService<BunImageServiceConfig> = {
   },
 
   async transform(inputBuffer, transformOptions, config) {
-    const transform: BaseServiceTransform = transformOptions as BaseServiceTransform;
-    const kernel = config.service.config.kernel ?? "lanczos3";
-    const outputFormat = transform.format ?? "webp";
-    const quality = resolveQuality(transform.quality);
+    const t = transformOptions as Record<string, unknown>;
+    const kernel = (config.service.config.kernel ?? "lanczos3") as "lanczos3";
+    const outputFormat = String(t["format"] ?? "webp") as ImageOutputFormat;
+    const quality = resolveQuality(t["quality"] as string | null | undefined);
 
     const img = new Bun.Image(inputBuffer, { autoOrient: true });
 
-    if (transform.width && transform.height) {
-      const fit = transform.fit ? (fitMap[transform.fit] ?? "inside") : "inside";
-      img.resize(Math.round(transform.width), Math.round(transform.height), {
-        fit,
-        withoutEnlargement: true,
-        filter: kernel,
-      });
-    } else if (transform.height && !transform.width) {
+    const w = t["width"] as number | undefined;
+    const h = t["height"] as number | undefined;
+    const fitRaw = t["fit"] as ImageFit | undefined;
+
+    if (w && h) {
+      const fit = fitRaw ? (fitMap[fitRaw] ?? "inside") : "inside";
+      img.resize(Math.round(w), Math.round(h), { fit, withoutEnlargement: true, filter: kernel });
+    } else if (h && !w) {
       const meta = await img.metadata();
       const aspectRatio = meta.width / meta.height;
-      img.resize(Math.round(transform.height * aspectRatio), Math.round(transform.height), {
+      img.resize(Math.round(h * aspectRatio), Math.round(h), {
         withoutEnlargement: true,
         filter: kernel,
       });
-    } else if (transform.width) {
-      img.resize(Math.round(transform.width), undefined, {
-        withoutEnlargement: true,
-        filter: kernel,
-      });
+    } else if (w) {
+      img.resize(Math.round(w), undefined, { withoutEnlargement: true, filter: kernel });
     }
 
     let data: Uint8Array;
@@ -290,7 +298,7 @@ const bunImageService: LocalImageService<BunImageServiceConfig> = {
       }
     }
 
-    return { data, format: outputFormat as ImageOutputFormat };
+    return { data, format: outputFormat };
   },
 };
 

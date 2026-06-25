@@ -1,18 +1,37 @@
-function update() {
-  const nav = document.querySelector<HTMLElement>("#main-navbar");
-  if (!nav) return;
+let resizeObserver: ResizeObserver | undefined;
+
+function updateScrolled(nav: HTMLElement) {
   if (window.scrollY > 0) {
     nav.dataset["scrolled"] = "";
   } else {
     delete nav.dataset["scrolled"];
   }
+}
+
+function updateHeight(nav: HTMLElement) {
   try {
     const h = nav.getBoundingClientRect().height;
     document.documentElement.style.setProperty("--spacing-navbar", `${h}px`);
   } catch {}
 }
 
-update();
-window.addEventListener("scroll", update, { passive: true });
-window.addEventListener("resize", update, { passive: true });
-document.addEventListener("astro:page-load", update);
+function init() {
+  const nav = document.querySelector<HTMLElement>("#main-navbar");
+  if (!nav) return;
+
+  updateScrolled(nav);
+  updateHeight(nav);
+
+  window.addEventListener("scroll", () => updateScrolled(nav), { passive: true });
+
+  resizeObserver?.disconnect();
+  resizeObserver = new ResizeObserver((entries) => {
+    for (const entry of entries) {
+      const h = entry.borderBoxSize?.[0]?.blockSize ?? entry.contentRect.height;
+      document.documentElement.style.setProperty("--spacing-navbar", `${h}px`);
+    }
+  });
+  resizeObserver.observe(nav);
+}
+
+document.addEventListener("astro:page-load", init);

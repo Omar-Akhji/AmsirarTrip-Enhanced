@@ -27,7 +27,7 @@ const eslintConfig = defineConfig(
   {
     rules: {
       "unicorn/filename-case": "off",
-      "unicorn/prevent-abbreviations": "off",
+      "unicorn/name-replacements": "off",
       "unicorn/no-null": "off",
       "unicorn/no-array-reduce": "off",
       "unicorn/prefer-math-trunc": "off",
@@ -36,6 +36,13 @@ const eslintConfig = defineConfig(
       "unicorn/no-empty-file": "off",
       "unicorn/prefer-logical-operator-over-ternary": "off",
       "unicorn/text-encoding-identifier-case": "off",
+      "unicorn/consistent-boolean-name": "off",
+      "unicorn/no-top-level-side-effects": "off",
+      "unicorn/no-unnecessary-global-this": "off",
+      "unicorn/prefer-ternary": "off",
+      "unicorn/no-computed-property-existence-check": "off",
+      "unicorn/no-top-level-assignment-in-function": "off",
+      "unicorn/prefer-at": "off",
     },
   },
 
@@ -60,22 +67,23 @@ const eslintConfig = defineConfig(
       "@typescript-eslint/consistent-type-definitions": "off",
       "@typescript-eslint/prefer-nullish-coalescing": "off",
       "@typescript-eslint/prefer-optional-chain": "error",
-      "@typescript-eslint/no-floating-promises": "off",
+      "@typescript-eslint/no-floating-promises": "error",
       "@typescript-eslint/no-misused-promises": [
         "error",
         { checksVoidReturn: { attributes: false } },
       ],
+      "@typescript-eslint/await-thenable": "error",
+      "@typescript-eslint/no-unnecessary-type-assertion": "error",
       "@typescript-eslint/array-type": ["error", { default: "array" }],
-      "@typescript-eslint/no-non-null-assertion": "off",
+      "@typescript-eslint/no-non-null-assertion": "warn",
       "@typescript-eslint/return-await": ["error", "in-try-catch"],
       "@typescript-eslint/prefer-promise-reject-errors": "error",
-      // Pragmatic — any is sometimes unavoidable in Astro/React projects
-      "@typescript-eslint/no-explicit-any": "off",
-      "@typescript-eslint/no-unsafe-assignment": "off",
-      "@typescript-eslint/no-unsafe-call": "off",
-      "@typescript-eslint/no-unsafe-member-access": "off",
-      "@typescript-eslint/no-unsafe-return": "off",
-      "@typescript-eslint/no-unsafe-argument": "off",
+      "@typescript-eslint/no-explicit-any": "warn",
+      "@typescript-eslint/no-unsafe-assignment": "warn",
+      "@typescript-eslint/no-unsafe-call": "warn",
+      "@typescript-eslint/no-unsafe-member-access": "warn",
+      "@typescript-eslint/no-unsafe-return": "warn",
+      "@typescript-eslint/no-unsafe-argument": "warn",
     },
   },
 
@@ -91,18 +99,12 @@ const eslintConfig = defineConfig(
       // Hooks (recommended-latest includes React Compiler diagnostics)
       ...reactHooksPlugin.configs.flat["recommended-latest"].rules,
       "react-hooks/rules-of-hooks": "error",
-      "react-hooks/exhaustive-deps": "off",
+      "react-hooks/exhaustive-deps": "warn",
     },
   },
 
   // ─── React Doctor — structural React quality rules (React files only) ─────
   { files: ["**/*.tsx", "**/*.jsx"], ...reactDoctor.configs.recommended },
-
-  // ─── React Doctor overrides ───────────────────────────────────────────────
-  {
-    files: ["**/*.tsx", "**/*.jsx"],
-    rules: { "react-doctor/no-noninteractive-element-interactions": "off" },
-  },
 
   // ─── General quality ──────────────────────────────────────────────────────
   {
@@ -123,12 +125,6 @@ const eslintConfig = defineConfig(
   // ─── Security tuning ──────────────────────────────────────────────────────
   {
     rules: {
-      "security/detect-eval-with-expression": "error",
-      "security/detect-unsafe-regex": "error",
-      "security/detect-buffer-noassert": "error",
-      "security/detect-child-process": "error",
-      "security/detect-no-csrf-before-method-override": "error",
-      "security/detect-pseudoRandomBytes": "error",
       "security/detect-object-injection": "off",
       "security/detect-non-literal-regexp": "warn",
       "no-unsanitized/method": "error",
@@ -141,7 +137,7 @@ const eslintConfig = defineConfig(
     files: ["**/*.astro"],
     rules: {
       // Astro requires the interface to be named "Props" for type inference
-      "unicorn/prevent-abbreviations": ["error", { allowList: { Props: true } }],
+      "unicorn/name-replacements": ["error", { allowList: { Props: true } }],
       // All Astro-specific non-recommended rules
       "astro/no-set-html-directive": "error",
       "astro/no-unsafe-inline-scripts": ["error", { allowModuleScripts: true }],

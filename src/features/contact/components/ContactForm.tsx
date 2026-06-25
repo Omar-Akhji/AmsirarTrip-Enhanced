@@ -2,6 +2,7 @@ import { lazy, Suspense, useActionState, useEffect, useReducer, useRef } from "r
 import { withState } from "@astrojs/react/actions";
 import { actions } from "astro:actions";
 import { useFormStatus } from "react-dom";
+import type ReCAPTCHAComponent from "react-google-recaptcha";
 import { hasRecaptchaV2, RECAPTCHA_V2_SITE_KEY } from "@/lib/client-env";
 import type { FormState } from "@/lib/form-types";
 import { useTranslation } from "@/lib/hooks/useTranslation";
@@ -67,7 +68,7 @@ const alertClasses: Record<string, string> = {
 
 const ContactForm = () => {
   const { t } = useTranslation();
-  const recaptchaReference = useRef<any>(null);
+  const recaptchaReference = useRef<ReCAPTCHAComponent>(null);
   const [uiState, dispatch] = useReducer(contactFormUIReducer, initialContactFormUIState);
 
   type AstroActionResult = { data?: FormState; error?: { message: string } };
@@ -179,7 +180,7 @@ const ContactForm = () => {
                               clipRule="evenodd"
                             />
                           </svg>
-                          <span>{error as string}</span>
+                          <span>{error}</span>
                         </li>
                       ))}
                     </ul>
@@ -243,7 +244,7 @@ const ContactForm = () => {
                       id="recaptchaToken-error"
                       className="mbs-1 text-xs text-red-600"
                     >
-                      {state["errors"]["recaptchaToken"] as string}
+                      {state["errors"]["recaptchaToken"]}
                     </p>
                   : null}
                   <SubmitButton />

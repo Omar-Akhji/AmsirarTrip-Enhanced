@@ -2,7 +2,7 @@ import node from "@astrojs/node";
 import react from "@astrojs/react";
 import compress from "@playform/compress";
 import tailwindcss from "@tailwindcss/vite";
-import { defineConfig, envField } from "astro/config";
+import { defineConfig, envField, memoryCache } from "astro/config";
 
 export default defineConfig({
   // ─── Site ────────────────────────────────────────────────────────────────
@@ -32,6 +32,18 @@ export default defineConfig({
 
   // ─── Security ────────────────────────────────────────────────────────────
   security: { checkOrigin: true },
+
+  // ─── Cache (Astro 7+) ───────────────────────────────────────────────────
+  cache: { provider: memoryCache() },
+
+  // ─── Route Rules (Astro 7+) ──────────────────────────────────────────────
+  routeRules: {
+    "/": { maxAge: 60, swr: 300 },
+    "/trips/[...slug]": { maxAge: 300, swr: 600 },
+    "/excursions/[...slug]": { maxAge: 300, swr: 600 },
+    "/about": { maxAge: 600, swr: 3600 },
+    "/api/[...path]": { maxAge: 0 },
+  },
 
   // ─── Dev ─────────────────────────────────────────────────────────────────
   server: { port: 4321, host: true },

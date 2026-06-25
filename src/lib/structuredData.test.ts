@@ -39,8 +39,9 @@ describe("generateTourJsonLd", () => {
     });
 
     expect(result.offers).toBeDefined();
-    expect(result.offers!.price).toBe(295);
-    expect(result.offers!.priceCurrency).toBe("EUR");
+    const offers = result.offers as { price: number; priceCurrency: string };
+    expect(offers.price).toBe(295);
+    expect(offers.priceCurrency).toBe("EUR");
   });
 
   it("sanitizes HTML from name and description", () => {
@@ -69,7 +70,8 @@ describe("generateFaqJsonLd", () => {
     expect(result["@type"]).toBe("FAQPage");
     const entities = result["mainEntity"] as Record<string, unknown>[];
     expect(entities).toHaveLength(2);
-    expect(entities[0]!["@type"]).toBe("Question");
+    const firstEntity = entities[0] as Record<string, unknown>;
+    expect(firstEntity["@type"]).toBe("Question");
   });
 });
 
@@ -91,7 +93,7 @@ describe("generateWebsiteJsonLd", () => {
 
     expect(result["@type"]).toBe("WebSite");
     expect(result.name).toBe("Amsirar Trip");
-    expect(result.potentialAction!["@type"]).toBe("SearchAction");
+    expect(result.potentialAction?.["@type"]).toBe("SearchAction");
     expect(result.inLanguage).toContain("en");
   });
 });

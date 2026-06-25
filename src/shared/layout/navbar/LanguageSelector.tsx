@@ -27,6 +27,12 @@ const badgeClasses = (size: "sm" | "md"): string => {
   return cn(baseClasses, sizeClasses);
 };
 
+const DEFAULT_LANGUAGE: (typeof LANGUAGES)[number] = {
+  code: "en",
+  name: "English",
+  shortName: "EN",
+};
+
 export function LanguageSelector({
   placement = "right",
   size = "md",
@@ -38,7 +44,7 @@ export function LanguageSelector({
   const [langOpen, setLangOpen] = useState(false);
   const langReference = useRef<HTMLDivElement>(null);
 
-  const currentLanguage = LANGUAGES.find((l) => l.code === i18n.language) || LANGUAGES[0]!;
+  const currentLanguage = LANGUAGES.find((l) => l.code === i18n.language) ?? DEFAULT_LANGUAGE;
 
   const changeLanguage = (code: string) => {
     const isValidLanguage = LANGUAGES.some((l) => l.code === code);

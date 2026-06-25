@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+import type SMTPPool from "nodemailer/lib/smtp-pool";
 import { env } from "@/lib/env";
 
 export async function verifyRecaptcha(token: string, expectedHostname?: string): Promise<boolean> {
@@ -64,9 +65,9 @@ export async function verifyRecaptcha(token: string, expectedHostname?: string):
   }
 }
 
-let _transporter: nodemailer.Transporter<any> | null = null;
+let _transporter: nodemailer.Transporter<SMTPPool.SentMessageInfo> | null = null;
 
-export function createMailer(): nodemailer.Transporter<any> {
+export function createMailer(): nodemailer.Transporter<SMTPPool.SentMessageInfo> {
   if (_transporter) return _transporter;
   _transporter = nodemailer.createTransport({
     service: "gmail",
