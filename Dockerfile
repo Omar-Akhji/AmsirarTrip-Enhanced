@@ -20,8 +20,8 @@ RUN bun run build
 FROM oven/bun:1-slim AS runtime
 
 # Security: run as non-root user
-RUN addgroup --system --gid 1001 appgroup && \
-    adduser --system --uid 1001 --ingroup appgroup appuser
+RUN groupadd --system --gid 1001 appgroup && \
+    useradd --system --uid 1001 --gid appgroup appuser
 
 WORKDIR /app
 
