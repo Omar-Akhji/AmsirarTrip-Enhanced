@@ -1,6 +1,9 @@
+# Modern Docker Compose — no "version" field needed (Compose Specification)
 services:
   astro:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: amsirartrip
     restart: unless-stopped
     ports:
@@ -8,6 +11,7 @@ services:
     environment:
       - HOST=0.0.0.0
       - PORT=4321
+      - NODE_ENV=production
       - GMAIL_USER=${GMAIL_USER}
       - GMAIL_PASS=${GMAIL_PASS}
       - MAIL_TO=${MAIL_TO}
@@ -15,3 +19,38 @@ services:
       - PUBLIC_RECAPTCHA_SITE_KEY=${PUBLIC_RECAPTCHA_SITE_KEY}
     env_file:
       - .env
+    # Health check (mirrors Dockerfile HEALTHCHECK)
+    healthcheck:
+      test: ["CMD-SHELL", "bun -e \"fetch('http://localhost:4321').then(r => r.ok ? process.exit(0) : process.exit(1)).catch(() => process.exit(1))\""]
+      interval: 30s
+      timeout: 10s
+      start_period: 40s
+      retries: 3
+    # Resource limits — prevent runaway memory on VPS
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: "1.0"
+        reservations:
+          memory: 256M
+    # Logging — prevent disk fill on VPS
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    # Security options
+    security_opt:
+      - no-new-privileges:true
+
+  # Auto-heal: restarts unhealthy containers automatically
+  autoheal:
+    image: willfarrell/autoheal:latest
+    container_name: autoheal
+    restart: always
+    environment:
+      - AUTOHEAL_CONTAINER_LABEL=all
+      - AUTOHEAL_INTERVAL=60
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
