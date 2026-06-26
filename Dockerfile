@@ -10,6 +10,8 @@ RUN npm install
 
 # ─── Stage 3: Build the application ────────────────────────
 FROM base AS build
+ARG PUBLIC_RECAPTCHA_SITE_KEY
+ENV PUBLIC_RECAPTCHA_SITE_KEY=$PUBLIC_RECAPTCHA_SITE_KEY
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN npm run build
