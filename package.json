@@ -12,7 +12,7 @@
     "lint": "eslint .",
     "prepare": "git update-index --assume-unchanged .husky/pre-commit 2>/dev/null || true",
     "preview": "astro preview",
-    "start": "bun ./dist/server/entry.mjs",
+    "start": "node ./dist/server/entry.mjs",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "test:watch": "vitest",
