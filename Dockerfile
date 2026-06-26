@@ -1,32 +1,24 @@
-# ─── Stage 1: Base ──────────────────────────────────────────
-FROM node:lts-slim AS base
-ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable
+# ─── Stage 1: Base (using Bun) ─────────────────────────────
+FROM oven/bun:1-slim AS base
 WORKDIR /app
 
-# ─── Stage 2: Build dependencies ───────────────────────────
-FROM base AS deps
-COPY package.json ./
-# Install all dependencies using pnpm
-RUN pnpm install --no-frozen-lockfile
+# ─── Stage 2: Production dependencies (using Bun) ──────────
+FROM base AS prod-deps
+COPY package.json bun.lock ./
+RUN bun install --production --frozen-lockfile
 
-# ─── Stage 3: Build the application ────────────────────────
-FROM base AS build
+# ─── Stage 3: All dependencies + build (using Bun) ─────────
+FROM base AS build-deps
+COPY package.json bun.lock ./
+RUN bun install --frozen-lockfile
+
+FROM build-deps AS build
 ARG PUBLIC_RECAPTCHA_SITE_KEY
 ENV PUBLIC_RECAPTCHA_SITE_KEY=$PUBLIC_RECAPTCHA_SITE_KEY
-COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN pnpm run build
+RUN bun run build
 
-# ─── Stage 4: Production dependencies ──────────────────────
-FROM base AS prod-deps
-COPY --from=deps /app/node_modules ./node_modules
-COPY package.json ./
-# Prune development dependencies using pnpm
-RUN pnpm prune --prod
-
-# ─── Stage 5: Runtime (production) ─────────────────────────
+# ─── Stage 4: Runtime (using Node) ─────────────────────────
 FROM node:lts-slim AS runtime
 WORKDIR /app
 
