@@ -17,7 +17,7 @@ COPY . .
 RUN bun run build
 
 # ─── Stage 4: Runtime (production) ─────────────────────────
-FROM node:24-slim AS runtime
+FROM node:lts-slim AS runtime
 WORKDIR /app
 
 # Copy only what's needed, changing ownership to standard non-root node user
