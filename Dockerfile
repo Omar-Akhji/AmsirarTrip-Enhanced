@@ -1,26 +1,31 @@
 # ─── Stage 1: Base ──────────────────────────────────────────
-FROM oven/bun:1-slim AS base
+FROM node:lts-slim AS base
 WORKDIR /app
 
-# ─── Stage 2: Production dependencies ──────────────────────
-FROM base AS prod-deps
-COPY package.json bun.lock ./
-RUN bun install --production --frozen-lockfile
+# ─── Stage 2: Build dependencies ───────────────────────────
+FROM base AS deps
+COPY package.json ./
+# Install all dependencies (required for building the project)
+RUN npm install
 
-# ─── Stage 3: All dependencies + build ─────────────────────
-FROM base AS build-deps
-COPY package.json bun.lock ./
-RUN bun install --frozen-lockfile
-
-FROM build-deps AS build
+# ─── Stage 3: Build the application ────────────────────────
+FROM base AS build
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN bun run build
+RUN npm run build
 
-# ─── Stage 4: Runtime (production) ─────────────────────────
+# ─── Stage 4: Production dependencies ──────────────────────
+FROM base AS prod-deps
+COPY --from=deps /app/node_modules ./node_modules
+COPY package.json ./
+# Prune development dependencies to keep the image small
+RUN npm prune --production
+
+# ─── Stage 5: Runtime (production) ─────────────────────────
 FROM node:lts-slim AS runtime
 WORKDIR /app
 
-# Copy only what's needed, changing ownership to standard non-root node user
+# Copy production node_modules and built dist folder
 COPY --from=prod-deps --chown=node:node /app/node_modules ./node_modules
 COPY --from=build --chown=node:node /app/dist ./dist
 
