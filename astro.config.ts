@@ -28,7 +28,7 @@ export default defineConfig({
   vite: { plugins: [tailwindcss()], resolve: { alias: { "@": "/src" } } },
 
   // ─── Image ───────────────────────────────────────────────────────────────
-  image: { service: { entrypoint: "@/services/bun-image" }, domains: [], remotePatterns: [] },
+  image: { domains: [], remotePatterns: [] },
 
   // ─── Security ────────────────────────────────────────────────────────────
   security: { checkOrigin: true },
