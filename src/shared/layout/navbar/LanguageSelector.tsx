@@ -16,7 +16,9 @@ const getButtonClasses = (size: "sm" | "md"): string => {
   const baseClasses =
     "flex items-center justify-center rounded-full border-2 transition-all duration-150 pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:shadow-[0_8px_18px_rgba(0,0,0,0.28)]";
   const textSize = size === "sm" ? "text-sm" : "text-base font-semibold";
-  return cn(baseClasses, sizeClass, textSize, "lang-btn");
+  const scrollClasses =
+    "border-white/60 bg-white/10 text-white group-data-scrolled:border-orange group-data-scrolled:bg-orange group-data-scrolled:text-white group-data-scrolled:shadow-[0_10px_24px_oklch(56%_0.19_33deg/35%)]";
+  return cn(baseClasses, sizeClass, textSize, scrollClasses);
 };
 
 const badgeClasses = (size: "sm" | "md"): string => {
@@ -116,7 +118,7 @@ export function LanguageSelector({
       {langOpen ?
         <div
           className={cn(
-            "lang-dropdown absolute z-50 mbs-2 overflow-hidden rounded-xl border shadow-xl backdrop-blur-xl inline-48",
+            "absolute z-50 mbs-2 overflow-hidden rounded-xl border border-white/10 bg-dark/90 text-white shadow-xl backdrop-blur-xl inline-48 group-data-scrolled:border-light-grey-alt2/60 group-data-scrolled:bg-white/90 group-data-scrolled:text-dark-grey",
             placement === "left" ? "inset-s-0" : "inset-e-0",
           )}
           role="menu"
@@ -133,15 +135,16 @@ export function LanguageSelector({
                   aria-checked={isSelected}
                   onClick={() => changeLanguage(lang.code)}
                   className={cn(
-                    "lang-dropdown-item flex items-center justify-between rounded-lg px-3 py-2 text-sm inline-full",
-                    isSelected && "lang-dropdown-item-selected",
+                    "flex items-center justify-between rounded-lg px-3 py-2 text-sm text-light-grey-alt2 transition-colors duration-150 inline-full group-data-scrolled:text-grey hover:bg-white/10 hover:text-white group-data-scrolled:hover:bg-light-grey group-data-scrolled:hover:text-dark-grey",
+                    isSelected
+                      && "bg-white/10 text-white group-data-scrolled:bg-orange/10 group-data-scrolled:text-orange",
                   )}
                 >
                   <span className="flex items-center gap-3">
                     <span className="font-medium">{lang.name}</span>
                   </span>
                   {isSelected ?
-                    <div className="lang-dropdown-dot me-1 size-2 rounded-full" />
+                    <div className="me-1 size-2 rounded-full bg-white group-data-scrolled:bg-orange" />
                   : null}
                 </button>
               );

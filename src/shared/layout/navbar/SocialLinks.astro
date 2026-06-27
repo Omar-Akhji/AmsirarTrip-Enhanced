@@ -10,7 +10,8 @@ const { class: className, compact = false } = Astro.props;
       <li>
         <a
           class:list={[
-            `social-link flex items-center justify-center rounded-full border-2 transition-all duration-150 pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:shadow-[0_8px_18px_rgba(0,0,0,0.28)]`,
+            `flex items-center justify-center rounded-full border-2 transition-all duration-150 pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:shadow-[0_8px_18px_rgba(0,0,0,0.28)]`,
+            `group-not-data-scrolled:border-white/60 group-not-data-scrolled:bg-white/10 group-not-data-scrolled:text-white`,
             ` ${link.accent}`,
             { "size-10": compact, "size-11": !compact },
           ]}

@@ -26,11 +26,11 @@ const isActive = (to: string) =>
 ---
 
 <nav
-  class="navbar fixed inset-s-1/2 top-2 z-50 translate-x-[-50%] rounded-2xl border border-white/10 px-4 py-2 shadow-[0_10px_30px_rgba(3,7,18,0.12)] backdrop-blur-xl transition-colors duration-200 will-change-auto inline-[min(1100px,calc(100%-2rem))] has-data-[state=open]:backdrop-blur-sm"
+  class="group fixed inset-s-1/2 top-2 z-50 translate-x-[-50%] rounded-2xl border border-white/10 bg-white/10 px-4 py-2 text-white shadow-[0_10px_30px_rgba(3,7,18,0.12)] backdrop-blur-xl transition-colors duration-200 will-change-auto inline-[min(1100px,calc(100%-2rem))] has-data-[state=open]:backdrop-blur-sm data-scrolled:bg-white data-scrolled:text-dark data-scrolled:shadow-[0_12px_30px_oklch(0%_0_0deg/8%)]"
   id="main-navbar"
 >
   <div
-    class="helpline-bar relative hidden items-center justify-center px-0 py-3 pbe-5 inline-full lg:flex"
+    class="helpline-bar relative hidden items-center justify-center border-b border-white/20 px-0 py-3 pbe-5 inline-full lg:flex group-data-scrolled:lg:hidden"
   >
     <a
       aria-label={`${t("helplineTitle")} ${t("helplineNumber")}`}
@@ -55,10 +55,13 @@ const isActive = (to: string) =>
     </a>
     <a
       aria-label="Amsirar Trip Home"
-      class="text-[1.5rem] font-semibold tracking-tight text-white"
+      class="text-[1.5rem] font-semibold tracking-tight text-white transition-colors duration-200 group-data-scrolled:text-dark-grey"
       href={localize("/")}
     >
-      Amsirar<span class="ms-1 font-brand font-light">Trip</span>
+      Amsirar<span
+        class="ms-1 font-brand font-light text-white transition-colors duration-200 group-data-scrolled:text-orange"
+        >Trip</span
+      >
     </a>
   </div>
 
@@ -76,9 +79,10 @@ const isActive = (to: string) =>
             <li>
               <a
                 class:list={[
-                  "desktop-nav-link inline-flex items-center gap-2 rounded-full px-3 py-2 text-[0.98rem] font-medium tracking-tight transition-all duration-200",
-                  active && "desktop-nav-link-active text-white",
-                  "pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:bg-white/10 pointer-fine:hover:shadow-[0_8px_26px_rgba(3,7,18,0.12)]",
+                  "inline-flex items-center gap-2 rounded-full px-3 py-2 text-[0.98rem] font-medium tracking-tight transition-all duration-200",
+                  "bg-transparent text-inherit pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:bg-white/10 pointer-fine:hover:shadow-[0_8px_26px_rgba(3,7,18,0.12)]",
+                  active
+                    && "bg-white/10 text-white shadow-[0_0_0_1px_rgb(0_0_0/_5%)] backdrop-blur-md group-data-scrolled:bg-orange group-data-scrolled:text-white group-data-scrolled:shadow-[0_10px_26px_oklch(56%_0.19_33deg/12%)]",
                 ]}
                 href={localize(link.to)}
               >
@@ -93,173 +97,5 @@ const isActive = (to: string) =>
     <MobileMenu client:load />
   </div>
 </nav>
-
-<style is:global>
-  .navbar {
-    background: rgb(255 255 255 / 10%);
-    color: white;
-  }
-
-  .navbar[data-scrolled] {
-    background: white;
-    color: var(--color-dark);
-    box-shadow: 0 12px 30px oklch(0% 0 0deg / 8%);
-  }
-
-  .navbar[data-scrolled] .helpline-bar {
-    display: none;
-  }
-
-  .desktop-nav-link {
-    color: inherit;
-    background: transparent;
-  }
-
-  .desktop-nav-link-active {
-    background: rgb(255 255 255 / 10%);
-    color: white;
-    box-shadow: 0 0 0 1px rgb(0 0 0 / 5%);
-    backdrop-filter: blur(4px);
-  }
-
-  .navbar[data-scrolled] .desktop-nav-link-active {
-    background: var(--color-orange);
-    color: white;
-    box-shadow: 0 10px 26px oklch(56% 0.19 33deg / 12%);
-  }
-
-  .navbar:not([data-scrolled]) a[class*="social-link"],
-  .navbar:not([data-scrolled]) .navbar-toggle {
-    border-color: rgb(255 255 255 / 60%);
-    background: rgb(255 255 255 / 10%);
-    color: white;
-  }
-
-  .navbar:not([data-scrolled]) .lang-btn {
-    border-color: rgb(255 255 255 / 60%);
-    background: rgb(255 255 255 / 10%);
-    color: white;
-  }
-
-  .navbar[data-scrolled] .lang-btn {
-    border-color: var(--color-orange);
-    background: var(--color-orange);
-    color: white;
-    box-shadow: 0 10px 24px oklch(56% 0.19 33deg / 35%);
-  }
-
-  .navbar:not([data-scrolled]) .lang-dropdown {
-    border-color: oklch(100% 0 0deg / 10%);
-    background: oklch(10% 0.004 200deg / 90%);
-    color: white;
-  }
-
-  .navbar[data-scrolled] .lang-dropdown {
-    border-color: oklch(91% 0.01 248deg / 60%);
-    background: oklch(100% 0 0deg / 90%);
-    color: var(--color-dark-grey);
-  }
-
-  .navbar:not([data-scrolled]) .lang-dropdown-item {
-    color: var(--color-light-grey-alt2);
-  }
-
-  .navbar[data-scrolled] .lang-dropdown-item {
-    color: var(--color-grey);
-  }
-
-  .navbar:not([data-scrolled]) .lang-dropdown-item:hover {
-    background: oklch(100% 0 0deg / 10%);
-    color: white;
-  }
-
-  .navbar[data-scrolled] .lang-dropdown-item:hover {
-    background: var(--color-light-grey);
-    color: var(--color-dark-grey);
-  }
-
-  .navbar:not([data-scrolled]) .lang-dropdown-item-selected {
-    background: oklch(100% 0 0deg / 10%);
-    color: white;
-  }
-
-  .navbar[data-scrolled] .lang-dropdown-item-selected {
-    background: oklch(56% 0.19 33deg / 10%);
-    color: var(--color-orange);
-  }
-
-  .navbar:not([data-scrolled]) .lang-dropdown-dot {
-    background: white;
-  }
-
-  .navbar[data-scrolled] .lang-dropdown-dot {
-    background: var(--color-orange);
-  }
-
-  .navbar:not([data-scrolled]) .navbar-link {
-    color: white;
-  }
-
-  .navbar[data-scrolled] .navbar-link {
-    color: var(--color-dark-grey);
-  }
-
-  .navbar:not([data-scrolled]) .navbar-trip {
-    color: white;
-  }
-
-  .navbar[data-scrolled] .navbar-trip {
-    color: var(--color-orange);
-  }
-
-  .navbar:not([data-scrolled]) .navbar-toggle {
-    background: rgb(0 0 0 / 35%);
-    color: white;
-  }
-
-  .navbar[data-scrolled] .navbar-toggle {
-    background: white;
-    color: var(--color-dark-grey);
-  }
-
-  .navbar:not([data-scrolled]) .mobile-nav-link {
-    color: white;
-    background: transparent;
-  }
-
-  .navbar[data-scrolled] .mobile-nav-link {
-    color: var(--color-dark);
-    background: transparent;
-  }
-
-  .navbar:not([data-scrolled]) .mobile-nav-link-active {
-    background: rgb(255 255 255 / 10%);
-    color: white;
-    box-shadow: 0 0 0 1px rgb(0 0 0 / 5%);
-    backdrop-filter: blur(4px);
-  }
-
-  .navbar[data-scrolled] .mobile-nav-link-active {
-    background: var(--color-orange);
-    color: white;
-    box-shadow: 0 10px 26px oklch(56% 0.19 33deg / 12%);
-  }
-
-  .navbar:not([data-scrolled]) .mobile-nav-link:hover {
-    background: rgb(255 255 255 / 10%);
-  }
-
-  .navbar[data-scrolled] .mobile-nav-link:hover {
-    background: var(--color-light-grey);
-  }
-
-  .navbar:not([data-scrolled]) .navbar-mobile-social {
-    border-bottom: 1px solid rgb(255 255 255 / 20%);
-  }
-
-  .navbar[data-scrolled] .navbar-mobile-social {
-    border-bottom: 1px solid oklch(91% 0.01 248deg / 30%);
-  }
-</style>
 
 <script src="../../scripts/navbar-scroll.ts"></script>

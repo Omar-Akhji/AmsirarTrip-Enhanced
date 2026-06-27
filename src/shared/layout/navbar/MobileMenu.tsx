@@ -8,8 +8,10 @@ import { LanguageSelector } from "./LanguageSelector";
 
 const getNavLinkClasses = (active: boolean): string => {
   const base =
-    "inline-flex items-center gap-2 rounded-full font-medium transition-all duration-200 mx-auto inline-fit min-inline-40 justify-center px-8 py-2.5 text-base";
-  return cn(base, "mobile-nav-link", active && "mobile-nav-link-active");
+    "inline-flex items-center gap-2 rounded-full font-medium transition-all duration-200 mx-auto inline-fit min-inline-40 justify-center px-8 py-2.5 text-base text-white bg-transparent hover:bg-white/10 group-data-scrolled:text-dark group-data-scrolled:hover:bg-light-grey";
+  const activeClasses =
+    "bg-white/10 text-white shadow-[0_0_0_1px_rgb(0_0_0/5%)] backdrop-blur-[4px] group-data-scrolled:bg-orange group-data-scrolled:text-white group-data-scrolled:shadow-[0_10px_26px_oklch(56%_0.19_33deg/12%)]";
+  return cn(base, active && activeClasses);
 };
 
 export function MobileMenu() {
@@ -24,7 +26,7 @@ export function MobileMenu() {
       return "tablet";
     return "mobile";
   });
-  const collapseReference = useRef<HTMLDialogElement>(null);
+  const collapseReference = useRef<HTMLDivElement>(null);
   const buttonReference = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
@@ -115,7 +117,7 @@ export function MobileMenu() {
 
   const getCollapseClasses = (): string => {
     const baseClasses =
-      "navbar-collapse fixed start-1/2 top-[calc(100%+0.75rem)] z-40 -translate-x-1/2 overflow-y-auto max-h-[calc(100vh-6rem)] rounded-2xl shadow-[0_20px_40px_rgba(0,0,0,0.3)] transition-all duration-300 inline-[min(1100px,calc(100vw-2rem))]";
+      "navbar-collapse fixed start-1/2 top-[calc(100%+0.75rem)] z-40 -translate-x-1/2 overflow-y-auto max-h-[calc(100vh-6rem)] rounded-2xl border border-white/20 bg-[#1f2937] text-white shadow-[0_20px_40px_rgba(0,0,0,0.3)] transition-all duration-300 inline-[min(1100px,calc(100vw-2rem))] group-data-scrolled:border-white/10 group-data-scrolled:bg-white group-data-scrolled:text-slate-900";
     const visibilityClasses =
       asideOpen ?
         "pointer-events-auto opacity-100 translate-y-0"
@@ -133,7 +135,8 @@ export function MobileMenu() {
                 <a
                   href={link.href}
                   className={cn(
-                    "social-link flex size-10 items-center justify-center rounded-full border-2 transition-all duration-150 pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:shadow-[0_8px_18px_rgba(0,0,0,0.28)]",
+                    "flex size-10 items-center justify-center rounded-full border-2 transition-all duration-150 pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:shadow-[0_8px_18px_rgba(0,0,0,0.28)]",
+                    "group-not-data-scrolled:border-white/60 group-not-data-scrolled:bg-white/10 group-not-data-scrolled:text-white",
                     link.accent,
                   )}
                   {...(link.href.startsWith("http") ?
@@ -160,7 +163,7 @@ export function MobileMenu() {
       <Link
         href="/"
         className={cn(
-          "navbar-link text-[1.4rem] font-semibold tracking-tight",
+          "text-[1.4rem] font-semibold tracking-tight text-white transition-colors duration-200 group-data-scrolled:text-dark-grey",
           viewport === "tablet" || viewport === "mobile" ?
             "absolute inset-s-1/2 z-10 -translate-x-1/2"
           : "",
@@ -169,7 +172,9 @@ export function MobileMenu() {
         aria-label="Amsirar Trip Home"
       >
         Amsirar
-        <span className="navbar-trip ms-1 font-brand font-light">Trip</span>
+        <span className="ms-1 font-brand font-light text-white transition-colors duration-200 group-data-scrolled:text-orange">
+          Trip
+        </span>
       </Link>
 
       {viewport === "mobile" && (
@@ -184,7 +189,8 @@ export function MobileMenu() {
         type="button"
         id="navbar-show-btn"
         className={cn(
-          "navbar-toggle ms-2 flex size-10 items-center justify-center rounded-md text-lg transition-all duration-150 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-orange",
+          "ms-2 flex size-10 items-center justify-center rounded-md text-lg transition-all duration-150 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-orange",
+          "bg-black/35 text-white group-data-scrolled:bg-white group-data-scrolled:text-dark-grey",
         )}
         aria-expanded={asideOpen}
         aria-controls="navbar-collapse"
@@ -196,22 +202,22 @@ export function MobileMenu() {
         : <Menu className="pointer-events-none size-5" />}
       </button>
 
-      <dialog
+      <div
         id="navbar-collapse"
         ref={collapseReference}
         className={cn(getCollapseClasses())}
-        aria-modal="true"
         aria-label="Navigation menu"
       >
         {viewport === "mobile" && (
-          <div className="navbar-mobile-social flex items-center justify-center gap-4 px-4 py-4">
+          <div className="flex items-center justify-center gap-4 border-b border-white/20 px-4 py-4 group-data-scrolled:border-light-grey-alt2/30">
             <ul className="flex items-center gap-4">
               {SOCIAL_LINKS.map((link) => (
                 <li key={link.label}>
                   <a
                     href={link.href}
                     className={cn(
-                      "social-link flex size-10 items-center justify-center rounded-full border-2 transition-all duration-150 pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:shadow-[0_8px_18px_rgba(0,0,0,0.28)]",
+                      "flex size-10 items-center justify-center rounded-full border-2 transition-all duration-150 pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:shadow-[0_8px_18px_rgba(0,0,0,0.28)]",
+                      "group-not-data-scrolled:border-white/60 group-not-data-scrolled:bg-white/10 group-not-data-scrolled:text-white",
                       link.accent,
                     )}
                     {...(link.href.startsWith("http") ?
@@ -243,7 +249,7 @@ export function MobileMenu() {
             </li>
           ))}
         </ul>
-      </dialog>
+      </div>
     </div>
   );
 }
