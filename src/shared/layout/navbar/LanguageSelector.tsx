@@ -23,9 +23,8 @@ const getButtonClasses = (size: "sm" | "md"): string => {
 
 const badgeClasses = (size: "sm" | "md"): string => {
   const baseClasses =
-    "absolute -end-1.5 -bottom-1 font-bold tracking-[0.04em] text-white rounded-full border-2 border-white bg-orange";
-  const sizeClasses =
-    size === "sm" ? "px-1 py-[1px] text-[0.6rem]" : "px-1.5 py-0.5 text-[0.625rem]";
+    "absolute -inset-e-1.5 -bottom-1 font-bold tracking-[0.04em] text-white rounded-full border-2 border-white bg-orange";
+  const sizeClasses = size === "sm" ? "px-1 py-px text-[0.6rem]" : "px-1.5 py-0.5 text-[0.625rem]";
   return cn(baseClasses, sizeClasses);
 };
 

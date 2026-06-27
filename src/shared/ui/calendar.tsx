@@ -90,14 +90,14 @@ export function EnhancedCalendar({
           <button
             type="button"
             onClick={() => navigateMonth("prev")}
-            className="flex items-center justify-center rounded-full text-orange-600 transition-colors block-8 inline-8 focus:ring-2 focus:ring-orange-500 focus:ring-offset-1 focus:outline-hidden pointer-fine:hover:bg-orange-50"
+            className="flex size-8 items-center justify-center rounded-full text-orange-600 transition-colors focus:ring-2 focus:ring-orange-500 focus:ring-offset-1 focus:outline-hidden pointer-fine:hover:bg-orange-50"
             aria-label="Previous month"
           >
-            <ChevronLeft className="block-4 inline-4" />
+            <ChevronLeft className="size-4" />
           </button>
 
           <div className="flex items-center gap-2">
-            <CalendarIcon className="text-orange-600 block-4 inline-4" />
+            <CalendarIcon className="size-4 text-orange-600" />
             <span
               className="text-sm font-semibold text-neutral-900"
               suppressHydrationWarning
@@ -109,10 +109,10 @@ export function EnhancedCalendar({
           <button
             type="button"
             onClick={() => navigateMonth("next")}
-            className="flex items-center justify-center rounded-full text-orange-600 transition-colors block-8 inline-8 focus:ring-2 focus:ring-orange-500 focus:ring-offset-1 focus:outline-hidden pointer-fine:hover:bg-orange-50"
+            className="flex size-8 items-center justify-center rounded-full text-orange-600 transition-colors focus:ring-2 focus:ring-orange-500 focus:ring-offset-1 focus:outline-hidden pointer-fine:hover:bg-orange-50"
             aria-label="Next month"
           >
-            <ChevronRight className="block-4 inline-4" />
+            <ChevronRight className="size-4" />
           </button>
         </div>
 
@@ -135,14 +135,14 @@ export function EnhancedCalendar({
             week: "flex inline-full mbs-1",
             day: "relative p-0 text-center group/day aspect-square flex items-center justify-center",
             day_button: cn(
-              "rounded-full p-0 text-sm font-normal transition-all duration-200 block-9 inline-9",
+              "size-9 rounded-full p-0 text-sm font-normal transition-all duration-200",
               "pointer-fine:hover:bg-orange-100 pointer-fine:hover:text-orange-900",
               "focus:ring-2 focus:ring-orange-500 focus:ring-offset-1 focus:outline-hidden",
               "aria-selected:bg-orange-600 aria-selected:font-semibold aria-selected:text-white",
               "disabled:cursor-not-allowed disabled:opacity-30",
             ),
             today:
-              "relative after:content-[''] after:absolute after:bottom-1 after:start-1/2 after:-translate-x-1/2 after:block-1 after:inline-1 after:rounded-full after:bg-orange-600",
+              "relative after:content-[''] after:absolute after:bottom-1 after:inset-s-1/2 after:-translate-x-1/2 after:size-1 after:rounded-full after:bg-orange-600",
             outside: "text-muted-foreground/40",
             disabled: "text-muted-foreground/30",
             hidden: "invisible",
@@ -153,7 +153,7 @@ export function EnhancedCalendar({
           <div className="mbs-4 border-t border-orange-100 pbs-3">
             <div className="flex items-center gap-3 rounded-xl border border-orange-200/40 bg-linear-to-r from-orange-50 to-orange-100/50 px-4 py-2.5">
               <div className="shrink-0">
-                <div className="animate-pulse rounded-full bg-orange-600 block-2 inline-2" />
+                <div className="size-2 animate-pulse rounded-full bg-orange-600" />
               </div>
               <div className="flex-1 min-inline-0">
                 <p

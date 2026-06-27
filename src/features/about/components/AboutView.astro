@@ -106,7 +106,7 @@ const factStats = [
                   {
                     [1, 2, 3, 4].map((number_) => (
                       <div class="flex items-start gap-3">
-                        <div class="flex shrink-0 items-center justify-center rounded-full bg-orange-500 text-sm font-bold text-white block-8 inline-8">
+                        <div class="flex size-8 shrink-0 items-center justify-center rounded-full bg-orange-500 text-sm font-bold text-white">
                           {number_}
                         </div>
                         <p class="flex-1 text-sm leading-relaxed text-neutral-700">
@@ -123,7 +123,7 @@ const factStats = [
               >
                 <div
                   aria-hidden="true"
-                  class="absolute inset-s-0 top-0 bottom-0 w-1.5 bg-orange-400 block-full"
+                  class="absolute inset-s-0 top-0 bottom-0 bg-orange-400 block-full inline-1.5"
                 >
                 </div>
                 <p class="text-sm leading-relaxed">{t("about.conclusionText")}</p>
@@ -143,7 +143,7 @@ const factStats = [
               >
               </div>
               <div
-                class="mask-linear-to-b relative aspect-4/3 overflow-hidden rounded-3xl bg-white from-black via-black to-transparent shadow-2xl"
+                class="relative aspect-4/3 overflow-hidden rounded-3xl bg-white mask-b-from-50% shadow-2xl"
               >
                 <img
                   alt="Amsirar landscape showcasing traditional Moroccan architecture and culture"
@@ -194,13 +194,13 @@ const factStats = [
         {
           factStats.map((fact, index) => (
             <div
-              class="flex block-full inline-full"
+              class="flex size-full"
               data-animate="fade-up"
               style={`transition-delay: ${index * 150}ms`}
             >
               <article
                 aria-labelledby={`fact-${fact.id}-label`}
-                class="group relative flex flex-col justify-between overflow-hidden rounded-2xl bg-zinc-900 px-8 py-10 text-center text-orange-200 shadow-xl ring-1 ring-white/10 transition-transform block-full inline-full pointer-fine:hover:-translate-y-1 pointer-fine:hover:shadow-2xl"
+                class="group relative flex size-full flex-col justify-between overflow-hidden rounded-2xl bg-zinc-900 px-8 py-10 text-center text-orange-200 shadow-xl ring-1 ring-white/10 transition-transform pointer-fine:hover:-translate-y-1 pointer-fine:hover:shadow-2xl"
               >
                 <div
                   aria-hidden="true"
@@ -209,11 +209,11 @@ const factStats = [
                   <div class="absolute inset-0 bg-linear-to-br from-orange-500/10 via-amber-400/5 to-transparent" />
                 </div>
                 <div class="relative flex flex-col items-center gap-y-6">
-                  <figure class="inline-flex items-center justify-center overflow-hidden rounded-full border-2 border-white/20 bg-white/5 p-3 text-orange-50 shadow-lg ring-2 shadow-orange-600/25 ring-white/10 block-24 inline-24">
+                  <figure class="inline-flex size-24 items-center justify-center overflow-hidden rounded-full border-2 border-white/20 bg-white/5 p-3 text-orange-50 shadow-lg ring-2 shadow-orange-600/25 ring-white/10">
                     <img
                       alt=""
                       aria-hidden="true"
-                      class="block object-contain brightness-0 invert block-full inline-full"
+                      class="block size-full object-contain brightness-0 invert"
                       height={96}
                       src={fact.icon}
                       width={96}

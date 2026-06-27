@@ -80,7 +80,7 @@ const contactMethods = [
         {
           contactMethods.map((method, index) => (
             <div
-              class="flex block-full inline-full"
+              class="flex size-full"
               data-animate="fade-up"
               style={`transition-delay: ${index * 150}ms`}
             >
@@ -88,7 +88,7 @@ const contactMethods = [
                 aria-label={typeof method.title === "string" ? method.title : undefined}
                 class="contact-info-card group rounded-3xl border border-orange-100 bg-white px-6 py-8 shadow-lg shadow-orange-100/70 transition inline-full pointer-fine:hover:-translate-y-1 pointer-fine:hover:shadow-xl"
               >
-                <div class="mbe-4 inline-flex items-center justify-center rounded-full bg-orange-50 text-orange-600 transition block-14 inline-14 group-hover:bg-orange-600 group-hover:text-white">
+                <div class="mbe-4 inline-flex size-14 items-center justify-center rounded-full bg-orange-50 text-orange-600 transition group-hover:bg-orange-600 group-hover:text-white">
                   <method.icon class="size-6" />
                 </div>
                 <h3 class="text-xl font-semibold text-zinc-900">{method.title}</h3>

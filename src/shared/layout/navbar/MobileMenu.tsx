@@ -10,7 +10,7 @@ const getNavLinkClasses = (active: boolean): string => {
   const base =
     "inline-flex items-center gap-2 rounded-full font-medium transition-all duration-200 mx-auto inline-fit min-inline-40 justify-center px-8 py-2.5 text-base text-white bg-transparent hover:bg-white/10 group-data-scrolled:text-dark group-data-scrolled:hover:bg-light-grey";
   const activeClasses =
-    "bg-white/10 text-white shadow-[0_0_0_1px_rgb(0_0_0/5%)] backdrop-blur-[4px] group-data-scrolled:bg-orange group-data-scrolled:text-white group-data-scrolled:shadow-[0_10px_26px_oklch(56%_0.19_33deg/12%)]";
+    "bg-white/10 text-white shadow-[0_0_0_1px_rgb(0_0_0/5%)] backdrop-blur-xs group-data-scrolled:bg-orange group-data-scrolled:text-white group-data-scrolled:shadow-[0_10px_26px_oklch(56%_0.19_33deg/12%)]";
   return cn(base, active && activeClasses);
 };
 
@@ -117,7 +117,7 @@ export function MobileMenu() {
 
   const getCollapseClasses = (): string => {
     const baseClasses =
-      "navbar-collapse fixed start-1/2 top-[calc(100%+0.75rem)] z-40 -translate-x-1/2 overflow-y-auto max-h-[calc(100vh-6rem)] rounded-2xl border border-white/20 bg-slate-950 text-white shadow-[0_20px_40px_rgba(0,0,0,0.3)] transition-all duration-300 inline-[min(1100px,calc(100vw-2rem))] group-data-scrolled:border-white/10 group-data-scrolled:bg-white group-data-scrolled:text-slate-900";
+      "navbar-collapse fixed inset-s-1/2 top-[calc(100%+0.75rem)] z-40 -translate-x-1/2 overflow-y-auto max-h-[calc(100vh-6rem)] rounded-2xl border border-white/20 bg-slate-950 text-white shadow-[0_20px_40px_rgba(0,0,0,0.3)] transition-all duration-300 inline-[min(1100px,calc(100vw-2rem))] group-data-scrolled:border-white/10 group-data-scrolled:bg-white group-data-scrolled:text-slate-900";
     const visibilityClasses =
       asideOpen ?
         "pointer-events-auto opacity-100 translate-y-0"

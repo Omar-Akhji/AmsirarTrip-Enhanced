@@ -57,10 +57,7 @@ const services = [
       {
         services.map((service, index) => (
           <div
-            class:list={[
-              `flex block-full inline-full`,
-              { "md:col-span-2 lg:col-span-1": index === 2 },
-            ]}
+            class:list={[`flex size-full`, { "md:col-span-2 lg:col-span-1": index === 2 }]}
             data-animate="fade-up"
             style={`transition-delay: ${index * 150}ms`}
           >

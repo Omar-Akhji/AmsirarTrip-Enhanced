@@ -61,7 +61,7 @@ const VideoSection = () => {
                 </p>
               </div>
             </div>
-          : <div className="relative block-full inline-full">
+          : <div className="relative size-full">
               {videoLoaded ? null : (
                 <div className="absolute inset-0 z-10 flex items-center justify-center rounded-[26px] bg-zinc-950/60">
                   <div className="space-y-3 text-center">
@@ -82,7 +82,7 @@ const VideoSection = () => {
                 onEnded={handleVideoEnd}
                 onClick={handleVideoClick}
                 preload="metadata"
-                className={`cursor-pointer rounded-[26px] object-cover transition-opacity duration-300 block-full inline-full ${
+                className={`size-full cursor-pointer rounded-[26px] object-cover transition-opacity duration-300 ${
                   videoLoaded ? "opacity-100" : "opacity-0"
                 }`}
               >

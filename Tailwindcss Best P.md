@@ -104,8 +104,8 @@ the new name for the old outline-none
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ These are gone — use opacity modifiers instead:
 bg-opacity-* → bg-black/50 text-opacity-* → text-black/50 border-opacity-* → border-black/50
 divide-opacity-* → divide-black/50 ring-opacity-* → ring-black/50 placeholder-opacity-* →
-placeholder-black/50 flex-shrink-* → shrink-* flex-grow-* → grow-* overflow-ellipsis → text-ellipsis
-decoration-slice → box-decoration-slice decoration-clone → box-decoration-clone
+placeholder-black/50 flex-shrink-* → shrink-* flex-grow-* → grow-* text-ellipsis → text-ellipsis
+box-decoration-slice → box-decoration-slice box-decoration-clone → box-decoration-clone
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 7. SPACING & SIZING — DYNAMIC SCALE
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Every multiple of --spacing (0.25rem default) works
@@ -125,7 +125,7 @@ class="ring-3 ring-blue-500"
 (`ring-3` recreates the old 3px width; plain `ring` is now 1px.)
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9. GRADIENTS — RENAMED & EXPANDED API
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Renamed: ❌ bg-gradient-to-r → ✅ bg-linear-to-r
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Renamed: ❌ bg-linear-to-r → ✅ bg-linear-to-r
 
 Angle-based linear gradients: class="bg-linear-45 from-indigo-500 to-pink-500"
 class="bg-linear-[135deg] from-blue-500 to-green-500"
@@ -238,8 +238,8 @@ block-size: 8rem (logical height) min-inline-0 → min-inline-size: 0 max-inline
 max-inline-size: 100% min-block-screen, max-block-none
 
 DEPRECATED since v4.2: start-* / end-* → use inset-s-* / inset-e-* instead, so the whole API lines
-up with inset-bs-_/inset-be-_. (old: start-4 end-0 → new: inset-s-4 inset-e-0) The old utilities
-still emit CSS for now but are deprecated and may be removed in a future minor.
+up with inset-bs-_/inset-be-_. (old: inset-s-4 inset-e-0 → new: inset-s-4 inset-e-0) The old
+utilities still emit CSS for now but are deprecated and may be removed in a future minor.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16. TYPOGRAPHY UTILITIES
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ font-stretch (since v4.0): font-stretch-condensed,
@@ -276,7 +276,7 @@ falls back to start when overflowing items-center-safe
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Stacked variant ORDER (left-to-right since v4.0): ✅
 v4: class="_:first:pt-0" ❌ v3: class="first:_:pt-0"
 
-CSS variable in arbitrary values: ✅ v4: bg-(--my-color) ❌ v3: bg-[--my-color]
+CSS variable in arbitrary values: ✅ v4: bg-(--my-color) ❌ v3: bg-(--my-color)
 
 not-* variant (CSS :not()): class="not-hover:opacity-75" class="not-supports-grid:flex"
 class="not-dark:text-gray-900"
@@ -361,8 +361,8 @@ Default values for functional @utility definitions via --default(...) — see se
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 22. !IMPORTANT, CUSTOM PREFIXES, AND LEGACY-COMPAT
 DIRECTIVES ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ !IMPORTANT MODIFIER — moved from the
 front to the end of the class name (so it always lands in the same spot, even with variants stacked
-in front): ✅ v4: class="flex! bg-red-500! hover:bg-red-600/50!" ❌ v3: class="!flex !bg-red-500
-hover:!bg-red-600/50" The old leading-`!` form still compiles for now but is deprecated — the
+in front): ✅ v4: class="flex! bg-red-500! hover:bg-red-600/50!" ❌ v3: class="!flex bg-red-500!
+hover:bg-red-600/50!" The old leading-`!` form still compiles for now but is deprecated — the
 upgrade tool will rewrite it to the trailing form automatically. There's no more global
 `important: true` config switch in v4; mark individual utilities important per-class instead.
 
@@ -417,24 +417,24 @@ SIZE — collapse matching width/height: ❌ w-5 h-5 → ✅ size-5 ❌ w-1234 h
 even past the default spacing scale)
 
 LETTER SPACING — prefer the named non-negative scale step rather than negating a different one: ❌
--tracking-tight (a hand-negated value that doesn't match any real step) → ✅ use the actual named
+tracking-wide (a hand-negated value that doesn't match any real step) → ✅ use the actual named
 scale step you mean (tracking-tighter, tracking-tight, tracking-normal, tracking-wide,
 tracking-wider, tracking-widest). Don't swap "tighter" for "wider" — they're opposite ends of the
 scale and changing between them changes the design, not just the spelling.
 
-DEPRECATED CLASSES — always migrate: ❌ overflow-ellipsis → ✅ text-ellipsis ❌ start-4 → ✅
-inset-s-4 ❌ start-full → ✅ inset-s-full ❌ start-auto → ✅ inset-s-auto ❌ end-4 → ✅ inset-e-4 ❌
-end-full → ✅ inset-e-full
+DEPRECATED CLASSES — always migrate: ❌ text-ellipsis → ✅ text-ellipsis ❌ inset-s-4 → ✅ inset-s-4
+❌ inset-s-full → ✅ inset-s-full ❌ inset-s-auto → ✅ inset-s-auto ❌ inset-e-4 → ✅ inset-e-4 ❌
+inset-e-full → ✅ inset-e-full
 
-NEGATIVE ARBITRARY VALUES — correct sign placement: ❌ -left-[9rem] → ✅ left-[-9rem] ❌
-ml-[calc(-1*var(--width))] → ✅ -ml-(--width) Note: as of v4.3, the canonicalizer preserves the
-original unit instead of normalizing to a base unit (e.g. -mt-[20in] → mt-[-20in], not a px
-conversion), and keeps required whitespace around operators in negated arbitrary values.
+NEGATIVE ARBITRARY VALUES — correct sign placement: ❌ -left-36 → ✅ -left-36 ❌ -ml-(--width) → ✅
+-ml-(--width) Note: as of v4.3, the canonicalizer preserves the original unit instead of normalizing
+to a base unit (e.g. mt-[-20in] → mt-[-20in], not a px conversion), and keeps required whitespace
+around operators in negated arbitrary values.
 
 ARBITRARY :has() VARIANTS — prefer the shorthand: ❌ [&:has(...)]:flex → ✅ has-[...]:flex
 
 INLINE STYLE ATTRIBUTES — leave them alone: The upgrade tool no longer rewrites plain HTML
-`style="..."` attributes into Tailwind classes (e.g. style="flex-grow: 1" stays as-is). Don't
+`style="..."` attributes into Tailwind classes (e.g. style="grow: 1" stays as-is). Don't
 hand-migrate those yourself either unless you're intentionally converting them to utility classes.
 
 PLACEHOLDER COLOR — correct variable: Placeholder utilities read from --placeholder-color, NOT

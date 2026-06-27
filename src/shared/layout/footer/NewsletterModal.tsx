@@ -106,9 +106,9 @@ export default function NewsletterModal({
               type="button"
               onClick={onCloseAction}
               aria-label={t("footer.newsletterCloseAria")}
-              className="-me-1 -mbs-1 flex items-center justify-center rounded-full text-neutral-400 transition-colors block-9 inline-9 pointer-fine:hover:bg-neutral-100 pointer-fine:hover:text-neutral-600"
+              className="-me-1 -mbs-1 flex size-9 items-center justify-center rounded-full text-neutral-400 transition-colors pointer-fine:hover:bg-neutral-100 pointer-fine:hover:text-neutral-600"
             >
-              <X className="block-5 inline-5" />
+              <X className="size-5" />
             </button>
           </div>
 
@@ -125,7 +125,7 @@ export default function NewsletterModal({
                   {t("footer.newsletterNameLabel")}
                 </label>
                 <div className="relative">
-                  <User className="absolute inset-s-3.5 top-1/2 -translate-y-1/2 text-neutral-400 block-4 inline-4" />
+                  <User className="absolute inset-s-3.5 top-1/2 size-4 -translate-y-1/2 text-neutral-400" />
                   <input
                     id="newsletter-name"
                     type="text"
@@ -149,7 +149,7 @@ export default function NewsletterModal({
                   {t("footer.newsletterInputAria")}
                 </label>
                 <div className="relative">
-                  <Mail className="absolute inset-s-3.5 top-1/2 -translate-y-1/2 text-neutral-400 block-4 inline-4" />
+                  <Mail className="absolute inset-s-3.5 top-1/2 size-4 -translate-y-1/2 text-neutral-400" />
                   <input
                     id="newsletter-email"
                     type="email"
@@ -209,7 +209,7 @@ export default function NewsletterModal({
               className="mbs-5 flex items-center justify-center gap-2 rounded-full bg-linear-to-r from-orange to-amber-500 text-sm font-semibold text-white shadow-md transition-all duration-300 block-11 inline-full active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 pointer-fine:hover:scale-[1.02] pointer-fine:hover:shadow-lg pointer-fine:hover:shadow-orange-500/30 disabled:pointer-fine:hover:scale-100"
             >
               {isSubmitting ?
-                <Loader2 className="animate-spin block-4 inline-4" />
+                <Loader2 className="size-4 animate-spin" />
               : t("footer.newsletterSubscribe")}
             </button>
           </form>
