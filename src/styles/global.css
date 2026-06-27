@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @font-face {
-  font-family: "Montserrat";
+  font-family: Montserrat;
   src: url("/fonts/Montserrat-VariableFont_wght.ttf") format("truetype");
   font-weight: 100 900;
   font-style: normal;
@@ -9,7 +9,7 @@
 }
 
 @font-face {
-  font-family: "StoryScript";
+  font-family: StoryScript;
   src: url("/fonts/StoryScript-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
@@ -17,7 +17,7 @@
 }
 
 @font-face {
-  font-family: "Yellowtail";
+  font-family: Yellowtail;
   src: url("/fonts/Yellowtail-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
@@ -45,11 +45,13 @@
 @theme {
   --breakpoint-tablet: 768px;
   --breakpoint-desktop: 1090px;
-
   --color-orange: oklch(56% 0.19 33deg);
   --color-orange-dark: oklch(51% 0.18 36deg);
   --color-whatsapp: oklch(76% 0.18 153deg);
-
+  --color-tripadvisor: #00af87;
+  --color-tripadvisor-bright: #34e0a1;
+  --color-tripadvisor-dark: #2bc48d;
+  --color-gmail: #ea4335;
   --color-white: oklch(100% 0 0deg);
   --color-black: oklch(0% 0 0deg);
   --color-light-grey: oklch(97% 0 0deg); /* #f7f7f7 */
@@ -60,10 +62,8 @@
   --color-grey-close: oklch(50% 0 0deg); /* #777 */
   --color-dark: oklch(10% 0.004 200deg); /* #0e1010 */
   --color-dark-grey: oklch(8% 0 0deg); /* #111 */
-
   --color-footer-start: oklch(11% 0 0deg); /* #18191a */
   --color-footer-end: oklch(13% 0 0deg); /* #202124 */
-
   --color-background: hsl(0deg 0% 100%);
   --color-foreground: hsl(222.2deg 84% 4.9%);
   --color-card: hsl(0deg 0% 100%);
@@ -84,9 +84,7 @@
   --color-input: hsl(214.3deg 31.8% 91.4%);
   --color-ring: hsl(13deg 80% 51%);
   --radius: 0.5rem;
-
   --spacing-navbar: 4rem;
-
   --animate-show-data: show-data 1000ms forwards;
   --animate-remove-overflow: remove-overflow 2000ms forwards;
   --animate-show-overflow: show-overflow 2000ms forwards;
@@ -171,10 +169,8 @@
 
 @layer base {
   html {
-    overflow-x: hidden;
-    overflow-y: auto;
+    overflow: hidden auto;
     scrollbar-gutter: stable;
-
     background:
       radial-gradient(50% 50% at 100% 0, var(--gradient-pattern)),
       radial-gradient(50% 50% at 0 100%, var(--gradient-pattern)),
@@ -274,6 +270,21 @@
     }
   }
 
+  .card-data {
+    position: absolute;
+    inset-inline: 0;
+    bottom: -9rem;
+    inline-size: var(--card-data-width, 90%);
+    padding: var(--card-data-padding, 1.5rem 2rem);
+    margin-inline: auto;
+    cursor: pointer;
+    background-color: var(--color-white);
+    border-radius: 16px;
+    box-shadow: var(--card-shadow);
+    opacity: 0;
+    transition: opacity 1000ms 1000ms;
+  }
+
   .card-article {
     --card-border-radius: 8px;
     --card-shadow: 0 8px 24px oklch(0% 0 0deg / 15%);
@@ -287,7 +298,7 @@
       animation: var(--animate-remove-overflow);
 
       & .card-data {
-        opacity: 100%;
+        opacity: 1;
         transition: opacity 300ms;
         animation: var(--animate-show-data);
       }
@@ -306,21 +317,6 @@
     cursor: pointer;
     object-fit: cover;
     border-radius: var(--card-border-radius, 8px);
-  }
-
-  .card-data {
-    position: absolute;
-    inset-inline: 0;
-    bottom: -9rem;
-    inline-size: var(--card-data-width, 90%);
-    padding: var(--card-data-padding, 1.5rem 2rem);
-    margin-inline: auto;
-    cursor: pointer;
-    background-color: var(--color-white);
-    border-radius: 16px;
-    box-shadow: var(--card-shadow);
-    opacity: 0%;
-    transition: opacity 1000ms 1000ms;
   }
 
   .card-title {

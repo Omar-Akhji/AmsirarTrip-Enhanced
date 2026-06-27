@@ -77,7 +77,7 @@ const isActive = (to: string) =>
               <a
                 class:list={[
                   "desktop-nav-link inline-flex items-center gap-2 rounded-full px-3 py-2 text-[0.98rem] font-medium tracking-tight transition-all duration-200",
-                  active && "desktop-nav-link-active",
+                  active && "desktop-nav-link-active text-white",
                   "pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:bg-white/10 pointer-fine:hover:shadow-[0_8px_26px_rgba(3,7,18,0.12)]",
                 ]}
                 href={localize(link.to)}
@@ -96,14 +96,14 @@ const isActive = (to: string) =>
 
 <style is:global>
   .navbar {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgb(255 255 255 / 10%);
     color: white;
   }
 
   .navbar[data-scrolled] {
     background: white;
     color: var(--color-dark);
-    box-shadow: 0 12px 30px oklch(0% 0 0deg / 0.08);
+    box-shadow: 0 12px 30px oklch(0% 0 0deg / 8%);
   }
 
   .navbar[data-scrolled] .helpline-bar {
@@ -116,29 +116,28 @@ const isActive = (to: string) =>
   }
 
   .desktop-nav-link-active {
-    background: rgba(255, 255, 255, 0.1);
-    color: white !important;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
+    background: rgb(255 255 255 / 10%);
+    color: white;
+    box-shadow: 0 0 0 1px rgb(0 0 0 / 5%);
     backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
   }
 
   .navbar[data-scrolled] .desktop-nav-link-active {
     background: var(--color-orange);
-    color: white !important;
-    box-shadow: 0 10px 26px oklch(56% 0.19 33deg / 0.12);
+    color: white;
+    box-shadow: 0 10px 26px oklch(56% 0.19 33deg / 12%);
   }
 
   .navbar:not([data-scrolled]) a[class*="social-link"],
   .navbar:not([data-scrolled]) .navbar-toggle {
-    border-color: rgba(255, 255, 255, 0.6);
-    background: rgba(255, 255, 255, 0.1);
+    border-color: rgb(255 255 255 / 60%);
+    background: rgb(255 255 255 / 10%);
     color: white;
   }
 
   .navbar:not([data-scrolled]) .lang-btn {
-    border-color: rgba(255, 255, 255, 0.6);
-    background: rgba(255, 255, 255, 0.1);
+    border-color: rgb(255 255 255 / 60%);
+    background: rgb(255 255 255 / 10%);
     color: white;
   }
 
@@ -146,18 +145,18 @@ const isActive = (to: string) =>
     border-color: var(--color-orange);
     background: var(--color-orange);
     color: white;
-    box-shadow: 0 10px 24px oklch(56% 0.19 33deg / 0.35);
+    box-shadow: 0 10px 24px oklch(56% 0.19 33deg / 35%);
   }
 
   .navbar:not([data-scrolled]) .lang-dropdown {
-    border-color: oklch(100% 0 0deg / 0.1);
-    background: oklch(10% 0.004 200deg / 0.9);
+    border-color: oklch(100% 0 0deg / 10%);
+    background: oklch(10% 0.004 200deg / 90%);
     color: white;
   }
 
   .navbar[data-scrolled] .lang-dropdown {
-    border-color: oklch(91% 0.01 248deg / 0.6);
-    background: oklch(100% 0 0deg / 0.9);
+    border-color: oklch(91% 0.01 248deg / 60%);
+    background: oklch(100% 0 0deg / 90%);
     color: var(--color-dark-grey);
   }
 
@@ -165,13 +164,13 @@ const isActive = (to: string) =>
     color: var(--color-light-grey-alt2);
   }
 
-  .navbar:not([data-scrolled]) .lang-dropdown-item:hover {
-    background: oklch(100% 0 0deg / 0.1);
-    color: white;
-  }
-
   .navbar[data-scrolled] .lang-dropdown-item {
     color: var(--color-grey);
+  }
+
+  .navbar:not([data-scrolled]) .lang-dropdown-item:hover {
+    background: oklch(100% 0 0deg / 10%);
+    color: white;
   }
 
   .navbar[data-scrolled] .lang-dropdown-item:hover {
@@ -180,12 +179,12 @@ const isActive = (to: string) =>
   }
 
   .navbar:not([data-scrolled]) .lang-dropdown-item-selected {
-    background: oklch(100% 0 0deg / 0.1);
+    background: oklch(100% 0 0deg / 10%);
     color: white;
   }
 
   .navbar[data-scrolled] .lang-dropdown-item-selected {
-    background: oklch(56% 0.19 33deg / 0.1);
+    background: oklch(56% 0.19 33deg / 10%);
     color: var(--color-orange);
   }
 
@@ -195,18 +194,6 @@ const isActive = (to: string) =>
 
   .navbar[data-scrolled] .lang-dropdown-dot {
     background: var(--color-orange);
-  }
-
-  .navbar:not([data-scrolled]) .navbar-collapse {
-    border-color: oklch(100% 0 0deg / 0.2);
-    background: var(--color-dark-grey);
-    color: white;
-  }
-
-  .navbar[data-scrolled] .navbar-collapse {
-    border-color: oklch(100% 0 0deg / 0.1);
-    background: white;
-    color: var(--color-dark);
   }
 
   .navbar:not([data-scrolled]) .navbar-link {
@@ -226,7 +213,7 @@ const isActive = (to: string) =>
   }
 
   .navbar:not([data-scrolled]) .navbar-toggle {
-    background: rgba(0, 0, 0, 0.35);
+    background: rgb(0 0 0 / 35%);
     color: white;
   }
 
@@ -240,48 +227,38 @@ const isActive = (to: string) =>
     background: transparent;
   }
 
-  .navbar:not([data-scrolled]) .mobile-nav-link:hover {
-    background: rgba(255, 255, 255, 0.1);
-  }
-
-  .navbar:not([data-scrolled]) .mobile-nav-link-active {
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-  }
-
   .navbar[data-scrolled] .mobile-nav-link {
     color: var(--color-dark);
     background: transparent;
+  }
+
+  .navbar:not([data-scrolled]) .mobile-nav-link-active {
+    background: rgb(255 255 255 / 10%);
+    color: white;
+    box-shadow: 0 0 0 1px rgb(0 0 0 / 5%);
+    backdrop-filter: blur(4px);
+  }
+
+  .navbar[data-scrolled] .mobile-nav-link-active {
+    background: var(--color-orange);
+    color: white;
+    box-shadow: 0 10px 26px oklch(56% 0.19 33deg / 12%);
+  }
+
+  .navbar:not([data-scrolled]) .mobile-nav-link:hover {
+    background: rgb(255 255 255 / 10%);
   }
 
   .navbar[data-scrolled] .mobile-nav-link:hover {
     background: var(--color-light-grey);
   }
 
-  .navbar[data-scrolled] .mobile-nav-link-active {
-    background: var(--color-orange);
-    color: white;
-    box-shadow: 0 10px 26px oklch(56% 0.19 33deg / 0.12);
-  }
-
   .navbar:not([data-scrolled]) .navbar-mobile-social {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgb(255 255 255 / 20%);
   }
 
   .navbar[data-scrolled] .navbar-mobile-social {
-    border-bottom: 1px solid oklch(91% 0.01 248deg / 0.3);
-  }
-
-  @media (min-width: 768px) and (max-width: 1089px) {
-    .navbar-collapse {
-      inset-inline-end: 0.25rem !important;
-      inset-inline-start: auto !important;
-      translate: 0 !important;
-      inline-size: 50% !important;
-    }
+    border-bottom: 1px solid oklch(91% 0.01 248deg / 30%);
   }
 </style>
 

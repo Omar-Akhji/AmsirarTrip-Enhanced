@@ -74,7 +74,7 @@ export function BookingSidebar({ perks }: BookingSidebarProperties) {
             href="https://www.tripadvisor.de/Attraction_Review-g293734-d32584739-Reviews-Amsirar_Travel-Marrakech_Marrakech_Safi.html"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex transform items-center justify-center gap-2 rounded-full bg-[#34E0A1] px-4 py-2 text-sm font-semibold text-black transition duration-300 ease-in-out focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#34E0A1] pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:bg-[#2bc48d] pointer-fine:hover:shadow-lg"
+            className="inline-flex transform items-center justify-center gap-2 rounded-full bg-tripadvisor-bright px-4 py-2 text-sm font-semibold text-black transition duration-300 ease-in-out focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-tripadvisor-bright pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:bg-tripadvisor-dark pointer-fine:hover:shadow-lg"
             aria-label={t("booking.tripadvisorCtaAria", "Open TripAdvisor in new tab")}
           >
             <svg
