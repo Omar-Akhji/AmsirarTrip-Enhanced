@@ -8,7 +8,6 @@ import {
 import { useTranslations } from "../../../i18n/utils";
 import Layout from "../../../layouts/Layout.astro";
 import { generateExcursionJsonLd } from "../../../lib/structuredData";
-import FormSkeleton from "../../../shared/ui/FormSkeleton.astro";
 import JsonLd from "../../../shared/ui/JsonLd.astro";
 
 const { slug } = Astro.params;
@@ -57,15 +56,10 @@ const excursionTitleClean = t(`${keyPrefix}.title`);
     locale={locale}
   >
     <BookingForm
-      client:only="react"
+      client:visible
       excursionId={String(excursion.bookingId)}
       excursionTitle={excursionTitleClean}
       fullWidth
-    >
-      <FormSkeleton
-        slot="fallback"
-        variant="booking"
-      />
-    </BookingForm>
+    />
   </ExcursionLayout>
 </Layout>

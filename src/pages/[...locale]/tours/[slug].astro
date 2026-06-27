@@ -5,7 +5,6 @@ import { getTourBySlug, getTourSlugs } from "../../../features/tours/data/toursM
 import { useTranslations } from "../../../i18n/utils";
 import Layout from "../../../layouts/Layout.astro";
 import { generateFaqJsonLd, generateTourJsonLd } from "../../../lib/structuredData";
-import FormSkeleton from "../../../shared/ui/FormSkeleton.astro";
 import JsonLd from "../../../shared/ui/JsonLd.astro";
 
 const { slug } = Astro.params;
@@ -91,15 +90,10 @@ const tourTitleClean = isEnglish ? tour.seo.title : t(`${tour.tourKey}.title`);
     tourKey={tour.tourKey}
   >
     <BookingForm
-      client:only="react"
+      client:visible
       fullWidth
       tourId={tour.bookingId.toString()}
       tourTitle={tourTitleClean}
-    >
-      <FormSkeleton
-        slot="fallback"
-        variant="booking"
-      />
-    </BookingForm>
+    />
   </TourLayout>
 </Layout>

@@ -3,7 +3,6 @@ import ContactForm from "../../features/contact/components/ContactForm";
 import ContactView from "../../features/contact/components/ContactView.astro";
 import { useTranslations } from "../../i18n/utils";
 import Layout from "../../layouts/Layout.astro";
-import FormSkeleton from "../../shared/ui/FormSkeleton.astro";
 
 const locale = Astro.currentLocale || "en";
 const t = useTranslations(locale);
@@ -17,11 +16,6 @@ const description = t("contact.meta.description");
   title={title}
 >
   <ContactView>
-    <ContactForm client:only="react">
-      <FormSkeleton
-        slot="fallback"
-        variant="contact"
-      />
-    </ContactForm>
+    <ContactForm client:load />
   </ContactView>
 </Layout>

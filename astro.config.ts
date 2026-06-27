@@ -7,6 +7,7 @@ import { defineConfig, envField, memoryCache } from "astro/config";
 export default defineConfig({
   // ─── Site ────────────────────────────────────────────────────────────────
   site: "https://amsirartrip.com",
+  compressHTML: "jsx",
 
   // ─── Output & Adapter ────────────────────────────────────────────────────
   output: "server",
@@ -15,13 +16,7 @@ export default defineConfig({
   // ─── Integrations ────────────────────────────────────────────────────────
   integrations: [
     react({ babel: { plugins: [["babel-plugin-react-compiler", { target: "19" }]] } }),
-    compress({
-      CSS: false, // Let Vite and Tailwind v4 handle CSS minification natively to avoid breaking media queries
-      HTML: true,
-      Image: true, // handled by Astro's built-in <Image /> + Bun.Image
-      JavaScript: true,
-      SVG: true,
-    }),
+    compress({ CSS: false, HTML: false, Image: true, JavaScript: false, SVG: true }),
   ],
 
   // ─── Vite ────────────────────────────────────────────────────────────────
@@ -38,11 +33,19 @@ export default defineConfig({
 
   // ─── Route Rules (Astro 7+) ──────────────────────────────────────────────
   routeRules: {
-    "/": { maxAge: 60, swr: 300 },
-    "/trips/[...slug]": { maxAge: 300, swr: 600 },
-    "/excursions/[...slug]": { maxAge: 300, swr: 600 },
-    "/about": { maxAge: 600, swr: 3600 },
-    "/api/[...path]": { maxAge: 0 },
+    "/": { maxAge: 600, swr: 3600 },
+    "/[...locale]": { maxAge: 600, swr: 3600 },
+    "/[...locale]/about": { maxAge: 1800, swr: 86_400 },
+    "/[...locale]/contact": { maxAge: 300, swr: 1800 },
+    "/[...locale]/excursions": { maxAge: 900, swr: 3600 },
+    "/[...locale]/excursions/[slug]": { maxAge: 1800, swr: 86_400 },
+    "/[...locale]/privacy-policy": { maxAge: 86_400, swr: 604_800 },
+    "/[...locale]/terms-of-service": { maxAge: 86_400, swr: 604_800 },
+    "/[...locale]/tours": { maxAge: 900, swr: 3600 },
+    "/[...locale]/tours/[slug]": { maxAge: 1800, swr: 86_400 },
+    "/robots.txt": { maxAge: 3600, swr: 86_400 },
+    "/sitemap-index.xml": { maxAge: 3600, swr: 86_400 },
+    "/_actions/[...path]": { maxAge: 0 },
   },
 
   // ─── Dev ─────────────────────────────────────────────────────────────────
@@ -75,5 +78,5 @@ export default defineConfig({
   },
 
   // ─── Prefetch ────────────────────────────────────────────────────────────
-  prefetch: { prefetchAll: true, defaultStrategy: "viewport" },
+  prefetch: { defaultStrategy: "viewport" },
 });

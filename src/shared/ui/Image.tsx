@@ -15,6 +15,9 @@ export default function Image({
   fill,
   quality: _quality,
   priority,
+  decoding,
+  fetchPriority,
+  loading,
   style,
   className,
   ...properties
@@ -30,7 +33,9 @@ export default function Image({
       alt={alt}
       style={{ ...fillStyle, ...style }}
       className={className}
-      loading={priority ? "eager" : "lazy"}
+      decoding={decoding ?? "async"}
+      fetchPriority={fetchPriority ?? (priority ? "high" : undefined)}
+      loading={loading ?? (priority ? "eager" : "lazy")}
       {...properties}
     />
   );
