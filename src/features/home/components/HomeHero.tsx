@@ -16,7 +16,7 @@ export default function HomeHero() {
   const isMobileOrTablet = useMediaQuery("(max-width: 1023px)");
 
   const [typed, setTyped] = useState("");
-  const [currentTextIndex, setCurrentTextIndex] = useState(0);
+  const [textState, setTextState] = useState({ index: 0, isFading: false });
 
   const heroTexts = [
     t("home.heroTitle"),
@@ -119,11 +119,22 @@ export default function HomeHero() {
   useEffect(() => {
     if (!isMobileOrTablet) return;
 
+    let timeoutId: ReturnType<typeof setTimeout>;
+
     const interval = setInterval(() => {
-      setCurrentTextIndex((previous) => (previous + 1) % heroTextsReference.current.length);
+      setTextState((prev) => ({ ...prev, isFading: true }));
+      timeoutId = setTimeout(() => {
+        setTextState((prev) => ({
+          index: (prev.index + 1) % heroTextsReference.current.length,
+          isFading: false,
+        }));
+      }, 500);
     }, 4000);
 
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+      if (timeoutId) clearTimeout(timeoutId);
+    };
   }, [isMobileOrTablet]);
 
   return (
@@ -166,8 +177,10 @@ export default function HomeHero() {
             className="lg:text-shadow-xl text-3xl leading-tight font-semibold text-shadow-black/60 text-shadow-lg sm:text-4xl lg:text-5xl"
           >
             {isMobileOrTablet ?
-              <span className="inline-block transition-opacity duration-500">
-                {heroTexts.at(currentTextIndex)}
+              <span
+                className={`inline-block transition-opacity duration-500 ${textState.isFading ? "opacity-0" : "opacity-100"}`}
+              >
+                {heroTexts.at(textState.index)}
               </span>
             : <>
                 <span>{typed}</span>
