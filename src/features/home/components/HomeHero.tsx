@@ -138,7 +138,7 @@ export default function HomeHero() {
   }, [isMobileOrTablet]);
 
   return (
-    <header
+    <section
       ref={headerReference}
       className="page-hero home-header relative isolate overflow-hidden bg-zinc-950 text-white shadow-xl inline-full min-block-[40vh] sm:min-block-[45vh] lg:min-block-[50vh]"
       aria-labelledby="hero-heading"
@@ -167,12 +167,12 @@ export default function HomeHero() {
         <div className="flex-1 space-y-6 pbs-0 text-center lg:pbs-8">
           <div className="flex items-center justify-center gap-4">
             <span className="bg-orange-400/60 block-px inline-8 sm:inline-12" />
-            <h1 className="text-xs font-semibold tracking-[0.2em] text-orange-300 uppercase sm:tracking-[0.3em]">
+            <p className="text-xs font-semibold tracking-[0.2em] text-orange-300 uppercase sm:tracking-[0.3em]">
               {t("home.title")}
-            </h1>
+            </p>
             <span className="bg-orange-400/60 block-px inline-8 sm:inline-12" />
           </div>
-          <h2
+          <h1
             id="hero-heading"
             className="lg:text-shadow-xl text-3xl leading-tight font-semibold text-shadow-black/60 text-shadow-lg sm:text-4xl lg:text-5xl"
           >
@@ -190,7 +190,7 @@ export default function HomeHero() {
                 />
               </>
             }
-          </h2>
+          </h1>
           <p className="font-fancy text-lg text-zinc-200 lg:text-xl">{t("home.heroSubtitle")}</p>
           <div className="flex flex-wrap items-center justify-center gap-4 pbs-2">
             <Link
@@ -208,6 +208,6 @@ export default function HomeHero() {
           </div>
         </div>
       </div>
-    </header>
+    </section>
   );
 }

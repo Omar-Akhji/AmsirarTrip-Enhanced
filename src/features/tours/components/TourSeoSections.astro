@@ -57,7 +57,7 @@ const {
       class="inline-flex items-center gap-3 rounded-2xl border border-orange-100 bg-orange-50 px-5 py-3 text-orange-600 min-block-20"
     >
       <Clock
-        aria-hidden
+        aria-hidden="true"
         class="size-5 shrink-0 text-orange-500"
       />
       <div class="text-start">
@@ -69,7 +69,7 @@ const {
       class="inline-flex items-center gap-3 rounded-2xl border border-amber-100 bg-amber-50 px-5 py-3 text-amber-600 min-block-20"
     >
       <MapPin
-        aria-hidden
+        aria-hidden="true"
         class="size-5 shrink-0 text-amber-500"
       />
       <div class="text-start">
@@ -81,7 +81,7 @@ const {
       class="inline-flex items-center gap-3 rounded-2xl border border-emerald-100 bg-emerald-50 px-5 py-3 text-emerald-700 min-block-20"
     >
       <Flag
-        aria-hidden
+        aria-hidden="true"
         class="size-5 shrink-0 text-emerald-600"
       />
       <div class="text-start">
@@ -93,7 +93,7 @@ const {
       class="inline-flex items-center gap-3 rounded-2xl border border-sky-100 bg-sky-50 px-5 py-3 text-sky-700 min-block-20"
     >
       <CreditCard
-        aria-hidden
+        aria-hidden="true"
         class="size-5 shrink-0 text-sky-600"
       />
       <div class="text-start">
@@ -109,18 +109,18 @@ const {
   style="transition-delay:225ms"
 >
   <section aria-labelledby="tour-highlights-title">
-    <h2
+    <h3
       class="mbe-4 text-xl font-semibold text-zinc-900 sm:text-2xl md:text-3xl"
       id="tour-highlights-title"
     >
       {highlightsTitle}
-    </h2>
+    </h3>
     <div class="grid gap-3 sm:grid-cols-2">
       {
         highlights.map((highlight) => (
           <div class="flex items-start gap-3 rounded-2xl border border-orange-100 bg-white p-4 shadow-xs">
             <BadgeCheck
-              aria-hidden
+              aria-hidden="true"
               class="mbs-0.5 size-5 shrink-0 text-orange-500"
             />
             <p class="text-sm leading-relaxed text-neutral-700 sm:text-base">{highlight}</p>
@@ -141,12 +141,12 @@ const {
   >
     <div class="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
       <div>
-        <h2
+        <h3
           class="text-xl font-semibold text-zinc-900 sm:text-2xl"
           id="tour-pricing-title"
         >
           {pricingTitle}
-        </h2>
+        </h3>
         <p class="mbs-2 text-2xl font-semibold text-orange-600">{price.label}</p>
         <p class="text-sm leading-relaxed text-neutral-700 max-inline-2xl sm:text-base">
           {price.note}
@@ -158,7 +158,7 @@ const {
       >
         {reserveNow}
         <ArrowRight
-          aria-hidden
+          aria-hidden="true"
           class="size-4"
         />
       </a>
@@ -168,24 +168,24 @@ const {
 
 <div data-animate="fade-up">
   <section aria-labelledby="tour-faq-title">
-    <h2
+    <h3
       class="mbe-4 text-xl font-semibold text-zinc-900 sm:text-2xl md:text-3xl"
       id="tour-faq-title"
     >
       {faqTitle}
-    </h2>
+    </h3>
     <div class="space-y-3">
       {
         faqs.map((faq) => (
           <details class="group rounded-2xl border border-zinc-200 bg-white p-4 shadow-xs open:border-orange-200 open:bg-orange-50/40">
             <summary class="flex cursor-pointer list-none items-start gap-3 text-start text-base font-semibold text-zinc-900 marker:hidden">
               <CircleQuestionMark
-                aria-hidden
+                aria-hidden="true"
                 class="mbs-0.5 size-5 shrink-0 text-orange-500"
               />
               <span class="flex-1">{faq.question}</span>
               <ChevronDown
-                aria-hidden
+                aria-hidden="true"
                 class="size-5 shrink-0 text-zinc-300 transition group-open:rotate-180 group-open:text-orange-500"
               />
             </summary>

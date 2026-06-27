@@ -43,6 +43,7 @@ const VideoSection = () => {
   return (
     <section
       id="video"
+      aria-label={t("video.sectionLabel", "Morocco Travel Video")}
       className="relative overflow-hidden py-4 text-white inline-full sm:py-6 lg:py-8"
     >
       <div className="mx-auto px-4 max-inline-330">

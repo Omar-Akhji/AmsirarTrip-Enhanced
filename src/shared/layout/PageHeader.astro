@@ -31,7 +31,7 @@ if (gradientPosition === "top-right") {
 }
 ---
 
-<header
+<section
   class="page-hero relative isolate overflow-hidden bg-zinc-950 text-white shadow-xl inline-full min-block-[40vh] sm:min-block-[45vh] lg:min-block-[50vh]"
 >
   {
@@ -73,9 +73,9 @@ if (gradientPosition === "top-right") {
             aria-label="Breadcrumb"
             class="mbe-8 flex items-center justify-center gap-3"
           >
-            <div class="flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 py-2 backdrop-blur-md">
+            <ol class="flex list-none flex-wrap items-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 py-2 backdrop-blur-md">
               {breadcrumbs.map((crumb, index) => (
-                <>
+                <li class="flex items-center gap-2">
                   {crumb.href ?
                     <a
                       class="text-sm font-medium text-white/80 transition-colors pointer-fine:hover:text-white"
@@ -83,7 +83,13 @@ if (gradientPosition === "top-right") {
                     >
                       {crumb.label}
                     </a>
-                  : <span class="text-sm font-semibold text-orange-300">{crumb.label}</span>}
+                  : <span
+                      aria-current="page"
+                      class="text-sm font-semibold text-orange-300"
+                    >
+                      {crumb.label}
+                    </span>
+                  }
                   {index < breadcrumbs.length - 1 && (
                     <svg
                       class="size-3 text-white/40"
@@ -99,9 +105,9 @@ if (gradientPosition === "top-right") {
                       />
                     </svg>
                   )}
-                </>
+                </li>
               ))}
-            </div>
+            </ol>
           </nav>
         : null
       }
@@ -131,4 +137,4 @@ if (gradientPosition === "top-right") {
       </div>
     </div>
   </div>
-</header>
+</section>

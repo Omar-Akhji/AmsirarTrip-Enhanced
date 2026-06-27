@@ -178,6 +178,7 @@ function BookingForm({
   return (
     <section
       id="booking"
+      aria-labelledby="booking-heading"
       className={`bg-neutral-50 py-20 md:py-10 ${fullWidth ? "booking-form-fullwidth" : ""}`}
     >
       <div
@@ -187,7 +188,10 @@ function BookingForm({
           <div className="inline-full lg:col-span-3">
             <div className="overflow-hidden rounded-3xl bg-white block-full">
               <div className="bg-linear-to-r from-orange-500 to-orange-600 px-6 py-8 text-white">
-                <h2 className="text-xl font-semibold sm:text-2xl md:text-3xl">
+                <h2
+                  className="text-xl font-semibold sm:text-2xl md:text-3xl"
+                  id="booking-heading"
+                >
                   {t("booking.makeReservation", "Make your reservation")}
                 </h2>
                 <p className="mbs-3 text-sm text-orange-50/90 md:text-base">

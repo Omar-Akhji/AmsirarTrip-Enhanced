@@ -8,6 +8,7 @@ const testimonials = [{ key: "kevin" }, { key: "ben" }, { key: "sara" }];
 ---
 
 <section
+  aria-labelledby="testimonials-heading"
   class="bg-zinc-50 py-12"
   id="testimonials"
 >
@@ -23,6 +24,7 @@ const testimonials = [{ key: "kevin" }, { key: "ben" }, { key: "sara" }];
       </p>
       <h2
         class="mbs-6 text-2xl leading-tight font-semibold tracking-widest text-neutral-900 uppercase text-shadow-md sm:text-3xl sm:tracking-[0.15em] md:text-4xl md:tracking-[0.2em]"
+        id="testimonials-heading"
       >
         {t("testimonials.lgTitle")}
       </h2>
@@ -58,7 +60,7 @@ const testimonials = [{ key: "kevin" }, { key: "ben" }, { key: "sara" }];
                   <div class="mbe-4 flex items-center gap-4 self-start">
                     <div class="inline-flex items-center justify-center rounded-full bg-white/5 ring-1 ring-white/10 block-25 inline-25">
                       <img
-                        alt="User Avatar"
+                        alt=""
                         class="object-contain block-15 inline-15"
                         decoding="async"
                         loading="lazy"
@@ -66,7 +68,7 @@ const testimonials = [{ key: "kevin" }, { key: "ben" }, { key: "sara" }];
                       />
                     </div>
                     <div
-                      aria-hidden
+                      aria-hidden="true"
                       class="mx-2 bg-white/10 block-8 inline-px"
                     />
                     <div>
@@ -79,7 +81,7 @@ const testimonials = [{ key: "kevin" }, { key: "ben" }, { key: "sara" }];
                     </div>
                   </div>
                   <div
-                    aria-hidden
+                    aria-hidden="true"
                     class="my-3 bg-white/10 block-px inline-full"
                   />
                   <div class="block-full">
@@ -89,12 +91,12 @@ const testimonials = [{ key: "kevin" }, { key: "ben" }, { key: "sara" }];
                   </div>
 
                   <div
-                    aria-hidden
+                    aria-hidden="true"
                     class="mbs-4 flex items-center justify-start text-orange-400"
                   >
                     {Array.from({ length: 5 }, () => (
                       <svg
-                        aria-hidden
+                        aria-hidden="true"
                         class="mx-0.5"
                         fill="currentColor"
                         height={14}

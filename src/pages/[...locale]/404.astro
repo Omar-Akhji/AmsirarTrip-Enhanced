@@ -10,14 +10,16 @@ const t = useTranslations(locale);
   description={t("404.description")}
   title={t("404.title")}
 >
-  <section class="flex flex-col items-center justify-center gap-6 px-4 py-24 text-center">
-    <h1 class="text-6xl font-bold text-orange">404</h1>
-    <p class="text-xl text-grey">{t("404.message")}</p>
-    <a
-      class="inline-flex items-center gap-2 rounded-lg bg-orange px-6 py-3 text-white transition-colors hover:bg-orange-dark"
-      href={`/${locale === "en" ? "" : locale}`}
-    >
-      {t("404.cta")}
-    </a>
-  </section>
+  <main>
+    <section class="flex flex-col items-center justify-center gap-6 px-4 py-24 text-center">
+      <h1 class="text-6xl font-bold text-orange">404</h1>
+      <p class="text-xl text-grey">{t("404.message")}</p>
+      <a
+        class="inline-flex items-center gap-2 rounded-lg bg-orange px-6 py-3 text-white transition-colors hover:bg-orange-dark"
+        href={`/${locale === "en" ? "" : locale}`}
+      >
+        {t("404.cta")}
+      </a>
+    </section>
+  </main>
 </Layout>

@@ -25,77 +25,79 @@ const isActive = (to: string) =>
   normalizedPath === to || (to !== "/" && normalizedPath.startsWith(to + "/"));
 ---
 
-<nav
-  class="group fixed inset-s-1/2 top-2 z-50 translate-x-[-50%] rounded-2xl border border-white/10 bg-white/10 px-4 py-2 text-white shadow-[0_10px_30px_rgba(3,7,18,0.12)] backdrop-blur-xl transition-colors duration-200 will-change-auto inline-[min(1100px,calc(100%-2rem))] has-data-[state=open]:backdrop-blur-sm data-scrolled:bg-white data-scrolled:text-dark data-scrolled:shadow-[0_12px_30px_oklch(0%_0_0deg/8%)]"
-  id="main-navbar"
->
-  <div
-    class="helpline-bar relative hidden items-center justify-center border-b border-white/20 px-0 py-3 pbe-5 inline-full lg:flex group-data-scrolled:lg:hidden"
+<header>
+  <nav
+    class="group fixed inset-s-1/2 top-2 z-50 translate-x-[-50%] rounded-2xl border border-white/10 bg-white/10 px-4 py-2 text-white shadow-[0_10px_30px_rgba(3,7,18,0.12)] backdrop-blur-xl transition-colors duration-200 will-change-auto inline-[min(1100px,calc(100%-2rem))] has-data-[state=open]:backdrop-blur-sm data-scrolled:bg-white data-scrolled:text-dark data-scrolled:shadow-[0_12px_30px_oklch(0%_0_0deg/8%)]"
+    id="main-navbar"
   >
-    <a
-      aria-label={`${t("helplineTitle")} ${t("helplineNumber")}`}
-      class="absolute inset-s-4 flex gap-2.5 rounded-md text-white transition focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-white pointer-fine:hover:opacity-90"
-      href="tel:+212661173144"
+    <div
+      class="helpline-bar relative hidden items-center justify-center border-b border-white/20 px-0 py-3 pbe-5 inline-full lg:flex group-data-scrolled:lg:hidden"
     >
-      <div
-        class="flex size-11 items-center justify-center rounded-full border-2 border-white/60 bg-white/10 text-white transition-all duration-150 pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:shadow-[0_8px_18px_rgba(0,0,0,0.28)]"
+      <a
+        aria-label={`${t("helplineTitle")} ${t("helplineNumber")}`}
+        class="absolute inset-s-4 flex gap-2.5 rounded-md text-white transition focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-white pointer-fine:hover:opacity-90"
+        href="tel:+212661173144"
       >
-        <img
-          alt=""
-          class="size-5 object-contain sm:size-6"
-          height={20}
-          src="/icons/nav-phone.png"
-          width={20}
-        />
-      </div>
-      <div class="leading-tight">
-        <p class="m-0 text-sm opacity-80">{t("helplineTitle")}</p>
-        <p class="m-0 text-base font-semibold">{t("helplineNumber")}</p>
-      </div>
-    </a>
-    <a
-      aria-label="Amsirar Trip Home"
-      class="text-[1.5rem] font-semibold tracking-tight text-white transition-colors duration-200 group-data-scrolled:text-dark-grey"
-      href={localize("/")}
-    >
-      Amsirar<span
-        class="ms-1 font-brand font-light text-white transition-colors duration-200 group-data-scrolled:text-orange"
-        >Trip</span
+        <div
+          class="flex size-11 items-center justify-center rounded-full border-2 border-white/60 bg-white/10 text-white transition-all duration-150 pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:shadow-[0_8px_18px_rgba(0,0,0,0.28)]"
+        >
+          <img
+            alt=""
+            class="size-5 object-contain sm:size-6"
+            height={20}
+            src="/icons/nav-phone.png"
+            width={20}
+          />
+        </div>
+        <div class="leading-tight">
+          <p class="m-0 text-sm opacity-80">{t("helplineTitle")}</p>
+          <p class="m-0 text-base font-semibold">{t("helplineNumber")}</p>
+        </div>
+      </a>
+      <a
+        aria-label="Amsirar Trip Home"
+        class="text-[1.5rem] font-semibold tracking-tight text-white transition-colors duration-200 group-data-scrolled:text-dark-grey"
+        href={localize("/")}
       >
-    </a>
-  </div>
-
-  <div class="relative flex items-center gap-2.5 px-2 py-0 lg:px-4 lg:py-2">
-    <div class="me-auto hidden items-center gap-0.5 lg:flex">
-      <SocialLinks class="me-2" />
-      <LanguageSelector client:load />
+        Amsirar<span
+          class="ms-1 font-brand font-light text-white transition-colors duration-200 group-data-scrolled:text-orange"
+          >Trip</span
+        >
+      </a>
     </div>
 
-    <ul class="absolute inset-s-1/2 z-10 hidden -translate-x-1/2 items-center gap-3 lg:flex">
-      {
-        NAV_LINKS.map((link) => {
-          const active = isActive(link.to);
-          return (
-            <li>
-              <a
-                class:list={[
-                  "inline-flex items-center gap-2 rounded-full px-3 py-2 text-[0.98rem] font-medium tracking-tight transition-all duration-200",
-                  "bg-transparent text-inherit pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:bg-white/10 pointer-fine:hover:shadow-[0_8px_26px_rgba(3,7,18,0.12)]",
-                  active
-                    && "bg-white/10 text-white shadow-[0_0_0_1px_rgb(0_0_0/_5%)] backdrop-blur-md group-data-scrolled:bg-orange group-data-scrolled:text-white group-data-scrolled:shadow-[0_10px_26px_oklch(56%_0.19_33deg/12%)]",
-                ]}
-                href={localize(link.to)}
-              >
-                <span class="nav-label">{t(link.labelKey)}</span>
-              </a>
-            </li>
-          );
-        })
-      }
-    </ul>
+    <div class="relative flex items-center gap-2.5 px-2 py-0 lg:px-4 lg:py-2">
+      <div class="me-auto hidden items-center gap-0.5 lg:flex">
+        <SocialLinks class="me-2" />
+        <LanguageSelector client:load />
+      </div>
 
-    <MobileMenu client:load />
-  </div>
-</nav>
+      <ul class="absolute inset-s-1/2 z-10 hidden -translate-x-1/2 items-center gap-3 lg:flex">
+        {
+          NAV_LINKS.map((link) => {
+            const active = isActive(link.to);
+            return (
+              <li>
+                <a
+                  class:list={[
+                    "inline-flex items-center gap-2 rounded-full px-3 py-2 text-[0.98rem] font-medium tracking-tight transition-all duration-200",
+                    "bg-transparent text-inherit pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:bg-white/10 pointer-fine:hover:shadow-[0_8px_26px_rgba(3,7,18,0.12)]",
+                    active
+                      && "bg-white/10 text-white shadow-[0_0_0_1px_rgb(0_0_0/_5%)] backdrop-blur-md group-data-scrolled:bg-orange group-data-scrolled:text-white group-data-scrolled:shadow-[0_10px_26px_oklch(56%_0.19_33deg/12%)]",
+                  ]}
+                  href={localize(link.to)}
+                >
+                  <span class="nav-label">{t(link.labelKey)}</span>
+                </a>
+              </li>
+            );
+          })
+        }
+      </ul>
+
+      <MobileMenu client:load />
+    </div>
+  </nav>
+</header>
 
 <script src="../../scripts/navbar-scroll.ts"></script>

@@ -70,104 +70,105 @@ const contactMethods = [
     <span>WhatsApp</span>
   </a>
 </PageHeader>
-
-<section
-  aria-label="Contact Methods"
-  class="relative isolate py-16"
->
-  <div class="mx-auto px-4 max-inline-7xl">
-    <div class="grid gap-6 md:grid-cols-3">
-      {
-        contactMethods.map((method, index) => (
-          <div
-            class="flex block-full inline-full"
-            data-animate="fade-up"
-            style={`transition-delay: ${index * 150}ms`}
-          >
-            <article
-              aria-label={typeof method.title === "string" ? method.title : undefined}
-              class="contact-info-card group rounded-3xl border border-orange-100 bg-white px-6 py-8 shadow-lg shadow-orange-100/70 transition inline-full pointer-fine:hover:-translate-y-1 pointer-fine:hover:shadow-xl"
+<main class="text-zinc-900">
+  <section
+    aria-label="Contact Methods"
+    class="relative isolate py-16"
+  >
+    <div class="mx-auto px-4 max-inline-7xl">
+      <div class="grid gap-6 md:grid-cols-3">
+        {
+          contactMethods.map((method, index) => (
+            <div
+              class="flex block-full inline-full"
+              data-animate="fade-up"
+              style={`transition-delay: ${index * 150}ms`}
             >
-              <div class="mbe-4 inline-flex items-center justify-center rounded-full bg-orange-50 text-orange-600 transition block-14 inline-14 group-hover:bg-orange-600 group-hover:text-white">
-                <method.icon class="size-6" />
-              </div>
-              <h3 class="text-xl font-semibold text-zinc-900">{method.title}</h3>
-              <p class="mbs-3 text-base leading-relaxed text-zinc-700">{method.description}</p>
-            </article>
-          </div>
-        ))
-      }
-    </div>
-  </div>
-</section>
-
-<section
-  aria-labelledby="contact-form-heading"
-  class="bg-neutral-50"
-  id="contact-form-section"
->
-  <div class="mx-auto px-4 pbs-16 max-inline-7xl">
-    <div class="section-header text-center">
-      <p
-        class="inline-flex items-center justify-center rounded-full border-2 border-orange-400 px-6 py-3 text-sm font-semibold tracking-[0.45em] text-orange-600 uppercase"
-      >
-        {t("contact.form.badge", "Plan with locals")}
-      </p>
-      <h2
-        class="mbs-6 text-2xl leading-tight font-semibold tracking-widest text-neutral-900 uppercase sm:text-3xl sm:tracking-[0.15em] md:text-4xl md:tracking-[0.2em]"
-        id="contact-form-heading"
-      >
-        {t("contact.lgTitle", "contact us")}
-      </h2>
-      <div
-        aria-hidden="true"
-        class="mx-auto mbs-4 rounded-full bg-orange-500 block-1 inline-20"
-      >
+              <article
+                aria-label={typeof method.title === "string" ? method.title : undefined}
+                class="contact-info-card group rounded-3xl border border-orange-100 bg-white px-6 py-8 shadow-lg shadow-orange-100/70 transition inline-full pointer-fine:hover:-translate-y-1 pointer-fine:hover:shadow-xl"
+              >
+                <div class="mbe-4 inline-flex items-center justify-center rounded-full bg-orange-50 text-orange-600 transition block-14 inline-14 group-hover:bg-orange-600 group-hover:text-white">
+                  <method.icon class="size-6" />
+                </div>
+                <h3 class="text-xl font-semibold text-zinc-900">{method.title}</h3>
+                <p class="mbs-3 text-base leading-relaxed text-zinc-700">{method.description}</p>
+              </article>
+            </div>
+          ))
+        }
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<slot />
-
-<section
-  aria-labelledby="location-heading"
-  class="relative bg-zinc-50 pbe-16"
-  id="location"
->
-  <div class="mx-auto px-4 max-inline-7xl">
-    <div class="mbe-12 p-7 text-center tracking-wide uppercase">
-      <p
-        class="inline-flex items-center justify-center rounded-full border-2 border-orange-400 px-6 py-3 text-sm font-semibold tracking-[0.45em] text-orange-600 uppercase"
-      >
-        {t("contact.location.smTitle")}
-      </p>
-      <h2
-        class="mbs-6 text-2xl leading-tight font-semibold tracking-widest text-neutral-900 uppercase sm:text-3xl sm:tracking-[0.15em] md:text-4xl md:tracking-[0.2em]"
-        id="location-heading"
-      >
-        {t("contact.location.lgTitle")}
-      </h2>
-      <div
-        aria-hidden="true"
-        class="mx-auto mbs-4 rounded-full bg-orange-500 block-1 inline-20"
-      >
+  <section
+    aria-labelledby="contact-form-heading"
+    class="bg-neutral-50"
+    id="contact-form-section"
+  >
+    <div class="mx-auto px-4 pbs-16 max-inline-7xl">
+      <div class="section-header text-center">
+        <p
+          class="inline-flex items-center justify-center rounded-full border-2 border-orange-400 px-6 py-3 text-sm font-semibold tracking-[0.45em] text-orange-600 uppercase"
+        >
+          {t("contact.form.badge", "Plan with locals")}
+        </p>
+        <h2
+          class="mbs-6 text-2xl leading-tight font-semibold tracking-widest text-neutral-900 uppercase sm:text-3xl sm:tracking-[0.15em] md:text-4xl md:tracking-[0.2em]"
+          id="contact-form-heading"
+        >
+          {t("contact.lgTitle", "contact us")}
+        </h2>
+        <div
+          aria-hidden="true"
+          class="mx-auto mbs-4 rounded-full bg-orange-500 block-1 inline-20"
+        >
+        </div>
       </div>
     </div>
-    <div class="overflow-hidden rounded-3xl shadow-2xl ring-1 ring-zinc-200">
-      <div data-animate="zoom-in">
-        <iframe
-          allowfullscreen
-          aria-label="Interactive map showing Amsirar Trip agency location in Marrakech"
-          class="border-0 block-75 md:block-100 lg:block-125"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          sandbox="allow-scripts allow-same-origin allow-popups"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3399.999!2d-8.0257651!3d31.6259758!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdafef007a3f58d3%3A0xa6485d9ed7022b4c!2sAmsirar+Travel!5e0!3m2!1sen!2sma!4v1699999999999!5m2!1sen!2sma"
-          title="Amsirar Trip Agency Location - Marrakech, Morocco"
-          width="100%"
-        ></iframe>
+  </section>
+
+  <slot />
+
+  <section
+    aria-labelledby="location-heading"
+    class="relative bg-zinc-50 pbe-16"
+    id="location"
+  >
+    <div class="mx-auto px-4 max-inline-7xl">
+      <div class="mbe-12 p-7 text-center tracking-wide uppercase">
+        <p
+          class="inline-flex items-center justify-center rounded-full border-2 border-orange-400 px-6 py-3 text-sm font-semibold tracking-[0.45em] text-orange-600 uppercase"
+        >
+          {t("contact.location.smTitle")}
+        </p>
+        <h2
+          class="mbs-6 text-2xl leading-tight font-semibold tracking-widest text-neutral-900 uppercase sm:text-3xl sm:tracking-[0.15em] md:text-4xl md:tracking-[0.2em]"
+          id="location-heading"
+        >
+          {t("contact.location.lgTitle")}
+        </h2>
+        <div
+          aria-hidden="true"
+          class="mx-auto mbs-4 rounded-full bg-orange-500 block-1 inline-20"
+        >
+        </div>
+      </div>
+      <div class="overflow-hidden rounded-3xl shadow-2xl ring-1 ring-zinc-200">
+        <div data-animate="zoom-in">
+          <iframe
+            allowfullscreen
+            aria-label="Interactive map showing Amsirar Trip agency location in Marrakech"
+            class="border-0 block-75 md:block-100 lg:block-125"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            sandbox="allow-scripts allow-same-origin allow-popups"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3399.999!2d-8.0257651!3d31.6259758!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdafef007a3f58d3%3A0xa6485d9ed7022b4c!2sAmsirar+Travel!5e0!3m2!1sen!2sma!4v1699999999999!5m2!1sen!2sma"
+            title="Amsirar Trip Agency Location - Marrakech, Morocco"
+            width="100%"
+          ></iframe>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+</main>

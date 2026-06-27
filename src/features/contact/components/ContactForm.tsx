@@ -114,6 +114,7 @@ const ContactForm = () => {
   return (
     <section
       id="contact-tailwind"
+      aria-labelledby="contact-heading"
       className="bg-neutral-50 py-12 md:py-16"
     >
       <div className="mx-auto px-4 max-inline-6xl sm:px-6 lg:px-8">
@@ -124,7 +125,10 @@ const ContactForm = () => {
                 <p className="text-xs font-semibold tracking-[0.35em] text-orange-100 uppercase">
                   {t("contact.form.badge", "Plan with locals")}
                 </p>
-                <h2 className="mbs-2 text-2xl font-semibold md:text-3xl">
+                <h2
+                  className="mbs-2 text-2xl font-semibold md:text-3xl"
+                  id="contact-heading"
+                >
                   {t("contact.form.title", "Design Your Custom Morocco Tour & Private Itinerary")}
                 </h2>
                 <p className="mbs-3 text-sm text-orange-50/90 md:text-base">
