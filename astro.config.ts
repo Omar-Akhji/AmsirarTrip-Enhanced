@@ -16,9 +16,9 @@ export default defineConfig({
   integrations: [
     react({ babel: { plugins: [["babel-plugin-react-compiler", { target: "19" }]] } }),
     compress({
-      CSS: false, // Let Vite and Tailwind v4 handle CSS minification natively to avoid breaking media queries
+      CSS: true, // Let Vite and Tailwind v4 handle CSS minification natively to avoid breaking media queries
       HTML: true,
-      Image: false, // handled by Astro's built-in <Image /> + Bun.Image
+      Image: true, // handled by Astro's built-in <Image /> + Bun.Image
       JavaScript: true,
       SVG: true,
     }),
