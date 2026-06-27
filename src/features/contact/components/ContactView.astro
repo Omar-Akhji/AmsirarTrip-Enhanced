@@ -1,5 +1,5 @@
 ---
-import { ArrowRight, Mail, MapPin, Phone } from "lucide-astro";
+import { ArrowRight, Mail, MapPin, Phone } from "@lucide/astro";
 import { useTranslations } from "@/i18n/utils";
 import PageHeader from "@/shared/layout/PageHeader.astro";
 
@@ -50,7 +50,7 @@ const contactMethods = [
     href="#contact-form-section"
   >
     <span>{t("contact.form.cta", "Send message")}</span>
-    <ArrowRight className="size-4" />
+    <ArrowRight class="size-4" />
   </a>
   <a
     class="inline-flex items-center gap-2 rounded-full bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur transition text-shadow-xs pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:bg-white/20"
@@ -89,7 +89,7 @@ const contactMethods = [
               class="contact-info-card group rounded-3xl border border-orange-100 bg-white px-6 py-8 shadow-lg shadow-orange-100/70 transition inline-full pointer-fine:hover:-translate-y-1 pointer-fine:hover:shadow-xl"
             >
               <div class="mbe-4 inline-flex items-center justify-center rounded-full bg-orange-50 text-orange-600 transition block-14 inline-14 group-hover:bg-orange-600 group-hover:text-white">
-                <method.icon className="size-6" />
+                <method.icon class="size-6" />
               </div>
               <h3 class="text-xl font-semibold text-zinc-900">{method.title}</h3>
               <p class="mbs-3 text-base leading-relaxed text-zinc-700">{method.description}</p>

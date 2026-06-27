@@ -1,5 +1,5 @@
 ---
-import { ArrowRight } from "lucide-astro";
+import { ArrowRight } from "@lucide/astro";
 import { useTranslations } from "@/i18n/utils";
 import PageHeader from "@/shared/layout/PageHeader.astro";
 import StatHighlights from "@/shared/ui/StatHighlights.astro";
@@ -48,7 +48,7 @@ const tourStats = [
     href="#tours-grid"
   >
     <span>{t("tours.detailsTitle")}</span>
-    <ArrowRight className="size-4" />
+    <ArrowRight class="size-4" />
   </a>
   <a
     class="inline-flex items-center gap-2 rounded-full bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur transition text-shadow-xs pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:bg-white/20"

@@ -60,8 +60,12 @@ const excursionTitleClean = t(`${keyPrefix}.title`);
       client:only="react"
       excursionId={String(excursion.bookingId)}
       excursionTitle={excursionTitleClean}
-      fallback={(<FormSkeleton variant="booking" />)}
       fullWidth
-    />
+    >
+      <FormSkeleton
+        slot="fallback"
+        variant="booking"
+      />
+    </BookingForm>
   </ExcursionLayout>
 </Layout>

@@ -92,10 +92,14 @@ const tourTitleClean = isEnglish ? tour.seo.title : t(`${tour.tourKey}.title`);
   >
     <BookingForm
       client:only="react"
-      fallback={(<FormSkeleton variant="booking" />)}
       fullWidth
       tourId={tour.bookingId.toString()}
       tourTitle={tourTitleClean}
-    />
+    >
+      <FormSkeleton
+        slot="fallback"
+        variant="booking"
+      />
+    </BookingForm>
   </TourLayout>
 </Layout>
