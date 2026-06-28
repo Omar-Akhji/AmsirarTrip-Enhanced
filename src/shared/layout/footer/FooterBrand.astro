@@ -6,7 +6,10 @@ const locale = Astro.currentLocale || "en";
 const t = useTranslations(locale);
 ---
 
-<div class="lg:col-span-1">
+<div
+  class="lg:col-span-1"
+  data-animate="fade-up"
+>
   <a
     aria-label="Amsirar Trip homepage"
     class="group mbe-2 inline-flex items-center gap-1"

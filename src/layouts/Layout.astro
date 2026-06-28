@@ -172,7 +172,7 @@ const DEFAULT_LOCALE = "en";
   </head>
   <body>
     <div
-      class="fixed inset-0 z-999999 flex items-center justify-center bg-zinc-100 opacity-100 transition-[opacity,visibility] duration-[450ms] ease-out data-[state=hidden]:pointer-events-none data-[state=hidden]:invisible data-[state=hidden]:opacity-0"
+      class="fixed inset-0 z-999999 flex items-center justify-center bg-zinc-100 opacity-100 transition-[opacity,visibility] duration-450 ease-out data-[state=hidden]:pointer-events-none data-[state=hidden]:invisible data-[state=hidden]:opacity-0"
       data-state="visible"
       id="initial-loader"
       transition:persist
@@ -204,6 +204,7 @@ const DEFAULT_LOCALE = "en";
       </svg>
     </div>
     <script src="../scripts/loader.ts"></script>
+    <script src="../scripts/scroll-animate.ts"></script>
 
     <Navbar />
     <slot />

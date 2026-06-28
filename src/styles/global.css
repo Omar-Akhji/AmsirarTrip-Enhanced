@@ -337,3 +337,93 @@
     --card-priority: high;
   }
 }
+
+/* ==========================================================================
+   Scroll Animation System (SEO & Performance Optimized)
+   ========================================================================== */
+
+/* Base transitions applied ONLY when JavaScript is initialized (.reveal-init) */
+.reveal-init [data-animate] {
+  opacity: 0;
+  transition-property: opacity, transform, filter;
+  transition-duration: var(--animate-duration, 800ms);
+  transition-timing-function: var(--animate-ease, cubic-bezier(0.16, 1, 0.3, 1));
+  will-change: transform, opacity;
+}
+
+/* Initial state variations */
+.reveal-init [data-animate="fade-up"] {
+  transform: translateY(30px);
+}
+
+.reveal-init [data-animate="fade-down"] {
+  transform: translateY(-30px);
+}
+
+.reveal-init [data-animate="fade-left"] {
+  transform: translateX(-30px);
+}
+
+.reveal-init [data-animate="fade-right"] {
+  transform: translateX(30px);
+}
+
+.reveal-init [data-animate="zoom-in"] {
+  transform: scale(0.95);
+}
+
+.reveal-init [data-animate="zoom-out"] {
+  transform: scale(1.05);
+}
+
+.reveal-init [data-animate="flip-up"] {
+  transform: perspective(1000px) rotateX(-20deg);
+}
+
+.reveal-init [data-animate="flip-down"] {
+  transform: perspective(1000px) rotateX(20deg);
+}
+
+.reveal-init [data-animate="creative-slide-up"] {
+  transform: translateY(60px) scale(0.96) skewY(1deg);
+}
+
+.reveal-init [data-animate="creative-slide-right"] {
+  transform: translateX(-60px) scale(0.97) skewX(2deg);
+}
+
+.reveal-init [data-animate="creative-slide-left"] {
+  transform: translateX(60px) scale(0.97) skewX(-2deg);
+}
+
+.reveal-init [data-animate="creative-flip"] {
+  transform: perspective(1200px) rotateY(-12deg) rotateX(8deg) translateY(40px);
+  transform-origin: center bottom;
+}
+
+/* Visible state */
+.reveal-init [data-animate].is-visible {
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
+  will-change: auto !important;
+}
+
+[data-scroll-parallax] {
+  transform: translateY(var(--scroll-translate-y, 0));
+  will-change: transform;
+
+  /* Interpolate changes smoothly to simulate momentum */
+  transition: transform 0.15s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Accessibility: respect user preferences for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-init [data-animate],
+  [data-scroll-parallax] {
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+  }
+}

@@ -25,35 +25,12 @@ import { FooterNewsletter } from "./footer/FooterNewsletter";
   <div class="relative z-10">
     <div class="mx-auto p-8 max-inline-7xl">
       <div class="grid grid-cols-1 items-baseline gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-4">
-        <div
-          class="inline-full"
-          data-animate="fade-up"
-        >
-          <FooterBrand />
-        </div>
-        <div
-          class="inline-full"
-          data-animate="fade-up"
-          style="transition-delay: 150ms;"
-        >
-          <FooterContactInfo />
-        </div>
-        <div
-          class="inline-full"
-          data-animate="fade-up"
-          style="transition-delay: 300ms;"
-        >
-          <FooterNewsletter client:visible />
-        </div>
+        <FooterBrand />
+        <FooterContactInfo />
+        <FooterNewsletter client:visible />
       </div>
     </div>
 
-    <div
-      class="inline-full"
-      data-animate="fade-up"
-      style="transition-delay: 450ms;"
-    >
-      <FooterBottomBar />
-    </div>
+    <FooterBottomBar />
   </div>
 </footer>

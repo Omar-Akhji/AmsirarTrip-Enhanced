@@ -119,7 +119,10 @@ const ContactForm = () => {
     >
       <div className="mx-auto px-4 max-inline-6xl sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-5">
-          <div className="inline-full lg:col-span-3">
+          <div
+            className="inline-full lg:col-span-3"
+            data-animate="creative-slide-right"
+          >
             <div className="overflow-hidden rounded-3xl bg-white block-full">
               <div className="bg-linear-to-r from-orange-500 to-orange-600 px-6 py-8 text-white">
                 <p className="text-xs font-semibold tracking-[0.35em] text-orange-100 uppercase">
@@ -257,7 +260,11 @@ const ContactForm = () => {
             </div>
           </div>
 
-          <div className="inline-full lg:col-span-2 lg:block-full">
+          <div
+            className="inline-full lg:col-span-2 lg:block-full"
+            data-animate="creative-slide-left"
+            data-delay="150"
+          >
             <div className="flex flex-col justify-between rounded-3xl bg-slate-950 p-8 text-white block-full">
               <ContactInfoSidebar />
             </div>

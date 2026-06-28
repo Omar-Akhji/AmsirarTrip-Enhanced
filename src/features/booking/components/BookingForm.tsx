@@ -185,7 +185,10 @@ function BookingForm({
         className={`booking-form-inner mx-auto overflow-x-hidden inline-full max-inline-6xl ${fullWidth ? "px-4 sm:px-6 lg:px-10" : "px-4 sm:px-6 lg:px-8"}`}
       >
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-5">
-          <div className="inline-full lg:col-span-3">
+          <div
+            className="inline-full lg:col-span-3"
+            data-animate="creative-slide-right"
+          >
             <div className="overflow-hidden rounded-3xl bg-white block-full">
               <div className="bg-linear-to-r from-orange-500 to-orange-600 px-6 py-8 text-white">
                 <h2
@@ -291,7 +294,11 @@ function BookingForm({
             </div>
           </div>
 
-          <div className="inline-full lg:col-span-2 lg:block-full">
+          <div
+            className="inline-full lg:col-span-2 lg:block-full"
+            data-animate="creative-slide-left"
+            data-delay="150"
+          >
             <BookingSidebar perks={perks} />
           </div>
         </div>

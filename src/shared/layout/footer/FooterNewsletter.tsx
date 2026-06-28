@@ -9,7 +9,11 @@ export function FooterNewsletter() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <div className="md:col-span-2 lg:col-span-1">
+    <div
+      className="md:col-span-2 lg:col-span-1"
+      data-animate="fade-up"
+      style={{ transitionDelay: "300ms" }}
+    >
       <h3 className="mbe-2 text-sm font-semibold tracking-wider text-white uppercase">
         {t("footer.newsletter")}
       </h3>
