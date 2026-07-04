@@ -1,0 +1,68 @@
+{
+  "tourKey": "tour7",
+  "bookingId": 7,
+  "image": "~/assets/images/Tours/Tour7.webp",
+  "duration": "P4D",
+  "durationDays": 4,
+  "startLocation": "Agadir",
+  "endLocation": "Marrakech",
+  "keywords": [
+    "Morocco 4 day tour",
+    "Coastal desert tour",
+    "Agadir to Marrakech",
+    "Morocco odyssey",
+    "Desert coast tour",
+    "Agadir tour",
+    "Anti-Atlas Morocco",
+    "Morocco beach desert tour"
+  ],
+  "seo": {
+    "title": "4-Day Agadir to Marrakech Desert Tour",
+    "metaDescription": "Travel from Agadir to Marrakech on a 4-day desert tour via Taroudant, Dades Valley, Merzouga camel trek, Erg Chebbi, and Ouarzazate.",
+    "lead": "A 4-day Agadir to Marrakech desert tour for travelers who want to connect Morocco's Atlantic coast, Anti-Atlas landscapes, Sahara dunes, and the Red City.",
+    "primaryKeyword": "Agadir to Marrakech desert tour",
+    "secondaryKeywords": [
+      "4 day Morocco tour from Agadir",
+      "Agadir to Merzouga tour",
+      "Coastal and desert Morocco tour",
+      "Anti-Atlas desert itinerary"
+    ],
+    "price": {
+      "label": "Custom quote",
+      "note": "Final pricing depends on travel dates, group size, accommodation level, and private or shared transport. Send your dates for an exact quote."
+    },
+    "imageAlt": "Agadir to Marrakech desert tour route through Anti-Atlas valleys and Merzouga dunes",
+    "highlights": [
+      "Depart from Agadir and travel through Taroudant",
+      "Cross Anti-Atlas scenery toward Ouarzazate and Dades Valley",
+      "Camel trek and overnight camp in Merzouga",
+      "Finish in Marrakech after the High Atlas crossing"
+    ],
+    "faqs": [
+      {
+        "question": "Can I start this Morocco desert tour in Agadir?",
+        "answer": "Yes. This route is built for travelers starting in Agadir and ending in Marrakech after visiting the desert."
+      },
+      {
+        "question": "Does the tour visit Merzouga?",
+        "answer": "Yes. The itinerary reaches Merzouga for a camel trek, sunset, desert camp, and Sahara sunrise."
+      },
+      {
+        "question": "Is this tour good after a beach stay in Agadir?",
+        "answer": "Yes. It is a practical way to turn an Agadir beach stay into a desert and Marrakech itinerary without backtracking."
+      },
+      {
+        "question": "What should I bring for the desert night?",
+        "answer": "Pack warm layers, sunglasses, sunscreen, a hat, comfortable shoes, and a small bag for the camp night."
+      },
+      {
+        "question": "Can the itinerary be extended?",
+        "answer": "Yes. Extra nights can be added in Merzouga, Dades Valley, Ouarzazate, or Marrakech."
+      }
+    ]
+  },
+  "jsonLd": {
+    "name": "Coastal and Desert Odyssey - 4 Days",
+    "description": "Experience the best of Morocco's coast and desert on this 4-day odyssey from Agadir to Marrakech via the Anti-Atlas Mountains and Sahara Desert."
+  }
+}

@@ -1,13 +1,12 @@
 ---
 import { useTranslations } from "@/i18n/utils";
-import { setGlobalLocale } from "@/lib/hooks/useTranslation";
+import { Image } from "astro:assets";
 import { LANGUAGES, NAV_LINKS } from "./navbar/constants";
 import { LanguageSelector } from "./navbar/LanguageSelector";
 import { MobileMenu } from "./navbar/MobileMenu";
 import SocialLinks from "./navbar/SocialLinks.astro";
 
 const locale = Astro.currentLocale || "en";
-setGlobalLocale(locale);
 const t = useTranslations(locale);
 
 const localize = (path: string) =>
@@ -42,7 +41,7 @@ const isActive = (to: string) =>
         <div
           class="flex size-11 items-center justify-center rounded-full border-2 border-white/60 bg-white/10 text-white transition-all duration-150 pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:shadow-[0_8px_18px_rgba(0,0,0,0.28)]"
         >
-          <img
+          <Image
             alt=""
             class="size-5 object-contain sm:size-6"
             height={20}
@@ -82,9 +81,12 @@ const isActive = (to: string) =>
                 <a
                   class:list={[
                     "inline-flex items-center gap-2 rounded-full px-3 py-2 text-[0.98rem] font-medium tracking-tight transition-all duration-200",
-                    "bg-transparent text-inherit pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:bg-white/10 pointer-fine:hover:shadow-[0_8px_26px_rgba(3,7,18,0.12)]",
-                    active
-                      && "bg-white/10 text-white shadow-[0_0_0_1px_rgb(0_0_0/_5%)] backdrop-blur-md group-data-scrolled:bg-orange group-data-scrolled:text-white group-data-scrolled:shadow-[0_10px_26px_oklch(56%_0.19_33deg/12%)]",
+                    {
+                      "bg-white/10 text-white shadow-[0_0_0_1px_rgb(0_0_0/_5%)] backdrop-blur-md group-data-scrolled:bg-orange group-data-scrolled:text-white group-data-scrolled:shadow-[0_10px_26px_oklch(56%_0.19_33deg/12%)] pointer-fine:hover:-translate-y-0.5":
+                        active,
+                      "bg-transparent text-inherit pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:bg-white/10 pointer-fine:hover:shadow-[0_8px_26px_rgba(3,7,18,0.12)]":
+                        !active,
+                    },
                   ]}
                   href={localize(link.to)}
                 >

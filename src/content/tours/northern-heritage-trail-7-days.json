@@ -1,0 +1,68 @@
+{
+  "tourKey": "tour9",
+  "bookingId": 9,
+  "image": "~/assets/images/Tours/Tour9.webp",
+  "duration": "P7D",
+  "durationDays": 7,
+  "startLocation": "Tangier",
+  "endLocation": "Marrakech",
+  "keywords": [
+    "Morocco 7 day tour",
+    "Northern Morocco tour",
+    "Tangier to Marrakech",
+    "Chefchaouen tour",
+    "Rif Mountains tour",
+    "Morocco heritage trail",
+    "Fes Tangier tour",
+    "Blue city Morocco tour"
+  ],
+  "seo": {
+    "title": "7-Day Northern Morocco Tour from Tangier",
+    "metaDescription": "Explore a 7-day northern Morocco tour from Tangier to Chefchaouen, Fes, Meknes, Volubilis, Middle Atlas, and Marrakech.",
+    "lead": "A 7-day northern Morocco tour from Tangier that connects Mediterranean coast, Chefchaouen, Fes, Roman ruins, Middle Atlas scenery, and Marrakech.",
+    "primaryKeyword": "7 day northern Morocco tour",
+    "secondaryKeywords": [
+      "Tangier Chefchaouen Fes tour",
+      "Tangier to Marrakech tour",
+      "Northern Morocco itinerary",
+      "Chefchaouen and Fes tour package"
+    ],
+    "price": {
+      "label": "Custom quote",
+      "note": "Final pricing depends on travel dates, group size, accommodation level, and private or shared transport. Send your dates for an exact quote."
+    },
+    "imageAlt": "Chefchaouen blue medina street on a 7-day northern Morocco tour from Tangier",
+    "highlights": [
+      "Start in Tangier with coast, caves, kasbah, and medina highlights",
+      "Spend time in Chefchaouen, the Blue Pearl of Morocco",
+      "Explore Fes, Meknes, and Volubilis with cultural stops",
+      "Cross the Middle Atlas and finish in Marrakech"
+    ],
+    "faqs": [
+      {
+        "question": "Can this northern Morocco tour start in Tangier?",
+        "answer": "Yes. Pickup can be arranged from Tangier airport, ferry port, hotel, or another agreed meeting point."
+      },
+      {
+        "question": "Does the route include Chefchaouen?",
+        "answer": "Yes. Chefchaouen is a core stop on this itinerary, with time to explore the blue medina and viewpoints."
+      },
+      {
+        "question": "Is this tour a good alternative to a Sahara trip?",
+        "answer": "Yes. It is better for travelers focused on northern cities, culture, Roman heritage, and mountain scenery rather than desert camping."
+      },
+      {
+        "question": "Can I add a Sahara desert extension?",
+        "answer": "Yes. The tour can be extended from Fes or Marrakech to include Merzouga or Chegaga desert routes."
+      },
+      {
+        "question": "What pace should I expect on this 7-day route?",
+        "answer": "The itinerary mixes guided city time with transfer days. Comfortable walking shoes are recommended for medinas and hillside streets."
+      }
+    ]
+  },
+  "jsonLd": {
+    "name": "Northern Heritage Trail - 7 Days",
+    "description": "Explore Morocco's northern heritage from Tangier to Marrakech on this 7-day journey through the Rif Mountains and blue city of Chefchaouen."
+  }
+}

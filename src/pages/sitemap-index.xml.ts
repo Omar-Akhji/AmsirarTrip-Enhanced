@@ -1,20 +1,22 @@
 import type { APIRoute } from "astro";
-import { getExcursionSlugs } from "../features/excursions/data/excursionsMetadata";
-import { getTourSlugs } from "../features/tours/data/toursMetadata";
+import { getCollection } from "astro:content";
 
 const LOCALES = ["en", "fr", "de", "es"] as const;
 const DEFAULT_LOCALE = "en";
 const CONTENT_LAST_MODIFIED = "2026-05-08";
 
-export const GET: APIRoute = ({ site }) => {
+export const GET: APIRoute = async ({ site }) => {
   const baseUrl = site || new URL("https://amsirartrip.com");
-  const tourSlugs = getTourSlugs();
-  const excursionSlugs = getExcursionSlugs();
+  const tours = await getCollection("tours");
+  const excursions = await getCollection("excursions");
+
+  const tourRoutes = tours.map((tour) => `tours/${tour.id}`);
+  const excursionRoutes = excursions.map((excursion) => `excursions/${excursion.id}`);
 
   const staticRoutes = ["", "/tours", "/excursions", "/about", "/contact"];
   const dynamicRoutes = [
-    ...tourSlugs.map((slug) => `/tours/${slug}`),
-    ...excursionSlugs.map((slug) => `/excursions/${slug}`),
+    ...tourRoutes.map((route) => `/${route}`),
+    ...excursionRoutes.map((route) => `/${route}`),
   ];
   const allRoutes = [...staticRoutes, ...dynamicRoutes];
 

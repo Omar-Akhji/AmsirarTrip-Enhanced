@@ -1,0 +1,8 @@
+{
+  "image": "~/assets/images/Home/Marrakech-tourist.webp",
+  "width": 4512,
+  "height": 3000,
+  "titleKey": "featured.cards.marrakech.title",
+  "descriptionKey": "featured.marrakech.description",
+  "altKey": "featured.cards.marrakech.alt"
+}

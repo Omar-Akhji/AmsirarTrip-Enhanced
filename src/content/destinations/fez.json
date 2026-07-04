@@ -1,0 +1,8 @@
+{
+  "image": "~/assets/images/Home/Fez-tourist.webp",
+  "width": 600,
+  "height": 395,
+  "titleKey": "featured.cards.fez.title",
+  "descriptionKey": "featured.fez.description",
+  "altKey": "featured.cards.fez.alt"
+}

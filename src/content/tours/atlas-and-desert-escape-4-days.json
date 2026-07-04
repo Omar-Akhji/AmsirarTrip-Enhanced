@@ -1,0 +1,68 @@
+{
+  "tourKey": "tour6",
+  "bookingId": 6,
+  "image": "~/assets/images/Tours/Tour6.webp",
+  "duration": "P4D",
+  "durationDays": 4,
+  "startLocation": "Marrakech",
+  "endLocation": "Marrakech",
+  "keywords": [
+    "Morocco 4 day tour",
+    "Atlas Mountains tour",
+    "Desert escape Morocco",
+    "Marrakech desert tour",
+    "Ouarzazate tour",
+    "Dades Valley tour",
+    "Sahara 4 days",
+    "Morocco adventure tour"
+  ],
+  "seo": {
+    "title": "4-Day Marrakech to Merzouga Desert Tour",
+    "metaDescription": "Join a 4-day Marrakech to Merzouga desert tour with Ait Ben Haddou, Dades Valley, Todra Gorge, Erg Chebbi camel trek, and Ouarzazate.",
+    "lead": "A slower 4-day Marrakech to Merzouga desert tour with more breathing room across the Atlas Mountains, Erg Chebbi dunes, Dades Valley, and Ouarzazate.",
+    "primaryKeyword": "4 day Marrakech to Merzouga desert tour",
+    "secondaryKeywords": [
+      "Marrakech desert tour 4 days",
+      "Atlas Mountains and Sahara tour",
+      "Ouarzazate Dades Merzouga itinerary",
+      "Erg Chebbi camel trekking tour"
+    ],
+    "price": {
+      "label": "Custom quote",
+      "note": "Final pricing depends on travel dates, group size, accommodation level, and private or shared transport. Send your dates for an exact quote."
+    },
+    "imageAlt": "Erg Chebbi dunes at sunrise on a 4-day Marrakech to Merzouga desert tour",
+    "highlights": [
+      "Cross the High Atlas and visit Ait Ben Haddou",
+      "Spend one night in Dades Valley and one night in a Merzouga camp",
+      "Ride camels across the Erg Chebbi dunes",
+      "Return through Draa Valley and Ouarzazate at a smoother pace"
+    ],
+    "faqs": [
+      {
+        "question": "Why choose a 4-day desert tour instead of 3 days?",
+        "answer": "Four days gives the route more balance, with shorter return pacing and more time around Ouarzazate, Dades Valley, and the Sahara."
+      },
+      {
+        "question": "Does this tour include Erg Chebbi?",
+        "answer": "Yes. The route reaches Merzouga and includes camel trekking in the Erg Chebbi dunes."
+      },
+      {
+        "question": "Can this trip start or end in Fes?",
+        "answer": "Yes. The route can be adjusted to start or end in Fes depending on your broader Morocco itinerary."
+      },
+      {
+        "question": "Are dinners and breakfasts included?",
+        "answer": "Breakfasts and dinners are included as listed in the itinerary, while lunches and drinks are usually paid separately."
+      },
+      {
+        "question": "Is the tour available year-round?",
+        "answer": "Yes. The desert route runs year-round, although winter nights are colder and summer midday heat requires a slower rhythm."
+      }
+    ]
+  },
+  "jsonLd": {
+    "name": "Atlas and Desert Escape - 4 Days",
+    "description": "Escape to the Atlas Mountains and Sahara Desert on this perfectly balanced 4-day adventure from Marrakech."
+  }
+}

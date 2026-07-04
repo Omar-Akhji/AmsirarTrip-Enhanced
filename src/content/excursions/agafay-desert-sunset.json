@@ -1,0 +1,21 @@
+{
+  "excursionKey": "excursion5",
+  "i18nKeyPrefix": "agafay",
+  "bookingId": 5,
+  "image": "~/assets/images/Excursions/Agafay.webp",
+  "duration": "P1D",
+  "location": "Agafay Desert, Morocco",
+  "keywords": [
+    "Agafay desert tour",
+    "Desert near Marrakech",
+    "Agafay sunset",
+    "Camel ride Marrakech",
+    "Quad biking Agafay",
+    "Morocco desert experience",
+    "Agafay glamping"
+  ],
+  "jsonLd": {
+    "name": "Agafay Desert Sunset Experience",
+    "description": "Experience the magic of the Agafay Desert at sunset with camel rides and stunning views of the Atlas Mountains."
+  }
+}

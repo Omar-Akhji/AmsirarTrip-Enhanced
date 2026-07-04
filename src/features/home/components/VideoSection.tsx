@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "@/lib/hooks/useTranslation";
-import Image from "@/shared/ui/Image";
 
-const VideoSection = () => {
+type VideoSectionProps = { fallbackImage: string };
+
+const VideoSection = ({ fallbackImage }: VideoSectionProps) => {
   const { t } = useTranslation();
   const [videoError, setVideoError] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(false);
@@ -52,7 +53,10 @@ const VideoSection = () => {
           className="relative overflow-hidden rounded-[34px] bg-zinc-900 p-3 shadow-2xl block-[55vh] inline-full sm:block-[65vh] lg:block-[75vh] xl:block-[85vh]"
         >
           {videoError ?
-            <div className="flex items-center justify-center rounded-[26px] bg-[url(/images/Header/header-1.webp)] bg-cover bg-center px-8 py-12 text-center block-full">
+            <div
+              className="flex items-center justify-center rounded-[26px] bg-cover bg-center px-8 py-12 text-center block-full"
+              style={{ backgroundImage: `url(${fallbackImage})` }}
+            >
               <div className="rounded-3xl bg-black/60 p-8">
                 <h3 className="text-2xl font-semibold">{t("video.fallback.title")}</h3>
                 <p className="mbs-3 text-sm text-white/80">{t("video.fallback.subtitle")}</p>
@@ -99,16 +103,9 @@ const VideoSection = () => {
                   onClick={handlePlay}
                   aria-label={t("video.playAria", "Play video")}
                 >
-                  <span className="inline-flex size-20 items-center justify-center rounded-full border border-white/60 bg-white/90 text-zinc-900 shadow-lg">
-                    <Image
-                      src="/icons/play-video_icon.svg"
-                      alt=""
-                      aria-hidden="true"
-                      width={32}
-                      height={32}
-                      className="size-8"
-                    />
-                  </span>
+                  <div className="flex size-20 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm transition-transform hover:scale-110">
+                    <div className="ms-2 border-y-12 border-l-20 border-y-transparent border-l-white" />
+                  </div>
                 </button>
               : null}
             </div>

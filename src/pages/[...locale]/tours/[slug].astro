@@ -1,7 +1,7 @@
 ---
+import { getEntry } from "astro:content";
 import BookingForm from "../../../features/booking/components/BookingForm";
 import TourLayout from "../../../features/tours/components/TourLayout.astro";
-import { getTourBySlug, getTourSlugs } from "../../../features/tours/data/toursMetadata";
 import { useTranslations } from "../../../i18n/utils";
 import Layout from "../../../layouts/Layout.astro";
 import { generateFaqJsonLd, generateTourJsonLd } from "../../../lib/structuredData";
@@ -10,15 +10,15 @@ import JsonLd from "../../../shared/ui/JsonLd.astro";
 const { slug } = Astro.params;
 const locale = Astro.currentLocale || "en";
 
-const slugs = getTourSlugs();
-const matchedSlug = slugs.find((s) => s.toLowerCase() === (slug || "").toLowerCase());
-const tour = matchedSlug ? getTourBySlug(matchedSlug) : undefined;
+const tourEntry = await getEntry("tours", slug || "");
 
-if (!tour) {
+if (!tourEntry) {
   Astro.response.status = 404;
   // eslint-disable-next-line unicorn/prefer-module
   return Astro.redirect("/404");
 }
+
+const tour = tourEntry.data;
 
 const t = useTranslations(locale);
 const isEnglish = locale === "en";
@@ -57,7 +57,7 @@ const tourJsonLd = generateTourJsonLd({
   name: tour.jsonLd.name,
   description: tour.seo.lead || tour.jsonLd.description,
   provider: "Amsirar Trip",
-  image: `https://amsirartrip.com${tour.image}`,
+  image: `https://amsirartrip.com${tour.image.src}`,
   price: tour.jsonLd.price,
   currency: tour.jsonLd.currency,
   duration: tour.duration,

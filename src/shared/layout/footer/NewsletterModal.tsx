@@ -50,23 +50,28 @@ export default function NewsletterModal({
     }
 
     setIsSubmitting(true);
-    const { data, error } = await actions["newsletter"]({ name, email, recaptchaToken });
+    try {
+      const { data, error } = await actions["newsletter"]({ name, email, recaptchaToken });
 
-    if (error) {
-      setStatusKey("footer.newsletterFailure");
-    } else if (data) {
-      if (data.ok) {
-        setName("");
-        setEmail("");
-        recaptchaReference.current?.reset();
-        timerReference.current = setTimeout(() => {
-          timerReference.current = null;
-          onCloseAction();
-        }, 2000);
+      if (error) {
+        setStatusKey("footer.newsletterFailure");
+      } else if (data) {
+        if (data.ok) {
+          setName("");
+          setEmail("");
+          recaptchaReference.current?.reset();
+          timerReference.current = setTimeout(() => {
+            timerReference.current = null;
+            onCloseAction();
+          }, 2000);
+        }
+        setStatusKey(data.statusKey);
       }
-      setStatusKey(data.statusKey);
+    } catch {
+      setStatusKey("footer.newsletterFailure");
+    } finally {
+      setIsSubmitting(false);
     }
-    setIsSubmitting(false);
   };
 
   return (

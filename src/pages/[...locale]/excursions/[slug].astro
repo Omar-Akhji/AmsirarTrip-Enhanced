@@ -1,10 +1,7 @@
 ---
+import { getEntry } from "astro:content";
 import BookingForm from "../../../features/booking/components/BookingForm";
 import ExcursionLayout from "../../../features/excursions/components/ExcursionLayout.astro";
-import {
-  getExcursionBySlug,
-  getExcursionSlugs,
-} from "../../../features/excursions/data/excursionsMetadata";
 import { useTranslations } from "../../../i18n/utils";
 import Layout from "../../../layouts/Layout.astro";
 import { generateExcursionJsonLd } from "../../../lib/structuredData";
@@ -13,15 +10,15 @@ import JsonLd from "../../../shared/ui/JsonLd.astro";
 const { slug } = Astro.params;
 const locale = Astro.currentLocale || "en";
 
-const slugs = getExcursionSlugs();
-const matchedSlug = slugs.find((s) => s.toLowerCase() === (slug || "").toLowerCase());
-const excursion = matchedSlug ? getExcursionBySlug(matchedSlug) : undefined;
+const excursionEntry = await getEntry("excursions", slug || "");
 
-if (!excursion) {
+if (!excursionEntry) {
   Astro.response.status = 404;
   // eslint-disable-next-line unicorn/prefer-module
   return Astro.redirect("/404");
 }
+
+const excursion = excursionEntry.data;
 
 const t = useTranslations(locale);
 const keyPrefix = `excursion.list.${excursion.i18nKeyPrefix}`;
@@ -33,10 +30,10 @@ const excursionJsonLd = generateExcursionJsonLd({
   name: excursion.jsonLd.name,
   description: excursion.jsonLd.description,
   provider: "Amsirar Trip",
-  image: `https://amsirartrip.com${excursion.image}`,
+  image: `https://amsirartrip.com${excursion.image.src}`,
   duration: excursion.duration,
   location: { point: excursion.location },
-  url: `https://amsirartrip.com/excursions/${excursion.slug}`,
+  url: `https://amsirartrip.com/excursions/${slug}`,
 });
 
 const excursionTitleClean = t(`${keyPrefix}.title`);

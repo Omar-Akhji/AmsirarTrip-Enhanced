@@ -1,11 +1,11 @@
 ---
-import "../styles/global.css";
+import { Image } from "astro:assets";
 import { ClientRouter } from "astro:transitions";
-import { setGlobalLocale } from "../lib/hooks/useTranslation";
 import { generateOrganizationJsonLd, generateWebsiteJsonLd } from "../lib/structuredData";
 import Footer from "../shared/layout/Footer.astro";
 import Navbar from "../shared/layout/Navbar.astro";
 import JsonLd from "../shared/ui/JsonLd.astro";
+import "../styles/global.css";
 
 const {
   title = "Amsirar Trip — Morocco Tours & Desert Adventures",
@@ -13,9 +13,6 @@ const {
 } = Astro.props;
 
 const locale = Astro.currentLocale || "en";
-
-setGlobalLocale(locale);
-
 const site = Astro.site!;
 const pathname = Astro.url.pathname;
 
@@ -221,7 +218,7 @@ const DEFAULT_LOCALE = "en";
         aria-hidden="true"
         class="absolute inset-0 -z-10 animate-ping rounded-full bg-whatsapp opacity-20 duration-1000"
       ></span>
-      <img
+      <Image
         alt="WhatsApp"
         class="size-10"
         height={40}

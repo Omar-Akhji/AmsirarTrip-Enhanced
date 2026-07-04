@@ -1,4 +1,5 @@
 let resizeObserver: ResizeObserver | undefined;
+let scrollListener: (() => void) | undefined;
 
 function updateScrolled(nav: HTMLElement) {
   if (window.scrollY > 0) {
@@ -22,7 +23,11 @@ function init() {
   updateScrolled(nav);
   updateHeight(nav);
 
-  window.addEventListener("scroll", () => updateScrolled(nav), { passive: true });
+  if (scrollListener) {
+    window.removeEventListener("scroll", scrollListener);
+  }
+  scrollListener = () => updateScrolled(nav);
+  window.addEventListener("scroll", scrollListener, { passive: true });
 
   resizeObserver?.disconnect();
   resizeObserver = new ResizeObserver((entries) => {

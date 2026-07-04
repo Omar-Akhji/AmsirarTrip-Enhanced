@@ -1,6 +1,7 @@
 ---
-import { Quote } from "@lucide/astro";
 import { useTranslations } from "@/i18n/utils";
+import { Quote } from "@lucide/astro";
+import { Image } from "astro:assets";
 
 const locale = Astro.currentLocale || "en";
 const t = useTranslations(locale);
@@ -56,12 +57,13 @@ const testimonials = [{ key: "kevin" }, { key: "ben" }, { key: "sara" }];
                   </div>
                   <div class="mbe-4 flex items-center gap-4 self-start">
                     <div class="inline-flex items-center justify-center rounded-full bg-white/5 ring-1 ring-white/10 block-25 inline-25">
-                      <img
+                      <Image
                         alt=""
                         class="object-contain block-15 inline-15"
-                        decoding="async"
+                        height={60}
                         loading="lazy"
                         src="/icons/face-img.svg"
+                        width={60}
                       />
                     </div>
                     <div

@@ -1,0 +1,21 @@
+{
+  "excursionKey": "excursion3",
+  "i18nKeyPrefix": "imlil",
+  "bookingId": 3,
+  "image": "~/assets/images/Excursions/Imlil_Toubkal.webp",
+  "duration": "P1D",
+  "location": "Imlil, Morocco",
+  "keywords": [
+    "Imlil day trip",
+    "Toubkal base camp",
+    "Atlas Mountains hike",
+    "Berber village tour",
+    "Marrakech mountain tour",
+    "High Atlas excursion",
+    "Morocco trekking"
+  ],
+  "jsonLd": {
+    "name": "Imlil & Toubkal Adventure",
+    "description": "Hike through Berber villages in the High Atlas Mountains and reach the base camp of Mount Toubkal."
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "tourKey": "tour4",
+  "bookingId": 4,
+  "image": "~/assets/images/Tours/Tour4.webp",
+  "duration": "P5D",
+  "durationDays": 5,
+  "startLocation": "Casablanca",
+  "endLocation": "Fes",
+  "keywords": [
+    "Morocco 5 day tour",
+    "Imperial cities tour",
+    "Casablanca Fes Marrakech",
+    "Morocco cultural tour",
+    "Rabat Meknes tour",
+    "Morocco heritage tour",
+    "Best Morocco tour",
+    "Morocco coastline tour"
+  ],
+  "seo": {
+    "title": "5-Day Imperial Cities Tour from Casablanca",
+    "metaDescription": "Explore a 5-day imperial cities tour from Casablanca to Rabat, Chefchaouen, Volubilis, Meknes, and Fes with private Morocco transport.",
+    "lead": "A culture-first 5-day imperial cities tour from Casablanca through Rabat, Chefchaouen, Roman Volubilis, Meknes, and Fes.",
+    "primaryKeyword": "5 day Morocco imperial cities tour",
+    "secondaryKeywords": [
+      "Casablanca to Fes tour",
+      "Rabat Chefchaouen Fes itinerary",
+      "Volubilis and Meknes tour",
+      "Northern Morocco cultural tour"
+    ],
+    "price": {
+      "label": "Custom quote",
+      "note": "Final pricing depends on travel dates, group size, accommodation level, and private or shared transport. Send your dates for an exact quote."
+    },
+    "imageAlt": "Blue streets of Chefchaouen on a northern Morocco imperial cities tour from Casablanca",
+    "highlights": [
+      "Begin in Casablanca with Hassan II Mosque and coastal city stops",
+      "Visit Rabat, the capital of Morocco",
+      "Spend time in Chefchaouen, the Blue Pearl of the Rif Mountains",
+      "Explore Volubilis, Meknes, and Fes with cultural depth"
+    ],
+    "faqs": [
+      {
+        "question": "Is this 5-day Morocco tour focused on culture?",
+        "answer": "Yes. The itinerary focuses on northern Morocco, imperial cities, medinas, Roman heritage, and guided cultural visits."
+      },
+      {
+        "question": "Does this tour include the Sahara desert?",
+        "answer": "No. This route is designed for Casablanca, Rabat, Chefchaouen, Meknes, Volubilis, and Fes. A Sahara extension can be added on request."
+      },
+      {
+        "question": "Can the tour end in Fes or Casablanca?",
+        "answer": "Yes. The itinerary can end in Fes or return to Casablanca depending on your flight plans and preferred route."
+      },
+      {
+        "question": "Is Chefchaouen included overnight?",
+        "answer": "Yes. The route includes time in Chefchaouen so you can enjoy the blue medina outside the busiest day-trip hours."
+      },
+      {
+        "question": "Can hotels be upgraded?",
+        "answer": "Yes. Riads and hotels can be arranged in standard, comfort, or luxury categories based on your budget."
+      }
+    ]
+  },
+  "jsonLd": {
+    "name": "Imperial Cities and Coastline - 5 Days",
+    "description": "Discover northern Morocco on this 5-day route from Casablanca to Fes via Rabat, Chefchaouen, Volubilis, and Meknes."
+  }
+}

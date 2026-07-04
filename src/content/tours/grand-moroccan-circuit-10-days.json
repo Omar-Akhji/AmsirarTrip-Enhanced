@@ -1,0 +1,68 @@
+{
+  "tourKey": "tour5",
+  "bookingId": 5,
+  "image": "~/assets/images/Tours/Tour5.webp",
+  "duration": "P10D",
+  "durationDays": 10,
+  "startLocation": "Marrakech",
+  "endLocation": "Casablanca",
+  "keywords": [
+    "Morocco 10 day tour",
+    "Grand Morocco tour",
+    "Complete Morocco tour",
+    "Sahara Atlas tour",
+    "Morocco epic adventure",
+    "Imperial cities Sahara",
+    "Morocco comprehensive tour",
+    "Best Morocco tour"
+  ],
+  "seo": {
+    "title": "10-Day Morocco Tour from Marrakech",
+    "metaDescription": "Book a 10-day Morocco tour from Marrakech with Sahara desert camping, Fes, Chefchaouen, Rabat, Casablanca, Atlas Mountains, and kasbahs.",
+    "lead": "A broad 10-day Morocco tour from Marrakech built for travelers who want desert, imperial cities, Chefchaouen, Atlas scenery, and Atlantic coast highlights in one circuit.",
+    "primaryKeyword": "10 day Morocco tour",
+    "secondaryKeywords": [
+      "Morocco highlights tour package",
+      "Marrakech Sahara Fes Chefchaouen tour",
+      "Morocco grand circuit itinerary",
+      "Imperial cities and Sahara tour"
+    ],
+    "price": {
+      "label": "Custom quote",
+      "note": "Final pricing depends on travel dates, group size, accommodation level, and private or shared transport. Send your dates for an exact quote."
+    },
+    "imageAlt": "Grand Morocco circuit route with Sahara dunes, imperial cities, Atlas Mountains, and Chefchaouen",
+    "highlights": [
+      "Start in Marrakech with a guided city experience",
+      "Camp in the Sahara after crossing the High Atlas and kasbah route",
+      "Visit Fes, Meknes, Volubilis, Chefchaouen, Rabat, and Casablanca",
+      "Combine desert, mountains, medinas, and Atlantic coast in one trip"
+    ],
+    "faqs": [
+      {
+        "question": "What is included in this 10-day Morocco tour?",
+        "answer": "The circuit includes private transport, accommodation, selected meals, camel trekking, desert camp, guided visits in key cities, and airport transfers as described in the itinerary."
+      },
+      {
+        "question": "Is 10 days enough for Morocco?",
+        "answer": "Ten days is a strong length for a first Morocco trip because it allows time for Marrakech, the Sahara, Fes, Chefchaouen, Rabat, and Casablanca without making every day a rush."
+      },
+      {
+        "question": "Can the circuit start and end in different cities?",
+        "answer": "Yes. The itinerary can be adjusted for Marrakech, Casablanca, Fes, or Tangier arrivals depending on your flights."
+      },
+      {
+        "question": "Does the tour include local guides?",
+        "answer": "Local guides are included for selected city visits such as Marrakech and Fes, with additional guides available on request."
+      },
+      {
+        "question": "Can this Morocco itinerary be made more relaxed?",
+        "answer": "Yes. Extra nights can be added in the desert, Fes, Chefchaouen, Marrakech, or Essaouira to slow the pace."
+      }
+    ]
+  },
+  "jsonLd": {
+    "name": "Grand Moroccan Circuit - 10 Days",
+    "description": "Traverse Sahara dunes, imperial cities, Atlas peaks, and coastal elegance in an epic 10-day adventure across Morocco!"
+  }
+}

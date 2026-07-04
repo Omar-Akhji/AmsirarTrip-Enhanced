@@ -1,6 +1,7 @@
 ---
 import { useTranslations } from "@/i18n/utils";
 import PageHeader from "@/shared/layout/PageHeader.astro";
+import { Image } from "astro:assets";
 
 const locale = Astro.currentLocale || "en";
 const t = useTranslations(locale);
@@ -10,28 +11,28 @@ const factStats = [
     id: "photos",
     icon: "/icons/camera-icon.svg",
     value: 12_200,
-    duration: 14_000,
+    duration: 1800,
     label: t("about.facts.photos"),
   },
   {
     id: "beaches",
     icon: "/icons/beach-icon.svg",
     value: 4500,
-    duration: 14_000,
+    duration: 1700,
     label: t("about.facts.beaches"),
   },
   {
     id: "mountains",
     icon: "/icons/mountain-icon.svg",
     value: 840,
-    duration: 9000,
+    duration: 1400,
     label: t("about.facts.mountains"),
   },
   {
     id: "cruises",
     icon: "/icons/travel-icon.svg",
     value: 1200,
-    duration: 10_000,
+    duration: 1500,
     label: t("about.facts.cruises"),
   },
 ];
@@ -148,10 +149,12 @@ const factStats = [
               <div
                 class="relative aspect-4/3 overflow-hidden rounded-3xl bg-white mask-b-from-50% shadow-2xl"
               >
-                <img
+                <Image
                   alt="Amsirar landscape showcasing traditional Moroccan architecture and culture"
                   class="absolute inset-0 size-full object-cover"
+                  height={852}
                   src="/images/about-img.webp"
+                  width={720}
                 />
                 <div
                   class="absolute inset-s-0 inset-e-0 bottom-0 bg-linear-to-t from-neutral-900/60 to-transparent p-6"
@@ -216,7 +219,7 @@ const factStats = [
                 </div>
                 <div class="relative flex flex-col items-center gap-y-6">
                   <figure class="inline-flex size-24 items-center justify-center overflow-hidden rounded-full border-2 border-white/20 bg-white/5 p-3 text-orange-50 shadow-lg ring-2 shadow-orange-600/25 ring-white/10">
-                    <img
+                    <Image
                       alt=""
                       aria-hidden="true"
                       class="block size-full object-contain brightness-0 invert"

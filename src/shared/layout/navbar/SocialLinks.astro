@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import { SOCIAL_LINKS } from "./constants";
 
 const { class: className, compact = false } = Astro.props;
@@ -21,7 +22,7 @@ const { class: className, compact = false } = Astro.props;
           : {})}
           aria-label={link.label}
         >
-          <img
+          <Image
             alt=""
             class:list={{ "size-5 object-contain": compact, "size-6.25 object-contain": !compact }}
             height={compact ? 20 : 25}

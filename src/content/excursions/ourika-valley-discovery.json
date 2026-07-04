@@ -1,0 +1,21 @@
+{
+  "excursionKey": "excursion4",
+  "i18nKeyPrefix": "ourika",
+  "bookingId": 4,
+  "image": "~/assets/images/Excursions/Ourika_Valley.webp",
+  "duration": "P1D",
+  "location": "Ourika Valley, Morocco",
+  "keywords": [
+    "Ourika Valley tour",
+    "Ourika waterfalls",
+    "Atlas day trip",
+    "Marrakech valley tour",
+    "Berber market Ourika",
+    "Morocco nature excursion",
+    "Setti Fatma waterfalls"
+  ],
+  "jsonLd": {
+    "name": "Ourika Valley Discovery",
+    "description": "Discover the lush Ourika Valley, visit traditional Berber markets, and hike to stunning waterfalls."
+  }
+}

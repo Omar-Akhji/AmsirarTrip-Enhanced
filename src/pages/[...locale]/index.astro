@@ -1,4 +1,8 @@
 ---
+import { getImage } from "astro:assets";
+import bg1 from "../../assets/images/Header/header-1.webp";
+import bg2 from "../../assets/images/Header/header-2.webp";
+import bg3 from "../../assets/images/Header/header-3.webp";
 import FeaturedTours from "../../features/home/components/FeaturedTours.astro";
 import HomeHero from "../../features/home/components/HomeHero";
 import HomeStats from "../../features/home/components/HomeStats.astro";
@@ -13,18 +17,28 @@ const t = useTranslations(locale);
 
 const title = t("home.meta.title");
 const description = t("home.meta.description");
+const optBg1 = await getImage({ src: bg1, format: "webp" });
+const optBg2 = await getImage({ src: bg2, format: "webp" });
+const optBg3 = await getImage({ src: bg3, format: "webp" });
+const heroImages = [optBg1.src, optBg2.src, optBg3.src];
 ---
 
 <Layout
   description={description}
   title={title}
 >
-  <HomeHero client:load />
+  <HomeHero
+    client:load
+    images={heroImages}
+  />
   <main class="text-zinc-900">
     <HomeStats />
     <FeaturedTours />
     <ServicesSection />
     <TestimonialsSection />
-    <VideoSection client:visible />
+    <VideoSection
+      client:visible
+      fallbackImage={heroImages[0] ?? ""}
+    />
   </main>
 </Layout>

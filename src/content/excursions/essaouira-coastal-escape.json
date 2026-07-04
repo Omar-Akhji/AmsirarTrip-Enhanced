@@ -1,0 +1,21 @@
+{
+  "excursionKey": "excursion2",
+  "i18nKeyPrefix": "essaouira",
+  "bookingId": 2,
+  "image": "~/assets/images/Excursions/Essaouira.webp",
+  "duration": "P1D",
+  "location": "Essaouira, Morocco",
+  "keywords": [
+    "Essaouira day trip",
+    "Essaouira from Marrakech",
+    "Morocco coastal tour",
+    "Essaouira medina",
+    "Atlantic coast Morocco",
+    "Essaouira beach",
+    "Morocco port city"
+  ],
+  "jsonLd": {
+    "name": "Essaouira Coastal Escape",
+    "description": "Stroll the fortified medina, watch blue fishing boats in the harbor, and enjoy ocean-fresh seafood."
+  }
+}

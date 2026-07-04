@@ -1,53 +1,14 @@
 ---
 import { useTranslations } from "@/i18n/utils";
+import { Image } from "astro:assets";
+
+import { getCollection } from "astro:content";
 
 const locale = Astro.currentLocale || "en";
 const t = useTranslations(locale);
 
-const cities = [
-  {
-    key: "marrakech",
-    image: "/images/Home/Marrakech-tourist.webp",
-    titleKey: "featured.cards.marrakech.title",
-    descriptionKey: "featured.marrakech.description",
-    altKey: "featured.cards.marrakech.alt",
-  },
-  {
-    key: "casablanca",
-    image: "/images/Home/Casablanca-tourist.webp",
-    titleKey: "featured.cards.casablanca.title",
-    descriptionKey: "featured.casablanca.description",
-    altKey: "featured.cards.casablanca.alt",
-  },
-  {
-    key: "fez",
-    image: "/images/Home/Fez-tourist.webp",
-    titleKey: "featured.cards.fez.title",
-    descriptionKey: "featured.fez.description",
-    altKey: "featured.cards.fez.alt",
-  },
-  {
-    key: "dadesValley",
-    image: "/images/Home/valley-tourisit.webp",
-    titleKey: "featured.cards.dadesValley.title",
-    descriptionKey: "featured.dadesValley.description",
-    altKey: "featured.cards.dadesValley.alt",
-  },
-  {
-    key: "chefchaouen",
-    image: "/images/Home/Chefchaouen-tourist.webp",
-    titleKey: "featured.cards.chefchaouen.title",
-    descriptionKey: "featured.chefchaouen.description",
-    altKey: "featured.cards.chefchaouen.alt",
-  },
-  {
-    key: "rabat",
-    image: "/images/Home/Rabat-tourist.webp",
-    titleKey: "featured.cards.rabat.title",
-    descriptionKey: "featured.rabat.description",
-    altKey: "featured.cards.rabat.alt",
-  },
-];
+const destinationEntries = await getCollection("destinations");
+const cities = destinationEntries.map((entry) => entry.data);
 ---
 
 <section
@@ -92,10 +53,9 @@ const cities = [
             style={`transition-delay: ${index * 150}ms`}
           >
             <article class="card-article relative block size-full overflow-hidden rounded-xl">
-              <img
+              <Image
                 alt={t(city.altKey)}
                 class="card-img absolute inset-0 size-full object-cover"
-                decoding="async"
                 loading="lazy"
                 src={city.image}
               />

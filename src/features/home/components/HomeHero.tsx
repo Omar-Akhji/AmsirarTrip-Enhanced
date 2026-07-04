@@ -1,15 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "@/i18n/routing";
 import { useMediaQuery, useTranslation } from "@/lib/hooks";
-import Image from "@/shared/ui/Image";
 
-const HEADER_IMAGES = [
-  "/images/Header/header-1.webp",
-  "/images/Header/header-2.webp",
-  "/images/Header/header-3.webp",
-];
+type HomeHeroProps = { images: string[] };
 
-export default function HomeHero() {
+export default function HomeHero({ images }: HomeHeroProps) {
   const { t } = useTranslation();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -31,11 +26,11 @@ export default function HomeHero() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentImageIndex((previous) => (previous + 1) % HEADER_IMAGES.length);
+      setCurrentImageIndex((previous) => (previous + 1) % images.length);
     }, 5000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [images]);
 
   const headerReference = useRef<HTMLElement>(null);
 
@@ -144,20 +139,17 @@ export default function HomeHero() {
       aria-labelledby="hero-heading"
     >
       <div className="absolute inset-0 z-0">
-        {HEADER_IMAGES.map((source, index) => (
+        {images.map((img, index) => (
           <div
-            key={source}
+            key={img}
             className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
               index === currentImageIndex ? "opacity-100" : "opacity-0"
             }`}
           >
-            <Image
-              src={source}
+            <img
+              src={img}
               alt=""
-              fill
-              className="object-cover"
-              sizes="100vw"
-              priority={index === 0}
+              className="size-full object-cover"
             />
           </div>
         ))}

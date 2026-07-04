@@ -1,6 +1,7 @@
 ---
 import DetailsSidebar from "@/shared/layout/DetailsSidebar.astro";
 import PageHeader from "@/shared/layout/PageHeader.astro";
+import { Image } from "astro:assets";
 
 const {
   title,
@@ -39,13 +40,13 @@ const sl = Astro.slots.has("default");
           <figure
             class="relative mbe-8 aspect-4/3 overflow-hidden rounded-[20px] border border-zinc-50 shadow-md inline-full"
           >
-            <img
+            <Image
               alt={imageAlt}
               class="absolute inset-0 h-full w-full object-cover"
-              decoding="async"
+              height={600}
               loading="eager"
-              sizes="(max-width: 1024px) 100vw, 66vw"
               src={imageSrc}
+              width={800}
             />
           </figure>
         </div>

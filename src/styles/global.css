@@ -345,9 +345,15 @@
 /* Base transitions applied ONLY when JavaScript is initialized (.reveal-init) */
 .reveal-init [data-animate] {
   opacity: 0;
-  transition-property: opacity, transform, filter;
-  transition-duration: var(--animate-duration, 800ms);
-  transition-timing-function: var(--animate-ease, cubic-bezier(0.16, 1, 0.3, 1));
+  transition:
+    opacity var(--animate-duration, 800ms) var(--animate-ease, cubic-bezier(0.16, 1, 0.3, 1))
+      var(--animate-delay, 0ms),
+    transform var(--animate-duration, 800ms) var(--animate-ease, cubic-bezier(0.16, 1, 0.3, 1))
+      var(--animate-delay, 0ms);
+  backface-visibility: hidden;
+}
+
+.reveal-init [data-animate].is-revealing {
   will-change: transform, opacity;
 }
 
@@ -410,11 +416,11 @@
 }
 
 [data-scroll-parallax] {
-  transform: translateY(var(--scroll-translate-y, 0));
-  will-change: transform;
+  transform: translate3d(0, var(--scroll-translate-y, 0), 0);
+}
 
-  /* Interpolate changes smoothly to simulate momentum */
-  transition: transform 0.15s cubic-bezier(0.25, 1, 0.5, 1);
+[data-scroll-parallax].is-parallax-active {
+  will-change: transform;
 }
 
 /* Accessibility: respect user preferences for reduced motion */
@@ -424,6 +430,6 @@
     transition: none !important;
     transform: none !important;
     opacity: 1 !important;
-    filter: none !important;
+    will-change: auto !important;
   }
 }

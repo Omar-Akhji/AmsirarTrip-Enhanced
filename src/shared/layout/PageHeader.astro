@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import { getRelativeLocaleUrl } from "astro:i18n";
 
 interface Props {
@@ -36,14 +37,13 @@ if (gradientPosition === "top-right") {
 >
   {
     bgImage ?
-      <img
+      <Image
         alt=""
         class="absolute inset-0 -z-30 h-full w-full object-cover"
-        decoding="async"
-        fetchpriority="high"
+        height={1280}
         loading="eager"
-        sizes="100vw"
         src={bgImage}
+        width={1920}
       />
     : null
   }

@@ -9,7 +9,6 @@ import {
   Flag,
   MapPin,
 } from "@lucide/astro";
-import type { TourSeoContent } from "../data/toursMetadata";
 
 interface Props {
   duration: number | undefined;
@@ -20,7 +19,7 @@ interface Props {
   endLabel: string;
   endCity: string;
   priceLabel: string;
-  price: TourSeoContent["price"];
+  price: { label: string; note: string };
   highlightsTitle: string;
   highlights: string[];
   pricingTitle: string;
@@ -61,7 +60,7 @@ const {
         class="size-5 shrink-0 text-orange-500"
       />
       <div class="text-start">
-        <div class="text-sm font-semibold">{duration || 3} {daysLabel}</div>
+        <div class="text-sm font-semibold">{duration ?? 3} {daysLabel}</div>
         <div class="text-xs font-semibold">{durationLabel}</div>
       </div>
     </div>

@@ -1,0 +1,68 @@
+{
+  "tourKey": "tour3",
+  "bookingId": 3,
+  "image": "~/assets/images/Tours/Tour3.webp",
+  "duration": "P3D",
+  "durationDays": 3,
+  "startLocation": "Fes",
+  "endLocation": "Marrakech",
+  "keywords": [
+    "Fes to Marrakech tour",
+    "3 day desert tour",
+    "Caravan experience Morocco",
+    "Kasbah tour",
+    "Merzouga from Fes",
+    "Sahara desert tour",
+    "Morocco 3 day adventure",
+    "Atlas Mountains crossing"
+  ],
+  "seo": {
+    "title": "3-Day Fes to Marrakech Desert Tour",
+    "metaDescription": "Take a 3-day Fes to Marrakech desert tour via Ifrane, Ziz Valley, Merzouga camel trek, Todra Gorge, Dades Valley, and Ait Ben Haddou.",
+    "lead": "A practical 3-day Fes to Marrakech desert tour that crosses the Middle Atlas, reaches the Erg Chebbi dunes, and continues through southern Morocco's kasbah valleys.",
+    "primaryKeyword": "Fes to Marrakech desert tour 3 days",
+    "secondaryKeywords": [
+      "3 day desert tour from Fes",
+      "Fes to Merzouga camel trek",
+      "Merzouga to Marrakech tour",
+      "Sahara desert tour from Fes"
+    ],
+    "price": {
+      "label": "Custom quote",
+      "note": "Final pricing depends on travel dates, group size, accommodation level, and private or shared transport. Send your dates for an exact quote."
+    },
+    "imageAlt": "Camel caravan in Erg Chebbi on a 3-day Fes to Marrakech desert tour",
+    "highlights": [
+      "Travel from Fes through Ifrane, Azrou, Midelt, and Ziz Valley",
+      "Ride camels into Erg Chebbi for sunset and desert camping",
+      "Visit Todra Gorge, Dades Valley, Ouarzazate, and Ait Ben Haddou",
+      "End in Marrakech after crossing the High Atlas Mountains"
+    ],
+    "faqs": [
+      {
+        "question": "Can this desert tour start in Fes and end in Marrakech?",
+        "answer": "Yes. This itinerary is designed as a point-to-point route from Fes to Marrakech with a Sahara desert night in Merzouga."
+      },
+      {
+        "question": "How long are the driving days?",
+        "answer": "Driving times vary by day, with the longest stretches on the Fes to Merzouga and Dades to Marrakech routes. The itinerary includes scenic breaks and visits along the way."
+      },
+      {
+        "question": "Is luggage safe during the camel trek?",
+        "answer": "Your main luggage stays secure with the vehicle or camp team. Bring a small overnight bag for the desert camp."
+      },
+      {
+        "question": "What desert dunes does this tour visit?",
+        "answer": "The tour visits the Erg Chebbi dunes near Merzouga, one of Morocco's most popular Sahara camel trekking areas."
+      },
+      {
+        "question": "Can I choose a luxury camp for the Merzouga night?",
+        "answer": "Yes. Standard and luxury camp upgrades can be arranged depending on availability and your budget."
+      }
+    ]
+  },
+  "jsonLd": {
+    "name": "Caravan and Kasbah Experience - 3 Days",
+    "description": "Journey from Fes to Marrakech through ancient kasbahs and golden dunes on this unforgettable 3-day caravan experience."
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "tourKey": "tour2",
+  "bookingId": 2,
+  "image": "~/assets/images/Tours/Tour2.webp",
+  "duration": "P6D",
+  "durationDays": 6,
+  "startLocation": "Casablanca",
+  "endLocation": "Marrakech",
+  "keywords": [
+    "Morocco 6 day tour",
+    "Coast and cities tour",
+    "Casablanca to Marrakech",
+    "Morocco coastal tour",
+    "Imperial cities tour",
+    "Essaouira tour",
+    "Fes Meknes tour",
+    "Morocco explorer tour"
+  ],
+  "seo": {
+    "title": "6-Day Morocco Tour from Casablanca",
+    "metaDescription": "Plan a 6-day Morocco tour from Casablanca to Chefchaouen, Fes, Merzouga desert, Dades Valley, Ait Ben Haddou, and Marrakech.",
+    "lead": "A complete 6-day Morocco tour from Casablanca combining imperial cities, Chefchaouen, Fes, Erg Chebbi camel trekking, and a Marrakech finish.",
+    "primaryKeyword": "6 day Morocco tour itinerary",
+    "secondaryKeywords": [
+      "Casablanca to Marrakech tour",
+      "Morocco tour with Chefchaouen and Sahara",
+      "Fes and Merzouga desert tour",
+      "Morocco highlights tour package"
+    ],
+    "price": {
+      "label": "Custom quote",
+      "note": "Final pricing depends on travel dates, group size, accommodation level, and private or shared transport. Send your dates for an exact quote."
+    },
+    "imageAlt": "Morocco tour route from Casablanca through Chefchaouen, Fes, Merzouga desert, and Marrakech",
+    "highlights": [
+      "Start in Casablanca with Rabat and Chefchaouen on the first day",
+      "Explore Fes with a local guide through the old medina",
+      "Camel trek and overnight camp in the Erg Chebbi dunes",
+      "Finish through Todra Gorge, Dades Valley, and Ait Ben Haddou"
+    ],
+    "faqs": [
+      {
+        "question": "What does this 6-day Morocco tour from Casablanca include?",
+        "answer": "The route covers Casablanca, Rabat, Chefchaouen, Fes, Merzouga, Dades Valley, Ait Ben Haddou, and Marrakech with transport, accommodation, selected meals, and guided experiences."
+      },
+      {
+        "question": "Is the tour suitable for first-time visitors to Morocco?",
+        "answer": "Yes. It is designed for travelers who want a balanced first Morocco itinerary with cities, mountains, Sahara desert, and kasbah landscapes."
+      },
+      {
+        "question": "Can the tour start at Casablanca airport?",
+        "answer": "Yes. Pickup can be arranged from Casablanca airport, your hotel, or another meeting point in the city."
+      },
+      {
+        "question": "Does the itinerary include a Sahara desert camp?",
+        "answer": "Yes. The tour includes a camel trek into the Erg Chebbi dunes and an overnight stay in a Merzouga desert camp."
+      },
+      {
+        "question": "Can this Casablanca to Marrakech tour be customized?",
+        "answer": "Yes. You can adjust hotel level, camp category, pace, extra nights, or private stops based on your travel style."
+      }
+    ]
+  },
+  "jsonLd": {
+    "name": "Coast and Cities Explorer - 6 Days",
+    "description": "Explore Morocco's stunning coastline and vibrant cities on this comprehensive 6-day journey from Casablanca to Marrakech."
+  }
+}

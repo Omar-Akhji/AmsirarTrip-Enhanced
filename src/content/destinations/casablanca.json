@@ -1,0 +1,8 @@
+{
+  "image": "~/assets/images/Home/Casablanca-tourist.webp",
+  "width": 600,
+  "height": 400,
+  "titleKey": "featured.cards.casablanca.title",
+  "descriptionKey": "featured.casablanca.description",
+  "altKey": "featured.cards.casablanca.alt"
+}

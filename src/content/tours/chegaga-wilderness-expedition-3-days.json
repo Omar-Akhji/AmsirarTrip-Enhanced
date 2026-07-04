@@ -1,0 +1,68 @@
+{
+  "tourKey": "tour8",
+  "bookingId": 8,
+  "image": "~/assets/images/Tours/Tour8.webp",
+  "duration": "P3D",
+  "durationDays": 3,
+  "startLocation": "Marrakech",
+  "endLocation": "Marrakech",
+  "keywords": [
+    "Chegaga desert tour",
+    "3 day wilderness tour",
+    "Morocco expedition",
+    "Chegaga dunes",
+    "Remote desert Morocco",
+    "Off-road Morocco tour",
+    "Zagora tour",
+    "Draa Valley tour"
+  ],
+  "seo": {
+    "title": "3-Day Chegaga Desert Tour from Marrakech",
+    "metaDescription": "Book a 3-day Chegaga desert tour from Marrakech to Ait Ben Haddou, Draa Valley, M'Hamid, remote Sahara dunes, camel trek, and camp.",
+    "lead": "A remote 3-day Chegaga desert tour from Marrakech for travelers who want wilder Sahara dunes, the Draa Valley, M'Hamid, and a less crowded camp experience.",
+    "primaryKeyword": "Chegaga dunes tour",
+    "secondaryKeywords": [
+      "3 day Chegaga desert tour",
+      "remote Sahara expedition Morocco",
+      "Marrakech to Chegaga tour",
+      "M'Hamid desert camp tour"
+    ],
+    "price": {
+      "label": "Custom quote",
+      "note": "Final pricing depends on travel dates, group size, accommodation level, and private or shared transport. Send your dates for an exact quote."
+    },
+    "imageAlt": "Remote Chegaga desert dunes at sunset on a Sahara tour from Marrakech",
+    "highlights": [
+      "Cross the High Atlas and visit Ait Ben Haddou",
+      "Follow the Draa Valley toward Zagora and M'Hamid",
+      "Ride camels into the remote Chegaga dunes",
+      "Sleep in an authentic Sahara camp away from busier desert routes"
+    ],
+    "faqs": [
+      {
+        "question": "Is Chegaga more remote than Merzouga?",
+        "answer": "Yes. Chegaga is generally more remote and less developed, making it a strong choice for travelers who want a wilder desert feel."
+      },
+      {
+        "question": "Can this Chegaga tour be done in 3 days?",
+        "answer": "Yes. Three days is possible from Marrakech, although the driving days are long because Chegaga sits deeper in the desert."
+      },
+      {
+        "question": "Does the tour include M'Hamid?",
+        "answer": "Yes. The route passes through M'Hamid, the last village before the open desert tracks toward Chegaga."
+      },
+      {
+        "question": "What is different about a Chegaga camp?",
+        "answer": "Chegaga camps usually feel more secluded, with darker skies, fewer crowds, and a stronger wilderness atmosphere."
+      },
+      {
+        "question": "Can I add an extra night in the desert?",
+        "answer": "Yes. Adding an extra night is recommended if you want more time for desert walks, photography, or a slower return to Marrakech."
+      }
+    ]
+  },
+  "jsonLd": {
+    "name": "Chegaga Wilderness Expedition - 3 Days",
+    "description": "Venture into the remote Chegaga dunes on this 3-day wilderness expedition for an authentic Sahara experience."
+  }
+}

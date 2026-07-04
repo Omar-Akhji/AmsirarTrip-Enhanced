@@ -1,13 +1,7 @@
 import { defaultLang } from "../../i18n/ui";
 import { useTranslations as useAstroTranslations } from "../../i18n/utils";
 
-let globalLocale = defaultLang;
-
 const LOCALES = ["en", "fr", "de", "es"] as const;
-
-export function setGlobalLocale(locale: string) {
-  globalLocale = locale;
-}
 
 export function getGlobalLocale(): string {
   if (typeof location !== "undefined") {
@@ -16,7 +10,7 @@ export function getGlobalLocale(): string {
       return segment;
     }
   }
-  return globalLocale;
+  return defaultLang;
 }
 
 export function useTranslation() {

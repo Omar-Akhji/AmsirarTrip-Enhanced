@@ -1,0 +1,74 @@
+{
+  "tourKey": "tour1",
+  "bookingId": 1,
+  "image": "~/assets/images/Tours/Tour1.webp",
+  "duration": "P3D",
+  "durationDays": 3,
+  "startLocation": "Marrakech",
+  "endLocation": "Marrakech",
+  "keywords": [
+    "Merzouga desert tour",
+    "3 day Sahara tour",
+    "Marrakech to Merzouga",
+    "Ait Ben Haddou tour",
+    "Dades Valley tour",
+    "Camel trekking Morocco",
+    "Desert camping Merzouga",
+    "Sahara adventure tour",
+    "Morocco desert experience",
+    "Atlas Mountains tour",
+    "Todra Gorge excursion",
+    "Morocco desert safari"
+  ],
+  "seo": {
+    "title": "3-Day Merzouga Desert Tour from Marrakech",
+    "metaDescription": "Book a 3-day Sahara desert tour from Marrakech to Merzouga with camel trek, Erg Chebbi camp, Ait Ben Haddou, Dades Valley, and Todra Gorge.",
+    "lead": "A focused 3-day Sahara desert tour from Marrakech with High Atlas scenery, kasbah stops, Erg Chebbi camel trekking, and an overnight Merzouga desert camp.",
+    "primaryKeyword": "3 day Sahara desert tour Morocco",
+    "secondaryKeywords": [
+      "Merzouga camel trek",
+      "Erg Chebbi camping",
+      "Marrakech to Merzouga desert tour",
+      "Sahara desert trip from Marrakech"
+    ],
+    "price": {
+      "label": "From EUR 295 per person",
+      "note": "Price is based on standard accommodation and shared transport. Private departures, luxury camps, and peak dates are quoted on request."
+    },
+    "imageAlt": "Camel trek at sunset on the Erg Chebbi dunes during a Merzouga desert tour from Marrakech",
+    "highlights": [
+      "Cross the High Atlas Mountains via Tizi n'Tichka Pass",
+      "Visit Ait Ben Haddou, Ouarzazate, Dades Valley, and Todra Gorge",
+      "Ride camels into the Erg Chebbi dunes at sunset",
+      "Sleep in a Sahara desert camp with dinner and Berber music"
+    ],
+    "faqs": [
+      {
+        "question": "Is this 3-day Sahara desert tour from Marrakech private?",
+        "answer": "The route can be arranged as a private tour or a small-group departure depending on your dates, group size, and preferred comfort level."
+      },
+      {
+        "question": "How far is Merzouga from Marrakech?",
+        "answer": "Merzouga is a long desert route from Marrakech, so the itinerary breaks the journey with scenic stops in the High Atlas, Ait Ben Haddou, Dades Valley, and Todra Gorge."
+      },
+      {
+        "question": "Do I need experience to ride camels in Erg Chebbi?",
+        "answer": "No previous experience is needed. Local camel handlers guide the caravan, and the ride is paced for first-time travelers."
+      },
+      {
+        "question": "What should I pack for the Merzouga desert camp?",
+        "answer": "Bring sunglasses, sunscreen, a hat, comfortable shoes, a small overnight bag, and warm layers because Sahara nights can be cold."
+      },
+      {
+        "question": "Can I upgrade to a luxury desert camp?",
+        "answer": "Yes. Standard and luxury desert camp options can be quoted based on availability and your preferred travel dates."
+      }
+    ]
+  },
+  "jsonLd": {
+    "name": "3 Day Merzouga Desert Tour from Marrakech",
+    "description": "Experience the magic of the Sahara Desert on this 3-day adventure from Marrakech to Merzouga. Explore Ait Ben Haddou, ride camels across golden dunes, camp under starlit skies, and discover the beauty of Morocco's desert wilderness.",
+    "price": 295,
+    "currency": "EUR"
+  }
+}

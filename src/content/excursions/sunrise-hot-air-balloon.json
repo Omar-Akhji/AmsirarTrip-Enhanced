@@ -1,0 +1,21 @@
+{
+  "excursionKey": "excursion6",
+  "i18nKeyPrefix": "balloon",
+  "bookingId": 6,
+  "image": "~/assets/images/Excursions/Hot_Air_Balloon_Ride.webp",
+  "duration": "P1D",
+  "location": "Marrakech, Morocco",
+  "keywords": [
+    "Hot air balloon Marrakech",
+    "Sunrise balloon ride",
+    "Marrakech from above",
+    "Morocco balloon experience",
+    "Atlas Mountains view",
+    "Romantic Marrakech tour",
+    "Aerial tour Morocco"
+  ],
+  "jsonLd": {
+    "name": "Sunrise Hot Air Balloon Ride",
+    "description": "Soar above Marrakech at sunrise in a hot air balloon for breathtaking views of the Atlas Mountains and palm groves."
+  }
+}

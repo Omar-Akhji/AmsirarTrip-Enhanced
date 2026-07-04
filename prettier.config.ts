@@ -39,15 +39,19 @@ const config: Config & PluginOptions & PluginConfig = {
 
   // ─── Plugins ──────────────────────────────────────────────────────────────
   // ORDER IS CRITICAL:
-  // 1. prettier-plugin-packagejson   — sorts package.json keys
+  // 1. prettier-plugin-packagejson    — sorts package.json keys
   // 2. @ianvs/prettier-plugin-sort-imports — sorts import statements
-  // 3. prettier-plugin-astro         — must come before tailwindcss
-  // 4. prettier-plugin-tailwindcss   — MUST always be last
+  // 3. prettier-plugin-jsdoc          — formats JSDoc comments
+  // 4. prettier-plugin-astro          — must come before tailwindcss
+  // 5. prettier-plugin-tailwindcss    — must come last for class sorting
+  // 6. prettier-plugin-astro-organize-imports — MUST come last (per its docs)
   plugins: [
     "prettier-plugin-packagejson",
     "@ianvs/prettier-plugin-sort-imports",
+    "prettier-plugin-jsdoc",
     "prettier-plugin-astro",
     "prettier-plugin-tailwindcss",
+    "prettier-plugin-astro-organize-imports",
   ],
 
   // ─── Import sorting (@ianvs/prettier-plugin-sort-imports) ─────────────────
@@ -79,6 +83,10 @@ const config: Config & PluginOptions & PluginConfig = {
   tailwindStylesheet: "./src/styles/global.css",
   // Custom functions that accept Tailwind classes (cn, cva, clsx, twMerge)
   tailwindFunctions: ["cn", "cva", "clsx", "twMerge"],
+
+  // ─── Astro organize imports ───────────────────────────────────────────────
+  // "All" = sort, combine, and remove unused imports in .astro files
+  astroOrganizeImportsMode: "All",
 
   // ─── File overrides ───────────────────────────────────────────────────────
   overrides: [
