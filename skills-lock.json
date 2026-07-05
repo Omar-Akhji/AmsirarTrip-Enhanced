@@ -1,10 +1,22 @@
 {
   "version": 1,
   "skills": {
+    "astro": {
+      "source": "mindrally/skills",
+      "sourceType": "github",
+      "skillPath": "astro/SKILL.md",
+      "computedHash": "39a6cfe33a7f2082977d015f343f84528190d76665604a02dde0ac3baceed1a1"
+    },
     "astro-expert": {
       "source": "smithery.ai",
       "sourceType": "well-known",
       "computedHash": "cd73bb072595efb67b20c237bec2c339023505b6c6af77908feae553939901e3"
+    },
+    "vue-expert": {
+      "source": "jeffallan/claude-skills",
+      "sourceType": "github",
+      "skillPath": "skills/vue-expert/SKILL.md",
+      "computedHash": "80995f70e6d4921a9ceb9cb6932587270b939ef415e090d8e5976d294c89e7d4"
     }
   }
 }

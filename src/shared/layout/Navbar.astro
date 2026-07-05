@@ -2,8 +2,8 @@
 import { useTranslations } from "@/i18n/utils";
 import { Image } from "astro:assets";
 import { LANGUAGES, NAV_LINKS } from "./navbar/constants";
-import { LanguageSelector } from "./navbar/LanguageSelector";
-import { MobileMenu } from "./navbar/MobileMenu";
+import LanguageSelector from "./navbar/LanguageSelector.vue";
+import MobileMenu from "./navbar/MobileMenu.vue";
 import SocialLinks from "./navbar/SocialLinks.astro";
 
 const locale = Astro.currentLocale || "en";

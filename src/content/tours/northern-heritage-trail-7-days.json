@@ -1,7 +1,7 @@
 {
   "tourKey": "tour9",
   "bookingId": 9,
-  "image": "~/assets/images/Tours/Tour9.webp",
+  "image": "../../assets/images/Tours/Tour9.webp",
   "duration": "P7D",
   "durationDays": 7,
   "startLocation": "Tangier",

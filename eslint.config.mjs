@@ -3,8 +3,8 @@ import tsParser from "@typescript-eslint/parser";
 import eslintPluginAstro from "eslint-plugin-astro";
 import nounsanitized from "eslint-plugin-no-unsanitized";
 import prettierRecommended from "eslint-plugin-prettier/recommended";
-import reactDoctor from "eslint-plugin-react-doctor";
-import reactHooksPlugin from "eslint-plugin-react-hooks";
+import eslintPluginVue from "eslint-plugin-vue";
+import vueParser from "vue-eslint-parser";
 import securityPlugin from "eslint-plugin-security";
 import unicorn from "eslint-plugin-unicorn";
 import { defineConfig } from "eslint/config";
@@ -87,24 +87,20 @@ const eslintConfig = defineConfig(
     },
   },
 
-  // ─── React Hooks ──────────────────────────────────────────────────────────
+  // ─── Vue Flat Config ──────────────────────────────────────────────────────
+  ...eslintPluginVue.configs["flat/recommended"],
   {
-    files: ["**/*.tsx", "**/*.jsx"],
-    plugins: { "react-hooks": reactHooksPlugin },
+    files: ["**/*.vue"],
     languageOptions: {
-      globals: { ...globals.browser },
-      parserOptions: { ecmaFeatures: { jsx: true } },
+      parser: vueParser,
+      parserOptions: { parser: tsParser, extraFileExtensions: [".vue"] },
     },
     rules: {
-      // Hooks (recommended-latest includes React Compiler diagnostics)
-      ...reactHooksPlugin.configs.flat["recommended-latest"].rules,
-      "react-hooks/rules-of-hooks": "error",
-      "react-hooks/exhaustive-deps": "warn",
+      "vue/multi-word-component-names": "off", // Disable multi-word constraints for pages/blocks
+      "vue/no-v-html": "warn",
+      "vue/require-default-prop": "off",
     },
   },
-
-  // ─── React Doctor — structural React quality rules (React files only) ─────
-  { files: ["**/*.tsx", "**/*.jsx"], ...reactDoctor.configs.recommended },
 
   // ─── General quality ──────────────────────────────────────────────────────
   {

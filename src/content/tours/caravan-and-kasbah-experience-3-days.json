@@ -1,7 +1,7 @@
 {
   "tourKey": "tour3",
   "bookingId": 3,
-  "image": "~/assets/images/Tours/Tour3.webp",
+  "image": "../../assets/images/Tours/Tour3.webp",
   "duration": "P3D",
   "durationDays": 3,
   "startLocation": "Fes",

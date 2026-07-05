@@ -1,4 +1,4 @@
-import React, { useSyncExternalStore } from "react";
+import { h, ref, onMounted, onUnmounted, type SetupContext, type Ref } from "vue";
 import { getGlobalLocale } from "@/lib/hooks/useTranslation";
 
 const defaultLang = "en";
@@ -14,20 +14,18 @@ function getLocalizedPath(locale: string, path: string): string {
 const LOCALES = ["en", "fr", "de", "es"] as const;
 type Locale = (typeof LOCALES)[number];
 
-type LinkProperties = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
-  href: string;
-  prefetch?: boolean;
-  children?: React.ReactNode;
+export const Link = {
+  name: "Link",
+  props: { href: { type: String, required: true } },
+  setup(props: { href: string }, { slots }: SetupContext) {
+    const locale = getGlobalLocale();
+    const localizedHref = getLocalizedPath(locale, props.href);
+    return () => h("a", { href: localizedHref }, slots["default"]?.());
+  },
 };
 
-export function Link({ href, prefetch: _prefetch, children, ...properties }: LinkProperties) {
-  const locale = getGlobalLocale();
-  const localizedHref = getLocalizedPath(locale, href);
-  return React.createElement("a", { href: localizedHref, ...properties }, children);
-}
-
 function computePathname(): string {
-  if (globalThis === undefined) return "/";
+  if (typeof window === "undefined" || typeof location === "undefined") return "/";
   const path = location.pathname;
   const segments = path.split("/").filter(Boolean);
 
@@ -47,19 +45,22 @@ function computePathname(): string {
   return normalizedPath || "/";
 }
 
-export function usePathname(): string {
-  const pathname = useSyncExternalStore(
-    (onStoreChange) => {
-      document.addEventListener("astro:page-load", onStoreChange);
-      globalThis.addEventListener("popstate", onStoreChange);
-      return () => {
-        document.removeEventListener("astro:page-load", onStoreChange);
-        globalThis.removeEventListener("popstate", onStoreChange);
-      };
-    },
-    computePathname,
-    () => "/",
-  );
+export function usePathname(): Ref<string> {
+  const pathname = ref(computePathname());
+
+  const update = () => {
+    pathname.value = computePathname();
+  };
+
+  onMounted(() => {
+    document.addEventListener("astro:page-load", update);
+    globalThis.addEventListener("popstate", update);
+  });
+
+  onUnmounted(() => {
+    document.removeEventListener("astro:page-load", update);
+    globalThis.removeEventListener("popstate", update);
+  });
 
   return pathname;
 }

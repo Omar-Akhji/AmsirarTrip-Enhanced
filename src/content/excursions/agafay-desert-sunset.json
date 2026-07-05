@@ -2,7 +2,7 @@
   "excursionKey": "excursion5",
   "i18nKeyPrefix": "agafay",
   "bookingId": 5,
-  "image": "~/assets/images/Excursions/Agafay.webp",
+  "image": "../../assets/images/Excursions/Agafay.webp",
   "duration": "P1D",
   "location": "Agafay Desert, Morocco",
   "keywords": [

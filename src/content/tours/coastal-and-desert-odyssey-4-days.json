@@ -1,7 +1,7 @@
 {
   "tourKey": "tour7",
   "bookingId": 7,
-  "image": "~/assets/images/Tours/Tour7.webp",
+  "image": "../../assets/images/Tours/Tour7.webp",
   "duration": "P4D",
   "durationDays": 4,
   "startLocation": "Agadir",

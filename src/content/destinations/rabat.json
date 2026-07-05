@@ -1,5 +1,5 @@
 {
-  "image": "~/assets/images/Home/Rabat-tourist.webp",
+  "image": "../../assets/images/Home/Rabat-tourist.webp",
   "width": 4032,
   "height": 2688,
   "titleKey": "featured.cards.rabat.title",

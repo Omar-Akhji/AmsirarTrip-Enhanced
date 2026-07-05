@@ -1,6 +1,6 @@
 ---
-import { getEntry } from "astro:content";
-import BookingForm from "../../../features/booking/components/BookingForm";
+import { getCollection } from "astro:content";
+import BookingForm from "../../../features/booking/components/BookingForm.vue";
 import ExcursionLayout from "../../../features/excursions/components/ExcursionLayout.astro";
 import { useTranslations } from "../../../i18n/utils";
 import Layout from "../../../layouts/Layout.astro";
@@ -10,7 +10,10 @@ import JsonLd from "../../../shared/ui/JsonLd.astro";
 const { slug } = Astro.params;
 const locale = Astro.currentLocale || "en";
 
-const excursionEntry = await getEntry("excursions", slug || "");
+const excursions = await getCollection("excursions");
+const excursionEntry = excursions.find(
+  (entry) => entry.id.toLowerCase() === (slug || "").toLowerCase(),
+);
 
 if (!excursionEntry) {
   Astro.response.status = 404;
@@ -33,7 +36,7 @@ const excursionJsonLd = generateExcursionJsonLd({
   image: `https://amsirartrip.com${excursion.image.src}`,
   duration: excursion.duration,
   location: { point: excursion.location },
-  url: `https://amsirartrip.com/excursions/${slug}`,
+  url: `https://amsirartrip.com/excursions/${excursionEntry.id}`,
 });
 
 const excursionTitleClean = t(`${keyPrefix}.title`);

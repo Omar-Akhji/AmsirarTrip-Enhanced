@@ -1,7 +1,7 @@
 {
   "tourKey": "tour5",
   "bookingId": 5,
-  "image": "~/assets/images/Tours/Tour5.webp",
+  "image": "../../assets/images/Tours/Tour5.webp",
   "duration": "P10D",
   "durationDays": 10,
   "startLocation": "Marrakech",

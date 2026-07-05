@@ -1,11 +1,11 @@
 ---
-import { Image } from "astro:assets";
+import "../styles/global.css";
 import { ClientRouter } from "astro:transitions";
+import { Image } from "astro:assets";
 import { generateOrganizationJsonLd, generateWebsiteJsonLd } from "../lib/structuredData";
 import Footer from "../shared/layout/Footer.astro";
 import Navbar from "../shared/layout/Navbar.astro";
 import JsonLd from "../shared/ui/JsonLd.astro";
-import "../styles/global.css";
 
 const {
   title = "Amsirar Trip — Morocco Tours & Desert Adventures",

@@ -1,5 +1,5 @@
 {
-  "image": "~/assets/images/Home/valley-tourisit.webp",
+  "image": "../../assets/images/Home/valley-tourisit.webp",
   "width": 600,
   "height": 400,
   "titleKey": "featured.cards.dadesValley.title",

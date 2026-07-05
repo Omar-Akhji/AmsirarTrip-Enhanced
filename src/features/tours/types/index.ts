@@ -1,6 +1,8 @@
+import type { ImageMetadata } from "astro";
+
 export type Tour = {
   id: number;
-  image: string;
+  image: string | ImageMetadata;
   title: string;
   author: string;
   category: string;

@@ -1,9 +1,18 @@
 import type { Tour } from "../types";
+import tour1 from "@/assets/images/Tours/Tour1.webp";
+import tour2 from "@/assets/images/Tours/Tour2.webp";
+import tour3 from "@/assets/images/Tours/Tour3.webp";
+import tour4 from "@/assets/images/Tours/Tour4.webp";
+import tour5 from "@/assets/images/Tours/Tour5.webp";
+import tour6 from "@/assets/images/Tours/Tour6.webp";
+import tour7 from "@/assets/images/Tours/Tour7.webp";
+import tour8 from "@/assets/images/Tours/Tour8.webp";
+import tour9 from "@/assets/images/Tours/Tour9.webp";
 
 export const TOURS_DATA: Tour[] = [
   {
     id: 1,
-    image: "/images/Tours/Tour1.webp",
+    image: tour1,
     title: "tour1.title",
     author: "tours.cities.marrakech",
     category: "tours",
@@ -15,7 +24,7 @@ export const TOURS_DATA: Tour[] = [
   },
   {
     id: 2,
-    image: "/images/Tours/Tour2.webp",
+    image: tour2,
     title: "tour2.title",
     author: "tours.cities.casablanca",
     category: "tours",
@@ -27,7 +36,7 @@ export const TOURS_DATA: Tour[] = [
   },
   {
     id: 3,
-    image: "/images/Tours/Tour3.webp",
+    image: tour3,
     title: "tour3.title",
     author: "tours.cities.fes",
     category: "tours",
@@ -39,7 +48,7 @@ export const TOURS_DATA: Tour[] = [
   },
   {
     id: 4,
-    image: "/images/Tours/Tour4.webp",
+    image: tour4,
     title: "tour4.title",
     author: "tours.cities.casablanca",
     category: "tours",
@@ -51,7 +60,7 @@ export const TOURS_DATA: Tour[] = [
   },
   {
     id: 5,
-    image: "/images/Tours/Tour5.webp",
+    image: tour5,
     title: "tour5.title",
     author: "tours.cities.marrakech",
     category: "tours",
@@ -63,7 +72,7 @@ export const TOURS_DATA: Tour[] = [
   },
   {
     id: 6,
-    image: "/images/Tours/Tour6.webp",
+    image: tour6,
     title: "tour6.title",
     author: "tours.cities.marrakech",
     category: "tours",
@@ -75,7 +84,7 @@ export const TOURS_DATA: Tour[] = [
   },
   {
     id: 7,
-    image: "/images/Tours/Tour7.webp",
+    image: tour7,
     title: "tour7.title",
     author: "tours.cities.agadir",
     category: "tours",
@@ -87,7 +96,7 @@ export const TOURS_DATA: Tour[] = [
   },
   {
     id: 8,
-    image: "/images/Tours/Tour8.webp",
+    image: tour8,
     title: "tour8.title",
     author: "tours.cities.marrakech",
     category: "tours",
@@ -99,7 +108,7 @@ export const TOURS_DATA: Tour[] = [
   },
   {
     id: 9,
-    image: "/images/Tours/Tour9.webp",
+    image: tour9,
     title: "tour9.title",
     author: "tours.cities.tangier",
     category: "tours",

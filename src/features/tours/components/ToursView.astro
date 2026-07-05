@@ -1,4 +1,5 @@
 ---
+import bgImage from "@/assets/images/Header/header-1.webp";
 import { useTranslations } from "@/i18n/utils";
 import PageHeader from "@/shared/layout/PageHeader.astro";
 import StatHighlights from "@/shared/ui/StatHighlights.astro";
@@ -38,7 +39,7 @@ const tourStats = [
 ---
 
 <PageHeader
-  bgImage="/images/Header/header-1.webp"
+  bgImage={bgImage}
   breadcrumbs={[{ label: t("nav.home"), href: "/" }, { label: t("nav.tours") }]}
   subtitle={t("tours.headerSubtitle")}
   title={t("tours.title")}

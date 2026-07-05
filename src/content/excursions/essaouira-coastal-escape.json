@@ -2,7 +2,7 @@
   "excursionKey": "excursion2",
   "i18nKeyPrefix": "essaouira",
   "bookingId": 2,
-  "image": "~/assets/images/Excursions/Essaouira.webp",
+  "image": "../../assets/images/Excursions/Essaouira.webp",
   "duration": "P1D",
   "location": "Essaouira, Morocco",
   "keywords": [

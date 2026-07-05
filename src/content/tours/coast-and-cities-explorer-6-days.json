@@ -1,7 +1,7 @@
 {
   "tourKey": "tour2",
   "bookingId": 2,
-  "image": "~/assets/images/Tours/Tour2.webp",
+  "image": "../../assets/images/Tours/Tour2.webp",
   "duration": "P6D",
   "durationDays": 6,
   "startLocation": "Casablanca",

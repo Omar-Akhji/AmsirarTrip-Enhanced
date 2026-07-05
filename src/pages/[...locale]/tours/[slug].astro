@@ -1,6 +1,6 @@
 ---
-import { getEntry } from "astro:content";
-import BookingForm from "../../../features/booking/components/BookingForm";
+import { getCollection } from "astro:content";
+import BookingForm from "../../../features/booking/components/BookingForm.vue";
 import TourLayout from "../../../features/tours/components/TourLayout.astro";
 import { useTranslations } from "../../../i18n/utils";
 import Layout from "../../../layouts/Layout.astro";
@@ -10,7 +10,8 @@ import JsonLd from "../../../shared/ui/JsonLd.astro";
 const { slug } = Astro.params;
 const locale = Astro.currentLocale || "en";
 
-const tourEntry = await getEntry("tours", slug || "");
+const tours = await getCollection("tours");
+const tourEntry = tours.find((entry) => entry.id.toLowerCase() === (slug || "").toLowerCase());
 
 if (!tourEntry) {
   Astro.response.status = 404;

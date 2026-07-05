@@ -1,4 +1,5 @@
 ---
+import bgImage from "@/assets/images/Header/header-1.webp";
 import { EXCURSIONS_DATA } from "@/features/excursions/data/excursionsData";
 import { useTranslations } from "@/i18n/utils";
 import PageHeader from "@/shared/layout/PageHeader.astro";
@@ -35,7 +36,7 @@ const highlightStats = [
 ---
 
 <PageHeader
-  bgImage="/images/Header/header-1.webp"
+  bgImage={bgImage}
   breadcrumbs={[{ label: t("nav.home"), href: "/" }, { label: t("nav.excursions") }]}
   subtitle={t("excursion.headerSubtitle")}
   title={t("excursion.title")}

@@ -1,5 +1,5 @@
 import node from "@astrojs/node";
-import react from "@astrojs/react";
+import vue from "@astrojs/vue";
 import compress from "@playform/compress";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig, envField, memoryCache } from "astro/config";
@@ -15,7 +15,7 @@ export default defineConfig({
 
   // ─── Integrations ────────────────────────────────────────────────────────
   integrations: [
-    react({ babel: { plugins: [["babel-plugin-react-compiler", { target: "19" }]] } }),
+    vue(),
     compress({ CSS: false, HTML: false, Image: true, JavaScript: false, SVG: true }),
   ],
 

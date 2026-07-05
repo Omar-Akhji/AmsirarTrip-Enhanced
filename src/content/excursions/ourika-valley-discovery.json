@@ -2,7 +2,7 @@
   "excursionKey": "excursion4",
   "i18nKeyPrefix": "ourika",
   "bookingId": 4,
-  "image": "~/assets/images/Excursions/Ourika_Valley.webp",
+  "image": "../../assets/images/Excursions/Ourika_Valley.webp",
   "duration": "P1D",
   "location": "Ourika Valley, Morocco",
   "keywords": [

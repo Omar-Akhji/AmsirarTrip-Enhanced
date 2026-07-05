@@ -1,5 +1,5 @@
 {
-  "image": "~/assets/images/Home/Chefchaouen-tourist.webp",
+  "image": "../../assets/images/Home/Chefchaouen-tourist.webp",
   "width": 600,
   "height": 400,
   "titleKey": "featured.cards.chefchaouen.title",

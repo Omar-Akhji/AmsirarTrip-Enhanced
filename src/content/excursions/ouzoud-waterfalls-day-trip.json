@@ -2,7 +2,7 @@
   "excursionKey": "excursion1",
   "i18nKeyPrefix": "ouzoud",
   "bookingId": 1,
-  "image": "~/assets/images/Excursions/Ouzoud_Waterfalls.webp",
+  "image": "../../assets/images/Excursions/Ouzoud_Waterfalls.webp",
   "duration": "P1D",
   "location": "Ouzoud, Morocco",
   "keywords": [

@@ -2,7 +2,7 @@
   "excursionKey": "excursion6",
   "i18nKeyPrefix": "balloon",
   "bookingId": 6,
-  "image": "~/assets/images/Excursions/Hot_Air_Balloon_Ride.webp",
+  "image": "../../assets/images/Excursions/Hot_Air_Balloon_Ride.webp",
   "duration": "P1D",
   "location": "Marrakech, Morocco",
   "keywords": [

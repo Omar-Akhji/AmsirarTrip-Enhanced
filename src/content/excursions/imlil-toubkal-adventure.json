@@ -2,7 +2,7 @@
   "excursionKey": "excursion3",
   "i18nKeyPrefix": "imlil",
   "bookingId": 3,
-  "image": "~/assets/images/Excursions/Imlil_Toubkal.webp",
+  "image": "../../assets/images/Excursions/Imlil_Toubkal.webp",
   "duration": "P1D",
   "location": "Imlil, Morocco",
   "keywords": [

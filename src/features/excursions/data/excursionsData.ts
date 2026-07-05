@@ -1,9 +1,15 @@
 import { ROUTES } from "@/lib/constants/routes";
+import excursion1 from "@/assets/images/Excursions/Ouzoud_Waterfalls.webp";
+import excursion2 from "@/assets/images/Excursions/Essaouira.webp";
+import excursion3 from "@/assets/images/Excursions/Imlil_Toubkal.webp";
+import excursion4 from "@/assets/images/Excursions/Ourika_Valley.webp";
+import excursion5 from "@/assets/images/Excursions/Agafay.webp";
+import excursion6 from "@/assets/images/Excursions/Hot_Air_Balloon_Ride.webp";
 
 export const EXCURSIONS_DATA = [
   {
     id: 1,
-    image: "/images/Excursions/Ouzoud_Waterfalls.webp",
+    image: excursion1,
     title: "excursion.list.ouzoud.title",
     alt: "excursion.list.ouzoud.alt",
     description: "excursion.list.ouzoud.description",
@@ -13,7 +19,7 @@ export const EXCURSIONS_DATA = [
   },
   {
     id: 2,
-    image: "/images/Excursions/Essaouira.webp",
+    image: excursion2,
     title: "excursion.list.essaouira.title",
     alt: "excursion.list.essaouira.alt",
     description: "excursion.list.essaouira.description",
@@ -23,7 +29,7 @@ export const EXCURSIONS_DATA = [
   },
   {
     id: 3,
-    image: "/images/Excursions/Imlil_Toubkal.webp",
+    image: excursion3,
     title: "excursion.list.imlil.title",
     alt: "excursion.list.imlil.alt",
     description: "excursion.list.imlil.description",
@@ -33,7 +39,7 @@ export const EXCURSIONS_DATA = [
   },
   {
     id: 4,
-    image: "/images/Excursions/Ourika_Valley.webp",
+    image: excursion4,
     title: "excursion.list.ourika.title",
     alt: "excursion.list.ourika.alt",
     description: "excursion.list.ourika.description",
@@ -43,7 +49,7 @@ export const EXCURSIONS_DATA = [
   },
   {
     id: 5,
-    image: "/images/Excursions/Agafay.webp",
+    image: excursion5,
     title: "excursion.list.agafay.title",
     alt: "excursion.list.agafay.alt",
     description: "excursion.list.agafay.description",
@@ -53,7 +59,7 @@ export const EXCURSIONS_DATA = [
   },
   {
     id: 6,
-    image: "/images/Excursions/Hot_Air_Balloon_Ride.webp",
+    image: excursion6,
     title: "excursion.list.balloon.title",
     alt: "excursion.list.balloon.alt",
     description: "excursion.list.balloon.description",

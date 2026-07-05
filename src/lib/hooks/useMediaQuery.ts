@@ -1,21 +1,26 @@
-import { useSyncExternalStore } from "react";
+import { ref, onMounted, onUnmounted, type Ref } from "vue";
 
-const getServerSnapshot = () => {
-  return false;
-};
+export function useMediaQuery(query: string): Ref<boolean> {
+  if (typeof window === "undefined") {
+    return ref(false);
+  }
 
-export function useMediaQuery(query: string): boolean {
-  const subscribe = (callback: () => void) => {
-    const matchMedia = globalThis.matchMedia(query);
-    matchMedia.addEventListener("change", callback);
-    return () => {
-      matchMedia.removeEventListener("change", callback);
-    };
+  const mediaQuery = globalThis.matchMedia(query);
+  const matches = ref(mediaQuery.matches);
+
+  const listener = (event: MediaQueryListEvent) => {
+    matches.value = event.matches;
   };
 
-  const getSnapshot = () => {
-    return globalThis.matchMedia(query).matches;
-  };
+  onMounted(() => {
+    mediaQuery.addEventListener("change", listener);
+    // Sync initial state on mount
+    matches.value = mediaQuery.matches;
+  });
 
-  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  onUnmounted(() => {
+    mediaQuery.removeEventListener("change", listener);
+  });
+
+  return matches;
 }

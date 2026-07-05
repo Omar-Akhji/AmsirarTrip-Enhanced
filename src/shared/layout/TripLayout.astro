@@ -1,4 +1,5 @@
 ---
+import bgImage from "@/assets/images/Header/header-1.webp";
 import DetailsSidebar from "@/shared/layout/DetailsSidebar.astro";
 import PageHeader from "@/shared/layout/PageHeader.astro";
 import { Image } from "astro:assets";
@@ -19,7 +20,7 @@ const sl = Astro.slots.has("default");
 ---
 
 <PageHeader
-  bgImage="/images/Header/header-1.webp"
+  bgImage={bgImage}
   breadcrumbs={breadcrumbs}
   smTitle={smTitle}
   subtitle={pageSubtitle}
