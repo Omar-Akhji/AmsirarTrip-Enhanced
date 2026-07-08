@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted, watch } from "vue";
 import { Link } from "@/i18n/routing";
 import { useMediaQuery, useTranslation } from "@/lib/hooks";
 
@@ -12,6 +12,8 @@ const props = defineProps<Props>();
 const { t } = useTranslation();
 const currentImageIndex = ref(0);
 const prefersReducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
+const isMobileOrTablet = useMediaQuery("(max-width: 1023px)");
+
 const heroTitle = t("home.heroTitle");
 const heroAlt1 = t("home.heroAlt1");
 const heroAlt2 = t("home.heroAlt2");
@@ -19,12 +21,15 @@ const heroAlt2 = t("home.heroAlt2");
 const phrases = [heroTitle || "", heroAlt1 || "", heroAlt2 || ""];
 const currentPhraseIndex = ref(0);
 
-// --- Typing Animation ---
+// --- Typing Animation (Desktop only) ---
 const displayedText = ref(prefersReducedMotion.value ? phrases[0] || "" : "");
 let animationFrameId: ReturnType<typeof requestAnimationFrame>;
+let isDesktopAnimating = false;
 
-function startTypingAnimation() {
+function startDesktopAnimation() {
   if (prefersReducedMotion.value) return;
+  if (isDesktopAnimating) return;
+  isDesktopAnimating = true;
 
   let isDeleting = false;
   let textIndex = 0;
@@ -32,6 +37,8 @@ function startTypingAnimation() {
   let pauseTimer = 0;
 
   function tick(timestamp: number) {
+    if (!isDesktopAnimating) return;
+
     let delta = timestamp - lastTime;
     // Handle tab backgrounding/suspend to prevent huge jumps
     if (delta > 100) {
@@ -81,24 +88,72 @@ function startTypingAnimation() {
   animationFrameId = requestAnimationFrame(tick);
 }
 
+function stopDesktopAnimation() {
+  isDesktopAnimating = false;
+  cancelAnimationFrame(animationFrameId);
+}
+
+// --- Fade Animation (Mobile/Tablet only) ---
+const mobileTextIndex = ref(0);
+const mobileIsFading = ref(false);
+let mobileInterval: ReturnType<typeof setInterval>;
+let mobileTimeout: ReturnType<typeof setTimeout>;
+
+function startMobileAnimation() {
+  if (prefersReducedMotion.value) {
+    mobileTextIndex.value = 0;
+    return;
+  }
+  mobileInterval = setInterval(() => {
+    mobileIsFading.value = true;
+    mobileTimeout = setTimeout(() => {
+      mobileTextIndex.value = (mobileTextIndex.value + 1) % phrases.length;
+      mobileIsFading.value = false;
+    }, 500);
+  }, 4000);
+}
+
+function stopMobileAnimation() {
+  clearInterval(mobileInterval);
+  clearTimeout(mobileTimeout);
+}
+
 // --- Carousel ---
 let carouselInterval: ReturnType<typeof setInterval>;
 
+watch(
+  [isMobileOrTablet, prefersReducedMotion],
+  ([mobile, reduced]) => {
+    if (typeof window === "undefined") return;
+
+    stopMobileAnimation();
+    stopDesktopAnimation();
+
+    if (reduced) {
+      displayedText.value = phrases[0] || "";
+      mobileTextIndex.value = 0;
+      return;
+    }
+
+    if (mobile) {
+      startMobileAnimation();
+    } else {
+      startDesktopAnimation();
+    }
+  },
+  { immediate: true },
+);
+
 onMounted(() => {
-  if (prefersReducedMotion.value) {
-    currentImageIndex.value = 0;
-    return;
-  }
   carouselInterval = setInterval(() => {
     currentImageIndex.value = (currentImageIndex.value + 1) % props.images.length;
   }, 5000);
-
-  startTypingAnimation();
 });
 
 onUnmounted(() => {
   clearInterval(carouselInterval);
-  cancelAnimationFrame(animationFrameId);
+  stopMobileAnimation();
+  stopDesktopAnimation();
 });
 </script>
 
@@ -145,7 +200,16 @@ onUnmounted(() => {
           id="hero-heading"
           class="lg:text-shadow-xl text-3xl leading-tight font-semibold text-shadow-black/60 text-shadow-lg sm:text-4xl lg:text-5xl"
         >
-          <span class="inline-flex items-center">
+          <span
+            v-if="isMobileOrTablet"
+            :class="[
+              'inline-block transition-opacity duration-500 text-center',
+              mobileIsFading ? 'opacity-0' : 'opacity-100',
+            ]"
+          >
+            {{ phrases[mobileTextIndex] }}
+          </span>
+          <span v-else class="inline-flex items-center">
             <span class="relative inline-block pe-2 text-left align-bottom whitespace-nowrap">
               <!-- Invisible placeholder to reserve layout width and prevent layout shifts -->
               <span
