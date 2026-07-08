@@ -200,32 +200,40 @@ onUnmounted(() => {
           id="hero-heading"
           class="lg:text-shadow-xl text-3xl leading-tight font-semibold text-shadow-black/60 text-shadow-lg sm:text-4xl lg:text-5xl"
         >
-          <span
-            v-if="isMobileOrTablet"
-            :class="[
-              'inline-block transition-opacity duration-500 text-center',
-              mobileIsFading ? 'opacity-0' : 'opacity-100',
-            ]"
-          >
-            {{ phrases[mobileTextIndex] }}
+          <!-- SEO & Screen Reader Accessible Content -->
+          <span class="sr-only">
+            {{ isMobileOrTablet ? phrases[mobileTextIndex] : phrases[currentPhraseIndex] }}
           </span>
-          <span v-else class="inline-flex items-center">
-            <span class="relative inline-block pe-2 text-left align-bottom whitespace-nowrap">
-              <!-- Invisible placeholder to reserve layout width and prevent layout shifts -->
-              <span
-                class="pointer-events-none invisible select-none"
-                aria-hidden="true"
-              >
-                {{ phrases[currentPhraseIndex] }}
-              </span>
-              <!-- Absolutely positioned container for the actual typed text and cursor -->
-              <span class="absolute inset-y-0 left-0 flex items-center">
-                <span class="text-white">{{ displayedText }}</span>
+
+          <!-- Visual Animation Layer -->
+          <span aria-hidden="true">
+            <span
+              v-if="isMobileOrTablet"
+              :class="[
+                'inline-block transition-opacity duration-500 text-center',
+                mobileIsFading ? 'opacity-0' : 'opacity-100',
+              ]"
+            >
+              {{ phrases[mobileTextIndex] }}
+            </span>
+            <span v-else class="inline-flex items-center">
+              <span class="relative inline-block pe-2 text-left align-bottom whitespace-nowrap">
+                <!-- Invisible placeholder to reserve layout width and prevent layout shifts -->
                 <span
-                  v-if="!prefersReducedMotion"
+                  class="pointer-events-none invisible select-none"
                   aria-hidden="true"
-                  class="will-change-opacity ms-1 inline-block h-[1em] w-0.75 animate-cursor-blink bg-orange-400/90"
-                />
+                >
+                  {{ phrases[currentPhraseIndex] }}
+                </span>
+                <!-- Absolutely positioned container for the actual typed text and cursor -->
+                <span class="absolute inset-y-0 left-0 flex items-center">
+                  <span class="text-white">{{ displayedText }}</span>
+                  <span
+                    v-if="!prefersReducedMotion"
+                    aria-hidden="true"
+                    class="will-change-opacity ms-1 inline-block h-[1em] w-0.75 animate-cursor-blink bg-orange-400/90"
+                  />
+                </span>
               </span>
             </span>
           </span>
