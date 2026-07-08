@@ -21,49 +21,64 @@ const currentPhraseIndex = ref(0);
 
 // --- Typing Animation ---
 const displayedText = ref(prefersReducedMotion.value ? phrases[0] || "" : "");
-let typingTimeout: ReturnType<typeof setTimeout>;
+let animationFrameId: ReturnType<typeof requestAnimationFrame>;
 
 function startTypingAnimation() {
   if (prefersReducedMotion.value) return;
 
   let isDeleting = false;
   let textIndex = 0;
+  let lastTime = performance.now();
+  let pauseTimer = 0;
 
-  function tick() {
+  function tick(timestamp: number) {
+    let delta = timestamp - lastTime;
+    // Handle tab backgrounding/suspend to prevent huge jumps
+    if (delta > 100) {
+      delta = 0;
+    }
+    lastTime = timestamp;
+
     const fullText = phrases[currentPhraseIndex.value] || "";
 
+    if (pauseTimer > 0) {
+      pauseTimer -= delta;
+      animationFrameId = requestAnimationFrame(tick);
+      return;
+    }
+
     if (!isDeleting) {
-      // Typing
-      displayedText.value = fullText.slice(0, textIndex + 1);
-      textIndex++;
+      // Typing phase
+      // typing speed is approx 100ms per char (10 chars per second) -> 0.01 chars/ms
+      const speed = 0.01;
+      textIndex += delta * speed;
 
-      if (textIndex === fullText.length) {
-        // Pause for 2.5 seconds at the end of typing
+      if (textIndex >= fullText.length) {
+        textIndex = fullText.length;
         isDeleting = true;
-        typingTimeout = setTimeout(tick, 2500);
-      } else {
-        // Smooth typing speed (around 90ms - 130ms per char)
-        typingTimeout = setTimeout(tick, 90 + Math.random() * 40);
+        pauseTimer = 2500; // Pause for 2.5 seconds at the end of typing
       }
+      displayedText.value = fullText.slice(0, Math.floor(textIndex));
     } else {
-      // Erasing
-      displayedText.value = fullText.slice(0, textIndex - 1);
-      textIndex--;
+      // Deleting/erasing phase
+      // deleting speed is approx 45ms per char (22 chars per second) -> 0.022 chars/ms
+      const speed = 0.022;
+      textIndex -= delta * speed;
 
-      if (textIndex === 0) {
+      if (textIndex <= 0) {
+        textIndex = 0;
         isDeleting = false;
         // Move to the next phrase in the list
         currentPhraseIndex.value = (currentPhraseIndex.value + 1) % phrases.length;
-        // Pause for 1.0 second when fully erased before typing next phrase
-        typingTimeout = setTimeout(tick, 1000);
-      } else {
-        // Smooth deleting speed (faster than typing, around 45ms per char)
-        typingTimeout = setTimeout(tick, 45);
+        pauseTimer = 1000; // Pause for 1.0 second when fully erased before typing next phrase
       }
+      displayedText.value = fullText.slice(0, Math.ceil(textIndex));
     }
+
+    animationFrameId = requestAnimationFrame(tick);
   }
 
-  tick();
+  animationFrameId = requestAnimationFrame(tick);
 }
 
 // --- Carousel ---
@@ -83,7 +98,7 @@ onMounted(() => {
 
 onUnmounted(() => {
   clearInterval(carouselInterval);
-  clearTimeout(typingTimeout);
+  cancelAnimationFrame(animationFrameId);
 });
 </script>
 
@@ -131,9 +146,12 @@ onUnmounted(() => {
           class="lg:text-shadow-xl text-3xl leading-tight font-semibold text-shadow-black/60 text-shadow-lg sm:text-4xl lg:text-5xl"
         >
           <span class="inline-flex items-center">
-            <span class="relative inline-block align-bottom whitespace-nowrap pe-2 text-left">
+            <span class="relative inline-block pe-2 text-left align-bottom whitespace-nowrap">
               <!-- Invisible placeholder to reserve layout width and prevent layout shifts -->
-              <span class="invisible select-none pointer-events-none" aria-hidden="true">
+              <span
+                class="pointer-events-none invisible select-none"
+                aria-hidden="true"
+              >
                 {{ phrases[currentPhraseIndex] }}
               </span>
               <!-- Absolutely positioned container for the actual typed text and cursor -->
