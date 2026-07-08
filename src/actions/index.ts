@@ -5,12 +5,8 @@ import { checkRateLimit } from "../lib/api-utils";
 import { env as environment } from "../lib/env";
 import { createErrorResponse, type FormState } from "../lib/form-types";
 import { getBookingSchema, getContactSchema, getNewsletterSchema } from "../lib/schemas";
-import {
-  createMailer,
-  escapeHtml,
-  logSuspiciousActivity,
-  verifyRecaptcha,
-} from "../lib/server-utils";
+import { createMailer, escapeHtml, logSuspiciousActivity } from "../lib/server-utils";
+import { verifyRecaptcha } from "../services/recaptcha";
 
 function getLanguageName(code: string = ""): string {
   const languages: Record<string, string> = {
@@ -77,7 +73,7 @@ export const server = {
         const data = validationResult.data;
 
         const host = context.request.headers.get("host")?.split(":", 1)[0] || "";
-        if (!(await verifyRecaptcha(data.recaptchaToken, host))) {
+        if (!(await verifyRecaptcha({ token: data.recaptchaToken, hostname: host }))) {
           logSuspiciousActivity(ip, "CAPTCHA_FAILED", "booking-action");
           return { success: false, message: "Security verification failed. Please try again." };
         }
@@ -178,7 +174,7 @@ Number of people : ${data.persons}${data.message ? `\nMessage : ${data.message}`
         const messageContent = topic ? `${topic.trim()}\n\n${data.message}` : data.message;
 
         const host = context.request.headers.get("host")?.split(":", 1)[0] || "";
-        if (!(await verifyRecaptcha(data.recaptchaToken, host))) {
+        if (!(await verifyRecaptcha({ token: data.recaptchaToken, hostname: host }))) {
           logSuspiciousActivity(ip, "CAPTCHA_FAILED", "contact-action");
           return { success: false, message: "Security verification failed. Please try again." };
         }
@@ -239,7 +235,7 @@ Number of people : ${data.persons}${data.message ? `\nMessage : ${data.message}`
         const data = validationResult.data;
 
         const host = context.request.headers.get("host")?.split(":", 1)[0] || "";
-        if (!(await verifyRecaptcha(data.recaptchaToken, host))) {
+        if (!(await verifyRecaptcha({ token: data.recaptchaToken, hostname: host }))) {
           logSuspiciousActivity(ip, "CAPTCHA_FAILED", "newsletter-action");
           return { ok: false, statusKey: "footer.newsletterCaptchaError" };
         }

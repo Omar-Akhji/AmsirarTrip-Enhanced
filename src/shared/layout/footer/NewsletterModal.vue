@@ -1,18 +1,10 @@
 <script setup lang="ts">
-import { ref, watch, onMounted, onUnmounted } from "vue";
+import { ref, onUnmounted } from "vue";
 import { actions } from "astro:actions";
 import { Loader2, Mail, User, X } from "lucide-vue-next";
 import { hasRecaptchaV2, RECAPTCHA_V2_SITE_KEY } from "@/lib/client-env";
 import { useTranslation } from "@/lib/hooks/useTranslation";
 import Recaptcha from "@/shared/ui/Recaptcha.vue";
-
-interface Props {
-  isOpen: boolean;
-}
-
-const props = defineProps<Props>();
-
-const emit = defineEmits<{ (e: "close"): void }>();
 
 const { t } = useTranslation();
 const name = ref("");
@@ -23,6 +15,10 @@ const isSubmitting = ref(false);
 const recaptchaRef = ref<InstanceType<typeof Recaptcha> | null>(null);
 const dialogRef = ref<HTMLDialogElement | null>(null);
 let timer: ReturnType<typeof setTimeout> | null = null;
+
+const handleClose = () => {
+  dialogRef.value?.close();
+};
 
 const handleSubmit = async () => {
   if (!name.value.trim() || !email.value.trim() || isSubmitting.value) return;
@@ -50,7 +46,7 @@ const handleSubmit = async () => {
         recaptchaRef.value?.reset();
         timer = setTimeout(() => {
           timer = null;
-          emit("close");
+          handleClose();
         }, 2000);
       }
       statusKey.value = data.statusKey;
@@ -64,32 +60,8 @@ const handleSubmit = async () => {
 
 const handleCancel = (event: Event) => {
   event.preventDefault();
-  emit("close");
+  handleClose();
 };
-
-watch(
-  () => props.isOpen,
-  (open) => {
-    if (!dialogRef.value) return;
-    if (open) {
-      if (!dialogRef.value.open) {
-        dialogRef.value.showModal();
-      }
-    } else {
-      if (dialogRef.value.open) {
-        dialogRef.value.close();
-      }
-    }
-  },
-  { immediate: true },
-);
-
-onMounted(() => {
-  // If dialog ref is already set, show modal
-  if (props.isOpen && dialogRef.value && !dialogRef.value.open) {
-    dialogRef.value.showModal();
-  }
-});
 
 onUnmounted(() => {
   if (timer) {
@@ -100,6 +72,7 @@ onUnmounted(() => {
 
 <template>
   <dialog
+    id="newsletter-dialog"
     ref="dialogRef"
     aria-modal="true"
     aria-labelledby="newsletter-dialog-title"
@@ -112,7 +85,7 @@ onUnmounted(() => {
       @click="
         (event) => {
           if (event.target === event.currentTarget) {
-            emit('close');
+            dialogRef?.close();
           }
         }
       "
@@ -132,9 +105,10 @@ onUnmounted(() => {
           </div>
           <button
             type="button"
+            command="close"
+            commandfor="newsletter-dialog"
             :aria-label="t('footer.newsletterCloseAria')"
             class="-me-1 -mbs-1 flex size-9 items-center justify-center rounded-full text-neutral-400 transition-colors pointer-fine:hover:bg-neutral-100 pointer-fine:hover:text-neutral-600"
-            @click="emit('close')"
           >
             <X class="size-5" />
           </button>

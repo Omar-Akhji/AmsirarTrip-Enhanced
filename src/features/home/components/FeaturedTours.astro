@@ -56,8 +56,10 @@ const cities = destinationEntries.map((entry) => entry.data);
               <Image
                 alt={t(city.altKey)}
                 class="card-img absolute inset-0 size-full object-cover"
+                height={city.height}
                 loading="lazy"
                 src={city.image}
+                width={city.width}
               />
               <div class="card-data">
                 <h3 class="card-title text-shadow-md">{t(city.titleKey)}</h3>

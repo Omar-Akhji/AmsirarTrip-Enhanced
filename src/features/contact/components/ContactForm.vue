@@ -16,6 +16,10 @@ const formKey = ref(0);
 const captchaToken = ref("");
 const state = ref<FormState | null>(null);
 const isSubmitting = ref(false);
+const submitTimeout = ref<ReturnType<typeof setTimeout> | null>(null);
+
+// Debounce submission to prevent double-clicks (500ms window)
+const DEBOUNCE_MS = 500;
 
 const alertClasses = {
   success: "bg-green-50 text-green-800 border border-green-100",
@@ -31,12 +35,21 @@ const handleExpired = () => {
 };
 
 const handleSubmit = async (event: Event) => {
+  // Clear any pending submission
+  if (submitTimeout.value) {
+    clearTimeout(submitTimeout.value);
+    submitTimeout.value = null;
+  }
+
   const form = event.target as HTMLFormElement;
   const formData = new FormData(form);
   const name = formData.get("name") as string;
   const email = formData.get("email") as string;
 
   if (!name.trim() || !email.trim() || isSubmitting.value) return;
+
+  // Debounce: set a flag for 500ms to prevent rapid submissions
+  isSubmitting.value = true;
 
   const recaptchaToken = recaptchaRef.value?.getValue() ?? "";
   if (!recaptchaToken) {
@@ -47,11 +60,11 @@ const handleSubmit = async (event: Event) => {
         recaptchaToken: t("contact.form.errors.captcha", "Recaptcha verification is required"),
       },
     };
+    isSubmitting.value = false;
     return;
   }
   formData.set("recaptchaToken", recaptchaToken);
 
-  isSubmitting.value = true;
   state.value = null;
 
   try {
@@ -86,7 +99,11 @@ const handleSubmit = async (event: Event) => {
     recaptchaRef.value?.reset();
     captchaToken.value = "";
   } finally {
-    isSubmitting.value = false;
+    // Debounce: re-enable after delay
+    submitTimeout.value = setTimeout(() => {
+      isSubmitting.value = false;
+      submitTimeout.value = null;
+    }, DEBOUNCE_MS);
   }
 };
 </script>

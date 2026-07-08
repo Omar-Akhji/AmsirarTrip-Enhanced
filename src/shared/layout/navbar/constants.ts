@@ -2,7 +2,8 @@ type NavLink = { to: string; labelKey: string };
 
 type SocialLink = { href: string; icon: string; label: string; accent: string };
 
-export type Language = { code: string; name: string; shortName: string };
+export type { Language } from "@/i18n/locales";
+export { LANGUAGES } from "@/i18n/locales";
 
 export const NAV_LINKS: NavLink[] = [
   { to: "/", labelKey: "nav.home" },
@@ -25,11 +26,4 @@ export const SOCIAL_LINKS: SocialLink[] = [
     label: "Email",
     accent: "bg-gmail border-gmail text-white",
   },
-];
-
-export const LANGUAGES: Language[] = [
-  { code: "en", name: "English", shortName: "EN" },
-  { code: "fr", name: "Français", shortName: "FR" },
-  { code: "de", name: "Deutsch", shortName: "DE" },
-  { code: "es", name: "Español", shortName: "ES" },
 ];

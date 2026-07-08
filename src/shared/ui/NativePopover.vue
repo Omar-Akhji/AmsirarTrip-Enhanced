@@ -21,12 +21,13 @@ const generatedId = useId().replaceAll(":", "");
 const popoverId = props.id || generatedId;
 
 const popoverRef = ref<HTMLDialogElement | null>(null);
-const triggerRef = ref<HTMLButtonElement | null>(null);
 
 const positionPopover = () => {
   const popover = popoverRef.value;
-  const triggerElement = triggerRef.value;
-  if (!popover || !triggerElement || !props.isOpen) return;
+  if (!popover || !props.isOpen) return;
+
+  const triggerElement = popover.previousElementSibling as HTMLElement | null;
+  if (!triggerElement) return;
 
   const triggerRect = triggerElement.getBoundingClientRect();
   const viewportWidth = window.innerWidth;
@@ -54,42 +55,7 @@ const positionPopover = () => {
   });
 };
 
-watch(
-  () => props.isOpen,
-  async (newOpen) => {
-    await nextTick();
-    const popover = popoverRef.value;
-    if (!popover) return;
-
-    if (newOpen) {
-      try {
-        if (!popover.matches(":popover-open")) {
-          popover.showPopover();
-          positionPopover();
-        }
-      } catch (error) {
-        console.warn("Popover error:", error);
-      }
-    } else {
-      try {
-        if (popover.matches(":popover-open")) {
-          popover.hidePopover();
-        }
-      } catch {}
-    }
-  },
-);
-
-// Toggle listener
-const handleToggle = (event: Event) => {
-  const toggleEvent = event as ToggleEvent;
-  const isNewState = toggleEvent.newState === "open";
-  if (isNewState !== props.isOpen) {
-    emit("update:isOpen", isNewState);
-  }
-};
-
-// Keyboard listener for focus trap
+// Focus trap
 const handleKeyDown = (event: KeyboardEvent) => {
   if (!props.isOpen || event.key !== "Tab") return;
 
@@ -117,23 +83,29 @@ const handleKeyDown = (event: KeyboardEvent) => {
   }
 };
 
-const setupFocus = () => {
-  const popover = popoverRef.value;
-  if (!popover) return;
-
-  const focusableSelector =
-    'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
-  const focusableElements = popover.querySelectorAll<HTMLElement>(focusableSelector);
-  const firstFocusable = focusableElements[0];
-  firstFocusable?.focus();
+// Sync browser popover state → parent
+const handleToggle = async (event: Event) => {
+  const toggleEvent = event as ToggleEvent;
+  const isOpennow = toggleEvent.newState === "open";
+  emit("update:isOpen", isOpennow);
+  await nextTick();
+  if (isOpennow) {
+    positionPopover();
+  }
 };
 
+// Focus + resize/scroll listeners
 watch(
   () => props.isOpen,
   (newOpen) => {
     if (newOpen) {
       setTimeout(() => {
-        setupFocus();
+        const popover = popoverRef.value;
+        if (!popover) return;
+        const focusableSelector =
+          'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
+        const first = popover.querySelector<HTMLElement>(focusableSelector);
+        first?.focus();
       }, 50);
       window.addEventListener("resize", positionPopover, { passive: true });
       window.addEventListener("scroll", positionPopover, { capture: true, passive: true });
@@ -145,19 +117,13 @@ watch(
 );
 
 onMounted(() => {
-  const popover = popoverRef.value;
-  if (popover) {
-    popover.addEventListener("toggle", handleToggle);
-    popover.addEventListener("keydown", handleKeyDown);
-  }
+  popoverRef.value?.addEventListener("toggle", handleToggle);
+  popoverRef.value?.addEventListener("keydown", handleKeyDown);
 });
 
 onUnmounted(() => {
-  const popover = popoverRef.value;
-  if (popover) {
-    popover.removeEventListener("toggle", handleToggle);
-    popover.removeEventListener("keydown", handleKeyDown);
-  }
+  popoverRef.value?.removeEventListener("toggle", handleToggle);
+  popoverRef.value?.removeEventListener("keydown", handleKeyDown);
   window.removeEventListener("resize", positionPopover);
   window.removeEventListener("scroll", positionPopover, { capture: true });
 });
@@ -168,12 +134,12 @@ const labelledBy = computed(() => (props.ariaLabel ? undefined : popoverId));
 <template>
   <div class="relative inline-block inline-full">
     <button
-      ref="triggerRef"
       type="button"
+      command="toggle-popover"
+      :commandfor="popoverId"
       class="cursor-pointer border-none bg-transparent p-0 inline-full"
       :aria-expanded="isOpen"
       :aria-controls="popoverId"
-      @click="emit('update:isOpen', !isOpen)"
     >
       <slot name="trigger" />
     </button>

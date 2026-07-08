@@ -1,5 +1,6 @@
 ---
 import { useTranslations } from "@/i18n/utils";
+import { PHONE_DISPLAY, PHONE_LINK } from "@/lib/constants/contact";
 import { Mail, MapPin, Phone, Smartphone } from "@lucide/astro";
 
 const locale = Astro.currentLocale || "en";
@@ -59,9 +60,9 @@ const t = useTranslations(locale);
         </div>
         <a
           class="text-sm text-zinc-400 transition-colors duration-300 pointer-fine:hover:text-orange"
-          href="tel:+212661173144"
+          href={PHONE_LINK}
         >
-          +212 (0) 6 61 17 31 44
+          {PHONE_DISPLAY}
         </a>
       </li>
 

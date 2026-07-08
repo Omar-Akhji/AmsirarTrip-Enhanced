@@ -1,6 +1,7 @@
 ---
 import bgImage from "@/assets/images/Header/header-1.webp";
 import { useTranslations } from "@/i18n/utils";
+import { WHATSAPP_LINK } from "@/lib/constants/contact";
 import PageHeader from "@/shared/layout/PageHeader.astro";
 import { ArrowRight, Mail, MapPin, Phone } from "@lucide/astro";
 
@@ -55,7 +56,7 @@ const contactMethods = [
   </a>
   <a
     class="inline-flex items-center gap-2 rounded-full bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur transition text-shadow-xs pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:bg-white/20"
-    href="https://wa.me/212661173144"
+    href={WHATSAPP_LINK}
     rel="noopener noreferrer"
     target="_blank"
   >
@@ -71,7 +72,7 @@ const contactMethods = [
     <span>WhatsApp</span>
   </a>
 </PageHeader>
-<main class="text-zinc-900">
+<div class="text-zinc-900">
   <section
     aria-label="Contact Methods"
     class="relative isolate py-16"
@@ -178,4 +179,4 @@ const contactMethods = [
       </div>
     </div>
   </section>
-</main>
+</div>

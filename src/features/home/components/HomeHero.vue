@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, watch } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import { Link } from "@/i18n/routing";
 import { useMediaQuery, useTranslation } from "@/lib/hooks";
 
@@ -11,160 +11,79 @@ const props = defineProps<Props>();
 
 const { t } = useTranslation();
 const currentImageIndex = ref(0);
-const isMobileOrTablet = useMediaQuery("(max-width: 1023px)"); // ref<boolean>
+const prefersReducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
+const heroTitle = t("home.heroTitle");
+const heroAlt1 = t("home.heroAlt1");
+const heroAlt2 = t("home.heroAlt2");
 
-const typed = ref("");
-const textState = ref({ index: 0, isFading: false });
+const phrases = [heroTitle || "", heroAlt1 || "", heroAlt2 || ""];
+const currentPhraseIndex = ref(0);
 
-const heroTexts = [
-  t("home.heroTitle"),
-  t("home.heroAlt1", "Adventure Awaits Beyond the Dunes"),
-  t("home.heroAlt2", "Pack your bags — Morocco calls"),
-];
+// --- Typing Animation ---
+const displayedText = ref(prefersReducedMotion.value ? phrases[0] || "" : "");
+let typingTimeout: ReturnType<typeof setTimeout>;
 
-// Carousel image rotation
+function startTypingAnimation() {
+  if (prefersReducedMotion.value) return;
+
+  let isDeleting = false;
+  let textIndex = 0;
+
+  function tick() {
+    const fullText = phrases[currentPhraseIndex.value] || "";
+
+    if (!isDeleting) {
+      // Typing
+      displayedText.value = fullText.slice(0, textIndex + 1);
+      textIndex++;
+
+      if (textIndex === fullText.length) {
+        // Pause for 2.5 seconds at the end of typing
+        isDeleting = true;
+        typingTimeout = setTimeout(tick, 2500);
+      } else {
+        // Smooth typing speed (around 90ms - 130ms per char)
+        typingTimeout = setTimeout(tick, 90 + Math.random() * 40);
+      }
+    } else {
+      // Erasing
+      displayedText.value = fullText.slice(0, textIndex - 1);
+      textIndex--;
+
+      if (textIndex === 0) {
+        isDeleting = false;
+        // Move to the next phrase in the list
+        currentPhraseIndex.value = (currentPhraseIndex.value + 1) % phrases.length;
+        // Pause for 1.0 second when fully erased before typing next phrase
+        typingTimeout = setTimeout(tick, 1000);
+      } else {
+        // Smooth deleting speed (faster than typing, around 45ms per char)
+        typingTimeout = setTimeout(tick, 45);
+      }
+    }
+  }
+
+  tick();
+}
+
+// --- Carousel ---
 let carouselInterval: ReturnType<typeof setInterval>;
+
 onMounted(() => {
+  if (prefersReducedMotion.value) {
+    currentImageIndex.value = 0;
+    return;
+  }
   carouselInterval = setInterval(() => {
     currentImageIndex.value = (currentImageIndex.value + 1) % props.images.length;
   }, 5000);
+
+  startTypingAnimation();
 });
 
 onUnmounted(() => {
   clearInterval(carouselInterval);
-});
-
-// Animations
-const headerRef = ref<HTMLElement | null>(null);
-
-let textIndex = 0;
-let charIndex = 0;
-let isDeleting = false;
-let lastUpdate = 0;
-let pauseUntil = 0;
-let rafId: number;
-let isVisible = false;
-let observer: IntersectionObserver | null = null;
-
-const TYPING_SPEED = 80;
-const DELETING_SPEED = 40;
-const PAUSE_AFTER_TYPING = 2000;
-const PAUSE_AFTER_DELETING = 300;
-
-function animate(timestamp: number) {
-  if (!isVisible) return;
-
-  if (pauseUntil > 0) {
-    if (timestamp < pauseUntil) {
-      rafId = requestAnimationFrame(animate);
-      return;
-    }
-    pauseUntil = 0;
-  }
-
-  const speed = isDeleting ? DELETING_SPEED : TYPING_SPEED;
-
-  if (timestamp - lastUpdate >= speed) {
-    lastUpdate = timestamp;
-    const current = heroTexts[textIndex] || "";
-
-    if (isDeleting) {
-      charIndex = Math.max(0, charIndex - 1);
-      typed.value = current.slice(0, charIndex);
-
-      if (charIndex <= 0) {
-        isDeleting = false;
-        textIndex = (textIndex + 1) % heroTexts.length;
-        pauseUntil = timestamp + PAUSE_AFTER_DELETING;
-      }
-    } else {
-      charIndex = Math.min(current.length, charIndex + 1);
-      typed.value = current.slice(0, charIndex);
-
-      if (charIndex >= current.length) {
-        isDeleting = true;
-        pauseUntil = timestamp + PAUSE_AFTER_TYPING;
-      }
-    }
-  }
-
-  rafId = requestAnimationFrame(animate);
-}
-
-// Fade effect for mobile
-let fadeInterval: ReturnType<typeof setInterval>;
-let fadeTimeout: ReturnType<typeof setTimeout>;
-
-const startMobileAnimation = () => {
-  fadeInterval = setInterval(() => {
-    textState.value.isFading = true;
-    fadeTimeout = setTimeout(() => {
-      textState.value.index = (textState.value.index + 1) % heroTexts.length;
-      textState.value.isFading = false;
-    }, 500);
-  }, 4000);
-};
-
-const stopMobileAnimation = () => {
-  clearInterval(fadeInterval);
-  clearTimeout(fadeTimeout);
-};
-
-const startDesktopAnimation = () => {
-  if (!headerRef.value) return;
-
-  observer = new IntersectionObserver(
-    ([entry]) => {
-      isVisible = entry?.isIntersecting ?? false;
-      if (isVisible) {
-        lastUpdate = performance.now();
-        rafId = requestAnimationFrame(animate);
-      } else {
-        cancelAnimationFrame(rafId);
-      }
-    },
-    { threshold: 0 },
-  );
-
-  observer.observe(headerRef.value);
-};
-
-const stopDesktopAnimation = () => {
-  cancelAnimationFrame(rafId);
-  if (observer) {
-    observer.disconnect();
-    observer = null;
-  }
-};
-
-watch(
-  isMobileOrTablet,
-  (mobile) => {
-    if (typeof window === "undefined") return;
-    // Clean up current animations
-    stopMobileAnimation();
-    stopDesktopAnimation();
-
-    if (mobile) {
-      startMobileAnimation();
-    } else {
-      startDesktopAnimation();
-    }
-  },
-  { immediate: true },
-);
-
-onMounted(() => {
-  if (isMobileOrTablet.value) {
-    startMobileAnimation();
-  } else {
-    startDesktopAnimation();
-  }
-});
-
-onUnmounted(() => {
-  stopMobileAnimation();
-  stopDesktopAnimation();
+  clearTimeout(typingTimeout);
 });
 </script>
 
@@ -186,6 +105,9 @@ onUnmounted(() => {
         <img
           :src="img"
           alt=""
+          :loading="index === 0 ? 'eager' : 'lazy'"
+          :fetchpriority="index === 0 ? 'high' : 'low'"
+          decoding="async"
           class="size-full object-cover"
         />
       </div>
@@ -208,22 +130,23 @@ onUnmounted(() => {
           id="hero-heading"
           class="lg:text-shadow-xl text-3xl leading-tight font-semibold text-shadow-black/60 text-shadow-lg sm:text-4xl lg:text-5xl"
         >
-          <span
-            v-if="isMobileOrTablet"
-            :class="[
-              'inline-block transition-opacity duration-500',
-              textState.isFading ? 'opacity-0' : 'opacity-100',
-            ]"
-          >
-            {{ heroTexts[textState.index] }}
+          <span class="inline-flex items-center">
+            <span class="relative inline-block align-bottom whitespace-nowrap pe-2 text-left">
+              <!-- Invisible placeholder to reserve layout width and prevent layout shifts -->
+              <span class="invisible select-none pointer-events-none" aria-hidden="true">
+                {{ phrases[currentPhraseIndex] }}
+              </span>
+              <!-- Absolutely positioned container for the actual typed text and cursor -->
+              <span class="absolute inset-y-0 left-0 flex items-center">
+                <span class="text-white">{{ displayedText }}</span>
+                <span
+                  v-if="!prefersReducedMotion"
+                  aria-hidden="true"
+                  class="will-change-opacity ms-1 inline-block h-[1em] w-0.75 animate-cursor-blink bg-orange-400/90"
+                />
+              </span>
+            </span>
           </span>
-          <template v-else>
-            <span>{{ typed }}</span>
-            <span
-              aria-hidden
-              class="ms-2 inline-block animate-pulse bg-white/90 block-6 inline-px"
-            />
-          </template>
         </h1>
         <p class="font-fancy text-lg text-zinc-200 lg:text-xl">{{ t("home.heroSubtitle") }}</p>
         <div class="flex flex-wrap items-center justify-center gap-4 pbs-2">

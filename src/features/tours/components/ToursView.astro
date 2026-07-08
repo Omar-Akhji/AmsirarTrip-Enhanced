@@ -5,9 +5,10 @@ import PageHeader from "@/shared/layout/PageHeader.astro";
 import StatHighlights from "@/shared/ui/StatHighlights.astro";
 import TripCard from "@/shared/ui/TripCard.astro";
 import { ArrowRight } from "@lucide/astro";
-import { TOURS_DATA } from "../data/toursData";
+import { getToursData } from "../data/toursData";
 
 const locale = Astro.currentLocale || "en";
+const tours = await getToursData();
 const t = useTranslations(locale);
 
 const tourStats = [
@@ -124,7 +125,7 @@ const tourStats = [
 
       <div class="grid grid-cols-1 gap-8 min-[901px]:grid-cols-2 min-[1150px]:grid-cols-3">
         {
-          TOURS_DATA.map((tour, index) => (
+          tours.map((tour, index) => (
             <div
               class="flex size-full"
               data-animate="fade-up"

@@ -93,6 +93,7 @@ const tourTitleClean = isEnglish ? tour.seo.title : t(`${tour.tourKey}.title`);
     <BookingForm
       client:visible
       fullWidth
+      tourDuration={tour.durationDays}
       tourId={tour.bookingId.toString()}
       tourTitle={tourTitleClean}
     />

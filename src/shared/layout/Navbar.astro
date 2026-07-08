@@ -5,6 +5,7 @@ import { LANGUAGES, NAV_LINKS } from "./navbar/constants";
 import LanguageSelector from "./navbar/LanguageSelector.vue";
 import MobileMenu from "./navbar/MobileMenu.vue";
 import SocialLinks from "./navbar/SocialLinks.astro";
+import { PHONE_LINK } from "@/lib/constants/contact";
 
 const locale = Astro.currentLocale || "en";
 const t = useTranslations(locale);
@@ -24,6 +25,14 @@ const isActive = (to: string) =>
   normalizedPath === to || (to !== "/" && normalizedPath.startsWith(to + "/"));
 ---
 
+<!-- Skip to main content link for keyboard accessibility -->
+<a
+  class="sr-only focus:not-sr-only focus:fixed focus:inset-2 focus:z-9999 focus:rounded-lg focus:bg-orange focus:px-4 focus:py-2 focus:text-white focus:font-semibold focus:shadow-lg"
+  href="#main-content"
+>
+  Skip to main content
+</a>
+
 <header>
   <nav
     aria-label={t("nav.mainAria", "Main Navigation")}
@@ -36,7 +45,7 @@ const isActive = (to: string) =>
       <a
         aria-label={`${t("helplineTitle")} ${t("helplineNumber")}`}
         class="absolute inset-s-4 flex gap-2.5 rounded-md text-white transition focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-white pointer-fine:hover:opacity-90"
-        href="tel:+212661173144"
+        href={PHONE_LINK}
       >
         <div
           class="flex size-11 items-center justify-center rounded-full border-2 border-white/60 bg-white/10 text-white transition-all duration-150 pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:shadow-[0_8px_18px_rgba(0,0,0,0.28)]"

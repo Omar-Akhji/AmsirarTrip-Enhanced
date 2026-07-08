@@ -1,0 +1,40 @@
+---
+/**
+ * Wrapper component for Vue components that need client-side hydration. Provides loading skeleton
+ * and graceful error fallback.
+ *
+ * Usage: <Hydrate client:load> <YourVueComponent slot="fallback" /> </Hydrate>
+ */
+import Loading from "@/shared/ui/Loading.vue";
+import HydrationBoundary from "./HydrationBoundary.vue";
+
+interface Props {
+  /** Height of the loading skeleton (CSS value) */
+  skeletonHeight?: string;
+  /** Error message to show on failure */
+  errorMessage?: string;
+  /** Component name for logging */
+  componentName?: string;
+}
+
+const { skeletonHeight = "200px", componentName = "Component" } = Astro.props;
+---
+
+<HydrationBoundary
+  client:load
+  error-prefix={`${componentName} Error`}
+>
+  <!-- Loading skeleton -->
+  <Fragment slot="loading">
+    <div
+      aria-label="Loading..."
+      class="flex items-center justify-center rounded-lg bg-light-grey-alt p-8 animate-pulse"
+      style={`min-height: ${skeletonHeight}`}
+    >
+      <Loading size="md" />
+    </div>
+  </Fragment>
+
+  <!-- Main slot for the component -->
+  <slot />
+</HydrationBoundary>

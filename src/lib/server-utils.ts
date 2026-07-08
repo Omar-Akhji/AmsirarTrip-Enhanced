@@ -1,82 +1,24 @@
-import nodemailer from "nodemailer";
-import type SMTPPool from "nodemailer/lib/smtp-pool";
-import { env } from "@/lib/env";
+/**
+ * Server utilities — re-exports from services + HTML escape + security logging. Core
+ * implementations live in src/services/ to keep concerns separated.
+ */
 
-export async function verifyRecaptcha(token: string, expectedHostname?: string): Promise<boolean> {
-  try {
-    if (!token || typeof token !== "string" || !env.RECAPTCHA_SECRET_KEY) {
-      return false;
-    }
+// Re-export for backward compatibility
+export { getMailer } from "@/services/email";
+export { verifyRecaptcha } from "@/services/recaptcha";
+export { logger, logSecurityEvent, logActionError, logAppError } from "@/services/logger";
 
-    const body = new URLSearchParams({ secret: env.RECAPTCHA_SECRET_KEY, response: token });
+import type { Transporter } from "nodemailer";
+import type SMTPTransport from "nodemailer/lib/smtp-transport";
+import { getMailer } from "@/services/email";
+import { logSecurityEvent } from "@/services/logger";
 
-    const response = await fetch("https://www.google.com/recaptcha/api/siteverify", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: body.toString(),
-      cache: "no-store",
-    });
-
-    if (!response.ok) {
-      console.error("CAPTCHA API returned non-OK status:", response.status);
-      return false;
-    }
-
-    const data = (await response.json()) as {
-      success?: boolean;
-      hostname?: string;
-      challenge_ts?: string;
-      "error-codes"?: string[];
-    };
-
-    if (data.success !== true) {
-      if (data["error-codes"]?.length) {
-        console.warn("CAPTCHA verification failed:", data["error-codes"]);
-      }
-      return false;
-    }
-
-    if (data.hostname && expectedHostname) {
-      const allowedHostnames = new Set([
-        expectedHostname,
-        `www.${expectedHostname}`,
-        "localhost",
-        "127.0.0.1",
-      ]);
-
-      if (!allowedHostnames.has(data.hostname)) {
-        console.warn(
-          `CAPTCHA hostname mismatch: expected ${expectedHostname}, got ${data.hostname}`,
-        );
-        return false;
-      }
-    }
-
-    const challengeTs = data.challenge_ts ? Date.parse(data.challenge_ts) : NaN;
-    if (Number.isNaN(challengeTs) || Date.now() - challengeTs > 5 * 60 * 1000) {
-      console.warn("CAPTCHA token is stale or missing challenge timestamp");
-      return false;
-    }
-
-    return true;
-  } catch (error) {
-    console.error("CAPTCHA verification error:", error);
-    return false;
-  }
+/** @deprecated Use `getMailer()` from `@/services/email` directly. */
+export function createMailer(): Transporter<SMTPTransport.SentMessageInfo> {
+  return getMailer();
 }
 
-let _transporter: nodemailer.Transporter<SMTPPool.SentMessageInfo> | null = null;
-
-export function createMailer(): nodemailer.Transporter<SMTPPool.SentMessageInfo> {
-  if (_transporter) return _transporter;
-  _transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: { user: env.GMAIL_USER, pass: env.GMAIL_PASS },
-    pool: true,
-    maxConnections: 3,
-  });
-  return _transporter;
-}
+// ── HTML escape ───────────────────────────────────────────────────────────────
 
 export function escapeHtml(string_: string = ""): string {
   return string_
@@ -87,7 +29,26 @@ export function escapeHtml(string_: string = ""): string {
     .replaceAll("'", "&#039;");
 }
 
+// ── Security logging ──────────────────────────────────────────────────────────
+
+/**
+ * Log suspicious activity to file and console.
+ *
+ * @deprecated Use `logSecurityEvent` from `@/services/logger` directly.
+ */
 export function logSuspiciousActivity(ip: string, type: string, details: string) {
-  const timestamp = new Date().toISOString();
-  console.warn(`[SECURITY] ${timestamp} IP: ${ip} Type: ${type} Details: ${details}`);
+  // Map old type strings to new enum values
+  const eventTypeMap: Record<
+    string,
+    "RATE_LIMIT" | "BLOCKED_IP" | "HONEYPOT" | "CAPTCHA_FAILED" | "SUSPICIOUS"
+  > = {
+    HONEYPOT_TRIGGERED: "HONEYPOT",
+    BLOCKED_ACTION: "RATE_LIMIT",
+    BLOCKED: "BLOCKED_IP",
+    CAPTCHA_FAILED: "CAPTCHA_FAILED",
+  };
+
+  const mappedType = eventTypeMap[type] || "SUSPICIOUS";
+
+  logSecurityEvent(mappedType, ip, details, { originalType: type, source: "server-utils" });
 }

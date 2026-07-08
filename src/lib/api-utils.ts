@@ -49,18 +49,18 @@ export function checkRateLimit(
   return { allowed: true, remaining: maxRequests - record.count };
 }
 
-if (globalThis === undefined) {
-  setInterval(() => {
-    const now = Date.now();
-    for (const [key, value] of rateLimitMap) {
-      if (now > value.resetAt) {
-        rateLimitMap.delete(key);
-      }
+// Clean up stale rate limit entries every minute to prevent memory leaks
+const CLEANUP_INTERVAL_MS = 60_000;
+setInterval(() => {
+  const now = Date.now();
+  for (const [key, value] of rateLimitMap) {
+    if (now > value.resetAt) {
+      rateLimitMap.delete(key);
     }
-    for (const [key, expiry] of blockedIPs) {
-      if (now > expiry) {
-        blockedIPs.delete(key);
-      }
+  }
+  for (const [key, expiry] of blockedIPs) {
+    if (now > expiry) {
+      blockedIPs.delete(key);
     }
-  }, 60_000);
-}
+  }
+}, CLEANUP_INTERVAL_MS);

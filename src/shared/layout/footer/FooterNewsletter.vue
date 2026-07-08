@@ -1,12 +1,9 @@
 <script setup lang="ts">
-import { ref, defineAsyncComponent } from "vue";
 import { Mail } from "lucide-vue-next";
 import { useTranslation } from "@/lib/hooks/useTranslation";
+import NewsletterModal from "./NewsletterModal.vue";
 
 const { t } = useTranslation();
-const isModalOpen = ref(false);
-
-const NewsletterModal = defineAsyncComponent(() => import("./NewsletterModal.vue"));
 </script>
 
 <template>
@@ -27,9 +24,10 @@ const NewsletterModal = defineAsyncComponent(() => import("./NewsletterModal.vue
       </p>
       <button
         type="button"
+        command="show-modal"
+        commandfor="newsletter-dialog"
         :aria-label="t('footer.newsletterButtonAria')"
         class="flex items-center justify-center gap-2 rounded-full bg-linear-to-r from-orange to-amber-500 text-sm font-semibold text-white shadow-md transition-all duration-300 block-10 inline-full active:scale-[0.98] pointer-fine:hover:scale-[1.02] pointer-fine:hover:shadow-lg pointer-fine:hover:shadow-orange-500/30"
-        @click="isModalOpen = true"
       >
         <Mail class="size-4" />
         {{ t("footer.newsletterSubscribe") }}
@@ -125,11 +123,7 @@ const NewsletterModal = defineAsyncComponent(() => import("./NewsletterModal.vue
       </nav>
     </div>
 
-    <!-- Lazy loaded modal -->
-    <NewsletterModal
-      v-if="isModalOpen"
-      :is-open="isModalOpen"
-      @close="isModalOpen = false"
-    />
+    <!-- Newsletter dialog (always in DOM, shown via command="show-modal") -->
+    <NewsletterModal />
   </div>
 </template>

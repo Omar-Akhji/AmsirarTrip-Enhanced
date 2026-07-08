@@ -1,121 +1,42 @@
 import type { Tour } from "../types";
-import tour1 from "@/assets/images/Tours/Tour1.webp";
-import tour2 from "@/assets/images/Tours/Tour2.webp";
-import tour3 from "@/assets/images/Tours/Tour3.webp";
-import tour4 from "@/assets/images/Tours/Tour4.webp";
-import tour5 from "@/assets/images/Tours/Tour5.webp";
-import tour6 from "@/assets/images/Tours/Tour6.webp";
-import tour7 from "@/assets/images/Tours/Tour7.webp";
-import tour8 from "@/assets/images/Tours/Tour8.webp";
-import tour9 from "@/assets/images/Tours/Tour9.webp";
+import { getCollection } from "astro:content";
 
-export const TOURS_DATA: Tour[] = [
-  {
-    id: 1,
-    image: tour1,
-    title: "tour1.title",
-    author: "tours.cities.marrakech",
-    category: "tours",
-    description: "tours.tour1.description",
-    duration: 3,
-    start: "tours.cities.marrakech",
-    route: "/tours/merzouga-desert-adventure-3-days",
-    end: "tours.cities.marrakech",
-  },
-  {
-    id: 2,
-    image: tour2,
-    title: "tour2.title",
-    author: "tours.cities.casablanca",
-    category: "tours",
-    description: "tours.tour2.description",
-    duration: 6,
-    start: "tours.cities.casablanca",
-    route: "/tours/coast-and-cities-explorer-6-days",
-    end: "tours.cities.marrakech",
-  },
-  {
-    id: 3,
-    image: tour3,
-    title: "tour3.title",
-    author: "tours.cities.fes",
-    category: "tours",
-    description: "tours.tour3.description",
-    duration: 3,
-    start: "tours.cities.fes",
-    route: "/tours/caravan-and-kasbah-experience-3-days",
-    end: "tours.cities.marrakech",
-  },
-  {
-    id: 4,
-    image: tour4,
-    title: "tour4.title",
-    author: "tours.cities.casablanca",
-    category: "tours",
-    description: "tours.tour4.description",
-    duration: 5,
-    start: "tours.cities.casablanca",
-    route: "/tours/imperial-cities-and-coastline-5-days",
-    end: "tours.cities.fes",
-  },
-  {
-    id: 5,
-    image: tour5,
-    title: "tour5.title",
-    author: "tours.cities.marrakech",
-    category: "tours",
-    description: "tours.tour5.description",
-    duration: 10,
-    start: "tours.cities.marrakech",
-    route: "/tours/grand-moroccan-circuit-10-days",
-    end: "tours.cities.casablanca",
-  },
-  {
-    id: 6,
-    image: tour6,
-    title: "tour6.title",
-    author: "tours.cities.marrakech",
-    category: "tours",
-    description: "tours.tour6.description",
-    duration: 4,
-    start: "tours.cities.marrakech",
-    route: "/tours/atlas-and-desert-escape-4-days",
-    end: "tours.cities.marrakech",
-  },
-  {
-    id: 7,
-    image: tour7,
-    title: "tour7.title",
-    author: "tours.cities.agadir",
-    category: "tours",
-    description: "tours.tour7.description",
-    duration: 4,
-    start: "tours.cities.agadir",
-    route: "/tours/coastal-and-desert-odyssey-4-days",
-    end: "tours.cities.marrakech",
-  },
-  {
-    id: 8,
-    image: tour8,
-    title: "tour8.title",
-    author: "tours.cities.marrakech",
-    category: "tours",
-    description: "tours.tour8.description",
-    duration: 3,
-    start: "tours.cities.marrakech",
-    route: "/tours/chegaga-wilderness-expedition-3-days",
-    end: "tours.cities.marrakech",
-  },
-  {
-    id: 9,
-    image: tour9,
-    title: "tour9.title",
-    author: "tours.cities.tangier",
-    category: "tours",
-    description: "tours.tour9.description",
-    duration: 7,
-    start: "tours.cities.tangier",
-    route: "/tours/northern-heritage-trail-7-days",
-    end: "tours.cities.marrakech",
-  },
-];
+/**
+ * Derives UI-ready tour data from Astro Content Collections. Replaces the old hardcoded TOURS_DATA
+ * array — single source of truth.
+ *
+ * Usage in .astro files (top-level await is fine): const tours = await getToursData();
+ *
+ * Usage in .vue files (use inside async setup() or fetch on mount): const tours = await
+ * getToursData();
+ */
+export async function getToursData(): Promise<Tour[]> {
+  const entries = await getCollection("tours");
+
+  return entries
+    .map((entry) => {
+      const { bookingId, tourKey, image, durationDays, startLocation, endLocation } = entry.data;
+
+      // i18n keys matching the locale JSON structure: tours.tour1.title, tours.tour1.description
+      const titleKey = `${tourKey}.title`;
+      const descriptionKey = `${tourKey}.description`;
+      // Author = start city shown in card
+      const authorKey = `tours.cities.${startLocation.toLowerCase()}`;
+      const startKey = `tours.cities.${startLocation.toLowerCase()}`;
+      const endKey = `tours.cities.${endLocation.toLowerCase()}`;
+
+      return {
+        id: bookingId,
+        image,
+        title: titleKey,
+        author: authorKey,
+        category: "tours",
+        description: descriptionKey,
+        duration: durationDays,
+        start: startKey,
+        route: `/tours/${entry.id}`,
+        end: endKey,
+      } satisfies Tour;
+    })
+    .toSorted((a, b) => a.id - b.id);
+}

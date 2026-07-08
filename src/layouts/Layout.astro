@@ -1,4 +1,5 @@
 ---
+/* eslint-disable astro/no-unsafe-inline-scripts */
 import "../styles/global.css";
 import { ClientRouter } from "astro:transitions";
 import { Image } from "astro:assets";
@@ -6,11 +7,16 @@ import { generateOrganizationJsonLd, generateWebsiteJsonLd } from "../lib/struct
 import Footer from "../shared/layout/Footer.astro";
 import Navbar from "../shared/layout/Navbar.astro";
 import JsonLd from "../shared/ui/JsonLd.astro";
+import { WHATSAPP_LINK } from "../lib/constants/contact";
+import { LOCALES, DEFAULT_LOCALE } from "../i18n/locales";
 
 const {
   title = "Amsirar Trip — Morocco Tours & Desert Adventures",
   description = "Explore Morocco with local experts. Authentic Sahara desert tours, imperial city excursions, Atlas Mountains treks, and private guided experiences. 20+ years serving travelers. Book your dream Morocco adventure today.",
 } = Astro.props;
+
+// Get the per-request nonce generated in middleware for CSP
+const cspNonce = Astro.locals.cspNonce;
 
 const locale = Astro.currentLocale || "en";
 const site = Astro.site!;
@@ -23,8 +29,9 @@ const basePath = "/" + baseSegments.join("/");
 const canonicalURL = new URL(basePath, site).href;
 const defaultOgImage = new URL("/images/Header/header-1.webp", site).href;
 
-const LOCALES = ["en", "fr", "de", "es"] as const;
-const DEFAULT_LOCALE = "en";
+const ClientRouterWithNonce = ClientRouter as unknown as (_properties: {
+  nonce: string;
+}) => unknown;
 ---
 
 <!doctype html>
@@ -38,7 +45,17 @@ const DEFAULT_LOCALE = "en";
     <meta charset="UTF-8" />
     <script src="../scripts/no-js.ts"></script>
 
-    <ClientRouter />
+    <!--
+      ClientRouter (View Transitions) generates inline scripts that are not
+      easily nonce-able in Astro 7. 'strict-dynamic' in CSP allows these
+      while still blocking third-party injected scripts.
+    -->
+    <ClientRouterWithNonce nonce={cspNonce} />
+
+    <!-- Inject per-request CSP nonce for our own inline scripts -->
+    <script define:vars={{ cspNonce }} is:inline>
+      window.__CSP_NONCE__ = cspNonce;
+    </script>
     <meta
       content="width=device-width, initial-scale=1.0"
       name="viewport"
@@ -82,6 +99,14 @@ const DEFAULT_LOCALE = "en";
       content={locale}
       property="og:locale"
     />
+    {
+      LOCALES.filter((l) => l !== DEFAULT_LOCALE).map((l) => (
+        <meta
+          content={l}
+          property="og:locale:alternate"
+        />
+      ))
+    }
 
     <meta
       content="summary_large_image"
@@ -169,7 +194,7 @@ const DEFAULT_LOCALE = "en";
   </head>
   <body>
     <div
-      class="fixed inset-0 z-999999 flex items-center justify-center bg-zinc-100 opacity-100 transition-[opacity,visibility] duration-450 ease-out data-[state=hidden]:pointer-events-none data-[state=hidden]:invisible data-[state=hidden]:opacity-0"
+      class="fixed inset-0 z-999999 flex items-center justify-center bg-zinc-100 opacity-100 transition-opacity duration-450 ease-out data-[state=hidden]:pointer-events-none data-[state=hidden]:opacity-0"
       data-state="visible"
       id="initial-loader"
       transition:persist
@@ -204,13 +229,15 @@ const DEFAULT_LOCALE = "en";
     <script src="../scripts/scroll-animate.ts"></script>
 
     <Navbar />
-    <slot />
+    <main id="main-content">
+      <slot />
+    </main>
     <Footer />
 
     <a
       aria-label="Contact us on WhatsApp"
       class="fixed inset-e-6 bottom-6 z-50 flex size-16 items-center justify-center rounded-full border-[3px] border-whatsapp bg-white text-whatsapp shadow-lg transition-all duration-300 pointer-fine:hover:scale-110 pointer-fine:hover:shadow-xl pointer-fine:hover:brightness-110"
-      href="https://wa.me/212661173144"
+      href={WHATSAPP_LINK}
       rel="noopener noreferrer"
       target="_blank"
     >

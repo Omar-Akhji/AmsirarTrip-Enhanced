@@ -1,12 +1,17 @@
 ---
 interface Props {
   data: Record<string, unknown>;
-  id: string;
+  id?: string;
 }
 
 const { data, id } = Astro.props;
 const json = JSON.stringify(data);
-const html = `<script type="application/ld+json" id="${id}">${json}</script>`;
+// Escape id to prevent XSS via unescaped template literal injection
+const safeId = id?.replaceAll(/[^a-zA-Z0-9_-]/g, "");
 ---
 
-<Fragment set:html={html} />
+<script
+  id={safeId}
+  set:html={json}
+  type="application/ld+json"
+/>

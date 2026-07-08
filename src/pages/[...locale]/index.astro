@@ -31,7 +31,7 @@ const heroImages = [optBg1.src, optBg2.src, optBg3.src];
     client:load
     images={heroImages}
   />
-  <main class="text-zinc-900">
+  <div class="text-zinc-900">
     <HomeStats />
     <FeaturedTours />
     <ServicesSection />
@@ -40,5 +40,5 @@ const heroImages = [optBg1.src, optBg2.src, optBg3.src];
       client:visible
       fallbackImage={heroImages[0] ?? ""}
     />
-  </main>
+  </div>
 </Layout>

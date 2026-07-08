@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted, watch } from "vue";
+import { ref, computed, onMounted, onUnmounted, watch, onErrorCaptured } from "vue";
 import { Menu, X } from "lucide-vue-next";
 import { Link, usePathname } from "@/i18n/routing";
 import { useTranslation } from "@/lib/hooks/useTranslation";
@@ -7,9 +7,21 @@ import { cn } from "@/lib/utils";
 import { NAV_LINKS, SOCIAL_LINKS } from "./constants";
 import LanguageSelector from "./LanguageSelector.vue";
 
+// Error boundary state
+const hasError = ref(false);
+const errorMessage = ref("");
+
+onErrorCaptured((err: Error) => {
+  hasError.value = true;
+  errorMessage.value = err?.message || "Unknown error";
+  console.error("[MobileMenu] Error:", err);
+  return false;
+});
+
 const { t } = useTranslation();
 const pathname = usePathname(); // reactive Ref<string>
 const asideOpen = ref(false);
+const isHydrated = ref(false);
 
 const getViewport = () => {
   if (
@@ -125,6 +137,7 @@ onMounted(() => {
   mqTablet.addEventListener("change", updateViewport);
   mqMobile.addEventListener("change", updateViewport);
   updateViewport();
+  isHydrated.value = true;
 });
 
 onUnmounted(() => {
@@ -137,103 +150,38 @@ onUnmounted(() => {
 
 <template>
   <div class="relative flex items-center gap-3 inline-full lg:hidden">
+    <!-- Loading skeleton -->
     <div
-      v-if="viewport === 'tablet'"
-      class="me-auto flex items-center gap-2"
+      v-if="!isHydrated"
+      class="flex items-center gap-2"
     >
-      <ul class="flex items-center gap-2">
-        <li
-          v-for="link in SOCIAL_LINKS"
-          :key="link.label"
-        >
-          <a
-            :href="link.href"
-            :class="[
-              'flex size-10 items-center justify-center rounded-full border-2 transition-all duration-150 pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:shadow-[0_8px_18px_rgba(0,0,0,0.28)]',
-              'group-not-data-scrolled:border-white/60 group-not-data-scrolled:bg-white/10 group-not-data-scrolled:text-white',
-              link.accent,
-            ]"
-            v-bind="
-              link.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {}
-            "
-            :aria-label="link.label"
-          >
-            <img
-              :src="link.icon"
-              alt=""
-              class="size-5 object-contain"
-            />
-          </a>
-        </li>
-      </ul>
-      <LanguageSelector
-        size="sm"
-        placement="left"
-      />
+      <div class="size-10 animate-pulse rounded-full bg-white/20" />
+      <div class="size-10 animate-pulse rounded-full bg-white/20" />
     </div>
 
-    <!-- Mobile menu brand Link -->
-    <Link
-      href="/"
-      :class="[
-        'text-[1.4rem] font-semibold tracking-tight text-white transition-colors duration-200 group-data-scrolled:text-dark-grey',
-        viewport === 'tablet' || viewport === 'mobile' ?
-          'absolute inset-s-1/2 z-10 -translate-x-1/2'
-        : '',
-      ]"
-      aria-label="Amsirar Trip Home"
-      @click="handleNavClick"
-    >
-      Amsirar
-      <span
-        class="ms-1 font-brand font-light text-white transition-colors duration-200 group-data-scrolled:text-orange"
-      >
-        Trip
-      </span>
-    </Link>
-
-    <LanguageSelector
-      v-if="viewport === 'mobile'"
-      size="sm"
-      class="me-auto"
-      placement="left"
-    />
-
-    <!-- Toggle button -->
-    <button
-      id="navbar-show-btn"
-      ref="buttonRef"
-      type="button"
-      :class="[
-        'ms-2 flex size-10 items-center justify-center rounded-md text-lg transition-all duration-150 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-orange',
-        'bg-black/35 text-white group-data-scrolled:bg-white group-data-scrolled:text-dark-grey',
-      ]"
-      :aria-expanded="asideOpen"
-      aria-controls="navbar-collapse"
-      @click="asideOpen = !asideOpen"
-    >
-      <X
-        v-if="asideOpen"
-        class="pointer-events-none size-5"
-      />
-      <Menu
-        v-else
-        class="pointer-events-none size-5"
-      />
-    </button>
-
-    <!-- Navigation panel -->
+    <!-- Error fallback -->
     <div
-      id="navbar-collapse"
-      ref="collapseRef"
-      :class="getCollapseClasses"
-      aria-label="Navigation menu"
+      v-else-if="hasError"
+      class="flex items-center gap-2"
+      role="alert"
+      :aria-label="`Menu error: ${errorMessage}`"
     >
-      <div
-        v-if="viewport === 'mobile'"
-        class="flex items-center justify-center gap-4 border-b border-white/20 px-4 py-4 group-data-scrolled:border-light-grey-alt2/30"
+      <a
+        href="/"
+        class="flex size-10 items-center justify-center rounded-full bg-white/10 text-white"
+        aria-label="Home"
       >
-        <ul class="flex items-center gap-4">
+        <span class="text-lg">🏠</span>
+      </a>
+    </div>
+
+    <!-- Main component -->
+    <template v-else>
+      <div
+        v-if="viewport === 'tablet'"
+        class="me-auto flex items-center gap-2"
+      >
+        <ul class="flex items-center gap-2">
           <li
             v-for="link in SOCIAL_LINKS"
             :key="link.label"
@@ -258,22 +206,117 @@ onUnmounted(() => {
             </a>
           </li>
         </ul>
+        <LanguageSelector
+          size="sm"
+          placement="left"
+        />
       </div>
 
-      <ul class="flex flex-col items-center gap-3 p-4">
-        <li
-          v-for="link in NAV_LINKS"
-          :key="link.to"
+      <!-- Mobile menu brand Link -->
+      <Link
+        href="/"
+        :class="[
+          'text-[1.4rem] font-semibold tracking-tight text-white transition-colors duration-200 group-data-scrolled:text-dark-grey',
+          viewport === 'tablet' || viewport === 'mobile' ?
+            'absolute inset-s-1/2 z-10 -translate-x-1/2'
+          : '',
+        ]"
+        aria-label="Amsirar Trip Home"
+        @click="handleNavClick"
+      >
+        Amsirar
+        <span
+          class="ms-1 font-brand font-light text-white transition-colors duration-200 group-data-scrolled:text-orange"
         >
-          <Link
-            :href="link.to"
-            :class="getNavLinkClasses(isActive(link.to))"
-            @click="handleNavClick"
+          Trip
+        </span>
+      </Link>
+
+      <LanguageSelector
+        v-if="viewport === 'mobile'"
+        size="sm"
+        class="me-auto"
+        placement="left"
+      />
+
+      <!-- Toggle button -->
+      <button
+        id="navbar-show-btn"
+        ref="buttonRef"
+        type="button"
+        :class="[
+          'ms-2 flex size-10 items-center justify-center rounded-md text-lg transition-all duration-150 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-orange',
+          'bg-black/35 text-white group-data-scrolled:bg-white group-data-scrolled:text-dark-grey',
+        ]"
+        :aria-expanded="asideOpen"
+        aria-controls="navbar-collapse"
+        @click="asideOpen = !asideOpen"
+      >
+        <X
+          v-if="asideOpen"
+          class="pointer-events-none size-5"
+        />
+        <Menu
+          v-else
+          class="pointer-events-none size-5"
+        />
+      </button>
+
+      <!-- Navigation panel -->
+      <div
+        id="navbar-collapse"
+        ref="collapseRef"
+        :class="getCollapseClasses"
+        aria-label="Navigation menu"
+      >
+        <div
+          v-if="viewport === 'mobile'"
+          class="flex items-center justify-center gap-4 border-b border-white/20 px-4 py-4 group-data-scrolled:border-light-grey-alt2/30"
+        >
+          <ul class="flex items-center gap-4">
+            <li
+              v-for="link in SOCIAL_LINKS"
+              :key="link.label"
+            >
+              <a
+                :href="link.href"
+                :class="[
+                  'flex size-10 items-center justify-center rounded-full border-2 transition-all duration-150 pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:shadow-[0_8px_18px_rgba(0,0,0,0.28)]',
+                  'group-not-data-scrolled:border-white/60 group-not-data-scrolled:bg-white/10 group-not-data-scrolled:text-white',
+                  link.accent,
+                ]"
+                v-bind="
+                  link.href.startsWith('http') ?
+                    { target: '_blank', rel: 'noopener noreferrer' }
+                  : {}
+                "
+                :aria-label="link.label"
+              >
+                <img
+                  :src="link.icon"
+                  alt=""
+                  class="size-5 object-contain"
+                />
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <ul class="flex flex-col items-center gap-3 p-4">
+          <li
+            v-for="link in NAV_LINKS"
+            :key="link.to"
           >
-            <span class="nav-label">{{ t(link.labelKey) }}</span>
-          </Link>
-        </li>
-      </ul>
-    </div>
+            <Link
+              :href="link.to"
+              :class="getNavLinkClasses(isActive(link.to))"
+              @click="handleNavClick"
+            >
+              <span class="nav-label">{{ t(link.labelKey) }}</span>
+            </Link>
+          </li>
+        </ul>
+      </div>
+    </template>
   </div>
 </template>

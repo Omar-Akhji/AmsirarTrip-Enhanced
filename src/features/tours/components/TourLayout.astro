@@ -1,7 +1,7 @@
 ---
 import { useTranslations } from "@/i18n/utils";
 import TripLayout from "@/shared/layout/TripLayout.astro";
-import { TOURS_DATA } from "../data/toursData";
+import { getToursData } from "../data/toursData";
 import TourInfo from "./TourInfo.astro";
 import TourItinerary from "./TourItinerary.astro";
 import TourSeoSections from "./TourSeoSections.astro";
@@ -9,7 +9,9 @@ import TourSeoSections from "./TourSeoSections.astro";
 const { tourKey, bookingId, imageSrc, seo, locale } = Astro.props;
 const t = useTranslations(locale);
 
-const tourData = TOURS_DATA.find((tour) => tour.id === bookingId);
+// Derive tour metadata from content collection — no duplicate data needed
+const tours = await getToursData();
+const tourData = tours.find((tour) => tour.id === bookingId);
 
 const rawSidebarItems = t.raw("tours.sidebar.items");
 const sidebarItems = Array.isArray(rawSidebarItems) ? (rawSidebarItems as string[]) : [];
@@ -19,8 +21,8 @@ const overview = t(`${tourKey}.overview`);
 const includes = t(`${tourKey}.includes`);
 const excludes = t(`${tourKey}.excludes`);
 const goodToKnow = t(`${tourKey}.goodToKnow`);
-const endCity = t(tourData?.end || "tours.cities.marrakech");
-const startCity = t(tourData?.start || "tours.cities.marrakech");
+const endCity = t(tourData ? tourData.end : "tours.cities.marrakech");
+const startCity = t(tourData ? tourData.start : "tours.cities.marrakech");
 
 const highlightsTitle = t("tours.highlightsTitle", "Tour Highlights");
 const pricingTitle = t("tours.pricingTitle", "Pricing & Booking");

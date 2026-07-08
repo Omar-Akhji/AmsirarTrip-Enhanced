@@ -21,6 +21,11 @@ export const getContactSchema = (t: (key: string) => string) =>
         .regex(phoneRegex, { message: t("phoneInvalid") })
         .max(20, { message: t("phoneTooLong") })
         .transform(sanitize),
+      topic: z
+        .string()
+        .max(200, { message: t("topicTooLong") })
+        .optional()
+        .transform((v) => (v ? sanitize(v) : undefined)),
       message: z
         .string()
         .min(10, { message: t("messageMin") })

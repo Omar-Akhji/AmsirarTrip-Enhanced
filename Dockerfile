@@ -19,7 +19,7 @@ COPY . .
 RUN bun run build
 
 # ─── Stage 4: Runtime (using Node) ─────────────────────────
-FROM node:lts-slim AS runtime
+FROM node:22-slim AS runtime
 WORKDIR /app
 
 # Copy production node_modules and built dist folder
