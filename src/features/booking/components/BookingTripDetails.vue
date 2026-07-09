@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { format as formatDate } from "date-fns";
-import { Calendar as CalendarIcon } from "lucide-vue-next";
+import CalendarIcon from "lucide-vue-next/dist/esm/icons/calendar";
 import type { FormState } from "@/lib/form-types";
 import { useTranslation } from "@/lib/hooks/useTranslation";
 import { cn } from "@/lib/utils";

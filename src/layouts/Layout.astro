@@ -9,6 +9,7 @@ import Navbar from "../shared/layout/Navbar.astro";
 import JsonLd from "../shared/ui/JsonLd.astro";
 import { WHATSAPP_LINK } from "../lib/constants/contact";
 import { LOCALES, DEFAULT_LOCALE } from "../i18n/locales";
+import { ui } from "../i18n/ui";
 
 const {
   title = "Amsirar Trip — Morocco Tours & Desert Adventures",
@@ -19,6 +20,8 @@ const {
 const cspNonce = Astro.locals.cspNonce;
 
 const locale = Astro.currentLocale || "en";
+(globalThis as any).__TRANSLATIONS__ = ui[locale as keyof typeof ui];
+(globalThis as any).__LOCALE__ = locale;
 const site = Astro.site!;
 const pathname = Astro.url.pathname;
 
@@ -55,6 +58,10 @@ const ClientRouterWithNonce = ClientRouter as unknown as (_properties: {
     <!-- Inject per-request CSP nonce for our own inline scripts -->
     <script define:vars={{ cspNonce }} is:inline>
       window.__CSP_NONCE__ = cspNonce;
+    </script>
+    <script define:vars={{ translations: ui[locale as keyof typeof ui], locale }} is:inline>
+      window.__TRANSLATIONS__ = translations;
+      window.__LOCALE__ = locale;
     </script>
     <meta
       content="width=device-width, initial-scale=1.0"

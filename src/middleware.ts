@@ -48,15 +48,15 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
     }
   }
 
+  if (isStaticAsset) {
+    const newResponse = new Response(response.body, response);
+    if (pathname.startsWith("/_astro/")) {
+      newResponse.headers.set("Cache-Control", "public, max-age=31536000, immutable");
+    } else {
+      newResponse.headers.set("Cache-Control", "public, max-age=2592000");
+    }
+    return newResponse;
+  }
+
   return response;
 };
-
-// Extend Astro's App.Locals type so TypeScript knows about cspNonce
-declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace App {
-    interface Locals {
-      cspNonce: string;
-    }
-  }
-}

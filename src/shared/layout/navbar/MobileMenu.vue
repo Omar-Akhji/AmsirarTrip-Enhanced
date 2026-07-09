@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted, watch, onErrorCaptured } from "vue";
-import { Menu, X } from "lucide-vue-next";
+import Menu from "lucide-vue-next/dist/esm/icons/menu";
+import X from "lucide-vue-next/dist/esm/icons/x";
 import { Link, usePathname } from "@/i18n/routing";
 import { useTranslation } from "@/lib/hooks/useTranslation";
 import { cn } from "@/lib/utils";

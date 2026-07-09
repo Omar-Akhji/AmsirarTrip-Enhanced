@@ -4,3 +4,9 @@ declare module "*.vue" {
   const component: DefineComponent<object, object, unknown>;
   export default component;
 }
+
+declare namespace App {
+  interface Locals {
+    cspNonce: string;
+  }
+}
