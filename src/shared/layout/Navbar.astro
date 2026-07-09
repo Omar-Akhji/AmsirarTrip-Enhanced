@@ -2,7 +2,7 @@
 import { useTranslations } from "@/i18n/utils";
 import { Image } from "astro:assets";
 import { LANGUAGES, NAV_LINKS } from "./navbar/constants";
-import LanguageSelector from "./navbar/LanguageSelector.vue";
+import LanguageSelector from "./navbar/LanguageSelector.astro";
 import MobileMenu from "./navbar/MobileMenu.vue";
 import SocialLinks from "./navbar/SocialLinks.astro";
 import { PHONE_LINK } from "@/lib/constants/contact";
@@ -78,7 +78,7 @@ const isActive = (to: string) =>
     <div class="relative flex items-center gap-2.5 px-2 py-0 lg:px-4 lg:py-2">
       <div class="me-auto hidden items-center gap-0.5 lg:flex">
         <SocialLinks class="me-2" />
-        <LanguageSelector client:load />
+        <LanguageSelector />
       </div>
 
       <ul class="absolute inset-s-1/2 z-10 hidden -translate-x-1/2 items-center gap-3 lg:flex">
@@ -107,7 +107,10 @@ const isActive = (to: string) =>
         }
       </ul>
 
-      <MobileMenu client:load />
+      <MobileMenu client:load>
+        <LanguageSelector slot="language-selector-tablet" size="sm" placement="left" />
+        <LanguageSelector slot="language-selector-mobile" size="sm" class="me-auto" placement="left" />
+      </MobileMenu>
     </div>
   </nav>
 </header>

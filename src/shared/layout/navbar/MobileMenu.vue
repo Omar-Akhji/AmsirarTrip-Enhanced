@@ -5,7 +5,6 @@ import { Link, usePathname } from "@/i18n/routing";
 import { useTranslation } from "@/lib/hooks/useTranslation";
 import { cn } from "@/lib/utils";
 import { NAV_LINKS, SOCIAL_LINKS } from "./constants";
-import LanguageSelector from "./LanguageSelector.vue";
 
 // Error boundary state
 const hasError = ref(false);
@@ -206,10 +205,7 @@ onUnmounted(() => {
             </a>
           </li>
         </ul>
-        <LanguageSelector
-          size="sm"
-          placement="left"
-        />
+        <slot name="language-selector-tablet" />
       </div>
 
       <!-- Mobile menu brand Link -->
@@ -232,12 +228,9 @@ onUnmounted(() => {
         </span>
       </Link>
 
-      <LanguageSelector
-        v-if="viewport === 'mobile'"
-        size="sm"
-        class="me-auto"
-        placement="left"
-      />
+      <template v-if="viewport === 'mobile'">
+        <slot name="language-selector-mobile" />
+      </template>
 
       <!-- Toggle button -->
       <button
