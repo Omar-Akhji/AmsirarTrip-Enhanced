@@ -42,12 +42,11 @@ if (root.dataset["loaderBound"] !== "true") {
   document.addEventListener("astro:before-preparation", showLoader);
   document.addEventListener("astro:after-swap", showLoader);
   document.addEventListener("astro:page-load", hideLoader);
-  globalThis.addEventListener("DOMContentLoaded", finishFirstLoad, { once: true });
   window.addEventListener("pageshow", finishFirstLoad, { once: true });
   window.addEventListener("load", finishFirstLoad, { once: true });
 }
 
-if (document.readyState === "complete" || document.readyState === "interactive") {
+if (document.readyState === "complete") {
   queueMicrotask(finishFirstLoad);
 } else {
   fallbackTimeoutId = setTimeout(finishFirstLoad, FIRST_LOAD_TIMEOUT);

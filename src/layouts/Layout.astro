@@ -191,6 +191,24 @@ const ClientRouterWithNonce = ClientRouter as unknown as (_properties: {
       data={generateWebsiteJsonLd()}
       id="website-jsonld"
     />
+    <style is:inline>
+      #initial-loader {
+        position: fixed;
+        inset: 0;
+        z-index: 999999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f4f4f5;
+        opacity: 1;
+        transition: opacity 450ms ease-out;
+      }
+
+      #initial-loader[data-state="hidden"] {
+        opacity: 0;
+        pointer-events: none;
+      }
+    </style>
   </head>
   <body>
     <div
