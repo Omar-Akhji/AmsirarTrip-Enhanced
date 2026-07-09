@@ -1,0 +1,13 @@
+# Amsirar Trip
+
+> Authentic travel, desert tours, and excursions in Morocco.
+
+Amsirar Trip is a premium local tour operator providing guided desert tours, imperial city journeys, Atlas Mountains treks, and custom itineraries throughout Morocco.
+
+## Core Navigation
+
+- [Home Page](https://amsirartrip.com/): Overview of travel experiences, stats, and trip packages.
+- [Tours](https://amsirartrip.com/tours): Hand-crafted multi-day itineraries across Morocco (Sahara desert camps, Chefchaouen, Fes, Marrakech).
+- [Excursions](https://amsirartrip.com/excursions): Full-day private trips from Marrakech (Ouzoud Waterfalls, Essaouira beach, Atlas hiking in Imlil).
+- [About Us](https://amsirartrip.com/about): History of Amsirar Trip, local expertise, and customer feedback.
+- [Contact](https://amsirartrip.com/contact): Inquiries, office location, and custom tour builder.
