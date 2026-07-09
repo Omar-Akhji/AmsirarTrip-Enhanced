@@ -245,8 +245,12 @@ function init() {
     window.addEventListener("scroll", onScrollOrResize, { passive: true, signal });
     window.addEventListener("resize", onScrollOrResize, { passive: true, signal });
 
-    // Run initial pass to set initial values
-    updateScrollValues();
+    // Run initial pass in requestAnimationFrame to prevent forced reflow during page load
+    requestAnimationFrame(() => {
+      if (initialized) {
+        updateScrollValues();
+      }
+    });
   }
 }
 

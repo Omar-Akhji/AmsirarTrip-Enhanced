@@ -9,6 +9,11 @@ export default defineConfig({
   site: "https://amsirartrip.com",
   compressHTML: "jsx",
 
+  // ─── Build Options ───────────────────────────────────────────────────────
+  build: {
+    inlineStylesheets: "always",
+  },
+
   // ─── Output & Adapter ────────────────────────────────────────────────────
   output: "server",
   adapter: node({ mode: "standalone" }),

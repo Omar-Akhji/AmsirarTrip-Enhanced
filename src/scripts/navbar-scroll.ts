@@ -9,19 +9,11 @@ function updateScrolled(nav: HTMLElement) {
   }
 }
 
-function updateHeight(nav: HTMLElement) {
-  try {
-    const h = nav.getBoundingClientRect().height;
-    document.documentElement.style.setProperty("--spacing-navbar", `${h}px`);
-  } catch {}
-}
-
 function init() {
   const nav = document.querySelector<HTMLElement>("#main-navbar");
   if (!nav) return;
 
   updateScrolled(nav);
-  updateHeight(nav);
 
   if (scrollListener) {
     window.removeEventListener("scroll", scrollListener);
