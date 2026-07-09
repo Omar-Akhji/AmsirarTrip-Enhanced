@@ -44,15 +44,14 @@ const cities = destinationEntries.map((entry) => entry.data);
       </div>
     </div>
 
-    <div class="featured-row grid grid-cols-1 gap-8 md:grid-cols-2 xl:grid-cols-3">
+    <div class="featured-row grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
       {
         cities.map((city, index) => (
           <div
-            class="block-75 inline-full"
             data-animate="fade-up"
             style={`transition-delay: ${index * 150}ms`}
           >
-            <article class="card-article relative block size-full overflow-hidden rounded-xl">
+            <article class="card-article relative block aspect-4/3 overflow-hidden rounded-xl">
               <Image
                 alt={t(city.altKey)}
                 class="card-img absolute inset-0 size-full object-cover"
