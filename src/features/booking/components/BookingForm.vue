@@ -162,6 +162,8 @@ const handleSubmit = async (event: Event) => {
                 noValidate
                 data-form="booking"
                 @submit.prevent="handleSubmit"
+                toolname="submit_booking_request"
+                tooldescription="Submits a booking reservation request for a specific tour or excursion"
               >
                 <FormStatusMessages
                   v-bind="{
@@ -184,6 +186,7 @@ const handleSubmit = async (event: Event) => {
                     tabindex="-1"
                     autocomplete="off"
                     aria-label="Leave this field empty"
+                    toolparamdescription="A honeypot field that must be left blank"
                   />
                 </div>
 

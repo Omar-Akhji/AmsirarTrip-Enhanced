@@ -245,6 +245,75 @@ const ClientRouterWithNonce = ClientRouter as unknown as (_properties: {
     </div>
     <script src="../scripts/loader.ts"></script>
     <script src="../scripts/scroll-animate.ts"></script>
+    <script is:inline>
+      if (typeof navigator !== "undefined" && "modelContext" in navigator) {
+        try {
+          // @ts-ignore
+          navigator.modelContext.registerTool(
+            {
+              name: "toggle_dark_theme",
+              description: "Toggles the website theme between light and dark mode",
+              inputSchema: {
+                type: "object",
+                properties: {
+                  dark: { type: "boolean", description: "True to enable dark mode, false for light mode" },
+                },
+                required: ["dark"],
+              },
+            },
+            async (input) => {
+              if (input.dark) {
+                document.documentElement.classList.add("dark");
+              } else {
+                document.documentElement.classList.remove("dark");
+              }
+              return { success: true, currentTheme: input.dark ? "dark" : "light" };
+            }
+          );
+
+          // @ts-ignore
+          navigator.modelContext.registerTool(
+            {
+              name: "change_locale",
+              description: "Changes the website locale/language by navigating to the corresponding page prefix",
+              inputSchema: {
+                type: "object",
+                properties: {
+                  locale: {
+                    type: "string",
+                    enum: ["en", "fr", "de", "es"],
+                    description: "The locale code to switch to",
+                  },
+                },
+                required: ["locale"],
+              },
+            },
+            async (input) => {
+              const currentPath = window.location.pathname;
+              const segments = currentPath.split("/").filter(Boolean);
+              const locales = ["fr", "de", "es"];
+              const hasLocale = locales.includes(segments[0]);
+
+              let newPath = "";
+              if (input.locale === "en") {
+                newPath = "/" + (hasLocale ? segments.slice(1).join("/") : segments.join("/"));
+              } else {
+                const baseSegments = hasLocale ? segments.slice(1) : segments;
+                newPath = "/" + input.locale + "/" + baseSegments.join("/");
+              }
+
+              newPath = newPath.replace(/\/+/g, "/");
+              if (!newPath.startsWith("/")) newPath = "/" + newPath;
+
+              window.location.href = newPath;
+              return { success: true, targetPath: newPath };
+            }
+          );
+        } catch (e) {
+          console.error("Failed to register WebMCP tools:", e);
+        }
+      }
+    </script>
 
     <Navbar />
     <main id="main-content">

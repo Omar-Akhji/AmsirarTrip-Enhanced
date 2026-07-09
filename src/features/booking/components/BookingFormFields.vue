@@ -32,17 +32,20 @@ const { t } = useTranslation();
     <input
       type="hidden"
       name="reservationType"
+      toolparamdescription="The type of reservation: e.g. booking a specific tour or excursion"
       :value="selectedTour"
     />
     <input
       v-if="tourDuration"
       type="hidden"
       name="duration"
+      toolparamdescription="The duration in days of the selected tour"
       :value="tourDuration"
     />
     <input
       type="hidden"
       name="language"
+      toolparamdescription="The current language/locale code of the user"
       :value="locale"
     />
   </template>
@@ -54,6 +57,8 @@ const { t } = useTranslation();
     <input
       class="rounded-2xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 inline-full"
       type="text"
+      name="selectedTourDisplay"
+      toolparamdescription="Readonly field showing the selected tour title"
       :value="selectedTour"
       readonly
       :aria-label="t('booking.selectedTour', 'Selected Tour')"
@@ -67,6 +72,8 @@ const { t } = useTranslation();
     <input
       class="rounded-2xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 inline-full"
       type="text"
+      name="selectedExcursionDisplay"
+      toolparamdescription="Readonly field showing the selected excursion title"
       :value="excursionTitle"
       readonly
       :aria-label="t('booking.selectedExcursion', 'Selected Excursion')"

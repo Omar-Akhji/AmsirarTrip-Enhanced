@@ -117,6 +117,8 @@ onUnmounted(() => {
         <form
           :aria-label="t('footer.newsletterAria')"
           @submit.prevent="handleSubmit"
+          toolname="subscribe_to_newsletter"
+          tooldescription="Subscribes the user to the newsletter with their name and email address"
         >
           <div class="space-y-4">
             <div>
@@ -135,6 +137,7 @@ onUnmounted(() => {
                   v-model="name"
                   type="text"
                   name="name"
+                  toolparamdescription="The full name of the user subscribing to the newsletter"
                   :placeholder="t('footer.newsletterNamePlaceholder')"
                   required
                   minlength="2"
@@ -160,6 +163,7 @@ onUnmounted(() => {
                   v-model="email"
                   type="email"
                   name="email"
+                  toolparamdescription="The email address of the user subscribing to the newsletter"
                   :placeholder="t('footer.newsletterPlaceholder')"
                   required
                   autocomplete="email"
