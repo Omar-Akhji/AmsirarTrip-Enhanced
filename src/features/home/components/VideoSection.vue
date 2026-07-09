@@ -114,6 +114,13 @@ const handleVideoClick = () => {
               :src="videoSource"
               type="video/mp4"
             />
+            <track
+              kind="captions"
+              src="/videos/captions.vtt"
+              srclang="en"
+              label="English"
+              default
+            />
             {{ t("video.unsupported") }}
           </video>
 
