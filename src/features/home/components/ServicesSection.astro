@@ -15,12 +15,12 @@ const services = [
 
 <section
   aria-labelledby="services-heading"
-  class="relative isolate overflow-hidden py-20 text-orange-200 sm:py-24"
+  class="relative overflow-hidden py-20 text-orange-200 sm:py-24"
   id="services"
 >
   <Image
     alt=""
-    class="absolute inset-0 -z-20 h-full w-full object-cover"
+    class="absolute inset-0 h-full w-full object-cover"
     height={1277}
     loading="lazy"
     src={servicesBg}
@@ -28,7 +28,7 @@ const services = [
   />
   <div
     aria-hidden="true"
-    class="absolute inset-0 -z-10 bg-black/40"
+    class="absolute inset-0 bg-black/40"
   >
   </div>
   <div class="relative mx-auto px-4 max-inline-6xl sm:px-6 lg:px-8">
@@ -64,7 +64,10 @@ const services = [
             data-animate="fade-up"
             style={`transition-delay: ${index * 150}ms`}
           >
-            <article class="group relative flex flex-col items-center rounded-3xl border border-white/10 bg-white/5 p-8 text-center shadow-xs ring-1 ring-black/5 backdrop-blur-sm transition inline-full pointer-fine:hover:-translate-y-1 pointer-fine:hover:bg-white/10 pointer-fine:hover:shadow-md">
+            <article
+              class="group relative flex flex-col items-center rounded-3xl border border-white/10 bg-white/10 p-8 text-center shadow-xs ring-1 ring-black/5 backdrop-blur-lg transition inline-full pointer-fine:hover:-translate-y-1 pointer-fine:hover:bg-white/20 pointer-fine:hover:shadow-md"
+              style="backdrop-filter: blur(20px);"
+            >
               <div class="mbe-6 inline-flex size-25 items-center justify-center rounded-full bg-white/5 ring-1 ring-white/10">
                 <Image
                   alt={t(service.altKey)}

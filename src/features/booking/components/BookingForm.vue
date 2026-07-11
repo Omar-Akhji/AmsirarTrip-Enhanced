@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { actions } from "astro:actions";
 import { hasRecaptchaV2, RECAPTCHA_V2_SITE_KEY } from "@/lib/client-env";
 import type { FormState } from "@/lib/form-types";
@@ -23,6 +23,11 @@ const props = withDefaults(defineProps<Props>(), { fullWidth: false });
 
 const { t, i18n } = useTranslation();
 const recaptchaRef = ref<InstanceType<typeof Recaptcha> | null>(null);
+
+const isMounted = ref(false);
+onMounted(() => {
+  isMounted.value = true;
+});
 
 const formKey = ref(0);
 const calendarOpen = ref(false);
@@ -156,6 +161,7 @@ const handleSubmit = async (event: Event) => {
                 class="space-y-5 p-6 md:p-8"
                 noValidate
                 data-form="booking"
+                :data-hydrated="isMounted"
                 @submit.prevent="handleSubmit"
                 toolname="submit_booking_request"
                 tooldescription="Submits a booking reservation request for a specific tour or excursion"

@@ -1,5 +1,7 @@
 import node from "@astrojs/node";
 import vue from "@astrojs/vue";
+import partytown from "@astrojs/partytown";
+import htmlValidate from "astro-html-validate";
 import compress from "@playform/compress";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig, envField, memoryCache } from "astro/config";
@@ -21,6 +23,8 @@ export default defineConfig({
   // ─── Integrations ────────────────────────────────────────────────────────
   integrations: [
     vue(),
+    partytown(),
+    htmlValidate(),
     compress({ CSS: false, HTML: false, Image: true, JavaScript: false, SVG: true }),
   ],
 

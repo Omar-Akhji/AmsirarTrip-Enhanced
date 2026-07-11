@@ -365,7 +365,7 @@
 
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
   }
 }
 
@@ -377,7 +377,7 @@
 
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
   }
 }
 
@@ -389,7 +389,7 @@
 
   to {
     opacity: 1;
-    transform: translateX(0);
+    transform: none;
   }
 }
 
@@ -401,7 +401,7 @@
 
   to {
     opacity: 1;
-    transform: translateX(0);
+    transform: none;
   }
 }
 
@@ -413,7 +413,7 @@
 
   to {
     opacity: 1;
-    transform: scale(1);
+    transform: none;
   }
 }
 
@@ -425,7 +425,7 @@
 
   to {
     opacity: 1;
-    transform: scale(1);
+    transform: none;
   }
 }
 
@@ -437,7 +437,7 @@
 
   to {
     opacity: 1;
-    transform: perspective(1000px) rotateX(0);
+    transform: none;
   }
 }
 
@@ -449,7 +449,7 @@
 
   to {
     opacity: 1;
-    transform: perspective(1000px) rotateX(0);
+    transform: none;
   }
 }
 
@@ -461,7 +461,7 @@
 
   to {
     opacity: 1;
-    transform: translateY(0) scale(1) skewY(0);
+    transform: none;
   }
 }
 
@@ -473,7 +473,7 @@
 
   to {
     opacity: 1;
-    transform: translateX(0) scale(1) skewX(0);
+    transform: none;
   }
 }
 
@@ -485,7 +485,7 @@
 
   to {
     opacity: 1;
-    transform: translateX(0) scale(1) skewX(0);
+    transform: none;
   }
 }
 
@@ -497,7 +497,7 @@
 
   to {
     opacity: 1;
-    transform: perspective(1200px) rotateY(0) rotateX(0) translateY(0);
+    transform: none;
   }
 }
 
