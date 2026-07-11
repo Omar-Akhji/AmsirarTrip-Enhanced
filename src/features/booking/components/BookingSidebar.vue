@@ -36,14 +36,14 @@ const { t } = useTranslation();
           {{ t("booking.checkTitle", "Find us on TripAdvisor") }}
         </h3>
         <div
-          class="inline-flex items-center justify-center rounded-full border-2 border-white/20 bg-white/5 p-4 ring-1 ring-white/10 block-32 inline-32"
+          class="inline-flex items-center justify-center rounded-full border-2 border-white/20 bg-white/5 p-4 ring-1 ring-white/10 block-36 inline-36"
         >
           <Image
             src="/icons/tripadvisor-nav_icon.svg"
             :alt="t('booking.tripadvisorAlt', 'TripAdvisor icon')"
-            :width="48"
-            :height="48"
-            class-name="object-contain block-20 inline-20"
+            :width="96"
+            :height="96"
+            class-name="object-contain block-24 inline-24"
           />
         </div>
       </div>

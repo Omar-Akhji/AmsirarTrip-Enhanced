@@ -351,99 +351,233 @@
 }
 
 /* ==========================================================================
-   Scroll Animation System (SEO & Performance Optimized)
+   Scroll-Driven Animation System (CSS-native, SEO-safe)
+   Uses the modern animation-timeline: view() API (90%+ browser support 2026).
+   Content is ALWAYS visible by default. Animations are a progressive enhancement.
    ========================================================================== */
 
-/* Base transitions applied ONLY when JavaScript is initialized (.reveal-init) */
-.reveal-init [data-animate] {
-  opacity: 0;
-  transition:
-    opacity var(--animate-duration, 800ms) var(--animate-ease, cubic-bezier(0.16, 1, 0.3, 1))
-      var(--animate-delay, 0ms),
-    transform var(--animate-duration, 800ms) var(--animate-ease, cubic-bezier(0.16, 1, 0.3, 1))
-      var(--animate-delay, 0ms);
-  backface-visibility: hidden;
+/* ---------- Keyframes ---------- */
+@keyframes reveal-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.reveal-init [data-animate].is-revealing {
+@keyframes reveal-fade-down {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes reveal-fade-left {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes reveal-fade-right {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes reveal-zoom-in {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes reveal-zoom-out {
+  from {
+    opacity: 0;
+    transform: scale(1.08);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes reveal-flip-up {
+  from {
+    opacity: 0;
+    transform: perspective(1000px) rotateX(-20deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: perspective(1000px) rotateX(0);
+  }
+}
+
+@keyframes reveal-flip-down {
+  from {
+    opacity: 0;
+    transform: perspective(1000px) rotateX(20deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: perspective(1000px) rotateX(0);
+  }
+}
+
+@keyframes reveal-creative-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(60px) scale(0.96) skewY(1deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1) skewY(0);
+  }
+}
+
+@keyframes reveal-creative-slide-right {
+  from {
+    opacity: 0;
+    transform: translateX(-60px) scale(0.97) skewX(2deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1) skewX(0);
+  }
+}
+
+@keyframes reveal-creative-slide-left {
+  from {
+    opacity: 0;
+    transform: translateX(60px) scale(0.97) skewX(-2deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1) skewX(0);
+  }
+}
+
+@keyframes reveal-creative-flip {
+  from {
+    opacity: 0;
+    transform: perspective(1200px) rotateY(-12deg) rotateX(8deg) translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: perspective(1200px) rotateY(0) rotateX(0) translateY(0);
+  }
+}
+
+/* ---------- JS-triggered Scroll Reveal ---------- */
+
+/* .scroll-init is added to <html> by the TypeScript orchestrator.
+   Without JS, content stays fully visible (SEO-safe). */
+
+.scroll-init [data-animate] {
+  opacity: 0;
   will-change: transform, opacity;
 }
 
-/* Initial state variations */
-.reveal-init [data-animate="fade-up"] {
-  transform: translateY(30px);
+/* When the IntersectionObserver adds .is-visible, play the animation */
+.scroll-init [data-animate].is-visible {
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-duration: 800ms;
 }
 
-.reveal-init [data-animate="fade-down"] {
-  transform: translateY(-30px);
+/* Map each data-animate value to its keyframes */
+.scroll-init [data-animate="fade-up"].is-visible {
+  animation-name: reveal-fade-up;
 }
 
-.reveal-init [data-animate="fade-left"] {
-  transform: translateX(-30px);
+.scroll-init [data-animate="fade-down"].is-visible {
+  animation-name: reveal-fade-down;
 }
 
-.reveal-init [data-animate="fade-right"] {
-  transform: translateX(30px);
+.scroll-init [data-animate="fade-left"].is-visible {
+  animation-name: reveal-fade-left;
 }
 
-.reveal-init [data-animate="zoom-in"] {
-  transform: scale(0.95);
+.scroll-init [data-animate="fade-right"].is-visible {
+  animation-name: reveal-fade-right;
 }
 
-.reveal-init [data-animate="zoom-out"] {
-  transform: scale(1.05);
+.scroll-init [data-animate="zoom-in"].is-visible {
+  animation-name: reveal-zoom-in;
 }
 
-.reveal-init [data-animate="flip-up"] {
-  transform: perspective(1000px) rotateX(-20deg);
+.scroll-init [data-animate="zoom-out"].is-visible {
+  animation-name: reveal-zoom-out;
 }
 
-.reveal-init [data-animate="flip-down"] {
-  transform: perspective(1000px) rotateX(20deg);
+.scroll-init [data-animate="flip-up"].is-visible {
+  animation-name: reveal-flip-up;
 }
 
-.reveal-init [data-animate="creative-slide-up"] {
-  transform: translateY(60px) scale(0.96) skewY(1deg);
+.scroll-init [data-animate="flip-down"].is-visible {
+  animation-name: reveal-flip-down;
 }
 
-.reveal-init [data-animate="creative-slide-right"] {
-  transform: translateX(-60px) scale(0.97) skewX(2deg);
+.scroll-init [data-animate="creative-slide-up"].is-visible {
+  animation-name: reveal-creative-slide-up;
 }
 
-.reveal-init [data-animate="creative-slide-left"] {
-  transform: translateX(60px) scale(0.97) skewX(-2deg);
+.scroll-init [data-animate="creative-slide-right"].is-visible {
+  animation-name: reveal-creative-slide-right;
 }
 
-.reveal-init [data-animate="creative-flip"] {
-  transform: perspective(1200px) rotateY(-12deg) rotateX(8deg) translateY(40px);
-  transform-origin: center bottom;
+.scroll-init [data-animate="creative-slide-left"].is-visible {
+  animation-name: reveal-creative-slide-left;
 }
 
-/* Visible state */
-.reveal-init [data-animate].is-visible {
-  opacity: 1 !important;
-  transform: none !important;
-  filter: none !important;
-  will-change: auto !important;
+.scroll-init [data-animate="creative-flip"].is-visible {
+  animation-name: reveal-creative-flip;
 }
 
-[data-scroll-parallax] {
-  transform: translate3d(0, var(--scroll-translate-y, 0), 0);
-}
-
-[data-scroll-parallax].is-parallax-active {
-  will-change: transform;
+/* After animation completes, clean up will-change */
+.scroll-init [data-animate].is-done {
+  will-change: auto;
 }
 
 /* Accessibility: respect user preferences for reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .reveal-init [data-animate],
-  [data-scroll-parallax],
-  .animate-cursor-blink {
-    transition: none !important;
-    transform: none !important;
+  .scroll-init [data-animate] {
+    opacity: 1;
     animation: none !important;
-    opacity: 1 !important;
+    transform: none !important;
     will-change: auto !important;
   }
 }

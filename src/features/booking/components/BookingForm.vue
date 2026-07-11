@@ -4,7 +4,6 @@ import { actions } from "astro:actions";
 import { hasRecaptchaV2, RECAPTCHA_V2_SITE_KEY } from "@/lib/client-env";
 import type { FormState } from "@/lib/form-types";
 import { useTranslation } from "@/lib/hooks/useTranslation";
-import HydrationBoundary from "@/shared/ui/HydrationBoundary.vue";
 import Loading from "@/shared/ui/Loading.vue";
 import Recaptcha from "@/shared/ui/Recaptcha.vue";
 import BookingFormFields from "./BookingFormFields.vue";
@@ -123,11 +122,7 @@ const handleSubmit = async (event: Event) => {
 </script>
 
 <template>
-  <HydrationBoundary
-    :fallback="t('booking.loading', 'Loading booking form...')"
-    error-prefix="Booking Form Error"
-  >
-    <section
+  <section
       id="booking"
       aria-labelledby="booking-heading"
       :class="['bg-neutral-50 py-20 md:py-10', fullWidth ? 'booking-form-fullwidth' : '']"
@@ -271,6 +266,5 @@ const handleSubmit = async (event: Event) => {
           </div>
         </div>
       </div>
-    </section>
-  </HydrationBoundary>
+  </section>
 </template>
