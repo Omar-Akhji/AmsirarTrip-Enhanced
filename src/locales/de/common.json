@@ -22,7 +22,8 @@
     "excursions": "Ausflug",
     "blog": "Blog",
     "about": "Über uns",
-    "contact": "Kontakt"
+    "contact": "Kontakt",
+    "toggleMenu": "Navigationsmenü umschalten"
   },
   "language": "Sprache",
   "selectLanguage": "Sprache auswählen",

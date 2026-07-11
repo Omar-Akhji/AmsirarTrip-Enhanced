@@ -22,7 +22,8 @@
     "excursions": "Excursions",
     "blog": "Blog",
     "about": "About",
-    "contact": "Contact"
+    "contact": "Contact",
+    "toggleMenu": "Toggle navigation menu"
   },
   "language": "Language",
   "selectLanguage": "Select language",

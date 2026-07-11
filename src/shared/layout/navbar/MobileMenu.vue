@@ -244,6 +244,7 @@ onUnmounted(() => {
         ]"
         :aria-expanded="asideOpen"
         aria-controls="navbar-collapse"
+        :aria-label="t('nav.toggleMenu')"
         @click="asideOpen = !asideOpen"
       >
         <X

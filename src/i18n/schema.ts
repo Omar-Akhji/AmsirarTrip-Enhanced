@@ -33,6 +33,7 @@ const navSchema = z.object({
   blog: z.string(),
   about: z.string(),
   contact: z.string(),
+  toggleMenu: z.string(),
 });
 
 const statsSchema = z.object({
