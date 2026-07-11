@@ -1,0 +1,296 @@
+---
+import { useTranslations } from "@/i18n/utils";
+
+interface Props {
+  images: string[];
+}
+
+const { images } = Astro.props;
+
+const locale = Astro.currentLocale || "en";
+const t = useTranslations(locale);
+
+const heroTitle = t("home.heroTitle") || "";
+const heroAlt1 = t("home.heroAlt1") || "";
+const heroAlt2 = t("home.heroAlt2") || "";
+
+const phrases = [heroTitle, heroAlt1, heroAlt2].filter(Boolean);
+
+const localize = (path: string) =>
+  locale === "en" ? path : `/${locale}${path === "/" ? "" : path}`;
+---
+
+<section
+  id="home-hero-section"
+  class="page-hero home-header relative isolate overflow-hidden bg-zinc-950 text-white shadow-xl inline-full min-block-[40vh] sm:min-block-[45vh] lg:min-block-[50vh]"
+  aria-labelledby="hero-heading"
+  data-phrases={JSON.stringify(phrases)}
+>
+  <div class="absolute inset-0 z-0">
+    {
+      images.map((img, index) => (
+        <div
+          class="hero-slide absolute inset-0 transition-opacity duration-1000 ease-in-out"
+          style={index === 0 ? "opacity: 1;" : "opacity: 0;"}
+          data-index={index}
+        >
+          <img
+            src={img}
+            alt=""
+            loading={index === 0 ? "eager" : "lazy"}
+            fetchpriority={index === 0 ? "high" : "low"}
+            decoding="async"
+            class="size-full object-cover"
+          />
+        </div>
+      ))
+    }
+  </div>
+  <div class="absolute inset-0 z-10 bg-linear-to-b from-black/60 via-black/30 to-black/70" />
+  <div
+    class="relative z-20 mx-auto flex flex-col items-center justify-center gap-12 px-4 pbs-8 pbe-16 text-center inline-full max-inline-7xl lg:py-20"
+  >
+    <div class="flex-1 space-y-6 pbs-0 text-center lg:pbs-8">
+      <div class="flex items-center justify-center gap-4">
+        <span class="bg-orange-400/60 block-px inline-8 sm:inline-12" />
+        <p
+          class="text-xs font-semibold tracking-[0.2em] text-orange-300 uppercase sm:tracking-[0.3em]"
+        >
+          {t("home.title")}
+        </p>
+        <span class="bg-orange-400/60 block-px inline-8 sm:inline-12" />
+      </div>
+      <h1
+        id="hero-heading"
+        class="lg:text-shadow-xl text-3xl leading-tight font-semibold text-shadow-black/60 text-shadow-lg sm:text-4xl lg:text-5xl"
+      >
+        <!-- SEO & Screen Reader Accessible Content -->
+        <span class="sr-only hero-sr-text">
+          {phrases[0]}
+        </span>
+
+        <!-- Visual Animation Layer -->
+        <span aria-hidden="true">
+          <!-- Mobile/Tablet layout: simple fade text -->
+          <span
+            id="hero-mobile-text"
+            class="inline-block transition-opacity duration-500 text-center lg:hidden"
+          >
+            {phrases[0]}
+          </span>
+          <!-- Desktop layout: typing text -->
+          <span id="hero-desktop-text-container" class="hidden lg:inline-flex items-center">
+            <span class="relative inline-block pe-2 text-left align-bottom whitespace-nowrap">
+              <!-- Invisible placeholder to reserve layout width and prevent layout shifts -->
+              <span
+                id="hero-desktop-placeholder"
+                class="pointer-events-none invisible select-none"
+                aria-hidden="true"
+              >
+                {phrases[0]}
+              </span>
+              <!-- Absolutely positioned container for the actual typed text and cursor -->
+              <span class="absolute inset-y-0 left-0 flex items-center">
+                <span id="hero-desktop-text" class="text-white">{phrases[0]}</span>
+                <span
+                  id="hero-cursor"
+                  class="will-change-opacity ms-1 inline-block h-[1em] w-0.75 animate-cursor-blink bg-orange-400/90"
+                />
+              </span>
+            </span>
+          </span>
+        </span>
+      </h1>
+      <p class="font-fancy text-lg text-zinc-200 lg:text-xl">{t("home.heroSubtitle")}</p>
+      <div class="flex flex-wrap items-center justify-center gap-4 pbs-2">
+        <a
+          href={localize("/tours")}
+          class="inline-flex items-center gap-2 rounded-full border border-white/60 px-6 py-3 text-sm font-semibold text-white/90 transition text-shadow-xs sm:px-8 pointer-fine:hover:bg-white/10"
+        >
+          {t("home.exploreOurTours")}
+        </a>
+        <a
+          href={localize("/contact")}
+          class="inline-flex items-center gap-2 rounded-full bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur transition text-shadow-xs sm:px-8 pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:bg-white/20"
+        >
+          {t("home.contactForMore")}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function initHero() {
+    const section = document.querySelector<HTMLElement>("#home-hero-section");
+    if (!section) return;
+
+    const phrasesAttr = section.dataset["phrases"];
+    const phrases: string[] = phrasesAttr ? JSON.parse(phrasesAttr) : [];
+    if (phrases.length === 0) return;
+
+    const slides = section.querySelectorAll<HTMLElement>(".hero-slide");
+    const srText = section.querySelector<HTMLElement>(".hero-sr-text");
+    const mobileText = section.querySelector<HTMLElement>("#hero-mobile-text");
+    const desktopPlaceholder = section.querySelector<HTMLElement>("#hero-desktop-placeholder");
+    const desktopText = section.querySelector<HTMLElement>("#hero-desktop-text");
+    const cursor = section.querySelector<HTMLElement>("#hero-cursor");
+
+    // Carousel State
+    let currentSlideIndex = 0;
+    const carouselInterval = setInterval(() => {
+      if (slides.length === 0) return;
+      const currentSlide = slides[currentSlideIndex];
+      if (currentSlide) {
+        currentSlide.style.opacity = "0";
+      }
+      currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+      const nextSlide = slides[currentSlideIndex];
+      if (nextSlide) {
+        nextSlide.style.opacity = "1";
+      }
+    }, 5000);
+
+    // Reduced motion preference
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // Let's check window size dynamically using media query matching
+    const mediaQuery = window.matchMedia("(max-width: 1023px)");
+    let isMobile = mediaQuery.matches;
+
+    // Track animation frames and intervals
+    let mobileInterval: ReturnType<typeof setInterval> | undefined;
+    let mobileTimeout: ReturnType<typeof setTimeout> | undefined;
+    let animationFrameId: number | undefined;
+    let isDesktopAnimating = false;
+
+    function handleResize() {
+      const newIsMobile = mediaQuery.matches;
+      if (newIsMobile !== isMobile) {
+        isMobile = newIsMobile;
+        restartAnimation();
+      }
+    }
+
+    mediaQuery.addEventListener("change", handleResize);
+
+    function stopAllAnimations() {
+      if (mobileInterval) clearInterval(mobileInterval);
+      if (mobileTimeout) clearTimeout(mobileTimeout);
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+      isDesktopAnimating = false;
+    }
+
+    let currentPhraseIndex = 0;
+
+    function startMobileAnimation() {
+      if (prefersReducedMotion) {
+        if (mobileText) mobileText.textContent = phrases[0] ?? "";
+        if (srText) srText.textContent = phrases[0] ?? "";
+        return;
+      }
+      mobileInterval = setInterval(() => {
+        if (mobileText) {
+          mobileText.style.opacity = "0";
+          mobileTimeout = setTimeout(() => {
+            currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
+            mobileText.textContent = phrases[currentPhraseIndex] ?? "";
+            if (srText) srText.textContent = phrases[currentPhraseIndex] ?? "";
+            mobileText.style.opacity = "1";
+          }, 500);
+        }
+      }, 4000);
+    }
+
+    function startDesktopAnimation() {
+      if (prefersReducedMotion) {
+        if (desktopText) desktopText.textContent = phrases[0] ?? "";
+        if (srText) srText.textContent = phrases[0] ?? "";
+        if (cursor) cursor.style.display = "none";
+        return;
+      }
+
+      if (isDesktopAnimating) return;
+      isDesktopAnimating = true;
+
+      let isDeleting = false;
+      let textIndex = 0;
+      let lastTime = performance.now();
+      let pauseTimer = 0;
+
+      function tick(timestamp: number) {
+        if (!isDesktopAnimating) return;
+
+        let delta = timestamp - lastTime;
+        if (delta > 100) delta = 0; // Handle tab backgrounding
+        lastTime = timestamp;
+
+        const fullText = phrases[currentPhraseIndex] || "";
+
+        if (pauseTimer > 0) {
+          pauseTimer -= delta;
+          animationFrameId = requestAnimationFrame(tick);
+          return;
+        }
+
+        if (!isDeleting) {
+          // Typing phase
+          const speed = 0.01;
+          textIndex += delta * speed;
+
+          if (textIndex >= fullText.length) {
+            textIndex = fullText.length;
+            isDeleting = true;
+            pauseTimer = 2500; // Pause for 2.5s when fully typed
+          }
+          const text = fullText.slice(0, Math.floor(textIndex));
+          if (desktopText) desktopText.textContent = text;
+          if (desktopPlaceholder) desktopPlaceholder.textContent = fullText;
+          if (srText) srText.textContent = text;
+        } else {
+          // Deleting phase
+          const speed = 0.022;
+          textIndex -= delta * speed;
+
+          if (textIndex <= 0) {
+            textIndex = 0;
+            isDeleting = false;
+            currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
+            pauseTimer = 1000; // Pause for 1.0s when erased
+          }
+          const text = fullText.slice(0, Math.ceil(textIndex));
+          if (desktopText) desktopText.textContent = text;
+          if (desktopPlaceholder) desktopPlaceholder.textContent = fullText;
+          if (srText) srText.textContent = text;
+        }
+
+        animationFrameId = requestAnimationFrame(tick);
+      }
+
+      animationFrameId = requestAnimationFrame(tick);
+    }
+
+    function restartAnimation() {
+      stopAllAnimations();
+      if (isMobile) {
+        startMobileAnimation();
+      } else {
+        startDesktopAnimation();
+      }
+    }
+
+    // Initial animation start
+    restartAnimation();
+
+    // Cleanup handler for View Transitions
+    function cleanup() {
+      clearInterval(carouselInterval);
+      stopAllAnimations();
+      mediaQuery.removeEventListener("change", handleResize);
+      document.removeEventListener("astro:before-swap", cleanup);
+    }
+    document.addEventListener("astro:before-swap", cleanup, { once: true });
+  }
+
+  document.addEventListener("astro:page-load", initHero);
+</script>

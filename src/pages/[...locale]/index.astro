@@ -4,7 +4,7 @@ import bg1 from "../../assets/images/Header/header-1.webp";
 import bg2 from "../../assets/images/Header/header-2.webp";
 import bg3 from "../../assets/images/Header/header-3.webp";
 import FeaturedTours from "../../features/home/components/FeaturedTours.astro";
-import HomeHero from "../../features/home/components/HomeHero.vue";
+import HomeHero from "../../features/home/components/HomeHero.astro";
 import HomeStats from "../../features/home/components/HomeStats.astro";
 import ServicesSection from "../../features/home/components/ServicesSection.astro";
 import TestimonialsSection from "../../features/home/components/TestimonialsSection.astro";
@@ -28,7 +28,6 @@ const heroImages = [optBg1.src, optBg2.src, optBg3.src];
   title={title}
 >
   <HomeHero
-    client:load
     images={heroImages}
   />
   <div class="text-zinc-900">

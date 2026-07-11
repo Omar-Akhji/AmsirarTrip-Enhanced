@@ -1,0 +1,277 @@
+---
+import { useTranslations } from "@/i18n/utils";
+import { cn } from "@/lib/utils";
+import { NAV_LINKS, SOCIAL_LINKS } from "./constants";
+import { LANGUAGES } from "@/i18n/locales";
+
+const locale = Astro.currentLocale || "en";
+const t = useTranslations(locale);
+
+const localize = (path: string) =>
+  locale === "en" ? path : `/${locale}${path === "/" ? "" : path}`;
+
+const pathname = Astro.url.pathname;
+const segments = pathname.split("/").filter(Boolean);
+const normalizedPath =
+  (LANGUAGES.some((l) => l.code === segments[0]) ?
+    "/" + segments.slice(1).join("/")
+  : pathname
+  ).replace(/\/$/, "") || "/";
+
+const isActive = (to: string) =>
+  normalizedPath === to || (to !== "/" && normalizedPath.startsWith(to + "/"));
+---
+
+<div class="relative flex items-center gap-3 inline-full lg:hidden">
+  <!-- Tablet Social Links & Language Selector -->
+  <div class="hidden md:flex me-auto items-center gap-2">
+    <ul class="flex items-center gap-2">
+      {
+        SOCIAL_LINKS.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class:list={[
+                "flex size-10 items-center justify-center rounded-full border-2 transition-all duration-150 pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:shadow-[0_8px_18px_rgba(0,0,0,0.28)]",
+                "group-not-data-scrolled:border-white/60 group-not-data-scrolled:bg-white/10 group-not-data-scrolled:text-white",
+                link.accent,
+              ]}
+              target={link.href.startsWith("http") ? "_blank" : null}
+              rel={link.href.startsWith("http") ? "noopener noreferrer" : null}
+              aria-label={link.label}
+            >
+              <img
+                src={link.icon}
+                alt=""
+                class="size-5 object-contain"
+              />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <slot name="language-selector-tablet" />
+  </div>
+
+  <!-- Mobile Menu Brand Link -->
+  <a
+    href={localize("/")}
+    class="absolute inset-s-1/2 z-10 -translate-x-1/2 text-[1.4rem] font-semibold tracking-tight text-white transition-colors duration-200 group-data-scrolled:text-dark-grey"
+    aria-label="Amsirar Trip Home"
+  >
+    Amsirar<span
+      class="ms-1 font-brand font-light text-white transition-colors duration-200 group-data-scrolled:text-orange"
+      >Trip</span
+    >
+  </a>
+
+  <!-- Mobile Language Selector -->
+  <div class="flex md:hidden me-auto">
+    <slot name="language-selector-mobile" />
+  </div>
+
+  <!-- Toggle Button -->
+  <button
+    id="navbar-show-btn"
+    type="button"
+    class="ms-2 flex size-10 items-center justify-center rounded-md text-lg transition-all duration-150 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-orange bg-black/35 text-white group-data-scrolled:bg-white group-data-scrolled:text-dark-grey"
+    aria-expanded="false"
+    aria-controls="navbar-collapse"
+    aria-label={t("nav.toggleMenu")}
+  >
+    <!-- Hamburger icon -->
+    <svg
+      class="pointer-events-none size-5 menu-icon-hamburger"
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <line x1="4" x2="20" y1="12" y2="12" />
+      <line x1="4" x2="20" y1="6" y2="6" />
+      <line x1="4" x2="20" y1="18" y2="18" />
+    </svg>
+    <!-- X icon -->
+    <svg
+      class="pointer-events-none size-5 menu-icon-x hidden"
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path d="M18 6 6 18" />
+      <path d="m6 6 12 12" />
+    </svg>
+  </button>
+
+  <!-- Navigation dropdown panel -->
+  <div
+    id="navbar-collapse"
+    class="navbar-collapse fixed inset-s-1/2 top-[calc(100%+0.75rem)] z-40 -translate-x-1/2 overflow-y-auto max-h-[calc(100vh-6rem)] rounded-2xl border border-white/20 bg-slate-950 text-white shadow-[0_20px_40px_rgba(0,0,0,0.3)] transition-all duration-300 inline-[min(1100px,calc(100vw-2rem))] group-data-scrolled:border-white/10 group-data-scrolled:bg-white group-data-scrolled:text-slate-900 pointer-events-none opacity-0 -translate-y-4 data-[state=open]:pointer-events-auto data-[state=open]:opacity-100 data-[state=open]:translate-y-0"
+    data-state="closed"
+    aria-label="Navigation menu"
+  >
+    <!-- Social Links inside dropdown (Mobile only) -->
+    <div
+      class="flex md:hidden items-center justify-center gap-4 border-b border-white/20 px-4 py-4 group-data-scrolled:border-light-grey-alt2/30"
+    >
+      <ul class="flex items-center gap-4">
+        {
+          SOCIAL_LINKS.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class:list={[
+                  "flex size-10 items-center justify-center rounded-full border-2 transition-all duration-150 pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:shadow-[0_8px_18px_rgba(0,0,0,0.28)]",
+                  "group-not-data-scrolled:border-white/60 group-not-data-scrolled:bg-white/10 group-not-data-scrolled:text-white",
+                  link.accent,
+                ]}
+                target={link.href.startsWith("http") ? "_blank" : null}
+                rel={link.href.startsWith("http") ? "noopener noreferrer" : null}
+                aria-label={link.label}
+              >
+                <img
+                  src={link.icon}
+                  alt=""
+                  class="size-5 object-contain"
+                />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <!-- Navigation links -->
+    <ul class="flex flex-col items-center gap-3 p-4">
+      {
+        NAV_LINKS.map((link) => {
+          const active = isActive(link.to);
+          return (
+            <li>
+              <a
+                href={localize(link.to)}
+                class={cn(
+                  "inline-flex items-center gap-2 rounded-full font-medium transition-all duration-200 mx-auto inline-fit min-inline-40 justify-center px-8 py-2.5 text-base text-white bg-transparent hover:bg-white/10 group-data-scrolled:text-dark group-data-scrolled:hover:bg-light-grey",
+                  active &&
+                    "bg-white/10 text-white shadow-[0_0_0_1px_rgb(0_0_0/5%)] backdrop-blur-xs group-data-scrolled:bg-orange group-data-scrolled:text-white group-data-scrolled:shadow-[0_10px_26px_oklch(56%_0.19_33deg/12%)]"
+                )}
+              >
+                <span class="nav-label">{t(link.labelKey)}</span>
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </div>
+</div>
+
+<script>
+  function initMobileMenu() {
+    const button = document.querySelector<HTMLButtonElement>("#navbar-show-btn");
+    const collapse = document.querySelector<HTMLElement>("#navbar-collapse");
+    const nav = document.querySelector<HTMLElement>("#main-navbar");
+
+    if (!button || !collapse || !nav) return;
+
+    let isOpen = false;
+
+    function setMenuState(open: boolean) {
+      isOpen = open;
+      button!.setAttribute("aria-expanded", String(open));
+      collapse!.dataset["state"] = open ? "open" : "closed";
+      nav!.dataset["state"] = open ? "open" : "closed";
+
+      const xIcon = button!.querySelector(".menu-icon-x");
+      const menuIcon = button!.querySelector(".menu-icon-hamburger");
+      if (xIcon && menuIcon) {
+        if (open) {
+          xIcon.classList.remove("hidden");
+          menuIcon.classList.add("hidden");
+        } else {
+          xIcon.classList.add("hidden");
+          menuIcon.classList.remove("hidden");
+        }
+      }
+    }
+
+    function toggle() {
+      setMenuState(!isOpen);
+    }
+
+    function clickOutside(e: MouseEvent) {
+      if (!isOpen) return;
+      const target = e.target as Node;
+      if (!collapse!.contains(target) && !button!.contains(target)) {
+        setMenuState(false);
+      }
+    }
+
+    function handleKeyDown(e: KeyboardEvent) {
+      if (!isOpen) return;
+
+      if (e.key === "Escape") {
+        setMenuState(false);
+        button!.focus();
+        return;
+      }
+
+      if (e.key === "Tab") {
+        const focusableSelector = 'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
+        const focusableElements = collapse!.querySelectorAll<HTMLElement>(focusableSelector);
+        if (focusableElements.length === 0) return;
+
+        const firstFocusable = focusableElements[0];
+        const lastFocusable = focusableElements[focusableElements.length - 1];
+
+        if (firstFocusable && lastFocusable) {
+          if (e.shiftKey) {
+            if (document.activeElement === firstFocusable) {
+              e.preventDefault();
+              lastFocusable.focus();
+            }
+          } else {
+            if (document.activeElement === lastFocusable) {
+              e.preventDefault();
+              firstFocusable.focus();
+            }
+          }
+        }
+      }
+    }
+
+    // Close menu when a link inside the collapse is clicked
+    const links = collapse.querySelectorAll("a");
+    links.forEach(link => {
+      link.addEventListener("click", () => {
+        setMenuState(false);
+      });
+    });
+
+    button.addEventListener("click", toggle);
+    document.addEventListener("click", clickOutside);
+    document.addEventListener("keydown", handleKeyDown);
+
+    // Cleanup on View Transition to avoid duplicating listeners
+    function cleanup() {
+      button!.removeEventListener("click", toggle);
+      document.removeEventListener("click", clickOutside);
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("astro:before-swap", cleanup);
+    }
+    document.addEventListener("astro:before-swap", cleanup, { once: true });
+  }
+
+  document.addEventListener("astro:page-load", initMobileMenu);
+</script>
