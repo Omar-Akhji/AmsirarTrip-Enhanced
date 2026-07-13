@@ -17,9 +17,9 @@ const t = useTranslations(locale);
 
 const title = t("home.meta.title");
 const description = t("home.meta.description");
-const optBg1 = await getImage({ src: bg1, format: "webp" });
-const optBg2 = await getImage({ src: bg2, format: "webp" });
-const optBg3 = await getImage({ src: bg3, format: "webp" });
+const optBg1 = await getImage({ src: bg1, width: 1920, format: "webp" });
+const optBg2 = await getImage({ src: bg2, width: 1920, format: "webp" });
+const optBg3 = await getImage({ src: bg3, width: 1920, format: "webp" });
 const heroImages = [optBg1.src, optBg2.src, optBg3.src];
 ---
 

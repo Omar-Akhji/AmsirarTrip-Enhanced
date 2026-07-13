@@ -52,7 +52,7 @@ const popoverId = `lang-popover-${Math.floor(Math.random() * 100000)}`;
     popovertarget={popoverId}
     class="relative cursor-pointer"
     aria-haspopup="menu"
-    aria-label={t("language") || "Language"}
+    aria-label={`${t("language") || "Language"} - ${currentLanguage.shortName}`}
     style={`anchor-name: --anchor-${popoverId}`}
   >
     <div
