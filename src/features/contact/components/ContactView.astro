@@ -74,9 +74,12 @@ const contactMethods = [
 </PageHeader>
 <div class="text-zinc-900">
   <section
-    aria-label="Contact Methods"
+    aria-labelledby="contact-methods-heading"
     class="relative isolate py-16"
   >
+    <h2 id="contact-methods-heading" class="sr-only">
+      {t("contact.methods.title", "Contact Methods")}
+    </h2>
     <div class="mx-auto px-4 max-inline-7xl">
       <div class="grid gap-6 md:grid-cols-3">
         {
@@ -114,7 +117,7 @@ const contactMethods = [
         data-animate="fade-up"
       >
         <p
-          class="inline-flex items-center justify-center rounded-full border-2 border-orange-400 px-6 py-3 text-sm font-semibold tracking-[0.45em] text-orange-600 uppercase"
+          class="inline-flex items-center justify-center rounded-full border-2 border-orange-400 px-6 py-3 text-sm font-semibold tracking-[0.45em] text-orange-700 uppercase"
         >
           {t("contact.form.badge", "Plan with locals")}
         </p>
@@ -146,7 +149,7 @@ const contactMethods = [
         data-animate="fade-up"
       >
         <p
-          class="inline-flex items-center justify-center rounded-full border-2 border-orange-400 px-6 py-3 text-sm font-semibold tracking-[0.45em] text-orange-600 uppercase"
+          class="inline-flex items-center justify-center rounded-full border-2 border-orange-400 px-6 py-3 text-sm font-semibold tracking-[0.45em] text-orange-700 uppercase"
         >
           {t("contact.location.smTitle")}
         </p>
@@ -163,7 +166,21 @@ const contactMethods = [
         </div>
       </div>
       <div class="overflow-hidden rounded-3xl shadow-2xl ring-1 ring-zinc-200">
-        <div data-animate="zoom-in">
+        <div id="map-placeholder" class="group relative flex flex-col items-center justify-center bg-zinc-900/95 text-white cursor-pointer transition duration-300 block-75 md:block-100 lg:block-125">
+          <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(249,115,22,0.15),transparent_70%)]"></div>
+          <div class="relative z-10 text-center space-y-4 px-6">
+            <div class="mx-auto flex size-16 items-center justify-center rounded-full bg-orange-600/10 text-orange-500 ring-2 ring-orange-500/20 group-hover:scale-110 transition duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="size-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold tracking-wide uppercase">{t("contact.map.placeholderTitle", "Show Interactive Map")}</h3>
+            <p class="text-sm text-zinc-400 max-w-md mx-auto">{t("contact.map.placeholderDesc", "Clicking will load the Google Maps widget which may set cookies and load third-party scripts.")}</p>
+            <button type="button" class="inline-flex items-center gap-2 rounded-full bg-orange-700 px-6 py-2.5 text-sm font-semibold text-white shadow-md hover:bg-orange-600 transition duration-150">{t("contact.map.loadBtn", "Load Map")}</button>
+          </div>
+        </div>
+        <div id="map-container" class="hidden">
           <iframe
             allowfullscreen
             aria-label="Interactive map showing Amsirar Trip agency location in Marrakech"
@@ -171,12 +188,29 @@ const contactMethods = [
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
             sandbox="allow-scripts allow-same-origin allow-popups"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3399.999!2d-8.0257651!3d31.6259758!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdafef007a3f58d3%3A0xa6485d9ed7022b4c!2sAmsirar+Travel!5e0!3m2!1sen!2sma!4v1699999999999!5m2!1sen!2sma"
+            data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3399.999!2d-8.0257651!3d31.6259758!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdafef007a3f58d3%3A0xa6485d9ed7022b4c!2sAmsirar+Travel!5e0!3m2!1sen!2sma!4v1699999999999!5m2!1sen!2sma"
             title="Amsirar Trip Agency Location - Marrakech, Morocco"
             width="100%"
           ></iframe>
         </div>
       </div>
+
+      <script>
+        const placeholder = document.getElementById('map-placeholder');
+        const container = document.getElementById('map-container');
+        const iframe = container?.querySelector('iframe');
+
+        if (placeholder && container && iframe) {
+          placeholder.addEventListener('click', () => {
+            const src = iframe.getAttribute('data-src');
+            if (src) {
+              iframe.setAttribute('src', src);
+            }
+            container.classList.remove('hidden');
+            placeholder.classList.add('hidden');
+          });
+        }
+      </script>
     </div>
   </section>
 </div>
