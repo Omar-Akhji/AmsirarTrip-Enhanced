@@ -18,6 +18,14 @@ function initMobileMenu() {
     panel.dataset["state"] = open ? "open" : "closed";
     navbar.dataset["state"] = open ? "open" : "closed";
 
+    if (open) {
+      navbar.classList.remove("backdrop-blur-xl");
+      navbar.classList.add("backdrop-blur-sm");
+    } else {
+      navbar.classList.remove("backdrop-blur-sm");
+      navbar.classList.add("backdrop-blur-xl");
+    }
+
     const xIcon = btn.querySelector(".menu-icon-x");
     const menuIcon = btn.querySelector(".menu-icon-hamburger");
     if (xIcon && menuIcon) {

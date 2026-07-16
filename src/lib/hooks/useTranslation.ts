@@ -37,13 +37,13 @@ function lookup(key: string): unknown {
 
   if (!translations && typeof window !== "undefined") {
     const el = document.querySelector("#app-translations");
-    const dataTranslations = (el as HTMLElement | null)?.dataset["translations"];
-    if (dataTranslations) {
+    const jsonText = el?.textContent;
+    if (jsonText) {
       try {
-        translations = JSON.parse(dataTranslations) as TranslationMap;
+        translations = JSON.parse(jsonText) as TranslationMap;
         cachedTranslations = translations;
       } catch (error) {
-        console.error("Failed to parse translations from data attribute:", error);
+        console.error("Failed to parse translations from script tag:", error);
       }
     }
   }

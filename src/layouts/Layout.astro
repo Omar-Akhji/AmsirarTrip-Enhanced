@@ -57,183 +57,181 @@ const ClientRouterWithNonce = ClientRouter as unknown as (_properties: {
       content={locale}
       name="app-locale"
     />
-  </head><div
-    class="hidden"
-    data-translations={JSON.stringify(ui[locale as keyof typeof ui])}
-    id="app-translations"
-  >
-  </div>
-  <link
-    as="font"
-    crossorigin="anonymous"
-    href="/fonts/Montserrat-VariableFont_wght.woff2"
-    rel="preload"
-    type="font/woff2"
-  />
-  <link
-    as="font"
-    crossorigin="anonymous"
-    href="/fonts/StoryScript-Regular.woff2"
-    rel="preload"
-    type="font/woff2"
-  />
-  <link
-    as="font"
-    crossorigin="anonymous"
-    href="/fonts/Yellowtail-Regular.woff2"
-    rel="preload"
-    type="font/woff2"
-  />
-  <meta
-    content="width=device-width, initial-scale=1.0"
-    name="viewport"
-  />
-  <meta
-    content={Astro.generator}
-    name="generator"
-  />
-  <meta
-    content="#f97316"
-    name="theme-color"
-  />
+    <link
+      as="font"
+      crossorigin="anonymous"
+      href="/fonts/Montserrat-VariableFont_wght.woff2"
+      rel="preload"
+      type="font/woff2"
+    />
+    <link
+      as="font"
+      crossorigin="anonymous"
+      href="/fonts/StoryScript-Regular.woff2"
+      rel="preload"
+      type="font/woff2"
+    />
+    <link
+      as="font"
+      crossorigin="anonymous"
+      href="/fonts/Yellowtail-Regular.woff2"
+      rel="preload"
+      type="font/woff2"
+    />
+    <meta
+      content="width=device-width, initial-scale=1.0"
+      name="viewport"
+    />
+    <meta
+      content={Astro.generator}
+      name="generator"
+    />
+    <meta
+      content="#f97316"
+      name="theme-color"
+    />
 
-  <title>{title}</title>
-  <meta
-    content={description}
-    name="description"
-  />
+    <title>{title}</title>
+    <meta
+      content={description}
+      name="description"
+    />
 
-  <meta
-    content={title}
-    property="og:title"
-  />
-  <meta
-    content={description}
-    property="og:description"
-  />
-  <meta
-    content={defaultOgImage}
-    property="og:image"
-  />
-  <meta
-    content={canonicalURL}
-    property="og:url"
-  />
-  <meta
-    content="website"
-    property="og:type"
-  />
-  <meta
-    content={locale}
-    property="og:locale"
-  />
-  {
-    LOCALES.filter((l) => l !== DEFAULT_LOCALE).map((l) => (
-      <meta
-        content={l}
-        property="og:locale:alternate"
-      />
-    ))
-  }
-
-  <meta
-    content="summary_large_image"
-    name="twitter:card"
-  />
-  <meta
-    content={title}
-    name="twitter:title"
-  />
-  <meta
-    content={description}
-    name="twitter:description"
-  />
-  <meta
-    content={defaultOgImage}
-    name="twitter:image"
-  />
-
-  <link
-    href={canonicalURL}
-    rel="canonical"
-  />
-
-  {
-    LOCALES.map((l) => {
-      const href = l === DEFAULT_LOCALE ? canonicalURL : new URL(`/${l}${basePath}`, site).href;
-      return (
-        <link
-          href={href}
-          hreflang={l}
-          rel="alternate"
+    <meta
+      content={title}
+      property="og:title"
+    />
+    <meta
+      content={description}
+      property="og:description"
+    />
+    <meta
+      content={defaultOgImage}
+      property="og:image"
+    />
+    <meta
+      content={canonicalURL}
+      property="og:url"
+    />
+    <meta
+      content="website"
+      property="og:type"
+    />
+    <meta
+      content={locale}
+      property="og:locale"
+    />
+    {
+      LOCALES.filter((l) => l !== DEFAULT_LOCALE).map((l) => (
+        <meta
+          content={l}
+          property="og:locale:alternate"
         />
-      );
-    })
-  }
-  <link
-    href={canonicalURL}
-    hreflang="x-default"
-    rel="alternate"
-  />
-
-  <link
-    href="/sitemap-index.xml"
-    rel="sitemap"
-  />
-
-  <link
-    href="/favicon.png"
-    rel="icon"
-    type="image/png"
-  />
-  <link
-    href="/horse-head.svg"
-    rel="icon"
-    type="image/svg+xml"
-  />
-  <link
-    href="/favicon.png"
-    rel="shortcut icon"
-  />
-  <link
-    href="/icons/icon-512.png"
-    rel="apple-touch-icon"
-  />
-  <link
-    href="/site.webmanifest"
-    rel="manifest"
-  />
-
-  <link
-    as="image"
-    href="/images/Header/header-1.webp"
-    rel="preload"
-    type="image/webp"
-  />
-
-  <JsonLd
-    data={generateOrganizationJsonLd()}
-    id="organization-jsonld"
-  />
-  <JsonLd
-    data={generateWebsiteJsonLd()}
-    id="website-jsonld"
-  />
-  <style is:inline>
-    #initial-loader {
-      position: fixed;
-      inset: 0;
-      z-index: 999999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: #f4f4f5;
-      opacity: 1;
-      transition: opacity 450ms ease-out;
+      ))
     }
-  </style>
+
+    <meta
+      content="summary_large_image"
+      name="twitter:card"
+    />
+    <meta
+      content={title}
+      name="twitter:title"
+    />
+    <meta
+      content={description}
+      name="twitter:description"
+    />
+    <meta
+      content={defaultOgImage}
+      name="twitter:image"
+    />
+
+    <link
+      href={canonicalURL}
+      rel="canonical"
+    />
+
+    {
+      LOCALES.map((l) => {
+        const href = l === DEFAULT_LOCALE ? canonicalURL : new URL(`/${l}${basePath}`, site).href;
+        return (
+          <link
+            href={href}
+            hreflang={l}
+            rel="alternate"
+          />
+        );
+      })
+    }
+    <link
+      href={canonicalURL}
+      hreflang="x-default"
+      rel="alternate"
+    />
+
+    <link
+      href="/sitemap-index.xml"
+      rel="sitemap"
+    />
+
+    <link
+      href="/favicon.png"
+      rel="icon"
+      type="image/png"
+    />
+    <link
+      href="/horse-head.svg"
+      rel="icon"
+      type="image/svg+xml"
+    />
+    <link
+      href="/favicon.png"
+      rel="shortcut icon"
+    />
+    <link
+      href="/icons/icon-512.png"
+      rel="apple-touch-icon"
+    />
+    <link
+      href="/site.webmanifest"
+      rel="manifest"
+    />
+
+    <link
+      as="image"
+      href="/images/Header/header-1.webp"
+      rel="preload"
+      type="image/webp"
+    />
+
+    <JsonLd
+      data={generateOrganizationJsonLd()}
+      id="organization-jsonld"
+    />
+    <JsonLd
+      data={generateWebsiteJsonLd()}
+      id="website-jsonld"
+    />
+    <style is:inline>
+      #initial-loader {
+        position: fixed;
+        inset: 0;
+        z-index: 999999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f4f4f5;
+        opacity: 1;
+        transition: opacity 450ms ease-out;
+      }
+    </style>
+  </head>
 
   <body>
+    <script id="app-translations" type="application/json" is:inline>
+      {JSON.stringify(ui[locale as keyof typeof ui])}
+    </script>
     <div
       class="fixed inset-0 z-999999 flex items-center justify-center bg-zinc-100 opacity-100 transition-opacity duration-450 ease-out data-[state=hidden]:pointer-events-none"
       data-state="visible"
