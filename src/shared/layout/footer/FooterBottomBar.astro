@@ -17,6 +17,7 @@ const currentYear = new Date().getFullYear();
       <div class="order-2 text-center sm:order-1 sm:text-start">
         <p class="text-sm font-medium text-zinc-500">
           &copy; <time datetime={currentYear.toString()}>{currentYear}</time>
+          <span class="mx-1.5 opacity-20">&bull;</span>
           <span class="text-zinc-400">Amsirar Trip. Ltd.</span><span
             class="mx-1.5 hidden opacity-20 sm:inline-block">&bull;</span
           ><span class="inline sm:hidden"> </span>{t("footer.copyright")}
