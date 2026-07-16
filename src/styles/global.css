@@ -94,6 +94,13 @@
   --animate-cursor-blink: cursor-blink 0.75s step-end infinite;
 }
 
+html,
+body {
+  margin: 0;
+  width: 100%;
+  min-height: 100%;
+}
+
 @keyframes show-data {
   50% {
     translate: 0 -10rem;

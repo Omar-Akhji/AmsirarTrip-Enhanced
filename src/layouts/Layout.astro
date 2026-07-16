@@ -213,25 +213,15 @@ const ClientRouterWithNonce = ClientRouter as unknown as (_properties: {
       data={generateWebsiteJsonLd()}
       id="website-jsonld"
     />
-    <style is:inline>
-      #initial-loader {
-        position: fixed;
-        inset: 0;
-        z-index: 999999;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #f4f4f5;
-        opacity: 1;
-        transition: opacity 450ms ease-out;
-      }
-    </style>
   </head>
 
   <body>
-    <script id="app-translations" type="application/json" is:inline>
+    <div
+      class="hidden"
+      id="app-translations"
+    >
       {JSON.stringify(ui[locale as keyof typeof ui])}
-    </script>
+    </div>
     <div
       class="fixed inset-0 z-999999 flex items-center justify-center bg-zinc-100 opacity-100 transition-opacity duration-450 ease-out data-[state=hidden]:pointer-events-none"
       data-state="visible"
@@ -295,12 +285,3 @@ const ClientRouterWithNonce = ClientRouter as unknown as (_properties: {
     </a>
   </body>
 </html>
-
-<style is:global>
-  html,
-  body {
-    margin: 0;
-    width: 100%;
-    min-height: 100%;
-  }
-</style>
