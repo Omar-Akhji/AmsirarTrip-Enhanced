@@ -1,6 +1,6 @@
 ---
-import { LANGUAGES } from "./constants";
 import { useTranslations } from "@/i18n/utils";
+import { LANGUAGES } from "./constants";
 
 interface Props {
   placement?: "left" | "right";
@@ -25,7 +25,7 @@ const segments = pathname.split("/").filter(Boolean);
 const localeCodes = LANGUAGES.map((l) => l.code);
 
 let basePath = pathname;
-if (segments[0] && localeCodes.includes(segments[0] as any)) {
+if (segments[0] && (localeCodes as readonly string[]).includes(segments[0])) {
   basePath = "/" + segments.slice(1).join("/");
 }
 
@@ -43,43 +43,35 @@ const getLocalizedHref = (code: string) => {
 };
 
 // Generate a unique ID to avoid collision if multiple selectors are on the same page
-const popoverId = `lang-popover-${Math.floor(Math.random() * 100000)}`;
+const popoverId = `lang-popover-${Math.floor(Math.random() * 100_000)}`;
 ---
 
-<div class={`relative inline-block ${className}`}>
+<div class:list={["relative inline-block", className]}>
   <button
-    type="button"
-    popovertarget={popoverId}
-    class="relative cursor-pointer"
     aria-haspopup="menu"
     aria-label={`${t("language") || "Language"} - ${currentLanguage.shortName}`}
+    class="relative cursor-pointer"
+    popovertarget={popoverId}
     style={`anchor-name: --anchor-${popoverId}`}
+    type="button"
   >
     <div
       class:list={[
         "flex items-center justify-center rounded-full border-2 transition-all duration-150 pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:shadow-[0_8px_18px_rgba(0,0,0,0.28)]",
-        "border-white/60 bg-white/10 text-white group-data-scrolled:border-orange group-data-scrolled:bg-orange group-data-scrolled:text-white group-data-scrolled:shadow-[0_10px_24px_oklch(56%_0.19_33deg/35%)]",
-        {
-          "size-10 text-sm": size === "sm",
-          "size-11 text-base font-semibold": size === "md",
-        },
+        "text-white group-data-scrolled:border-orange group-data-scrolled:bg-orange group-data-scrolled:shadow-[0_10px_24px_oklch(56%_0.19_33deg/35%)]",
+        { "size-10 text-sm": size === "sm", "size-11 text-base font-semibold": size === "md" },
       ]}
     >
       <img
-        src="/icons/translate-icon-com.svg"
         alt=""
-        width="25"
+        class:list={["object-contain", { "size-5": size === "sm", "size-6.25": size === "md" }]}
         height="25"
-        class:list={[
-          "object-contain",
-          {
-            "size-5": size === "sm",
-            "size-6.25": size === "md",
-          },
-        ]}
+        src="/icons/translate-icon-com.svg"
+        width="25"
       />
     </div>
     <span
+      aria-hidden="true"
       class:list={[
         "absolute -inset-e-1.5 -bottom-1 font-bold tracking-[0.04em] text-white rounded-full border-2 border-white bg-orange",
         {
@@ -87,48 +79,44 @@ const popoverId = `lang-popover-${Math.floor(Math.random() * 100000)}`;
           "px-1.5 py-0.5 text-[0.625rem]": size === "md",
         },
       ]}
-      aria-hidden="true"
     >
       {currentLanguage.shortName}
     </span>
   </button>
 
   <div
+    aria-orientation="vertical"
+    class:list={[
+      "m-0 border-none bg-transparent p-0 outline-hidden",
+      "fixed z-50 mbs-2 overflow-hidden rounded-xl border border-white/10 bg-dark/90 text-white shadow-xl backdrop-blur-xl inline-48",
+      "transition-all duration-300 ease-out transition-discrete opacity-0 scale-95 starting:opacity-0 starting:scale-95",
+    ]}
     id={popoverId}
     popover="auto"
-    class:list={[
-      "m-0 border-none bg-transparent p-0 outline-hidden backdrop:bg-black/20",
-      "fixed z-50 mbs-2 overflow-hidden rounded-xl border border-white/10 bg-dark/90 text-white shadow-xl backdrop-blur-xl inline-48 group-data-scrolled:border-light-grey-alt2/60 group-data-scrolled:bg-white/90 group-data-scrolled:text-dark-grey",
-      "transition-all duration-300 ease-out transition-discrete opacity-0 scale-95 open:opacity-100 open:scale-100 starting:opacity-0 starting:scale-95",
-    ]}
+    role="menu"
     style={`
       position-anchor: --anchor-${popoverId};
       top: anchor(bottom);
-      ${placement === 'left' ? 'left: anchor(left);' : 'right: anchor(right);'}
+      ${placement === "left" ? "left: anchor(left);" : "right: anchor(right);"}
     `}
-    role="menu"
-    aria-orientation="vertical"
   >
     <div class="flex flex-col gap-1 p-1">
       {
         LANGUAGES.map((lang) => (
           <a
-            href={getLocalizedHref(lang.code)}
-            role="menuitemradio"
             aria-checked={lang.code === currentLanguage.code}
             class:list={[
-              "flex items-center justify-between rounded-lg px-3 py-2 text-sm text-light-grey-alt2 transition-colors duration-150 inline-full group-data-scrolled:text-grey hover:bg-white/10 hover:text-white group-data-scrolled:hover:bg-light-grey group-data-scrolled:hover:text-dark-grey",
-              {
-                "bg-white/10 text-white group-data-scrolled:bg-orange/10 group-data-scrolled:text-orange":
-                  lang.code === currentLanguage.code,
-              },
+              "flex items-center justify-between rounded-lg px-3 py-2 text-sm text-light-grey-alt2 transition-colors duration-150 inline-full hover:bg-white/10 hover:text-white group-data-scrolled:hover:bg-light-grey group-data-scrolled:hover:text-dark-grey",
+              { "bg-white/10 text-white": lang.code === currentLanguage.code },
             ]}
+            href={getLocalizedHref(lang.code)}
+            role="menuitemradio"
           >
             <span class="flex items-center gap-3">
               <span class="font-medium">{lang.name}</span>
             </span>
             {lang.code === currentLanguage.code && (
-              <div class="me-1 size-2 rounded-full bg-white group-data-scrolled:bg-orange" />
+              <div class="me-1 size-2 rounded-full group-data-scrolled:bg-orange" />
             )}
           </a>
         ))

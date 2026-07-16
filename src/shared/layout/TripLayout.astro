@@ -46,10 +46,10 @@ const sl = Astro.slots.has("default");
               class="absolute inset-0 h-full w-full object-cover"
               height={600}
               loading="eager"
+              sizes="(max-width: 600px) 400px, (max-width: 900px) 600px, 800px"
               src={imageSrc}
               width={800}
               widths={[400, 600, 800]}
-              sizes="(max-width: 600px) 400px, (max-width: 900px) 600px, 800px"
             />
           </figure>
         </div>

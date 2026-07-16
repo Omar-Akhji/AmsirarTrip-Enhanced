@@ -12,9 +12,7 @@ export default defineConfig({
   compressHTML: "jsx",
 
   // ─── Build Options ───────────────────────────────────────────────────────
-  build: {
-    inlineStylesheets: "always",
-  },
+  build: { inlineStylesheets: "always" },
 
   // ─── Output & Adapter ────────────────────────────────────────────────────
   output: "server",

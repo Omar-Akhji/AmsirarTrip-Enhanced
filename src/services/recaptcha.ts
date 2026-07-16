@@ -59,7 +59,7 @@ export async function verifyRecaptcha({ token, hostname }: VerifyOptions): Promi
     }
 
     // Hostname check: ensure token came from our domain
-    if (data.hostname && hostname) {
+    if (hostname && data.hostname) {
       const allowed = new Set([hostname, `www.${hostname}`, "localhost", "127.0.0.1"]);
       if (!allowed.has(data.hostname)) {
         console.warn(`[recaptcha] hostname mismatch: expected ${hostname}, got ${data.hostname}`);

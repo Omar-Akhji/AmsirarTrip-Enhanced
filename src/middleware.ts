@@ -46,9 +46,7 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
         headers: response.headers,
       });
     }
-  }
-
-  if (isStaticAsset) {
+  } else if (isStaticAsset) {
     const newResponse = new Response(response.body, response);
     if (pathname.startsWith("/_astro/")) {
       newResponse.headers.set("Cache-Control", "public, max-age=31536000, immutable");

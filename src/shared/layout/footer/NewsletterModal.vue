@@ -79,7 +79,7 @@ onUnmounted(() => {
     ref="dialogRef"
     aria-modal="true"
     aria-labelledby="newsletter-dialog-title"
-    class="fixed inset-0 z-50 m-auto overflow-visible rounded-3xl border border-neutral-200 bg-transparent p-0 text-neutral-900 shadow-2xl transition-all duration-300 inline-[95vw] max-inline-md backdrop:bg-black/50 backdrop:backdrop-blur-sm backdrop:transition-all backdrop:duration-300 open:flex open:flex-col starting:backdrop:bg-black/0 starting:open:scale-95 starting:open:opacity-0"
+    class="fixed inset-0 z-50 m-auto overflow-visible rounded-3xl border border-neutral-200 bg-transparent p-0 text-neutral-900 shadow-2xl inline-[95vw] max-inline-md backdrop:backdrop-blur-sm backdrop:transition-all backdrop:duration-300 open:flex open:flex-col starting:backdrop:bg-black/0 starting:open:scale-95 starting:open:opacity-0"
     @cancel="handleCancel"
   >
     <div
@@ -119,9 +119,9 @@ onUnmounted(() => {
 
         <form
           :aria-label="t('footer.newsletterAria')"
-          @submit.prevent="handleSubmit"
           toolname="subscribe_to_newsletter"
           tooldescription="Subscribes the user to the newsletter with their name and email address"
+          @submit.prevent="handleSubmit"
         >
           <div class="space-y-4">
             <div>
@@ -145,7 +145,7 @@ onUnmounted(() => {
                   required
                   minlength="2"
                   autocomplete="name"
-                  class="rounded-full border border-neutral-200 bg-neutral-50 ps-10 pe-4 text-sm text-neutral-900 transition-all duration-200 block-11 inline-full placeholder:text-neutral-400 user-valid:border-green-500 user-invalid:border-red-500 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden"
+                  class="rounded-full border ps-10 pe-4 text-sm transition-all duration-200 block-11 inline-full placeholder:text-neutral-400 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden"
                 />
               </div>
             </div>
@@ -170,7 +170,7 @@ onUnmounted(() => {
                   :placeholder="t('footer.newsletterPlaceholder')"
                   required
                   autocomplete="email"
-                  class="rounded-full border border-neutral-200 bg-neutral-50 ps-10 pe-4 text-sm text-neutral-900 transition-all duration-200 block-11 inline-full placeholder:text-neutral-400 user-valid:border-green-500 user-invalid:border-red-500 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden"
+                  class="rounded-full border ps-10 pe-4 text-sm text-neutral-900 transition-all duration-200 block-11 inline-full user-invalid:border-red-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden"
                 />
               </div>
             </div>

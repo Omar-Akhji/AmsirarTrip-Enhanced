@@ -1,11 +1,25 @@
 import { DEFAULT_LOCALE as defaultLang, LOCALES } from "../../i18n/locales";
 
+type TranslationMap = Record<string, unknown>;
+
+interface AstroGlobals {
+  __LOCALE__?: string;
+  __TRANSLATIONS__?: TranslationMap;
+}
+
+function getAstroGlobals(): AstroGlobals {
+  return globalThis as unknown as AstroGlobals;
+}
+
 export function getGlobalLocale(): string {
-  if (typeof window !== "undefined" && (window as any).__LOCALE__) {
-    return (window as any).__LOCALE__;
+  if (typeof window !== "undefined") {
+    const meta = document.querySelector('meta[name="app-locale"]');
+    const content = meta?.getAttribute("content");
+    if (content) return content;
   }
-  if (typeof globalThis !== "undefined" && (globalThis as any).__LOCALE__) {
-    return (globalThis as any).__LOCALE__;
+  const globals = getAstroGlobals();
+  if (typeof window !== "undefined" && globals.__LOCALE__) {
+    return globals.__LOCALE__;
   }
   if (typeof location !== "undefined") {
     const segment = location.pathname.split("/").find(Boolean);
@@ -16,30 +30,44 @@ export function getGlobalLocale(): string {
   return defaultLang;
 }
 
-export function useTranslation() {
-  const locale = getGlobalLocale();
+let cachedTranslations: TranslationMap | undefined;
 
-  function lookup(key: string): any {
-    let translations: any = undefined;
-    if (typeof window !== "undefined") {
-      translations = (window as any).__TRANSLATIONS__;
-    } else if (typeof globalThis !== "undefined") {
-      translations = (globalThis as any).__TRANSLATIONS__;
-    }
+function lookup(key: string): unknown {
+  let translations = cachedTranslations;
 
-    if (!translations) return undefined;
-
-    const keys = key.split(".");
-    let result: any = translations;
-    for (const k of keys) {
-      if (result && typeof result === "object" && k in result) {
-        result = result[k];
-      } else {
-        return undefined;
+  if (!translations && typeof window !== "undefined") {
+    const el = document.querySelector("#app-translations");
+    const dataTranslations = (el as HTMLElement | null)?.dataset["translations"];
+    if (dataTranslations) {
+      try {
+        translations = JSON.parse(dataTranslations) as TranslationMap;
+        cachedTranslations = translations;
+      } catch (error) {
+        console.error("Failed to parse translations from data attribute:", error);
       }
     }
-    return result;
   }
+
+  if (!translations) {
+    translations = getAstroGlobals().__TRANSLATIONS__;
+  }
+
+  if (!translations) return undefined;
+
+  const keys = key.split(".");
+  let result: unknown = translations;
+  for (const k of keys) {
+    if (result && typeof result === "object" && k in (result as Record<string, unknown>)) {
+      result = (result as Record<string, unknown>)[k];
+    } else {
+      return undefined;
+    }
+  }
+  return result;
+}
+
+export function useTranslation() {
+  const locale = getGlobalLocale();
 
   function t(key: string, values?: string | Record<string, string | number>): string {
     const result = lookup(key);
@@ -48,7 +76,7 @@ export function useTranslation() {
       return typeof values === "string" ? values : key;
     }
 
-    if (typeof result !== "string" && !Array.isArray(result) && typeof result !== "object") {
+    if (typeof result !== "string" && typeof result !== "object" && !Array.isArray(result)) {
       return typeof values === "string" ? values : key;
     }
 
@@ -64,7 +92,7 @@ export function useTranslation() {
   }
 
   const tFunc = Object.assign(t, {
-    raw(key: string): any {
+    raw(key: string): unknown {
       return lookup(key);
     },
     has(key: string): boolean {

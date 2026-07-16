@@ -22,7 +22,7 @@ const { t } = useTranslation();
       </label>
       <input
         id="fullName"
-        class="rounded-2xl border border-neutral-200 px-4 py-3 text-sm inline-full user-valid:border-green-500 user-invalid:border-red-500 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden"
+        class="rounded-2xl border border-neutral-200 px-4 py-3 text-sm inline-full focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden"
         :maxlength="100"
         type="text"
         name="fullName"
@@ -52,7 +52,7 @@ const { t } = useTranslation();
       </label>
       <input
         id="phone"
-        class="rounded-2xl border border-neutral-200 px-4 py-3 text-sm inline-full user-valid:border-green-500 user-invalid:border-red-500 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden"
+        class="rounded-2xl border border-neutral-200 px-4 py-3 text-sm inline-full focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden"
         :maxlength="20"
         type="tel"
         name="phone"
@@ -83,7 +83,7 @@ const { t } = useTranslation();
     </label>
     <input
       id="email"
-      class="rounded-2xl border border-neutral-200 px-4 py-3 text-sm inline-full user-valid:border-green-500 user-invalid:border-red-500 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden"
+      class="rounded-2xl border border-neutral-200 px-4 py-3 text-sm inline-full focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden"
       type="email"
       name="email"
       toolparamdescription="The email address of the guest"

@@ -1,11 +1,11 @@
 /**
  * Scroll Animation Orchestrator
  *
- * Lightweight TypeScript that triggers CSS @keyframes animations via
- * IntersectionObserver. The actual animations run on the compositor thread
- * via CSS — this script only toggles classes.
+ * Lightweight TypeScript that triggers CSS @keyframes animations via IntersectionObserver. The
+ * actual animations run on the compositor thread via CSS — this script only toggles classes.
  *
  * Also handles:
+ *
  * - Counter count-up animations (DOM text manipulation)
  * - Stagger delay conversion (transition-delay → animation-delay)
  * - Astro View Transition lifecycle hooks
@@ -30,11 +30,7 @@ function createRevealObserver(): IntersectionObserver {
         el.classList.add("is-visible");
 
         // Clean up will-change after animation completes
-        el.addEventListener(
-          "animationend",
-          () => el.classList.add("is-done"),
-          { once: true },
-        );
+        el.addEventListener("animationend", () => el.classList.add("is-done"), { once: true });
 
         // Safety fallback in case animationend doesn't fire
         globalThis.setTimeout(() => el.classList.add("is-done"), ANIMATION_CLEANUP_MS);
@@ -43,11 +39,7 @@ function createRevealObserver(): IntersectionObserver {
         revealObserver?.unobserve(el);
       }
     },
-    {
-      root: null,
-      rootMargin: "0px 0px -8% 0px",
-      threshold: 0.05,
-    },
+    { root: null, rootMargin: "0px 0px -8% 0px", threshold: 0.05 },
   );
 }
 
@@ -58,20 +50,19 @@ function createRevealObserver(): IntersectionObserver {
 function animateCounter(el: HTMLElement) {
   const countToAttr = el.dataset["countTo"];
   const text = el.textContent || "";
-  const numberMatches = [...text.matchAll(/\d+/g)];
+  const numberMatches = text.matchAll(/\d+/g).toArray();
   if (!countToAttr && numberMatches.length !== 1) return;
 
   const match = numberMatches[0];
-  const targetVal =
-    countToAttr !== undefined ? Number.parseInt(countToAttr, 10) : Number.parseInt(match![0], 10);
+  if (!match) return;
+  const targetVal = Number(countToAttr === undefined ? match[0] : countToAttr);
   if (Number.isNaN(targetVal)) return;
 
-  const prefix = countToAttr ? "" : text.slice(0, match!.index);
-  const suffix = countToAttr ? "" : text.slice(match!.index! + match![0].length);
+  const prefix = countToAttr ? "" : text.slice(0, match.index);
+  const suffix = countToAttr ? "" : text.slice(match.index + match[0].length);
 
   const durationAttr = el.dataset["countDuration"];
-  const duration =
-    durationAttr !== undefined ? Number.parseInt(durationAttr, 10) : 1800;
+  const duration = durationAttr === undefined ? 1800 : Number(durationAttr);
 
   const startTime = performance.now();
 
@@ -139,7 +130,7 @@ function init() {
   if (!reducedMotion) {
     revealObserver = createRevealObserver();
     const revealElements = document.querySelectorAll<HTMLElement>("[data-animate]");
-    revealElements.forEach((el) => revealObserver!.observe(el));
+    revealElements.forEach((el) => revealObserver?.observe(el));
   }
 
   // Counter Observer
@@ -148,7 +139,7 @@ function init() {
       for (const entry of entries) {
         if (!entry.isIntersecting) continue;
         animateCounter(entry.target as HTMLElement);
-        counterObserver!.unobserve(entry.target);
+        counterObserver?.unobserve(entry.target);
       }
     },
     { root: null, rootMargin: "0px 0px -5% 0px", threshold: 0.1 },
@@ -157,7 +148,7 @@ function init() {
   const counterElements = document.querySelectorAll<HTMLElement>(
     "[data-scroll-counter], [data-count-to]",
   );
-  counterElements.forEach((el) => counterObserver!.observe(el));
+  counterElements.forEach((el) => counterObserver?.observe(el));
 }
 
 function cleanup() {

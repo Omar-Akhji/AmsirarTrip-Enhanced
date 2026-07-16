@@ -26,7 +26,7 @@ export function useTranslations(locale: string) {
       return typeof values === "string" ? values : key;
     }
 
-    if (typeof result !== "string" && !Array.isArray(result) && typeof result !== "object") {
+    if (typeof result !== "string" && typeof result !== "object" && !Array.isArray(result)) {
       return typeof values === "string" ? values : key;
     }
 

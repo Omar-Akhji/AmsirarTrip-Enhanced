@@ -15,7 +15,8 @@
  * WHATSAPP_NUMBER)
  */
 
-const raw = import.meta.env["PUBLIC_WHATSAPP_NUMBER"] ?? "212661173144";
+const raw: string =
+  (import.meta.env["PUBLIC_WHATSAPP_NUMBER"] as string | undefined) ?? "212661173144";
 
 /** WhatsApp link — wa.me/{number} */
 export const WHATSAPP_LINK = `https://wa.me/${raw}`;

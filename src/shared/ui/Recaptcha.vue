@@ -70,7 +70,7 @@ const loadRecaptchaScript = (): Promise<void> => {
 
 const renderRecaptcha = () => {
   const grecaptcha = getGrecaptcha();
-  if (!container.value || !grecaptcha) return;
+  if (!grecaptcha || !container.value) return;
 
   try {
     widgetId = grecaptcha.render(container.value, {

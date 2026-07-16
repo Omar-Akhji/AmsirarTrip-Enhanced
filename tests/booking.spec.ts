@@ -4,14 +4,14 @@ test.describe("Booking Form E2E Tests", () => {
   test.beforeEach(async ({ page }) => {
     // Navigate to a sample tour page
     await page.goto("/tours/grand-moroccan-circuit-10-days");
-    
+
     // Scroll the booking form into view to trigger Astro's client:visible hydration
     const formSection = page.locator("#booking");
     await formSection.scrollIntoViewIfNeeded();
-    
+
     // Wait for the form to complete hydration
     const form = formSection.locator('form[data-form="booking"]');
-    await expect(form).toHaveAttribute("data-hydrated", "true", { timeout: 15000 });
+    await expect(form).toHaveAttribute("data-hydrated", "true", { timeout: 15_000 });
   });
 
   test("should render the booking form elements correctly", async ({ page }) => {
@@ -43,7 +43,9 @@ test.describe("Booking Form E2E Tests", () => {
     await formSection.locator('input[name="email"]').fill("test@example.com");
     await formSection.locator('input[name="phone"]').fill("+1234567890");
     await formSection.locator('input[name="numberOfPeople"]').fill("2");
-    await formSection.locator('textarea[name="message"]').fill("This is an automated test message for booking.");
+    await formSection
+      .locator('textarea[name="message"]')
+      .fill("This is an automated test message for booking.");
 
     // Submit the form
     await formSection.locator('button[type="submit"]').click();

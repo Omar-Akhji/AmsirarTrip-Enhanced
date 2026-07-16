@@ -152,7 +152,7 @@ const labelledBy = computed(() => (props.ariaLabel ? undefined : popoverId));
       :aria-label="ariaLabel"
       :aria-labelledby="labelledBy ? popoverId : undefined"
       :class="[
-        'fixed inset-auto m-0 border-none bg-transparent p-0 outline-hidden backdrop:bg-black/20',
+        'fixed inset-auto m-0 border-none p-0 outline-hidden backdrop:bg-black/20',
         className,
       ]"
     >

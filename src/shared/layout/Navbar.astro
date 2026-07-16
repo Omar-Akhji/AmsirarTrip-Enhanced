@@ -36,7 +36,7 @@ const isActive = (to: string) =>
 <header>
   <nav
     aria-label={t("nav.mainAria", "Main Navigation")}
-    class="group fixed inset-s-1/2 top-2 z-50 translate-x-[-50%] rounded-2xl border border-white/10 bg-white/10 px-4 py-2 text-white shadow-[0_10px_30px_rgba(3,7,18,0.12)] backdrop-blur-xl transition-colors duration-200 will-change-auto inline-[min(1100px,calc(100%-2rem))] has-data-[state=open]:backdrop-blur-sm data-scrolled:bg-white data-scrolled:text-dark data-scrolled:shadow-[0_12px_30px_oklch(0%_0_0deg/8%)]"
+    class="group fixed inset-s-1/2 top-2 z-50 translate-x-[-50%] rounded-2xl border border-white/10 px-4 py-2 transition-colors duration-200 will-change-auto inline-[min(1100px,calc(100%-2rem))] has-data-[state=open]:backdrop-blur-sm data-scrolled:bg-white data-scrolled:text-dark data-scrolled:shadow-[0_12px_30px_oklch(0%_0_0deg/8%)]"
     id="main-navbar"
   >
     <div
@@ -65,11 +65,11 @@ const isActive = (to: string) =>
       </a>
       <a
         aria-label="AmsirarTrip Home"
-        class="text-[1.5rem] font-semibold tracking-tight text-white transition-colors duration-200 group-data-scrolled:text-dark-grey"
+        class="text-[1.5rem] font-semibold tracking-tight transition-colors duration-200 group-data-scrolled:text-dark-grey"
         href={localize("/")}
       >
         Amsirar<span
-          class="ms-1 font-brand font-light text-white transition-colors duration-200 group-data-scrolled:text-orange"
+          class="ms-1 font-brand font-light transition-colors duration-200 group-data-scrolled:text-orange"
           >Trip</span
         >
       </a>
@@ -91,7 +91,7 @@ const isActive = (to: string) =>
                   class:list={[
                     "inline-flex items-center gap-2 rounded-full px-3 py-2 text-[0.98rem] font-medium tracking-tight transition-all duration-200",
                     {
-                      "bg-white/10 text-white shadow-[0_0_0_1px_rgb(0_0_0/_5%)] backdrop-blur-md group-data-scrolled:bg-orange group-data-scrolled:text-white group-data-scrolled:shadow-[0_10px_26px_oklch(56%_0.19_33deg/12%)] pointer-fine:hover:-translate-y-0.5":
+                      "backdrop-blur-md group-data-scrolled:bg-orange group-data-scrolled:text-white group-data-scrolled:shadow-[0_10px_26px_oklch(56%_0.19_33deg/12%)] pointer-fine:hover:-translate-y-0.5":
                         active,
                       "bg-transparent text-inherit pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:bg-white/10 pointer-fine:hover:shadow-[0_8px_26px_rgba(3,7,18,0.12)]":
                         !active,
@@ -108,8 +108,17 @@ const isActive = (to: string) =>
       </ul>
 
       <MobileMenu>
-        <LanguageSelector slot="language-selector-tablet" size="sm" placement="left" />
-        <LanguageSelector slot="language-selector-mobile" size="sm" class="me-auto" placement="left" />
+        <LanguageSelector
+          placement="left"
+          size="sm"
+          slot="language-selector-tablet"
+        />
+        <LanguageSelector
+          class="me-auto"
+          placement="left"
+          size="sm"
+          slot="language-selector-mobile"
+        />
       </MobileMenu>
     </div>
   </nav>

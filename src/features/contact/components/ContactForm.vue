@@ -146,9 +146,9 @@ const handleSubmit = async (event: Event) => {
               noValidate
               class="space-y-5 p-6 md:p-8"
               data-form="contact"
-              @submit.prevent="handleSubmit"
               toolname="submit_custom_tour_request"
               tooldescription="Submits a custom private Morocco tour and itinerary request for planning"
+              @submit.prevent="handleSubmit"
             >
               <output
                 v-if="state?.['message']"

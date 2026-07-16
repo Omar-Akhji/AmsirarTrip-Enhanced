@@ -35,10 +35,10 @@ const locale = Astro.currentLocale || "en";
       class="absolute inset-0 size-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
       height={480}
       loading={priority ? "eager" : "lazy"}
+      sizes="(max-width: 480px) 320px, (max-width: 768px) 480px, 640px"
       src={item.image}
       width={640}
       widths={[320, 480, 640]}
-      sizes="(max-width: 480px) 320px, (max-width: 768px) 480px, 640px"
     />
     <div
       class="absolute inset-0 bg-linear-to-t from-zinc-900/60 via-transparent to-transparent opacity-60 transition-opacity duration-300 group-hover:opacity-40"

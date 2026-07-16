@@ -49,7 +49,7 @@ onMounted(() => {
       </label>
       <input
         id="numberOfPeople"
-        class="rounded-2xl border border-neutral-200 px-4 py-3 text-sm inline-full user-valid:border-green-500 user-invalid:border-red-500 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden"
+        class="rounded-2xl border border-neutral-200 px-4 py-3 text-sm inline-full focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden"
         type="number"
         name="numberOfPeople"
         toolparamdescription="The total number of people participating in the tour"
@@ -145,7 +145,7 @@ onMounted(() => {
     </label>
     <textarea
       id="message"
-      class="rounded-2xl border border-neutral-200 px-4 py-3 text-sm inline-full user-valid:border-green-500 user-invalid:border-red-500 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden"
+      class="rounded-2xl border border-neutral-200 px-4 py-3 text-sm inline-full focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden"
       :maxlength="1000"
       name="message"
       toolparamdescription="Any custom requests, message, or notes from the guest regarding the booking"
