@@ -15,7 +15,7 @@
     "preview": "astro preview",
     "start": "node ./dist/server/entry.mjs",
     "test:e2e": "playwright test",
-    "test:lighthouse": "bun run build && node scripts/lighthouse-test.js",
+    "test:lighthouse": "bun run build && bun scripts/lighthouse-test.ts",
     "type-check": "tsc --noEmit"
   },
   "lint-staged": {
