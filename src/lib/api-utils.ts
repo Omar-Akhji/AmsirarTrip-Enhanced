@@ -1,4 +1,4 @@
-import { logSuspiciousActivity } from "./server-utils";
+import { logSecurityEvent } from "./server-utils";
 
 const rateLimitMap = new Map<string, { count: number; resetAt: number; violations: number }>();
 const blockedIPs = new Map<string, number>();
@@ -34,9 +34,9 @@ export function checkRateLimit(
 
     if (record.violations >= 3) {
       blockedIPs.set(identifier, now + 3_600_000);
-      logSuspiciousActivity(
+      logSecurityEvent(
+        "BLOCKED_IP",
         identifier,
-        "BLOCKED",
         `Blocked after ${record.violations} rate limit violations`,
       );
       return { allowed: false, remaining: 0, blocked: true };

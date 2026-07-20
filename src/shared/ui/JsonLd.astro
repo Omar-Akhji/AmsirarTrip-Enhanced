@@ -12,6 +12,7 @@ const safeId = id?.replaceAll(/[^a-zA-Z0-9_-]/g, "");
 
 <script
   id={safeId}
+  is:inline
   set:html={json}
   type="application/ld+json"
 />

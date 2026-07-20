@@ -18,3 +18,7 @@ tsconfig.tsbuildinfo
 
 # Static assets and public files
 public/
+
+# Lighthouse reports
+lighthouse-*.html
+

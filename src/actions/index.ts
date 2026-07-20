@@ -5,7 +5,7 @@ import { checkRateLimit } from "../lib/api-utils";
 import { env as environment } from "../lib/env";
 import { createErrorResponse, type FormState } from "../lib/form-types";
 import { getBookingSchema, getContactSchema, getNewsletterSchema } from "../lib/schemas";
-import { createMailer, escapeHtml, logSuspiciousActivity } from "../lib/server-utils";
+import { escapeHtml, getMailer, logSecurityEvent } from "../lib/server-utils";
 import { verifyRecaptcha } from "../services/recaptcha";
 
 function getLanguageName(code: string = ""): string {
@@ -31,14 +31,14 @@ export const server = {
 
         const honeypot = formData.get("website") as string;
         if (honeypot) {
-          logSuspiciousActivity(ip, "HONEYPOT_TRIGGERED", "booking-action");
+          logSecurityEvent("HONEYPOT", ip, "booking-action");
           return { success: true, message: "Booking request sent!" };
         }
 
         const rateLimit = checkRateLimit(ip, 10, 60_000);
         if (!rateLimit.allowed) {
           if (rateLimit.blocked) {
-            logSuspiciousActivity(ip, "BLOCKED_ACTION", "booking-action");
+            logSecurityEvent("RATE_LIMIT", ip, "booking-action");
           }
           return { success: false, message: "Too many requests. Please try again later." };
         }
@@ -74,11 +74,11 @@ export const server = {
 
         const host = context.request.headers.get("host")?.split(":", 1)[0] || "";
         if (!(await verifyRecaptcha({ token: data.recaptchaToken, hostname: host }))) {
-          logSuspiciousActivity(ip, "CAPTCHA_FAILED", "booking-action");
+          logSecurityEvent("CAPTCHA_FAILED", ip, "booking-action");
           return { success: false, message: "Security verification failed. Please try again." };
         }
 
-        const transporter = createMailer();
+        const transporter = getMailer();
         const mailTo = environment.MAIL_TO || environment.GMAIL_USER;
 
         const html = `
@@ -135,14 +135,14 @@ Number of people : ${data.persons}${data.message ? `\nMessage : ${data.message}`
 
         const honeypot = formData.get("website") as string;
         if (honeypot) {
-          logSuspiciousActivity(ip, "HONEYPOT_TRIGGERED", "contact-action");
+          logSecurityEvent("HONEYPOT", ip, "contact-action");
           return { success: true, message: "Message sent!" };
         }
 
         const rateLimit = checkRateLimit(ip, 10, 60_000);
         if (!rateLimit.allowed) {
           if (rateLimit.blocked) {
-            logSuspiciousActivity(ip, "BLOCKED_ACTION", "contact-action");
+            logSecurityEvent("RATE_LIMIT", ip, "contact-action");
           }
           return { success: false, message: "Too many requests. Please try again later." };
         }
@@ -175,11 +175,11 @@ Number of people : ${data.persons}${data.message ? `\nMessage : ${data.message}`
 
         const host = context.request.headers.get("host")?.split(":", 1)[0] || "";
         if (!(await verifyRecaptcha({ token: data.recaptchaToken, hostname: host }))) {
-          logSuspiciousActivity(ip, "CAPTCHA_FAILED", "contact-action");
+          logSecurityEvent("CAPTCHA_FAILED", ip, "contact-action");
           return { success: false, message: "Security verification failed. Please try again." };
         }
 
-        const transporter = createMailer();
+        const transporter = getMailer();
         const mailTo = environment.MAIL_TO || environment.GMAIL_USER;
 
         const html = `
@@ -219,7 +219,7 @@ Number of people : ${data.persons}${data.message ? `\nMessage : ${data.message}`
         const rateLimit = checkRateLimit(ip, 5, 60_000);
         if (!rateLimit.allowed) {
           if (rateLimit.blocked) {
-            logSuspiciousActivity(ip, "BLOCKED_ACTION", "newsletter-action");
+            logSecurityEvent("RATE_LIMIT", ip, "newsletter-action");
           }
           return { ok: false, statusKey: "footer.newsletterNetwork" };
         }
@@ -236,11 +236,11 @@ Number of people : ${data.persons}${data.message ? `\nMessage : ${data.message}`
 
         const host = context.request.headers.get("host")?.split(":", 1)[0] || "";
         if (!(await verifyRecaptcha({ token: data.recaptchaToken, hostname: host }))) {
-          logSuspiciousActivity(ip, "CAPTCHA_FAILED", "newsletter-action");
+          logSecurityEvent("CAPTCHA_FAILED", ip, "newsletter-action");
           return { ok: false, statusKey: "footer.newsletterCaptchaError" };
         }
 
-        const transporter = createMailer();
+        const transporter = getMailer();
         const mailTo = environment.MAIL_TO || environment.GMAIL_USER;
 
         const safeName = data.name.replaceAll(/[^\p{L}\p{N}\s]/gu, "");

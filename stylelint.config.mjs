@@ -13,4 +13,5 @@ export default {
     // Allow class naming selector patterns (standard camelCase/kebab-case)
     "selector-class-pattern": null,
   },
+  overrides: [{ files: ["**/*.astro"], rules: { "no-invalid-position-declaration": null } }],
 };
