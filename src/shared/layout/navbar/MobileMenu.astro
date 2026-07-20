@@ -75,7 +75,7 @@ const isActive = (to: string) =>
     aria-controls="navbar-collapse"
     aria-expanded="false"
     aria-label={t("nav.toggleMenu")}
-    class="ms-2 flex size-10 items-center justify-center rounded-md text-lg transition-all duration-150 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-orange text-white group-data-scrolled:bg-white"
+    class="ms-2 flex size-10 items-center justify-center rounded-md text-lg transition-all duration-150 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-orange bg-black/35 text-white group-data-scrolled:bg-orange group-data-scrolled:text-white"
     id="navbar-show-btn"
     type="button"
   >
@@ -132,13 +132,13 @@ const isActive = (to: string) =>
   <!-- Navigation dropdown panel -->
   <div
     aria-label="Navigation menu"
-    class="navbar-collapse fixed inset-s-1/2 top-[calc(100%+0.75rem)] z-40 -translate-x-1/2 overflow-y-auto max-h-[calc(100vh-6rem)] rounded-2xl border shadow-[0_20px_40px_rgba(0,0,0,0.3)] transition-all duration-300 inline-[min(1100px,calc(100vw-2rem))] group-data-scrolled:border-white/10 group-data-scrolled:bg-white group-data-scrolled:text-slate-900 data-[state=open]:pointer-events-auto data-[state=open]:opacity-100 data-[state=open]:translate-y-0"
+    class="navbar-collapse fixed inset-s-1/2 top-[calc(100%+0.75rem)] z-40 -translate-x-1/2 overflow-y-auto max-h-[calc(100vh-6rem)] rounded-2xl border border-white/20 bg-slate-950 text-white shadow-[0_20px_40px_rgba(0,0,0,0.3)] transition-all duration-300 inline-[min(1100px,calc(100vw-2rem))] group-data-scrolled:border-white/10 group-data-scrolled:bg-white group-data-scrolled:text-slate-900 pointer-events-none opacity-0 -translate-y-4 data-[state=open]:pointer-events-auto data-[state=open]:opacity-100 data-[state=open]:translate-y-0"
     data-state="closed"
     id="navbar-collapse"
   >
     <!-- Social Links inside dropdown (Mobile only) -->
     <div
-      class="flex md:hidden items-center justify-center gap-4 border-b px-4 py-4 group-data-scrolled:border-light-grey-alt2/30"
+      class="flex md:hidden items-center justify-center gap-4 border-b border-white/20 px-4 py-4 group-data-scrolled:border-light-grey-alt2/30"
     >
       <ul class="flex items-center gap-4">
         {
@@ -176,9 +176,9 @@ const isActive = (to: string) =>
             <li>
               <a
                 class:list={cn(
-                  "mx-auto inline-flex items-center justify-center gap-2 rounded-full bg-transparent px-8 py-2.5 text-base font-medium transition-all duration-200 inline-fit min-inline-40 group-data-scrolled:text-dark hover:bg-white/10 group-data-scrolled:hover:bg-light-grey",
+                  "mx-auto inline-flex items-center justify-center gap-2 rounded-full bg-transparent px-8 py-2.5 text-base font-medium text-white transition-all duration-200 inline-fit min-inline-40 group-data-scrolled:text-dark hover:bg-white/10 group-data-scrolled:hover:bg-light-grey",
                   active
-                    && "bg-white/10 backdrop-blur-xs group-data-scrolled:text-white group-data-scrolled:shadow-[0_10px_26px_oklch(56%_0.19_33deg/12%)]",
+                    && "bg-white/10 text-white shadow-[0_0_0_1px_rgb(0_0_0/5%)] backdrop-blur-xs group-data-scrolled:bg-orange group-data-scrolled:text-white group-data-scrolled:shadow-[0_10px_26px_oklch(56%_0.19_33deg/12%)]",
                 )}
                 href={localize(link.to)}
               >
