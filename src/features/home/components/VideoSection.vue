@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import { useTranslation } from "@/lib/hooks/useTranslation";
+import { useTranslation } from "@/lib/hooks/use-translation";
 
 interface Props {
   fallbackImage: string;

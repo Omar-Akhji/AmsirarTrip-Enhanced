@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { useTranslation } from "@/lib/hooks/useTranslation";
+import agencyProfile from "@/data/agency-profile.json";
+import { useTranslation } from "@/lib/hooks/use-translation";
 
 const { t } = useTranslation();
 </script>
@@ -35,7 +36,7 @@ const { t } = useTranslation();
           {{ t("contact.form.info.address", "Visit") }}
         </p>
         <p class="mbs-1 text-base text-white">
-          Imm. J appt N° 5, Résidence La Perle de l'Atlas, angle Rue aboubakr, Marrakech
+          {{ agencyProfile.address.fullAddress }}
         </p>
       </div>
     </li>
@@ -52,16 +53,12 @@ const { t } = useTranslation();
           {{ t("contact.form.info.phone", "Call") }}
         </p>
         <a
+          v-for="phone in agencyProfile.contact.phones"
+          :key="phone.value"
           class="mbs-1 block text-base text-white pointer-fine:hover:text-orange-300"
-          href="tel:+21266173144"
+          :href="`tel:${phone.value}`"
         >
-          +212 (0) 6 61 17 31 44
-        </a>
-        <a
-          class="mbs-1 block text-base text-white/80 pointer-fine:hover:text-orange-300"
-          href="tel:+212566173144"
-        >
-          +212 (0) 5 6 61 73 14 44
+          {{ phone.display }}
         </a>
       </div>
     </li>
@@ -78,16 +75,20 @@ const { t } = useTranslation();
           {{ t("contact.form.info.email", "Email") }}
         </p>
         <a
+          v-for="email in agencyProfile.contact.emails"
+          :key="email"
           class="break-anywhere mbs-1 block text-base text-white pointer-fine:hover:text-orange-300"
-          href="mailto:amsirare@gmail.com"
+          :href="`mailto:${email}`"
         >
-          amsirare@gmail.com
+          {{ email }}
         </a>
       </div>
     </li>
   </ul>
 
   <p class="mbs-8 text-xs text-slate-400">
-    {{ t("contact.form.infoFooter", "Available every day from 09:00 to 21:00 GMT+1") }}
+    {{
+      t("contact.form.infoFooter", `Available every day from ${agencyProfile.contact.workingHours}`)
+    }}
   </p>
 </template>

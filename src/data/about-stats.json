@@ -1,0 +1,30 @@
+[
+  {
+    "id": "photos",
+    "icon": "/icons/camera-icon.svg",
+    "value": 12200,
+    "duration": 1800,
+    "labelKey": "about.facts.photos"
+  },
+  {
+    "id": "beaches",
+    "icon": "/icons/beach-icon.svg",
+    "value": 4500,
+    "duration": 1700,
+    "labelKey": "about.facts.beaches"
+  },
+  {
+    "id": "mountains",
+    "icon": "/icons/mountain-icon.svg",
+    "value": 840,
+    "duration": 1400,
+    "labelKey": "about.facts.mountains"
+  },
+  {
+    "id": "cruises",
+    "icon": "/icons/travel-icon.svg",
+    "value": 1200,
+    "duration": 1500,
+    "labelKey": "about.facts.cruises"
+  }
+]

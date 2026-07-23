@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { FormState } from "@/lib/form-types";
-import { useTranslation } from "@/lib/hooks/useTranslation";
+import { useTranslation } from "@/lib/hooks/use-translation";
 
 interface Props {
   state: FormState | null;

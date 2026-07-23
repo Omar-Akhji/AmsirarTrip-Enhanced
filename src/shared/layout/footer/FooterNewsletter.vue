@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Mail from "lucide-vue-next/dist/esm/icons/mail";
-import { useTranslation } from "@/lib/hooks/useTranslation";
+import { useTranslation } from "@/lib/hooks/use-translation";
 import NewsletterModal from "./NewsletterModal.vue";
 
 const { t } = useTranslation();

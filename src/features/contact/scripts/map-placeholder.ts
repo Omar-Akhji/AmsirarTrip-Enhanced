@@ -4,14 +4,18 @@ function initMapPlaceholder() {
   const iframe = container?.querySelector("iframe");
 
   if (placeholder && container && iframe) {
-    placeholder.addEventListener("click", () => {
-      const src = iframe.dataset["src"];
-      if (src) {
-        iframe.setAttribute("src", src);
-      }
-      container.classList.remove("hidden");
-      placeholder.classList.add("hidden");
-    });
+    placeholder.addEventListener(
+      "click",
+      () => {
+        const src = iframe.dataset["src"];
+        if (src) {
+          iframe.setAttribute("src", src);
+        }
+        container.classList.remove("hidden");
+        placeholder.classList.add("hidden");
+      },
+      { once: true },
+    );
   }
 }
 

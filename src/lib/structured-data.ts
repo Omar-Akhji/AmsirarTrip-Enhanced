@@ -1,3 +1,5 @@
+import agencyProfile from "@/data/agency-profile.json";
+
 type TripItineraryItem = { position: number; name: string; description?: string };
 
 type TripStructuredData<TLocation> = {
@@ -127,16 +129,20 @@ export function generateOrganizationJsonLd() {
     "@context": "https://schema.org",
     "@type": "TravelAgency",
     "@id": `${BASE_URL}/#organization`,
-    name: "Amsirar Trip",
+    name: agencyProfile.name,
     alternateName: ["Amsirar", "AmsirarTrip", "amsirartrip", "Amsirar Tours", "Amsirar Morocco"],
     url: "https://amsirartrip.com",
     logo: "https://amsirartrip.com/horse-head.svg",
     image: "https://amsirartrip.com/images/Header/header-1.webp",
     description:
       "Amsirar Trip is a specialist Morocco travel agency offering authentic Sahara desert tours, imperial city excursions, Atlas Mountains treks, and cultural experiences. Book your Morocco adventure with local experts.",
-    legalName: "Amsirar Trip",
-    foundingDate: "2004",
-    numberOfEmployees: { "@type": "QuantitativeValue", minValue: 10, maxValue: 50 },
+    legalName: agencyProfile.name,
+    foundingDate: agencyProfile.foundingDate,
+    numberOfEmployees: {
+      "@type": "QuantitativeValue",
+      minValue: agencyProfile.employeeRange.min,
+      maxValue: agencyProfile.employeeRange.max,
+    },
     knowsAbout: [
       "Morocco Tourism",
       "Sahara Desert Tours",
@@ -145,11 +151,11 @@ export function generateOrganizationJsonLd() {
     ],
     address: {
       "@type": "PostalAddress",
-      streetAddress: "Marrakech",
-      addressLocality: "Marrakech",
-      addressRegion: "Marrakech-Safi",
-      postalCode: "40000",
-      addressCountry: "MA",
+      streetAddress: agencyProfile.address.streetAddress,
+      addressLocality: agencyProfile.address.addressLocality,
+      addressRegion: agencyProfile.address.addressRegion,
+      postalCode: agencyProfile.address.postalCode,
+      addressCountry: agencyProfile.address.addressCountry,
     },
     contactPoint: {
       "@type": "ContactPoint",
@@ -158,11 +164,7 @@ export function generateOrganizationJsonLd() {
       areaServed: "MA",
       availableLanguage: ["English", "French", "Spanish", "German"],
     },
-    sameAs: [
-      "https://facebook.com/amsirartrip",
-      "https://instagram.com/amsirartrip",
-      "https://twitter.com/amsirartrip",
-    ],
+    sameAs: agencyProfile.socials,
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: "4.8",
@@ -170,32 +172,18 @@ export function generateOrganizationJsonLd() {
       bestRating: "5",
       worstRating: "1",
     },
-    review: [
-      {
-        "@type": "Review",
-        author: { "@type": "Person", name: "Kevin B." },
-        datePublished: "2023-11-15",
-        reviewBody:
-          "An unforgettable journey! From the bustling souks of Marrakech to the silent dunes of Merzouga. Amsirar Trip took care of everything.",
-        reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5", worstRating: "1" },
+    review: agencyProfile.reviews.map((rev) => ({
+      "@type": "Review",
+      author: { "@type": "Person", name: rev.author },
+      datePublished: rev.datePublished,
+      reviewBody: sanitizeForJsonLd(rev.body),
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: String(rev.rating),
+        bestRating: "5",
+        worstRating: "1",
       },
-      {
-        "@type": "Review",
-        author: { "@type": "Person", name: "Ben L." },
-        datePublished: "2024-02-10",
-        reviewBody:
-          "Professional, punctual, and passionate. Our driver was incredibly knowledgeable and made us feel safe throughout the entire Atlas Mountains trek.",
-        reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5", worstRating: "1" },
-      },
-      {
-        "@type": "Review",
-        author: { "@type": "Person", name: "Sara M." },
-        datePublished: "2024-03-22",
-        reviewBody:
-          "The luxury desert camp was beyond our expectations. Watching the sunrise over the Sahara while sipping traditional mint tea is a memory I'll cherish forever.",
-        reviewRating: { "@type": "Rating", ratingValue: "5", bestRating: "5", worstRating: "1" },
-      },
-    ],
+    })),
   };
 }
 

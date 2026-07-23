@@ -10,7 +10,7 @@ export function useTranslations(locale: string) {
     const keys = key.split(".");
     let result: unknown = translations;
     for (const k of keys) {
-      if (result && typeof result === "object" && k in (result as Record<string, unknown>)) {
+      if (result && typeof result === "object" && Object.hasOwn(result, k)) {
         result = Reflect.get(result as Record<string, unknown>, k);
       } else {
         return undefined;

@@ -6,7 +6,7 @@ import Mail from "lucide-vue-next/dist/esm/icons/mail";
 import User from "lucide-vue-next/dist/esm/icons/user";
 import X from "lucide-vue-next/dist/esm/icons/x";
 import { hasRecaptchaV2, RECAPTCHA_V2_SITE_KEY } from "@/lib/client-env";
-import { useTranslation } from "@/lib/hooks/useTranslation";
+import { useTranslation } from "@/lib/hooks/use-translation";
 import Recaptcha from "@/shared/ui/Recaptcha.vue";
 
 const { t } = useTranslation();

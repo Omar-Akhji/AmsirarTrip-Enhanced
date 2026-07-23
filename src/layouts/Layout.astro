@@ -2,7 +2,7 @@
 import "../styles/global.css";
 import { ClientRouter } from "astro:transitions";
 import { Image } from "astro:assets";
-import { generateOrganizationJsonLd, generateWebsiteJsonLd } from "../lib/structuredData";
+import { generateOrganizationJsonLd, generateWebsiteJsonLd } from "../lib/structured-data";
 import Footer from "../shared/layout/Footer.astro";
 import Navbar from "../shared/layout/Navbar.astro";
 import JsonLd from "../shared/ui/JsonLd.astro";
@@ -44,6 +44,10 @@ const ClientRouterWithNonce = ClientRouter as unknown as (_properties: {
 >
   <head>
     <meta charset="UTF-8" />
+    <link
+      href="/sitemap-index.xml"
+      rel="sitemap"
+    />
     <script src="../scripts/no-js.ts"></script>
 
     <!--
@@ -116,6 +120,10 @@ const ClientRouterWithNonce = ClientRouter as unknown as (_properties: {
     <meta
       content="website"
       property="og:type"
+    />
+    <meta
+      content="Amsirar Trip"
+      property="og:site_name"
     />
     <meta
       content={locale}

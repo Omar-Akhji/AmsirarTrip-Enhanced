@@ -1,6 +1,7 @@
 ---
 import aboutImg from "@/assets/images/about-img.webp";
 import bgImage from "@/assets/images/Header/header-1.webp";
+import aboutStats from "@/data/about-stats.json";
 import { useTranslations } from "@/i18n/utils";
 import PageHeader from "@/shared/layout/PageHeader.astro";
 import { Image } from "astro:assets";
@@ -8,36 +9,19 @@ import { Image } from "astro:assets";
 const locale = Astro.currentLocale || "en";
 const t = useTranslations(locale);
 
-const factStats = [
-  {
-    id: "photos",
-    icon: "/icons/camera-icon.svg",
-    value: 12_200,
-    duration: 1800,
-    label: t("about.facts.photos"),
-  },
-  {
-    id: "beaches",
-    icon: "/icons/beach-icon.svg",
-    value: 4500,
-    duration: 1700,
-    label: t("about.facts.beaches"),
-  },
-  {
-    id: "mountains",
-    icon: "/icons/mountain-icon.svg",
-    value: 840,
-    duration: 1400,
-    label: t("about.facts.mountains"),
-  },
-  {
-    id: "cruises",
-    icon: "/icons/travel-icon.svg",
-    value: 1200,
-    duration: 1500,
-    label: t("about.facts.cruises"),
-  },
-];
+const factStats = aboutStats.map((stat) => ({
+  id: stat.id,
+  icon: stat.icon,
+  value: stat.value,
+  duration: stat.duration,
+  label: t(
+    stat.labelKey as
+      | "about.facts.photos"
+      | "about.facts.beaches"
+      | "about.facts.mountains"
+      | "about.facts.cruises",
+  ),
+}));
 ---
 
 <PageHeader

@@ -3,7 +3,7 @@ import { ref } from "vue";
 import { actions } from "astro:actions";
 import { hasRecaptchaV2, RECAPTCHA_V2_SITE_KEY } from "@/lib/client-env";
 import type { FormState } from "@/lib/form-types";
-import { useTranslation } from "@/lib/hooks/useTranslation";
+import { useTranslation } from "@/lib/hooks/use-translation";
 import Loading from "@/shared/ui/Loading.vue";
 import Recaptcha from "@/shared/ui/Recaptcha.vue";
 import ContactFormFields from "./ContactFormFields.vue";

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useTranslation } from "@/lib/hooks/useTranslation";
+import { useTranslation } from "@/lib/hooks/use-translation";
 import Image from "@/shared/ui/Image.vue";
 
 interface Perk {

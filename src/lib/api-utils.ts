@@ -24,7 +24,7 @@ export function checkRateLimit(
     rateLimitMap.set(identifier, {
       count: 1,
       resetAt: now + windowMs,
-      violations: record?.violations || 0,
+      violations: record?.violations ?? 0,
     });
     return { allowed: true, remaining: maxRequests - 1 };
   }

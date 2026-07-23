@@ -49,13 +49,13 @@ function createRevealObserver(): IntersectionObserver {
 
 function animateCounter(el: HTMLElement) {
   const countToAttr = el.dataset["countTo"];
-  const text = el.textContent || "";
+  const text = el.textContent ?? "";
   const numberMatches = text.matchAll(/\d+/g).toArray();
   if (!countToAttr && numberMatches.length !== 1) return;
 
   const match = numberMatches[0];
   if (!match) return;
-  const targetVal = Number(countToAttr === undefined ? match[0] : countToAttr);
+  const targetVal = Number(countToAttr ?? match[0]);
   if (Number.isNaN(targetVal)) return;
 
   const prefix = countToAttr ? "" : text.slice(0, match.index);

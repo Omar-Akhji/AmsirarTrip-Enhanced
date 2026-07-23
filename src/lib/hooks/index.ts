@@ -1,2 +1,2 @@
-export * from "./useTranslation";
-export * from "./useMediaQuery";
+export * from "./use-translation";
+export * from "./use-media-query";

@@ -36,7 +36,7 @@ const baseTripSchema = ({ image }: SchemaContext) =>
   });
 
 const toursCollection = defineCollection({
-  loader: glob({ pattern: "**/*.json", base: "./src/content/tours" }),
+  loader: glob({ pattern: "**/*.{json,mdx}", base: "./src/content/tours" }),
   schema: (context) =>
     baseTripSchema(context).extend({
       tourKey: z.string(),
@@ -49,7 +49,7 @@ const toursCollection = defineCollection({
 });
 
 const excursionsCollection = defineCollection({
-  loader: glob({ pattern: "**/*.json", base: "./src/content/excursions" }),
+  loader: glob({ pattern: "**/*.{json,mdx}", base: "./src/content/excursions" }),
   schema: (context) =>
     baseTripSchema(context).extend({
       excursionKey: z.string(),
@@ -60,7 +60,7 @@ const excursionsCollection = defineCollection({
 });
 
 const destinationsCollection = defineCollection({
-  loader: glob({ pattern: "**/*.json", base: "./src/content/destinations" }),
+  loader: glob({ pattern: "**/*.{json,mdx}", base: "./src/content/destinations" }),
   schema: ({ image }) =>
     z.object({
       image: image(),
@@ -72,8 +72,19 @@ const destinationsCollection = defineCollection({
     }),
 });
 
+const legalCollection = defineCollection({
+  loader: glob({ pattern: "**/*.mdx", base: "./src/content/legal" }),
+  schema: z.object({
+    title: z.string(),
+    subtitle: z.string().optional(),
+    lastUpdated: z.string(),
+    locale: z.enum(["en", "fr", "de", "es"]),
+  }),
+});
+
 export const collections = {
   tours: toursCollection,
   excursions: excursionsCollection,
   destinations: destinationsCollection,
+  legal: legalCollection,
 };

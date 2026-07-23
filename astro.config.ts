@@ -1,3 +1,4 @@
+import mdx from "@astrojs/mdx";
 import node from "@astrojs/node";
 import vue from "@astrojs/vue";
 import partytown from "@astrojs/partytown";
@@ -20,6 +21,7 @@ export default defineConfig({
 
   // ─── Integrations ────────────────────────────────────────────────────────
   integrations: [
+    mdx(),
     vue(),
     partytown(),
     htmlValidate(),
@@ -33,7 +35,14 @@ export default defineConfig({
   image: { domains: [], remotePatterns: [] },
 
   // ─── Security ────────────────────────────────────────────────────────────
-  security: { checkOrigin: true },
+  security: {
+    checkOrigin: true,
+    allowedDomains: [
+      { hostname: "amsirartrip.com", protocol: "https" },
+      { hostname: "*.amsirartrip.com", protocol: "https" },
+    ],
+    actionBodySizeLimit: 1_048_576,
+  },
 
   // ─── Cache (Astro 7+) ───────────────────────────────────────────────────
   cache: { provider: memoryCache() },

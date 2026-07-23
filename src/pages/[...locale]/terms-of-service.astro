@@ -1,5 +1,5 @@
 ---
-import TermsOfServiceView from "../../features/legal/components/TermsOfServiceView.astro";
+import TermsView from "../../features/legal/components/TermsView.astro";
 import { useTranslations } from "../../i18n/utils";
 import Layout from "../../layouts/Layout.astro";
 
@@ -14,5 +14,5 @@ const description = t("legal.terms.meta.description");
   description={description}
   title={title}
 >
-  <TermsOfServiceView />
+  <TermsView />
 </Layout>

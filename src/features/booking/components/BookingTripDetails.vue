@@ -3,9 +3,9 @@ import { ref, onMounted } from "vue";
 import { format as formatDate } from "date-fns";
 import CalendarIcon from "lucide-vue-next/dist/esm/icons/calendar";
 import type { FormState } from "@/lib/form-types";
-import { useTranslation } from "@/lib/hooks/useTranslation";
+import { useTranslation } from "@/lib/hooks/use-translation";
 import { cn } from "@/lib/utils";
-import EnhancedCalendar from "@/shared/ui/calendar.vue";
+import EnhancedCalendar from "@/shared/ui/Calendar.vue";
 import NativePopover from "@/shared/ui/NativePopover.vue";
 
 interface Props {

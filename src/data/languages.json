@@ -1,0 +1,6 @@
+[
+  { "code": "en", "name": "English", "shortName": "EN" },
+  { "code": "fr", "name": "Français", "shortName": "FR" },
+  { "code": "de", "name": "Deutsch", "shortName": "DE" },
+  { "code": "es", "name": "Español", "shortName": "ES" }
+]

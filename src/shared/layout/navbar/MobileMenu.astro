@@ -53,14 +53,13 @@ const isActive = (to: string) =>
     <slot name="language-selector-tablet" />
   </div>
 
-  <!-- Mobile Menu Brand Link -->
   <a
-    aria-label="AmsirarTrip Home"
+    aria-label="Amsirar Trip Home"
     class="absolute inset-s-1/2 z-10 -translate-x-1/2 text-[1.4rem] font-semibold tracking-tight transition-colors duration-200 group-data-scrolled:text-dark-grey"
     href={localize("/")}
   >
-    Amsirar<span
-      class="ms-1 font-brand font-light transition-colors duration-200 group-data-scrolled:text-orange"
+    Amsirar <span
+      class="font-brand font-light transition-colors duration-200 group-data-scrolled:text-orange"
       >Trip</span
     >
   </a>

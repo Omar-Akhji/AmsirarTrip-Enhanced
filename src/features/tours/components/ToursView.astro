@@ -5,7 +5,7 @@ import PageHeader from "@/shared/layout/PageHeader.astro";
 import StatHighlights from "@/shared/ui/StatHighlights.astro";
 import TripCard from "@/shared/ui/TripCard.astro";
 import { ArrowRight } from "@lucide/astro";
-import { getToursData } from "../data/toursData";
+import { getToursData } from "../data/tours-data";
 
 const locale = Astro.currentLocale || "en";
 const tours = await getToursData();

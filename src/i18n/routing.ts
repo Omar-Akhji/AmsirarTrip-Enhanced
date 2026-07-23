@@ -1,5 +1,5 @@
 import { h, ref, onMounted, onUnmounted, type SetupContext, type Ref } from "vue";
-import { getGlobalLocale } from "@/lib/hooks/useTranslation";
+import { getGlobalLocale } from "@/lib/hooks/use-translation";
 
 const defaultLang = "en";
 
