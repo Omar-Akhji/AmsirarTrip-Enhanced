@@ -6,6 +6,9 @@ import htmlValidate from "astro-html-validate";
 import compress from "@playform/compress";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig, envField, memoryCache } from "astro/config";
+import { fileURLToPath } from "node:url";
+
+const srcDir = fileURLToPath(new URL("src", import.meta.url));
 
 export default defineConfig({
   // ─── Site ────────────────────────────────────────────────────────────────
@@ -29,7 +32,7 @@ export default defineConfig({
   ],
 
   // ─── Vite ────────────────────────────────────────────────────────────────
-  vite: { plugins: [tailwindcss()], resolve: { alias: { "@": "/src" } } },
+  vite: { plugins: [tailwindcss()], resolve: { alias: { "@": srcDir } } },
 
   // ─── Image ───────────────────────────────────────────────────────────────
   image: { domains: [], remotePatterns: [] },
