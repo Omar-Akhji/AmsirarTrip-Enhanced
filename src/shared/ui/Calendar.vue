@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// Dummy comment to invalidate Docker cache for filename casing change
 import { ref, computed, watch } from "vue";
 import { ChevronLeft, ChevronRight, Calendar as CalendarIcon } from "lucide-vue-next";
 
