@@ -5,8 +5,8 @@ import CalendarIcon from "lucide-vue-next/dist/esm/icons/calendar";
 import type { FormState } from "@/lib/form-types";
 import { useTranslation } from "@/lib/hooks/use-translation";
 import { cn } from "@/lib/utils";
-import EnhancedCalendar from "@/shared/ui/Calendar.vue";
-import NativePopover from "@/shared/ui/NativePopover.vue";
+import EnhancedCalendar from "../../../shared/ui/Calendar.vue";
+import NativePopover from "../../../shared/ui/NativePopover.vue";
 
 interface Props {
   state: FormState | null;
