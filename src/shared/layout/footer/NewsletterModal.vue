@@ -126,7 +126,7 @@ onUnmounted(() => {
           <div class="space-y-4">
             <div>
               <label
-                htmlFor="newsletter-name"
+                for="newsletter-name"
                 class="mbe-1.5 block text-sm font-medium text-neutral-700"
               >
                 {{ t("footer.newsletterNameLabel") }}
@@ -152,7 +152,7 @@ onUnmounted(() => {
 
             <div>
               <label
-                htmlFor="newsletter-email"
+                for="newsletter-email"
                 class="mbe-1.5 block text-sm font-medium text-neutral-700"
               >
                 {{ t("footer.newsletterInputAria") }}
