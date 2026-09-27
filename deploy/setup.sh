@@ -87,9 +87,14 @@ fi
 echo "[7/9] Configuring Nginx..."
 
 # Create certbot webroot
-mkdir -p /var/www/certbot
+mkdir -p /var/www/certbot /etc/nginx/conf.d
 
-# Copy Nginx config
+# Copy global rate limiting and common HTTP settings
+if [ -f "$PROJECT_DIR/nginx/conf.d/amsirartrip-common.conf" ]; then
+  cp "$PROJECT_DIR/nginx/conf.d/amsirartrip-common.conf" "/etc/nginx/conf.d/amsirartrip-common.conf"
+fi
+
+# Copy Nginx bootstrap config
 cp "$PROJECT_DIR/deploy/nginx.conf" "$NGINX_CONF"
 ln -sf "$NGINX_CONF" "/etc/nginx/sites-enabled/$DOMAIN"
 rm -f /etc/nginx/sites-enabled/default
@@ -103,7 +108,7 @@ certbot certonly --webroot -w /var/www/certbot \
   -d "$DOMAIN" -d "www.$DOMAIN" \
   --non-interactive --agree-tos --email "$EMAIL"
 
-# Switch Nginx to HTTPS config after SSL is obtained
+# Switch Nginx to hardened HTTPS config after SSL is obtained
 cp "$PROJECT_DIR/nginx/amsirartrip.com.conf" "$NGINX_CONF"
 nginx -t && systemctl reload nginx
 

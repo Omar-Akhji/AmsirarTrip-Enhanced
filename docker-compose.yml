@@ -9,7 +9,8 @@ services:
     container_name: amsirartrip
     restart: unless-stopped
     ports:
-      - "4321:4321"
+      # Bind strictly to localhost so external traffic MUST traverse Nginx
+      - "127.0.0.1:4321:4321"
     environment:
       - HOST=0.0.0.0
       - PORT=4321
@@ -47,9 +48,13 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
-    # Security options
+    # Security options & privilege restriction
     security_opt:
       - no-new-privileges:true
+    cap_drop:
+      - ALL
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=64m
 
   # Auto-heal: restarts unhealthy containers automatically
   autoheal:
