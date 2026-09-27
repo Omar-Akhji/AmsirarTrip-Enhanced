@@ -22,30 +22,23 @@ echo ""
 echo "[1/9] Updating system packages..."
 apt update && apt upgrade -y
 
-# ─── 2. Install Docker CE (official repo) ─────────────────
-echo "[2/9] Installing Docker CE from official repository..."
-apt install -y ca-certificates curl gnupg lsb-release
+# ─── 2. Install Docker CE (official script or repo) ───────
+echo "[2/9] Checking Docker CE installation..."
+if ! command -v docker >/dev/null 2>&1; then
+  echo "Installing Docker Engine and Compose plugin..."
+  apt install -y ca-certificates curl gnupg lsb-release
+  curl -fsSL https://get.docker.com | sh
+  systemctl enable docker
+  systemctl start docker
+else
+  echo "[✓] Docker already installed: $(docker --version)"
+fi
 
-# Add Docker's official GPG key
-mkdir -p /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-chmod a+r /etc/apt/keyrings/docker.gpg
+# Ensure docker compose plugin is available
+if ! docker compose version >/dev/null 2>&1; then
+  apt update && apt install -y docker-compose-plugin
+fi
 
-# Add the Docker repository
-echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
-
-# Install Docker Engine + Compose plugin
-apt update
-apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-
-# Enable Docker on boot
-systemctl enable docker
-systemctl start docker
-
-# Verify Docker installation
-echo "[✓] Docker version: $(docker --version)"
 echo "[✓] Docker Compose version: $(docker compose version)"
 
 # ─── 3. Install Nginx & Certbot ───────────────────────────
@@ -62,25 +55,34 @@ echo "[✓] Firewall configured: SSH + HTTP/HTTPS allowed"
 
 # ─── 5. Stop old containers (if any) ──────────────────────
 echo "[5/9] Stopping old containers..."
-cd "$PROJECT_DIR" 2>/dev/null && docker compose down 2>/dev/null || true
+if [ -d "$PROJECT_DIR" ]; then
+  cd "$PROJECT_DIR" 2>/dev/null && docker compose down 2>/dev/null || true
+fi
 
 # ─── 6. Clone / copy project files ────────────────────────
 echo "[6/9] Setting up project directory..."
 mkdir -p "$PROJECT_DIR"
 
-# If this is run from the project root (local copy)
-if [ -f "./docker-compose.yml" ]; then
-  rsync -av --delete \
+CURRENT_DIR="$(pwd -P)"
+TARGET_DIR="$(cd "$PROJECT_DIR" 2>/dev/null && pwd -P || echo "$PROJECT_DIR")"
+
+if [ "$CURRENT_DIR" = "$TARGET_DIR" ]; then
+  echo "[✓] Running directly inside target project directory ($PROJECT_DIR)"
+elif [ -f "./docker-compose.yml" ]; then
+  echo "[→] Syncing repository files to $PROJECT_DIR..."
+  rsync -av \
     --exclude 'node_modules' \
-    --exclude '.git' \
     --exclude 'dist' \
     --exclude '.astro' \
     --exclude '.env' \
     ./ "$PROJECT_DIR/"
-  echo "[✓] Files copied from local directory"
+  echo "[✓] Files synced from current directory to $PROJECT_DIR"
+elif [ -d "$PROJECT_DIR/.git" ]; then
+  echo "[✓] Existing git repository found in $PROJECT_DIR"
+  cd "$PROJECT_DIR" && git pull origin main
 else
-  echo "[!] Run this script from the project root, or clone your repo to $PROJECT_DIR"
-  echo "    Example: git clone https://github.com/YOUR_USER/AmsirarTrip-Enhanced.git $PROJECT_DIR"
+  echo "[→] Cloning repository into $PROJECT_DIR..."
+  git clone https://github.com/Omar-Akhji/AmsirarTrip-Enhanced.git "$PROJECT_DIR"
 fi
 
 # ─── 7. Setup Nginx reverse proxy ─────────────────────────
@@ -100,13 +102,14 @@ ln -sf "$NGINX_CONF" "/etc/nginx/sites-enabled/$DOMAIN"
 rm -f /etc/nginx/sites-enabled/default
 
 nginx -t && systemctl reload nginx
-echo "[✓] Nginx configured and reloaded"
+echo "[✓] Nginx bootstrap configured and reloaded"
 
 # ─── 8. Get SSL certificate ───────────────────────────────
-echo "[8/9] Obtaining SSL certificate..."
+echo "[8/9] Obtaining SSL certificate via Let's Encrypt..."
 certbot certonly --webroot -w /var/www/certbot \
   -d "$DOMAIN" -d "www.$DOMAIN" \
-  --non-interactive --agree-tos --email "$EMAIL"
+  --non-interactive --agree-tos --email "$EMAIL" \
+  --keep-until-expiring
 
 # Switch Nginx to hardened HTTPS config after SSL is obtained
 cp "$PROJECT_DIR/nginx/amsirartrip.com.conf" "$NGINX_CONF"
@@ -115,7 +118,7 @@ nginx -t && systemctl reload nginx
 # Setup auto-renewal
 echo "0 0,12 * * * root certbot renew --quiet --post-hook 'systemctl reload nginx'" > /etc/cron.d/certbot-renew
 chmod 644 /etc/cron.d/certbot-renew
-echo "[✓] SSL certificate obtained and auto-renewal configured"
+echo "[✓] SSL certificate active and auto-renewal configured"
 
 # ─── 9. Build & run containers ────────────────────────────
 echo "[9/9] Building and starting containers..."

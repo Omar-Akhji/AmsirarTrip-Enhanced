@@ -19,7 +19,7 @@ cd "$PROJECT_DIR"
 
 # Pull latest code
 echo "[1/5] Pulling latest code..."
-git pull
+git pull origin main
 
 # Sync and reload Nginx configuration
 echo "[2/5] Updating and validating Nginx configuration..."
@@ -40,9 +40,8 @@ fi
 echo "[3/5] Building new image..."
 docker compose build
 
-echo "[4/5] Restarting containers..."
-docker compose down
-docker compose up -d
+echo "[4/5] Restarting containers (zero-downtime swap)..."
+docker compose up -d --remove-orphans
 
 # Clean up old images
 echo "[5/5] Cleaning up old images..."
