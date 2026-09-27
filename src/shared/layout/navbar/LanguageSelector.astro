@@ -41,24 +41,21 @@ const getLocalizedHref = (code: string) => {
   const path = code === "en" ? basePath : `/${code}${basePath === "/" ? "" : basePath}`;
   return path + Astro.url.search;
 };
-
-// Generate a unique ID to avoid collision if multiple selectors are on the same page
-const popoverId = `lang-popover-${Math.floor(Math.random() * 100_000)}`;
 ---
 
-<div class:list={["relative inline-block", className]}>
+<div class:list={["language-selector-root relative inline-block", className]}>
   <button
+    aria-expanded="false"
     aria-haspopup="menu"
     aria-label={`${t("language") || "Language"} - ${currentLanguage.shortName}`}
     class="relative cursor-pointer"
-    popovertarget={popoverId}
-    style={`anchor-name: --anchor-${popoverId}`}
+    data-lang-trigger
     type="button"
   >
     <div
       class:list={[
         "flex items-center justify-center rounded-full border-2 transition-all duration-150 pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:shadow-[0_8px_18px_rgba(0,0,0,0.28)]",
-        "text-white group-data-scrolled:border-orange group-data-scrolled:bg-orange group-data-scrolled:shadow-[0_10px_24px_oklch(56%_0.19_33deg/35%)]",
+        "border-white/60 bg-white/10 text-white group-data-scrolled:border-orange group-data-scrolled:bg-orange group-data-scrolled:shadow-[0_10px_24px_oklch(56%_0.19_33deg/35%)]",
         { "size-10 text-sm": size === "sm", "size-11 text-base font-semibold": size === "md" },
       ]}
     >
@@ -87,38 +84,45 @@ const popoverId = `lang-popover-${Math.floor(Math.random() * 100_000)}`;
   <div
     aria-orientation="vertical"
     class:list={[
-      "m-0 border-none bg-transparent p-0 outline-hidden",
-      "fixed z-50 mbs-2 overflow-hidden rounded-xl border border-white/10 bg-dark/90 text-white shadow-xl backdrop-blur-xl inline-48",
-      "transition-all duration-300 ease-out transition-discrete opacity-0 scale-95 starting:opacity-0 starting:scale-95",
+      "language-selector-menu pointer-events-none invisible scale-95 opacity-0 transition-all duration-200 ease-out",
+      "data-[state=open]:pointer-events-auto data-[state=open]:visible data-[state=open]:scale-100 data-[state=open]:opacity-100",
+      "absolute top-full z-50 mt-2 min-w-44 overflow-hidden rounded-xl border border-white/15 bg-dark/95 p-1.5 text-white shadow-2xl backdrop-blur-xl",
+      "group-data-scrolled:border-black/10 group-data-scrolled:bg-white group-data-scrolled:text-slate-800 group-data-scrolled:shadow-[0_12px_32px_rgba(0,0,0,0.15)]",
+      { "inset-e-0": placement === "right", "inset-s-0": placement !== "right" },
     ]}
-    id={popoverId}
-    popover="auto"
+    data-lang-menu
+    data-state="closed"
     role="menu"
-    style={`
-      position-anchor: --anchor-${popoverId};
-      top: anchor(bottom);
-      ${placement === "left" ? "left: anchor(left);" : "right: anchor(right);"}
-    `}
   >
-    <div class="flex flex-col gap-1 p-1">
-      {LANGUAGES.map((lang) => (
-        <a
-          aria-checked={lang.code === currentLanguage.code}
-          class:list={[
-            "flex items-center justify-between rounded-lg px-3 py-2 text-sm text-light-grey-alt2 transition-colors duration-150 inline-full hover:bg-white/10 hover:text-white group-data-scrolled:hover:bg-light-grey group-data-scrolled:hover:text-dark-grey",
-            { "bg-white/10 text-white": lang.code === currentLanguage.code },
-          ]}
-          href={getLocalizedHref(lang.code)}
-          role="menuitemradio"
-        >
-          <span class="flex items-center gap-3">
-            <span class="font-medium">{lang.name}</span>
-          </span>
-          {lang.code === currentLanguage.code && (
-            <div class="me-1 size-2 rounded-full group-data-scrolled:bg-orange" />
-          )}
-        </a>
-      ))}
+    <div class="flex flex-col gap-1">
+      {LANGUAGES.map((lang) => {
+        const isCurrent = lang.code === currentLanguage.code;
+        return (
+          <a
+            aria-checked={isCurrent}
+            class:list={[
+              "flex items-center justify-between rounded-lg px-3 py-2 text-sm font-medium transition-colors duration-150 inline-full",
+              {
+                "bg-white/15 text-white group-data-scrolled:bg-orange group-data-scrolled:text-white":
+                  isCurrent,
+                "text-zinc-300 hover:bg-white/10 hover:text-white group-data-scrolled:text-zinc-600 group-data-scrolled:hover:bg-zinc-100 group-data-scrolled:hover:text-zinc-900":
+                  !isCurrent,
+              },
+            ]}
+            href={getLocalizedHref(lang.code)}
+            role="menuitemradio"
+          >
+            <span class="flex items-center gap-2.5">
+              <span>{lang.name}</span>
+            </span>
+            {isCurrent && (
+              <span class="size-2 rounded-full bg-orange group-data-scrolled:bg-white" />
+            )}
+          </a>
+        );
+      })}
     </div>
   </div>
 </div>
+
+<script src="./scripts/language-selector.ts"></script>
