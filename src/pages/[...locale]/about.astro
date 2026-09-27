@@ -2,17 +2,28 @@
 import AboutView from "../../features/about/components/AboutView.astro";
 import { useTranslations } from "../../i18n/utils";
 import Layout from "../../layouts/Layout.astro";
+import { generateBreadcrumbJsonLd } from "../../lib/structured-data";
+import JsonLd from "../../shared/ui/JsonLd.astro";
 
 const locale = Astro.currentLocale || "en";
 const t = useTranslations(locale);
 
 const title = t("about.meta.title");
 const description = t("about.meta.description");
+
+const breadcrumbJsonLd = generateBreadcrumbJsonLd([
+  { name: t("nav.home") || "Home", url: locale === "en" ? "/" : `/${locale}` },
+  { name: t("nav.about") || "About Us", url: Astro.url.pathname },
+]);
 ---
 
 <Layout
   description={description}
   title={title}
 >
+  <JsonLd
+    data={breadcrumbJsonLd}
+    id="about-breadcrumb-jsonld"
+  />
   <AboutView />
 </Layout>

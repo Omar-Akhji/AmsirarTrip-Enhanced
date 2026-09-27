@@ -4,7 +4,11 @@ import BookingForm from "../../../features/booking/components/BookingForm.vue";
 import TourLayout from "../../../features/tours/components/TourLayout.astro";
 import { useTranslations } from "../../../i18n/utils";
 import Layout from "../../../layouts/Layout.astro";
-import { generateFaqJsonLd, generateTourJsonLd } from "../../../lib/structured-data";
+import {
+  generateBreadcrumbJsonLd,
+  generateFaqJsonLd,
+  generateTourJsonLd,
+} from "../../../lib/structured-data";
 import JsonLd from "../../../shared/ui/JsonLd.astro";
 
 const { slug } = Astro.params;
@@ -69,6 +73,12 @@ const tourJsonLd = generateTourJsonLd({
 
 const faqJsonLd = generateFaqJsonLd(tour.seo.faqs);
 const tourTitleClean = isEnglish ? tour.seo.title : t(`${tour.tourKey}.title`);
+
+const breadcrumbJsonLd = generateBreadcrumbJsonLd([
+  { name: t("nav.home") || "Home", url: locale === "en" ? "/" : `/${locale}` },
+  { name: t("nav.tours") || "Tours", url: locale === "en" ? "/tours" : `/${locale}/tours` },
+  { name: tourTitleClean, url: Astro.url.pathname },
+]);
 ---
 
 <Layout
@@ -82,6 +92,10 @@ const tourTitleClean = isEnglish ? tour.seo.title : t(`${tour.tourKey}.title`);
   <JsonLd
     data={faqJsonLd}
     id={`${tour.tourKey}-faq-jsonld`}
+  />
+  <JsonLd
+    data={breadcrumbJsonLd}
+    id={`${tour.tourKey}-breadcrumb-jsonld`}
   />
   <TourLayout
     bookingId={tour.bookingId}

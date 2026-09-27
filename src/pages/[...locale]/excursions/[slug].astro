@@ -4,7 +4,7 @@ import BookingForm from "../../../features/booking/components/BookingForm.vue";
 import ExcursionLayout from "../../../features/excursions/components/ExcursionLayout.astro";
 import { useTranslations } from "../../../i18n/utils";
 import Layout from "../../../layouts/Layout.astro";
-import { generateExcursionJsonLd } from "../../../lib/structured-data";
+import { generateBreadcrumbJsonLd, generateExcursionJsonLd } from "../../../lib/structured-data";
 import JsonLd from "../../../shared/ui/JsonLd.astro";
 
 const { slug } = Astro.params;
@@ -40,6 +40,15 @@ const excursionJsonLd = generateExcursionJsonLd({
 });
 
 const excursionTitleClean = t(`${keyPrefix}.title`);
+
+const breadcrumbJsonLd = generateBreadcrumbJsonLd([
+  { name: t("nav.home") || "Home", url: locale === "en" ? "/" : `/${locale}` },
+  {
+    name: t("nav.excursions") || "Excursions",
+    url: locale === "en" ? "/excursions" : `/${locale}/excursions`,
+  },
+  { name: excursionTitleClean, url: Astro.url.pathname },
+]);
 ---
 
 <Layout
@@ -49,6 +58,10 @@ const excursionTitleClean = t(`${keyPrefix}.title`);
   <JsonLd
     data={excursionJsonLd}
     id={`${excursion.excursionKey}-jsonld`}
+  />
+  <JsonLd
+    data={breadcrumbJsonLd}
+    id={`${excursion.excursionKey}-breadcrumb-jsonld`}
   />
   <ExcursionLayout
     excursionKey={excursion.excursionKey}

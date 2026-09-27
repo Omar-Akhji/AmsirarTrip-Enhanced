@@ -10,10 +10,19 @@ import { WHATSAPP_LINK } from "../lib/constants/contact";
 import { LOCALES, DEFAULT_LOCALE } from "../i18n/locales";
 import { ui } from "../i18n/ui";
 
+interface Props {
+  title?: string;
+  description?: string;
+  noindex?: boolean;
+}
+
 const {
   title = "Amsirar Trip — Morocco Tours & Desert Adventures",
   description = "Explore Morocco with local experts. Authentic Sahara desert tours, imperial city excursions, Atlas Mountains treks, and private guided experiences. 20+ years serving travelers. Book your dream Morocco adventure today.",
+  noindex = false,
 } = Astro.props;
+
+const pageTitle = title.includes("Amsirar Trip") ? title : `${title} | Amsirar Trip`;
 
 const locale = Astro.currentLocale ?? "en";
 Object.assign(globalThis, { __TRANSLATIONS__: ui[locale as keyof typeof ui], __LOCALE__: locale });
@@ -85,15 +94,23 @@ const defaultOgImage = new URL("/images/Header/header-1.webp", site).href;
       content="#f97316"
       name="theme-color"
     />
+    <meta
+      content={
+        noindex ? "noindex, follow" : (
+          "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+        )
+      }
+      name="robots"
+    />
 
-    <title>{title}</title>
+    <title>{pageTitle}</title>
     <meta
       content={description}
       name="description"
     />
 
     <meta
-      content={title}
+      content={pageTitle}
       property="og:title"
     />
     <meta
@@ -132,7 +149,7 @@ const defaultOgImage = new URL("/images/Header/header-1.webp", site).href;
       name="twitter:card"
     />
     <meta
-      content={title}
+      content={pageTitle}
       name="twitter:title"
     />
     <meta

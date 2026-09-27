@@ -6,46 +6,46 @@ export const GET: APIRoute = ({ site }) => {
 
   const robotsTxt = `User-agent: *
 Allow: /
+Disallow: /_actions/
 Disallow: /api/
-Disallow: /booking/
-Disallow: /account/
-Disallow: /search/
 
 User-agent: Googlebot
 Allow: /
+Disallow: /_actions/
 Disallow: /api/
-Disallow: /booking/
-Disallow: /account/
+
+User-agent: Google-Extended
+Allow: /
 
 User-agent: Bingbot
 Allow: /
+Disallow: /_actions/
 Disallow: /api/
-Disallow: /booking/
-Disallow: /account/
 Crawl-delay: 1
 
 User-agent: GPTBot
 Allow: /
-Disallow: /api/
-Disallow: /booking/
-Disallow: /account/
 
 User-agent: ChatGPT-User
 Allow: /
 
-User-agent: CCBot
+User-agent: ClaudeBot
 Allow: /
 
 User-agent: anthropic-ai
 Allow: /
 
-User-agent: Google-Extended
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Applebot-Extended
 Allow: /
 
 User-agent: FacebookBot
 Allow: /
 
-Sitemap: ${sitemapUrl.href}`;
+Sitemap: ${sitemapUrl.href}
+`;
 
   return new Response(robotsTxt, { headers: { "Content-Type": "text/plain; charset=utf-8" } });
 };

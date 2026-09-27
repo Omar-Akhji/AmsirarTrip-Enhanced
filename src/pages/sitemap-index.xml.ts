@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 
 const LOCALES = ["en", "fr", "de", "es"] as const;
 const DEFAULT_LOCALE = "en";
-const CONTENT_LAST_MODIFIED = "2026-05-08";
+const TODAY = new Date().toISOString().split("T", 1)[0] ?? "2026-09-27";
 
 export const GET: APIRoute = async ({ site }) => {
   const baseUrl = site || new URL("https://amsirartrip.com");
@@ -13,7 +13,15 @@ export const GET: APIRoute = async ({ site }) => {
   const tourRoutes = tours.map((tour) => `tours/${tour.id}`);
   const excursionRoutes = excursions.map((excursion) => `excursions/${excursion.id}`);
 
-  const staticRoutes = ["", "/tours", "/excursions", "/about", "/contact"];
+  const staticRoutes = [
+    "",
+    "/tours",
+    "/excursions",
+    "/about",
+    "/contact",
+    "/privacy-policy",
+    "/terms-of-service",
+  ];
   const dynamicRoutes = [
     ...tourRoutes.map((route) => `/${route}`),
     ...excursionRoutes.map((route) => `/${route}`),
@@ -24,12 +32,18 @@ export const GET: APIRoute = async ({ site }) => {
   xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n`;
 
   for (const route of allRoutes) {
-    const depth = route === "" ? 0 : route.split("/").length;
+    const isHome = route === "";
+    const isMainSection = route === "/tours" || route === "/excursions";
+    const isLegal = route.includes("privacy") || route.includes("terms");
     const priority =
-      depth === 0 ? "1.0"
-      : depth <= 2 ? "0.9"
+      isHome ? "1.0"
+      : isMainSection ? "0.9"
+      : isLegal ? "0.3"
       : "0.8";
-    const changefreq = depth === 0 ? "daily" : "weekly";
+    const changefreq =
+      isHome ? "daily"
+      : isLegal ? "monthly"
+      : "weekly";
 
     for (const locale of LOCALES) {
       const localePath = locale === DEFAULT_LOCALE ? route : `/${locale}${route}`;
@@ -37,7 +51,7 @@ export const GET: APIRoute = async ({ site }) => {
 
       xml += `  <url>\n`;
       xml += `    <loc>${url}</loc>\n`;
-      xml += `    <lastmod>${CONTENT_LAST_MODIFIED}</lastmod>\n`;
+      xml += `    <lastmod>${TODAY}</lastmod>\n`;
       xml += `    <changefreq>${changefreq}</changefreq>\n`;
       xml += `    <priority>${priority}</priority>\n`;
 

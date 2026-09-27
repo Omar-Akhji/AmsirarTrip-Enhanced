@@ -161,7 +161,7 @@ export function generateOrganizationJsonLd(): Record<string, unknown> {
     },
     contactPoint: {
       "@type": "ContactPoint",
-      telephone: "+212-661-173-144",
+      telephone: "+212661173144",
       contactType: "Customer Service",
       areaServed: "MA",
       availableLanguage: ["English", "French", "Spanish", "German"],
@@ -185,6 +185,21 @@ export function generateOrganizationJsonLd(): Record<string, unknown> {
         bestRating: "5",
         worstRating: "1",
       },
+    })),
+  };
+}
+
+export function generateBreadcrumbJsonLd(
+  items: { name: string; url: string }[],
+): Record<string, unknown> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: sanitizeForJsonLd(item.name),
+      item: resolveUrl(item.url),
     })),
   };
 }
