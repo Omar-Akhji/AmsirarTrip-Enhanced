@@ -72,9 +72,7 @@ const tourStats = [
         class="mx-auto mbe-10 text-center max-inline-3xl"
         data-animate="fade-up"
       >
-        <p
-          class="inline-flex items-center justify-center rounded-full border-2 border-white bg-orange-700 px-6 py-3 text-sm font-semibold tracking-[0.45em] text-white uppercase"
-        >
+        <p class="inline-flex items-center justify-center rounded-full border-2 border-white bg-orange-700 px-6 py-3 text-sm font-semibold tracking-[0.45em] text-white uppercase">
           {t("tours.tour.smTitle")}
         </p>
         <h2
@@ -86,8 +84,7 @@ const tourStats = [
         <div
           aria-hidden="true"
           class="mx-auto mbs-4 rounded-full bg-orange-500 block-1 inline-20"
-        >
-        </div>
+        ></div>
         <p class="mbs-4 text-base text-taupe-600">{t("tours.detailsSubtitle")}</p>
       </div>
 
@@ -116,43 +113,40 @@ const tourStats = [
         <div
           aria-hidden="true"
           class="mx-auto mbs-4 rounded-full bg-orange-500 block-1 inline-20"
-        >
-        </div>
+        ></div>
         <p class="mbs-4 text-base text-taupe-600">
           {t("tours.sectionSubtitle") || t("tours.detailsSubtitle")}
         </p>
       </div>
 
       <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {
-          tours.map((tour, index) => (
-            <div
-              class="flex size-full"
-              data-animate="fade-up"
-              style={`transition-delay: ${index * 150}ms`}
-            >
-              <TripCard
-                badge={`${tour.duration} Days`}
-                end={t(tour.end)}
-                endLabel={t("tours.endLabelShort") || "End"}
-                item={{
-                  image: tour.image,
-                  imageAlt: t(tour.title),
-                  title: t(tour.title),
-                  description: t(tour.description),
-                  route: tour.route,
-                }}
-                start={t(tour.start)}
-                startLabel={t("tours.startLabelShort") || "Start"}
-                translations={{
-                  title: t(tour.title),
-                  description: t(tour.description),
-                  exploreLink: t("tours.exploreLink"),
-                }}
-              />
-            </div>
-          ))
-        }
+        {tours.map((tour, index) => (
+          <div
+            class="flex size-full"
+            data-animate="fade-up"
+            style={`transition-delay: ${index * 150}ms`}
+          >
+            <TripCard
+              badge={`${tour.duration} Days`}
+              end={t(tour.end)}
+              endLabel={t("tours.endLabelShort") || "End"}
+              item={{
+                image: tour.image,
+                imageAlt: t(tour.title),
+                title: t(tour.title),
+                description: t(tour.description),
+                route: tour.route,
+              }}
+              start={t(tour.start)}
+              startLabel={t("tours.startLabelShort") || "Start"}
+              translations={{
+                title: t(tour.title),
+                description: t(tour.description),
+                exploreLink: t("tours.exploreLink"),
+              }}
+            />
+          </div>
+        ))}
       </div>
     </div>
   </section>

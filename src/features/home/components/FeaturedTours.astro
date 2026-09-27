@@ -19,16 +19,13 @@ const cities = destinationEntries.map((entry) => entry.data);
   <div
     aria-hidden="true"
     class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(248,250,252,0.3),transparent_70%)]"
-  >
-  </div>
+  ></div>
   <div class="relative z-10 mx-auto px-4 max-inline-7xl">
     <div
       class="mx-auto mbe-16 space-y-4 text-center max-inline-4xl"
       data-animate="fade-up"
     >
-      <p
-        class="inline-flex items-center justify-center rounded-full border-2 border-orange-400 px-6 py-3 text-sm font-semibold tracking-[0.45em] text-orange-700 uppercase"
-      >
+      <p class="inline-flex items-center justify-center rounded-full border-2 border-orange-400 px-6 py-3 text-sm font-semibold tracking-[0.45em] text-orange-700 uppercase">
         {t("featured.smTitle")}
       </p>
       <h2
@@ -40,34 +37,31 @@ const cities = destinationEntries.map((entry) => entry.data);
       <div
         aria-hidden="true"
         class="mx-auto mbs-4 rounded-full bg-orange-500 block-1 inline-20"
-      >
-      </div>
+      ></div>
     </div>
 
     <div class="featured-row grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-      {
-        cities.map((city, index) => (
-          <div
-            data-animate="fade-up"
-            style={`transition-delay: ${index * 150}ms`}
-          >
-            <article class="card-article relative block aspect-4/3 overflow-hidden rounded-xl">
-              <Image
-                alt={t(city.altKey)}
-                class="card-img absolute inset-0 size-full object-cover"
-                height={450}
-                loading="lazy"
-                src={city.image}
-                width={600}
-              />
-              <div class="card-data">
-                <h3 class="card-title text-shadow-md">{t(city.titleKey)}</h3>
-                <p class="card-text">{t(city.descriptionKey)}</p>
-              </div>
-            </article>
-          </div>
-        ))
-      }
+      {cities.map((city, index) => (
+        <div
+          data-animate="fade-up"
+          style={`transition-delay: ${index * 150}ms`}
+        >
+          <article class="card-article relative block aspect-4/3 overflow-hidden rounded-xl">
+            <Image
+              alt={t(city.altKey)}
+              class="card-img absolute inset-0 size-full object-cover"
+              height={450}
+              loading="lazy"
+              src={city.image}
+              width={600}
+            />
+            <div class="card-data">
+              <h3 class="card-title text-shadow-md">{t(city.titleKey)}</h3>
+              <p class="card-text">{t(city.descriptionKey)}</p>
+            </div>
+          </article>
+        </div>
+      ))}
     </div>
   </div>
 </section>

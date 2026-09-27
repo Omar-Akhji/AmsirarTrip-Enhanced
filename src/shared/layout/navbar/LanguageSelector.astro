@@ -101,26 +101,24 @@ const popoverId = `lang-popover-${Math.floor(Math.random() * 100_000)}`;
     `}
   >
     <div class="flex flex-col gap-1 p-1">
-      {
-        LANGUAGES.map((lang) => (
-          <a
-            aria-checked={lang.code === currentLanguage.code}
-            class:list={[
-              "flex items-center justify-between rounded-lg px-3 py-2 text-sm text-light-grey-alt2 transition-colors duration-150 inline-full hover:bg-white/10 hover:text-white group-data-scrolled:hover:bg-light-grey group-data-scrolled:hover:text-dark-grey",
-              { "bg-white/10 text-white": lang.code === currentLanguage.code },
-            ]}
-            href={getLocalizedHref(lang.code)}
-            role="menuitemradio"
-          >
-            <span class="flex items-center gap-3">
-              <span class="font-medium">{lang.name}</span>
-            </span>
-            {lang.code === currentLanguage.code && (
-              <div class="me-1 size-2 rounded-full group-data-scrolled:bg-orange" />
-            )}
-          </a>
-        ))
-      }
+      {LANGUAGES.map((lang) => (
+        <a
+          aria-checked={lang.code === currentLanguage.code}
+          class:list={[
+            "flex items-center justify-between rounded-lg px-3 py-2 text-sm text-light-grey-alt2 transition-colors duration-150 inline-full hover:bg-white/10 hover:text-white group-data-scrolled:hover:bg-light-grey group-data-scrolled:hover:text-dark-grey",
+            { "bg-white/10 text-white": lang.code === currentLanguage.code },
+          ]}
+          href={getLocalizedHref(lang.code)}
+          role="menuitemradio"
+        >
+          <span class="flex items-center gap-3">
+            <span class="font-medium">{lang.name}</span>
+          </span>
+          {lang.code === currentLanguage.code && (
+            <div class="me-1 size-2 rounded-full group-data-scrolled:bg-orange" />
+          )}
+        </a>
+      ))}
     </div>
   </div>
 </div>

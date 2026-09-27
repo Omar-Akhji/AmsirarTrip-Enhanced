@@ -18,9 +18,10 @@ const currentYear = new Date().getFullYear();
         <p class="text-sm font-medium text-zinc-500">
           &copy; <time datetime={currentYear.toString()}>{currentYear}</time>
           <span class="mx-1.5 opacity-20">&bull;</span>
-          <span class="text-zinc-400">Amsirar Trip. Ltd.</span><span
-            class="mx-1.5 hidden opacity-20 sm:inline-block">&bull;</span
-          ><span class="inline sm:hidden"> </span>{t("footer.copyright")}
+          <span class="text-zinc-400">Amsirar Trip. Ltd.</span>
+          <span class="mx-1.5 hidden opacity-20 sm:inline-block">&bull;</span>
+          <span class="inline sm:hidden"> </span>
+          {t("footer.copyright")}
         </p>
       </div>
 
@@ -40,8 +41,7 @@ const currentYear = new Date().getFullYear();
           <li
             aria-hidden="true"
             class="hidden bg-white/10 block-3 inline-px sm:block"
-          >
-          </li>
+          ></li>
           <li>
             <a
               class="text-sm font-medium text-zinc-500 transition-colors duration-200 pointer-fine:hover:text-white"

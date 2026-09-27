@@ -43,6 +43,8 @@ const eslintConfig = defineConfig(
       "unicorn/no-computed-property-existence-check": "off",
       "unicorn/no-top-level-assignment-in-function": "off",
       "unicorn/prefer-at": "off",
+      "unicorn/prefer-early-return": "off",
+      "unicorn/single-line-block-comment-style": "off",
     },
   },
 

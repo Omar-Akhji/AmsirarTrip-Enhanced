@@ -52,21 +52,19 @@ const {
   style="transition-delay:150ms"
 >
   <div class="grid gap-4 sm:grid-cols-2">
-    <div
-      class="inline-flex items-center gap-3 rounded-2xl border border-orange-100 bg-orange-50 px-5 py-3 text-orange-600 min-block-20"
-    >
+    <div class="inline-flex items-center gap-3 rounded-2xl border border-orange-100 bg-orange-50 px-5 py-3 text-orange-600 min-block-20">
       <Clock
         aria-hidden="true"
         class="size-5 shrink-0 text-orange-500"
       />
       <div class="text-start">
-        <div class="text-sm font-semibold">{duration ?? 3} {daysLabel}</div>
+        <div class="text-sm font-semibold">
+          {duration ?? 3} {daysLabel}
+        </div>
         <div class="text-xs font-semibold">{durationLabel}</div>
       </div>
     </div>
-    <div
-      class="inline-flex items-center gap-3 rounded-2xl border border-amber-100 bg-amber-50 px-5 py-3 text-amber-600 min-block-20"
-    >
+    <div class="inline-flex items-center gap-3 rounded-2xl border border-amber-100 bg-amber-50 px-5 py-3 text-amber-600 min-block-20">
       <MapPin
         aria-hidden="true"
         class="size-5 shrink-0 text-amber-500"
@@ -76,9 +74,7 @@ const {
         <div class="text-xs font-semibold">{startLabel}</div>
       </div>
     </div>
-    <div
-      class="inline-flex items-center gap-3 rounded-2xl border border-emerald-100 bg-emerald-50 px-5 py-3 text-emerald-700 min-block-20"
-    >
+    <div class="inline-flex items-center gap-3 rounded-2xl border border-emerald-100 bg-emerald-50 px-5 py-3 text-emerald-700 min-block-20">
       <Flag
         aria-hidden="true"
         class="size-5 shrink-0 text-emerald-600"
@@ -88,9 +84,7 @@ const {
         <div class="text-xs font-semibold">{endLabel}</div>
       </div>
     </div>
-    <div
-      class="inline-flex items-center gap-3 rounded-2xl border border-sky-100 bg-sky-50 px-5 py-3 text-sky-700 min-block-20"
-    >
+    <div class="inline-flex items-center gap-3 rounded-2xl border border-sky-100 bg-sky-50 px-5 py-3 text-sky-700 min-block-20">
       <CreditCard
         aria-hidden="true"
         class="size-5 shrink-0 text-sky-600"
@@ -115,17 +109,15 @@ const {
       {highlightsTitle}
     </h3>
     <div class="grid gap-3 sm:grid-cols-2">
-      {
-        highlights.map((highlight) => (
-          <div class="flex items-start gap-3 rounded-2xl border border-orange-100 bg-white p-4 shadow-xs">
-            <BadgeCheck
-              aria-hidden="true"
-              class="mbs-0.5 size-5 shrink-0 text-orange-500"
-            />
-            <p class="text-sm leading-relaxed text-neutral-700 sm:text-base">{highlight}</p>
-          </div>
-        ))
-      }
+      {highlights.map((highlight) => (
+        <div class="flex items-start gap-3 rounded-2xl border border-orange-100 bg-white p-4 shadow-xs">
+          <BadgeCheck
+            aria-hidden="true"
+            class="mbs-0.5 size-5 shrink-0 text-orange-500"
+          />
+          <p class="text-sm leading-relaxed text-neutral-700 sm:text-base">{highlight}</p>
+        </div>
+      ))}
     </div>
   </section>
 </div>
@@ -174,26 +166,24 @@ const {
       {faqTitle}
     </h3>
     <div class="space-y-3">
-      {
-        faqs.map((faq) => (
-          <details class="group rounded-2xl border border-zinc-200 bg-white p-4 shadow-xs">
-            <summary class="flex cursor-pointer list-none items-start gap-3 text-start text-base font-semibold text-zinc-900 marker:hidden">
-              <CircleQuestionMark
-                aria-hidden="true"
-                class="mbs-0.5 size-5 shrink-0 text-orange-500"
-              />
-              <span class="flex-1">{faq.question}</span>
-              <ChevronDown
-                aria-hidden="true"
-                class="size-5 shrink-0 text-zinc-300 transition group-open:rotate-180"
-              />
-            </summary>
-            <p class="mbs-3 ps-8 text-sm leading-relaxed text-neutral-700 sm:text-base">
-              {faq.answer}
-            </p>
-          </details>
-        ))
-      }
+      {faqs.map((faq) => (
+        <details class="group rounded-2xl border border-zinc-200 bg-white p-4 shadow-xs">
+          <summary class="flex cursor-pointer list-none items-start gap-3 text-start text-base font-semibold text-zinc-900 marker:hidden">
+            <CircleQuestionMark
+              aria-hidden="true"
+              class="mbs-0.5 size-5 shrink-0 text-orange-500"
+            />
+            <span class="flex-1">{faq.question}</span>
+            <ChevronDown
+              aria-hidden="true"
+              class="size-5 shrink-0 text-zinc-300 transition group-open:rotate-180"
+            />
+          </summary>
+          <p class="mbs-3 ps-8 text-sm leading-relaxed text-neutral-700 sm:text-base">
+            {faq.answer}
+          </p>
+        </details>
+      ))}
     </div>
   </section>
 </div>

@@ -18,19 +18,17 @@ const { highlights, overview, highlightsTitle, overviewTitle } = Astro.props;
   <div>
     <h3 class="text-xl font-semibold text-zinc-900 sm:text-2xl md:text-3xl">{highlightsTitle}</h3>
     <ul class="mbs-4 grid gap-3">
-      {
-        highlights.map((item) => (
-          <li class="grid grid-cols-[40px_1fr] items-center gap-4">
-            <span class="inline-flex size-8 shrink-0 items-center justify-center justify-self-end rounded-full bg-orange-500 text-white">
-              <Check
-                aria-hidden="true"
-                class="size-4"
-              />
-            </span>
-            <p class="text-start text-sm leading-relaxed sm:text-base">{item}</p>
-          </li>
-        ))
-      }
+      {highlights.map((item) => (
+        <li class="grid grid-cols-[40px_1fr] items-center gap-4">
+          <span class="inline-flex size-8 shrink-0 items-center justify-center justify-self-end rounded-full bg-orange-500 text-white">
+            <Check
+              aria-hidden="true"
+              class="size-4"
+            />
+          </span>
+          <p class="text-start text-sm leading-relaxed sm:text-base">{item}</p>
+        </li>
+      ))}
     </ul>
   </div>
 </div>

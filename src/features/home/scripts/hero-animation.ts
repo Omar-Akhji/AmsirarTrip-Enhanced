@@ -43,10 +43,12 @@ function initHero() {
 
   function handleResize() {
     const newIsMobile = mediaQuery.matches;
-    if (newIsMobile !== isMobile) {
-      isMobile = newIsMobile;
-      restartAnimation();
+    if (newIsMobile === isMobile) {
+      return;
     }
+
+    isMobile = newIsMobile;
+    restartAnimation();
   }
 
   mediaQuery.addEventListener("change", handleResize);

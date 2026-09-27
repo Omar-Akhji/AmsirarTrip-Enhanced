@@ -39,17 +39,13 @@ const isActive = (to: string) =>
     class="group fixed inset-s-1/2 top-2 z-50 translate-x-[-50%] rounded-2xl border border-white/10 bg-white/10 px-4 py-2 text-white shadow-[0_10px_30px_rgba(3,7,18,0.12)] backdrop-blur-xl transition-all duration-200 will-change-auto inline-[min(1100px,calc(100%-2rem))]"
     id="main-navbar"
   >
-    <div
-      class="helpline-bar relative hidden items-center justify-center border-b border-white/20 px-0 py-3 pbe-5 inline-full lg:flex group-data-scrolled:lg:hidden"
-    >
+    <div class="helpline-bar relative hidden items-center justify-center border-b border-white/20 px-0 py-3 pbe-5 inline-full lg:flex group-data-scrolled:lg:hidden">
       <a
         aria-label={`${t("helplineTitle")} ${t("helplineNumber")}`}
         class="absolute inset-s-4 flex gap-2.5 rounded-md text-white transition focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-white pointer-fine:hover:opacity-90"
         href={PHONE_LINK}
       >
-        <div
-          class="flex size-11 items-center justify-center rounded-full border-2 border-white/60 bg-white/10 text-white transition-all duration-150 pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:shadow-[0_8px_18px_rgba(0,0,0,0.28)]"
-        >
+        <div class="flex size-11 items-center justify-center rounded-full border-2 border-white/60 bg-white/10 text-white transition-all duration-150 pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:shadow-[0_8px_18px_rgba(0,0,0,0.28)]">
           <Image
             alt=""
             class="size-5 object-contain sm:size-6"
@@ -68,10 +64,10 @@ const isActive = (to: string) =>
         class="brand-logo-link text-[1.5rem] font-semibold tracking-tight text-white transition-colors duration-200"
         href={localize("/")}
       >
-        Amsirar <span
-          class="brand-logo-span font-brand font-light text-white transition-colors duration-200"
-          >Trip</span
-        >
+        Amsirar{" "}
+        <span class="brand-logo-span font-brand font-light text-white transition-colors duration-200">
+          Trip
+        </span>
       </a>
     </div>
 
@@ -82,29 +78,27 @@ const isActive = (to: string) =>
       </div>
 
       <ul class="absolute inset-s-1/2 z-10 hidden -translate-x-1/2 items-center gap-3 lg:flex">
-        {
-          NAV_LINKS.map((link) => {
-            const active = isActive(link.to);
-            return (
-              <li>
-                <a
-                  class:list={[
-                    "inline-flex items-center gap-2 rounded-full px-3 py-2 text-[0.98rem] font-medium tracking-tight transition-all duration-200",
-                    {
-                      "nav-link-active bg-white/10 text-white shadow-[0_0_0_1px_rgb(0_0_0/_5%)] backdrop-blur-md pointer-fine:hover:-translate-y-0.5":
-                        active,
-                      "bg-transparent text-inherit pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:bg-white/10 pointer-fine:hover:shadow-[0_8px_26px_rgba(3,7,18,0.12)]":
-                        !active,
-                    },
-                  ]}
-                  href={localize(link.to)}
-                >
-                  <span class="nav-label">{t(link.labelKey)}</span>
-                </a>
-              </li>
-            );
-          })
-        }
+        {NAV_LINKS.map((link) => {
+          const active = isActive(link.to);
+          return (
+            <li>
+              <a
+                class:list={[
+                  "inline-flex items-center gap-2 rounded-full px-3 py-2 text-[0.98rem] font-medium tracking-tight transition-all duration-200",
+                  {
+                    "nav-link-active bg-white/10 text-white shadow-[0_0_0_1px_rgb(0_0_0/_5%)] backdrop-blur-md pointer-fine:hover:-translate-y-0.5":
+                      active,
+                    "bg-transparent text-inherit pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:bg-white/10 pointer-fine:hover:shadow-[0_8px_26px_rgba(3,7,18,0.12)]":
+                      !active,
+                  },
+                ]}
+                href={localize(link.to)}
+              >
+                <span class="nav-label">{t(link.labelKey)}</span>
+              </a>
+            </li>
+          );
+        })}
       </ul>
 
       <MobileMenu>

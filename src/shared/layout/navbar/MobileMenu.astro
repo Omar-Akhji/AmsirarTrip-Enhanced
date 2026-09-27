@@ -26,29 +26,27 @@ const isActive = (to: string) =>
   <!-- Tablet Social Links & Language Selector -->
   <div class="hidden md:flex me-auto items-center gap-2">
     <ul class="flex items-center gap-2">
-      {
-        SOCIAL_LINKS.map((link) => (
-          <li>
-            <a
-              aria-label={link.label}
-              class:list={[
-                "flex size-10 items-center justify-center rounded-full border-2 transition-all duration-150 pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:shadow-[0_8px_18px_rgba(0,0,0,0.28)]",
-                "group-not-data-scrolled:border-white/60 group-not-data-scrolled:bg-white/10 group-not-data-scrolled:text-white",
-                link.accent,
-              ]}
-              href={link.href}
-              rel={link.href.startsWith("http") ? "noopener noreferrer" : null}
-              target={link.href.startsWith("http") ? "_blank" : null}
-            >
-              <img
-                alt=""
-                class="size-5 object-contain"
-                src={link.icon}
-              />
-            </a>
-          </li>
-        ))
-      }
+      {SOCIAL_LINKS.map((link) => (
+        <li>
+          <a
+            aria-label={link.label}
+            class:list={[
+              "flex size-10 items-center justify-center rounded-full border-2 transition-all duration-150 pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:shadow-[0_8px_18px_rgba(0,0,0,0.28)]",
+              "group-not-data-scrolled:border-white/60 group-not-data-scrolled:bg-white/10 group-not-data-scrolled:text-white",
+              link.accent,
+            ]}
+            href={link.href}
+            rel={link.href.startsWith("http") ? "noopener noreferrer" : null}
+            target={link.href.startsWith("http") ? "_blank" : null}
+          >
+            <img
+              alt=""
+              class="size-5 object-contain"
+              src={link.icon}
+            />
+          </a>
+        </li>
+      ))}
     </ul>
     <slot name="language-selector-tablet" />
   </div>
@@ -58,10 +56,10 @@ const isActive = (to: string) =>
     class="absolute inset-s-1/2 z-10 -translate-x-1/2 text-[1.4rem] font-semibold tracking-tight transition-colors duration-200 group-data-scrolled:text-dark-grey"
     href={localize("/")}
   >
-    Amsirar <span
-      class="font-brand font-light transition-colors duration-200 group-data-scrolled:text-orange"
-      >Trip</span
-    >
+    Amsirar{" "}
+    <span class="font-brand font-light transition-colors duration-200 group-data-scrolled:text-orange">
+      Trip
+    </span>
   </a>
 
   <!-- Mobile Language Selector -->
@@ -136,57 +134,51 @@ const isActive = (to: string) =>
     id="navbar-collapse"
   >
     <!-- Social Links inside dropdown (Mobile only) -->
-    <div
-      class="flex md:hidden items-center justify-center gap-4 border-b border-white/20 px-4 py-4 group-data-scrolled:border-light-grey-alt2/30"
-    >
+    <div class="flex md:hidden items-center justify-center gap-4 border-b border-white/20 px-4 py-4 group-data-scrolled:border-light-grey-alt2/30">
       <ul class="flex items-center gap-4">
-        {
-          SOCIAL_LINKS.map((link) => (
-            <li>
-              <a
-                aria-label={link.label}
-                class:list={[
-                  "flex size-10 items-center justify-center rounded-full border-2 transition-all duration-150 pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:shadow-[0_8px_18px_rgba(0,0,0,0.28)]",
-                  "group-not-data-scrolled:border-white/60 group-not-data-scrolled:bg-white/10 group-not-data-scrolled:text-white",
-                  link.accent,
-                ]}
-                href={link.href}
-                rel={link.href.startsWith("http") ? "noopener noreferrer" : null}
-                target={link.href.startsWith("http") ? "_blank" : null}
-              >
-                <img
-                  alt=""
-                  class="size-5 object-contain"
-                  src={link.icon}
-                />
-              </a>
-            </li>
-          ))
-        }
+        {SOCIAL_LINKS.map((link) => (
+          <li>
+            <a
+              aria-label={link.label}
+              class:list={[
+                "flex size-10 items-center justify-center rounded-full border-2 transition-all duration-150 pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:shadow-[0_8px_18px_rgba(0,0,0,0.28)]",
+                "group-not-data-scrolled:border-white/60 group-not-data-scrolled:bg-white/10 group-not-data-scrolled:text-white",
+                link.accent,
+              ]}
+              href={link.href}
+              rel={link.href.startsWith("http") ? "noopener noreferrer" : null}
+              target={link.href.startsWith("http") ? "_blank" : null}
+            >
+              <img
+                alt=""
+                class="size-5 object-contain"
+                src={link.icon}
+              />
+            </a>
+          </li>
+        ))}
       </ul>
     </div>
 
     <!-- Navigation links -->
     <ul class="flex flex-col items-center gap-3 p-4">
-      {
-        NAV_LINKS.map((link) => {
-          const active = isActive(link.to);
-          return (
-            <li>
-              <a
-                class:list={cn(
-                  "mx-auto inline-flex items-center justify-center gap-2 rounded-full bg-transparent px-8 py-2.5 text-base font-medium text-white transition-all duration-200 inline-fit min-inline-40 group-data-scrolled:text-dark hover:bg-white/10 group-data-scrolled:hover:bg-light-grey",
-                  active
-                    && "bg-white/10 text-white shadow-[0_0_0_1px_rgb(0_0_0/5%)] backdrop-blur-xs group-data-scrolled:bg-orange group-data-scrolled:text-white group-data-scrolled:shadow-[0_10px_26px_oklch(56%_0.19_33deg/12%)]",
-                )}
-                href={localize(link.to)}
-              >
-                <span class="nav-label">{t(link.labelKey)}</span>
-              </a>
-            </li>
-          );
-        })
-      }
+      {NAV_LINKS.map((link) => {
+        const active = isActive(link.to);
+        return (
+          <li>
+            <a
+              class:list={cn(
+                "mx-auto inline-flex items-center justify-center gap-2 rounded-full bg-transparent px-8 py-2.5 text-base font-medium text-white transition-all duration-200 inline-fit min-inline-40 group-data-scrolled:text-dark hover:bg-white/10 group-data-scrolled:hover:bg-light-grey",
+                active
+                  && "bg-white/10 text-white shadow-[0_0_0_1px_rgb(0_0_0/5%)] backdrop-blur-xs group-data-scrolled:bg-orange group-data-scrolled:text-white group-data-scrolled:shadow-[0_10px_26px_oklch(56%_0.19_33deg/12%)]",
+              )}
+              href={localize(link.to)}
+            >
+              <span class="nav-label">{t(link.labelKey)}</span>
+            </a>
+          </li>
+        );
+      })}
     </ul>
   </div>
 </div>

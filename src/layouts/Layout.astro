@@ -49,7 +49,6 @@ const ClientRouterWithNonce = ClientRouter as unknown as (_properties: {
       rel="sitemap"
     />
     <script src="../scripts/no-js.ts"></script>
-
     <!--
       ClientRouter (View Transitions) generates inline scripts that are not
       easily nonce-able in Astro 7. 'strict-dynamic' in CSP allows these
@@ -129,14 +128,12 @@ const ClientRouterWithNonce = ClientRouter as unknown as (_properties: {
       content={locale}
       property="og:locale"
     />
-    {
-      LOCALES.filter((l) => l !== DEFAULT_LOCALE).map((l) => (
-        <meta
-          content={l}
-          property="og:locale:alternate"
-        />
-      ))
-    }
+    {LOCALES.filter((l) => l !== DEFAULT_LOCALE).map((l) => (
+      <meta
+        content={l}
+        property="og:locale:alternate"
+      />
+    ))}
 
     <meta
       content="summary_large_image"
@@ -160,18 +157,16 @@ const ClientRouterWithNonce = ClientRouter as unknown as (_properties: {
       rel="canonical"
     />
 
-    {
-      LOCALES.map((l) => {
-        const href = l === DEFAULT_LOCALE ? canonicalURL : new URL(`/${l}${basePath}`, site).href;
-        return (
-          <link
-            href={href}
-            hreflang={l}
-            rel="alternate"
-          />
-        );
-      })
-    }
+    {LOCALES.map((l) => {
+      const href = l === DEFAULT_LOCALE ? canonicalURL : new URL(`/${l}${basePath}`, site).href;
+      return (
+        <link
+          href={href}
+          hreflang={l}
+          rel="alternate"
+        />
+      );
+    })}
     <link
       href={canonicalURL}
       hreflang="x-default"
@@ -265,7 +260,6 @@ const ClientRouterWithNonce = ClientRouter as unknown as (_properties: {
     <script src="../scripts/loader.ts"></script>
     <script src="../scripts/scroll-animate.ts"></script>
     <script src="../scripts/webmcp-tools.ts"></script>
-
     <Navbar />
     <main id="main-content">
       <slot />
