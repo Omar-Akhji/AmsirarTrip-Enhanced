@@ -40,10 +40,12 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
         /<script(?![^>]*\bnonce=)(\s|>)/g,
         (_match, space) => `<script ${nonceAttr}${space}`,
       );
+      const headers = new Headers(response.headers);
+      headers.delete("content-length");
       return new Response(processed, {
         status: response.status,
         statusText: response.statusText,
-        headers: response.headers,
+        headers,
       });
     }
   } else if (isStaticAsset) {

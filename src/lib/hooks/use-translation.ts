@@ -31,6 +31,12 @@ export function getGlobalLocale(): string {
 
 let cachedTranslations: TranslationMap | undefined;
 
+if (typeof document !== "undefined") {
+  document.addEventListener("astro:before-swap", () => {
+    cachedTranslations = undefined;
+  });
+}
+
 function lookup(key: string): unknown {
   let translations = cachedTranslations;
 
