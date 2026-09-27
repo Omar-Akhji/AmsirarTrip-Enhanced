@@ -2,16 +2,30 @@ import { defaultLang, ui, type Locale } from "./ui";
 
 const uiMap = new Map<string, unknown>(Object.entries(ui));
 
-export function useTranslations(locale: string) {
-  const currentLocale = (uiMap.has(locale) ? locale : defaultLang) as Locale;
+export interface TranslationFunction {
+  (key: string, values?: string | Record<string, string | number>): string;
+  raw(key: string): unknown;
+  has(key: string): boolean;
+}
+
+function isLocale(key: string): key is Locale {
+  return uiMap.has(key);
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null;
+}
+
+export function useTranslations(locale: string): TranslationFunction {
+  const currentLocale: Locale = isLocale(locale) ? locale : defaultLang;
   const translations = uiMap.get(currentLocale);
 
   function lookup(key: string): unknown {
     const keys = key.split(".");
     let result: unknown = translations;
     for (const k of keys) {
-      if (result && typeof result === "object" && Object.hasOwn(result, k)) {
-        result = Reflect.get(result as Record<string, unknown>, k);
+      if (isRecord(result) && Object.hasOwn(result, k)) {
+        result = Reflect.get(result, k);
       } else {
         return undefined;
       }

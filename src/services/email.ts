@@ -6,21 +6,21 @@ import nodemailer, { type Transporter } from "nodemailer";
 import type SMTPTransport from "nodemailer/lib/smtp-transport";
 import { env } from "@/lib/env";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-let _transporter: Transporter<any> | null = null;
+let _transporter: Transporter<SMTPTransport.SentMessageInfo> | null = null;
 
 /** Returns a reusable nodemailer transporter (singleton per server process). */
 export function getMailer(): Transporter<SMTPTransport.SentMessageInfo> {
-  if (_transporter) return _transporter as Transporter<SMTPTransport.SentMessageInfo>;
+  if (_transporter) return _transporter;
 
-  _transporter = nodemailer.createTransport({
+  const mailer = nodemailer.createTransport({
     service: "gmail",
     auth: { user: env.GMAIL_USER, pass: env.GMAIL_PASS },
     pool: true,
     maxConnections: 3,
   });
 
-  return _transporter as Transporter<SMTPTransport.SentMessageInfo>;
+  _transporter = mailer;
+  return mailer;
 }
 
 export { type default as SMTPTransport } from "nodemailer/lib/smtp-transport";

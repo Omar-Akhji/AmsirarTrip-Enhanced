@@ -65,18 +65,26 @@ export function usePathname(): Ref<string> {
   return pathname;
 }
 
-export function useRouter() {
+export interface AppRouter {
+  push: (href: string, options?: { locale?: Locale }) => void;
+  replace: (href: string, options?: { locale?: Locale }) => void;
+  prefetch: (href: string) => void;
+  back: () => void;
+  forward: () => void;
+}
+
+export function useRouter(): AppRouter {
   return {
-    push: (href: string, options?: { locale?: Locale }) => {
+    push: (href: string, options?: { locale?: Locale }): void => {
       const locale = options?.locale ?? getGlobalLocale();
       location.assign(getLocalizedPath(locale, href));
     },
-    replace: (href: string, options?: { locale?: Locale }) => {
+    replace: (href: string, options?: { locale?: Locale }): void => {
       const locale = options?.locale ?? getGlobalLocale();
       location.replace(getLocalizedPath(locale, href));
     },
-    prefetch: (_href: string) => {},
-    back: () => history.back(),
-    forward: () => history.forward(),
+    prefetch: (_href: string): void => {},
+    back: (): void => history.back(),
+    forward: (): void => history.forward(),
   };
 }

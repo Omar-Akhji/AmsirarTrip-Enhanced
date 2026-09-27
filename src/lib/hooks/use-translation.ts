@@ -2,13 +2,13 @@ import { DEFAULT_LOCALE as defaultLang, LOCALES } from "../../i18n/locales";
 
 type TranslationMap = Record<string, unknown>;
 
-interface AstroGlobals {
-  __LOCALE__?: string;
-  __TRANSLATIONS__?: TranslationMap;
+declare global {
+  var __LOCALE__: string | undefined;
+  var __TRANSLATIONS__: TranslationMap | undefined;
 }
 
-function getAstroGlobals(): AstroGlobals {
-  return globalThis as unknown as AstroGlobals;
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null;
 }
 
 export function getGlobalLocale(): string {
@@ -17,9 +17,8 @@ export function getGlobalLocale(): string {
     const content = meta?.getAttribute("content");
     if (content) return content;
   }
-  const globals = getAstroGlobals();
-  if (typeof window !== "undefined" && globals.__LOCALE__) {
-    return globals.__LOCALE__;
+  if (typeof window !== "undefined" && globalThis.__LOCALE__) {
+    return globalThis.__LOCALE__;
   }
   if (typeof location !== "undefined") {
     const segment = location.pathname.split("/").find(Boolean);
@@ -40,8 +39,11 @@ function lookup(key: string): unknown {
     const jsonText = el?.textContent;
     if (jsonText) {
       try {
-        translations = JSON.parse(jsonText) as TranslationMap;
-        cachedTranslations = translations;
+        const parsed: unknown = JSON.parse(jsonText);
+        if (isRecord(parsed)) {
+          translations = parsed;
+          cachedTranslations = translations;
+        }
       } catch (error) {
         console.error("Failed to parse translations from script tag:", error);
       }
@@ -49,7 +51,7 @@ function lookup(key: string): unknown {
   }
 
   if (!translations) {
-    translations = getAstroGlobals().__TRANSLATIONS__;
+    translations = globalThis.__TRANSLATIONS__;
   }
 
   if (!translations) return undefined;
@@ -57,8 +59,8 @@ function lookup(key: string): unknown {
   const keys = key.split(".");
   let result: unknown = translations;
   for (const k of keys) {
-    if (result && typeof result === "object" && k in (result as Record<string, unknown>)) {
-      result = (result as Record<string, unknown>)[k];
+    if (isRecord(result) && k in result) {
+      result = result[k];
     } else {
       return undefined;
     }
@@ -66,7 +68,18 @@ function lookup(key: string): unknown {
   return result;
 }
 
-export function useTranslation() {
+export interface TranslationHelper {
+  (key: string, values?: string | Record<string, string | number>): string;
+  raw(key: string): unknown;
+  has(key: string): boolean;
+}
+
+export interface UseTranslationReturn {
+  t: TranslationHelper;
+  i18n: { language: string; changeLanguage: () => void };
+}
+
+export function useTranslation(): UseTranslationReturn {
   const locale = getGlobalLocale();
 
   function t(key: string, values?: string | Record<string, string | number>): string {
@@ -91,7 +104,7 @@ export function useTranslation() {
     return typeof result === "string" ? result : key;
   }
 
-  const tFunc = Object.assign(t, {
+  const tFunc: TranslationHelper = Object.assign(t, {
     raw(key: string): unknown {
       return lookup(key);
     },
@@ -104,7 +117,7 @@ export function useTranslation() {
     t: tFunc,
     i18n: {
       language: locale,
-      changeLanguage: () => {
+      changeLanguage: (): void => {
         console.warn("Language changes should be done via routing, not programmatically.");
       },
     },

@@ -36,7 +36,7 @@ export function escapeHtml(string_: string = ""): string {
  *
  * @deprecated Use `logSecurityEvent` from `@/services/logger` directly.
  */
-export function logSuspiciousActivity(ip: string, type: string, details: string) {
+export function logSuspiciousActivity(ip: string, type: string, details: string): void {
   // Map old type strings to new enum values
   const eventTypeMap: Record<
     string,

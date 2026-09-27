@@ -3,11 +3,17 @@ import { logSecurityEvent } from "./server-utils";
 const rateLimitMap = new Map<string, { count: number; resetAt: number; violations: number }>();
 const blockedIPs = new Map<string, number>();
 
+export interface RateLimitResult {
+  allowed: boolean;
+  remaining: number;
+  blocked?: boolean;
+}
+
 export function checkRateLimit(
   identifier: string,
   maxRequests: number = 5,
   windowMs: number = 60_000,
-): { allowed: boolean; remaining: number; blocked?: boolean } {
+): RateLimitResult {
   const now = Date.now();
 
   const blockExpiry = blockedIPs.get(identifier);

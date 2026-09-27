@@ -28,13 +28,23 @@
     // Modern replacement for esModuleInterop (deprecated in TS6)
     "verbatimModuleSyntax": true,
 
-    // ─── TS6 Strictness ────────────────────────────────────────────────────
+    // ─── TS Strictness (Senior Standard) ──────────────────────────────────
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitReturns": true,
+    "noImplicitOverride": true,
+    "exactOptionalPropertyTypes": true,
+    "noFallthroughCasesInSwitch": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "skipLibCheck": true,
     // No enums/namespaces — required for Bun native TS stripping
     "erasableSyntaxOnly": true,
     // Explicit even though TS6 default — important behavior to document
     "noUncheckedSideEffectImports": true,
-    // Prevents dot-access on index-signature types
-    "noPropertyAccessFromIndexSignature": true,
 
     // ─── Types ─────────────────────────────────────────────────────────────
     // CRITICAL in TS6: @types/* no longer auto-discovered

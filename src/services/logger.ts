@@ -123,7 +123,7 @@ export function logSecurityEvent(
   ip: string,
   details: string,
   extra?: Record<string, unknown>,
-) {
+): void {
   logger.security(`Security event: ${type}`, {
     ip,
     type,
@@ -136,18 +136,18 @@ export function logSecurityEvent(
 /** Log an error from user action (form submissions, API calls, etc.) */
 export function logActionError(
   action: string,
-  error: Error | unknown,
+  error: unknown,
   context?: Record<string, unknown>,
-) {
+): void {
   logger.error(`Action failed: ${action}`, error, { action, ...context });
 }
 
 /** Log application errors (unhandled exceptions, crashes, etc.) */
 export function logAppError(
   context: "SERVER" | "MIDDLEWARE" | "ACTION" | "RENDER",
-  error: Error | unknown,
+  error: unknown,
   request?: Request,
-) {
+): void {
   const meta: Record<string, unknown> = { context };
 
   if (request) {

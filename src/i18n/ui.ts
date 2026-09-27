@@ -12,13 +12,7 @@ export type { Locale } from "./locales";
  * structural drift between the JSON files and the schema — the `as` cast bridges the small gap
  * between Astro's JSON-import type inference and Zod's inferred type.
  */
-const _ui = {
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion -- Astro JSON import inference and Zod's inferred type have no overlap; safeParse validates at runtime
-  en: en as unknown as LocaleData,
-  fr: fr,
-  de: de,
-  es: es,
-} as const satisfies Record<string, LocaleData>;
+const _ui = { en, fr, de, es } as const satisfies Record<string, LocaleData>;
 
 // Run full schema validation in development/CI builds
 if (import.meta.env.DEV || process.env["CI"]) {

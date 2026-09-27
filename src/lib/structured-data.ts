@@ -83,7 +83,7 @@ function buildTripJsonLd<TLocation>(
   };
 }
 
-export function generateTourJsonLd(data: TourStructuredData) {
+export function generateTourJsonLd(data: TourStructuredData): Record<string, unknown> {
   return buildTripJsonLd(
     data,
     [
@@ -104,7 +104,9 @@ export function generateTourJsonLd(data: TourStructuredData) {
   );
 }
 
-export function generateFaqJsonLd(faqs: { question: string; answer: string }[]) {
+export function generateFaqJsonLd(
+  faqs: { question: string; answer: string }[],
+): Record<string, unknown> {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -116,7 +118,7 @@ export function generateFaqJsonLd(faqs: { question: string; answer: string }[]) 
   };
 }
 
-export function generateExcursionJsonLd(data: ExcursionStructuredData) {
+export function generateExcursionJsonLd(data: ExcursionStructuredData): Record<string, unknown> {
   return buildTripJsonLd(
     data,
     [{ "@type": "TouristDestination", name: data.location.point }],
@@ -124,7 +126,7 @@ export function generateExcursionJsonLd(data: ExcursionStructuredData) {
   );
 }
 
-export function generateOrganizationJsonLd() {
+export function generateOrganizationJsonLd(): Record<string, unknown> {
   return {
     "@context": "https://schema.org",
     "@type": "TravelAgency",
@@ -187,7 +189,7 @@ export function generateOrganizationJsonLd() {
   };
 }
 
-export function generateWebsiteJsonLd() {
+export function generateWebsiteJsonLd(): Record<string, unknown> {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
