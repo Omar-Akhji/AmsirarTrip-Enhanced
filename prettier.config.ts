@@ -56,8 +56,8 @@ const config: Config & PluginOptions & PluginConfig = {
 
   // ─── Import sorting (@ianvs/prettier-plugin-sort-imports) ─────────────────
   importOrder: [
-    // React core first
-    "^(react/(.*)$)|^(react$)",
+    // Vue core first
+    "^(vue/(.*)$)|^(vue$)",
     "<THIRD_PARTY_MODULES>",
     // Astro/framework internals
     "^(astro/(.*)$)|^(astro$)",
