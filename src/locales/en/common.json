@@ -1415,7 +1415,8 @@
     },
     "footer": {
       "privacyPolicy": "Privacy Policy",
-      "termsOfService": "Terms of Service"
+      "termsOfService": "Terms of Service",
+      "cookieSettings": "Cookie Settings"
     }
   },
   "notFound": {
@@ -1440,5 +1441,24 @@
     "morocco_safety_title": "Is Morocco Safe for Tourists? 10 Essential Travel Tips You Need to Know",
     "morocco_safety_excerpt": "Safety is a top concern for many travelers. Here is our honest guide to staying safe, avoiding scams, and traveling confidently in Morocco.",
     "morocco_safety_content": "<p>Morocco is generally a very safe country for tourists, known for its warm hospitality. However, like any major tourist destination, it helps to be prepared. Here are our top tips for a safe and enjoyable trip.</p><h2>1. Dress Conservatively</h2><p>Morocco is a conservative Muslim country. While tourists aren't expected to follow local dress codes strictly, dressing modestly (covering shoulders and knees) shows respect and often results in less unwanted attention, particularly for female travelers.</p><h2>2. Beware of \"Faux Guides\"</h2><p>In major cities like Marrakech and Fes, you may be approached by unofficial guides offering to show you around. Politely but firmly decline. Always book tours through reputable agencies or ask your riad for licensed guide recommendations.</p><h2>3. Agree on Taxi Fares in Advance</h2><p>Always ask the taxi driver to turn on the meter. If they refuse (which is common), clearly negotiate and agree on the fare *before* getting into the vehicle.</p><h2>4. Stay Hydrated with Bottled Water</h2><p>To avoid \"traveler's tummy,\" stick to drinking bottled or filtered water. Avoid ice in your drinks at smaller cafes, and ensure street food is cooked fresh and served hot.</p>"
+  },
+  "cookieConsent": {
+    "title": "We value your privacy",
+    "description": "We use cookies to enhance your browsing experience, provide essential security, and analyze site traffic to deliver unforgettable Morocco adventures. You can customize your preferences at any time.",
+    "acceptAll": "Accept All",
+    "rejectAll": "Essential Only",
+    "customize": "Cookie Settings",
+    "savePreferences": "Save Preferences",
+    "modalTitle": "Cookie & Privacy Preferences",
+    "modalSubtitle": "Customize how cookies and local storage are used during your visit. You can modify these settings at any time.",
+    "necessaryTitle": "Strictly Necessary Cookies",
+    "necessaryDesc": "Required for site navigation, security, language selection, and core features. These cannot be disabled.",
+    "alwaysActive": "Always Active",
+    "analyticsTitle": "Analytics & Performance",
+    "analyticsDesc": "Enables anonymous traffic metrics to help us understand popular itineraries and improve loading performance.",
+    "functionalTitle": "Preferences & Functional",
+    "functionalDesc": "Remembers your choices (such as interactive agency maps and currency preferences) for a smoother journey.",
+    "privacyPolicyLink": "Read our Privacy Policy",
+    "close": "Close"
   }
 }

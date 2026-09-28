@@ -50,6 +50,19 @@ const currentYear = new Date().getFullYear();
               {t("legal.footer.termsOfService")}
             </a>
           </li>
+          <li
+            aria-hidden="true"
+            class="hidden bg-white/10 block-3 inline-px sm:block"
+          ></li>
+          <li>
+            <button
+              class="cursor-pointer text-sm font-medium text-zinc-500 transition-colors duration-200 pointer-fine:hover:text-white"
+              data-open-cookie-settings
+              type="button"
+            >
+              {t("legal.footer.cookieSettings", "Cookie Settings")}
+            </button>
+          </li>
         </ul>
       </nav>
     </div>

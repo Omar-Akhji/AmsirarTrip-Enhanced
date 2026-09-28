@@ -1430,7 +1430,8 @@
     },
     "footer": {
       "privacyPolicy": "Datenschutzerklärung",
-      "termsOfService": "AGB"
+      "termsOfService": "AGB",
+      "cookieSettings": "Cookie-Einstellungen"
     }
   },
   "notFound": {
@@ -1455,5 +1456,24 @@
     "morocco_safety_title": "Ist Marokko sicher für Touristen? 10 wichtige Reisetipps, die Sie kennen sollten",
     "morocco_safety_excerpt": "Sicherheit ist für viele Reisende ein Hauptanliegen. Hier ist unser ehrlicher Leitfaden, um in Marokko sicher zu bleiben, Betrügereien zu vermeiden und selbstbewusst zu reisen.",
     "morocco_safety_content": "<p>Marokko ist im Allgemeinen ein sehr sicheres Land für Touristen, bekannt für seine herzliche Gastfreundschaft. Wie bei jedem großen Reiseziel ist es jedoch hilfreich, vorbereitet zu sein. Hier sind unsere besten Tipps für eine sichere und angenehme Reise.</p><h2>1. Kleiden Sie sich konservativ</h2><p>Marokko ist ein konservativ muslimisches Land. Obwohl von Touristen nicht erwartet wird, dass sie sich streng an lokale Kleiderordnungen halten, zeigt bescheidene Kleidung (die Schultern und Knie bedeckt) Respekt und führt oft zu weniger ungewollter Aufmerksamkeit, insbesondere bei weiblichen Reisenden.</p><h2>2. Hüten Sie sich vor \"Faux Guides\"</h2><p>In großen Städten wie Marrakesch und Fès werden Sie möglicherweise von inoffiziellen Führern angesprochen, die Ihnen anbieten, Sie herumzuführen. Lehnen Sie höflich, aber bestimmt ab. Buchen Sie Touren immer über seriöse Agenturen oder fragen Sie Ihr Riad nach lizenzierten Führerempfehlungen.</p><h2>3. Vereinbaren Sie Taxipreise im Voraus</h2><p>Bitten Sie den Taxifahrer immer, das Taxameter einzuschalten. Wenn sie sich weigern (was häufig vorkommt), verhandeln Sie klar und vereinbaren Sie den Fahrpreis, *bevor* Sie in das Fahrzeug steigen.</p><h2>4. Bleiben Sie hydriert mit Wasser in Flaschen</h2><p>Um „Reisendendurchfall“ zu vermeiden, sollten Sie nur in Flaschen abgefülltes oder gefiltertes Wasser trinken. Vermeiden Sie Eis in Ihren Getränken in kleineren Cafés und stellen Sie sicher, dass Street Food frisch gekocht und heiß serviert wird.</p>"
+  },
+  "cookieConsent": {
+    "title": "Wir schätzen Ihre Privatsphäre",
+    "description": "Wir verwenden Cookies, um Ihr Surferlebnis zu verbessern, grundlegende Sicherheit zu gewährleisten und den Website-Traffic zu analysieren. Sie können Ihre Einstellungen jederzeit anpassen.",
+    "acceptAll": "Alle akzeptieren",
+    "rejectAll": "Nur essenzielle",
+    "customize": "Cookie-Einstellungen",
+    "savePreferences": "Auswahl speichern",
+    "modalTitle": "Cookie- und Datenschutzeinstellungen",
+    "modalSubtitle": "Verwalten Sie die Verwendung von Cookies während Ihres Besuchs. Sie können diese Einstellungen jederzeit ändern.",
+    "necessaryTitle": "Technisch notwendige Cookies",
+    "necessaryDesc": "Erforderlich für Sicherheit, Sprachauswahl und grundlegende Website-Funktionen. Diese können nicht deaktiviert werden.",
+    "alwaysActive": "Immer aktiv",
+    "analyticsTitle": "Analyse & Leistung",
+    "analyticsDesc": "Ermöglicht anonyme Statistiken, damit wir beliebte Reiseangebote verstehen und Ladezeiten optimieren können.",
+    "functionalTitle": "Präferenzen & Funktionen",
+    "functionalDesc": "Speichert Ihre Einstellungen (z. B. interaktive Karten und Währungspräferenzen) für ein personalisiertes Erlebnis.",
+    "privacyPolicyLink": "Unsere Datenschutzerklärung lesen",
+    "close": "Schließen"
   }
 }

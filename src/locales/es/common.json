@@ -1413,7 +1413,8 @@
     },
     "footer": {
       "privacyPolicy": "Política de Privacidad",
-      "termsOfService": "Términos de Servicio"
+      "termsOfService": "Términos de Servicio",
+      "cookieSettings": "Ajustes de cookies"
     }
   },
   "notFound": {
@@ -1438,5 +1439,24 @@
     "morocco_safety_title": "¿Es Seguro Marruecos para los Turistas? 10 Consejos Esenciales de Viaje que Debes Saber",
     "morocco_safety_excerpt": "La seguridad es una preocupación principal para muchos viajeros. Aquí está nuestra guía honesta para mantenerte seguro, evitar estafas y viajar con confianza en Marruecos.",
     "morocco_safety_content": "<p>Marruecos es, en general, un país muy seguro para los turistas, conocido por su cálida hospitalidad. Sin embargo, como en cualquier destino turístico importante, ayuda estar preparado. Aquí tienes nuestros mejores consejos para un viaje seguro y agradable.</p><h2>1. Viste de Manera Conservadora</h2><p>Marruecos es un país musulmán conservador. Aunque no se espera que los turistas sigan estrictamente los códigos de vestimenta locales, vestir modestamente (cubriendo hombros y rodillas) muestra respeto y a menudo resulta en menos atención no deseada, particularmente para las mujeres que viajan.</p><h2>2. Cuidado con los \"Guías Falsos\"</h2><p>En ciudades principales como Marrakech y Fez, es posible que se te acerquen guías no oficiales ofreciéndote mostrarte los alrededores. Rechaza cortés pero firmemente. Reserva siempre excursiones a través de agencias de confianza o pide a tu riad recomendaciones de guías autorizados.</p><h2>3. Acuerda las Tarifas de Taxi por Adelantado</h2><p>Pide siempre al taxista que encienda el taxímetro. Si se niegan (lo cual es común), negocia claramente y acuerda la tarifa *antes* de subir al vehículo.</p><h2>4. Mantente Hidratado con Agua Embotellada</h2><p>Para evitar problemas estomacales, limítate a beber agua embotellada o filtrada. Evita el hielo en tus bebidas en cafés pequeños y asegúrate de que la comida callejera esté recién cocinada y servida caliente.</p>"
+  },
+  "cookieConsent": {
+    "title": "Valoramos su privacidad",
+    "description": "Utilizamos cookies para mejorar su experiencia de navegación, garantizar la seguridad del sitio y analizar el tráfico para ofrecerle las mejores aventuras en Marruecos. Puede personalizar sus preferencias en cualquier momento.",
+    "acceptAll": "Aceptar todo",
+    "rejectAll": "Solo esenciales",
+    "customize": "Ajustes de cookies",
+    "savePreferences": "Guardar preferencias",
+    "modalTitle": "Preferencias de Cookies y Privacidad",
+    "modalSubtitle": "Gestione el uso de cookies y almacenamiento local durante su visita. Puede cambiar estos ajustes en cualquier momento.",
+    "necessaryTitle": "Cookies estrictamente necesarias",
+    "necessaryDesc": "Indispensables para la navegación, seguridad, selección de idioma y funciones clave. No se pueden desactivar.",
+    "alwaysActive": "Siempre activas",
+    "analyticsTitle": "Análisis y rendimiento",
+    "analyticsDesc": "Permite métricas anónimas para entender las rutas más populares y optimizar la velocidad del sitio web.",
+    "functionalTitle": "Preferencias y funcionalidad",
+    "functionalDesc": "Recuerda sus elecciones (como mapas interactivos de la agencia y preferencias de moneda) para una experiencia personalizada.",
+    "privacyPolicyLink": "Leer nuestra política de privacidad",
+    "close": "Cerrar"
   }
 }

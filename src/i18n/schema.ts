@@ -344,6 +344,8 @@ export const localeSchema = z.object({
   legal: z.record(z.string(), z.unknown()),
   // 404 page
   notFound: z.record(z.string(), z.unknown()),
+  // cookie consent banner & preferences
+  cookieConsent: z.record(z.string(), z.unknown()).optional(),
 });
 
 // ── Inferred TypeScript type ──────────────────────────────────────────────────

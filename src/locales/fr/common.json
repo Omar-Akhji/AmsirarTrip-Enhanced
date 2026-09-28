@@ -1421,7 +1421,8 @@
     },
     "footer": {
       "privacyPolicy": "Politique de confidentialité",
-      "termsOfService": "Conditions d'utilisation"
+      "termsOfService": "Conditions d'utilisation",
+      "cookieSettings": "Paramètres des cookies"
     }
   },
   "notFound": {
@@ -1446,5 +1447,24 @@
     "morocco_safety_title": "Le Maroc est-il Sûr pour les Touristes ? 10 Conseils de Voyage Essentiels à Connaître",
     "morocco_safety_excerpt": "La sécurité est une préoccupation majeure pour de nombreux voyageurs. Voici notre guide honnête pour rester en sécurité, éviter les arnaques et voyager en toute confiance au Maroc.",
     "morocco_safety_content": "<p>Le Maroc est généralement un pays très sûr pour les touristes, connu pour sa chaleureuse hospitalité. Cependant, comme dans toute grande destination touristique, il est utile d'être préparé. Voici nos meilleurs conseils pour un voyage sûr et agréable.</p><h2>1. S'Habiller de Manière Conservatrice</h2><p>Le Maroc est un pays musulman conservateur. Bien que les touristes ne soient pas tenus de suivre strictement les codes vestimentaires locaux, s'habiller modestement (en couvrant les épaules et les genoux) montre du respect et entraîne souvent moins d'attention non désirée, en particulier pour les voyageuses.</p><h2>2. Méfiez-vous des \"Faux Guides\"</h2><p>Dans les grandes villes comme Marrakech et Fès, vous pourriez être abordé par des guides non officiels proposant de vous faire visiter. Refusez poliment mais fermement. Réservez toujours vos excursions par le biais d'agences réputées ou demandez à votre riad des recommandations de guides agréés.</p><h2>3. Convenez des Tarifs de Taxi à l'Avance</h2><p>Demandez toujours au chauffeur de taxi d'allumer le compteur. S'il refuse (ce qui est courant), négociez clairement et convenez du tarif *avant* de monter dans le véhicule.</p><h2>4. Restez Hydraté avec de l'Eau en Bouteille</h2><p>Pour éviter la \"turista\", limitez-vous à boire de l'eau en bouteille ou filtrée. Évitez les glaçons dans vos boissons dans les petits cafés, et assurez-vous que la nourriture de rue est fraîchement cuisinée et servie chaude.</p>"
+  },
+  "cookieConsent": {
+    "title": "Nous respectons votre vie privée",
+    "description": "Nous utilisons des cookies pour enrichir votre navigation, garantir la sécurité du site et analyser notre audience afin de vous offrir les meilleures aventures au Maroc. Vous pouvez personnaliser vos choix à tout moment.",
+    "acceptAll": "Tout accepter",
+    "rejectAll": "Essentiels uniquement",
+    "customize": "Paramètres des cookies",
+    "savePreferences": "Enregistrer mes choix",
+    "modalTitle": "Préférences relatives aux cookies",
+    "modalSubtitle": "Gérez l'utilisation des cookies et du stockage local lors de votre visite. Vous pouvez modifier ces paramètres à tout moment.",
+    "necessaryTitle": "Cookies strictement nécessaires",
+    "necessaryDesc": "Indispensables à la navigation, à la sécurité, au choix de la langue et aux fonctionnalités de base. Ils ne peuvent être désactivés.",
+    "alwaysActive": "Toujours actifs",
+    "analyticsTitle": "Mesure d'audience & Performance",
+    "analyticsDesc": "Permet des statistiques anonymes pour nous aider à comprendre les itinéraires les plus appréciés et optimiser la rapidité du site.",
+    "functionalTitle": "Préférences & Fonctionnalités",
+    "functionalDesc": "Mémorise vos préférences (comme les cartes interactives de l'agence et vos sélections) pour une navigation fluide.",
+    "privacyPolicyLink": "Consulter notre politique de confidentialité",
+    "close": "Fermer"
   }
 }

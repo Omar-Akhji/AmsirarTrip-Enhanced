@@ -1,0 +1,378 @@
+---
+import { useTranslations } from "@/i18n/utils";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+const locale = Astro.currentLocale || "en";
+const t = useTranslations(locale);
+
+const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
+---
+
+<!-- ========================================== -->
+<!-- 1. Floating Cookie Consent Banner          -->
+<!-- ========================================== -->
+<div
+  aria-describedby="cookie-banner-desc"
+  aria-label={t("cookieConsent.title", "Cookie Consent")}
+  aria-live="polite"
+  class="pointer-events-none fixed inset-x-4 bottom-4 z-50 mx-auto max-w-3xl translate-y-full opacity-0 transition-all duration-500 ease-out hidden"
+  id="cookie-banner"
+  role="region"
+>
+  <div class="pointer-events-auto overflow-hidden rounded-2xl border border-white/15 bg-zinc-950/95 p-5 text-white shadow-[0_20px_50px_rgba(0,0,0,0.7)] backdrop-blur-xl ring-1 ring-white/10 sm:p-6">
+    <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-5">
+      <!-- Cookie Icon Badge -->
+      <div class="flex size-11 shrink-0 items-center justify-center rounded-xl bg-orange-500/10 text-orange-500 ring-1 ring-orange-500/25">
+        <svg
+          class="size-6"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M12 2a10 10 0 1010 10c0-1.5-1-2.5-2.5-2.5a2.5 2.5 0 01-2.5-2.5c0-1.5-1-2.5-2.5-2.5a2.5 2.5 0 01-2.5-2.5z"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></path>
+          <circle
+            cx="8.5"
+            cy="8.5"
+            fill="currentColor"
+            r="1"
+          ></circle>
+          <circle
+            cx="7.5"
+            cy="14.5"
+            fill="currentColor"
+            r="1"
+          ></circle>
+          <circle
+            cx="14.5"
+            cy="14.5"
+            fill="currentColor"
+            r="1"
+          ></circle>
+          <circle
+            cx="12"
+            cy="11"
+            fill="currentColor"
+            r="0.75"
+          ></circle>
+          <circle
+            cx="16.5"
+            cy="10"
+            fill="currentColor"
+            r="0.75"
+          ></circle>
+        </svg>
+      </div>
+
+      <!-- Text Content -->
+      <div class="flex-1 space-y-2">
+        <h3 class="text-base font-semibold tracking-tight text-white">
+          {t("cookieConsent.title", "We value your privacy")}
+        </h3>
+        <p
+          class="text-xs leading-relaxed text-zinc-300 sm:text-sm"
+          id="cookie-banner-desc"
+        >
+          {t(
+            "cookieConsent.description",
+            "We use cookies to enhance your browsing experience, provide secure navigation, and analyze site traffic to deliver unforgettable Morocco adventures.",
+          )}{" "}
+          <a
+            class="font-medium text-orange-400 underline underline-offset-2 transition-colors hover:text-orange-300"
+            href={privacyPolicyHref}
+          >
+            {t("cookieConsent.privacyPolicyLink", "Read our Privacy Policy")}
+          </a>
+        </p>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-wrap items-center gap-2.5 pt-2 sm:gap-3">
+          <button
+            class="inline-flex cursor-pointer items-center justify-center rounded-xl bg-orange-600 px-4 py-2 text-xs font-semibold text-white shadow-md shadow-orange-600/30 transition-all hover:bg-orange-500 active:scale-[0.98] sm:px-5 sm:py-2.5 sm:text-sm"
+            data-cookie-accept-all
+            type="button"
+          >
+            {t("cookieConsent.acceptAll", "Accept All")}
+          </button>
+
+          <button
+            class="inline-flex cursor-pointer items-center justify-center rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-xs font-medium text-zinc-200 transition-all hover:bg-white/10 hover:text-white active:scale-[0.98] sm:px-5 sm:py-2.5 sm:text-sm"
+            data-cookie-reject-all
+            type="button"
+          >
+            {t("cookieConsent.rejectAll", "Essential Only")}
+          </button>
+
+          <button
+            class="inline-flex cursor-pointer items-center justify-center rounded-xl px-3 py-2 text-xs font-medium text-zinc-400 transition-all hover:text-orange-400 sm:text-sm"
+            data-cookie-open-preferences
+            type="button"
+          >
+            {t("cookieConsent.customize", "Cookie Settings")}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========================================== -->
+<!-- 2. Modal: Granular Cookie Preferences      -->
+<!-- ========================================== -->
+<div
+  aria-labelledby="cookie-modal-title"
+  aria-modal="true"
+  class="fixed inset-0 z-100lex items-center justify-center p-4 opacity-0 transition-opacity duration-300 ease-out hidden"
+  id="cookie-preferences-modal"
+  role="dialog"
+>
+  <!-- Backdrop -->
+  <div
+    class="fixed inset-0 bg-black/75 backdrop-blur-md transition-opacity"
+    data-modal-backdrop
+  ></div>
+
+  <!-- Modal Content Box -->
+  <div class="relative z-10 flex max-h-[90vh] w-full max-w-2xl flex-col overflow-hidden rounded-3xl border border-white/15 bg-zinc-950 text-white shadow-2xl ring-1 ring-white/10">
+    <!-- Header -->
+    <div class="flex items-center justify-between border-b border-white/10 px-6 py-5">
+      <div class="flex items-center gap-3">
+        <div class="flex size-9 items-center justify-center rounded-lg bg-orange-500/10 text-orange-500 ring-1 ring-orange-500/30">
+          <svg
+            class="size-5"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></path>
+            <circle
+              cx="12"
+              cy="12"
+              r="3"
+            ></circle>
+          </svg>
+        </div>
+        <h2
+          class="text-lg font-semibold tracking-tight text-white"
+          id="cookie-modal-title"
+        >
+          {t("cookieConsent.modalTitle", "Cookie & Privacy Preferences")}
+        </h2>
+      </div>
+
+      <button
+        aria-label={t("cookieConsent.close", "Close")}
+        class="inline-flex size-9 cursor-pointer items-center justify-center rounded-xl text-zinc-400 transition-colors hover:bg-white/10 hover:text-white"
+        data-cookie-close-preferences
+        type="button"
+      >
+        <svg
+          class="size-5"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M6 18L18 6M6 6l12 12"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Scrollable Body -->
+    <div class="flex-1 space-y-6 overflow-y-auto px-6 py-6 text-sm text-zinc-300">
+      <p class="text-xs leading-relaxed text-zinc-400 sm:text-sm">
+        {t(
+          "cookieConsent.modalSubtitle",
+          "Manage how cookies and local storage are used during your visit. You can modify these settings at any time.",
+        )}
+      </p>
+
+      <div class="space-y-4">
+        <!-- 1. Strictly Necessary (Always On) -->
+        <div class="rounded-2xl border border-white/10 bg-white/2 p-4 transition-colors">
+          <div class="flex items-center justify-between gap-4">
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <h4 class="font-medium text-white">
+                  {t("cookieConsent.necessaryTitle", "Strictly Necessary Cookies")}
+                </h4>
+                <span class="rounded-full bg-emerald-500/10 px-2 py-0.5 text-[11px] font-semibold text-emerald-400 ring-1 ring-emerald-500/30">
+                  {t("cookieConsent.alwaysActive", "Always Active")}
+                </span>
+              </div>
+              <p class="text-xs text-zinc-400">
+                {t(
+                  "cookieConsent.necessaryDesc",
+                  "Required for site navigation, security, language selection, and core features. These cannot be disabled.",
+                )}
+              </p>
+            </div>
+            <!-- Disabled checkbox -->
+            <div class="relative flex items-center">
+              <input
+                checked
+                class="size-5 rounded border-white/20 bg-zinc-800 text-orange-500 opacity-60 cursor-not-allowed"
+                disabled
+                id="cookie-toggle-necessary"
+                type="checkbox"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Analytics & Performance -->
+        <div class="rounded-2xl border border-white/10 bg-white/2 p-4 transition-colors">
+          <div class="flex items-center justify-between gap-4">
+            <label
+              class="flex-1 cursor-pointer space-y-1"
+              for="cookie-toggle-analytics"
+            >
+              <h4 class="font-medium text-white">
+                {t("cookieConsent.analyticsTitle", "Analytics & Performance")}
+              </h4>
+              <p class="text-xs text-zinc-400">
+                {t(
+                  "cookieConsent.analyticsDesc",
+                  "Enables anonymous traffic metrics to help us understand popular itineraries and improve loading performance.",
+                )}
+              </p>
+            </label>
+            <div class="relative flex items-center">
+              <input
+                class="size-5 cursor-pointer rounded border-white/20 bg-zinc-800 text-orange-500 focus:ring-2 focus:ring-orange-500 focus:ring-offset-zinc-950"
+                id="cookie-toggle-analytics"
+                type="checkbox"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Preferences & Functional -->
+        <div class="rounded-2xl border border-white/10 bg-white/2 p-4 transition-colors">
+          <div class="flex items-center justify-between gap-4">
+            <label
+              class="flex-1 cursor-pointer space-y-1"
+              for="cookie-toggle-functional"
+            >
+              <h4 class="font-medium text-white">
+                {t("cookieConsent.functionalTitle", "Preferences & Functional")}
+              </h4>
+              <p class="text-xs text-zinc-400">
+                {t(
+                  "cookieConsent.functionalDesc",
+                  "Remembers your choices (such as interactive agency maps and currency preferences) for a smoother journey.",
+                )}
+              </p>
+            </label>
+            <div class="relative flex items-center">
+              <input
+                class="size-5 cursor-pointer rounded border-white/20 bg-zinc-800 text-orange-500 focus:ring-2 focus:ring-orange-500 focus:ring-offset-zinc-950"
+                id="cookie-toggle-functional"
+                type="checkbox"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Actions -->
+    <div class="flex flex-col-reverse items-center justify-between gap-3 border-t border-white/10 bg-zinc-900/60 px-6 py-4 sm:flex-row">
+      <a
+        class="text-xs font-medium text-zinc-400 underline underline-offset-2 transition-colors hover:text-white"
+        href={privacyPolicyHref}
+      >
+        {t("cookieConsent.privacyPolicyLink", "Read our Privacy Policy")}
+      </a>
+
+      <div class="flex w-full items-center justify-end gap-2.5 sm:w-auto">
+        <button
+          class="flex-1 cursor-pointer rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-xs font-semibold text-zinc-200 transition-all hover:bg-white/10 sm:flex-none sm:text-sm"
+          data-cookie-reject-all
+          type="button"
+        >
+          {t("cookieConsent.rejectAll", "Essential Only")}
+        </button>
+
+        <button
+          class="flex-1 cursor-pointer rounded-xl bg-orange-600 px-5 py-2.5 text-xs font-semibold text-white shadow-md shadow-orange-600/30 transition-all hover:bg-orange-500 sm:flex-none sm:text-sm"
+          data-cookie-save-preferences
+          type="button"
+        >
+          {t("cookieConsent.savePreferences", "Save Preferences")}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========================================== -->
+<!-- 3. Discreet Floating Cookie Settings Badge -->
+<!-- ========================================== -->
+<button
+  aria-label={t("cookieConsent.modalTitle", "Cookie Settings")}
+  class="fixed bottom-6 left-6 z-40 flex size-11 cursor-pointer items-center justify-center rounded-full border border-white/15 bg-zinc-950/85 text-zinc-400 shadow-lg backdrop-blur-md transition-all duration-300 hover:border-orange-500/50 hover:bg-zinc-900 hover:text-orange-400 hover:scale-105 active:scale-95"
+  data-cookie-open-preferences
+  id="cookie-badge-btn"
+  title={t("cookieConsent.customize", "Cookie Settings")}
+  type="button"
+>
+  <svg
+    class="size-5"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.8"
+    viewBox="0 0 24 24"
+  >
+    <path
+      d="M12 2a10 10 0 1010 10c0-1.5-1-2.5-2.5-2.5a2.5 2.5 0 01-2.5-2.5c0-1.5-1-2.5-2.5-2.5a2.5 2.5 0 01-2.5-2.5z"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    ></path>
+    <circle
+      cx="8.5"
+      cy="8.5"
+      fill="currentColor"
+      r="1"
+    ></circle>
+    <circle
+      cx="7.5"
+      cy="14.5"
+      fill="currentColor"
+      r="1"
+    ></circle>
+    <circle
+      cx="14.5"
+      cy="14.5"
+      fill="currentColor"
+      r="1"
+    ></circle>
+    <circle
+      cx="12"
+      cy="11"
+      fill="currentColor"
+      r="0.75"
+    ></circle>
+    <circle
+      cx="16.5"
+      cy="10"
+      fill="currentColor"
+      r="0.75"
+    ></circle>
+  </svg>
+</button>
+
+<script src="../../scripts/cookie-consent.ts"></script>
