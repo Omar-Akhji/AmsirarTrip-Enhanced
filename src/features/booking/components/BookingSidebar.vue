@@ -87,7 +87,7 @@ const { t } = useTranslation();
           href="https://www.tripadvisor.de/Attraction_Review-g293734-d32584739-Reviews-Amsirar_Travel-Marrakech_Marrakech_Safi.html"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex transform items-center justify-center gap-2 rounded-full bg-tripadvisor-bright px-4 py-2 text-sm font-semibold text-black transition duration-300 ease-in-out focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-tripadvisor-bright pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:bg-tripadvisor-dark pointer-fine:hover:shadow-lg"
+          class="inline-flex items-center justify-center gap-2 rounded-full bg-tripadvisor-bright px-4 py-2 text-sm font-semibold text-black transition duration-300 ease-in-out focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-tripadvisor-bright pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:bg-tripadvisor-dark pointer-fine:hover:shadow-lg"
           :aria-label="t('booking.tripadvisorCtaAria', 'Open TripAdvisor in new tab')"
         >
           <svg

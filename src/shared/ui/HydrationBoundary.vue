@@ -45,7 +45,7 @@ onErrorCaptured((err: Error) => {
       <slot name="loading">
         <div class="flex items-center justify-center p-4">
           <div
-            class="h-6 w-6 animate-spin rounded-full border-2 border-orange-500 border-t-transparent"
+            class="size-6 animate-spin rounded-full border-2 border-orange-500 border-t-transparent"
             aria-hidden="true"
           />
           <span class="sr-only">{{ fallback }}</span>

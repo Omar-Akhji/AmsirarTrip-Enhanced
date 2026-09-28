@@ -181,7 +181,7 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
     </div>
 
     <!-- Scrollable Body with Clean Custom Scrollbar -->
-    <div class="amsirar-cookie-modal-body flex-1 space-y-4 overflow-y-auto px-6 py-6 text-sm text-zinc-300">
+    <div class="flex-1 space-y-4 overflow-y-auto p-6 text-sm text-zinc-300 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-white/15 hover:scrollbar-thumb-orange-500/50">
       <!-- Info callout card -->
       <div class="rounded-2xl border border-white/10 bg-white/2 p-4 text-xs leading-relaxed text-zinc-300 sm:text-[13px]">
         <p>
@@ -504,21 +504,6 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
 
   .amsirar-toggle-track.is-locked .amsirar-toggle-thumb {
     transform: translateX(22px);
-  }
-
-  /* Custom Sleek Scrollbar for Preferences Modal */
-  .amsirar-cookie-modal-body::-webkit-scrollbar {
-    width: 5px;
-  }
-  .amsirar-cookie-modal-body::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  .amsirar-cookie-modal-body::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.15);
-    border-radius: 9999px;
-  }
-  .amsirar-cookie-modal-body::-webkit-scrollbar-thumb:hover {
-    background: rgba(249, 115, 22, 0.5);
   }
 </style>
 
