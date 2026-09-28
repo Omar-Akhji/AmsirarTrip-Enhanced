@@ -9,29 +9,21 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
 ---
 
 <!-- ========================================== -->
-<!-- 1. Modal Cookie Consent Dialog             -->
+<!-- 1. Floating Cookie Notification (Right)    -->
 <!-- ========================================== -->
 <div
   aria-describedby="cookie-banner-desc"
   aria-labelledby="cookie-banner-title"
-  aria-modal="true"
-  class="fixed inset-0 z-999999 flex items-center justify-center p-4 opacity-0 transition-opacity duration-300 ease-out"
+  class="pointer-events-none fixed right-4 bottom-4 left-4 z-50 transition-all duration-300 ease-out opacity-0 translate-y-3 sm:left-auto sm:right-6 sm:bottom-6 sm:max-w-md md:max-w-lg hidden"
   id="cookie-banner"
-  role="dialog"
+  role="region"
 >
-  <!-- Backdrop (Dark + Blur) in front of everything -->
-  <div
-    aria-hidden="true"
-    class="fixed inset-0 bg-black/75 backdrop-blur-md transition-opacity"
-  ></div>
-
-  <!-- Modal Card Dialog -->
-  <div class="relative z-10 w-full max-w-lg overflow-hidden rounded-3xl bg-slate-950 p-6 text-white shadow-[0_25px_60px_rgba(0,0,0,0.85)] ring-1 ring-white/10 sm:p-8">
-    <div class="flex items-start gap-4">
-      <!-- Cookie Icon Badge -->
-      <div class="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-orange-500/10 text-orange-500 ring-1 ring-orange-500/30">
+  <div class="pointer-events-auto relative overflow-hidden rounded-3xl border border-white/10 bg-slate-950/95 p-5 sm:p-6 text-white shadow-[0_20px_50px_rgba(0,0,0,0.85)] backdrop-blur-xl ring-1 ring-white/10">
+    <div class="flex items-start gap-3.5 sm:gap-4">
+      <!-- Cookie Icon Badge (Circular in Border) -->
+      <div class="flex size-11 shrink-0 items-center justify-center rounded-full border-2 border-orange-500/40 bg-orange-500/10 text-orange-400 ring-4 ring-orange-500/10 shadow-[0_0_16px_rgba(249,115,22,0.15)] sm:size-12">
         <svg
-          class="size-6"
+          class="size-5 sm:size-6"
           fill="none"
           stroke="currentColor"
           stroke-width="1.8"
@@ -76,15 +68,15 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
       </div>
 
       <!-- Text Content -->
-      <div class="flex-1 space-y-2">
+      <div class="flex-1 space-y-1.5">
         <h2
-          class="text-lg font-bold tracking-tight text-white sm:text-xl"
+          class="text-sm font-bold tracking-tight text-white sm:text-base"
           id="cookie-banner-title"
         >
           {t("cookieConsent.title", "We value your privacy")}
         </h2>
         <p
-          class="text-xs leading-relaxed text-orange-200/90 sm:text-sm"
+          class="text-xs leading-relaxed text-zinc-300/90 sm:text-[13px]"
           id="cookie-banner-desc"
         >
           {t(
@@ -101,30 +93,34 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
       </div>
     </div>
 
-    <!-- Action Buttons -->
-    <div class="mt-6 flex flex-col-reverse gap-2.5 sm:flex-row sm:items-center sm:justify-end">
+    <!-- Action Buttons Row (Reversed Order) -->
+    <div class="mt-4 flex flex-col gap-2 border-t border-white/10 pt-4 sm:flex-row sm:items-center sm:justify-between">
+      <!-- Primary Action Buttons Group (Accept All first, Essential Only second) -->
+      <div class="grid grid-cols-2 gap-2 sm:flex sm:items-center sm:gap-2">
+        <button
+          class="inline-flex h-9 cursor-pointer items-center justify-center rounded-xl bg-gradient-to-r from-orange-600 via-orange-500 to-amber-600 px-4 text-xs font-bold text-white shadow-lg shadow-orange-600/30 transition-all duration-200 hover:shadow-orange-500/40 hover:brightness-110 active:scale-[0.98] sm:text-sm"
+          data-cookie-accept-all
+          type="button"
+        >
+          {t("cookieConsent.acceptAll", "Accept All")}
+        </button>
+
+        <button
+          class="inline-flex h-9 cursor-pointer items-center justify-center rounded-xl border border-white/15 bg-white/5 px-3.5 text-xs font-semibold text-zinc-200 transition-all duration-200 hover:border-white/30 hover:bg-white/10 hover:text-white active:scale-[0.98]"
+          data-cookie-reject-all
+          type="button"
+        >
+          {t("cookieConsent.rejectAll", "Essential Only")}
+        </button>
+      </div>
+
+      <!-- Settings button -->
       <button
-        class="inline-flex cursor-pointer items-center justify-center px-2 py-2 text-xs font-semibold text-zinc-400 underline underline-offset-4 transition-all hover:text-orange-400 sm:me-auto"
+        class="inline-flex h-9 cursor-pointer items-center justify-center rounded-xl border border-white/15 bg-white/5 px-3.5 text-xs font-semibold text-zinc-300 transition-all duration-200 hover:border-orange-500/40 hover:bg-white/10 hover:text-orange-300 active:scale-[0.98]"
         data-cookie-open-preferences
         type="button"
       >
-        {t("cookieConsent.customize", "Cookie Settings")}
-      </button>
-
-      <button
-        class="inline-flex cursor-pointer items-center justify-center rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-xs font-semibold text-zinc-200 transition-all hover:bg-white/10 hover:text-white active:scale-[0.98] sm:text-sm"
-        data-cookie-reject-all
-        type="button"
-      >
-        {t("cookieConsent.rejectAll", "Essential Only")}
-      </button>
-
-      <button
-        class="inline-flex cursor-pointer items-center justify-center rounded-xl bg-orange-600 px-5 py-2.5 text-xs font-bold text-white shadow-lg shadow-orange-600/25 transition-all hover:bg-orange-500 hover:shadow-orange-500/35 active:scale-[0.98] sm:text-sm"
-        data-cookie-accept-all
-        type="button"
-      >
-        {t("cookieConsent.acceptAll", "Accept All")}
+        <span>{t("cookieConsent.customize", "Cookie Settings")}</span>
       </button>
     </div>
   </div>
@@ -142,29 +138,34 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
 >
   <!-- Backdrop -->
   <div
-    class="fixed inset-0 bg-black/75 backdrop-blur-md transition-opacity"
+    class="fixed inset-0 bg-black/80 backdrop-blur-md transition-opacity"
     data-modal-backdrop
   ></div>
 
   <!-- Modal Content Box -->
-  <div class="relative z-10 flex max-h-[90vh] w-full max-w-2xl flex-col overflow-hidden rounded-3xl bg-slate-950 text-white shadow-2xl ring-1 ring-white/10">
+  <div class="relative z-10 flex max-h-[88vh] w-full max-w-2xl flex-col overflow-hidden rounded-3xl bg-slate-950 text-white shadow-[0_25px_70px_rgba(0,0,0,0.9)] ring-1 ring-white/10">
     <!-- Header -->
-    <div class="flex items-center justify-between border-b border-white/10 px-6 py-5">
-      <h2
-        class="text-lg font-semibold tracking-tight text-white"
-        id="cookie-modal-title"
-      >
-        {t("cookieConsent.modalTitle", "Cookie & Privacy Preferences")}
-      </h2>
+    <div class="flex items-center justify-between border-b border-white/10 bg-slate-900/40 px-6 py-5 backdrop-blur-md">
+      <div>
+        <h2
+          class="text-base font-bold tracking-tight text-white sm:text-lg"
+          id="cookie-modal-title"
+        >
+          {t("cookieConsent.modalTitle", "Cookie & Privacy Preferences")}
+        </h2>
+        <p class="text-[11px] text-zinc-400">
+          {t("cookieConsent.complianceNote", "Compliant with GDPR & Moroccan Law 09-08")}
+        </p>
+      </div>
 
       <button
         aria-label={t("cookieConsent.close", "Close")}
-        class="inline-flex size-9 cursor-pointer items-center justify-center rounded-xl text-zinc-400 transition-colors hover:bg-white/10 hover:text-white"
+        class="inline-flex size-9 cursor-pointer items-center justify-center rounded-xl border border-white/10 bg-white/5 text-zinc-400 transition-colors hover:bg-white/10 hover:text-white"
         data-cookie-close-preferences
         type="button"
       >
         <svg
-          class="size-5"
+          class="size-4.5"
           fill="none"
           stroke="currentColor"
           stroke-width="2"
@@ -179,40 +180,55 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
       </button>
     </div>
 
-    <!-- Scrollable Body -->
-    <div class="flex-1 space-y-6 overflow-y-auto px-6 py-6 text-sm text-zinc-300">
-      <p class="text-xs leading-relaxed text-zinc-400 sm:text-sm">
-        {t(
-          "cookieConsent.modalSubtitle",
-          "Manage how cookies and local storage are used during your visit. You can modify these settings at any time.",
-        )}
-      </p>
+    <!-- Scrollable Body with Clean Custom Scrollbar -->
+    <div class="amsirar-cookie-modal-body flex-1 space-y-4 overflow-y-auto px-6 py-6 text-sm text-zinc-300">
+      <!-- Info callout card -->
+      <div class="rounded-2xl border border-white/10 bg-white/[0.02] p-4 text-xs leading-relaxed text-zinc-300 sm:text-[13px]">
+        <p>
+          {t(
+            "cookieConsent.modalSubtitle",
+            "Manage how cookies and local storage are used during your visit. You can modify these settings at any time.",
+          )}
+        </p>
+      </div>
 
-      <div class="space-y-4">
+      <!-- Categories Boxes -->
+      <div class="space-y-3.5">
         <!-- 1. Strictly Necessary (Always On) -->
-        <div class="rounded-2xl bg-white/5 p-4 ring-1 ring-white/10 transition-colors">
-          <div class="flex items-center justify-between gap-4">
-            <div class="flex-1 space-y-1">
-              <div class="flex items-center gap-2">
-                <h4 class="font-medium text-white">
+        <div class="rounded-2xl border border-white/10 bg-white/[0.03] p-4.5 transition-all sm:p-5">
+          <div class="flex items-start justify-between gap-4">
+            <div class="flex-1 min-w-0">
+              <div class="flex flex-wrap items-center gap-2">
+                <h3 class="text-sm font-semibold tracking-tight text-white sm:text-base">
                   {t("cookieConsent.necessaryTitle", "Strictly Necessary Cookies")}
-                </h4>
-                <span class="rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-[11px] font-semibold text-emerald-400 ring-1 ring-emerald-500/30">
+                </h3>
+                <span class="inline-flex items-center rounded-full bg-emerald-500/15 px-2.5 py-0.5 text-[11px] font-semibold text-emerald-400 ring-1 ring-emerald-500/30">
                   {t("cookieConsent.alwaysActive", "Always Active")}
                 </span>
               </div>
-              <p class="text-xs leading-relaxed text-zinc-400">
+              <p class="pt-2 text-xs leading-relaxed text-zinc-400 sm:text-[13px]">
                 {t(
                   "cookieConsent.necessaryDesc",
                   "Required for site navigation, security, language selection, and core features. These cannot be disabled.",
                 )}
               </p>
+
+              <!-- Feature tags -->
+              <div class="mt-3 flex flex-wrap items-center gap-1.5 border-t border-white/5 pt-2.5 text-[10px] text-zinc-400">
+                <span class="rounded-md border border-white/10 bg-white/5 px-2 py-0.5 font-medium">
+                  Session Security
+                </span>
+                <span class="rounded-md border border-white/10 bg-white/5 px-2 py-0.5 font-medium">
+                  Language Routing
+                </span>
+                <span class="rounded-md border border-white/10 bg-white/5 px-2 py-0.5 font-medium">
+                  CSRF Token
+                </span>
+              </div>
             </div>
+
             <!-- Locked Active Switch -->
-            <label
-              class="relative inline-flex shrink-0 cursor-not-allowed items-center"
-              for="cookie-toggle-necessary"
-            >
+            <div class="relative inline-flex shrink-0 cursor-not-allowed items-center pt-0.5">
               <input
                 checked
                 class="amsirar-toggle-input sr-only"
@@ -224,44 +240,51 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
                 aria-hidden="true"
                 class="amsirar-toggle-track is-locked"
               >
-                <div class="amsirar-toggle-thumb">
-                  <svg
-                    class="size-3 text-emerald-600"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      clip-rule="evenodd"
-                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                      fill-rule="evenodd"
-                    ></path>
-                  </svg>
-                </div>
+                <div class="amsirar-toggle-thumb"></div>
               </div>
-            </label>
+            </div>
           </div>
         </div>
 
         <!-- 2. Analytics & Performance -->
-        <div class="group rounded-2xl bg-white/5 p-4 ring-1 ring-white/10 transition-colors hover:bg-white/[0.07] hover:ring-white/20">
-          <div class="flex items-center justify-between gap-4">
-            <label
-              class="flex-1 cursor-pointer space-y-1"
-              for="cookie-toggle-analytics"
-            >
-              <h4 class="font-medium text-white transition-colors group-hover:text-orange-200">
-                {t("cookieConsent.analyticsTitle", "Analytics & Performance")}
-              </h4>
-              <p class="text-xs leading-relaxed text-zinc-400">
+        <div class="group rounded-2xl border border-white/10 bg-white/[0.03] p-4.5 transition-all hover:border-white/20 hover:bg-white/[0.06] sm:p-5">
+          <div class="flex items-start justify-between gap-4">
+            <div class="flex-1 min-w-0">
+              <label
+                class="flex cursor-pointer flex-wrap items-center gap-2"
+                for="cookie-toggle-analytics"
+              >
+                <h3 class="text-sm font-semibold tracking-tight text-white transition-colors group-hover:text-orange-200 sm:text-base">
+                  {t("cookieConsent.analyticsTitle", "Analytics & Performance")}
+                </h3>
+                <span class="inline-flex items-center rounded-full bg-white/10 px-2.5 py-0.5 text-[11px] font-medium text-zinc-400 ring-1 ring-white/10">
+                  {t("cookieConsent.optional", "Optional")}
+                </span>
+              </label>
+              <p class="pt-2 text-xs leading-relaxed text-zinc-400 sm:text-[13px]">
                 {t(
                   "cookieConsent.analyticsDesc",
                   "Enables anonymous traffic metrics to help us understand popular itineraries and improve loading performance.",
                 )}
               </p>
-            </label>
+
+              <!-- Feature tags -->
+              <div class="mt-3 flex flex-wrap items-center gap-1.5 border-t border-white/5 pt-2.5 text-[10px] text-zinc-400">
+                <span class="rounded-md border border-white/10 bg-white/5 px-2 py-0.5 font-medium">
+                  Traffic Analytics
+                </span>
+                <span class="rounded-md border border-white/10 bg-white/5 px-2 py-0.5 font-medium">
+                  Page Speeds
+                </span>
+                <span class="rounded-md border border-white/10 bg-white/5 px-2 py-0.5 font-medium">
+                  Anonymized Telemetry
+                </span>
+              </div>
+            </div>
+
             <!-- Interactive Switch Toggle -->
             <label
-              class="relative inline-flex shrink-0 cursor-pointer items-center"
+              class="relative inline-flex shrink-0 cursor-pointer items-center pt-0.5"
               for="cookie-toggle-analytics"
             >
               <input
@@ -280,25 +303,44 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
         </div>
 
         <!-- 3. Preferences & Functional -->
-        <div class="group rounded-2xl bg-white/5 p-4 ring-1 ring-white/10 transition-colors hover:bg-white/[0.07] hover:ring-white/20">
-          <div class="flex items-center justify-between gap-4">
-            <label
-              class="flex-1 cursor-pointer space-y-1"
-              for="cookie-toggle-functional"
-            >
-              <h4 class="font-medium text-white transition-colors group-hover:text-orange-200">
-                {t("cookieConsent.functionalTitle", "Preferences & Functional")}
-              </h4>
-              <p class="text-xs leading-relaxed text-zinc-400">
+        <div class="group rounded-2xl border border-white/10 bg-white/[0.03] p-4.5 transition-all hover:border-white/20 hover:bg-white/[0.06] sm:p-5">
+          <div class="flex items-start justify-between gap-4">
+            <div class="flex-1 min-w-0">
+              <label
+                class="flex cursor-pointer flex-wrap items-center gap-2"
+                for="cookie-toggle-functional"
+              >
+                <h3 class="text-sm font-semibold tracking-tight text-white transition-colors group-hover:text-orange-200 sm:text-base">
+                  {t("cookieConsent.functionalTitle", "Preferences & Functional")}
+                </h3>
+                <span class="inline-flex items-center rounded-full bg-white/10 px-2.5 py-0.5 text-[11px] font-medium text-zinc-400 ring-1 ring-white/10">
+                  {t("cookieConsent.optional", "Optional")}
+                </span>
+              </label>
+              <p class="pt-2 text-xs leading-relaxed text-zinc-400 sm:text-[13px]">
                 {t(
                   "cookieConsent.functionalDesc",
                   "Remembers your choices (such as interactive agency maps and currency preferences) for a smoother journey.",
                 )}
               </p>
-            </label>
+
+              <!-- Feature tags -->
+              <div class="mt-3 flex flex-wrap items-center gap-1.5 border-t border-white/5 pt-2.5 text-[10px] text-zinc-400">
+                <span class="rounded-md border border-white/10 bg-white/5 px-2 py-0.5 font-medium">
+                  Interactive Maps
+                </span>
+                <span class="rounded-md border border-white/10 bg-white/5 px-2 py-0.5 font-medium">
+                  Custom Preferences
+                </span>
+                <span class="rounded-md border border-white/10 bg-white/5 px-2 py-0.5 font-medium">
+                  Agency Cache
+                </span>
+              </div>
+            </div>
+
             <!-- Interactive Switch Toggle -->
             <label
-              class="relative inline-flex shrink-0 cursor-pointer items-center"
+              class="relative inline-flex shrink-0 cursor-pointer items-center pt-0.5"
               for="cookie-toggle-functional"
             >
               <input
@@ -318,26 +360,38 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
       </div>
     </div>
 
-    <!-- Footer Actions -->
-    <div class="flex flex-col-reverse items-center justify-between gap-3 border-t border-white/10 bg-slate-900/60 px-6 py-4 sm:flex-row">
+    <!-- Footer Actions with Perfected Alignment & Hierarchy -->
+    <div class="flex flex-col gap-3.5 border-t border-white/10 bg-slate-900/60 px-6 py-4.5 backdrop-blur-md sm:flex-row sm:items-center sm:justify-between">
+      <!-- Privacy Policy Link -->
       <a
-        class="text-xs font-medium text-zinc-400 underline underline-offset-2 transition-colors hover:text-white"
+        class="inline-flex items-center justify-center text-xs font-medium text-zinc-400 underline underline-offset-4 transition-colors hover:text-orange-400 sm:justify-start"
         href={privacyPolicyHref}
       >
-        {t("cookieConsent.privacyPolicyLink", "Read our Privacy Policy")}
+        <span>{t("cookieConsent.privacyPolicyLink", "Read our Privacy Policy")}</span>
       </a>
 
-      <div class="flex w-full items-center justify-end gap-2.5 sm:w-auto">
-        <button
-          class="flex-1 cursor-pointer rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-xs font-semibold text-zinc-200 transition-all hover:bg-white/10 sm:flex-none sm:text-sm"
-          data-cookie-reject-all
-          type="button"
-        >
-          {t("cookieConsent.rejectAll", "Essential Only")}
-        </button>
+      <!-- Action Buttons Suite -->
+      <div class="flex flex-col items-stretch gap-2 sm:flex-row sm:items-center sm:gap-2.5">
+        <div class="grid grid-cols-2 gap-2 sm:flex sm:items-center sm:gap-2.5">
+          <button
+            class="inline-flex h-10 cursor-pointer items-center justify-center rounded-xl border border-white/15 bg-white/5 px-4 text-xs font-semibold text-zinc-200 transition-all duration-200 hover:border-white/30 hover:bg-white/10 hover:text-white active:scale-[0.98] sm:text-sm"
+            data-cookie-reject-all
+            type="button"
+          >
+            {t("cookieConsent.rejectAll", "Essential Only")}
+          </button>
+
+          <button
+            class="inline-flex h-10 cursor-pointer items-center justify-center rounded-xl border border-orange-500/30 bg-orange-500/10 px-4 text-xs font-semibold text-orange-300 transition-all duration-200 hover:border-orange-500/50 hover:bg-orange-500/20 hover:text-white active:scale-[0.98] sm:text-sm"
+            data-cookie-accept-all
+            type="button"
+          >
+            {t("cookieConsent.acceptAll", "Accept All")}
+          </button>
+        </div>
 
         <button
-          class="flex-1 cursor-pointer rounded-xl bg-orange-600 px-5 py-2.5 text-xs font-semibold text-white shadow-md shadow-orange-600/30 transition-all hover:bg-orange-500 sm:flex-none sm:text-sm"
+          class="inline-flex h-10 cursor-pointer items-center justify-center rounded-xl bg-gradient-to-r from-orange-600 via-orange-500 to-amber-600 px-5 text-xs font-bold text-white shadow-lg shadow-orange-600/30 transition-all duration-200 hover:shadow-orange-500/40 hover:brightness-110 active:scale-[0.98] sm:text-sm"
           data-cookie-save-preferences
           type="button"
         >
@@ -353,7 +407,7 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
 <!-- ========================================== -->
 <button
   aria-label={t("cookieConsent.modalTitle", "Cookie Settings")}
-  class="fixed bottom-6 left-6 z-40 flex size-11 cursor-pointer items-center justify-center rounded-full bg-slate-950/90 text-orange-200/80 shadow-lg backdrop-blur-md ring-1 ring-white/10 transition-all duration-300 hover:scale-105 hover:bg-slate-900 hover:text-orange-400 hover:ring-orange-500/50 active:scale-95"
+  class="fixed bottom-6 left-6 z-40 flex size-11 cursor-pointer items-center justify-center rounded-full border-2 border-orange-500/40 bg-slate-950/90 text-orange-400 shadow-xl backdrop-blur-md ring-4 ring-orange-500/10 transition-all duration-300 hover:scale-110 hover:border-orange-500 hover:bg-slate-900 hover:text-orange-300 hover:shadow-orange-500/25 active:scale-95"
   data-cookie-open-preferences
   id="cookie-badge-btn"
   title={t("cookieConsent.customize", "Cookie Settings")}
@@ -418,6 +472,7 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
     padding: 2px;
     cursor: pointer;
     user-select: none;
+    flex-shrink: 0;
   }
 
   .amsirar-toggle-thumb {
@@ -430,6 +485,7 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
     align-items: center;
     justify-content: center;
     will-change: transform;
+    flex-shrink: 0;
   }
 
   /* Focus outline for keyboard accessibility */
@@ -448,6 +504,21 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
 
   .amsirar-toggle-track.is-locked .amsirar-toggle-thumb {
     transform: translateX(22px);
+  }
+
+  /* Custom Sleek Scrollbar for Preferences Modal */
+  .amsirar-cookie-modal-body::-webkit-scrollbar {
+    width: 5px;
+  }
+  .amsirar-cookie-modal-body::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .amsirar-cookie-modal-body::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 9999px;
+  }
+  .amsirar-cookie-modal-body::-webkit-scrollbar-thumb:hover {
+    background: rgba(249, 115, 22, 0.5);
   }
 </style>
 
