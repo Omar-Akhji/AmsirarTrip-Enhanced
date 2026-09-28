@@ -405,7 +405,7 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
 </button>
 
 <style>
-  /* Custom Toggle Switch - Smooth Glide Animation */
+  /* Custom Toggle Switch Base Geometry */
   .amsirar-toggle-track {
     width: 48px;
     height: 26px;
@@ -416,11 +416,8 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
     display: flex;
     align-items: center;
     padding: 2px;
-    transition:
-      background-color 0.28s ease,
-      border-color 0.28s ease,
-      box-shadow 0.28s ease;
     cursor: pointer;
+    user-select: none;
   }
 
   .amsirar-toggle-thumb {
@@ -429,22 +426,10 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
     border-radius: 9999px;
     background-color: #ffffff;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.35);
-    transform: translateX(0);
-    transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-
-  /* Active checked state: circle moves 22px to the right */
-  .amsirar-toggle-input:checked + .amsirar-toggle-track {
-    background-color: #ea580c;
-    border-color: rgba(251, 146, 60, 0.7);
-    box-shadow: 0 0 14px rgba(234, 88, 12, 0.45);
-  }
-
-  .amsirar-toggle-input:checked + .amsirar-toggle-track .amsirar-toggle-thumb {
-    transform: translateX(22px);
+    will-change: transform;
   }
 
   /* Focus outline for keyboard accessibility */
