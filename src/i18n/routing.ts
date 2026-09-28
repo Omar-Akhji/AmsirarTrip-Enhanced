@@ -29,17 +29,17 @@ function computePathname(): string {
   const path = location.pathname;
   const segments = path.split("/").filter(Boolean);
 
-  let normalizedPath = path;
-  if (segments[0] && (LOCALES as readonly string[]).includes(segments[0])) {
-    normalizedPath = "/" + segments.slice(1).join("/");
-  }
+  let normalizedPath =
+    segments[0] && (LOCALES as readonly string[]).includes(segments[0]) ?
+      `/${segments.slice(1).join("/")}`
+    : path;
 
   if (normalizedPath.length > 1 && normalizedPath.endsWith("/")) {
     normalizedPath = normalizedPath.slice(0, -1);
   }
 
   if (!normalizedPath.startsWith("/")) {
-    normalizedPath = "/" + normalizedPath;
+    normalizedPath = `/${normalizedPath}`;
   }
 
   return normalizedPath || "/";
@@ -83,7 +83,9 @@ export function useRouter(): AppRouter {
       const locale = options?.locale ?? getGlobalLocale();
       location.replace(getLocalizedPath(locale, href));
     },
-    prefetch: (_href: string): void => {},
+    prefetch: (_href: string): void => {
+      // Intentional no-op: Astro natively handles client-side prefetching
+    },
     back: (): void => history.back(),
     forward: (): void => history.forward(),
   };

@@ -17,11 +17,22 @@ interface Props {
   reservationDate: Date | null;
 }
 
-defineProps<Props>();
+const {
+  state,
+  selectedTour,
+  tourTitle,
+  tourId,
+  tourDuration,
+  excursionTitle,
+  excursionId,
+  locale,
+  calendarOpen,
+  reservationDate,
+} = defineProps<Props>();
 
 const emit = defineEmits<{
-  (e: "update:calendarOpen", open: boolean): void;
-  (e: "update:reservationDate", date: Date | null): void;
+  "update:calendarOpen": [open: boolean];
+  "update:reservationDate": [date: Date | null];
 }>();
 
 const { t } = useTranslation();

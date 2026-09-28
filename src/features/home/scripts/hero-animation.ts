@@ -112,7 +112,7 @@ function initHero() {
         return;
       }
 
-      const fullText = phrases[currentPhraseIndex] || "";
+      const fullText = phrases[currentPhraseIndex] ?? "";
       let text = "";
 
       if (isDeleting) {

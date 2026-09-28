@@ -17,12 +17,12 @@ const pathname = Astro.url.pathname;
 const segments = pathname.split("/").filter(Boolean);
 const normalizedPath =
   (LANGUAGES.some((l) => l.code === segments[0]) ?
-    "/" + segments.slice(1).join("/")
+    `/${segments.slice(1).join("/")}`
   : pathname
   ).replace(/\/$/, "") || "/";
 
 const isActive = (to: string) =>
-  normalizedPath === to || (to !== "/" && normalizedPath.startsWith(to + "/"));
+  normalizedPath === to || (to !== "/" && normalizedPath.startsWith(`${to}/`));
 ---
 
 <!-- Skip to main content link for keyboard accessibility -->
@@ -38,6 +38,7 @@ const isActive = (to: string) =>
     aria-label={t("nav.mainAria", "Main Navigation")}
     class="group fixed inset-s-1/2 top-2 z-50 translate-x-[-50%] rounded-2xl border border-white/10 bg-white/10 px-4 py-2 text-white shadow-[0_10px_30px_rgba(3,7,18,0.12)] backdrop-blur-xl transition-all duration-200 will-change-auto inline-[min(1100px,calc(100%-2rem))]"
     id="main-navbar"
+    transition:name="main-navbar"
   >
     <div class="helpline-bar relative hidden items-center justify-center border-b border-white/20 px-0 py-3 pbe-5 inline-full lg:flex group-data-scrolled:lg:hidden">
       <a

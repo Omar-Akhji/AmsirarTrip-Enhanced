@@ -24,17 +24,17 @@ const pathname = Astro.url.pathname;
 const segments = pathname.split("/").filter(Boolean);
 const localeCodes = LANGUAGES.map((l) => l.code);
 
-let basePath = pathname;
-if (segments[0] && (localeCodes as readonly string[]).includes(segments[0])) {
-  basePath = "/" + segments.slice(1).join("/");
-}
+let basePath =
+  segments[0] && (localeCodes as readonly string[]).includes(segments[0]) ?
+    `/${segments.slice(1).join("/")}`
+  : pathname;
 
 // Clean trailing slashes
 if (basePath.length > 1 && basePath.endsWith("/")) {
   basePath = basePath.slice(0, -1);
 }
 if (!basePath.startsWith("/")) {
-  basePath = "/" + basePath;
+  basePath = `/${basePath}`;
 }
 
 const getLocalizedHref = (code: string) => {

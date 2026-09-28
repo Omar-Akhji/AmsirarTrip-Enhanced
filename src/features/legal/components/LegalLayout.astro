@@ -1,6 +1,7 @@
 ---
 import { useTranslations } from "@/i18n/utils";
 import PageHeader from "@/shared/layout/PageHeader.astro";
+import { ArrowLeft } from "@lucide/astro";
 import { getCollection, render } from "astro:content";
 import { getRelativeLocaleUrl } from "astro:i18n";
 
@@ -36,7 +37,7 @@ if (entry) {
   title={meta?.title || docId}
 />
 
-<main>
+<div>
   <section
     aria-labelledby={headingId}
     class="relative isolate overflow-hidden bg-neutral-50 py-16 text-neutral-900 sm:py-24"
@@ -63,22 +64,10 @@ if (entry) {
           class="inline-flex items-center gap-2 font-medium text-orange-600 transition-colors pointer-fine:hover:text-orange-700"
           href={getRelativeLocaleUrl(locale, "/")}
         >
-          <svg
-            class="size-4"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M10 19l-7-7m0 0l7-7m-7 7h18"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-            ></path>
-          </svg>
+          <ArrowLeft class="size-4" />
           {t("legal.backToHome")}
         </a>
       </div>
     </div>
   </section>
-</main>
+</div>

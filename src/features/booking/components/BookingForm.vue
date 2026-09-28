@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from "vue";
+import { ref, computed, onMounted, useTemplateRef } from "vue";
 import { actions } from "astro:actions";
 import { hasRecaptchaV2, RECAPTCHA_V2_SITE_KEY } from "@/lib/client-env";
 import type { FormState } from "@/lib/form-types";
@@ -19,10 +19,17 @@ interface Props {
   fullWidth?: boolean;
 }
 
-const props = withDefaults(defineProps<Props>(), { fullWidth: false });
+const {
+  tourTitle,
+  tourId,
+  tourDuration,
+  excursionTitle,
+  excursionId,
+  fullWidth = false,
+} = defineProps<Props>();
 
 const { t, i18n } = useTranslation();
-const recaptchaRef = ref<InstanceType<typeof Recaptcha> | null>(null);
+const recaptchaRef = useTemplateRef<InstanceType<typeof Recaptcha>>("recaptchaRef");
 
 const isMounted = ref(false);
 onMounted(() => {
@@ -52,15 +59,12 @@ const perks = computed(() => [
 ]);
 
 const selectedTour = computed(() => {
-  if (props.tourTitle && props.tourDuration != null) {
-    return `${props.tourTitle} - Duration: ${props.tourDuration} Days`;
-  }
-  return props.tourTitle || props.excursionTitle || "";
+  return tourTitle && tourDuration != null ?
+      `${tourTitle} - Duration: ${tourDuration} Days`
+    : tourTitle || excursionTitle || "";
 });
 
-const tourDuration = computed(() => {
-  return props.tourDuration ?? null;
-});
+const computedTourDuration = computed(() => tourDuration ?? null);
 
 const handleSubmit = async (event: Event) => {
   const form = event.target as HTMLFormElement;
@@ -130,13 +134,12 @@ const handleSubmit = async (event: Event) => {
   <section
     id="booking"
     aria-labelledby="booking-heading"
-    :class="['bg-neutral-50 py-20 md:py-10', fullWidth ? 'booking-form-fullwidth' : '']"
+    class="bg-neutral-50 py-20 md:py-10"
+    :class="[fullWidth ? 'booking-form-fullwidth' : '']"
   >
     <div
-      :class="[
-        'booking-form-inner mx-auto overflow-x-hidden inline-full max-inline-6xl',
-        fullWidth ? 'px-4 sm:px-6 lg:px-10' : 'px-4 sm:px-6 lg:px-8',
-      ]"
+      class="booking-form-inner mx-auto overflow-x-hidden inline-full max-inline-6xl"
+      :class="[fullWidth ? 'px-4 sm:px-6 lg:px-10' : 'px-4 sm:px-6 lg:px-8']"
     >
       <div class="grid grid-cols-1 gap-8 lg:grid-cols-5">
         <div
@@ -159,7 +162,7 @@ const handleSubmit = async (event: Event) => {
             <form
               :key="formKey"
               class="space-y-5 p-6 md:p-8"
-              noValidate
+              novalidate
               data-form="booking"
               :data-hydrated="isMounted"
               toolname="submit_booking_request"
@@ -168,18 +171,16 @@ const handleSubmit = async (event: Event) => {
             >
               <FormStatusMessages
                 v-bind="{
-                  ...(state?.['errors']?.['submit'] ?
-                    { submitError: state['errors']['submit'] }
-                  : {}),
-                  ...(state?.['success'] !== undefined ? { success: state['success'] } : {}),
-                  ...(state?.['message'] ? { successMessage: state['message'] } : {}),
+                  ...(state?.errors?.submit ? { submitError: state.errors.submit } : {}),
+                  ...(state?.success !== undefined ? { success: state.success } : {}),
+                  ...(state?.message ? { successMessage: state.message } : {}),
                 }"
               />
 
               <!-- Honeypot -->
               <div
                 aria-hidden="true"
-                class="absolute -left-2499.75 h-0 overflow-hidden"
+                class="absolute left-[-9999px] h-0 overflow-hidden"
               >
                 <input
                   type="text"
@@ -202,18 +203,16 @@ const handleSubmit = async (event: Event) => {
                   ...(excursionTitle ? { excursionTitle } : {}),
                   ...(excursionId ? { excursionId } : {}),
                 }"
-                :tour-duration="tourDuration"
+                :tour-duration="computedTourDuration"
                 :locale="i18n.language"
               />
 
               <div class="flex flex-col gap-4 lg:flex-row lg:items-center">
                 <div class="flex justify-center inline-full lg:justify-start">
                   <div
+                    class="w-fit origin-center scale-85 rounded-2xl border border-dashed p-3 transition-all duration-500 sm:scale-100"
                     :class="[
-                      'w-fit origin-center scale-85 rounded-2xl border border-dashed p-3 transition-all duration-500 sm:scale-100',
-                      state?.['errors']?.['recaptchaToken'] ?
-                        'border-red-300'
-                      : 'border-neutral-200',
+                      state?.errors?.recaptchaToken ? 'border-red-300' : 'border-neutral-200',
                     ]"
                   >
                     <Recaptcha
@@ -233,11 +232,11 @@ const handleSubmit = async (event: Event) => {
                 </div>
 
                 <p
-                  v-if="state?.['errors']?.['recaptchaToken']"
+                  v-if="state?.errors?.recaptchaToken"
                   id="recaptchaToken-error"
                   class="mbs-1 text-xs text-red-600"
                 >
-                  {{ state["errors"]["recaptchaToken"] }}
+                  {{ state.errors.recaptchaToken }}
                 </p>
 
                 <button

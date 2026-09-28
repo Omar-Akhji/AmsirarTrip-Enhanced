@@ -27,7 +27,7 @@ const t = useTranslations(locale);
 const keyPrefix = `excursion.list.${excursion.i18nKeyPrefix}`;
 
 const title = t(`${keyPrefix}.title`);
-const description = t(`${keyPrefix}.description`) + " " + t(`${keyPrefix}.tagline`);
+const description = `${t(`${keyPrefix}.description`)} ${t(`${keyPrefix}.tagline`)}`;
 
 const excursionJsonLd = generateExcursionJsonLd({
   name: excursion.jsonLd.name,
@@ -67,6 +67,7 @@ const breadcrumbJsonLd = generateBreadcrumbJsonLd([
     excursionKey={excursion.excursionKey}
     imageSrc={excursion.image}
     locale={locale}
+    slug={slug}
   >
     <BookingForm
       client:visible

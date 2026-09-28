@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, onUnmounted, useTemplateRef } from "vue";
 import { actions } from "astro:actions";
 import { hasRecaptchaV2, RECAPTCHA_V2_SITE_KEY } from "@/lib/client-env";
 import type { FormState } from "@/lib/form-types";
@@ -8,9 +8,10 @@ import Loading from "@/shared/ui/Loading.vue";
 import Recaptcha from "@/shared/ui/Recaptcha.vue";
 import ContactFormFields from "./ContactFormFields.vue";
 import ContactInfoSidebar from "./ContactInfoSidebar.vue";
+import { CircleAlert } from "lucide-vue-next";
 
 const { t } = useTranslation();
-const recaptchaRef = ref<InstanceType<typeof Recaptcha> | null>(null);
+const recaptchaRef = useTemplateRef<InstanceType<typeof Recaptcha>>("recaptchaRef");
 
 const formKey = ref(0);
 const captchaToken = ref("");
@@ -106,6 +107,12 @@ const handleSubmit = async (event: Event) => {
     }, DEBOUNCE_MS);
   }
 };
+
+onUnmounted(() => {
+  if (submitTimeout.value) {
+    clearTimeout(submitTimeout.value);
+  }
+});
 </script>
 
 <template>
@@ -143,7 +150,7 @@ const handleSubmit = async (event: Event) => {
 
             <form
               :key="formKey"
-              noValidate
+              novalidate
               class="space-y-5 p-6 md:p-8"
               data-form="contact"
               toolname="submit_custom_tour_request"
@@ -151,19 +158,18 @@ const handleSubmit = async (event: Event) => {
               @submit.prevent="handleSubmit"
             >
               <output
-                v-if="state?.['message']"
-                :class="[
-                  'block rounded-2xl px-4 py-3 text-sm font-medium',
-                  state?.['success'] ? alertClasses['success'] : alertClasses['error'],
-                ]"
-                :role="state?.['success'] ? undefined : 'alert'"
+                v-if="state?.message"
+                class="block rounded-2xl px-4 py-3 text-sm font-medium"
+                :class="[state.success ? alertClasses.success : alertClasses.error]"
+                :role="state.success ? undefined : 'alert'"
                 aria-live="polite"
+                aria-label="Submission status"
               >
-                {{ state?.["message"] }}
+                {{ state.message }}
               </output>
 
               <div
-                v-if="state?.['errors'] && Object.keys(state['errors']).length > 0"
+                v-if="state?.errors && Object.keys(state.errors).length > 0"
                 class="rounded-2xl border border-orange-200 bg-orange-50 px-4 py-3"
                 role="alert"
               >
@@ -172,20 +178,11 @@ const handleSubmit = async (event: Event) => {
                 </p>
                 <ul class="space-y-1 text-xs text-orange-800">
                   <li
-                    v-for="[field, error] in Object.entries(state['errors'])"
+                    v-for="[field, error] in Object.entries(state.errors)"
                     :key="field"
                     class="flex items-start gap-2"
                   >
-                    <svg
-                      class="mbs-0.5 size-4 shrink-0"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                      />
-                    </svg>
+                    <CircleAlert class="mbs-0.5 size-4 shrink-0" />
                     <span>{{ error }}</span>
                   </li>
                 </ul>
@@ -194,7 +191,7 @@ const handleSubmit = async (event: Event) => {
               <!-- Honeypot -->
               <div
                 aria-hidden="true"
-                class="absolute -left-2499.75 h-0 overflow-hidden"
+                class="absolute left-[-9999px] h-0 overflow-hidden"
               >
                 <input
                   type="text"
@@ -211,11 +208,9 @@ const handleSubmit = async (event: Event) => {
               <div class="flex flex-col gap-4 lg:flex-row lg:items-center">
                 <div class="flex justify-center inline-full lg:justify-start">
                   <div
+                    class="w-fit origin-center scale-85 rounded-2xl border border-dashed p-3 transition-all duration-500 sm:scale-100"
                     :class="[
-                      'w-fit origin-center scale-85 rounded-2xl border border-dashed p-3 transition-all duration-500 sm:scale-100',
-                      state?.['errors']?.['recaptchaToken'] ?
-                        'border-red-300'
-                      : 'border-neutral-200',
+                      state?.errors?.recaptchaToken ? 'border-red-300' : 'border-neutral-200',
                     ]"
                   >
                     <Recaptcha
@@ -235,11 +230,11 @@ const handleSubmit = async (event: Event) => {
                 </div>
 
                 <p
-                  v-if="state?.['errors']?.['recaptchaToken']"
+                  v-if="state?.errors?.recaptchaToken"
                   id="recaptchaToken-error"
                   class="mbs-1 text-xs text-red-600"
                 >
-                  {{ state["errors"]["recaptchaToken"] }}
+                  {{ state.errors.recaptchaToken }}
                 </p>
 
                 <button

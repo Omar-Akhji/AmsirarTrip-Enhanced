@@ -4,10 +4,9 @@ import { Check, Clock, Hotel, Navigation2, Tent, Utensils } from "@lucide/astro"
 const getOrdinalSuffix = (number_: number) => {
   const index = number_ % 10;
   const k = number_ % 100;
-  if (index === 1 && k !== 11) return number_ + "st";
-  if (index === 2 && k !== 12) return number_ + "nd";
-  if (index === 3 && k !== 13) return number_ + "rd";
-  return number_ + "th";
+  if (index === 1 && k !== 11) return `${number_}st`;
+  if (index === 2 && k !== 12) return `${number_}nd`;
+  return number_ + (index === 3 && k !== 13 ? "rd" : "th");
 };
 
 interface ItineraryDay {

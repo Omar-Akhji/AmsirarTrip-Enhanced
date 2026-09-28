@@ -20,7 +20,7 @@ export function createMailer(): Transporter<SMTPTransport.SentMessageInfo> {
 
 // ── HTML escape ───────────────────────────────────────────────────────────────
 
-export function escapeHtml(string_: string = ""): string {
+export function escapeHtml(string_ = ""): string {
   return string_
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
@@ -48,7 +48,7 @@ export function logSuspiciousActivity(ip: string, type: string, details: string)
     CAPTCHA_FAILED: "CAPTCHA_FAILED",
   };
 
-  const mappedType = eventTypeMap[type] || "SUSPICIOUS";
+  const mappedType = eventTypeMap[type] ?? "SUSPICIOUS";
 
   logSecurityEvent(mappedType, ip, details, { originalType: type, source: "server-utils" });
 }

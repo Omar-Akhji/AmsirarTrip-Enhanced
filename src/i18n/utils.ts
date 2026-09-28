@@ -4,8 +4,8 @@ const uiMap = new Map<string, unknown>(Object.entries(ui));
 
 export interface TranslationFunction {
   (key: string, values?: string | Record<string, string | number>): string;
-  raw(key: string): unknown;
-  has(key: string): boolean;
+  raw: (key: string) => unknown;
+  has: (key: string) => boolean;
 }
 
 function isLocale(key: string): key is Locale {

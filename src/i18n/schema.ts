@@ -358,8 +358,8 @@ export type LocaleData = z.infer<typeof localeSchema>;
  */
 export function validateLocale(data: unknown, locale: string): asserts data is LocaleData {
   const result = localeSchema.safeParse(data);
-  if (!result.success) {
-    const issues = result.error.issues.map((i) => `  • ${i.path.join(".")}: ${i.message}`);
-    throw new Error(`Locale "${locale}" is invalid:\n${issues.join("\n")}`);
-  }
+  if (result.success) return;
+
+  const issues = result.error.issues.map((i) => `  • ${i.path.join(".")}: ${i.message}`);
+  throw new Error(`Locale "${locale}" is invalid:\n${issues.join("\n")}`);
 }

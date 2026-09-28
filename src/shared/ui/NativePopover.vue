@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /* eslint-disable unicorn/prefer-observer-apis */
-import { ref, watch, onMounted, onUnmounted, useId, nextTick, computed } from "vue";
+import { watch, onMounted, onUnmounted, useId, nextTick, useTemplateRef } from "vue";
 
 interface Props {
   isOpen: boolean;
@@ -9,22 +9,19 @@ interface Props {
   ariaLabel?: string;
 }
 
-const props = withDefaults(defineProps<Props>(), { id: "", className: "" });
+const { isOpen, className = "", id = "", ariaLabel } = defineProps<Props>();
 
-interface Emits {
-  (e: "update:isOpen", value: boolean): void;
-}
-
-const emit = defineEmits<Emits>();
+const emit = defineEmits<{ "update:isOpen": [value: boolean] }>();
 
 const generatedId = useId().replaceAll(":", "");
-const popoverId = props.id || generatedId;
+const popoverId = id || generatedId;
 
-const popoverRef = ref<HTMLDialogElement | null>(null);
+const popoverRef = useTemplateRef<HTMLDialogElement>("popoverRef");
+let focusTimer: ReturnType<typeof setTimeout> | null = null;
 
 const positionPopover = () => {
   const popover = popoverRef.value;
-  if (!popover || !props.isOpen) return;
+  if (!popover || !isOpen) return;
 
   const triggerElement = popover.previousElementSibling as HTMLElement | null;
   if (!triggerElement) return;
@@ -57,7 +54,7 @@ const positionPopover = () => {
 
 // Focus trap
 const handleKeyDown = (event: KeyboardEvent) => {
-  if (!props.isOpen || event.key !== "Tab") return;
+  if (!isOpen || event.key !== "Tab") return;
 
   const popover = popoverRef.value;
   if (!popover) return;
@@ -68,18 +65,16 @@ const handleKeyDown = (event: KeyboardEvent) => {
   if (focusableElements.length === 0) return;
 
   const firstFocusable = focusableElements[0];
-  const lastFocusable = focusableElements[focusableElements.length - 1];
+  const lastFocusable = focusableElements.at(-1);
 
   if (event.shiftKey) {
     if (document.activeElement === firstFocusable) {
       event.preventDefault();
       lastFocusable?.focus();
     }
-  } else {
-    if (document.activeElement === lastFocusable) {
-      event.preventDefault();
-      firstFocusable?.focus();
-    }
+  } else if (document.activeElement === lastFocusable) {
+    event.preventDefault();
+    firstFocusable?.focus();
   }
 };
 
@@ -96,10 +91,15 @@ const handleToggle = async (event: Event) => {
 
 // Focus + resize/scroll listeners
 watch(
-  () => props.isOpen,
+  () => isOpen,
   (newOpen) => {
+    if (focusTimer) {
+      clearTimeout(focusTimer);
+      focusTimer = null;
+    }
+
     if (newOpen) {
-      setTimeout(() => {
+      focusTimer = setTimeout(() => {
         const popover = popoverRef.value;
         if (!popover) return;
         const focusableSelector =
@@ -122,13 +122,14 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
+  if (focusTimer) {
+    clearTimeout(focusTimer);
+  }
   popoverRef.value?.removeEventListener("toggle", handleToggle);
   popoverRef.value?.removeEventListener("keydown", handleKeyDown);
   window.removeEventListener("resize", positionPopover);
   window.removeEventListener("scroll", positionPopover, { capture: true });
 });
-
-const labelledBy = computed(() => (props.ariaLabel ? undefined : popoverId));
 </script>
 
 <template>
@@ -149,12 +150,9 @@ const labelledBy = computed(() => (props.ariaLabel ? undefined : popoverId));
       ref="popoverRef"
       popover="auto"
       aria-modal="true"
-      :aria-label="ariaLabel"
-      :aria-labelledby="labelledBy ? popoverId : undefined"
-      :class="[
-        'fixed inset-auto m-0 border-none p-0 outline-hidden backdrop:bg-black/20',
-        className,
-      ]"
+      :aria-label="ariaLabel || 'Popover dialog'"
+      class="fixed inset-auto m-0 border-none p-0 outline-hidden backdrop:bg-black/20"
+      :class="[className]"
     >
       <div
         v-if="isOpen"

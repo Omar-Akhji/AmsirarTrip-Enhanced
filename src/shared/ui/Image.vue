@@ -14,28 +14,35 @@ interface Props {
   style?: StyleValue;
 }
 
-const props = withDefaults(defineProps<Props>(), { fill: false, priority: false });
+const {
+  src,
+  alt,
+  fill = false,
+  priority = false,
+  sizes,
+  decoding,
+  fetchpriority,
+  loading,
+  style,
+} = defineProps<Props>();
 
 const imageStyle = computed<StyleValue>(() => {
   const fillStyle =
-    props.fill ?
+    fill ?
       { position: "absolute", height: "100%", width: "100%", left: 0, top: 0, right: 0, bottom: 0 }
     : {};
 
-  if (Array.isArray(props.style)) {
-    return [fillStyle, ...props.style] as StyleValue;
+  if (Array.isArray(style)) {
+    return [fillStyle, ...style] as StyleValue;
   }
-  if (typeof props.style === "string") {
-    return [fillStyle, props.style] as StyleValue;
-  }
-  return { ...fillStyle, ...props.style } as StyleValue;
+  return typeof style === "string" ?
+      ([fillStyle, style] as StyleValue)
+    : ({ ...fillStyle, ...style } as StyleValue);
 });
 
-const computedDecoding = computed(() => props.decoding ?? "async");
-const computedFetchPriority = computed(
-  () => props.fetchpriority ?? (props.priority ? "high" : undefined),
-);
-const computedLoading = computed(() => props.loading ?? (props.priority ? "eager" : "lazy"));
+const computedDecoding = computed(() => decoding ?? "async");
+const computedFetchPriority = computed(() => fetchpriority ?? (priority ? "high" : undefined));
+const computedLoading = computed(() => loading ?? (priority ? "eager" : "lazy"));
 </script>
 
 <template>

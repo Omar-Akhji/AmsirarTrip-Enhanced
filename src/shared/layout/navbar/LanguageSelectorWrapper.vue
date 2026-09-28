@@ -3,23 +3,30 @@
  * Language Selector with built-in error boundary and loading state. Wraps the actual
  * LanguageSelector to provide graceful degradation.
  */
-import { ref, onErrorCaptured, onMounted } from "vue";
+import { ref, onErrorCaptured, onMounted, onUnmounted } from "vue";
 
 const hasError = ref(false);
 const errorMsg = ref("");
 const isReady = ref(false);
+let timer: ReturnType<typeof setTimeout> | null = null;
 
-onErrorCaptured((err: Error) => {
+onErrorCaptured((err: unknown) => {
   hasError.value = true;
-  errorMsg.value = err?.message || "Failed to load";
+  errorMsg.value = err instanceof Error ? err.message : "Failed to load";
   console.error("[LanguageSelector] Error:", err);
   return false;
 });
 
 onMounted(() => {
-  setTimeout(() => {
+  timer = setTimeout(() => {
     isReady.value = true;
   }, 50);
+});
+
+onUnmounted(() => {
+  if (timer) {
+    clearTimeout(timer);
+  }
 });
 </script>
 

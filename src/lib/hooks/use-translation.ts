@@ -56,9 +56,7 @@ function lookup(key: string): unknown {
     }
   }
 
-  if (!translations) {
-    translations = globalThis.__TRANSLATIONS__;
-  }
+  translations ??= globalThis.__TRANSLATIONS__;
 
   if (!translations) return undefined;
 
@@ -76,8 +74,8 @@ function lookup(key: string): unknown {
 
 export interface TranslationHelper {
   (key: string, values?: string | Record<string, string | number>): string;
-  raw(key: string): unknown;
-  has(key: string): boolean;
+  raw: (key: string) => unknown;
+  has: (key: string) => boolean;
 }
 
 export interface UseTranslationReturn {

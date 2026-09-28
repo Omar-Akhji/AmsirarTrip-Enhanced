@@ -24,7 +24,7 @@ interface LogEntry {
 }
 
 // Log directory (can be overridden by environment)
-const LOG_DIR = process.env["LOG_DIR"] || "./logs";
+const LOG_DIR = process.env["LOG_DIR"] ?? "./logs";
 
 // Active write streams keyed by date string
 let activeDate = "";
@@ -43,10 +43,10 @@ function ensureLogDir() {
 
 // Get or create a write stream for the given level, rotating when the date changes
 function getStream(level: LogLevel): WriteStream {
-  const today = new Date().toISOString().split("T", 1)[0] || "";
+  const today = new Date().toISOString().split("T", 1)[0] ?? "";
   if (today !== activeDate) {
     // Close stale streams from a previous day
-    for (const s of Object.values(streams)) s?.end();
+    for (const s of Object.values(streams)) s.end();
     activeDate = today;
   }
   if (!streams[level]) {
@@ -66,7 +66,7 @@ function formatLogEntry(level: LogLevel, message: string, meta?: Record<string, 
 function writeToFile(level: LogLevel, line: string) {
   try {
     ensureLogDir();
-    getStream(level).write(line + "\n");
+    getStream(level).write(`${line}\n`);
   } catch (error) {
     console.error("[Logger] Failed to write to log file:", error);
   }

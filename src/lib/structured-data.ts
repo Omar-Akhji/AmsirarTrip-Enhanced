@@ -23,12 +23,13 @@ type TourStructuredData = TripStructuredData<TourLocation>;
 type ExcursionStructuredData = TripStructuredData<ExcursionLocation>;
 
 function sanitizeForJsonLd(value: string | undefined): string {
-  if (!value) return "";
-  return value
-    .replaceAll(/<[^>]*>/g, "")
-    .replaceAll(/[<>]/g, "")
-    .replaceAll(/javascript:/gi, "")
-    .trim();
+  return value ?
+      value
+        .replaceAll(/<[^>]*>/g, "")
+        .replaceAll(/[<>]/g, "")
+        .replaceAll(/javascript:/gi, "")
+        .trim()
+    : "";
 }
 
 const BASE_URL = "https://amsirartrip.com";
@@ -72,7 +73,7 @@ function buildTripJsonLd<TLocation>(
       offers: {
         "@type": "Offer",
         price: data.price,
-        priceCurrency: data.currency || "EUR",
+        priceCurrency: data.currency && data.currency.trim() !== "" ? data.currency.trim() : "EUR",
         availability: "https://schema.org/InStock",
       },
     }),

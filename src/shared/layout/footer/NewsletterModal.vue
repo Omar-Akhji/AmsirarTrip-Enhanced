@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onUnmounted } from "vue";
+import { ref, onUnmounted, useTemplateRef } from "vue";
 import { actions } from "astro:actions";
 import Loader2 from "lucide-vue-next/dist/esm/icons/loader-circle";
 import Mail from "lucide-vue-next/dist/esm/icons/mail";
@@ -15,8 +15,8 @@ const email = ref("");
 const statusKey = ref("");
 const isSubmitting = ref(false);
 
-const recaptchaRef = ref<InstanceType<typeof Recaptcha> | null>(null);
-const dialogRef = ref<HTMLDialogElement | null>(null);
+const recaptchaRef = useTemplateRef<InstanceType<typeof Recaptcha>>("recaptchaRef");
+const dialogRef = useTemplateRef<HTMLDialogElement>("dialogRef");
 let timer: ReturnType<typeof setTimeout> | null = null;
 
 const handleClose = () => {
@@ -34,7 +34,7 @@ const handleSubmit = async () => {
 
   isSubmitting.value = true;
   try {
-    const { data, error } = await actions["newsletter"]({
+    const { data, error } = await actions.newsletter({
       name: name.value,
       email: email.value,
       recaptchaToken,
@@ -88,7 +88,7 @@ onUnmounted(() => {
       @click="
         (event) => {
           if (event.target === event.currentTarget) {
-            dialogRef?.close();
+            dialogRef.value?.close();
           }
         }
       "
@@ -177,10 +177,8 @@ onUnmounted(() => {
 
             <div class="flex justify-center pbs-1">
               <div
-                :class="[
-                  'origin-center scale-[0.85] rounded-2xl border border-dashed p-3 sm:scale-100',
-                  statusKey.includes('Captcha') ? 'border-red-300' : 'border-neutral-200',
-                ]"
+                class="origin-center scale-[0.85] rounded-2xl border border-dashed p-3 sm:scale-100"
+                :class="[statusKey.includes('Captcha') ? 'border-red-300' : 'border-neutral-200']"
               >
                 <Recaptcha
                   v-if="hasRecaptchaV2"
@@ -201,10 +199,10 @@ onUnmounted(() => {
 
           <p
             v-if="statusKey"
-            :class="[
-              'mbs-4 text-center text-sm font-medium',
-              statusKey.includes('Success') ? 'text-emerald-600' : 'text-red-500',
-            ]"
+            role="status"
+            aria-live="polite"
+            class="mbs-4 text-center text-sm font-medium"
+            :class="[statusKey.includes('Success') ? 'text-emerald-600' : 'text-red-500']"
           >
             {{ t(statusKey) }}
           </p>
@@ -212,6 +210,7 @@ onUnmounted(() => {
           <button
             type="submit"
             :disabled="isSubmitting"
+            :aria-busy="isSubmitting"
             class="mbs-5 flex items-center justify-center gap-2 rounded-full bg-linear-to-r from-orange to-amber-500 text-sm font-semibold text-white shadow-md transition-all duration-300 block-11 inline-full active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 pointer-fine:hover:scale-[1.02] pointer-fine:hover:shadow-lg pointer-fine:hover:shadow-orange-500/30 disabled:pointer-fine:hover:scale-100"
           >
             <Loader2

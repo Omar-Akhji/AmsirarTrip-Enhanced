@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onErrorCaptured, onMounted } from "vue";
+import { ref, onErrorCaptured, onMounted, onUnmounted } from "vue";
 
 interface Props {
   /** Fallback content shown during hydration */
@@ -8,26 +8,30 @@ interface Props {
   errorPrefix?: string;
 }
 
-withDefaults(defineProps<Props>(), {
-  fallback: "Loading...",
-  errorPrefix: "Component failed to load",
-});
+const { fallback = "Loading...", errorPrefix = "Component failed to load" } = defineProps<Props>();
 
 const hasError = ref(false);
 const errorMessage = ref("");
 const isHydrated = ref(false);
+let timer: ReturnType<typeof setTimeout> | null = null;
 
 onMounted(() => {
   // Give a small delay for hydration to complete
-  setTimeout(() => {
+  timer = setTimeout(() => {
     isHydrated.value = true;
   }, 100);
 });
 
+onUnmounted(() => {
+  if (timer) {
+    clearTimeout(timer);
+  }
+});
+
 // Capture errors from child components
-onErrorCaptured((err: Error) => {
+onErrorCaptured((err: unknown) => {
   hasError.value = true;
-  errorMessage.value = err?.message || "Unknown error";
+  errorMessage.value = err instanceof Error ? err.message : "Unknown error";
   console.error("[HydrationBoundary] Captured error:", err);
   return false; // Prevent error propagation
 });

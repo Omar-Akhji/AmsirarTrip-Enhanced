@@ -7,47 +7,50 @@ function initLanguageSelectors() {
       if (container === except) return;
       const btn = container.querySelector<HTMLButtonElement>("[data-lang-trigger]");
       const menu = container.querySelector<HTMLElement>("[data-lang-menu]");
-      if (btn && menu) {
-        btn.setAttribute("aria-expanded", "false");
-        menu.dataset["state"] = "closed";
+      if (!(btn && menu)) {
+        return;
       }
+
+      btn.setAttribute("aria-expanded", "false");
+      menu.dataset["state"] = "closed";
     });
   }
 
   function handleContainer(container: HTMLElement) {
-    const btn = container.querySelector<HTMLButtonElement>("[data-lang-trigger]");
-    const menu = container.querySelector<HTMLElement>("[data-lang-menu]");
-    if (!btn || !menu) return;
+    const rawBtn = container.querySelector<HTMLButtonElement>("[data-lang-trigger]");
+    const rawMenu = container.querySelector<HTMLElement>("[data-lang-menu]");
+    if (!rawBtn || !rawMenu) return;
+
+    const btn = rawBtn;
+    const menu = rawMenu;
 
     function toggle(e: MouseEvent) {
       e.stopPropagation();
-      const isOpen = menu?.dataset["state"] === "open";
+      const isOpen = menu.dataset["state"] === "open";
       if (isOpen) {
-        btn?.setAttribute("aria-expanded", "false");
-        if (menu) menu.dataset["state"] = "closed";
+        btn.setAttribute("aria-expanded", "false");
+        menu.dataset["state"] = "closed";
       } else {
         closeAll(container);
-        btn?.setAttribute("aria-expanded", "true");
-        if (menu) menu.dataset["state"] = "open";
+        btn.setAttribute("aria-expanded", "true");
+        menu.dataset["state"] = "open";
       }
     }
 
     btn.addEventListener("click", toggle);
 
     function handleKeydown(e: KeyboardEvent) {
-      const isOpen = menu?.dataset["state"] === "open";
+      const isOpen = menu.dataset["state"] === "open";
       if (!isOpen) return;
 
-      const items = [
-        ...(menu?.querySelectorAll<HTMLAnchorElement>('[role="menuitemradio"]') ?? []),
-      ];
+      const items = [...menu.querySelectorAll<HTMLAnchorElement>('[role="menuitemradio"]')];
       if (items.length === 0) return;
 
       if (e.key === "Escape") {
         e.preventDefault();
-        btn?.setAttribute("aria-expanded", "false");
-        if (menu) menu.dataset["state"] = "closed";
-        btn?.focus();
+        btn.setAttribute("aria-expanded", "false");
+        menu.dataset["state"] = "closed";
+        btn.focus();
         return;
       }
 
@@ -72,10 +75,7 @@ function initLanguageSelectors() {
   function handleClickOutside(e: MouseEvent) {
     const target = e.target as Node | null;
     if (!target) return;
-    let clickedInside = false;
-    containers.forEach((c) => {
-      if (c.contains(target)) clickedInside = true;
-    });
+    const clickedInside = [...containers].some((c) => c.contains(target));
     if (!clickedInside) {
       closeAll();
     }

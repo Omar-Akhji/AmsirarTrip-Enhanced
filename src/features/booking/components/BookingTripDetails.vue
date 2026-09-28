@@ -5,8 +5,8 @@ import CalendarIcon from "lucide-vue-next/dist/esm/icons/calendar";
 import type { FormState } from "@/lib/form-types";
 import { useTranslation } from "@/lib/hooks/use-translation";
 import { cn } from "@/lib/utils";
-import EnhancedCalendar from "../../../shared/ui/Calendar.vue";
-import NativePopover from "../../../shared/ui/NativePopover.vue";
+import EnhancedCalendar from "@/shared/ui/Calendar.vue";
+import NativePopover from "@/shared/ui/NativePopover.vue";
 
 interface Props {
   state: FormState | null;
@@ -15,11 +15,11 @@ interface Props {
   reservationDate: Date | null;
 }
 
-defineProps<Props>();
+const { state, locale, calendarOpen, reservationDate } = defineProps<Props>();
 
 const emit = defineEmits<{
-  (e: "update:calendarOpen", open: boolean): void;
-  (e: "update:reservationDate", date: Date | null): void;
+  "update:calendarOpen": [open: boolean];
+  "update:reservationDate": [date: Date | null];
 }>();
 
 const { t } = useTranslation();
@@ -58,16 +58,16 @@ onMounted(() => {
         autocomplete="off"
         min="1"
         max="50"
-        :aria-invalid="state?.errors?.['persons'] ? 'true' : 'false'"
-        :aria-describedby="state?.errors?.['persons'] ? 'numberOfPeople-error' : undefined"
+        :aria-invalid="state?.errors?.persons ? 'true' : 'false'"
+        :aria-describedby="state?.errors?.persons ? 'numberOfPeople-error' : undefined"
         required
       />
       <p
-        v-if="state?.errors?.['persons']"
+        v-if="state?.errors?.persons"
         id="numberOfPeople-error"
         class="mbs-1 text-xs text-red-600"
       >
-        {{ state.errors["persons"] }}
+        {{ state.errors.persons }}
       </p>
     </div>
 
@@ -82,10 +82,10 @@ onMounted(() => {
               cn(
                 'flex items-center justify-start rounded-2xl border bg-white px-4 py-3 text-start text-sm font-normal transition-colors block-auto inline-full focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden pointer-fine:hover:bg-neutral-50',
                 !reservationDate && 'text-neutral-500',
-                state?.errors?.['date'] ? 'border-red-300' : 'border-neutral-200',
+                state?.errors?.date ? 'border-red-300' : 'border-neutral-200',
               )
             "
-            :aria-describedby="state?.errors?.['date'] ? 'reservationDate-error' : undefined"
+            :aria-describedby="state?.errors?.date ? 'reservationDate-error' : undefined"
           >
             <CalendarIcon class="me-2 size-4" />
             <span v-if="reservationDate">
@@ -127,11 +127,11 @@ onMounted(() => {
         :value="reservationDate ? formatDate(reservationDate, 'yyyy-MM-dd') : ''"
       />
       <p
-        v-if="state?.errors?.['date']"
+        v-if="state?.errors?.date"
         id="reservationDate-error"
         class="mbs-1 text-xs text-red-600"
       >
-        {{ state.errors["date"] }}
+        {{ state.errors.date }}
       </p>
     </div>
   </div>
@@ -152,15 +152,15 @@ onMounted(() => {
       :placeholder="t('booking.message', 'Your message')"
       autocomplete="off"
       :rows="4"
-      :aria-invalid="state?.errors?.['message'] ? 'true' : 'false'"
-      :aria-describedby="state?.errors?.['message'] ? 'message-error' : undefined"
+      :aria-invalid="state?.errors?.message ? 'true' : 'false'"
+      :aria-describedby="state?.errors?.message ? 'message-error' : undefined"
     />
     <p
-      v-if="state?.errors?.['message']"
+      v-if="state?.errors?.message"
       id="message-error"
       class="mbs-1 text-xs text-red-600"
     >
-      {{ state.errors["message"] }}
+      {{ state.errors.message }}
     </p>
   </div>
 </template>

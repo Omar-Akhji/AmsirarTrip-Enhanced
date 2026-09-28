@@ -34,18 +34,28 @@ export function getCookieConsent(): CookiePreferences | null {
     // 1. Try reading cookie
     const cookieMatch = /(?:^|;\s*)amsirar_cookie_consent=([^;]+)/.exec(document.cookie);
     if (cookieMatch?.[1]) {
-      const parsed = JSON.parse(decodeURIComponent(cookieMatch[1])) as CookiePreferences;
-      if (parsed && typeof parsed === "object" && parsed.version === CONSENT_VERSION) {
-        return parsed;
+      const parsed: unknown = JSON.parse(decodeURIComponent(cookieMatch[1]));
+      if (
+        parsed
+        && typeof parsed === "object"
+        && "version" in parsed
+        && parsed.version === CONSENT_VERSION
+      ) {
+        return parsed as CookiePreferences;
       }
     }
 
     // 2. Fallback to localStorage
     const local = localStorage.getItem(STORAGE_KEY);
     if (local) {
-      const parsed = JSON.parse(local) as CookiePreferences;
-      if (parsed && typeof parsed === "object" && parsed.version === CONSENT_VERSION) {
-        return parsed;
+      const parsed: unknown = JSON.parse(local);
+      if (
+        parsed
+        && typeof parsed === "object"
+        && "version" in parsed
+        && parsed.version === CONSENT_VERSION
+      ) {
+        return parsed as CookiePreferences;
       }
     }
   } catch (error) {
@@ -121,7 +131,9 @@ export function animateToggleSwitch(input: HTMLInputElement, animate = true): vo
 
   const isChecked = input.checked;
   const prefersReduced =
-    typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    typeof globalThis !== "undefined"
+    && typeof globalThis.matchMedia === "function"
+    && globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   if (!animate || prefersReduced) {
     gsap.killTweensOf([track, thumb]);
@@ -370,12 +382,8 @@ export function initCookieConsent(): void {
 
   // Modal backdrop click
   const modal = getModalElement();
-  if (modal) {
-    const backdrop = modal.querySelector<HTMLElement>("[data-modal-backdrop]");
-    if (backdrop) {
-      backdrop.addEventListener("click", closePreferencesModal);
-    }
-  }
+  const backdrop = modal?.querySelector<HTMLElement>("[data-modal-backdrop]");
+  backdrop?.addEventListener("click", closePreferencesModal);
 }
 
 // Global keydown listener for Escape key to close modal

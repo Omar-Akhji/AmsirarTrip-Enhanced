@@ -60,27 +60,25 @@ function initMobileMenu() {
       return;
     }
 
-    if (e.key === "Tab") {
-      const focusableSelector =
-        'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
-      const focusableElements = panel.querySelectorAll<HTMLElement>(focusableSelector);
-      if (focusableElements.length === 0) return;
+    if (e.key !== "Tab") return;
 
-      const firstFocusable = focusableElements[0];
-      const lastFocusable = focusableElements[focusableElements.length - 1];
+    const focusableSelector =
+      'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
+    const focusableElements = [...panel.querySelectorAll<HTMLElement>(focusableSelector)];
+    if (focusableElements.length === 0) return;
 
-      if (firstFocusable && lastFocusable) {
-        if (e.shiftKey) {
-          if (document.activeElement === firstFocusable) {
-            e.preventDefault();
-            lastFocusable.focus();
-          }
-        } else {
-          if (document.activeElement === lastFocusable) {
-            e.preventDefault();
-            firstFocusable.focus();
-          }
+    const firstFocusable = focusableElements[0];
+    const lastFocusable = focusableElements.at(-1);
+
+    if (firstFocusable && lastFocusable) {
+      if (e.shiftKey) {
+        if (document.activeElement === firstFocusable) {
+          e.preventDefault();
+          lastFocusable.focus();
         }
+      } else if (document.activeElement === lastFocusable) {
+        e.preventDefault();
+        firstFocusable.focus();
       }
     }
   }

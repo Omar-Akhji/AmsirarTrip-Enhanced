@@ -15,6 +15,7 @@ const {
   sectionId,
   headingId,
   sidebar,
+  transitionName,
 } = Astro.props;
 const sl = Astro.slots.has("default");
 ---
@@ -27,7 +28,7 @@ const sl = Astro.slots.has("default");
   title={pageTitle}
 />
 
-<main>
+<div class="trip-content">
   <section
     aria-labelledby={headingId}
     class="py-14"
@@ -44,6 +45,7 @@ const sl = Astro.slots.has("default");
               loading="eager"
               sizes="(max-width: 600px) 400px, (max-width: 900px) 600px, 800px"
               src={imageSrc}
+              transition:name={transitionName}
               width={800}
               widths={[400, 600, 800]}
             />
@@ -91,4 +93,4 @@ const sl = Astro.slots.has("default");
     </div>
   </section>
   {sl && <slot />}
-</main>
+</div>

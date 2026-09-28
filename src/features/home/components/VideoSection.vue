@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, onMounted, useTemplateRef } from "vue";
 import { useTranslation } from "@/lib/hooks/use-translation";
 
 interface Props {
   fallbackImage: string;
 }
 
-defineProps<Props>();
+const { fallbackImage } = defineProps<Props>();
 
 const { t } = useTranslation();
 const videoError = ref(false);
 const videoLoaded = ref(false);
 const isPlaying = ref(false);
-const videoRef = ref<HTMLVideoElement | null>(null);
+const videoRef = useTemplateRef<HTMLVideoElement>("videoRef");
 const videoSource = "/videos/Morocco-Video.mp4";
 
 onMounted(() => {
@@ -99,16 +99,21 @@ const handleVideoClick = () => {
             ref="videoRef"
             loop
             muted
-            playsInline
+            playsinline
             preload="metadata"
-            :class="[
-              'size-full cursor-pointer rounded-[26px] object-cover transition-opacity duration-300',
-              videoLoaded ? 'opacity-100' : 'opacity-0',
-            ]"
+            tabindex="0"
+            role="button"
+            :aria-label="
+              isPlaying ? t('video.pause', 'Pause video') : t('video.play', 'Play video')
+            "
+            class="size-full cursor-pointer rounded-[26px] object-cover transition-opacity duration-300"
+            :class="[videoLoaded ? 'opacity-100' : 'opacity-0']"
             @error="handleVideoError"
             @loadeddata="handleVideoLoad"
             @ended="handleVideoEnd"
             @click="handleVideoClick"
+            @keydown.enter="handleVideoClick"
+            @keydown.space.prevent="handleVideoClick"
           >
             <source
               :src="videoSource"

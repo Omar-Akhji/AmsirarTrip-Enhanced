@@ -3,6 +3,7 @@ import { useTranslations } from "@/i18n/utils";
 import { cn } from "@/lib/utils";
 import { NAV_LINKS, SOCIAL_LINKS } from "./constants";
 import { LANGUAGES } from "@/i18n/locales";
+import { Menu, X } from "@lucide/astro";
 
 const locale = Astro.currentLocale || "en";
 const t = useTranslations(locale);
@@ -14,12 +15,12 @@ const pathname = Astro.url.pathname;
 const segments = pathname.split("/").filter(Boolean);
 const normalizedPath =
   (LANGUAGES.some((l) => l.code === segments[0]) ?
-    "/" + segments.slice(1).join("/")
+    `/${segments.slice(1).join("/")}`
   : pathname
   ).replace(/\/$/, "") || "/";
 
 const isActive = (to: string) =>
-  normalizedPath === to || (to !== "/" && normalizedPath.startsWith(to + "/"));
+  normalizedPath === to || (to !== "/" && normalizedPath.startsWith(`${to}/`));
 ---
 
 <div class="relative flex items-center gap-3 inline-full lg:hidden">
@@ -77,53 +78,9 @@ const isActive = (to: string) =>
     type="button"
   >
     <!-- Hamburger icon -->
-    <svg
-      class="pointer-events-none size-5 menu-icon-hamburger"
-      fill="none"
-      height="24"
-      stroke="currentColor"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      stroke-width="2"
-      viewBox="0 0 24 24"
-      width="24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <line
-        x1="4"
-        x2="20"
-        y1="12"
-        y2="12"
-      ></line>
-      <line
-        x1="4"
-        x2="20"
-        y1="6"
-        y2="6"
-      ></line>
-      <line
-        x1="4"
-        x2="20"
-        y1="18"
-        y2="18"
-      ></line>
-    </svg>
+    <Menu class="pointer-events-none size-5 menu-icon-hamburger" />
     <!-- X icon -->
-    <svg
-      class="pointer-events-none size-5 menu-icon-x hidden"
-      fill="none"
-      height="24"
-      stroke="currentColor"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      stroke-width="2"
-      viewBox="0 0 24 24"
-      width="24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path d="M18 6 6 18"></path>
-      <path d="m6 6 12 12"></path>
-    </svg>
+    <X class="pointer-events-none size-5 menu-icon-x hidden" />
   </button>
 
   <!-- Navigation dropdown panel -->

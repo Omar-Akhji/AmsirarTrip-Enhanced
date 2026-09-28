@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useTranslation } from "@/lib/hooks/use-translation";
 import Image from "@/shared/ui/Image.vue";
+import { ArrowRight } from "lucide-vue-next";
 
 interface Perk {
   id: string;
@@ -11,7 +12,7 @@ interface Props {
   perks: Perk[];
 }
 
-defineProps<Props>();
+const { perks } = defineProps<Props>();
 
 const { t } = useTranslation();
 </script>
@@ -90,20 +91,10 @@ const { t } = useTranslation();
           class="inline-flex items-center justify-center gap-2 rounded-full bg-tripadvisor-bright px-4 py-2 text-sm font-semibold text-black transition duration-300 ease-in-out focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-tripadvisor-bright pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:bg-tripadvisor-dark pointer-fine:hover:shadow-lg"
           :aria-label="t('booking.tripadvisorCtaAria', 'Open TripAdvisor in new tab')"
         >
-          <svg
+          <ArrowRight
             class="size-4"
-            viewBox="0 0 24 24"
-            fill="none"
-            aria-hidden
-          >
-            <path
-              d="M5 12h14M12 5l7 7-7 7"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
+            aria-hidden="true"
+          />
           <span>{{ t("booking.checkCta", "Check reviews & book") }}</span>
         </a>
       </div>

@@ -6,7 +6,7 @@ const DEFAULT_LOCALE = "en";
 const TODAY = new Date().toISOString().split("T", 1)[0] ?? "2026-09-27";
 
 export const GET: APIRoute = async ({ site }) => {
-  const baseUrl = site || new URL("https://amsirartrip.com");
+  const baseUrl = site ?? new URL("https://amsirartrip.com");
   const tours = await getCollection("tours");
   const excursions = await getCollection("excursions");
 

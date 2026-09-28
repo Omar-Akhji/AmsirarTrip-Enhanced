@@ -8,17 +8,17 @@ import { getBookingSchema, getContactSchema, getNewsletterSchema } from "../lib/
 import { escapeHtml, getMailer, logSecurityEvent } from "../lib/server-utils";
 import { verifyRecaptcha } from "../services/recaptcha";
 
-function getLanguageName(code: string = ""): string {
+function getLanguageName(code = ""): string {
   const languages: Record<string, string> = {
     en: "English",
     fr: "Français",
     de: "Deutsch",
     es: "Español",
   };
-  return languages[code] || code;
+  return languages[code] ?? code;
 }
 
-function cleanReservationType(type: string = ""): string {
+function cleanReservationType(type = ""): string {
   return type.replace(/^Tour\d+\s/, "");
 }
 
@@ -27,7 +27,7 @@ export const server = {
     accept: "form",
     handler: async (formData: FormData, context: ActionAPIContext): Promise<FormState> => {
       try {
-        const ip = context.clientAddress || "unknown";
+        const ip = context.clientAddress;
 
         const honeypot = formData.get("website") as string;
         if (honeypot) {
@@ -43,7 +43,8 @@ export const server = {
           return { success: false, message: "Too many requests. Please try again later." };
         }
 
-        const language = (formData.get("language") as string) || context.currentLocale || "en";
+        const formLang = formData.get("language") as string | null;
+        const language = formLang ?? context.currentLocale ?? "en";
         const t = getTranslations(language);
 
         const rawData = {
@@ -54,8 +55,8 @@ export const server = {
           persons: formData.get("numberOfPeople"),
           date: formData.get("reservationDate") as string,
           message: formData.get("message") as string,
-          language: language,
-          duration: formData.get("duration") || undefined,
+          language,
+          duration: (formData.get("duration") as string | null) ?? undefined,
           recaptchaToken: formData.get("recaptchaToken") as string,
         };
 
@@ -72,14 +73,15 @@ export const server = {
 
         const data = validationResult.data;
 
-        const host = context.request.headers.get("host")?.split(":", 1)[0] || "";
+        const host = context.request.headers.get("host")?.split(":", 1)[0] ?? "";
         if (!(await verifyRecaptcha({ token: data.recaptchaToken, hostname: host }))) {
           logSecurityEvent("CAPTCHA_FAILED", ip, "booking-action");
           return { success: false, message: "Security verification failed. Please try again." };
         }
 
         const transporter = getMailer();
-        const mailTo = environment.MAIL_TO || environment.GMAIL_USER;
+        const mailTo =
+          environment.MAIL_TO.length > 0 ? environment.MAIL_TO : environment.GMAIL_USER;
 
         const html = `
           <h2>New Booking Request</h2>
@@ -147,7 +149,7 @@ Number of people : ${data.persons}${data.message ? `\nMessage : ${data.message}`
           return { success: false, message: "Too many requests. Please try again later." };
         }
 
-        const language = context.currentLocale || "en";
+        const language = context.currentLocale ?? "en";
         const t = getTranslations(language);
 
         const rawData = {
@@ -173,14 +175,15 @@ Number of people : ${data.persons}${data.message ? `\nMessage : ${data.message}`
         const topic = formData.get("topic") as string;
         const messageContent = topic ? `${topic.trim()}\n\n${data.message}` : data.message;
 
-        const host = context.request.headers.get("host")?.split(":", 1)[0] || "";
+        const host = context.request.headers.get("host")?.split(":", 1)[0] ?? "";
         if (!(await verifyRecaptcha({ token: data.recaptchaToken, hostname: host }))) {
           logSecurityEvent("CAPTCHA_FAILED", ip, "contact-action");
           return { success: false, message: "Security verification failed. Please try again." };
         }
 
         const transporter = getMailer();
-        const mailTo = environment.MAIL_TO || environment.GMAIL_USER;
+        const mailTo =
+          environment.MAIL_TO.length > 0 ? environment.MAIL_TO : environment.GMAIL_USER;
 
         const html = `
           <h2>New Contact Message</h2>
@@ -214,7 +217,7 @@ Number of people : ${data.persons}${data.message ? `\nMessage : ${data.message}`
       context: ActionAPIContext,
     ): Promise<{ ok: boolean; statusKey: string }> => {
       try {
-        const ip = context.clientAddress || "unknown";
+        const ip = context.clientAddress;
 
         const rateLimit = checkRateLimit(ip, 5, 60_000);
         if (!rateLimit.allowed) {
@@ -224,7 +227,7 @@ Number of people : ${data.persons}${data.message ? `\nMessage : ${data.message}`
           return { ok: false, statusKey: "footer.newsletterNetwork" };
         }
 
-        const language = context.currentLocale || "en";
+        const language = context.currentLocale ?? "en";
         const t = getTranslations(language);
         const validationResult = getNewsletterSchema(t).safeParse(input);
 
@@ -234,14 +237,15 @@ Number of people : ${data.persons}${data.message ? `\nMessage : ${data.message}`
 
         const data = validationResult.data;
 
-        const host = context.request.headers.get("host")?.split(":", 1)[0] || "";
+        const host = context.request.headers.get("host")?.split(":", 1)[0] ?? "";
         if (!(await verifyRecaptcha({ token: data.recaptchaToken, hostname: host }))) {
           logSecurityEvent("CAPTCHA_FAILED", ip, "newsletter-action");
           return { ok: false, statusKey: "footer.newsletterCaptchaError" };
         }
 
         const transporter = getMailer();
-        const mailTo = environment.MAIL_TO || environment.GMAIL_USER;
+        const mailTo =
+          environment.MAIL_TO.length > 0 ? environment.MAIL_TO : environment.GMAIL_USER;
 
         const safeName = data.name.replaceAll(/[^\p{L}\p{N}\s]/gu, "");
 

@@ -6,7 +6,7 @@ interface Props {
   state: FormState | null;
 }
 
-defineProps<Props>();
+const { state } = defineProps<Props>();
 
 const { t } = useTranslation();
 </script>
@@ -30,16 +30,16 @@ const { t } = useTranslation();
         :placeholder="t('booking.fullName', 'Full Name')"
         :aria-label="t('booking.fullName', 'Full Name')"
         autocomplete="name"
-        :aria-invalid="state?.errors?.['fullName'] ? 'true' : 'false'"
-        :aria-describedby="state?.errors?.['fullName'] ? 'fullName-error' : undefined"
+        :aria-invalid="state?.errors?.fullName ? 'true' : 'false'"
+        :aria-describedby="state?.errors?.fullName ? 'fullName-error' : undefined"
         required
       />
       <p
-        v-if="state?.errors?.['fullName']"
+        v-if="state?.errors?.fullName"
         id="fullName-error"
         class="mbs-1 text-xs text-red-600"
       >
-        {{ state.errors["fullName"] }}
+        {{ state.errors.fullName }}
       </p>
     </div>
 
@@ -60,16 +60,16 @@ const { t } = useTranslation();
         :placeholder="t('booking.phone', 'Phone Number')"
         :aria-label="t('booking.phone', 'Phone Number')"
         autocomplete="tel"
-        :aria-invalid="state?.errors?.['phone'] ? 'true' : 'false'"
-        :aria-describedby="state?.errors?.['phone'] ? 'phone-error' : undefined"
+        :aria-invalid="state?.errors?.phone ? 'true' : 'false'"
+        :aria-describedby="state?.errors?.phone ? 'phone-error' : undefined"
         required
       />
       <p
-        v-if="state?.errors?.['phone']"
+        v-if="state?.errors?.phone"
         id="phone-error"
         class="mbs-1 text-xs text-red-600"
       >
-        {{ state.errors["phone"] }}
+        {{ state.errors.phone }}
       </p>
     </div>
   </div>
@@ -90,16 +90,16 @@ const { t } = useTranslation();
       :placeholder="t('booking.email', 'Email')"
       :aria-label="t('booking.email', 'Email')"
       autocomplete="email"
-      :aria-invalid="state?.errors?.['email'] ? 'true' : 'false'"
-      :aria-describedby="state?.errors?.['email'] ? 'email-error' : undefined"
+      :aria-invalid="state?.errors?.email ? 'true' : 'false'"
+      :aria-describedby="state?.errors?.email ? 'email-error' : undefined"
       required
     />
     <p
-      v-if="state?.errors?.['email']"
+      v-if="state?.errors?.email"
       id="email-error"
       class="mbs-1 text-xs text-red-600"
     >
-      {{ state.errors["email"] }}
+      {{ state.errors.email }}
     </p>
   </div>
 </template>

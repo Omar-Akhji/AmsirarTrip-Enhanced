@@ -49,8 +49,8 @@ function createRevealObserver(): IntersectionObserver {
 
 function animateCounter(el: HTMLElement) {
   const countToAttr = el.dataset["countTo"];
-  const text = el.textContent ?? "";
-  const numberMatches = text.matchAll(/\d+/g).toArray();
+  const text = el.textContent;
+  const numberMatches = text ? text.matchAll(/\d+/g).toArray() : [];
   if (!countToAttr && numberMatches.length !== 1) return;
 
   const match = numberMatches[0];
@@ -108,7 +108,10 @@ function convertDelays() {
 // ---------------------------------------------------------------------------
 
 function getReducedMotionPreference(): boolean {
-  return globalThis.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ?? false;
+  return (
+    typeof window !== "undefined"
+    && globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
 }
 
 // ---------------------------------------------------------------------------

@@ -64,7 +64,7 @@ function init() {
   resizeObserver?.disconnect();
   resizeObserver = new ResizeObserver((entries) => {
     for (const entry of entries) {
-      const h = entry.borderBoxSize?.[0]?.blockSize ?? entry.contentRect.height;
+      const h = entry.borderBoxSize[0]?.blockSize ?? entry.contentRect.height;
       document.documentElement.style.setProperty("--spacing-navbar", `${h}px`);
     }
   });

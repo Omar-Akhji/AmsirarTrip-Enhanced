@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// Dummy comment to invalidate Docker cache for filename casing change
 import { ref, computed, watch } from "vue";
 import { ChevronLeft, ChevronRight, Calendar as CalendarIcon } from "lucide-vue-next";
 
@@ -9,17 +8,12 @@ interface Props {
   className?: string;
 }
 
-const props = withDefaults(defineProps<Props>(), { className: "" });
+const { initialDate, disabled, className = "" } = defineProps<Props>();
 
-interface Emits {
-  (e: "select", date: Date | undefined): void;
-  (e: "close"): void;
-}
+const emit = defineEmits<{ select: [date: Date | undefined]; close: [] }>();
 
-const emit = defineEmits<Emits>();
-
-const currentMonth = ref<Date>(props.initialDate ? new Date(props.initialDate) : new Date());
-const selectedDate = ref<Date | undefined>(props.initialDate);
+const currentMonth = ref<Date>(initialDate ? new Date(initialDate) : new Date());
+const selectedDate = ref<Date | undefined>(initialDate);
 
 // Helper: check if two dates represent the same calendar day
 const isSameDay = (d1: Date, d2: Date) => {
@@ -81,7 +75,7 @@ const days = computed(() => {
       isCurrentMonth: false,
       isToday: isSameDay(d, new Date()),
       isSelected: selectedDate.value ? isSameDay(d, selectedDate.value) : false,
-      isDisabled: props.disabled ? props.disabled(d) : false,
+      isDisabled: disabled ? disabled(d) : false,
     });
   }
 
@@ -93,7 +87,7 @@ const days = computed(() => {
       isCurrentMonth: true,
       isToday: isSameDay(d, new Date()),
       isSelected: selectedDate.value ? isSameDay(d, selectedDate.value) : false,
-      isDisabled: props.disabled ? props.disabled(d) : false,
+      isDisabled: disabled ? disabled(d) : false,
     });
   }
 
@@ -106,7 +100,7 @@ const days = computed(() => {
       isCurrentMonth: false,
       isToday: isSameDay(d, new Date()),
       isSelected: selectedDate.value ? isSameDay(d, selectedDate.value) : false,
-      isDisabled: props.disabled ? props.disabled(d) : false,
+      isDisabled: disabled ? disabled(d) : false,
     });
   }
 
@@ -115,7 +109,7 @@ const days = computed(() => {
 
 // Watch initialDate to update state if it changes
 watch(
-  () => props.initialDate,
+  () => initialDate,
   (newDate) => {
     if (!newDate) return;
     selectedDate.value = newDate;
@@ -125,7 +119,10 @@ watch(
 </script>
 
 <template>
-  <div :class="['relative', className]">
+  <div
+    class="relative"
+    :class="[className]"
+  >
     <div
       class="overflow-hidden rounded-2xl bg-linear-to-br from-white to-orange-50/30 p-5 shadow-2xl ring-1 shadow-orange-900/10 ring-orange-500/20 backdrop-blur-sm"
     >
@@ -181,10 +178,17 @@ watch(
               <button
                 type="button"
                 :disabled="day.isDisabled"
+                :aria-label="
+                  day.date.toLocaleDateString('en-US', {
+                    month: 'short',
+                    day: 'numeric',
+                    year: 'numeric',
+                  })
+                "
+                :aria-current="day.isToday ? 'date' : undefined"
+                :aria-pressed="day.isSelected"
+                class="size-9 rounded-full p-0 text-sm font-normal transition-all duration-200 focus:ring-2 focus:ring-orange-500 focus:ring-offset-1 focus:outline-hidden pointer-fine:hover:bg-orange-100 pointer-fine:hover:text-orange-900"
                 :class="[
-                  'size-9 rounded-full p-0 text-sm font-normal transition-all duration-200',
-                  'pointer-fine:hover:bg-orange-100 pointer-fine:hover:text-orange-900',
-                  'focus:ring-2 focus:ring-orange-500 focus:ring-offset-1 focus:outline-hidden',
                   day.isSelected ?
                     'bg-orange-600 font-semibold text-white hover:bg-orange-600 hover:text-white'
                   : '',

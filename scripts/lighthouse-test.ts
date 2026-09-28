@@ -73,12 +73,12 @@ function parseLighthouseReport(filePath: string): LighthouseResult | null {
 
     const audits = data.audits;
     const metrics: LighthouseMetrics = {
-      fcp: audits["first-contentful-paint"]?.displayValue || "N/A",
-      lcp: audits["largest-contentful-paint"]?.displayValue || "N/A",
-      tbt: audits["total-blocking-time"]?.displayValue || "N/A",
-      cls: audits["cumulative-layout-shift"]?.displayValue || "N/A",
-      speedIndex: audits["speed-index"]?.displayValue || "N/A",
-      interactive: audits["interactive"]?.displayValue || "N/A",
+      fcp: audits["first-contentful-paint"]?.displayValue ?? "N/A",
+      lcp: audits["largest-contentful-paint"]?.displayValue ?? "N/A",
+      tbt: audits["total-blocking-time"]?.displayValue ?? "N/A",
+      cls: audits["cumulative-layout-shift"]?.displayValue ?? "N/A",
+      speedIndex: audits["speed-index"]?.displayValue ?? "N/A",
+      interactive: audits["interactive"]?.displayValue ?? "N/A",
     };
 
     return { categories, metrics };

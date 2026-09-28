@@ -1,6 +1,6 @@
 ---
 import { useTranslations } from "@/i18n/utils";
-import { Quote } from "@lucide/astro";
+import { Quote, Star } from "@lucide/astro";
 import { Image } from "astro:assets";
 
 const locale = Astro.currentLocale || "en";
@@ -90,16 +90,12 @@ const testimonials = [{ key: "kevin" }, { key: "ben" }, { key: "sara" }];
                   class="mbs-4 flex items-center justify-start text-orange-400"
                 >
                   {Array.from({ length: 5 }, () => (
-                    <svg
+                    <Star
                       aria-hidden="true"
                       class="mx-0.5"
                       fill="currentColor"
-                      height={14}
-                      viewBox="0 0 24 24"
-                      width={14}
-                    >
-                      <path d="M12 17.27L18.18 21 16.54 13.97 22 9.24 14.81 8.63 12 2 9.19 8.63 2 9.24 7.46 13.97 5.82 21z" />
-                    </svg>
+                      size={14}
+                    />
                   ))}
                 </div>
               </article>

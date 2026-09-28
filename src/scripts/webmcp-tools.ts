@@ -1,3 +1,5 @@
+import { navigate } from "astro:transitions/client";
+
 interface ToolDefinition {
   name: string;
   description: string;
@@ -10,10 +12,10 @@ interface ToolDefinition {
 
 interface NavigatorWithModelContext extends Navigator {
   modelContext?: {
-    registerTool(
+    registerTool: (
       definition: ToolDefinition,
       handler: (input: Record<string, unknown>) => Promise<unknown>,
-    ): void;
+    ) => void;
   };
 }
 
@@ -47,8 +49,7 @@ function initWebMCPTools() {
     nav.modelContext.registerTool(
       {
         name: "change_locale",
-        description:
-          "Changes the website locale/language by navigating to the corresponding page prefix",
+        description: "Changes the website locale/language with smooth Astro view transitions",
         inputSchema: {
           type: "object",
           properties: {
@@ -66,21 +67,65 @@ function initWebMCPTools() {
         const currentPath = globalThis.location.pathname;
         const segments = currentPath.split("/").filter(Boolean);
         const locales = ["fr", "de", "es"];
-        const hasLocale = locales.includes(segments[0] || "");
+        const hasLocale = locales.includes(segments[0] ?? "");
 
         let newPath = "";
         if (localeInput === "en") {
-          newPath = "/" + (hasLocale ? segments.slice(1).join("/") : segments.join("/"));
+          newPath = `/${hasLocale ? segments.slice(1).join("/") : segments.join("/")}`;
         } else {
           const baseSegments = hasLocale ? segments.slice(1) : segments;
-          newPath = "/" + localeInput + "/" + baseSegments.join("/");
+          newPath = `/${localeInput}/${baseSegments.join("/")}`;
         }
 
         newPath = newPath.replaceAll(/\/+/g, "/");
-        if (!newPath.startsWith("/")) newPath = "/" + newPath;
+        if (!newPath.startsWith("/")) newPath = `/${newPath}`;
 
-        globalThis.location.assign(newPath);
+        await navigate(newPath);
         return { success: true, targetPath: newPath };
+      },
+    );
+
+    nav.modelContext.registerTool(
+      {
+        name: "navigate_to",
+        description:
+          "Navigates to any website route (e.g. '/', '/tours', '/excursions', '/about', '/contact') using smooth Astro view transitions",
+        inputSchema: {
+          type: "object",
+          properties: {
+            path: {
+              type: "string",
+              description: "The internal path to navigate to, starting with /",
+            },
+          },
+          required: ["path"],
+        },
+      },
+      async (input) => {
+        const path = String(input["path"]).trim();
+        if (!path.startsWith("/")) {
+          return { success: false, error: "Path must start with '/'" };
+        }
+        await navigate(path);
+        return { success: true, targetPath: path };
+      },
+    );
+
+    nav.modelContext.registerTool(
+      {
+        name: "get_page_context",
+        description:
+          "Returns metadata for the current page including route, title, language, and theme",
+        inputSchema: { type: "object", properties: {} },
+      },
+      async () => {
+        return {
+          success: true,
+          pathname: globalThis.location.pathname,
+          title: document.title,
+          locale: document.documentElement.lang || "en",
+          theme: document.documentElement.classList.contains("dark") ? "dark" : "light",
+        };
       },
     );
   } catch (error) {

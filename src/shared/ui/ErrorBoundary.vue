@@ -6,11 +6,7 @@
  * 2. Error state if component fails
  * 3. Graceful degradation
  */
-import { ref, onErrorCaptured, onMounted } from "vue";
-
-function reload() {
-  globalThis.location.reload();
-}
+import { ref, onErrorCaptured, onMounted, onUnmounted } from "vue";
 
 interface Props {
   /** Fallback content shown during hydration */
@@ -21,29 +17,40 @@ interface Props {
   minLoadingTime?: number;
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  fallback: "Loading...",
-  errorPrefix: "Component Error",
-  minLoadingTime: 100,
-});
+const {
+  fallback = "Loading...",
+  errorPrefix = "Component Error",
+  minLoadingTime = 100,
+} = defineProps<Props>();
+
+function reload() {
+  globalThis.location.reload();
+}
 
 const hasError = ref(false);
 const errorMessage = ref("");
 const isReady = ref(false);
+let timer: ReturnType<typeof setTimeout> | null = null;
 
 // Capture errors from child components
-onErrorCaptured((err: Error) => {
+onErrorCaptured((err: unknown) => {
   hasError.value = true;
-  errorMessage.value = err?.message || "Unknown error";
-  console.error(`[ErrorBoundary] ${props.errorPrefix}:`, err);
+  errorMessage.value = err instanceof Error ? err.message : "Unknown error";
+  console.error(`[ErrorBoundary] ${errorPrefix}:`, err);
   return false; // Prevent error propagation
 });
 
 onMounted(() => {
   // Ensure minimum loading time for smooth UX
-  setTimeout(() => {
+  timer = setTimeout(() => {
     isReady.value = true;
-  }, props.minLoadingTime);
+  }, minLoadingTime);
+});
+
+onUnmounted(() => {
+  if (timer) {
+    clearTimeout(timer);
+  }
 });
 </script>
 
@@ -79,6 +86,7 @@ onMounted(() => {
             {{ errorMessage }}
           </p>
           <button
+            type="button"
             class="mt-2 rounded bg-red-100 px-3 py-1 text-xs font-medium text-red-700 hover:bg-red-200"
             @click="reload"
           >

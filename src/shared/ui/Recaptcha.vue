@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { onMounted, useTemplateRef } from "vue";
 
 interface Props {
   sitekey: string;
@@ -7,15 +7,11 @@ interface Props {
   size?: "normal" | "compact";
 }
 
-const props = withDefaults(defineProps<Props>(), { theme: "light", size: "normal" });
+const { sitekey, theme = "light", size = "normal" } = defineProps<Props>();
 
-const emit = defineEmits<{
-  (e: "verify", token: string): void;
-  (e: "expired"): void;
-  (e: "error"): void;
-}>();
+const emit = defineEmits<{ verify: [token: string]; expired: []; error: [] }>();
 
-const container = ref<HTMLElement | null>(null);
+const container = useTemplateRef<HTMLElement>("container");
 let widgetId: number | null = null;
 
 interface ReCaptchaInstance {
@@ -74,9 +70,9 @@ const renderRecaptcha = () => {
 
   try {
     widgetId = grecaptcha.render(container.value, {
-      sitekey: props.sitekey,
-      theme: props.theme,
-      size: props.size,
+      sitekey,
+      theme,
+      size,
       callback: (token: string) => emit("verify", token),
       "expired-callback": () => emit("expired"),
       "error-callback": () => emit("error"),
@@ -99,10 +95,7 @@ onMounted(async () => {
 // Methods exposed to parent via defineExpose
 const getValue = (): string => {
   const grecaptcha = getGrecaptcha();
-  if (widgetId !== null && grecaptcha) {
-    return grecaptcha.getResponse(widgetId);
-  }
-  return "";
+  return widgetId !== null && grecaptcha ? grecaptcha.getResponse(widgetId) : "";
 };
 
 const reset = () => {
@@ -116,5 +109,5 @@ defineExpose({ getValue, reset });
 </script>
 
 <template>
-  <div ref="container"></div>
+  <div ref="container" />
 </template>

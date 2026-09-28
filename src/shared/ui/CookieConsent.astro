@@ -1,6 +1,7 @@
 ---
 import { useTranslations } from "@/i18n/utils";
 import { getRelativeLocaleUrl } from "astro:i18n";
+import { Cookie, X } from "@lucide/astro";
 
 const locale = Astro.currentLocale || "en";
 const t = useTranslations(locale);
@@ -22,49 +23,10 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
     <div class="flex items-start gap-3.5 sm:gap-4">
       <!-- Cookie Icon Badge (Circular in Border) -->
       <div class="flex size-11 shrink-0 items-center justify-center rounded-full border-2 border-orange-500/40 bg-orange-500/10 text-orange-400 ring-4 ring-orange-500/10 shadow-[0_0_16px_rgba(249,115,22,0.15)] sm:size-12">
-        <svg
+        <Cookie
           class="size-5 sm:size-6"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.8"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M12 2a10 10 0 1010 10c0-1.5-1-2.5-2.5-2.5a2.5 2.5 0 01-2.5-2.5c0-1.5-1-2.5-2.5-2.5a2.5 2.5 0 01-2.5-2.5z"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          ></path>
-          <circle
-            cx="8.5"
-            cy="8.5"
-            fill="currentColor"
-            r="1"
-          ></circle>
-          <circle
-            cx="7.5"
-            cy="14.5"
-            fill="currentColor"
-            r="1"
-          ></circle>
-          <circle
-            cx="14.5"
-            cy="14.5"
-            fill="currentColor"
-            r="1"
-          ></circle>
-          <circle
-            cx="12"
-            cy="11"
-            fill="currentColor"
-            r="0.75"
-          ></circle>
-          <circle
-            cx="16.5"
-            cy="10"
-            fill="currentColor"
-            r="0.75"
-          ></circle>
-        </svg>
+          stroke-width={1.8}
+        />
       </div>
 
       <!-- Text Content -->
@@ -164,19 +126,10 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
         data-cookie-close-preferences
         type="button"
       >
-        <svg
+        <X
           class="size-4.5"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M6 18L18 6M6 6l12 12"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          ></path>
-        </svg>
+          stroke-width={2}
+        />
       </button>
     </div>
 
@@ -413,49 +366,10 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
   title={t("cookieConsent.customize", "Cookie Settings")}
   type="button"
 >
-  <svg
+  <Cookie
     class="size-5"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="1.8"
-    viewBox="0 0 24 24"
-  >
-    <path
-      d="M12 2a10 10 0 1010 10c0-1.5-1-2.5-2.5-2.5a2.5 2.5 0 01-2.5-2.5c0-1.5-1-2.5-2.5-2.5a2.5 2.5 0 01-2.5-2.5z"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    ></path>
-    <circle
-      cx="8.5"
-      cy="8.5"
-      fill="currentColor"
-      r="1"
-    ></circle>
-    <circle
-      cx="7.5"
-      cy="14.5"
-      fill="currentColor"
-      r="1"
-    ></circle>
-    <circle
-      cx="14.5"
-      cy="14.5"
-      fill="currentColor"
-      r="1"
-    ></circle>
-    <circle
-      cx="12"
-      cy="11"
-      fill="currentColor"
-      r="0.75"
-    ></circle>
-    <circle
-      cx="16.5"
-      cy="10"
-      fill="currentColor"
-      r="0.75"
-    ></circle>
-  </svg>
+    stroke-width={1.8}
+  />
 </button>
 
 <style>

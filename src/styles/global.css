@@ -614,3 +614,92 @@ body {
 @utility inline-px {
   inline-size: 1px;
 }
+
+/* ==========================================================================
+   Astro ClientRouter & View Transitions
+   Fluid, hardware-accelerated page transitions & shared element morphing
+   ========================================================================== */
+
+/* Top Navigation Progress Indicator */
+#page-progress-bar {
+  position: fixed;
+  top: 0;
+  inset-inline-start: 0;
+  height: 3px;
+  width: 0%;
+  z-index: 100000;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    oklch(56% 0.19 33deg),
+    oklch(75% 0.18 55deg),
+    oklch(56% 0.19 33deg)
+  );
+  box-shadow:
+    0 0 12px oklch(56% 0.19 33deg / 70%),
+    0 0 6px oklch(75% 0.18 55deg / 50%);
+  transition:
+    width 200ms ease-out,
+    opacity 250ms ease;
+  opacity: 0;
+}
+
+/* Root Page Crossfade & Micro-Slide */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 240ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+::view-transition-old(root) {
+  animation-name: astro-page-fade-out;
+}
+
+::view-transition-new(root) {
+  animation-name: astro-page-fade-in;
+}
+
+@keyframes astro-page-fade-out {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.995);
+  }
+}
+
+@keyframes astro-page-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px) scale(0.995);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Shared element morphing smoothness */
+::view-transition-group(*) {
+  animation-duration: 320ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Ensure navbar transitions smoothly without jump */
+::view-transition-group(main-navbar) {
+  animation-duration: 200ms;
+  animation-timing-function: ease-out;
+}
+
+/* Accessibility: respect user preferences for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root),
+  ::view-transition-group(*) {
+    animation: none !important;
+  }
+}

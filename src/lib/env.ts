@@ -11,6 +11,6 @@ export const env = {
     return RECAPTCHA_SECRET_KEY;
   },
   get MAIL_TO() {
-    return MAIL_TO || "";
+    return MAIL_TO ?? "";
   },
 } as const;

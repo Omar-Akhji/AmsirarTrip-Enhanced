@@ -36,7 +36,7 @@ const title =
 const description =
   isEnglish ?
     tour.seo.metaDescription
-  : `${t("tours." + tour.tourKey + ".description")} ${t(`${tour.tourKey}.overview`)}`;
+  : `${t(`tours.${tour.tourKey}.description`)} ${t(`${tour.tourKey}.overview`)}`;
 
 const itinerary = Array.from({ length: tour.durationDays }, (_, index) => {
   const dayNumber = index + 1;
@@ -102,6 +102,7 @@ const breadcrumbJsonLd = generateBreadcrumbJsonLd([
     imageSrc={tour.image}
     locale={locale}
     seo={tour.seo}
+    slug={slug}
     tourKey={tour.tourKey}
   >
     <BookingForm

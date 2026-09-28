@@ -6,7 +6,7 @@ interface Props {
   state: FormState | null;
 }
 
-defineProps<Props>();
+const { state } = defineProps<Props>();
 
 const { t } = useTranslation();
 </script>
@@ -31,15 +31,15 @@ const { t } = useTranslation();
         :aria-label="t('contact.form.fields.name', 'Full name')"
         autocomplete="name"
         required
-        :aria-invalid="state?.errors?.['name'] ? 'true' : 'false'"
-        :aria-describedby="state?.errors?.['name'] ? 'name-error' : undefined"
+        :aria-invalid="state?.errors?.name ? 'true' : 'false'"
+        :aria-describedby="state?.errors?.name ? 'name-error' : undefined"
       />
       <p
-        v-if="state?.errors?.['name']"
+        v-if="state?.errors?.name"
         id="name-error"
         class="mbs-1 text-xs text-red-600"
       >
-        {{ state.errors["name"] }}
+        {{ state.errors.name }}
       </p>
     </div>
     <div>
@@ -59,15 +59,15 @@ const { t } = useTranslation();
         :aria-label="t('contact.form.fields.email', 'Email')"
         autocomplete="email"
         required
-        :aria-invalid="state?.errors?.['email'] ? 'true' : 'false'"
-        :aria-describedby="state?.errors?.['email'] ? 'email-error' : undefined"
+        :aria-invalid="state?.errors?.email ? 'true' : 'false'"
+        :aria-describedby="state?.errors?.email ? 'email-error' : undefined"
       />
       <p
-        v-if="state?.errors?.['email']"
+        v-if="state?.errors?.email"
         id="email-error"
         class="mbs-1 text-xs text-red-600"
       >
-        {{ state.errors["email"] }}
+        {{ state.errors.email }}
       </p>
     </div>
   </div>
@@ -91,15 +91,15 @@ const { t } = useTranslation();
         :aria-label="t('contact.form.fields.phone', 'Phone number')"
         autocomplete="tel"
         required
-        :aria-invalid="state?.errors?.['phone'] ? 'true' : 'false'"
-        :aria-describedby="state?.errors?.['phone'] ? 'phone-error' : undefined"
+        :aria-invalid="state?.errors?.phone ? 'true' : 'false'"
+        :aria-describedby="state?.errors?.phone ? 'phone-error' : undefined"
       />
       <p
-        v-if="state?.errors?.['phone']"
+        v-if="state?.errors?.phone"
         id="phone-error"
         class="mbs-1 text-xs text-red-600"
       >
-        {{ state.errors["phone"] }}
+        {{ state.errors.phone }}
       </p>
     </div>
     <div>
@@ -139,15 +139,15 @@ const { t } = useTranslation();
       :aria-label="t('contact.form.fields.message', 'Tell us about your Morocco dream')"
       autocomplete="off"
       required
-      :aria-invalid="state?.errors?.['message'] ? 'true' : 'false'"
-      :aria-describedby="state?.errors?.['message'] ? 'message-error' : undefined"
+      :aria-invalid="state?.errors?.message ? 'true' : 'false'"
+      :aria-describedby="state?.errors?.message ? 'message-error' : undefined"
     />
     <p
-      v-if="state?.errors?.['message']"
+      v-if="state?.errors?.message"
       id="message-error"
       class="mbs-1 text-xs text-red-600"
     >
-      {{ state.errors["message"] }}
+      {{ state.errors.message }}
     </p>
   </div>
 </template>
