@@ -108,24 +108,32 @@ export function showBanner(): void {
   if (!banner) return;
   banner.classList.remove("hidden");
   requestAnimationFrame(() => {
-    banner.classList.remove("translate-y-full", "opacity-0");
-    banner.classList.add("translate-y-0", "opacity-100");
+    banner.classList.remove("opacity-0");
+    banner.classList.add("opacity-100");
   });
+  document.body.classList.add("overflow-hidden");
 }
 
 export function hideBanner(): void {
   const banner = getBannerElement();
   if (!banner) return;
-  banner.classList.add("translate-y-full", "opacity-0");
-  banner.classList.remove("translate-y-0", "opacity-100");
+  banner.classList.add("opacity-0");
+  banner.classList.remove("opacity-100");
+  document.body.classList.remove("overflow-hidden");
   setTimeout(() => {
     banner.classList.add("hidden");
-  }, 350);
+  }, 300);
 }
 
 export function openPreferencesModal(triggerElement?: HTMLElement): void {
   const modal = getModalElement();
   if (!modal) return;
+
+  const banner = getBannerElement();
+  if (banner && !banner.classList.contains("hidden")) {
+    banner.classList.add("hidden", "opacity-0");
+    banner.classList.remove("opacity-100");
+  }
 
   if (triggerElement) {
     lastFocusedElement = triggerElement;
@@ -163,7 +171,13 @@ export function closePreferencesModal(): void {
 
   modal.classList.add("opacity-0");
   modal.classList.remove("opacity-100");
-  document.body.classList.remove("overflow-hidden");
+
+  const consent = getCookieConsent();
+  if (consent) {
+    document.body.classList.remove("overflow-hidden");
+  } else {
+    showBanner();
+  }
 
   setTimeout(() => {
     modal.classList.add("hidden");

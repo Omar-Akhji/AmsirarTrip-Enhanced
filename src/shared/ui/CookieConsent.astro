@@ -9,20 +9,27 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
 ---
 
 <!-- ========================================== -->
-<!-- 1. Floating Cookie Consent Banner          -->
+<!-- 1. Modal Cookie Consent Dialog             -->
 <!-- ========================================== -->
 <div
   aria-describedby="cookie-banner-desc"
-  aria-label={t("cookieConsent.title", "Cookie Consent")}
-  aria-live="polite"
-  class="pointer-events-none fixed inset-x-4 bottom-4 z-50 mx-auto max-w-3xl translate-y-full opacity-0 transition-all duration-500 ease-out hidden"
+  aria-labelledby="cookie-banner-title"
+  aria-modal="true"
+  class="fixed inset-0 z-999999 flex items-center justify-center p-4 opacity-0 transition-opacity duration-300 ease-out"
   id="cookie-banner"
-  role="region"
+  role="dialog"
 >
-  <div class="pointer-events-auto overflow-hidden rounded-2xl border border-white/15 bg-zinc-950/95 p-5 text-white shadow-[0_20px_50px_rgba(0,0,0,0.7)] backdrop-blur-xl ring-1 ring-white/10 sm:p-6">
-    <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-5">
+  <!-- Backdrop (Dark + Blur) in front of everything -->
+  <div
+    aria-hidden="true"
+    class="fixed inset-0 bg-black/75 backdrop-blur-md transition-opacity"
+  ></div>
+
+  <!-- Modal Card Dialog -->
+  <div class="relative z-10 w-full max-w-lg overflow-hidden rounded-3xl bg-slate-950 p-6 text-white shadow-[0_25px_60px_rgba(0,0,0,0.85)] ring-1 ring-white/10 sm:p-8">
+    <div class="flex items-start gap-4">
       <!-- Cookie Icon Badge -->
-      <div class="flex size-11 shrink-0 items-center justify-center rounded-xl bg-orange-500/10 text-orange-500 ring-1 ring-orange-500/25">
+      <div class="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-orange-500/10 text-orange-500 ring-1 ring-orange-500/30">
         <svg
           class="size-6"
           fill="none"
@@ -70,11 +77,14 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
 
       <!-- Text Content -->
       <div class="flex-1 space-y-2">
-        <h3 class="text-base font-semibold tracking-tight text-white">
+        <h2
+          class="text-lg font-bold tracking-tight text-white sm:text-xl"
+          id="cookie-banner-title"
+        >
           {t("cookieConsent.title", "We value your privacy")}
-        </h3>
+        </h2>
         <p
-          class="text-xs leading-relaxed text-zinc-300 sm:text-sm"
+          class="text-xs leading-relaxed text-orange-200/90 sm:text-sm"
           id="cookie-banner-desc"
         >
           {t(
@@ -88,34 +98,34 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
             {t("cookieConsent.privacyPolicyLink", "Read our Privacy Policy")}
           </a>
         </p>
-
-        <!-- Action Buttons -->
-        <div class="flex flex-wrap items-center gap-2.5 pt-2 sm:gap-3">
-          <button
-            class="inline-flex cursor-pointer items-center justify-center rounded-xl bg-orange-600 px-4 py-2 text-xs font-semibold text-white shadow-md shadow-orange-600/30 transition-all hover:bg-orange-500 active:scale-[0.98] sm:px-5 sm:py-2.5 sm:text-sm"
-            data-cookie-accept-all
-            type="button"
-          >
-            {t("cookieConsent.acceptAll", "Accept All")}
-          </button>
-
-          <button
-            class="inline-flex cursor-pointer items-center justify-center rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-xs font-medium text-zinc-200 transition-all hover:bg-white/10 hover:text-white active:scale-[0.98] sm:px-5 sm:py-2.5 sm:text-sm"
-            data-cookie-reject-all
-            type="button"
-          >
-            {t("cookieConsent.rejectAll", "Essential Only")}
-          </button>
-
-          <button
-            class="inline-flex cursor-pointer items-center justify-center rounded-xl px-3 py-2 text-xs font-medium text-zinc-400 transition-all hover:text-orange-400 sm:text-sm"
-            data-cookie-open-preferences
-            type="button"
-          >
-            {t("cookieConsent.customize", "Cookie Settings")}
-          </button>
-        </div>
       </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="mt-6 flex flex-col-reverse gap-2.5 sm:flex-row sm:items-center sm:justify-end">
+      <button
+        class="inline-flex cursor-pointer items-center justify-center px-2 py-2 text-xs font-semibold text-zinc-400 underline underline-offset-4 transition-all hover:text-orange-400 sm:me-auto"
+        data-cookie-open-preferences
+        type="button"
+      >
+        {t("cookieConsent.customize", "Cookie Settings")}
+      </button>
+
+      <button
+        class="inline-flex cursor-pointer items-center justify-center rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-xs font-semibold text-zinc-200 transition-all hover:bg-white/10 hover:text-white active:scale-[0.98] sm:text-sm"
+        data-cookie-reject-all
+        type="button"
+      >
+        {t("cookieConsent.rejectAll", "Essential Only")}
+      </button>
+
+      <button
+        class="inline-flex cursor-pointer items-center justify-center rounded-xl bg-orange-600 px-5 py-2.5 text-xs font-bold text-white shadow-lg shadow-orange-600/25 transition-all hover:bg-orange-500 hover:shadow-orange-500/35 active:scale-[0.98] sm:text-sm"
+        data-cookie-accept-all
+        type="button"
+      >
+        {t("cookieConsent.acceptAll", "Accept All")}
+      </button>
     </div>
   </div>
 </div>
@@ -126,7 +136,7 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
 <div
   aria-labelledby="cookie-modal-title"
   aria-modal="true"
-  class="fixed inset-0 z-100lex items-center justify-center p-4 opacity-0 transition-opacity duration-300 ease-out hidden"
+  class="fixed inset-0 z-999999 flex items-center justify-center p-4 opacity-0 transition-opacity duration-300 ease-out"
   id="cookie-preferences-modal"
   role="dialog"
 >
@@ -137,37 +147,15 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
   ></div>
 
   <!-- Modal Content Box -->
-  <div class="relative z-10 flex max-h-[90vh] w-full max-w-2xl flex-col overflow-hidden rounded-3xl border border-white/15 bg-zinc-950 text-white shadow-2xl ring-1 ring-white/10">
+  <div class="relative z-10 flex max-h-[90vh] w-full max-w-2xl flex-col overflow-hidden rounded-3xl bg-slate-950 text-white shadow-2xl ring-1 ring-white/10">
     <!-- Header -->
     <div class="flex items-center justify-between border-b border-white/10 px-6 py-5">
-      <div class="flex items-center gap-3">
-        <div class="flex size-9 items-center justify-center rounded-lg bg-orange-500/10 text-orange-500 ring-1 ring-orange-500/30">
-          <svg
-            class="size-5"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            ></path>
-            <circle
-              cx="12"
-              cy="12"
-              r="3"
-            ></circle>
-          </svg>
-        </div>
-        <h2
-          class="text-lg font-semibold tracking-tight text-white"
-          id="cookie-modal-title"
-        >
-          {t("cookieConsent.modalTitle", "Cookie & Privacy Preferences")}
-        </h2>
-      </div>
+      <h2
+        class="text-lg font-semibold tracking-tight text-white"
+        id="cookie-modal-title"
+      >
+        {t("cookieConsent.modalTitle", "Cookie & Privacy Preferences")}
+      </h2>
 
       <button
         aria-label={t("cookieConsent.close", "Close")}
@@ -202,95 +190,136 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
 
       <div class="space-y-4">
         <!-- 1. Strictly Necessary (Always On) -->
-        <div class="rounded-2xl border border-white/10 bg-white/2 p-4 transition-colors">
+        <div class="rounded-2xl bg-white/5 p-4 ring-1 ring-white/10 transition-colors">
           <div class="flex items-center justify-between gap-4">
-            <div class="space-y-1">
+            <div class="flex-1 space-y-1">
               <div class="flex items-center gap-2">
                 <h4 class="font-medium text-white">
                   {t("cookieConsent.necessaryTitle", "Strictly Necessary Cookies")}
                 </h4>
-                <span class="rounded-full bg-emerald-500/10 px-2 py-0.5 text-[11px] font-semibold text-emerald-400 ring-1 ring-emerald-500/30">
+                <span class="rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-[11px] font-semibold text-emerald-400 ring-1 ring-emerald-500/30">
                   {t("cookieConsent.alwaysActive", "Always Active")}
                 </span>
               </div>
-              <p class="text-xs text-zinc-400">
+              <p class="text-xs leading-relaxed text-zinc-400">
                 {t(
                   "cookieConsent.necessaryDesc",
                   "Required for site navigation, security, language selection, and core features. These cannot be disabled.",
                 )}
               </p>
             </div>
-            <!-- Disabled checkbox -->
-            <div class="relative flex items-center">
+            <!-- Locked Active Switch -->
+            <label
+              class="relative inline-flex shrink-0 cursor-not-allowed items-center"
+              for="cookie-toggle-necessary"
+            >
               <input
                 checked
-                class="size-5 rounded border-white/20 bg-zinc-800 text-orange-500 opacity-60 cursor-not-allowed"
+                class="amsirar-toggle-input sr-only"
                 disabled
                 id="cookie-toggle-necessary"
                 type="checkbox"
               />
-            </div>
+              <div
+                aria-hidden="true"
+                class="amsirar-toggle-track is-locked"
+              >
+                <div class="amsirar-toggle-thumb">
+                  <svg
+                    class="size-3 text-emerald-600"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      clip-rule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      fill-rule="evenodd"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+            </label>
           </div>
         </div>
 
         <!-- 2. Analytics & Performance -->
-        <div class="rounded-2xl border border-white/10 bg-white/2 p-4 transition-colors">
+        <div class="group rounded-2xl bg-white/5 p-4 ring-1 ring-white/10 transition-colors hover:bg-white/[0.07] hover:ring-white/20">
           <div class="flex items-center justify-between gap-4">
             <label
               class="flex-1 cursor-pointer space-y-1"
               for="cookie-toggle-analytics"
             >
-              <h4 class="font-medium text-white">
+              <h4 class="font-medium text-white transition-colors group-hover:text-orange-200">
                 {t("cookieConsent.analyticsTitle", "Analytics & Performance")}
               </h4>
-              <p class="text-xs text-zinc-400">
+              <p class="text-xs leading-relaxed text-zinc-400">
                 {t(
                   "cookieConsent.analyticsDesc",
                   "Enables anonymous traffic metrics to help us understand popular itineraries and improve loading performance.",
                 )}
               </p>
             </label>
-            <div class="relative flex items-center">
+            <!-- Interactive Switch Toggle -->
+            <label
+              class="relative inline-flex shrink-0 cursor-pointer items-center"
+              for="cookie-toggle-analytics"
+            >
               <input
-                class="size-5 cursor-pointer rounded border-white/20 bg-zinc-800 text-orange-500 focus:ring-2 focus:ring-orange-500 focus:ring-offset-zinc-950"
+                class="amsirar-toggle-input sr-only"
                 id="cookie-toggle-analytics"
                 type="checkbox"
               />
-            </div>
+              <div
+                aria-hidden="true"
+                class="amsirar-toggle-track"
+              >
+                <div class="amsirar-toggle-thumb"></div>
+              </div>
+            </label>
           </div>
         </div>
 
         <!-- 3. Preferences & Functional -->
-        <div class="rounded-2xl border border-white/10 bg-white/2 p-4 transition-colors">
+        <div class="group rounded-2xl bg-white/5 p-4 ring-1 ring-white/10 transition-colors hover:bg-white/[0.07] hover:ring-white/20">
           <div class="flex items-center justify-between gap-4">
             <label
               class="flex-1 cursor-pointer space-y-1"
               for="cookie-toggle-functional"
             >
-              <h4 class="font-medium text-white">
+              <h4 class="font-medium text-white transition-colors group-hover:text-orange-200">
                 {t("cookieConsent.functionalTitle", "Preferences & Functional")}
               </h4>
-              <p class="text-xs text-zinc-400">
+              <p class="text-xs leading-relaxed text-zinc-400">
                 {t(
                   "cookieConsent.functionalDesc",
                   "Remembers your choices (such as interactive agency maps and currency preferences) for a smoother journey.",
                 )}
               </p>
             </label>
-            <div class="relative flex items-center">
+            <!-- Interactive Switch Toggle -->
+            <label
+              class="relative inline-flex shrink-0 cursor-pointer items-center"
+              for="cookie-toggle-functional"
+            >
               <input
-                class="size-5 cursor-pointer rounded border-white/20 bg-zinc-800 text-orange-500 focus:ring-2 focus:ring-orange-500 focus:ring-offset-zinc-950"
+                class="amsirar-toggle-input sr-only"
                 id="cookie-toggle-functional"
                 type="checkbox"
               />
-            </div>
+              <div
+                aria-hidden="true"
+                class="amsirar-toggle-track"
+              >
+                <div class="amsirar-toggle-thumb"></div>
+              </div>
+            </label>
           </div>
         </div>
       </div>
     </div>
 
     <!-- Footer Actions -->
-    <div class="flex flex-col-reverse items-center justify-between gap-3 border-t border-white/10 bg-zinc-900/60 px-6 py-4 sm:flex-row">
+    <div class="flex flex-col-reverse items-center justify-between gap-3 border-t border-white/10 bg-slate-900/60 px-6 py-4 sm:flex-row">
       <a
         class="text-xs font-medium text-zinc-400 underline underline-offset-2 transition-colors hover:text-white"
         href={privacyPolicyHref}
@@ -324,7 +353,7 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
 <!-- ========================================== -->
 <button
   aria-label={t("cookieConsent.modalTitle", "Cookie Settings")}
-  class="fixed bottom-6 left-6 z-40 flex size-11 cursor-pointer items-center justify-center rounded-full border border-white/15 bg-zinc-950/85 text-zinc-400 shadow-lg backdrop-blur-md transition-all duration-300 hover:border-orange-500/50 hover:bg-zinc-900 hover:text-orange-400 hover:scale-105 active:scale-95"
+  class="fixed bottom-6 left-6 z-40 flex size-11 cursor-pointer items-center justify-center rounded-full bg-slate-950/90 text-orange-200/80 shadow-lg backdrop-blur-md ring-1 ring-white/10 transition-all duration-300 hover:scale-105 hover:bg-slate-900 hover:text-orange-400 hover:ring-orange-500/50 active:scale-95"
   data-cookie-open-preferences
   id="cookie-badge-btn"
   title={t("cookieConsent.customize", "Cookie Settings")}
@@ -374,5 +403,67 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
     ></circle>
   </svg>
 </button>
+
+<style>
+  /* Custom Toggle Switch - Smooth Glide Animation */
+  .amsirar-toggle-track {
+    width: 48px;
+    height: 26px;
+    border-radius: 9999px;
+    background-color: #27272a;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    padding: 2px;
+    transition:
+      background-color 0.28s ease,
+      border-color 0.28s ease,
+      box-shadow 0.28s ease;
+    cursor: pointer;
+  }
+
+  .amsirar-toggle-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 9999px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.35);
+    transform: translateX(0);
+    transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Active checked state: circle moves 22px to the right */
+  .amsirar-toggle-input:checked + .amsirar-toggle-track {
+    background-color: #ea580c;
+    border-color: rgba(251, 146, 60, 0.7);
+    box-shadow: 0 0 14px rgba(234, 88, 12, 0.45);
+  }
+
+  .amsirar-toggle-input:checked + .amsirar-toggle-track .amsirar-toggle-thumb {
+    transform: translateX(22px);
+  }
+
+  /* Focus outline for keyboard accessibility */
+  .amsirar-toggle-input:focus-visible + .amsirar-toggle-track {
+    outline: 2px solid #f97316;
+    outline-offset: 3px;
+  }
+
+  /* Necessary Cookies - Locked Active State */
+  .amsirar-toggle-track.is-locked {
+    background-color: #059669;
+    border-color: rgba(52, 211, 153, 0.6);
+    box-shadow: 0 0 12px rgba(16, 185, 129, 0.35);
+    cursor: not-allowed;
+  }
+
+  .amsirar-toggle-track.is-locked .amsirar-toggle-thumb {
+    transform: translateX(22px);
+  }
+</style>
 
 <script src="../../scripts/cookie-consent.ts"></script>
