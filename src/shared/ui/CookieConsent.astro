@@ -184,16 +184,16 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
             <div class="relative inline-flex shrink-0 cursor-not-allowed items-center pt-0.5">
               <input
                 checked
-                class="amsirar-toggle-input sr-only"
+                class="amsirar-toggle-input peer sr-only"
                 disabled
                 id="cookie-toggle-necessary"
                 type="checkbox"
               />
               <div
                 aria-hidden="true"
-                class="amsirar-toggle-track is-locked"
+                class="amsirar-toggle-track is-locked flex h-6.5 w-12 shrink-0 cursor-not-allowed select-none items-center rounded-full border border-emerald-400/60 bg-emerald-600 p-0.5 shadow-[0_0_12px_rgba(16,185,129,0.35)] peer-focus-visible:outline-2 peer-focus-visible:outline-offset-3 peer-focus-visible:outline-orange-500"
               >
-                <div class="amsirar-toggle-thumb"></div>
+                <div class="amsirar-toggle-thumb flex size-5 shrink-0 items-center justify-center translate-x-5.5 rounded-full bg-white shadow-[0_2px_5px_rgba(0,0,0,0.35)] will-change-transform"></div>
               </div>
             </div>
           </div>
@@ -241,15 +241,15 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
               for="cookie-toggle-analytics"
             >
               <input
-                class="amsirar-toggle-input sr-only"
+                class="amsirar-toggle-input peer sr-only"
                 id="cookie-toggle-analytics"
                 type="checkbox"
               />
               <div
                 aria-hidden="true"
-                class="amsirar-toggle-track"
+                class="amsirar-toggle-track flex h-6.5 w-12 shrink-0 cursor-pointer select-none items-center rounded-full border border-white/15 bg-zinc-800 p-0.5 shadow-[inset_0_1px_2px_rgba(0,0,0,0.4)] peer-focus-visible:outline-2 peer-focus-visible:outline-offset-3 peer-focus-visible:outline-orange-500"
               >
-                <div class="amsirar-toggle-thumb"></div>
+                <div class="amsirar-toggle-thumb flex size-5 shrink-0 items-center justify-center rounded-full bg-white shadow-[0_2px_5px_rgba(0,0,0,0.35)] will-change-transform"></div>
               </div>
             </label>
           </div>
@@ -297,15 +297,15 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
               for="cookie-toggle-functional"
             >
               <input
-                class="amsirar-toggle-input sr-only"
+                class="amsirar-toggle-input peer sr-only"
                 id="cookie-toggle-functional"
                 type="checkbox"
               />
               <div
                 aria-hidden="true"
-                class="amsirar-toggle-track"
+                class="amsirar-toggle-track flex h-6.5 w-12 shrink-0 cursor-pointer select-none items-center rounded-full border border-white/15 bg-zinc-800 p-0.5 shadow-[inset_0_1px_2px_rgba(0,0,0,0.4)] peer-focus-visible:outline-2 peer-focus-visible:outline-offset-3 peer-focus-visible:outline-orange-500"
               >
-                <div class="amsirar-toggle-thumb"></div>
+                <div class="amsirar-toggle-thumb flex size-5 shrink-0 items-center justify-center rounded-full bg-white shadow-[0_2px_5px_rgba(0,0,0,0.35)] will-change-transform"></div>
               </div>
             </label>
           </div>
@@ -371,54 +371,5 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
     stroke-width={1.8}
   />
 </button>
-
-<style>
-  /* Custom Toggle Switch Base Geometry */
-  .amsirar-toggle-track {
-    width: 48px;
-    height: 26px;
-    border-radius: 9999px;
-    background-color: #27272a;
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    display: flex;
-    align-items: center;
-    padding: 2px;
-    cursor: pointer;
-    user-select: none;
-    flex-shrink: 0;
-  }
-
-  .amsirar-toggle-thumb {
-    width: 20px;
-    height: 20px;
-    border-radius: 9999px;
-    background-color: #ffffff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.35);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    will-change: transform;
-    flex-shrink: 0;
-  }
-
-  /* Focus outline for keyboard accessibility */
-  .amsirar-toggle-input:focus-visible + .amsirar-toggle-track {
-    outline: 2px solid #f97316;
-    outline-offset: 3px;
-  }
-
-  /* Necessary Cookies - Locked Active State */
-  .amsirar-toggle-track.is-locked {
-    background-color: #059669;
-    border-color: rgba(52, 211, 153, 0.6);
-    box-shadow: 0 0 12px rgba(16, 185, 129, 0.35);
-    cursor: not-allowed;
-  }
-
-  .amsirar-toggle-track.is-locked .amsirar-toggle-thumb {
-    transform: translateX(22px);
-  }
-</style>
 
 <script src="../../scripts/cookie-consent.ts"></script>
