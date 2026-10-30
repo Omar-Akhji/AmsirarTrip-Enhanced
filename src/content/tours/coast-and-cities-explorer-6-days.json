@@ -17,7 +17,7 @@
     "Morocco explorer tour"
   ],
   "seo": {
-    "title": "6-Day Morocco Tour from Casablanca",
+    "title": "Morocco Tour from Casablanca",
     "metaDescription": "Plan a 6-day Morocco tour from Casablanca to Chefchaouen, Fes, Merzouga desert, Dades Valley, Ait Ben Haddou, and Marrakech.",
     "lead": "A complete 6-day Morocco tour from Casablanca combining imperial cities, Chefchaouen, Fes, Erg Chebbi camel trekking, and a Marrakech finish.",
     "primaryKeyword": "6 day Morocco tour itinerary",
@@ -63,6 +63,8 @@
   },
   "jsonLd": {
     "name": "Coast and Cities Explorer - 6 Days",
-    "description": "Explore Morocco's stunning coastline and vibrant cities on this comprehensive 6-day journey from Casablanca to Marrakech."
+    "description": "Six-day private route from Casablanca to Marrakech via Rabat, Chefchaouen, the Fes medina, and the Erg Chebbi desert.",
+    "price": 540,
+    "currency": "EUR"
   }
 }

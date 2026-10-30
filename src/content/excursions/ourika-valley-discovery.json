@@ -3,19 +3,132 @@
   "i18nKeyPrefix": "ourika",
   "bookingId": 4,
   "image": "../../assets/images/Excursions/Ourika_Valley.webp",
-  "duration": "P1D",
-  "location": "Ourika Valley, Morocco",
+  "duration": "PT8H",
+  "location": "Ourika Valley and Setti Fatma, Morocco",
   "keywords": [
-    "Ourika Valley tour",
-    "Ourika waterfalls",
-    "Atlas day trip",
-    "Marrakech valley tour",
-    "Berber market Ourika",
-    "Morocco nature excursion",
-    "Setti Fatma waterfalls"
+    "ourika valley day trip from marrakech",
+    "ourika valley marrakech",
+    "marrakech to ourika valley",
+    "setti fatma waterfalls",
+    "ourika waterfalls hike",
+    "tnine ourika monday market",
+    "atlas mountains day trip"
   ],
+  "metrics": {
+    "distance": "~65 km from Marrakech",
+    "duration": "About 8 hours",
+    "pickup": "09:00 to 09:30",
+    "elevation": "Setti Fatma, ~1,500 m"
+  },
+  "overview": [
+    "The Ourika Valley follows the Ourika River into the High Atlas, starting about 30 km south of Marrakech. The road ends 65 km from the city at Setti Fatma, a village at around 1,500 meters with a series of seven waterfalls in the side gorge above it.",
+    "On the way up you stop at a women's argan oil cooperative and at viewpoints over terraced fields and earth-built villages on the slopes. If you travel on a Monday, you can also walk through the weekly souk at Tnine Ourika, where people from the mountain villages come to trade.",
+    "In Setti Fatma a local guide takes you up to the first waterfalls, a walk of 45 minutes to an hour with some scrambling over rocks. Lunch is at a riverside restaurant where the tables sit almost in the water. This is the shortest of our mountain day trips, and a good choice if you want the Atlas without a long drive."
+  ],
+  "program": [
+    {
+      "time": "09:00 to 09:30",
+      "title": "Pickup in Marrakech",
+      "location": "Your hotel or riad",
+      "description": "Your driver collects you at your hotel, or at the nearest gate a vehicle can reach if you are staying inside the medina. You head south across the Haouz plain toward the mountains."
+    },
+    {
+      "time": "10:00 to 10:40",
+      "title": "Argan cooperative, or the Monday souk",
+      "location": "Tnine Ourika and the lower valley",
+      "description": "Visit a women's argan oil cooperative to see the oil made by hand, with tea and bread for tasting. On Mondays you can also stop at the weekly market in Tnine Ourika, where livestock, vegetables and household goods change hands."
+    },
+    {
+      "time": "10:40 to 11:30",
+      "title": "Drive up the valley with photo stops",
+      "location": "Ourika Valley",
+      "description": "The road follows the river between walnut trees and terraced fields, with stops at viewpoints over villages built from earth and stone on the slopes."
+    },
+    {
+      "time": "11:30 to 13:00",
+      "title": "Guided hike to the Setti Fatma waterfalls",
+      "location": "Setti Fatma, ~1,500 m",
+      "description": "Meet a local guide and cross the river by footbridge to climb to the first waterfalls. The walk takes 45 minutes to an hour each way, on rocky paths with a few sections where you use your hands. The higher falls need more climbing and are optional."
+    },
+    {
+      "time": "13:00 to 14:30",
+      "title": "Riverside lunch",
+      "location": "Setti Fatma riverbank",
+      "description": "Lunch at a restaurant on the riverbank, with tables set over the water under the trees. Tagine, salads and mint tea are the usual choices."
+    },
+    {
+      "time": "15:00 to 16:30",
+      "title": "Return drive to Marrakech",
+      "location": "Setti Fatma to Marrakech",
+      "description": "Drive back down the valley. You are dropped at your accommodation in Marrakech around 16:30."
+    }
+  ],
+  "includes": [
+    "Pickup and drop-off at your Marrakech hotel or riad",
+    "Round-trip transport in an air-conditioned vehicle",
+    "Driver who speaks English, French, Spanish or German",
+    "Local guide for the waterfall hike in Setti Fatma",
+    "Stop at an argan oil cooperative",
+    "Bottled water in the vehicle"
+  ],
+  "excludes": ["Lunch and drinks", "Tips for your guide and driver"],
+  "goodToKnow": [
+    "Wear shoes with good grip. The path to the waterfalls crosses wet rocks and has short sections of scrambling. Sandals are not suitable.",
+    "Travel on a Monday if you want to see the Tnine Ourika souk.",
+    "After heavy rain or snowmelt the river rises quickly. Your guide may shorten the hike on those days for safety.",
+    "The valley is 5 to 10 degrees cooler than Marrakech, which makes it a good escape in summer.",
+    "Bring cash in dirhams for lunch and tips. Restaurants in Setti Fatma rarely take cards."
+  ],
+  "seo": {
+    "title": "Ourika Valley Day Trip from Marrakech | Setti Fatma Waterfalls",
+    "metaDescription": "Ourika Valley day trip from Marrakech: guided hike to the Setti Fatma waterfalls, argan cooperative, Monday souk and riverside lunch. Hotel pickup, from EUR 30.",
+    "lead": "The closest Atlas mountain day trip from Marrakech: drive up the Ourika Valley, visit an argan cooperative, hike to the Setti Fatma waterfalls with a local guide and have lunch beside the river.",
+    "primaryKeyword": "ourika valley day trip from marrakech",
+    "secondaryKeywords": [
+      "ourika valley marrakech",
+      "marrakech to ourika valley",
+      "setti fatma waterfalls"
+    ],
+    "price": {
+      "label": "From EUR 30 per person",
+      "note": "Includes hotel pickup and drop-off, round-trip air-conditioned transport, a local guide for the waterfall hike, the argan cooperative stop and bottled water. Lunch is paid on site."
+    },
+    "imageAlt": "Ourika River running past riverside restaurants in Setti Fatma in the High Atlas",
+    "highlights": [
+      "Hike with a local guide to the Setti Fatma waterfalls",
+      "Lunch at a riverside restaurant with tables over the water",
+      "See argan oil made by hand at a women's cooperative",
+      "Monday departures stop at the weekly souk in Tnine Ourika",
+      "Views of terraced fields and earth-built villages along the valley",
+      "Only about 1 hour from Marrakech each way"
+    ],
+    "faqs": [
+      {
+        "question": "How far is the Ourika Valley from Marrakech?",
+        "answer": "Setti Fatma, at the end of the Ourika Valley road, is about 65 km from Marrakech. The drive takes 1 to 1.5 hours each way, and the full day lasts about 8 hours."
+      },
+      {
+        "question": "How difficult is the Setti Fatma waterfall hike?",
+        "answer": "Reaching the first waterfall takes 45 minutes to an hour each way on a rocky path, with a few short sections of scrambling. Most reasonably fit travelers manage it. The higher falls need more climbing and are optional."
+      },
+      {
+        "question": "Which day is the Ourika market?",
+        "answer": "The weekly souk at Tnine Ourika is held on Mondays. Book a Monday departure if you want to include it."
+      },
+      {
+        "question": "Is the Ourika Valley good for children?",
+        "answer": "Yes, for children who are steady on their feet. The guide can stop at the lower falls, and the riverside lunch spots are popular with families."
+      },
+      {
+        "question": "Ourika Valley or Imlil: which should I choose?",
+        "answer": "Ourika is shorter, closer and centered on waterfalls and a riverside lunch. Imlil is higher, quieter and gives you a longer mountain walk with views toward Toubkal. Choose Ourika for an easier day, Imlil for more hiking."
+      }
+    ]
+  },
   "jsonLd": {
-    "name": "Ourika Valley Discovery",
-    "description": "Discover the lush Ourika Valley, visit traditional Berber markets, and hike to stunning waterfalls."
+    "name": "Ourika Valley Day Trip from Marrakech",
+    "description": "Day trip from Marrakech to the Ourika Valley with hotel pickup, an argan cooperative stop, a guided hike to the Setti Fatma waterfalls and time for a riverside lunch.",
+    "price": 30,
+    "currency": "EUR"
   }
 }

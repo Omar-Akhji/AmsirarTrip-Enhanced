@@ -4,13 +4,14 @@ interface Props {
   mainBrand: string;
   intro: string;
   details: string;
-  sidebarItems: string[];
+  sidebarItems: readonly string[];
   conclusion: string;
   ctaTitle: string;
   ctaDescription: string;
-  ctaPoint01: string;
-  ctaPoint02: string;
-  ctaPoint03: string;
+  ctaPoints?: readonly string[] | undefined;
+  ctaPoint01?: string | undefined;
+  ctaPoint02?: string | undefined;
+  ctaPoint03?: string | undefined;
 }
 
 const {
@@ -22,41 +23,57 @@ const {
   conclusion,
   ctaTitle,
   ctaDescription,
+  ctaPoints,
   ctaPoint01,
   ctaPoint02,
   ctaPoint03,
 } = Astro.props;
+
+const points =
+  ctaPoints && ctaPoints.length > 0 ?
+    ctaPoints
+  : [ctaPoint01, ctaPoint02, ctaPoint03].filter(
+      (p): p is string => typeof p === "string" && p.length > 0,
+    );
 ---
 
-<aside class="space-y-6 self-start lg:sticky lg:top-24">
+<aside
+  aria-label={sidebarTitle}
+  class="space-y-6 self-start lg:sticky lg:top-24"
+>
   <div
     class="inline-full"
     data-animate="creative-slide-left"
     data-delay="150"
   >
-    <div class="overflow-hidden rounded-3xl bg-slate-950 text-white shadow-xl">
-      <div class="p-8">
-        <p class="text-center text-xs tracking-[0.45em] text-orange-300 uppercase">
-          {sidebarTitle}
-        </p>
-        <h3 class="mbs-2 text-center text-2xl font-semibold">{mainBrand}</h3>
+    <div class="overflow-hidden rounded-2xl bg-slate-950 text-white shadow-xl">
+      <div class="p-6 sm:p-8">
+        <hgroup>
+          <p class="font-mono text-xs font-semibold tracking-[0.16em] text-orange-400 uppercase">
+            [{sidebarTitle}]
+          </p>
+          <h3 class="mbs-2 text-xl sm:text-2xl font-bold tracking-tight text-white">{mainBrand}</h3>
+        </hgroup>
         <div
           aria-hidden="true"
-          class="my-4 border-t border-slate-700"
+          class="my-4 border-t border-slate-800"
         ></div>
-        <p class="mbs-2 text-sm text-slate-200">{intro}</p>
-        <p class="mbs-4 text-sm text-slate-200">{details}</p>
-        <ul class="mbs-4 grid gap-3 text-sm text-slate-100">
+        <p class="mbs-2 font-mono text-xs sm:text-sm leading-relaxed text-slate-300">{intro}</p>
+        <p class="mbs-4 font-mono text-xs sm:text-sm leading-relaxed text-slate-300">{details}</p>
+        <ul
+          role="list"
+          class="mbs-4 grid gap-3"
+        >
           {sidebarItems.map((item, index) => (
-            <li class="grid grid-cols-[40px_1fr] items-center gap-3">
-              <span class="inline-flex size-5 items-center justify-center justify-self-end rounded-full bg-orange-500 text-xs font-semibold text-white">
+            <li class="flex items-start gap-3">
+              <span class="inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-orange-500/20 text-orange-400 font-mono text-xs font-bold">
                 {index + 1}
               </span>
-              <p class="text-sm leading-relaxed">{item}</p>
+              <p class="font-mono text-xs sm:text-sm leading-relaxed text-slate-200">{item}</p>
             </li>
           ))}
         </ul>
-        <p class="mbs-4 text-sm text-slate-200">{conclusion}</p>
+        <p class="mbs-4 font-mono text-xs text-slate-400 leading-relaxed">{conclusion}</p>
       </div>
     </div>
   </div>
@@ -66,22 +83,19 @@ const {
     data-animate="creative-slide-left"
     data-delay="300"
   >
-    <div class="rounded-3xl border border-dashed border-slate-200 bg-white p-6 shadow-xs">
-      <h4 class="text-lg font-semibold text-slate-900">{ctaTitle}</h4>
-      <p class="mbs-2 text-sm text-slate-500">{ctaDescription}</p>
-      <ul class="m-0 mbs-4 grid list-none gap-3 p-0 text-sm text-slate-600">
-        <li class="grid grid-cols-[40px_1fr] items-center gap-3">
-          <span class="size-2 justify-self-end rounded-full bg-orange-500"></span>
-          <p>{ctaPoint01}</p>
-        </li>
-        <li class="grid grid-cols-[40px_1fr] items-center gap-3">
-          <span class="size-2 justify-self-end rounded-full bg-orange-500"></span>
-          <p>{ctaPoint02}</p>
-        </li>
-        <li class="grid grid-cols-[40px_1fr] items-center gap-3">
-          <span class="size-2 justify-self-end rounded-full bg-orange-500"></span>
-          <p>{ctaPoint03}</p>
-        </li>
+    <div class="rounded-2xl border border-dashed border-stone-200 bg-white p-6 shadow-2xs">
+      <h3 class="text-base font-bold text-stone-900 tracking-tight">{ctaTitle}</h3>
+      <p class="mbs-2 font-mono text-xs text-stone-600 leading-relaxed">{ctaDescription}</p>
+      <ul
+        role="list"
+        class="m-0 mbs-4 grid list-none gap-3 p-0 font-mono text-xs text-stone-700"
+      >
+        {points.map((point) => (
+          <li class="flex items-start gap-3">
+            <span class="mbs-1 size-2 shrink-0 rounded-full bg-orange-600"></span>
+            <p>{point}</p>
+          </li>
+        ))}
       </ul>
     </div>
   </div>

@@ -1,8 +1,1264 @@
 ---
-import LegalLayout from "./LegalLayout.astro";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import headerImg from "@/assets/images/Header/header-2.webp";
+import { useTranslations } from "@/i18n/utils";
+import { PHONE_DISPLAY, PHONE_LINK, WHATSAPP_LINK } from "@/lib/constants/contact";
+import PageHeader from "@/shared/layout/PageHeader.astro";
+import {
+  Calendar,
+  CircleCheck,
+  Compass,
+  Cookie,
+  FileText,
+  Mail,
+  MapPinned,
+  MessageCircle,
+  Phone,
+  Printer,
+  Scale,
+  ShieldCheck,
+  Sparkles,
+} from "@lucide/astro";
+
+const locale = Astro.currentLocale || "en";
+const t = useTranslations(locale);
+
+interface CookieRow {
+  name: string;
+  provider: string;
+  category: string;
+  categoryClass: string;
+  purpose: string;
+  lifespan: string;
+}
+
+interface PrivacyCopy {
+  title: string;
+  subtitle: string;
+  lastUpdated: string;
+  badgeDoc: string;
+  badgeStatus: string;
+  badgeJurisdiction: string;
+  summaryTitle: string;
+  summarySubtitle: string;
+  summaryCards: { title: string; description: string }[];
+  tocTitle: string;
+  printLabel: string;
+  agencyCard: { title: string; badge: string; hours: string; chatCta: string };
+  cookieCta: { title: string; desc: string; buttonLabel: string };
+  cookieTable: {
+    title: string;
+    subtitle: string;
+    colName: string;
+    colProvider: string;
+    colCategory: string;
+    colPurpose: string;
+    colLifespan: string;
+    rows: CookieRow[];
+  };
+  sections: {
+    id: string;
+    num: string;
+    title: string;
+    paragraphs: string[];
+    callout?: { title: string; desc: string };
+  }[];
+}
+
+const contentByLocale: Record<string, PrivacyCopy> = {
+  en: {
+    title: "Privacy & Cookie Policy",
+    subtitle:
+      "Clear commitment to your personal data privacy, transparent cookie governance, and traveler rights across Morocco.",
+    lastUpdated: "Last updated: January 2026",
+    badgeDoc: "Data Protection Charter",
+    badgeStatus: "GDPR & CNDP Enforced",
+    badgeJurisdiction: "Kingdom of Morocco & EU",
+    summaryTitle: "Privacy Safeguards at a Glance",
+    summarySubtitle:
+      "Key traveler protections and transparent data governance summarized in plain language before your Moroccan expedition.",
+    summaryCards: [
+      {
+        title: "Zero Data Selling",
+        description:
+          "We never monetize, rent, or trade your personal records. Data is processed strictly for authentic travel operations.",
+      },
+      {
+        title: "GDPR & Moroccan Law",
+        description:
+          "Fully aligned with EU Regulation 2016/679 and Moroccan Personal Data Protection Law No. 09-08 (CNDP).",
+      },
+      {
+        title: "TLS 1.3 & CSP Shield",
+        description:
+          "Bank-grade cryptographic transport encryption with strict Content Security Policy guardrails protecting every interaction.",
+      },
+      {
+        title: "Instant Cookie Control",
+        description:
+          "Granular consent preferences with instant revocation. Non-essential cookies require your explicit prior opt-in.",
+      },
+    ],
+    tocTitle: "Document Contents",
+    printLabel: "Print / Save as PDF",
+    agencyCard: {
+      title: "Amsirar Trip SARL",
+      badge: "Licensed Moroccan Tour Agency",
+      hours: "Customer support available 7 days a week",
+      chatCta: "Chat on WhatsApp",
+    },
+    cookieCta: {
+      title: "Interactive Cookie Preferences",
+      desc: "Customize your tracking consent choices at any time. Essential cookies remain active to provide core booking capabilities.",
+      buttonLabel: "Manage Cookie Preferences",
+    },
+    cookieTable: {
+      title: "Official Cookie & Token Inventory",
+      subtitle:
+        "Full disclosure of client-side cookies and identifiers utilized across our digital platform:",
+      colName: "Cookie / Identifier",
+      colProvider: "Provider",
+      colCategory: "Category",
+      colPurpose: "Operational Purpose",
+      colLifespan: "Lifespan",
+      rows: [
+        {
+          name: "amsirar_cookie_consent",
+          provider: "Amsirar Trip (First-party)",
+          category: "Strictly Necessary",
+          categoryClass: "bg-emerald-500/10 text-emerald-800 border-emerald-500/30",
+          purpose: "Stores your verified cookie consent selections across browsing sessions.",
+          lifespan: "1 Year",
+        },
+        {
+          name: "app-locale / astro-locale",
+          provider: "Amsirar Trip (First-party)",
+          category: "Strictly Necessary",
+          categoryClass: "bg-emerald-500/10 text-emerald-800 border-emerald-500/30",
+          purpose: "Preserves your chosen language (English, French, Spanish, German).",
+          lifespan: "1 Year",
+        },
+        {
+          name: "CSRF & Security Tokens",
+          provider: "Amsirar Trip / Hostinger",
+          category: "Strictly Necessary",
+          categoryClass: "bg-emerald-500/10 text-emerald-800 border-emerald-500/30",
+          purpose: "Guards booking forms and inquiries against bot attacks and cross-site forgery.",
+          lifespan: "Session",
+        },
+        {
+          name: "_ga, _ga_*",
+          provider: "Google Analytics (Third-party)",
+          category: "Analytics & Performance",
+          categoryClass: "bg-amber-500/10 text-amber-800 border-amber-500/30",
+          purpose: "Anonymous aggregated audience metrics, route popularity, and load speeds.",
+          lifespan: "Up to 2 Years",
+        },
+        {
+          name: "NID, CONSENT",
+          provider: "Google Maps (Third-party)",
+          category: "Functional & Maps",
+          categoryClass: "bg-blue-500/10 text-blue-800 border-blue-500/30",
+          purpose: "Powers the optional interactive map displaying our Marrakech office location.",
+          lifespan: "Up to 6 Months",
+        },
+      ],
+    },
+    sections: [
+      {
+        id: "collection",
+        num: "01",
+        title: "Information We Collect",
+        paragraphs: [
+          "We collect personal information that you provide directly to us when planning or reserving private desert tours, imperial city excursions, or tailor-made Moroccan expeditions.",
+          "This includes your full name, email address, telephone / WhatsApp number, country of residence, party size, travel dates, and itinerary customizations. When interacting with our website, standard technical diagnostics such as browser type, device category, and IP address are collected securely via encrypted server logs.",
+          "We never collect sensitive personal categories (such as racial background, political opinions, or religious beliefs) without explicit operational necessity or your prior written consent.",
+        ],
+      },
+      {
+        id: "usage",
+        num: "02",
+        title: "How We Use Your Information",
+        paragraphs: [
+          "Your data is processed strictly in accordance with international data protection principles (GDPR) and Moroccan Law No. 09-08 promulgated by the CNDP (Commission Nationale de contrôle de la protection des Données à caractère Personnel).",
+          "Primary operational purposes include securing private transport permits, scheduling accredited Berber desert drivers, booking boutique riads, answering customer inquiries, and issuing official reservation vouchers.",
+          "We never sell, lease, or distribute your personal details to advertising networks or third-party data brokers.",
+        ],
+      },
+      {
+        id: "cookies",
+        num: "03",
+        title: "Comprehensive Cookie Policy",
+        paragraphs: [
+          "Cookies are compact text files stored on your computer or mobile device when you browse websites. They enable our platform to remember your navigation choices and ensure secure operation.",
+          "Under the EU ePrivacy Directive and GDPR Art. 6(1)(f), strictly necessary cookies are placed to deliver core security and navigation features. Optional analytics cookies are placed exclusively upon your freely given, informed, and revocable consent (Art. 6(1)(a)).",
+        ],
+        callout: {
+          title: "Full Visitor Autonomy",
+          desc: "You can modify or withdraw your cookie permissions at any time without impacting your ability to browse our tours or contact our team.",
+        },
+      },
+      {
+        id: "inventory",
+        num: "04",
+        title: "Cookie Inventory & Categories",
+        paragraphs: [
+          "We maintain complete transparency regarding every tracking identifier and cookie stored on your browser. Review the active cookie matrix below for technical specifics, providers, and expiration durations.",
+        ],
+      },
+      {
+        id: "security",
+        num: "05",
+        title: "Data Security & Technical Safeguards",
+        paragraphs: [
+          "We implement rigorous administrative, physical, and digital safeguards to defend your personal information against accidental loss, unauthorized access, alteration, and disclosure.",
+          "All web traffic is encrypted end-to-end using modern TLS 1.3 cryptographic protocols with strict HTTPS enforcement. Strict Content Security Policy (CSP) headers prevent cross-site scripting (XSS) and code injection vulnerabilities.",
+          "Access to guest reservation details is strictly compartmentalized to authorized logistics coordinators managing your private Moroccan itinerary.",
+        ],
+      },
+      {
+        id: "providers",
+        num: "06",
+        title: "Third-Party Service Processors",
+        paragraphs: [
+          "To deliver dependable travel planning, we collaborate with select infrastructure partners adhering to strict confidentiality and international privacy frameworks:",
+          "Hostinger Cloud Infrastructure for secure European VPS hosting; Google Workspace / Gmail SMTP for encrypted reservation confirmations; and Google Maps API for optional interactive location maps (initiated only upon visitor consent).",
+        ],
+      },
+      {
+        id: "rights",
+        num: "07",
+        title: "Your Rights Under GDPR & Moroccan Law",
+        paragraphs: [
+          "Regardless of your location, you hold comprehensive rights regarding your personal records under GDPR and Moroccan Law No. 09-08:",
+          "Right of Access: Request a verified copy of your personal data. Right to Rectification: Correct inaccurate or outdated details. Right to Erasure: Request full deletion of your profile once contractual obligations conclude. Right to Restrict Processing & Data Portability: Limit processing or export records in standard formats.",
+        ],
+      },
+      {
+        id: "contact",
+        num: "08",
+        title: "Data Protection Team & Contact",
+        paragraphs: [
+          "If you have inquiries regarding this Privacy Policy, wish to exercise your data rights, or need copies of your booking data, reach out directly to our Marrakech headquarters:",
+        ],
+      },
+    ],
+  },
+  fr: {
+    title: "Politique de Confidentialité et Cookies",
+    subtitle:
+      "Engagement clair pour la protection de vos données personnelles, gouvernance transparente des cookies et droits des voyageurs au Maroc.",
+    lastUpdated: "Dernière mise à jour : Janvier 2026",
+    badgeDoc: "Charte de Protection des Données",
+    badgeStatus: "Conforme RGPD & CNDP",
+    badgeJurisdiction: "Royaume du Maroc & UE",
+    summaryTitle: "Garanties de Confidentialité en un Coup d'Œil",
+    summarySubtitle:
+      "Protections essentielles des voyageurs et gouvernance transparente des données résumées en toute clarté avant votre voyage.",
+    summaryCards: [
+      {
+        title: "Zéro Vente de Données",
+        description:
+          "Nous ne monétisons, ne louons et ne cédons jamais vos données personnelles. Elles servent exclusivement à l'organisation de vos voyages.",
+      },
+      {
+        title: "Conformité RGPD & CNDP",
+        description:
+          "Parfaitement aligné avec le Règlement européen 2016/679 et la Loi marocaine n° 09-08 relative à la protection des données.",
+      },
+      {
+        title: "Chiffrement TLS 1.3 & CSP",
+        description:
+          "Chiffrement cryptographique de pointe et politique de sécurité du contenu stricte protégeant chaque interaction sur notre plateforme.",
+      },
+      {
+        title: "Contrôle Immédiat des Cookies",
+        description:
+          "Gestion granulaire des préférences avec révocation instantanée. Les cookies non essentiels requièrent votre consentement explicite préalable.",
+      },
+    ],
+    tocTitle: "Sommaire du Document",
+    printLabel: "Imprimer / Enregistrer en PDF",
+    agencyCard: {
+      title: "Amsirar Trip SARL",
+      badge: "Agence Touristique Agréée au Maroc",
+      hours: "Support client disponible 7j/7",
+      chatCta: "Discussion sur WhatsApp",
+    },
+    cookieCta: {
+      title: "Préférences Interactives de Cookies",
+      desc: "Personnalisez vos choix de consentement à tout instant. Les cookies nécessaires restent actifs pour garantir les réservations.",
+      buttonLabel: "Gérer mes Préférences Cookies",
+    },
+    cookieTable: {
+      title: "Inventaire Officiel des Cookies et Jetons",
+      subtitle:
+        "Transparence totale sur les cookies et identifiants techniques utilisés sur notre plateforme :",
+      colName: "Cookie / Identifiant",
+      colProvider: "Fournisseur",
+      colCategory: "Catégorie",
+      colPurpose: "Finalité Opérationnelle",
+      colLifespan: "Durée",
+      rows: [
+        {
+          name: "amsirar_cookie_consent",
+          provider: "Amsirar Trip (Interne)",
+          category: "Strictement Nécessaire",
+          categoryClass: "bg-emerald-500/10 text-emerald-800 border-emerald-500/30",
+          purpose:
+            "Enregistre vos choix de consentement relatifs aux cookies d'une session à l'autre.",
+          lifespan: "1 An",
+        },
+        {
+          name: "app-locale / astro-locale",
+          provider: "Amsirar Trip (Interne)",
+          category: "Strictement Nécessaire",
+          categoryClass: "bg-emerald-500/10 text-emerald-800 border-emerald-500/30",
+          purpose: "Mémorise votre langue sélectionnée (français, anglais, espagnol, allemand).",
+          lifespan: "1 An",
+        },
+        {
+          name: "Jetons CSRF & Sécurité",
+          provider: "Amsirar Trip / Hostinger",
+          category: "Strictement Nécessaire",
+          categoryClass: "bg-emerald-500/10 text-emerald-800 border-emerald-500/30",
+          purpose:
+            "Protège les formulaires de demande et de réservation contre les attaques automatisées.",
+          lifespan: "Session",
+        },
+        {
+          name: "_ga, _ga_*",
+          provider: "Google Analytics (Tiers)",
+          category: "Analyse & Performance",
+          categoryClass: "bg-amber-500/10 text-amber-800 border-amber-500/30",
+          purpose:
+            "Mesure anonyme et agrégée de la fréquentation, des circuits prisés et des temps de chargement.",
+          lifespan: "Jusqu'à 2 Ans",
+        },
+        {
+          name: "NID, CONSENT",
+          provider: "Google Maps (Tiers)",
+          category: "Fonctionnalité & Carte",
+          categoryClass: "bg-blue-500/10 text-blue-800 border-blue-500/30",
+          purpose: "Permet l'affichage interactif de l'emplacement de notre bureau à Marrakech.",
+          lifespan: "Jusqu'à 6 Mois",
+        },
+      ],
+    },
+    sections: [
+      {
+        id: "collection",
+        num: "01",
+        title: "Données Personnelles Collectées",
+        paragraphs: [
+          "Nous recueillons les informations personnelles que vous nous transmettez directement lors de la préparation ou de la réservation de circuits dans le désert, d'excursions culturelles ou d'itinéraires sur mesure au Maroc.",
+          "Ces éléments comprennent votre nom complet, adresse e-mail, numéro de téléphone / WhatsApp, pays de résidence, dates de séjour et demandes personnalisées. Lors de votre visite, des données techniques standard (type de navigateur, appareil, adresse IP) sont collectées via des journaux de serveurs sécurisés.",
+          "Nous ne collectons aucune donnée personnelle sensible (origines, convictions religieuses ou opinions politiques) sans impératif opérationnel et consentement explicite préalable.",
+        ],
+      },
+      {
+        id: "usage",
+        num: "02",
+        title: "Utilisation de vos Données",
+        paragraphs: [
+          "Vos données sont traitées dans le respect le plus strict du RGPD européen et de la Loi marocaine n° 09-08 régie par la CNDP (Commission Nationale de contrôle de la protection des Données à caractère Personnel).",
+          "Les finalités principales incluent la délivrance des autorisations de transport touristique, la planification des chauffeurs certifiés, la réservation des riads et bivouacs, et la confirmation officielle de vos voyages.",
+          "Nous ne vendons ni ne louons jamais vos données à des fins publicitaires ou à des courtiers d'informations.",
+        ],
+      },
+      {
+        id: "cookies",
+        num: "03",
+        title: "Politique Complète Relative aux Cookies",
+        paragraphs: [
+          "Les cookies sont de petits fichiers texte déposés sur votre terminal lors de la consultation de nos pages web. Ils permettent d'enregistrer vos paramètres de navigation et d'assurer une expérience fluide.",
+          "Conformément à la directive ePrivacy et au RGPD (Art. 6(1)(f)), les cookies strictement nécessaires sont activés pour assurer les fonctions fondamentales. Les cookies d'analyse optionnels ne sont déployés qu'avec votre accord explicite préalable (Art. 6(1)(a)).",
+        ],
+        callout: {
+          title: "Autonomie Totale du Visiteur",
+          desc: "Vous pouvez modifier ou retirer votre consentement à tout moment sans restreindre votre accès aux descriptifs de circuits ou à notre formulaire de contact.",
+        },
+      },
+      {
+        id: "inventory",
+        num: "04",
+        title: "Inventaire et Catégories de Cookies",
+        paragraphs: [
+          "Nous appliquons une politique de transparence absolue quant aux cookies actifs sur votre navigateur. Consultez le tableau ci-dessous détaillant chaque identifiant technique, son émetteur et sa durée.",
+        ],
+      },
+      {
+        id: "security",
+        num: "05",
+        title: "Sécurité des Données et Chiffrement",
+        paragraphs: [
+          "Nous déployons des mesures organisationnelles et technologiques de pointe pour préserver vos données contre toute perte fortuite, altération, intrusion ou divulgation non autorisée.",
+          "Tous les flux web sont sécurisés de bout en bout grâce au protocole TLS 1.3 avec redirection HTTPS systématique. Les en-têtes de sécurité CSP (Content Security Policy) neutralisent les failles d'injection de scripts.",
+          "L'accès aux données des dossiers de voyage est réservé exclusivement aux coordinateurs logistiques dédiés à votre séjour marocain.",
+        ],
+      },
+      {
+        id: "providers",
+        num: "06",
+        title: "Prestataires et Sous-Traitants Tiers",
+        paragraphs: [
+          "Afin d'assurer une haute fiabilité opérationnelle, nous faisons appel à des prestataires d'infrastructure réputés appliquant des normes rigoureuses de confidentialité :",
+          "Hostinger Cloud pour l'hébergement VPS sur serveurs européens sécurisés ; Google Workspace pour la messagerie transactionnelle chiffrée ; et Google Maps pour la cartographie interactive optionnelle.",
+        ],
+      },
+      {
+        id: "rights",
+        num: "07",
+        title: "Vos Droits selon le RGPD et la Loi Marocaine",
+        paragraphs: [
+          "Quel que soit votre pays d'origine, vous bénéficiez de droits étendus garantis par le RGPD et la loi marocaine n° 09-08 :",
+          "Droit d'accès à vos informations, droit de rectification de données erronées, droit à l'effacement définitif à la clôture des prestations, et droit d'opposition ou de retrait de votre consentement.",
+        ],
+      },
+      {
+        id: "contact",
+        num: "08",
+        title: "Délégué à la Protection et Contact Direct",
+        paragraphs: [
+          "Pour toute question relative à cette politique de confidentialité ou pour exercer vos droits d'accès, contactez notre équipe à Marrakech :",
+        ],
+      },
+    ],
+  },
+  es: {
+    title: "Política de Privacidad y Cookies",
+    subtitle:
+      "Compromiso transparente con la privacidad de sus datos personales, gestión clara de cookies y derechos del viajero en Marruecos.",
+    lastUpdated: "Última actualización: Enero 2026",
+    badgeDoc: "Carta de Protección de Datos",
+    badgeStatus: "Conforme a RGPD y CNDP",
+    badgeJurisdiction: "Reino de Marruecos y UE",
+    summaryTitle: "Garantías de Privacidad en un Vistazo",
+    summarySubtitle:
+      "Protecciones fundamentales para el viajero y gobernanza transparente resumidas con claridad antes de su expedición.",
+    summaryCards: [
+      {
+        title: "Cero Venta de Datos",
+        description:
+          "Nunca comercializamos, alquilamos ni cedemos su información personal. Se procesa estrictamente para sus servicios de viaje.",
+      },
+      {
+        title: "Cumplimiento RGPD y CNDP",
+        description:
+          "Totalmente alineado con el Reglamento UE 2016/679 y la Ley marroquí n.º 09-08 de Protección de Datos Personales.",
+      },
+      {
+        title: "Cifrado TLS 1.3 y CSP",
+        description:
+          "Cifrado criptográfico en tránsito de nivel bancario y políticas de seguridad de contenido estrictas para proteger cada interacción.",
+      },
+      {
+        title: "Control Rápido de Cookies",
+        description:
+          "Preferencias granulares con revocación instantánea. Las cookies opcionales requieren siempre su consentimiento previo informado.",
+      },
+    ],
+    tocTitle: "Contenido del Documento",
+    printLabel: "Imprimir / Guardar como PDF",
+    agencyCard: {
+      title: "Amsirar Trip SARL",
+      badge: "Agencia de Turismo Acreditada en Marruecos",
+      hours: "Atención al cliente disponible 7 días a la semana",
+      chatCta: "Conversar por WhatsApp",
+    },
+    cookieCta: {
+      title: "Preferencias Interactivas de Cookies",
+      desc: "Personalice sus permisos de cookies en cualquier momento. Las cookies indispensables permanecen activas para garantizar la reserva.",
+      buttonLabel: "Gestionar Preferencias de Cookies",
+    },
+    cookieTable: {
+      title: "Inventario Oficial de Cookies y Tokens",
+      subtitle:
+        "Transparencia total sobre los identificadores técnicos y cookies utilizados en nuestra plataforma digital:",
+      colName: "Cookie / Identificador",
+      colProvider: "Proveedor",
+      colCategory: "Categoría",
+      colPurpose: "Finalidad Operativa",
+      colLifespan: "Duración",
+      rows: [
+        {
+          name: "amsirar_cookie_consent",
+          provider: "Amsirar Trip (Propia)",
+          category: "Estrictamente Necesaria",
+          categoryClass: "bg-emerald-500/10 text-emerald-800 border-emerald-500/30",
+          purpose:
+            "Almacena sus selecciones de consentimiento de cookies entre sesiones de navegación.",
+          lifespan: "1 Año",
+        },
+        {
+          name: "app-locale / astro-locale",
+          provider: "Amsirar Trip (Propia)",
+          category: "Estrictamente Necesaria",
+          categoryClass: "bg-emerald-500/10 text-emerald-800 border-emerald-500/30",
+          purpose: "Guarda el idioma elegido (español, inglés, francés, alemán).",
+          lifespan: "1 Año",
+        },
+        {
+          name: "Tokens CSRF y Seguridad",
+          provider: "Amsirar Trip / Hostinger",
+          category: "Estrictamente Necesaria",
+          categoryClass: "bg-emerald-500/10 text-emerald-800 border-emerald-500/30",
+          purpose: "Protege los formularios contra envíos fraudulentos y bots automatizados.",
+          lifespan: "Sesión",
+        },
+        {
+          name: "_ga, _ga_*",
+          provider: "Google Analytics (Terceros)",
+          category: "Análisis y Rendimiento",
+          categoryClass: "bg-amber-500/10 text-amber-800 border-amber-500/30",
+          purpose:
+            "Medición anónima agregada de visitantes, itinerarios populares y velocidad de carga.",
+          lifespan: "Hasta 2 Años",
+        },
+        {
+          name: "NID, CONSENT",
+          provider: "Google Maps (Terceros)",
+          category: "Funcionalidad y Mapa",
+          categoryClass: "bg-blue-500/10 text-blue-800 border-blue-500/30",
+          purpose:
+            "Permite mostrar el mapa interactivo de nuestra oficina en Marrakech bajo demanda.",
+          lifespan: "Hasta 6 Meses",
+        },
+      ],
+    },
+    sections: [
+      {
+        id: "collection",
+        num: "01",
+        title: "Información que Recopilamos",
+        paragraphs: [
+          "Recopilamos los datos personales que nos proporciona directamente al solicitar información, cotizaciones o reservas de excursiones privadas por Marruecos.",
+          "Esto incluye su nombre completo, correo electrónico, número de teléfono / WhatsApp, país de origen, fechas previstas y personalizaciones de ruta.",
+          "Nunca solicitamos datos especialmente sensibles sin su previo consentimiento explícito.",
+        ],
+      },
+      {
+        id: "usage",
+        num: "02",
+        title: "Uso de su Información",
+        paragraphs: [
+          "Sus datos se gestionan conforme al RGPD europeo y a la Ley marroquí n.º 09-08 regulada por la CNDP.",
+          "Los propósitos primordiales abarcan la tramitación de permisos de transporte, coordinación de chóferes en el Sahara, confirmación de riads y emisión de comprobantes oficiales.",
+          "No comercializamos ni traspasamos su información con agencias de marketing ni intermediarios de datos.",
+        ],
+      },
+      {
+        id: "cookies",
+        num: "03",
+        title: "Política Completa de Cookies",
+        paragraphs: [
+          "Las cookies son pequeños archivos de texto que se instalan en su navegador para optimizar el rendimiento y guardar sus elecciones de navegación.",
+          "Las cookies técnicas esenciales se cargan por necesidad contractual y de seguridad, mientras que las cookies analíticas requieren su consentimiento previo revocable.",
+        ],
+        callout: {
+          title: "Control Permanente del Viajero",
+          desc: "Puede revisar o revocar sus permisos de cookies cuando lo desee sin perder acceso a nuestras rutas ni al formulario de contacto.",
+        },
+      },
+      {
+        id: "inventory",
+        num: "04",
+        title: "Inventario y Categorías de Cookies",
+        paragraphs: [
+          "Ofrecemos máxima claridad sobre cada cookie utilizada en el sitio web. Consulte el listado técnico a continuación para conocer proveedores y tiempos de vigencia.",
+        ],
+      },
+      {
+        id: "security",
+        num: "05",
+        title: "Seguridad de Datos y Cifrado",
+        paragraphs: [
+          "Mantenemos estrictos estándares técnicos para proteger su privacidad frente a accesos no autorizados, pérdidas accidentales o alteraciones.",
+          "Toda la navegación está blindada mediante cifrado TLS 1.3 con soporte HTTPS obligatorio y cabeceras CSP.",
+          "El acceso a sus datos de viaje se limita exclusivamente al personal responsable de coordinar su itinerario privado.",
+        ],
+      },
+      {
+        id: "providers",
+        num: "06",
+        title: "Proveedores y Servicios Externos",
+        paragraphs: [
+          "Colaboramos exclusivamente con proveedores tecnológicos líderes que cumplen exigentes normativas internacionales de privacidad : Hostinger Cloud VPS para servidores en Europa, Google Workspace para correos transaccionales y Google Maps para mapas interactivos.",
+        ],
+      },
+      {
+        id: "rights",
+        num: "07",
+        title: "Sus Derechos Legales",
+        paragraphs: [
+          "Dispone de derechos plenos de acceso, rectificación, supresión de datos, limitación del tratamiento y revocación del consentimiento en todo momento.",
+        ],
+      },
+      {
+        id: "contact",
+        num: "08",
+        title: "Equipo de Protección y Contacto Directo",
+        paragraphs: [
+          "Para cualquier duda sobre el tratamiento de sus datos o para ejercer sus derechos, comuníquese con nuestra sede en Marrakech:",
+        ],
+      },
+    ],
+  },
+  de: {
+    title: "Datenschutzerklärung & Cookie-Richtlinie",
+    subtitle:
+      "Klares Bekenntnis zum Schutz Ihrer persönlichen Daten, transparente Cookie-Verwaltung und Reiserechte in Marokko.",
+    lastUpdated: "Zuletzt aktualisiert: Januar 2026",
+    badgeDoc: "Datenschutz-Charta",
+    badgeStatus: "DSGVO & CNDP-konform",
+    badgeJurisdiction: "Königreich Marokko & EU",
+    summaryTitle: "Datenschutzgarantien auf einen Blick",
+    summarySubtitle:
+      "Wesentliche Schutzrechte für Reisende und transparente Datenverwaltung verständlich zusammengefasst vor Ihrer Reise.",
+    summaryCards: [
+      {
+        title: "Kein Datenverkauf",
+        description:
+          "Wir verkaufen, vermieten oder handeln niemals mit Ihren persönlichen Daten. Daten werden ausschließlich für Ihre Reiseabwicklung verarbeitet.",
+      },
+      {
+        title: "DSGVO & Marokko Gesetz 09-08",
+        description:
+          "Vollständig konform mit der EU-Verordnung 2016/679 sowie dem marokkanischen Datenschutzgesetz Nr. 09-08 (CNDP).",
+      },
+      {
+        title: "TLS 1.3 & CSP-Schutz",
+        description:
+          "Vollständige Transportverschlüsselung und strikte Content Security Policy schützen jede Interaktion auf unserer Plattform.",
+      },
+      {
+        title: "Direkte Cookie-Kontrolle",
+        description:
+          "Granulare Einstellungen mit sofortiger Widerrufsmöglichkeit. Nicht notwendige Cookies erfordern Ihre ausdrückliche Zustimmung.",
+      },
+    ],
+    tocTitle: "Inhaltsverzeichnis",
+    printLabel: "Drucken / Als PDF speichern",
+    agencyCard: {
+      title: "Amsirar Trip SARL",
+      badge: "Lizenzierte marokkanische Reiseagentur",
+      hours: "Kundenservice an 7 Tagen pro Woche erreichbar",
+      chatCta: "WhatsApp-Chat starten",
+    },
+    cookieCta: {
+      title: "Interaktive Cookie-Einstellungen",
+      desc: "Passen Sie Ihre Einwilligungseinstellungen jederzeit an. Notwendige Cookies bleiben aktiv, um Basisfunktionen bereitzustellen.",
+      buttonLabel: "Cookie-Einstellungen öffnen",
+    },
+    cookieTable: {
+      title: "Offizielle Cookie- & Token-Übersicht",
+      subtitle:
+        "Vollständige Offenlegung aller clientseitigen Cookies und Identifikatoren auf unserer Website:",
+      colName: "Cookie / Kennung",
+      colProvider: "Anbieter",
+      colCategory: "Kategorie",
+      colPurpose: "Betriebszweck",
+      colLifespan: "Speicherdauer",
+      rows: [
+        {
+          name: "amsirar_cookie_consent",
+          provider: "Amsirar Trip (First-Party)",
+          category: "Technisch notwendig",
+          categoryClass: "bg-emerald-500/10 text-emerald-800 border-emerald-500/30",
+          purpose: "Speichert Ihre Cookie-Auswahl und Einstellungen für zukünftige Sitzungen.",
+          lifespan: "1 Jahr",
+        },
+        {
+          name: "app-locale / astro-locale",
+          provider: "Amsirar Trip (First-Party)",
+          category: "Technisch notwendig",
+          categoryClass: "bg-emerald-500/10 text-emerald-800 border-emerald-500/30",
+          purpose:
+            "Merkt sich Ihre ausgewählte Sprache (Deutsch, Englisch, Französisch, Spanisch).",
+          lifespan: "1 Jahr",
+        },
+        {
+          name: "Sicherheits- & CSRF-Token",
+          provider: "Amsirar Trip / Hostinger",
+          category: "Technisch notwendig",
+          categoryClass: "bg-emerald-500/10 text-emerald-800 border-emerald-500/30",
+          purpose: "Schützt Kontakt- und Buchungsformulare vor Bot-Angriffen und Missbrauch.",
+          lifespan: "Sitzung",
+        },
+        {
+          name: "_ga, _ga_*",
+          provider: "Google Analytics (Drittanbieter)",
+          category: "Analyse & Leistung",
+          categoryClass: "bg-amber-500/10 text-amber-800 border-amber-500/30",
+          purpose: "Anonyme aggregierte Nutzungsstatistiken, beliebte Touren und Ladezeiten.",
+          lifespan: "Bis zu 2 Jahre",
+        },
+        {
+          name: "NID, CONSENT",
+          provider: "Google Maps (Drittanbieter)",
+          category: "Funktion & Karten",
+          categoryClass: "bg-blue-500/10 text-blue-800 border-blue-500/30",
+          purpose: "Ermöglicht die interaktive Anzeige unseres Agenturstandorts in Marrakesch.",
+          lifespan: "Bis zu 6 Monate",
+        },
+      ],
+    },
+    sections: [
+      {
+        id: "collection",
+        num: "01",
+        title: "Von uns erfasste Daten",
+        paragraphs: [
+          "Wir erfassen personenbezogene Daten, die Sie uns direkt bei Reiseanfragen, Buchungen privater Touren oder bei der Kontaktaufnahme übermitteln.",
+          "Hierzu zählen Name, E-Mail-Adresse, Telefon- / WhatsApp-Nummer, Reisedaten, Teilnehmeranzahl und gewünschte Reiserouten durch Marokko.",
+          "Besondere Kategorien personenbezogener Daten werden ohne zwingende betriebliche Erforderlichkeit und ausdrückliche Einwilligung nicht erfasst.",
+        ],
+      },
+      {
+        id: "usage",
+        num: "02",
+        title: "Nutzung Ihrer Daten",
+        paragraphs: [
+          "Ihre Daten werden streng nach den Vorgaben der europäischen DSGVO und des marokkanischen Gesetzes Nr. 09-08 verarbeitet.",
+          "Zu den Kernzwecken gehören die Organisation behördlicher Fahrtgenehmigungen, Reservierungen lizenzierter Wüstenfahrer, Unterkünfte in Riads und Bereitstellung von Reiseunterlagen.",
+          "Wir verkaufen oder vermieten Ihre Daten keinesfalls zu Werbezwecken an Dritte.",
+        ],
+      },
+      {
+        id: "cookies",
+        num: "03",
+        title: "Umfassende Cookie-Richtlinie",
+        paragraphs: [
+          "Cookies sind kleine Textdateien, die beim Besuch unserer Website in Ihrem Browser gespeichert werden, um Navigationspräferenzen zu sichern.",
+          "Technisch notwendige Cookies werden zur Gewährleistung der Grundfunktionen gesetzt. Optionale Analyse-Cookies aktivieren wir nur nach Ihrer ausdrücklichen Einwilligung.",
+        ],
+        callout: {
+          title: "Volle Kontrolle für Reisende",
+          desc: "Sie können Ihre Cookie-Zustimmung jederzeit unkompliziert anpassen oder widerrufen, ohne Einschränkung beim Zugriff auf Reiseangebote.",
+        },
+      },
+      {
+        id: "inventory",
+        num: "04",
+        title: "Cookie-Übersicht & Zweck",
+        paragraphs: [
+          "Wir legen alle verwendeten Tracker transparent offen. Die nachfolgende Tabelle erläutert jeden Identifikator, den Anbieter und die jeweilige Speicherdauer.",
+        ],
+      },
+      {
+        id: "security",
+        num: "05",
+        title: "Datensicherheit & Verschlüsselung",
+        paragraphs: [
+          "Wir setzen moderne technische und organisatorische Sicherheitsmaßnahmen ein, um Ihre Daten vor Verlust und unbefugtem Zugriff zu schützen.",
+          "Der Datenverkehr wird durchgängig mit TLS 1.3 verschlüsselt. Strenge CSP-Header unterbinden Cross-Site-Scripting-Risiken.",
+          "Der Zugriff auf Buchungsunterlagen ist ausschließlich autorisierten Logistik-Koordinatoren für Ihre Reise vorbehalten.",
+        ],
+      },
+      {
+        id: "providers",
+        num: "06",
+        title: "Eingesetzte Drittanbieter",
+        paragraphs: [
+          "Für den zuverlässigen Betrieb arbeiten wir mit ausgewählten Dienstleistern zusammen: Hostinger Cloud für europäisches VPS-Hosting, Google Workspace für Buchungsbestätigungen und Google Maps für interaktive Standortkarten.",
+        ],
+      },
+      {
+        id: "rights",
+        num: "07",
+        title: "Ihre gesetzlichen Rechte",
+        paragraphs: [
+          "Ihnen stehen umfassende Rechte auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu.",
+        ],
+      },
+      {
+        id: "contact",
+        num: "08",
+        title: "Datenschutz-Team & Direkter Kontakt",
+        paragraphs: [
+          "Bei Anliegen zum Datenschutz oder zur Geltendmachung Ihrer Rechte erreichen Sie unser Büro in Marrakesch direkt über folgende Kanäle:",
+        ],
+      },
+    ],
+  },
+};
+
+const defaultCopy: PrivacyCopy = contentByLocale["en"] as PrivacyCopy;
+const current: PrivacyCopy = (contentByLocale[locale] ?? defaultCopy) as PrivacyCopy;
 ---
 
-<LegalLayout
-  docId="privacy-policy"
+<!-- 1. Hero Header with Authentic Moroccan Photography & Meta Badges -->
+<PageHeader
+  bgImage={headerImg}
+  breadcrumbs={[{ label: t("nav.home"), href: "/" }, { label: current.title }]}
+  gradientPosition="top-right"
   headingId="privacy-policy-heading"
-/>
+  subtitle={current.subtitle}
+  title={current.title}
+>
+  <!-- Authority & Meta Badges Row -->
+  <div class="flex flex-wrap items-center justify-center gap-2 pbs-2">
+    <div class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1 text-xs font-mono font-medium text-white backdrop-blur-md">
+      <span class="size-2 rounded-full bg-emerald-400 animate-pulse"></span>
+      <span>{current.badgeStatus}</span>
+    </div>
+    <div class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1 text-xs font-mono font-medium text-white/90 backdrop-blur-md">
+      <Calendar class="size-3.5 text-orange-300" />
+      <time datetime="2026-01">{current.lastUpdated}</time>
+    </div>
+    <div class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1 text-xs font-mono font-medium text-white/90 backdrop-blur-md">
+      <Scale class="size-3.5 text-orange-300" />
+      <span>{current.badgeJurisdiction}</span>
+    </div>
+  </div>
+</PageHeader>
+
+<div class="relative bg-stone-50/70 text-slate-900 transition-colors print:bg-white print:text-black">
+  <!-- Subtle background texture -->
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,oklch(56%_0.19_33deg/4%),transparent_50%)]"
+  ></div>
+
+  <!-- 2. Executive Summary Bento (Anti-Slop Transparency Cards) -->
+  <section
+    aria-labelledby="privacy-summary-heading"
+    class="relative z-10 border-be border-stone-200/80 bg-white py-12 lg:py-16"
+  >
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl">
+        <div class="flex items-center gap-2">
+          <Sparkles class="size-4 text-orange" />
+          <span class="font-mono text-xs font-semibold tracking-wider text-orange uppercase">
+            // {current.badgeDoc}
+          </span>
+        </div>
+        <h2
+          class="mbs-2 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl"
+          id="privacy-summary-heading"
+        >
+          {current.summaryTitle}
+        </h2>
+        <p class="mbs-2 text-sm text-slate-600 sm:text-base leading-relaxed">
+          {current.summarySubtitle}
+        </p>
+      </div>
+
+      <div class="mbs-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {current.summaryCards.map((card, idx) => (
+          <div class="group relative flex flex-col justify-between rounded-2xl border border-stone-200/90 bg-stone-50/60 p-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-orange/30 hover:bg-white hover:shadow-lg hover:shadow-orange/5">
+            <div>
+              <div class="flex items-center justify-between">
+                <span class="font-mono text-xs font-bold text-orange">0{idx + 1}</span>
+              </div>
+              <h3 class="mbs-3 text-base font-bold text-slate-900 group-hover:text-orange transition-colors">
+                {card.title}
+              </h3>
+              <p class="mbs-2 text-xs leading-relaxed text-slate-600 sm:text-sm">
+                {card.description}
+              </p>
+            </div>
+            <div class="mbs-4 pbs-3 border-bs border-stone-200/60 flex items-center gap-2 text-xs font-medium text-slate-500">
+              <CircleCheck class="size-4 text-emerald-600" />
+              <span>Verified Policy</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Two-Column Swiss Editorial Layout -->
+  <div class="relative z-10 mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-8 xl:gap-8">
+      <!-- STICKY SIDEBAR (TOC + AGENCY CARD + ACTIONS) -->
+      <aside class="lg:col-span-4 print:hidden">
+        <div class="sticky top-24 space-y-4">
+          <!-- Table of Contents Card -->
+          <nav
+            aria-label={current.tocTitle}
+            class="rounded-2xl border border-stone-200/90 bg-white p-4 sm:p-5 shadow-sm"
+          >
+            <div class="flex items-center justify-between border-be border-stone-200/80 pbe-3">
+              <div class="flex items-center gap-2">
+                <FileText class="size-4 text-orange" />
+                <h3 class="font-mono text-xs font-bold tracking-wider text-slate-900 uppercase">
+                  {current.tocTitle}
+                </h3>
+              </div>
+              <span class="rounded-full bg-stone-100 px-2 py-1 font-mono text-[11px] font-semibold text-slate-600">
+                0{current.sections.length}
+              </span>
+            </div>
+
+            <ul
+              class="mbs-3 flex flex-col gap-0.5 text-xs sm:text-sm font-medium"
+              id="privacy-toc-list"
+            >
+              {current.sections.map((sec, idx) => (
+                <li>
+                  <a
+                    class="group flex items-center rounded-full px-3 py-2 text-slate-600 transition-all duration-150 hover:bg-orange/5 hover:text-orange data-[active=true]:bg-orange/10 data-[active=true]:font-semibold data-[active=true]:text-orange"
+                    data-section-id={sec.id}
+                    href={`#${sec.id}`}
+                  >
+                    <span class="flex items-center gap-2 truncate min-w-0">
+                      <span class="shrink-0 whitespace-nowrap font-mono text-xs font-bold text-slate-400 group-hover:text-orange group-data-[active=true]:text-orange">
+                        {idx + 1}&nbsp;//
+                      </span>
+                      <span class="truncate">{sec.title}</span>
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+
+            <div class="mbs-3 pbs-3 border-bs border-stone-200/80">
+              <button
+                class="flex w-full min-h-10 cursor-pointer items-center justify-center gap-2 rounded-full border border-stone-200 bg-stone-50 px-4 py-2 text-xs font-semibold text-slate-700 transition-colors hover:bg-stone-100 active:scale-[0.98]"
+                id="privacy-print-btn"
+                type="button"
+              >
+                <Printer class="size-3.5 text-slate-500" />
+                <span>{current.printLabel}</span>
+              </button>
+            </div>
+          </nav>
+
+          <!-- Direct Agency Credentials & Support Card -->
+          <div class="overflow-hidden rounded-2xl border border-white/10 bg-slate-950 p-5 text-white shadow-xl ring-1 ring-white/10">
+            <div class="flex items-center gap-2">
+              <ShieldCheck class="size-4 text-orange-400" />
+              <span class="font-mono text-xs font-semibold tracking-wider text-orange-400 uppercase">
+                {current.agencyCard.badge}
+              </span>
+            </div>
+
+            <h4 class="mbs-2 text-base font-bold text-white sm:text-lg">
+              {current.agencyCard.title}
+            </h4>
+            <p class="mbs-1 text-xs text-zinc-400">{current.agencyCard.hours}</p>
+
+            <div class="mbs-4 flex flex-col gap-3 border-bs border-white/10 pbs-3 text-xs text-zinc-300">
+              <div class="flex items-start gap-3">
+                <MapPinned
+                  class="size-4 shrink-0 text-orange-400 mbs-0.5"
+                  stroke-width={2}
+                />
+                <span class="leading-relaxed">
+                  Imm. J appt N° 5, Résidence La Perle de l'Atlas, Marrakech, Morocco
+                </span>
+              </div>
+              <div class="flex items-center gap-3">
+                <Mail class="size-4 shrink-0 text-orange-400" />
+                <a
+                  class="hover:text-white transition-colors"
+                  href="mailto:amsirare@gmail.com"
+                >
+                  amsirare@gmail.com
+                </a>
+              </div>
+              <div class="flex items-center gap-3">
+                <Phone class="size-4 shrink-0 text-orange-400" />
+                <a
+                  class="hover:text-white transition-colors"
+                  href={PHONE_LINK}
+                >
+                  {PHONE_DISPLAY}
+                </a>
+              </div>
+            </div>
+
+            <div class="mbs-4 pbs-2">
+              <a
+                class="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-linear-to-br from-amber-orange to-orange px-4 py-3 font-mono text-xs font-semibold text-white shadow-md shadow-orange/20 transition-all duration-150 hover:brightness-105 active:scale-[0.98]"
+                href={WHATSAPP_LINK}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <MessageCircle class="size-4" />
+                <span>{current.agencyCard.chatCta}</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- MAIN CONTENT COLUMN -->
+      <article class="lg:col-span-8 space-y-6 print:w-full">
+        {current.sections.map((sec, idx) => (
+          <section
+            aria-labelledby={`heading-${sec.id}`}
+            class="relative rounded-2xl border border-stone-200/90 bg-white p-6 sm:p-8 shadow-sm transition-all duration-200 hover:border-stone-300 print:border-none print:shadow-none print:break-inside-avoid"
+            id={sec.id}
+          >
+            <!-- Section Header -->
+            <div class="border-be border-stone-200/80 pbe-4">
+              <div class="flex items-center gap-3">
+                <span class="flex shrink-0 whitespace-nowrap items-center justify-center rounded-full bg-orange/10 px-2 py-1 font-mono text-xs font-bold text-orange">
+                  {idx + 1}&nbsp;//
+                </span>
+                <h2
+                  class="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl"
+                  id={`heading-${sec.id}`}
+                >
+                  {sec.title}
+                </h2>
+              </div>
+            </div>
+
+            <!-- Paragraphs -->
+            <div class="mbs-6 flex flex-col gap-4 text-sm leading-relaxed text-slate-700 sm:text-base">
+              {sec.paragraphs.map((p) => (
+                <p>{p}</p>
+              ))}
+            </div>
+
+            <!-- Callout if defined -->
+            {sec.callout && (
+              <div class="mbs-6 rounded-2xl border border-orange/20 bg-orange/5 p-4 sm:p-5">
+                <div class="flex items-start gap-4">
+                  <div class="flex size-9 shrink-0 items-center justify-center rounded-full bg-orange/10 text-orange">
+                    <ShieldCheck class="size-4.5" />
+                  </div>
+                  <div>
+                    <h4 class="text-sm font-bold text-slate-900">{sec.callout.title}</h4>
+                    <p class="mbs-1 text-xs sm:text-sm text-slate-700 leading-relaxed">
+                      {sec.callout.desc}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            <!-- Interactive Cookie Preference CTA Box (Section 03) -->
+            {sec.id === "cookies" && (
+              <div class="mbs-6 rounded-2xl border border-stone-200 bg-stone-50/80 p-5 sm:p-6 transition-colors hover:border-orange/30">
+                <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                  <div class="flex items-start gap-4">
+                    <div class="flex size-9 shrink-0 items-center justify-center rounded-full bg-orange/10 text-orange">
+                      <Cookie class="size-4.5" />
+                    </div>
+                    <div>
+                      <h4 class="text-sm font-bold text-slate-900">{current.cookieCta.title}</h4>
+                      <p class="mbs-1 text-xs sm:text-sm text-slate-600 leading-relaxed max-w-md">
+                        {current.cookieCta.desc}
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    class="inline-flex min-h-11 cursor-pointer items-center justify-center whitespace-nowrap rounded-full bg-linear-to-br from-amber-orange to-orange px-6 py-3 text-xs font-semibold text-white shadow-md shadow-orange/20 transition-all hover:brightness-105 active:scale-[0.98]"
+                    data-open-cookie-settings
+                    type="button"
+                  >
+                    <span>{current.cookieCta.buttonLabel}</span>
+                  </button>
+                </div>
+              </div>
+            )}
+
+            <!-- Dedicated Cookie Inventory Table (Section 04) -->
+            {sec.id === "inventory" && (
+              <div class="mbs-6 flex flex-col gap-4 pbs-4 border-bs border-stone-200/80">
+                <div>
+                  <h3 class="text-base font-bold text-slate-900 sm:text-lg">
+                    {current.cookieTable.title}
+                  </h3>
+                  <p class="mbs-1 text-xs text-slate-600 sm:text-sm">
+                    {current.cookieTable.subtitle}
+                  </p>
+                </div>
+
+                <!-- Responsive Mobile Cards (< sm) -->
+                <div class="sm:hidden flex flex-col gap-3">
+                  {current.cookieTable.rows.map((row) => (
+                    <div class="rounded-xl border border-stone-200 bg-stone-50/60 p-4 transition-colors hover:border-orange/30 hover:bg-white">
+                      <div class="flex items-start justify-between gap-2 border-be border-stone-200/60 pbe-3">
+                        <span class="font-mono text-xs font-bold text-slate-900 break-all">
+                          {row.name}
+                        </span>
+                        <span
+                          class:list={[
+                            "inline-block shrink-0 rounded-full border px-2 py-1 font-mono text-[10px] font-bold",
+                            row.categoryClass,
+                          ]}
+                        >
+                          {row.category}
+                        </span>
+                      </div>
+                      <p class="mbs-3 text-xs leading-relaxed text-slate-600">{row.purpose}</p>
+                      <div class="mbs-3 flex items-center justify-between border-bs border-stone-200/60 pbs-2 text-[11px] text-slate-500">
+                        <span class="font-medium text-slate-700">{row.provider}</span>
+                        <span class="font-mono text-slate-500">{row.lifespan}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <!-- Balanced Desktop / Tablet Table (>= sm) -->
+                <div class="hidden sm:block overflow-x-auto rounded-xl border border-stone-200 bg-white shadow-xs">
+                  <table class="w-full text-left text-xs sm:text-sm">
+                    <caption class="sr-only">
+                      {locale === "fr" ?
+                        "Inventaire des cookies et traceurs utilisés"
+                      : locale === "es" ?
+                        "Inventario de cookies y rastreadores"
+                      : locale === "de" ?
+                        "Übersicht der verwendeten Cookies"
+                      : "Cookie and tracking technologies inventory"}
+                    </caption>
+                    <thead class="border-be border-stone-200 bg-stone-50 font-mono text-xs font-semibold text-slate-700">
+                      <tr>
+                        <th
+                          class="w-[20%] min-w-35 px-4 py-3"
+                          scope="col"
+                        >
+                          {current.cookieTable.colName}
+                        </th>
+                        <th
+                          class="w-[17%] min-w-31.25 px-4 py-3"
+                          scope="col"
+                        >
+                          {current.cookieTable.colProvider}
+                        </th>
+                        <th
+                          class="w-[16%] min-w-30 px-4 py-3"
+                          scope="col"
+                        >
+                          {current.cookieTable.colCategory}
+                        </th>
+                        <th
+                          class="w-[36%] min-w-60 px-4 py-3"
+                          scope="col"
+                        >
+                          {current.cookieTable.colPurpose}
+                        </th>
+                        <th
+                          class="w-[11%] min-w-20 px-4 py-3"
+                          scope="col"
+                        >
+                          {current.cookieTable.colLifespan}
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody class="divide-y divide-stone-100 text-slate-700">
+                      {current.cookieTable.rows.map((row) => (
+                        <tr class="transition-colors hover:bg-stone-50/60">
+                          <td class="px-4 py-3 font-mono text-xs font-bold text-slate-900 break-all sm:break-normal">
+                            {row.name}
+                          </td>
+                          <td class="px-4 py-3 text-xs text-slate-600">{row.provider}</td>
+                          <td class="px-4 py-3">
+                            <span
+                              class:list={[
+                                "inline-block rounded-full border px-2 py-1 font-mono text-[11px] font-bold whitespace-nowrap",
+                                row.categoryClass,
+                              ]}
+                            >
+                              {row.category}
+                            </span>
+                          </td>
+                          <td class="px-4 py-3 text-xs leading-relaxed text-slate-600">
+                            {row.purpose}
+                          </td>
+                          <td class="px-4 py-3 font-mono text-xs text-slate-500 whitespace-nowrap">
+                            {row.lifespan}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
+
+            <!-- Section 08: Direct Contact Action Grid -->
+            {sec.id === "contact" && (
+              <div class="mbs-8 pbs-6 border-bs border-stone-200/80">
+                <div class="grid grid-cols-1 gap-3 sm:grid-cols-3">
+                  <a
+                    class="group/contact flex items-center justify-center gap-3 rounded-full border border-stone-200 bg-stone-50 px-4 py-3 text-center transition-all duration-150 hover:border-orange hover:bg-orange/5 active:scale-[0.98]"
+                    href={PHONE_LINK}
+                  >
+                    <div class="flex size-8 shrink-0 items-center justify-center rounded-full bg-orange/10 text-orange group-hover/contact:bg-orange group-hover/contact:text-white transition-colors">
+                      <Phone class="size-4" />
+                    </div>
+                    <div class="text-left">
+                      <span class="block text-xs font-bold text-slate-900 group-hover/contact:text-orange transition-colors">
+                        Telephone
+                      </span>
+                      <span class="block font-mono text-[11px] text-slate-600">
+                        {PHONE_DISPLAY}
+                      </span>
+                    </div>
+                  </a>
+
+                  <a
+                    class="group/contact flex items-center justify-center gap-3 rounded-full border border-stone-200 bg-stone-50 px-4 py-3 text-center transition-all duration-150 hover:border-orange hover:bg-orange/5 active:scale-[0.98]"
+                    href="mailto:amsirare@gmail.com"
+                  >
+                    <div class="flex size-8 shrink-0 items-center justify-center rounded-full bg-orange/10 text-orange group-hover/contact:bg-orange group-hover/contact:text-white transition-colors">
+                      <Mail class="size-4" />
+                    </div>
+                    <div class="text-left">
+                      <span class="block text-xs font-bold text-slate-900 group-hover/contact:text-orange transition-colors">
+                        Email Us
+                      </span>
+                      <span class="block font-mono text-[11px] text-slate-600">
+                        amsirare@gmail.com
+                      </span>
+                    </div>
+                  </a>
+
+                  <a
+                    class="group/contact flex items-center justify-center gap-3 rounded-full border border-stone-200 bg-stone-50 px-4 py-3 text-center transition-all duration-150 hover:border-emerald-500 hover:bg-emerald-500/5 active:scale-[0.98]"
+                    href={WHATSAPP_LINK}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    <div class="flex size-8 shrink-0 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-600 group-hover/contact:bg-emerald-600 group-hover/contact:text-white transition-colors">
+                      <MessageCircle class="size-4" />
+                    </div>
+                    <div class="text-left">
+                      <span class="block text-xs font-bold text-slate-900 group-hover/contact:text-emerald-700 transition-colors">
+                        WhatsApp
+                      </span>
+                      <span class="block font-mono text-[11px] text-emerald-700">Chat Now</span>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            )}
+          </section>
+        ))}
+
+        <!-- Bottom Return & Reassurance Banner -->
+        <div class="rounded-2xl border border-stone-200 bg-linear-to-r from-stone-50 via-white to-stone-50 p-6 sm:p-8 text-center shadow-xs">
+          <Compass class="mx-auto size-8 text-orange" />
+          <h3 class="mt-3 text-lg font-bold text-slate-900">Explore Morocco with Absolute Trust</h3>
+          <p class="mx-auto mt-2 max-w-xl text-sm text-slate-600 leading-relaxed">
+            From the dunes of Merzouga to the vibrant souks of Marrakech, our accredited team is
+            committed to safeguarding your privacy at every stage of your travel adventure.
+          </p>
+          <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
+            <a
+              class="inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-full bg-linear-to-br from-amber-orange to-orange px-6 py-3 text-sm font-semibold text-white shadow-md shadow-orange/20 transition-all hover:brightness-105 active:scale-[0.98]"
+              href={getRelativeLocaleUrl(locale, "tours")}
+            >
+              <span>Explore Morocco Tours</span>
+            </a>
+            <a
+              class="inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-full border border-stone-300 bg-white px-6 py-3 text-sm font-medium text-slate-700 transition-colors hover:bg-stone-50 active:scale-[0.98]"
+              href={getRelativeLocaleUrl(locale, "contact")}
+            >
+              <span>Contact Our Team</span>
+            </a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</div>
+
+<!-- Interactive Table of Contents & Print Script -->
+<script src="../scripts/privacy-interactive.ts"></script>

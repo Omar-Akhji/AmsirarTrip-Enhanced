@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { FormState } from "@/lib/form-types";
-import { useTranslation } from "@/lib/hooks/use-translation";
 import BookingPersonalFields from "./BookingPersonalFields.vue";
 import BookingTripDetails from "./BookingTripDetails.vue";
 
@@ -17,29 +16,20 @@ interface Props {
   reservationDate: Date | null;
 }
 
-const {
-  state,
-  selectedTour,
-  tourTitle,
-  tourId,
-  tourDuration,
-  excursionTitle,
-  excursionId,
-  locale,
-  calendarOpen,
-  reservationDate,
-} = defineProps<Props>();
+const { state, selectedTour, tourDuration, excursionTitle, locale, calendarOpen, reservationDate } =
+  defineProps<Props>();
 
 const emit = defineEmits<{
   "update:calendarOpen": [open: boolean];
   "update:reservationDate": [date: Date | null];
 }>();
-
-const { t } = useTranslation();
 </script>
 
 <template>
-  <template v-if="selectedTour">
+  <div
+    v-if="selectedTour"
+    class="hidden"
+  >
     <input
       type="hidden"
       name="reservationType"
@@ -59,35 +49,18 @@ const { t } = useTranslation();
       toolparamdescription="The current language/locale code of the user"
       :value="locale"
     />
-  </template>
-
-  <div
-    v-if="tourTitle && tourId"
-    class="mbe-6"
-  >
     <input
-      class="rounded-2xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 inline-full"
-      type="text"
+      type="hidden"
       name="selectedTourDisplay"
       toolparamdescription="Readonly field showing the selected tour title"
       :value="selectedTour"
-      readonly
-      :aria-label="t('booking.selectedTour', 'Selected Tour')"
     />
-  </div>
-
-  <div
-    v-if="excursionTitle && excursionId"
-    class="mbe-6"
-  >
     <input
-      class="rounded-2xl border border-neutral-200 bg-neutral-50 px-4 py-3 text-sm text-neutral-700 inline-full"
-      type="text"
+      v-if="excursionTitle"
+      type="hidden"
       name="selectedExcursionDisplay"
       toolparamdescription="Readonly field showing the selected excursion title"
       :value="excursionTitle"
-      readonly
-      :aria-label="t('booking.selectedExcursion', 'Selected Excursion')"
     />
   </div>
 

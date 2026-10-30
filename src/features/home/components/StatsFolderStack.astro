@@ -1,0 +1,171 @@
+---
+interface StatItem {
+  id: string;
+  code: string;
+  value: string;
+  label: string;
+  description: string;
+  footerLeft: string;
+  footerRight: string;
+  icon: (_props: Record<string, unknown>) => unknown;
+}
+
+interface Props {
+  stats: StatItem[];
+}
+
+const { stats } = Astro.props;
+---
+
+<stats-folder-stack class="block relative w-full overflow-visible">
+  <!-- Scroll runway: Gives the user comfortable scroll distance to stack cards and see them slide into the folder -->
+  <div class="stats-folder-track relative w-full h-[220vh]">
+    <!-- Pinned Stage: Stays sticky in the viewport, using full container width -->
+    <div class="stats-folder-stage sticky top-18 h-102.5 w-full mx-auto overflow-visible select-none">
+      <!-- Layer 1: Folder Back Plate (z-index: 2, behind the cards) -->
+      <!-- Tab left edge and body left edge are aligned in the exact same vertical line at left-0 -->
+      <div
+        class="folder-back-plate absolute inset-x-0 bottom-4 h-66.25 overflow-visible pointer-events-none will-change-transform"
+        style="z-index: 2; opacity: 0; transform: translateY(340px);"
+      >
+        <!-- 1. Top Tab: Left edge at left-0, sharing the same vertical line -->
+        <div class="absolute top-0 left-0 h-7.75 w-28 rounded-tl-2xl bg-slate-950 border-t border-l border-white/10"></div>
+
+        <!-- 2. Diagonal Slanted Shoulder: Starts at left-28 (112px), width 24px -->
+        <div class="absolute top-0 left-28 h-7.75 w-6">
+          <svg
+            class="size-full text-slate-950"
+            viewBox="0 0 24 31"
+            fill="currentColor"
+          >
+            <polygon points="0,0 24,31 0,31"></polygon>
+            <line
+              x1="0"
+              y1="0"
+              x2="24"
+              y2="31"
+              stroke="rgba(255,255,255,0.12)"
+              stroke-width="1.2"
+            ></line>
+          </svg>
+        </div>
+
+        <!-- 3. Top-Right Shoulder Border: Continues from shoulder to right edge -->
+        <div class="absolute top-7.5 left-34 right-0 h-px bg-white/10"></div>
+
+        <!-- 4. Main Back Body: Left edge at left-0 in exact same vertical line with tab -->
+        <div class="absolute top-7.5 inset-x-0 bottom-0 rounded-b-2xl rounded-tr-2xl bg-slate-950 border-x border-b border-white/10 shadow-2xl">
+          <!-- Subtle interior backdrop -->
+          <div class="absolute inset-0 rounded-b-2xl rounded-tr-2xl bg-linear-to-b from-slate-900/60 to-slate-950 pointer-events-none"></div>
+        </div>
+      </div>
+
+      <!-- Layer 2: The Cards Stack (z-index: 10, between folder back and front pocket) -->
+      <div
+        class="cards-stack-layer absolute inset-x-0 top-2 h-85 will-change-transform"
+        style="z-index: 10; perspective: 1200px;"
+      >
+        {stats.map(({ icon: Icon, ...stat }, index) => (
+          <div
+            data-stack-card={index}
+            class="stat-card-slot absolute inset-x-0 top-0 w-full origin-top will-change-transform"
+            style={`z-index: ${10 + index * 2};`}
+          >
+            <article class="stat-card relative flex h-55 w-full flex-col justify-between rounded-2xl border border-stone-200/90 bg-stone-50/95 p-5 shadow-xl shadow-stone-900/10 backdrop-blur-xs transition-shadow duration-300">
+              <div>
+                <div class="mbe-3 flex items-center justify-between border-b border-stone-200/70 pb-2 text-[11px] font-mono uppercase tracking-wider text-stone-400">
+                  <span class="inline-flex items-center gap-2 font-semibold text-stone-600">
+                    <span class="size-2 rounded-full bg-orange-600" />
+                    {stat.code}
+                  </span>
+                  <div class="flex items-center gap-2 text-stone-400">
+                    <Icon
+                      aria-hidden="true"
+                      class="size-4"
+                      stroke-width="2"
+                    />
+                  </div>
+                </div>
+
+                <div class="mbe-1.5">
+                  <data
+                    value={stat.value}
+                    class="text-4xl font-bold tracking-tight text-orange-600 tabular-nums block"
+                  >
+                    {stat.value}
+                  </data>
+                </div>
+
+                <h3 class="text-base font-semibold tracking-tight text-stone-900">{stat.label}</h3>
+
+                <p class="mbs-1 text-xs leading-relaxed text-stone-600 line-clamp-2">
+                  {stat.description}
+                </p>
+              </div>
+
+              <div class="mbs-2 flex items-center justify-between border-t border-stone-200/60 pt-2 text-[11px] font-mono text-stone-400 uppercase tracking-wider">
+                <span class="text-stone-500">{stat.footerLeft}</span>
+                <span class="inline-flex items-center gap-1 text-stone-600">
+                  {stat.footerRight}
+                </span>
+              </div>
+            </article>
+          </div>
+        ))}
+      </div>
+
+      <!-- Layer 3: Folder Front Pocket (z-index: 25, in front of the cards) -->
+      <!-- Matches reference folder graphic: clean, rounded all around (rounded-2xl), no text, no orange border -->
+      <div
+        class="folder-front-pocket absolute inset-x-0 bottom-4 h-58.75 rounded-2xl bg-slate-900/98 border border-white/10 shadow-[0_-14px_35px_rgba(0,0,0,0.7)] ring-1 ring-white/5 will-change-transform overflow-hidden pointer-events-none"
+        style="z-index: 25; opacity: 0; transform-origin: bottom center; transform: translateY(340px);"
+      >
+        <!-- Pure clean folder front without text or orange borders -->
+        <div class="size-full bg-linear-to-b from-slate-900/40 to-slate-950/80"></div>
+      </div>
+    </div>
+  </div>
+</stats-folder-stack>
+
+<style>
+  @media (prefers-reduced-motion: reduce) {
+    .stats-folder-track {
+      height: auto !important;
+    }
+
+    .stats-folder-stage {
+      position: static !important;
+      height: auto !important;
+      top: auto !important;
+      user-select: auto !important;
+    }
+
+    .folder-back-plate,
+    .folder-front-pocket {
+      display: none !important;
+    }
+
+    .cards-stack-layer {
+      position: static !important;
+      height: auto !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 1.25rem !important;
+      perspective: none !important;
+    }
+
+    .stat-card-slot {
+      position: static !important;
+      inset: auto !important;
+      transform: none !important;
+      opacity: 1 !important;
+      will-change: auto !important;
+    }
+
+    .stat-card {
+      transform: none !important;
+    }
+  }
+</style>
+
+<script src="./stats-folder-stack.ts"></script>

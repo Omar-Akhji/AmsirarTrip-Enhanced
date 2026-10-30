@@ -3,7 +3,20 @@ function initHero() {
   if (!section) return;
 
   const phrasesAttr = section.dataset["phrases"];
-  const phrases: string[] = phrasesAttr ? (JSON.parse(phrasesAttr) as string[]) : [];
+  let phrases: readonly string[] = [];
+  if (phrasesAttr) {
+    try {
+      const parsed: unknown = JSON.parse(phrasesAttr);
+      if (
+        Array.isArray(parsed)
+        && parsed.every((item): item is string => typeof item === "string")
+      ) {
+        phrases = parsed;
+      }
+    } catch {
+      phrases = [];
+    }
+  }
   if (phrases.length === 0) return;
 
   const slides = section.querySelectorAll<HTMLElement>(".hero-slide");
@@ -12,8 +25,6 @@ function initHero() {
   const desktopPlaceholder = section.querySelector<HTMLElement>("#hero-desktop-placeholder");
   const desktopText = section.querySelector<HTMLElement>("#hero-desktop-text");
   const cursor = section.querySelector<HTMLElement>("#hero-cursor");
-
-  // Carousel State
   let currentSlideIndex = 0;
   const carouselInterval = setInterval(() => {
     if (slides.length === 0) return;
@@ -28,14 +39,10 @@ function initHero() {
     }
   }, 5000);
 
-  // Reduced motion preference
   const prefersReducedMotion = globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  // Let's check window size dynamically using media query matching
   const mediaQuery = globalThis.matchMedia("(max-width: 1023px)");
   let isMobile = mediaQuery.matches;
 
-  // Track animation frames and intervals
   let mobileInterval: ReturnType<typeof setInterval> | undefined;
   let mobileTimeout: ReturnType<typeof setTimeout> | undefined;
   let animationFrameId: number | undefined;
@@ -116,7 +123,6 @@ function initHero() {
       let text = "";
 
       if (isDeleting) {
-        // Deleting phase
         const speed = 0.022;
         textIndex -= delta * speed;
 
@@ -124,18 +130,17 @@ function initHero() {
           textIndex = 0;
           isDeleting = false;
           currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
-          pauseTimer = 1000; // Pause for 1.0s when erased
+          pauseTimer = 1000;
         }
         text = fullText.slice(0, Math.ceil(textIndex));
       } else {
-        // Typing phase
         const speed = 0.01;
         textIndex += delta * speed;
 
         if (textIndex >= fullText.length) {
           textIndex = fullText.length;
           isDeleting = true;
-          pauseTimer = 2500; // Pause for 2.5s when fully typed
+          pauseTimer = 2500;
         }
         text = fullText.slice(0, Math.floor(textIndex));
       }
@@ -159,10 +164,8 @@ function initHero() {
     }
   }
 
-  // Initial animation start
   restartAnimation();
 
-  // Cleanup handler for View Transitions
   function cleanup() {
     clearInterval(carouselInterval);
     stopAllAnimations();

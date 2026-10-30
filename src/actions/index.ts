@@ -1,25 +1,20 @@
 import { defineAction, type ActionAPIContext } from "astro:actions";
 import { z } from "astro/zod";
 import { useTranslations as getTranslations } from "../i18n/utils";
-import { checkRateLimit } from "../lib/api-utils";
 import { env as environment } from "../lib/env";
 import { createErrorResponse, type FormState } from "../lib/form-types";
 import { getBookingSchema, getContactSchema, getNewsletterSchema } from "../lib/schemas";
-import { escapeHtml, getMailer, logSecurityEvent } from "../lib/server-utils";
-import { verifyRecaptcha } from "../services/recaptcha";
+import { getMailer, logger } from "../lib/server-utils";
+import { enforceRateLimit, isHoneypotTriggered, verifyCaptcha } from "./helpers/action-guards";
+import {
+  buildBookingEmail,
+  buildContactEmail,
+  buildNewsletterEmail,
+} from "./helpers/email-templates";
+import { extractZodErrors, getFormString, getOptionalFormString } from "./helpers/form-helpers";
 
-function getLanguageName(code = ""): string {
-  const languages: Record<string, string> = {
-    en: "English",
-    fr: "Français",
-    de: "Deutsch",
-    es: "Español",
-  };
-  return languages[code] ?? code;
-}
-
-function cleanReservationType(type = ""): string {
-  return type.replace(/^Tour\d+\s/, "");
+function getRecipientEmail(): string {
+  return environment.MAIL_TO.length > 0 ? environment.MAIL_TO : environment.GMAIL_USER;
 }
 
 export const server = {
@@ -27,99 +22,59 @@ export const server = {
     accept: "form",
     handler: async (formData: FormData, context: ActionAPIContext): Promise<FormState> => {
       try {
-        const ip = context.clientAddress;
+        const ip = context.clientAddress || "unknown";
 
-        const honeypot = formData.get("website") as string;
-        if (honeypot) {
-          logSecurityEvent("HONEYPOT", ip, "booking-action");
+        if (isHoneypotTriggered(getFormString(formData, "website"), ip, "booking-action")) {
           return { success: true, message: "Booking request sent!" };
         }
 
-        const rateLimit = checkRateLimit(ip, 10, 60_000);
-        if (!rateLimit.allowed) {
-          if (rateLimit.blocked) {
-            logSecurityEvent("RATE_LIMIT", ip, "booking-action");
-          }
+        if (!enforceRateLimit(`booking:${ip}`, ip, "booking-action", 10).allowed) {
           return { success: false, message: "Too many requests. Please try again later." };
         }
 
-        const formLang = formData.get("language") as string | null;
+        const formLang = getOptionalFormString(formData, "language");
         const language = formLang ?? context.currentLocale ?? "en";
         const t = getTranslations(language);
 
         const rawData = {
-          reservationType: formData.get("reservationType") as string,
-          fullName: formData.get("fullName") as string,
-          email: formData.get("email") as string,
-          phone: formData.get("phone") as string,
+          reservationType: getFormString(formData, "reservationType"),
+          fullName: getFormString(formData, "fullName"),
+          email: getFormString(formData, "email"),
+          phone: getFormString(formData, "phone"),
           persons: formData.get("numberOfPeople"),
-          date: formData.get("reservationDate") as string,
-          message: formData.get("message") as string,
+          date: getFormString(formData, "reservationDate"),
+          message: getFormString(formData, "message"),
           language,
-          duration: (formData.get("duration") as string | null) ?? undefined,
-          recaptchaToken: formData.get("recaptchaToken") as string,
+          duration: getOptionalFormString(formData, "duration"),
+          recaptchaToken: getFormString(formData, "recaptchaToken"),
         };
 
         const validationResult = getBookingSchema(t).safeParse(rawData);
-
         if (!validationResult.success) {
-          const errors: Record<string, string> = {};
-          for (const error of validationResult.error.issues) {
-            const path = error.path[0] as string;
-            errors[path] = error.message;
-          }
-          return { success: false, message: "Please check the form for errors", errors };
+          return {
+            success: false,
+            message: "Please check the form for errors",
+            errors: extractZodErrors(validationResult.error.issues),
+          };
         }
 
         const data = validationResult.data;
-
         const host = context.request.headers.get("host")?.split(":", 1)[0] ?? "";
-        if (!(await verifyRecaptcha({ token: data.recaptchaToken, hostname: host }))) {
-          logSecurityEvent("CAPTCHA_FAILED", ip, "booking-action");
+
+        if (!(await verifyCaptcha(data.recaptchaToken, host, ip, "booking-action"))) {
           return { success: false, message: "Security verification failed. Please try again." };
         }
 
+        const emailContent = buildBookingEmail(data);
         const transporter = getMailer();
-        const mailTo =
-          environment.MAIL_TO.length > 0 ? environment.MAIL_TO : environment.GMAIL_USER;
-
-        const html = `
-          <h2>New Booking Request</h2>
-          <p><strong>Website display language :</strong> ${escapeHtml(
-            getLanguageName(data.language),
-          )}</p>
-          <p><strong>Type of reservation :</strong> ${escapeHtml(
-            cleanReservationType(data.reservationType),
-          )}</p>
-          <p><strong>Duration :</strong> ${escapeHtml(
-            data.duration ? `${data.duration} days` : "Not specified",
-          )}</p>
-          <p><strong>Full Name :</strong> ${escapeHtml(data.fullName)}</p>
-          <p><strong>Phone Number :</strong> ${escapeHtml(data.phone)}</p>
-          <p><strong>E-mail :</strong> ${escapeHtml(data.email)}</p>
-          <p><strong>Date of reservation :</strong> ${escapeHtml(data.date)}</p>
-          <p><strong>Number of people :</strong> ${escapeHtml(String(data.persons))}</p>
-          ${
-            data.message ?
-              `<p><strong>Message :</strong><br>${escapeHtml(data.message).replaceAll("\n", "<br>")}</p>`
-            : ""
-          }
-        `;
 
         await transporter.sendMail({
           from: `Amsirar Trip Bookings <${environment.GMAIL_USER}>`,
-          to: mailTo,
-          replyTo: data.email,
-          subject: `Booking: ${data.fullName} (${cleanReservationType(data.reservationType)})`,
-          text: `Website display language : ${getLanguageName(data.language)}
-Type of reservation : ${cleanReservationType(data.reservationType)}
-Duration : ${data.duration ? `${data.duration} days` : "Not specified"}
-Full Name : ${data.fullName}
-Phone Number : ${data.phone}
-E-mail : ${data.email}
-Date of reservation : ${data.date}
-Number of people : ${data.persons}${data.message ? `\nMessage : ${data.message}` : ""}`,
-          html,
+          to: getRecipientEmail(),
+          replyTo: emailContent.replyTo,
+          subject: emailContent.subject,
+          text: emailContent.text,
+          html: emailContent.html,
         });
 
         return { success: true, message: "Your booking request has been sent successfully!" };
@@ -135,17 +90,11 @@ Number of people : ${data.persons}${data.message ? `\nMessage : ${data.message}`
       try {
         const ip = context.clientAddress || "unknown";
 
-        const honeypot = formData.get("website") as string;
-        if (honeypot) {
-          logSecurityEvent("HONEYPOT", ip, "contact-action");
+        if (isHoneypotTriggered(getFormString(formData, "website"), ip, "contact-action")) {
           return { success: true, message: "Message sent!" };
         }
 
-        const rateLimit = checkRateLimit(ip, 10, 60_000);
-        if (!rateLimit.allowed) {
-          if (rateLimit.blocked) {
-            logSecurityEvent("RATE_LIMIT", ip, "contact-action");
-          }
+        if (!enforceRateLimit(`contact:${ip}`, ip, "contact-action", 10).allowed) {
           return { success: false, message: "Too many requests. Please try again later." };
         }
 
@@ -153,53 +102,40 @@ Number of people : ${data.persons}${data.message ? `\nMessage : ${data.message}`
         const t = getTranslations(language);
 
         const rawData = {
-          name: formData.get("name") as string,
-          email: formData.get("email") as string,
-          phone: formData.get("phone") as string,
-          message: formData.get("message") as string,
-          recaptchaToken: formData.get("recaptchaToken") as string,
+          name: getFormString(formData, "name"),
+          email: getFormString(formData, "email"),
+          phone: getFormString(formData, "phone"),
+          topic: getOptionalFormString(formData, "topic"),
+          message: getFormString(formData, "message"),
+          recaptchaToken: getFormString(formData, "recaptchaToken"),
         };
 
         const validationResult = getContactSchema(t).safeParse(rawData);
-
         if (!validationResult.success) {
-          const errors: Record<string, string> = {};
-          for (const error of validationResult.error.issues) {
-            const path = error.path[0] as string;
-            errors[path] = error.message;
-          }
-          return { success: false, message: "Please check the form for errors", errors };
+          return {
+            success: false,
+            message: "Please check the form for errors",
+            errors: extractZodErrors(validationResult.error.issues),
+          };
         }
 
         const data = validationResult.data;
-        const topic = formData.get("topic") as string;
-        const messageContent = topic ? `${topic.trim()}\n\n${data.message}` : data.message;
-
         const host = context.request.headers.get("host")?.split(":", 1)[0] ?? "";
-        if (!(await verifyRecaptcha({ token: data.recaptchaToken, hostname: host }))) {
-          logSecurityEvent("CAPTCHA_FAILED", ip, "contact-action");
+
+        if (!(await verifyCaptcha(data.recaptchaToken, host, ip, "contact-action"))) {
           return { success: false, message: "Security verification failed. Please try again." };
         }
 
+        const emailContent = buildContactEmail(data);
         const transporter = getMailer();
-        const mailTo =
-          environment.MAIL_TO.length > 0 ? environment.MAIL_TO : environment.GMAIL_USER;
-
-        const html = `
-          <h2>New Contact Message</h2>
-          <p><strong>Name :</strong> ${escapeHtml(data.name)}</p>
-          <p><strong>E-mail :</strong> ${escapeHtml(data.email)}</p>
-          <p><strong>Phone :</strong> ${escapeHtml(data.phone)}</p>
-          <p><strong>Message :</strong><br>${escapeHtml(messageContent).replaceAll("\n", "<br>")}</p>
-        `;
 
         await transporter.sendMail({
           from: `Amsirar Trip Contact <${environment.GMAIL_USER}>`,
-          to: mailTo,
-          replyTo: data.email,
-          subject: `Contact from ${data.name}`,
-          text: `Name : ${data.name}\nE-mail : ${data.email}\nPhone : ${data.phone}\nMessage : \n${messageContent}`,
-          html,
+          to: getRecipientEmail(),
+          replyTo: emailContent.replyTo,
+          subject: emailContent.subject,
+          text: emailContent.text,
+          html: emailContent.html,
         });
 
         return { success: true, message: "Message sent! We will reply within 24 hours." };
@@ -211,19 +147,15 @@ Number of people : ${data.persons}${data.message ? `\nMessage : ${data.message}`
 
   newsletter: defineAction({
     accept: "json",
-    input: z.object({ name: z.string(), email: z.string(), recaptchaToken: z.string() }),
+    input: z.object({ name: z.string(), email: z.email(), recaptchaToken: z.string() }),
     handler: async (
       input,
       context: ActionAPIContext,
     ): Promise<{ ok: boolean; statusKey: string }> => {
       try {
-        const ip = context.clientAddress;
+        const ip = context.clientAddress || "unknown";
 
-        const rateLimit = checkRateLimit(ip, 5, 60_000);
-        if (!rateLimit.allowed) {
-          if (rateLimit.blocked) {
-            logSecurityEvent("RATE_LIMIT", ip, "newsletter-action");
-          }
+        if (!enforceRateLimit(`newsletter:${ip}`, ip, "newsletter-action", 5).allowed) {
           return { ok: false, statusKey: "footer.newsletterNetwork" };
         }
 
@@ -236,37 +168,27 @@ Number of people : ${data.persons}${data.message ? `\nMessage : ${data.message}`
         }
 
         const data = validationResult.data;
-
         const host = context.request.headers.get("host")?.split(":", 1)[0] ?? "";
-        if (!(await verifyRecaptcha({ token: data.recaptchaToken, hostname: host }))) {
-          logSecurityEvent("CAPTCHA_FAILED", ip, "newsletter-action");
+
+        if (!(await verifyCaptcha(data.recaptchaToken, host, ip, "newsletter-action"))) {
           return { ok: false, statusKey: "footer.newsletterCaptchaError" };
         }
 
+        const emailContent = buildNewsletterEmail(data);
         const transporter = getMailer();
-        const mailTo =
-          environment.MAIL_TO.length > 0 ? environment.MAIL_TO : environment.GMAIL_USER;
-
-        const safeName = data.name.replaceAll(/[^\p{L}\p{N}\s]/gu, "");
-
-        const html = `
-          <h2>New Newsletter Subscription</h2>
-          <p><strong>Name :</strong> ${escapeHtml(data.name)}</p>
-          <p><strong>Email :</strong> ${escapeHtml(data.email)}</p>
-        `;
 
         await transporter.sendMail({
           from: `Amsirar Trip Newsletter <${environment.GMAIL_USER}>`,
-          to: mailTo,
-          replyTo: data.email,
-          subject: `Newsletter Subscription: ${safeName} (${data.email})`,
-          text: `New newsletter subscription:\nName: ${data.name}\nEmail: ${data.email}`,
-          html,
+          to: getRecipientEmail(),
+          replyTo: emailContent.replyTo,
+          subject: emailContent.subject,
+          text: emailContent.text,
+          html: emailContent.html,
         });
 
         return { ok: true, statusKey: "footer.newsletterSuccess" };
       } catch (error) {
-        console.error("Newsletter submission error:", error);
+        logger.error("Newsletter submission error", error);
         return { ok: false, statusKey: "footer.newsletterFailure" };
       }
     },

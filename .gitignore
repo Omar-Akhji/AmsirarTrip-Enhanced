@@ -4,8 +4,11 @@ dist-*
 
 # ─── Generated types & caches ─────────────────────────────
 .astro/
+.agent/
+.playwright-report/
 .cache/
 .vite/
+.github/
 .eslintcache
 *.tsbuildinfo
 
@@ -33,6 +36,10 @@ bun-debug.log*
 
 # ─── Testing & coverage ──────────────────────────────────
 coverage/
+playwright-report/
+test-results/
+.tests/
+.test-results/
 
 # ─── macOS system files ──────────────────────────────────
 .DS_Store
@@ -59,14 +66,71 @@ Desktop.ini
 
 # ─── AI agents & tooling ─────────────────────────────────
 .agents/
+.codestudio/
+.claude/
+.arena/
+.anti-slop/
 .kiro/
 .junie/
 .gemini/
 opencode.json
+skills-lock.json
+.mcp.json
+Screenshot*.png
+
+# Auto-generated agent skill mirrors & workspaces
+.adal/
+.aider-desk/
+.augment/
+.autohand/
+.bob/
+.codeartsdoer/
+.codebuddy/
+.codemaker/
+.codex/
+.commandcode/
+.continue/
+.cortex/
+.crush/
+.devin/
+.forge/
+.goose/
+.grok/
+.hermes/
+.iflow/
+.inferencesh/
+.jazz/
+.kimchi/
+.kode/
+.lingma/
+.mcpjam/
+.minimax/
+.moxby/
+.mux/
+.neovate/
+.ona/
+.openhands/
+.pochi/
+.posit/
+.qoder/
+.qwen/
+.reasonix/
+.roo/
+.rovodev/
+.tabnine/
+.terramind/
+.tinycloud/
+.trae/
+.vibe/
+.windsurf/
+.zcode/
+.zencoder/
+agent/
+skills/
+data/skills/
 
 # ─── Git hooks ────────────────────────────────────────────
 .husky/
 
 # ─── Docker runtime artifacts ────────────────────────────
 docker-compose.override.yml
-

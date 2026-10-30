@@ -1,7 +1,16 @@
 import { logSecurityEvent } from "./server-utils";
 
+const MAX_TRACKED_KEYS = 10_000;
 const rateLimitMap = new Map<string, { count: number; resetAt: number; violations: number }>();
 const blockedIPs = new Map<string, number>();
+
+function enforceMapCapacity<K, V>(map: Map<K, V>): void {
+  if (map.size < MAX_TRACKED_KEYS) return;
+  const oldestKey = map.keys().next().value;
+  if (oldestKey !== undefined) {
+    map.delete(oldestKey);
+  }
+}
 
 export interface RateLimitResult {
   allowed: boolean;
@@ -27,6 +36,7 @@ export function checkRateLimit(
   const record = rateLimitMap.get(identifier);
 
   if (!record || now > record.resetAt) {
+    enforceMapCapacity(rateLimitMap);
     rateLimitMap.set(identifier, {
       count: 1,
       resetAt: now + windowMs,
@@ -39,6 +49,7 @@ export function checkRateLimit(
     record.violations++;
 
     if (record.violations >= 3) {
+      enforceMapCapacity(blockedIPs);
       blockedIPs.set(identifier, now + 3_600_000);
       logSecurityEvent(
         "BLOCKED_IP",

@@ -1,5 +1,6 @@
 ---
-import { getCollection } from "astro:content";
+import { getEntry } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
 import BookingForm from "../../../features/booking/components/BookingForm.vue";
 import TourLayout from "../../../features/tours/components/TourLayout.astro";
 import { useTranslations } from "../../../i18n/utils";
@@ -14,13 +15,12 @@ import JsonLd from "../../../shared/ui/JsonLd.astro";
 const { slug } = Astro.params;
 const locale = Astro.currentLocale || "en";
 
-const tours = await getCollection("tours");
-const tourEntry = tours.find((entry) => entry.id.toLowerCase() === (slug || "").toLowerCase());
+const tourEntry = slug ? await getEntry("tours", slug.toLowerCase()) : undefined;
 
 if (!tourEntry) {
   Astro.response.status = 404;
   // eslint-disable-next-line unicorn/prefer-module
-  return Astro.redirect("/404");
+  return Astro.rewrite(locale === "en" ? "/404" : `/${locale}/404`);
 }
 
 const tour = tourEntry.data;
@@ -28,10 +28,8 @@ const tour = tourEntry.data;
 const t = useTranslations(locale);
 const isEnglish = locale === "en";
 
-const title =
-  isEnglish ?
-    tour.seo.title
-  : `${t(`${tour.tourKey}.title`)} (${tour.durationDays} ${t("tours.days")})`;
+const localizedTitle = t(`${tour.tourKey}.title`);
+const title = isEnglish ? tour.seo.title : localizedTitle;
 
 const description =
   isEnglish ?
@@ -67,7 +65,7 @@ const tourJsonLd = generateTourJsonLd({
   currency: tour.jsonLd.currency,
   duration: tour.duration,
   location: { start: tour.startLocation, end: tour.endLocation },
-  url: `https://amsirartrip.com/tours/${slug}`,
+  url: new URL(Astro.url.pathname, Astro.site ?? "https://amsirartrip.com").href,
   itinerary,
 });
 
@@ -75,14 +73,16 @@ const faqJsonLd = generateFaqJsonLd(tour.seo.faqs);
 const tourTitleClean = isEnglish ? tour.seo.title : t(`${tour.tourKey}.title`);
 
 const breadcrumbJsonLd = generateBreadcrumbJsonLd([
-  { name: t("nav.home") || "Home", url: locale === "en" ? "/" : `/${locale}` },
-  { name: t("nav.tours") || "Tours", url: locale === "en" ? "/tours" : `/${locale}/tours` },
+  { name: t("nav.home") || "Home", url: getRelativeLocaleUrl(locale, "/") },
+  { name: t("nav.tours") || "Tours", url: getRelativeLocaleUrl(locale, "tours") },
   { name: tourTitleClean, url: Astro.url.pathname },
 ]);
 ---
 
 <Layout
   description={description}
+  image={tour.image.src}
+  imageAlt={tour.seo.imageAlt}
   title={title}
 >
   <JsonLd
@@ -98,6 +98,7 @@ const breadcrumbJsonLd = generateBreadcrumbJsonLd([
     id={`${tour.tourKey}-breadcrumb-jsonld`}
   />
   <TourLayout
+    tour={tour}
     bookingId={tour.bookingId}
     imageSrc={tour.image}
     locale={locale}
@@ -108,6 +109,7 @@ const breadcrumbJsonLd = generateBreadcrumbJsonLd([
     <BookingForm
       client:visible
       fullWidth
+      locale={locale}
       tourDuration={tour.durationDays}
       tourId={tour.bookingId.toString()}
       tourTitle={tourTitleClean}

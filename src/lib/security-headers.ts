@@ -1,4 +1,10 @@
+import { LOCAL_HOSTS, TRUSTED_HOSTS } from "@/lib/constants/hosts";
+
 export const getSecurityHeaders = (nonce: string, host: string) => {
+  const normalizedHost = host.toLowerCase().replaceAll(/[^a-z0-9.-]/g, "");
+  const safeConnectHost = TRUSTED_HOSTS.has(normalizedHost) ? ` https://${normalizedHost}` : "";
+  const isLocal = LOCAL_HOSTS.has(normalizedHost);
+
   return [
     { key: "X-DNS-Prefetch-Control", value: "on" },
     { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
@@ -11,7 +17,7 @@ export const getSecurityHeaders = (nonce: string, host: string) => {
     {
       key: "Permissions-Policy",
       value:
-        "camera=(), microphone=(), geolocation=(), interest-cohort=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()",
+        "autoplay=(), camera=(), microphone=(), geolocation=(), interest-cohort=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()",
     },
     { key: "X-Permitted-Cross-Domain-Policies", value: "none" },
     {
@@ -29,8 +35,10 @@ export const getSecurityHeaders = (nonce: string, host: string) => {
         `img-src 'self' blob: data: https://*.tripadvisor.com https://*.tripadvisor.de https://*.google.com https://*.gstatic.com`,
         // Frames: self + Google reCAPTCHA & Maps
         "frame-src 'self' https://www.google.com https://www.google.com/maps/",
+        // Frame ancestors: prevent clickjacking
+        "frame-ancestors 'self'",
         // Connections: self + own host + Google (reCAPTCHA verification calls)
-        `connect-src 'self' https://${host} https://www.google.com`,
+        `connect-src 'self'${safeConnectHost} https://www.google.com`,
         // Workers: self only (no third-party workers)
         "worker-src 'self'",
         // Web app manifest: self only
@@ -41,6 +49,7 @@ export const getSecurityHeaders = (nonce: string, host: string) => {
         "base-uri 'self'",
         // Form-action: restrict to self
         "form-action 'self'",
+        ...(isLocal ? [] : ["upgrade-insecure-requests"]),
       ].join("; "),
     },
   ];

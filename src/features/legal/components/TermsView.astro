@@ -1,8 +1,1051 @@
 ---
-import LegalLayout from "./LegalLayout.astro";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import headerImg from "@/assets/images/Header/header-2.webp";
+import { useTranslations } from "@/i18n/utils";
+import { PHONE_DISPLAY, PHONE_LINK, WHATSAPP_LINK } from "@/lib/constants/contact";
+import PageHeader from "@/shared/layout/PageHeader.astro";
+import {
+  Calendar,
+  CircleAlert,
+  CircleCheck,
+  Compass,
+  FileText,
+  Mail,
+  MapPinned,
+  MessageCircle,
+  Phone,
+  Printer,
+  Scale,
+  ShieldCheck,
+  Sparkles,
+} from "@lucide/astro";
+
+const locale = Astro.currentLocale || "en";
+const t = useTranslations(locale);
+
+// Localized Content Matrix for Anti-Slop Legal Experience
+interface LegalCopy {
+  title: string;
+  subtitle: string;
+  lastUpdated: string;
+  badgeDoc: string;
+  badgeStatus: string;
+  badgeJurisdiction: string;
+  summaryTitle: string;
+  summarySubtitle: string;
+  summaryCards: { title: string; description: string }[];
+  tocTitle: string;
+  printLabel: string;
+  agencyCard: { title: string; badge: string; hours: string; chatCta: string };
+  cancellationMatrix: {
+    title: string;
+    subtitle: string;
+    tiers: { days: string; badge: string; badgeClass: string; desc: string }[];
+    insuranceTitle: string;
+    insuranceDesc: string;
+  };
+  sections: {
+    id: string;
+    num: string;
+    title: string;
+    paragraphs: string[];
+    callout?: { title: string; desc: string };
+  }[];
+}
+
+const contentByLocale: Record<string, LegalCopy> = {
+  en: {
+    title: "Terms of Service",
+    subtitle:
+      "Complete operational agreement, booking conditions, and traveler protections for Amsirar Trip services in Morocco.",
+    lastUpdated: "Last updated: January 2026",
+    badgeDoc: "Official Booking Framework",
+    badgeStatus: "Legally Active & Enforced",
+    badgeJurisdiction: "Kingdom of Morocco",
+    summaryTitle: "Essential Booking Highlights",
+    summarySubtitle:
+      "Core protections and contractual commitments summarized in plain language before your departure.",
+    summaryCards: [
+      {
+        title: "Deposit & Confirmation",
+        description:
+          "An initial deposit confirms your private tour or excursion. Balance is payable before departure as per itinerary.",
+      },
+      {
+        title: "Tiered Refund Policy",
+        description:
+          "100% refund for cancellations 30+ days prior, 50% refund at 15 to 29 days. Structured and fair notice windows.",
+      },
+      {
+        title: "Licensed Operations",
+        description:
+          "Accredited Moroccan tourism operator with certified desert drivers, insured transport, and licensed mountain guides.",
+      },
+      {
+        title: "Marrakech Jurisdiction",
+        description:
+          "Governed exclusively under Moroccan tourism legislation and the commercial court jurisdiction of Marrakech.",
+      },
+    ],
+    tocTitle: "Document Contents",
+    printLabel: "Print / Save as PDF",
+    agencyCard: {
+      title: "Amsirar Trip SARL",
+      badge: "Licensed Moroccan Tour Agency",
+      hours: "Customer support available 7 days a week",
+      chatCta: "Chat on WhatsApp",
+    },
+    cancellationMatrix: {
+      title: "Standard Cancellation & Refund Schedule",
+      subtitle: "Calculated based on calendar days prior to the official departure date:",
+      tiers: [
+        {
+          days: "30+ Days Prior",
+          badge: "100% Refundable",
+          badgeClass: "bg-emerald-500/10 text-emerald-700 border-emerald-500/30",
+          desc: "Full refund returned to original payment method minus minor banking administration charges.",
+        },
+        {
+          days: "15 to 29 Days Prior",
+          badge: "50% Refundable",
+          badgeClass: "bg-amber-500/10 text-amber-800 border-amber-500/30",
+          desc: "50% refund issued. The remainder covers advanced hotel deposits and vehicle holds.",
+        },
+        {
+          days: "Less than 15 Days",
+          badge: "Non-Refundable",
+          badgeClass: "bg-zinc-500/10 text-zinc-700 border-zinc-500/30",
+          desc: "Non-refundable. All vehicle permits, accommodations, and private staff are fully locked and committed.",
+        },
+      ],
+      insuranceTitle: "Travel Insurance Strongly Recommended",
+      insuranceDesc:
+        "We strongly advise all international guests to carry comprehensive travel insurance covering trip cancellations, medical emergencies, flight schedule changes, and unexpected travel delays.",
+    },
+    sections: [
+      {
+        id: "acceptance",
+        num: "01",
+        title: "Acceptance of Terms",
+        paragraphs: [
+          "By accessing or using Amsirar Trip's website, reserving travel itineraries, or confirming private excursions in Morocco, you enter into a legally binding agreement governed by these Terms of Service.",
+          "If you do not accept these terms in their entirety, you should not access or make reservations through our services. Amsirar Trip reserves the right to update these terms to reflect changes in Moroccan legislation or company policy. Continued participation in our tours constitutes acceptance of any published modifications.",
+        ],
+      },
+      {
+        id: "services",
+        num: "02",
+        title: "Our Services & Tour Operations",
+        paragraphs: [
+          "Amsirar Trip provides tailor-made travel planning, Sahara desert expeditions, High Atlas mountain trekking, imperial city cultural journeys, and bespoke excursions across the Kingdom of Morocco.",
+          "All published tours are subject to availability and formal written confirmation. Route descriptions, photographs, and itineraries displayed on our platforms serve an illustrative purpose. Actual experiences, stops, and timings may adjust based on weather conditions, seasonal daylight, road closures, and passenger safety considerations.",
+        ],
+      },
+      {
+        id: "bookings",
+        num: "03",
+        title: "Booking, Deposit & Payment Schedule",
+        paragraphs: [
+          "To secure vehicle allocation, licensed driver scheduling, and desert camp lodging, all reservations require an advance confirmation deposit.",
+          "The remaining balance is due prior to departure or according to the explicit terms established during your booking confirmation. Quoted prices include only the specific inclusions enumerated in your official itinerary. Optional upgrades, gratuities, personal incidentals, and individual travel insurance are not included unless expressly invoiced.",
+        ],
+        callout: {
+          title: "Transparent Pricing Guarantee",
+          desc: "All quotations are fixed in the contracted currency upon deposit receipt. We never charge hidden tourist surcharges or unexpected booking fees.",
+        },
+      },
+      {
+        id: "cancellation",
+        num: "04",
+        title: "Cancellation & Refund Policy",
+        paragraphs: [
+          "We understand travel plans can shift unexpectedly. However, organizing private journeys across the Moroccan desert and mountains requires binding commitments with local Berber camps, nomadic hosts, and licensed transport providers.",
+          "Cancellations must be communicated in writing via email (amsirare@gmail.com) or official WhatsApp. Refund percentages apply strictly according to the departure timeline detailed in the matrix below.",
+        ],
+      },
+      {
+        id: "liability",
+        num: "05",
+        title: "Limitation of Liability & Force Majeure",
+        paragraphs: [
+          "Amsirar Trip operates with utmost diligence, collaborating exclusively with licensed professional drivers, official local mountain guides, and vetted accommodation partners across Morocco.",
+          "To the maximum extent permitted under Moroccan law, Amsirar Trip shall not be held liable for damages, route modifications, or financial losses caused by events of Force Majeure (including severe weather, desert sandstorms, road damage, political disruptions, or border regulations beyond our reasonable control). Our total aggregate liability for any proven operational failure is strictly capped at the total booking amount paid.",
+        ],
+      },
+      {
+        id: "intellectual-property",
+        num: "06",
+        title: "Intellectual Property & Content Rights",
+        paragraphs: [
+          "All proprietary content presented on amsirartrip.com (including written itineraries, destination guides, high-resolution photography, brand typography, and design elements) is protected under Moroccan and international intellectual property law.",
+          "No content, maps, or editorial text may be copied, repurposed, or republished for commercial tour operations without express prior written permission from Amsirar Trip SARL.",
+        ],
+      },
+      {
+        id: "governing-law",
+        num: "07",
+        title: "Governing Law & Legal Jurisdiction",
+        paragraphs: [
+          "These Terms of Service, all passenger contracts, and any disputes arising out of your booking with Amsirar Trip are governed by the laws of the Kingdom of Morocco.",
+          "In the event of any claim, disagreement, or controversy that cannot be resolved amicably through direct customer service mediation, the parties irrevocably submit to the exclusive jurisdiction of the competent commercial courts of Marrakech, Morocco.",
+        ],
+        callout: {
+          title: "Official Moroccan Agency Registration",
+          desc: "Amsirar Trip is an officially registered tourism venture domiciled in Marrakech, operating in full compliance with the Moroccan Ministry of Tourism standards.",
+        },
+      },
+      {
+        id: "contact",
+        num: "08",
+        title: "Official Agency Contact & Legal Notices",
+        paragraphs: [
+          "Formal legal notices, inquiries regarding booking terms, or contractual questions should be directed to our Marrakech central administration office via the channels listed below.",
+        ],
+      },
+    ],
+  },
+  fr: {
+    title: "Conditions Générales de Vente",
+    subtitle:
+      "Cadre contractuel, conditions de réservation et protections des voyageurs pour les services d'Amsirar Trip au Maroc.",
+    lastUpdated: "Dernière mise à jour : Janvier 2026",
+    badgeDoc: "Cadre Contractuel Officiel",
+    badgeStatus: "Légalement Valide & Appliqué",
+    badgeJurisdiction: "Royaume du Maroc",
+    summaryTitle: "Points Clés de la Réservation",
+    summarySubtitle: "Vos protections contractuelles résumées en toute clarté avant votre départ.",
+    summaryCards: [
+      {
+        title: "Acompte & Confirmation",
+        description:
+          "Un acompte confirme votre circuit privé. Le solde est payable avant le départ selon les modalités convenues.",
+      },
+      {
+        title: "Politique d'Annulation",
+        description:
+          "Remboursement à 100% à plus de 30 jours, 50% entre 15 et 29 jours. Paliers de préavis clairs et équitables.",
+      },
+      {
+        title: "Opérateur Agréé",
+        description:
+          "Agence marocaine agréée avec chauffeurs certifiés, 4x4 assurés et guides de montagne officiels.",
+      },
+      {
+        title: "Tribunaux de Marrakech",
+        description:
+          "Contrat régi exclusivement par le droit marocain et la juridiction commerciale de Marrakech.",
+      },
+    ],
+    tocTitle: "Sommaire du Document",
+    printLabel: "Imprimer / Enregistrer en PDF",
+    agencyCard: {
+      title: "Amsirar Trip SARL",
+      badge: "Agence Touristique Marocaine Agréée",
+      hours: "Assistance voyage 7 jours sur 7",
+      chatCta: "Échanger sur WhatsApp",
+    },
+    cancellationMatrix: {
+      title: "Barème des Remboursements en Cas d'Annulation",
+      subtitle: "Calculé en jours calendaires avant la date officielle de départ :",
+      tiers: [
+        {
+          days: "Plus de 30 jours avant",
+          badge: "Remboursement 100%",
+          badgeClass: "bg-emerald-500/10 text-emerald-700 border-emerald-500/30",
+          desc: "Remboursement intégral effectué sur votre mode de paiement, déduction faite des frais bancaires et de dossier.",
+        },
+        {
+          days: "Entre 15 et 29 jours",
+          badge: "Remboursement 50%",
+          badgeClass: "bg-amber-500/10 text-amber-800 border-amber-500/30",
+          desc: "50% de remboursement. Le solde couvre les acomptes fermes engagés pour les hébergements et le transport.",
+        },
+        {
+          days: "Moins de 15 jours",
+          badge: "Non remboursable",
+          badgeClass: "bg-zinc-500/10 text-zinc-700 border-zinc-500/30",
+          desc: "Non remboursable. L'ensemble des réservations, bivouacs du désert et chauffeurs sont irrévocablement bloqués.",
+        },
+      ],
+      insuranceTitle: "Assurance Voyage Fortement Recommandée",
+      insuranceDesc:
+        "Nous recommandons expressément à chaque voyageur de souscrire une assurance voyage multirisque couvrant l'annulation de vol, le rapatriement médical et les imprévus.",
+    },
+    sections: [
+      {
+        id: "acceptance",
+        num: "01",
+        title: "Acceptation des Conditions",
+        paragraphs: [
+          "En accédant au site web d'Amsirar Trip, en réservant nos circuits ou en participant à nos excursions au Maroc, vous acceptez d'être juridiquement lié par les présentes Conditions Générales.",
+          "Si vous refusez ces dispositions, vous êtes invité à ne pas utiliser nos prestations. Amsirar Trip se réserve le droit de mettre à jour ses conditions pour respecter l'évolution réglementaire au Maroc. Votre participation continue vaut acceptation pleine et entière.",
+        ],
+      },
+      {
+        id: "services",
+        num: "02",
+        title: "Nos Services & Prestations de Voyage",
+        paragraphs: [
+          "Amsirar Trip est une agence locale organisant des circuits sur mesure, des traversées du Sahara, des randonnées dans le Haut Atlas et des circuits culturels dans les villes impériales du Maroc.",
+          "Toutes les réservations sont soumises à disponibilité et confirmation écrite. Les itinéraires et photographies sont indicatifs : des ajustements d'horaires ou de parcours peuvent intervenir pour des impératifs météo ou de sécurité.",
+        ],
+      },
+      {
+        id: "bookings",
+        num: "03",
+        title: "Modalités de Réservation & Paiement",
+        paragraphs: [
+          "Toute réservation nécessite le règlement d'un acompte pour garantir les véhicules 4x4, chauffeurs et nuits en campements du désert.",
+          "Le solde restant est exigible avant le départ selon les termes convenus. Les prix annoncés comprennent expressément les services listés sur votre voucher. Les pourboires et dépenses personnelles demeurent à la charge du voyageur.",
+        ],
+        callout: {
+          title: "Transparence Tarifaire",
+          desc: "Nos tarifs confirmés sont garantis sans majoration cachée ni frais imprévus à l'arrivée.",
+        },
+      },
+      {
+        id: "cancellation",
+        num: "04",
+        title: "Politique d'Annulation & Remboursements",
+        paragraphs: [
+          "L'organisation d'itinéraires dans le désert marocain implique des réservations fermes auprès de partenaires locaux et campements isolés.",
+          "Toute demande d'annulation doit impérativement être transmise par écrit par email (amsirare@gmail.com) ou WhatsApp officiel selon le barème certifié ci-dessous.",
+        ],
+      },
+      {
+        id: "liability",
+        num: "05",
+        title: "Limitation de Responsabilité & Force Majeure",
+        paragraphs: [
+          "Amsirar Trip sélectionne avec rigueur des guides agréés, chauffeurs chevronnés et prestataires reconnus pour leur professionnalisme.",
+          "Notre responsabilité ne saurait être engagée pour des retards, déviations ou annulations causés par un cas de force majeure (tempêtes de sable, crues, fermetures de routes ou événements imprévisibles). Notre engagement financier est strictement plafonné au montant total perçu pour la réservation.",
+        ],
+      },
+      {
+        id: "intellectual-property",
+        num: "06",
+        title: "Propriété Intellectuelle",
+        paragraphs: [
+          "L'ensemble des contenus de ce site (textes, photographies originales, tracés d'itinéraires et logos) est la propriété exclusive d'Amsirar Trip SARL et protégé par les conventions internationales du droit d'auteur.",
+          "Toute reproduction ou diffusion commerciale sans accord écrit préalable est strictement interdite.",
+        ],
+      },
+      {
+        id: "governing-law",
+        num: "07",
+        title: "Loi Applicable & Juridiction Compétente",
+        paragraphs: [
+          "Les présentes conditions générales sont soumises au droit du Royaume du Maroc.",
+          "En cas de réclamation qui ne trouverait pas de règlement amiable direct, compétence exclusive est attribuée aux tribunaux de commerce de Marrakech, Maroc.",
+        ],
+        callout: {
+          title: "Enregistrement Commercial à Marrakech",
+          desc: "Amsirar Trip SARL opère en parfaite conformité avec la réglementation du Ministère du Tourisme du Maroc.",
+        },
+      },
+      {
+        id: "contact",
+        num: "08",
+        title: "Contact Officiel & Mentions Légales",
+        paragraphs: [
+          "Pour toute question relative à nos conditions générales de vente, vous pouvez joindre notre équipe à Marrakech :",
+        ],
+      },
+    ],
+  },
+  es: {
+    title: "Términos y Condiciones de Servicio",
+    subtitle:
+      "Marco operativo, condiciones de reserva y garantías para los viajeros de Amsirar Trip en Marruecos.",
+    lastUpdated: "Última actualización: Enero 2026",
+    badgeDoc: "Contrato Oficial de Viaje",
+    badgeStatus: "Vigente y Vinculante",
+    badgeJurisdiction: "Reino de Marruecos",
+    summaryTitle: "Garantías y Aspectos Clave",
+    summarySubtitle: "Resumen transparente de los puntos esenciales de su reserva antes de partir.",
+    summaryCards: [
+      {
+        title: "Depósito Inicial",
+        description:
+          "Un depósito asegura sus vehículos 4x4, chófer privado y campamentos. Saldo abonado antes de la salida.",
+      },
+      {
+        title: "Cancelación Justa",
+        description:
+          "100% de reembolso a más de 30 días, 50% entre 15 y 29 días. Tiempos de preaviso claros.",
+      },
+      {
+        title: "Operador Acreditado",
+        description:
+          "Agencia local registrada en Marruecos con transportes turísticos autorizados y guías certificados.",
+      },
+      {
+        title: "Tribunales de Marrakech",
+        description:
+          "Contrato regulado conforme a la legislación marroquí y la jurisdicción comercial de Marrakech.",
+      },
+    ],
+    tocTitle: "Índice de Secciones",
+    printLabel: "Imprimir / Guardar en PDF",
+    agencyCard: {
+      title: "Amsirar Trip SARL",
+      badge: "Agencia Turística Acreditada en Marruecos",
+      hours: "Atención al viajero 7 días a la semana",
+      chatCta: "Contactar por WhatsApp",
+    },
+    cancellationMatrix: {
+      title: "Baremos de Cancelación y Devoluciones",
+      subtitle: "Calculado en días naturales previos a la salida oficial:",
+      tiers: [
+        {
+          days: "Más de 30 días antes",
+          badge: "Reembolso 100%",
+          badgeClass: "bg-emerald-500/10 text-emerald-700 border-emerald-500/30",
+          desc: "Reembolso íntegro a su forma de pago original, deducidos los gastos de gestión bancaria.",
+        },
+        {
+          days: "Entre 15 y 29 días",
+          badge: "Reembolso 50%",
+          badgeClass: "bg-amber-500/10 text-amber-800 border-amber-500/30",
+          desc: "50% de devolución. La cantidad retenida cubre bloqueos de hoteles y logística en ruta.",
+        },
+        {
+          days: "Menos de 15 días",
+          badge: "Sin reembolso",
+          badgeClass: "bg-zinc-500/10 text-zinc-700 border-zinc-500/30",
+          desc: "Sin reembolso. Vehículos, chóferes y haimas en el desierto quedan formalmente bloqueados.",
+        },
+      ],
+      insuranceTitle: "Seguro Integral Altamente Recomendado",
+      insuranceDesc:
+        "Aconsejamos encarecidamente contratar un seguro de viaje integral que cubra cancelaciones médicas, retrasos aéreos y emergencias durante su estancia.",
+    },
+    sections: [
+      {
+        id: "acceptance",
+        num: "01",
+        title: "Aceptación de los Términos",
+        paragraphs: [
+          "Al navegar por amsirartrip.com o confirmar una reserva de circuito en Marruecos, usted suscribe un acuerdo legal regulado por estos términos.",
+          "Si no está conforme con estas cláusulas, le rogamos no contratar nuestros servicios. Amsirar Trip se reserva el derecho de actualizar sus condiciones conforme a la normativa turística marroquí.",
+        ],
+      },
+      {
+        id: "services",
+        num: "02",
+        title: "Nuestros Servicios y Rutas",
+        paragraphs: [
+          "Amsirar Trip es una agencia local especializada en tours por el desierto del Sahara, excursiones desde Marrakech, expediciones en el Atlas y rutas culturales en Marruecos.",
+          "Las descripciones y fotografías de la web tienen carácter orientativo. Las rutas pueden sufrir modificaciones por causas meteorológicas o seguridad del pasaje.",
+        ],
+      },
+      {
+        id: "bookings",
+        num: "03",
+        title: "Reservas, Depósitos y Formas de Pago",
+        paragraphs: [
+          "Toda reserva requiere un anticipo formal para confirmar la asignación del vehículo y alojamiento.",
+          "El saldo restante se abonará antes de iniciar la ruta según lo pactado. Los precios incluyen exclusivamente los servicios detallados en el itinerario oficial.",
+        ],
+        callout: {
+          title: "Precios Transparentes",
+          desc: "Sin suplementos sorpresa ni cargos ocultos tras la emisión del presupuesto formal.",
+        },
+      },
+      {
+        id: "cancellation",
+        num: "04",
+        title: "Política de Cancelación y Reembolsos",
+        paragraphs: [
+          "La coordinación en el desierto y montaña exige compromisos vinculantes con los campamentos locales.",
+          "Las cancelaciones deben notificarse por escrito vía correo electrónico (amsirare@gmail.com) o WhatsApp según la escala expuesta a continuación.",
+        ],
+      },
+      {
+        id: "liability",
+        num: "05",
+        title: "Limitación de Responsabilidad y Fuerza Mayor",
+        paragraphs: [
+          "Amsirar Trip no asume responsabilidad por retrasos o cambios de ruta derivados de causas de fuerza mayor (tormentas de arena, desprendimientos de pistas o alteraciones meteorológicas imprevistas).",
+          "Nuestra responsabilidad contractual queda limitada a la cuantía total abonada por la reserva contratada.",
+        ],
+      },
+      {
+        id: "intellectual-property",
+        num: "06",
+        title: "Propiedad Intelectual",
+        paragraphs: [
+          "Los textos, imágenes, rutas y materiales gráficos de este sitio web son propiedad exclusiva de Amsirar Trip SARL y están protegidos por la legislación internacional.",
+        ],
+      },
+      {
+        id: "governing-law",
+        num: "07",
+        title: "Legislación Aplicable y Jurisdicción",
+        paragraphs: [
+          "Estos términos se rigen por la legislación del Reino de Marruecos.",
+          "Cualquier disputa que no pueda solucionarse de mutuo acuerdo se someterá a los juzgados y tribunales competentes de Marrakech.",
+        ],
+        callout: {
+          title: "Inscripción en Marrakech",
+          desc: "Empresa legalmente registrada y auditada bajo las normas del Ministerio de Turismo de Marruecos.",
+        },
+      },
+      {
+        id: "contact",
+        num: "08",
+        title: "Contacto Oficial y Notificaciones",
+        paragraphs: [
+          "Para consultas formales o aclaraciones sobre su contrato de viaje, contacte con nuestra oficina en Marrakech:",
+        ],
+      },
+    ],
+  },
+  de: {
+    title: "Allgemeine Geschäftsbedingungen",
+    subtitle:
+      "Vertragliche Grundlagen, Buchungsrichtlinien und Reisendenschutz für Angebote von Amsirar Trip in Marokko.",
+    lastUpdated: "Zuletzt aktualisiert: Januar 2026",
+    badgeDoc: "Offizieller Reisevertrag",
+    badgeStatus: "Gültig & Rechtsverbindlich",
+    badgeJurisdiction: "Königreich Marokko",
+    summaryTitle: "Wesentliche Vertragsinhalte",
+    summarySubtitle:
+      "Die wichtigsten Konditionen auf einen Blick für absolute Klarheit vor Reiseantritt.",
+    summaryCards: [
+      {
+        title: "Buchungsanzahlung",
+        description:
+          "Eine Anzahlung bestätigt Ihre private Tour verbindlich. Die Restzahlung erfolgt vor Reiseantritt.",
+      },
+      {
+        title: "Faire Stornierungsfristen",
+        description:
+          "100% Erstattung ab 30 Tagen vor Abreise, 50% bei 15 bis 29 Tagen. Klare und nachvollziehbare Fristen.",
+      },
+      {
+        title: "Lizenzierter Veranstalter",
+        description:
+          "In Marokko registrierte Reiseagentur mit lizenzierten Fahrern, versicherten Fahrzeugen und Bergführern.",
+      },
+      {
+        title: "Gerichtsstand Marrakesch",
+        description:
+          "Unterliegt ausschließlich marokkanischem Recht und der Zuständigkeit der Gerichte in Marrakesch.",
+      },
+    ],
+    tocTitle: "Inhaltsübersicht",
+    printLabel: "Drucken / Als PDF speichern",
+    agencyCard: {
+      title: "Amsirar Trip SARL",
+      badge: "Lizenzierte Marokkanische Reiseagentur",
+      hours: "Kundenbetreuung an 7 Tagen pro Woche",
+      chatCta: "Über WhatsApp anfragen",
+    },
+    cancellationMatrix: {
+      title: "Stornierungsstaffel & Rückerstattungen",
+      subtitle: "Berechnung erfolgt nach Kalendertagen vor dem offiziellen Reisebeginn:",
+      tiers: [
+        {
+          days: "Mehr als 30 Tage vorher",
+          badge: "100% Erstattungsfähig",
+          badgeClass: "bg-emerald-500/10 text-emerald-700 border-emerald-500/30",
+          desc: "Vollständige Erstattung auf Ihr Zahlungsmittel abzüglich geringer Bank- und Bearbeitungsspesen.",
+        },
+        {
+          days: "15 bis 29 Tage vorher",
+          badge: "50% Erstattungsfähig",
+          badgeClass: "bg-amber-500/10 text-amber-800 border-amber-500/30",
+          desc: "50% Rückerstattung. Der Restbetrag deckt feste Anzahlungen für Wüstencamps und Chauffeure.",
+        },
+        {
+          days: "Weniger als 15 Tage",
+          badge: "Keine Erstattung",
+          badgeClass: "bg-zinc-500/10 text-zinc-700 border-zinc-500/30",
+          desc: "Keine Erstattung möglich. Sämtliche Fahrzeuge, Camps und Guides sind unwiderruflich gebucht.",
+        },
+      ],
+      insuranceTitle: "Reiseversicherung Dringend Empfohlen",
+      insuranceDesc:
+        "Wir empfehlen allen internationalen Reisenden den Abschluss einer umfassenden Auslandsreisekranken- und Reiserücktrittsversicherung.",
+    },
+    sections: [
+      {
+        id: "acceptance",
+        num: "01",
+        title: "Geltungsbereich & Annahme der Bedingungen",
+        paragraphs: [
+          "Mit dem Zugriff auf amsirartrip.com oder der verbindlichen Buchung unserer Marokko-Reisen schließen Sie einen rechtsverbindlichen Reisevertrag ab.",
+          "Sollten Sie diesen Bestimmungen nicht zustimmen, bitten wir Sie, von einer Buchung abzusehen. Fortgesetzte Nutzung gilt als Einverständnis mit den jeweils aktuellen Bestimmungen.",
+        ],
+      },
+      {
+        id: "services",
+        num: "02",
+        title: "Unsere Reiseleistungen & Angebote",
+        paragraphs: [
+          "Amsirar Trip bietet maßgeschneiderte Rundreisen, Wüstenausflüge in die Sahara, Bergtouren im Atlas und Kulturtouren in Marokko an.",
+          "Alle Buchungen erfolgen vorbehaltlich Verfügbarkeit. Reiserouten können wetterbedingt oder aus Sicherheitsgründen angepasst werden.",
+        ],
+      },
+      {
+        id: "bookings",
+        num: "03",
+        title: "Buchung, Anzahlung & Zahlungsbedingungen",
+        paragraphs: [
+          "Für verbindliche Reservierungen ist eine Anzahlung zur Sicherung von Allradfahrzeugen und Wüstencamps erforderlich.",
+          "Der Restbetrag ist vor Reisebeginn fällig. Die angegebenen Preise umfassen alle schriftlich bestätigten Leistungen Ihres Reiseplans.",
+        ],
+        callout: {
+          title: "Preistransparenz",
+          desc: "Verbindliche Festpreise ohne versteckte Zuschläge oder nachträgliche Sonderabgaben.",
+        },
+      },
+      {
+        id: "cancellation",
+        num: "04",
+        title: "Stornierungs- & Rückerstattungsrichtlinien",
+        paragraphs: [
+          "Die Durchführung privater Expeditionen erfordert verbindliche Vereinbarungen mit lokalen Partnern in abgelegenen Wüstenregionen.",
+          "Stornierungen bedürfen der Schriftform per E-Mail (amsirare@gmail.com) oder WhatsApp gemäß der nachfolgenden Staffel.",
+        ],
+      },
+      {
+        id: "liability",
+        num: "05",
+        title: "Haftungsbeschränkung & Höhere Gewalt",
+        paragraphs: [
+          "Für Verzögerungen oder Ausfälle infolge höherer Gewalt (Sandstürme, Unwetter, Straßensperren) übernimmt Amsirar Trip keine Haftung.",
+          "Unsere Haftung beschränkt sich in jedem Fall auf die Höhe des insgesamt für die Buchung bezahlten Reisepreises.",
+        ],
+      },
+      {
+        id: "intellectual-property",
+        num: "06",
+        title: "Urheberrecht & Geistiges Eigentum",
+        paragraphs: [
+          "Sämtliche Texte, Fotografien und Routenverläufe dieser Webseite unterliegen dem Urheberrecht von Amsirar Trip SARL.",
+        ],
+      },
+      {
+        id: "governing-law",
+        num: "07",
+        title: "Anwendbares Recht & Gerichtsstand",
+        paragraphs: [
+          "Es gilt ausschließlich das Recht des Königreichs Marokko.",
+          "Für Streitigkeiten, die nicht gütlich beigelegt werden können, ist der ausschließliche Gerichtsstand Marrakesch.",
+        ],
+        callout: {
+          title: "Lizenzierter Tourismusbetrieb",
+          desc: "Amsirar Trip SARL ist in Marrakesch registriert und erfüllt alle Vorgaben des marokkanischen Tourismusministeriums.",
+        },
+      },
+      {
+        id: "contact",
+        num: "08",
+        title: "Offizielle Kontaktaufnahme & Rechtshinweise",
+        paragraphs: [
+          "Für vertragsrechtliche Rückfragen steht Ihnen unsere Leitung in Marrakesch gerne zur Verfügung:",
+        ],
+      },
+    ],
+  },
+};
+
+const defaultCopy: LegalCopy = contentByLocale["en"] as LegalCopy;
+const current: LegalCopy = (contentByLocale[locale] ?? defaultCopy) as LegalCopy;
 ---
 
-<LegalLayout
-  docId="terms-of-service"
+<!-- 1. Hero Header with Authentic Moroccan Photography & Meta Badges -->
+<PageHeader
+  bgImage={headerImg}
+  breadcrumbs={[{ label: t("nav.home"), href: "/" }, { label: current.title }]}
+  gradientPosition="top-right"
   headingId="terms-of-service-heading"
-/>
+  subtitle={current.subtitle}
+  title={current.title}
+>
+  <!-- Authority & Meta Badges Row -->
+  <div class="flex flex-wrap items-center justify-center gap-2 pbs-2">
+    <div class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1 text-xs font-mono font-medium text-white backdrop-blur-md">
+      <span class="size-2 rounded-full bg-emerald-400 animate-pulse"></span>
+      <span>{current.badgeStatus}</span>
+    </div>
+    <div class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1 text-xs font-mono font-medium text-white/90 backdrop-blur-md">
+      <Calendar class="size-3.5 text-orange-300" />
+      <time datetime="2026-01">{current.lastUpdated}</time>
+    </div>
+    <div class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1 text-xs font-mono font-medium text-white/90 backdrop-blur-md">
+      <Scale class="size-3.5 text-orange-300" />
+      <span>{current.badgeJurisdiction}</span>
+    </div>
+  </div>
+</PageHeader>
+
+<div class="relative bg-stone-50/70 text-slate-900 transition-colors print:bg-white print:text-black">
+  <!-- Subtle background texture -->
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,oklch(56%_0.19_33deg/4%),transparent_50%)]"
+  ></div>
+
+  <!-- 2. Executive Summary Bento (Anti-Slop Transparency Cards) -->
+  <section
+    aria-labelledby="terms-summary-heading"
+    class="relative z-10 border-be border-stone-200/80 bg-white py-12 lg:py-16"
+  >
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-2xl">
+        <div class="flex items-center gap-2">
+          <Sparkles class="size-4 text-orange" />
+          <span class="font-mono text-xs font-semibold tracking-wider text-orange uppercase">
+            // {current.badgeDoc}
+          </span>
+        </div>
+        <h2
+          class="mbs-2 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl"
+          id="terms-summary-heading"
+        >
+          {current.summaryTitle}
+        </h2>
+        <p class="mbs-2 text-sm text-slate-600 sm:text-base leading-relaxed">
+          {current.summarySubtitle}
+        </p>
+      </div>
+
+      <div class="mbs-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {current.summaryCards.map((card, idx) => (
+          <div class="group relative flex flex-col justify-between rounded-2xl border border-stone-200/90 bg-stone-50/60 p-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-orange/30 hover:bg-white hover:shadow-lg hover:shadow-orange/5">
+            <div>
+              <div class="flex items-center justify-between">
+                <span class="font-mono text-xs font-bold text-orange">0{idx + 1}</span>
+              </div>
+              <h3 class="mbs-3 text-base font-bold text-slate-900 group-hover:text-orange transition-colors">
+                {card.title}
+              </h3>
+              <p class="mbs-2 text-xs leading-relaxed text-slate-600 sm:text-sm">
+                {card.description}
+              </p>
+            </div>
+            <div class="mbs-4 pbs-3 border-bs border-stone-200/60 flex items-center gap-2 text-xs font-medium text-slate-500">
+              <CircleCheck class="size-4 text-emerald-600" />
+              <span>Verified Policy</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Two-Column Swiss Editorial Layout -->
+  <div class="relative z-10 mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-8 xl:gap-8">
+      <!-- STICKY SIDEBAR (TOC + AGENCY CARD + ACTIONS) -->
+      <aside class="lg:col-span-4 print:hidden">
+        <div class="sticky top-24 space-y-4">
+          <!-- Table of Contents Card -->
+          <nav
+            aria-label={current.tocTitle}
+            class="rounded-2xl border border-stone-200/90 bg-white p-4 sm:p-5 shadow-sm"
+          >
+            <div class="flex items-center justify-between border-be border-stone-200/80 pbe-3">
+              <div class="flex items-center gap-2">
+                <FileText class="size-4 text-orange" />
+                <h3 class="font-mono text-xs font-bold tracking-wider text-slate-900 uppercase">
+                  {current.tocTitle}
+                </h3>
+              </div>
+              <span class="rounded-full bg-stone-100 px-2 py-1 font-mono text-[11px] font-semibold text-slate-600">
+                0{current.sections.length}
+              </span>
+            </div>
+
+            <ul
+              class="mbs-3 flex flex-col gap-0.5 text-xs sm:text-sm font-medium"
+              id="terms-toc-list"
+            >
+              {current.sections.map((sec, idx) => (
+                <li>
+                  <a
+                    class="group flex items-center rounded-full px-3 py-2 text-slate-600 transition-all duration-150 hover:bg-orange/5 hover:text-orange data-[active=true]:bg-orange/10 data-[active=true]:font-semibold data-[active=true]:text-orange"
+                    data-section-id={sec.id}
+                    href={`#${sec.id}`}
+                  >
+                    <span class="flex items-center gap-2 truncate min-w-0">
+                      <span class="shrink-0 whitespace-nowrap font-mono text-xs font-bold text-slate-400 group-hover:text-orange group-data-[active=true]:text-orange">
+                        {idx + 1}&nbsp;//
+                      </span>
+                      <span class="truncate">{sec.title}</span>
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+
+            <div class="mbs-3 pbs-3 border-bs border-stone-200/80">
+              <button
+                class="flex w-full min-h-10 cursor-pointer items-center justify-center gap-2 rounded-full border border-stone-200 bg-stone-50 px-4 py-2 text-xs font-semibold text-slate-700 transition-colors hover:bg-stone-100 active:scale-[0.98]"
+                id="terms-print-btn"
+                type="button"
+              >
+                <Printer class="size-3.5 text-slate-500" />
+                <span>{current.printLabel}</span>
+              </button>
+            </div>
+          </nav>
+
+          <!-- Direct Agency Credentials & Support Card -->
+          <div class="overflow-hidden rounded-2xl border border-white/10 bg-slate-950 p-5 text-white shadow-xl ring-1 ring-white/10">
+            <div class="flex items-center gap-2">
+              <ShieldCheck class="size-4 text-orange-400" />
+              <span class="font-mono text-xs font-semibold tracking-wider text-orange-400 uppercase">
+                {current.agencyCard.badge}
+              </span>
+            </div>
+
+            <h4 class="mbs-2 text-base font-bold text-white sm:text-lg">
+              {current.agencyCard.title}
+            </h4>
+            <p class="mbs-1 text-xs text-zinc-400">{current.agencyCard.hours}</p>
+
+            <div class="mbs-4 flex flex-col gap-3 border-bs border-white/10 pbs-3 text-xs text-zinc-300">
+              <div class="flex items-start gap-3">
+                <MapPinned
+                  class="size-4 shrink-0 text-orange-400 mbs-0.5"
+                  stroke-width={2}
+                />
+                <span class="leading-relaxed">
+                  Imm. J appt N° 5, Résidence La Perle de l'Atlas, Marrakech, Morocco
+                </span>
+              </div>
+              <div class="flex items-center gap-3">
+                <Mail class="size-4 shrink-0 text-orange-400" />
+                <a
+                  class="hover:text-white transition-colors"
+                  href="mailto:amsirare@gmail.com"
+                >
+                  amsirare@gmail.com
+                </a>
+              </div>
+              <div class="flex items-center gap-3">
+                <Phone class="size-4 shrink-0 text-orange-400" />
+                <a
+                  class="hover:text-white transition-colors"
+                  href={PHONE_LINK}
+                >
+                  {PHONE_DISPLAY}
+                </a>
+              </div>
+            </div>
+
+            <div class="mbs-4 pbs-2">
+              <a
+                class="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-linear-to-br from-amber-orange to-orange px-4 py-3 font-mono text-xs font-semibold text-white shadow-md shadow-orange/20 transition-all duration-150 hover:brightness-105 active:scale-[0.98]"
+                href={WHATSAPP_LINK}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <MessageCircle class="size-4" />
+                <span>{current.agencyCard.chatCta}</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- MAIN CONTENT COLUMN -->
+      <article class="lg:col-span-8 space-y-6 print:w-full">
+        {current.sections.map((sec, idx) => (
+          <section
+            aria-labelledby={`heading-${sec.id}`}
+            class="relative rounded-2xl border border-stone-200/90 bg-white p-6 sm:p-8 shadow-sm transition-all duration-200 hover:border-stone-300 print:border-none print:shadow-none print:break-inside-avoid"
+            id={sec.id}
+          >
+            <!-- Section Header -->
+            <div class="border-be border-stone-200/80 pbe-4">
+              <div class="flex items-center gap-3">
+                <span class="flex shrink-0 whitespace-nowrap items-center justify-center rounded-full bg-orange/10 px-2 py-1 font-mono text-xs font-bold text-orange">
+                  {idx + 1}&nbsp;//
+                </span>
+                <h2
+                  class="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl"
+                  id={`heading-${sec.id}`}
+                >
+                  {sec.title}
+                </h2>
+              </div>
+            </div>
+
+            <!-- Paragraphs -->
+            <div class="mbs-6 flex flex-col gap-4 text-sm leading-relaxed text-slate-700 sm:text-base">
+              {sec.paragraphs.map((p) => (
+                <p>{p}</p>
+              ))}
+            </div>
+
+            <!-- Dedicated Visual Matrix for Cancellation (Section 04) -->
+            {sec.id === "cancellation" && (
+              <div class="mbs-8 flex flex-col gap-6 pbs-6 border-bs border-stone-200/80">
+                <div>
+                  <h3 class="text-base font-bold text-slate-900 sm:text-lg">
+                    {current.cancellationMatrix.title}
+                  </h3>
+                  <p class="mbs-1 text-xs text-slate-600 sm:text-sm">
+                    {current.cancellationMatrix.subtitle}
+                  </p>
+                </div>
+
+                <!-- 3-Tier Grid -->
+                <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+                  {current.cancellationMatrix.tiers.map((tier) => (
+                    <div class="flex flex-col justify-between rounded-xl border border-stone-200 bg-stone-50/70 p-4 transition-colors hover:bg-white hover:border-orange/30">
+                      <div>
+                        <div class="flex items-center justify-between">
+                          <span class="font-mono text-xs font-bold text-slate-800">
+                            {tier.days}
+                          </span>
+                        </div>
+                        <div class="mbs-3">
+                          <span
+                            class:list={[
+                              "inline-block rounded-full border px-2 py-1 font-mono text-xs font-bold",
+                              tier.badgeClass,
+                            ]}
+                          >
+                            {tier.badge}
+                          </span>
+                        </div>
+                        <p class="mbs-3 text-xs leading-relaxed text-slate-600">{tier.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <!-- Travel Insurance Advisory Box -->
+                <div class="rounded-2xl border border-amber-500/20 bg-amber-500/5 p-4 sm:p-5">
+                  <div class="flex items-start gap-4">
+                    <div class="flex size-9 shrink-0 items-center justify-center rounded-full bg-orange/10 text-orange">
+                      <CircleAlert class="size-4.5" />
+                    </div>
+                    <div>
+                      <h4 class="text-sm font-bold text-slate-900">
+                        {current.cancellationMatrix.insuranceTitle}
+                      </h4>
+                      <p class="mbs-1 text-xs sm:text-sm text-slate-700 leading-relaxed">
+                        {current.cancellationMatrix.insuranceDesc}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            <!-- Callout if defined -->
+            {sec.callout && (
+              <div class="mbs-6 rounded-2xl border border-orange/20 bg-orange/5 p-4 sm:p-5">
+                <div class="flex items-start gap-4">
+                  <div class="flex size-9 shrink-0 items-center justify-center rounded-full bg-orange/10 text-orange">
+                    <ShieldCheck class="size-4.5" />
+                  </div>
+                  <div>
+                    <h4 class="text-sm font-bold text-slate-900">{sec.callout.title}</h4>
+                    <p class="mbs-1 text-xs sm:text-sm text-slate-700 leading-relaxed">
+                      {sec.callout.desc}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            <!-- Section 08: Direct Contact Action Grid -->
+            {sec.id === "contact" && (
+              <div class="mbs-8 pbs-6 border-bs border-stone-200/80">
+                <div class="grid grid-cols-1 gap-3 sm:grid-cols-3">
+                  <a
+                    class="group/contact flex items-center justify-center gap-3 rounded-full border border-stone-200 bg-stone-50 px-4 py-3 text-center transition-all duration-150 hover:border-orange hover:bg-orange/5 active:scale-[0.98]"
+                    href={PHONE_LINK}
+                  >
+                    <div class="flex size-8 shrink-0 items-center justify-center rounded-full bg-orange/10 text-orange group-hover/contact:bg-orange group-hover/contact:text-white transition-colors">
+                      <Phone class="size-4" />
+                    </div>
+                    <div class="text-left">
+                      <span class="block text-xs font-bold text-slate-900 group-hover/contact:text-orange transition-colors">
+                        Telephone
+                      </span>
+                      <span class="block font-mono text-[11px] text-slate-600">
+                        {PHONE_DISPLAY}
+                      </span>
+                    </div>
+                  </a>
+
+                  <a
+                    class="group/contact flex items-center justify-center gap-3 rounded-full border border-stone-200 bg-stone-50 px-4 py-3 text-center transition-all duration-150 hover:border-orange hover:bg-orange/5 active:scale-[0.98]"
+                    href="mailto:amsirare@gmail.com"
+                  >
+                    <div class="flex size-8 shrink-0 items-center justify-center rounded-full bg-orange/10 text-orange group-hover/contact:bg-orange group-hover/contact:text-white transition-colors">
+                      <Mail class="size-4" />
+                    </div>
+                    <div class="text-left">
+                      <span class="block text-xs font-bold text-slate-900 group-hover/contact:text-orange transition-colors">
+                        Email Us
+                      </span>
+                      <span class="block font-mono text-[11px] text-slate-600">
+                        amsirare@gmail.com
+                      </span>
+                    </div>
+                  </a>
+
+                  <a
+                    class="group/contact flex items-center justify-center gap-3 rounded-full border border-stone-200 bg-stone-50 px-4 py-3 text-center transition-all duration-150 hover:border-emerald-500 hover:bg-emerald-500/5 active:scale-[0.98]"
+                    href={WHATSAPP_LINK}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    <div class="flex size-8 shrink-0 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-600 group-hover/contact:bg-emerald-600 group-hover/contact:text-white transition-colors">
+                      <MessageCircle class="size-4" />
+                    </div>
+                    <div class="text-left">
+                      <span class="block text-xs font-bold text-slate-900 group-hover/contact:text-emerald-700 transition-colors">
+                        WhatsApp
+                      </span>
+                      <span class="block font-mono text-[11px] text-emerald-700">Chat Now</span>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            )}
+          </section>
+        ))}
+
+        <!-- Bottom Return & Reassurance Banner -->
+        <div class="rounded-2xl border border-stone-200 bg-linear-to-r from-stone-50 via-white to-stone-50 p-6 sm:p-8 text-center shadow-xs">
+          <Compass class="mx-auto size-8 text-orange" />
+          <h3 class="mt-3 text-lg font-bold text-slate-900">
+            Ready to Explore the Wonders of Morocco?
+          </h3>
+          <p class="mx-auto mt-2 max-w-xl text-sm text-slate-600 leading-relaxed">
+            From the dunes of Erg Chebbi to the imperial alleys of Fes and Marrakech, our expert
+            team is ready to design your journey with complete peace of mind.
+          </p>
+          <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
+            <a
+              class="inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-full bg-linear-to-br from-amber-orange to-orange px-6 py-3 text-sm font-semibold text-white shadow-md shadow-orange/20 transition-all hover:brightness-105 active:scale-[0.98]"
+              href={getRelativeLocaleUrl(locale, "tours")}
+            >
+              <span>Explore Morocco Tours</span>
+            </a>
+            <a
+              class="inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-full border border-stone-300 bg-white px-6 py-3 text-sm font-medium text-slate-700 transition-colors hover:bg-stone-50 active:scale-[0.98]"
+              href={getRelativeLocaleUrl(locale, "contact")}
+            >
+              <span>Contact Our Team</span>
+            </a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</div>
+
+<!-- Interactive Table of Contents & Print Script -->
+<script src="../scripts/terms-interactive.ts"></script>

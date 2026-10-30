@@ -23,6 +23,9 @@ const eslintConfig = defineConfig(
   securityPlugin.configs.recommended,
   nounsanitized.configs.recommended,
 
+  // ─── Linter Options ───────────────────────────────────────────────────────
+  { linterOptions: { reportUnusedDisableDirectives: "error" } },
+
   // ─── Unicorn Strict Tuning ───────────────────────────────────────────────
   {
     rules: {
@@ -65,6 +68,7 @@ const eslintConfig = defineConfig(
       "unicorn/no-unnecessary-global-this": "off",
       "unicorn/no-computed-property-existence-check": "off",
       "unicorn/no-nested-ternary": "off",
+      "unicorn/no-asterisk-prefix-in-documentation-comments": "off",
     },
   },
 
@@ -121,6 +125,14 @@ const eslintConfig = defineConfig(
       "@typescript-eslint/prefer-function-type": "error",
       "@typescript-eslint/unified-signatures": "error",
       "@typescript-eslint/consistent-type-definitions": "off",
+      "@typescript-eslint/no-dynamic-delete": "error",
+      "@typescript-eslint/no-extraneous-class": "error",
+      "@typescript-eslint/consistent-type-assertions": [
+        "error",
+        { assertionStyle: "as", objectLiteralTypeAssertions: "never" },
+      ],
+      "@typescript-eslint/consistent-type-exports": "error",
+      "@typescript-eslint/no-deprecated": "error",
     },
   },
 
@@ -219,6 +231,7 @@ const eslintConfig = defineConfig(
     files: ["**/*.astro"],
     rules: {
       "unicorn/name-replacements": "off",
+      "unicorn/relative-url-style": "off",
       "astro/no-set-html-directive": "error",
       "astro/no-unsafe-inline-scripts": ["error", { allowModuleScripts: true }],
       "astro/no-exports-from-components": "error",
@@ -249,9 +262,16 @@ const eslintConfig = defineConfig(
       "unicorn/prefer-top-level-await": "off",
       "no-unsanitized/method": "off",
       "security/detect-object-injection": "off",
-      "@typescript-eslint/no-explicit-any": "off",
     },
   },
+
+  // ─── ASCII Skeleton components — safe HTML insertion for internal ASCII wireframes ───
+  { files: ["src/shared/ui/AsciiSkeleton.astro"], rules: { "astro/no-set-html-directive": "off" } },
+  { files: ["src/shared/ui/AsciiSkeleton.vue"], rules: { "vue/no-v-html": "off" } },
+
+  // ─── ASCII Skeleton components — safe HTML insertion for internal ASCII wireframes ───
+  { files: ["src/shared/ui/AsciiSkeleton.astro"], rules: { "astro/no-set-html-directive": "off" } },
+  { files: ["src/shared/ui/AsciiSkeleton.vue"], rules: { "vue/no-v-html": "off" } },
 
   // ─── Logger Service & CLI Scripts — Allows Central Log & Console Dispatches ────
   { files: ["src/services/logger.ts", "scripts/**/*.ts"], rules: { "no-console": "off" } },
@@ -263,8 +283,13 @@ const eslintConfig = defineConfig(
       "no-unsanitized/method": "off",
       "unicorn/no-await-expression-member": "off",
       "security/detect-object-injection": "off",
-      "@typescript-eslint/no-explicit-any": "off",
     },
+  },
+
+  // ─── Zod Schema Definitions — Composition pattern exceeds arbitrary nesting depths ───
+  {
+    files: ["src/i18n/schema.ts", "src/content.config.ts"],
+    rules: { "unicorn/max-nested-calls": "off" },
   },
 
   // ─── Prettier — MUST be last ──────────────────────────────────────────────
@@ -277,10 +302,13 @@ const eslintConfig = defineConfig(
       ".astro/**",
       "node_modules/**",
       "public/**",
+      "scratch/**",
       ".gemini/**",
       ".kiro/**",
       ".agent/**",
       ".agents/**",
+      ".claude/**",
+      ".github/**",
       "*.md",
       "*.json",
       "*.lock",

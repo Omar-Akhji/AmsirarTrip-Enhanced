@@ -1,4 +1,6 @@
 import { navigate } from "astro:transitions/client";
+import { getLocalizedPath } from "@/i18n/core";
+import { isLocale } from "@/i18n/locales";
 
 interface ToolDefinition {
   name: string;
@@ -10,21 +12,23 @@ interface ToolDefinition {
   };
 }
 
-interface NavigatorWithModelContext extends Navigator {
-  modelContext?: {
-    registerTool: (
-      definition: ToolDefinition,
-      handler: (input: Record<string, unknown>) => Promise<unknown>,
-    ) => void;
-  };
+declare global {
+  interface Navigator {
+    readonly modelContext?: {
+      readonly registerTool: (
+        definition: ToolDefinition,
+        handler: (input: Record<string, unknown>) => Promise<unknown>,
+      ) => void;
+    };
+  }
 }
 
 function initWebMCPTools() {
-  const nav = navigator as NavigatorWithModelContext;
-  if (!nav.modelContext) return;
+  const modelContext = navigator.modelContext;
+  if (!modelContext) return;
 
   try {
-    nav.modelContext.registerTool(
+    modelContext.registerTool(
       {
         name: "toggle_dark_theme",
         description: "Toggles the website theme between light and dark mode",
@@ -46,7 +50,7 @@ function initWebMCPTools() {
       },
     );
 
-    nav.modelContext.registerTool(
+    modelContext.registerTool(
       {
         name: "change_locale",
         description: "Changes the website locale/language with smooth Astro view transitions",
@@ -63,29 +67,17 @@ function initWebMCPTools() {
         },
       },
       async (input) => {
-        const localeInput = String(input["locale"]);
-        const currentPath = globalThis.location.pathname;
-        const segments = currentPath.split("/").filter(Boolean);
-        const locales = ["fr", "de", "es"];
-        const hasLocale = locales.includes(segments[0] ?? "");
-
-        let newPath = "";
-        if (localeInput === "en") {
-          newPath = `/${hasLocale ? segments.slice(1).join("/") : segments.join("/")}`;
-        } else {
-          const baseSegments = hasLocale ? segments.slice(1) : segments;
-          newPath = `/${localeInput}/${baseSegments.join("/")}`;
+        const localeInput = String(input["locale"]).trim();
+        if (!isLocale(localeInput)) {
+          return { success: false, error: "Unsupported locale" };
         }
-
-        newPath = newPath.replaceAll(/\/+/g, "/");
-        if (!newPath.startsWith("/")) newPath = `/${newPath}`;
-
+        const newPath = getLocalizedPath(globalThis.location.pathname, localeInput);
         await navigate(newPath);
         return { success: true, targetPath: newPath };
       },
     );
 
-    nav.modelContext.registerTool(
+    modelContext.registerTool(
       {
         name: "navigate_to",
         description:
@@ -103,15 +95,19 @@ function initWebMCPTools() {
       },
       async (input) => {
         const path = String(input["path"]).trim();
-        if (!path.startsWith("/")) {
-          return { success: false, error: "Path must start with '/'" };
+        if (!path.startsWith("/") || path.startsWith("//") || path.includes("\\")) {
+          return { success: false, error: "Path must be a valid internal relative path" };
         }
-        await navigate(path);
-        return { success: true, targetPath: path };
+        const resolved = new URL(path, globalThis.location.origin);
+        if (resolved.origin !== globalThis.location.origin) {
+          return { success: false, error: "Cross-origin navigation is forbidden" };
+        }
+        await navigate(resolved.pathname + resolved.search + resolved.hash);
+        return { success: true, targetPath: resolved.pathname };
       },
     );
 
-    nav.modelContext.registerTool(
+    modelContext.registerTool(
       {
         name: "get_page_context",
         description:

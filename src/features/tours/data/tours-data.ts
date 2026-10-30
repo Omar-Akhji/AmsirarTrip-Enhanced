@@ -19,7 +19,7 @@ export async function getToursData(): Promise<Tour[]> {
 
       // i18n keys matching the locale JSON structure: tours.tour1.title, tours.tour1.description
       const titleKey = `${tourKey}.title`;
-      const descriptionKey = `${tourKey}.description`;
+      const descriptionKey = `tours.${tourKey}.description`;
       // Author = start city shown in card
       const authorKey = `tours.cities.${startLocation.toLowerCase()}`;
       const startKey = `tours.cities.${startLocation.toLowerCase()}`;

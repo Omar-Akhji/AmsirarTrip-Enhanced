@@ -29,18 +29,18 @@
   "selectLanguage": "Select language",
   "home": {
     "meta": {
-      "title": "Amsirar Trip | Tour Travel & Adventure Camping in Morocco",
-      "description": "Specialist in Morocco travel and tours, Sahara desert trips, and excursions to the imperial cities of Morocco."
+      "title": "Morocco Tours & Sahara Desert Trips | Amsirar Trip",
+      "description": "Licensed Morocco travel agency in Marrakech. Specialist in private Sahara desert tours, Erg Chebbi & Chegaga expeditions, Atlas treks, and custom itineraries."
     },
     "title": "Welcome to Amsirar Trip",
-    "heroTitle": "Tour Travel & Adventure Camping",
-    "heroSubtitle": "Specialist in Morocco travel and tours, Sahara desert trips, and excursions to the imperial cities of Morocco.",
-    "heroSubtitleAlt1": "Discover Morocco's hidden gems and desert wonders",
-    "heroSubtitleAlt2": "Your gateway to Sahara adventures and imperial city explorations",
-    "heroAlt1": "Adventure Awaits Beyond the Dunes",
-    "heroAlt2": "Pack your bags — Morocco calls",
-    "exploreOurTours": "Explore Our Tours",
-    "contactForMore": "Contact Us For More Information",
+    "heroTitle": "Private Sahara & Morocco Expeditions",
+    "heroSubtitle": "Licensed private transport and tailored expeditions across Morocco. From Marrakech and Casablanca to desert bivouacs and imperial medinas.",
+    "heroSubtitleAlt1": "Private journeys across High Atlas passes and Sahara dunes",
+    "heroSubtitleAlt2": "Private 4x4 transport and licensed Berber guides across Morocco",
+    "heroAlt1": "High Atlas Passes to Erg Chebbi Dunes",
+    "heroAlt2": "Private 4x4 Travel with Local Berber Guides",
+    "exploreOurTours": "Browse Multi-Day Itineraries",
+    "contactForMore": "Request Custom Route",
     "stats": {
       "experience": "Years of Experience",
       "tours": "Tours Completed",
@@ -52,8 +52,8 @@
   },
   "tours": {
     "meta": {
-      "title": "Our Tours",
-      "description": "Explore our curated multi-day tours across Morocco. From the Sahara Desert to the Imperial Cities, find your perfect adventure."
+      "title": "Morocco Desert Tours & Sahara Itineraries | Amsirar Trip",
+      "description": "Book private and small-group Sahara desert tours from Marrakech and Casablanca. Experience Erg Chebbi dunes, camel treks, and luxury Berber camps."
     },
     "title": "Our Tours",
     "day": "Day",
@@ -62,7 +62,9 @@
     "activitiesLabel": "Activities",
     "arrivalLabel": "Arrival Time",
     "featured": "Featured",
-    "category": { "departures": "Departures" },
+    "category": {
+      "departures": "Departures"
+    },
     "cities": {
       "marrakech": "Marrakech",
       "casablanca": "Casablanca",
@@ -90,33 +92,33 @@
       "title": "Airport Transfer Services in Morocco",
       "mainBrand": "Amsirar Trip",
       "subBrand": "Tourist Transport",
-      "intro": "Travel in comfort and style with Amsirar Transport Touristique, your trusted partner for airport transfers across Morocco. We provide reliable, punctual, and private transfer services from major airports including Marrakech, Casablanca, Agadir, and Fes to your hotel or destination.",
-      "details": "Our modern, air-conditioned vehicles and professional drivers ensure a safe and stress-free journey, whether you're arriving for business or leisure. Forget the hassle of taxis or waiting lines — we'll be there on time to welcome you and take you wherever you need to go.",
+      "intro": "We provide licensed private airport transfers between major Moroccan airports (Marrakech RAK, Casablanca CMN, Agadir AGA, Fes FEZ) and city riads or regional destinations.",
+      "details": "Your driver meets you in the arrival hall with a name board, assists with luggage, and drives directly to your accommodation in an air-conditioned vehicle at agreed fixed rates.",
       "items": [
         "Comfortable & clean vehicles",
         "Professional multilingual drivers",
         "24/7 availability",
         "Fixed, transparent prices"
       ],
-      "conclusion": "With Amsirar Transport Touristique, your Moroccan adventure begins the moment you land",
+      "conclusion": "Private airport transfers and city transport across Morocco.",
       "ctaTitle": "Ready to explore Morocco?",
       "ctaDescription": "Book your multi-day tour with confidence",
       "ctaPoint01": "Expert guides & comfortable transport",
       "ctaPoint02": "Flexible itineraries tailored to you",
-      "ctaPoint03": "24/7 support throughout your journey"
+      "ctaPoint03": "24/7 on-trip assistance across Morocco"
     },
     "headerSubtitle": "Our Tours and packages",
     "stats": {
       "routes": "Signature itineraries",
-      "routesDesc": "Multi-day journeys curated across imperial cities, desert dunes, and Atlas passes.",
+      "routesDesc": "Multi-day journeys across imperial cities, desert dunes, and High Atlas passes.",
       "comfort": "Comfort fleet",
       "comfortDesc": "Modern 4x4s and mini-coaches with seasoned driver-guides on every route.",
       "support": "Concierge support",
       "supportDesc": "On-trip coordination for hotels, dietary requests, and schedule tweaks."
     },
     "tour": {
-      "smTitle": "read these tour for information",
-      "lgTitle": "recent tour"
+      "smTitle": "Private multi-day journeys",
+      "lgTitle": "Signature Morocco itineraries"
     },
     "readMore": "Read more",
     "comments": {
@@ -171,31 +173,31 @@
       "tourTypePlaceholder": "Tour Type"
     },
     "tour1": {
-      "description": "Sahara Magic: Ride camels across golden dunes, camp under a blanket of stars, and discover the enchanting beauty of Morocco's desert wilderness!"
+      "description": "Camel trek across Erg Chebbi dunes, overnight desert bivouac, and guided travel through the Ziz Valley and High Atlas passes."
     },
     "tour2": {
-      "description": "Morocco Odyssey: Discover Casablanca's vibrant energy, Chefchaouen's mystical blues, Fes's ancient labyrinth, and Sahara's golden dunes in an epic 6-day cultural adventure!"
+      "description": "Six-day route connecting Casablanca, the blue streets of Chefchaouen, Fes medina, and Sahara dunes with private driver."
     },
     "tour3": {
-      "description": "Marrakech Marvel: Wander bustling souks, explore stunning palaces, and soak in the vibrant culture of Morocco's red city!"
+      "description": "Guided exploration of Marrakech medina, historical palaces, artisan souks, and tranquil gardens."
     },
     "tour4": {
-      "description": "Northern Treasures: From Casablanca's modernity to Fes's ancient wonders, explore Morocco's north in a 5-day cultural journey!"
+      "description": "Five-day northern itinerary covering Casablanca, Rabat's historic landmarks, Chefchaouen, and imperial Fes."
     },
     "tour5": {
-      "description": "Morocco Wonders: Traverse Sahara dunes, imperial cities, Atlas peaks, and coastal elegance in a 10-day epic adventure!"
+      "description": "Ten-day comprehensive expedition linking the High Atlas, Erg Chebbi desert, imperial medinas, and Atlantic coastline."
     },
     "tour6": {
-      "description": "Desert Thrill: Conquer Atlas Mountains, trek Sahara dunes, and camp under stars in a 4-day Merzouga adventure!"
+      "description": "Four-day circuit through Tizi n'Tichka pass, Dades Valley, Todra Gorge, and Erg Chebbi camel trek."
     },
     "tour7": {
-      "description": "Coastal Odyssey: Journey from Agadir's beaches through Anti-Atlas valleys to Sahara's golden dunes in this 4-day adventure!"
+      "description": "Four-day route from Agadir along Anti-Atlas valleys and palm groves to the dunes of Merzouga."
     },
     "tour8": {
-      "description": "Wilderness Escape: Trek to remote Chegaga dunes, ride camels into pristine desert, and sleep under endless stars on this 3-day expedition!"
+      "description": "Three-day off-road route into the remote Erg Chegaga dunes via Zagora and M'Hamid El Ghizlane."
     },
     "tour9": {
-      "description": "Heritage Journey: From Tangier's coast through Chefchaouen's blue streets and Fes's ancient medina to Marrakech in 7 unforgettable days!"
+      "description": "Seven-day cross-country journey from Tangier through the Rif mountains, imperial Fes, and High Atlas to Marrakech."
     },
     "accommodation": "Accommodation",
     "meals": "Meals",
@@ -207,12 +209,18 @@
     "end": "End"
   },
   "excursion": {
+    "404": {
+      "title": "Page Not Found",
+      "description": "The page you are looking for does not exist",
+      "message": "The page you are looking for might have been removed, renamed, or is temporarily unavailable.",
+      "cta": "Back to Home"
+    },
     "meta": {
-      "title": "Our Excursions",
-      "description": "Discover our day trips from Marrakech. Explore the Atlas Mountains, Sahara Desert, and coastal gems with expert local guides."
+      "title": "Marrakech Day Trips & Desert Excursions | Amsirar Trip",
+      "description": "Discover top Marrakech day trips: Agafay Desert sunset dinners, Ourika Valley waterfalls, Ouzoud Falls, and Essaouira coastal excursions with private transport."
     },
     "title": "Our Excursions",
-    "sectionSubtitle": "Read these excursions for information",
+    "sectionSubtitle": "Single-day departures from Marrakech into the Atlas valleys, coastal ramparts, and desert plateaus.",
     "detailsTitle": "Excursion Details",
     "detailsSubtitle": "Stories, tips, and insights from our adventures",
     "exploreThisExcursion": "Explore this excursion",
@@ -232,27 +240,29 @@
       "support": "On-trip support",
       "supportDesc": "Flexible departures and concierge-style planning."
     },
-    "card": { "category": "Full Day" },
+    "card": {
+      "category": "Full Day"
+    },
     "exploreLink": "View details",
     "sidebar": {
       "alt": "Amsirar airport transfer vehicle",
       "title": "Airport Transfer Services in Morocco",
       "mainBrand": "Amsirar Trip",
       "subBrand": "Transport Touristique",
-      "intro": "Travel in comfort and style with Amsirar Transport Touristique, your trusted partner for airport transfers across Morocco. We provide reliable, punctual, and private transfer services from major airports including Marrakech, Casablanca, Agadir, and Fes to your hotel or destination.",
-      "details": "Our modern, air-conditioned vehicles and professional drivers ensure a safe and stress-free journey, whether you're arriving for business or leisure. Forget the hassle of taxis or waiting lines — we'll be there on time to welcome you and take you wherever you need to go.",
+      "intro": "We provide licensed private airport transfers between major Moroccan airports (Marrakech RAK, Casablanca CMN, Agadir AGA, Fes FEZ) and city riads or regional destinations.",
+      "details": "Your driver meets you in the arrival hall with a name board, assists with luggage, and drives directly to your accommodation in an air-conditioned vehicle at agreed fixed rates.",
       "items": [
         "Comfortable & clean vehicles",
         "Professional multilingual drivers",
         "24/7 availability",
         "Fixed, transparent prices"
       ],
-      "conclusion": "With Amsirar Transport Touristique, your Moroccan adventure begins the moment you land",
+      "conclusion": "Private airport transfers and city transport across Morocco.",
       "ctaTitle": "Ready to customise?",
       "ctaDescription": "Share your preferences and we will craft an itinerary that matches your pace, style, and travel dates.",
       "ctaPoint01": "Private driver & modern vehicle",
       "ctaPoint02": "Flexible departures from Marrakech",
-      "ctaPoint03": "Local guides & curated experiences"
+      "ctaPoint03": "Local Berber guides and flexible daily routes"
     },
     "list": {
       "ouzoud": {
@@ -299,12 +309,6 @@
       }
     },
     "headerSubtitle": "Our Excursions and packages",
-    "404": {
-      "title": "Page Not Found",
-      "description": "The page you are looking for does not exist",
-      "message": "The page you are looking for might have been removed, renamed, or is temporarily unavailable.",
-      "cta": "Back to Home"
-    },
     "blog": {
       "smTitle": "read these excursions for information",
       "lgTitle": "Excursions from Marrakech"
@@ -313,56 +317,56 @@
   },
   "about": {
     "meta": {
-      "title": "About Us",
-      "description": "Learn about Amsirar Trip, our story, and our passion for sharing the beauty of Morocco with travelers from around the world."
+      "title": "About Amsirar Trip | Licensed Morocco Tour Operator & Desert Experts",
+      "description": "Meet Amsirar Trip, an officially licensed Moroccan travel agency based in Marrakech with 20+ years guiding travelers across the Sahara, Atlas, and imperial cities."
     },
     "title": "About Us",
-    "headerSubtitle": "Explore Amsirar Trip – Real Adventure & Travels",
-    "smTitle": "things to know about us",
-    "ourStory": "our story",
+    "headerSubtitle": "Private desert expeditions and High Atlas transport from Marrakech",
+    "smTitle": "About our agency",
+    "ourStory": "Our Story",
     "experienceTitle": "20 Years of Experience",
-    "whyTrustTitle": "Why travelers trust our 20 years of Amsirar experience:",
+    "whyTrustTitle": "How we organize private travel in Morocco:",
     "whyTrust": {
-      "point1": "Deep local knowledge and cultural connection",
-      "point2": "Safe, eco-friendly, and community-focused trips",
-      "point3": "Tailored itineraries for hiking, camping, or cultural immersion",
-      "point4": "Proven reputation built on excellence and authenticity"
+      "point1": "Direct coordination with licensed local Berber driver-guides",
+      "point2": "Modern, air-conditioned 4x4s and minivans maintained for mountain roads",
+      "point3": "Flexible itineraries adapted to your pacing and family requirements",
+      "point4": "Clear pricing with no commission shop detours or forced stops"
     },
-    "experienceText1": "For over two decades, we have guided travelers through the breathtaking landscapes of Amsirar, sharing the region's hidden beauty, culture, and timeless traditions. With 20 years of experience, our journeys have become more than just trips — they are immersive stories woven through the High Atlas Mountains.",
-    "experienceText2": "From the serene valleys and ancient Berber villages to the winding mountain trails and star-filled desert skies, we have perfected every detail to offer our guests authentic, safe, and unforgettable experiences.",
-    "experienceText3": "Our seasoned local guides know every path, every story, and every smile along the way. Whether you seek adventure, cultural discovery, or peaceful retreat, our 20 years of expertise ensure a personalized journey shaped by passion, trust, and deep respect for Amsirar's natural and cultural heritage.",
-    "conclusionText": "Come experience Amsirar not just as a visitor, but as a friend guided by 20 years of dedication, discovery, and love for this extraordinary land.",
-    "imageCaption": "Exploring the beauty of Amsirar",
+    "experienceText1": "Since 2004, our Marrakech team has guided travelers across southern Morocco, from the High Atlas passes to the desert dunes of Merzouga and Chegaga. We coordinate transport, mountain routes, and riad stays directly with local Berber drivers.",
+    "experienceText2": "Our itineraries balance scenic mountain drives through the Tizi n'Tichka pass with quiet walking stops in valley villages and nights in established desert camps.",
+    "experienceText3": "Our drivers know regional road conditions, the best scenic viewpoints, and local dining stops. We organize private transport tailored to your schedule and travel interests.",
+    "conclusionText": "Whether you are planning a 3-day desert run or a 10-day circuit through the imperial cities, we organize each journey around your dates and travel pace.",
+    "imageCaption": "Berber driver-guide in the High Atlas foothills",
     "facts": {
-      "smTitle": "know some facts about our agency",
-      "lgTitle": "fun facts",
-      "photos": "photos taken",
-      "beaches": "beaches visited",
-      "mountains": "mountains climbed",
-      "cruises": "cruises organized"
+      "smTitle": "Agency overview",
+      "lgTitle": "Key figures",
+      "photos": "Travelers Guided",
+      "beaches": "Desert Bivouacs",
+      "mountains": "Atlas Passes Crossed",
+      "cruises": "Private Routes Run"
     }
   },
   "contact": {
     "meta": {
-      "title": "Contact Us",
-      "description": "Get in touch with Amsirar Trip for Morocco tours, desert adventures, and travel inquiries. Our team is ready to help plan your perfect Moroccan journey."
+      "title": "Contact Amsirar Trip | Plan Your Morocco Tour & Desert Adventure",
+      "description": "Contact our local Morocco travel specialists. Request custom tour quotes, get 24/7 WhatsApp assistance, and plan your private Sahara desert trip."
     },
     "title": "Contact Us",
-    "headerSubtitle": "Ready to get our best services!",
-    "smTitle": "get in touch with us",
-    "lgTitle": "contact us",
+    "headerSubtitle": "Plan your private desert journey, transport, or custom itinerary with our Marrakech team.",
+    "smTitle": "Get in Touch with Us",
+    "lgTitle": "Contact Us",
     "card": {
-      "phoneTitle": "Feel free to contact us — we're here to help",
-      "phoneSeo": "Have a quick question or want to book now? Our local team answers calls and messages promptly — reach out and we'll help plan the perfect Morocco trip.",
-      "emailTitle": "Send a message — we'll reply with a tailored plan",
-      "emailSeo": "Prefer to write? Send us your plans, dates and priorities — we'll prepare a personalised itinerary and respond quickly with options and clear next steps.",
-      "visitTitle": "Visit our Marrakech office — friendly, local support",
-      "visitSeo": "Drop by for an in-person chat, help with bookings, or to learn more about our desert excursions and private tours — our team is ready to welcome you."
+      "phoneTitle": "Call or WhatsApp our Marrakech desk",
+      "phoneSeo": "Our team answers booking inquiries, route customization questions, and availability from 09:00 to 21:00 GMT+1 daily.",
+      "emailTitle": "Email us your travel dates and route plans",
+      "emailSeo": "Send us your preferred travel dates, destinations, and group size. We prepare detailed itineraries with clear pricing.",
+      "visitTitle": "Visit our office in Marrakech",
+      "visitSeo": "Stop by our Marrakech office to discuss itineraries, confirm private transfers, or review desert route options in person."
     },
     "form": {
       "badge": "Plan with locals",
       "title": "Design Your Custom Morocco Tour & Private Itinerary",
-      "subtitle": "Share a few details and we will craft a bespoke itinerary for you.",
+      "subtitle": "Share your travel details and we will prepare a tailored route proposal for you.",
       "cta": "Send message",
       "sending": "Sending…",
       "success": "Message sent! We will reply within 24 hours.",
@@ -387,7 +391,11 @@
       "infoBadge": "Need details?",
       "infoTitle": "Plan handcrafted experiences",
       "infoCopy": "Our Marrakech team answers every message personally and can help with custom itineraries, desert camps, or last-minute transfers.",
-      "info": { "address": "Visit", "phone": "Call", "email": "Email" },
+      "info": {
+        "address": "Visit",
+        "phone": "Call",
+        "email": "Email"
+      },
       "infoFooter": "Available every day from 09:00 to 21:00 GMT+1"
     },
     "info": {
@@ -396,7 +404,10 @@
       "address": "Address",
       "message": "Message"
     },
-    "location": { "smTitle": "find us", "lgTitle": "our location" }
+    "location": {
+      "smTitle": "Find Us",
+      "lgTitle": "Our Location"
+    }
   },
   "excursion1": {
     "title": "Ouzoud Waterfalls Day Trip",
@@ -502,7 +513,7 @@
         "After breakfast, journey to the spectacular Todra Gorges, a favorite for climbers and photographers.",
         "Continue through Tinejdad and Erfoud, known for fossil workshops and date markets.",
         "Arrive in Merzouga, where your camel trek begins.",
-        "Ride into the Erg Chebbi dunes and watch a magical sunset.",
+        "Ride camels into the Erg Chebbi dunes to watch the sunset.",
         "Arrive at your desert camp, enjoy Berber music by the fire, and sleep under the stars or in a luxury tent."
       ],
       "accommodation": "Desert Camp in Merzouga",
@@ -512,7 +523,7 @@
     "day3": {
       "title": "Merzouga ➜ Draa Valley ➜ Ouarzazate ➜ Marrakech",
       "text": [
-        "Wake early to witness the magical sunrise over the Erg Chebbi dunes — a truly unforgettable moment.",
+        "Wake before dawn to watch the sunrise from the top of the Erg Chebbi dunes.",
         "Return by camel to Merzouga village for breakfast and a refreshing shower.",
         "Begin the return journey through the scenic Draa Valley, Morocco's longest river oasis with palm groves and ancient kasbahs.",
         "Stop in Ouarzazate for lunch, with an optional visit to Atlas Film Studios or Taourirt Kasbah.",
@@ -520,15 +531,15 @@
         "Arrive back in Marrakech in the evening, where your desert adventure concludes."
       ],
       "meals": "Breakfast included",
-      "arrival": "Around 7:00–8:00 PM"
+      "arrival": "Around 7:00 to 8:00 PM"
     },
-    "overview": "Embark on a breathtaking 3-day adventure from Marrakech to the heart of the Sahara Desert. Experience the magic of the High Atlas Mountains, the Kasbahs of Ouarzazate, and the golden dunes of Merzouga. Ride a camel into the sunset, spend the night under a star-filled sky, and discover the authentic beauty of Morocco.",
+    "overview": "Three-day private tour from Marrakech crossing the High Atlas via the Tizi n'Tichka pass to the Erg Chebbi dunes in Merzouga. Includes stops at Kasbah Ait Ben Haddou and Todra Gorges, a sunset camel trek, and an overnight desert camp.",
     "includes": "Transportation in modern air-conditioned 4x4 or minibus\nEnglish / French / Spanish-speaking driver-guide\n1 night in Dades Valley (hotel or riad)\n1 night in desert camp (standard or luxury)\nCamel ride in Merzouga dunes\nBreakfasts & dinners as mentioned\nSandboarding (optional)",
     "excludes": "Lunches & drinks\nEntrance fees (if applicable)\nTips & personal expenses",
     "goodToKnow": "Departure: 7:00 AM from Marrakech\nReturn: Evening of Day 3\nLuggage: You can bring your small suitcase or backpack on the camel\nBring sunglasses, hat, sunscreen, and warm clothes for the desert night"
   },
   "tour2": {
-    "overview": "This 6-day journey takes you through Morocco’s most iconic cities and breathtaking landscapes. From the cosmopolitan energy of Casablanca to the blue charm of Chefchaouen, the ancient medina of Fes, and the golden dunes of the Sahara — experience Morocco’s culture, colors, and traditions in one unforgettable adventure.",
+    "overview": "Six-day private route connecting Casablanca, Rabat, Chefchaouen, the Fes medina, and the Erg Chebbi desert before finishing in Marrakech.",
     "day1": {
       "title": "Casablanca ➜ Rabat ➜ Chefchaouen",
       "text": [
@@ -546,7 +557,7 @@
       "text": [
         "Morning at leisure in Chefchaouen for photos and walking around the medina.",
         "Depart toward the Roman ruins of Volubilis, a UNESCO World Heritage Site.",
-        "Visit Meknes, one of Morocco’s imperial cities — see Bab Mansour Gate and El Hedim Square.",
+        "Visit Meknes, stopping at the Bab Mansour Gate and El Hedim Square.",
         "Continue to Fes, the cultural and spiritual heart of Morocco."
       ],
       "accommodation": "Riad in Fes Medina",
@@ -568,7 +579,7 @@
       "text": [
         "Early departure through the Middle Atlas Mountains, passing Ifrane (the \"Switzerland of Morocco\") and Azrou Cedar Forest, home to Barbary monkeys.",
         "Lunch in Midelt, then continue through the scenic Ziz Valley.",
-        "Arrive in Merzouga — gateway to the Sahara Desert.",
+        "Arrive in Merzouga at the edge of the Erg Chebbi dunes.",
         "Camel trek across the Erg Chebbi dunes, watch the sunset, and enjoy dinner under the stars."
       ],
       "accommodation": "Desert Camp in Merzouga (standard or luxury)",
@@ -578,10 +589,10 @@
     "day5": {
       "title": "Merzouga ➜ Todra Gorges ➜ Dades Valley",
       "text": [
-        "Wake up early to witness the magical sunrise over the Erg Chebbi dunes — a truly unforgettable moment.",
+        "Wake early to watch the sunrise over the Erg Chebbi dunes.",
         "Return by camel to Merzouga village for breakfast and a refreshing shower.",
         "Depart towards the spectacular Todra Gorges, Morocco's most famous canyon with 300m high cliffs.",
-        "Walk through the gorge and enjoy lunch at a local café nestled between the towering walls.",
+        "Walk through the gorge and have lunch at a café between the canyon walls.",
         "Continue through the stunning Dades Valley, known as the 'Valley of a Thousand Kasbahs'.",
         "Marvel at the famous 'Monkey Fingers' rock formations carved by centuries of erosion.",
         "Arrive at your hotel overlooking the dramatic Dades Gorges for dinner and overnight."
@@ -605,7 +616,7 @@
     "title": "Coast & Cities Explorer"
   },
   "tour3": {
-    "overview": "Embark on an unforgettable 3-day journey from Fes to Marrakech through the mesmerizing landscapes of southern Morocco. Travel across the Middle Atlas Mountains, ride camels into the golden Erg Chebbi dunes of the Sahara, spend a magical night under the stars, and explore ancient Kasbahs and dramatic valleys on your way to Marrakech.\nThis tour combines adventure, culture, and scenic beauty — the perfect Moroccan experience.",
+    "overview": "Three-day route from Fes to Marrakech crossing the Middle Atlas cedar forests, the Ziz Valley, and the Erg Chebbi dunes, returning via Todra Gorges and Ait Ben Haddou.",
     "day1": {
       "title": "Fes ➜ Ifrane ➜ Azrou ➜ Midelt ➜ Errachidia ➜ Merzouga Desert",
       "text": [
@@ -615,7 +626,7 @@
         "Continue south to the market town of Midelt for lunch, with views of Jebel Ayachi (3,737m).",
         "Drive through Errachidia and the spectacular Ziz Valley, a stunning palm-lined river gorge with ancient kasbahs.",
         "Arrive in Merzouga in the late afternoon where your camel trek into the Erg Chebbi dunes awaits.",
-        "Ride across the golden dunes to your desert camp, enjoy a magical sunset, and spend the night under a blanket of stars with traditional Berber music around the campfire."
+        "Ride across the dunes to the desert camp, watch the sunset, and spend the night in private tents with dinner around the campfire."
       ],
       "accommodation": "Desert Camp in Merzouga (Standard or Luxury)",
       "meals": "Dinner & Breakfast included",
@@ -624,10 +635,10 @@
     "day2": {
       "title": "Merzouga ➜ Erfoud ➜ Todra Gorges ➜ Dades Valley",
       "text": [
-        "Wake early to witness the spectacular sunrise over the Sahara dunes — a truly unforgettable moment.",
+        "Wake early to watch the sunrise over the Sahara dunes.",
         "Return by camel to the village of Merzouga for breakfast and a refreshing shower.",
-        "Drive to Erfoud, famous for its fossil workshops and date palm groves — optional visit to a marble fossil factory.",
-        "Continue to Tinghir and explore the breathtaking Todra Gorges, Morocco's most famous canyon with 300-meter high cliffs.",
+        "Drive to Erfoud, known for fossil workshops and date palm groves, with an optional visit to a marble workshop.",
+        "Continue to Tinghir and walk through the Todra Gorges canyon with its 300-meter cliffs.",
         "Walk along the canyon floor between the towering rock walls.",
         "Continue through the stunning Dades Valley, known as the \"Valley of a Thousand Kasbahs\".",
         "Admire the famous \"Monkey Fingers\" rock formations carved by centuries of erosion.",
@@ -647,7 +658,7 @@
         "Arrive in Marrakech in the evening, drop-off at your accommodation."
       ],
       "meals": "Breakfast included",
-      "arrival": "Around 7:00–8:00 PM"
+      "arrival": "Around 7:00 to 8:00 PM"
     },
     "includes": "Pick-up in Fes & drop-off in Marrakech\nPrivate transport in air-conditioned 4x4 or minibus\nEnglish/French/Spanish-speaking driver-guide\n1 night in Dades Valley (hotel/riad)\n1 night in desert camp (standard or luxury)\nCamel ride in Merzouga dunes\nBreakfasts & dinners as mentioned\nSandboarding (optional)",
     "excludes": "Lunches & drinks\nEntrance fees (if applicable)\nTips & personal expenses",
@@ -655,7 +666,7 @@
     "title": "Caravan & Kasbah Experience"
   },
   "tour4": {
-    "overview": "Discover Morocco’s northern gems on this 5-day journey from Casablanca to Fes. Explore the modern and historical highlights of Casablanca, the political capital Rabat, the picturesque Blue City of Chefchaouen, the ancient Roman ruins of Volubilis, and the imperial city of Meknes before reaching Fes, Morocco’s spiritual and cultural capital.\nThis tour offers a perfect balance of history, culture, and breathtaking scenery.",
+    "overview": "Five-day northern itinerary from Casablanca to Fes via the coastal capital Rabat, the blue streets of Chefchaouen, the Roman ruins of Volubilis, and imperial Meknes.",
     "day1": {
       "title": "Arrival in Casablanca",
       "text": [
@@ -674,7 +685,7 @@
         "After breakfast, departure to Rabat, Morocco’s capital.",
         "Visit the iconic Hassan Tower and Mohamed V Mausoleum, masterpieces of Moroccan craftsmanship. Explore the picturesque Kasbah of the Udayas with its blue and white Andalusian streets overlooking the Bou Regreg River.",
         "Continue north through the scenic Rif Mountains toward the stunning Chefchaouen (~4 hours drive).",
-        "Arrive in the Blue Pearl of Morocco and enjoy a peaceful evening walk through its magical blue-painted medina."
+        "Arrive in Chefchaouen for an evening walk through the blue-painted medina."
       ],
       "accommodation": "Riad/Hotel in Chefchaouen",
       "meals": "Breakfast included"
@@ -694,7 +705,7 @@
       "title": "Full-Day Guided Tour of Fes",
       "text": [
         "After breakfast, meet your local guide for a full exploration of Fes el Bali, the world’s oldest living medieval city.",
-        "Visit Al-Qarawiyyin University (founded 859 AD), considered the oldest university in the world. Explore the magnificent Bou Inania Madrasa with its intricate zellige tilework.",
+        "Visit Al-Qarawiyyin University (founded 859 CE) and explore the Bou Inania Madrasa with its carved cedar and zellige tilework.",
         "Discover the Nejjarine Fountain and the famous Chouara Tanneries with colorful dye pits. Wander through traditional souks selling leather, brass, and ceramics.",
         "Free evening in your riad."
       ],
@@ -717,12 +728,12 @@
     "title": "Imperial Cities & Coastline"
   },
   "tour5": {
-    "overview": "This 10-day tour from Marrakech to Casablanca lets you experience the best of Morocco — from the Sahara Desert dunes to the imperial cities, Atlas Mountains, and Atlantic coast.\nRide camels at sunset, explore ancient kasbahs, wander through blue alleys, and discover Morocco’s rich history and hospitality.",
+    "overview": "Ten-day private circuit from Marrakech across the High Atlas, Erg Chebbi desert, Fes, Chefchaouen, Rabat, and Casablanca.",
     "day1": {
       "title": "Arrival in Marrakech",
       "text": [
         "Pick-up from Marrakech Airport and transfer to your riad/hotel in the heart of the Medina.",
-        "Free time to explore the famous Jemaa el-Fna Square — a UNESCO Masterpiece of Oral and Intangible Heritage.",
+        "Free time in Jemaa el-Fna square and the surrounding souks.",
         "Watch snake charmers, storytellers, and acrobats as the square comes alive at sunset.",
         "Optional dinner in a traditional restaurant with live Moroccan music."
       ],
@@ -730,7 +741,7 @@
       "meals": "None or optional dinner"
     },
     "day2": {
-      "title": "Marrakech – Guided City Tour",
+      "title": "Marrakech: Guided City Tour",
       "text": [
         "Guided tour of Marrakech’s historical and cultural sites:",
         "Koutoubia Mosque, Bahia Palace, and Saadian Tombs",
@@ -745,7 +756,7 @@
       "text": [
         "Depart Marrakech crossing the High Atlas Mountains via the Tizi n’Tichka Pass (2,260m).",
         "Visit the Kasbah of Ait Ben Haddou, a UNESCO World Heritage site.",
-        "Continue to Ouarzazate, the 'Hollywood of Africa' — optional visit to Atlas Film Studios.",
+        "Continue to Ouarzazate, with an optional visit to Atlas Film Studios.",
         "Drive through the beautiful Skoura Oasis and Kalaat M'gouna (Valley of Roses) to the spectacular Dades Valley."
       ],
       "accommodation": "Hotel/Riad in Dades Valley",
@@ -766,7 +777,7 @@
     "day5": {
       "title": "Merzouga ➜ Ziz Valley ➜ Midelt ➜ Fes",
       "text": [
-        "Early wake-up for a magical sunrise over the golden dunes — a truly unforgettable moment.",
+        "Wake before dawn to watch the sunrise over the Erg Chebbi dunes.",
         "After breakfast, leave the desert via historic Rissani and the palm-lined Ziz Valley gorge.",
         "Cross the Middle Atlas Mountains, passing Midelt (lunch stop), the Cedar Forest of Azrou with its Barbary monkeys, and Ifrane 'the Switzerland of Morocco'.",
         "Arrive in Fes by evening (~7 hours total driving)."
@@ -789,13 +800,13 @@
       "text": [
         "Depart for Meknes, the imperial city of Sultan Moulay Ismail. Visit the impressive Bab Mansour Gate and El Hedim Square.",
         "Explore the ancient Roman ruins of Volubilis (UNESCO site) with its well-preserved mosaics and Triumphal Arch.",
-        "Continue north through the scenic Rif Mountains to the magical Blue City of Chefchaouen (~4 hours)."
+        "Drive north through the Rif Mountains to Chefchaouen (about 4 hours)."
       ],
       "accommodation": "Riad/Hotel in Chefchaouen",
       "meals": "Breakfast included"
     },
     "day8": {
-      "title": "Chefchaouen – Free Day",
+      "title": "Chefchaouen: Free Day",
       "text": [
         "Free day to enjoy the enchanting blue-painted streets of Chefchaouen.",
         "Optional hike to the Spanish Mosque for panoramic views, visit local artisan shops, or relax in a café overlooking the blue medina."
@@ -814,11 +825,11 @@
       "meals": "Breakfast included"
     },
     "day10": {
-      "title": "Casablanca – Departure",
+      "title": "Casablanca: Departure",
       "text": [
         "Breakfast at your hotel with optional visit to the stunning Hassan II Mosque.",
         "Transfer to Casablanca Mohammed V Airport for your flight home.",
-        "End of the tour with unforgettable memories of Morocco's diverse landscapes and rich culture!"
+        "Transfer to Casablanca airport for departure."
       ],
       "meals": "Breakfast included"
     },
@@ -828,14 +839,14 @@
     "title": "Grand Moroccan Circuit"
   },
   "tour6": {
-    "overview": "This 4-day adventure from Marrakech to Merzouga Desert lets you experience Morocco’s stunning landscapes — from the High Atlas Mountains and ancient kasbahs to the Sahara Desert dunes.\nEnjoy camel trekking, desert camping, Berber music under the stars, and charming valleys along the way.",
+    "overview": "Four-day route from Marrakech to the Erg Chebbi dunes with additional time in the Dades Valley, Todra Gorges, and Ouarzazate.",
     "day1": {
       "title": "Marrakech ➜ Ait Ben Haddou ➜ Ouarzazate ➜ Dades Valley",
       "text": [
         "Early morning departure from Marrakech.",
         "Cross the High Atlas Mountains via the Tizi n’Tichka Pass (2,260m), with panoramic stops for photos.",
         "Visit the Kasbah of Ait Ben Haddou, a UNESCO World Heritage site featured in many movies (Gladiator, Game of Thrones).",
-        "Continue to Ouarzazate, the 'Hollywood of Africa' — optional visit to Atlas Film Studios.",
+        "Continue to Ouarzazate, with an optional visit to Atlas Film Studios.",
         "Drive through the beautiful Kalaat M'gouna (Valley of Roses), Skoura Oasis, and see the famous 'Monkey Fingers' rock formations in Dades Valley."
       ],
       "accommodation": "Hotel/Riad in Dades Valley",
@@ -857,7 +868,7 @@
     "day3": {
       "title": "Merzouga ➜ Alnif ➜ Draa Valley ➜ Ouarzazate",
       "text": [
-        "Wake early to catch the sunrise over the dunes — a breathtaking moment.",
+        "Wake early to watch the sunrise over the dunes.",
         "Ride camels or drive back to the village for breakfast and a shower.",
         "Depart through Alnif and Tazzarine, following the scenic Draa Valley, one of Morocco’s longest river valleys.",
         "Continue toward Ouarzazate, known for its film studios and kasbahs."
@@ -873,7 +884,7 @@
         "Arrive in Marrakech by late afternoon (~4.5 hours driving)."
       ],
       "meals": "Breakfast included",
-      "arrival": "Around 5:00–6:00 PM"
+      "arrival": "Around 5:00 to 6:00 PM"
     },
     "includes": "Pick-up and drop-off in Marrakech\nPrivate transport in air-conditioned 4x4 or minibus\nEnglish/French-speaking driver-guide\n2 nights in traditional riads/hotels\n1 night in desert camp (standard or luxury)\nCamel trek in Merzouga dunes\nBreakfasts & dinners (as mentioned)\nSandboarding (optional)",
     "excludes": "Lunches & drinks\nEntrance fees (if applicable)\nTips & personal expenses",
@@ -882,7 +893,7 @@
   },
   "tour7": {
     "title": "Coastal & Desert Odyssey",
-    "overview": "Explore Morocco's diverse landscapes on this 4-day adventure from Agadir to Marrakech. Journey through the rugged Anti-Atlas Mountains, the charming walled city of Taroudant, the dramatic valleys and kasbahs of Dades, and the golden Sahara Desert dunes at Merzouga. Ride camels at sunset, witness breathtaking desert sunrises, and experience authentic Berber hospitality.",
+    "overview": "Four-day private circuit from Agadir through Taroudant, the Anti-Atlas, Todra Gorges, and the Merzouga dunes, ending in Marrakech.",
     "description": "4 Days Tour from Agadir to Marrakech via Merzouga Desert",
     "day1": {
       "title": "Agadir ➜ Taroudant ➜ Ouarzazate ➜ Dades Valley",
@@ -899,7 +910,7 @@
     "day2": {
       "title": "Dades Valley ➜ Todra Gorges ➜ Merzouga Desert",
       "text": [
-        "After breakfast, visit the breathtaking Todra Gorges with 300m towering cliffs — ideal for walking and photography.",
+        "After breakfast, visit the Todra Gorges with its 300-meter limestone cliffs.",
         "Continue toward Merzouga, passing Tinejdad and Erfoud, famous for dates and fossils.",
         "Arrive in Merzouga and start a camel trek into the Erg Chebbi dunes.",
         "Watch the sunset over the desert and enjoy a traditional Berber dinner around the campfire.",
@@ -926,7 +937,7 @@
       "text": [
         "Depart Ouarzazate after breakfast.",
         "Cross the High Atlas Mountains via Tizi n'Tichka Pass (2,260m) with panoramic photo stops.",
-        "Enjoy breathtaking views of the snow-capped Atlas range and lush surrounding valleys.",
+        "Enjoy panoramic views across the High Atlas range and surrounding valleys.",
         "Arrive in Marrakech in the late afternoon (~4.5 hours driving), ending the tour at your hotel or the airport."
       ],
       "meals": "Breakfast included",
@@ -934,11 +945,11 @@
     },
     "includes": "Pickup & drop-off from Agadir/Marrakech\nPrivate 4x4 or minibus transport\nEnglish/French-speaking driver-guide\n1 night desert camp in Merzouga\n2 nights hotels/riads (Dades Valley & Ouarzazate)\nCamel trek in Merzouga dunes\nBreakfasts & dinners as mentioned\nSandboarding (optional)",
     "excludes": "Lunches & drinks\nEntrance fees\nTips & personal expenses",
-    "goodToKnow": "Departure: 7:00–8:00 AM from Agadir\nDuration: 4 Days / 3 Nights\nDriving: Day 1 ~350 km (5-6h), Day 2 ~300 km (5h), Day 3 ~380 km (6h), Day 4 ~200 km (4.5h)\nBring: Sunglasses, hat, sunscreen, warm clothing for desert nights, camera\nOptional: Sandboarding, extra night in desert camp, photography tour\nCustomization: Available for different group sizes and preferences"
+    "goodToKnow": "Departure: 7:00 to 8:00 AM from Agadir\nDuration: 4 Days / 3 Nights\nDriving: Day 1 ~350 km (5-6h), Day 2 ~300 km (5h), Day 3 ~380 km (6h), Day 4 ~200 km (4.5h)\nBring: Sunglasses, hat, sunscreen, warm clothing for desert nights, camera\nOptional: Sandboarding, extra night in desert camp, photography tour\nCustomization: Available for different group sizes and preferences"
   },
   "tour8": {
     "title": "Chegaga Wilderness Expedition",
-    "overview": "Escape into the remote Sahara on this 3-day journey from Marrakech to the majestic Chegaga dunes — Morocco's largest and most pristine desert dunes, untouched by mass tourism. Cross the spectacular High Atlas Mountains, explore ancient kasbahs, ride camels into the golden sunset, and spend a magical night under a blanket of stars in an authentic desert camp.",
+    "overview": "Three-day off-road route from Marrakech to the remote Erg Chegaga dunes via Zagora, M'Hamid, and Lake Iriqui in a private 4x4.",
     "description": "3 Days Marrakech to Chegaga Desert Tour",
     "day1": {
       "title": "Marrakech ➜ Ait Ben Haddou ➜ Ouarzazate ➜ Zagora",
@@ -946,7 +957,7 @@
         "Departure early morning from Marrakech.",
         "Cross the High Atlas Mountains via the Tizi n'Tichka Pass (2,260m).",
         "Visit the iconic Ait Ben Haddou Kasbah, a UNESCO World Heritage Site and famous filming location for Gladiator and Game of Thrones.",
-        "Continue to Ouarzazate, the 'Hollywood of Africa,' and then drive to Zagora via the spectacular Draa Valley — Morocco's longest palm oasis with traditional Berber villages (~7 hours total driving).",
+        "Continue to Ouarzazate and drive to Zagora along the Draa Valley, Morocco's longest palm oasis (about 7 hours total driving).",
         "Dinner and overnight in a traditional riad or hotel in Zagora."
       ],
       "accommodation": "Hotel/Riad in Zagora",
@@ -956,7 +967,7 @@
       "title": "Zagora ➜ M'Hamid ➜ Chegaga Desert",
       "text": [
         "Early breakfast, then continue south through the desert plains to M'Hamid, the last village before the dunes.",
-        "Board camels for an unforgettable ride into the Chegaga Desert — Morocco's largest dunes reaching up to 300m high, witnessing a spectacular sunset over endless golden waves of sand.",
+        "Ride camels into the Erg Chegaga dunes for sunset before dinner at the desert camp.",
         "Enjoy traditional Berber dinner around the campfire with live drumming and music, stargazing in one of the darkest skies in Morocco, and overnight stay in an authentic desert camp.",
         "Experience the magic of sleeping under a star-filled sky in the heart of the Sahara."
       ],
@@ -977,14 +988,14 @@
     },
     "includes": "Pickup & drop-off in Marrakech\nPrivate 4x4 or minibus transport\nEnglish/French-speaking driver-guide\n1 night desert camp in Chegaga\n1 night hotel in Zagora\nCamel trek in Chegaga dunes\nBreakfasts & dinners as mentioned",
     "excludes": "Lunches & drinks\nEntrance fees\nTips & personal expenses",
-    "goodToKnow": "Departure: 7:00–8:00 AM from Marrakech\nDuration: 3 Days / 2 Nights\nDriving: Day 1 ~350 km (7h), Day 2 ~100 km (3h + camel), Day 3 ~450 km (8h)\nBring: Warm clothes (desert nights can be cold), sunglasses, hat, sunscreen, camera\nOptional: Sandboarding, extra nights in desert camp, photography sessions\nNote: Chegaga is more remote and less crowded than Merzouga"
+    "goodToKnow": "Departure: 7:00 to 8:00 AM from Marrakech\nDuration: 3 Days / 2 Nights\nDriving: Day 1 ~350 km (7h), Day 2 ~100 km (3h + camel), Day 3 ~450 km (8h)\nBring: Warm clothes (desert nights can be cold), sunglasses, hat, sunscreen, camera\nOptional: Sandboarding, extra nights in desert camp, photography sessions\nNote: Chegaga is more remote and less crowded than Merzouga"
   },
   "tour9": {
     "title": "Northern Heritage Trail",
-    "overview": "This 7-day tour takes you through the highlights of Northern Morocco — from the legendary city of Tangier where the Mediterranean meets the Atlantic, to the enchanting blue streets of Chefchaouen, the ancient imperial cities of Fes and Meknes, Roman ruins, the Middle Atlas Mountains, and ends in the vibrant city of Marrakech. A perfect mix of culture, history, nature, and authentic Moroccan experiences.",
+    "overview": "Seven-day cross-country route from Tangier through Chefchaouen, the Fes medina, the Middle Atlas, and ending in Marrakech.",
     "description": "7 Days North Morocco Tour from Tangier to Marrakech",
     "day1": {
-      "title": "Arrival in Tangier – City Highlights Tour",
+      "title": "Arrival in Tangier: City Highlights",
       "text": [
         "Pick-up from Tangier Airport/Port (Tanger Med or city port).",
         "Visit Cap Spartel, where the Mediterranean meets the Atlantic.",
@@ -1020,10 +1031,10 @@
       "meals": "Breakfast included"
     },
     "day4": {
-      "title": "Full Day Exploring Fes – Imperial, Spiritual & Cultural Capital",
+      "title": "Fes: Full-Day Medina Tour",
       "text": [
         "Guided tour with a certified local guide: Fes el-Bali (oldest part of the city).",
-        "Visit Al-Qarawiyyin University — founded in 859 AD, recognized as the world's oldest continuously operating university.",
+        "Visit Al-Qarawiyyin University, founded in 859 CE as one of the oldest universities in the world.",
         "Explore the Tannery of Chouara.",
         "Visit Bou Inania and Attarine Madrasas.",
         "Discover Nejjarine Square and Museum.",
@@ -1057,7 +1068,7 @@
       "meals": "Breakfast included"
     },
     "day7": {
-      "title": "Marrakech – Departure",
+      "title": "Marrakech: Departure",
       "text": [
         "Free time depending on your flight schedule.",
         "Transfer to Marrakech Menara Airport."
@@ -1069,51 +1080,57 @@
     "goodToKnow": "This tour is private, so you can stop anywhere along the way.\nRiads in old medinas may require short walking distances.\nComfortable walking shoes are recommended.\nChefchaouen & Fes have many uphill/downhill alleys.\nThe weather in the north can be cooler, especially in winter.\nYou can customize the tour: add days, upgrade hotels, add desert extension.\nVegetarian/vegan meals available upon request.\nLuggage is always safe in the car during visits."
   },
   "featured": {
-    "smTitle": "know about some places before your travel",
+    "smTitle": "Know About Some Places Before Your Travel",
     "lgTitle": "Tourist Cities",
     "cards": {
       "marrakech": {
         "title": "Marrakech",
-        "alt": "Marrakech city view with traditional architecture"
+        "alt": "Marrakech city view with traditional architecture",
+        "region": "High Atlas Gateway"
       },
       "casablanca": {
         "title": "Casablanca",
-        "alt": "Casablanca modern cityscape with Hassan II Mosque"
+        "alt": "Casablanca modern cityscape with Hassan II Mosque",
+        "region": "Atlantic Coast"
       },
       "fez": {
         "title": "Fes",
-        "alt": "Fes ancient medina with traditional Moroccan architecture"
+        "alt": "Fes ancient medina with traditional Moroccan architecture",
+        "region": "Imperial Medina"
       },
       "dadesValley": {
         "title": "Dades Valley",
-        "alt": "Dades Valley scenic landscape with red rock canyons"
+        "alt": "Dades Valley scenic landscape with red rock canyons",
+        "region": "Gorges & Canyons"
       },
       "chefchaouen": {
         "title": "Chefchaouen",
-        "alt": "Chefchaouen blue city streets in the mountains"
+        "alt": "Chefchaouen blue city streets in the mountains",
+        "region": "Rif Mountains"
       },
       "rabat": {
         "title": "Rabat",
-        "alt": "Rabat capital city with modern and historical buildings"
+        "alt": "Rabat capital city with modern and historical buildings",
+        "region": "Atlantic Capital"
       }
     },
     "marrakech": {
-      "description": "The Red City is Morocco's cultural gem, full of life, colors, and history. Explore Jemaa El-Fna, vibrant souks, and stunning gardens and palaces. A perfect mix of tradition and modern energy."
+      "description": "Ochre ramparts encircling Bahia Palace, artisan copper-beaters in Rahba Kedima, and dusk descending over Jemaa el-Fna."
     },
     "casablanca": {
-      "description": "Morocco's modern and cosmopolitan hub, famous for the stunning Hassan II Mosque by the sea. Enjoy its beachfront Corniche, stylish cafés, and art-deco buildings."
+      "description": "Atlantic swells breaking beneath the minaret of Hassan II Mosque, flanked by 1930s Mauresque art-deco boulevards."
     },
     "fez": {
-      "description": "The spiritual and cultural heart of Morocco. Its ancient medina, tanneries, and Al Quaraouiyine University make it a living museum of Moroccan heritage."
+      "description": "The world's largest car-free medieval medina, where Chouara tanneries, 9th-century courtyards, and artisan souks endure."
     },
     "dadesValley": {
-      "description": "A dramatic valley with red rock canyons, ancient kasbahs, and scenic mountain roads. Ideal for hiking, photography, and discovering Berber villages."
+      "description": "Rust-red canyon switchbacks carved by the Dades River, winding past fortified earthen kasbahs and High Atlas cliffs."
     },
     "chefchaouen": {
-      "description": "The Blue City nestled in the Rif Mountains. Famous for its blue-painted streets, calm vibe, and stunning mountain views — perfect for relaxing and taking photos."
+      "description": "Cobalt and indigo lime-washed alleyways ascending the Rif Mountains, crowned by panoramic sunset trails above the Spanish Mosque."
     },
     "rabat": {
-      "description": "The capital city of Morocco, combining modern life with history. Visit Hassan Tower, Kasbah of the Udayas, and enjoy the peaceful Atlantic coast atmosphere."
+      "description": "Bouregreg estuary shores meeting the 12th-century Hassan Tower columns and the Andalusian cliffside ramparts of Kasbah des Oudayas."
     },
     "from": {
       "marrakesh": "From Marrakech",
@@ -1128,7 +1145,7 @@
     "cards": {
       "handcrafted": {
         "title": "Handcrafted Experiences",
-        "text": "Experience the best of Morocco with our handcrafted tours, designed to showcase the country's rich culture and stunning landscapes.",
+        "text": "Explore Morocco on private itineraries with experienced drivers, flexible stops, and vetted riads.",
         "alt": "Handcrafted tour experiences icon"
       },
       "guide": {
@@ -1138,32 +1155,32 @@
       },
       "price": {
         "title": "Suitable Price",
-        "text": "We offer competitive pricing on all our tours, ensuring great value for an unforgettable experience.",
+        "text": "Transparent pricing on all tours, providing private transport, accommodations, and guided travel without hidden fees.",
         "alt": "Best price guarantee icon"
       }
     }
   },
   "testimonials": {
-    "smTitle": "what our clients say about us",
-    "lgTitle": "testimonials",
+    "smTitle": "Verified traveler feedback",
+    "lgTitle": "Traveler dispatches & reviews",
     "items": {
       "kevin": {
         "name": "Kevin Wilson",
         "country": "USA",
         "alt": "Kevin Wilson testimonial",
-        "quote": "I’ve traveled with several agencies before, but Amsirar Trip stands out for its attention to detail and authentic experiences. They don’t just take you to tourist spots — they make sure you experience the culture, the food, and the people. Our local guide was fantastic and made us feel like family. Everything ran smoothly, from airport pickup to our final day. Highly recommended for anyone who wants a personal touch to their travel plans."
+        "quote": "Our driver, Hassan, met us at Marrakech airport and stayed with our group through the High Atlas and out to Erg Chebbi. He knew every turn in the Tizi n'Tichka pass and stopped at small roadside places we would have missed on our own. The riad and desert camp bookings were sorted without any delays."
       },
       "ben": {
         "name": "Ben Smith",
         "country": "UK",
         "alt": "Ben Smith testimonial",
-        "quote": "Booking with Amsirar Trip was the best choice I made this year. The communication was fast, clear, and friendly from start to finish. The itinerary was well-balanced — adventure, relaxation, and exploration all in one. The guides were knowledgeable and always ready to help. What really stood out was how much effort they put into making sure everyone felt comfortable and safe throughout the journey. I’m already planning my next trip with them!"
+        "quote": "Booking with Amsirar Trip was straightforward and dependable. The communication was prompt and clear from start to finish. The itinerary was well-balanced across desert routes and mountain passes, and the guides were attentive throughout the journey."
       },
       "sara": {
         "name": "Sara Garcia",
         "country": "Spain",
         "alt": "Sara Garcia testimonial",
-        "quote": "A Perfectly Organized Adventure!\nMy trip with Amsirar Trip was absolutely flawless. From the moment I booked, the team handled everything with care — hotel reservations, local transport, and guided tours. What impressed me most was how flexible they were when I wanted to adjust my itinerary. Every destination felt well thought-out and perfectly timed. I didn't have to worry about a single thing. It was the most stress-free vacation I've ever had!"
+        "quote": "Our private tour with Amsirar Trip was handled with real care, from hotel bookings to transport through the Atlas. The team was especially accommodating when we asked to adjust our route pacing. Every stage was well organized and gave us time to explore."
       }
     }
   },
@@ -1178,11 +1195,11 @@
     "newsletterDescription": "Subscribe to get exclusive offers and travel tips",
     "newsletterCaptchaError": "Please complete the captcha verification.",
     "newsletterCloseAria": "Close newsletter dialog",
-    "newsletterSuccess": "Successfully subscribed to newsletter!",
+    "newsletterSuccess": "Subscription confirmed. You will receive our travel dispatch.",
     "newsletterFailure": "Failed to subscribe. Please try again.",
     "newsletterNetwork": "Network error. Please check your connection.",
     "copyright": "All rights reserved.",
-    "description": "At Amsirar Trip, we are passionate about showcasing the diverse and vibrant culture of Morocco.\nOur carefully curated tours offer something for every traveler from the bustling markets of Marrakech to the serene landscapes of the Sahara Desert.",
+    "description": "Amsirar Trip is an officially licensed travel agency in Marrakech (License No. 24/TT/RAK). We specialize in private Sahara expeditions, High Atlas treks, and custom routes across Morocco.",
     "newsletterAria": "Newsletter subscription form",
     "newsletterInputAria": "Email address",
     "newsletterButtonAria": "Subscribe to newsletter",
@@ -1198,15 +1215,24 @@
     "loading": "Loading video...",
     "unsupported": "Your browser does not support the video tag.",
     "fallback": {
-      "title": "Experience Morocco Like Never Before",
-      "subtitle": "Discover the beauty of Morocco through our immersive tours and excursions.",
-      "cta": "Book your adventure today!"
+      "title": "Private Expeditions Across Morocco",
+      "subtitle": "Explore the Sahara, High Atlas passes, and imperial cities with experienced local drivers.",
+      "cta": "Explore itineraries"
     }
   },
   "button": "Button",
   "locale": "Locale",
   "script": "Script",
-  "calendar": { "chooseYear": "Choose year" },
+  "calendar": {
+    "chooseYear": "Choose year",
+    "prevMonth": "Previous month",
+    "nextMonth": "Next month",
+    "currentDate": "Current Date",
+    "selectedDate": "Selected Date",
+    "today": "Today",
+    "cancel": "Cancel",
+    "apply": "Apply"
+  },
   "booking": {
     "makeReservation": "Make your reservation",
     "description": "Book your perfect Morocco adventure with us",
@@ -1235,8 +1261,14 @@
         "accommodation": "Riad/Hotel in Chefchaouen",
         "meals": "Breakfast included"
       },
-      "day2": { "accommodation": "Riad in Fes", "meals": "Breakfast included" },
-      "day3": { "accommodation": "Riad in Fes", "meals": "Breakfast included" },
+      "day2": {
+        "accommodation": "Riad in Fes",
+        "meals": "Breakfast included"
+      },
+      "day3": {
+        "accommodation": "Riad in Fes",
+        "meals": "Breakfast included"
+      },
       "day4": {
         "accommodation": "Hotel in Midelt",
         "meals": "Breakfast included"
@@ -1245,7 +1277,9 @@
         "accommodation": "Desert Camp in Merzouga",
         "meals": "Breakfast & Dinner included"
       },
-      "day6": { "meals": "Breakfast included" }
+      "day6": {
+        "meals": "Breakfast included"
+      }
     },
     "tour3": {
       "day1": {
@@ -1259,7 +1293,7 @@
       },
       "day3": {
         "meals": "Breakfast included",
-        "arrival": "Around 7:00–8:00 PM"
+        "arrival": "Around 7:00 to 8:00 PM"
       }
     },
     "tour4": {
@@ -1279,21 +1313,33 @@
         "accommodation": "Riad/Hotel in Fes",
         "meals": "Breakfast included"
       },
-      "day5": { "meals": "Breakfast included" }
+      "day5": {
+        "meals": "Breakfast included"
+      }
     },
     "tour5": {
-      "day1": { "accommodation": "Riad/Hotel in Marrakech" },
+      "day1": {
+        "accommodation": "Riad/Hotel in Marrakech"
+      },
       "day2": {
         "accommodation": "Riad/Hotel in Marrakech",
         "meals": "Breakfast included"
       },
-      "day3": { "accommodation": "Hotel/Riad in Dades Valley" },
+      "day3": {
+        "accommodation": "Hotel/Riad in Dades Valley"
+      },
       "day4": {
         "accommodation": "Desert Camp (standard or luxury)",
         "meals": "Breakfast and dinner included"
       },
-      "day5": { "accommodation": "Riad in Fes", "meals": "Breakfast included" },
-      "day6": { "accommodation": "Riad in Fes", "meals": "Breakfast included" },
+      "day5": {
+        "accommodation": "Riad in Fes",
+        "meals": "Breakfast included"
+      },
+      "day6": {
+        "accommodation": "Riad in Fes",
+        "meals": "Breakfast included"
+      },
       "day7": {
         "accommodation": "Riad/Hotel in Chefchaouen",
         "meals": "Breakfast included"
@@ -1306,7 +1352,9 @@
         "accommodation": "Hotel in Casablanca",
         "meals": "Breakfast included"
       },
-      "day10": { "meals": "Breakfast included" }
+      "day10": {
+        "meals": "Breakfast included"
+      }
     },
     "tour6": {
       "day1": {
@@ -1324,7 +1372,7 @@
       },
       "day4": {
         "meals": "Breakfast included",
-        "arrival": "Around 5:00–6:00 PM"
+        "arrival": "Around 5:00 to 6:00 PM"
       }
     },
     "sending": "Sending..."
@@ -1426,7 +1474,7 @@
   },
   "blog": {
     "title": "Morocco Travel Guide & Blog",
-    "description": "Discover travel tips, itineraries, and expert advice for an unforgettable Moroccan adventure.",
+    "description": "Practical travel guides, route itineraries, and packing advice for multi-day trips and excursions across Morocco.",
     "backToBlog": "Back to Blog",
     "meta": {
       "title": "Morocco Travel Blog & Guides | Amsirar Trip",
@@ -1436,28 +1484,30 @@
     "sahara_guide_excerpt": "Planning a trip to the Sahara? Discover what to pack, how to choose between Merzouga and Zagora, and what an authentic desert camp experience is really like.",
     "sahara_guide_content": "<p>A trip to the Sahara Desert is the highlight of any Moroccan adventure. Whether you are seeking a romantic night under the stars in a luxury camp or a thrilling quad bike ride across the dunes, the Sahara has something for everyone.</p><h2>Choosing Your Desert Experience</h2><p>The two most popular desert destinations in Morocco are Merzouga (Erg Chebbi) and Zagora (Erg Chigaga). Merzouga boasts the iconic, towering golden sand dunes that most people picture when they think of the Sahara. Zagora offers a more rocky, flat desert experience but is closer to Marrakech, making it ideal for shorter trips.</p><h2>What to Pack</h2><ul><li><strong>Lightweight, breathable clothing:</strong> The sun is intense, so cover up with loose long sleeves.</li><li><strong>A warm jacket or fleece:</strong> Desert nights can get surprisingly cold, especially in winter.</li><li><strong>Sun protection:</strong> A wide-brimmed hat, high SPF sunscreen, and sunglasses are essential.</li><li><strong>Comfortable walking shoes:</strong> Sand can get hot, and you'll want solid footing.</li></ul><h2>What to Expect at a Desert Camp</h2><p>Most desert tours include a camel ride into the camp just before sunset. Upon arrival, you'll be greeted with traditional mint tea. Evening activities usually include a hearty Moroccan dinner (tagine or couscous) followed by Berber music and drumming around a campfire under a sky brimming with stars.</p>",
     "marrakech_itinerary_title": "3 Days in Marrakech: The Perfect Itinerary for First-Timers",
-    "marrakech_itinerary_excerpt": "Make the most of a short trip to Marrakech with this definitive 3-day itinerary covering the Medina, the palaces, and unforgettable day trips.",
-    "marrakech_itinerary_content": "<p>Marrakech is a sensory overload in the best possible way. To help you navigate its bustling souks and vibrant squares, we've crafted the perfect 3-day itinerary.</p><h2>Day 1: The Heart of the Medina</h2><p>Start your morning at the Koutoubia Mosque, taking in its impressive minaret. From there, dive into the bustling Jemaa el-Fnaa square. Spend the afternoon wandering the labyrinthine souks, bargaining for spices, leather goods, and ceramics. End your day with dinner on a rooftop cafe overlooking the illuminated square.</p><h2>Day 2: Palaces and Gardens</h2><p>Dedicate your second day to Marrakech's architectural wonders. Visit the stunning Bahia Palace with its intricate tilework and serene courtyards. In the afternoon, take a taxi to the Majorelle Garden, a vibrant botanical oasis famously restored by Yves Saint Laurent.</p><h2>Day 3: Escape the City</h2><p>For your final day, take a day trip! The Ourika Valley offers beautiful mountain scenery and cascading waterfalls just a short drive away. Alternatively, head to the Agafay Desert for a thrilling quad bike ride or a sunset dinner in a rocky desert landscape.</p>",
+    "marrakech_itinerary_excerpt": "Make the most of a short stay in Marrakech with a 3-day itinerary covering the medina, historical palaces, artisan souks, and mountain day trips.",
+    "marrakech_itinerary_content": "<p>Marrakech offers a rich introduction to Moroccan architecture, food, and culture. Here is a clear 3-day itinerary covering the medina, palaces, and nearby mountain valleys.</p><h2>Day 1: The Historic Medina</h2><p>Start your morning at the Koutoubia Mosque minaret. From there, head into the central Jemaa el-Fna square. Spend the afternoon walking through the souks, stopping at spice and leather stalls. Conclude the evening with dinner overlooking the square.</p><h2>Day 2: Palaces and Historic Sites</h2><p>Dedicate the second day to Marrakech's architecture. Visit the Bahia Palace with its cedar ceilings and tiled courtyards. In the afternoon, visit the Majorelle Garden and the Berber Museum.</p><h2>Day 3: Day Trip to the Atlas Foothills</h2><p>On your final day, take a day excursion outside the city. The Ourika Valley and Setti Fatma waterfalls provide cool mountain air and riverside dining an hour from Marrakech. Alternatively, travel to the Agafay stone desert for a sunset camel ride and dinner by the campfire.</p>",
     "morocco_safety_title": "Is Morocco Safe for Tourists? 10 Essential Travel Tips You Need to Know",
     "morocco_safety_excerpt": "Safety is a top concern for many travelers. Here is our honest guide to staying safe, avoiding scams, and traveling confidently in Morocco.",
     "morocco_safety_content": "<p>Morocco is generally a very safe country for tourists, known for its warm hospitality. However, like any major tourist destination, it helps to be prepared. Here are our top tips for a safe and enjoyable trip.</p><h2>1. Dress Conservatively</h2><p>Morocco is a conservative Muslim country. While tourists aren't expected to follow local dress codes strictly, dressing modestly (covering shoulders and knees) shows respect and often results in less unwanted attention, particularly for female travelers.</p><h2>2. Beware of \"Faux Guides\"</h2><p>In major cities like Marrakech and Fes, you may be approached by unofficial guides offering to show you around. Politely but firmly decline. Always book tours through reputable agencies or ask your riad for licensed guide recommendations.</p><h2>3. Agree on Taxi Fares in Advance</h2><p>Always ask the taxi driver to turn on the meter. If they refuse (which is common), clearly negotiate and agree on the fare *before* getting into the vehicle.</p><h2>4. Stay Hydrated with Bottled Water</h2><p>To avoid \"traveler's tummy,\" stick to drinking bottled or filtered water. Avoid ice in your drinks at smaller cafes, and ensure street food is cooked fresh and served hot.</p>"
   },
   "cookieConsent": {
-    "title": "We value your privacy",
-    "description": "We use cookies to enhance your browsing experience, provide essential security, and analyze site traffic to deliver unforgettable Morocco adventures. You can customize your preferences at any time.",
+    "title": "Cookie preferences",
+    "description": "We use essential cookies to maintain secure sessions and keep your chosen language. With your consent, we also collect anonymized metrics to improve tour itineraries.",
     "acceptAll": "Accept All",
     "rejectAll": "Essential Only",
     "customize": "Cookie Settings",
     "savePreferences": "Save Preferences",
     "modalTitle": "Cookie & Privacy Preferences",
-    "modalSubtitle": "Customize how cookies and local storage are used during your visit. You can modify these settings at any time.",
-    "necessaryTitle": "Strictly Necessary Cookies",
-    "necessaryDesc": "Required for site navigation, security, language selection, and core features. These cannot be disabled.",
+    "modalSubtitle": "Choose which cookies you allow on your device. You can update or withdraw your consent at any time.",
+    "complianceNote": "Privacy Controls",
+    "necessaryTitle": "Essential cookies",
+    "necessaryDesc": "Required for secure navigation, session security, and language routing. These cannot be disabled.",
     "alwaysActive": "Always Active",
-    "analyticsTitle": "Analytics & Performance",
-    "analyticsDesc": "Enables anonymous traffic metrics to help us understand popular itineraries and improve loading performance.",
-    "functionalTitle": "Preferences & Functional",
-    "functionalDesc": "Remembers your choices (such as interactive agency maps and currency preferences) for a smoother journey.",
+    "analyticsTitle": "Analytics cookies",
+    "analyticsDesc": "Collects anonymous page visit counts and speed metrics to help us see which tour itineraries are popular and improve site performance.",
+    "functionalTitle": "Preference cookies",
+    "functionalDesc": "Remembers your choices (such as interactive itinerary map views and currency selections) across visits.",
+    "optional": "Optional",
     "privacyPolicyLink": "Read our Privacy Policy",
     "close": "Close"
   }

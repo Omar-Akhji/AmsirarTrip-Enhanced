@@ -1,14 +1,14 @@
 import type { ImageMetadata } from "astro";
 
 export type Tour = {
-  id: number;
-  image: string | ImageMetadata;
-  title: string;
-  author: string;
-  category: string;
-  description: string;
-  duration: number;
-  start: string;
-  route: string;
-  end: string;
+  readonly id: number;
+  readonly image: string | ImageMetadata;
+  readonly title: string;
+  readonly author: string;
+  readonly category: string;
+  readonly description: string;
+  readonly duration: number;
+  readonly start: string;
+  readonly route: string;
+  readonly end: string;
 };

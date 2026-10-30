@@ -1,0 +1,115 @@
+---
+import { ChevronRight } from "@lucide/astro";
+import AsciiSkeleton from "./AsciiSkeleton.astro";
+
+interface Props {
+  class?: string | undefined;
+  hasItinerary?: boolean | undefined;
+  hasBadge?: boolean | undefined;
+}
+
+const { class: className, hasItinerary = true, hasBadge = true } = Astro.props;
+---
+
+<article
+  aria-busy="true"
+  aria-label="Loading trip card"
+  class:list={[
+    "group relative flex flex-col overflow-hidden rounded-2xl border border-stone-200/90 bg-white p-3 shadow-xs size-full",
+    className,
+  ]}
+>
+  {/* Image thumbnail decoding through ASCII dither mesh matching TripCard.astro */}
+  <div class="relative aspect-4/3 shrink-0 overflow-hidden rounded-xl bg-stone-100 dark:bg-stone-900 inline-full">
+    <AsciiSkeleton
+      class="ars-image size-full text-stone-400"
+      rows={30}
+      variant="dither"
+    />
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-0 bg-linear-to-t from-slate-950/70 via-transparent to-transparent opacity-60"
+    ></div>
+
+    {hasBadge && (
+      <div class="absolute inset-s-3 top-3 z-10">
+        <div class="inline-flex items-center rounded-md border border-white/20 bg-slate-950/80 px-2.5 py-1 backdrop-blur-xs">
+          <AsciiSkeleton
+            class="text-white/80"
+            lines={1}
+            variant="scan"
+            widths={["4rem"]}
+          />
+        </div>
+      </div>
+    )}
+  </div>
+
+  {/* Card body matching TripCard.astro typography & spacing */}
+  <div class="flex flex-1 flex-col px-3 pbs-5 pbe-2">
+    <div class="mbe-2">
+      {/* Tagline */}
+      <AsciiSkeleton
+        class="mbe-1.5 text-stone-400 font-mono text-xs"
+        lines={1}
+        variant="scan"
+        widths={["6rem"]}
+      />
+      {/* Title */}
+      <AsciiSkeleton
+        class="mbe-2 text-stone-800 font-bold text-lg sm:text-xl"
+        lines={2}
+        variant="dither"
+        widths={["88%", "62%"]}
+      />
+    </div>
+
+    {/* Description */}
+    <div class="mbe-6 flex-1 space-y-2 pt-1">
+      <AsciiSkeleton
+        class="text-stone-400"
+        lines={3}
+        variant="dither"
+        widths={["100%", "92%", "75%"]}
+      />
+    </div>
+
+    {/* Itinerary Metadata */}
+    {hasItinerary && (
+      <div class="m-0 mbe-5 grid grid-cols-2 gap-3 border-y border-stone-100 p-0 py-3 text-xs font-mono">
+        <div class="flex flex-col gap-1.5">
+          <AsciiSkeleton
+            class="text-stone-500"
+            lines={2}
+            variant="terminal"
+            widths={["3rem", "5rem"]}
+          />
+        </div>
+        <div class="flex flex-col border-s border-stone-100 ps-3 gap-1.5">
+          <AsciiSkeleton
+            class="text-stone-500"
+            lines={2}
+            variant="terminal"
+            widths={["3rem", "5rem"]}
+          />
+        </div>
+      </div>
+    )}
+
+    {/* Footer CTA & circular action button */}
+    <div class="mbs-auto flex items-center justify-between border-t border-stone-100 pbs-3">
+      <AsciiSkeleton
+        class="text-stone-400"
+        lines={1}
+        variant="scan"
+        widths={["6rem"]}
+      />
+      <div class="flex size-8 items-center justify-center rounded-full border border-stone-200 bg-stone-50">
+        <ChevronRight
+          aria-hidden="true"
+          class="size-4 -rotate-90 text-stone-300"
+        />
+      </div>
+    </div>
+  </div>
+</article>

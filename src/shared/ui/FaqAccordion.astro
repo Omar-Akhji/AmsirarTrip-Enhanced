@@ -1,0 +1,50 @@
+---
+import { ChevronDown, CircleQuestionMark } from "@lucide/astro";
+
+interface Props {
+  readonly idPrefix?: string | undefined;
+  readonly faqTitle: string;
+  readonly faqs: readonly { readonly question: string; readonly answer: string }[];
+}
+
+const { idPrefix = "trip", faqTitle, faqs } = Astro.props;
+---
+
+<div data-animate="fade-up">
+  <section aria-labelledby={`${idPrefix}-faq-title`}>
+    <hgroup class="mbe-4">
+      <p class="font-sans text-xs font-bold tracking-wider text-orange-700 uppercase">
+        Practical Clarifications
+      </p>
+      <h3
+        class="mbs-1 text-xl font-bold tracking-tight text-stone-900 sm:text-2xl md:text-3xl"
+        id={`${idPrefix}-faq-title`}
+      >
+        {faqTitle}
+      </h3>
+    </hgroup>
+    <div class="space-y-3">
+      {faqs.map((faq) => (
+        <details
+          name={`${idPrefix}-faq`}
+          class="group rounded-2xl border border-stone-200/90 bg-white p-5 shadow-2xs transition-colors open:border-stone-300"
+        >
+          <summary class="flex cursor-pointer list-none items-start gap-3 text-start text-base font-semibold text-stone-900 marker:hidden">
+            <CircleQuestionMark
+              aria-hidden="true"
+              class="mbs-0.5 size-5 shrink-0 text-orange-600"
+            />
+            <span class="flex-1">{faq.question}</span>
+            <ChevronDown
+              aria-hidden="true"
+              class="size-5 shrink-0 text-stone-400 transition group-open:rotate-180"
+            />
+          </summary>
+          <p class="mbs-3 ps-8 font-sans text-sm sm:text-base leading-relaxed text-stone-600">
+            {faq.answer}
+          </p>
+        </details>
+      ))}
+    </div>
+  </section>
+</div>

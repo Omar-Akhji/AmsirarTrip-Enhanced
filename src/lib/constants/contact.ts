@@ -15,14 +15,12 @@
  * WHATSAPP_NUMBER)
  */
 
-const raw: string =
-  (import.meta.env["PUBLIC_WHATSAPP_NUMBER"] as string | undefined) ?? "212661173144";
+import { PUBLIC_WHATSAPP_NUMBER } from "astro:env/client";
+
+const raw: string = PUBLIC_WHATSAPP_NUMBER ?? "212661173144";
 
 /** WhatsApp link — wa.me/{number} */
 export const WHATSAPP_LINK = `https://wa.me/${raw}`;
-
-/** Raw WhatsApp number (digits only, no leading +) */
-export const WHATSAPP_NUMBER = raw;
 
 /** Tel link for the phone number */
 export const PHONE_LINK = `tel:+${raw}`;

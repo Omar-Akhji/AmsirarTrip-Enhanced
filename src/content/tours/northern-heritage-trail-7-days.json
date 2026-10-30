@@ -17,7 +17,7 @@
     "Blue city Morocco tour"
   ],
   "seo": {
-    "title": "7-Day Northern Morocco Tour from Tangier",
+    "title": "Northern Morocco Tour from Tangier",
     "metaDescription": "Explore a 7-day northern Morocco tour from Tangier to Chefchaouen, Fes, Meknes, Volubilis, Middle Atlas, and Marrakech.",
     "lead": "A 7-day northern Morocco tour from Tangier that connects Mediterranean coast, Chefchaouen, Fes, Roman ruins, Middle Atlas scenery, and Marrakech.",
     "primaryKeyword": "7 day northern Morocco tour",
@@ -63,6 +63,8 @@
   },
   "jsonLd": {
     "name": "Northern Heritage Trail - 7 Days",
-    "description": "Explore Morocco's northern heritage from Tangier to Marrakech on this 7-day journey through the Rif Mountains and blue city of Chefchaouen."
+    "description": "Explore Morocco's northern heritage from Tangier to Marrakech on this 7-day journey through the Rif Mountains and blue city of Chefchaouen.",
+    "price": 630,
+    "currency": "EUR"
   }
 }

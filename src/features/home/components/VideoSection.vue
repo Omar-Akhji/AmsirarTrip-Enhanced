@@ -4,11 +4,12 @@ import { useTranslation } from "@/lib/hooks/use-translation";
 
 interface Props {
   fallbackImage: string;
+  locale?: string;
 }
 
-const { fallbackImage } = defineProps<Props>();
+const { fallbackImage, locale } = defineProps<Props>();
 
-const { t } = useTranslation();
+const { t } = useTranslation(locale);
 const videoError = ref(false);
 const videoLoaded = ref(false);
 const isPlaying = ref(false);
@@ -27,12 +28,6 @@ const handleVideoError = () => {
 
 const handleVideoLoad = () => {
   videoLoaded.value = true;
-};
-
-const handlePlay = () => {
-  if (!videoRef.value) return;
-  void videoRef.value.play();
-  isPlaying.value = true;
 };
 
 const handleVideoEnd = () => {
@@ -56,24 +51,49 @@ const handleVideoClick = () => {
   <section
     id="video"
     :aria-label="t('video.sectionLabel', 'Morocco Travel Video')"
-    class="relative overflow-hidden py-4 text-white inline-full sm:py-6 lg:py-8"
+    class="relative overflow-hidden py-8 text-white inline-full sm:py-12 lg:py-16"
   >
     <div class="mx-auto px-4 max-inline-330">
       <div
         data-animate="fade-up"
-        class="relative overflow-hidden rounded-[34px] bg-zinc-900 p-3 shadow-2xl block-[55vh] inline-full sm:block-[65vh] lg:block-[75vh] xl:block-[85vh]"
+        data-scroll-cinematic
+        class="relative overflow-hidden rounded-2xl border border-slate-900 bg-slate-950 p-2 shadow-2xl will-change-transform block-[55vh] inline-full sm:p-3 sm:block-[65vh] lg:block-[75vh] xl:block-[85vh]"
       >
+        <!-- Top Telemetry Badge -->
+        <div
+          class="pointer-events-none absolute inset-s-6 top-6 z-20 flex items-center gap-2 font-mono text-xs"
+        >
+          <span
+            class="inline-flex items-center gap-2 rounded-md border border-white/20 bg-slate-950/80 px-3 py-1 font-bold tracking-wider text-orange-400 uppercase shadow-xs backdrop-blur-xs"
+          >
+            <span class="size-2 animate-pulse rounded-full bg-orange-400"></span>
+            FIELD FOOTAGE // MOROCCO EXPEDITION
+          </span>
+        </div>
+
         <div
           v-if="videoError"
-          class="flex items-center justify-center rounded-[26px] bg-cover bg-center px-8 py-12 text-center block-full"
+          class="flex items-center justify-center rounded-xl bg-cover bg-center px-8 py-12 text-center block-full"
           :style="{ backgroundImage: `url(${fallbackImage})` }"
         >
-          <div class="rounded-3xl bg-black/60 p-8">
-            <h3 class="text-2xl font-semibold">{{ t("video.fallback.title") }}</h3>
-            <p class="mbs-3 text-sm text-white/80">{{ t("video.fallback.subtitle") }}</p>
-            <p class="mbs-4 text-xs tracking-[0.35em] text-orange-300 uppercase">
-              {{ t("video.fallback.cta") }}
+          <div
+            class="max-w-lg rounded-2xl border border-white/15 bg-slate-950/90 p-8 shadow-2xl backdrop-blur-md"
+          >
+            <div class="mbe-3 inline-flex items-center gap-2 font-mono text-xs text-orange-400">
+              <span class="size-2 rounded-full bg-orange-400"></span>
+              <span>ATELIER ARCHIVE</span>
+            </div>
+            <h3 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">
+              {{ t("video.fallback.title") }}
+            </h3>
+            <p class="mbs-2 text-sm leading-relaxed text-stone-300">
+              {{ t("video.fallback.subtitle") }}
             </p>
+            <div
+              class="mbs-6 border-t border-white/10 pt-4 font-mono text-xs font-bold tracking-wider text-orange-400 uppercase"
+            >
+              {{ t("video.fallback.cta") }}
+            </div>
           </div>
         </div>
 
@@ -83,14 +103,14 @@ const handleVideoClick = () => {
         >
           <div
             v-if="!videoLoaded"
-            class="absolute inset-0 z-10 flex items-center justify-center rounded-[26px] bg-zinc-950/60"
+            class="absolute inset-0 z-10 flex items-center justify-center rounded-xl bg-slate-950/80 backdrop-blur-xs"
           >
-            <div class="space-y-3 text-center">
-              <p class="text-sm tracking-[0.4em] text-orange-200 uppercase">
+            <div class="space-y-3 text-center font-mono">
+              <p class="text-xs font-bold tracking-[0.2em] text-orange-400 uppercase">
                 {{ t("video.loading") }}
               </p>
               <div
-                class="mx-auto size-10 animate-spin rounded-full border-2 border-white/20 border-t-white"
+                class="mx-auto size-8 animate-spin rounded-full border-2 border-white/20 border-t-orange-500"
               />
             </div>
           </div>
@@ -101,19 +121,11 @@ const handleVideoClick = () => {
             muted
             playsinline
             preload="metadata"
-            tabindex="0"
-            role="button"
-            :aria-label="
-              isPlaying ? t('video.pause', 'Pause video') : t('video.play', 'Play video')
-            "
-            class="size-full cursor-pointer rounded-[26px] object-cover transition-opacity duration-300"
+            class="size-full rounded-xl object-cover transition-opacity duration-300"
             :class="[videoLoaded ? 'opacity-100' : 'opacity-0']"
             @error="handleVideoError"
             @loadeddata="handleVideoLoad"
             @ended="handleVideoEnd"
-            @click="handleVideoClick"
-            @keydown.enter="handleVideoClick"
-            @keydown.space.prevent="handleVideoClick"
           >
             <source
               :src="videoSource"
@@ -130,16 +142,41 @@ const handleVideoClick = () => {
           </video>
 
           <button
-            v-if="videoLoaded && !isPlaying"
+            v-if="videoLoaded"
             type="button"
-            class="absolute inset-0 z-10 flex items-center justify-center rounded-[26px] bg-black/40 text-white transition pointer-fine:hover:bg-black/50"
-            :aria-label="t('video.playAria', 'Play video')"
-            @click="handlePlay"
+            class="group absolute inset-0 z-10 flex items-center justify-center rounded-xl transition-colors duration-300"
+            :class="[
+              isPlaying ?
+                'bg-black/0 pointer-fine:hover:bg-black/15'
+              : 'bg-black/30 pointer-fine:hover:bg-black/45',
+            ]"
+            :aria-label="
+              isPlaying ? t('video.pause', 'Pause video') : t('video.playAria', 'Play video')
+            "
+            @click="handleVideoClick"
           >
             <div
-              class="flex size-20 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm transition-transform hover:scale-110"
+              v-if="!isPlaying"
+              class="relative flex items-center justify-center"
             >
-              <div class="ms-2 border-y-12 border-l-20 border-y-transparent border-l-white" />
+              <!-- Glowing ambient ripple ring on hover -->
+              <span
+                class="absolute size-20 rounded-full border border-orange/40 transition-all duration-500 group-hover:scale-135 group-hover:border-orange/60 group-hover:opacity-0 sm:size-24"
+                aria-hidden="true"
+              ></span>
+
+              <!-- Radiant Moroccan terracotta & amber-orange gradient button -->
+              <div
+                class="flex size-18 items-center justify-center rounded-full border-2 border-white bg-linear-to-br from-amber-orange to-orange text-white shadow-xl shadow-orange/35 backdrop-blur-md transition-all duration-300 group-hover:scale-108 group-hover:border-white/60 group-hover:shadow-2xl group-hover:shadow-orange/50 group-hover:brightness-110 group-active:scale-95 sm:size-20"
+              >
+                <svg
+                  class="size-7 translate-x-0.5 fill-current drop-shadow-sm transition-transform duration-300 group-hover:scale-110"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <polygon points="7 4 19 12 7 20 7 4" />
+                </svg>
+              </div>
             </div>
           </button>
         </div>

@@ -1,0 +1,72 @@
+---
+import { MapPinned } from "@lucide/astro";
+
+interface Stage {
+  readonly time: string;
+  readonly title: string;
+  readonly location: string;
+  readonly description: string;
+}
+
+interface Props {
+  readonly program: readonly Stage[];
+  readonly programTitle?: string | undefined;
+}
+
+const { program, programTitle = "Timed Itinerary & Program" } = Astro.props;
+---
+
+<section
+  aria-labelledby="excursion-itinerary-heading"
+  data-animate="fade-up"
+  style="transition-delay:450ms"
+>
+  <hgroup class="mbe-8">
+    <p class="font-sans text-xs font-bold tracking-wider text-orange-700 uppercase">
+      Timed Itinerary & Program
+    </p>
+    <h3
+      id="excursion-itinerary-heading"
+      class="mbs-1 text-xl font-bold tracking-tight text-stone-900 sm:text-2xl md:text-3xl"
+    >
+      {programTitle}
+    </h3>
+  </hgroup>
+
+  <ol
+    role="list"
+    class="itinerary-stages-list m-0 list-none p-0 space-y-8"
+  >
+    {program.map((stage, index) => (
+      <li
+        data-animate="fade-up"
+        style={`transition-delay:${index * 80}ms`}
+      >
+        <div class="group relative">
+          <div class="mbe-4 flex flex-wrap items-center gap-3">
+            <span class="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-1.5 font-mono text-xs font-bold tracking-[0.14em] text-orange-700 uppercase shadow-2xs">
+              <span class="size-1.5 rounded-full bg-orange-600"></span>
+              STAGE {String(index + 1).padStart(2, "0")} // {stage.time}
+            </span>
+            <span class="inline-flex items-center gap-1.5 rounded-full border border-stone-200/90 bg-white px-3.5 py-1 font-mono text-xs font-semibold text-stone-800 shadow-2xs">
+              <MapPinned
+                aria-hidden="true"
+                class="size-3.5 text-orange-600 shrink-0"
+              />
+              {stage.location}
+            </span>
+          </div>
+
+          <div class="relative space-y-3 border-s-0 ps-0 sm:ms-5.5 sm:border-s sm:border-stone-200 sm:ps-8">
+            <h4 class="text-base sm:text-lg font-bold text-stone-900 tracking-tight">
+              {stage.title}
+            </h4>
+            <p class="text-sm sm:text-base leading-relaxed text-stone-700 font-normal">
+              {stage.description}
+            </p>
+          </div>
+        </div>
+      </li>
+    ))}
+  </ol>
+</section>

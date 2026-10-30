@@ -1,16 +1,8 @@
 import { GMAIL_PASS, GMAIL_USER, MAIL_TO, RECAPTCHA_SECRET_KEY } from "astro:env/server";
 
 export const env = {
-  get GMAIL_USER() {
-    return GMAIL_USER;
-  },
-  get GMAIL_PASS() {
-    return GMAIL_PASS;
-  },
-  get RECAPTCHA_SECRET_KEY() {
-    return RECAPTCHA_SECRET_KEY;
-  },
-  get MAIL_TO() {
-    return MAIL_TO ?? "";
-  },
+  GMAIL_USER,
+  GMAIL_PASS,
+  RECAPTCHA_SECRET_KEY,
+  MAIL_TO: MAIL_TO ?? "",
 } as const;

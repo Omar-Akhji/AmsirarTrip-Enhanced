@@ -8,35 +8,49 @@ import Navbar from "../shared/layout/Navbar.astro";
 import CookieConsent from "../shared/ui/CookieConsent.astro";
 import JsonLd from "../shared/ui/JsonLd.astro";
 import { WHATSAPP_LINK } from "../lib/constants/contact";
-import { LOCALES, DEFAULT_LOCALE } from "../i18n/locales";
-import { ui } from "../i18n/ui";
-import { LoaderCircle } from "@lucide/astro";
+import { LOCALES, DEFAULT_LOCALE, isLocale, type Locale } from "../i18n/locales";
+import { getLocalizedPath, stripLocaleFromPath } from "../i18n/utils";
+import TransitionSkeletons from "./components/TransitionSkeletons.astro";
 
 interface Props {
-  title?: string;
-  description?: string;
-  noindex?: boolean;
+  title?: string | undefined;
+  description?: string | undefined;
+  noindex?: boolean | undefined;
+  image?: string | undefined;
+  imageAlt?: string | undefined;
+  preloadImage?: boolean | undefined;
 }
 
 const {
-  title = "Amsirar Trip — Morocco Tours & Desert Adventures",
-  description = "Explore Morocco with local experts. Authentic Sahara desert tours, imperial city excursions, Atlas Mountains treks, and private guided experiences. 20+ years serving travelers. Book your dream Morocco adventure today.",
+  title = "Amsirar Trip | Morocco Tours & Desert Adventures",
+  description = "Private Sahara desert tours, High Atlas mountain treks, and day excursions across Morocco with licensed local Berber guides.",
   noindex = false,
+  image = "/images/hero/marrakech-medina.webp",
+  imageAlt,
+  preloadImage,
 } = Astro.props;
 
 const pageTitle = title.includes("Amsirar Trip") ? title : `${title} | Amsirar Trip`;
 
-const locale = Astro.currentLocale ?? "en";
-Object.assign(globalThis, { __TRANSLATIONS__: ui[locale as keyof typeof ui], __LOCALE__: locale });
+const locale: Locale =
+  Astro.currentLocale && isLocale(Astro.currentLocale) ? Astro.currentLocale : DEFAULT_LOCALE;
 const site = Astro.site ?? Astro.url;
 const pathname = Astro.url.pathname;
 
-const segments = pathname.replace(/^\/+/, "").split("/").filter(Boolean);
-const baseSegments = locale === "en" ? segments : segments.slice(1);
-const basePath = `/${baseSegments.join("/")}`;
-
-const canonicalURL = new URL(basePath, site).href;
-const defaultOgImage = new URL("/images/Header/header-1.webp", site).href;
+const cleanPath = stripLocaleFromPath(pathname);
+const defaultUrl = new URL(cleanPath, site).href;
+const canonicalURL = new URL(getLocalizedPath(pathname, locale), site).href;
+const preloadImageHref = image;
+const shouldPreload = Boolean(preloadImage);
+const defaultOgImage = new URL(preloadImageHref, site).href;
+const resolvedImageAlt = imageAlt ?? pageTitle;
+const OG_LOCALE_MAP: Record<string, string> = {
+  en: "en_US",
+  fr: "fr_FR",
+  de: "de_DE",
+  es: "es_ES",
+};
+const currentOgLocale = OG_LOCALE_MAP[locale] ?? locale;
 ---
 
 <!doctype html>
@@ -48,10 +62,6 @@ const defaultOgImage = new URL("/images/Header/header-1.webp", site).href;
 >
   <head>
     <meta charset="utf-8" />
-    <link
-      href="/sitemap-index.xml"
-      rel="sitemap"
-    />
     <script src="../scripts/no-js.ts"></script>
     <!--
       ClientRouter (View Transitions) generates inline scripts handled
@@ -73,7 +83,7 @@ const defaultOgImage = new URL("/images/Header/header-1.webp", site).href;
     <link
       as="font"
       crossorigin="anonymous"
-      href="/fonts/StoryScript-Regular.woff2"
+      href="/fonts/JetBrainsMono-Regular.woff2"
       rel="preload"
       type="font/woff2"
     />
@@ -87,6 +97,10 @@ const defaultOgImage = new URL("/images/Header/header-1.webp", site).href;
     <meta
       content="width=device-width, initial-scale=1.0"
       name="viewport"
+    />
+    <meta
+      content="light dark"
+      name="color-scheme"
     />
     <meta
       content={Astro.generator}
@@ -124,6 +138,10 @@ const defaultOgImage = new URL("/images/Header/header-1.webp", site).href;
       property="og:image"
     />
     <meta
+      content={resolvedImageAlt}
+      property="og:image:alt"
+    />
+    <meta
       content={canonicalURL}
       property="og:url"
     />
@@ -136,12 +154,12 @@ const defaultOgImage = new URL("/images/Header/header-1.webp", site).href;
       property="og:site_name"
     />
     <meta
-      content={locale}
+      content={currentOgLocale}
       property="og:locale"
     />
-    {LOCALES.filter((l) => l !== DEFAULT_LOCALE).map((l) => (
+    {LOCALES.filter((l) => l !== locale).map((l) => (
       <meta
-        content={l}
+        content={OG_LOCALE_MAP[l] ?? l}
         property="og:locale:alternate"
       />
     ))}
@@ -162,62 +180,112 @@ const defaultOgImage = new URL("/images/Header/header-1.webp", site).href;
       content={defaultOgImage}
       name="twitter:image"
     />
+    <meta
+      content={resolvedImageAlt}
+      name="twitter:image:alt"
+    />
 
     <link
       href={canonicalURL}
       rel="canonical"
     />
 
-    {LOCALES.map((l) => {
-      const href = l === DEFAULT_LOCALE ? canonicalURL : new URL(`/${l}${basePath}`, site).href;
-      return (
-        <link
-          href={href}
-          hreflang={l}
-          rel="alternate"
-        />
-      );
-    })}
-    <link
-      href={canonicalURL}
-      hreflang="x-default"
-      rel="alternate"
-    />
+    {!noindex
+      && LOCALES.map((l) => {
+        const href = new URL(getLocalizedPath(pathname, l), site).href;
+        return (
+          <link
+            href={href}
+            hreflang={l}
+            rel="alternate"
+          />
+        );
+      })}
+    {!noindex && (
+      <link
+        href={defaultUrl}
+        hreflang="x-default"
+        rel="alternate"
+      />
+    )}
 
     <link
       href="/sitemap-index.xml"
       rel="sitemap"
     />
 
+    <meta
+      content="Amsirar Trip"
+      name="application-name"
+    />
+    <meta
+      content="Amsirar Trip"
+      name="apple-mobile-web-app-title"
+    />
+    <meta
+      content="yes"
+      name="mobile-web-app-capable"
+    />
+    <meta
+      content="yes"
+      name="apple-mobile-web-app-capable"
+    />
+    <meta
+      content="default"
+      name="apple-mobile-web-app-status-bar-style"
+    />
+    <meta
+      content="MA-07"
+      name="geo.region"
+    />
+    <meta
+      content="Marrakech, Morocco"
+      name="geo.placename"
+    />
+    <meta
+      content="31.6295;-7.9811"
+      name="geo.position"
+    />
+    <meta
+      content="31.6295, -7.9811"
+      name="ICBM"
+    />
+
     <link
-      href="/favicon.png"
+      href="/favicon.ico"
       rel="icon"
-      type="image/png"
+      sizes="32x32"
     />
     <link
-      href="/horse-head.svg"
+      href="/favicon.svg"
       rel="icon"
       type="image/svg+xml"
     />
     <link
       href="/favicon.png"
-      rel="shortcut icon"
+      rel="icon"
+      sizes="1024x1024"
+      type="image/png"
     />
     <link
       href="/icons/icon-512.png"
       rel="apple-touch-icon"
+      sizes="512x512"
     />
     <link
       href="/site.webmanifest"
       rel="manifest"
     />
 
-    <link
-      as="image"
-      href="/images/Header/header-1.webp"
-      rel="preload"
-      type="image/webp"
-    />
+    {shouldPreload && (
+      <link
+        as="image"
+        fetchpriority="high"
+        href={preloadImageHref}
+        rel="preload"
+        type="image/webp"
+      />
+    )}
 
     <JsonLd
       data={generateOrganizationJsonLd()}
@@ -231,25 +299,14 @@ const defaultOgImage = new URL("/images/Header/header-1.webp", site).href;
 
   <body>
     <div
-      class="hidden"
-      id="app-translations"
-    >
-      {JSON.stringify(ui[locale as keyof typeof ui])}
-    </div>
-    <div
-      class="fixed inset-0 z-999999 flex items-center justify-center bg-zinc-100 opacity-100 transition-opacity duration-450 ease-out data-[state=hidden]:pointer-events-none"
-      data-state="visible"
-      id="initial-loader"
-      transition:persist="initial-loader"
-    >
-      <LoaderCircle class="size-12 animate-spin text-orange-500" />
-    </div>
-    <div
       aria-hidden="true"
+      class="fixed top-0 inset-s-0 z-100000 h-0.75 w-full pointer-events-none opacity-0 origin-left scale-x-0 bg-linear-to-r from-orange via-amber-orange to-orange shadow-[0_0_12px_oklch(56%_0.19_33deg/70%),0_0_6px_oklch(75%_0.18_55deg/50%)] transition-[transform,opacity] duration-200 ease-out"
       id="page-progress-bar"
       transition:persist="page-progress-bar"
     ></div>
-    <script src="../scripts/loader.ts"></script>
+    <script src="../scripts/transitions.ts"></script>
+    <script src="../scripts/ascii-skeleton.ts"></script>
+    <script src="../scripts/smooth-scroll.ts"></script>
     <script src="../scripts/scroll-animate.ts"></script>
     <script src="../scripts/webmcp-tools.ts"></script>
     <Navbar />
@@ -257,30 +314,42 @@ const defaultOgImage = new URL("/images/Header/header-1.webp", site).href;
       id="main-content"
       transition:animate="fade"
     >
-      <slot />
+      <TransitionSkeletons />
+      <div
+        id="page-content"
+        tabindex="-1"
+      >
+        <slot />
+      </div>
     </main>
     <Footer />
     <CookieConsent />
 
+    <!-- WhatsApp Side Tape (Right Edge) -->
     <a
       aria-label="Contact us on WhatsApp"
-      class="fixed inset-e-6 bottom-6 z-50 flex size-16 items-center justify-center rounded-full border-[3px] border-whatsapp bg-white text-whatsapp shadow-lg transition-all duration-300 pointer-fine:hover:scale-110 pointer-fine:hover:shadow-xl pointer-fine:hover:brightness-110"
+      class="group fixed inset-e-0 inset-be-33 z-40 flex size-11 items-center justify-center rounded-s-md border-[1.5px] border-e-0 border-emerald-500/50 bg-slate-950/95 text-emerald-400 shadow-xl backdrop-blur-md transition-[transform,background-color,border-color,color,box-shadow] duration-200 ease-out pointer-fine:hover:-translate-x-1.5 pointer-fine:hover:border-emerald-400 pointer-fine:hover:bg-slate-900 pointer-fine:hover:text-emerald-300 pointer-fine:hover:shadow-2xl pointer-fine:hover:shadow-emerald-950/40 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-2 motion-reduce:transform-none"
       href={WHATSAPP_LINK}
       rel="noopener noreferrer"
       target="_blank"
+      title="Contact us on WhatsApp"
       transition:persist="whatsapp-cta"
     >
-      <span
-        aria-hidden="true"
-        class="absolute inset-0 -z-10 animate-ping rounded-full bg-whatsapp opacity-20 duration-1000"
-      ></span>
-      <Image
-        alt="WhatsApp"
-        class="size-10"
-        height={40}
-        src="/icons/whatsapp.svg"
-        width={40}
-      />
+      <span class="relative flex size-6 shrink-0 items-center justify-center">
+        <span
+          aria-hidden="true"
+          class="absolute inset-0 -z-10 animate-ping rounded-full bg-emerald-400 opacity-25 duration-1000 motion-reduce:hidden"
+        ></span>
+        <Image
+          alt="WhatsApp"
+          class="size-6 shrink-0 transition-transform duration-200 ease-out pointer-fine:group-hover:scale-110 motion-reduce:transform-none"
+          decoding="async"
+          height={24}
+          loading="eager"
+          src="/icons/whatsapp.svg"
+          width={24}
+        />
+      </span>
     </a>
   </body>
 </html>

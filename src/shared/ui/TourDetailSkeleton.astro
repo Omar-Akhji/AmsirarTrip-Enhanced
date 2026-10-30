@@ -1,0 +1,395 @@
+---
+import AsciiSkeleton from "@/shared/ui/AsciiSkeleton.astro";
+import PageHeaderSkeleton from "@/shared/ui/PageHeaderSkeleton.astro";
+
+interface Props {
+  crumbWidths?: string[] | undefined;
+  class?: string | undefined;
+}
+
+const { crumbWidths = ["w-12", "w-14", "w-52"], class: className } = Astro.props;
+---
+
+<div
+  aria-busy="true"
+  aria-label="Loading tour details"
+  class:list={["size-full bg-white text-stone-900", className]}
+>
+  <PageHeaderSkeleton
+    crumbWidths={crumbWidths}
+    hasButtons={false}
+    hasUnderline={true}
+  />
+
+  {/* Trip Content Section matching TripLayout.astro */}
+  <section class="py-14">
+    <div class="mx-auto grid gap-10 px-4 max-inline-7xl lg:grid-cols-[4fr_2fr]">
+      {/* Left Column: Dossier Article */}
+      <article class="rounded-2xl bg-white p-4 pbe-8 shadow-xs ring-1 ring-zinc-100 sm:p-6 sm:pbe-12">
+        {/* Featured Image with rich ASCII dither matching TripLayout.astro 4/3 ratio */}
+        <figure class="relative mbe-8 aspect-4/3 overflow-hidden rounded-xl border border-zinc-100 shadow-md inline-full bg-stone-100 dark:bg-stone-900">
+          <AsciiSkeleton
+            class="ars-image size-full text-stone-400"
+            rows={48}
+            variant="dither"
+          />
+        </figure>
+
+        {/* Dossier Header */}
+        <div class="mbe-8 block border-b border-stone-200 pb-6 text-start">
+          <AsciiSkeleton
+            class="text-stone-400 font-mono text-xs uppercase"
+            lines={1}
+            variant="scan"
+            widths={["11rem"]}
+          />
+          <AsciiSkeleton
+            class="mbs-2 text-2xl sm:text-3xl text-stone-800 font-bold"
+            lines={1}
+            variant="dither"
+            widths={["80%"]}
+          />
+        </div>
+
+        {/* Quick Specs Grid (Days, Start, End, Price) */}
+        <div class="mbe-8 grid grid-cols-2 gap-3 rounded-2xl border border-stone-200/70 bg-stone-50 p-4 sm:grid-cols-4">
+          {Array.from({ length: 4 }, () => (
+            <div class="flex flex-col gap-1.5">
+              <AsciiSkeleton
+                class="text-stone-400 font-mono text-xs"
+                lines={1}
+                variant="terminal"
+                widths={["3rem"]}
+              />
+              <AsciiSkeleton
+                class="text-stone-700 font-mono text-sm"
+                lines={1}
+                variant="terminal"
+                widths={["5rem"]}
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* Highlights Box */}
+        <div class="mbe-8 rounded-2xl border border-stone-200/80 bg-stone-50/60 p-5 sm:p-6 space-y-3">
+          <AsciiSkeleton
+            class="text-stone-800 font-bold"
+            lines={1}
+            variant="scan"
+            widths={["9rem"]}
+          />
+          <div class="space-y-2">
+            {Array.from({ length: 3 }, () => (
+              <div class="flex items-center gap-2">
+                <span class="size-1.5 shrink-0 rounded-full bg-stone-400"></span>
+                <AsciiSkeleton
+                  class="text-stone-500"
+                  lines={1}
+                  variant="dither"
+                  widths={["100%"]}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Route Overview */}
+        <div class="mbe-8 space-y-2">
+          <AsciiSkeleton
+            class="text-stone-400 font-mono text-xs uppercase"
+            lines={1}
+            variant="scan"
+            widths={["10rem"]}
+          />
+          <AsciiSkeleton
+            class="text-xl sm:text-2xl text-stone-800 font-bold"
+            lines={1}
+            variant="dither"
+            widths={["12rem"]}
+          />
+          <div class="pt-1">
+            <AsciiSkeleton
+              class="text-stone-400"
+              lines={3}
+              variant="dither"
+              widths={["100%", "92%", "78%"]}
+            />
+          </div>
+        </div>
+
+        {/* Itinerary Timeline */}
+        <div class="space-y-4">
+          <AsciiSkeleton
+            class="text-stone-400 font-mono text-xs uppercase"
+            lines={1}
+            variant="scan"
+            widths={["11rem"]}
+          />
+          <AsciiSkeleton
+            class="text-xl sm:text-2xl text-stone-800 font-bold"
+            lines={1}
+            variant="dither"
+            widths={["13rem"]}
+          />
+          <div class="space-y-6 pt-2">
+            {Array.from({ length: 3 }, () => (
+              <div class="flex items-start gap-4">
+                <div class="size-8 shrink-0 rounded-full bg-stone-200 border border-stone-300/80 flex items-center justify-center">
+                  <span class="size-2 rounded-full bg-stone-400"></span>
+                </div>
+                <div class="flex-1 space-y-2">
+                  <AsciiSkeleton
+                    class="text-stone-800 font-bold text-base"
+                    lines={1}
+                    variant="dither"
+                    widths={["12rem"]}
+                  />
+                  <AsciiSkeleton
+                    class="text-stone-400 text-sm"
+                    lines={2}
+                    variant="dither"
+                    widths={["100%", "85%"]}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </article>
+
+      {/* Right Column: DetailsSidebar in clean neutral gray */}
+      <aside class="space-y-6 self-start lg:sticky lg:top-24">
+        {/* Brand Card in neutral gray */}
+        <div class="overflow-hidden rounded-2xl border border-stone-200/90 bg-stone-100 p-6 text-stone-900 shadow-xs sm:p-8">
+          <AsciiSkeleton
+            class="text-stone-500 font-mono text-xs"
+            lines={1}
+            variant="terminal"
+            widths={["7rem"]}
+          />
+          <AsciiSkeleton
+            class="mbs-2 text-xl font-bold text-stone-800"
+            lines={1}
+            variant="dither"
+            widths={["12rem"]}
+          />
+          <div class="my-4 border-t border-stone-200"></div>
+          <div>
+            <AsciiSkeleton
+              class="text-stone-400 text-sm"
+              lines={2}
+              variant="dither"
+              widths={["100%", "85%"]}
+            />
+          </div>
+          <div class="mbs-4 grid gap-3">
+            {Array.from({ length: 4 }, () => (
+              <div class="flex items-start gap-3">
+                <span class="size-2 rounded-full bg-stone-400 mt-1 shrink-0"></span>
+                <AsciiSkeleton
+                  class="text-stone-600"
+                  lines={1}
+                  variant="scan"
+                  widths={["80%"]}
+                />
+              </div>
+            ))}
+          </div>
+          <div class="mbs-4">
+            <AsciiSkeleton
+              class="text-stone-400 font-mono text-xs"
+              lines={1}
+              variant="terminal"
+              widths={["10rem"]}
+            />
+          </div>
+        </div>
+
+        {/* Dashed CTA Card */}
+        <div class="rounded-2xl border border-dashed border-stone-300 bg-white p-6 shadow-2xs">
+          <AsciiSkeleton
+            class="text-stone-800 font-bold"
+            lines={1}
+            variant="scan"
+            widths={["9rem"]}
+          />
+          <div class="mbs-2">
+            <AsciiSkeleton
+              class="text-stone-400 text-sm"
+              lines={1}
+              variant="dither"
+              widths={["100%"]}
+            />
+          </div>
+          <div class="mbs-4 space-y-2.5">
+            {Array.from({ length: 3 }, () => (
+              <div class="flex items-start gap-2.5">
+                <span class="mbs-1.5 size-1.5 shrink-0 rounded-full bg-stone-400"></span>
+                <AsciiSkeleton
+                  class="text-stone-400 text-xs"
+                  lines={1}
+                  variant="dither"
+                  widths={["10rem"]}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  {/* Booking Form Skeleton matching BookingForm.vue at bottom of tour */}
+  <section class="relative isolate border-bs border-stone-200 bg-stone-50 py-16 sm:py-20">
+    <div class="mx-auto px-4 inline-full max-inline-7xl">
+      <div class="grid grid-cols-1 items-stretch gap-8 lg:grid-cols-5">
+        {/* Left: Booking Form Card (col-span-3) */}
+        <div class="inline-full lg:col-span-3">
+          <div class="rounded-2xl border border-stone-200/90 bg-white p-6 shadow-2xs block-full sm:p-8">
+            <div class="mbe-6 border-b border-stone-100 pbe-5">
+              <AsciiSkeleton
+                class="mbe-2 text-stone-400 font-mono text-xs uppercase"
+                lines={1}
+                variant="scan"
+                widths={["7rem"]}
+              />
+              <AsciiSkeleton
+                class="text-xl sm:text-2xl text-stone-800 font-bold"
+                lines={1}
+                variant="dither"
+                widths={["16rem"]}
+              />
+            </div>
+
+            <div class="flex flex-col gap-5">
+              {/* Row 1: Persons & Date */}
+              <div class="grid gap-5 md:grid-cols-2">
+                <div class="h-12 w-full rounded-xl bg-stone-50/80 border border-stone-200/90 p-3 flex items-center">
+                  <AsciiSkeleton
+                    class="text-stone-300"
+                    lines={1}
+                    variant="terminal"
+                    widths={["6rem"]}
+                  />
+                </div>
+                <div class="h-12 w-full rounded-xl bg-stone-50/80 border border-stone-200/90 p-3 flex items-center">
+                  <AsciiSkeleton
+                    class="text-stone-300"
+                    lines={1}
+                    variant="terminal"
+                    widths={["8rem"]}
+                  />
+                </div>
+              </div>
+
+              {/* Row 2: Name & Email */}
+              <div class="grid gap-5 md:grid-cols-2">
+                <div class="h-12 w-full rounded-xl bg-stone-50/80 border border-stone-200/90 p-3 flex items-center">
+                  <AsciiSkeleton
+                    class="text-stone-300"
+                    lines={1}
+                    variant="terminal"
+                    widths={["7rem"]}
+                  />
+                </div>
+                <div class="h-12 w-full rounded-xl bg-stone-50/80 border border-stone-200/90 p-3 flex items-center">
+                  <AsciiSkeleton
+                    class="text-stone-300"
+                    lines={1}
+                    variant="terminal"
+                    widths={["9rem"]}
+                  />
+                </div>
+              </div>
+
+              {/* Row 3: Phone */}
+              <div class="h-12 w-full rounded-xl bg-stone-50/80 border border-stone-200/90 p-3 flex items-center">
+                <AsciiSkeleton
+                  class="text-stone-300"
+                  lines={1}
+                  variant="terminal"
+                  widths={["8rem"]}
+                />
+              </div>
+
+              {/* Row 4: Message */}
+              <div class="min-block-40 w-full rounded-xl bg-stone-50/80 border border-stone-200/90 p-4">
+                <AsciiSkeleton
+                  class="text-stone-300"
+                  lines={3}
+                  variant="dither"
+                  widths={["100%", "90%", "65%"]}
+                />
+              </div>
+
+              {/* Submit button */}
+              <div class="rounded-full border border-stone-300 bg-stone-100 px-8 py-3 w-fit">
+                <AsciiSkeleton
+                  class="text-stone-700 font-bold font-mono text-xs uppercase"
+                  lines={1}
+                  variant="scan"
+                  widths={["10rem"]}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Right: Booking Summary / Guarantee Card (col-span-2) */}
+        <div class="inline-full lg:col-span-2">
+          <div class="flex flex-col gap-6 rounded-2xl border border-stone-200/90 bg-white p-6 shadow-2xs sm:p-8">
+            <div class="border-b border-stone-100 pb-4">
+              <AsciiSkeleton
+                class="mbe-2 text-stone-400 font-mono text-xs"
+                lines={1}
+                variant="terminal"
+                widths={["5rem"]}
+              />
+              <AsciiSkeleton
+                class="text-lg font-bold text-stone-800"
+                lines={1}
+                variant="dither"
+                widths={["12rem"]}
+              />
+            </div>
+
+            <div class="space-y-4">
+              {Array.from({ length: 3 }, () => (
+                <div class="flex items-center gap-3">
+                  <div class="size-8 rounded-full bg-stone-100 border border-stone-200 flex items-center justify-center">
+                    <span class="size-2 rounded-full bg-stone-400"></span>
+                  </div>
+                  <div class="flex-1 space-y-1.5">
+                    <AsciiSkeleton
+                      class="text-stone-700 font-bold"
+                      lines={1}
+                      variant="dither"
+                      widths={["75%"]}
+                    />
+                    <AsciiSkeleton
+                      class="text-stone-400 text-xs"
+                      lines={1}
+                      variant="dither"
+                      widths={["50%"]}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div class="border-t border-stone-100 pt-4">
+              <div class="h-20 w-full rounded-2xl bg-stone-900/90 p-4 overflow-hidden">
+                <AsciiSkeleton
+                  class="size-full text-stone-500"
+                  rows={3}
+                  variant="terminal"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

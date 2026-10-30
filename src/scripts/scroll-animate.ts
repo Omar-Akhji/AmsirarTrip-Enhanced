@@ -16,17 +16,13 @@ const ANIMATION_CLEANUP_MS = 1200;
 let revealObserver: IntersectionObserver | undefined;
 let counterObserver: IntersectionObserver | undefined;
 
-// ---------------------------------------------------------------------------
-// Reveal Observer (triggers CSS @keyframes via .is-visible class)
-// ---------------------------------------------------------------------------
-
 function createRevealObserver(): IntersectionObserver {
   return new IntersectionObserver(
     (entries) => {
       for (const entry of entries) {
-        if (!entry.isIntersecting) continue;
+        if (!entry.isIntersecting || !(entry.target instanceof HTMLElement)) continue;
 
-        const el = entry.target as HTMLElement;
+        const el = entry.target;
         el.classList.add("is-visible");
 
         // Clean up will-change after animation completes
@@ -42,10 +38,6 @@ function createRevealObserver(): IntersectionObserver {
     { root: null, rootMargin: "0px 0px -8% 0px", threshold: 0.05 },
   );
 }
-
-// ---------------------------------------------------------------------------
-// Counter Animation
-// ---------------------------------------------------------------------------
 
 function animateCounter(el: HTMLElement) {
   const countToAttr = el.dataset["countTo"];
@@ -84,10 +76,6 @@ function animateCounter(el: HTMLElement) {
   requestAnimationFrame(tick);
 }
 
-// ---------------------------------------------------------------------------
-// Stagger Delay Conversion
-// ---------------------------------------------------------------------------
-
 function convertDelays() {
   const elements = document.querySelectorAll<HTMLElement>("[data-animate]");
   elements.forEach((el) => {
@@ -103,20 +91,12 @@ function convertDelays() {
   });
 }
 
-// ---------------------------------------------------------------------------
-// Reduced Motion Check
-// ---------------------------------------------------------------------------
-
 function getReducedMotionPreference(): boolean {
   return (
     typeof window !== "undefined"
     && globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches
   );
 }
-
-// ---------------------------------------------------------------------------
-// Lifecycle
-// ---------------------------------------------------------------------------
 
 function init() {
   cleanup();
@@ -126,22 +106,21 @@ function init() {
   // Mark system as active (enables opacity: 0 initial state in CSS)
   document.documentElement.classList.add("scroll-init");
 
-  // Convert stagger delays
   convertDelays();
 
-  // Reveal Observer
   if (!reducedMotion) {
     revealObserver = createRevealObserver();
     const revealElements = document.querySelectorAll<HTMLElement>("[data-animate]");
     revealElements.forEach((el) => revealObserver?.observe(el));
   }
 
-  // Counter Observer
   counterObserver = new IntersectionObserver(
     (entries) => {
       for (const entry of entries) {
         if (!entry.isIntersecting) continue;
-        animateCounter(entry.target as HTMLElement);
+        if (entry.target instanceof HTMLElement) {
+          animateCounter(entry.target);
+        }
         counterObserver?.unobserve(entry.target);
       }
     },

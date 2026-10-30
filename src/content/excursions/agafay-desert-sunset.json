@@ -3,19 +3,137 @@
   "i18nKeyPrefix": "agafay",
   "bookingId": 5,
   "image": "../../assets/images/Excursions/Agafay.webp",
-  "duration": "P1D",
+  "duration": "PT6H",
   "location": "Agafay Desert, Morocco",
   "keywords": [
-    "Agafay desert tour",
-    "Desert near Marrakech",
-    "Agafay sunset",
-    "Camel ride Marrakech",
-    "Quad biking Agafay",
-    "Morocco desert experience",
-    "Agafay glamping"
+    "agafay desert dinner and camel ride",
+    "agafay desert sunset tour from marrakech",
+    "agafay desert day trip from marrakech",
+    "agafay camel ride",
+    "agafay desert quad biking",
+    "desert near marrakech",
+    "agafay desert camp dinner"
   ],
+  "metrics": {
+    "distance": "~40 km from Marrakech",
+    "duration": "About 6 hours",
+    "pickup": "15:00 to 17:00 (by season)",
+    "elevation": "Stone desert plateau"
+  },
+  "overview": [
+    "The Agafay Desert is a stone desert about 40 km southwest of Marrakech, a drive of around 45 minutes. It has no sand dunes. Instead it is a landscape of bare, pale hills, and on clear evenings the High Atlas peaks stand along the southern horizon.",
+    "You are collected in the afternoon at a time set by the season, so that you reach the camp about an hour before sunset. After mint tea, you ride a camel across the hills for about an hour, dressed in a scarf and robe if you like, and stop at a high point to watch the sun go down over the Atlas.",
+    "Back at camp, dinner is served under the tents or outside: soup, salads, tagine and fruit, followed by music around the fire. You return to Marrakech around 21:30 to 22:30. It is the shortest way to see a desert landscape if you do not have the 3 days needed for the Sahara."
+  ],
+  "program": [
+    {
+      "time": "15:00 to 17:00",
+      "title": "Afternoon pickup in Marrakech",
+      "location": "Your hotel or riad",
+      "description": "Your driver collects you at your hotel or the nearest vehicle-accessible gate. Pickup is earlier in winter and later in summer so you arrive before sunset. You head southwest past the Lalla Takerkoust reservoir."
+    },
+    {
+      "time": "Arrival",
+      "title": "Welcome at the desert camp",
+      "location": "Agafay camp",
+      "description": "Mint tea at the camp after about 45 minutes on the road. You can borrow a scarf and robe for the camel ride."
+    },
+    {
+      "time": "About 1 hour before sunset",
+      "title": "Sunset camel ride",
+      "location": "Agafay hills",
+      "description": "A ride of about one hour across the stone hills, ending at a viewpoint where you watch the sun set over the High Atlas. Quad biking can replace or be added to the ride for an extra fee."
+    },
+    {
+      "time": "After sunset",
+      "title": "Dinner under the stars",
+      "location": "Agafay camp",
+      "description": "A Moroccan dinner of harira soup, salads, chicken or beef tagine and seasonal fruit, served in the tents or outside by the fire."
+    },
+    {
+      "time": "During dinner",
+      "title": "Music around the fire",
+      "location": "Agafay camp",
+      "description": "Local musicians play Berber and Gnawa music around the campfire after dinner."
+    },
+    {
+      "time": "21:30 to 22:30",
+      "title": "Return to Marrakech",
+      "location": "Agafay to Marrakech",
+      "description": "Drive back to Marrakech, about 45 minutes, with drop-off at your accommodation."
+    }
+  ],
+  "includes": [
+    "Pickup and drop-off at your Marrakech hotel or riad",
+    "Round-trip transport in an air-conditioned vehicle",
+    "Mint tea on arrival",
+    "Sunset camel ride of about one hour, with scarf and robe on loan",
+    "Three-course Moroccan dinner",
+    "Live music by the fire",
+    "Bottled water"
+  ],
+  "excludes": [
+    "Quad biking or buggy ride (optional, extra fee)",
+    "Alcoholic and soft drinks beyond water and tea",
+    "Tips for your driver and camp staff"
+  ],
+  "goodToKnow": [
+    "Bring a warm layer. The desert cools quickly after sunset, even in summer, and winter evenings can be cold.",
+    "Wear closed shoes. The ground is stony.",
+    "Pickup time changes through the year with the sunset. We confirm the exact time the day before.",
+    "Vegetarian, vegan and other diets can be prepared if you tell us when booking.",
+    "Agafay is a stone desert without dunes. If golden dunes matter to you, look at our Merzouga desert tours."
+  ],
+  "seo": {
+    "title": "Agafay Desert Sunset Camel Ride & Dinner from Marrakech",
+    "metaDescription": "Agafay Desert sunset tour from Marrakech: 1-hour camel ride, Atlas views at sunset, Moroccan dinner and live music by the fire. Hotel pickup, from EUR 55.",
+    "lead": "An afternoon and evening in the Agafay stone desert, 45 minutes from Marrakech: a camel ride at sunset with the Atlas on the horizon, then dinner and music by the fire at a desert camp.",
+    "primaryKeyword": "agafay desert dinner and camel ride from marrakech",
+    "secondaryKeywords": [
+      "agafay desert sunset tour",
+      "agafay desert day trip from marrakech",
+      "agafay desert camp dinner"
+    ],
+    "price": {
+      "label": "From EUR 55 per person",
+      "note": "Includes hotel pickup and drop-off, air-conditioned transport, mint tea, a sunset camel ride, a three-course dinner, live music and bottled water."
+    },
+    "imageAlt": "Camels walking across the pale stone hills of the Agafay Desert at sunset with the Atlas Mountains behind",
+    "highlights": [
+      "Sunset camel ride of about one hour across the Agafay hills",
+      "Watch the sun go down with the High Atlas on the horizon",
+      "Three-course Moroccan dinner at a desert camp",
+      "Berber and Gnawa music around the fire after dinner",
+      "Only 45 minutes from Marrakech, with hotel pickup",
+      "Optional quad biking before sunset"
+    ],
+    "faqs": [
+      {
+        "question": "How far is the Agafay Desert from Marrakech?",
+        "answer": "The Agafay Desert is about 40 km southwest of Marrakech, around 45 minutes by car. The whole excursion lasts about 6 hours."
+      },
+      {
+        "question": "Does Agafay have sand dunes?",
+        "answer": "No. Agafay is a stone desert of bare, pale hills. It does not have the golden dunes of the Sahara, which are a 9 to 10 hour drive away in Merzouga. Agafay gives you desert scenery, silence and sunset views in one evening."
+      },
+      {
+        "question": "What time does the Agafay sunset tour start and finish?",
+        "answer": "Pickup is between 15:00 and 17:00 depending on the season, so you reach camp before sunset. You are back in Marrakech between 21:30 and 22:30."
+      },
+      {
+        "question": "Can I add quad biking to the Agafay tour?",
+        "answer": "Yes. Quad biking or a buggy ride can be added before sunset for an extra fee. Let us know when booking so the timing works."
+      },
+      {
+        "question": "Is the Agafay tour suitable for children?",
+        "answer": "Yes. Children can ride camels with an adult nearby, and the dinner can be adjusted for younger eaters. The evening is short enough for most families."
+      }
+    ]
+  },
   "jsonLd": {
-    "name": "Agafay Desert Sunset Experience",
-    "description": "Experience the magic of the Agafay Desert at sunset with camel rides and stunning views of the Atlas Mountains."
+    "name": "Agafay Desert Sunset Camel Ride and Dinner from Marrakech",
+    "description": "Afternoon and evening excursion from Marrakech to the Agafay stone desert with a sunset camel ride, a Moroccan dinner at a desert camp and live music.",
+    "price": 55,
+    "currency": "EUR"
   }
 }

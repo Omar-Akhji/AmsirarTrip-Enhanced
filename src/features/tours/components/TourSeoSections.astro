@@ -1,35 +1,29 @@
 ---
-import {
-  ArrowRight,
-  BadgeCheck,
-  ChevronDown,
-  CircleQuestionMark,
-  Clock,
-  CreditCard,
-  Flag,
-  MapPin,
-} from "@lucide/astro";
+import FaqAccordion from "@/shared/ui/FaqAccordion.astro";
+import HighlightsList from "@/shared/ui/HighlightsList.astro";
+import PricingCard from "@/shared/ui/PricingCard.astro";
+import { Clock, Flag, MapPinned } from "@lucide/astro";
 
 interface Props {
-  duration: number | undefined;
-  durationLabel: string;
-  daysLabel: string;
-  startLabel: string;
-  startCity: string;
-  endLabel: string;
-  endCity: string;
-  priceLabel: string;
-  price: { label: string; note: string };
-  highlightsTitle: string;
-  highlights: string[];
-  pricingTitle: string;
-  reserveNow: string;
-  faqTitle: string;
-  faqs: { question: string; answer: string }[];
+  readonly duration?: number | undefined;
+  readonly durationLabel: string;
+  readonly daysLabel: string;
+  readonly startLabel: string;
+  readonly startCity: string;
+  readonly endLabel: string;
+  readonly endCity: string;
+  readonly priceLabel: string;
+  readonly price: { readonly label: string; readonly note: string };
+  readonly highlightsTitle: string;
+  readonly highlights: readonly string[];
+  readonly pricingTitle: string;
+  readonly reserveNow: string;
+  readonly faqTitle: string;
+  readonly faqs: readonly { readonly question: string; readonly answer: string }[];
 }
 
 const {
-  duration,
+  duration = 3,
   durationLabel,
   daysLabel,
   startLabel,
@@ -51,139 +45,71 @@ const {
   data-animate="fade-up"
   style="transition-delay:150ms"
 >
-  <div class="grid gap-4 sm:grid-cols-2">
-    <div class="inline-flex items-center gap-3 rounded-2xl border border-orange-100 bg-orange-50 px-5 py-3 text-orange-600 min-block-20">
+  <dl class="m-0 p-0 grid grid-cols-1 gap-3 sm:gap-4 sm:grid-cols-3">
+    <div class="flex items-center gap-4 rounded-2xl border border-stone-200/90 bg-white px-5 py-3 shadow-2xs transition-colors hover:border-stone-300 min-block-20">
       <Clock
         aria-hidden="true"
-        class="size-5 shrink-0 text-orange-500"
+        class="size-5 shrink-0 text-orange-600"
       />
-      <div class="text-start">
-        <div class="text-sm font-semibold">
+      <div class="text-start min-w-0">
+        <dt class="font-mono text-xs font-semibold tracking-wider text-stone-500 uppercase">
+          {durationLabel}
+        </dt>
+        <dd class="m-0 font-mono text-sm sm:text-base font-bold text-stone-900 tabular-nums">
           {duration ?? 3} {daysLabel}
-        </div>
-        <div class="text-xs font-semibold">{durationLabel}</div>
+        </dd>
       </div>
     </div>
-    <div class="inline-flex items-center gap-3 rounded-2xl border border-amber-100 bg-amber-50 px-5 py-3 text-amber-600 min-block-20">
-      <MapPin
+
+    <div class="flex items-center gap-4 rounded-2xl border border-stone-200/90 bg-white px-5 py-3 shadow-2xs transition-colors hover:border-stone-300 min-block-20">
+      <MapPinned
         aria-hidden="true"
-        class="size-5 shrink-0 text-amber-500"
+        class="size-5 shrink-0 text-orange-600"
+        stroke-width={2}
       />
-      <div class="text-start">
-        <div class="text-sm font-semibold">{startCity}</div>
-        <div class="text-xs font-semibold">{startLabel}</div>
+      <div class="text-start min-w-0">
+        <dt class="font-mono text-xs font-semibold tracking-wider text-stone-500 uppercase">
+          {startLabel}
+        </dt>
+        <dd class="m-0 font-mono text-sm sm:text-base font-bold text-stone-900 truncate">
+          {startCity}
+        </dd>
       </div>
     </div>
-    <div class="inline-flex items-center gap-3 rounded-2xl border border-emerald-100 bg-emerald-50 px-5 py-3 text-emerald-700 min-block-20">
+
+    <div class="flex items-center gap-4 rounded-2xl border border-stone-200/90 bg-white px-5 py-3 shadow-2xs transition-colors hover:border-stone-300 min-block-20">
       <Flag
         aria-hidden="true"
-        class="size-5 shrink-0 text-emerald-600"
+        class="size-5 shrink-0 text-orange-600"
       />
-      <div class="text-start">
-        <div class="text-sm font-semibold">{endCity}</div>
-        <div class="text-xs font-semibold">{endLabel}</div>
+      <div class="text-start min-w-0">
+        <dt class="font-mono text-xs font-semibold tracking-wider text-stone-500 uppercase">
+          {endLabel}
+        </dt>
+        <dd class="m-0 font-mono text-sm sm:text-base font-bold text-stone-900 truncate">
+          {endCity}
+        </dd>
       </div>
     </div>
-    <div class="inline-flex items-center gap-3 rounded-2xl border border-sky-100 bg-sky-50 px-5 py-3 text-sky-700 min-block-20">
-      <CreditCard
-        aria-hidden="true"
-        class="size-5 shrink-0 text-sky-600"
-      />
-      <div class="text-start">
-        <div class="text-sm font-semibold">{price.label}</div>
-        <div class="text-xs font-semibold">{priceLabel}</div>
-      </div>
-    </div>
-  </div>
+  </dl>
 </div>
 
-<div
-  data-animate="fade-up"
-  style="transition-delay:225ms"
->
-  <section aria-labelledby="tour-highlights-title">
-    <h3
-      class="mbe-4 text-xl font-semibold text-zinc-900 sm:text-2xl md:text-3xl"
-      id="tour-highlights-title"
-    >
-      {highlightsTitle}
-    </h3>
-    <div class="grid gap-3 sm:grid-cols-2">
-      {highlights.map((highlight) => (
-        <div class="flex items-start gap-3 rounded-2xl border border-orange-100 bg-white p-4 shadow-xs">
-          <BadgeCheck
-            aria-hidden="true"
-            class="mbs-0.5 size-5 shrink-0 text-orange-500"
-          />
-          <p class="text-sm leading-relaxed text-neutral-700 sm:text-base">{highlight}</p>
-        </div>
-      ))}
-    </div>
-  </section>
-</div>
+<HighlightsList
+  idPrefix="tour"
+  highlightsTitle={highlightsTitle}
+  highlights={highlights}
+/>
 
-<div
-  data-animate="fade-up"
-  style="transition-delay:375ms"
->
-  <section
-    aria-labelledby="tour-pricing-title"
-    class="rounded-2xl border border-orange-100 bg-linear-to-br from-orange-50 to-amber-50 p-5 sm:p-6"
-  >
-    <div class="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-      <div>
-        <h3
-          class="text-xl font-semibold text-zinc-900 sm:text-2xl"
-          id="tour-pricing-title"
-        >
-          {pricingTitle}
-        </h3>
-        <p class="mbs-2 text-2xl font-semibold text-orange-600">{price.label}</p>
-        <p class="text-sm leading-relaxed text-neutral-700 max-inline-2xl sm:text-base">
-          {price.note}
-        </p>
-      </div>
-      <a
-        class="inline-flex items-center justify-center gap-2 rounded-full bg-orange-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-orange-600/20 transition min-inline-40 pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:bg-orange-700"
-        href="#booking"
-      >
-        {reserveNow}
-        <ArrowRight
-          aria-hidden="true"
-          class="size-4"
-        />
-      </a>
-    </div>
-  </section>
-</div>
+<PricingCard
+  idPrefix="tour"
+  pricingTitle={pricingTitle}
+  priceLabel={priceLabel}
+  price={price}
+  reserveNow={reserveNow}
+/>
 
-<div data-animate="fade-up">
-  <section aria-labelledby="tour-faq-title">
-    <h3
-      class="mbe-4 text-xl font-semibold text-zinc-900 sm:text-2xl md:text-3xl"
-      id="tour-faq-title"
-    >
-      {faqTitle}
-    </h3>
-    <div class="space-y-3">
-      {faqs.map((faq) => (
-        <details class="group rounded-2xl border border-zinc-200 bg-white p-4 shadow-xs">
-          <summary class="flex cursor-pointer list-none items-start gap-3 text-start text-base font-semibold text-zinc-900 marker:hidden">
-            <CircleQuestionMark
-              aria-hidden="true"
-              class="mbs-0.5 size-5 shrink-0 text-orange-500"
-            />
-            <span class="flex-1">{faq.question}</span>
-            <ChevronDown
-              aria-hidden="true"
-              class="size-5 shrink-0 text-zinc-300 transition group-open:rotate-180"
-            />
-          </summary>
-          <p class="mbs-3 ps-8 text-sm leading-relaxed text-neutral-700 sm:text-base">
-            {faq.answer}
-          </p>
-        </details>
-      ))}
-    </div>
-  </section>
-</div>
+<FaqAccordion
+  idPrefix="tour"
+  faqTitle={faqTitle}
+  faqs={faqs}
+/>

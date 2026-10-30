@@ -12,6 +12,7 @@ interface Props {
   gradientPosition?: "top" | "top-right" | "center";
   bgImage?: string | ImageMetadata;
   breadcrumbs?: { label: string; href?: string }[];
+  hasUnderline?: boolean;
 }
 
 const {
@@ -22,23 +23,29 @@ const {
   gradientPosition = "top",
   bgImage,
   breadcrumbs,
+  hasUnderline = false,
 } = Astro.props;
 
 const locale = Astro.currentLocale || "en";
 
-let gradientValue = "bg-[radial-gradient(circle_at_top,rgba(249,115,22,0.35),transparent_65%)]";
+let gradientValue =
+  "bg-[radial-gradient(circle_at_top,color-mix(in_oklch,var(--color-orange)_35%,transparent),transparent_65%)]";
 if (gradientPosition === "top-right") {
-  gradientValue = "bg-[radial-gradient(circle_at_top_right,rgba(249,115,22,0.35),transparent_65%)]";
+  gradientValue =
+    "bg-[radial-gradient(circle_at_top_right,color-mix(in_oklch,var(--color-orange)_35%,transparent),transparent_65%)]";
 } else if (gradientPosition === "center") {
-  gradientValue = "bg-[radial-gradient(circle_at_center,rgba(249,115,22,0.35),transparent_65%)]";
+  gradientValue =
+    "bg-[radial-gradient(circle_at_center,color-mix(in_oklch,var(--color-orange)_35%,transparent),transparent_65%)]";
 }
 ---
 
-<section class="page-hero relative isolate overflow-hidden bg-zinc-950 text-white shadow-xl inline-full min-block-[40vh] sm:min-block-[45vh] lg:min-block-[50vh]">
+<section class="relative isolate flex flex-col justify-center overflow-hidden bg-zinc-950 pbs-24 pbe-12 sm:pbs-28 sm:pbe-16 lg:pbs-32 lg:pbe-20 text-center text-white shadow-xl inline-full min-h-[48dvh] sm:min-h-[52dvh] lg:min-h-[56dvh] max-h-150 print:hidden">
   {bgImage ?
     <Image
       alt=""
       class="absolute inset-0 -z-30 size-full object-cover"
+      decoding="async"
+      fetchpriority="high"
       height={1280}
       loading="eager"
       src={bgImage as string}
@@ -52,21 +59,20 @@ if (gradientPosition === "top-right") {
   ></div>
   <div
     aria-hidden="true"
-    class="absolute inset-0 z-10 bg-linear-to-br from-zinc-900/80 via-zinc-900/60 to-zinc-900 opacity-80"
-  ></div>
-  <div
-    aria-hidden="true"
-    class="absolute inset-0 z-10 bg-linear-to-br from-black/60 via-black/20 to-transparent"
+    class="absolute inset-0 z-10 bg-linear-to-b from-zinc-950/80 via-zinc-950/60 to-zinc-950/90"
   ></div>
 
-  <div class="relative z-20 mx-auto flex flex-col items-center justify-center gap-12 px-4 pbs-8 pbe-16 text-center inline-full max-inline-7xl lg:py-20">
-    <div class="flex-1 space-y-6 pbs-0 text-center lg:pbs-8">
+  <div class="relative z-20 mx-auto my-auto flex flex-col items-center justify-center px-4 text-center inline-full max-inline-7xl">
+    <div class="w-full max-w-4xl space-y-6 text-center">
       {breadcrumbs && breadcrumbs.length > 0 ?
         <nav
           aria-label="Breadcrumb"
-          class="mbe-8 flex items-center justify-center gap-3"
+          class="mbe-6 sm:mbe-8 flex items-center justify-center gap-3"
         >
-          <ol class="flex list-none flex-wrap items-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 py-2 backdrop-blur-md">
+          <ol
+            role="list"
+            class="flex list-none flex-wrap items-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 py-2 backdrop-blur-md"
+          >
             {breadcrumbs.map((crumb, index) => (
               <li class="flex items-center gap-2">
                 {crumb.href ?
@@ -83,33 +89,49 @@ if (gradientPosition === "top-right") {
                     {crumb.label}
                   </span>
                 }
-                {index < breadcrumbs.length - 1 && <ChevronRight class="size-3 text-white/40" />}
+                {index < breadcrumbs.length - 1 && (
+                  <ChevronRight
+                    aria-hidden="true"
+                    class="size-3 text-white/40"
+                  />
+                )}
               </li>
             ))}
           </ol>
         </nav>
       : null}
 
-      {smTitle && !breadcrumbs ?
-        <div class="flex items-center justify-center gap-4">
-          <span class="bg-orange-400/60 block-px inline-8" />
-          <p class="text-xs font-bold tracking-[0.2em] text-orange-300 uppercase sm:tracking-[0.3em]">
-            {smTitle}
+      <hgroup class="space-y-4 sm:space-y-5">
+        {smTitle && !breadcrumbs ?
+          <div class="flex items-center justify-center gap-4">
+            <span class="bg-orange-400/60 block-px inline-8" />
+            <p class="font-mono text-xs font-semibold tracking-[0.16em] text-orange-300 uppercase">
+              {smTitle}
+            </p>
+            <span class="bg-orange-400/60 block-px inline-8" />
+          </div>
+        : null}
+
+        <h1
+          class="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl text-balance"
+          id={headingId}
+        >
+          {title}
+        </h1>
+
+        {hasUnderline ?
+          <div
+            aria-hidden="true"
+            class="mx-auto mt-3 block-1 inline-20 rounded-full bg-orange-500"
+          />
+        : null}
+
+        {subtitle ?
+          <p class="mx-auto max-w-[62ch] font-mono text-sm leading-relaxed text-zinc-200 sm:text-base lg:text-lg">
+            {subtitle}
           </p>
-          <span class="bg-orange-400/60 block-px inline-8" />
-        </div>
-      : null}
-
-      <h1
-        class="lg:text-shadow-xl text-3xl font-semibold tracking-widest text-orange-200 uppercase text-shadow-black/60 text-shadow-lg sm:text-4xl sm:tracking-[0.15em] lg:text-5xl lg:tracking-[0.2em] lg:text-shadow-black/60"
-        id={headingId}
-      >
-        {title}
-      </h1>
-
-      {subtitle ?
-        <p class="font-fancy text-lg text-zinc-200 lg:text-xl">{subtitle}</p>
-      : null}
+        : null}
+      </hgroup>
       <div class="flex flex-wrap items-center justify-center gap-4 pbs-2">
         <slot />
       </div>

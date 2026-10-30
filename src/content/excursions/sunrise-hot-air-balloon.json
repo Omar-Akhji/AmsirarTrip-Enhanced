@@ -3,19 +3,130 @@
   "i18nKeyPrefix": "balloon",
   "bookingId": 6,
   "image": "../../assets/images/Excursions/Hot_Air_Balloon_Ride.webp",
-  "duration": "P1D",
+  "duration": "PT5H",
   "location": "Marrakech, Morocco",
   "keywords": [
-    "Hot air balloon Marrakech",
-    "Sunrise balloon ride",
-    "Marrakech from above",
-    "Morocco balloon experience",
-    "Atlas Mountains view",
-    "Romantic Marrakech tour",
-    "Aerial tour Morocco"
+    "hot air balloon marrakech",
+    "hot air balloon marrakech sunrise",
+    "marrakech balloon ride",
+    "sunrise balloon flight morocco",
+    "balloon ride with berber breakfast",
+    "private balloon flight marrakech",
+    "things to do in marrakech"
   ],
+  "metrics": {
+    "distance": "~30 to 40 min drive from Marrakech",
+    "duration": "About 5 hours",
+    "pickup": "05:00 to 06:30 (by season)",
+    "elevation": "Flight up to ~1,000 m"
+  },
+  "overview": [
+    "The balloons launch from open countryside north of Marrakech, about 30 to 40 minutes by car, and fly at sunrise when the air is calmest. From the basket you see the palm groves, the Jbilet hills, small farming villages and, on clear mornings, the snow on the High Atlas to the south.",
+    "You are collected before dawn, at a time that moves with the season. At the launch site you have tea and a light snack while the crew inflates the balloons, then the pilot gives a short safety briefing. The flight lasts about one hour and reaches up to about 1,000 meters, depending on the wind.",
+    "After landing you sit down to a Berber breakfast of fresh bread, msemen, honey, olive oil, eggs and mint tea, and receive a flight certificate. You are back at your hotel by late morning, with the rest of the day free."
+  ],
+  "program": [
+    {
+      "time": "05:00 to 06:30",
+      "title": "Pre-dawn pickup in Marrakech",
+      "location": "Your hotel or riad",
+      "description": "Your driver collects you at your hotel or the nearest vehicle-accessible gate. Pickup is earlier in summer and later in winter, timed so you arrive before sunrise."
+    },
+    {
+      "time": "Before sunrise",
+      "title": "Tea and balloon inflation",
+      "location": "Launch site north of Marrakech",
+      "description": "Tea, coffee and a light snack while the crew lays out and inflates the balloons. The pilot gives a short safety briefing, including the landing position."
+    },
+    {
+      "time": "Sunrise, about 1 hour",
+      "title": "Balloon flight",
+      "location": "Over the countryside north of Marrakech",
+      "description": "Lift off as the sun rises and drift with the wind over palm groves, villages and the Jbilet hills, with the High Atlas visible to the south on clear mornings. Height varies from treetop level to around 1,000 meters."
+    },
+    {
+      "time": "After landing",
+      "title": "Berber breakfast",
+      "location": "Tent or village house near the landing site",
+      "description": "Breakfast of fresh bread, msemen, honey, olive oil, eggs, cheese and mint tea. You also receive a flight certificate."
+    },
+    {
+      "time": "09:30 to 11:00",
+      "title": "Return to Marrakech",
+      "location": "Landing site to Marrakech",
+      "description": "Drive back to Marrakech with drop-off at your accommodation by late morning."
+    }
+  ],
+  "includes": [
+    "Pickup and drop-off at your Marrakech hotel or riad",
+    "Transport to the launch site and back",
+    "Tea, coffee and snack before the flight",
+    "Balloon flight of about one hour in a shared basket with a licensed pilot",
+    "Berber breakfast after landing",
+    "Flight certificate"
+  ],
+  "excludes": [
+    "Private basket upgrade (available on request)",
+    "Photos and videos sold by the balloon crew",
+    "Tips for the crew and driver"
+  ],
+  "goodToKnow": [
+    "Flights depend on the weather. If wind or visibility make flying unsafe, the flight is moved to another morning or refunded in full.",
+    "Book for one of your first mornings in Marrakech so there is time to reschedule if the weather cancels a flight.",
+    "Dress in layers. Mornings are cold before sunrise, even in summer, and warm up quickly after landing.",
+    "Wear closed shoes for the landing field, which can be uneven.",
+    "The flight is not suitable during pregnancy, for children under 6, or for travelers with serious back or heart conditions. Ask us if you are unsure."
+  ],
+  "seo": {
+    "title": "Hot Air Balloon Marrakech at Sunrise | Flight & Berber Breakfast",
+    "metaDescription": "Sunrise hot air balloon flight in Marrakech: about 1 hour over palm groves and the Jbilet hills, Berber breakfast, flight certificate and hotel pickup. EUR 160.",
+    "lead": "A one-hour hot air balloon flight at sunrise over the countryside north of Marrakech, with views toward the High Atlas, followed by a Berber breakfast and a return to your hotel by late morning.",
+    "primaryKeyword": "hot air balloon marrakech sunrise",
+    "secondaryKeywords": [
+      "hot air balloon marrakech",
+      "marrakech balloon ride",
+      "sunrise balloon flight morocco"
+    ],
+    "price": {
+      "label": "From EUR 160 per person",
+      "note": "Includes hotel pickup and drop-off, tea before the flight, a flight of about one hour in a shared basket, a Berber breakfast and a flight certificate. Private baskets on request."
+    },
+    "imageAlt": "Hot air balloon rising at sunrise over palm groves and farmland north of Marrakech",
+    "highlights": [
+      "Fly for about one hour at sunrise over the countryside north of Marrakech",
+      "See palm groves, the Jbilet hills and, on clear days, the High Atlas",
+      "Watch the crew inflate the balloons before take-off",
+      "Berber breakfast with fresh bread, msemen and mint tea after landing",
+      "Flight certificate to take home",
+      "Back at your hotel by late morning, with the day free"
+    ],
+    "faqs": [
+      {
+        "question": "What time does the Marrakech balloon flight start?",
+        "answer": "Pickup is between 05:00 and 06:30 depending on the season, so the balloon can take off at sunrise. We confirm the exact time the day before."
+      },
+      {
+        "question": "How long is the hot air balloon flight?",
+        "answer": "The flight itself lasts about one hour. With transport, preparation and breakfast, the whole experience takes about 5 hours, and you are back in Marrakech by late morning."
+      },
+      {
+        "question": "What happens if the flight is cancelled for weather?",
+        "answer": "Safety decisions are made by the pilot on the morning of the flight. If the balloon cannot fly, you can move to another morning or receive a full refund."
+      },
+      {
+        "question": "Is the balloon ride shared or private?",
+        "answer": "The standard flight is in a shared basket with other passengers. A private basket for couples, families or special occasions can be booked in advance for a higher price."
+      },
+      {
+        "question": "Is the balloon flight safe?",
+        "answer": "Flights are run by licensed pilots and only take place in suitable weather. You receive a safety briefing before take-off, including how to stand for landing."
+      }
+    ]
+  },
   "jsonLd": {
-    "name": "Sunrise Hot Air Balloon Ride",
-    "description": "Soar above Marrakech at sunrise in a hot air balloon for breathtaking views of the Atlas Mountains and palm groves."
+    "name": "Sunrise Hot Air Balloon Flight in Marrakech",
+    "description": "Sunrise hot air balloon flight of about one hour over the countryside north of Marrakech, with hotel pickup, a Berber breakfast and a flight certificate.",
+    "price": 160,
+    "currency": "EUR"
   }
 }

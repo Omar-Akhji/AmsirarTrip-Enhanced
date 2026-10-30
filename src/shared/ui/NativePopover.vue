@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /* eslint-disable unicorn/prefer-observer-apis */
-import { watch, onMounted, onUnmounted, useId, nextTick, useTemplateRef } from "vue";
+import { ref, watch, onMounted, onUnmounted, useId, nextTick, useTemplateRef } from "vue";
 
 interface Props {
   isOpen: boolean;
@@ -17,11 +17,21 @@ const generatedId = useId().replaceAll(":", "");
 const popoverId = id || generatedId;
 
 const popoverRef = useTemplateRef<HTMLDialogElement>("popoverRef");
+const isLocallyOpen = ref(isOpen);
 let focusTimer: ReturnType<typeof setTimeout> | null = null;
+
+const isPopoverOpen = (el: HTMLElement) => {
+  try {
+    return el.matches(":popover-open");
+  } catch {
+    return false;
+  }
+};
 
 const positionPopover = () => {
   const popover = popoverRef.value;
-  if (!popover || !isOpen) return;
+  if (!popover) return;
+  if (typeof popover.matches === "function" && !isPopoverOpen(popover)) return;
 
   const triggerElement = popover.previousElementSibling as HTMLElement | null;
   if (!triggerElement) return;
@@ -33,8 +43,9 @@ const positionPopover = () => {
   let top = triggerRect.bottom + 8;
   let left = triggerRect.left;
 
-  const popoverWidth = 340;
-  const popoverHeight = 400;
+  const popoverRect = popover.getBoundingClientRect();
+  const popoverWidth = popoverRect.width || 340;
+  const popoverHeight = popoverRect.height || 400;
 
   if (left + popoverWidth > viewportWidth) {
     left = Math.max(8, viewportWidth - popoverWidth - 16);
@@ -47,14 +58,14 @@ const positionPopover = () => {
   Object.assign(popover.style, {
     position: "fixed",
     margin: "0",
-    top: `${top}px`,
-    left: `${left}px`,
+    top: `${Math.round(top)}px`,
+    left: `${Math.round(left)}px`,
   });
 };
 
 // Focus trap
 const handleKeyDown = (event: KeyboardEvent) => {
-  if (!isOpen || event.key !== "Tab") return;
+  if (!(isOpen || isLocallyOpen.value) || event.key !== "Tab") return;
 
   const popover = popoverRef.value;
   if (!popover) return;
@@ -78,33 +89,79 @@ const handleKeyDown = (event: KeyboardEvent) => {
   }
 };
 
-// Sync browser popover state → parent
+// Sync browser popover state → parent (e.g. on light-dismiss)
 const handleToggle = async (event: Event) => {
   const toggleEvent = event as ToggleEvent;
   const isOpennow = toggleEvent.newState === "open";
-  emit("update:isOpen", isOpennow);
+  isLocallyOpen.value = isOpennow;
+  if (isOpennow !== isOpen) {
+    emit("update:isOpen", isOpennow);
+  }
   await nextTick();
   if (isOpennow) {
     positionPopover();
   }
 };
 
+// Handle trigger click reliably
+const handleTriggerClick = (event: MouseEvent) => {
+  event.preventDefault();
+  const willOpen = !(isOpen || isLocallyOpen.value);
+  isLocallyOpen.value = willOpen;
+  emit("update:isOpen", willOpen);
+
+  const popover = popoverRef.value;
+  if (!popover || typeof popover.showPopover !== "function") return;
+
+  try {
+    if (willOpen) {
+      if (!isPopoverOpen(popover)) {
+        popover.showPopover();
+      }
+      void nextTick(() => {
+        positionPopover();
+      });
+    } else if (isPopoverOpen(popover)) {
+      popover.hidePopover();
+    }
+  } catch {
+    // ignore
+  }
+};
+
 // Focus + resize/scroll listeners
 watch(
   () => isOpen,
-  (newOpen) => {
+  async (newOpen) => {
+    isLocallyOpen.value = newOpen;
     if (focusTimer) {
       clearTimeout(focusTimer);
       focusTimer = null;
     }
 
+    const popover = popoverRef.value;
+    if (popover && typeof popover.showPopover === "function") {
+      try {
+        const currentlyOpen = isPopoverOpen(popover);
+        if (newOpen && !currentlyOpen) {
+          popover.showPopover();
+        } else if (!newOpen && currentlyOpen) {
+          popover.hidePopover();
+        }
+      } catch {
+        // ignore
+      }
+    }
+
     if (newOpen) {
+      await nextTick();
+      positionPopover();
       focusTimer = setTimeout(() => {
-        const popover = popoverRef.value;
-        if (!popover) return;
+        const target = popoverRef.value;
+        if (!target) return;
         const focusableSelector =
           'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
-        const first = popover.querySelector<HTMLElement>(focusableSelector);
+        const first = target.querySelector<HTMLElement>(focusableSelector);
         first?.focus();
       }, 50);
       window.addEventListener("resize", positionPopover, { passive: true });
@@ -133,14 +190,16 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="relative inline-block inline-full">
+  <div class="relative block inline-full">
     <button
       type="button"
-      command="toggle-popover"
-      :commandfor="popoverId"
-      class="cursor-pointer border-none bg-transparent p-0 inline-full"
-      :aria-expanded="isOpen"
+      :popovertarget="popoverId"
+      popovertargetaction="toggle"
+      class="group block cursor-pointer rounded-xl border-none bg-transparent p-0 text-start inline-full focus:outline-hidden focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2"
+      :aria-expanded="isOpen || isLocallyOpen"
       :aria-controls="popoverId"
+      :aria-label="ariaLabel"
+      @click="handleTriggerClick"
     >
       <slot name="trigger" />
     </button>
@@ -151,12 +210,12 @@ onUnmounted(() => {
       popover="auto"
       aria-modal="true"
       :aria-label="ariaLabel || 'Popover dialog'"
-      class="fixed inset-auto m-0 border-none p-0 outline-hidden backdrop:bg-black/20"
+      class="fixed inset-auto m-0 border-none bg-transparent p-0 outline-hidden backdrop:bg-black/20"
       :class="[className]"
     >
       <div
-        v-if="isOpen"
-        class="animate-in fade-in zoom-in-95 duration-200"
+        v-if="isOpen || isLocallyOpen"
+        class="animate-fade-in-scale"
       >
         <slot />
       </div>

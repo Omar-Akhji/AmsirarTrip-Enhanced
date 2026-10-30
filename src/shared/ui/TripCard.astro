@@ -1,11 +1,33 @@
 ---
-import { ArrowRight } from "@lucide/astro";
+import { ChevronRight } from "@lucide/astro";
 import { Image } from "astro:assets";
 import { getRelativeLocaleUrl } from "astro:i18n";
 
+interface Props {
+  readonly item: {
+    readonly image: ImageMetadata | string;
+    readonly route: string;
+    readonly imageAlt?: string | undefined;
+    readonly alt?: string | undefined;
+  };
+  readonly title: string;
+  readonly description: string;
+  readonly exploreLink?: string | undefined;
+  readonly badge?: string | undefined;
+  readonly priority?: boolean | undefined;
+  readonly tagline?: string | undefined;
+  readonly start?: string | undefined;
+  readonly end?: string | undefined;
+  readonly startLabel?: string | undefined;
+  readonly endLabel?: string | undefined;
+  readonly transitionName?: string | undefined;
+}
+
 const {
   item,
-  translations,
+  title,
+  description,
+  exploreLink = "Explore",
   badge,
   priority = false,
   tagline,
@@ -15,80 +37,90 @@ const {
   endLabel,
   transitionName,
 } = Astro.props;
+
 const locale = Astro.currentLocale || "en";
 
 const cardTransitionName =
   transitionName
-  || (item?.route ?
+  || (item.route.length > 0 ?
     `trip-image-${item.route.replace(/^\/+/, "").replaceAll(/[^a-zA-Z0-9_-]/g, "-")}`
   : undefined);
 ---
 
-<article class="group relative flex flex-col overflow-hidden rounded-[20px] bg-white p-2.5 shadow-xs ring-1 ring-zinc-100 transition-all duration-500 size-full pointer-fine:hover:-translate-y-2 pointer-fine:hover:shadow-2xl pointer-fine:hover:shadow-orange-900/5">
+<article class="group relative flex flex-col overflow-hidden rounded-2xl border border-stone-200/90 bg-white p-3 shadow-xs transition duration-300 size-full pointer-fine:hover:-translate-y-1 pointer-fine:hover:border-stone-300 pointer-fine:hover:shadow-xl">
   <a
     class="absolute inset-0 z-20"
     href={getRelativeLocaleUrl(locale, item.route)}
   >
     <span class="sr-only">
-      {translations.exploreLink} - {translations.title}
+      {exploreLink} - {title}
     </span>
   </a>
 
-  <div class="relative aspect-4/3 shrink-0 overflow-hidden rounded-[15px] bg-zinc-100 inline-full">
-    <Image
-      alt={item.imageAlt}
-      class="absolute inset-0 size-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-      height={480}
-      loading={priority ? "eager" : "lazy"}
-      sizes="(max-width: 480px) 320px, (max-width: 768px) 480px, 640px"
-      src={item.image}
-      transition:name={cardTransitionName}
-      width={640}
-      widths={[320, 480, 640]}
-    />
-    <div class="absolute inset-0 bg-linear-to-t from-zinc-900/60 via-transparent to-transparent opacity-60 transition-opacity duration-300 group-hover:opacity-40"></div>
-
-    <div class="absolute inset-s-4 top-4 z-10">
-      <span class="inline-flex rounded-full bg-white/90 px-4 py-1.5 text-xs font-bold tracking-widest text-orange-600 uppercase shadow-xs backdrop-blur-md">
-        {badge}
-      </span>
+  <div
+    data-scroll-parallax
+    class="relative aspect-4/3 shrink-0 overflow-hidden rounded-xl bg-stone-100 inline-full"
+  >
+    <div class="parallax-media pointer-events-none absolute -inset-y-4 inset-x-0 h-[calc(100%+32px)] w-full">
+      <Image
+        alt={item.imageAlt || item.alt || title || "Morocco Trip"}
+        class="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 motion-reduce:transform-none"
+        height={480}
+        loading={priority ? "eager" : "lazy"}
+        sizes="(max-width: 480px) 320px, (max-width: 768px) 480px, 640px"
+        src={item.image as ImageMetadata}
+        {...(cardTransitionName ? { "transition:name": cardTransitionName } : {})}
+        width={640}
+        widths={[320, 480, 640]}
+      />
     </div>
-  </div>
+    <div class="absolute inset-0 bg-linear-to-t from-slate-950/70 via-transparent to-transparent opacity-60 transition-opacity duration-300 group-hover:opacity-40"></div>
 
-  <div class="flex flex-1 flex-col px-6 pbs-8 pbe-6">
-    <h3 class="mbe-2 line-clamp-2 text-xl leading-snug font-semibold text-zinc-900 transition-colors duration-300 text-shadow-md group-hover:text-orange-600">
-      {translations.title}
-    </h3>
-
-    {tagline && (
-      <p class="mbe-4 text-sm font-semibold tracking-wide text-orange-500 uppercase">{tagline}</p>
-    )}
-
-    <p class="mbe-8 line-clamp-3 flex-1 text-sm leading-relaxed text-zinc-600">
-      {translations.description}
-    </p>
-
-    {start && end && (
-      <div class="mbe-6 grid grid-cols-2 gap-4 text-sm">
-        <div class="flex flex-col">
-          <span class="text-xs font-medium tracking-widest text-zinc-400 uppercase">
-            {startLabel}
-          </span>
-          <span class="truncate font-bold text-zinc-900">{start}</span>
-        </div>
-        <div class="flex flex-col border-s border-zinc-100 ps-4">
-          <span class="text-xs font-medium tracking-widest text-zinc-400 uppercase">
-            {endLabel}
-          </span>
-          <span class="truncate font-bold text-zinc-900">{end}</span>
-        </div>
+    {badge && (
+      <div class="absolute inset-s-3 top-3 z-10">
+        <span class="inline-flex items-center rounded-md border border-white/20 bg-slate-950/80 px-2 py-1 font-mono text-[11px] font-bold tracking-wider text-orange-300 uppercase shadow-xs backdrop-blur-xs">
+          {badge}
+        </span>
       </div>
     )}
+  </div>
 
-    <div class="mbs-auto flex items-center justify-between border-t border-zinc-100 pbs-5">
-      <span class="font-bold tracking-wide text-orange-600">{translations.exploreLink}</span>
-      <div class="flex size-10 items-center justify-center rounded-full bg-zinc-50 text-orange-600 transition-all duration-300 group-hover:bg-orange-500 group-hover:text-white">
-        <ArrowRight class="size-4 -rotate-45 transition-transform duration-300 group-hover:rotate-0" />
+  <div class="flex flex-1 flex-col px-3 pbs-5 pbe-2">
+    <hgroup class="mbe-2">
+      {tagline && (
+        <p class="mbe-1 font-mono text-xs font-semibold tracking-wider text-orange-600 uppercase">
+          {tagline}
+        </p>
+      )}
+      <h3 class="line-clamp-2 text-lg font-bold leading-snug tracking-tight text-stone-950 transition-colors duration-200 group-hover:text-orange-600 sm:text-xl">
+        {title}
+      </h3>
+    </hgroup>
+
+    <p class="mbe-6 line-clamp-3 flex-1 text-sm leading-relaxed text-stone-600">{description}</p>
+
+    {start && end && (
+      <dl class="m-0 mbe-5 grid grid-cols-2 gap-3 border-y border-stone-100 p-0 py-3 text-xs font-mono">
+        <div class="flex flex-col">
+          <dt class="text-[10px] tracking-wider text-stone-400 uppercase">{startLabel}</dt>
+          <dd class="m-0 truncate font-semibold text-stone-900">{start}</dd>
+        </div>
+        <div class="flex flex-col border-s border-stone-100 ps-3">
+          <dt class="text-[10px] tracking-wider text-stone-400 uppercase">{endLabel}</dt>
+          <dd class="m-0 truncate font-semibold text-stone-900">{end}</dd>
+        </div>
+      </dl>
+    )}
+
+    <div class="mbs-auto flex items-center justify-between border-t border-stone-100 pbs-3">
+      <span class="text-xs font-bold tracking-wider text-orange-600 uppercase font-mono">
+        {exploreLink}
+      </span>
+      <div class="flex size-8 items-center justify-center rounded-full border border-stone-200 bg-stone-50 text-stone-700 transition-all duration-200 group-hover:border-orange/50 group-hover:bg-linear-to-br group-hover:from-amber-orange group-hover:to-orange group-hover:text-white group-hover:shadow-md group-hover:shadow-orange/30">
+        <ChevronRight
+          aria-hidden="true"
+          class="size-4 -rotate-90 transition-transform duration-200 ease-out group-hover:rotate-0"
+        />
       </div>
     </div>
   </div>

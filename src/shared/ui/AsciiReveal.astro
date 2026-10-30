@@ -1,0 +1,29 @@
+---
+import type { Duration, PresetName } from "ascii-reveal/core";
+
+interface Props {
+  preset?: PresetName | undefined;
+  duration?: Duration | undefined;
+  speed?: number | undefined;
+  origin?: "center" | "top-left" | "pointer" | undefined;
+  class?: string | undefined;
+}
+
+const {
+  preset = "decode",
+  duration = "fast",
+  speed = 1,
+  origin = "center",
+  class: className,
+} = Astro.props;
+---
+
+<div
+  class:list={["ascii-reveal-target relative", className]}
+  data-ascii-reveal-duration={duration}
+  data-ascii-reveal-origin={origin}
+  data-ascii-reveal-preset={preset}
+  data-ascii-reveal-speed={speed}
+>
+  <slot />
+</div>

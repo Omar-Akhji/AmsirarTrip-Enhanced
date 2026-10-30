@@ -1,8 +1,10 @@
 ---
+import { getCollection } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
 import ExcursionView from "../../../features/excursions/components/ExcursionsView.astro";
 import { useTranslations } from "../../../i18n/utils";
 import Layout from "../../../layouts/Layout.astro";
-import { generateBreadcrumbJsonLd } from "../../../lib/structured-data";
+import { generateBreadcrumbJsonLd, generateItemListJsonLd } from "../../../lib/structured-data";
 import JsonLd from "../../../shared/ui/JsonLd.astro";
 
 const locale = Astro.currentLocale || "en";
@@ -11,8 +13,24 @@ const t = useTranslations(locale);
 const title = t("excursion.meta.title");
 const description = t("excursion.meta.description");
 
+const excursionsEntries = await getCollection("excursions");
+const sortedExcursions = [...excursionsEntries].toSorted(
+  (a, b) => a.data.bookingId - b.data.bookingId,
+);
+const excursionsItemListJsonLd = generateItemListJsonLd({
+  name: title,
+  description,
+  url: Astro.url.pathname,
+  items: sortedExcursions.map((entry) => ({
+    name: t(`excursion.list.${entry.data.i18nKeyPrefix}.title`),
+    description: t(`excursion.list.${entry.data.i18nKeyPrefix}.description`),
+    url: getRelativeLocaleUrl(locale, `excursions/${entry.id}`),
+    image: entry.data.image.src,
+  })),
+});
+
 const breadcrumbJsonLd = generateBreadcrumbJsonLd([
-  { name: t("nav.home") || "Home", url: locale === "en" ? "/" : `/${locale}` },
+  { name: t("nav.home") || "Home", url: getRelativeLocaleUrl(locale, "/") },
   { name: t("nav.excursions") || "Excursions", url: Astro.url.pathname },
 ]);
 ---
@@ -21,6 +39,10 @@ const breadcrumbJsonLd = generateBreadcrumbJsonLd([
   description={description}
   title={title}
 >
+  <JsonLd
+    data={excursionsItemListJsonLd}
+    id="excursions-itemlist-jsonld"
+  />
   <JsonLd
     data={breadcrumbJsonLd}
     id="excursions-breadcrumb-jsonld"

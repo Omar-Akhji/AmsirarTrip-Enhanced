@@ -1,12 +1,19 @@
 import navData from "@/data/navigation.json";
 
-type NavLink = { to: string; labelKey: string };
+export interface NavLink {
+  readonly to: string;
+  readonly labelKey: string;
+}
 
-type SocialLink = { href: string; icon: string; label: string; accent: string };
+export interface SocialLink {
+  readonly href: string;
+  readonly icon: string;
+  readonly label: string;
+  readonly accent: string;
+}
 
-export type { Language } from "@/i18n/locales";
 export { LANGUAGES } from "@/i18n/locales";
 
-export const NAV_LINKS = navData.navLinks as NavLink[];
+export const NAV_LINKS: readonly NavLink[] = navData.navLinks;
 
-export const SOCIAL_LINKS = navData.socialLinks as SocialLink[];
+export const SOCIAL_LINKS: readonly SocialLink[] = navData.socialLinks;

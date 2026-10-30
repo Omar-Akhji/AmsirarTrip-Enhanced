@@ -9,8 +9,8 @@
     // ─── Target & Lib ──────────────────────────────────────────────────────
     // TS6 defaults to ES2025 but explicit is clearer
     "target": "ES2025",
-    "lib": ["ES2025", "DOM", "DOM.Iterable"],
-    "ignoreDeprecations": "6.0",
+    "lib": ["ES2023", "ES2024", "ES2025", "ESNext", "DOM"],
+    "noEmit": true,
 
     // ─── Vue Template & JSX Preservation ──────────────────────────────────
     "jsx": "preserve",
@@ -28,16 +28,28 @@
     // Modern replacement for esModuleInterop (deprecated in TS6)
     "verbatimModuleSyntax": true,
 
-    // ─── TS Strictness (Senior Standard) ──────────────────────────────────
+    // ─── TS Strictness (Strictest 2026 Standard) ─────────────────────────
     "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "useUnknownInCatchVariables": true,
+    "alwaysStrict": true,
+
+    /* Advanced Strict Safety */
     "noUncheckedIndexedAccess": true,
-    "noImplicitReturns": true,
-    "noImplicitOverride": true,
     "exactOptionalPropertyTypes": true,
+    "noImplicitOverride": true,
     "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
     "noPropertyAccessFromIndexSignature": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "skipLibCheck": true,

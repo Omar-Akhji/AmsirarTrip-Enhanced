@@ -1,123 +1,314 @@
 ---
-import { useTranslations } from "@/i18n/utils";
+import { Image } from "astro:assets";
+import bg4 from "../../../assets/images/Excursions/Agafay.webp";
+import bg1 from "../../../assets/images/Header/header-1.webp";
+import bg2 from "../../../assets/images/Header/header-2.webp";
+import bg3 from "../../../assets/images/Header/header-3.webp";
+import SliderCards, { type SlideCardItem } from "./SliderCards.astro";
+import SliderDetails from "./SliderDetails.astro";
 
 interface Props {
-  images: string[];
+  images?: (ImageMetadata | string)[];
 }
 
-const { images } = Astro.props;
+const { images = [] } = Astro.props;
 
 const locale = Astro.currentLocale || "en";
-const t = useTranslations(locale);
 
-const heroTitle = t("home.heroTitle") || "";
-const heroAlt1 = t("home.heroAlt1") || "";
-const heroAlt2 = t("home.heroAlt2") || "";
+// Default high-resolution Moroccan travel images
+const defaultImages = [images[0] || bg1, images[1] || bg2, images[2] || bg3, images[3] || bg4];
 
-const phrases = [heroTitle, heroAlt1, heroAlt2].filter(Boolean);
+// Localized slide content
+const slidesData = {
+  en: [
+    {
+      id: "sahara",
+      tagline: "SAHARA DESERT ROUTES",
+      title: "ERG CHEBBI DUNES",
+      type: "DESERT EXPEDITIONS",
+      description:
+        "Travel across the Erg Chebbi dunes by private 4x4, stay overnight in a desert bivouac, and watch the sunrise over the Sahara.",
+    },
+    {
+      id: "atlas",
+      tagline: "HIGH ATLAS MOUNTAINS",
+      title: "IMLIL & TOUBKAL",
+      type: "MOUNTAIN TREKKING",
+      description:
+        "Drive up mountain passes, walk through terraced walnut groves, and visit Berber stone villages on the slopes of Mount Toubkal.",
+    },
+    {
+      id: "imperial",
+      tagline: "IMPERIAL MEDINAS & KASBAHS",
+      title: "MARRAKECH & FES",
+      type: "HISTORICAL ITINERARIES",
+      description:
+        "Explore historic medinas, spice souks, and traditional riads with Moroccan zellige tilework.",
+    },
+    {
+      id: "coastal",
+      tagline: "ATLANTIC COASTLINE",
+      title: "ESSAOUIRA MOGADOR",
+      type: "COASTAL EXCURSIONS",
+      description:
+        "Walk along 18th-century sea ramparts, artisan woodworking shops, and the Atlantic beach.",
+    },
+  ],
+  fr: [
+    {
+      id: "sahara",
+      tagline: "EXPÉDITIONS DANS LE SAHARA",
+      title: "DUNES D'ERG CHEBBI",
+      type: "SAFARI DÉSERT",
+      description:
+        "Traversez les sables dorés en 4x4 privé. Dormez sous la voûte céleste dans un bivouac de luxe et admirez le lever de soleil sur les dunes.",
+    },
+    {
+      id: "atlas",
+      tagline: "MASSIF DU HAUT ATLAS",
+      title: "IMLIL ET LE TOUBKAL",
+      type: "TREK EN MONTAGNE",
+      description:
+        "Franchissez des cols spectaculaires, vergers en terrasses et villages berbères authentiques accrochés aux pentes du mont Toubkal.",
+    },
+    {
+      id: "imperial",
+      tagline: "CITÉS ET MÉDINAS IMPÉRIALES",
+      title: "MARRAKECH ET FÈS",
+      type: "ODYSSÉE CULTURELLE",
+      description:
+        "Plongez dans les ruelles millénaires classées à l'UNESCO, les souks d'épices parfumés et les riads aux zelliges ciselés avec art.",
+    },
+    {
+      id: "coastal",
+      tagline: "CÔTE ATLANTIQUE SAUVAGE",
+      title: "ESSAOUIRA MOGADOR",
+      type: "ESCAPADE OCÉANE",
+      description:
+        "Ressentez les alizés le long des remparts maritimes du XVIIIe siècle, des ateliers d'artisans et des plages paisibles de l'Atlantique.",
+    },
+  ],
+  es: [
+    {
+      id: "sahara",
+      tagline: "EXPEDICIONES AL SÁHARA",
+      title: "DUNAS DE ERG CHEBBI",
+      type: "SAFARI EN EL DESIERTO",
+      description:
+        "Cruce las doradas dunas de Merzouga en 4x4 privado. Duerma bajo las estrellas en haimas bereberes de lujo con vistas al amanecer.",
+    },
+    {
+      id: "atlas",
+      tagline: "CORDILLERA DEL ALTO ATLAS",
+      title: "IMLIL Y TOUBKAL",
+      type: "TREKKING DE MONTAÑA",
+      description:
+        "Senderos de altura, terrazas de nogales y pueblos bereberes milenarios al pie del majestuoso pico Toubkal guiados por locales.",
+    },
+    {
+      id: "imperial",
+      tagline: "CIUDADES IMPERIALES",
+      title: "MARRAKECH Y FEZ",
+      type: "ODISEA CULTURAL",
+      description:
+        "Piérdase en los callejones de medinas históricas, mercados de especias y palacios con mosaicos zellige de belleza milenaria.",
+    },
+    {
+      id: "coastal",
+      tagline: "COSTA ATLÁNTICA MARROQUÍ",
+      title: "ESSAOUIRA MOGADOR",
+      type: "ESCAPADA AL MAR",
+      description:
+        "Murallas históricas frente al océano, brisa atlántica, talleres de artesanía en madera de tuya y serenidad junto a la playa.",
+    },
+  ],
+  de: [
+    {
+      id: "sahara",
+      tagline: "SAHARA EXPEDITIONEN",
+      title: "ERG CHEBBI DÜNEN",
+      type: "WÜSTEN SAFARI",
+      description:
+        "Überqueren Sie die goldenen Dünen von Merzouga im privaten 4x4. Übernachten Sie in Luxus-Berbercamps unter funkelndem Sternenhimmel.",
+    },
+    {
+      id: "atlas",
+      tagline: "HOHER ATLAS GEBIRGE",
+      title: "IMLIL & TOUBKAL",
+      type: "ALPINES TREKKING",
+      description:
+        "Erleben Sie spektakuläre Bergpässe, terrassierte Walnusshaine und gastfreundliche Berberdörfer am Fuße des Jbel Toubkal.",
+    },
+    {
+      id: "imperial",
+      tagline: "KÖNIGSSTÄDTE & MEDINAS",
+      title: "MARRAKESCH & FÈS",
+      type: "KULTURELLE REISE",
+      description:
+        "Tauchen Sie ein in lebhafte UNESCO-Medinas, duftende Gewürzsouks und prachtvolle Riads mit kunstvollen marokkanischen Mosaiken.",
+    },
+    {
+      id: "coastal",
+      tagline: "ATLANTIKKÜSTE",
+      title: "ESSAOUIRA MOGADOR",
+      type: "KÜSTEN AUSZEIT",
+      description:
+        "Genießen Sie die frische Meeresbrise an den Festungsmauern des 18. Jahrhunderts, traditionsreiche Kunsthandwerke und ruhige Strände.",
+    },
+  ],
+};
 
-const localize = (path: string) =>
-  locale === "en" ? path : `/${locale}${path === "/" ? "" : path}`;
+const currentSlides = (slidesData[locale as keyof typeof slidesData] || slidesData.en).map(
+  (slide, index) => ({ ...slide, image: defaultImages[index] || defaultImages[0] || "" }),
+);
+
+const thumbnailCards: SlideCardItem[] = currentSlides.map((slide) => ({
+  id: slide.id,
+  image: slide.image,
+  title: slide.title,
+  type: slide.type,
+}));
 ---
 
 <section
-  aria-labelledby="hero-heading"
-  class="page-hero home-header relative isolate overflow-hidden bg-zinc-950 text-white shadow-xl inline-full min-block-[40vh] sm:min-block-[45vh] lg:min-block-[50vh]"
-  data-phrases={JSON.stringify(phrases)}
-  id="home-hero-section"
+  id="home-hero-slider-section"
+  class="relative isolate w-full min-h-screen h-dvh overflow-hidden bg-black text-white"
+  aria-roledescription="carousel"
+  aria-label="Amsirar Trip Hero Carousel"
 >
-  <div class="absolute inset-0 z-0">
-    {images.map((img, index) => (
-      <div
-        class="hero-slide absolute inset-0 transition-opacity duration-1000 ease-in-out"
-        data-index={index}
-        style={index === 0 ? "opacity: 1;" : "opacity: 0;"}
-      >
-        <img
-          alt=""
-          class="size-full object-cover"
-          decoding="async"
-          fetchpriority={index === 0 ? "high" : "low"}
-          loading={index === 0 ? "eager" : "lazy"}
-          src={img}
-        />
-      </div>
-    ))}
-  </div>
-  <div class="absolute inset-0 z-10 bg-linear-to-b from-black/60 via-black/30 to-black/70"></div>
-  <div class="relative z-20 mx-auto flex flex-col items-center justify-center gap-12 px-4 pbs-8 pbe-16 text-center inline-full max-inline-7xl lg:py-20">
-    <div class="flex-1 space-y-6 pbs-0 text-center lg:pbs-8">
-      <div class="flex items-center justify-center gap-4">
-        <span class="bg-orange-400/60 block-px inline-8 sm:inline-12"></span>
-        <p class="text-xs font-semibold tracking-[0.2em] text-orange-300 uppercase sm:tracking-[0.3em]">
-          {t("home.title")}
-        </p>
-        <span class="bg-orange-400/60 block-px inline-8 sm:inline-12"></span>
-      </div>
-      <h1
-        class="lg:text-shadow-xl text-3xl leading-tight font-semibold text-shadow-black/60 text-shadow-lg sm:text-4xl lg:text-5xl"
-        id="hero-heading"
-      >
-        <!-- SEO & Screen Reader Accessible Content -->
-        <span class="sr-only hero-sr-text">{phrases[0]}</span>
+  <div
+    class="slider relative h-screen w-screen overflow-hidden bg-[#050505] font-sans"
+    id="home-hero-slider"
+  >
+    <!-- List of Full-Screen Slides -->
+    <div class="list">
+      {currentSlides.map((slide, index) => (
+        <div
+          class="item absolute inset-0 size-full"
+          data-index={index}
+        >
+          {typeof slide.image === "string" ?
+            <Image
+              src={slide.image}
+              alt={`${slide.title} - ${slide.type}`}
+              decoding="async"
+              fetchpriority={index === 0 ? "high" : "low"}
+              loading="eager"
+              width={1920}
+              height={1080}
+              class="size-full object-cover"
+            />
+          : <Image
+              src={slide.image}
+              alt={`${slide.title} - ${slide.type}`}
+              decoding="async"
+              fetchpriority={index === 0 ? "high" : "low"}
+              loading="eager"
+              class="size-full object-cover"
+            />
+          }
+          <div
+            class="slide-overlay pointer-events-none absolute inset-0 z-1 bg-[linear-gradient(to_bottom,rgb(0_0_0/55%)_0%,rgb(0_0_0/15%)_18%,transparent_32%),linear-gradient(to_top,rgb(0_0_0/40%)_0%,transparent_32%)]"
+            aria-hidden="true"
+          />
+          <SliderDetails
+            description={slide.description}
+            isH1={index === 0}
+            tagline={slide.tagline}
+            title={slide.title}
+            type={slide.type}
+          />
+        </div>
+      ))}
+    </div>
 
-        <!-- Visual Animation Layer -->
-        <span aria-hidden="true">
-          <!-- Mobile/Tablet layout: simple fade text -->
-          <span
-            class="inline-block transition-opacity duration-500 text-center lg:hidden"
-            id="hero-mobile-text"
-          >
-            {phrases[0]}
-          </span>
-          <!-- Desktop layout: typing text -->
-          <span
-            class="hidden lg:inline-flex items-center"
-            id="hero-desktop-text-container"
-          >
-            <span class="relative inline-block pe-2 text-left align-bottom whitespace-nowrap">
-              <!-- Invisible placeholder to reserve layout width and prevent layout shifts -->
-              <span
-                aria-hidden="true"
-                class="pointer-events-none invisible select-none"
-                id="hero-desktop-placeholder"
-              >
-                {phrases[0]}
-              </span>
-              <!-- Absolutely positioned container for the actual typed text and cursor -->
-              <span class="absolute inset-y-0 left-0 flex items-center">
-                <span
-                  class="text-white"
-                  id="hero-desktop-text"
-                >
-                  {phrases[0]}
-                </span>
-                <span
-                  class="will-change-opacity ms-1 inline-block h-[1em] w-0.75 animate-cursor-blink bg-orange-400/90"
-                  id="hero-cursor"
-                ></span>
-              </span>
-            </span>
-          </span>
-        </span>
-      </h1>
-      <p class="font-fancy text-lg text-zinc-200 lg:text-xl">{t("home.heroSubtitle")}</p>
-      <div class="flex flex-wrap items-center justify-center gap-4 pbs-2">
-        <a
-          class="inline-flex items-center gap-2 rounded-full border border-white/60 px-6 py-3 text-sm font-semibold text-white/90 transition text-shadow-xs sm:px-8 pointer-fine:hover:bg-white/10"
-          href={localize("/tours")}
+    <!-- Thumbnail Carousel Cards -->
+    <SliderCards items={thumbnailCards} />
+
+    <!-- Prev / Next Navigation Arrows & Marrakech-Tours Pagination Progress -->
+    <div
+      class="nextPrevArrows pagination absolute z-100 hidden w-auto items-center gap-3 md:flex left-[max(7%,calc(50%-570px))] max-lg:left-[5%] bottom-[calc(var(--thumb-bottom)+12px)] max-lg:bottom-[calc(var(--thumb-bottom)+10px)]"
+      id="pagination"
+      role="region"
+      aria-label="Slider navigation and progress"
+    >
+      <button
+        class="prev arrow arrow-left group grid size-12.5 cursor-pointer place-items-center rounded-full border-2 border-white/33 bg-white/5 backdrop-blur-md transition-[transform,background-color,border-color] duration-160 ease-out pointer-fine:hover:border-white/80 pointer-fine:hover:bg-white/10 active:scale-[0.96] motion-reduce:transform-none"
+        type="button"
+        aria-label="Previous slide"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          class="size-6 text-white/60 transition-colors duration-160 pointer-fine:group-hover:text-white"
+          aria-hidden="true"
         >
-          {t("home.exploreOurTours")}
-        </a>
-        <a
-          class="inline-flex items-center gap-2 rounded-full bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur transition text-shadow-xs sm:px-8 pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:bg-white/20"
-          href={localize("/contact")}
+          <path
+            d="M15.75 19.5L8.25 12l7.5-7.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          />
+        </svg>
+      </button>
+      <button
+        class="next arrow arrow-right group grid size-12.5 cursor-pointer place-items-center rounded-full border-2 border-white/33 bg-white/5 backdrop-blur-md transition-[transform,background-color,border-color] duration-160 ease-out pointer-fine:hover:border-white/80 pointer-fine:hover:bg-white/10 active:scale-[0.96] motion-reduce:transform-none"
+        type="button"
+        aria-label="Next slide"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          class="size-6 text-white/60 transition-colors duration-160 pointer-fine:group-hover:text-white"
+          aria-hidden="true"
         >
-          {t("home.contactForMore")}
-        </a>
+          <path
+            d="M8.25 4.5l7.5 7.5-7.5 7.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          />
+        </svg>
+      </button>
+
+      <!-- Yellow Progress Band from Marrakech-Tours -->
+      <div
+        class="progress-sub-container z-60 flex h-12.5 w-[clamp(80px,14vw,220px)] items-center max-lg:w-[clamp(60px,10vw,130px)]"
+        aria-hidden="true"
+      >
+        <div class="progress-sub-background h-0.75 w-full overflow-hidden rounded-full bg-white/20">
+          <div
+            class="progress-sub-foreground h-full w-1/4 rounded-full bg-[#ecad29] shadow-[0_0_10px_rgb(236_173_41/50%)] transition-[width] duration-220 ease-[cubic-bezier(0.23,1,0.32,1)]"
+            id="slider-progress-bar"
+          ></div>
+        </div>
+      </div>
+
+      <!-- Slide Numbers Counter from Marrakech-Tours -->
+      <div
+        class="slide-numbers relative z-60 h-12.5 w-11 overflow-hidden"
+        id="slide-numbers"
+        aria-live="polite"
+      >
+        {currentSlides.map((_, index) => (
+          <div
+            class:list={[
+              "number-item pointer-events-none absolute inset-0 grid place-items-center text-[clamp(1.25rem,1.8vw,1.85rem)] font-bold text-white select-none transition-[transform,opacity] duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] translate-y-full opacity-0 [&.active]:translate-y-0 [&.active]:opacity-100",
+              { active: index === 0 },
+            ]}
+            id={`slide-item-${index}`}
+            data-number-index={index}
+          >
+            {index + 1}
+          </div>
+        ))}
       </div>
     </div>
   </div>
 </section>
 
-<script src="../scripts/hero-animation.ts"></script>
+<script src="../../../scripts/slider.ts"></script>

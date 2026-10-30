@@ -1,0 +1,159 @@
+---
+import { Check } from "@lucide/astro";
+
+interface Props {
+  readonly includes?: readonly string[] | string | undefined;
+  readonly excludes?: readonly string[] | string | undefined;
+  readonly goodToKnow?: readonly string[] | string | undefined;
+  readonly includedTitle?: string | undefined;
+  readonly excludedTitle?: string | undefined;
+  readonly goodToKnowTitle?: string | undefined;
+  readonly idPrefix?: string | undefined;
+}
+
+const {
+  includes,
+  excludes,
+  goodToKnow,
+  includedTitle = "Included Services",
+  excludedTitle = "Excluded Services",
+  goodToKnowTitle = "Travel Advisories & Preparation",
+  idPrefix = "trip",
+} = Astro.props;
+
+const normalizeList = (value: readonly string[] | string | undefined): readonly string[] => {
+  if (!value) return [];
+  if (Array.isArray(value)) return value;
+  if (typeof value === "string") {
+    return value
+      .split("\n")
+      .map((s) => s.trim())
+      .filter((s) => s.length > 0);
+  }
+  return [];
+};
+
+const includeList = normalizeList(includes);
+const excludeList = normalizeList(excludes);
+const goodToKnowList = normalizeList(goodToKnow);
+---
+
+{includeList.length > 0 && (
+  <div data-animate="fade-up">
+    <section aria-labelledby={`${idPrefix}-included-heading`}>
+      <hgroup class="mbe-4">
+        <p class="font-sans text-xs font-bold tracking-wider text-orange-700 uppercase">
+          Service Coverage
+        </p>
+        <h3
+          class="mbs-1 text-xl font-bold tracking-tight text-stone-900 sm:text-2xl md:text-3xl"
+          id={`${idPrefix}-included-heading`}
+        >
+          {includedTitle}
+        </h3>
+      </hgroup>
+      <div class="rounded-2xl border border-emerald-500/20 bg-emerald-50/30 p-6 shadow-2xs">
+        <ul
+          role="list"
+          class="space-y-3 m-0 p-0 list-none"
+        >
+          {includeList.map((item) => (
+            <li class="flex items-start gap-3">
+              <span class="mbs-0.5 inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-emerald-600/15 text-emerald-700 font-bold text-xs">
+                <Check
+                  aria-hidden="true"
+                  class="size-3.5 stroke-[2.5]"
+                />
+              </span>
+              <span class="flex-1 text-start font-sans text-sm text-stone-800 leading-relaxed">
+                {item}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  </div>
+)}
+
+{excludeList.length > 0 && (
+  <div data-animate="fade-up">
+    <section
+      aria-labelledby={`${idPrefix}-excluded-heading`}
+      class="mbs-8"
+    >
+      <hgroup class="mbe-4">
+        <p class="font-sans text-xs font-bold tracking-wider text-stone-500 uppercase">
+          Exclusions
+        </p>
+        <h3
+          class="mbs-1 text-xl font-bold tracking-tight text-stone-900 sm:text-2xl md:text-3xl"
+          id={`${idPrefix}-excluded-heading`}
+        >
+          {excludedTitle}
+        </h3>
+      </hgroup>
+      <div class="rounded-2xl border border-stone-200/90 bg-stone-50/60 p-6 shadow-2xs">
+        <ul
+          role="list"
+          class="space-y-3 m-0 p-0 list-none"
+        >
+          {excludeList.map((item) => (
+            <li class="flex items-start gap-3">
+              <span
+                aria-hidden="true"
+                class="mbs-0.5 inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-stone-200 text-stone-600 font-mono text-xs font-bold"
+              >
+                ✕
+              </span>
+              <span class="flex-1 text-start font-sans text-sm text-stone-600 leading-relaxed">
+                {item}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  </div>
+)}
+
+{goodToKnowList.length > 0 && (
+  <div data-animate="fade-up">
+    <section
+      aria-labelledby={`${idPrefix}-advisories-heading`}
+      class="mbs-8"
+    >
+      <hgroup class="mbe-4">
+        <p class="font-sans text-xs font-bold tracking-wider text-orange-700 uppercase">
+          Travel Advisories
+        </p>
+        <h3
+          class="mbs-1 text-xl font-bold tracking-tight text-stone-900 sm:text-2xl md:text-3xl"
+          id={`${idPrefix}-advisories-heading`}
+        >
+          {goodToKnowTitle}
+        </h3>
+      </hgroup>
+      <div class="rounded-2xl border border-orange-500/20 bg-orange-50/30 p-6 shadow-2xs">
+        <ul
+          role="list"
+          class="space-y-3 m-0 p-0 list-none"
+        >
+          {goodToKnowList.map((item) => (
+            <li class="flex items-start gap-3">
+              <span
+                aria-hidden="true"
+                class="mbs-0.5 inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-orange-500/15 text-orange-700 font-mono text-xs font-bold"
+              >
+                i
+              </span>
+              <span class="flex-1 text-start font-sans text-sm text-stone-800 leading-relaxed">
+                {item}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  </div>
+)}

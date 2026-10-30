@@ -1,0 +1,122 @@
+---
+import FaqAccordion from "@/shared/ui/FaqAccordion.astro";
+import HighlightsList from "@/shared/ui/HighlightsList.astro";
+import PricingCard from "@/shared/ui/PricingCard.astro";
+import { Clock, Compass, Mountain, Route } from "@lucide/astro";
+
+interface Props {
+  readonly metrics: {
+    readonly distance: string;
+    readonly duration: string;
+    readonly pickup: string;
+    readonly elevation: string;
+  };
+  readonly highlights: readonly string[];
+  readonly highlightsTitle: string;
+  readonly price: { readonly label: string; readonly note: string };
+  readonly priceLabel: string;
+  readonly pricingTitle: string;
+  readonly reserveNow: string;
+  readonly faqs: readonly { readonly question: string; readonly answer: string }[];
+  readonly faqTitle: string;
+}
+
+const {
+  metrics,
+  highlights,
+  highlightsTitle,
+  price,
+  priceLabel,
+  pricingTitle,
+  reserveNow,
+  faqs,
+  faqTitle,
+} = Astro.props;
+---
+
+<div
+  data-animate="fade-up"
+  style="transition-delay:150ms"
+>
+  <dl class="m-0 p-0 grid grid-cols-1 gap-3 sm:gap-4 sm:grid-cols-2">
+    <div class="flex items-center gap-3.5 rounded-2xl border border-stone-200/90 bg-white px-4 py-3 sm:px-5 sm:py-3.5 shadow-2xs transition-colors hover:border-stone-300 min-block-20">
+      <Route
+        aria-hidden="true"
+        class="size-5 shrink-0 text-orange-600"
+      />
+      <div class="text-start min-w-0">
+        <dt class="font-mono text-xs font-semibold tracking-wider text-stone-500 uppercase">
+          Distance
+        </dt>
+        <dd class="m-0 font-mono text-xs sm:text-sm font-bold text-stone-900 leading-snug">
+          {metrics.distance}
+        </dd>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-3.5 rounded-2xl border border-stone-200/90 bg-white px-4 py-3 sm:px-5 sm:py-3.5 shadow-2xs transition-colors hover:border-stone-300 min-block-20">
+      <Clock
+        aria-hidden="true"
+        class="size-5 shrink-0 text-orange-600"
+      />
+      <div class="text-start min-w-0">
+        <dt class="font-mono text-xs font-semibold tracking-wider text-stone-500 uppercase">
+          Duration
+        </dt>
+        <dd class="m-0 font-mono text-xs sm:text-sm font-bold text-stone-900 leading-snug">
+          {metrics.duration}
+        </dd>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-3.5 rounded-2xl border border-stone-200/90 bg-white px-4 py-3 sm:px-5 sm:py-3.5 shadow-2xs transition-colors hover:border-stone-300 min-block-20">
+      <Compass
+        aria-hidden="true"
+        class="size-5 shrink-0 text-orange-600"
+      />
+      <div class="text-start min-w-0">
+        <dt class="font-mono text-xs font-semibold tracking-wider text-stone-500 uppercase">
+          Pickup Window
+        </dt>
+        <dd class="m-0 font-mono text-xs sm:text-sm font-bold text-stone-900 leading-snug">
+          {metrics.pickup}
+        </dd>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-3.5 rounded-2xl border border-stone-200/90 bg-white px-4 py-3 sm:px-5 sm:py-3.5 shadow-2xs transition-colors hover:border-stone-300 min-block-20">
+      <Mountain
+        aria-hidden="true"
+        class="size-5 shrink-0 text-orange-600"
+      />
+      <div class="text-start min-w-0">
+        <dt class="font-mono text-xs font-semibold tracking-wider text-stone-500 uppercase">
+          Elevation / Setting
+        </dt>
+        <dd class="m-0 font-mono text-xs sm:text-sm font-bold text-stone-900 leading-snug">
+          {metrics.elevation}
+        </dd>
+      </div>
+    </div>
+  </dl>
+</div>
+
+<HighlightsList
+  idPrefix="excursion"
+  highlightsTitle={highlightsTitle}
+  highlights={highlights}
+/>
+
+<PricingCard
+  idPrefix="excursion"
+  pricingTitle={pricingTitle}
+  priceLabel={priceLabel}
+  price={price}
+  reserveNow={reserveNow}
+/>
+
+<FaqAccordion
+  idPrefix="excursion"
+  faqTitle={faqTitle}
+  faqs={faqs}
+/>

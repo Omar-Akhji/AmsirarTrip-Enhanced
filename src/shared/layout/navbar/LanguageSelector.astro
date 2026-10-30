@@ -1,5 +1,7 @@
 ---
-import { useTranslations } from "@/i18n/utils";
+import { Image } from "astro:assets";
+import { getLocalizedPath, useTranslations } from "@/i18n/utils";
+import type { Locale } from "@/i18n/locales";
 import { LANGUAGES } from "./constants";
 
 interface Props {
@@ -19,27 +21,8 @@ const currentLanguage = LANGUAGES.find((l) => l.code === locale) || {
   shortName: "EN",
 };
 
-// Generate localized URLs on the server
-const pathname = Astro.url.pathname;
-const segments = pathname.split("/").filter(Boolean);
-const localeCodes = LANGUAGES.map((l) => l.code);
-
-let basePath =
-  segments[0] && (localeCodes as readonly string[]).includes(segments[0]) ?
-    `/${segments.slice(1).join("/")}`
-  : pathname;
-
-// Clean trailing slashes
-if (basePath.length > 1 && basePath.endsWith("/")) {
-  basePath = basePath.slice(0, -1);
-}
-if (!basePath.startsWith("/")) {
-  basePath = `/${basePath}`;
-}
-
 const getLocalizedHref = (code: string) => {
-  const path = code === "en" ? basePath : `/${code}${basePath === "/" ? "" : basePath}`;
-  return path + Astro.url.search;
+  return getLocalizedPath(Astro.url.pathname, code as Locale) + Astro.url.search;
 };
 ---
 
@@ -55,22 +38,27 @@ const getLocalizedHref = (code: string) => {
     <div
       class:list={[
         "flex items-center justify-center rounded-full border-2 transition-all duration-150 pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:shadow-[0_8px_18px_rgba(0,0,0,0.28)]",
-        "border-white/60 bg-white/10 text-white group-data-scrolled:border-orange group-data-scrolled:bg-orange group-data-scrolled:shadow-[0_10px_24px_oklch(56%_0.19_33deg/35%)]",
-        { "size-10 text-sm": size === "sm", "size-11 text-base font-semibold": size === "md" },
+        "border-white/60 bg-white/10 text-white group-data-scrolled:border-0 group-data-scrolled:border-transparent group-data-scrolled:hover:border-0 group-data-scrolled:hover:border-transparent group-data-scrolled:bg-linear-to-br group-data-scrolled:from-amber-orange group-data-scrolled:to-orange group-data-scrolled:shadow-[0_10px_24px_oklch(56%_0.19_33deg/35%)]",
+        {
+          "size-11 sm:size-10 text-sm": size === "sm",
+          "size-11 text-base font-semibold": size === "md",
+        },
       ]}
     >
-      <img
+      <Image
         alt=""
         class:list={["object-contain", { "size-5": size === "sm", "size-6.25": size === "md" }]}
-        height="25"
+        decoding="async"
+        height={25}
+        loading="eager"
         src="/icons/translate-icon-com.svg"
-        width="25"
+        width={25}
       />
     </div>
     <span
       aria-hidden="true"
       class:list={[
-        "absolute -inset-e-1.5 -bottom-1 font-bold tracking-[0.04em] text-white rounded-full border-2 border-white bg-orange",
+        "absolute -inset-e-1.5 -bottom-1 font-bold tracking-[0.04em] text-white rounded-full border-2 border-white bg-linear-to-br from-amber-orange to-orange",
         {
           "px-1 py-px text-[0.6rem]": size === "sm",
           "px-1.5 py-0.5 text-[0.625rem]": size === "md",
@@ -81,8 +69,14 @@ const getLocalizedHref = (code: string) => {
     </span>
   </button>
 
+  <!-- Concentric radius formula: outer radius = inner radius + padding <=> inner radius = radius of list card - padding between them -->
   <div
     aria-orientation="vertical"
+    style="
+
+--card-radius: 12px; --card-padding: 6px; --inner-radius: calc(var(--card-radius) - var(--card-padding));
+
+ border-radius: var(--card-radius); padding: var(--card-padding);"
     class:list={[
       "language-selector-menu pointer-events-none invisible scale-95 opacity-0 transition-all duration-200 ease-out",
       "data-[state=open]:pointer-events-auto data-[state=open]:visible data-[state=open]:scale-100 data-[state=open]:opacity-100",
@@ -100,10 +94,12 @@ const getLocalizedHref = (code: string) => {
         return (
           <a
             aria-checked={isCurrent}
+            aria-label={lang.name}
+            style="border-radius: var(--inner-radius);"
             class:list={[
-              "flex items-center justify-between rounded-lg px-3 py-2 text-sm font-medium transition-colors duration-150 inline-full",
+              "flex items-center justify-between whitespace-nowrap rounded-md px-3 py-2 text-sm font-medium transition-colors duration-150 inline-full",
               {
-                "bg-white/15 text-white group-data-scrolled:bg-orange group-data-scrolled:text-white":
+                "bg-white/15 text-white group-data-scrolled:bg-linear-to-br group-data-scrolled:from-amber-orange group-data-scrolled:to-orange group-data-scrolled:text-white":
                   isCurrent,
                 "text-zinc-300 hover:bg-white/10 hover:text-white group-data-scrolled:text-zinc-600 group-data-scrolled:hover:bg-zinc-100 group-data-scrolled:hover:text-zinc-900":
                   !isCurrent,

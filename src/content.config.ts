@@ -1,6 +1,6 @@
 import { glob } from "astro/loaders";
 import { defineCollection, type SchemaContext } from "astro:content";
-import { z } from "zod";
+import { z } from "astro/zod";
 
 // Sub-schemas to keep function nesting depth <= 3 (violates unicorn/max-nested-calls otherwise)
 const faqSchema = z.object({ question: z.string(), answer: z.string() });
@@ -14,9 +14,24 @@ const seoSchema = z.object({
   primaryKeyword: z.string(),
   secondaryKeywords: z.array(z.string()),
   price: priceSchema,
-  imageAlt: z.string(),
+  imageAlt: z.string().optional(),
   highlights: z.array(z.string()),
   faqs: z.array(faqSchema),
+});
+
+// One timed stop on an excursion's day program. Rendered as the timeline and as TouristTrip itinerary JSON-LD.
+const programStageSchema = z.object({
+  time: z.string(),
+  title: z.string(),
+  location: z.string(),
+  description: z.string(),
+});
+
+const excursionMetricsSchema = z.object({
+  distance: z.string(),
+  duration: z.string(),
+  pickup: z.string(),
+  elevation: z.string(),
 });
 
 const jsonLdSchema = z.object({
@@ -55,7 +70,14 @@ const excursionsCollection = defineCollection({
       excursionKey: z.string(),
       i18nKeyPrefix: z.string(),
       location: z.string(),
-      jsonLd: z.object({ name: z.string(), description: z.string() }),
+      metrics: excursionMetricsSchema,
+      overview: z.array(z.string()),
+      program: z.array(programStageSchema).min(1),
+      includes: z.array(z.string()),
+      excludes: z.array(z.string()),
+      goodToKnow: z.array(z.string()),
+      seo: seoSchema,
+      jsonLd: jsonLdSchema,
     }),
 });
 

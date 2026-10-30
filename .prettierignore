@@ -10,6 +10,10 @@ dist/
 .kiro/
 .agent/
 .agents/
+.claude/
+.arena/
+.anti-slop/
+.docs/
 
 # Lockfiles and TS build cache
 bun.lock
@@ -21,4 +25,3 @@ public/
 
 # Lighthouse reports
 lighthouse-*.html
-

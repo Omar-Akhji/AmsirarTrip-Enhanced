@@ -4,6 +4,7 @@ import bgImage from "@/assets/images/Header/header-1.webp";
 import aboutStats from "@/data/about-stats.json";
 import { useTranslations } from "@/i18n/utils";
 import PageHeader from "@/shared/layout/PageHeader.astro";
+import Button from "@/shared/ui/Button.astro";
 import { Image } from "astro:assets";
 
 const locale = Astro.currentLocale || "en";
@@ -31,110 +32,127 @@ const factStats = aboutStats.map((stat) => ({
   subtitle={t("about.headerSubtitle")}
   title={t("about.title")}
 >
-  <a
-    class="inline-flex items-center gap-2 rounded-full border border-white/60 px-6 py-3 text-sm font-semibold text-white/90 transition text-shadow-xs pointer-fine:hover:bg-white/10"
+  <Button
+    variant="secondary"
     href="#about"
   >
-    <span>{t("about.ourStory")}</span>
-    <span class="sr-only">{t("about.ourStory")}</span>
-  </a>
-  <a
-    class="inline-flex items-center gap-2 rounded-full bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur transition text-shadow-xs pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:bg-white/20"
+    {t("about.ourStory")}
+  </Button>
+  <Button
+    variant="ghost"
     href="#facts"
   >
     {t("about.facts.smTitle")}
-  </a>
+  </Button>
 </PageHeader>
 
-<div>
+<div class="bg-white">
+  <!-- 01 // HERITAGE & MISSION -->
   <section
     aria-labelledby="our-story-heading"
-    class="relative isolate overflow-hidden bg-neutral-50 py-24 text-neutral-900"
+    class="relative isolate overflow-hidden py-12 sm:py-16 lg:py-24 text-stone-900"
     id="about"
   >
-    <div
-      aria-hidden="true"
-      class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(248,250,252,0.3),transparent_70%)]"
-    ></div>
-    <div class="relative z-10 mx-auto px-4 max-inline-7xl">
+    <div class="mx-auto px-4 max-inline-7xl">
       <div
-        class="mx-auto mbe-16 text-center max-inline-4xl"
+        class="mbe-8 sm:mbe-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-stone-200 pb-6 sm:pb-8"
         data-animate="fade-up"
       >
-        <p class="inline-flex items-center justify-center rounded-full border-2 border-orange-400 px-6 py-3 text-sm font-semibold tracking-[0.45em] text-orange-700 uppercase">
-          {t("about.smTitle")}
-        </p>
-        <h2
-          class="mbs-6 text-2xl leading-tight font-semibold tracking-widest text-neutral-900 uppercase sm:text-3xl sm:tracking-[0.15em] md:text-4xl md:tracking-[0.2em]"
-          id="our-story-heading"
-        >
-          {t("about.ourStory")}
-        </h2>
+        <hgroup class="max-w-2xl space-y-2">
+          <h2
+            class="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl text-balance"
+            id="our-story-heading"
+          >
+            {t("about.ourStory")}
+          </h2>
+          <p class="border-s-2 border-orange-600 ps-4 py-0.5 text-sm sm:text-base text-stone-600 leading-relaxed max-w-[62ch] text-pretty">
+            {t("about.experienceTitle")}
+          </p>
+        </hgroup>
       </div>
 
-      <div class="grid items-center gap-12 lg:grid-cols-2">
-        <div class="order-2 lg:order-1">
+      <div class="grid items-start gap-12 lg:grid-cols-12 lg:gap-16">
+        <!-- Editorial Text Column -->
+        <div class="order-2 lg:order-1 lg:col-span-7">
           <div
             class="inline-full"
             data-animate="fade-up"
           >
             <article class="space-y-8">
-              <div class="space-y-6">
-                <p class="text-sm leading-relaxed text-neutral-700">{t("about.experienceText1")}</p>
-                <p class="text-sm leading-relaxed text-neutral-700">{t("about.experienceText2")}</p>
-                <p class="text-sm leading-relaxed text-neutral-700">{t("about.experienceText3")}</p>
+              <div class="space-y-5 text-stone-700">
+                <p class="text-base sm:text-lg leading-relaxed text-stone-800 font-normal">
+                  {t("about.experienceText1")}
+                </p>
+                <p class="text-sm sm:text-base leading-relaxed text-stone-600">
+                  {t("about.experienceText2")}
+                </p>
+                <p class="text-sm sm:text-base leading-relaxed text-stone-600">
+                  {t("about.experienceText3")}
+                </p>
               </div>
 
-              <div class="border-t border-zinc-700 pbs-8">
-                <h3 class="mbe-6 text-xl font-semibold text-orange-600">
-                  {t("about.whyTrustTitle")}
-                </h3>
-                <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+              <!-- Editorial Blockquote -->
+              <figure class="my-8 border-s-2 border-orange-600 ps-6 py-1">
+                <blockquote class="text-base sm:text-lg leading-relaxed text-stone-800 italic text-pretty">
+                  "{t("about.conclusionText")}"
+                </blockquote>
+                <figcaption class="mbs-2 text-xs font-semibold tracking-wider text-stone-500 uppercase">
+                  — Amsirar Expedition Atelier
+                </figcaption>
+              </figure>
+
+              <!-- Core Pillars of Trust -->
+              <div class="border-t border-stone-200/90 pbs-8">
+                <hgroup class="mbe-6">
+                  <h3 class="text-lg sm:text-xl font-bold tracking-tight text-stone-900">
+                    {t("about.whyTrustTitle")}
+                  </h3>
+                </hgroup>
+                <ul
+                  role="list"
+                  class="m-0 p-0 list-none grid grid-cols-1 gap-3 sm:grid-cols-2"
+                >
                   {[1, 2, 3, 4].map((number_) => (
-                    <div class="flex items-start gap-3">
-                      <div class="flex size-8 shrink-0 items-center justify-center rounded-full bg-orange-500 text-sm font-bold text-white">
-                        {number_}
-                      </div>
-                      <p class="flex-1 text-sm leading-relaxed text-neutral-700">
+                    <li class="flex items-start gap-3 rounded-2xl border border-stone-200/80 bg-stone-50/70 p-4 shadow-2xs transition-colors hover:border-stone-300">
+                      <span class="text-xs font-bold text-orange-600 shrink-0 mbs-0.5">
+                        0{number_}
+                      </span>
+                      <p class="text-xs sm:text-sm leading-relaxed text-stone-700 text-pretty">
                         {t(`about.whyTrust.point${number_}`)}
                       </p>
-                    </div>
+                    </li>
                   ))}
-                </div>
+                </ul>
               </div>
-
-              <blockquote class="relative overflow-hidden rounded-r-2xl bg-linear-to-r from-orange-50 to-transparent py-4 ps-8 text-neutral-600 italic ring-1 ring-orange-200/50 ring-inset">
-                <div
-                  aria-hidden="true"
-                  class="absolute inset-s-0 top-0 bottom-0 bg-orange-400 block-full inline-1.5"
-                ></div>
-                <p class="text-sm leading-relaxed">{t("about.conclusionText")}</p>
-              </blockquote>
             </article>
           </div>
         </div>
 
-        <div class="order-1 lg:order-2">
+        <!-- Archival Image Column with Concentric Frame -->
+        <div class="order-1 lg:order-2 lg:col-span-5">
           <div
             data-animate="zoom-in"
             style="transition-delay: 200ms"
           >
-            <figure class="relative">
-              <div class="absolute inset-0 rotate-3 rounded-3xl bg-linear-to-br from-orange-500/20 to-amber-500/20"></div>
-              <div class="relative aspect-4/3 overflow-hidden rounded-3xl bg-white mask-b-from-50% shadow-2xl">
-                <Image
-                  alt="Amsirar landscape showcasing traditional Moroccan architecture and culture"
-                  class="absolute inset-0 size-full object-cover"
-                  height={852}
-                  src={aboutImg}
-                  width={720}
-                />
-                <div class="absolute inset-s-0 inset-e-0 bottom-0 bg-linear-to-t from-neutral-900/60 to-transparent p-6">
-                  <p class="text-sm font-medium text-neutral-100">
-                    {t("about.imageCaption") || "Discover Morocco with Amsirar"}
-                  </p>
+            <figure>
+              <div class="overflow-hidden rounded-2xl border border-stone-200/90 bg-stone-100/80 p-2 sm:p-3 shadow-2xs">
+                <div class="relative aspect-4/5 sm:aspect-4/3 lg:aspect-4/5 overflow-hidden rounded-2xl bg-stone-200">
+                  <Image
+                    alt="Amsirar landscape showcasing traditional Moroccan architecture and culture"
+                    class="size-full object-cover transition-transform duration-250 ease-out pointer-fine:hover:scale-103 motion-reduce:transform-none"
+                    height={852}
+                    src={aboutImg}
+                    width={720}
+                  />
                 </div>
               </div>
+              <figcaption class="mbs-3 flex items-center justify-between px-2 font-mono text-xs text-stone-500">
+                <span class="flex items-center gap-2">
+                  <span class="size-1.5 rounded-full bg-orange-600"></span>
+                  {t("about.imageCaption") || "High Atlas & Desert Valleys"}
+                </span>
+                <span class="tabular-nums">EST. 2006 · MOROCCO</span>
+              </figcaption>
             </figure>
           </div>
         </div>
@@ -142,29 +160,28 @@ const factStats = aboutStats.map((stat) => ({
     </div>
   </section>
 
+  <!-- 02 // EXPEDITION METRICS -->
   <section
     aria-labelledby="facts-heading"
-    class="relative isolate overflow-hidden py-16"
+    class="relative isolate overflow-hidden border-t border-stone-200/90 bg-stone-50/60 py-12 sm:py-16 lg:py-24 text-stone-900"
     id="facts"
   >
-    <div class="relative z-10 mx-auto px-4 inline-full max-inline-6xl">
+    <div class="mx-auto px-4 max-inline-7xl">
       <div
-        class="mx-auto text-center max-inline-3xl"
+        class="mbe-8 sm:mbe-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-stone-200 pb-6 sm:pb-8"
         data-animate="fade-up"
       >
-        <p class="inline-flex items-center justify-center rounded-full border-2 border-white bg-orange-700 px-6 py-3 text-sm font-semibold tracking-[0.45em] text-white uppercase sm:tracking-[0.3em]">
-          {t("about.facts.smTitle")}
-        </p>
-        <h2
-          class="mbs-4 text-2xl leading-tight font-semibold tracking-widest text-zinc-900 uppercase text-shadow-md sm:text-3xl sm:tracking-[0.15em] md:text-4xl md:tracking-[0.2em]"
-          id="facts-heading"
-        >
-          {t("about.facts.lgTitle")}
-        </h2>
-        <div
-          aria-hidden="true"
-          class="mx-auto mbs-4 rounded-full bg-orange-500 block-1 inline-20"
-        ></div>
+        <hgroup class="max-w-2xl space-y-2">
+          <h2
+            class="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl text-balance"
+            id="facts-heading"
+          >
+            {t("about.facts.lgTitle")}
+          </h2>
+          <p class="border-s-2 border-orange-600 ps-4 py-0.5 text-sm sm:text-base text-stone-600 leading-relaxed max-w-[62ch] text-pretty">
+            {t("about.facts.smTitle")}
+          </p>
+        </hgroup>
       </div>
 
       <div class="mbs-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
@@ -176,16 +193,10 @@ const factStats = aboutStats.map((stat) => ({
           >
             <article
               aria-labelledby={`fact-${fact.id}-label`}
-              class="group relative flex size-full flex-col justify-between overflow-hidden rounded-2xl bg-zinc-900 px-8 py-10 text-center text-orange-200 shadow-xl ring-1 ring-white/10 transition-transform pointer-fine:hover:-translate-y-1 pointer-fine:hover:shadow-2xl"
+              class="group relative flex size-full flex-col justify-between overflow-hidden rounded-2xl border border-slate-900 bg-slate-950 px-8 py-10 text-center text-orange-200 shadow-xl transition-[transform,box-shadow] duration-200 ease-out pointer-fine:hover:-translate-y-1 pointer-fine:hover:shadow-2xl motion-reduce:transform-none"
             >
-              <div
-                aria-hidden="true"
-                class="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-              >
-                <div class="absolute inset-0 bg-linear-to-br from-orange-500/10 via-amber-400/5 to-transparent" />
-              </div>
               <div class="relative flex flex-col items-center gap-y-6">
-                <figure class="inline-flex size-24 items-center justify-center overflow-hidden rounded-full border-2 border-white/20 bg-white/5 p-3 text-orange-50 shadow-lg ring-2 shadow-orange-600/25 ring-white/10">
+                <figure class="relative inline-flex size-24 shrink-0 items-center justify-center overflow-hidden rounded-full border-2 border-white bg-white/5 p-3 text-white">
                   <Image
                     alt=""
                     aria-hidden="true"
@@ -197,7 +208,7 @@ const factStats = aboutStats.map((stat) => ({
                 </figure>
                 <div
                   aria-hidden="true"
-                  class="text-4xl font-bold text-orange-200 text-shadow-md"
+                  class="font-mono text-4xl font-bold text-orange-200 tabular-nums text-shadow-md"
                 >
                   <span
                     class="inline-block"
@@ -208,7 +219,7 @@ const factStats = aboutStats.map((stat) => ({
                   </span>
                 </div>
                 <h3
-                  class="text-sm font-medium tracking-wide text-white/80 uppercase"
+                  class="font-mono text-xs sm:text-sm font-semibold tracking-wider text-white/80 uppercase"
                   id={`fact-${fact.id}-label`}
                 >
                   {fact.label}

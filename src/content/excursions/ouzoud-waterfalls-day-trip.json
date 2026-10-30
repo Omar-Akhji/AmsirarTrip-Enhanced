@@ -3,19 +3,135 @@
   "i18nKeyPrefix": "ouzoud",
   "bookingId": 1,
   "image": "../../assets/images/Excursions/Ouzoud_Waterfalls.webp",
-  "duration": "P1D",
-  "location": "Ouzoud, Morocco",
+  "duration": "PT10H",
+  "location": "Ouzoud Waterfalls, Tanaghmeilt, Azilal Province, Morocco",
   "keywords": [
-    "Ouzoud Waterfalls",
-    "Morocco waterfalls",
-    "Ouzoud day trip",
-    "Middle Atlas waterfalls",
-    "Marrakech to Ouzoud",
-    "Morocco nature tour",
-    "Ouzoud macaques"
+    "ouzoud waterfalls day trip from marrakech",
+    "ouzoud waterfalls from marrakech",
+    "marrakech to ouzoud falls",
+    "ouzoud falls day trip",
+    "waterfalls near marrakech",
+    "ouzoud barbary macaques",
+    "tanaghmeilt ouzoud"
   ],
+  "metrics": {
+    "distance": "~150 km from Marrakech",
+    "duration": "About 10 hours",
+    "pickup": "08:00 to 08:30",
+    "elevation": "Middle Atlas foothills"
+  },
+  "overview": [
+    "The Ouzoud Waterfalls sit about 150 km northeast of Marrakech, beside the village of Tanaghmeilt in Azilal Province. The river drops roughly 110 meters over red rock in several tiers before running into the El Abid gorge. Ouzoud means olive in Tamazight, and the paths down to the falls still run through olive groves and past small water mills.",
+    "The drive takes 2.5 to 3 hours each way across the Haouz plain and up into the Middle Atlas foothills, with a coffee stop on the way. At the top of the falls you meet a local guide who walks you down by the viewpoints, through the groves where wild Barbary macaques live, and to the pool at the base.",
+    "At the bottom you can take a short ride on a flat wooden boat close to the spray, then eat lunch on a terrace facing the cascades. The climb back up is gradual, with plenty of stops. You are back at your Marrakech hotel or riad in the early evening."
+  ],
+  "program": [
+    {
+      "time": "08:00 to 08:30",
+      "title": "Pickup in Marrakech",
+      "location": "Your hotel or riad",
+      "description": "Your driver collects you at your hotel, or at the nearest gate a vehicle can reach if you are staying inside the medina. You leave Marrakech heading northeast across the flat farmland of the Haouz plain."
+    },
+    {
+      "time": "09:45 to 10:05",
+      "title": "Coffee and rest stop",
+      "location": "Roadside café on the route",
+      "description": "A 20-minute break for coffee, mint tea and toilets before the road starts climbing into the hills of Azilal Province."
+    },
+    {
+      "time": "10:45 to 12:30",
+      "title": "Guided walk down to the falls",
+      "location": "Tanaghmeilt, top of the falls",
+      "description": "Meet your local guide at the top of the falls. The path goes down through olive groves and past old water mills, stopping at viewpoints that show the full height of the cascades. Barbary macaques are often seen in the trees along this stretch."
+    },
+    {
+      "time": "12:30 to 13:15",
+      "title": "Base of the falls and boat ride",
+      "location": "Pool below the main cascade",
+      "description": "At the bottom you can take an optional ride on a flat wooden boat that goes close to the spray of the main fall. The boatmen charge a small fee in cash."
+    },
+    {
+      "time": "13:15 to 14:45",
+      "title": "Lunch facing the waterfalls",
+      "location": "Terrace restaurant in the gorge",
+      "description": "Lunch at one of the family terraces built into the slope opposite the falls. Tagine, grilled meat, salads and fresh orange juice are the usual choices. After lunch the path climbs back up the other side of the gorge at an easy pace."
+    },
+    {
+      "time": "15:30 to 18:30",
+      "title": "Return drive to Marrakech",
+      "location": "Ouzoud to Marrakech",
+      "description": "Rejoin your driver in Tanaghmeilt for the drive back. You are dropped at your accommodation in Marrakech between 18:00 and 18:30, depending on traffic."
+    }
+  ],
+  "includes": [
+    "Pickup and drop-off at your Marrakech hotel or riad",
+    "Round-trip transport in an air-conditioned vehicle",
+    "Driver who speaks English, French, Spanish or German",
+    "Local guide for the walk around the falls",
+    "Bottled water in the vehicle"
+  ],
+  "excludes": [
+    "Lunch and drinks",
+    "Optional boat ride at the base of the falls (paid in cash on site)",
+    "Tips for your guide and driver"
+  ],
+  "goodToKnow": [
+    "Wear closed shoes with grip. The steps near the pool are often wet from the spray.",
+    "The macaques are wild. Watch them from a distance and do not feed them.",
+    "The walk takes about 2 hours with stops and includes a climb back up. Tell us when booking if you prefer a shorter route to the upper viewpoints only.",
+    "Bring cash in dirhams for lunch, the boat and small purchases. Cards are rarely accepted at the falls.",
+    "Water flow is strongest from February to May. In late summer the falls are lower but the pools are better for a swim."
+  ],
+  "seo": {
+    "title": "Ouzoud Waterfalls Day Trip from Marrakech | Guided Walk & Lunch",
+    "metaDescription": "Ouzoud Waterfalls day trip from Marrakech: hotel pickup, guided walk to the 110 m falls, Barbary macaques, boat ride and lunch facing the cascades. From EUR 35.",
+    "lead": "A full day from Marrakech to the 110-meter Ouzoud Waterfalls in the Middle Atlas foothills, with a local guide, a walk through olive groves where wild macaques live, and lunch facing the cascades.",
+    "primaryKeyword": "ouzoud waterfalls day trip from marrakech",
+    "secondaryKeywords": [
+      "ouzoud waterfalls from marrakech",
+      "marrakech to ouzoud falls",
+      "waterfalls near marrakech"
+    ],
+    "price": {
+      "label": "From EUR 35 per person",
+      "note": "Includes hotel pickup and drop-off, round-trip air-conditioned transport, a local guide at the falls and bottled water. Lunch and the boat ride are paid on site."
+    },
+    "imageAlt": "Ouzoud Waterfalls dropping over red rock into a green gorge near Tanaghmeilt, Azilal Province",
+    "highlights": [
+      "Walk down to the 110-meter Ouzoud Waterfalls with a local guide",
+      "See wild Barbary macaques in the olive groves above the gorge",
+      "Pass the old water mills that still stand along the path",
+      "Take a flat wooden boat close to the spray of the main fall",
+      "Eat lunch on a terrace facing the cascades",
+      "Hotel pickup in Marrakech and air-conditioned transport both ways"
+    ],
+    "faqs": [
+      {
+        "question": "How far is Ouzoud from Marrakech and how long is the drive?",
+        "answer": "Ouzoud is about 150 km northeast of Marrakech. The drive takes 2.5 to 3 hours each way, including a short coffee stop. The full day lasts around 10 hours from pickup to drop-off."
+      },
+      {
+        "question": "How hard is the walk at Ouzoud Waterfalls?",
+        "answer": "It is an easy to moderate walk of about 2 hours with stops. The way down is gentle, and the way back up is a steady climb on steps and dirt paths. If you prefer, the guide can keep to the upper viewpoints, which are close to the village."
+      },
+      {
+        "question": "Will I see monkeys at Ouzoud?",
+        "answer": "Wild Barbary macaques live in the trees around the falls and are seen on most visits, though sightings are never guaranteed. Please do not feed them."
+      },
+      {
+        "question": "Can you swim at Ouzoud Waterfalls?",
+        "answer": "Swimming is possible in the calmer pools below the main fall, mostly in summer. Bring a swimsuit and a small towel if you plan to swim. The water stays cold year round."
+      },
+      {
+        "question": "When is the best time to visit Ouzoud?",
+        "answer": "February to May has the strongest flow and green hills. Summer is busier and hotter but good for swimming. The trip runs all year."
+      }
+    ]
+  },
   "jsonLd": {
-    "name": "Ouzoud Waterfalls Day Trip",
-    "description": "Journey to Morocco's tallest waterfalls, meet playful macaques, and cool off by the cascades."
+    "name": "Ouzoud Waterfalls Day Trip from Marrakech",
+    "description": "Full-day trip from Marrakech to the Ouzoud Waterfalls with hotel pickup, a local guide, a walk to the base of the falls and time to see the Barbary macaques.",
+    "price": 35,
+    "currency": "EUR"
   }
 }

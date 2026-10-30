@@ -22,5 +22,3 @@ export function getMailer(): Transporter<SMTPTransport.SentMessageInfo> {
   _transporter = mailer;
   return mailer;
 }
-
-export { type default as SMTPTransport } from "nodemailer/lib/smtp-transport";

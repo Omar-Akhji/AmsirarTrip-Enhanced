@@ -17,7 +17,7 @@
     "Morocco beach desert tour"
   ],
   "seo": {
-    "title": "4-Day Agadir to Marrakech Desert Tour",
+    "title": "Agadir to Marrakech Desert Tour",
     "metaDescription": "Travel from Agadir to Marrakech on a 4-day desert tour via Taroudant, Dades Valley, Merzouga camel trek, Erg Chebbi, and Ouarzazate.",
     "lead": "A 4-day Agadir to Marrakech desert tour for travelers who want to connect Morocco's Atlantic coast, Anti-Atlas landscapes, Sahara dunes, and the Red City.",
     "primaryKeyword": "Agadir to Marrakech desert tour",
@@ -63,6 +63,8 @@
   },
   "jsonLd": {
     "name": "Coastal and Desert Odyssey - 4 Days",
-    "description": "Experience the best of Morocco's coast and desert on this 4-day odyssey from Agadir to Marrakech via the Anti-Atlas Mountains and Sahara Desert."
+    "description": "Experience the best of Morocco's coast and desert on this 4-day odyssey from Agadir to Marrakech via the Anti-Atlas Mountains and Sahara Desert.",
+    "price": 350,
+    "currency": "EUR"
   }
 }

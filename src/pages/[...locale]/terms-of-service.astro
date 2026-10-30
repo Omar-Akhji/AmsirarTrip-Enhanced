@@ -1,18 +1,30 @@
 ---
+import { getRelativeLocaleUrl } from "astro:i18n";
 import TermsView from "../../features/legal/components/TermsView.astro";
 import { useTranslations } from "../../i18n/utils";
 import Layout from "../../layouts/Layout.astro";
+import { generateBreadcrumbJsonLd } from "../../lib/structured-data";
+import JsonLd from "../../shared/ui/JsonLd.astro";
 
 const locale = Astro.currentLocale || "en";
 const t = useTranslations(locale);
 
 const title = t("legal.terms.meta.title");
 const description = t("legal.terms.meta.description");
+
+const breadcrumbJsonLd = generateBreadcrumbJsonLd([
+  { name: t("nav.home") || "Home", url: getRelativeLocaleUrl(locale, "/") },
+  { name: title, url: Astro.url.pathname },
+]);
 ---
 
 <Layout
   description={description}
   title={title}
 >
+  <JsonLd
+    data={breadcrumbJsonLd}
+    id="terms-breadcrumb-jsonld"
+  />
   <TermsView />
 </Layout>

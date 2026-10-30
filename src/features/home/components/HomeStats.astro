@@ -1,75 +1,181 @@
 ---
 import { useTranslations } from "@/i18n/utils";
+import { Compass, MapPinned, ShieldCheck } from "@lucide/astro";
+import StatsFolderStack from "./StatsFolderStack.astro";
 
 const locale = Astro.currentLocale || "en";
 const t = useTranslations(locale);
 
+interface CopyType {
+  readonly experience: string;
+  readonly routes: string;
+  readonly care: string;
+}
+
+const defaultCopy: CopyType = {
+  experience:
+    "Over two decades orchestrating private Sahara expeditions, High Atlas treks, and bespoke cultural journeys.",
+  routes:
+    "Handcrafted routes from Erg Chebbi dunes to coastal Atlantic medinas and imperial monuments.",
+  care: "Dedicated local coordinators and licensed Berber guides accompanying every leg of your journey.",
+};
+
+const descriptions: Record<"fr" | "es" | "de", CopyType> = {
+  fr: {
+    experience:
+      "Plus de deux décennies d'expertise dans les expéditions sahariennes, les treks de l'Atlas et les voyages sur mesure.",
+    routes:
+      "Itinéraires exclusifs des dunes de l'Erg Chebbi aux médinas atlantiques et palais impériaux.",
+    care: "Coordinateurs locaux dédiés et guides berbères agréés à vos côtés 24h/24 à chaque étape.",
+  },
+  es: {
+    experience:
+      "Más de dos décadas guiando expediciones privadas por el Sahara, rutas del Atlas y viajes culturales a medida.",
+    routes:
+      "Rutas exclusivas desde las dunas de Erg Chebbi hasta las medinas atlánticas y ciudades imperiales.",
+    care: "Coordinadores locales dedicados y guías bereberes titulados acompañando cada etapa del viaje.",
+  },
+  de: {
+    experience:
+      "Über zwei Jahrzehnte Erfahrung mit privaten Sahara-Expeditionen, Atlas-Treks und maßgeschneiderten Kulturreisen.",
+    routes:
+      "Handverlesene Routen von den Erg-Chebbi-Dünen über historische Königsstädte bis zu den Küstenmedinas.",
+    care: "Engagierte Rund-um-die-Uhr-Koordination und lizensierte Berber-Guides für Ihre gesamte Reise.",
+  },
+};
+
+function getCopy(lang: string): CopyType {
+  switch (lang) {
+    case "fr": {
+      return descriptions.fr;
+    }
+    case "es": {
+      return descriptions.es;
+    }
+    case "de": {
+      return descriptions.de;
+    }
+    default: {
+      return defaultCopy;
+    }
+  }
+}
+
+const copy = getCopy(locale);
+
 const statHighlights = [
   {
     id: "experience",
+    code: "HERITAGE",
     value: "20+",
-    label: t("about.experienceTitle"),
-    description: t(
-      "home.stats.experience",
-      "Years perfecting Sahara crossings and Atlas escapades.",
-    ),
+    label: t("home.stats.experience"),
+    description: copy.experience,
+    footerLeft: "Est. 2004",
+    footerRight: "Marrakech HQ",
+    icon: Compass,
   },
   {
     id: "routes",
+    code: "EXPEDITIONS",
     value: "35+",
     label: t("excursion.stats.routes", "Signature excursions"),
-    description: t("home.stats.routes", "Handpicked story-driven routes from dunes to oceans."),
+    description: copy.routes,
+    footerLeft: "All 12 Regions",
+    footerRight: "Bespoke Routes",
+    icon: MapPinned,
   },
   {
     id: "care",
+    code: "CONCIERGE",
     value: "24/7",
     label: t("excursion.stats.support", "On-trip support"),
-    description: t("home.stats.care", "Dedicated coordinators for every mile of your journey."),
+    description: copy.care,
+    footerLeft: "Real-Time",
+    footerRight: "Direct WhatsApp",
+    icon: ShieldCheck,
   },
 ];
 ---
 
 <section
   aria-labelledby="home-highlights"
-  class="py-12"
+  class="bg-white py-12 sm:py-16 lg:py-24"
 >
   <div class="mx-auto px-4 max-inline-7xl">
     <div
-      class="mx-auto mbe-10 space-y-4 text-center max-inline-4xl"
+      class="mbe-8 sm:mbe-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-stone-200 pb-6 sm:pb-8"
       data-animate="fade-up"
     >
-      <p class="inline-flex items-center justify-center rounded-full border-2 border-white bg-orange-700 px-6 py-3 text-sm font-semibold tracking-[0.45em] text-white uppercase">
-        {t("about.smTitle")}
-      </p>
-      <h2
-        class="mbs-4 text-2xl leading-tight font-semibold text-shadow-md sm:text-3xl md:text-4xl"
-        id="home-highlights"
-      >
-        {t("about.experienceTitle")}
-      </h2>
-      <div
-        aria-hidden="true"
-        class="mx-auto mbs-4 rounded-full bg-orange-500 block-1 inline-20"
-      ></div>
-      <p class="mbs-4 text-base text-taupe-600">{t("tours.detailsSubtitle")}</p>
+      <hgroup class="max-w-2xl space-y-2">
+        <h2
+          class="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl text-balance"
+          id="home-highlights"
+        >
+          {t("about.experienceTitle")}
+        </h2>
+        <p class="border-s-2 border-orange-600 ps-4 py-0.5 text-sm sm:text-base text-stone-600 leading-relaxed max-w-[62ch]">
+          {locale === "fr" ?
+            "Plus de deux décennies d'expertise locale, de chauffeurs certifiés et de circuits privatifs à travers tout le Maroc."
+          : locale === "es" ?
+            "Más de dos décadas de experiencia sobre el terreno, vehículos autorizados y guías locales titulados."
+          : locale === "de" ?
+            "Über zwei Jahrzehnte verlässliche Durchführung privater Marokko-Expeditionen mit lizenzierten Berber-Guides."
+          : "Two decades orchestrating private Sahara expeditions, High Atlas treks, and bespoke cultural itineraries with licensed local drivers."
+          }
+        </p>
+      </hgroup>
     </div>
 
-    <div class="grid gap-6 md:grid-cols-3">
-      {statHighlights.map((stat, index) => (
+    {/* Mobile Mode: Scroll-Stack into Folder (https://reactbits.dev/components/folder) */}
+    <div class="block md:hidden w-full">
+      <StatsFolderStack stats={statHighlights} />
+    </div>
+
+    {/* Desktop & Tablet Mode: 3-column Grid */}
+    <div class="hidden md:grid md:grid-cols-2 xl:grid-cols-3 gap-6 items-stretch">
+      {statHighlights.map(({ icon: Icon, ...stat }, index) => (
         <div
-          class="flex size-full"
+          class:list={["flex size-full", { "sm:col-span-2 xl:col-span-1": index === 2 }]}
           data-animate="fade-up"
           style={`transition-delay: ${index * 150}ms`}
         >
-          <article class="rounded-3xl border border-orange-100 bg-white p-6 shadow-xs shadow-orange-100/70 inline-full">
-            <p
-              class="text-4xl font-bold text-orange-600"
-              data-scroll-counter
-            >
-              {stat.value}
-            </p>
-            <h3 class="mbs-3 text-lg font-semibold text-zinc-900">{stat.label}</h3>
-            <p class="mbs-2 text-sm text-taupe-600">{stat.description}</p>
+          <article class="group relative flex h-full w-full flex-col justify-between rounded-2xl border border-stone-200/90 bg-stone-50/80 p-6 sm:p-7 shadow-xs shadow-stone-900/5 transition-all duration-300 hover:-translate-y-1 hover:border-stone-300 hover:shadow-md">
+            <div>
+              <div class="mbe-5 flex items-center justify-between border-b border-stone-200/60 pb-3 text-[11px] font-mono uppercase tracking-wider text-stone-400">
+                <span class="inline-flex items-center gap-2 font-semibold text-stone-500">
+                  <span class="size-2 rounded-full bg-orange-600"></span>
+                  {stat.code}
+                </span>
+                <div class="flex items-center gap-2 text-stone-400 transition-colors group-hover:text-stone-700">
+                  <Icon
+                    aria-hidden="true"
+                    class="size-4"
+                    stroke-width="2"
+                  />
+                </div>
+              </div>
+
+              <div class="mbe-3">
+                <data
+                  value={stat.value}
+                  class="text-4xl font-bold tracking-tight text-orange-600 tabular-nums block"
+                  data-scroll-counter
+                >
+                  {stat.value}
+                </data>
+              </div>
+
+              <h3 class="text-base sm:text-lg font-semibold tracking-tight text-stone-900">
+                {stat.label}
+              </h3>
+
+              <p class="mbs-2 text-sm leading-relaxed text-stone-600">{stat.description}</p>
+            </div>
+
+            <div class="mbs-6 flex items-center justify-between border-t border-stone-200/60 pt-3 text-[11px] font-mono text-stone-400 uppercase tracking-wider">
+              <span class="text-stone-500">{stat.footerLeft}</span>
+              <span class="inline-flex items-center gap-1 text-stone-600">{stat.footerRight}</span>
+            </div>
           </article>
         </div>
       ))}

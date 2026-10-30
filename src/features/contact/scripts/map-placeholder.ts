@@ -9,7 +9,18 @@ function initMapPlaceholder() {
       () => {
         const src = iframe.dataset["src"];
         if (src) {
-          iframe.setAttribute("src", src);
+          try {
+            const parsed = new URL(src);
+            if (
+              parsed.protocol === "https:"
+              && (parsed.hostname === "www.google.com" || parsed.hostname === "maps.google.com")
+              && parsed.pathname.startsWith("/maps/")
+            ) {
+              iframe.setAttribute("src", parsed.href);
+            }
+          } catch {
+            // Ignore malformed map URL
+          }
         }
         container.classList.remove("hidden");
         placeholder.classList.add("hidden");

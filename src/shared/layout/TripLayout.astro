@@ -8,10 +8,12 @@ const {
   title,
   pageTitle,
   pageSubtitle,
+  hasUnderline = false,
+  lead,
   smTitle,
   breadcrumbs,
   imageSrc,
-  imageAlt,
+  imageAlt = title || "Morocco Trip",
   sectionId,
   headingId,
   sidebar,
@@ -23,6 +25,7 @@ const sl = Astro.slots.has("default");
 <PageHeader
   bgImage={bgImage}
   breadcrumbs={breadcrumbs}
+  hasUnderline={hasUnderline}
   smTitle={smTitle}
   subtitle={pageSubtitle}
   title={pageTitle}
@@ -31,13 +34,13 @@ const sl = Astro.slots.has("default");
 <div class="trip-content">
   <section
     aria-labelledby={headingId}
-    class="py-14"
+    class="py-12 sm:py-16 lg:py-24"
     id={sectionId}
   >
     <div class="mx-auto grid gap-10 px-4 max-inline-7xl lg:grid-cols-[4fr_2fr]">
-      <article class="rounded-[20px] bg-white p-4 pbe-8 shadow-xs ring-1 ring-zinc-100 sm:p-6 sm:pbe-12">
+      <article class="rounded-2xl bg-white p-4 pbe-8 shadow-xs ring-1 ring-zinc-100 sm:p-6 sm:pbe-12">
         <div data-animate="zoom-in">
-          <figure class="relative mbe-8 aspect-4/3 overflow-hidden rounded-[20px] border border-zinc-50 shadow-md inline-full">
+          <figure class="relative mbe-8 aspect-4/3 overflow-hidden rounded-xl border border-zinc-50 shadow-md inline-full">
             <Image
               alt={imageAlt}
               class="absolute inset-0 size-full object-cover"
@@ -56,20 +59,19 @@ const sl = Astro.slots.has("default");
           data-animate="fade-up"
           style="transition-delay:150ms"
         >
-          <div class="mbe-6 text-center">
-            <div class="mx-auto inline-block">
-              <span
-                aria-hidden="true"
-                class="mbe-3 hidden rounded-full bg-amber-300 block-1 inline-16 sm:block"
-              ></span>
-              <h2
-                class="mbs-2 text-2xl leading-tight font-semibold text-amber-600 sm:text-3xl md:text-4xl"
-                id={headingId}
-              >
-                {title}
-              </h2>
-            </div>
-          </div>
+          <hgroup class="mbe-8 sm:mbe-12 block border-b border-stone-200 pb-6 sm:pb-8 text-start">
+            <h2
+              class="text-2xl font-bold tracking-tight text-stone-900 sm:text-3xl md:text-4xl text-balance"
+              id={headingId}
+            >
+              {title}
+            </h2>
+            {lead ?
+              <p class="mbs-3 text-base sm:text-lg leading-relaxed text-stone-700 max-w-[68ch] text-pretty">
+                {lead}
+              </p>
+            : null}
+          </hgroup>
         </div>
 
         <div class="space-y-8">
@@ -83,6 +85,7 @@ const sl = Astro.slots.has("default");
         ctaPoint01={sidebar.ctaPoint01}
         ctaPoint02={sidebar.ctaPoint02}
         ctaPoint03={sidebar.ctaPoint03}
+        ctaPoints={sidebar.ctaPoints}
         ctaTitle={sidebar.ctaTitle}
         details={sidebar.details}
         intro={sidebar.intro}

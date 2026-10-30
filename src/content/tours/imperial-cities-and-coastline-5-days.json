@@ -17,7 +17,7 @@
     "Morocco coastline tour"
   ],
   "seo": {
-    "title": "5-Day Imperial Cities Tour from Casablanca",
+    "title": "Imperial Cities Tour from Casablanca",
     "metaDescription": "Explore a 5-day imperial cities tour from Casablanca to Rabat, Chefchaouen, Volubilis, Meknes, and Fes with private Morocco transport.",
     "lead": "A culture-first 5-day imperial cities tour from Casablanca through Rabat, Chefchaouen, Roman Volubilis, Meknes, and Fes.",
     "primaryKeyword": "5 day Morocco imperial cities tour",
@@ -63,6 +63,8 @@
   },
   "jsonLd": {
     "name": "Imperial Cities and Coastline - 5 Days",
-    "description": "Discover northern Morocco on this 5-day route from Casablanca to Fes via Rabat, Chefchaouen, Volubilis, and Meknes."
+    "description": "Discover northern Morocco on this 5-day route from Casablanca to Fes via Rabat, Chefchaouen, Volubilis, and Meknes.",
+    "price": 450,
+    "currency": "EUR"
   }
 }

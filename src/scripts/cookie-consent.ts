@@ -14,11 +14,11 @@
 import gsap from "gsap";
 
 export interface CookiePreferences {
-  necessary: true;
-  analytics: boolean;
-  functional: boolean;
-  timestamp: string;
-  version: number;
+  readonly necessary: true;
+  readonly analytics: boolean;
+  readonly functional: boolean;
+  readonly timestamp: string;
+  readonly version: number;
 }
 
 const COOKIE_NAME = "amsirar_cookie_consent";
@@ -26,36 +26,37 @@ const STORAGE_KEY = "amsirar_cookie_consent_v1";
 const CONSENT_VERSION = 1;
 const ONE_YEAR_SECONDS = 365 * 24 * 60 * 60;
 
+/** Type guard verifying that a value structurally conforms to CookiePreferences. */
+export function isCookiePreferences(value: unknown): value is CookiePreferences {
+  if (!value || typeof value !== "object") return false;
+  const candidate = value as Record<string, unknown>;
+  return (
+    candidate["necessary"] === true
+    && typeof candidate["analytics"] === "boolean"
+    && typeof candidate["functional"] === "boolean"
+    && typeof candidate["timestamp"] === "string"
+    && candidate["version"] === CONSENT_VERSION
+  );
+}
+
 /** Retrieves the current user cookie preferences, or null if not yet determined. */
 export function getCookieConsent(): CookiePreferences | null {
   if (typeof document === "undefined") return null;
 
   try {
-    // 1. Try reading cookie
     const cookieMatch = /(?:^|;\s*)amsirar_cookie_consent=([^;]+)/.exec(document.cookie);
     if (cookieMatch?.[1]) {
       const parsed: unknown = JSON.parse(decodeURIComponent(cookieMatch[1]));
-      if (
-        parsed
-        && typeof parsed === "object"
-        && "version" in parsed
-        && parsed.version === CONSENT_VERSION
-      ) {
-        return parsed as CookiePreferences;
+      if (isCookiePreferences(parsed)) {
+        return parsed;
       }
     }
 
-    // 2. Fallback to localStorage
     const local = localStorage.getItem(STORAGE_KEY);
     if (local) {
       const parsed: unknown = JSON.parse(local);
-      if (
-        parsed
-        && typeof parsed === "object"
-        && "version" in parsed
-        && parsed.version === CONSENT_VERSION
-      ) {
-        return parsed as CookiePreferences;
+      if (isCookiePreferences(parsed)) {
+        return parsed;
       }
     }
   } catch (error) {
@@ -99,8 +100,6 @@ export function setCookieConsent(preferences: {
   return consent;
 }
 
-// ── DOM UI Controllers ──────────────────────────────────────────
-
 let lastFocusedElement: HTMLElement | null = null;
 
 function getBannerElement(): HTMLElement | null {
@@ -137,41 +136,28 @@ export function animateToggleSwitch(input: HTMLInputElement, animate = true): vo
 
   if (!animate || prefersReduced) {
     gsap.killTweensOf([track, thumb]);
-    gsap.set(thumb, { x: isChecked ? 22 : 0, scaleX: 1, scaleY: 1 });
+    gsap.set(thumb, { x: isChecked ? 20 : 0 });
     gsap.set(track, {
-      backgroundColor: isChecked ? "#ea580c" : "#27272a",
-      borderColor: isChecked ? "rgba(251, 146, 60, 0.7)" : "rgba(255, 255, 255, 0.15)",
-      boxShadow:
-        isChecked ? "0 0 14px rgba(234, 88, 12, 0.45)" : "inset 0 1px 2px rgba(0, 0, 0, 0.4)",
+      backgroundColor: isChecked ? "#c2410c" : "#27272a",
+      borderColor: isChecked ? "rgba(234, 88, 12, 0.8)" : "rgba(255, 255, 255, 0.2)",
     });
     return;
   }
 
   const tl = gsap.timeline({ overwrite: "auto" });
 
-  // 1. Morph track background color, border, and glow
   tl.to(
     track,
     {
-      backgroundColor: isChecked ? "#ea580c" : "#27272a",
-      borderColor: isChecked ? "rgba(251, 146, 60, 0.7)" : "rgba(255, 255, 255, 0.15)",
-      boxShadow:
-        isChecked ? "0 0 14px rgba(234, 88, 12, 0.45)" : "inset 0 1px 2px rgba(0, 0, 0, 0.4)",
-      duration: 0.28,
+      backgroundColor: isChecked ? "#c2410c" : "#27272a",
+      borderColor: isChecked ? "rgba(234, 88, 12, 0.8)" : "rgba(255, 255, 255, 0.2)",
+      duration: 0.2,
       ease: "power2.out",
     },
     0,
   );
 
-  // 2. Micro squash-and-stretch during travel
-  tl.to(thumb, { scaleX: 1.15, scaleY: 0.9, duration: 0.09, ease: "power1.out" }, 0);
-
-  // 3. Smooth glide with Apple-like spring overshoot
-  tl.to(
-    thumb,
-    { x: isChecked ? 22 : 0, scaleX: 1, scaleY: 1, duration: 0.28, ease: "back.out(1.75)" },
-    0.06,
-  );
+  tl.to(thumb, { x: isChecked ? 20 : 0, duration: 0.2, ease: "power2.out" }, 0);
 }
 
 /** Synchronize all toggle switches in the preferences modal with GSAP. */
@@ -220,7 +206,6 @@ export function openPreferencesModal(triggerElement?: HTMLElement): void {
     lastFocusedElement = document.activeElement;
   }
 
-  // Populate checkboxes with current consent
   const current = getCookieConsent();
   const analyticsInput = document.querySelector<HTMLInputElement>("#cookie-toggle-analytics");
   const functionalInput = document.querySelector<HTMLInputElement>("#cookie-toggle-functional");
@@ -232,17 +217,16 @@ export function openPreferencesModal(triggerElement?: HTMLElement): void {
     functionalInput.checked = Boolean(current?.functional);
   }
 
-  // Set initial GSAP switch states without layout flash
   syncAllToggleSwitches(false);
 
   modal.classList.remove("hidden");
+  modal.classList.add("flex");
   requestAnimationFrame(() => {
     modal.classList.remove("opacity-0");
     modal.classList.add("opacity-100");
   });
   document.body.classList.add("overflow-hidden");
 
-  // Focus the close button or first interactive element
   const closeBtn = modal.querySelector<HTMLElement>("[data-cookie-close-preferences]");
   closeBtn?.focus();
 }
@@ -262,6 +246,7 @@ export function closePreferencesModal(): void {
 
   setTimeout(() => {
     modal.classList.add("hidden");
+    modal.classList.remove("flex");
   }, 250);
 
   if (lastFocusedElement && document.contains(lastFocusedElement)) {
@@ -328,7 +313,6 @@ export function initCookieConsent(): void {
 
   updateBadgeVisibility();
 
-  // Attach change listeners to toggle switches for GSAP glide animations
   const toggleInputs = document.querySelectorAll<HTMLInputElement>(
     ".amsirar-toggle-input:not([disabled])",
   );
@@ -338,10 +322,8 @@ export function initCookieConsent(): void {
     });
   }
 
-  // Initial sync with GSAP
   syncAllToggleSwitches(false);
 
-  // Attach click handlers to elements with specific data attributes
   const acceptButtons = document.querySelectorAll<HTMLElement>("[data-cookie-accept-all]");
   for (const btn of acceptButtons) {
     btn.addEventListener("click", handleAcceptAll);
@@ -386,11 +368,40 @@ export function initCookieConsent(): void {
   backdrop?.addEventListener("click", closePreferencesModal);
 }
 
-// Global keydown listener for Escape key to close modal
+// Global keydown listener for keyboard accessibility (Escape close + Tab focus trap)
 if (typeof window !== "undefined") {
   globalThis.addEventListener("keydown", (event: KeyboardEvent) => {
+    const modal = getModalElement();
+    if (!modal || modal.classList.contains("hidden")) return;
+
     if (event.key === "Escape") {
+      event.preventDefault();
       closePreferencesModal();
+      return;
+    }
+
+    if (event.key !== "Tab") return;
+
+    const focusable = modal.querySelectorAll<HTMLElement>(
+      'button, [href], input:not([disabled]), select, textarea, [tabindex]:not([tabindex="-1"])',
+    );
+    const focusableElements = [...focusable].filter(
+      (el) => !el.hasAttribute("disabled") && el.offsetParent !== null,
+    );
+    if (focusableElements.length === 0) return;
+
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements.at(-1);
+    if (!firstElement || !lastElement) return;
+
+    if (event.shiftKey) {
+      if (document.activeElement === firstElement) {
+        event.preventDefault();
+        lastElement.focus();
+      }
+    } else if (document.activeElement === lastElement) {
+      event.preventDefault();
+      firstElement.focus();
     }
   });
 

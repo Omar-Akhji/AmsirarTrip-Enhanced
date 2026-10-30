@@ -3,19 +3,142 @@
   "i18nKeyPrefix": "imlil",
   "bookingId": 3,
   "image": "../../assets/images/Excursions/Imlil_Toubkal.webp",
-  "duration": "P1D",
-  "location": "Imlil, Morocco",
+  "duration": "PT9H",
+  "location": "Imlil, Toubkal National Park, Morocco",
   "keywords": [
-    "Imlil day trip",
-    "Toubkal base camp",
-    "Atlas Mountains hike",
-    "Berber village tour",
-    "Marrakech mountain tour",
-    "High Atlas excursion",
-    "Morocco trekking"
+    "imlil day trip from marrakech",
+    "marrakech to imlil",
+    "toubkal national park day trip",
+    "atlas mountains day hike from marrakech",
+    "aroumd village hike",
+    "berber village tour atlas",
+    "high atlas excursion"
   ],
+  "metrics": {
+    "distance": "~65 km from Marrakech",
+    "duration": "About 9 hours",
+    "pickup": "08:00 to 08:30",
+    "elevation": "Up to ~1,900 m"
+  },
+  "overview": [
+    "Imlil is a mountain village at about 1,740 meters, 65 km south of Marrakech, where the paved road ends and the trails into Toubkal National Park begin. Mount Toubkal, at 4,167 meters the highest peak in North Africa, rises at the head of the valley. Climbing it takes two days, so this trip is a day of walking in the valley below it.",
+    "The drive takes about 1.5 hours through the Moulay Brahim gorge and the market town of Asni, which holds its weekly souk on Saturdays. In Imlil you meet a local mountain guide and walk up through walnut and apple orchards to Aroumd, a stone village on a ridge at the top of the valley with a clear view toward the high peaks.",
+    "Lunch is a home-cooked tagine with a Berber family or on a guesthouse terrace in the valley. The walk is about 3 hours in total at an easy pace, and a mule can carry you on the steeper parts if you prefer. You are back in Marrakech by early evening."
+  ],
+  "program": [
+    {
+      "time": "08:00 to 08:30",
+      "title": "Pickup in Marrakech",
+      "location": "Your hotel or riad",
+      "description": "Your driver collects you at your hotel, or at the nearest gate a vehicle can reach if you are staying inside the medina. You leave Marrakech heading south toward the High Atlas."
+    },
+    {
+      "time": "09:00 to 09:45",
+      "title": "Moulay Brahim gorge and Asni",
+      "location": "Asni, about 1,150 m",
+      "description": "The road climbs through the red cliffs of the Moulay Brahim gorge, with photo stops at viewpoints, then passes through Asni. On Saturdays you can stop briefly at the weekly market."
+    },
+    {
+      "time": "10:00 to 10:30",
+      "title": "Arrive in Imlil and meet your guide",
+      "location": "Imlil, about 1,740 m",
+      "description": "Mint tea on a terrace in Imlil while you meet your local mountain guide, who will walk with you for the rest of the day."
+    },
+    {
+      "time": "10:30 to 12:30",
+      "title": "Walk up to Aroumd",
+      "location": "Aroumd, about 1,900 m",
+      "description": "Follow mule paths through walnut and apple orchards and along irrigation channels up to Aroumd. From the village there are views up the valley toward the Toubkal massif. A mule can be arranged for the uphill part."
+    },
+    {
+      "time": "12:30 to 14:00",
+      "title": "Lunch in the valley",
+      "location": "Berber family home or guesthouse",
+      "description": "A home-cooked lunch of salad, tagine and fruit with mint tea, either in a family home or on a terrace facing the mountains."
+    },
+    {
+      "time": "14:00 to 15:30",
+      "title": "Walk back down to Imlil",
+      "location": "Imlil valley",
+      "description": "Return to Imlil by a different path through the lower hamlets and orchards, with time to visit the small craft shops in the village."
+    },
+    {
+      "time": "15:30 to 17:00",
+      "title": "Return drive to Marrakech",
+      "location": "Imlil to Marrakech",
+      "description": "Drive back down the valley. You are dropped at your accommodation in Marrakech around 17:00."
+    }
+  ],
+  "includes": [
+    "Pickup and drop-off at your Marrakech hotel or riad",
+    "Round-trip transport in an air-conditioned vehicle",
+    "Driver who speaks English, French, Spanish or German",
+    "Local mountain guide in Imlil",
+    "Home-cooked lunch with mint tea",
+    "Bottled water in the vehicle"
+  ],
+  "excludes": [
+    "Mule ride (optional, paid on site)",
+    "Drinks other than water and mint tea",
+    "Tips for your guide and driver"
+  ],
+  "goodToKnow": [
+    "Wear walking shoes or trail shoes with good grip. The paths are rocky and can be loose.",
+    "Imlil is about 1,300 meters higher than Marrakech and noticeably cooler. Bring a fleece or light jacket in every season, and warm layers from November to March, when snow is common on the peaks.",
+    "The walk is about 3 hours in total at an easy pace with breaks. No hiking experience is needed.",
+    "Bring cash in dirhams for the optional mule, tips and small purchases.",
+    "This day trip does not reach the Toubkal summit. If you want to climb it, ask us about the 2-day Toubkal trek."
+  ],
+  "seo": {
+    "title": "Imlil Day Trip from Marrakech | Atlas Hike to Aroumd & Lunch",
+    "metaDescription": "Imlil day trip from Marrakech: guided 3-hour Atlas walk to Aroumd village in Toubkal National Park, home-cooked Berber lunch and hotel pickup. From EUR 40.",
+    "lead": "A day in the High Atlas from Marrakech: drive to Imlil at the edge of Toubkal National Park, walk with a local guide up to the village of Aroumd, and share a home-cooked lunch in the valley.",
+    "primaryKeyword": "imlil day trip from marrakech",
+    "secondaryKeywords": [
+      "marrakech to imlil",
+      "atlas mountains day hike from marrakech",
+      "toubkal national park day trip"
+    ],
+    "price": {
+      "label": "From EUR 40 per person",
+      "note": "Includes hotel pickup and drop-off, round-trip air-conditioned transport, a local mountain guide, a home-cooked lunch and bottled water. The optional mule is paid on site."
+    },
+    "imageAlt": "Stone houses of Imlil village in a green High Atlas valley with Toubkal massif behind",
+    "highlights": [
+      "Walk with a local guide from Imlil to the ridge village of Aroumd",
+      "Views up the valley toward Mount Toubkal, the highest peak in North Africa",
+      "Home-cooked tagine lunch with a Berber family or on a mountain terrace",
+      "Drive through the red cliffs of the Moulay Brahim gorge",
+      "Easy 3-hour walk, with a mule available for the uphill part",
+      "Hotel pickup in Marrakech and air-conditioned transport both ways"
+    ],
+    "faqs": [
+      {
+        "question": "How far is Imlil from Marrakech?",
+        "answer": "Imlil is about 65 km south of Marrakech, a drive of around 1.5 hours each way. The full day lasts about 9 hours."
+      },
+      {
+        "question": "Can I climb Mount Toubkal in one day from Marrakech?",
+        "answer": "No. The summit is at 4,167 meters and the climb normally takes two days with a night at the refuge. This day trip walks in the valley below the mountain, up to Aroumd at about 1,900 meters."
+      },
+      {
+        "question": "How fit do I need to be for the Imlil hike?",
+        "answer": "The walk suits anyone who can walk for 3 hours with breaks on uneven paths. It goes uphill for about 2 hours and down for about 1.5 hours. A mule can carry you on the uphill part if needed."
+      },
+      {
+        "question": "What is the weather like in Imlil?",
+        "answer": "Imlil is much cooler than Marrakech. Summer days are pleasant, and from November to March it can be cold, with snow on the peaks and sometimes in the village. Bring warm layers in winter."
+      },
+      {
+        "question": "Is lunch included on the Imlil day trip?",
+        "answer": "Yes. A home-cooked lunch of salad, tagine, fruit and mint tea is included. Tell us about vegetarian or other dietary needs when booking."
+      }
+    ]
+  },
   "jsonLd": {
-    "name": "Imlil & Toubkal Adventure",
-    "description": "Hike through Berber villages in the High Atlas Mountains and reach the base camp of Mount Toubkal."
+    "name": "Imlil and Atlas Mountains Day Trip from Marrakech",
+    "description": "Full-day trip from Marrakech to Imlil in Toubkal National Park, with a guided walk to Aroumd village, a home-cooked lunch and hotel pickup.",
+    "price": 40,
+    "currency": "EUR"
   }
 }

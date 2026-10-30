@@ -54,7 +54,9 @@ function initLanguageSelectors() {
         return;
       }
 
-      const currentIndex = items.indexOf(document.activeElement as HTMLAnchorElement);
+      const activeElement = document.activeElement;
+      const currentIndex =
+        activeElement instanceof HTMLAnchorElement ? items.indexOf(activeElement) : -1;
 
       if (e.key === "ArrowDown") {
         e.preventDefault();
@@ -73,8 +75,8 @@ function initLanguageSelectors() {
   containers.forEach(handleContainer);
 
   function handleClickOutside(e: MouseEvent) {
-    const target = e.target as Node | null;
-    if (!target) return;
+    const target = e.target;
+    if (!(target instanceof Node)) return;
     const clickedInside = [...containers].some((c) => c.contains(target));
     if (!clickedInside) {
       closeAll();

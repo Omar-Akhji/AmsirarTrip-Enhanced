@@ -14,7 +14,7 @@ import { createWriteStream, type WriteStream } from "node:fs";
 
 const disk = { exists: existsSync, mkdir: mkdirSync, createStream: createWriteStream };
 
-export type LogLevel = "debug" | "info" | "warn" | "error" | "security";
+type LogLevel = "debug" | "info" | "warn" | "error" | "security";
 
 interface LogEntry {
   timestamp: string;
@@ -23,14 +23,11 @@ interface LogEntry {
   [key: string]: unknown;
 }
 
-// Log directory (can be overridden by environment)
 const LOG_DIR = process.env["LOG_DIR"] ?? "./logs";
 
-// Active write streams keyed by date string
 let activeDate = "";
 const streams: Partial<Record<LogLevel, WriteStream>> = {};
 
-// Ensure log directory exists
 function ensureLogDir() {
   if (!disk.exists(LOG_DIR)) {
     try {
@@ -56,13 +53,11 @@ function getStream(level: LogLevel): WriteStream {
   return streams[level];
 }
 
-// Format log entry as JSON line
 function formatLogEntry(level: LogLevel, message: string, meta?: Record<string, unknown>): string {
   const entry: LogEntry = { timestamp: new Date().toISOString(), level, message, ...meta };
   return JSON.stringify(entry);
 }
 
-// Write to log file asynchronously via stream
 function writeToFile(level: LogLevel, line: string) {
   try {
     ensureLogDir();
@@ -72,7 +67,6 @@ function writeToFile(level: LogLevel, line: string) {
   }
 }
 
-// Create logger instance
 export const logger = {
   debug(message: string, meta?: Record<string, unknown>) {
     const line = formatLogEntry("debug", message, meta);
@@ -115,7 +109,14 @@ export const logger = {
   },
 };
 
-// ── Convenience functions for common log types ─────────────────────────────────
+function sanitizeLogString(value: unknown, maxLength = 512): string {
+  return typeof value === "string" ?
+      value
+        .replaceAll(/[\r\n\0\v\f]+/g, " ")
+        .trim()
+        .slice(0, maxLength)
+    : "";
+}
 
 /** Log a security event (rate limit violations, suspicious activity, etc.) */
 export function logSecurityEvent(
@@ -125,39 +126,10 @@ export function logSecurityEvent(
   extra?: Record<string, unknown>,
 ): void {
   logger.security(`Security event: ${type}`, {
-    ip,
+    ip: sanitizeLogString(ip, 64),
     type,
-    details,
-    userAgent: extra?.["userAgent"],
+    details: sanitizeLogString(details, 512),
+    userAgent: sanitizeLogString(extra?.["userAgent"], 512),
     ...extra,
   });
-}
-
-/** Log an error from user action (form submissions, API calls, etc.) */
-export function logActionError(
-  action: string,
-  error: unknown,
-  context?: Record<string, unknown>,
-): void {
-  logger.error(`Action failed: ${action}`, error, { action, ...context });
-}
-
-/** Log application errors (unhandled exceptions, crashes, etc.) */
-export function logAppError(
-  context: "SERVER" | "MIDDLEWARE" | "ACTION" | "RENDER",
-  error: unknown,
-  request?: Request,
-): void {
-  const meta: Record<string, unknown> = { context };
-
-  if (request) {
-    meta["method"] = request.method;
-    meta["url"] = request.url;
-    meta["headers"] = {
-      "user-agent": request.headers.get("user-agent"),
-      referer: request.headers.get("referer"),
-    };
-  }
-
-  logger.error(`Application error in ${context}`, error, meta);
 }

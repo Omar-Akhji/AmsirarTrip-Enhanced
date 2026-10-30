@@ -3,7 +3,9 @@ import bgImage from "@/assets/images/Header/header-1.webp";
 import { useTranslations } from "@/i18n/utils";
 import { WHATSAPP_LINK } from "@/lib/constants/contact";
 import PageHeader from "@/shared/layout/PageHeader.astro";
-import { ArrowRight, Mail, MapPin, MessageCircle, Phone } from "@lucide/astro";
+import Button from "@/shared/ui/Button.astro";
+import ContactFolderStack from "./ContactFolderStack.astro";
+import { ChevronRight, Mail, MapPinned, MessageCircle, Phone } from "@lucide/astro";
 
 const locale = Astro.currentLocale || "en";
 const t = useTranslations(locale);
@@ -12,10 +14,10 @@ const contactMethods = [
   {
     id: "phone",
     icon: Phone,
-    title: t("contact.card.phoneTitle", "Feel free to contact us - we're here to help"),
+    title: t("contact.card.phoneTitle", "Call or WhatsApp our Marrakech desk"),
     description: t(
       "contact.card.phoneSeo",
-      "Have a quick question or want to book now? Our local team answers calls and messages promptly - reach out and we'll help plan the perfect Morocco trip.",
+      "Our team answers booking questions, availability requests, and route changes from 09:00 to 21:00 GMT+1 daily.",
     ),
   },
   {
@@ -29,7 +31,7 @@ const contactMethods = [
   },
   {
     id: "location",
-    icon: MapPin,
+    icon: MapPinned,
     title: t("contact.card.visitTitle", "Visit our Marrakech office - friendly, local support"),
     description: t(
       "contact.card.visitSeo",
@@ -43,19 +45,22 @@ const contactMethods = [
   bgImage={bgImage}
   breadcrumbs={[{ label: t("nav.home"), href: "/" }, { label: t("nav.contact") }]}
   gradientPosition="top-right"
-  smTitle={t("contact.smTitle", "get in touch with us")}
+  smTitle={t("contact.smTitle", "Get in Touch with Us")}
   subtitle={t("contact.headerSubtitle")}
   title={t("contact.title")}
 >
-  <a
-    class="inline-flex items-center gap-2 rounded-full border border-white/60 px-6 py-3 text-sm font-semibold text-white/90 transition text-shadow-xs pointer-fine:hover:bg-white/10"
+  <Button
+    variant="secondary"
     href="#contact-form-section"
   >
     <span>{t("contact.form.cta", "Send message")}</span>
-    <ArrowRight class="size-4" />
-  </a>
-  <a
-    class="inline-flex items-center gap-2 rounded-full bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur transition text-shadow-xs pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:bg-white/20"
+    <ChevronRight
+      aria-hidden="true"
+      class="size-4"
+    />
+  </Button>
+  <Button
+    variant="ghost"
     href={WHATSAPP_LINK}
     rel="noopener noreferrer"
     target="_blank"
@@ -65,36 +70,83 @@ const contactMethods = [
       class="size-4"
     />
     <span>WhatsApp</span>
-  </a>
+  </Button>
 </PageHeader>
+
 <div class="text-zinc-900">
+  <!-- 01 // DIRECT CHANNELS -->
   <section
     aria-labelledby="contact-methods-heading"
-    class="relative isolate py-16"
+    class="relative isolate bg-white py-12 sm:py-16 lg:py-24"
   >
-    <h2
-      class="sr-only"
-      id="contact-methods-heading"
-    >
-      {t("contact.methods.title", "Contact Methods")}
-    </h2>
     <div class="mx-auto px-4 max-inline-7xl">
-      <div class="grid gap-6 md:grid-cols-3">
+      <div
+        class="mbe-8 sm:mbe-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-stone-200 pb-6 sm:pb-8"
+        data-animate="fade-up"
+      >
+        <hgroup class="max-w-2xl space-y-2">
+          <h2
+            class="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl text-balance"
+            id="contact-methods-heading"
+          >
+            {t("contact.methods.title", "Direct Communication Channels")}
+          </h2>
+          <p class="border-s-2 border-orange-600 ps-4 py-0.5 text-sm sm:text-base text-stone-600 leading-relaxed max-w-[62ch] text-pretty">
+            {t("contact.smTitle", "Get in Touch with Us")}
+          </p>
+        </hgroup>
+      </div>
+
+      <!-- Mobile Mode: Folder Stack (matches Home page experience) -->
+      <div class="block md:hidden w-full">
+        <ContactFolderStack methods={contactMethods} />
+      </div>
+
+      <!-- Desktop & Tablet Mode: Responsive Multi-Column Grid -->
+      <div class="hidden md:grid md:grid-cols-2 xl:grid-cols-3 gap-6 items-stretch">
         {contactMethods.map((method, index) => (
           <div
-            class="flex size-full"
+            class:list={["flex size-full", { "sm:col-span-2 xl:col-span-1": index === 2 }]}
             data-animate="fade-up"
             style={`transition-delay: ${index * 150}ms`}
           >
             <article
               aria-label={typeof method.title === "string" ? method.title : undefined}
-              class="contact-info-card group rounded-3xl border border-orange-100 bg-white px-6 py-8 shadow-lg shadow-orange-100/70 transition inline-full pointer-fine:hover:-translate-y-1 pointer-fine:hover:shadow-xl"
+              class="contact-info-card group flex size-full flex-col justify-between rounded-2xl border border-stone-200/90 bg-stone-50/80 p-6 sm:p-8 shadow-xs transition-[transform,border-color,box-shadow] duration-200 ease-out pointer-fine:hover:-translate-y-1 pointer-fine:hover:border-stone-300 pointer-fine:hover:shadow-xl motion-reduce:transform-none"
             >
-              <div class="mbe-4 inline-flex size-14 items-center justify-center rounded-full bg-orange-50 text-orange-600 transition group-hover:bg-orange-600 group-hover:text-white">
-                <method.icon class="size-6" />
+              <div>
+                <h3 class="mbe-3 text-xl font-bold tracking-tight text-stone-950 transition-colors duration-200 group-hover:text-orange-600">
+                  {method.title}
+                </h3>
+                <p class="text-sm leading-relaxed text-stone-600">{method.description}</p>
               </div>
-              <h3 class="text-xl font-semibold text-zinc-900">{method.title}</h3>
-              <p class="mbs-3 text-base leading-relaxed text-zinc-700">{method.description}</p>
+
+              <!-- Tactile Action Link -->
+              <div class="mbs-6 border-t border-stone-200/60 pbs-4">
+                <a
+                  class="flex min-h-11 items-center justify-between rounded-full border border-stone-200 bg-white px-6 py-3 font-mono text-xs font-bold text-stone-800 transition-[border-color,background,color,box-shadow] duration-160 ease-out pointer-fine:hover:border-orange/60 pointer-fine:hover:bg-linear-to-br pointer-fine:hover:from-amber-orange pointer-fine:hover:to-orange pointer-fine:hover:text-white pointer-fine:hover:shadow-md pointer-fine:hover:shadow-orange/20 active:scale-[0.98] motion-reduce:transform-none"
+                  href={
+                    method.id === "phone" ? WHATSAPP_LINK
+                    : method.id === "email" ?
+                      "#contact-form-section"
+                    : "#location"
+                  }
+                  target={method.id === "phone" ? "_blank" : undefined}
+                  rel={method.id === "phone" ? "noopener noreferrer" : undefined}
+                >
+                  <span class="uppercase tracking-wider">
+                    {method.id === "phone" ?
+                      "WhatsApp Dispatch"
+                    : method.id === "email" ?
+                      "Send Written Brief"
+                    : "Office Coordinates"}
+                  </span>
+                  <ChevronRight
+                    aria-hidden="true"
+                    class="size-4"
+                  />
+                </a>
+              </div>
             </article>
           </div>
         ))}
@@ -102,87 +154,96 @@ const contactMethods = [
     </div>
   </section>
 
+  <!-- 02 // EXPEDITION INQUIRY & DISPATCH -->
   <section
     aria-labelledby="contact-form-heading"
-    class="bg-neutral-50"
+    class="relative isolate border-t border-stone-200 bg-stone-50 py-12 sm:py-16 lg:py-24"
     id="contact-form-section"
   >
-    <div class="mx-auto px-4 pbs-16 max-inline-7xl">
+    <div class="mx-auto px-4 max-inline-7xl">
       <div
-        class="section-header text-center"
+        class="mbe-8 sm:mbe-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-stone-200 pb-6 sm:pb-8"
         data-animate="fade-up"
       >
-        <p class="inline-flex items-center justify-center rounded-full border-2 border-orange-400 px-6 py-3 text-sm font-semibold tracking-[0.45em] text-orange-700 uppercase">
-          {t("contact.form.badge", "Plan with locals")}
-        </p>
-        <h2
-          class="mbs-6 text-2xl leading-tight font-semibold tracking-widest text-neutral-900 uppercase sm:text-3xl sm:tracking-[0.15em] md:text-4xl md:tracking-[0.2em]"
-          id="contact-form-heading"
-        >
-          {t("contact.lgTitle", "contact us")}
-        </h2>
-        <div
-          aria-hidden="true"
-          class="mx-auto mbs-4 rounded-full bg-orange-500 block-1 inline-20"
-        ></div>
+        <hgroup class="max-w-2xl space-y-2">
+          <h2
+            class="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl text-balance"
+            id="contact-form-heading"
+          >
+            {t("contact.lgTitle", "Contact Us")}
+          </h2>
+          <p class="border-s-2 border-orange-600 ps-4 py-0.5 text-sm sm:text-base text-stone-600 leading-relaxed max-w-[62ch] text-pretty">
+            {t(
+              "contact.form.subtitle",
+              "Share your dates, party size, and travel priorities. Our local Marrakech office prepares a tailored proposal within 24 hours.",
+            )}
+          </p>
+        </hgroup>
       </div>
+
+      <slot />
     </div>
   </section>
 
-  <slot />
-
+  <!-- PHYSICAL ATELIER & COORDINATES -->
   <section
     aria-labelledby="location-heading"
-    class="relative bg-zinc-50 pbe-16"
+    class="relative isolate border-t border-stone-200/90 bg-white py-12 sm:py-16 lg:py-24"
     id="location"
   >
     <div class="mx-auto px-4 max-inline-7xl">
       <div
-        class="mbe-12 p-7 text-center tracking-wide uppercase"
+        class="mbe-8 sm:mbe-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-stone-200 pb-6 sm:pb-8"
         data-animate="fade-up"
       >
-        <p class="inline-flex items-center justify-center rounded-full border-2 border-orange-400 px-6 py-3 text-sm font-semibold tracking-[0.45em] text-orange-700 uppercase">
-          {t("contact.location.smTitle")}
-        </p>
-        <h2
-          class="mbs-6 text-2xl leading-tight font-semibold tracking-widest text-neutral-900 uppercase sm:text-3xl sm:tracking-[0.15em] md:text-4xl md:tracking-[0.2em]"
-          id="location-heading"
-        >
-          {t("contact.location.lgTitle")}
-        </h2>
-        <div
-          aria-hidden="true"
-          class="mx-auto mbs-4 rounded-full bg-orange-500 block-1 inline-20"
-        ></div>
+        <hgroup class="max-w-2xl space-y-2">
+          <h2
+            class="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl text-balance"
+            id="location-heading"
+          >
+            {t("contact.location.lgTitle")}
+          </h2>
+          <p class="border-s-2 border-orange-600 ps-4 py-0.5 text-sm sm:text-base text-stone-600 leading-relaxed max-w-[62ch] text-pretty">
+            {t("contact.location.smTitle")}
+          </p>
+        </hgroup>
       </div>
-      <div class="overflow-hidden rounded-3xl shadow-2xl ring-1 ring-zinc-200">
+
+      <div class="overflow-hidden rounded-2xl border border-slate-900 bg-slate-950 text-white shadow-xl">
         <div
-          class="group relative flex flex-col items-center justify-center bg-zinc-900/95 text-white cursor-pointer transition duration-300 block-75 md:block-100 lg:block-125"
+          class="group relative flex flex-col items-center justify-center bg-slate-950 text-white cursor-pointer transition duration-300 block-75 md:block-100 lg:block-125"
           id="map-placeholder"
         >
-          <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(249,115,22,0.15),transparent_70%)]"></div>
-          <div class="relative z-10 text-center space-y-4 px-6">
-            <div class="mx-auto flex size-16 items-center justify-center rounded-full bg-orange-600/10 text-orange-500 ring-2 ring-orange-500/20 group-hover:scale-110 transition duration-300">
-              <MapPin
-                class="size-8"
+          <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(234,88,12,0.12),transparent_70%)]"></div>
+          <div class="relative z-10 text-center space-y-4 px-6 max-w-lg mx-auto">
+            <div class="mx-auto flex size-14 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-orange-400 font-mono text-xs shadow-xs group-hover:scale-105 transition duration-300">
+              <MapPinned
+                aria-hidden="true"
+                class="size-6"
                 stroke-width={2}
               />
             </div>
-            <h3 class="text-xl font-semibold tracking-wide uppercase">
+            <h3 class="text-xl font-bold tracking-tight text-white uppercase sm:text-2xl">
               {t("contact.map.placeholderTitle", "Show Interactive Map")}
             </h3>
-            <p class="text-sm text-zinc-400 max-w-md mx-auto">
+            <p class="font-mono text-xs sm:text-sm text-stone-300 leading-relaxed">
               {t(
                 "contact.map.placeholderDesc",
                 "Clicking will load the Google Maps widget which may set cookies and load third-party scripts.",
               )}
             </p>
-            <button
-              class="inline-flex items-center gap-2 rounded-full bg-orange-700 px-6 py-2.5 text-sm font-semibold text-white shadow-md hover:bg-orange-600 transition duration-150"
-              type="button"
-            >
-              {t("contact.map.loadBtn", "Load Map")}
-            </button>
+            <div class="pt-2">
+              <button
+                class="inline-flex min-h-11 items-center gap-2 rounded-full border border-orange-500/50 bg-linear-to-br from-amber-orange to-orange px-8 py-3 font-mono text-xs font-bold uppercase tracking-wider text-white shadow-md shadow-orange/20 transition-[filter,box-shadow,transform] duration-160 ease-out pointer-fine:hover:brightness-105 pointer-fine:hover:shadow-lg pointer-fine:hover:shadow-orange/30 active:scale-[0.98] motion-reduce:transform-none cursor-pointer"
+                type="button"
+              >
+                <span>{t("contact.map.loadBtn", "Load Map")}</span>
+                <ChevronRight
+                  aria-hidden="true"
+                  class="size-4"
+                />
+              </button>
+            </div>
           </div>
         </div>
         <div

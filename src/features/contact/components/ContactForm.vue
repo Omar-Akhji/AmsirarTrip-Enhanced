@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onUnmounted, useTemplateRef } from "vue";
+import { ref, onUnmounted, useTemplateRef, provide } from "vue";
 import { actions } from "astro:actions";
 import { hasRecaptchaV2, RECAPTCHA_V2_SITE_KEY } from "@/lib/client-env";
 import type { FormState } from "@/lib/form-types";
@@ -10,7 +10,14 @@ import ContactFormFields from "./ContactFormFields.vue";
 import ContactInfoSidebar from "./ContactInfoSidebar.vue";
 import { CircleAlert } from "lucide-vue-next";
 
-const { t } = useTranslation();
+interface Props {
+  locale?: string;
+}
+
+const { locale } = defineProps<Props>();
+provide("app-locale", locale);
+
+const { t } = useTranslation(locale);
 const recaptchaRef = useTemplateRef<InstanceType<typeof Recaptcha>>("recaptchaRef");
 
 const formKey = ref(0);
@@ -23,8 +30,8 @@ const submitTimeout = ref<ReturnType<typeof setTimeout> | null>(null);
 const DEBOUNCE_MS = 500;
 
 const alertClasses = {
-  success: "bg-green-50 text-green-800 border border-green-100",
-  error: "bg-rose-50 text-rose-700 border border-rose-100",
+  success: "bg-emerald-50 text-emerald-800 border border-emerald-200 font-mono text-xs",
+  error: "bg-rose-50 text-rose-700 border border-rose-200 font-mono text-xs",
 };
 
 const handleVerify = (token: string) => {
@@ -42,12 +49,21 @@ const handleSubmit = async (event: Event) => {
     submitTimeout.value = null;
   }
 
-  const form = event.target as HTMLFormElement;
+  const form = event.currentTarget ?? event.target;
+  if (!(form instanceof HTMLFormElement)) return;
   const formData = new FormData(form);
-  const name = formData.get("name") as string;
-  const email = formData.get("email") as string;
+  const name = formData.get("name");
+  const email = formData.get("email");
 
-  if (!name.trim() || !email.trim() || isSubmitting.value) return;
+  if (
+    typeof name !== "string"
+    || typeof email !== "string"
+    || !name.trim()
+    || !email.trim()
+    || isSubmitting.value
+  ) {
+    return;
+  }
 
   // Debounce: set a flag for 500ms to prevent rapid submissions
   isSubmitting.value = true;
@@ -82,7 +98,6 @@ const handleSubmit = async (event: Event) => {
     } else if (data) {
       state.value = data;
       if (data.success) {
-        // Reset form
         formKey.value += 1;
         captchaToken.value = "";
       } else {
@@ -116,162 +131,147 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <section
-    id="contact-tailwind"
-    aria-labelledby="contact-heading"
-    class="bg-neutral-50 py-12 md:py-16"
-  >
-    <div class="mx-auto px-4 max-inline-6xl sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 gap-8 lg:grid-cols-5">
-        <div
-          class="inline-full lg:col-span-3"
-          data-animate="creative-slide-right"
+  <div class="grid grid-cols-1 items-stretch gap-8 lg:grid-cols-5">
+    <!-- Left: Form Card -->
+    <div
+      class="inline-full lg:col-span-3"
+      data-animate="creative-slide-right"
+    >
+      <div class="rounded-2xl border border-stone-200/90 bg-white p-6 shadow-2xs block-full sm:p-8">
+        <div class="mbe-6 border-b border-stone-100 pbe-5">
+          <span class="font-mono text-xs font-semibold tracking-[0.14em] text-orange-600 uppercase">
+            {{ t("contact.form.badge", "Plan with locals") }}
+          </span>
+          <h3
+            id="contact-heading"
+            class="mbs-1 text-xl font-bold tracking-tight text-stone-900 sm:text-2xl"
+          >
+            {{ t("contact.form.title", "Design Your Custom Morocco Tour & Private Itinerary") }}
+          </h3>
+        </div>
+
+        <form
+          :key="formKey"
+          novalidate
+          class="flex flex-col gap-5"
+          data-form="contact"
+          toolname="submit_custom_tour_request"
+          tooldescription="Submits a custom private Morocco tour and itinerary request for planning"
+          @submit.prevent="handleSubmit"
         >
-          <div class="overflow-hidden rounded-3xl bg-white block-full">
-            <div class="bg-linear-to-r from-orange-500 to-orange-600 px-6 py-8 text-white">
-              <p class="text-xs font-semibold tracking-[0.35em] text-orange-100 uppercase">
-                {{ t("contact.form.badge", "Plan with locals") }}
-              </p>
-              <h2
-                id="contact-heading"
-                class="mbs-2 text-2xl font-semibold md:text-3xl"
+          <output
+            v-if="state?.message"
+            class="block rounded-2xl border px-4 py-3 font-mono text-xs leading-relaxed"
+            :class="[state.success ? alertClasses.success : alertClasses.error]"
+            :role="state.success ? undefined : 'alert'"
+            aria-live="polite"
+            aria-label="Submission status"
+          >
+            {{ state.message }}
+          </output>
+
+          <div
+            v-if="state?.errors && Object.keys(state.errors).length > 0"
+            class="rounded-2xl border border-orange-200/80 bg-orange-50/60 p-4"
+            role="alert"
+          >
+            <p class="mbe-2 font-mono text-xs font-bold tracking-wider text-orange-900 uppercase">
+              {{ t("contact.form.errors.title", "Please complete these fields:") }}
+            </p>
+            <ul class="space-y-1 font-mono text-xs text-orange-800">
+              <li
+                v-for="[field, error] in Object.entries(state.errors)"
+                :key="field"
+                class="flex items-start gap-2"
               >
-                {{ t("contact.form.title", "Design Your Custom Morocco Tour & Private Itinerary") }}
-              </h2>
-              <p class="mbs-3 text-sm text-orange-50/90 md:text-base">
-                {{
-                  t(
-                    "contact.form.subtitle",
-                    "Share a few details and we will craft a bespoke itinerary for you.",
-                  )
-                }}
-              </p>
+                <CircleAlert class="mbs-0.5 size-4 shrink-0 text-orange-600" />
+                <span>{{ error }}</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Honeypot -->
+          <div
+            aria-hidden="true"
+            class="absolute left-[-9999px] h-0 overflow-hidden"
+          >
+            <input
+              type="text"
+              name="website"
+              tabindex="-1"
+              autocomplete="off"
+              aria-label="Leave this field empty"
+              toolparamdescription="A honeypot field that must be left blank"
+            />
+          </div>
+
+          <ContactFormFields :state="state" />
+
+          <div class="flex flex-col gap-4 pbs-2 sm:flex-row sm:items-center sm:justify-between">
+            <div class="flex justify-center sm:justify-start">
+              <div
+                class="w-fit origin-center scale-85 rounded-xl border border-dashed p-2 transition-all sm:scale-100"
+                :class="[state?.errors?.recaptchaToken ? 'border-red-300' : 'border-stone-200']"
+              >
+                <Recaptcha
+                  v-if="hasRecaptchaV2"
+                  ref="recaptchaRef"
+                  :sitekey="RECAPTCHA_V2_SITE_KEY"
+                  @verify="handleVerify"
+                  @expired="handleExpired"
+                />
+                <div
+                  v-else
+                  class="rounded-lg bg-stone-100 p-2 font-mono text-xs text-stone-600"
+                >
+                  reCAPTCHA not configured
+                </div>
+              </div>
             </div>
 
-            <form
-              :key="formKey"
-              novalidate
-              class="space-y-5 p-6 md:p-8"
-              data-form="contact"
-              toolname="submit_custom_tour_request"
-              tooldescription="Submits a custom private Morocco tour and itinerary request for planning"
-              @submit.prevent="handleSubmit"
+            <p
+              v-if="state?.errors?.recaptchaToken"
+              id="recaptchaToken-error"
+              class="mbs-1 font-mono text-xs text-red-600"
             >
-              <output
-                v-if="state?.message"
-                class="block rounded-2xl px-4 py-3 text-sm font-medium"
-                :class="[state.success ? alertClasses.success : alertClasses.error]"
-                :role="state.success ? undefined : 'alert'"
-                aria-live="polite"
-                aria-label="Submission status"
-              >
-                {{ state.message }}
-              </output>
+              {{ state.errors.recaptchaToken }}
+            </p>
 
-              <div
-                v-if="state?.errors && Object.keys(state.errors).length > 0"
-                class="rounded-2xl border border-orange-200 bg-orange-50 px-4 py-3"
-                role="alert"
-              >
-                <p class="mbe-2 text-sm font-semibold text-orange-900">
-                  {{ t("contact.form.errors.title", "Please complete these fields:") }}
-                </p>
-                <ul class="space-y-1 text-xs text-orange-800">
-                  <li
-                    v-for="[field, error] in Object.entries(state.errors)"
-                    :key="field"
-                    class="flex items-start gap-2"
-                  >
-                    <CircleAlert class="mbs-0.5 size-4 shrink-0" />
-                    <span>{{ error }}</span>
-                  </li>
-                </ul>
-              </div>
-
-              <!-- Honeypot -->
-              <div
-                aria-hidden="true"
-                class="absolute left-[-9999px] h-0 overflow-hidden"
-              >
-                <input
-                  type="text"
-                  name="website"
-                  tabindex="-1"
-                  autocomplete="off"
-                  aria-label="Leave this field empty"
-                  toolparamdescription="A honeypot field that must be left blank"
-                />
-              </div>
-
-              <ContactFormFields :state="state" />
-
-              <div class="flex flex-col gap-4 lg:flex-row lg:items-center">
-                <div class="flex justify-center inline-full lg:justify-start">
-                  <div
-                    class="w-fit origin-center scale-85 rounded-2xl border border-dashed p-3 transition-all duration-500 sm:scale-100"
-                    :class="[
-                      state?.errors?.recaptchaToken ? 'border-red-300' : 'border-neutral-200',
-                    ]"
-                  >
-                    <Recaptcha
-                      v-if="hasRecaptchaV2"
-                      ref="recaptchaRef"
-                      :sitekey="RECAPTCHA_V2_SITE_KEY"
-                      @verify="handleVerify"
-                      @expired="handleExpired"
-                    />
-                    <div
-                      v-else
-                      class="rounded-lg bg-amber-50 p-2 text-sm text-amber-600"
-                    >
-                      reCAPTCHA not configured
-                    </div>
-                  </div>
-                </div>
-
-                <p
-                  v-if="state?.errors?.recaptchaToken"
-                  id="recaptchaToken-error"
-                  class="mbs-1 text-xs text-red-600"
-                >
-                  {{ state.errors.recaptchaToken }}
-                </p>
-
-                <button
-                  type="submit"
-                  class="inline-flex items-center justify-center gap-2 rounded-full bg-linear-to-r from-orange-500 to-orange-600 px-6 py-3 text-sm font-semibold tracking-wide text-white uppercase shadow-lg shadow-orange-500/25 transition duration-300 ease-in-out inline-full disabled:opacity-60 md:inline-auto md:min-inline-50 pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:shadow-xl pointer-fine:hover:brightness-110"
-                  :disabled="isSubmitting"
-                  :aria-busy="isSubmitting"
-                >
-                  <Loading
-                    v-if="isSubmitting"
-                    size="sm"
-                  />
-                  <span>
-                    {{
-                      isSubmitting ?
-                        t("contact.form.sending", "Sending…")
-                      : t("contact.form.cta", "Send message")
-                    }}
-                  </span>
-                </button>
-              </div>
-            </form>
+            <button
+              type="submit"
+              class="inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-full bg-linear-to-br from-amber-orange to-orange px-8 py-3 font-mono text-xs font-semibold tracking-wider text-white uppercase shadow-md shadow-orange/20 transition-all duration-200 hover:shadow-lg hover:shadow-orange/30 hover:brightness-105 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
+              :disabled="isSubmitting"
+              :aria-busy="isSubmitting"
+            >
+              <Loading
+                v-if="isSubmitting"
+                size="sm"
+              />
+              <span>
+                {{
+                  isSubmitting ?
+                    t("contact.form.sending", "Sending…")
+                  : t("contact.form.cta", "Send message")
+                }}
+              </span>
+            </button>
           </div>
-        </div>
-
-        <div
-          class="inline-full lg:col-span-2 lg:block-full"
-          data-animate="creative-slide-left"
-          data-delay="150"
-        >
-          <div
-            class="flex flex-col justify-between rounded-3xl bg-slate-950 p-8 text-white block-full"
-          >
-            <ContactInfoSidebar />
-          </div>
-        </div>
+        </form>
       </div>
     </div>
-  </section>
+
+    <!-- Right: Sidebar -->
+    <aside
+      aria-label="Contact Information"
+      class="block-full inline-full lg:col-span-2"
+      data-animate="creative-slide-left"
+      data-delay="150"
+    >
+      <div
+        class="flex flex-col justify-between rounded-2xl border border-slate-900 bg-slate-950 p-6 text-white shadow-xl block-full sm:p-8"
+      >
+        <ContactInfoSidebar />
+      </div>
+    </aside>
+  </div>
 </template>

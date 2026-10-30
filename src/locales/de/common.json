@@ -29,16 +29,16 @@
   "selectLanguage": "Sprache auswählen",
   "home": {
     "meta": {
-      "title": "Amsirar Trip | Reisen, Abenteuer & Camping in Marokko",
-      "description": "Spezialist für Reisen und Touren in Marokko, Wüstenreisen in die Sahara und Ausflüge zu den Königsstädten Marokkos."
+      "title": "Marokko Wüstentouren & Sahara Rundreisen | Amsirar Trip",
+      "description": "Offiziell lizenzierte marokkanische Reiseagentur in Marrakesch. Spezialisiert auf private Sahara-Wüstentouren (Merzouga, Chegaga), Atlas-Treks und Kulturreisen."
     },
     "title": "Willkommen bei Amsirar Trip",
     "heroTitle": "Reisen, Abenteuer & Camping",
     "heroSubtitle": "Spezialist für Reisen und Touren in Marokko, Wüstenreisen in die Sahara und Ausflüge zu den Königsstädten Marokkos.",
-    "heroSubtitleAlt1": "Entdecken Sie Marokkos verborgene Schätze und Wüstenwunder",
+    "heroSubtitleAlt1": "Private Reisen über die Pässe des Hohen Atlas und durch die Wüstendünen",
     "heroSubtitleAlt2": "Ihr Tor zu Sahara-Abenteuern und Erkundungen der Königsstädte",
-    "heroAlt1": "Das Abenteuer wartet jenseits der Dünen",
-    "heroAlt2": "Packen Sie Ihre Koffer — Marokko ruft",
+    "heroAlt1": "Pässe des Hohen Atlas und Erg Chebbi-Dünen",
+    "heroAlt2": "Private 4x4-Reisen mit lokalen Berber-Fahrern",
     "exploreOurTours": "Unsere Touren Entdecken",
     "contactForMore": "Kontaktieren Sie Uns Für Mehr Informationen",
     "stats": {
@@ -52,8 +52,8 @@
   },
   "tours": {
     "meta": {
-      "title": "Unsere Touren",
-      "description": "Entdecken Sie unsere sorgfältig zusammengestellten mehrtägigen Touren durch Marokko. Von der Sahara-Wüste zu den Königsstädten, finden Sie Ihr perfektes Abenteuer."
+      "title": "Marokko Rundreisen & Wüstentouren | Amsirar Trip",
+      "description": "Buchen Sie private Wüstentouren ab Marrakesch und Fès. Kamelritte, Luxus-Wüstencamps in den Dünen von Erg Chebbi und unvergessliche Berber-Gastfreundschaft."
     },
     "title": "Unsere Touren",
     "day": "Tag",
@@ -62,7 +62,9 @@
     "activitiesLabel": "Aktivitäten",
     "arrivalLabel": "Ankunftszeit",
     "featured": "Empfohlen",
-    "category": { "departures": "Abfahrten" },
+    "category": {
+      "departures": "Abfahrten"
+    },
     "cities": {
       "marrakech": "Marrakesch",
       "casablanca": "Casablanca",
@@ -90,32 +92,32 @@
       "title": "Flughafentransfers in Marokko",
       "mainBrand": "Amsirar Trip",
       "subBrand": "Touristischer Transport",
-      "intro": "Reisen Sie bequem und stilvoll mit Amsirar Transport Touristique, Ihrem zuverlässigen Partner für Flughafentransfers in ganz Marokko. Wir bieten zuverlässige, pünktliche und private Transfers von den wichtigsten Flughäfen, darunter Marrakesch, Casablanca, Agadir und Fès, direkt zu Ihrem Hotel oder Ziel.",
-      "details": "Unsere modernen, klimatisierten Fahrzeuge und professionellen Fahrer garantieren eine sichere und stressfreie Reise, egal ob Sie geschäftlich oder privat unterwegs sind. Vergessen Sie Taxistress oder Warteschlangen — wir erwarten Sie pünktlich und bringen Sie dorthin, wo Sie hin möchten.",
+      "intro": "Wir bieten lizenzierte private Flughafentransfers zwischen den wichtigsten marokkanischen Flughäfen (Marrakesch RAK, Casablanca CMN, Agadir AGA, Fès FEZ) und Ihrer Unterkunft.",
+      "details": "Ihr Fahrer erwartet Sie in der Ankunftshalle mit einem Namensschild, hilft mit dem Gepäck und fährt Sie im klimatisierten Fahrzeug direkt zu Ihrem Riad oder Hotel zu vorab vereinbarten Festpreisen.",
       "items": [
         "Komfortable, saubere Fahrzeuge",
         "Professionelle mehrsprachige Fahrer",
         "24/7 Verfügbarkeit",
         "Feste, transparente Preise"
       ],
-      "conclusion": "Mit Amsirar Transport Touristique beginnt Ihr Marokko-Abenteuer bereits bei der Landung.",
+      "conclusion": "Private Flughafentransfers und Überlandfahrten in Marokko.",
       "ctaTitle": "Bereit, Marokko zu erkunden?",
       "ctaDescription": "Buchen Sie Ihre mehrtägige Tour mit Vertrauen",
       "ctaPoint01": "Expertenführer und komfortabler Transport",
       "ctaPoint02": "Flexible Reiserouten auf Sie zugeschnitten",
-      "ctaPoint03": "24/7-Unterstützung während Ihrer Reise"
+      "ctaPoint03": "Betreuung rund um die Uhr während Ihrer Marokkoreise"
     },
     "headerSubtitle": "Unsere Touren und Pakete",
     "stats": {
       "routes": "Signatur-Routen",
-      "routesDesc": "Mehrtägige Routen, sorgfältig kuratiert durch Königsstädte, Wüstendünen und Atlas-Pässe.",
+      "routesDesc": "Mehrtägige Routen durch Königsstädte, Wüstendünen und Atlaspässe.",
       "comfort": "Komfort-Flotte",
       "comfortDesc": "Moderne 4x4s und Minibusse mit erfahrenen Fahrer-Guides auf jeder Route.",
       "support": "24/7 Unterstützung",
       "supportDesc": "Unterstützung unterwegs für Hotels, Ernährungswünsche und Planungsänderungen."
     },
     "tour": {
-      "smTitle": "lesen Sie diese Touren für Informationen",
+      "smTitle": "Private Mehrtagestouren",
       "lgTitle": "aktuelle Touren"
     },
     "readMore": "Mehr lesen",
@@ -171,31 +173,31 @@
       "tourTypePlaceholder": "Tourtyp"
     },
     "tour1": {
-      "description": "Sahara-Zauber: Reite Kamele durch goldene Dünen, campe unter einem Sternenhimmel und entdecke die bezaubernde Schönheit der marokkanischen Wüste!"
+      "description": "Kamelritt durch die Dünen des Erg Chebbi, Übernachtung im Wüstenbivak und geführte Fahrt durch das Ziz-Tal und den Hohen Atlas."
     },
     "tour2": {
-      "description": "Marokko-Odyssee: Entdecke die vibrierende Energie von Casablanca, die mystischen Blautöne von Chefchaouen, das antike Labyrinth von Fès und die goldenen Dünen der Sahara in einem epischen 6-tägigen Kulturerlebnis!"
+      "description": "Sechstägige Reiseroute von Casablanca über Chefchaouen und die Medina von Fès bis zu den Dünen der Sahara mit privatem Fahrer."
     },
     "tour3": {
-      "description": "Marrakesch-Wunder: Schlendere durch lebhafte Souks, erkunde atemberaubende Paläste und tauche ein in die lebendige Kultur der roten Stadt Marokkos!"
+      "description": "Geführte Erkundung der Medina von Marrakesch, historischer Paläste, Handwerkersouks und Gärten."
     },
     "tour4": {
-      "description": "Nordschätze: Von Casablancas Moderne zu Fès' alten Wundern, erkunde Nordmarokko in einer 5-tägigen Kulturreise!"
+      "description": "Fünftägige Nordroute mit Stationen in Casablanca, den Wahrzeichen von Rabat, Chefchaouen und Fès."
     },
     "tour5": {
-      "description": "Marokko-Wunder: Durchquere Sahara-Dünen, Kaiserstädte, Atlas-Gipfel und Küsteneleganz in einem 10-tägigen Epos!"
+      "description": "Zehntägige Überlandreise über den Hohen Atlas, Erg Chebbi, Königsstädte und die Atlantikküste."
     },
     "tour6": {
-      "description": "Wüsten-Thrill: Erobern Sie Atlas-Berge, wandern Sie durch Sahara-Dünen und campen Sie unter Sternen in einem 4-tägigen Merzouga-Abenteuer!"
+      "description": "Viertägige Rundreise über den Tizi n'Tichka-Pass, die Dades-Schlucht, Todra-Schlucht und Erg Chebbi."
     },
     "tour7": {
-      "description": "Küsten-Odyssee: Reisen Sie von Agadirs Stränden durch Anti-Atlas-Täler zu Saharas goldenen Dünen in diesem 4-Tage-Abenteuer!"
+      "description": "Viertägige Route ab Agadir durch die Täler des Anti-Atlas und Palmenoasen bis zu den Dünen von Merzouga."
     },
     "tour8": {
-      "description": "Wildnis-Flucht: Wandern Sie zu abgelegenen Chegaga-Dünen, reiten Sie auf Kamelen in unberührte Wüste und schlafen Sie unter endlosen Sternen auf dieser 3-Tage-Expedition!"
+      "description": "Dreitägige Offroad-Route zu den abgelegenen Dünen des Erg Chegaga über Zagora und M'Hamid El Ghizlane."
     },
     "tour9": {
-      "description": "Kulturreise: Von Tangers Küste durch Chefchaouens blaue Gassen und Fès' antike Medina nach Marrakesch in 7 unvergesslichen Tagen!"
+      "description": "Siebentägige Reise von Tanger durch das Rif-Gebirge und Fès über den Hohen Atlas nach Marrakesch."
     },
     "accommodation": "Unterkunft",
     "meals": "Mahlzeiten",
@@ -207,13 +209,19 @@
     "end": "Ende"
   },
   "excursion": {
+    "404": {
+      "title": "Seite Nicht Gefunden",
+      "description": "Die gesuchte Seite existiert nicht",
+      "message": "Die gesuchte Seite wurde möglicherweise entfernt, umbenannt oder ist vorübergehend nicht verfügbar.",
+      "cta": "Zurück zur Startseite"
+    },
     "meta": {
-      "title": "Unsere Ausflüge",
-      "description": "Entdecken Sie unsere Tagesausflüge von Marrakesch aus. Erkunden Sie die Atlas-Berge, die Sahara-Wüste und Küstenjuwelen mit erfahrenen lokalen Führern."
+      "title": "Tagesausflüge ab Marrakesch & Wüsten-Exkursionen | Amsirar Trip",
+      "description": "Die besten Tagesausflüge ab Marrakesch: Agafay-Wüste mit Sonnenuntergang & Dinner, Ourika-Tal, Ouzoud-Wasserfälle und Essaouira im privaten Fahrzeug."
     },
     "title": "Unsere Ausflüge",
     "featured": "Empfohlen",
-    "sectionSubtitle": "Lesen Sie diese Ausflüge für weitere Informationen",
+    "sectionSubtitle": "Tagestouren ab Marrakesch in die Atlas-Täler, an die Atlantikküste und in die Wüstenplateaus.",
     "detailsTitle": "Ausflugsdetails",
     "detailsSubtitle": "Entdecken Sie Marokkos verborgene Schätze",
     "exploreThisExcursion": "Diesen Ausflug entdecken",
@@ -233,27 +241,29 @@
       "support": "Unterstützung unterwegs",
       "supportDesc": "Flexible Abfahrten und Concierge-Planung."
     },
-    "card": { "category": "Ganztägig" },
+    "card": {
+      "category": "Ganztägig"
+    },
     "exploreLink": "Details ansehen",
     "sidebar": {
       "alt": "Amsirar Flughafentransfer-Fahrzeug",
       "title": "Flughafentransfers in Marokko",
       "mainBrand": "Amsirar Trip",
       "subBrand": "Touristischer Transport",
-      "intro": "Reisen Sie bequem und stilvoll mit Amsirar Transport Touristique, Ihrem zuverlässigen Partner für Flughafentransfers in ganz Marokko.",
-      "details": "Wir bieten zuverlässige, pünktliche und private Transfers von den wichtigsten Flughäfen, darunter Marrakesch, Casablanca, Agadir und Fès, direkt zu Ihrem Hotel oder Ziel.",
+      "intro": "Wir bieten lizenzierte private Flughafentransfers zwischen den wichtigsten marokkanischen Flughäfen (Marrakesch RAK, Casablanca CMN, Agadir AGA, Fès FEZ) und Ihrer Unterkunft.",
+      "details": "Ihr Fahrer erwartet Sie in der Ankunftshalle mit einem Namensschild, hilft mit dem Gepäck und fährt Sie im klimatisierten Fahrzeug direkt zu Ihrem Riad oder Hotel zu vorab vereinbarten Festpreisen.",
       "items": [
         "Komfortable, saubere Fahrzeuge",
         "Professionelle mehrsprachige Fahrer",
         "24/7 Verfügbarkeit",
         "Feste, transparente Preise"
       ],
-      "conclusion": "Mit Amsirar Transport Touristique beginnt Ihr Marokko-Abenteuer bereits bei der Landung.",
+      "conclusion": "Private Flughafentransfers und Überlandfahrten in Marokko.",
       "ctaTitle": "Bereit zum Anpassen?",
       "ctaDescription": "Teilen Sie Ihre Vorlieben mit und wir erstellen einen Reiseplan, der zu Ihrem Tempo, Stil und Reisedaten passt.",
       "ctaPoint01": "Privater Fahrer und modernes Fahrzeug",
       "ctaPoint02": "Flexible Abfahrten ab Marrakesch",
-      "ctaPoint03": "Lokale Führer und kuratierte Erlebnisse"
+      "ctaPoint03": "Lokale Fahrer und flexible Tagesetappen"
     },
     "list": {
       "ouzoud": {
@@ -300,12 +310,6 @@
       }
     },
     "headerSubtitle": "Unsere Ausflüge und Pakete",
-    "404": {
-      "title": "Seite Nicht Gefunden",
-      "description": "Die gesuchte Seite existiert nicht",
-      "message": "Die gesuchte Seite wurde möglicherweise entfernt, umbenannt oder ist vorübergehend nicht verfügbar.",
-      "cta": "Zurück zur Startseite"
-    },
     "blog": {
       "smTitle": "lesen Sie diese Ausflüge für Informationen",
       "lgTitle": "Ausflüge von Marrakech"
@@ -314,56 +318,56 @@
   },
   "about": {
     "meta": {
-      "title": "Über uns",
-      "description": "Erfahren Sie mehr über Amsirar Trip, unsere Geschichte und unsere Leidenschaft, die Schönheit Marokkos mit Reisenden aus aller Welt zu teilen."
+      "title": "Über Amsirar Trip | Lokale Reiseagentur & Wüsten-Experten Marokko",
+      "description": "Lernen Sie Amsirar Trip kennen: Ihr lizenzierter marokkanischer Reiseveranstalter in Marrakesch mit 20+ Jahren Erfahrung in authentischen Wüstenexpeditionen."
     },
     "title": "Über uns",
-    "headerSubtitle": "Entdecken Sie Amsirar Trip – echte Abenteuer und Reisen",
-    "smTitle": "was Sie über uns wissen sollten",
-    "ourStory": "unsere Geschichte",
+    "headerSubtitle": "Private Wüstenreisen und Hoher Atlas-Transport ab Marrakesch",
+    "smTitle": "Über unsere Agentur",
+    "ourStory": "Unsere Geschichte",
     "experienceTitle": "20 Jahre Erfahrung",
-    "whyTrustTitle": "Warum Reisende unseren 20 Jahren Amsirar‑Erfahrung vertrauen:",
+    "whyTrustTitle": "Wie wir private Marokko-Reisen organisieren:",
     "whyTrust": {
-      "point1": "Tiefes Ortswissen und kulturelle Verbundenheit",
-      "point2": "Sichere, umweltfreundliche und gemeinschaftsorientierte Reisen",
-      "point3": "Individuelle Routen für Wandern, Camping oder kulturelle Erlebnisse",
-      "point4": "Bewährter Ruf, aufgebaut auf Qualität und Authentizität"
+      "point1": "Direkte Absprache mit lizenzierten lokalen Berber-Fahrern",
+      "point2": "Moderne, klimatisierte 4x4-Fahrzeuge und Minibusse für Gebirgsstrecken",
+      "point3": "Flexible Routenplanung angepasst an Ihren Zeitplan",
+      "point4": "Klare Festpreise ohne ungeplante Verkaufsstopps"
     },
-    "experienceText1": "Seit über zwei Jahrzehnten führen wir Reisende durch die atemberaubenden Landschaften von Amsirar und teilen die verborgene Schönheit, Kultur und zeitlosen Traditionen der Region. Mit 20 Jahren Erfahrung sind unsere Reisen mehr als nur Trips geworden — sie sind immersive Geschichten, die durch die Hohen Atlas-Berge gewoben sind.",
-    "experienceText2": "Von den ruhigen Tälern und alten Berberdörfern bis zu den gewundenen Bergpfaden und sternenübersäten Wüstenhimmeln haben wir jedes Detail perfektioniert, um unseren Gästen authentische, sichere und unvergessliche Erlebnisse zu bieten.",
-    "experienceText3": "Unsere erfahrenen lokalen Führer kennen jeden Pfad, jede Geschichte und jedes Lächeln auf dem Weg. Ob Sie Abenteuer, kulturelle Entdeckung oder friedliche Zurückgezogenheit suchen, unsere 20 Jahre Expertise garantieren eine personalisierte Reise, geprägt von Leidenschaft, Vertrauen und tiefer Achtung vor Amsirars natürlichem und kulturellem Erbe.",
-    "conclusionText": "Erleben Sie Amsirar nicht nur als Besucher, sondern als Freund, geführt von 20 Jahren Hingabe, Entdeckung und Liebe zu diesem außergewöhnlichen Land.",
-    "imageCaption": "Die Schönheit von Amsirar erkunden",
+    "experienceText1": "Seit 2004 begleitet unser Team in Marrakesch Reisende durch den Süden Marokkos, von den Pässen des Hohen Atlas bis zu den Sanddünen von Erg Chebbi und Erg Chegaga. Wir organisieren Fahrzeuge, Gebirgsstrecken und Riad-Aufenthalte direkt mit einheimischen Fahrern.",
+    "experienceText2": "Unsere Touren verbinden Gebirgsfahrten über den Tizi n'Tichka-Pass mit ruhigen Aufenthalten in Taldörfern und Übernachtungen in bewährten Wüstencamps.",
+    "experienceText3": "Unsere Fahrer kennen die regionalen Straßenverhältnisse, verlässliche Rastplätze und gute Aussichtspunkte. Wir richten jede Fahrt nach Ihren Reisedaten aus.",
+    "conclusionText": "Ob Sie eine 3-tägige Wüstentour planen oder eine 10-tägige Rundreise durch die Königsstädte: Wir stimmen jede Etappe auf Ihre Reisedaten ab.",
+    "imageCaption": "Berber-Fahrer im Hohen Atlas",
     "facts": {
-      "smTitle": "einige Fakten über unsere Agentur",
-      "lgTitle": "Fakten",
-      "photos": "aufgenommene Fotos",
-      "beaches": "besuchte Strände",
-      "mountains": "bestiegene Berge",
-      "cruises": "organisierte Kreuzfahrten"
+      "smTitle": "Agentur-Überblick",
+      "lgTitle": "Wichtige Kennzahlen",
+      "photos": "Begleitete Reisende",
+      "beaches": "Wüstencamps",
+      "mountains": "Gequerte Atlas-Pässe",
+      "cruises": "Geführte Privattouren"
     }
   },
   "contact": {
     "meta": {
-      "title": "Kontakt",
-      "description": "Kontaktieren Sie Amsirar Trip für Marokko-Touren, Wüstenabenteuer und Reiseanfragen. Unser Team ist bereit, Ihnen bei der Planung Ihrer perfekten Marokko-Reise zu helfen."
+      "title": "Kontakt | Amsirar Trip Marokko Rundreisen & Wüstentouren",
+      "description": "Kontaktieren Sie unsere lokalen Marokko-Reiseberater in Marrakesch. Individuelle Reiseplanung, unverbindliche Angebote und WhatsApp-Support rund um die Uhr."
     },
     "title": "Kontakt",
-    "headerSubtitle": "Bereit für unseren besten Service!",
-    "smTitle": "kontaktieren Sie uns",
-    "lgTitle": "kontakt",
+    "headerSubtitle": "Planen Sie Ihre private Wüstenreise, Transfers oder maßgeschneiderte Reiseroute mit unserem Team in Marrakesch.",
+    "smTitle": "Kontaktieren Sie Uns",
+    "lgTitle": "Kontakt",
     "card": {
-      "phoneTitle": "Kontaktieren Sie uns gerne — wir sind für Sie da",
-      "phoneSeo": "Haben Sie eine schnelle Frage oder möchten Sie jetzt buchen? Unser lokales Team beantwortet Anrufe und Nachrichten umgehend — melden Sie sich und wir helfen Ihnen, die perfekte Marokko-Reise zu planen.",
-      "emailTitle": "Senden Sie eine Nachricht — wir antworten mit einem maßgeschneiderten Plan",
-      "emailSeo": "Schreiben Sie lieber? Senden Sie uns Ihre Pläne, Termine und Prioritäten — wir erstellen einen personalisierten Reiseplan und antworten schnell mit Optionen und klaren nächsten Schritten.",
-      "visitTitle": "Besuchen Sie unser Büro in Marrakesch — freundliche, lokale Unterstützung",
-      "visitSeo": "Kommen Sie vorbei für ein persönliches Gespräch, Hilfe bei Buchungen oder um mehr über unsere Wüstenausflüge und privaten Touren zu erfahren — unser Team freut sich darauf, Sie willkommen zu heißen."
+      "phoneTitle": "Rufen Sie uns an oder schreiben Sie per WhatsApp",
+      "phoneSeo": "Unser Team beantwortet Buchungsanfragen, Routenfragen und Verfügbarkeiten täglich von 09:00 bis 21:00 Uhr GMT+1.",
+      "emailTitle": "Senden Sie uns Reisedaten und Routenwünsche",
+      "emailSeo": "Teilen Sie uns Ihre Reisedaten, Reiseziele und Gruppengröße mit. Wir erstellen einen detaillierten Reiseplan mit transparentem Angebot.",
+      "visitTitle": "Besuchen Sie unser Büro in Marrakesch",
+      "visitSeo": "Besuchen Sie uns in Marrakesch zur persönlichen Reiseplanung, für Flughafentransfers oder zur Abstimmung von Wüstenrouten."
     },
     "form": {
       "badge": "Planen Sie mit Einheimischen",
       "title": "Entwerfen Sie Ihre Individuelle Marokko-Reise & Privaten Reiseplan",
-      "subtitle": "Teilen Sie uns einige Details mit und wir erstellen einen maßgeschneiderten Reiseplan für Sie.",
+      "subtitle": "Teilen Sie uns Ihre Reisedaten mit und wir erstellen einen maßgeschneiderten Routenvorschlag für Sie.",
       "nameLabel": "Ihr Name",
       "namePlaceholder": "Ihr Name",
       "emailLabel": "Ihre E‑Mail",
@@ -395,7 +399,11 @@
       "infoBadge": "Details benötigt?",
       "infoTitle": "Planen Sie handgefertigte Erlebnisse",
       "infoCopy": "Unser Team in Marrakesch beantwortet jede Nachricht persönlich und kann bei individuellen Reiseplänen, Wüstencamps oder Last-Minute-Transfers helfen.",
-      "info": { "address": "Besuchen", "phone": "Anrufen", "email": "E-Mail" },
+      "info": {
+        "address": "Besuchen",
+        "phone": "Anrufen",
+        "email": "E-Mail"
+      },
       "infoFooter": "Täglich von 09:00 bis 21:00 Uhr GMT+1 verfügbar"
     },
     "info": {
@@ -404,7 +412,10 @@
       "address": "Adresse",
       "message": "Nachricht"
     },
-    "location": { "smTitle": "finden Sie uns", "lgTitle": "unser Standort" }
+    "location": {
+      "smTitle": "Finden Sie Uns",
+      "lgTitle": "Unser Standort"
+    }
   },
   "excursion1": {
     "title": "Tagesausflug zu den Ouzoud-Wasserfällen",
@@ -491,7 +502,7 @@
     "bookingTitle": "Reservieren Sie Ihren Sonnenaufgangs-Ballonflug"
   },
   "tour1": {
-    "title": "Merzouga Wüstenabenteuer",
+    "title": "3 Tage Wüstentour ab Marrakesch nach Merzouga",
     "day1": {
       "title": "Marrakesch ➜ Ait Ben Haddou ➜ Ouarzazate ➜ Dadestal",
       "text": [
@@ -510,7 +521,7 @@
         "Nach dem Frühstück Fahrt zu den spektakulären Todraschluchten, ein Paradies für Kletterer und Fotografen.",
         "Weiterfahrt durch Tinejdad und Erfoud, bekannt für Fossilienwerkstätten und Dattelmärkte.",
         "Ankunft in Merzouga, wo Ihr Kamelritt beginnt.",
-        "Ritt in die Erg Chebbi-Dünen und magischer Sonnenuntergang.",
+        "Kamelritt in die Dünen von Erg Chebbi zum Sonnenuntergang.",
         "Ankunft im Wüstencamp, Berbermusik am Lagerfeuer, Übernachtung unter den Sternen oder in einem Luxuszelt."
       ],
       "accommodation": "Wüstencamp in Merzouga",
@@ -520,7 +531,7 @@
     "day3": {
       "title": "Merzouga ➜ Draa-Tal ➜ Ouarzazate ➜ Marrakesch",
       "text": [
-        "Früher Aufstieg, um den magischen Sonnenaufgang über den Erg Chebbi-Dünen zu erleben — ein wahrhaft unvergesslicher Moment.",
+        "Frühes Aufstehen vor der Dämmerung, um den Sonnenaufgang über den Dünen von Erg Chebbi zu beobachten.",
         "Rückkehr mit dem Kamel zum Dorf Merzouga für Frühstück und eine erfrischende Dusche.",
         "Beginn der Rückreise durch das malerische Draa-Tal, Marokkos längste Flussoase mit Palmenhainen und alten Kasbahs.",
         "Halt in Ouarzazate zum Mittagessen, mit optionalem Besuch der Atlas Film Studios oder der Taourirt-Kasbah.",
@@ -528,15 +539,15 @@
         "Ankunft in Marrakesch am Abend, wo Ihr Wüstenabenteuer endet."
       ],
       "meals": "Frühstück inbegriffen",
-      "arrival": "Um ca. 19:00–20:00 Uhr"
+      "arrival": "Gegen 19:00 bis 20:00 Uhr"
     },
-    "overview": "Begeben Sie sich auf ein atemberaubendes 3‑tägiges Abenteuer von Marrakesch ins Herz der Sahara‑Wüste. Erleben Sie die Magie des Hohen Atlas, die Kasbahs von Ouarzazate und die goldenen Dünen von Merzouga. Reiten Sie auf einem Kamel in den Sonnenuntergang, verbringen Sie die Nacht unter einem sternenklaren Himmel und entdecken Sie die authentische Schönheit Marokkos.",
+    "overview": "3-tägige Privattour von Marrakesch über den Hohen Atlas und den Tizi n'Tichka-Pass zu den Dünen von Erg Chebbi in Merzouga. Beinhaltet Stopps bei Ait Ben Haddou, in der Todraschlucht, einen Kamelritt und eine Übernachtung im Wüstencamp.",
     "includes": "Transport in modernen klimatisierten 4x4 oder Minibus\nEnglisch/Französisch sprechender Fahrer‑Reiseleiter\n1 Nacht im Dadestal (Hotel oder Riad)\n1 Nacht im Wüstencamp (Standard oder Luxus)\nKamelritt in den Merzouga‑Dünen\nFrühstücke & Abendessen wie erwähnt\nSandboarding (optional)",
     "excludes": "Mittagessen & Getränke\nEintrittsgebühren (falls zutreffend)\nTrinkgeld & persönliche Ausgaben",
     "goodToKnow": "Abfahrt: 7:00 Uhr von Marrakesch\nRückkehr: Abend des Tages 3\nGepäck: Sie können Ihren kleinen Koffer oder Rucksack auf dem Kamel mitnehmen\nBringen Sie Sonnenbrille, Hut, Sonnencreme und warme Kleidung für die Wüstennacht mit"
   },
   "tour2": {
-    "overview": "Diese 6-tägige Reise führt Sie durch Marokkos ikonischste Städte und atemberaubende Landschaften. Von der kosmopolitischen Energie Casablancas über den blauen Charme Chefchaouens, die antike Medina von Fès bis zu den goldenen Dünen der Sahara — erleben Sie Marokkos Kultur, Farben und Traditionen in einem unvergesslichen Abenteuer.",
+    "overview": "6-tägige Privatreise von Casablanca über Rabat, Chefchaouen, die Medina von Fès und die Wüste Erg Chebbi mit Abschluss in Marrakesch.",
     "day1": {
       "title": "Casablanca ➜ Rabat ➜ Chefchaouen",
       "text": [
@@ -554,7 +565,7 @@
       "text": [
         "Morgen zur freien Verfügung in Chefchaouen für Fotos und Spaziergänge in der Medina.",
         "Abfahrt zu den römischen Ruinen von Volubilis (UNESCO-Weltkulturerbe).",
-        "Besuch von Meknès, einer der Königsstädte: Bab-Mansour-Tor und El-Hedim-Platz.",
+        "Besuch von Meknès mit Stopp am Bab-Mansour-Tor und auf dem El-Hedim-Platz.",
         "Weiterfahrt nach Fès, dem kulturellen und spirituellen Herzen Marokkos."
       ],
       "accommodation": "Riad in der Medina von Fès",
@@ -576,7 +587,7 @@
       "text": [
         "Frühe Abfahrt durch den Mittleren Atlas, vorbei an Ifrane (die \"Schweiz Marokkos\") und dem Zedernwald von Azrou.",
         "Mittagessen in Midelt, dann Weiterfahrt durch das malerische Ziz-Tal.",
-        "Ankunft in Merzouga — Tor zur Sahara-Wüste.",
+        "Ankunft in Merzouga am Rand der Erg Chebbi-Dünen.",
         "Kamelritt über die Erg Chebbi-Dünen, Sonnenuntergang und Abendessen unter den Sternen."
       ],
       "accommodation": "Wüstencamp in Merzouga (Standard oder Luxus)",
@@ -586,7 +597,7 @@
     "day5": {
       "title": "Merzouga ➜ Todra-Schlucht ➜ Dades-Tal",
       "text": [
-        "Früh aufstehen, um den Sonnenaufgang über den Dünen zu bewundern.",
+        "Frühes Aufstehen, um den Sonnenaufgang über den Dünen von Erg Chebbi zu sehen.",
         "Nach dem Frühstück verlassen Sie die Wüste in Richtung der spektakulären Todra-Schlucht.",
         "Spaziergang entlang der Schlucht und Mittagessen in einem lokalen Café.",
         "Weiterfahrt durch das Dades-Tal, bekannt als das \"Tal der tausend Kasbahs\"."
@@ -610,7 +621,7 @@
     "title": "Küsten- & Städte-Entdecker"
   },
   "tour3": {
-    "overview": "Erleben Sie ein unvergessliches 3-tägiges Abenteuer von Fès nach Marrakesch durch die faszinierenden Landschaften Südmarokkos. Reisen Sie über das Mittlere Atlasgebirge, reiten Sie auf Kamelen in die goldenen Erg Chebbi-Dünen der Sahara, verbringen Sie eine magische Nacht unter den Sternen und erkunden Sie uralte Kasbahs und dramatische Täler auf dem Weg nach Marrakesch.\nDiese Tour kombiniert Abenteuer, Kultur und landschaftliche Schönheit – das perfekte marokkanische Erlebnis.",
+    "overview": "3-tägige Reiseroute von Fès nach Marrakesch über die Zedernwälder des Mittleren Atlas, das Ziz-Tal und die Erg Chebbi-Dünen, Rückfahrt über die Todraschlucht und Ait Ben Haddou.",
     "day1": {
       "title": "Fès ➜ Ifrane ➜ Azrou ➜ Midelt ➜ Errachidia ➜ Merzouga-Wüste",
       "text": [
@@ -620,7 +631,7 @@
         "Weiterfahrt nach Süden zur Marktstadt Midelt zum Mittagessen, mit Blick auf den Jebel Ayachi (3.737 m).",
         "Fahrt durch Errachidia und das spektakuläre Ziz-Tal, eine atemberaubende palmengesäumte Flussschlucht mit uralten Kasbahs.",
         "Ankunft in Merzouga am späten Nachmittag, wo Ihr Kamelritt in die Erg Chebbi-Dünen beginnt.",
-        "Ritt durch die goldenen Dünen zu Ihrem Wüstencamp, magischer Sonnenuntergang und Übernachtung unter einem Sternenhimmel mit traditioneller Berbermusik am Lagerfeuer."
+        "Ritt durch die Dünen zum Wüstencamp, Sonnenuntergang und Übernachtung in privaten Zelten mit Abendessen am Lagerfeuer."
       ],
       "accommodation": "Wüstencamp in Merzouga (Standard oder Luxus)",
       "meals": "Abendessen & Frühstück inbegriffen",
@@ -629,10 +640,10 @@
     "day2": {
       "title": "Merzouga ➜ Erfoud ➜ Todra-Schlucht ➜ Dades-Tal",
       "text": [
-        "Früh aufstehen, um den spektakulären Sonnenaufgang über den Sahara-Dünen zu erleben – ein unvergesslicher Moment.",
+        "Frühes Aufstehen, um den Sonnenaufgang über den Wüstendünen zu beobachten.",
         "Rückkehr mit dem Kamel nach Merzouga für Frühstück und eine erfrischende Dusche.",
-        "Fahrt nach Erfoud, berühmt für seine Fossilienwerkstätten und Dattelpalmen – optionaler Besuch einer Marmor-Fossilienfabrik.",
-        "Weiterfahrt nach Tinghir und Erkundung der atemberaubenden Todra-Schlucht, Marokkos berühmtestem Canyon mit 300 Meter hohen Klippen.",
+        "Fahrt nach Erfoud, bekannt für Fossilienwerkstätten und Dattelpalmen, mit optionaler Werkstattbesichtigung.",
+        "Weiterfahrt nach Tinghir und Spaziergang durch die Todraschlucht mit 300 Meter hohen Felswänden.",
         "Spaziergang entlang des Canyonbodens zwischen den aufragenden Felswänden.",
         "Weiterfahrt durch das atemberaubende Dades-Tal, bekannt als das \"Tal der tausend Kasbahs\".",
         "Bewundern Sie die berühmten \"Affenfinger\"-Felsformationen, geformt durch Jahrhunderte der Erosion.",
@@ -652,7 +663,7 @@
         "Ankunft in Marrakesch am Abend, Transfer zu Ihrer Unterkunft."
       ],
       "meals": "Frühstück inbegriffen",
-      "arrival": "Gegen 19:00–20:00 Uhr"
+      "arrival": "Gegen 19:00 bis 20:00 Uhr"
     },
     "includes": "Abholung in Fès & Rücktransfer in Marrakesch\nPrivater Transport in klimatisiertem 4x4 oder Minibus\nEnglisch/Französisch sprechender Fahrer-Reiseleiter\n1 Nacht im Dades-Tal (Hotel/Riad)\n1 Nacht im Wüstencamp (Standard oder Luxus)\nKamelritt in den Merzouga-Dünen\nFrühstück & Abendessen wie erwähnt\nSandboarding (optional)",
     "excludes": "Mittagessen & Getränke\nEintrittsgebühren (falls zutreffend)\nTrinkgeld & persönliche Ausgaben",
@@ -660,7 +671,7 @@
     "title": "Karawanen- & Kasbah-Erlebnis"
   },
   "tour4": {
-    "overview": "Entdecken Sie die Höhepunkte Marokkos auf dieser 5-tägigen Reise von Casablanca nach Fès. Erkunden Sie die modernen und historischen Highlights von Casablanca, die politische Hauptstadt Rabat, die malerische blaue Stadt Chefchaouen, die antiken römischen Ruinen von Volubilis und die Kaiserstadt Meknès, bevor Sie Fès, die spirituelle und kulturelle Hauptstadt Marokkos, erreichen.\nDiese Tour bietet eine perfekte Balance aus Geschichte, Kultur und atemberaubender Landschaft.",
+    "overview": "5-tägige Reiseroute von Casablanca nach Fès über Rabat, Chefchaouen, die römischen Ruinen von Volubilis und Meknès.",
     "title": "Kaiserstädte & Küste",
     "day1": {
       "title": "Ankunft in Casablanca",
@@ -679,7 +690,7 @@
         "Nach dem Frühstück Abfahrt nach Rabat, der eleganten Hauptstadt Marokkos (~1 Stunde Fahrt).",
         "Besuch des Hassan-Turms, des Mausoleums von Mohamed V. und der Kasbah des Oudayas mit Blick auf den Fluss Bou Regreg.",
         "Weiterfahrt durch das malerische Rif-Gebirge in das atemberaubende Chefchaouen (~4 Stunden Fahrt).",
-        "Genießen Sie einen friedlichen Spaziergang durch die blau gestrichenen Straßen und lebhaften Märkte."
+        "Ankunft in Chefchaouen für einen Abendspaziergang durch die blaue Medina."
       ],
       "accommodation": "Riad/Hotel in Chefchaouen",
       "meals": "Frühstück inbegriffen"
@@ -721,19 +732,19 @@
   },
   "tour5": {
     "title": "Große Marokko-Rundreise",
-    "overview": "Diese 10-tägige Tour von Marrakesch nach Casablanca ermöglicht es Ihnen, das Beste Marokkos zu erleben – von den Dünen der Sahara-Wüste zu den Königsstädten, den Bergen des Atlas und der Atlantikküste.\nReiten Sie auf Kamelen in den Sonnenuntergang, erkunden Sie alte Kasbahs, wandern Sie durch blaue Gassen und entdecken Sie Marokkos reiche Geschichte und Gastfreundschaft.",
+    "overview": "10-tägige Rundreise von Marrakesch nach Casablanca über den Hohen Atlas, Erg Chebbi, Fès, Chefchaouen und Rabat.",
     "day1": {
       "title": "Ankunft in Marrakesch",
       "text": [
         "Abholung vom Flughafen Marrakesch und Transfer zu Ihrem Riad/Hotel.",
-        "Freizeit, um den Platz Jemaa el-Fna zu erkunden, das pulsierende Herz von Marrakesch.",
+        "Freie Zeit auf dem Platz Jemaa el-Fna und in den umliegenden Souks.",
         "Optionales Abendessen in einem traditionellen Restaurant mit marokkanischer Musik."
       ],
       "accommodation": "Riad/Hotel in Marrakesch",
       "meals": "Keine oder optionales Abendessen"
     },
     "day2": {
-      "title": "Marrakesch – Geführte Stadttour",
+      "title": "Marrakesch: geführte Stadttour",
       "text": [
         "Geführte Tour zu den historischen und kulturellen Stätten von Marrakesch:",
         "Koutoubia-Moschee, Bahia-Palast und Saadier-Gräber.",
@@ -748,7 +759,7 @@
       "text": [
         "Abfahrt von Marrakesch über das Hohe Atlasgebirge über den Tizi n’Tichka-Pass (2.260 m).",
         "Besuch der Kasbah Ait Ben Haddou, UNESCO-Weltkulturerbe.",
-        "Weiterfahrt nach Ouarzazate, bekannt als das \"Hollywood Afrikas\".",
+        "Fahrt nach Ouarzazate mit optionalem Besuch der Atlas-Filmstudios.",
         "Fahrt durch die Skoura-Oase und das Tal der Rosen zum Dades-Tal."
       ],
       "accommodation": "Hotel/Riad im Dades-Tal",
@@ -769,7 +780,7 @@
     "day5": {
       "title": "Merzouga ➜ Ziz-Tal ➜ Midelt ➜ Fès",
       "text": [
-        "Frühes Aufstehen für einen magischen Sonnenaufgang über den goldenen Dünen.",
+        "Frühes Aufstehen vor Tagesanbruch für den Sonnenaufgang über den Dünen von Erg Chebbi.",
         "Nach dem Frühstück verlassen Sie die Wüste über das historische Rissani und das palmengesäumte Ziz-Tal.",
         "Überquerung des Mittleren Atlas, vorbei an Midelt (Mittagspause), dem Zedernwald von Azrou mit Berberaffen und Ifrane 'der Schweiz Marokkos'.",
         "Ankunft in Fès am Abend (~7 Stunden Fahrt)."
@@ -792,13 +803,13 @@
       "text": [
         "Abfahrt nach Meknès, eine der vier Königsstädte. Besuch des Bab-Mansour-Tors und des El-Hedim-Platzes.",
         "Erkunden Sie die römischen Ruinen von Volubilis, eine UNESCO-Stätte.",
-        "Weiterfahrt nach Norden durch das Rif-Gebirge zur blauen Stadt Chefchaouen."
+        "Fahrt nach Norden durch das Rif-Gebirge nach Chefchaouen (ca. 4 Stunden)."
       ],
       "accommodation": "Riad/Hotel in Chefchaouen",
       "meals": "Frühstück inbegriffen"
     },
     "day8": {
-      "title": "Chefchaouen – Freier Tag",
+      "title": "Chefchaouen: freier Tag",
       "text": [
         "Freier Tag, um die zauberhaften blauen Straßen von Chefchaouen zu genießen.",
         "Optionale Wanderung zur Spanischen Moschee für Panoramablick, Besuch lokaler Kunsthandwerksläden oder Entspannung im Café."
@@ -817,11 +828,11 @@
       "meals": "Frühstück inbegriffen"
     },
     "day10": {
-      "title": "Casablanca – Abreise",
+      "title": "Casablanca: Abreise",
       "text": [
         "Frühstück in Ihrem Hotel mit optionalem Besuch der atemberaubenden Hassan-II.-Moschee.",
         "Transfer zum Flughafen Casablanca Mohammed V für Ihren Heimflug.",
-        "Ende der Tour mit unvergesslichen Erinnerungen an Marokkos vielfältige Landschaften und reiche Kultur!"
+        "Transfer zum Flughafen Casablanca für den Rückflug."
       ],
       "meals": "Frühstück inbegriffen"
     },
@@ -831,14 +842,14 @@
   },
   "tour6": {
     "title": "Atlas & Wüste Erlebnis",
-    "overview": "Dieses 4-tägige Abenteuer von Marrakesch in die Wüste Merzouga lässt Sie die atemberaubenden Landschaften Marokkos erleben – vom Hohen Atlasgebirge und alten Kasbahs bis zu den Dünen der Sahara.\nGenießen Sie Kamelreiten, Wüstencamping, Berbermusik unter den Sternen und charmante Täler entlang des Weges.",
+    "overview": "4-tägige Route von Marrakesch zu den Erg Chebbi-Dünen mit mehr Zeit im Dadès-Tal, der Todraschlucht und Ouarzazate.",
     "day1": {
       "title": "Marrakesch ➜ Ait Ben Haddou ➜ Ouarzazate ➜ Dades-Tal",
       "text": [
         "Frühe Abfahrt von Marrakesch.",
         "Überquerung des Hohen Atlas über den Tizi n’Tichka-Pass (2.260m) mit Panoramastopps.",
         "Besuch der Kasbah Ait Ben Haddou, UNESCO-Weltkulturerbe und Drehort vieler Filme (Gladiator, Game of Thrones).",
-        "Weiterfahrt nach Ouarzazate, das 'Hollywood Afrikas' — optionaler Besuch der Atlas-Filmstudios.",
+        "Weiterfahrt nach Ouarzazate mit optionalem Besuch der Atlas-Filmstudios.",
         "Fahrt durch das wunderschöne Kalaat M'gouna (Tal der Rosen), die Skoura-Oase und die berühmten 'Affenfinger'-Felsformationen im Dades-Tal."
       ],
       "accommodation": "Hotel/Riad im Dades-Tal",
@@ -860,7 +871,7 @@
     "day3": {
       "title": "Merzouga ➜ Alnif ➜ Draa-Tal ➜ Ouarzazate",
       "text": [
-        "Frühes Aufstehen, um den Sonnenaufgang über den Dünen zu erleben – ein atemberaubender Moment.",
+        "Frühes Aufstehen für den Sonnenaufgang über den Dünen.",
         "Kamelritt oder Fahrt zurück ins Dorf zum Frühstück und Duschen.",
         "Abfahrt durch Alnif und Tazzarine, entlang des malerischen Draa-Tals, eines der längsten Flusstäler Marokkos.",
         "Weiterfahrt Richtung Ouarzazate.",
@@ -877,7 +888,7 @@
         "Ankunft in Marrakesch am späten Nachmittag (~4,5 Stunden Fahrt)."
       ],
       "meals": "Frühstück inbegriffen",
-      "arrival": "Gegen 17:00–18:00 Uhr"
+      "arrival": "Gegen 17:00 bis 18:00 Uhr"
     },
     "includes": "Abholung und Rücktransfer in Marrakesch\nPrivater Transport in klimatisiertem 4x4 oder Minibus\nEnglisch/Französisch sprechender Fahrer-Reiseleiter\n2 Nächte in traditionellen Riads/Hotels\n1 Nacht im Wüstencamp (Standard oder Luxus)\nKamelritt in den Merzouga-Dünen\nFrühstücke & Abendessen (wie erwähnt)\nSandboarding (optional)",
     "excludes": "Mittagessen & Getränke\nEintrittsgebühren (falls zutreffend)\nTrinkgeld & persönliche Ausgaben",
@@ -885,7 +896,7 @@
   },
   "tour7": {
     "title": "Küsten- & Wüsten-Odyssee",
-    "overview": "Entdecken Sie die vielfältigen Landschaften Marokkos auf diesem 4-Tage-Abenteuer von Agadir nach Marrakesch. Fahren Sie über die Gebirge des Anti-Atlas, die Täler und Kasbahs des Dadès und die Sanddünen der Sahara in Merzouga. Reiten Sie auf Kamelen, erleben Sie Wüstensuntergang und -sonnenaufgang und erleben Sie authentische Berber-Gastfreundschaft.",
+    "overview": "4-tägige Rundreise von Agadir über Taroudant, den Antiatlas, die Todraschlucht und die Dünen von Merzouga nach Marrakesch.",
     "description": "4-Tage-Tour von Agadir nach Marrakesch über die Merzouga-Wüste",
     "day1": {
       "title": "Agadir ➜ Taroudant ➜ Ouarzazate ➜ Dadestal",
@@ -902,7 +913,7 @@
     "day2": {
       "title": "Dadestal ➜ Todraschlucht ➜ Merzouga-Wüste",
       "text": [
-        "Nach dem Frühstück besuchen Sie die atemberaubende Todraschlucht mit 300m hohen Klippen — ideal zum Wandern und Fotografieren.",
+        "Nach dem Frühstück Besuch der Todraschlucht mit ihren 300 Meter hohen Kalksteinwänden.",
         "Fahren Sie weiter nach Merzouga und passieren Sie Tinejdad und Erfoud, berühmt für Fossilien und Datteln.",
         "Ankunft in Merzouga und Beginn einer Kamelsafari in den Erg-Chebbi-Dünen.",
         "Schauen Sie sich den Sonnenuntergang über der Wüste an und genießen Sie ein traditionelles Berber-Abendessen am Lagerfeuer.",
@@ -929,7 +940,7 @@
       "text": [
         "Abfahrt von Ouarzazate nach dem Frühstück.",
         "Überqueren Sie die Atlas-Gebirge über den Tizi n'Tichka-Pass (2.260m) mit panoramischen Fotostopps.",
-        "Genießen Sie spektakuläre Ausblicke auf die schneebedeckte Atlas-Kette und die üppigen umliegenden Täler.",
+        "Panoramablick auf die Gipfel des Hohen Atlas und die umliegenden Täler.",
         "Ankunft in Marrakesch am späten Nachmittag (~4,5 Stunden Fahrt), Ende der Tour an Ihrem Hotel oder Flughafen."
       ],
       "meals": "Frühstück inbegriffen",
@@ -937,11 +948,11 @@
     },
     "includes": "Abholung und Abgabe in Agadir/Marrakesch\nPrivater Transport in klimatisiertem 4x4 oder Minibus\nEnglisch/Französisch sprechender Fahrer‑Reiseleiter\n1 Nacht Wüstencamp in Merzouga\n2 Nächte Hotels/Riads (Dadestal & Ouarzazate)\nKamelritt in den Merzouga-Dünen\nFrühstücke und Abendessen wie erwähnt\nSandboarden (optional)",
     "excludes": "Mittagessen & Getränke\nEintrittsgebühren\nTrinkgeld & persönliche Ausgaben",
-    "goodToKnow": "Abfahrt: 07:00–08:00 Uhr von Agadir\nDauer: 4 Tage / 3 Nächte\nEntfernung: ~900 km insgesamt\nMitbringen: Sonnenbrille, Hut, Sonnencreme, warme Kleidung für Wüstennächte, Kamera\nOptional: Sandboarden, zusätzliche Nacht im Wüstencamp, Fototour\nAnpassung: Verfügbar für verschiedene Gruppengrößen und Vorlieben"
+    "goodToKnow": "Abfahrt: 07:00 bis 08:00 Uhr von Agadir\nDauer: 4 Tage / 3 Nächte\nEntfernung: ~900 km insgesamt\nMitbringen: Sonnenbrille, Hut, Sonnencreme, warme Kleidung für Wüstennächte, Kamera\nOptional: Sandboarden, zusätzliche Nacht im Wüstencamp, Fototour\nAnpassung: Verfügbar für verschiedene Gruppengrößen und Vorlieben"
   },
   "tour8": {
     "title": "Chegaga Wildnis-Expedition",
-    "overview": "Fliehen Sie in die abgelegene Sahara bei dieser 3-Tage-Reise von Marrakesch zu den majestätischen Chegaga-Dünen — Marokkos größte und ursprünglichste Wüstendünen, unberührt vom Massentourismus. Überqueren Sie das spektakuläre Hohe Atlasgebirge, erkunden Sie alte Kasbahs, reiten Sie auf Kamelen in den goldenen Sonnenuntergang und verbringen Sie eine magische Nacht unter einem Sternenmeer in einem authentischen Wüstencamp.",
+    "overview": "3-tägige 4x4-Route von Marrakesch zu den abgelegenen Erg Chegaga-Dünen über Zagora, M'Hamid und den Iriqui-See.",
     "description": "3-Tage-Tour von Marrakesch zur Chegaga-Wüste",
     "day1": {
       "title": "Marrakesch ➜ Kasbah Ait Ben Haddou ➜ Ouarzazate ➜ Zagora",
@@ -949,7 +960,7 @@
         "Frühe Abreise von Marrakesch am Morgen.",
         "Überqueren Sie die Hohen Atlas-Gebirge über den Tizi n'Tichka-Pass (2.260m).",
         "Besuchen Sie die Kasbah Ait Ben Haddou, eine UNESCO-Welterbestätte und berühmter Drehort.",
-        "Fahren Sie weiter nach Ouarzazate, dem \"Hollywood Afrikas\", und dann nach Zagora über das Draa-Tal mit seinen üppigen Palmenhainen und traditionellen Dörfern.",
+        "Weiterfahrt nach Ouarzazate und Fahrt nach Zagora entlang des Draa-Tals, Marokkos längster Palmenoase (ca. 7 Stunden Gesamtfahrzeit).",
         "Abendessen und Übernachtung in einem traditionellen Riad oder Hotel in Zagora."
       ],
       "accommodation": "Hotel/Riad in Zagora",
@@ -959,7 +970,7 @@
       "title": "Zagora ➜ M'Hamid ➜ Chegaga-Wüste",
       "text": [
         "Frühes Frühstück, dann fahren Sie nach Süden durch die Wüstenebenen nach M'Hamid, dem letzten Dorf vor den Dünen.",
-        "Steigen Sie auf Kamele für einen unvergesslichen Ritt in die Chegaga-Wüste — Marokkos größte Dünen mit bis zu 300m Höhe, und beobachten Sie einen spektakulären Sonnenuntergang über endlosen goldenen Sandwellen.",
+        "Kamelritt in die Dünen von Erg Chegaga zum Sonnenuntergang vor dem Abendessen im Camp.",
         "Genießen Sie ein traditionelles Berber-Abendessen um das Lagerfeuer, Sternenhimmel und Übernachtung im Wüstencamp.",
         "Magisches Erlebnis, unter einem sternenklaren Himmel im Herzen der Sahara zu schlafen."
       ],
@@ -980,14 +991,14 @@
     },
     "includes": "Abholung und Abgabe in Marrakesch\nPrivater Transport in klimatisiertem 4x4 oder Minibus\nEnglisch/Französisch sprechender Fahrer‑Reiseleiter\n1 Nacht Wüstencamp in Chegaga\n1 Nacht Hotel in Zagora\nKamelritt in den Chegaga-Dünen\nFrühstücke und Abendessen wie erwähnt",
     "excludes": "Mittagessen & Getränke\nEintrittsgebühren\nTrinkgeld & persönliche Ausgaben",
-    "goodToKnow": "Abfahrt: 07:00–08:00 Uhr von Marrakesch\nDauer: 3 Tage / 2 Nächte\nFahrstrecke: Tag 1 ~350 km (7 Std.), Tag 2 ~100 km (3 Std. + Kamel), Tag 3 ~450 km (8 Std.)\nMitbringen: Warme Kleidung (WüstenNächte können kalt sein), Sonnenbrille, Hut, Sonnencreme, Kamera\nOptional: Sandboarden, zusätzliche Nächte im Wüstencamp, Fotosessions\nHinweis: Chegaga ist abgelegener und weniger überlaufen als Merzouga"
+    "goodToKnow": "Abfahrt: 07:00 bis 08:00 Uhr von Marrakesch\nDauer: 3 Tage / 2 Nächte\nFahrstrecke: Tag 1 ~350 km (7 Std.), Tag 2 ~100 km (3 Std. + Kamel), Tag 3 ~450 km (8 Std.)\nMitbringen: Warme Kleidung (WüstenNächte können kalt sein), Sonnenbrille, Hut, Sonnencreme, Kamera\nOptional: Sandboarden, zusätzliche Nächte im Wüstencamp, Fotosessions\nHinweis: Chegaga ist abgelegener und weniger überlaufen als Merzouga"
   },
   "tour9": {
     "title": "Nördlicher Kulturpfad",
-    "overview": "Diese 7-Tage-Tour führt Sie durch die Höhepunkte Nordmarokkos — Tanger, Chefchaouen, Fès, römische Ruinen, den Mittleren Atlas und endet in der lebendigen Stadt Marrakesch. Eine perfekte Mischung aus Kultur, Geschichte, Natur und authentischen marokkanischen Erfahrungen.",
+    "overview": "7-tägige Route von Tanger nach Marrakesch über Chefchaouen, die Medina von Fès, Volubilis und den Mittleren Atlas.",
     "description": "7-Tage-Tour Nordmarokko von Tanger zu Marrakech",
     "day1": {
-      "title": "Ankunft in Tanger – Höhepunkte der Stadt",
+      "title": "Ankunft in Tanger: Höhepunkte der Stadt",
       "text": [
         "Abholung vom Flughafen/Hafen Tanger (Tanger Med oder Stadthafen).",
         "Besuchen Sie Kap Spartel, wo die Mittelmeerküste auf den Atlantik trifft.",
@@ -1023,10 +1034,10 @@
       "meals": "Frühstück inbegriffen"
     },
     "day4": {
-      "title": "Ganztägige Erkundung von Fès – Kaiserliche, spirituelle und kulturelle Hauptstadt",
+      "title": "Fès: geführte Medina-Tour",
       "text": [
         "Geführte Tour mit zertifiziertem lokalen Reiseleiter: Fès el-Bali (ältester Teil der Stadt).",
-        "Besuchen Sie die Al-Qarawiyyin-Universität — gegründet 859 n. Chr., anerkannt als die älteste kontinuierlich betriebene Universität der Welt.",
+        "Besuch der Al-Qarawiyyin-Universität, gegründet im Jahr 859 und eine der ältesten Universitäten weltweit.",
         "Erkunden Sie die Gerberei von Chouara.",
         "Besuchen Sie die Madrasas Bou Inania und Attarine.",
         "Entdecken Sie den Nejjarine-Platz und sein Museum.",
@@ -1060,7 +1071,7 @@
       "meals": "Frühstück inbegriffen"
     },
     "day7": {
-      "title": "Marrakech – Abfahrt",
+      "title": "Marrakesch: Abreise",
       "text": [
         "Freizeit je nach Flugplan.",
         "Transfer zum Flughafen Marrakech Menara."
@@ -1072,51 +1083,57 @@
     "goodToKnow": "Diese Tour ist privat, Sie können also überall unterwegs anhalten.\nRiads in alten Medinas können kurze Gehstrecken erfordern.\nBequeme Wanderschuhe werden empfohlen.\nChefchaouen und Fès haben viele steil an- und absteigende Gassen.\nDas Wetter im Norden kann kühl sein, besonders im Winter.\nSie können die Tour anpassen: Tage hinzufügen, Hotels aufwerten, Wüstenerweiterung hinzufügen.\nVegetarische/vegane Mahlzeiten auf Anfrage verfügbar.\nGepäck ist während Besuche immer sicher im Auto."
   },
   "featured": {
-    "smTitle": "lernen Sie einige Orte vor Ihrer Reise kennen",
+    "smTitle": "Erfahren Sie Mehr Vor Ihrer Reise",
     "lgTitle": "Touristenstädte",
     "cards": {
       "marrakech": {
         "title": "Marrakech",
-        "alt": "Stadtansicht von Marrakech mit traditioneller Architektur"
+        "alt": "Stadtansicht von Marrakech mit traditioneller Architektur",
+        "region": "Tor zum Hohen Atlas"
       },
       "casablanca": {
         "title": "Casablanca",
-        "alt": "Moderne Stadtansicht von Casablanca mit Hassan-II-Moschee"
+        "alt": "Moderne Stadtansicht von Casablanca mit Hassan-II-Moschee",
+        "region": "Atlantikküste"
       },
       "fez": {
         "title": "Fès",
-        "alt": "Alte Medina von Fès mit traditioneller marokkanischer Architektur"
+        "alt": "Alte Medina von Fès mit traditioneller marokkanischer Architektur",
+        "region": "Kaiserliche Medina"
       },
       "dadesValley": {
         "title": "Dadès-Tal",
-        "alt": "Malerische Landschaft des Dadès-Tals mit roten Felsenschluchten"
+        "alt": "Malerische Landschaft des Dadès-Tals mit roten Felsenschluchten",
+        "region": "Canyons & Kasbahs"
       },
       "chefchaouen": {
         "title": "Chefchaouen",
-        "alt": "Blaue Stadtstraßen von Chefchaouen in den Bergen"
+        "alt": "Blaue Stadtstraßen von Chefchaouen in den Bergen",
+        "region": "Rif-Gebirge"
       },
       "rabat": {
         "title": "Rabat",
-        "alt": "Hauptstadt Rabat mit modernen und historischen Gebäuden"
+        "alt": "Hauptstadt Rabat mit modernen und historischen Gebäuden",
+        "region": "Atlantische Hauptstadt"
       }
     },
     "marrakech": {
-      "description": "Die Rote Stadt ist das kulturelle Juwel Marokkos, voller Leben, Farben und Geschichte. Erkunden Sie Jemaa El-Fna, die lebendigen Souks und die atemberaubenden Gärten und Paläste. Eine perfekte Mischung aus Tradition und moderner Energie."
+      "description": "Ockerfarbene Wehrmauern um den Bahia-Palast, Handwerkergassen der Rahba Kedima und die abendliche Stimmung am Jemaa el-Fna."
     },
     "casablanca": {
-      "description": "Das moderne und kosmopolitische Zentrum Marokkos, berühmt für die atemberaubende Hassan-II-Moschee am Meer. Genießen Sie die Strandpromenade Corniche, stilvolle Cafés und Art-Déco-Gebäude."
+      "description": "Atlantikbrandung am Fuße des Minaretts der Hassan-II.-Moschee, gesäumt von Art-déco-Boulevards und der Corniche."
     },
     "fez": {
-      "description": "Das spirituelle und kulturelle Herz Marokkos. Die alte Medina, Gerbereien und Al-Quaraouiyine-Universität machen sie zu einem lebendigen Museum des marokkanischen Erbes."
+      "description": "Die weltgrößte autofreie mittelalterliche Medina mit den Gerbereien von Chouara, Höfen des 9. Jahrhunderts und alten Madrasas."
     },
     "dadesValley": {
-      "description": "Ein dramatisches Tal mit roten Felsenschluchten, alten Kasbahs und malerischen Bergstraßen. Ideal zum Wandern, Fotografieren und Entdecken berberischer Dörfer."
+      "description": "Vom Fluss Dadès geformte Felsenschluchten und Serpentinen, vorbei an befestigten Lehm-Kasbahs und den Kämmen des Hohen Atlas."
     },
     "chefchaouen": {
-      "description": "Die Blaue Stadt, eingebettet in die Rif-Berge. Berühmt für die blau gestrichenen Straßen, entspannte Atmosphäre und atemberaubende Bergblicke — perfekt zum Entspannen und Fotografieren."
+      "description": "Kobalt- und indigoblaue Kalkgassen an den Hängen des Rif-Gebirges, gekrönt von Panoramapfaden oberhalb der Spanischen Moschee."
     },
     "rabat": {
-      "description": "Die Hauptstadt Marokkos, die modernes Leben mit Geschichte verbindet. Besuchen Sie den Hassan-Turm, die Kasbah der Udaias und genießen Sie die friedliche Atmosphäre der Atlantikküste."
+      "description": "Das Bouregreg-Mündungstal neben den Säulen des Hassan-Turms aus dem 12. Jahrhundert und den andalusischen Gassen der Kasbah des Oudayas."
     },
     "from": {
       "marrakesh": "Ab Marrakech",
@@ -1141,7 +1158,7 @@
       },
       "price": {
         "title": "Passender Preis",
-        "text": "Wir bieten wettbewerbsfähige Preise für alle Touren – hoher Wert für ein unvergessliches Erlebnis.",
+        "text": "Klare Festpreise für alle Touren inklusive privatem Transport, Unterkünften und Guide ohne versteckte Zusatzkosten.",
         "alt": "Symbol für besten Preis"
       }
     }
@@ -1154,19 +1171,19 @@
         "name": "Kevin Wilson",
         "country": "USA",
         "alt": "Kevin Wilson Bewertung",
-        "quote": "Ich bin schon mit mehreren Agenturen gereist, aber Amsirar Trip sticht durch seine Liebe zum Detail und authentischen Erlebnisse hervor. Sie bringen Sie nicht nur zu Touristenorten — sie sorgen dafür, dass Sie die Kultur, das Essen und die Menschen erleben. Unser lokaler Guide war fantastisch und ließ uns uns wie Familie fühlen. Alles lief reibungslos, vom Flughafen-Transfer bis zu unserem letzten Tag. Sehr empfehlenswert für jeden, der eine persönliche Note in seinen Reiseplänen möchte."
+        "quote": "Unser Fahrer Hassan erwartete uns am Flughafen Marrakesch und begleitete unsere Gruppe über den Hohen Atlas bis nach Erg Chebbi. Er kannte die Strecke über den Tizi n'Tichka-Pass genau und zeigte uns ruhige Orte abseits der üblichen Touristenstopps. Riads und das Wüstencamp waren pünktlich vorbereitet."
       },
       "ben": {
         "name": "Ben Smith",
         "country": "UK",
         "alt": "Ben Smith Bewertung",
-        "quote": "Die Buchung bei Amsirar Trip war die beste Entscheidung, die ich dieses Jahr getroffen habe. Die Kommunikation war schnell, klar und freundlich von Anfang bis Ende. Der Reiseplan war gut ausgewogen — Abenteuer, Entspannung und Erkundung in einem. Die Guides waren kompetent und immer bereit zu helfen. Was wirklich herausstach, war der Aufwand, den sie betrieben haben, um sicherzustellen, dass sich jeder während der Reise wohl und sicher fühlte. Ich plane bereits meine nächste Reise mit ihnen!"
+        "quote": "Die Buchung bei Amsirar Trip war unkompliziert und verlässlich. Die Kommunikation war von Anfang bis Ende zügig und klar. Der Reiseplan war zwischen Wüstenrouten und Bergpässen gut ausgewogen, und die Reiseleiter waren während der gesamten Fahrt aufmerksam."
       },
       "sara": {
         "name": "Sara Garcia",
         "country": "Spanien",
         "alt": "Sara Garcia Bewertung",
-        "quote": "Ein Perfekt Organisiertes Abenteuer!\nMeine Reise mit Amsirar Trip war absolut makellos. Vom Moment der Buchung an kümmerte sich das Team um alles mit Sorgfalt — Hotelreservierungen, lokaler Transport und geführte Touren. Was mich am meisten beeindruckt hat, war ihre Flexibilität, als ich meinen Reiseplan anpassen wollte. Jeder Ort fühlte sich gut durchdacht und perfekt getimt an. Ich musste mir um nichts Sorgen machen. Es war der stressfreiste Urlaub, den ich je hatte!"
+        "quote": "Unsere Privattour mit Amsirar Trip wurde mit großer Sorgfalt durchgeführt, von den Unterkünften bis zum Transport durch den Atlas. Das Team war besonders entgegenkommend, als wir das Reisetempo anpassen wollten. Jeder Reiseabschnitt war gut organisiert und ließ uns genügend Zeit für Erkundungen."
       }
     }
   },
@@ -1181,11 +1198,11 @@
     "newsletterDescription": "Abonnieren Sie exklusive Angebote und Reisetipps",
     "newsletterCaptchaError": "Bitte füllen Sie die Captcha-Verifizierung aus.",
     "newsletterCloseAria": "Newsletter-Dialog schließen",
-    "newsletterSuccess": "Erfolgreich zum Newsletter angemeldet!",
+    "newsletterSuccess": "Anmeldung bestätigt. Sie erhalten unsere Reiseinformationen.",
     "newsletterFailure": "Anmeldung fehlgeschlagen. Bitte versuchen Sie es erneut.",
     "newsletterNetwork": "Netzwerkfehler. Bitte überprüfen Sie Ihre Verbindung.",
     "copyright": "Alle Rechte vorbehalten.",
-    "description": "Bei Amsirar Trip sind wir leidenschaftlich daran interessiert, die vielfältige und lebendige Kultur Marokkos zu präsentieren.\nUnsere sorgfältig zusammengestellten Touren bieten jedem Reisenden etwas, von den belebten Märkten Marrakeschs bis zu den ruhigen Landschaften der Sahara‑Wüste.",
+    "description": "Amsirar Trip ist eine lizenzierte Reiseagentur in Marrakesch (Lizenz Nr. 24/TT/RAK). Wir organisieren private Sahara-Expeditionen, Bergtouren im Atlas und individuelle Marokkoreisen.",
     "newsletterAria": "Newsletter-Anmeldeformular",
     "newsletterInputAria": "E-Mail-Adresse",
     "newsletterButtonAria": "Für Newsletter anmelden",
@@ -1200,14 +1217,23 @@
   "button": "Schaltfläche",
   "locale": "Gebietsschema",
   "script": "Skript",
-  "calendar": { "chooseYear": "Jahr wählen" },
+  "calendar": {
+    "chooseYear": "Jahr wählen",
+    "prevMonth": "Vorheriger Monat",
+    "nextMonth": "Nächster Monat",
+    "currentDate": "Aktuelles Datum",
+    "selectedDate": "Ausgewähltes Datum",
+    "today": "Heute",
+    "cancel": "Abbrechen",
+    "apply": "Anwenden"
+  },
   "video": {
     "loading": "Video wird geladen...",
     "unsupported": "Ihr Browser unterstützt das Video-Tag nicht.",
     "fallback": {
-      "title": "Erleben Sie Marokko wie nie zuvor",
-      "subtitle": "Entdecken Sie die Schönheit Marokkos durch unsere immersiven Touren und Ausflüge.",
-      "cta": "Buchen Sie Ihr Abenteuer heute!"
+      "title": "Private Expeditionen durch Marokko",
+      "subtitle": "Erkunden Sie die Sahara, Hochatlas-Pässe und Königsstädte mit erfahrenen lokalen Fahrern.",
+      "cta": "Reiserouten entdecken"
     }
   },
   "booking": {
@@ -1254,7 +1280,9 @@
         "accommodation": "Wüstencamp in Merzouga",
         "meals": "Frühstück & Abendessen inbegriffen"
       },
-      "day6": { "meals": "Frühstück inbegriffen" }
+      "day6": {
+        "meals": "Frühstück inbegriffen"
+      }
     },
     "tour3": {
       "day1": {
@@ -1268,7 +1296,7 @@
       },
       "day3": {
         "meals": "Frühstück inbegriffen",
-        "arrival": "Um ca. 19:00–20:00 Uhr"
+        "arrival": "Gegen 19:00 bis 20:00 Uhr"
       }
     },
     "tour4": {
@@ -1288,15 +1316,21 @@
         "accommodation": "Riad/Hotel in Fès",
         "meals": "Frühstück inbegriffen"
       },
-      "day5": { "meals": "Frühstück inbegriffen" }
+      "day5": {
+        "meals": "Frühstück inbegriffen"
+      }
     },
     "tour5": {
-      "day1": { "accommodation": "Riad/Hotel in Marrakech" },
+      "day1": {
+        "accommodation": "Riad/Hotel in Marrakech"
+      },
       "day2": {
         "accommodation": "Riad/Hotel in Marrakech",
         "meals": "Frühstück inbegriffen"
       },
-      "day3": { "accommodation": "Hotel/Riad im Dades-Tal" },
+      "day3": {
+        "accommodation": "Hotel/Riad im Dades-Tal"
+      },
       "day4": {
         "accommodation": "Wüstencamp (Standard oder Luxus)",
         "meals": "Frühstück und Abendessen inbegriffen"
@@ -1321,7 +1355,9 @@
         "accommodation": "Hotel in Casablanca",
         "meals": "Frühstück inbegriffen"
       },
-      "day10": { "meals": "Frühstück inbegriffen" }
+      "day10": {
+        "meals": "Frühstück inbegriffen"
+      }
     },
     "tour6": {
       "day1": {
@@ -1339,7 +1375,7 @@
       },
       "day4": {
         "meals": "Frühstück inbegriffen",
-        "arrival": "Um ca. 17:00–18:00 Uhr"
+        "arrival": "Gegen 17:00 bis 18:00 Uhr"
       }
     },
     "sending": "Wird gesendet..."
@@ -1441,7 +1477,7 @@
   },
   "blog": {
     "title": "Marokko Reiseführer & Blog",
-    "description": "Entdecken Sie Reisetipps, Reiserouten und Expertenempfehlungen für ein unvergessliches Marokko-Abenteuer.",
+    "description": "Praktische Reisetipps, Reiserouten und Empfehlungen für Rundreisen und Tagesausflüge in Marokko.",
     "backToBlog": "Zurück zum Blog",
     "meta": {
       "title": "Marokko Reiseblog & Guides | Amsirar Trip",
@@ -1451,28 +1487,30 @@
     "sahara_guide_excerpt": "Planen Sie eine Reise in die Sahara? Erfahren Sie, was Sie einpacken sollten, wie Sie zwischen Merzouga und Zagora wählen und wie ein authentisches Wüstencamp-Erlebnis wirklich aussieht.",
     "sahara_guide_content": "<p>Eine Reise in die Sahara ist der Höhepunkt eines jeden Marokko-Abenteuers. Egal, ob Sie eine romantische Nacht unter den Sternen in einem Luxuscamp oder eine aufregende Quad-Fahrt über die Dünen suchen, die Sahara hat für jeden etwas zu bieten.</p><h2>Auswahl Ihres Wüstenerlebnisses</h2><p>Die beiden beliebtesten Wüstenziele in Marokko sind Merzouga (Erg Chebbi) und Zagora (Erg Chigaga). Merzouga rühmt sich der ikonischen, hoch aufragenden goldenen Sanddünen, die sich die meisten Menschen vorstellen, wenn sie an die Sahara denken. Zagora bietet ein felsigeres, flacheres Wüstenerlebnis, liegt aber näher an Marrakesch, was es ideal für kürzere Reisen macht.</p><h2>Was man einpacken sollte</h2><ul><li><strong>Leichte, atmungsaktive Kleidung:</strong> Die Sonne ist intensiv, also bedecken Sie sich mit lockeren langen Ärmeln.</li><li><strong>Eine warme Jacke oder ein Fleece:</strong> Wüstennächte können überraschend kalt werden, besonders im Winter.</li><li><strong>Sonnenschutz:</strong> Ein breitkrempiger Hut, Sonnencreme mit hohem Lichtschutzfaktor und eine Sonnenbrille sind unerlässlich.</li><li><strong>Bequeme Wanderschuhe:</strong> Sand kann heiß werden, und Sie werden einen festen Stand wollen.</li></ul><h2>Was Sie in einem Wüstencamp erwartet</h2><p>Die meisten Wüstentouren beinhalten einen Kamelritt zum Camp kurz vor Sonnenuntergang. Bei Ihrer Ankunft werden Sie mit traditionellem Minztee begrüßt. Die Abendaktivitäten umfassen in der Regel ein herzhaftes marokkanisches Abendessen (Tajine oder Couscous), gefolgt von Berbermusik und Trommeln am Lagerfeuer unter einem sternenübersäten Himmel.</p>",
     "marrakech_itinerary_title": "3 Tage in Marrakesch: Die perfekte Reiseroute für Erstbesucher",
-    "marrakech_itinerary_excerpt": "Machen Sie mit dieser definitiven 3-Tages-Route das Beste aus einem Kurztrip nach Marrakesch. Sie deckt die Medina, die Paläste und unvergessliche Tagesausflüge ab.",
+    "marrakech_itinerary_excerpt": "Nutzen Sie einen Kurzaufenthalt in Marrakesch optimal mit diesem 3-Tage-Plan für Medina, historische Paläste, Basare und Bergtouren.",
     "marrakech_itinerary_content": "<p>Marrakesch ist eine Reizüberflutung im bestmöglichen Sinne. Um Ihnen bei der Navigation durch die geschäftigen Souks und lebhaften Plätze zu helfen, haben wir die perfekte 3-Tage-Route zusammengestellt.</p><h2>Tag 1: Das Herz der Medina</h2><p>Beginnen Sie Ihren Morgen an der Koutoubia-Moschee und bewundern Sie ihr beeindruckendes Minarett. Tauchen Sie von dort in den geschäftigen Platz Jemaa el-Fnaa ein. Verbringen Sie den Nachmittag damit, durch die labyrinthartigen Souks zu schlendern und um Gewürze, Lederwaren und Keramik zu feilschen. Beenden Sie Ihren Tag mit einem Abendessen in einem Dachcafé mit Blick auf den beleuchteten Platz.</p><h2>Tag 2: Paläste und Gärten</h2><p>Widmen Sie Ihren zweiten Tag den architektonischen Wundern von Marrakesch. Besuchen Sie den atemberaubenden Bahia-Palast mit seinen komplizierten Kachelarbeiten und ruhigen Innenhöfen. Nehmen Sie am Nachmittag ein Taxi zum Majorelle-Garten, einer lebhaften botanischen Oase, die bekanntermaßen von Yves Saint Laurent restauriert wurde.</p><h2>Tag 3: Flucht aus der Stadt</h2><p>Machen Sie an Ihrem letzten Tag einen Tagesausflug! Das Ourika-Tal bietet wunderschöne Berglandschaften und Wasserfälle, die nur eine kurze Autofahrt entfernt sind. Alternativ können Sie in die Agafay-Wüste fahren, um eine aufregende Quad-Fahrt oder ein Abendessen bei Sonnenuntergang in einer felsigen Wüstenlandschaft zu genießen.</p>",
     "morocco_safety_title": "Ist Marokko sicher für Touristen? 10 wichtige Reisetipps, die Sie kennen sollten",
     "morocco_safety_excerpt": "Sicherheit ist für viele Reisende ein Hauptanliegen. Hier ist unser ehrlicher Leitfaden, um in Marokko sicher zu bleiben, Betrügereien zu vermeiden und selbstbewusst zu reisen.",
     "morocco_safety_content": "<p>Marokko ist im Allgemeinen ein sehr sicheres Land für Touristen, bekannt für seine herzliche Gastfreundschaft. Wie bei jedem großen Reiseziel ist es jedoch hilfreich, vorbereitet zu sein. Hier sind unsere besten Tipps für eine sichere und angenehme Reise.</p><h2>1. Kleiden Sie sich konservativ</h2><p>Marokko ist ein konservativ muslimisches Land. Obwohl von Touristen nicht erwartet wird, dass sie sich streng an lokale Kleiderordnungen halten, zeigt bescheidene Kleidung (die Schultern und Knie bedeckt) Respekt und führt oft zu weniger ungewollter Aufmerksamkeit, insbesondere bei weiblichen Reisenden.</p><h2>2. Hüten Sie sich vor \"Faux Guides\"</h2><p>In großen Städten wie Marrakesch und Fès werden Sie möglicherweise von inoffiziellen Führern angesprochen, die Ihnen anbieten, Sie herumzuführen. Lehnen Sie höflich, aber bestimmt ab. Buchen Sie Touren immer über seriöse Agenturen oder fragen Sie Ihr Riad nach lizenzierten Führerempfehlungen.</p><h2>3. Vereinbaren Sie Taxipreise im Voraus</h2><p>Bitten Sie den Taxifahrer immer, das Taxameter einzuschalten. Wenn sie sich weigern (was häufig vorkommt), verhandeln Sie klar und vereinbaren Sie den Fahrpreis, *bevor* Sie in das Fahrzeug steigen.</p><h2>4. Bleiben Sie hydriert mit Wasser in Flaschen</h2><p>Um „Reisendendurchfall“ zu vermeiden, sollten Sie nur in Flaschen abgefülltes oder gefiltertes Wasser trinken. Vermeiden Sie Eis in Ihren Getränken in kleineren Cafés und stellen Sie sicher, dass Street Food frisch gekocht und heiß serviert wird.</p>"
   },
   "cookieConsent": {
-    "title": "Wir schätzen Ihre Privatsphäre",
-    "description": "Wir verwenden Cookies, um Ihr Surferlebnis zu verbessern, grundlegende Sicherheit zu gewährleisten und den Website-Traffic zu analysieren. Sie können Ihre Einstellungen jederzeit anpassen.",
+    "title": "Cookie-Einstellungen",
+    "description": "Wir verwenden essenzielle Cookies für sichere Sitzungen und Ihre Sprachauswahl. Mit Ihrer Zustimmung erfassen wir zudem anonyme Statistiken, um unsere Reiserouten und Ladezeiten zu verbessern.",
     "acceptAll": "Alle akzeptieren",
     "rejectAll": "Nur essenzielle",
     "customize": "Cookie-Einstellungen",
     "savePreferences": "Auswahl speichern",
     "modalTitle": "Cookie- und Datenschutzeinstellungen",
-    "modalSubtitle": "Verwalten Sie die Verwendung von Cookies während Ihres Besuchs. Sie können diese Einstellungen jederzeit ändern.",
-    "necessaryTitle": "Technisch notwendige Cookies",
-    "necessaryDesc": "Erforderlich für Sicherheit, Sprachauswahl und grundlegende Website-Funktionen. Diese können nicht deaktiviert werden.",
+    "modalSubtitle": "Wählen Sie aus, welche Cookies Sie auf Ihrem Gerät zulassen möchten. Sie können Ihre Auswahl jederzeit anpassen.",
+    "complianceNote": "Datenschutzkontrolle",
+    "necessaryTitle": "Erforderliche Cookies",
+    "necessaryDesc": "Erforderlich für sichere Navigation, Sprachauswahl und Buchungsfunktionen. Diese können nicht deaktiviert werden.",
     "alwaysActive": "Immer aktiv",
-    "analyticsTitle": "Analyse & Leistung",
-    "analyticsDesc": "Ermöglicht anonyme Statistiken, damit wir beliebte Reiseangebote verstehen und Ladezeiten optimieren können.",
-    "functionalTitle": "Präferenzen & Funktionen",
-    "functionalDesc": "Speichert Ihre Einstellungen (z. B. interaktive Karten und Währungspräferenzen) für ein personalisiertes Erlebnis.",
+    "analyticsTitle": "Analyse-Cookies",
+    "analyticsDesc": "Erfasst anonyme Besucherzahlen und Geschwindigkeitswerte, damit wir beliebte Routen verstehen und die Website schneller machen können.",
+    "functionalTitle": "Präferenz-Cookies",
+    "functionalDesc": "Speichert Ihre Auswahl (wie interaktive Karteneinstellungen und Währung) für zukünftige Besuche.",
+    "optional": "Optional",
     "privacyPolicyLink": "Unsere Datenschutzerklärung lesen",
     "close": "Schließen"
   }

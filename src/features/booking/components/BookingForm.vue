@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, useTemplateRef } from "vue";
+import { ref, computed, onMounted, useTemplateRef, provide } from "vue";
 import { actions } from "astro:actions";
 import { hasRecaptchaV2, RECAPTCHA_V2_SITE_KEY } from "@/lib/client-env";
 import type { FormState } from "@/lib/form-types";
@@ -9,8 +9,10 @@ import Recaptcha from "@/shared/ui/Recaptcha.vue";
 import BookingFormFields from "./BookingFormFields.vue";
 import BookingSidebar from "./BookingSidebar.vue";
 import FormStatusMessages from "./FormStatusMessages.vue";
+import { CircleAlert } from "lucide-vue-next";
 
 interface Props {
+  locale?: string;
   tourTitle?: string;
   tourId?: string;
   tourDuration?: number | null;
@@ -20,6 +22,7 @@ interface Props {
 }
 
 const {
+  locale,
   tourTitle,
   tourId,
   tourDuration,
@@ -28,7 +31,11 @@ const {
   fullWidth = false,
 } = defineProps<Props>();
 
-const { t, i18n } = useTranslation();
+if (locale) {
+  provide("app-locale", locale);
+}
+
+const { t, i18n } = useTranslation(locale);
 const recaptchaRef = useTemplateRef<InstanceType<typeof Recaptcha>>("recaptchaRef");
 
 const isMounted = ref(false);
@@ -134,34 +141,36 @@ const handleSubmit = async (event: Event) => {
   <section
     id="booking"
     aria-labelledby="booking-heading"
-    class="bg-neutral-50 py-20 md:py-10"
+    class="relative isolate border-bs border-stone-200 bg-stone-50 py-12 sm:py-16 lg:py-24"
     :class="[fullWidth ? 'booking-form-fullwidth' : '']"
   >
-    <div
-      class="booking-form-inner mx-auto overflow-x-hidden inline-full max-inline-6xl"
-      :class="[fullWidth ? 'px-4 sm:px-6 lg:px-10' : 'px-4 sm:px-6 lg:px-8']"
-    >
-      <div class="grid grid-cols-1 gap-8 lg:grid-cols-5">
+    <div class="booking-form-inner mx-auto px-4 inline-full max-inline-7xl">
+      <div class="grid grid-cols-1 items-stretch gap-8 lg:grid-cols-5">
+        <!-- Left: Form Card -->
         <div
           class="inline-full lg:col-span-3"
           data-animate="creative-slide-right"
         >
-          <div class="overflow-hidden rounded-3xl bg-white block-full">
-            <div class="bg-linear-to-r from-orange-500 to-orange-600 px-6 py-8 text-white">
-              <h2
+          <div
+            class="rounded-2xl border border-stone-200/90 bg-white p-6 shadow-2xs block-full sm:p-8"
+          >
+            <div class="mbe-6 border-be border-stone-100 pbe-4">
+              <span
+                class="font-mono text-xs font-semibold tracking-[0.14em] text-orange-600 uppercase"
+              >
+                {{ t("contact.form.badge", "Plan with locals") }}
+              </span>
+              <h3
                 id="booking-heading"
-                class="text-xl font-semibold sm:text-2xl md:text-3xl"
+                class="mbs-1 text-xl font-bold tracking-tight text-stone-900 sm:text-2xl"
               >
                 {{ t("booking.makeReservation", "Make your reservation") }}
-              </h2>
-              <p class="mbs-3 text-sm text-orange-50/90 md:text-base">
-                {{ t("booking.description", "Book your perfect Morocco adventure with us") }}
-              </p>
+              </h3>
             </div>
 
             <form
               :key="formKey"
-              class="space-y-5 p-6 md:p-8"
+              class="flex flex-col gap-6"
               novalidate
               data-form="booking"
               :data-hydrated="isMounted"
@@ -177,10 +186,39 @@ const handleSubmit = async (event: Event) => {
                 }"
               />
 
-              <!-- Honeypot -->
+              <div
+                v-if="
+                  state?.errors
+                  && Object.entries(state.errors).some(
+                    ([k]) => k !== 'submit' && k !== 'recaptchaToken',
+                  )
+                "
+                class="rounded-2xl border border-orange-200/80 bg-orange-50/60 p-4"
+                role="alert"
+              >
+                <p
+                  class="mbe-2 font-mono text-xs font-bold tracking-wider text-orange-900 uppercase"
+                >
+                  {{ t("contact.form.errors.title", "Please complete these fields:") }}
+                </p>
+                <ul class="flex flex-col gap-1 font-mono text-xs text-orange-800">
+                  <li
+                    v-for="[field, error] in Object.entries(state.errors).filter(
+                      ([k]) => k !== 'submit' && k !== 'recaptchaToken',
+                    )"
+                    :key="field"
+                    class="flex items-start gap-2"
+                  >
+                    <CircleAlert class="mbs-0.5 size-4 shrink-0 text-orange-600" />
+                    <span>{{ error }}</span>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Honeypot (hidden from layout and screen readers without creating phantom gaps) -->
               <div
                 aria-hidden="true"
-                class="absolute left-[-9999px] h-0 overflow-hidden"
+                class="hidden"
               >
                 <input
                   type="text"
@@ -207,13 +245,11 @@ const handleSubmit = async (event: Event) => {
                 :locale="i18n.language"
               />
 
-              <div class="flex flex-col gap-4 lg:flex-row lg:items-center">
-                <div class="flex justify-center inline-full lg:justify-start">
+              <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <div class="flex justify-center sm:justify-start">
                   <div
-                    class="w-fit origin-center scale-85 rounded-2xl border border-dashed p-3 transition-all duration-500 sm:scale-100"
-                    :class="[
-                      state?.errors?.recaptchaToken ? 'border-red-300' : 'border-neutral-200',
-                    ]"
+                    class="w-fit origin-center scale-85 rounded-xl border border-dashed p-2 transition-all sm:scale-100"
+                    :class="[state?.errors?.recaptchaToken ? 'border-red-300' : 'border-stone-200']"
                   >
                     <Recaptcha
                       v-if="hasRecaptchaV2"
@@ -224,7 +260,7 @@ const handleSubmit = async (event: Event) => {
                     />
                     <div
                       v-else
-                      class="rounded-lg bg-amber-50 p-2 text-sm text-amber-600"
+                      class="rounded-lg bg-stone-100 p-2 font-mono text-xs text-stone-600"
                     >
                       reCAPTCHA not configured
                     </div>
@@ -234,14 +270,14 @@ const handleSubmit = async (event: Event) => {
                 <p
                   v-if="state?.errors?.recaptchaToken"
                   id="recaptchaToken-error"
-                  class="mbs-1 text-xs text-red-600"
+                  class="mbs-1 font-mono text-xs text-red-600"
                 >
                   {{ state.errors.recaptchaToken }}
                 </p>
 
                 <button
                   type="submit"
-                  class="inline-flex items-center justify-center gap-2 rounded-full border border-orange-400 bg-linear-to-r from-orange-500 to-orange-600 px-6 py-3 text-sm font-semibold tracking-wide whitespace-nowrap text-white uppercase transition duration-300 ease-in-out inline-full disabled:cursor-not-allowed disabled:opacity-60 md:inline-auto md:min-inline-50 pointer-fine:hover:-translate-y-0.5 pointer-fine:hover:brightness-110"
+                  class="inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-full bg-linear-to-br from-amber-orange to-orange px-8 py-3 font-mono text-xs font-semibold tracking-wider text-white uppercase shadow-md shadow-orange/20 transition-all duration-200 hover:shadow-lg hover:shadow-orange/30 hover:brightness-105 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
                   :disabled="isSubmitting"
                   :aria-busy="isSubmitting"
                 >

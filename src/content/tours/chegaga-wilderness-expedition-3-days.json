@@ -7,62 +7,70 @@
   "startLocation": "Marrakech",
   "endLocation": "Marrakech",
   "keywords": [
+    "3 day Chegaga desert tour from Marrakech",
     "Chegaga desert tour",
-    "3 day wilderness tour",
-    "Morocco expedition",
-    "Chegaga dunes",
-    "Remote desert Morocco",
-    "Off-road Morocco tour",
-    "Zagora tour",
-    "Draa Valley tour"
+    "Erg Chegaga off road 4x4",
+    "remote Sahara tour Morocco",
+    "Zagora and Draa Valley tour",
+    "M'Hamid desert camp",
+    "wild Sahara camping Morocco",
+    "Erg Chegaga vs Erg Chebbi",
+    "private Morocco wilderness tour",
+    "High Atlas to Chegaga dunes",
+    "off the beaten path Morocco",
+    "authentic nomad desert experience"
   ],
   "seo": {
-    "title": "3-Day Chegaga Desert Tour from Marrakech",
-    "metaDescription": "Book a 3-day Chegaga desert tour from Marrakech to Ait Ben Haddou, Draa Valley, M'Hamid, remote Sahara dunes, camel trek, and camp.",
-    "lead": "A remote 3-day Chegaga desert tour from Marrakech for travelers who want wilder Sahara dunes, the Draa Valley, M'Hamid, and a less crowded camp experience.",
-    "primaryKeyword": "Chegaga dunes tour",
+    "title": "Erg Chegaga Desert Tour from Marrakech | Wild Sahara Expedition",
+    "metaDescription": "Private 3-day 4x4 desert tour from Marrakech to Erg Chegaga. Travel through the Draa Valley, Zagora, off-road desert tracks, and stay at a remote Sahara camp.",
+    "lead": "A 3-day private 4x4 expedition from Marrakech to Erg Chegaga. The route crosses the High Atlas, follows the Draa Valley through Zagora, and navigates 60 km of unpaved desert tracks to reach Morocco's tallest wild sand dunes.",
+    "primaryKeyword": "3 day Erg Chegaga desert tour from Marrakech",
     "secondaryKeywords": [
-      "3 day Chegaga desert tour",
+      "Erg Chegaga dunes tour",
       "remote Sahara expedition Morocco",
-      "Marrakech to Chegaga tour",
+      "Marrakech to Chegaga 4x4",
       "M'Hamid desert camp tour"
     ],
     "price": {
-      "label": "Custom quote",
-      "note": "Final pricing depends on travel dates, group size, accommodation level, and private or shared transport. Send your dates for an exact quote."
+      "label": "From EUR 340 per person",
+      "note": "Price includes rugged 4WD transport with expert desert driver, licensed local Berber guide, all accommodations, dinners, breakfasts, and camel excursions. Custom luxury bivouacs quoted on request."
     },
-    "imageAlt": "Remote Chegaga desert dunes at sunset on a Sahara tour from Marrakech",
+    "imageAlt": "Sunlight creating dramatic shadows over the remote Erg Chegaga sand dunes during a 3-day desert expedition from Marrakech",
     "highlights": [
-      "Cross the High Atlas and visit Ait Ben Haddou",
-      "Follow the Draa Valley toward Zagora and M'Hamid",
-      "Ride camels into the remote Chegaga dunes",
-      "Sleep in an authentic Sahara camp away from busier desert routes"
+      "Cross the High Atlas Mountains via Tizi n'Tichka pass and explore Kasbah Ait Ben Haddou",
+      "Travel along the palm-fringed Draa Valley, Morocco's longest river oasis",
+      "Drive off-road across the dry salt plateau of Lake Iriqui",
+      "Reach the 300-meter sand dunes of Erg Chegaga by 4x4",
+      "Overnight in a Sahara bivouac under dark desert skies",
+      "Sunset camel trek and traditional nomadic campfire dinner"
     ],
     "faqs": [
       {
-        "question": "Is Chegaga more remote than Merzouga?",
-        "answer": "Yes. Chegaga is generally more remote and less developed, making it a strong choice for travelers who want a wilder desert feel."
+        "question": "What is the difference between Erg Chegaga and Erg Chebbi (Merzouga)?",
+        "answer": "Erg Chegaga is larger in surface area and accessible only by 4x4 across 60 km of unpaved desert tracks. Merzouga (Erg Chebbi) is reached by paved road and has more hotels and established camps. Chegaga suits travelers who prefer a quieter, isolated desert route with fewer groups."
       },
       {
-        "question": "Can this Chegaga tour be done in 3 days?",
-        "answer": "Yes. Three days is possible from Marrakech, although the driving days are long because Chegaga sits deeper in the desert."
+        "question": "Is a 4x4 vehicle required for the Erg Chegaga tour?",
+        "answer": "Yes. The final 60 kilometers from M'Hamid El Ghizlane to Erg Chegaga follow unpaved tracks across sand dunes, dry lakebeds, and gravel plains. Our tours use air-conditioned 4x4 Toyota Land Cruisers driven by licensed desert drivers."
       },
       {
-        "question": "Does the tour include M'Hamid?",
-        "answer": "Yes. The route passes through M'Hamid, the last village before the open desert tracks toward Chegaga."
+        "question": "What is the driving route and itinerary from Marrakech to Erg Chegaga?",
+        "answer": "Day 1 travels from Marrakech over the High Atlas to Ouarzazate, Agdz, and the Draa Valley to Zagora (~360 km). Day 2 heads through Tamgroute pottery village and M'Hamid into the open dunes of Erg Chegaga (~150 km, including off-road tracks). Day 3 crosses the dry salt flats of Lake Iriqui, Foum Zguid, and Taznakht carpet village back to Marrakech (~400 km)."
       },
       {
-        "question": "What is different about a Chegaga camp?",
-        "answer": "Chegaga camps usually feel more secluded, with darker skies, fewer crowds, and a stronger wilderness atmosphere."
+        "question": "What facilities are available at the Chegaga desert camp?",
+        "answer": "Our camps provide private, comfortable nomad tents with proper beds, clean linen, blankets, and dining areas. Luxury camp upgrades include private ensuite bathrooms with hot water showers and solar electricity for charging devices."
       },
       {
-        "question": "Can I add an extra night in the desert?",
-        "answer": "Yes. Adding an extra night is recommended if you want more time for desert walks, photography, or a slower return to Marrakech."
+        "question": "When is the best time of year to visit Erg Chegaga?",
+        "answer": "The ideal season for Erg Chegaga is from October through May, when daytime temperatures range from 20°C to 28°C (68°F–82°F) with clear skies. Mid-summer (July and August) is extremely hot in the deep desert."
       }
     ]
   },
   "jsonLd": {
-    "name": "Chegaga Wilderness Expedition - 3 Days",
-    "description": "Venture into the remote Chegaga dunes on this 3-day wilderness expedition for an authentic Sahara experience."
+    "name": "3-Day Erg Chegaga Desert Tour from Marrakech",
+    "description": "Three-day private 4x4 desert tour from Marrakech to the Erg Chegaga dunes via Zagora, M'Hamid, and Lake Iriqui.",
+    "price": 340,
+    "currency": "EUR"
   }
 }

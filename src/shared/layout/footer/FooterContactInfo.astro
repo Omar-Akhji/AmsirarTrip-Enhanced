@@ -1,31 +1,35 @@
 ---
 import { useTranslations } from "@/i18n/utils";
 import { PHONE_DISPLAY, PHONE_LINK } from "@/lib/constants/contact";
-import { Mail, MapPin, Phone, Smartphone } from "@lucide/astro";
+import { Mail, MapPinned, Phone, Smartphone } from "@lucide/astro";
 
 const locale = Astro.currentLocale || "en";
 const t = useTranslations(locale);
 ---
 
 <div
-  class="space-y-6 lg:col-span-1"
+  class="lg:col-span-1"
   data-animate="fade-up"
   style="transition-delay: 150ms;"
 >
-  <h3 class="mbe-2 text-sm font-semibold tracking-wider text-white uppercase">
-    {t("footer.office")}
-  </h3>
+  <div class="mbe-2 flex h-9 items-center">
+    <h3 class="text-sm font-semibold tracking-wider text-white uppercase">{t("footer.office")}</h3>
+  </div>
   <span class="mbe-6 block rounded bg-orange block-1 inline-12"></span>
   <address class="not-italic">
-    <ul class="space-y-4">
+    <ul
+      role="list"
+      class="space-y-4"
+    >
       <li class="group grid grid-cols-[36px_1fr] items-start gap-x-3">
         <div class="flex size-9 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 text-orange transition-colors duration-300 group-hover:bg-orange/10">
-          <MapPin
+          <MapPinned
+            aria-hidden="true"
             class="size-4"
-            stroke-width={1.5}
+            stroke-width={2}
           />
         </div>
-        <p class="text-sm leading-relaxed text-zinc-400 max-inline-67.5">
+        <p class="text-sm leading-relaxed text-zinc-400">
           Imm. J appt N° 5, Résidence La Perle de l'Atlas, angle Rue aboubakr, Marrakech
         </p>
       </li>
@@ -33,12 +37,13 @@ const t = useTranslations(locale);
       <li class="group grid grid-cols-[36px_1fr] items-center gap-x-3">
         <div class="flex size-9 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 text-orange transition-colors duration-300 group-hover:bg-orange/10">
           <Mail
+            aria-hidden="true"
             class="size-4"
-            stroke-width={1.5}
+            stroke-width={2}
           />
         </div>
         <a
-          class="break-anywhere text-sm text-zinc-400 transition-colors duration-300 pointer-fine:hover:text-orange"
+          class="wrap-anywhere text-sm text-zinc-400 transition-colors duration-300 pointer-fine:hover:text-orange"
           href="mailto:amsirare@gmail.com"
         >
           amsirare@gmail.com
@@ -48,8 +53,9 @@ const t = useTranslations(locale);
       <li class="group grid grid-cols-[36px_1fr] items-center gap-x-3">
         <div class="flex size-9 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 text-orange transition-colors duration-300 group-hover:bg-orange/10">
           <Smartphone
+            aria-hidden="true"
             class="size-4"
-            stroke-width={1.5}
+            stroke-width={2}
           />
         </div>
         <a
@@ -63,8 +69,9 @@ const t = useTranslations(locale);
       <li class="group grid grid-cols-[36px_1fr] items-center gap-x-3">
         <div class="flex size-9 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 text-orange transition-colors duration-300 group-hover:bg-orange/10">
           <Phone
+            aria-hidden="true"
             class="size-4"
-            stroke-width={1.5}
+            stroke-width={2}
           />
         </div>
         <a

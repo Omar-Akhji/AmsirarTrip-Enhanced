@@ -2,7 +2,14 @@ import type { MiddlewareHandler } from "astro";
 import { generateNonce } from "./lib/csp";
 import { getSecurityHeaders } from "./lib/security-headers";
 
-const STATIC_PATH_PREFIXES = ["/_astro/", "/favicon", "/icons/", "/fonts/", "/images/"];
+const STATIC_PATH_PREFIXES = [
+  "/_astro/",
+  "/.well-known/",
+  "/favicon",
+  "/icons/",
+  "/fonts/",
+  "/images/",
+];
 
 export const onRequest: MiddlewareHandler = async (context, next) => {
   const pathname = new URL(context.request.url).pathname;
@@ -18,6 +25,8 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
 
   if (isStaticAsset) {
     const newResponse = new Response(response.body, response);
+    newResponse.headers.set("X-Content-Type-Options", "nosniff");
+    newResponse.headers.set("Cross-Origin-Resource-Policy", "same-origin");
     if (pathname.startsWith("/_astro/")) {
       newResponse.headers.set("Cache-Control", "public, max-age=31536000, immutable");
     } else {

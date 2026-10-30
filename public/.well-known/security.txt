@@ -1,0 +1,6 @@
+Contact: mailto:contact@amsirartrip.com
+Expires: 2027-10-27T00:00:00.000Z
+Preferred-Languages: en, fr, de, es
+Canonical: https://amsirartrip.com/.well-known/security.txt
+Policy: https://amsirartrip.com/privacy-policy
+

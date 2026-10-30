@@ -1,0 +1,58 @@
+---
+import { Image } from "astro:assets";
+
+export interface SlideCardItem {
+  id: string;
+  image: ImageMetadata | string;
+  title: string;
+  type: string;
+  alt?: string;
+}
+
+interface Props {
+  items: SlideCardItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<div
+  class="thumbnail absolute z-100 flex w-max gap-(--thumb-gap) bottom-(--thumb-bottom) left-(--thumb-left)"
+  aria-label="Slider destination previews"
+>
+  {items.map((item, index) => (
+    <div
+      class="item group relative shrink-0 cursor-pointer overflow-hidden shadow-[0_8px_25px_rgb(0_0_0/45%)] w-(--thumb-width) h-(--thumb-height) rounded-(--thumb-radius)"
+      data-index={index}
+      role="button"
+      tabindex="0"
+    >
+      {typeof item.image === "string" ?
+        <Image
+          src={item.image}
+          alt={item.alt || `${item.title} - ${item.type}`}
+          loading="eager"
+          decoding="async"
+          width={320}
+          height={200}
+          class="size-full object-cover rounded-(--thumb-radius)"
+        />
+      : <Image
+          src={item.image}
+          alt={item.alt || `${item.title} - ${item.type}`}
+          loading="eager"
+          decoding="async"
+          class="size-full object-cover rounded-(--thumb-radius)"
+        />
+      }
+      <div class="thumbnail-overlay pointer-events-none absolute inset-x-0 bottom-0 flex flex-col px-2 py-2 sm:px-2.5 sm:py-3 text-white text-shadow-sm text-shadow-black/80 bg-linear-to-t from-black/85 to-transparent">
+        <span class="thumbnail-type truncate text-[0.7rem] sm:text-xs font-bold uppercase tracking-wider text-orange">
+          {item.type}
+        </span>
+        <span class="thumbnail-title truncate text-[0.7rem] sm:text-xs text-slate-200">
+          {item.title}
+        </span>
+      </div>
+    </div>
+  ))}
+</div>

@@ -1,18 +1,30 @@
 ---
+import { getRelativeLocaleUrl } from "astro:i18n";
 import PrivacyView from "../../features/legal/components/PrivacyView.astro";
 import { useTranslations } from "../../i18n/utils";
 import Layout from "../../layouts/Layout.astro";
+import { generateBreadcrumbJsonLd } from "../../lib/structured-data";
+import JsonLd from "../../shared/ui/JsonLd.astro";
 
 const locale = Astro.currentLocale || "en";
 const t = useTranslations(locale);
 
 const title = t("legal.privacy.meta.title");
 const description = t("legal.privacy.meta.description");
+
+const breadcrumbJsonLd = generateBreadcrumbJsonLd([
+  { name: t("nav.home") || "Home", url: getRelativeLocaleUrl(locale, "/") },
+  { name: title, url: Astro.url.pathname },
+]);
 ---
 
 <Layout
   description={description}
   title={title}
 >
+  <JsonLd
+    data={breadcrumbJsonLd}
+    id="privacy-breadcrumb-jsonld"
+  />
   <PrivacyView />
 </Layout>

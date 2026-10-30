@@ -1,0 +1,67 @@
+---
+interface Props {
+  className?: string;
+  class?: string;
+  itemDistance?: number;
+  itemStackDistance?: number;
+  stackPosition?: string | number;
+  itemScale?: number;
+  baseScale?: number;
+  dimAmount?: number;
+  blurAmount?: number;
+  tiltAmount?: number;
+  rotationAmount?: number;
+  holdDistance?: number;
+  useWindowScroll?: boolean;
+}
+
+const {
+  className = "",
+  class: propClass = "",
+  itemDistance = 100,
+  itemStackDistance = 24,
+  stackPosition = "84px",
+  itemScale = 0.045,
+  baseScale = 0.8,
+  dimAmount = 0.2,
+  blurAmount = 0.8,
+  tiltAmount = 2,
+  rotationAmount = 1.5,
+  holdDistance = 200,
+  useWindowScroll = true,
+} = Astro.props;
+
+const resolvedClass = [className, propClass].filter(Boolean).join(" ");
+---
+
+<scroll-stack
+  class:list={[
+    "block relative w-full",
+    {
+      "overflow-visible": useWindowScroll,
+      "h-full overflow-x-hidden overflow-y-auto": !useWindowScroll,
+    },
+    resolvedClass,
+  ]}
+  data-window-scroll={useWindowScroll ? "true" : "false"}
+  data-item-distance={itemDistance}
+  data-item-stack-distance={itemStackDistance}
+  data-stack-position={stackPosition}
+  data-item-scale={itemScale}
+  data-base-scale={baseScale}
+  data-dim-amount={dimAmount}
+  data-blur-amount={blurAmount}
+  data-tilt-amount={tiltAmount}
+  data-rotation-amount={rotationAmount}
+  data-hold-distance={holdDistance}
+>
+  <div class="scroll-stack-inner relative w-full px-1 sm:px-4">
+    <slot />
+    <div
+      class="scroll-stack-end"
+      aria-hidden="true"
+    />
+  </div>
+</scroll-stack>
+
+<script src="./scroll-stack.ts"></script>

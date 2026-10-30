@@ -1,0 +1,43 @@
+---
+import { cn } from "@/lib/utils";
+import { asciiSkeletonHTML, type SkeletonSpec, type SkeletonVariant } from "ascii-reveal/core";
+
+interface Props {
+  variant?: SkeletonVariant | undefined;
+  lines?: number | undefined;
+  widths?: (string | number)[] | undefined;
+  rows?: number | undefined;
+  seed?: number | undefined;
+  animate?: boolean | undefined;
+  class?: string | undefined;
+}
+
+const {
+  variant = "dither",
+  lines,
+  widths,
+  rows,
+  seed = Math.floor(Math.random() * 100_000),
+  animate = true,
+  class: className,
+} = Astro.props;
+
+// Build spec respecting exactOptionalPropertyTypes
+const spec: SkeletonSpec = {
+  variant,
+  seed,
+  animate,
+  css: false,
+  ...(lines !== undefined && { lines }),
+  ...(widths !== undefined && { widths }),
+  ...(rows !== undefined && { rows }),
+};
+
+const rawHtml = asciiSkeletonHTML(spec);
+
+// Inject consumer classes directly into root .ars container using a replacer function
+const html =
+  className ? rawHtml.replace('class="ars ', () => `class="ars ${cn(className)} `) : rawHtml;
+---
+
+<Fragment set:html={html} />

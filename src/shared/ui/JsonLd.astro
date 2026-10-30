@@ -1,11 +1,17 @@
 ---
 interface Props {
-  data: Record<string, unknown>;
-  id?: string;
+  readonly data: Record<string, unknown>;
+  readonly id?: string;
 }
 
 const { data, id } = Astro.props;
-const json = JSON.stringify(data);
+// Escape HTML-significant characters and line separators to prevent </script> breakout XSS
+const json = JSON.stringify(data)
+  .replaceAll("<", String.raw`\u003c`)
+  .replaceAll(">", String.raw`\u003e`)
+  .replaceAll("&", String.raw`\u0026`)
+  .replaceAll("\u{2028}", String.raw`\u2028`)
+  .replaceAll("\u{2029}", String.raw`\u2029`);
 // Escape id to prevent XSS via unescaped template literal injection
 const safeId = id?.replaceAll(/[^a-zA-Z0-9_-]/g, "");
 ---

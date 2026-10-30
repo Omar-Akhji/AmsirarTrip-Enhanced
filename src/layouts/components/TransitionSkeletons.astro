@@ -1,0 +1,487 @@
+---
+import FeaturedToursSkeleton from "@/features/home/components/FeaturedToursSkeleton.astro";
+import HomeStatsSkeleton from "@/features/home/components/HomeStatsSkeleton.astro";
+import ServicesSectionSkeleton from "@/features/home/components/ServicesSectionSkeleton.astro";
+import TestimonialsSectionSkeleton from "@/features/home/components/TestimonialsSectionSkeleton.astro";
+import VideoSectionSkeleton from "@/features/home/components/VideoSectionSkeleton.astro";
+import AsciiSkeleton from "@/shared/ui/AsciiSkeleton.astro";
+import ContactSkeleton from "@/shared/ui/ContactSkeleton.astro";
+import HomeHeroSkeleton from "@/shared/ui/HomeHeroSkeleton.astro";
+import PageHeaderSkeleton from "@/shared/ui/PageHeaderSkeleton.astro";
+import TourDetailSkeleton from "@/shared/ui/TourDetailSkeleton.astro";
+import TripCardSkeleton from "@/shared/ui/TripCardSkeleton.astro";
+---
+
+{/* Skeleton container: hidden by default, shown during page transitions */}
+<div
+  aria-hidden="true"
+  class="hidden"
+  id="skeleton-container"
+>
+  {/* Home Page Skeleton */}
+  <div
+    class="hidden"
+    data-skeleton="home"
+  >
+    <HomeHeroSkeleton />
+    <div class="text-zinc-900">
+      <HomeStatsSkeleton />
+      <FeaturedToursSkeleton count={6} />
+      <ServicesSectionSkeleton />
+      <TestimonialsSectionSkeleton />
+      <VideoSectionSkeleton />
+    </div>
+  </div>
+
+  {/* Tours Listing Skeleton */}
+  <div
+    class="hidden"
+    data-skeleton="tours"
+  >
+    <PageHeaderSkeleton
+      crumbWidths={["w-12", "w-16"]}
+      hasButtons={true}
+    />
+    <div class="text-zinc-900">
+      {/* 01 // EXPEDITION STANDARDS */}
+      <section class="bg-white py-12 sm:py-16">
+        <div class="mx-auto px-4 max-inline-7xl">
+          <div class="mbe-10 flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-stone-200 pb-6">
+            <div class="max-w-2xl space-y-2">
+              <AsciiSkeleton
+                class="text-2xl sm:text-3xl font-bold text-stone-800"
+                lines={1}
+                variant="dither"
+                widths={["18rem"]}
+              />
+              <AsciiSkeleton
+                class="text-stone-400 text-sm"
+                lines={1}
+                variant="scan"
+                widths={["24rem"]}
+              />
+            </div>
+          </div>
+          <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 sm:gap-6">
+            {Array.from({ length: 3 }, () => (
+              <div class="flex size-full">
+                <article class="flex size-full flex-col justify-between rounded-2xl border border-stone-200/90 bg-stone-50/80 p-6 sm:p-7 shadow-xs">
+                  <div class="mbe-4 flex items-center justify-between">
+                    <AsciiSkeleton
+                      class="text-stone-500 font-mono text-xs font-bold"
+                      lines={1}
+                      variant="scan"
+                      widths={["4rem"]}
+                    />
+                    <span class="size-2 rounded-full bg-stone-400"></span>
+                  </div>
+                  <div class="space-y-1.5">
+                    <AsciiSkeleton
+                      class="text-stone-800 font-bold"
+                      lines={1}
+                      variant="dither"
+                      widths={["9rem"]}
+                    />
+                    <AsciiSkeleton
+                      class="text-stone-400 text-sm"
+                      lines={2}
+                      variant="dither"
+                      widths={["100%", "80%"]}
+                    />
+                  </div>
+                </article>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 02 // CURATED ITINERARIES */}
+      <section
+        class="border-t border-zinc-200 bg-linear-to-b from-zinc-50 to-white py-16"
+        id="tours-grid-skeleton"
+      >
+        <div class="mx-auto px-4 max-inline-7xl">
+          <div class="mbe-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-stone-200 pb-6">
+            <div class="max-w-2xl space-y-2">
+              <AsciiSkeleton
+                class="text-2xl sm:text-3xl font-bold text-stone-800"
+                lines={1}
+                variant="dither"
+                widths={["16rem"]}
+              />
+            </div>
+          </div>
+          <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {Array.from({ length: 6 }, () => (
+              <TripCardSkeleton />
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  {/* Tour Detail Skeleton */}
+  <div
+    class="hidden"
+    data-skeleton="tour-detail"
+  >
+    <TourDetailSkeleton crumbWidths={["w-12", "w-14", "w-52"]} />
+  </div>
+
+  {/* Excursions Listing Skeleton */}
+  <div
+    class="hidden"
+    data-skeleton="excursions"
+  >
+    <PageHeaderSkeleton
+      crumbWidths={["w-12", "w-20"]}
+      hasButtons={true}
+    />
+    <div class="text-zinc-900">
+      {/* 01 // DAY-TRIP STANDARDS */}
+      <section class="bg-white py-12 sm:py-16">
+        <div class="mx-auto px-4 max-inline-7xl">
+          <div class="mbe-10 flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-stone-200 pb-6">
+            <div class="max-w-2xl space-y-2">
+              <AsciiSkeleton
+                class="text-2xl sm:text-3xl font-bold text-stone-800"
+                lines={1}
+                variant="dither"
+                widths={["18rem"]}
+              />
+              <AsciiSkeleton
+                class="text-stone-400 text-sm"
+                lines={1}
+                variant="scan"
+                widths={["24rem"]}
+              />
+            </div>
+          </div>
+          <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 sm:gap-6">
+            {Array.from({ length: 3 }, () => (
+              <div class="flex size-full">
+                <article class="flex size-full flex-col justify-between rounded-2xl border border-stone-200/90 bg-stone-50/80 p-6 sm:p-7 shadow-xs">
+                  <div class="mbe-4 flex items-center justify-between">
+                    <AsciiSkeleton
+                      class="text-stone-500 font-mono text-xs font-bold"
+                      lines={1}
+                      variant="scan"
+                      widths={["4rem"]}
+                    />
+                    <span class="size-2 rounded-full bg-stone-400"></span>
+                  </div>
+                  <div class="space-y-1.5">
+                    <AsciiSkeleton
+                      class="text-stone-800 font-bold"
+                      lines={1}
+                      variant="dither"
+                      widths={["9rem"]}
+                    />
+                    <AsciiSkeleton
+                      class="text-stone-400 text-sm"
+                      lines={2}
+                      variant="dither"
+                      widths={["100%", "80%"]}
+                    />
+                  </div>
+                </article>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 02 // CURATED DAY TRIPS */}
+      <section
+        class="border-t border-zinc-200 bg-linear-to-b from-zinc-50 to-white py-16"
+        id="excursions-grid-skeleton"
+      >
+        <div class="mx-auto px-4 max-inline-7xl">
+          <div class="mbe-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-stone-200 pb-6">
+            <div class="max-w-2xl space-y-2">
+              <AsciiSkeleton
+                class="text-2xl sm:text-3xl font-bold text-stone-800"
+                lines={1}
+                variant="dither"
+                widths={["16rem"]}
+              />
+            </div>
+          </div>
+          <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {Array.from({ length: 6 }, () => (
+              <TripCardSkeleton hasItinerary={false} />
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  {/* Excursion Detail Skeleton */}
+  <div
+    class="hidden"
+    data-skeleton="excursion-detail"
+  >
+    <TourDetailSkeleton crumbWidths={["w-12", "w-20", "w-52"]} />
+  </div>
+
+  {/* Contact Page Skeleton */}
+  <div
+    class="hidden"
+    data-skeleton="contact"
+  >
+    <ContactSkeleton />
+  </div>
+
+  {/* About Page Skeleton */}
+  <div
+    class="hidden"
+    data-skeleton="about"
+  >
+    <PageHeaderSkeleton
+      crumbWidths={["w-12", "w-18"]}
+      hasButtons={true}
+    />
+    <div class="bg-white">
+      {/* 01 // HERITAGE & MISSION */}
+      <section class="relative isolate overflow-hidden py-20 sm:py-28 text-stone-900">
+        <div class="mx-auto px-4 max-inline-7xl">
+          <div class="mbe-12 sm:mbe-16 max-w-3xl space-y-2">
+            <AsciiSkeleton
+              class="text-3xl sm:text-4xl lg:text-5xl font-bold text-stone-800"
+              lines={1}
+              variant="dither"
+              widths={["18rem"]}
+            />
+            <AsciiSkeleton
+              class="text-stone-400 text-sm"
+              lines={1}
+              variant="scan"
+              widths={["14rem"]}
+            />
+          </div>
+
+          <div class="grid items-start gap-12 lg:grid-cols-12 lg:gap-16">
+            {/* Editorial Text Column */}
+            <div class="order-2 lg:order-1 lg:col-span-7 space-y-8">
+              <div class="space-y-4">
+                <AsciiSkeleton
+                  class="text-stone-400"
+                  lines={3}
+                  variant="dither"
+                  widths={["100%", "92%", "80%"]}
+                />
+              </div>
+
+              {/* Blockquote */}
+              <div class="my-8 border-s-2 border-stone-300 ps-6 py-2 space-y-2">
+                <AsciiSkeleton
+                  class="text-stone-600 italic text-base sm:text-lg"
+                  lines={2}
+                  variant="dither"
+                  widths={["100%", "75%"]}
+                />
+                <AsciiSkeleton
+                  class="text-stone-400 font-mono text-xs"
+                  lines={1}
+                  variant="terminal"
+                  widths={["10rem"]}
+                />
+              </div>
+
+              {/* Pillars of trust */}
+              <div class="border-t border-stone-200/90 pbs-8">
+                <div class="mbe-6 space-y-1.5">
+                  <AsciiSkeleton
+                    class="text-stone-400 font-mono text-xs uppercase"
+                    lines={1}
+                    variant="scan"
+                    widths={["9rem"]}
+                  />
+                  <AsciiSkeleton
+                    class="text-xl font-bold text-stone-800"
+                    lines={1}
+                    variant="dither"
+                    widths={["12rem"]}
+                  />
+                </div>
+                <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                  {Array.from({ length: 4 }, () => (
+                    <div class="flex items-start gap-3 rounded-2xl border border-stone-200/80 bg-stone-50/70 p-4 shadow-2xs">
+                      <span class="size-2 rounded-full bg-stone-400 mt-1 shrink-0"></span>
+                      <AsciiSkeleton
+                        class="text-stone-600"
+                        lines={1}
+                        variant="scan"
+                        widths={["100%"]}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Archival Image Column */}
+            <div class="order-1 lg:order-2 lg:col-span-5">
+              <div class="overflow-hidden rounded-2xl border border-stone-200/90 bg-stone-100 dark:bg-stone-900 p-2 sm:p-2.5 shadow-2xs">
+                <div class="relative aspect-4/5 sm:aspect-4/3 lg:aspect-4/5 overflow-hidden rounded-2xl">
+                  <AsciiSkeleton
+                    class="ars-image size-full text-stone-400"
+                    rows={48}
+                    variant="dither"
+                  />
+                </div>
+              </div>
+              <div class="mbs-3 flex items-center justify-between px-2">
+                <AsciiSkeleton
+                  class="text-stone-400 font-mono text-xs"
+                  lines={1}
+                  variant="terminal"
+                  widths={["10rem"]}
+                />
+                <AsciiSkeleton
+                  class="text-stone-400 font-mono text-xs"
+                  lines={1}
+                  variant="terminal"
+                  widths={["7rem"]}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 02 // EXPEDITION METRICS */}
+      <section class="relative isolate overflow-hidden border-t border-stone-200/90 bg-stone-50/60 py-12 sm:py-16 lg:py-24 text-stone-900">
+        <div class="mx-auto px-4 max-inline-7xl">
+          <div class="mbe-8 sm:mbe-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-stone-200 pb-6 sm:pb-8">
+            <div class="max-w-2xl space-y-2">
+              <AsciiSkeleton
+                class="text-3xl sm:text-4xl font-bold text-stone-800"
+                lines={1}
+                variant="dither"
+                widths={["16rem"]}
+              />
+              <AsciiSkeleton
+                class="text-stone-400 text-sm"
+                lines={1}
+                variant="scan"
+                widths={["22rem"]}
+              />
+            </div>
+          </div>
+
+          <div class="mbs-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {Array.from({ length: 4 }, () => (
+              <div class="flex size-full">
+                <article class="flex size-full flex-col items-center justify-between overflow-hidden rounded-2xl border border-slate-900 bg-slate-950 px-8 py-10 text-center shadow-xl">
+                  <div class="flex flex-col items-center gap-y-6 w-full">
+                    <div class="relative size-24 shrink-0 overflow-hidden rounded-full border-2 border-white bg-white/5">
+                      <AsciiSkeleton
+                        class="ars-image size-full text-stone-400"
+                        rows={10}
+                        variant="dither"
+                      />
+                    </div>
+                    <div class="flex justify-center w-full">
+                      <AsciiSkeleton
+                        class="text-4xl font-mono font-bold text-orange-200/70"
+                        lines={1}
+                        variant="terminal"
+                        widths={["6rem"]}
+                      />
+                    </div>
+                    <div class="flex justify-center w-full">
+                      <AsciiSkeleton
+                        class="text-stone-400 font-mono text-xs uppercase"
+                        lines={1}
+                        variant="scan"
+                        widths={["8rem"]}
+                      />
+                    </div>
+                  </div>
+                </article>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  {/* Legal (Privacy & Terms) Skeleton */}
+  <div
+    class="hidden"
+    data-skeleton="legal"
+  >
+    <PageHeaderSkeleton
+      crumbWidths={["w-12", "w-28"]}
+      hasBreadcrumbs={true}
+      hasButtons={false}
+    />
+    <section class="relative isolate overflow-hidden bg-neutral-50 py-16 text-neutral-900 sm:py-24">
+      <div class="relative z-10 mx-auto px-4 max-inline-4xl space-y-8">
+        <div class="mx-auto mbe-8 flex justify-center">
+          <AsciiSkeleton
+            class="text-stone-400 font-mono text-xs uppercase"
+            lines={1}
+            variant="scan"
+            widths={["9rem"]}
+          />
+        </div>
+        <div class="rounded-2xl border border-stone-200/90 bg-white p-8 shadow-xs sm:p-12 space-y-6">
+          <AsciiSkeleton
+            class="text-2xl font-bold text-stone-800"
+            lines={1}
+            variant="dither"
+            widths={["16rem"]}
+          />
+          <div class="space-y-3 pt-2">
+            <AsciiSkeleton
+              class="text-stone-400"
+              lines={3}
+              variant="dither"
+              widths={["100%", "95%", "80%"]}
+            />
+          </div>
+          <div class="space-y-3 pt-4">
+            <AsciiSkeleton
+              class="text-xl font-bold text-stone-800"
+              lines={1}
+              variant="dither"
+              widths={["12rem"]}
+            />
+            <AsciiSkeleton
+              class="text-stone-400"
+              lines={3}
+              variant="dither"
+              widths={["100%", "90%", "75%"]}
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  {/* Default Fallback Skeleton */}
+  <div
+    class="hidden"
+    data-skeleton="default"
+  >
+    <PageHeaderSkeleton
+      crumbWidths={["w-12", "w-20"]}
+      hasButtons={true}
+    />
+    <section class="bg-neutral-50 py-16">
+      <div class="mx-auto max-w-7xl px-4">
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {Array.from({ length: 3 }, () => (
+            <TripCardSkeleton />
+          ))}
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

@@ -1,9 +1,25 @@
 <script setup lang="ts">
+import { provide } from "vue";
 import Mail from "lucide-vue-next/dist/esm/icons/mail";
 import { useTranslation } from "@/lib/hooks/use-translation";
 import NewsletterModal from "./NewsletterModal.vue";
 
-const { t } = useTranslation();
+interface Props {
+  locale?: string;
+}
+
+const props = defineProps<Props>();
+
+if (props.locale) {
+  provide("app-locale", props.locale);
+}
+
+const { t } = useTranslation(props.locale);
+
+const openModal = () => {
+  const dialog = document.querySelector("#newsletter-dialog") as HTMLDialogElement | null;
+  dialog?.showModal();
+};
 </script>
 
 <template>
@@ -12,9 +28,11 @@ const { t } = useTranslation();
     data-animate="fade-up"
     style="transition-delay: 300ms"
   >
-    <h3 class="mbe-2 text-sm font-semibold tracking-wider text-white uppercase">
-      {{ t("footer.newsletter") }}
-    </h3>
+    <div class="mbe-2 flex h-9 items-center">
+      <h3 class="text-sm font-semibold tracking-wider text-white uppercase">
+        {{ t("footer.newsletter") }}
+      </h3>
+    </div>
     <span class="mbe-6 block rounded bg-orange block-1 inline-12" />
     <div
       class="rounded-2xl border border-white/10 bg-linear-to-br from-white/5 to-white/2 p-4 backdrop-blur-sm"
@@ -27,7 +45,8 @@ const { t } = useTranslation();
         command="show-modal"
         commandfor="newsletter-dialog"
         :aria-label="t('footer.newsletterButtonAria')"
-        class="flex items-center justify-center gap-2 rounded-full bg-linear-to-r from-orange to-amber-500 text-sm font-semibold text-white shadow-md transition-all duration-300 block-10 inline-full active:scale-[0.98] pointer-fine:hover:scale-[1.02] pointer-fine:hover:shadow-lg pointer-fine:hover:shadow-orange-500/30"
+        class="flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-full bg-linear-to-br from-amber-orange to-orange font-sans text-sm font-semibold text-white shadow-md shadow-orange/20 transition-all duration-200 select-none inline-full hover:shadow-lg hover:shadow-orange/30 hover:brightness-105 focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 focus-visible:ring-offset-black focus-visible:outline-hidden active:scale-[0.98]"
+        @click="openModal"
       >
         <Mail class="size-4" />
         {{ t("footer.newsletterSubscribe") }}
@@ -124,6 +143,6 @@ const { t } = useTranslation();
     </div>
 
     <!-- Newsletter dialog (always in DOM, shown via command="show-modal") -->
-    <NewsletterModal />
+    <NewsletterModal :locale="props.locale" />
   </div>
 </template>

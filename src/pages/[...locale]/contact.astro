@@ -1,4 +1,5 @@
 ---
+import { getRelativeLocaleUrl } from "astro:i18n";
 import ContactForm from "../../features/contact/components/ContactForm.vue";
 import ContactView from "../../features/contact/components/ContactView.astro";
 import { useTranslations } from "../../i18n/utils";
@@ -13,7 +14,7 @@ const title = t("contact.meta.title");
 const description = t("contact.meta.description");
 
 const breadcrumbJsonLd = generateBreadcrumbJsonLd([
-  { name: t("nav.home") || "Home", url: locale === "en" ? "/" : `/${locale}` },
+  { name: t("nav.home") || "Home", url: getRelativeLocaleUrl(locale, "/") },
   { name: t("nav.contact") || "Contact", url: Astro.url.pathname },
 ]);
 ---
@@ -27,6 +28,9 @@ const breadcrumbJsonLd = generateBreadcrumbJsonLd([
     id="contact-breadcrumb-jsonld"
   />
   <ContactView>
-    <ContactForm client:visible />
+    <ContactForm
+      client:visible
+      locale={locale}
+    />
   </ContactView>
 </Layout>

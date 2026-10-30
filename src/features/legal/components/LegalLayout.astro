@@ -15,11 +15,9 @@ const locale = Astro.currentLocale || "en";
 const t = useTranslations(locale);
 
 const legalEntries = await getCollection("legal");
-const entry = legalEntries.find(
-  (legalEntry) =>
-    legalEntry.id.toLowerCase() === `${locale}/${docId}`.toLowerCase()
-    || legalEntry.id.toLowerCase() === `en/${docId}`.toLowerCase(),
-);
+const entry =
+  legalEntries.find((e) => e.id.toLowerCase() === `${locale}/${docId}`.toLowerCase())
+  ?? legalEntries.find((e) => e.id.toLowerCase() === `en/${docId}`.toLowerCase());
 
 let Content: Awaited<ReturnType<typeof render>>["Content"] | null = null;
 const meta = entry?.data;
@@ -40,7 +38,7 @@ if (entry) {
 <div>
   <section
     aria-labelledby={headingId}
-    class="relative isolate overflow-hidden bg-neutral-50 py-16 text-neutral-900 sm:py-24"
+    class="relative isolate overflow-hidden bg-neutral-50 py-12 sm:py-16 lg:py-24 text-neutral-900"
   >
     <div
       aria-hidden="true"
@@ -48,7 +46,12 @@ if (entry) {
     ></div>
     <div class="relative z-10 mx-auto px-4 max-inline-4xl">
       {meta?.lastUpdated && (
-        <div class="mbe-8 text-center text-sm font-medium text-neutral-500">{meta.lastUpdated}</div>
+        <time
+          class="mbe-8 block text-center text-sm font-medium text-neutral-500"
+          datetime="2026-01"
+        >
+          {meta.lastUpdated}
+        </time>
       )}
 
       <article class="rounded-2xl bg-white p-8 shadow-sm ring-1 ring-neutral-200/80 sm:p-12">
@@ -64,7 +67,10 @@ if (entry) {
           class="inline-flex items-center gap-2 font-medium text-orange-600 transition-colors pointer-fine:hover:text-orange-700"
           href={getRelativeLocaleUrl(locale, "/")}
         >
-          <ArrowLeft class="size-4" />
+          <ArrowLeft
+            aria-hidden="true"
+            class="size-4"
+          />
           {t("legal.backToHome")}
         </a>
       </div>

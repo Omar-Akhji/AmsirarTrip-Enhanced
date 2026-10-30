@@ -24,7 +24,6 @@ const getGrecaptcha = (): ReCaptchaInstance | undefined => {
   return (globalThis as typeof globalThis & { grecaptcha?: ReCaptchaInstance }).grecaptcha;
 };
 
-// Dynamic loader for the script
 const loadRecaptchaScript = (): Promise<void> => {
   return new Promise((resolve, reject) => {
     const grecaptcha = getGrecaptcha();
@@ -33,7 +32,6 @@ const loadRecaptchaScript = (): Promise<void> => {
       return;
     }
 
-    // Check if script is already added
     const existing = document.querySelector('script[src*="recaptcha/api.js"]');
     if (existing) {
       // Script is loading, poll for grecaptcha
@@ -92,7 +90,6 @@ onMounted(async () => {
   }
 });
 
-// Methods exposed to parent via defineExpose
 const getValue = (): string => {
   const grecaptcha = getGrecaptcha();
   return widgetId !== null && grecaptcha ? grecaptcha.getResponse(widgetId) : "";

@@ -17,7 +17,7 @@
     "Morocco adventure tour"
   ],
   "seo": {
-    "title": "4-Day Marrakech to Merzouga Desert Tour",
+    "title": "Marrakech to Merzouga Desert Tour",
     "metaDescription": "Join a 4-day Marrakech to Merzouga desert tour with Ait Ben Haddou, Dades Valley, Todra Gorge, Erg Chebbi camel trek, and Ouarzazate.",
     "lead": "A slower 4-day Marrakech to Merzouga desert tour with more breathing room across the Atlas Mountains, Erg Chebbi dunes, Dades Valley, and Ouarzazate.",
     "primaryKeyword": "4 day Marrakech to Merzouga desert tour",
@@ -63,6 +63,8 @@
   },
   "jsonLd": {
     "name": "Atlas and Desert Escape - 4 Days",
-    "description": "Escape to the Atlas Mountains and Sahara Desert on this perfectly balanced 4-day adventure from Marrakech."
+    "description": "Escape to the Atlas Mountains and Sahara Desert on this perfectly balanced 4-day adventure from Marrakech.",
+    "price": 320,
+    "currency": "EUR"
   }
 }

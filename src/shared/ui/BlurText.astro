@@ -1,0 +1,54 @@
+---
+export interface Props {
+  text: string;
+  as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "div" | "p" | "span";
+  class?: string;
+  animateBy?: "words" | "letters";
+  direction?: "top" | "bottom";
+  delay?: number;
+  stepDuration?: number;
+  blur?: number;
+  distance?: number;
+  stagger?: number;
+}
+
+const {
+  text,
+  as: Tag = "p",
+  class: className = "",
+  animateBy = "words",
+  direction = "top",
+  delay = 200,
+  stepDuration = 0.35,
+  blur = 10,
+  distance = 50,
+  stagger = 0.035,
+} = Astro.props;
+
+const tokens: string[] = animateBy === "letters" ? [...text] : text.split(" ");
+---
+
+<Tag
+  aria-label={text}
+  class:list={["blur-text-root", className]}
+  data-animate-by={animateBy}
+  data-blur={blur}
+  data-blur-text
+  data-delay={delay}
+  data-direction={direction}
+  data-distance={distance}
+  data-stagger={stagger}
+  data-step-duration={stepDuration}
+>
+  <span
+    aria-hidden="true"
+    class="blur-text-tokens inline"
+  >
+    {tokens.map((token: string, idx: number) => (
+      <span class="blur-token inline-block will-change-[transform,filter,opacity]">
+        {token === " " ? "\u{A0}" : token}
+        {animateBy === "words" && idx < tokens.length - 1 ? "\u{A0}" : ""}
+      </span>
+    ))}
+  </span>
+</Tag>

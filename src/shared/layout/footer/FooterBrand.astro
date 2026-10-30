@@ -10,20 +10,21 @@ const t = useTranslations(locale);
   class="lg:col-span-1"
   data-animate="fade-up"
 >
-  <a
-    aria-label="Amsirar Trip Homepage"
-    class="group mbe-2 inline-flex items-center gap-1"
-    href={getRelativeLocaleUrl(locale, "/")}
-  >
-    <span class="text-3xl font-bold tracking-tight text-white transition-transform duration-300 group-hover:scale-105">
-      Amsirar
-    </span>
-    <span class="font-brand text-3xl text-orange transition-all duration-300 group-hover:text-amber-400">
-      Trip
-    </span>
-  </a>
+  <div class="mbe-2 flex h-9 items-center">
+    <a
+      class="group inline-flex items-center gap-1"
+      href={getRelativeLocaleUrl(locale, "/")}
+    >
+      <span class="text-3xl font-bold tracking-tight text-white transition-transform duration-300 group-hover:scale-105">
+        Amsirar
+      </span>
+      <span class="font-brand text-3xl text-orange transition-all duration-300 group-hover:text-amber-400">
+        Trip
+      </span>
+    </a>
+  </div>
   <span class="mbe-6 block rounded bg-orange block-1 inline-12"></span>
-  <p class="font-fancy text-xl leading-relaxed text-zinc-400 lg:max-inline-sm">
+  <p class="font-mono text-sm leading-relaxed text-stone-300 lg:max-inline-sm">
     {t("footer.description")}
   </p>
 </div>

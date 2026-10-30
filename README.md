@@ -1,48 +1,118 @@
-# Astro Starter Kit: Basics
+# Amsirar Trip 🇲🇦
 
-```sh
-bun create astro@latest -- --template basics
-```
+> **Boutique Moroccan Tours, Desert Expeditions & Cultural Journeys**  
+> Premium web platform for [Amsirar Trip](https://amsirartrip.com), a licensed local tour operator based in Marrakech offering private Sahara desert tours, High Atlas mountain trekking, and bespoke itineraries across Morocco.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+---
 
-## 🚀 Project Structure
+## 🌟 Overview
 
-Inside of your Astro project, you'll see the following folders and files:
+Amsirar Trip is an editorial, high-performance web application designed with deep craft, physical interaction design, and multilingual reach across Europe and the Americas. Built with modern web architecture to deliver instant page transitions, fluid animations, and high-converting booking workflows.
+
+- **Private Sahara Expeditions**: Merzouga (Erg Chebbi), Zagora, and M'Hamid (Erg Chegaga).
+- **High Atlas Mountain Treks**: Mount Toubkal summits, Imlil valley, and Berber stone villages.
+- **Imperial Cities Itineraries**: Marrakech, Fes, Meknes, Rabat, Chefchaouen, and Essaouira.
+- **Day Trips & Excursions**: Ouzoud Waterfalls, Ourika Valley, Agafay Desert sunset, and hot-air balloon flights.
+
+---
+
+## 🛠️ Tech Stack & Architecture
+
+- **Framework**: [Astro](https://astro.build/) (Server-Side Rendering via `@astrojs/node` adapter)
+- **Interactive Islands**: [Vue 3](https://vuejs.org/) (Booking forms, newsletter modal, interactive calendar, video player)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/) with OKLCH warm Moroccan palette tokens (terracotta, golden amber, sand canvas)
+- **Motion & Interactions**: [GSAP](https://gsap.com/), [Lenis](https://github.com/darkroomengineering/lenis) smooth scrolling, native View Transitions, and sub-300ms motion craft
+- **Package Manager & Runtime**: [Bun](https://bun.sh/)
+- **Internationalization (i18n)**: 4 languages supported (`en`, `fr`, `es`, `de`) with localized slug routing, language selector, and alternate hreflang canonicals
+- **SEO & AI Discoverability**: Schema.org JSON-LD (Organization, Tour, TouristTrip, FAQPage, BreadcrumbList), XML sitemap index, `/llms.txt`, and `/ai-catalog.json`
+- **Security & Privacy**: Strict Content Security Policy (`strict-dynamic`), anti-CSRF headers, Google reCAPTCHA v3 verification, and GDPR-compliant cookie consent
+
+---
+
+## 📁 Project Structure
 
 ```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+├── public/                     # Static assets, fonts, icons, manifests & llms.txt
+├── src/
+│   ├── actions/                # Astro server actions (booking & contact dispatches)
+│   ├── content/                # Content collections (tours, excursions, legal MDX)
+│   ├── features/               # Feature-sliced domain modules
+│   │   ├── about/              # Agency story, guide bios, mission
+│   │   ├── booking/            # Vue booking form, validation & calculation
+│   │   ├── contact/            # Contact methods stack & interactive map
+│   │   ├── excursions/         # Day trip catalog & program itineraries
+│   │   ├── home/               # Hero carousel, scroll stack, stats & reviews
+│   │   ├── legal/              # Privacy policy & terms of service
+│   │   └── tours/              # Multi-day tour packages & detailed itineraries
+│   ├── i18n/                   # Locales, dictionary schemas, and routing utilities
+│   ├── layouts/                # Base HTML layout, head metadata, scripts & navbar
+│   ├── lib/                    # CSP, structured data, API helpers & constants
+│   ├── locales/                # Translation JSON bundles (en, fr, es, de)
+│   ├── pages/                  # Dynamic localized route endpoints ([...locale])
+│   ├── scripts/                # Compositor animations, transitions & smooth scroll
+│   ├── shared/                 # Reusable UI components, modals, and layouts
+│   └── styles/                 # global.css design tokens & scroll keyframes
+├── tests/                      # Playwright E2E and TypeScript type tests
+└── AGENTS.md                   # Project execution protocols and agent playbooks
 ```
 
-To learn more about the folder structure of an Astro project, refer to
-[our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+---
 
-## 🧞 Commands
+## 🚀 Getting Started
 
-All commands are run from the root of the project, from a terminal:
+### Prerequisites
 
-| Command               | Action                                           |
-| :-------------------- | :----------------------------------------------- |
-| `bun install`         | Installs dependencies                            |
-| `bun dev`             | Starts local dev server at `localhost:4321`      |
-| `bun build`           | Build your production site to `./dist/`          |
-| `bun preview`         | Preview your build locally, before deploying     |
-| `bun astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `bun astro -- --help` | Get help using the Astro CLI                     |
+Install [Bun](https://bun.sh/) (version 1.1+ recommended).
 
-## 👀 Want to learn more?
+### Installation
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our
-[Discord server](https://astro.build/chat).
+```bash
+bun install
+```
+
+### Development
+
+Start the local Astro development server with hot-module reloading:
+
+```bash
+bun run dev
+```
+
+Visit `http://localhost:4321` in your browser.
+
+### Building for Production
+
+Compile server and client bundles into `./dist/`:
+
+```bash
+bun run build
+```
+
+Preview the production server locally:
+
+```bash
+bun run preview
+```
+
+### Verification & Testing
+
+```bash
+# Type check and diagnostic analysis
+bun run check
+
+# Lint source files
+bun run lint
+
+# Format code with Prettier
+bun run format
+
+# Run Playwright E2E test suites
+bun run test:e2e
+```
+
+---
+
+## 📄 License & Ownership
+
+Copyright © 2026 **Amsirar Trip SARL**. All rights reserved.
+Licensed Moroccan Tour Operator — Marrakech, Morocco.

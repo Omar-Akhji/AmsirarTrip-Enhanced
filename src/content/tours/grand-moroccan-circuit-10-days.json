@@ -17,7 +17,7 @@
     "Best Morocco tour"
   ],
   "seo": {
-    "title": "10-Day Morocco Tour from Marrakech",
+    "title": "Morocco Tour from Marrakech",
     "metaDescription": "Book a 10-day Morocco tour from Marrakech with Sahara desert camping, Fes, Chefchaouen, Rabat, Casablanca, Atlas Mountains, and kasbahs.",
     "lead": "A broad 10-day Morocco tour from Marrakech built for travelers who want desert, imperial cities, Chefchaouen, Atlas scenery, and Atlantic coast highlights in one circuit.",
     "primaryKeyword": "10 day Morocco tour",
@@ -63,6 +63,8 @@
   },
   "jsonLd": {
     "name": "Grand Moroccan Circuit - 10 Days",
-    "description": "Traverse Sahara dunes, imperial cities, Atlas peaks, and coastal elegance in an epic 10-day adventure across Morocco!"
+    "description": "Traverse Sahara dunes, imperial cities, Atlas peaks, and coastal elegance in an epic 10-day adventure across Morocco!",
+    "price": 890,
+    "currency": "EUR"
   }
 }

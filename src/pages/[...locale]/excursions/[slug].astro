@@ -1,69 +1,96 @@
 ---
-import { getCollection } from "astro:content";
+import { getEntry } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
 import BookingForm from "../../../features/booking/components/BookingForm.vue";
 import ExcursionLayout from "../../../features/excursions/components/ExcursionLayout.astro";
 import { useTranslations } from "../../../i18n/utils";
 import Layout from "../../../layouts/Layout.astro";
-import { generateBreadcrumbJsonLd, generateExcursionJsonLd } from "../../../lib/structured-data";
+import {
+  generateBreadcrumbJsonLd,
+  generateExcursionJsonLd,
+  generateFaqJsonLd,
+} from "../../../lib/structured-data";
 import JsonLd from "../../../shared/ui/JsonLd.astro";
 
 const { slug } = Astro.params;
 const locale = Astro.currentLocale || "en";
 
-const excursions = await getCollection("excursions");
-const excursionEntry = excursions.find(
-  (entry) => entry.id.toLowerCase() === (slug || "").toLowerCase(),
-);
+const excursionEntry = slug ? await getEntry("excursions", slug.toLowerCase()) : undefined;
 
 if (!excursionEntry) {
   Astro.response.status = 404;
   // eslint-disable-next-line unicorn/prefer-module
-  return Astro.redirect("/404");
+  return Astro.rewrite(locale === "en" ? "/404" : `/${locale}/404`);
 }
 
 const excursion = excursionEntry.data;
 
 const t = useTranslations(locale);
+const isEnglish = locale === "en";
 const keyPrefix = `excursion.list.${excursion.i18nKeyPrefix}`;
 
-const title = t(`${keyPrefix}.title`);
-const description = `${t(`${keyPrefix}.description`)} ${t(`${keyPrefix}.tagline`)}`;
+const title = isEnglish && excursion.seo?.title ? excursion.seo.title : t(`${keyPrefix}.title`);
+const description =
+  isEnglish && excursion.seo?.metaDescription ?
+    excursion.seo.metaDescription
+  : `${t(`${keyPrefix}.description`)} ${t(`${keyPrefix}.tagline`)}`;
+
+const itinerary = excursion.program.map((stage, index) => ({
+  position: index + 1,
+  name: `${stage.time} : ${stage.title} (${stage.location})`,
+  description: stage.description,
+}));
 
 const excursionJsonLd = generateExcursionJsonLd({
-  name: excursion.jsonLd.name,
-  description: excursion.jsonLd.description,
+  name: isEnglish && excursion.seo?.title ? excursion.seo.title : excursion.jsonLd.name,
+  description: excursion.seo?.lead ?? excursion.jsonLd.description,
   provider: "Amsirar Trip",
   image: `https://amsirartrip.com${excursion.image.src}`,
+  price: excursion.jsonLd.price,
+  currency: excursion.jsonLd.currency,
   duration: excursion.duration,
   location: { point: excursion.location },
-  url: `https://amsirartrip.com/excursions/${excursionEntry.id}`,
+  url: new URL(Astro.url.pathname, Astro.site ?? "https://amsirartrip.com").href,
+  itinerary,
 });
 
-const excursionTitleClean = t(`${keyPrefix}.title`);
+const faqJsonLd =
+  excursion.seo?.faqs && excursion.seo.faqs.length > 0 ?
+    generateFaqJsonLd(excursion.seo.faqs)
+  : undefined;
+
+const excursionTitleClean =
+  isEnglish && excursion.seo?.title ? excursion.seo.title : t(`${keyPrefix}.title`);
 
 const breadcrumbJsonLd = generateBreadcrumbJsonLd([
-  { name: t("nav.home") || "Home", url: locale === "en" ? "/" : `/${locale}` },
-  {
-    name: t("nav.excursions") || "Excursions",
-    url: locale === "en" ? "/excursions" : `/${locale}/excursions`,
-  },
+  { name: t("nav.home") || "Home", url: getRelativeLocaleUrl(locale, "/") },
+  { name: t("nav.excursions") || "Excursions", url: getRelativeLocaleUrl(locale, "excursions") },
   { name: excursionTitleClean, url: Astro.url.pathname },
 ]);
 ---
 
 <Layout
   description={description}
+  image={excursion.image.src}
+  imageAlt={excursion.seo?.imageAlt ?? t(`${excursion.excursionKey}.alt`)}
   title={title}
 >
   <JsonLd
     data={excursionJsonLd}
     id={`${excursion.excursionKey}-jsonld`}
   />
+  {faqJsonLd && (
+    <JsonLd
+      data={faqJsonLd}
+      id={`${excursion.excursionKey}-faq-jsonld`}
+    />
+  )}
   <JsonLd
     data={breadcrumbJsonLd}
     id={`${excursion.excursionKey}-breadcrumb-jsonld`}
   />
   <ExcursionLayout
+    excursion={excursion}
     excursionKey={excursion.excursionKey}
     imageSrc={excursion.image}
     locale={locale}
@@ -74,6 +101,7 @@ const breadcrumbJsonLd = generateBreadcrumbJsonLd([
       excursionId={String(excursion.bookingId)}
       excursionTitle={excursionTitleClean}
       fullWidth
+      locale={locale}
     />
   </ExcursionLayout>
 </Layout>

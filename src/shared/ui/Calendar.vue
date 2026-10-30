@@ -1,21 +1,25 @@
 <script setup lang="ts">
 import { ref, computed, watch } from "vue";
 import { ChevronLeft, ChevronRight, Calendar as CalendarIcon } from "lucide-vue-next";
+import { useTranslation, getResolvedLocale } from "@/lib/hooks/use-translation";
 
 interface Props {
   initialDate?: Date;
   disabled?: (date: Date) => boolean;
   className?: string;
+  locale?: string;
 }
 
-const { initialDate, disabled, className = "" } = defineProps<Props>();
+const { initialDate, disabled, className = "", locale: explicitLocale } = defineProps<Props>();
 
 const emit = defineEmits<{ select: [date: Date | undefined]; close: [] }>();
+
+const activeLocale = computed(() => getResolvedLocale(explicitLocale));
+const { t } = useTranslation(explicitLocale);
 
 const currentMonth = ref<Date>(initialDate ? new Date(initialDate) : new Date());
 const selectedDate = ref<Date | undefined>(initialDate);
 
-// Helper: check if two dates represent the same calendar day
 const isSameDay = (d1: Date, d2: Date) => {
   return (
     d1.getFullYear() === d2.getFullYear()
@@ -24,20 +28,17 @@ const isSameDay = (d1: Date, d2: Date) => {
   );
 };
 
-// Navigate months
 const navigateMonth = (direction: "prev" | "next") => {
   const next = new Date(currentMonth.value);
   next.setMonth(next.getMonth() + (direction === "prev" ? -1 : 1));
   currentMonth.value = next;
 };
 
-// Select a day
 const handleDaySelect = (day: { date: Date; isDisabled: boolean }) => {
   if (day.isDisabled) return;
   selectedDate.value = day.date;
 };
 
-// Go to today
 const goToToday = () => {
   const today = new Date();
   selectedDate.value = today;
@@ -46,15 +47,48 @@ const goToToday = () => {
   emit("close");
 };
 
-// Apply selection
 const handleApply = () => {
   if (!selectedDate.value) return;
   emit("select", selectedDate.value);
   emit("close");
 };
 
-// Generate weekdays
-const weekdays = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+const formattedMonthYear = computed(() => {
+  try {
+    return new Intl.DateTimeFormat(activeLocale.value, { month: "long", year: "numeric" }).format(
+      currentMonth.value,
+    );
+  } catch {
+    return currentMonth.value.toLocaleDateString("en-US", { month: "long", year: "numeric" });
+  }
+});
+
+const weekdays = computed(() => {
+  try {
+    const formatter = new Intl.DateTimeFormat(activeLocale.value, { weekday: "short" });
+    // Jan 4, 1970 was a Sunday
+    return Array.from({ length: 7 }, (_, i) => {
+      const d = new Date(1970, 0, 4 + i);
+      return formatter.format(d);
+    });
+  } catch {
+    return ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+  }
+});
+
+const formattedSelectedDate = computed(() => {
+  if (!selectedDate.value) return "";
+  try {
+    return new Intl.DateTimeFormat(activeLocale.value, {
+      weekday: "short",
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    }).format(selectedDate.value);
+  } catch {
+    return selectedDate.value.toLocaleDateString();
+  }
+});
 
 // Generate days grid (42 days)
 const days = computed(() => {
@@ -74,8 +108,8 @@ const days = computed(() => {
       date: d,
       isCurrentMonth: false,
       isToday: isSameDay(d, new Date()),
-      isSelected: selectedDate.value ? isSameDay(d, selectedDate.value) : false,
-      isDisabled: disabled ? disabled(d) : false,
+      isSelected: Boolean(selectedDate.value && isSameDay(d, selectedDate.value)),
+      isDisabled: Boolean(disabled && disabled(d)),
     });
   }
 
@@ -86,8 +120,8 @@ const days = computed(() => {
       date: d,
       isCurrentMonth: true,
       isToday: isSameDay(d, new Date()),
-      isSelected: selectedDate.value ? isSameDay(d, selectedDate.value) : false,
-      isDisabled: disabled ? disabled(d) : false,
+      isSelected: Boolean(selectedDate.value && isSameDay(d, selectedDate.value)),
+      isDisabled: Boolean(disabled && disabled(d)),
     });
   }
 
@@ -99,15 +133,14 @@ const days = computed(() => {
       date: d,
       isCurrentMonth: false,
       isToday: isSameDay(d, new Date()),
-      isSelected: selectedDate.value ? isSameDay(d, selectedDate.value) : false,
-      isDisabled: disabled ? disabled(d) : false,
+      isSelected: Boolean(selectedDate.value && isSameDay(d, selectedDate.value)),
+      isDisabled: Boolean(disabled && disabled(d)),
     });
   }
 
   return result;
 });
 
-// Watch initialDate to update state if it changes
 watch(
   () => initialDate,
   (newDate) => {
@@ -124,14 +157,13 @@ watch(
     :class="[className]"
   >
     <div
-      class="overflow-hidden rounded-2xl bg-linear-to-br from-white to-orange-50/30 p-5 shadow-2xl ring-1 shadow-orange-900/10 ring-orange-500/20 backdrop-blur-sm"
+      class="overflow-hidden rounded-2xl border border-stone-200/90 bg-white p-4 shadow-xl ring-1 ring-stone-900/5"
     >
-      <!-- Calendar Header -->
-      <div class="mbe-4 flex items-center justify-center gap-4 border-b border-orange-100 pbe-3">
+      <div class="mbe-4 flex items-center justify-between border-b border-stone-100 pbe-3">
         <button
           type="button"
-          class="flex size-8 items-center justify-center rounded-full text-orange-600 transition-colors focus:ring-2 focus:ring-orange-500 focus:ring-offset-1 focus:outline-hidden pointer-fine:hover:bg-orange-50"
-          aria-label="Previous month"
+          class="flex size-8 items-center justify-center rounded-lg text-stone-600 transition-colors focus:ring-2 focus:ring-orange-500 focus:ring-offset-1 focus:outline-hidden pointer-fine:hover:bg-stone-100 pointer-fine:hover:text-stone-900"
+          :aria-label="t('calendar.prevMonth', 'Previous month')"
           @click="navigateMonth('prev')"
         >
           <ChevronLeft class="size-4" />
@@ -139,37 +171,34 @@ watch(
 
         <div class="flex items-center gap-2">
           <CalendarIcon class="size-4 text-orange-600" />
-          <span class="text-sm font-semibold text-neutral-900">
-            {{ currentMonth.toLocaleDateString("en-US", { month: "long", year: "numeric" }) }}
+          <span class="font-mono text-sm font-semibold text-stone-900 capitalize">
+            {{ formattedMonthYear }}
           </span>
         </div>
 
         <button
           type="button"
-          class="flex size-8 items-center justify-center rounded-full text-orange-600 transition-colors focus:ring-2 focus:ring-orange-500 focus:ring-offset-1 focus:outline-hidden pointer-fine:hover:bg-orange-50"
-          aria-label="Next month"
+          class="flex size-8 items-center justify-center rounded-lg text-stone-600 transition-colors focus:ring-2 focus:ring-orange-500 focus:ring-offset-1 focus:outline-hidden pointer-fine:hover:bg-stone-100 pointer-fine:hover:text-stone-900"
+          :aria-label="t('calendar.nextMonth', 'Next month')"
           @click="navigateMonth('next')"
         >
           <ChevronRight class="size-4" />
         </button>
       </div>
 
-      <!-- Month Daypicker Grid -->
-      <div class="bg-transparent p-2 inline-fit">
-        <div class="flex flex-col gap-4">
-          <!-- Weekday Headers -->
+      <div class="bg-transparent p-1 inline-fit">
+        <div class="flex flex-col gap-3">
           <div class="flex justify-between">
             <span
               v-for="wd in weekdays"
               :key="wd"
-              class="w-9 text-center text-xs font-medium text-muted-foreground"
+              class="w-9 text-center font-mono text-xs font-medium text-stone-400 capitalize"
             >
               {{ wd }}
             </span>
           </div>
 
-          <!-- Days Grid -->
-          <div class="grid grid-cols-7 justify-items-center gap-y-1">
+          <div class="grid grid-cols-7 justify-items-center gap-1">
             <div
               v-for="(day, idx) in days"
               :key="idx"
@@ -179,7 +208,7 @@ watch(
                 type="button"
                 :disabled="day.isDisabled"
                 :aria-label="
-                  day.date.toLocaleDateString('en-US', {
+                  day.date.toLocaleDateString(activeLocale, {
                     month: 'short',
                     day: 'numeric',
                     year: 'numeric',
@@ -187,18 +216,16 @@ watch(
                 "
                 :aria-current="day.isToday ? 'date' : undefined"
                 :aria-pressed="day.isSelected"
-                class="size-9 rounded-full p-0 text-sm font-normal transition-all duration-200 focus:ring-2 focus:ring-orange-500 focus:ring-offset-1 focus:outline-hidden pointer-fine:hover:bg-orange-100 pointer-fine:hover:text-orange-900"
+                class="size-9 rounded-lg p-0 font-mono text-xs transition-colors duration-150 focus:ring-2 focus:ring-orange-500 focus:ring-offset-1 focus:outline-hidden pointer-fine:hover:bg-stone-100 pointer-fine:hover:text-stone-900"
                 :class="[
                   day.isSelected ?
-                    'bg-orange-600 font-semibold text-white hover:bg-orange-600 hover:text-white'
+                    'bg-linear-to-br from-amber-orange to-orange font-bold text-white shadow-2xs shadow-orange/30 hover:text-white hover:brightness-105'
+                  : 'text-stone-700',
+                  day.isDisabled ? 'cursor-not-allowed text-stone-300 opacity-40' : '',
+                  !day.isCurrentMonth && !day.isSelected ? 'text-stone-300' : '',
+                  day.isToday && !day.isSelected ?
+                    'border border-orange-500/40 font-semibold text-orange-700'
                   : '',
-                  day.isDisabled ? 'cursor-not-allowed text-muted-foreground/30 opacity-30' : '',
-                  !day.isCurrentMonth && !day.isSelected ? 'text-muted-foreground/40' : '',
-                  day.isToday ?
-                    'relative after:absolute after:inset-s-1/2 after:bottom-1 after:size-1 after:-translate-x-1/2 after:rounded-full after:content-[\'\']'
-                  : '',
-                  day.isToday && day.isSelected ? 'after:bg-white' : '',
-                  day.isToday && !day.isSelected ? 'after:bg-orange-600' : '',
                 ]"
                 @click="handleDaySelect(day)"
               >
@@ -209,64 +236,55 @@ watch(
         </div>
       </div>
 
-      <!-- Selection Indicator -->
       <div
         v-if="selectedDate"
-        class="mbs-4 border-t border-orange-100 pbs-3"
+        class="mbs-4 border-t border-stone-100 pbs-3"
       >
         <div
-          class="flex items-center gap-3 rounded-xl border border-orange-200/40 bg-linear-to-r from-orange-50 to-orange-100/50 px-4 py-2.5"
+          class="flex items-center gap-3 rounded-lg border border-stone-200/80 bg-stone-50/80 px-4 py-3"
         >
           <div class="shrink-0">
-            <div class="size-2 animate-pulse rounded-full bg-orange-600" />
+            <div class="size-2 rounded-full bg-linear-to-br from-amber-orange to-orange" />
           </div>
           <div class="flex-1 min-inline-0">
-            <p class="text-xs font-medium text-neutral-500">
+            <p class="font-mono text-[11px] font-medium tracking-wider text-stone-500 uppercase">
               {{
-                initialDate && isSameDay(selectedDate, initialDate) ? "Current Date" : (
-                  "New Selection"
-                )
+                initialDate && isSameDay(selectedDate, initialDate) ?
+                  t("calendar.currentDate", "Current Date")
+                : t("calendar.selectedDate", "Selected Date")
               }}
             </p>
-            <p class="truncate text-sm font-semibold text-neutral-900">
-              {{
-                selectedDate.toLocaleDateString("en-US", {
-                  weekday: "long",
-                  month: "long",
-                  day: "numeric",
-                  year: "numeric",
-                })
-              }}
+            <p class="truncate font-mono text-xs font-semibold text-stone-900 capitalize">
+              {{ formattedSelectedDate }}
             </p>
           </div>
         </div>
       </div>
 
-      <!-- Footer Buttons -->
-      <div class="mbs-4 flex items-center justify-between gap-2 border-t border-orange-100 pbs-3">
+      <div class="mbs-4 flex items-center justify-between gap-2 border-t border-stone-100 pbs-3">
         <button
           type="button"
-          class="rounded-lg border border-orange-200 px-3 py-1.5 text-sm font-medium text-orange-600 transition-colors focus:ring-2 focus:ring-orange-500 focus:ring-offset-1 focus:outline-hidden pointer-fine:hover:bg-orange-50"
+          class="rounded-lg border border-stone-200/90 bg-stone-50 px-3 py-2 font-mono text-xs font-semibold text-stone-700 transition-colors focus:ring-2 focus:ring-orange-500 focus:ring-offset-1 focus:outline-hidden pointer-fine:hover:border-stone-300 pointer-fine:hover:bg-stone-100"
           @click="goToToday"
         >
-          Today
+          {{ t("calendar.today", "Today") }}
         </button>
 
         <div class="flex gap-2">
           <button
             type="button"
-            class="rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm font-medium text-neutral-700 transition-colors duration-200 focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:outline-hidden pointer-fine:hover:border-neutral-400 pointer-fine:hover:bg-neutral-50"
+            class="rounded-lg border border-stone-200/90 bg-white px-4 py-2 font-mono text-xs font-semibold text-stone-700 transition-colors duration-150 focus:ring-2 focus:ring-orange-500 focus:ring-offset-1 focus:outline-hidden pointer-fine:hover:border-stone-300 pointer-fine:hover:bg-stone-50"
             @click="emit('close')"
           >
-            Cancel
+            {{ t("calendar.cancel", "Cancel") }}
           </button>
           <button
             :disabled="!selectedDate || (initialDate && isSameDay(selectedDate, initialDate))"
             type="button"
-            class="rounded-lg bg-linear-to-r from-orange-500 to-orange-600 px-4 py-2 text-sm font-medium text-white shadow-md transition-all duration-200 focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:outline-hidden disabled:cursor-not-allowed disabled:opacity-50 pointer-fine:hover:from-orange-600 pointer-fine:hover:to-orange-700 pointer-fine:hover:shadow-lg disabled:pointer-fine:hover:from-orange-500 disabled:pointer-fine:hover:to-orange-600"
+            class="rounded-lg bg-linear-to-br from-amber-orange to-orange px-4 py-2 font-mono text-xs font-semibold text-white shadow-2xs shadow-orange/20 transition-all duration-150 focus:ring-2 focus:ring-orange-500 focus:ring-offset-1 focus:outline-hidden disabled:cursor-not-allowed disabled:opacity-40 pointer-fine:hover:shadow-sm pointer-fine:hover:shadow-orange/30 pointer-fine:hover:brightness-105"
             @click="handleApply"
           >
-            Apply
+            {{ t("calendar.apply", "Apply") }}
           </button>
         </div>
       </div>

@@ -42,7 +42,7 @@ export default defineConfig({
       { hostname: "amsirartrip.com", protocol: "https" },
       { hostname: "*.amsirartrip.com", protocol: "https" },
     ],
-    actionBodySizeLimit: 1_048_576,
+    actionBodySizeLimit: 65_536,
   },
 
   // ─── Cache (Astro 7+) ───────────────────────────────────────────────────
@@ -60,8 +60,11 @@ export default defineConfig({
     "/[...locale]/terms-of-service": { maxAge: 86_400, swr: 604_800 },
     "/[...locale]/tours": { maxAge: 900, swr: 3600 },
     "/[...locale]/tours/[slug]": { maxAge: 1800, swr: 86_400 },
+    "/llms.txt": { maxAge: 3600, swr: 86_400 },
     "/robots.txt": { maxAge: 3600, swr: 86_400 },
+    "/sitemap.xml": { maxAge: 3600, swr: 86_400 },
     "/sitemap-index.xml": { maxAge: 3600, swr: 86_400 },
+    "/api/[...path]": { maxAge: 900, swr: 3600 },
     "/_actions/[...path]": { maxAge: 0 },
   },
 
@@ -75,7 +78,7 @@ export default defineConfig({
     routing: { prefixDefaultLocale: false },
   },
 
-  // ─── Type-safe environment variables (Astro 5+) ──────────────────────────
+  // ─── Type-safe environment variables ─────────────────────────────────────
   env: {
     schema: {
       GMAIL_USER: envField.string({ context: "server", access: "secret" }),

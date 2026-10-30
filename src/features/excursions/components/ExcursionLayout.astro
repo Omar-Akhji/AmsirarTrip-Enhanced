@@ -1,99 +1,174 @@
 ---
-import { useTranslations } from "@/i18n/utils";
+import { parseStringArray, useTranslations } from "@/i18n/utils";
 import TripLayout from "@/shared/layout/TripLayout.astro";
-import { Clock, Route } from "@lucide/astro";
-import ExcursionInfo from "./ExcursionInfo.astro";
+import TripInfoSections from "@/shared/ui/TripInfoSections.astro";
+import type { ImageMetadata } from "astro";
+import type { CollectionEntry } from "astro:content";
+import ExcursionProgram from "./ExcursionProgram.astro";
+import ExcursionSeoSections from "./ExcursionSeoSections.astro";
 
-const { excursionKey, imageSrc, locale, slug } = Astro.props;
+interface Props {
+  readonly excursion?: CollectionEntry<"excursions">["data"] | undefined;
+  readonly excursionKey: string;
+  readonly imageSrc: ImageMetadata;
+  readonly locale: string;
+  readonly slug?: string | undefined;
+}
+
+const { excursion, excursionKey, imageSrc, locale, slug = "" } = Astro.props;
 const t = useTranslations(locale);
+const isEnglish = locale === "en";
 
-const excursionSlug = slug || excursionKey;
+const excursionSlug = slug.length > 0 ? slug : excursionKey;
 const transitionName = `trip-image-excursions-${excursionSlug}`;
 
-const highlights: string[] = [
+const fallbackHighlights: readonly string[] = [
   t(`${excursionKey}.highlights.0`),
   t(`${excursionKey}.highlights.1`),
   t(`${excursionKey}.highlights.2`),
   t(`${excursionKey}.highlights.3`),
-].filter(Boolean);
+].filter((item): item is string => typeof item === "string" && item.length > 0);
 
-const rawSidebarItems = t.raw("excursion.sidebar.items");
-const sidebarItems = Array.isArray(rawSidebarItems) ? (rawSidebarItems as string[]) : [];
+const highlights =
+  isEnglish && excursion?.seo?.highlights && excursion.seo.highlights.length > 0 ?
+    excursion.seo.highlights
+  : fallbackHighlights.length > 0 ? fallbackHighlights
+  : (excursion?.seo?.highlights ?? []);
 
-const title = t(`${excursionKey}.title`);
-const distanceLabel = t(`${excursionKey}.distanceValue`, "~191 km from Marrakech");
+const sidebarItems = parseStringArray(t.raw("excursion.sidebar.items"));
+
+const title = isEnglish && excursion?.seo?.title ? excursion.seo.title : t(`${excursionKey}.title`);
+const lead =
+  isEnglish && excursion?.seo?.lead ?
+    excursion.seo.lead
+  : t("excursion.detailsSubtitle", "Full-day private and small-group journeys from Marrakech");
+
+const heroSubtitle =
+  excursion?.i18nKeyPrefix && t.has(`excursion.list.${excursion.i18nKeyPrefix}.tagline`) ?
+    t(`excursion.list.${excursion.i18nKeyPrefix}.tagline`)
+  : t("excursion.headerSubtitle", "Our Excursions and packages");
+
+const distanceLabel = t(`${excursionKey}.distanceValue`, "~150 km from Marrakech");
 const durationLabel = t(`${excursionKey}.durationLabel`, "Full-day excursion");
-const altText = t(`${excursionKey}.alt`);
+const altText = excursion?.seo?.imageAlt ?? t(`${excursionKey}.alt`);
+
+const metrics = excursion?.metrics ?? {
+  distance: distanceLabel,
+  duration: durationLabel,
+  pickup: "08:00 AM hotel pickup in Marrakech",
+  elevation: "Atlas foothills",
+};
+
+const price = excursion?.seo?.price ?? {
+  label: "From €25 / person",
+  note: "Small-group or private transfer with licensed English-speaking driver.",
+};
+
+const overviewParagraphs: readonly string[] =
+  isEnglish && excursion?.overview && excursion.overview.length > 0 ?
+    excursion.overview
+  : [t(`${excursionKey}.overview`)].filter(
+      (p): p is string => typeof p === "string" && p.length > 0,
+    );
+
+const program = excursion?.program ?? [];
+const faqs = excursion?.seo?.faqs ?? [];
+const includes = excursion?.includes ?? [];
+const excludes = excursion?.excludes ?? [];
+const goodToKnow = excursion?.goodToKnow ?? [];
 ---
 
 <TripLayout
   breadcrumbs={[
-    { label: t("nav.home"), href: "/" },
-    { label: t("nav.excursions"), href: "/excursions" },
-    { label: t("excursion.detailsTitle") },
+    { label: t("nav.home", "Home"), href: "/" },
+    { label: t("nav.excursions", "Excursions"), href: "/excursions" },
+    { label: t("excursion.detailsTitle", "Excursion Details") },
   ]}
+  hasUnderline={true}
   headingId="excursion-title"
-  imageAlt={`${altText} - Morocco excursion destination`}
+  imageAlt={`${altText} : Morocco excursion destination`}
   imageSrc={imageSrc}
-  pageSubtitle={t("excursion.detailsSubtitle")}
-  pageTitle={t("excursion.detailsTitle")}
+  lead={lead}
+  pageSubtitle={heroSubtitle}
+  pageTitle={t("excursion.detailsTitle", "Excursion Details")}
   sectionId="excursion-single"
   sidebar={{
-    sidebarTitle: t("excursion.sidebar.title"),
-    mainBrand: t("excursion.sidebar.mainBrand"),
-    intro: t("excursion.sidebar.intro"),
-    details: t("excursion.sidebar.details"),
+    sidebarTitle: t("excursion.sidebar.title", "Why Book With Us"),
+    mainBrand: t("excursion.sidebar.mainBrand", "Amsirar Trip"),
+    intro: t("excursion.sidebar.intro", "Licensed Moroccan transport agency based in Marrakech."),
+    details: t(
+      "excursion.sidebar.details",
+      "Modern air-conditioned Mercedes-Benz vehicles with registered professional drivers.",
+    ),
     sidebarItems,
-    conclusion: t("excursion.sidebar.conclusion"),
-    ctaTitle: t("excursion.sidebar.ctaTitle"),
-    ctaDescription: t("excursion.sidebar.ctaDescription"),
-    ctaPoint01: t("excursion.sidebar.ctaPoint01"),
-    ctaPoint02: t("excursion.sidebar.ctaPoint02"),
-    ctaPoint03: t("excursion.sidebar.ctaPoint03"),
+    conclusion: t(
+      "excursion.sidebar.conclusion",
+      "Flexible pickup directly from your riad or hotel in Marrakech.",
+    ),
+    ctaTitle: t("excursion.sidebar.ctaTitle", "Need Instant Help?"),
+    ctaDescription: t(
+      "excursion.sidebar.ctaDescription",
+      "Message our dispatch desk directly on WhatsApp for real-time questions and group rates.",
+    ),
+    ctaPoint01: t("excursion.sidebar.ctaPoint01", "Door-to-door hotel transfers"),
+    ctaPoint02: t("excursion.sidebar.ctaPoint02", "Clean modern fleet"),
+    ctaPoint03: t("excursion.sidebar.ctaPoint03", "Transparent fixed pricing"),
   }}
-  smTitle={t("excursion.detailsTitle")}
+  smTitle={t("excursion.detailsTitle", "Excursion Details")}
   title={title}
   transitionName={transitionName}
 >
   <Fragment slot="content">
-    <div
-      data-animate="fade-up"
-      style="transition-delay:150ms"
-    >
-      <div class="grid gap-4 sm:grid-cols-2">
-        <div class="inline-flex items-center gap-3 rounded-full border border-orange-100 bg-orange-50 px-5 py-3">
-          <Route
-            aria-hidden="true"
-            class="size-5 text-orange-500"
-          />
-          <div class="text-start">
-            <div class="text-sm font-semibold text-orange-600">{distanceLabel}</div>
-            <div class="text-xs font-semibold text-amber-300">
-              {t("excursion.common.distanceLabel", "Distance")}
-            </div>
-          </div>
-        </div>
-
-        <div class="inline-flex items-center gap-3 rounded-full border border-amber-100 bg-amber-50 px-5 py-3">
-          <Clock
-            aria-hidden="true"
-            class="size-5 text-amber-500"
-          />
-          <div class="text-start">
-            <div class="text-sm font-semibold text-amber-600">{durationLabel}</div>
-            <div class="text-xs font-semibold text-amber-300">
-              {t("excursion.common.durationLabel", "Duration")}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <ExcursionInfo
+    <ExcursionSeoSections
+      faqTitle={t("excursion.common.faqTitle", "Frequently Asked Questions")}
+      faqs={faqs}
       highlights={highlights}
-      highlightsTitle={t("excursion.common.highlights")}
-      overview={t(`${excursionKey}.overview`)}
-      overviewTitle={t("excursion.common.overview")}
+      highlightsTitle={t("excursion.common.highlights", "Key Experiences")}
+      metrics={metrics}
+      price={price}
+      priceLabel={t("excursion.common.priceLabel", "Starting price")}
+      pricingTitle={t("excursion.common.pricingTitle", "Reservation & Pricing")}
+      reserveNow={t("booking.checkAvailability", "Reserve Now")}
+    />
+
+    <section
+      aria-labelledby="excursion-overview-heading"
+      data-animate="fade-up"
+      style="transition-delay:300ms"
+    >
+      <hgroup>
+        <p class="font-sans text-xs font-bold tracking-wider text-orange-700 uppercase">
+          Journey Overview
+        </p>
+        <h3
+          id="excursion-overview-heading"
+          class="mbs-1 mbe-4 text-xl font-bold tracking-tight text-stone-900 sm:text-2xl md:text-3xl"
+        >
+          {t("excursion.common.overview", "Journey Overview")}
+        </h3>
+      </hgroup>
+      <div class="space-y-4 max-w-[68ch]">
+        {overviewParagraphs.map((paragraph) => (
+          <p class="font-mono text-xs sm:text-sm leading-relaxed text-stone-700">{paragraph}</p>
+        ))}
+      </div>
+    </section>
+
+    {program.length > 0 && (
+      <ExcursionProgram
+        program={program}
+        programTitle={t("excursion.common.programTitle", "Timed Itinerary & Program")}
+      />
+    )}
+
+    <TripInfoSections
+      idPrefix="excursion"
+      excludedTitle={t("excursion.common.excluded", "Excluded Services")}
+      excludes={excludes}
+      goodToKnow={goodToKnow}
+      goodToKnowTitle={t("excursion.common.goodToKnow", "Travel Advisories & Preparation")}
+      includedTitle={t("excursion.common.included", "Included Services")}
+      includes={includes}
     />
   </Fragment>
   <slot />

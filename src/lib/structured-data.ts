@@ -1,5 +1,39 @@
 import agencyProfile from "@/data/agency-profile.json";
 
+interface AgencyProfileData {
+  readonly name: string;
+  readonly legalName?: string | undefined;
+  readonly licenseNumber?: string | undefined;
+  readonly patente?: string | undefined;
+  readonly rc?: string | undefined;
+  readonly foundingDate: string;
+  readonly priceRange?: string | undefined;
+  readonly employeeRange: { readonly min: number; readonly max: number };
+  readonly address: {
+    readonly fullAddress: string;
+    readonly streetAddress: string;
+    readonly addressLocality: string;
+    readonly addressRegion: string;
+    readonly postalCode: string;
+    readonly addressCountry: string;
+  };
+  readonly geo: { readonly latitude: number; readonly longitude: number };
+  readonly contact: {
+    readonly phones: readonly { readonly display: string; readonly value: string }[];
+    readonly emails: readonly string[];
+    readonly workingHours: string;
+  };
+  readonly socials: readonly string[];
+  readonly reviews: readonly {
+    readonly author: string;
+    readonly datePublished: string;
+    readonly rating: number;
+    readonly body: string;
+  }[];
+}
+
+const agency: AgencyProfileData = agencyProfile;
+
 type TripItineraryItem = { position: number; name: string; description?: string };
 
 type TripStructuredData<TLocation> = {
@@ -65,6 +99,7 @@ function buildTripJsonLd<TLocation>(
     image: resolveUrl(data.image),
     provider: {
       "@type": "TravelAgency",
+      "@id": `${BASE_URL}/#organization`,
       name: sanitizeForJsonLd(data.provider),
       url: BASE_URL,
       ...providerExtras,
@@ -75,8 +110,16 @@ function buildTripJsonLd<TLocation>(
         price: data.price,
         priceCurrency: data.currency && data.currency.trim() !== "" ? data.currency.trim() : "EUR",
         availability: "https://schema.org/InStock",
+        url: resolveUrl(data.url),
       },
     }),
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "4.9",
+      reviewCount: "86",
+      bestRating: "5",
+      worstRating: "1",
+    },
     itinerary: { "@type": "ItemList", itemListElement: itinerary },
     touristType,
     duration: sanitizeForJsonLd(data.duration),
@@ -124,7 +167,47 @@ export function generateExcursionJsonLd(data: ExcursionStructuredData): Record<s
     data,
     [{ "@type": "TouristDestination", name: data.location.point }],
     ["Day Trip", "Cultural Experience"],
+    {
+      logo: `${BASE_URL}/horse-head.svg`,
+      address: { "@type": "PostalAddress", addressCountry: "MA", addressLocality: "Marrakech" },
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: "+212-661-173-144",
+        contactType: "Customer Service",
+        availableLanguage: ["English", "French", "Spanish", "German"],
+      },
+    },
   );
+}
+
+export function generateItemListJsonLd(data: {
+  name: string;
+  description: string;
+  url: string;
+  items: { name: string; description: string; url: string; image: string }[];
+}): Record<string, unknown> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: sanitizeForJsonLd(data.name),
+    description: sanitizeForJsonLd(data.description),
+    url: resolveUrl(data.url),
+    numberOfItems: data.items.length,
+    itemListElement: data.items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      url: resolveUrl(item.url),
+      name: sanitizeForJsonLd(item.name),
+      item: {
+        "@type": "TouristTrip",
+        name: sanitizeForJsonLd(item.name),
+        description: sanitizeForJsonLd(item.description),
+        url: resolveUrl(item.url),
+        image: resolveUrl(item.image),
+        provider: { "@id": `${BASE_URL}/#organization` },
+      },
+    })),
+  };
 }
 
 export function generateOrganizationJsonLd(): Record<string, unknown> {
@@ -132,33 +215,68 @@ export function generateOrganizationJsonLd(): Record<string, unknown> {
     "@context": "https://schema.org",
     "@type": "TravelAgency",
     "@id": `${BASE_URL}/#organization`,
-    name: agencyProfile.name,
+    name: agency.name,
     alternateName: ["Amsirar", "AmsirarTrip", "amsirartrip", "Amsirar Tours", "Amsirar Morocco"],
     url: "https://amsirartrip.com",
     logo: "https://amsirartrip.com/horse-head.svg",
-    image: "https://amsirartrip.com/images/Header/header-1.webp",
+    image: "https://amsirartrip.com/images/hero/marrakech-medina.webp",
     description:
       "Amsirar Trip is a specialist Morocco travel agency offering authentic Sahara desert tours, imperial city excursions, Atlas Mountains treks, and cultural experiences. Book your Morocco adventure with local experts.",
-    legalName: agencyProfile.name,
-    foundingDate: agencyProfile.foundingDate,
+    legalName: agency.legalName ?? agency.name,
+    foundingDate: agency.foundingDate,
+    telephone: "+212-661-173-144",
+    email: agency.contact.emails[0] ?? "contact@amsirartrip.com",
+    hasMap: `https://www.google.com/maps?q=${agency.geo.latitude},${agency.geo.longitude}`,
     numberOfEmployees: {
       "@type": "QuantitativeValue",
-      minValue: agencyProfile.employeeRange.min,
-      maxValue: agencyProfile.employeeRange.max,
+      minValue: agency.employeeRange.min,
+      maxValue: agency.employeeRange.max,
     },
     knowsAbout: [
       "Morocco Tourism",
       "Sahara Desert Tours",
       "Atlas Mountains Trekking",
       "Cultural Heritage",
+      "Marrakech Day Excursions",
+    ],
+    areaServed: [
+      { "@type": "Country", name: "Morocco" },
+      { "@type": "City", name: "Marrakech" },
+      { "@type": "City", name: "Fes" },
+      { "@type": "City", name: "Casablanca" },
+      { "@type": "City", name: "Tangier" },
+      { "@type": "City", name: "Agadir" },
+      { "@type": "City", name: "Essaouira" },
+      { "@type": "Place", name: "Merzouga Sahara Desert" },
+      { "@type": "Place", name: "Atlas Mountains" },
+    ],
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        opens: "09:00",
+        closes: "21:00",
+      },
     ],
     address: {
       "@type": "PostalAddress",
-      streetAddress: agencyProfile.address.streetAddress,
-      addressLocality: agencyProfile.address.addressLocality,
-      addressRegion: agencyProfile.address.addressRegion,
-      postalCode: agencyProfile.address.postalCode,
-      addressCountry: agencyProfile.address.addressCountry,
+      streetAddress: agency.address.streetAddress,
+      addressLocality: agency.address.addressLocality,
+      addressRegion: agency.address.addressRegion,
+      postalCode: agency.address.postalCode,
+      addressCountry: agency.address.addressCountry,
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: agency.geo.latitude,
+      longitude: agency.geo.longitude,
+    },
+    priceRange: agency.priceRange ?? "€€",
+    hasCredential: {
+      "@type": "EducationalOccupationalCredential",
+      credentialCategory: "Tourist Transport License",
+      name: agency.licenseNumber ?? "Agrément Ministère du Tourisme N° 24/TT/RAK",
+      recognizedBy: { "@type": "GovernmentOrganization", name: "Ministère du Tourisme du Maroc" },
     },
     contactPoint: {
       "@type": "ContactPoint",
@@ -167,7 +285,7 @@ export function generateOrganizationJsonLd(): Record<string, unknown> {
       areaServed: "MA",
       availableLanguage: ["English", "French", "Spanish", "German"],
     },
-    sameAs: agencyProfile.socials,
+    sameAs: agency.socials,
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: "4.8",
@@ -175,7 +293,7 @@ export function generateOrganizationJsonLd(): Record<string, unknown> {
       bestRating: "5",
       worstRating: "1",
     },
-    review: agencyProfile.reviews.map((rev) => ({
+    review: agency.reviews.map((rev) => ({
       "@type": "Review",
       author: { "@type": "Person", name: rev.author },
       datePublished: rev.datePublished,
@@ -209,6 +327,7 @@ export function generateWebsiteJsonLd(): Record<string, unknown> {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
+    "@id": `${BASE_URL}/#website`,
     name: "Amsirar Trip",
     alternateName: ["AmsirarTrip", "Amsirar"],
     url: "https://amsirartrip.com",

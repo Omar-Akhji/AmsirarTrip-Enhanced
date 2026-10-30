@@ -17,7 +17,7 @@
     "Atlas Mountains crossing"
   ],
   "seo": {
-    "title": "3-Day Fes to Marrakech Desert Tour",
+    "title": "Fes to Marrakech Desert Tour",
     "metaDescription": "Take a 3-day Fes to Marrakech desert tour via Ifrane, Ziz Valley, Merzouga camel trek, Todra Gorge, Dades Valley, and Ait Ben Haddou.",
     "lead": "A practical 3-day Fes to Marrakech desert tour that crosses the Middle Atlas, reaches the Erg Chebbi dunes, and continues through southern Morocco's kasbah valleys.",
     "primaryKeyword": "Fes to Marrakech desert tour 3 days",
@@ -63,6 +63,8 @@
   },
   "jsonLd": {
     "name": "Caravan and Kasbah Experience - 3 Days",
-    "description": "Journey from Fes to Marrakech through ancient kasbahs and golden dunes on this unforgettable 3-day caravan experience."
+    "description": "Travel from Fes to Marrakech through Middle Atlas cedar forests, Erg Chebbi sand dunes, Todra Gorges, and Ait Ben Haddou.",
+    "price": 260,
+    "currency": "EUR"
   }
 }

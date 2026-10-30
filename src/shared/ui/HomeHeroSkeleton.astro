@@ -1,0 +1,180 @@
+---
+import AsciiSkeleton from "./AsciiSkeleton.astro";
+
+interface Props {
+  class?: string | undefined;
+}
+
+const { class: className } = Astro.props;
+---
+
+<section
+  id="home-hero-slider-section-skeleton"
+  class:list={[
+    "relative isolate w-full min-h-screen h-dvh overflow-hidden bg-stone-950 text-white",
+    className,
+  ]}
+  aria-busy="true"
+  aria-label="Loading Amsirar Trip Hero Carousel"
+>
+  <div
+    class="relative h-screen w-screen overflow-hidden bg-stone-950 font-sans"
+    id="home-hero-slider-skeleton"
+  >
+    {/* Dark Hero Background with desert ASCII atmosphere */}
+    <div class="item absolute inset-0 size-full">
+      <div class="size-full bg-stone-950">
+        <AsciiSkeleton
+          class="ars-image ars-hero-bg size-full text-stone-700/35"
+          rows={42}
+          variant="dither"
+        />
+        <div
+          class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.06),transparent_65%)]"
+          aria-hidden="true"
+        ></div>
+        <div
+          class="pointer-events-none absolute inset-0 bg-linear-to-b from-black/75 via-stone-950/40 to-stone-950"
+          aria-hidden="true"
+        ></div>
+      </div>
+
+      {/* Slider Details exact position & typography match for Erg Chebbi Dunes slide */}
+      <div class="content absolute top-[clamp(4.25rem,9.5vh,5.5rem)] left-5 sm:left-8 md:left-[5%] lg:left-[max(7%,calc(50%-570px))] z-10 box-border w-auto max-w-[calc(100vw-2.5rem)] text-white sm:top-[clamp(4.5rem,11vh,6.5rem)] md:top-[clamp(5.25rem,12.5vh,8rem)] lg:top-[clamp(5.5rem,15vh,8.5rem)] xl:top-[clamp(6rem,17vh,9.5rem)]">
+        {/* Tagline: WILD SAHARA EXPEDITIONS (23ch) */}
+        <div class="tagline mb-2 inline-flex items-center gap-2 whitespace-nowrap sm:mb-2 sm:gap-2 md:mb-3 md:gap-3 text-[0.7rem] sm:text-xs md:text-xs font-bold uppercase tracking-[0.16em] sm:tracking-[0.2em] md:tracking-[0.25em]">
+          <span
+            class="tagline-line inline-block h-[1.5px] w-5 shrink-0 bg-white/20 sm:w-8 md:w-12"
+            aria-hidden="true"
+          ></span>
+          <AsciiSkeleton
+            class="text-stone-300 font-bold"
+            lines={1}
+            variant="scan"
+            widths={["23ch"]}
+          />
+          <span
+            class="tagline-line inline-block h-[1.5px] w-5 shrink-0 bg-white/20 sm:w-8 md:w-12"
+            aria-hidden="true"
+          ></span>
+        </div>
+
+        {/* Title: ERG CHEBBI DUNES (16ch) matching clamp font-size from SliderDetails.astro */}
+        <div class="title m-0 whitespace-nowrap text-[clamp(1.25rem,4.6vw,1.9rem)] font-extrabold uppercase leading-[1.08] tracking-tight sm:text-[clamp(1.65rem,4vw,2.6rem)] sm:leading-[1.1] md:text-[clamp(2.1rem,3.8vw,3.6rem)] md:leading-[1.12] lg:text-[clamp(2.6rem,4.2vw,4.5rem)]">
+          <AsciiSkeleton
+            class="text-white/95"
+            lines={1}
+            variant="dither"
+            widths={["16ch"]}
+          />
+        </div>
+
+        {/* Type: DESERT SAFARI (13ch) matching clamp font-size from SliderDetails.astro */}
+        <div class="type m-0 mt-0.5 whitespace-nowrap text-[clamp(1.25rem,4.6vw,1.9rem)] font-extrabold uppercase leading-[1.08] tracking-tight sm:mt-1 sm:text-[clamp(1.65rem,4vw,2.6rem)] sm:leading-[1.1] md:mt-2 md:text-[clamp(2.1rem,3.8vw,3.6rem)] md:leading-[1.12] lg:mt-2 lg:text-[clamp(2.6rem,4.2vw,4.5rem)]">
+          <AsciiSkeleton
+            class="text-stone-300 font-extrabold"
+            lines={1}
+            variant="scan"
+            widths={["13ch"]}
+          />
+        </div>
+
+        {/* Description: Cross monumental golden sands in a private 4x4. Sleep under star-lit skies in luxury nomadic bivouacs and awaken to sunrise over the Sahara. (3 lines) */}
+        <div class="description mt-3 max-w-[min(100%,44ch)] text-[clamp(0.8125rem,0.72rem+0.42vw,1.05rem)] font-normal leading-normal sm:mt-4 sm:max-w-[46ch] sm:leading-[1.58] md:mt-4 md:max-w-[min(46ch,calc(100vw-10%))] md:leading-[1.65] lg:mt-6 lg:max-w-[calc(var(--thumb-left)-max(7%,calc(50%-570px))-3rem)] lg:leading-[1.7] xl:max-w-120">
+          <AsciiSkeleton
+            class="text-white/60"
+            lines={3}
+            variant="dither"
+            widths={["100%", "96%", "82%"]}
+          />
+        </div>
+      </div>
+    </div>
+
+    {/* Thumbnail Carousel Cards matching SliderCards.astro position & dimensions */}
+    <div
+      class="thumbnail absolute z-100 flex w-max gap-(--thumb-gap) bottom-(--thumb-bottom) left-(--thumb-left)"
+      aria-hidden="true"
+    >
+      {Array.from({ length: 4 }, () => (
+        <div class="item relative shrink-0 overflow-hidden border border-white/10 shadow-[0_8px_25px_rgb(0_0_0/45%)] w-(--thumb-width) h-(--thumb-height) rounded-(--thumb-radius) bg-slate-950">
+          <AsciiSkeleton
+            class="ars-image size-full rounded-(--thumb-radius) text-stone-500 overflow-hidden"
+            rows={22}
+            variant="dither"
+          />
+          <div class="thumbnail-overlay pointer-events-none absolute inset-x-0 bottom-0 flex flex-col gap-1 px-2 py-2 sm:px-2.5 sm:py-3 bg-linear-to-t from-black/80 via-black/40 to-transparent">
+            <AsciiSkeleton
+              class="text-white/80"
+              lines={1}
+              variant="scan"
+              widths={["4rem"]}
+            />
+            <AsciiSkeleton
+              class="text-white/50"
+              lines={1}
+              variant="terminal"
+              widths={["5rem"]}
+            />
+          </div>
+        </div>
+      ))}
+    </div>
+
+    {/* Prev / Next Navigation Arrows & Progress matching HomeHero.astro */}
+    <div
+      class="nextPrevArrows pagination absolute z-100 hidden w-auto items-center gap-3 md:flex left-[max(7%,calc(50%-570px))] max-lg:left-[5%] bottom-[calc(var(--thumb-bottom)+12px)] max-lg:bottom-[calc(var(--thumb-bottom)+10px)]"
+      aria-hidden="true"
+    >
+      <div class="grid size-12.5 place-items-center rounded-full border-2 border-white/20 bg-white/5 backdrop-blur-md">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          class="size-6 text-white/40"
+          aria-hidden="true"
+        >
+          <path
+            d="M15.75 19.5L8.25 12l7.5-7.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          />
+        </svg>
+      </div>
+      <div class="grid size-12.5 place-items-center rounded-full border-2 border-white/20 bg-white/5 backdrop-blur-md">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          class="size-6 text-white/40"
+          aria-hidden="true"
+        >
+          <path
+            d="M8.25 4.5l7.5 7.5-7.5 7.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+          />
+        </svg>
+      </div>
+
+      <div class="progress-sub-container z-60 flex h-12.5 w-[clamp(80px,14vw,220px)] items-center max-lg:w-[clamp(60px,10vw,130px)]">
+        <div class="progress-sub-background h-0.75 w-full overflow-hidden rounded-full bg-white/20">
+          <div class="h-full w-1/4 rounded-full bg-white/60"></div>
+        </div>
+      </div>
+
+      <div class="slide-numbers relative z-60 h-12.5 w-11 grid place-items-center">
+        <AsciiSkeleton
+          class="text-white/60 font-mono text-sm"
+          lines={1}
+          variant="terminal"
+          widths={["1.5rem"]}
+        />
+      </div>
+    </div>
+  </div>
+</section>

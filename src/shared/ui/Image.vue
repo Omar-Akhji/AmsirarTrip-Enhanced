@@ -2,16 +2,16 @@
 import { computed, type StyleValue } from "vue";
 
 interface Props {
-  src: string;
-  alt: string;
-  fill?: boolean;
-  quality?: number;
-  priority?: boolean;
-  sizes?: string;
-  decoding?: "async" | "sync" | "auto";
-  fetchpriority?: "high" | "low" | "auto";
-  loading?: "lazy" | "eager";
-  style?: StyleValue;
+  readonly src: string;
+  readonly alt: string;
+  readonly fill?: boolean;
+  readonly quality?: number;
+  readonly priority?: boolean;
+  readonly sizes?: string;
+  readonly decoding?: "async" | "sync" | "auto";
+  readonly fetchpriority?: "high" | "low" | "auto";
+  readonly loading?: "lazy" | "eager";
+  readonly style?: StyleValue;
 }
 
 const {
@@ -20,7 +20,7 @@ const {
   fill = false,
   priority = false,
   sizes,
-  decoding,
+  decoding = "async",
   fetchpriority,
   loading,
   style,
@@ -33,14 +33,14 @@ const imageStyle = computed<StyleValue>(() => {
     : {};
 
   if (Array.isArray(style)) {
-    return [fillStyle, ...style] as StyleValue;
+    return [fillStyle, ...style];
   }
   return typeof style === "string" ?
-      ([fillStyle, style] as StyleValue)
-    : ({ ...fillStyle, ...style } as StyleValue);
+      [fillStyle, style]
+    : { ...fillStyle, ...(typeof style === "object" && style !== null && style) };
 });
 
-const computedDecoding = computed(() => decoding ?? "async");
+const computedDecoding = computed(() => decoding);
 const computedFetchPriority = computed(() => fetchpriority ?? (priority ? "high" : undefined));
 const computedLoading = computed(() => loading ?? (priority ? "eager" : "lazy"));
 </script>
