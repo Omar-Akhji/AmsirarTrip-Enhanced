@@ -14,12 +14,24 @@ interface Props {
 }
 
 const { program, programTitle = "Timed Itinerary & Program" } = Astro.props;
+const STAGE_DELAYS = [
+  "delay-0",
+  "delay-[80ms]",
+  "delay-[160ms]",
+  "delay-[240ms]",
+  "delay-[320ms]",
+  "delay-[400ms]",
+  "delay-[480ms]",
+  "delay-[560ms]",
+  "delay-[640ms]",
+  "delay-[720ms]",
+] as const;
 ---
 
 <section
   aria-labelledby="excursion-itinerary-heading"
+  class="delay-[450ms]"
   data-animate="fade-up"
-  style="transition-delay:450ms"
 >
   <hgroup class="mbe-8">
     <p class="font-sans text-xs font-bold tracking-wider text-orange-700 uppercase">
@@ -39,8 +51,8 @@ const { program, programTitle = "Timed Itinerary & Program" } = Astro.props;
   >
     {program.map((stage, index) => (
       <li
+        class:list={[STAGE_DELAYS[index] || "delay-0"]}
         data-animate="fade-up"
-        style={`transition-delay:${index * 80}ms`}
       >
         <div class="group relative">
           <div class="mbe-4 flex flex-wrap items-center gap-3">

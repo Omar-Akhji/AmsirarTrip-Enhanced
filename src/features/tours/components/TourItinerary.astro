@@ -28,6 +28,20 @@ interface Props {
 }
 
 const { days, accommodationLabel, mealsLabel, activitiesLabel, arrivalLabel } = Astro.props;
+
+const DAY_DELAYS = [
+  "delay-0",
+  "delay-100",
+  "delay-200",
+  "delay-300",
+  "delay-[400ms]",
+  "delay-500",
+  "delay-[600ms]",
+  "delay-700",
+  "delay-[800ms]",
+  "delay-[900ms]",
+  "delay-1000",
+] as const;
 ---
 
 <ol
@@ -36,8 +50,8 @@ const { days, accommodationLabel, mealsLabel, activitiesLabel, arrivalLabel } = 
 >
   {days.map((day, index) => (
     <li
+      class:list={[DAY_DELAYS[index] || "delay-0"]}
       data-animate="fade-up"
-      style={`transition-delay:${index * 100}ms`}
     >
       <div class="group relative">
         <div class="mbe-6">

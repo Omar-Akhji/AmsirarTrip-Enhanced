@@ -11,8 +11,6 @@
  * - Astro View Transition lifecycle hooks
  */
 
-const ANIMATION_CLEANUP_MS = 1200;
-
 let revealObserver: IntersectionObserver | undefined;
 let counterObserver: IntersectionObserver | undefined;
 
@@ -25,17 +23,36 @@ function createRevealObserver(): IntersectionObserver {
         const el = entry.target;
         el.classList.add("is-visible");
 
-        // Clean up will-change after animation completes
-        el.addEventListener("animationend", () => el.classList.add("is-done"), { once: true });
+        // Compute element's delay + duration to ensure safety cleanup never prematurely cuts off animation
+        const computedStyle = globalThis.getComputedStyle(el);
+        // eslint-disable-next-line unicorn/prefer-number-coercion -- CSS time values contain units like 's' or 'ms' which Number() parses as NaN
+        const delaySec = Number.parseFloat(computedStyle.animationDelay) || 0;
+        // eslint-disable-next-line unicorn/prefer-number-coercion -- CSS time values contain units like 's' or 'ms' which Number() parses as NaN
+        const durSec = Number.parseFloat(computedStyle.animationDuration) || 0.75;
+        const totalMs = Math.round((delaySec + durSec) * 1000) + 400;
 
-        // Safety fallback in case animationend doesn't fire
-        globalThis.setTimeout(() => el.classList.add("is-done"), ANIMATION_CLEANUP_MS);
+        const cleanupTimer = globalThis.setTimeout(
+          () => {
+            el.classList.add("is-done");
+          },
+          Math.max(totalMs, 2500),
+        );
+
+        // Clean up will-change after animation completes
+        el.addEventListener(
+          "animationend",
+          () => {
+            clearTimeout(cleanupTimer);
+            el.classList.add("is-done");
+          },
+          { once: true },
+        );
 
         // Once revealed, stop observing (one-shot reveal)
         revealObserver?.unobserve(el);
       }
     },
-    { root: null, rootMargin: "0px 0px -8% 0px", threshold: 0.05 },
+    { root: null, rootMargin: "0px 0px -6% 0px", threshold: 0.08 },
   );
 }
 
@@ -79,14 +96,21 @@ function animateCounter(el: HTMLElement) {
 function convertDelays() {
   const elements = document.querySelectorAll<HTMLElement>("[data-animate]");
   elements.forEach((el) => {
-    const td = el.style.transitionDelay;
-    if (td && td !== "0s") {
-      el.style.animationDelay = td;
-    }
-
     const dataDelay = el.dataset["delay"];
     if (dataDelay) {
       el.style.animationDelay = `${dataDelay}ms`;
+      return;
+    }
+
+    const inlineTd = el.style.transitionDelay;
+    if (inlineTd && inlineTd !== "0s") {
+      el.style.animationDelay = inlineTd;
+      return;
+    }
+
+    const computedTd = globalThis.getComputedStyle(el).transitionDelay;
+    if (computedTd && computedTd !== "0s" && computedTd !== "0ms") {
+      el.style.animationDelay = computedTd;
     }
   });
 }

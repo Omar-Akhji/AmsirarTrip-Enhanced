@@ -1,235 +1,108 @@
 ---
 import servicesBg from "@/assets/images/services-bg.webp";
+import { useTranslations } from "@/i18n/utils";
 import { Image } from "astro:assets";
-import { Car, Compass, ShieldCheck, MapPinned } from "@lucide/astro";
+import ServicesScrollStack from "./ServicesScrollStack.astro";
 
 const locale = Astro.currentLocale || "en";
+const t = useTranslations(locale);
 
-const fleetSpecs = [
-  {
-    label:
-      locale === "fr" ? "Véhicules"
-      : locale === "es" ? "Vehículos"
-      : locale === "de" ? "Fahrzeuge"
-      : "Vehicles",
-    value: "Toyota Prado 4x4 & Mercedes Sprinter",
-  },
-  {
-    label:
-      locale === "fr" ? "Climatisation"
-      : locale === "es" ? "Climatización"
-      : locale === "de" ? "Klimaanlage"
-      : "Climate Control",
-    value: "Dual-zone A/C in every vehicle",
-  },
-  {
-    label:
-      locale === "fr" ? "Agrément"
-      : locale === "es" ? "Licencia"
-      : locale === "de" ? "Zulassung"
-      : "Licensing",
-    value: "Transport Touristique agréé",
-  },
-  {
-    label:
-      locale === "fr" ? "Chauffeurs"
-      : locale === "es" ? "Chóferes"
-      : locale === "de" ? "Fahrer"
-      : "Driver-Guides",
-    value: "Multilingual & mountain-certified",
-  },
+const services = [
+  { key: "handcrafted", icon: "/icons/globus-icon.svg", altKey: "services.cards.handcrafted.alt" },
+  { key: "guide", icon: "/icons/map-icon.svg", altKey: "services.cards.guide.alt" },
+  { key: "price", icon: "/icons/dollar-icon.svg", altKey: "services.cards.price.alt" },
 ];
 
-const pillars = [
-  {
-    code: "01",
-    title:
-      locale === "fr" ? "Transferts aéroport & inter-villes privés"
-      : locale === "es" ? "Traslados privados aeropuerto y ciudad"
-      : locale === "de" ? "Private Flughafen- und Stadttransfers"
-      : "Private airport & inter-city transfers",
-    desc:
-      locale === "fr" ?
-        "Prise en charge ponctuelle depuis Casablanca (CMN), Marrakech (RAK) et Fès vers votre riad ou hôtel avec accueil personnalisé."
-      : locale === "es" ?
-        "Recogida puntual en Casablanca (CMN), Marrakech (RAK) y Fez hacia su riad u hotel con bienvenida personalizada."
-      : locale === "de" ?
-        "Pünktliche Abholung von Casablanca (CMN), Marrakesch (RAK) und Fès zu Ihrem Riad mit persönlichem Empfang."
-      : "Punctual meet-and-greet pickups from Casablanca (CMN), Marrakech (RAK), and Fes directly to your riad or destination.",
-    icon: Car,
-  },
-  {
-    code: "02",
-    title:
-      locale === "fr" ? "Circuits tout-terrain Haut Atlas & Sahara"
-      : locale === "es" ? "Rutas 4x4 por el Alto Atlas y el Sahara"
-      : locale === "de" ? "4x4-Routen durch den Hohen Atlas und die Sahara"
-      : "High Atlas & Sahara 4WD expeditions",
-    desc:
-      locale === "fr" ?
-        "Franchissement sécurisé des cols du Tizi n'Tichka, pistes désertiques vers l'Erg Chebbi et bivouacs nomades privés."
-      : locale === "es" ?
-        "Cruce seguro por los pasos del Tizi n'Tichka, pistas del desierto hacia Erg Chebbi y campamentos bereberes privados."
-      : locale === "de" ?
-        "Sichere Fahrt über den Tizi n'Tichka-Pass, Wüstenpisten nach Erg Chebbi und private Berbercamps."
-      : "Expert navigation through Tizi n'Tichka mountain passes and desert tracks to private Erg Chebbi bivouacs.",
-    icon: Compass,
-  },
-  {
-    code: "03",
-    title:
-      locale === "fr" ? "Tarification transparente & sans frais cachés"
-      : locale === "es" ? "Precios claros y sin paradas forzadas"
-      : locale === "de" ? "Transparente Festpreise ohne versteckte Kosten"
-      : "Transparent pricing & direct booking",
-    desc:
-      locale === "fr" ?
-        "Carburant, péages, chauffeur dédié et hébergements confirmés à l'avance. Zéro arrêt commercial forcé."
-      : locale === "es" ?
-        "Combustible, peajes, chófer dedicado y alojamientos confirmados por adelantado. Cero compras obligadas."
-      : locale === "de" ?
-        "Inklusive Benzin, Maut, Fahrer und Unterkünften. Keine Pflicht-Einkaufsstopps."
-      : "Fuel, tolls, private driver-guide, and verified accommodations included. Zero commission shop detours.",
-    icon: ShieldCheck,
-  },
-];
+const titleMap: Record<string, { main: string; accent: string }> = {
+  fr: { main: "Flotte privée et", accent: "engagements de transport" },
+  es: { main: "Flota privada y", accent: "servicios de transporte" },
+  de: { main: "Private Fahrzeugflotte und", accent: "Transportservice" },
+  en: { main: "Private fleet and", accent: "expedition transport" },
+};
+
+const subtitleMap: Record<string, string> = {
+  fr: "Amsirar Transport Touristique assure tous vos déplacements avec des véhicules agréés, confortables et conduits par des professionnels locaux.",
+  es: "Amsirar Transport Touristique garantiza sus traslados con vehículos autorizados, modernos y conducidos por profesionales locales.",
+  de: "Amsirar Transport Touristique garantiert lückenlose Mobilität mit zugelassenen, modernen Fahrzeugen und erfahrenen Chauffeuren.",
+  en: "Licensed tourist transport across all Moroccan regions. Certified late-model vehicles, professional driver-guides, and door-to-door comfort.",
+};
+
+const defaultHeading = { main: "Private fleet and", accent: "expedition transport" };
+const defaultSubtitle =
+  "Licensed tourist transport across all Moroccan regions. Certified late-model vehicles, professional driver-guides, and door-to-door comfort.";
+
+const heading = titleMap[locale] ?? titleMap["en"] ?? defaultHeading;
+const subtitle = subtitleMap[locale] ?? subtitleMap["en"] ?? defaultSubtitle;
 ---
 
 <section
   aria-labelledby="services-heading"
-  class="relative bg-stone-100 py-12 sm:py-16 lg:py-24 text-stone-900 border-y border-stone-200"
+  class="relative overflow-visible py-12 sm:py-16 lg:py-24 text-orange-200"
   id="services"
 >
-  <div class="mx-auto px-4 max-inline-7xl sm:px-6 lg:px-8">
-    <!-- Header: Editorial & Left-Aligned with Meta -->
+  <Image
+    alt=""
+    class="absolute inset-0 size-full object-cover"
+    height={1277}
+    loading="lazy"
+    src={servicesBg}
+    width={1920}
+  />
+  <div
+    aria-hidden="true"
+    class="absolute inset-0 bg-black/45"
+  ></div>
+  <div class="relative mx-auto px-4 max-inline-7xl sm:px-6 lg:px-8">
     <div
-      class="mbe-8 sm:mbe-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-stone-200 pb-6 sm:pb-8"
+      class="mbe-8 sm:mbe-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-white/10 pb-6 sm:pb-8"
       data-animate="fade-up"
     >
       <hgroup class="max-w-2xl space-y-2">
         <h2
-          class="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl text-balance"
+          class="text-3xl font-bold tracking-tight text-white sm:text-4xl text-balance"
           id="services-heading"
         >
-          {locale === "fr" ?
-            "Flotte privée et engagements de transport"
-          : locale === "es" ?
-            "Flota privada y servicios de transporte"
-          : locale === "de" ?
-            "Private Fahrzeugflotte und Transportservice"
-          : "Private fleet and expedition transport"}
+          {heading.main} <span class="text-yellow text-shadow-sm">{heading.accent}</span>
         </h2>
-        <p class="border-s-2 border-orange-600 ps-4 py-0.5 text-sm sm:text-base text-stone-600 leading-relaxed max-w-[62ch]">
-          {locale === "fr" ?
-            "Amsirar Transport Touristique assure tous vos déplacements avec des véhicules agréés, confortables et conduits par des professionnels locaux."
-          : locale === "es" ?
-            "Amsirar Transport Touristique garantiza sus traslados con vehículos autorizados, modernos y conducidos por profesionales locales."
-          : locale === "de" ?
-            "Amsirar Transport Touristique garantiert lückenlose Mobilität mit zugelassenen, modernen Fahrzeugen und erfahrenen Chauffeuren."
-          : "Licensed tourist transport across all Moroccan regions. Certified late-model vehicles, professional driver-guides, and door-to-door comfort."
-          }
+        <p class="border-s-2 border-yellow ps-4 py-0.5 text-sm sm:text-base text-zinc-100/90 leading-relaxed max-w-[62ch] text-shadow-sm">
+          {subtitle}
         </p>
       </hgroup>
     </div>
 
-    <!-- Asymmetric 7/5 Grid -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-      <!-- Left 7 Cols: Image & Fleet Specifications -->
-      <div
-        class="lg:col-span-7 flex flex-col justify-between rounded-2xl border border-stone-200/90 bg-white p-6 sm:p-8 shadow-xs"
-        data-animate="fade-up"
-      >
-        <div class="relative overflow-hidden rounded-xl aspect-video mbe-6 bg-stone-900">
-          <Image
-            alt="Amsirar Trip private expedition transport"
-            class="size-full object-cover opacity-90 transition duration-500 hover:scale-102"
-            height={500}
-            loading="lazy"
-            src={servicesBg}
-            width={900}
-          />
-          <div class="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent"></div>
-          <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between text-white text-xs font-mono">
-            <span class="flex items-center gap-2">
-              <MapPinned
-                aria-hidden="true"
-                class="size-3.5 text-orange-400"
-                stroke-width={2}
-              />
-              <span>Morocco Statewide Coverage</span>
-            </span>
-            <span class="text-stone-300">Est. 2004</span>
+    {/* Mobile Mode: Animated ScrollStack cards without folder */}
+    <div class="block md:hidden w-full">
+      <ServicesScrollStack services={services} />
+    </div>
+
+    {/* Desktop & Tablet Mode: 3-column Grid */}
+    <div class="hidden md:grid md:grid-cols-2 lg:grid-cols-3 justify-items-stretch gap-6">
+      {services.map((service, index) => (
+        <article
+          class:list={[
+            "group relative flex size-full flex-col items-center rounded-2xl border border-white/10 bg-white/10 p-8 text-center shadow-xs ring-1 ring-black/5 backdrop-blur-xl transition-all duration-300 pointer-fine:hover:-translate-y-1 pointer-fine:hover:shadow-[0_12px_36px_rgba(0,0,0,0.35)]",
+            { "md:col-span-2 lg:col-span-1": index === 2 },
+          ]}
+          data-animate="fade-up"
+          style={`transition-delay: ${index * 150}ms; -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px);`}
+        >
+          <div class="mbe-6 inline-flex size-25 items-center justify-center rounded-full bg-white/5 ring-1 ring-white/10 transition-transform duration-300 pointer-fine:group-hover:scale-105">
+            <Image
+              alt={t(service.altKey)}
+              class="size-15"
+              height={60}
+              src={service.icon}
+              width={60}
+            />
           </div>
-        </div>
-
-        <div>
-          <h3 class="text-lg font-bold tracking-tight text-stone-900 mbe-3">
-            {locale === "fr" ?
-              "Normes techniques et confort de route"
-            : locale === "es" ?
-              "Especificaciones técnicas de nuestra flota"
-            : locale === "de" ?
-              "Technische Standards und Fahrkomfort"
-            : "Fleet specifications and safety protocols"}
+          <h3 class="text-xl font-semibold text-white">
+            {t(`services.cards.${service.key}.title`)}
           </h3>
-          <p class="text-sm text-stone-600 leading-relaxed mbe-6">
-            {locale === "fr" ?
-              "Nos véhicules tout-terrain et minivans subissent des contrôles techniques réguliers pour supporter les températures sahariennes et les virages de montagne."
-            : locale === "es" ?
-              "Nuestros 4x4 y furgonetas pasan revisiones continuas para responder al calor sahariano y carreteras de montaña."
-            : locale === "de" ?
-              "Alle Geländewagen und Kleinbusse werden regelmäßig gewartet, um Wüstenhitze und steile Bergpassagen sicher zu meistern."
-            : "Every vehicle in our private fleet undergoes rigorous multi-point maintenance to handle desert heat and mountain passes with complete reliability."
-            }
+          <p class="mbs-3 text-sm text-zinc-200 leading-relaxed">
+            {t(`services.cards.${service.key}.text`)}
           </p>
-
-          <dl class="grid grid-cols-1 sm:grid-cols-2 gap-4 border-t border-stone-100 pt-5">
-            {fleetSpecs.map((spec) => (
-              <div class="space-y-1">
-                <dt class="font-mono text-xs text-stone-600 uppercase tracking-wider">
-                  {spec.label}
-                </dt>
-                <dd class="text-sm font-semibold text-stone-900">{spec.value}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-      </div>
-
-      <!-- Right 5 Cols: 3 Purposeful Pillars -->
-      <div
-        class="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 lg:grid-rows-3 gap-4 items-stretch"
-        data-animate="fade-up"
-        style="transition-delay: 150ms;"
-      >
-        {pillars.map((pillar, index) => {
-          const Icon = pillar.icon;
-          return (
-            <div class:list={["flex size-full", { "sm:col-span-2 lg:col-span-1": index === 2 }]}>
-              <article class="flex-1 rounded-2xl border border-stone-200/90 bg-white p-6 shadow-xs transition hover:border-stone-300 hover:shadow-md flex flex-col justify-between w-full">
-                <div>
-                  <div class="flex items-center justify-between mbe-3">
-                    <span class="font-mono text-xs font-bold text-orange-600 tracking-wider">
-                      [{pillar.code}]
-                    </span>
-                    <div class="size-8 rounded-lg bg-orange-50 flex items-center justify-center text-orange-700">
-                      <Icon
-                        aria-hidden="true"
-                        class="size-4"
-                        stroke-width="2"
-                      />
-                    </div>
-                  </div>
-                  <h3 class="text-base font-bold text-stone-900 tracking-tight mbe-2">
-                    {pillar.title}
-                  </h3>
-                  <p class="text-xs sm:text-sm text-stone-600 leading-relaxed">{pillar.desc}</p>
-                </div>
-              </article>
-            </div>
-          );
-        })}
-      </div>
+        </article>
+      ))}
     </div>
   </div>
 </section>

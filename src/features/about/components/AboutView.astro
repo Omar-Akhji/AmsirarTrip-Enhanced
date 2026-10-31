@@ -23,6 +23,8 @@ const factStats = aboutStats.map((stat) => ({
       | "about.facts.cruises",
   ),
 }));
+
+const DELAY_CLASSES = ["delay-0", "delay-150", "delay-300", "delay-[450ms]"] as const;
 ---
 
 <PageHeader
@@ -131,15 +133,15 @@ const factStats = aboutStats.map((stat) => ({
         <!-- Archival Image Column with Concentric Frame -->
         <div class="order-1 lg:order-2 lg:col-span-5">
           <div
+            class="delay-200"
             data-animate="zoom-in"
-            style="transition-delay: 200ms"
           >
             <figure>
               <div class="overflow-hidden rounded-2xl border border-stone-200/90 bg-stone-100/80 p-2 sm:p-3 shadow-2xs">
                 <div class="relative aspect-4/5 sm:aspect-4/3 lg:aspect-4/5 overflow-hidden rounded-2xl bg-stone-200">
                   <Image
                     alt="Amsirar landscape showcasing traditional Moroccan architecture and culture"
-                    class="size-full object-cover transition-transform duration-250 ease-out pointer-fine:hover:scale-103 motion-reduce:transform-none"
+                    class="size-full object-cover transition-transform duration-700 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] pointer-fine:hover:scale-103 motion-reduce:transform-none"
                     height={852}
                     src={aboutImg}
                     width={720}
@@ -187,9 +189,8 @@ const factStats = aboutStats.map((stat) => ({
       <div class="mbs-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
         {factStats.map((fact, index) => (
           <div
-            class="flex size-full"
+            class:list={["flex size-full", DELAY_CLASSES[index] || "delay-0"]}
             data-animate="fade-up"
-            style={`transition-delay: ${index * 150}ms`}
           >
             <article
               aria-labelledby={`fact-${fact.id}-label`}

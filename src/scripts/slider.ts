@@ -20,12 +20,12 @@ function animateBlurText(slideItem: HTMLElement | null): void {
     const tokens = container.querySelectorAll<HTMLElement>(".blur-token");
     if (tokens.length === 0) continue;
 
-    const direction = container.dataset["direction"] ?? "top";
+    const direction = container.dataset["direction"] ?? "bottom";
     const delay = Number(container.dataset["delay"] ?? 200) / 1000;
-    const duration = Number(container.dataset["stepDuration"] ?? 0.35);
-    const blur = Number(container.dataset["blur"] ?? 10);
-    const distance = Number(container.dataset["distance"] ?? 50);
-    const stagger = Number(container.dataset["stagger"] ?? 0.035);
+    const duration = Number(container.dataset["stepDuration"] ?? 0.65);
+    const blur = Number(container.dataset["blur"] ?? 4);
+    const distance = Number(container.dataset["distance"] ?? 20);
+    const stagger = Number(container.dataset["stagger"] ?? 0.02);
 
     const initialY = direction === "top" ? -distance : distance;
 
@@ -43,9 +43,9 @@ function animateBlurText(slideItem: HTMLElement | null): void {
       filter: "blur(0px)",
       duration,
       stagger: { each: stagger, from: "start" },
-      ease: "power2.out",
+      ease: "power3.out",
       delay,
-      clearProps: "willChange",
+      clearProps: "willChange,filter",
     });
   }
 }
@@ -74,12 +74,17 @@ function initSlider(): void {
   const prevBtn = slider.querySelector<HTMLButtonElement>(".prev");
   const progressBar = slider.querySelector<HTMLElement>("#slider-progress-bar");
   const numberItems = slider.querySelectorAll<HTMLElement>(":scope .slide-numbers .number-item");
-  const totalSlides = sliderList.querySelectorAll<HTMLElement>(":scope > .item").length || 4;
+  const totalSlides = sliderList.querySelectorAll<HTMLElement>(":scope > .item").length || 3;
 
-  function updatePagination(): void {
-    const activeItem = sliderList.querySelector<HTMLElement>(":scope > .item:first-child");
-    const activeIndexStr = activeItem?.dataset["index"];
-    const activeIndex = activeIndexStr ? Number(activeIndexStr) : 0;
+  function updatePagination(forcedIndex?: number): void {
+    let activeIndex: number;
+    if (typeof forcedIndex === "number") {
+      activeIndex = forcedIndex;
+    } else {
+      const activeItem = sliderList.querySelector<HTMLElement>(":scope > .item:first-child");
+      const activeIndexStr = activeItem?.dataset["index"];
+      activeIndex = activeIndexStr ? Number(activeIndexStr) : 0;
+    }
 
     if (progressBar) {
       const percentage = ((activeIndex + 1) / totalSlides) * 100;
@@ -114,56 +119,82 @@ function initSlider(): void {
     const currentSliderItems = sliderList.querySelectorAll<HTMLElement>(":scope > .item");
     const currentThumbnailItems = thumbnail.querySelectorAll<HTMLElement>(":scope > .item");
 
-    if (currentSliderItems.length === 0 || currentThumbnailItems.length === 0) {
+    if (currentSliderItems.length < 2 || currentThumbnailItems.length < 2) {
       isAnimating = false;
       return;
     }
 
     if (direction === "next") {
-      const firstSlide = currentSliderItems[0];
+      const activeSlide = currentSliderItems[0];
+      const incomingSlide = currentSliderItems[1];
       const firstThumb = currentThumbnailItems[0];
-      if (firstSlide && firstThumb) {
-        sliderList.append(firstSlide);
-        thumbnail.append(firstThumb);
-        slider.classList.add("next");
-        updatePagination();
-        animateBlurText(sliderList.querySelector<HTMLElement>(":scope > .item:first-child"));
+
+      if (!activeSlide || !incomingSlide || !firstThumb) {
+        isAnimating = false;
+        return;
       }
+
+      activeSlide.classList.add("is-outgoing");
+      incomingSlide.classList.add("is-incoming");
+      firstThumb.classList.add("is-expanding");
+      slider.classList.add("is-next");
+
+      const nextIndex = Number(incomingSlide.dataset["index"] ?? 0);
+      updatePagination(nextIndex);
+      animateBlurText(incomingSlide);
+
+      let cleanedUp = false;
+      const finalizeNext = () => {
+        if (cleanedUp) return;
+        cleanedUp = true;
+
+        sliderList.append(activeSlide);
+        thumbnail.append(firstThumb);
+
+        activeSlide.classList.remove("is-outgoing");
+        incomingSlide.classList.remove("is-incoming");
+        firstThumb.classList.remove("is-expanding");
+        slider.classList.remove("is-next");
+
+        isAnimating = false;
+      };
+
+      setTimeout(finalizeNext, 760);
     } else {
+      const activeSlide = currentSliderItems[0];
       const lastSlide = currentSliderItems[currentSliderItems.length - 1];
       const lastThumb = currentThumbnailItems[currentThumbnailItems.length - 1];
-      if (lastSlide && lastThumb) {
-        sliderList.prepend(lastSlide);
-        thumbnail.prepend(lastThumb);
-        slider.classList.add("prev");
-        updatePagination();
-        animateBlurText(sliderList.querySelector<HTMLElement>(":scope > .item:first-child"));
+
+      if (!activeSlide || !lastSlide || !lastThumb) {
+        isAnimating = false;
+        return;
       }
+
+      sliderList.prepend(lastSlide);
+      thumbnail.prepend(lastThumb);
+
+      activeSlide.classList.add("is-outgoing");
+      lastSlide.classList.add("is-incoming");
+      slider.classList.add("is-prev");
+
+      const prevIndex = Number(lastSlide.dataset["index"] ?? 0);
+      updatePagination(prevIndex);
+      animateBlurText(lastSlide);
+
+      let cleanedUp = false;
+      const finalizePrev = () => {
+        if (cleanedUp) return;
+        cleanedUp = true;
+
+        activeSlide.classList.remove("is-outgoing");
+        lastSlide.classList.remove("is-incoming");
+        slider.classList.remove("is-prev");
+
+        isAnimating = false;
+      };
+
+      setTimeout(finalizePrev, 760);
     }
-
-    let cleanedUp = false;
-    const finalizeAnimation = () => {
-      if (cleanedUp) return;
-      cleanedUp = true;
-      if (direction === "next") {
-        slider.classList.remove("next");
-      } else {
-        slider.classList.remove("prev");
-      }
-      isAnimating = false;
-    };
-
-    // Safety timeout prevents locking if animationend is dropped
-    const timeoutId = setTimeout(finalizeAnimation, 520);
-
-    slider.addEventListener(
-      "animationend",
-      () => {
-        clearTimeout(timeoutId);
-        finalizeAnimation();
-      },
-      { once: true },
-    );
   }
 
   function startAutoplay(): void {
@@ -228,16 +259,16 @@ function initSlider(): void {
     } else if (forwardSteps === 1) {
       moveSlider("next");
     } else {
-      // Rotate intermediate items silently, then trigger animation for the landing step
+      // Bring target slide right behind the active slide so active slide stays visible while target expands
       for (let i = 0; i < forwardSteps - 1; i++) {
-        const firstSlide = sliderList.querySelector<HTMLElement>(":scope > .item");
+        const intermediateSlide = sliderList.querySelector<HTMLElement>(":scope > .item:nth-child(2)");
         const firstThumb = thumbnail.querySelector<HTMLElement>(":scope > .item");
-        if (!(firstSlide && firstThumb)) {
-          continue;
+        if (intermediateSlide) {
+          sliderList.append(intermediateSlide);
         }
-
-        sliderList.append(firstSlide);
-        thumbnail.append(firstThumb);
+        if (firstThumb) {
+          thumbnail.append(firstThumb);
+        }
       }
       moveSlider("next");
     }

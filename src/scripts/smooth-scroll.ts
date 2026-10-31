@@ -156,54 +156,6 @@ function initScrollAnimations() {
     if (trigger) activeTriggers.push(trigger);
   });
 
-  // 3. Monumental Brand Sign-off Scrub Reveal
-  const monumentalContainers = document.querySelectorAll<HTMLElement>("[data-scroll-monumental]");
-  monumentalContainers.forEach((container) => {
-    const brandText = container.querySelector<HTMLElement>(".monumental-text");
-    const glow = container.querySelector<HTMLElement>(".monumental-glow");
-
-    if (brandText) {
-      const tween = gsap.fromTo(
-        brandText,
-        { y: 32, opacity: 0.75, letterSpacing: "-0.045em" },
-        {
-          y: 0,
-          opacity: 1,
-          letterSpacing: "-0.035em",
-          ease: "none",
-          scrollTrigger: {
-            trigger: container,
-            start: "top bottom",
-            end: "bottom bottom",
-            scrub: 0.8,
-          },
-        },
-      );
-      const trigger = tween.scrollTrigger;
-      if (trigger) activeTriggers.push(trigger);
-    }
-
-    if (!glow) return;
-
-    const glowTween = gsap.fromTo(
-      glow,
-      { scale: 0.75, opacity: 0.3 },
-      {
-        scale: 1.1,
-        opacity: 0.8,
-        ease: "none",
-        scrollTrigger: {
-          trigger: container,
-          start: "top bottom",
-          end: "bottom bottom",
-          scrub: 0.8,
-        },
-      },
-    );
-    const glowTrigger = glowTween.scrollTrigger;
-    if (glowTrigger) activeTriggers.push(glowTrigger);
-  });
-
   ScrollTrigger.refresh();
 }
 
@@ -215,18 +167,36 @@ function cleanupScrollAnimations() {
   activeTriggers = [];
 }
 
+/** Resets scroll position to the page header / top (unless targeting an anchor hash). */
+function resetScrollToTop(immediate = true) {
+  if (globalThis.location.hash) return;
+
+  if (lenis) {
+    lenis.scrollTo(0, { immediate });
+  }
+  window.scrollTo({ left: 0, top: 0, behavior: "instant" });
+  document.documentElement.scrollTop = 0;
+  if (document.body) {
+    document.body.scrollTop = 0;
+  }
+}
+
 /** Full page load orchestrator. */
 function onPageLoad() {
   const instance = initLenis();
 
   // If page is loaded directly with an anchor hash in URL, smooth scroll to it
-  if (instance && globalThis.location.hash) {
-    const targetEl = document.querySelector(globalThis.location.hash);
-    if (targetEl) {
-      globalThis.setTimeout(() => {
-        instance.scrollTo(targetEl, { offset: -72, immediate: false });
-      }, 150);
+  if (globalThis.location.hash) {
+    if (instance) {
+      const targetEl = document.querySelector(globalThis.location.hash);
+      if (targetEl) {
+        globalThis.setTimeout(() => {
+          instance.scrollTo(targetEl, { offset: -72, immediate: false });
+        }, 150);
+      }
     }
+  } else {
+    resetScrollToTop(true);
   }
 
   // Small delay to allow layout recalculation after transition skeletons vanish
@@ -237,10 +207,24 @@ function onPageLoad() {
 }
 
 /** View transition preparation hook. */
-function onBeforePreparation() {
+function onBeforePreparation(e: Event) {
   cleanupScrollAnimations();
+  const hasHash = Boolean(
+    e && typeof e === "object" && "to" in e && (e as { to: URL }).to?.hash,
+  );
+  if (!hasHash) {
+    resetScrollToTop(true);
+  }
+}
+
+/** View transition swap hook to ensure new page starts at header. */
+function onAfterSwap() {
+  if (!globalThis.location.hash) {
+    resetScrollToTop(true);
+  }
 }
 
 // Wire up Astro View Transition lifecycle
 document.addEventListener("astro:page-load", onPageLoad);
 document.addEventListener("astro:before-preparation", onBeforePreparation);
+document.addEventListener("astro:after-swap", onAfterSwap);

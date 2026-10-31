@@ -39,10 +39,10 @@ const { class: className } = Astro.props;
         ></div>
       </div>
 
-      {/* Slider Details exact position & typography match for Erg Chebbi Dunes slide */}
-      <div class="content absolute top-[clamp(4.25rem,9.5vh,5.5rem)] left-5 sm:left-8 md:left-[5%] lg:left-[max(7%,calc(50%-570px))] z-10 box-border w-auto max-w-[calc(100vw-2.5rem)] text-white sm:top-[clamp(4.5rem,11vh,6.5rem)] md:top-[clamp(5.25rem,12.5vh,8rem)] lg:top-[clamp(5.5rem,15vh,8.5rem)] xl:top-[clamp(6rem,17vh,9.5rem)]">
-        {/* Tagline: WILD SAHARA EXPEDITIONS (23ch) */}
-        <div class="tagline mb-2 inline-flex items-center gap-2 whitespace-nowrap sm:mb-2 sm:gap-2 md:mb-3 md:gap-3 text-[0.7rem] sm:text-xs md:text-xs font-bold uppercase tracking-[0.16em] sm:tracking-[0.2em] md:tracking-[0.25em]">
+      {/* Slider Details exact position & typography match for Tour Travel & Adventure Camping slide */}
+      <div class="content absolute top-[clamp(4.25rem,9.5vh,5.5rem)] max-sm:inset-x-4 max-sm:flex max-sm:flex-col max-sm:items-center max-sm:text-center sm:left-8 sm:w-auto md:left-[5%] lg:left-[max(7%,calc(50%-570px))] z-10 box-border max-w-[calc(100vw-2rem)] text-white sm:top-[clamp(3.75rem,8.5vh,5rem)] md:top-[clamp(4.25rem,9.5vh,6rem)] lg:top-[clamp(4.75rem,11vh,7rem)] xl:top-[clamp(5.25rem,13vh,7.5rem)]">
+        {/* Tagline: Welcome to Amsirar Trip (23ch) */}
+        <div class="tagline mb-2 inline-flex items-center justify-center sm:justify-start gap-2 whitespace-nowrap sm:mb-2 sm:gap-2 md:mb-3 md:gap-3 text-[0.7rem] sm:text-xs md:text-xs font-bold uppercase tracking-[0.16em] sm:tracking-[0.2em] md:tracking-[0.25em]">
           <span
             class="tagline-line inline-block h-[1.5px] w-5 shrink-0 bg-white/20 sm:w-8 md:w-12"
             aria-hidden="true"
@@ -59,28 +59,28 @@ const { class: className } = Astro.props;
           ></span>
         </div>
 
-        {/* Title: ERG CHEBBI DUNES (16ch) matching clamp font-size from SliderDetails.astro */}
-        <div class="title m-0 whitespace-nowrap text-[clamp(1.25rem,4.6vw,1.9rem)] font-extrabold uppercase leading-[1.08] tracking-tight sm:text-[clamp(1.65rem,4vw,2.6rem)] sm:leading-[1.1] md:text-[clamp(2.1rem,3.8vw,3.6rem)] md:leading-[1.12] lg:text-[clamp(2.6rem,4.2vw,4.5rem)]">
+        {/* Title: TOUR TRAVEL (11ch) matching clamp font-size from SliderDetails.astro */}
+        <div class="title m-0 whitespace-nowrap text-center sm:text-left text-[clamp(1.25rem,4.6vw,1.9rem)] font-extrabold uppercase leading-[1.08] tracking-tight sm:text-[clamp(1.65rem,4vw,2.6rem)] sm:leading-[1.1] md:text-[clamp(2.1rem,3.8vw,3.6rem)] md:leading-[1.12] lg:text-[clamp(2.6rem,4.2vw,4.5rem)]">
           <AsciiSkeleton
             class="text-white/95"
             lines={1}
             variant="dither"
-            widths={["16ch"]}
+            widths={["14ch"]}
           />
         </div>
 
-        {/* Type: DESERT SAFARI (13ch) matching clamp font-size from SliderDetails.astro */}
-        <div class="type m-0 mt-0.5 whitespace-nowrap text-[clamp(1.25rem,4.6vw,1.9rem)] font-extrabold uppercase leading-[1.08] tracking-tight sm:mt-1 sm:text-[clamp(1.65rem,4vw,2.6rem)] sm:leading-[1.1] md:mt-2 md:text-[clamp(2.1rem,3.8vw,3.6rem)] md:leading-[1.12] lg:mt-2 lg:text-[clamp(2.6rem,4.2vw,4.5rem)]">
+        {/* Type: & ADVENTURE CAMPING (19ch) matching clamp font-size from SliderDetails.astro */}
+        <div class="type m-0 mt-0.5 whitespace-nowrap text-center sm:text-left text-[clamp(1.25rem,4.6vw,1.9rem)] font-extrabold uppercase leading-[1.08] tracking-tight sm:mt-1 sm:text-[clamp(1.65rem,4vw,2.6rem)] sm:leading-[1.1] md:mt-2 md:text-[clamp(2.1rem,3.8vw,3.6rem)] md:leading-[1.12] lg:mt-2 lg:text-[clamp(2.6rem,4.2vw,4.5rem)]">
           <AsciiSkeleton
             class="text-stone-300 font-extrabold"
             lines={1}
             variant="scan"
-            widths={["13ch"]}
+            widths={["19ch"]}
           />
         </div>
 
-        {/* Description: Cross monumental golden sands in a private 4x4. Sleep under star-lit skies in luxury nomadic bivouacs and awaken to sunrise over the Sahara. (3 lines) */}
-        <div class="description mt-3 max-w-[min(100%,44ch)] text-[clamp(0.8125rem,0.72rem+0.42vw,1.05rem)] font-normal leading-normal sm:mt-4 sm:max-w-[46ch] sm:leading-[1.58] md:mt-4 md:max-w-[min(46ch,calc(100vw-10%))] md:leading-[1.65] lg:mt-6 lg:max-w-[calc(var(--thumb-left)-max(7%,calc(50%-570px))-3rem)] lg:leading-[1.7] xl:max-w-120">
+        {/* Description: Specialist in Morocco travel and tours, Sahara desert trips, and excursions to the imperial cities of Morocco. (3 lines) */}
+        <div class="description mt-3 mx-auto sm:mx-0 max-w-[min(100%,44ch)] text-center sm:text-left text-[clamp(0.8125rem,0.72rem+0.42vw,1.05rem)] font-normal leading-normal sm:mt-4 sm:max-w-[46ch] sm:leading-[1.58] md:mt-4 md:max-w-[min(46ch,calc(100vw-10%))] md:leading-[1.65] lg:mt-6 lg:max-w-[calc(var(--thumb-left)-max(7%,calc(50%-570px))-3rem)] lg:leading-[1.7] xl:max-w-120">
           <AsciiSkeleton
             class="text-white/60"
             lines={3}
@@ -96,7 +96,7 @@ const { class: className } = Astro.props;
       class="thumbnail absolute z-100 flex w-max gap-(--thumb-gap) bottom-(--thumb-bottom) left-(--thumb-left)"
       aria-hidden="true"
     >
-      {Array.from({ length: 4 }, () => (
+      {Array.from({ length: 3 }, () => (
         <div class="item relative shrink-0 overflow-hidden border border-white/10 shadow-[0_8px_25px_rgb(0_0_0/45%)] w-(--thumb-width) h-(--thumb-height) rounded-(--thumb-radius) bg-slate-950">
           <AsciiSkeleton
             class="ars-image size-full rounded-(--thumb-radius) text-stone-500 overflow-hidden"
@@ -163,7 +163,7 @@ const { class: className } = Astro.props;
 
       <div class="progress-sub-container z-60 flex h-12.5 w-[clamp(80px,14vw,220px)] items-center max-lg:w-[clamp(60px,10vw,130px)]">
         <div class="progress-sub-background h-0.75 w-full overflow-hidden rounded-full bg-white/20">
-          <div class="h-full w-1/4 rounded-full bg-white/60"></div>
+          <div class="h-full w-1/3 rounded-full bg-white/60"></div>
         </div>
       </div>
 

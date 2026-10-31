@@ -34,9 +34,12 @@ const navigateMonth = (direction: "prev" | "next") => {
   currentMonth.value = next;
 };
 
-const handleDaySelect = (day: { date: Date; isDisabled: boolean }) => {
+const handleDaySelect = (day: { date: Date; isDisabled: boolean }, event?: MouseEvent) => {
   if (day.isDisabled) return;
   selectedDate.value = day.date;
+  if (event?.currentTarget instanceof HTMLElement) {
+    event.currentTarget.blur();
+  }
 };
 
 const goToToday = () => {
@@ -162,7 +165,7 @@ watch(
       <div class="mbe-4 flex items-center justify-between border-b border-stone-100 pbe-3">
         <button
           type="button"
-          class="flex size-8 items-center justify-center rounded-lg text-stone-600 transition-colors focus:ring-2 focus:ring-orange-500 focus:ring-offset-1 focus:outline-hidden pointer-fine:hover:bg-stone-100 pointer-fine:hover:text-stone-900"
+          class="flex size-8 items-center justify-center rounded-lg text-stone-600 transition-colors focus:ring-0 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-1 pointer-fine:hover:bg-stone-100 pointer-fine:hover:text-stone-900"
           :aria-label="t('calendar.prevMonth', 'Previous month')"
           @click="navigateMonth('prev')"
         >
@@ -178,7 +181,7 @@ watch(
 
         <button
           type="button"
-          class="flex size-8 items-center justify-center rounded-lg text-stone-600 transition-colors focus:ring-2 focus:ring-orange-500 focus:ring-offset-1 focus:outline-hidden pointer-fine:hover:bg-stone-100 pointer-fine:hover:text-stone-900"
+          class="flex size-8 items-center justify-center rounded-lg text-stone-600 transition-colors focus:ring-0 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-1 pointer-fine:hover:bg-stone-100 pointer-fine:hover:text-stone-900"
           :aria-label="t('calendar.nextMonth', 'Next month')"
           @click="navigateMonth('next')"
         >
@@ -216,20 +219,31 @@ watch(
                 "
                 :aria-current="day.isToday ? 'date' : undefined"
                 :aria-pressed="day.isSelected"
-                class="size-9 rounded-lg p-0 font-mono text-xs transition-colors duration-150 focus:ring-2 focus:ring-orange-500 focus:ring-offset-1 focus:outline-hidden pointer-fine:hover:bg-stone-100 pointer-fine:hover:text-stone-900"
+                class="relative flex size-9 flex-col items-center justify-center rounded-full p-0 font-mono text-xs transition-colors duration-150 focus:ring-0 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-1"
                 :class="[
                   day.isSelected ?
-                    'bg-linear-to-br from-amber-orange to-orange font-bold text-white shadow-2xs shadow-orange/30 hover:text-white hover:brightness-105'
-                  : 'text-stone-700',
+                    'bg-linear-to-br from-amber-orange to-orange font-bold text-white shadow-2xs shadow-orange/30'
+                  : [
+                      'text-stone-700',
+                      !day.isDisabled ?
+                        'pointer-fine:hover:bg-stone-100 pointer-fine:hover:text-stone-900'
+                      : '',
+                    ],
                   day.isDisabled ? 'cursor-not-allowed text-stone-300 opacity-40' : '',
                   !day.isCurrentMonth && !day.isSelected ? 'text-stone-300' : '',
-                  day.isToday && !day.isSelected ?
-                    'border border-orange-500/40 font-semibold text-orange-700'
-                  : '',
+                  day.isToday && !day.isSelected ? 'font-semibold text-orange-700' : '',
                 ]"
-                @click="handleDaySelect(day)"
+                @click="handleDaySelect(day, $event)"
               >
-                {{ day.date.getDate() }}
+                <span :class="day.isToday ? '-mbs-0.5 leading-none' : 'leading-none'">
+                  {{ day.date.getDate() }}
+                </span>
+                <span
+                  v-if="day.isToday"
+                  aria-hidden="true"
+                  class="absolute bottom-1 size-1 rounded-full"
+                  :class="day.isSelected ? 'bg-white' : 'bg-orange-600'"
+                />
               </button>
             </div>
           </div>
@@ -264,7 +278,7 @@ watch(
       <div class="mbs-4 flex items-center justify-between gap-2 border-t border-stone-100 pbs-3">
         <button
           type="button"
-          class="rounded-lg border border-stone-200/90 bg-stone-50 px-3 py-2 font-mono text-xs font-semibold text-stone-700 transition-colors focus:ring-2 focus:ring-orange-500 focus:ring-offset-1 focus:outline-hidden pointer-fine:hover:border-stone-300 pointer-fine:hover:bg-stone-100"
+          class="rounded-lg border border-stone-200/90 bg-stone-50 px-3 py-2 font-mono text-xs font-semibold text-stone-700 transition-colors focus:ring-0 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-1 pointer-fine:hover:border-stone-300 pointer-fine:hover:bg-stone-100"
           @click="goToToday"
         >
           {{ t("calendar.today", "Today") }}
@@ -273,7 +287,7 @@ watch(
         <div class="flex gap-2">
           <button
             type="button"
-            class="rounded-lg border border-stone-200/90 bg-white px-4 py-2 font-mono text-xs font-semibold text-stone-700 transition-colors duration-150 focus:ring-2 focus:ring-orange-500 focus:ring-offset-1 focus:outline-hidden pointer-fine:hover:border-stone-300 pointer-fine:hover:bg-stone-50"
+            class="rounded-lg border border-stone-200/90 bg-white px-4 py-2 font-mono text-xs font-semibold text-stone-700 transition-colors duration-150 focus:ring-0 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-1 pointer-fine:hover:border-stone-300 pointer-fine:hover:bg-stone-50"
             @click="emit('close')"
           >
             {{ t("calendar.cancel", "Cancel") }}
@@ -281,7 +295,7 @@ watch(
           <button
             :disabled="!selectedDate || (initialDate && isSameDay(selectedDate, initialDate))"
             type="button"
-            class="rounded-lg bg-linear-to-br from-amber-orange to-orange px-4 py-2 font-mono text-xs font-semibold text-white shadow-2xs shadow-orange/20 transition-all duration-150 focus:ring-2 focus:ring-orange-500 focus:ring-offset-1 focus:outline-hidden disabled:cursor-not-allowed disabled:opacity-40 pointer-fine:hover:shadow-sm pointer-fine:hover:shadow-orange/30 pointer-fine:hover:brightness-105"
+            class="rounded-lg bg-linear-to-br from-amber-orange to-orange px-4 py-2 font-mono text-xs font-semibold text-white shadow-2xs shadow-orange/20 transition-all duration-150 focus:ring-0 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-40 pointer-fine:hover:shadow-sm pointer-fine:hover:shadow-orange/30 pointer-fine:hover:brightness-105"
             @click="handleApply"
           >
             {{ t("calendar.apply", "Apply") }}

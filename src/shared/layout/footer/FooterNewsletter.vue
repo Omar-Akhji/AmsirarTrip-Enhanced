@@ -24,9 +24,8 @@ const openModal = () => {
 
 <template>
   <div
-    class="md:col-span-2 lg:col-span-1"
+    class="delay-300 md:col-span-2 lg:col-span-1"
     data-animate="fade-up"
-    style="transition-delay: 300ms"
   >
     <div class="mbe-2 flex h-9 items-center">
       <h3 class="text-sm font-semibold tracking-wider text-white uppercase">

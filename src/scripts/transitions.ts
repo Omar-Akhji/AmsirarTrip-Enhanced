@@ -151,6 +151,12 @@ function handleInitialLoad(): void {
   if (initialLoadShown) return;
   initialLoadShown = true;
 
+  if (!globalThis.location.hash) {
+    window.scrollTo({ left: 0, top: 0, behavior: "instant" });
+    document.documentElement.scrollTop = 0;
+    if (document.body) document.body.scrollTop = 0;
+  }
+
   const routeKey = resolveSkeletonRoute(globalThis.location.pathname);
   showSkeleton(routeKey);
 
@@ -166,6 +172,13 @@ document.addEventListener("astro:before-preparation", (e: Event) => {
 
   startProgressBar();
 
+  // Scroll to header immediately when navigating to another page without hash
+  if (!e.to.hash) {
+    window.scrollTo({ left: 0, top: 0, behavior: "instant" });
+    document.documentElement.scrollTop = 0;
+    if (document.body) document.body.scrollTop = 0;
+  }
+
   // In development mode (or on client nav), delay page loader so skeleton transition is visible
   const originalLoader = e.loader;
   e.loader = async (): Promise<void> => {
@@ -178,6 +191,11 @@ document.addEventListener("astro:before-preparation", (e: Event) => {
 });
 
 document.addEventListener("astro:after-swap", () => {
+  if (!globalThis.location.hash) {
+    window.scrollTo({ left: 0, top: 0, behavior: "instant" });
+    document.documentElement.scrollTop = 0;
+    if (document.body) document.body.scrollTop = 0;
+  }
   hideSkeleton();
   finishProgressBar();
 });

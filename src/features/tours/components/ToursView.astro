@@ -38,6 +38,17 @@ const tourStats = [
       || "On-trip coordination for hotels, dietary requests, and schedule tweaks.",
   },
 ];
+
+const DELAY_CLASSES = [
+  "delay-0",
+  "delay-150",
+  "delay-300",
+  "delay-[450ms]",
+  "delay-[600ms]",
+  "delay-[750ms]",
+  "delay-[900ms]",
+  "delay-[1050ms]",
+] as const;
 ---
 
 <PageHeader
@@ -124,9 +135,8 @@ const tourStats = [
       <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
         {tours.map((tour, index) => (
           <div
-            class="flex size-full"
+            class:list={["flex size-full", DELAY_CLASSES[index] || "delay-0"]}
             data-animate="fade-up"
-            style={`transition-delay: ${index * 150}ms`}
           >
             <TripCard
               badge={`${tour.duration} Days`}

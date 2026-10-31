@@ -5,8 +5,6 @@ import fr from "../locales/fr/common.json";
 
 import { type LocaleData, validateLocale } from "./schema";
 
-export type { Locale } from "./locales";
-
 /**
  * Locale objects cast to the schema type. Runtime `safeParse` validation in DEV/CI catches any
  * structural drift between the JSON files and the schema — the `as` cast bridges the small gap

@@ -66,3 +66,7 @@ function init() {
 }
 
 document.addEventListener("astro:page-load", init);
+document.addEventListener("astro:after-swap", () => {
+  const nav = document.querySelector<HTMLElement>("#main-navbar");
+  if (nav) updateScrolled(nav);
+});

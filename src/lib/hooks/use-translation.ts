@@ -40,5 +40,3 @@ export function useTranslation(explicitLocale?: string): UseTranslationReturn {
 
   return { t: tFunc, i18n: { language: locale } };
 }
-
-export { type TranslationFunction as TranslationHelper } from "../../i18n/core";

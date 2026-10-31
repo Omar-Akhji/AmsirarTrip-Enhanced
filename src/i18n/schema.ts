@@ -369,7 +369,7 @@ const contactSectionSchema = z.object({
 
 // ── Top-level Locale Schema ──────────────────────────────────────────────────
 
-export const localeSchema = z.object({
+const localeSchema = z.object({
   helplineTitle: z.string(),
   helplineNumber: z.string(),
   validations: validationsSchema,

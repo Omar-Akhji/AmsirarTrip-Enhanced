@@ -1,6 +1,5 @@
 ---
 import { Image } from "astro:assets";
-import bg4 from "../../../assets/images/Excursions/Agafay.webp";
 import bg1 from "../../../assets/images/Header/header-1.webp";
 import bg2 from "../../../assets/images/Header/header-2.webp";
 import bg3 from "../../../assets/images/Header/header-3.webp";
@@ -16,144 +15,112 @@ const { images = [] } = Astro.props;
 const locale = Astro.currentLocale || "en";
 
 // Default high-resolution Moroccan travel images
-const defaultImages = [images[0] || bg1, images[1] || bg2, images[2] || bg3, images[3] || bg4];
+const defaultImages = [images[0] || bg1, images[1] || bg2, images[2] || bg3];
 
 // Localized slide content
 const slidesData = {
   en: [
     {
       id: "sahara",
-      tagline: "SAHARA DESERT ROUTES",
-      title: "ERG CHEBBI DUNES",
-      type: "DESERT EXPEDITIONS",
+      tagline: "Welcome to Amsirar Trip",
+      title: "TOUR TRAVEL",
+      type: "& ADVENTURE CAMPING",
       description:
-        "Travel across the Erg Chebbi dunes by private 4x4, stay overnight in a desert bivouac, and watch the sunrise over the Sahara.",
+        "Specialist in Morocco travel and tours, Sahara desert trips, and excursions to the imperial cities of Morocco.",
     },
     {
       id: "atlas",
-      tagline: "HIGH ATLAS MOUNTAINS",
-      title: "IMLIL & TOUBKAL",
-      type: "MOUNTAIN TREKKING",
+      tagline: "Welcome to Amsirar Trip",
+      title: "ADVENTURE AWAITS",
+      type: "BEYOND THE DUNES",
       description:
-        "Drive up mountain passes, walk through terraced walnut groves, and visit Berber stone villages on the slopes of Mount Toubkal.",
+        "Specialist in Morocco travel and tours, Sahara desert trips, and excursions to the imperial cities of Morocco.",
     },
     {
       id: "imperial",
-      tagline: "IMPERIAL MEDINAS & KASBAHS",
-      title: "MARRAKECH & FES",
-      type: "HISTORICAL ITINERARIES",
+      tagline: "Welcome to Amsirar Trip",
+      title: "PACK YOUR BAGS",
+      type: "MOROCCO CALLS",
       description:
-        "Explore historic medinas, spice souks, and traditional riads with Moroccan zellige tilework.",
-    },
-    {
-      id: "coastal",
-      tagline: "ATLANTIC COASTLINE",
-      title: "ESSAOUIRA MOGADOR",
-      type: "COASTAL EXCURSIONS",
-      description:
-        "Walk along 18th-century sea ramparts, artisan woodworking shops, and the Atlantic beach.",
+        "Specialist in Morocco travel and tours, Sahara desert trips, and excursions to the imperial cities of Morocco.",
     },
   ],
   fr: [
     {
       id: "sahara",
-      tagline: "EXPÉDITIONS DANS LE SAHARA",
-      title: "DUNES D'ERG CHEBBI",
-      type: "SAFARI DÉSERT",
+      tagline: "Bienvenue chez Amsirar Trip",
+      title: "VOYAGE, AVENTURE",
+      type: "ET CAMPING",
       description:
-        "Traversez les sables dorés en 4x4 privé. Dormez sous la voûte céleste dans un bivouac de luxe et admirez le lever de soleil sur les dunes.",
+        "Spécialiste des voyages au Maroc, des circuits dans le désert du Sahara et des excursions vers les villes impériales.",
     },
     {
       id: "atlas",
-      tagline: "MASSIF DU HAUT ATLAS",
-      title: "IMLIL ET LE TOUBKAL",
-      type: "TREK EN MONTAGNE",
+      tagline: "Bienvenue chez Amsirar Trip",
+      title: "L'AVENTURE VOUS ATTEND",
+      type: "AU-DELÀ DES DUNES",
       description:
-        "Franchissez des cols spectaculaires, vergers en terrasses et villages berbères authentiques accrochés aux pentes du mont Toubkal.",
+        "Spécialiste des voyages au Maroc, des circuits dans le désert du Sahara et des excursions vers les villes impériales.",
     },
     {
       id: "imperial",
-      tagline: "CITÉS ET MÉDINAS IMPÉRIALES",
-      title: "MARRAKECH ET FÈS",
-      type: "ODYSSÉE CULTURELLE",
+      tagline: "Bienvenue chez Amsirar Trip",
+      title: "PRÉPAREZ VOS VALISES",
+      type: "LE MAROC VOUS APPELLE",
       description:
-        "Plongez dans les ruelles millénaires classées à l'UNESCO, les souks d'épices parfumés et les riads aux zelliges ciselés avec art.",
-    },
-    {
-      id: "coastal",
-      tagline: "CÔTE ATLANTIQUE SAUVAGE",
-      title: "ESSAOUIRA MOGADOR",
-      type: "ESCAPADE OCÉANE",
-      description:
-        "Ressentez les alizés le long des remparts maritimes du XVIIIe siècle, des ateliers d'artisans et des plages paisibles de l'Atlantique.",
+        "Spécialiste des voyages au Maroc, des circuits dans le désert du Sahara et des excursions vers les villes impériales.",
     },
   ],
   es: [
     {
       id: "sahara",
-      tagline: "EXPEDICIONES AL SÁHARA",
-      title: "DUNAS DE ERG CHEBBI",
-      type: "SAFARI EN EL DESIERTO",
+      tagline: "Bienvenidos a Amsirar Trip",
+      title: "VIAJES, AVENTURA",
+      type: "Y CAMPING",
       description:
-        "Cruce las doradas dunas de Merzouga en 4x4 privado. Duerma bajo las estrellas en haimas bereberes de lujo con vistas al amanecer.",
+        "Especialista en viajes y tours a Marruecos, viajes al desierto del Sahara y excursiones a las ciudades imperiales de Marruecos.",
     },
     {
       id: "atlas",
-      tagline: "CORDILLERA DEL ALTO ATLAS",
-      title: "IMLIL Y TOUBKAL",
-      type: "TREKKING DE MONTAÑA",
+      tagline: "Bienvenidos a Amsirar Trip",
+      title: "LA AVENTURA TE ESPERA",
+      type: "MÁS ALLÁ DE LAS DUNAS",
       description:
-        "Senderos de altura, terrazas de nogales y pueblos bereberes milenarios al pie del majestuoso pico Toubkal guiados por locales.",
+        "Especialista en viajes y tours a Marruecos, viajes al desierto del Sahara y excursiones a las ciudades imperiales de Marruecos.",
     },
     {
       id: "imperial",
-      tagline: "CIUDADES IMPERIALES",
-      title: "MARRAKECH Y FEZ",
-      type: "ODISEA CULTURAL",
+      tagline: "Bienvenidos a Amsirar Trip",
+      title: "PREPARA TUS MALETAS",
+      type: "MARRUECOS TE LLAMA",
       description:
-        "Piérdase en los callejones de medinas históricas, mercados de especias y palacios con mosaicos zellige de belleza milenaria.",
-    },
-    {
-      id: "coastal",
-      tagline: "COSTA ATLÁNTICA MARROQUÍ",
-      title: "ESSAOUIRA MOGADOR",
-      type: "ESCAPADA AL MAR",
-      description:
-        "Murallas históricas frente al océano, brisa atlántica, talleres de artesanía en madera de tuya y serenidad junto a la playa.",
+        "Especialista en viajes y tours a Marruecos, viajes al desierto del Sahara y excursiones a las ciudades imperiales de Marruecos.",
     },
   ],
   de: [
     {
       id: "sahara",
-      tagline: "SAHARA EXPEDITIONEN",
-      title: "ERG CHEBBI DÜNEN",
-      type: "WÜSTEN SAFARI",
+      tagline: "Willkommen bei Amsirar Trip",
+      title: "REISEN, ABENTEUER",
+      type: "& CAMPING",
       description:
-        "Überqueren Sie die goldenen Dünen von Merzouga im privaten 4x4. Übernachten Sie in Luxus-Berbercamps unter funkelndem Sternenhimmel.",
+        "Spezialist für Reisen und Touren in Marokko, Wüstenreisen in die Sahara und Ausflüge zu den Königsstädten Marokkos.",
     },
     {
       id: "atlas",
-      tagline: "HOHER ATLAS GEBIRGE",
-      title: "IMLIL & TOUBKAL",
-      type: "ALPINES TREKKING",
+      tagline: "Willkommen bei Amsirar Trip",
+      title: "DAS ABENTEUER WARTET",
+      type: "JENSEITS DER DÜNEN",
       description:
-        "Erleben Sie spektakuläre Bergpässe, terrassierte Walnusshaine und gastfreundliche Berberdörfer am Fuße des Jbel Toubkal.",
+        "Spezialist für Reisen und Touren in Marokko, Wüstenreisen in die Sahara und Ausflüge zu den Königsstädten Marokkos.",
     },
     {
       id: "imperial",
-      tagline: "KÖNIGSSTÄDTE & MEDINAS",
-      title: "MARRAKESCH & FÈS",
-      type: "KULTURELLE REISE",
+      tagline: "Willkommen bei Amsirar Trip",
+      title: "PACKEN SIE IHRE KOFFER",
+      type: "MAROKKO RUFT",
       description:
-        "Tauchen Sie ein in lebhafte UNESCO-Medinas, duftende Gewürzsouks und prachtvolle Riads mit kunstvollen marokkanischen Mosaiken.",
-    },
-    {
-      id: "coastal",
-      tagline: "ATLANTIKKÜSTE",
-      title: "ESSAOUIRA MOGADOR",
-      type: "KÜSTEN AUSZEIT",
-      description:
-        "Genießen Sie die frische Meeresbrise an den Festungsmauern des 18. Jahrhunderts, traditionsreiche Kunsthandwerke und ruhige Strände.",
+        "Spezialist für Reisen und Touren in Marokko, Wüstenreisen in die Sahara und Ausflüge zu den Königsstädten Marokkos.",
     },
   ],
 };
@@ -282,7 +249,7 @@ const thumbnailCards: SlideCardItem[] = currentSlides.map((slide) => ({
       >
         <div class="progress-sub-background h-0.75 w-full overflow-hidden rounded-full bg-white/20">
           <div
-            class="progress-sub-foreground h-full w-1/4 rounded-full bg-[#ecad29] shadow-[0_0_10px_rgb(236_173_41/50%)] transition-[width] duration-220 ease-[cubic-bezier(0.23,1,0.32,1)]"
+            class="progress-sub-foreground h-full w-1/3 rounded-full bg-[#ecad29] shadow-[0_0_10px_rgb(236_173_41/50%)] transition-[width] duration-750 ease-[cubic-bezier(0.16,1,0.3,1)]"
             id="slider-progress-bar"
           ></div>
         </div>
@@ -297,7 +264,7 @@ const thumbnailCards: SlideCardItem[] = currentSlides.map((slide) => ({
         {currentSlides.map((_, index) => (
           <div
             class:list={[
-              "number-item pointer-events-none absolute inset-0 grid place-items-center text-[clamp(1.25rem,1.8vw,1.85rem)] font-bold text-white select-none transition-[transform,opacity] duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] translate-y-full opacity-0 [&.active]:translate-y-0 [&.active]:opacity-100",
+              "number-item pointer-events-none absolute inset-0 grid place-items-center text-[clamp(1.25rem,1.8vw,1.85rem)] font-bold text-white select-none transition-[transform,opacity] duration-750 ease-[cubic-bezier(0.16,1,0.3,1)] translate-y-full opacity-0 [&.active]:translate-y-0 [&.active]:opacity-100",
               { active: index === 0 },
             ]}
             id={`slide-item-${index}`}

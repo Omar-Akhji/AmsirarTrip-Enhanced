@@ -68,7 +68,7 @@ export function checkRateLimit(
 
 // Clean up stale rate limit entries every minute to prevent memory leaks
 const CLEANUP_INTERVAL_MS = 60_000;
-setInterval(() => {
+const cleanupTimer = setInterval(() => {
   const now = Date.now();
   for (const [key, value] of rateLimitMap) {
     if (now > value.resetAt) {
@@ -81,3 +81,7 @@ setInterval(() => {
     }
   }
 }, CLEANUP_INTERVAL_MS);
+
+if (typeof cleanupTimer.unref === "function") {
+  cleanupTimer.unref();
+}

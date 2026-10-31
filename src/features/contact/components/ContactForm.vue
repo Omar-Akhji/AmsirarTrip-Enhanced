@@ -137,7 +137,9 @@ onUnmounted(() => {
       class="inline-full lg:col-span-3"
       data-animate="creative-slide-right"
     >
-      <div class="rounded-2xl border border-stone-200/90 bg-white p-6 shadow-2xs block-full sm:p-8">
+      <div
+        class="rounded-2xl border border-stone-200/90 bg-white p-6 shadow-xs shadow-stone-900/5 transition-all duration-300 block-full hover:-translate-y-1 hover:border-stone-300 hover:shadow-md sm:p-8"
+      >
         <div class="mbe-6 border-b border-stone-100 pbe-5">
           <span class="font-mono text-xs font-semibold tracking-[0.14em] text-orange-600 uppercase">
             {{ t("contact.form.badge", "Plan with locals") }}
@@ -268,7 +270,7 @@ onUnmounted(() => {
       data-delay="150"
     >
       <div
-        class="flex flex-col justify-between rounded-2xl border border-slate-900 bg-slate-950 p-6 text-white shadow-xl block-full sm:p-8"
+        class="flex flex-col justify-between rounded-2xl border border-slate-900 bg-slate-950 p-6 text-white shadow-xl transition-all duration-300 block-full hover:-translate-y-1 hover:border-slate-800 hover:shadow-2xl sm:p-8"
       >
         <ContactInfoSidebar />
       </div>

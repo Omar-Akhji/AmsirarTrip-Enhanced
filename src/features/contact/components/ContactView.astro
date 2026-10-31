@@ -39,6 +39,8 @@ const contactMethods = [
     ),
   },
 ];
+
+const DELAY_CLASSES = ["delay-0", "delay-150", "delay-300"] as const;
 ---
 
 <PageHeader
@@ -106,13 +108,16 @@ const contactMethods = [
       <div class="hidden md:grid md:grid-cols-2 xl:grid-cols-3 gap-6 items-stretch">
         {contactMethods.map((method, index) => (
           <div
-            class:list={["flex size-full", { "sm:col-span-2 xl:col-span-1": index === 2 }]}
+            class:list={[
+              "flex size-full",
+              { "sm:col-span-2 xl:col-span-1": index === 2 },
+              DELAY_CLASSES[index] || "delay-0",
+            ]}
             data-animate="fade-up"
-            style={`transition-delay: ${index * 150}ms`}
           >
             <article
               aria-label={typeof method.title === "string" ? method.title : undefined}
-              class="contact-info-card group flex size-full flex-col justify-between rounded-2xl border border-stone-200/90 bg-stone-50/80 p-6 sm:p-8 shadow-xs transition-[transform,border-color,box-shadow] duration-200 ease-out pointer-fine:hover:-translate-y-1 pointer-fine:hover:border-stone-300 pointer-fine:hover:shadow-xl motion-reduce:transform-none"
+              class="contact-info-card group relative flex size-full flex-col justify-between rounded-2xl border border-stone-200/90 bg-stone-50/80 p-6 sm:p-8 shadow-xs shadow-stone-900/5 transition-all duration-300 hover:-translate-y-1 hover:border-stone-300 hover:shadow-md motion-reduce:transform-none"
             >
               <div>
                 <h3 class="mbe-3 text-xl font-bold tracking-tight text-stone-950 transition-colors duration-200 group-hover:text-orange-600">

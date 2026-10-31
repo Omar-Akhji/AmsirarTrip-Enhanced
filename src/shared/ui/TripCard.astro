@@ -47,9 +47,9 @@ const cardTransitionName =
   : undefined);
 ---
 
-<article class="group relative flex flex-col overflow-hidden rounded-2xl border border-stone-200/90 bg-white p-3 shadow-xs transition duration-300 size-full pointer-fine:hover:-translate-y-1 pointer-fine:hover:border-stone-300 pointer-fine:hover:shadow-xl">
+<article class="group relative flex flex-col overflow-hidden rounded-2xl border border-stone-200/90 bg-white p-4 shadow-xs transition duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] size-full dark:border-stone-800 dark:bg-stone-900/90 pointer-fine:hover:-translate-y-1 pointer-fine:hover:shadow-xl dark:pointer-fine:hover:shadow-black/40">
   <a
-    class="absolute inset-0 z-20"
+    class="absolute inset-0 z-20 rounded-2xl focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-orange-600 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-stone-900"
     href={getRelativeLocaleUrl(locale, item.route)}
   >
     <span class="sr-only">
@@ -59,12 +59,12 @@ const cardTransitionName =
 
   <div
     data-scroll-parallax
-    class="relative aspect-4/3 shrink-0 overflow-hidden rounded-xl bg-stone-100 inline-full"
+    class="relative aspect-4/3 shrink-0 overflow-hidden rounded-xl bg-stone-100 dark:bg-stone-800 inline-full"
   >
     <div class="parallax-media pointer-events-none absolute -inset-y-4 inset-x-0 h-[calc(100%+32px)] w-full">
       <Image
         alt={item.imageAlt || item.alt || title || "Morocco Trip"}
-        class="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 motion-reduce:transform-none"
+        class="size-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105 motion-reduce:transform-none"
         height={480}
         loading={priority ? "eager" : "lazy"}
         sizes="(max-width: 480px) 320px, (max-width: 768px) 480px, 640px"
@@ -74,7 +74,7 @@ const cardTransitionName =
         widths={[320, 480, 640]}
       />
     </div>
-    <div class="absolute inset-0 bg-linear-to-t from-slate-950/70 via-transparent to-transparent opacity-60 transition-opacity duration-300 group-hover:opacity-40"></div>
+    <div class="absolute inset-0 bg-linear-to-t from-slate-950/70 via-transparent to-transparent opacity-60 transition-opacity duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:opacity-40"></div>
 
     {badge && (
       <div class="absolute inset-s-3 top-3 z-10">
@@ -85,41 +85,45 @@ const cardTransitionName =
     )}
   </div>
 
-  <div class="flex flex-1 flex-col px-3 pbs-5 pbe-2">
+  <div class="flex flex-1 flex-col pbs-4 pbe-1">
     <hgroup class="mbe-2">
       {tagline && (
-        <p class="mbe-1 font-mono text-xs font-semibold tracking-wider text-orange-600 uppercase">
+        <p class="mbe-1 font-mono text-xs font-semibold tracking-wider text-orange-600 dark:text-orange-400 uppercase">
           {tagline}
         </p>
       )}
-      <h3 class="line-clamp-2 text-lg font-bold leading-snug tracking-tight text-stone-950 transition-colors duration-200 group-hover:text-orange-600 sm:text-xl">
+      <h3 class="line-clamp-2 text-lg font-bold leading-snug tracking-tight text-stone-950 transition-colors duration-200 group-hover:text-orange-600 dark:text-stone-50 dark:group-hover:text-orange-400 sm:text-xl">
         {title}
       </h3>
     </hgroup>
 
-    <p class="mbe-6 line-clamp-3 flex-1 text-sm leading-relaxed text-stone-600">{description}</p>
+    <p class="mbe-4 line-clamp-3 text-sm leading-relaxed text-stone-600 dark:text-stone-300">
+      {description}
+    </p>
 
     {start && end && (
-      <dl class="m-0 mbe-5 grid grid-cols-2 gap-3 border-y border-stone-100 p-0 py-3 text-xs font-mono">
+      <dl class="m-0 mbe-4 grid grid-cols-2 gap-3 rounded-xl border border-stone-200/80 bg-stone-50/80 px-3.5 py-2.5 text-xs font-mono dark:border-stone-800 dark:bg-stone-800/40">
         <div class="flex flex-col">
-          <dt class="text-[10px] tracking-wider text-stone-400 uppercase">{startLabel}</dt>
-          <dd class="m-0 truncate font-semibold text-stone-900">{start}</dd>
+          <dt class="text-[10px] tracking-wider text-stone-400 uppercase dark:text-stone-500">
+            {startLabel}
+          </dt>
+          <dd class="m-0 truncate font-semibold text-stone-900 dark:text-stone-100">{start}</dd>
         </div>
-        <div class="flex flex-col border-s border-stone-100 ps-3">
-          <dt class="text-[10px] tracking-wider text-stone-400 uppercase">{endLabel}</dt>
-          <dd class="m-0 truncate font-semibold text-stone-900">{end}</dd>
+        <div class="flex flex-col border-s border-stone-200/80 ps-3 dark:border-stone-800">
+          <dt class="text-[10px] tracking-wider text-stone-400 uppercase dark:text-stone-500">
+            {endLabel}
+          </dt>
+          <dd class="m-0 truncate font-semibold text-stone-900 dark:text-stone-100">{end}</dd>
         </div>
       </dl>
     )}
 
-    <div class="mbs-auto flex items-center justify-between border-t border-stone-100 pbs-3">
-      <span class="text-xs font-bold tracking-wider text-orange-600 uppercase font-mono">
-        {exploreLink}
-      </span>
-      <div class="flex size-8 items-center justify-center rounded-full border border-stone-200 bg-stone-50 text-stone-700 transition-all duration-200 group-hover:border-orange/50 group-hover:bg-linear-to-br group-hover:from-amber-orange group-hover:to-orange group-hover:text-white group-hover:shadow-md group-hover:shadow-orange/30">
+    <div class="mbs-auto flex items-center justify-start pbs-3">
+      <div class="inline-flex items-center gap-1.5 rounded-full bg-stone-100/70 px-4 py-2 text-xs font-semibold text-dark-grey select-none transition-colors duration-200 group-hover:bg-linear-to-br group-hover:from-amber-orange group-hover:to-orange group-hover:text-white group-hover:shadow-lg group-hover:shadow-orange/30 dark:bg-stone-800 dark:text-stone-200">
+        <span class="transition-none">{exploreLink}</span>
         <ChevronRight
           aria-hidden="true"
-          class="size-4 -rotate-90 transition-transform duration-200 ease-out group-hover:rotate-0"
+          class="size-4 shrink-0 rtl:rotate-180"
         />
       </div>
     </div>

@@ -5,16 +5,16 @@ export type ButtonVariant =
 
 export type ButtonSize = "sm" | "md" | "lg";
 
-export const baseButtonStyles =
+const baseButtonStyles =
   "inline-flex items-center justify-center rounded-full font-mono font-semibold transition-all duration-200 cursor-pointer select-none active:scale-[0.98] focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50";
 
-export const buttonSizeStyles: Record<ButtonSize, string> = {
+const buttonSizeStyles: Record<ButtonSize, string> = {
   sm: "min-h-11 sm:min-h-9 px-4 py-1.5 text-xs gap-1.5",
   md: "min-h-11 px-6 py-2.5 text-sm gap-2",
   lg: "min-h-13 px-8 py-3.5 text-base gap-2.5",
 };
 
-export const buttonVariantStyles: Record<ButtonVariant, string> = {
+const buttonVariantStyles: Record<ButtonVariant, string> = {
   primary:
     "bg-linear-to-br from-amber-orange to-orange text-white shadow-md shadow-orange/20 hover:brightness-105 hover:shadow-lg hover:shadow-orange/30 focus-visible:ring-offset-black",
   secondary:

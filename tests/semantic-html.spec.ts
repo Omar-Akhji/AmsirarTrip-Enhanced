@@ -89,7 +89,7 @@ test.describe("Semantic HTML 2026 Modernization", () => {
     const servicesH4 = page.locator("section#services h4");
     await expect(servicesH4).toHaveCount(0); // Pillars should be h3, not h4
     const servicesH3 = page.locator("section#services h3");
-    expect(await servicesH3.count()).toBe(4); // 1 specs header + 3 pillars
+    expect(await servicesH3.count()).toBe(3); // 3 service cards
 
     // 2. TourInfo sections on tour page
     await page.goto("/tours/merzouga-desert-adventure-3-days", { waitUntil: "domcontentloaded" });

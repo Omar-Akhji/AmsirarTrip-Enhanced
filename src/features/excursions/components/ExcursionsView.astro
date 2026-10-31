@@ -35,6 +35,15 @@ const highlightStats = [
       t("excursion.stats.supportDesc") || "Flexible departures and concierge-style planning.",
   },
 ];
+
+const DELAY_CLASSES = [
+  "delay-0",
+  "delay-150",
+  "delay-300",
+  "delay-[450ms]",
+  "delay-[600ms]",
+  "delay-[750ms]",
+] as const;
 ---
 
 <PageHeader
@@ -121,16 +130,14 @@ const highlightStats = [
       <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
         {excursions.map((excursion, index) => (
           <div
-            class="flex size-full"
+            class:list={["flex size-full", DELAY_CLASSES[index] || "delay-0"]}
             data-animate="fade-up"
-            style={`transition-delay: ${index * 150}ms`}
           >
             <TripCard
               badge={t("excursion.card.category")}
               description={t(excursion.description)}
               exploreLink={t("excursion.exploreLink")}
               item={{ image: excursion.image, imageAlt: t(excursion.alt), route: excursion.route }}
-              priority={index < 2}
               tagline={t(excursion.tagline)}
               title={t(excursion.title)}
             />

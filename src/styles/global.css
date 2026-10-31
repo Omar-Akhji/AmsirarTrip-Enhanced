@@ -97,43 +97,11 @@
   --radius-md: 12px;
   --radius-lg: 16px;
 
-  /* Elevation */
-  --shadow-flat: none;
-  --shadow-raised: 0 1px 3px oklch(0% 0 0deg / 6%), 0 1px 2px oklch(0% 0 0deg / 4%);
-  --shadow-floating: 0 4px 12px oklch(0% 0 0deg / 8%), 0 1px 3px oklch(0% 0 0deg / 4%);
-
-  /* Layout & 4-Point Spacing Tokens (Base unit: 4px / 0.25rem) */
+  /* Layout Spacing */
   --spacing-navbar: 4rem;
-  --spacing-1: 0.25rem; /* 4px */
-  --spacing-2: 0.5rem; /* 8px */
-  --spacing-3: 0.75rem; /* 12px */
-  --spacing-4: 1rem; /* 16px */
-  --spacing-5: 1.25rem; /* 20px */
-  --spacing-6: 1.5rem; /* 24px */
-  --spacing-7: 1.75rem; /* 28px */
-  --spacing-8: 2rem; /* 32px */
-  --spacing-10: 2.5rem; /* 40px */
-  --spacing-12: 3rem; /* 48px */
-  --spacing-14: 3.5rem; /* 56px */
-  --spacing-16: 4rem; /* 64px */
-  --spacing-20: 5rem; /* 80px */
-  --spacing-24: 6rem; /* 96px */
-  --spacing-32: 8rem; /* 128px */
 
   /* Animations */
-  --animate-cursor-blink: cursor-blink 0.75s step-end infinite;
   --animate-fade-in-scale: fade-in-scale 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-
-  @keyframes cursor-blink {
-    0%,
-    100% {
-      opacity: 1;
-    }
-
-    50% {
-      opacity: 0;
-    }
-  }
 
   @keyframes fade-in-scale {
     from {
@@ -224,16 +192,11 @@ body {
     cursor: pointer;
   }
 
-  input[type="submit"] {
-    font-size: 1rem;
-    cursor: pointer;
-  }
-
   :is(input, textarea, h1, h2, h3, h4) {
     font-family: var(--font-sans);
   }
 
-  :is(button, [type="button"], [type="submit"], [type="reset"], [role="button"], .btn) {
+  :is(button, [type="button"], [type="submit"], [type="reset"], [role="button"]) {
     font-family: var(--font-mono);
   }
 
@@ -352,43 +315,7 @@ body::-webkit-scrollbar-button {
 @keyframes reveal-fade-up {
   from {
     opacity: 0;
-    transform: translateY(18px);
-  }
-
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes reveal-fade-down {
-  from {
-    opacity: 0;
-    transform: translateY(-18px);
-  }
-
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes reveal-fade-left {
-  from {
-    opacity: 0;
-    transform: translateX(-18px);
-  }
-
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes reveal-fade-right {
-  from {
-    opacity: 0;
-    transform: translateX(18px);
+    transform: translateY(28px);
   }
 
   to {
@@ -400,55 +327,7 @@ body::-webkit-scrollbar-button {
 @keyframes reveal-zoom-in {
   from {
     opacity: 0;
-    transform: scale(0.96);
-  }
-
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes reveal-zoom-out {
-  from {
-    opacity: 0;
-    transform: scale(1.04);
-  }
-
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes reveal-flip-up {
-  from {
-    opacity: 0;
-    transform: perspective(1000px) rotateX(-12deg);
-  }
-
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes reveal-flip-down {
-  from {
-    opacity: 0;
-    transform: perspective(1000px) rotateX(12deg);
-  }
-
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes reveal-creative-slide-up {
-  from {
-    opacity: 0;
-    transform: translateY(32px) scale(0.98);
+    transform: scale(0.95);
   }
 
   to {
@@ -460,7 +339,7 @@ body::-webkit-scrollbar-button {
 @keyframes reveal-creative-slide-right {
   from {
     opacity: 0;
-    transform: translateX(-32px) scale(0.98);
+    transform: translateX(-28px);
   }
 
   to {
@@ -472,19 +351,7 @@ body::-webkit-scrollbar-button {
 @keyframes reveal-creative-slide-left {
   from {
     opacity: 0;
-    transform: translateX(32px) scale(0.98);
-  }
-
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes reveal-creative-flip {
-  from {
-    opacity: 0;
-    transform: perspective(1000px) rotateY(-8deg) translateY(24px);
+    transform: translateX(28px);
   }
 
   to {
@@ -505,9 +372,28 @@ body::-webkit-scrollbar-button {
 /* When the IntersectionObserver adds .is-visible, play the animation */
 .scroll-init [data-animate].is-visible {
   animation-fill-mode: both;
-  animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
-  animation-duration: 320ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-duration: 750ms;
 }
+
+/* Stagger delays for sequential card/item entrance */
+.scroll-init [data-animate].delay-0 { animation-delay: 0ms; }
+.scroll-init [data-animate].delay-75 { animation-delay: 75ms; }
+.scroll-init [data-animate].delay-100 { animation-delay: 100ms; }
+.scroll-init [data-animate].delay-150 { animation-delay: 150ms; }
+.scroll-init [data-animate].delay-200 { animation-delay: 200ms; }
+.scroll-init [data-animate].delay-300 { animation-delay: 300ms; }
+.scroll-init [data-animate].delay-450,
+.scroll-init [data-animate].delay-\[450ms\] { animation-delay: 450ms; }
+.scroll-init [data-animate].delay-500 { animation-delay: 500ms; }
+.scroll-init [data-animate].delay-600,
+.scroll-init [data-animate].delay-\[600ms\] { animation-delay: 600ms; }
+.scroll-init [data-animate].delay-700 { animation-delay: 700ms; }
+.scroll-init [data-animate].delay-1000 { animation-delay: 1000ms; }
+.scroll-init [data-animate].delay-\[120ms\] { animation-delay: 120ms; }
+.scroll-init [data-animate].delay-\[240ms\] { animation-delay: 240ms; }
+.scroll-init [data-animate].delay-\[360ms\] { animation-delay: 360ms; }
+.scroll-init [data-animate].delay-\[480ms\] { animation-delay: 480ms; }
 
 .scroll-init [data-animate].is-visible:not(.is-done) {
   will-change: transform, opacity;
@@ -518,36 +404,8 @@ body::-webkit-scrollbar-button {
   animation-name: reveal-fade-up;
 }
 
-.scroll-init [data-animate="fade-down"].is-visible {
-  animation-name: reveal-fade-down;
-}
-
-.scroll-init [data-animate="fade-left"].is-visible {
-  animation-name: reveal-fade-left;
-}
-
-.scroll-init [data-animate="fade-right"].is-visible {
-  animation-name: reveal-fade-right;
-}
-
 .scroll-init [data-animate="zoom-in"].is-visible {
   animation-name: reveal-zoom-in;
-}
-
-.scroll-init [data-animate="zoom-out"].is-visible {
-  animation-name: reveal-zoom-out;
-}
-
-.scroll-init [data-animate="flip-up"].is-visible {
-  animation-name: reveal-flip-up;
-}
-
-.scroll-init [data-animate="flip-down"].is-visible {
-  animation-name: reveal-flip-down;
-}
-
-.scroll-init [data-animate="creative-slide-up"].is-visible {
-  animation-name: reveal-creative-slide-up;
 }
 
 .scroll-init [data-animate="creative-slide-right"].is-visible {
@@ -558,13 +416,11 @@ body::-webkit-scrollbar-button {
   animation-name: reveal-creative-slide-left;
 }
 
-.scroll-init [data-animate="creative-flip"].is-visible {
-  animation-name: reveal-creative-flip;
-}
-
-/* After animation completes, clean up will-change */
+/* After animation completes, clean up will-change and release composite layers */
 .scroll-init [data-animate].is-done {
   will-change: auto;
+  animation: none;
+  opacity: 1;
 }
 
 /* Accessibility: respect user preferences for reduced motion */
@@ -581,8 +437,9 @@ body::-webkit-scrollbar-button {
 /* Root Page Crossfade & Micro-Slide */
 ::view-transition-old(root),
 ::view-transition-new(root) {
-  animation-duration: 240ms;
+  animation-duration: 360ms;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  mix-blend-mode: normal;
 }
 
 ::view-transition-old(root) {
@@ -659,7 +516,7 @@ body::-webkit-scrollbar-button {
   --thumb-width: 200px;
   --thumb-height: 290px;
   --thumb-gap: 18px;
-  --thumb-bottom: 50px;
+  --thumb-bottom: 26px;
   --thumb-radius: var(--radius-lg);
   --thumb-left: calc(100vw - (2.5 * var(--thumb-width) + 2 * var(--thumb-gap)));
 }
@@ -670,7 +527,7 @@ body::-webkit-scrollbar-button {
     --thumb-width: 165px;
     --thumb-height: 245px;
     --thumb-gap: 14px;
-    --thumb-bottom: 36px;
+    --thumb-bottom: 20px;
     --thumb-radius: var(--radius-md);
   }
 }
@@ -698,19 +555,31 @@ body::-webkit-scrollbar-button {
 }
 
 /* Content Block - Hidden by default for non-active slides to eliminate double text/buttons */
+.slider .list .item {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.slider .list .item:first-child {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 1;
+}
+
 .slider .list .item .content {
   display: none;
   pointer-events: none;
 }
 
-.slider .list .item:nth-child(1) .content {
+.slider .list .item:first-child .content {
   display: block;
   pointer-events: auto;
-}
-
-.slider.prev .list .item:nth-child(2) .content {
-  display: block;
-  pointer-events: none;
 }
 
 /* On mobile, vertically balance content so space above it (from top navbar) equals space below it (to preview cards) */
@@ -729,145 +598,194 @@ body::-webkit-scrollbar-button {
 }
 
 /* -------------------------------------------------------------
-   ANIMATION PART (Keyframes & Sequencing)
+   ANIMATION PART (Keyframes & GPU Hardware-Accelerated Sequencing)
    ------------------------------------------------------------- */
-.slider .list .item:nth-child(1) {
-  z-index: 1;
-}
-
-/* Animation text in first item */
-.slider .list .item:nth-child(1) .content .tagline {
-  transform: translateY(20px);
-  filter: blur(8px);
-  opacity: 0;
-  animation: showTagline 0.4s 0.1s ease-out forwards;
-}
-
-@keyframes showTagline {
-  to {
-    transform: translateY(0);
-    filter: blur(0);
-    opacity: 1;
-  }
-}
-
 .no-js .blur-token {
   opacity: 1 !important;
   transform: none !important;
   filter: none !important;
 }
 
-.slider.prev .list .item img {
-  z-index: 100;
-}
-
-/* Animation for next button click */
-.slider.next .list .item:nth-child(1) img {
-  width: var(--thumb-width);
-  height: var(--thumb-height);
-  position: absolute;
-  bottom: var(--thumb-bottom);
-  left: var(--thumb-left);
-  border-radius: var(--thumb-radius);
-  animation: showImage 0.45s cubic-bezier(0.23, 1, 0.32, 1) 1 forwards;
-  z-index: 10;
-}
-
-@keyframes showImage {
-  to {
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 0;
-  }
-}
-
-.slider.next .thumbnail .item:nth-last-child(1) {
-  overflow: hidden;
-  animation: showThumbnail 0.4s cubic-bezier(0.23, 1, 0.32, 1) 1 forwards;
-}
-
-@keyframes showThumbnail {
-  from {
-    width: 0;
-    opacity: 0;
-  }
-}
-
-.slider.next .thumbnail {
-  animation: effectNext 0.4s cubic-bezier(0.23, 1, 0.32, 1) 1 forwards;
-}
-
-@keyframes effectNext {
-  from {
-    transform: translateX(calc(var(--thumb-width) + var(--thumb-gap)));
-  }
-}
-
-/* Animation for prev button click */
-.slider.prev .list .item:nth-child(2) {
-  z-index: 2;
-}
-
-.slider.prev .list .item:nth-child(2) img {
-  animation: outFrame 0.45s cubic-bezier(0.23, 1, 0.32, 1) 1 forwards;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-}
-
-@keyframes outFrame {
-  to {
-    width: var(--thumb-width);
-    height: var(--thumb-height);
-    bottom: var(--thumb-bottom);
-    left: var(--thumb-left);
-    border-radius: var(--thumb-radius);
-  }
-}
-
-.slider.prev .thumbnail .item:nth-child(1) {
-  overflow: hidden;
-  opacity: 0;
-  animation: showThumbnail 0.4s cubic-bezier(0.23, 1, 0.32, 1) 1 forwards;
-}
-
-.slider.next .nextPrevArrows button,
-.slider.prev .nextPrevArrows button {
+/* Disable navigation arrows during active slide transition */
+.slider.is-next .nextPrevArrows button,
+.slider.is-prev .nextPrevArrows button {
   pointer-events: none;
 }
 
-.slider.prev .list .item:nth-child(2) .content .tagline,
-.slider.prev .list .item:nth-child(2) .content .title,
-.slider.prev .list .item:nth-child(2) .content .type,
-.slider.prev .list .item:nth-child(2) .content .description {
-  animation: contentOut 0.25s cubic-bezier(0.23, 1, 0.32, 1) 1 forwards !important;
+/* =========================================================================
+   NEXT DIRECTION: Incoming slide expands smoothly over outgoing slide
+   ========================================================================= */
+
+/* Outgoing slide remains in background, subtle scale + gentle dimming */
+.slider.is-next .list .item.is-outgoing {
+  opacity: 1;
+  z-index: 1;
+  pointer-events: none;
 }
 
-@keyframes contentOut {
+.slider.is-next .list .item.is-outgoing img {
+  animation: heroOutgoingImage 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, filter;
+}
+
+@keyframes heroOutgoingImage {
   to {
-    transform: translateY(-120px);
-    filter: blur(20px);
-    opacity: 0;
+    transform: scale(1.04);
+    filter: brightness(0.8);
   }
 }
+
+/* Outgoing content gently dissolves upward */
+.slider.is-next .list .item.is-outgoing .content,
+.slider.is-prev .list .item.is-outgoing .content {
+  animation: heroContentExit 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+}
+
+@keyframes heroContentExit {
+  to {
+    transform: translateY(-24px);
+    opacity: 0;
+    filter: blur(4px);
+  }
+}
+
+/* Incoming slide expands from thumbnail frame to full-screen with clip-path (zero reflow) */
+.slider.is-next .list .item.is-incoming {
+  opacity: 1;
+  z-index: 10;
+  pointer-events: auto;
+}
+
+.slider.is-next .list .item.is-incoming .content {
+  display: block;
+  pointer-events: auto;
+}
+
+.slider.is-next .list .item.is-incoming img {
+  animation: heroShowImageClip 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: clip-path, transform;
+}
+
+@keyframes heroShowImageClip {
+  from {
+    clip-path: inset(
+      calc(100% - var(--thumb-bottom) - var(--thumb-height))
+      calc(100% - var(--thumb-left) - var(--thumb-width))
+      var(--thumb-bottom)
+      var(--thumb-left)
+      round var(--thumb-radius)
+    );
+    transform: scale(1.06);
+  }
+
+  to {
+    clip-path: inset(0 0 0 0 round 0);
+    transform: scale(1);
+  }
+}
+
+/* Thumbnail Track: horizontal glide left by 1 card distance */
+.slider.is-next .thumbnail {
+  animation: heroThumbTrackNext 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform;
+}
+
+@keyframes heroThumbTrackNext {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(calc(-1 * (var(--thumb-width) + var(--thumb-gap))));
+  }
+}
+
+/* The expanding thumbnail gently fades out */
+.slider.is-next .thumbnail .item.is-expanding {
+  animation: heroThumbFadeOut 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes heroThumbFadeOut {
+  to {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+}
+
+/* =========================================================================
+   PREV DIRECTION: Outgoing slide shrinks back into thumbnail card frame
+   ========================================================================= */
+
+/* Underneath: Incoming slide is visible full screen */
+.slider.is-prev .list .item.is-incoming {
+  opacity: 1;
+  z-index: 1;
+  pointer-events: auto;
+}
+
+.slider.is-prev .list .item.is-incoming .content {
+  display: block;
+  pointer-events: auto;
+}
+
+/* On-top: Outgoing slide shrinks smoothly down into the thumbnail card */
+.slider.is-prev .list .item.is-outgoing {
+  opacity: 1;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.slider.is-prev .list .item.is-outgoing img {
+  animation: heroHideImageClip 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: clip-path, transform;
+}
+
+@keyframes heroHideImageClip {
+  from {
+    clip-path: inset(0 0 0 0 round 0);
+    transform: scale(1);
+  }
+
+  to {
+    clip-path: inset(
+      calc(100% - var(--thumb-bottom) - var(--thumb-height))
+      calc(100% - var(--thumb-left) - var(--thumb-width))
+      var(--thumb-bottom)
+      var(--thumb-left)
+      round var(--thumb-radius)
+    );
+    transform: scale(1.06);
+  }
+}
+
+/* Thumbnail Track for Prev: glides smoothly to the right */
+.slider.is-prev .thumbnail {
+  animation: heroThumbTrackPrev 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform;
+}
+
+@keyframes heroThumbTrackPrev {
+  from {
+    transform: translateX(calc(-1 * (var(--thumb-width) + var(--thumb-gap))));
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
 /* Reduced motion accessibility support */
 @media (prefers-reduced-motion: reduce) {
-  .slider .list .item:nth-child(1) .content .tagline,
-  .slider .list .item:nth-child(1) .content .title,
-  .slider .list .item:nth-child(1) .content .type,
-  .slider .list .item:nth-child(1) .content .description,
-  .slider.next .list .item:nth-child(1) img,
-  .slider.next .thumbnail .item:nth-last-child(1),
-  .slider.next .thumbnail,
-  .slider.prev .list .item:nth-child(2) img,
-  .slider.prev .thumbnail .item:nth-child(1),
-  .slider.prev .list .item:nth-child(2) .content * {
+  .slider .list .item,
+  .slider .list .item img,
+  .slider .thumbnail,
+  .slider .thumbnail .item {
     animation: none !important;
+    transition: none !important;
     transform: none !important;
-    filter: none !important;
+    clip-path: none !important;
     opacity: 1 !important;
+    filter: none !important;
   }
 }
 
@@ -911,8 +829,7 @@ html.lenis {
 
 @media (prefers-reduced-motion: reduce) {
   [data-scroll-parallax] img,
-  [data-scroll-cinematic],
-  [data-scroll-monumental] {
+  [data-scroll-cinematic] {
     transform: none !important;
     transition: none !important;
   }
@@ -966,17 +883,13 @@ html.lenis {
 
 /* Center-aligned ASCII lines (e.g. PageHeader heroes & centered copy) */
 .text-center .ars-line,
-.ars.text-center .ars-line,
-.ars-center .ars-line,
-[data-align="center"] .ars-line {
+.ars.text-center .ars-line {
   margin-inline: auto !important;
   text-align: center;
 }
 
 .text-center .ars-base,
-.ars.text-center .ars-base,
-.ars-center .ars-base,
-[data-align="center"] .ars-base {
+.ars.text-center .ars-base {
   text-align: center;
 }
 
@@ -1024,6 +937,7 @@ html.lenis {
   flex-direction: column;
   overflow: hidden;
   border-radius: inherit;
+  container-type: inline-size;
 }
 
 .ars.ars-image > .ars-block {
@@ -1042,8 +956,10 @@ html.lenis {
   display: block;
   overflow: hidden;
   line-height: 1.15;
-  font-size: clamp(10px, 1.4vw, 13px);
-  letter-spacing: -0.02em;
+  font-size: clamp(11px, 2vw, 18px);
+  font-size: max(11px, calc(100cqi / 52));
+  letter-spacing: 0;
+  white-space: pre;
   user-select: none;
 }
 
@@ -1105,3 +1021,89 @@ html.lenis {
   --ars-speed: 1.5s;
   --ars-wave-color: var(--ascii-accent, currentColor);
 }
+
+/* ==========================================================================
+   Overlay & Popover Discrete Transitions (Language Selector & Cookie Modal)
+   ========================================================================== */
+
+/* Language Selector Popover (CSS Anchor Positioning + @starting-style transition) */
+.language-selector-popover {
+  position-anchor: auto;
+  inset: unset;
+  top: calc(anchor(bottom) + 8px);
+  right: anchor(right);
+  margin: 0;
+  transition:
+    opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    display 0.25s allow-discrete,
+    overlay 0.25s allow-discrete;
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+.language-selector-popover:popover-open {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@starting-style {
+  .language-selector-popover:popover-open {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+@supports not (position-anchor: auto) {
+  .language-selector-popover {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 0.5rem;
+  }
+}
+
+/* Cookie Preferences Dialog & Backdrop Discrete Transition */
+dialog.cookie-preferences-dialog {
+  transition:
+    opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    display 0.25s allow-discrete,
+    overlay 0.25s allow-discrete;
+  opacity: 0;
+  transform: scale(0.96);
+}
+
+dialog.cookie-preferences-dialog[open] {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@starting-style {
+  dialog.cookie-preferences-dialog[open] {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+
+dialog.cookie-preferences-dialog::backdrop {
+  transition:
+    opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    display 0.25s allow-discrete,
+    overlay 0.25s allow-discrete;
+  opacity: 0;
+  background-color: rgb(0 0 0 / 75%);
+  backdrop-filter: blur(2px);
+}
+
+dialog.cookie-preferences-dialog[open]::backdrop {
+  opacity: 1;
+}
+
+@starting-style {
+  dialog.cookie-preferences-dialog[open]::backdrop {
+    opacity: 0;
+  }
+}
+
+i

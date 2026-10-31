@@ -23,8 +23,7 @@ const resolvedClass = [itemClassName, className].filter(Boolean).join(" ");
     <slot />
     <span
       aria-hidden="true"
-      class="pointer-events-none absolute inset-0 z-20 rounded-[inherit] bg-black transition-opacity duration-150"
-      style="opacity: var(--scroll-stack-dim, 0);"
+      class="pointer-events-none absolute inset-0 z-20 rounded-[inherit] bg-black opacity-(--scroll-stack-dim,0) transition-opacity duration-150"
     />
   </div>
 </div>

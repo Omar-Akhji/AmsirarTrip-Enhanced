@@ -52,6 +52,7 @@ export const getBookingSchema = (t: (key: string) => string) =>
       reservationType: z
         .string()
         .min(1, { message: t("reservationRequired") })
+        .max(100, { message: t("reservationRequired") })
         .transform(sanitize),
       fullName: z
         .string()
@@ -71,6 +72,7 @@ export const getBookingSchema = (t: (key: string) => string) =>
         .max(50, { message: t("personsMax") }),
       date: z
         .string()
+        .max(50, { message: t("invalidDate") })
         .refine((value) => !Number.isNaN(Date.parse(value)), { message: t("invalidDate") })
         .refine(
           (value) => {
@@ -88,6 +90,7 @@ export const getBookingSchema = (t: (key: string) => string) =>
         .transform((value) => (value ? sanitize(value) : undefined)),
       language: z
         .string()
+        .max(10)
         .optional()
         .transform((value) => (value ? sanitize(value) : undefined)),
       duration: z.coerce.number().int().min(1).max(30).optional(),

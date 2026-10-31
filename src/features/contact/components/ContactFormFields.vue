@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref } from "vue";
 import type { FormState } from "@/lib/form-types";
 import { useTranslation } from "@/lib/hooks/use-translation";
 
@@ -9,6 +10,8 @@ interface Props {
 const { state } = defineProps<Props>();
 
 const { t } = useTranslation();
+
+const isTopicExpanded = ref(false);
 </script>
 
 <template>
@@ -126,10 +129,28 @@ const { t } = useTranslation();
           id="contact-topic"
           name="topic"
           type="text"
+          list="contact-topics"
+          aria-autocomplete="list"
+          :aria-expanded="isTopicExpanded"
+          aria-controls="contact-topics"
           class="rounded-xl border border-stone-200/90 bg-stone-50/50 px-4 py-3 font-sans text-sm text-stone-900 transition-colors inline-full focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden"
           toolparamdescription="The specific focus or interest of the trip, e.g., Sahara desert, imperial cities, custom trek"
           autocomplete="off"
+          @focus="isTopicExpanded = true"
+          @blur="isTopicExpanded = false"
+          @input="isTopicExpanded = true"
         />
+        <datalist id="contact-topics">
+          <option :value="t('contact.form.topics.desert', 'Sahara Desert Expedition')" />
+          <option :value="t('contact.form.topics.atlas', 'High Atlas Mountain Trek')" />
+          <option
+            :value="t('contact.form.topics.imperial', 'Imperial Cities & Cultural Heritage')"
+          />
+          <option
+            :value="t('contact.form.topics.coastal', 'Atlantic Coast & Essaouira Excursion')"
+          />
+          <option :value="t('contact.form.topics.custom', 'Tailored Private Morocco Itinerary')" />
+        </datalist>
       </div>
     </div>
 

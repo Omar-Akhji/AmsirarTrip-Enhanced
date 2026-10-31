@@ -1,10 +1,12 @@
 ---
 import { useTranslations } from "@/i18n/utils";
 import { CircleCheck, Star } from "@lucide/astro";
+import TestimonialsScrollStack from "./TestimonialsScrollStack.astro";
 
 const locale = Astro.currentLocale || "en";
 const t = useTranslations(locale);
 const testimonials = [{ key: "kevin" }, { key: "ben" }, { key: "sara" }];
+const DELAY_CLASSES = ["delay-0", "delay-150", "delay-300"] as const;
 ---
 
 <section
@@ -43,16 +45,25 @@ const testimonials = [{ key: "kevin" }, { key: "ben" }, { key: "sara" }];
       </hgroup>
     </div>
     <div class="relative">
-      <div class="grid grid-cols-1 justify-items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <!-- Mobile View: Interactive Physical Card Scroll Stack -->
+      <div class="block md:hidden w-full">
+        <TestimonialsScrollStack testimonials={testimonials} />
+      </div>
+
+      <!-- Desktop & Tablet View: 3-Column Responsive Grid -->
+      <div class="hidden md:grid md:grid-cols-2 lg:grid-cols-3 justify-items-stretch gap-6">
         {testimonials.map((tst, index) => {
           const guestName = t(`testimonials.items.${tst.key}.name`);
           const guestCountry = t(`testimonials.items.${tst.key}.country`);
           const guestQuote = t(`testimonials.items.${tst.key}.quote`);
           return (
             <div
-              class:list={[`flex size-full`, { "md:col-span-2 lg:col-span-1": index === 2 }]}
+              class:list={[
+                `flex size-full`,
+                { "md:col-span-2 lg:col-span-1": index === 2 },
+                DELAY_CLASSES[index] || "delay-0",
+              ]}
               data-animate="fade-up"
-              style={`transition-delay: ${index * 150}ms`}
             >
               <article class="group relative flex size-full flex-col justify-between rounded-2xl border border-stone-200/90 bg-white p-6 shadow-xs transition duration-300 pointer-fine:hover:-translate-y-1 pointer-fine:hover:border-stone-300 pointer-fine:hover:shadow-xl sm:p-8">
                 <figure class="m-0 flex size-full flex-col justify-between p-0">

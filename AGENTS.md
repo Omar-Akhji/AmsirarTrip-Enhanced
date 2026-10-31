@@ -35,9 +35,10 @@ Whenever the user presents a request, task, problem, or feature to build:
    - For ideation, requirements clarification, new architecture, or feature planning -> Use
      `brainstorming`.
    - For debugging, resolving errors, test failures, or crashes -> Use `systematic-debugging`.
-   - For UI, CSS, layout, styling, and visual design -> Use `impeccable`, `shadcn`, `antislop`, `antislop-ui`,
-     `anti-slop-web-design`, `frontend-design`, `design-system`, `design-taste-frontend`,
-     `taste-skill`, `ui-ux-pro-max`, `awesome-claude-design`, and `design-motion-principles`.
+   - For UI, CSS, layout, styling, and visual design -> Use `impeccable`, `shadcn`, `antislop`,
+     `antislop-ui`, `anti-slop-web-design`, `frontend-design`, `design-system`,
+     `design-taste-frontend`, `taste-skill`, `ui-ux-pro-max`, `awesome-claude-design`, and
+     `design-motion-principles`.
    - For copywriting, tone, text, and marketing copy -> Use `antislop-copywriting`.
    - For accessibility, contrast, and human ergonomics -> Use `antislop-human`.
    - For mobile layout, responsive breakpoints, and touch interfaces -> Use `antislop-layoutmobile`.

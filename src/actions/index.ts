@@ -5,7 +5,12 @@ import { env as environment } from "../lib/env";
 import { createErrorResponse, type FormState } from "../lib/form-types";
 import { getBookingSchema, getContactSchema, getNewsletterSchema } from "../lib/schemas";
 import { getMailer, logger } from "../lib/server-utils";
-import { enforceRateLimit, isHoneypotTriggered, verifyCaptcha } from "./helpers/action-guards";
+import {
+  enforceRateLimit,
+  extractClientIp,
+  isHoneypotTriggered,
+  verifyCaptcha,
+} from "./helpers/action-guards";
 import {
   buildBookingEmail,
   buildContactEmail,
@@ -22,7 +27,7 @@ export const server = {
     accept: "form",
     handler: async (formData: FormData, context: ActionAPIContext): Promise<FormState> => {
       try {
-        const ip = context.clientAddress || "unknown";
+        const ip = extractClientIp(context.request, context.clientAddress);
 
         if (isHoneypotTriggered(getFormString(formData, "website"), ip, "booking-action")) {
           return { success: true, message: "Booking request sent!" };
@@ -88,7 +93,7 @@ export const server = {
     accept: "form",
     handler: async (formData: FormData, context: ActionAPIContext): Promise<FormState> => {
       try {
-        const ip = context.clientAddress || "unknown";
+        const ip = extractClientIp(context.request, context.clientAddress);
 
         if (isHoneypotTriggered(getFormString(formData, "website"), ip, "contact-action")) {
           return { success: true, message: "Message sent!" };
@@ -153,7 +158,7 @@ export const server = {
       context: ActionAPIContext,
     ): Promise<{ ok: boolean; statusKey: string }> => {
       try {
-        const ip = context.clientAddress || "unknown";
+        const ip = extractClientIp(context.request, context.clientAddress);
 
         if (!enforceRateLimit(`newsletter:${ip}`, ip, "newsletter-action", 5).allowed) {
           return { ok: false, statusKey: "footer.newsletterNetwork" };

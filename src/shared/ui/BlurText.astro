@@ -1,5 +1,5 @@
 ---
-export interface Props {
+interface Props {
   text: string;
   as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "div" | "p" | "span";
   class?: string;
@@ -19,10 +19,10 @@ const {
   animateBy = "words",
   direction = "top",
   delay = 200,
-  stepDuration = 0.35,
+  stepDuration = 0.7,
   blur = 10,
   distance = 50,
-  stagger = 0.035,
+  stagger = 0.045,
 } = Astro.props;
 
 const tokens: string[] = animateBy === "letters" ? [...text] : text.split(" ");

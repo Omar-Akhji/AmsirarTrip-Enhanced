@@ -26,20 +26,6 @@ const {
   style,
 } = defineProps<Props>();
 
-const imageStyle = computed<StyleValue>(() => {
-  const fillStyle =
-    fill ?
-      { position: "absolute", height: "100%", width: "100%", left: 0, top: 0, right: 0, bottom: 0 }
-    : {};
-
-  if (Array.isArray(style)) {
-    return [fillStyle, ...style];
-  }
-  return typeof style === "string" ?
-      [fillStyle, style]
-    : { ...fillStyle, ...(typeof style === "object" && style !== null && style) };
-});
-
 const computedDecoding = computed(() => decoding);
 const computedFetchPriority = computed(() => fetchpriority ?? (priority ? "high" : undefined));
 const computedLoading = computed(() => loading ?? (priority ? "eager" : "lazy"));
@@ -49,7 +35,8 @@ const computedLoading = computed(() => loading ?? (priority ? "eager" : "lazy"))
   <img
     :src="src"
     :alt="alt"
-    :style="imageStyle"
+    :class="fill ? 'absolute inset-0 size-full' : undefined"
+    :style="style"
     :decoding="computedDecoding"
     :fetchpriority="computedFetchPriority"
     :loading="computedLoading"

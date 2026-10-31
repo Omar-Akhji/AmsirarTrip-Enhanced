@@ -22,12 +22,12 @@ const { crumbWidths = ["w-12", "w-14", "w-52"], class: className } = Astro.props
   />
 
   {/* Trip Content Section matching TripLayout.astro */}
-  <section class="py-14">
+  <section class="py-12 sm:py-16 lg:py-24">
     <div class="mx-auto grid gap-10 px-4 max-inline-7xl lg:grid-cols-[4fr_2fr]">
       {/* Left Column: Dossier Article */}
       <article class="rounded-2xl bg-white p-4 pbe-8 shadow-xs ring-1 ring-zinc-100 sm:p-6 sm:pbe-12">
         {/* Featured Image with rich ASCII dither matching TripLayout.astro 4/3 ratio */}
-        <figure class="relative mbe-8 aspect-4/3 overflow-hidden rounded-xl border border-zinc-100 shadow-md inline-full bg-stone-100 dark:bg-stone-900">
+        <figure class="relative mbe-8 aspect-4/3 overflow-hidden rounded-xl border border-zinc-100 shadow-md inline-full bg-stone-100 dark:bg-stone-800">
           <AsciiSkeleton
             class="ars-image size-full text-stone-400"
             rows={48}
@@ -36,7 +36,7 @@ const { crumbWidths = ["w-12", "w-14", "w-52"], class: className } = Astro.props
         </figure>
 
         {/* Dossier Header */}
-        <div class="mbe-8 block border-b border-stone-200 pb-6 text-start">
+        <div class="mbe-8 sm:mbe-12 block border-b border-stone-200 pb-6 sm:pb-8 text-start">
           <AsciiSkeleton
             class="text-stone-400 font-mono text-xs uppercase"
             lines={1}
@@ -241,7 +241,7 @@ const { crumbWidths = ["w-12", "w-14", "w-52"], class: className } = Astro.props
   </section>
 
   {/* Booking Form Skeleton matching BookingForm.vue at bottom of tour */}
-  <section class="relative isolate border-bs border-stone-200 bg-stone-50 py-16 sm:py-20">
+  <section class="relative isolate border-bs border-stone-200 bg-stone-50 py-12 sm:py-16 lg:py-24">
     <div class="mx-auto px-4 inline-full max-inline-7xl">
       <div class="grid grid-cols-1 items-stretch gap-8 lg:grid-cols-5">
         {/* Left: Booking Form Card (col-span-3) */}

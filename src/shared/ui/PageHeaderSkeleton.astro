@@ -98,7 +98,7 @@ const {
         {/* Title matching PageHeader text-3xl sm:text-4xl lg:text-5xl */}
         <div class:list={["mx-auto text-center", titleWidth]}>
           <AsciiSkeleton
-            class="text-2xl sm:text-3xl lg:text-4xl text-white/90 font-bold text-center mx-auto"
+            class="text-3xl sm:text-4xl lg:text-5xl text-white/90 font-bold text-center mx-auto"
             lines={1}
             variant="dither"
             widths={["100%"]}
@@ -112,7 +112,7 @@ const {
         {/* Subtitle matching PageHeader single max-w-[62ch] paragraph — centered broken line */}
         <div class="mx-auto max-w-[62ch] text-center">
           <AsciiSkeleton
-            class="text-white/60 text-sm sm:text-base text-center mx-auto"
+            class="text-white/60 font-mono text-sm sm:text-base lg:text-lg text-center mx-auto"
             lines={2}
             variant="dither"
             widths={["100%", "72%"]}
@@ -120,26 +120,28 @@ const {
         </div>
       </hgroup>
 
-      {hasButtons && (
-        <div class="flex flex-wrap items-center justify-center gap-4 pbs-2">
-          <div class="rounded-full border border-white/25 bg-white/10 px-6 py-2.5">
-            <AsciiSkeleton
-              class="text-white/75"
-              lines={1}
-              variant="scan"
-              widths={["7rem"]}
-            />
-          </div>
-          <div class="rounded-full border border-white/20 bg-white/10 px-6 py-2.5">
-            <AsciiSkeleton
-              class="text-white/75"
-              lines={1}
-              variant="scan"
-              widths={["9rem"]}
-            />
-          </div>
-        </div>
-      )}
+      <div class="flex flex-wrap items-center justify-center gap-4 pbs-2">
+        {hasButtons && (
+          <>
+            <div class="rounded-full border border-white/25 bg-white/10 px-6 py-2.5">
+              <AsciiSkeleton
+                class="text-white/75"
+                lines={1}
+                variant="scan"
+                widths={["7rem"]}
+              />
+            </div>
+            <div class="rounded-full border border-white/20 bg-white/10 px-6 py-2.5">
+              <AsciiSkeleton
+                class="text-white/75"
+                lines={1}
+                variant="scan"
+                widths={["9rem"]}
+              />
+            </div>
+          </>
+        )}
+      </div>
     </div>
   </div>
 </section>

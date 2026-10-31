@@ -106,8 +106,8 @@ function getBannerElement(): HTMLElement | null {
   return document.querySelector<HTMLElement>("#cookie-banner");
 }
 
-function getModalElement(): HTMLElement | null {
-  return document.querySelector<HTMLElement>("#cookie-preferences-modal");
+function getModalElement(): HTMLDialogElement | null {
+  return document.querySelector<HTMLDialogElement>("#cookie-preferences-modal");
 }
 
 function getBadgeButton(): HTMLElement | null {
@@ -219,35 +219,21 @@ export function openPreferencesModal(triggerElement?: HTMLElement): void {
 
   syncAllToggleSwitches(false);
 
-  modal.classList.remove("hidden");
-  modal.classList.add("flex");
-  requestAnimationFrame(() => {
-    modal.classList.remove("opacity-0");
-    modal.classList.add("opacity-100");
-  });
-  document.body.classList.add("overflow-hidden");
-
-  const closeBtn = modal.querySelector<HTMLElement>("[data-cookie-close-preferences]");
-  closeBtn?.focus();
+  if (!modal.open) {
+    modal.showModal();
+  }
 }
 
 export function closePreferencesModal(): void {
   const modal = getModalElement();
-  if (!modal || modal.classList.contains("hidden")) return;
+  if (!modal?.open) return;
 
-  modal.classList.add("opacity-0");
-  modal.classList.remove("opacity-100");
-  document.body.classList.remove("overflow-hidden");
+  modal.close();
 
   const consent = getCookieConsent();
   if (!consent) {
     showBanner();
   }
-
-  setTimeout(() => {
-    modal.classList.add("hidden");
-    modal.classList.remove("flex");
-  }, 250);
 
   if (lastFocusedElement && document.contains(lastFocusedElement)) {
     lastFocusedElement.focus();
@@ -362,49 +348,34 @@ export function initCookieConsent(): void {
     });
   }
 
-  // Modal backdrop click
+  // Modal backdrop click & native dialog close handling
   const modal = getModalElement();
-  const backdrop = modal?.querySelector<HTMLElement>("[data-modal-backdrop]");
-  backdrop?.addEventListener("click", closePreferencesModal);
-}
+  if (!modal) return;
 
-// Global keydown listener for keyboard accessibility (Escape close + Tab focus trap)
-if (typeof window !== "undefined") {
-  globalThis.addEventListener("keydown", (event: KeyboardEvent) => {
-    const modal = getModalElement();
-    if (!modal || modal.classList.contains("hidden")) return;
-
-    if (event.key === "Escape") {
-      event.preventDefault();
+  modal.addEventListener("click", (event) => {
+    const rect = modal.getBoundingClientRect();
+    const isInDialog =
+      rect.top <= event.clientY
+      && event.clientY <= rect.top + rect.height
+      && rect.left <= event.clientX
+      && event.clientX <= rect.left + rect.width;
+    if (!isInDialog) {
       closePreferencesModal();
-      return;
-    }
-
-    if (event.key !== "Tab") return;
-
-    const focusable = modal.querySelectorAll<HTMLElement>(
-      'button, [href], input:not([disabled]), select, textarea, [tabindex]:not([tabindex="-1"])',
-    );
-    const focusableElements = [...focusable].filter(
-      (el) => !el.hasAttribute("disabled") && el.offsetParent !== null,
-    );
-    if (focusableElements.length === 0) return;
-
-    const firstElement = focusableElements[0];
-    const lastElement = focusableElements.at(-1);
-    if (!firstElement || !lastElement) return;
-
-    if (event.shiftKey) {
-      if (document.activeElement === firstElement) {
-        event.preventDefault();
-        lastElement.focus();
-      }
-    } else if (document.activeElement === lastElement) {
-      event.preventDefault();
-      firstElement.focus();
     }
   });
 
+  modal.addEventListener("close", () => {
+    const consent = getCookieConsent();
+    if (!consent) {
+      showBanner();
+    }
+    if (lastFocusedElement && document.contains(lastFocusedElement)) {
+      lastFocusedElement.focus();
+    }
+  });
+}
+
+if (typeof window !== "undefined") {
   // Re-run setup on View Transitions page swap
   document.addEventListener("astro:page-load", initCookieConsent);
 

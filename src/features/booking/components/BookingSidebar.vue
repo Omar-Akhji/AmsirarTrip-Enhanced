@@ -96,7 +96,7 @@ const { t } = useTranslation();
           href="https://www.tripadvisor.com/Attraction_Review-g293734-d32584739-Reviews-Amsirar_Travel-Marrakech_Marrakech_Safi.html"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#00af87] px-6 py-3 font-sans text-xs font-semibold tracking-wider text-white uppercase shadow-md shadow-[#00af87]/20 transition-all duration-200 hover:bg-[#008f6d] hover:shadow-lg hover:shadow-[#00af87]/30 hover:brightness-105 focus-visible:ring-2 focus-visible:ring-[#34e0a1] focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 focus-visible:outline-hidden active:scale-[0.98] pointer-fine:hover:-translate-y-0.5"
+          class="inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-full bg-linear-to-br from-emerald-500 to-emerald-700 px-6 py-3 font-mono text-xs font-semibold tracking-wider text-white uppercase shadow-md shadow-emerald-600/25 transition-all duration-200 hover:shadow-lg hover:shadow-emerald-600/35 hover:brightness-105 active:scale-[0.98] pointer-fine:hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 focus-visible:outline-hidden"
           :aria-label="t('booking.tripadvisorCtaAria', 'Open TripAdvisor reviews in new tab')"
         >
           <span>{{ t("booking.checkCta", "Check reviews & book") }}</span>

@@ -1,16 +1,22 @@
 ---
-import { Image } from "astro:assets";
-import { getLocalizedPath, useTranslations } from "@/i18n/utils";
 import type { Locale } from "@/i18n/locales";
+import { getLocalizedPath, useTranslations } from "@/i18n/utils";
+import { Image } from "astro:assets";
 import { LANGUAGES } from "./constants";
 
 interface Props {
   placement?: "left" | "right";
   size?: "sm" | "md";
   class?: string;
+  id?: string;
 }
 
-const { placement = "left", size = "md", class: className = "" } = Astro.props;
+const {
+  placement = "left",
+  size = "md",
+  class: className = "",
+  id = "lang-selector",
+} = Astro.props;
 
 const locale = Astro.currentLocale || "en";
 const t = useTranslations(locale);
@@ -24,15 +30,16 @@ const currentLanguage = LANGUAGES.find((l) => l.code === locale) || {
 const getLocalizedHref = (code: string) => {
   return getLocalizedPath(Astro.url.pathname, code as Locale) + Astro.url.search;
 };
+
+const menuId = `${id}-popover`;
 ---
 
 <div class:list={["language-selector-root relative inline-block", className]}>
   <button
-    aria-expanded="false"
+    popovertarget={menuId}
     aria-haspopup="menu"
     aria-label={`${t("language") || "Language"} - ${currentLanguage.shortName}`}
     class="relative cursor-pointer"
-    data-lang-trigger
     type="button"
   >
     <div
@@ -69,23 +76,15 @@ const getLocalizedHref = (code: string) => {
     </span>
   </button>
 
-  <!-- Concentric radius formula: outer radius = inner radius + padding <=> inner radius = radius of list card - padding between them -->
   <div
+    id={menuId}
+    popover="auto"
     aria-orientation="vertical"
-    style="
-
---card-radius: 12px; --card-padding: 6px; --inner-radius: calc(var(--card-radius) - var(--card-padding));
-
- border-radius: var(--card-radius); padding: var(--card-padding);"
     class:list={[
-      "language-selector-menu pointer-events-none invisible scale-95 opacity-0 transition-all duration-200 ease-out",
-      "data-[state=open]:pointer-events-auto data-[state=open]:visible data-[state=open]:scale-100 data-[state=open]:opacity-100",
-      "absolute top-full z-50 mt-2 min-w-44 overflow-hidden rounded-xl border border-white/10 bg-slate-950/95 p-1.5 text-white shadow-2xl backdrop-blur-xl ring-1 ring-white/10",
+      "language-selector-popover m-0 min-w-44 overflow-hidden rounded-xl border border-white/10 bg-slate-950/95 p-1.5 text-white shadow-2xl backdrop-blur-xl ring-1 ring-white/10",
       "group-data-scrolled:border-black/10 group-data-scrolled:bg-white group-data-scrolled:text-slate-800 group-data-scrolled:shadow-[0_12px_32px_rgba(0,0,0,0.15)]",
-      { "inset-e-0": placement === "right", "inset-s-0": placement !== "right" },
+      { "inset-inline-start-0": placement === "left", "inset-inline-end-0": placement === "right" },
     ]}
-    data-lang-menu
-    data-state="closed"
     role="menu"
   >
     <div class="flex flex-col gap-1">
@@ -95,7 +94,6 @@ const getLocalizedHref = (code: string) => {
           <a
             aria-checked={isCurrent}
             aria-label={lang.name}
-            style="border-radius: var(--inner-radius);"
             class:list={[
               "flex items-center justify-between whitespace-nowrap rounded-md px-3 py-2 text-sm font-medium transition-colors duration-150 inline-full",
               {
@@ -120,5 +118,3 @@ const getLocalizedHref = (code: string) => {
     </div>
   </div>
 </div>
-
-<script src="./scripts/language-selector.ts"></script>

@@ -1,31 +1,44 @@
 # Amsirar Trip 🇲🇦
 
 > **Boutique Moroccan Tours, Desert Expeditions & Cultural Journeys**  
-> Premium web platform for [Amsirar Trip](https://amsirartrip.com), a licensed local tour operator based in Marrakech offering private Sahara desert tours, High Atlas mountain trekking, and bespoke itineraries across Morocco.
+> Premium web platform for [Amsirar Trip](https://amsirartrip.com), a licensed local tour operator
+> based in Marrakech offering private Sahara desert tours, High Atlas mountain trekking, and bespoke
+> itineraries across Morocco.
 
 ---
 
 ## 🌟 Overview
 
-Amsirar Trip is an editorial, high-performance web application designed with deep craft, physical interaction design, and multilingual reach across Europe and the Americas. Built with modern web architecture to deliver instant page transitions, fluid animations, and high-converting booking workflows.
+Amsirar Trip is an editorial, high-performance web application designed with deep craft, physical
+interaction design, and multilingual reach across Europe and the Americas. Built with modern web
+architecture to deliver instant page transitions, fluid animations, and high-converting booking
+workflows.
 
 - **Private Sahara Expeditions**: Merzouga (Erg Chebbi), Zagora, and M'Hamid (Erg Chegaga).
 - **High Atlas Mountain Treks**: Mount Toubkal summits, Imlil valley, and Berber stone villages.
 - **Imperial Cities Itineraries**: Marrakech, Fes, Meknes, Rabat, Chefchaouen, and Essaouira.
-- **Day Trips & Excursions**: Ouzoud Waterfalls, Ourika Valley, Agafay Desert sunset, and hot-air balloon flights.
+- **Day Trips & Excursions**: Ouzoud Waterfalls, Ourika Valley, Agafay Desert sunset, and hot-air
+  balloon flights.
 
 ---
 
 ## 🛠️ Tech Stack & Architecture
 
 - **Framework**: [Astro](https://astro.build/) (Server-Side Rendering via `@astrojs/node` adapter)
-- **Interactive Islands**: [Vue 3](https://vuejs.org/) (Booking forms, newsletter modal, interactive calendar, video player)
-- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/) with OKLCH warm Moroccan palette tokens (terracotta, golden amber, sand canvas)
-- **Motion & Interactions**: [GSAP](https://gsap.com/), [Lenis](https://github.com/darkroomengineering/lenis) smooth scrolling, native View Transitions, and sub-300ms motion craft
+- **Interactive Islands**: [Vue 3](https://vuejs.org/) (Booking forms, newsletter modal, interactive
+  calendar, video player)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/) with OKLCH warm Moroccan palette tokens
+  (terracotta, golden amber, sand canvas)
+- **Motion & Interactions**: [GSAP](https://gsap.com/),
+  [Lenis](https://github.com/darkroomengineering/lenis) smooth scrolling, native View Transitions,
+  and sub-300ms motion craft
 - **Package Manager & Runtime**: [Bun](https://bun.sh/)
-- **Internationalization (i18n)**: 4 languages supported (`en`, `fr`, `es`, `de`) with localized slug routing, language selector, and alternate hreflang canonicals
-- **SEO & AI Discoverability**: Schema.org JSON-LD (Organization, Tour, TouristTrip, FAQPage, BreadcrumbList), XML sitemap index, `/llms.txt`, and `/ai-catalog.json`
-- **Security & Privacy**: Strict Content Security Policy (`strict-dynamic`), anti-CSRF headers, Google reCAPTCHA v3 verification, and GDPR-compliant cookie consent
+- **Internationalization (i18n)**: 4 languages supported (`en`, `fr`, `es`, `de`) with localized
+  slug routing, language selector, and alternate hreflang canonicals
+- **SEO & AI Discoverability**: Schema.org JSON-LD (Organization, Tour, TouristTrip, FAQPage,
+  BreadcrumbList), XML sitemap index, `/llms.txt`, and `/ai-catalog.json`
+- **Security & Privacy**: Strict Content Security Policy (`strict-dynamic`), anti-CSRF headers,
+  Google reCAPTCHA v3 verification, and GDPR-compliant cookie consent
 
 ---
 
@@ -114,5 +127,5 @@ bun run test:e2e
 
 ## 📄 License & Ownership
 
-Copyright © 2026 **Amsirar Trip SARL**. All rights reserved.
-Licensed Moroccan Tour Operator — Marrakech, Morocco.
+Copyright © 2026 **Amsirar Trip SARL**. All rights reserved. Licensed Moroccan Tour Operator —
+Marrakech, Morocco.

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "entry": [
+    "src/scripts/ascii-skeleton.ts",
+    "src/scripts/cookie-consent.ts",
+    "src/scripts/desktop-nav.ts",
+    "src/scripts/mobile-nav.ts",
+    "src/scripts/navbar-scroll.ts",
+    "src/scripts/no-js.ts",
+    "src/scripts/scroll-animate.ts",
+    "src/scripts/slider.ts",
+    "src/scripts/smooth-scroll.ts",
+    "src/scripts/transitions.ts",
+    "src/scripts/webmcp-tools.ts",
+    "src/features/contact/scripts/contact-folder-stack.ts",
+    "src/features/contact/scripts/map-placeholder.ts",
+    "src/features/home/components/scroll-stack.ts",
+    "src/features/home/components/stats-folder-stack.ts",
+    "src/features/legal/scripts/privacy-interactive.ts",
+    "src/features/legal/scripts/terms-interactive.ts",
+    "src/shared/ui/stat-highlights-stack.ts",
+    "tests/type-safety.test-d.ts"
+  ]
+}

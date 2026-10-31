@@ -83,9 +83,11 @@ const NAV_ITEMS = [
                 class="size-5 shrink-0 stroke-[2.2] transition-transform duration-200 group-hover/link:scale-110 lg:hidden motion-reduce:transform-none"
               />
               <span
-                class="desktop-nav-label inline-block overflow-hidden whitespace-nowrap text-xs font-semibold tracking-tight motion-reduce:transition-none lg:text-sm lg:overflow-visible lg:w-auto! lg:opacity-100! lg:ml-0!"
+                class:list={[
+                  "desktop-nav-label inline-block overflow-hidden whitespace-nowrap text-xs font-semibold tracking-tight motion-reduce:transition-none lg:text-sm lg:overflow-visible lg:w-auto! lg:opacity-100! lg:ml-0!",
+                  { "ml-2": active, "w-0 opacity-0 ml-0": !active },
+                ]}
                 data-expanded={active ? "true" : undefined}
-                style={active ? "margin-left: 8px;" : "width: 0px; opacity: 0; margin-left: 0px;"}
               >
                 {label}
               </span>
