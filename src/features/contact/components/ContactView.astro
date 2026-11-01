@@ -105,12 +105,12 @@ const DELAY_CLASSES = ["delay-0", "delay-150", "delay-300"] as const;
       </div>
 
       <!-- Desktop & Tablet Mode: Responsive Multi-Column Grid -->
-      <div class="hidden md:grid md:grid-cols-2 xl:grid-cols-3 gap-6 items-stretch">
+      <div class="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
         {contactMethods.map((method, index) => (
           <div
             class:list={[
               "flex size-full",
-              { "sm:col-span-2 xl:col-span-1": index === 2 },
+              { "md:col-span-2 lg:col-span-1": index === 2 },
               DELAY_CLASSES[index] || "delay-0",
             ]}
             data-animate="fade-up"
@@ -214,14 +214,11 @@ const DELAY_CLASSES = ["delay-0", "delay-150", "delay-300"] as const;
         </hgroup>
       </div>
 
-      <div class="overflow-hidden rounded-2xl border border-slate-900 bg-slate-950 text-white shadow-xl">
-        <div
-          class="group relative flex flex-col items-center justify-center bg-slate-950 text-white cursor-pointer transition duration-300 block-75 md:block-100 lg:block-125"
-          id="map-placeholder"
-        >
+      <details class="group overflow-hidden rounded-2xl border border-slate-900 bg-slate-950 text-white shadow-xl">
+        <summary class="group/summary relative flex flex-col items-center justify-center bg-slate-950 text-white cursor-pointer list-none select-none transition duration-300 block-75 md:block-100 lg:block-125 marker:hidden group-open:hidden">
           <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(234,88,12,0.12),transparent_70%)]"></div>
           <div class="relative z-10 text-center space-y-4 px-6 max-w-lg mx-auto">
-            <div class="mx-auto flex size-14 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-orange-400 font-mono text-xs shadow-xs group-hover:scale-105 transition duration-300">
+            <div class="mx-auto flex size-14 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-orange-400 font-mono text-xs shadow-xs group-hover/summary:scale-105 transition duration-300">
               <MapPinned
                 aria-hidden="true"
                 class="size-6"
@@ -238,38 +235,27 @@ const DELAY_CLASSES = ["delay-0", "delay-150", "delay-300"] as const;
               )}
             </p>
             <div class="pt-2">
-              <button
-                class="inline-flex min-h-11 items-center gap-2 rounded-full border border-orange-500/50 bg-linear-to-br from-amber-orange to-orange px-8 py-3 font-mono text-xs font-bold uppercase tracking-wider text-white shadow-md shadow-orange/20 transition-[filter,box-shadow,transform] duration-160 ease-out pointer-fine:hover:brightness-105 pointer-fine:hover:shadow-lg pointer-fine:hover:shadow-orange/30 active:scale-[0.98] motion-reduce:transform-none cursor-pointer"
-                type="button"
-              >
+              <span class="inline-flex min-h-11 items-center gap-2 rounded-full border border-orange-500/50 bg-linear-to-br from-amber-orange to-orange px-8 py-3 font-mono text-xs font-bold uppercase tracking-wider text-white shadow-md shadow-orange/20 transition-[filter,box-shadow,transform] duration-160 ease-out pointer-fine:hover:brightness-105 pointer-fine:hover:shadow-lg pointer-fine:hover:shadow-orange/30 active:scale-[0.98] motion-reduce:transform-none">
                 <span>{t("contact.map.loadBtn", "Load Map")}</span>
                 <ChevronRight
                   aria-hidden="true"
                   class="size-4"
                 />
-              </button>
+              </span>
             </div>
           </div>
-        </div>
-        <div
-          class="hidden"
-          id="map-container"
-        >
-          <iframe
-            allowfullscreen
-            aria-label="Interactive map showing Amsirar Trip agency location in Marrakech"
-            class="border-0 block-75 md:block-100 lg:block-125"
-            data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3399.999!2d-8.0257651!3d31.6259758!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdafef007a3f58d3%3A0xa6485d9ed7022b4c!2sAmsirar+Travel!5e0!3m2!1sen!2sma!4v1699999999999!5m2!1sen!2sma"
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            sandbox="allow-scripts allow-same-origin allow-popups"
-            title="Amsirar Trip Agency Location - Marrakech, Morocco"
-            width="100%"
-          ></iframe>
-        </div>
-      </div>
-
-      <script src="../scripts/map-placeholder.ts"></script>
+        </summary>
+        <iframe
+          allowfullscreen
+          aria-label="Interactive map showing Amsirar Trip agency location in Marrakech"
+          class="border-0 block-75 md:block-100 lg:block-125 inline-full"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3399.999!2d-8.0257651!3d31.6259758!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdafef007a3f58d3%3A0xa6485d9ed7022b4c!2sAmsirar+Travel!5e0!3m2!1sen!2sma!4v1699999999999!5m2!1sen!2sma"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          sandbox="allow-scripts allow-same-origin allow-popups"
+          title="Amsirar Trip Agency Location - Marrakech, Morocco"
+        ></iframe>
+      </details>
     </div>
   </section>
 </div>

@@ -73,6 +73,8 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
 
       <button
         class="inline-flex min-h-11 h-11 cursor-pointer items-center justify-center whitespace-nowrap shrink-0 rounded-xl border border-transparent px-3 font-sans text-xs font-medium text-zinc-400 transition-colors hover:text-white hover:bg-white/5 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-400 sm:h-10 sm:min-h-10"
+        command="show-modal"
+        commandfor="cookie-preferences-modal"
         data-cookie-open-preferences
         type="button"
       >
@@ -108,6 +110,8 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
       <button
         aria-label={t("cookieConsent.close", "Close")}
         class="inline-flex size-8 cursor-pointer items-center justify-center rounded-lg border border-white/10 bg-white/5 text-zinc-400 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-2 focus-visible:outline-orange-400"
+        command="close"
+        commandfor="cookie-preferences-modal"
         data-cookie-close-preferences
         type="submit"
         value="cancel"
@@ -201,9 +205,9 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
             />
             <div
               aria-hidden="true"
-              class="amsirar-toggle-track flex h-6 w-11 shrink-0 cursor-pointer select-none items-center rounded-full border border-white/20 bg-zinc-800 p-0.5 transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-orange-400 peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-slate-950"
+              class="amsirar-toggle-track flex h-6 w-11 shrink-0 cursor-pointer select-none items-center rounded-full border border-white/20 bg-zinc-800 p-0.5 transition-[background-color,border-color] duration-200 ease-out peer-checked:border-orange-500/80 peer-checked:bg-[#c2410c] peer-checked:[&>.amsirar-toggle-thumb]:translate-x-5 peer-focus-visible:ring-2 peer-focus-visible:ring-orange-400 peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-slate-950 motion-reduce:transition-none"
             >
-              <div class="amsirar-toggle-thumb flex size-5 shrink-0 rounded-full bg-white shadow-xs will-change-transform"></div>
+              <div class="amsirar-toggle-thumb flex size-5 shrink-0 rounded-full bg-white shadow-xs transition-transform duration-200 ease-out will-change-transform motion-reduce:transition-none"></div>
             </div>
           </label>
         </div>
@@ -242,9 +246,9 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
             />
             <div
               aria-hidden="true"
-              class="amsirar-toggle-track flex h-6 w-11 shrink-0 cursor-pointer select-none items-center rounded-full border border-white/20 bg-zinc-800 p-0.5 transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-orange-400 peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-slate-950"
+              class="amsirar-toggle-track flex h-6 w-11 shrink-0 cursor-pointer select-none items-center rounded-full border border-white/20 bg-zinc-800 p-0.5 transition-[background-color,border-color] duration-200 ease-out peer-checked:border-orange-500/80 peer-checked:bg-[#c2410c] peer-checked:[&>.amsirar-toggle-thumb]:translate-x-5 peer-focus-visible:ring-2 peer-focus-visible:ring-orange-400 peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-slate-950 motion-reduce:transition-none"
             >
-              <div class="amsirar-toggle-thumb flex size-5 shrink-0 rounded-full bg-white shadow-xs will-change-transform"></div>
+              <div class="amsirar-toggle-thumb flex size-5 shrink-0 rounded-full bg-white shadow-xs transition-transform duration-200 ease-out will-change-transform motion-reduce:transition-none"></div>
             </div>
           </label>
         </div>
@@ -296,6 +300,8 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
 <button
   aria-label={t("cookieConsent.modalTitle", "Cookie Settings")}
   class="group fixed inset-e-0 inset-be-20 z-40 flex size-11 cursor-pointer items-center justify-start ps-2.5 rounded-s-md border-[1.5px] border-e-0 border-white/15 bg-slate-950/95 text-zinc-300 shadow-md backdrop-blur-md transition-[transform,background-color,border-color,color,box-shadow] duration-200 ease-out pointer-fine:hover:-translate-x-1.5 pointer-fine:hover:border-orange-400/50 pointer-fine:hover:bg-slate-900 pointer-fine:hover:text-white pointer-fine:hover:shadow-xl focus-visible:outline-2 focus-visible:outline-orange-400 motion-reduce:transform-none"
+  command="show-modal"
+  commandfor="cookie-preferences-modal"
   data-cookie-open-preferences
   id="cookie-badge-btn"
   title={t("cookieConsent.customize", "Cookie Settings")}

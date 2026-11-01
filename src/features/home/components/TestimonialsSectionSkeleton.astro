@@ -1,6 +1,5 @@
 ---
 import AsciiSkeleton from "@/shared/ui/AsciiSkeleton.astro";
-import { CircleCheck, Star } from "@lucide/astro";
 
 interface Props {
   class?: string | undefined;
@@ -46,18 +45,15 @@ const { class: className } = Astro.props;
                     <AsciiSkeleton
                       class="text-stone-400 font-bold tracking-[0.14em] uppercase"
                       lines={1}
-                      variant="scan"
+                      variant="dither"
                       widths={["13ch"]}
                     />
-                    <div class="flex items-center gap-0.5 text-stone-300">
-                      {Array.from({ length: 5 }, () => (
-                        <Star
-                          aria-hidden="true"
-                          class="size-3.5 fill-current"
-                          stroke-width={1.5}
-                        />
-                      ))}
-                    </div>
+                    <AsciiSkeleton
+                      class="text-stone-300"
+                      lines={1}
+                      variant="dither"
+                      widths={["4.5rem"]}
+                    />
                   </div>
 
                   <!-- Editorial Quote -->
@@ -76,24 +72,22 @@ const { class: className } = Astro.props;
                   <AsciiSkeleton
                     class="text-sm font-bold text-stone-800"
                     lines={1}
-                    variant="scan"
+                    variant="dither"
                     widths={["9rem"]}
                   />
                   <div class="mbs-1 flex items-center gap-2 font-mono text-xs text-stone-400">
                     <AsciiSkeleton
                       class="text-stone-400"
                       lines={1}
-                      variant="terminal"
+                      variant="dither"
                       widths={["6rem"]}
                     />
                     <span class="text-stone-300">·</span>
-                    <span class="inline-flex items-center gap-1 font-sans text-xs font-medium text-stone-400">
-                      <CircleCheck
-                        aria-hidden="true"
-                        class="size-3 text-stone-400"
-                      />
-                      Verified
-                    </span>
+                    <AsciiSkeleton
+                      class="h-4 w-16 rounded-full overflow-hidden text-stone-400"
+                      rows={1}
+                      variant="dither"
+                    />
                   </div>
                 </figcaption>
               </figure>

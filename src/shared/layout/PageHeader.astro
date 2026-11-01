@@ -70,6 +70,7 @@ if (gradientPosition === "top-right") {
           class="mbe-6 sm:mbe-8 flex items-center justify-center gap-3"
         >
           <ol
+            data-ascii="fade"
             role="list"
             class="flex list-none flex-wrap items-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 py-2 backdrop-blur-md"
           >
@@ -132,7 +133,10 @@ if (gradientPosition === "top-right") {
           </p>
         : null}
       </hgroup>
-      <div class="flex flex-wrap items-center justify-center gap-4 pbs-2">
+      <div
+        data-ascii="fade"
+        class="flex flex-wrap items-center justify-center gap-4 pbs-2"
+      >
         <slot />
       </div>
     </div>

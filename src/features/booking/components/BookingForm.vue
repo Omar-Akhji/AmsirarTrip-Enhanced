@@ -7,7 +7,6 @@ import { useTranslation } from "@/lib/hooks/use-translation";
 import Loading from "@/shared/ui/Loading.vue";
 import Recaptcha from "@/shared/ui/Recaptcha.vue";
 import BookingFormFields from "./BookingFormFields.vue";
-import BookingSidebar from "./BookingSidebar.vue";
 import FormStatusMessages from "./FormStatusMessages.vue";
 import { CircleAlert } from "lucide-vue-next";
 
@@ -58,12 +57,6 @@ const handleVerify = (token: string) => {
 const handleExpired = () => {
   captchaToken.value = "";
 };
-
-const perks = computed(() => [
-  { id: "experts", text: t("booking.perkLocalExperts", "Licensed local drivers & guides") },
-  { id: "flexible", text: t("booking.perkFlexible", "Flexible departures from Marrakech") },
-  { id: "support", text: t("booking.perkSupport", "Fast responses within 24 hours") },
-]);
 
 const selectedTour = computed(() => {
   return tourTitle && tourDuration != null ?
@@ -303,7 +296,7 @@ const handleSubmit = async (event: Event) => {
           data-animate="creative-slide-left"
           data-delay="150"
         >
-          <BookingSidebar :perks="perks" />
+          <slot name="sidebar" />
         </div>
       </div>
     </div>

@@ -90,7 +90,7 @@
     },
     "sidebar": {
       "title": "Airport Transfer Services in Morocco",
-      "mainBrand": "Amsirar Trip",
+      "mainBrand": "Amsirar Tourist Transport",
       "subBrand": "Tourist Transport",
       "intro": "We provide licensed private airport transfers between major Moroccan airports (Marrakech RAK, Casablanca CMN, Agadir AGA, Fes FEZ) and city riads or regional destinations.",
       "details": "Your driver meets you in the arrival hall with a name board, assists with luggage, and drives directly to your accommodation in an air-conditioned vehicle at agreed fixed rates.",
@@ -247,7 +247,7 @@
     "sidebar": {
       "alt": "Amsirar airport transfer vehicle",
       "title": "Airport Transfer Services in Morocco",
-      "mainBrand": "Amsirar Trip",
+      "mainBrand": "Amsirar Tourist Transport",
       "subBrand": "Transport Touristique",
       "intro": "We provide licensed private airport transfers between major Moroccan airports (Marrakech RAK, Casablanca CMN, Agadir AGA, Fes FEZ) and city riads or regional destinations.",
       "details": "Your driver meets you in the arrival hall with a name board, assists with luggage, and drives directly to your accommodation in an air-conditioned vehicle at agreed fixed rates.",
@@ -1164,23 +1164,53 @@
     "smTitle": "Verified traveler feedback",
     "lgTitle": "Traveler dispatches & reviews",
     "items": {
-      "kevin": {
-        "name": "Kevin Wilson",
-        "country": "USA",
-        "alt": "Kevin Wilson testimonial",
-        "quote": "Our driver, Hassan, met us at Marrakech airport and stayed with our group through the High Atlas and out to Erg Chebbi. He knew every turn in the Tizi n'Tichka pass and stopped at small roadside places we would have missed on our own. The riad and desert camp bookings were sorted without any delays."
+      "chrissy": {
+        "name": "Chrissy B.",
+        "country": "Germany",
+        "alt": "Chrissy B. TripAdvisor review",
+        "quote": "My husband and I spent our holiday in Marrakech and booked day trips to Imlil and Essaouira with Amsirar. Our guide Omar gave us a warm welcome. The High Atlas tour was fantastic—when I twisted my foot on the trail, Omar immediately arranged a mule so our trip could continue seamlessly. The second tour took us to Essaouira, the coast, and a wonderful seaside restaurant with fresh food and great views. Omar shared so much local history, stopped at scenic spots, and avoided standard tourist traps. Genuine holiday feeling without the rush. Thank you Amsirar!"
       },
-      "ben": {
-        "name": "Ben Smith",
-        "country": "UK",
-        "alt": "Ben Smith testimonial",
-        "quote": "Booking with Amsirar Trip was straightforward and dependable. The communication was prompt and clear from start to finish. The itinerary was well-balanced across desert routes and mountain passes, and the guides were attentive throughout the journey."
+      "bianca": {
+        "name": "Bianca V.",
+        "country": "Netherlands",
+        "alt": "Bianca V. TripAdvisor review",
+        "quote": "A fantastic luxury family experience with Amsirar! Everything was super neat, clean, and perfectly coordinated, with delicious authentic Moroccan cuisine. The host was friendly and genuinely helpful. They organized unforgettable quad biking and an excursion to the Ouzoud waterfalls. All in all, a truly special adventure for our family and a memory that will stay with us forever. We can wholeheartedly recommend their team to everyone!"
       },
-      "sara": {
-        "name": "Sara Garcia",
-        "country": "Spain",
-        "alt": "Sara Garcia testimonial",
-        "quote": "Our private tour with Amsirar Trip was handled with real care, from hotel bookings to transport through the Atlas. The team was especially accommodating when we asked to adjust our route pacing. Every stage was well organized and gave us time to explore."
+      "pac": {
+        "name": "Pa C.",
+        "country": "Germany",
+        "alt": "Pa C. TripAdvisor review",
+        "quote": "Mega tour! We saw so much of the region and Moroccan culture in such a short time. Everything was seamless for us, the weather was fantastic, and the organisation was first-rate. 100% recommended for anyone visiting Marrakech."
+      },
+      "franziska": {
+        "name": "Franziska B.",
+        "country": "Germany",
+        "alt": "Franziska B. TripAdvisor review",
+        "quote": "Our 3-day tour through Morocco was an unforgettable experience full of adventure, culture, and breathtaking landscapes. The contrast between vibrant Marrakech, the serene Sahara dunes in Merzouga, and historic Aït Ben Haddou made this journey absolutely perfect. A huge thank you to our guide who accompanied us throughout the trip and enriched every moment with his deep knowledge and passion for Morocco. Highly recommended for anyone wanting to discover the true beauty of this country!"
+      },
+      "tanja": {
+        "name": "Tanja F.",
+        "country": "Germany",
+        "alt": "Tanja F. TripAdvisor review",
+        "quote": "Super wonderful tour! We saw so much and the entire itinerary was planned to perfection. The guides were exceptionally friendly, attentive, and welcoming throughout. Many thanks to the Amsirar team for such a memorable trip!"
+      },
+      "margret": {
+        "name": "Margret B.",
+        "country": "Germany",
+        "alt": "Margret B. TripAdvisor review",
+        "quote": "Once again a very special experience with numerous highlights! Outstanding organization and execution of the tour. The bustling souks of Marrakech are vibrant and unique, and riding camels through the Sahara dunes is unforgettable. We would book again anytime—highly recommended!"
+      },
+      "marianne": {
+        "name": "Marianne B.",
+        "country": "Germany",
+        "alt": "Marianne B. TripAdvisor review",
+        "quote": "I would repeat this tour anytime. The tour guides were super friendly, attentive, and competent. What you experience feels straight out of 1001 Nights! Spending the night in the desert camp under the stars was simply brilliant. Thank you so much and until next time!"
+      },
+      "melina": {
+        "name": "Melina O.",
+        "country": "Germany",
+        "alt": "Melina O. TripAdvisor review",
+        "quote": "Such a wonderful experience! An incredible amount of impressions in just a few days. Our tour guide was fantastic, showed us so much along the way, and was always ready to stop for great photos and scenic viewpoints."
       }
     }
   },

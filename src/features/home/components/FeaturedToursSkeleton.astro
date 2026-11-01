@@ -1,6 +1,5 @@
 ---
 import AsciiSkeleton from "@/shared/ui/AsciiSkeleton.astro";
-import { ChevronRight } from "@lucide/astro";
 
 interface Props {
   count?: number | undefined;
@@ -30,7 +29,7 @@ const { count = 6, class: className } = Astro.props;
         <AsciiSkeleton
           class="text-stone-400 font-mono text-xs uppercase"
           lines={1}
-          variant="scan"
+          variant="dither"
           widths={["12rem"]}
         />
         <AsciiSkeleton
@@ -49,18 +48,12 @@ const { count = 6, class: className } = Astro.props;
         </div>
       </div>
 
-      <div class="inline-flex items-center gap-2">
-        <AsciiSkeleton
-          class="text-stone-400"
-          lines={1}
-          variant="scan"
-          widths={["8rem"]}
-        />
-        <ChevronRight
-          aria-hidden="true"
-          class="size-4 text-stone-400"
-        />
-      </div>
+      {/* View all destinations button — rendered as full ASCII dither button pill */}
+      <AsciiSkeleton
+        class="h-8.5 w-32 rounded-full overflow-hidden text-stone-400"
+        rows={2}
+        variant="dither"
+      />
     </div>
 
     {/* Destination Cards Grid matching FeaturedTours.astro */}
@@ -87,7 +80,7 @@ const { count = 6, class: className } = Astro.props;
                 <AsciiSkeleton
                   class="text-stone-300 font-bold mbe-1.5 text-xs font-mono uppercase"
                   lines={1}
-                  variant="scan"
+                  variant="dither"
                   widths={["7rem"]}
                 />
                 <AsciiSkeleton

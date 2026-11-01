@@ -90,7 +90,7 @@
     },
     "sidebar": {
       "title": "Flughafentransfers in Marokko",
-      "mainBrand": "Amsirar Trip",
+      "mainBrand": "Amsirar Touristentransport",
       "subBrand": "Touristischer Transport",
       "intro": "Wir bieten lizenzierte private Flughafentransfers zwischen den wichtigsten marokkanischen Flughäfen (Marrakesch RAK, Casablanca CMN, Agadir AGA, Fès FEZ) und Ihrer Unterkunft.",
       "details": "Ihr Fahrer erwartet Sie in der Ankunftshalle mit einem Namensschild, hilft mit dem Gepäck und fährt Sie im klimatisierten Fahrzeug direkt zu Ihrem Riad oder Hotel zu vorab vereinbarten Festpreisen.",
@@ -248,7 +248,7 @@
     "sidebar": {
       "alt": "Amsirar Flughafentransfer-Fahrzeug",
       "title": "Flughafentransfers in Marokko",
-      "mainBrand": "Amsirar Trip",
+      "mainBrand": "Amsirar Touristentransport",
       "subBrand": "Touristischer Transport",
       "intro": "Wir bieten lizenzierte private Flughafentransfers zwischen den wichtigsten marokkanischen Flughäfen (Marrakesch RAK, Casablanca CMN, Agadir AGA, Fès FEZ) und Ihrer Unterkunft.",
       "details": "Ihr Fahrer erwartet Sie in der Ankunftshalle mit einem Namensschild, hilft mit dem Gepäck und fährt Sie im klimatisierten Fahrzeug direkt zu Ihrem Riad oder Hotel zu vorab vereinbarten Festpreisen.",
@@ -1167,23 +1167,53 @@
     "smTitle": "was unsere Kunden über uns sagen",
     "lgTitle": "Referenzen",
     "items": {
-      "kevin": {
-        "name": "Kevin Wilson",
-        "country": "USA",
-        "alt": "Kevin Wilson Bewertung",
-        "quote": "Unser Fahrer Hassan erwartete uns am Flughafen Marrakesch und begleitete unsere Gruppe über den Hohen Atlas bis nach Erg Chebbi. Er kannte die Strecke über den Tizi n'Tichka-Pass genau und zeigte uns ruhige Orte abseits der üblichen Touristenstopps. Riads und das Wüstencamp waren pünktlich vorbereitet."
+      "chrissy": {
+        "name": "Chrissy B.",
+        "country": "Deutschland",
+        "alt": "Chrissy B. TripAdvisor Bewertung",
+        "quote": "Mein Mann und ich haben unseren Urlaub in Marrakesch verbracht und die Tour nach Imlil und Essaouira mit Amsirar gebucht. Omar unser Guide hat uns herzlich empfangen. Die Tour ins Atlas-Gebirge war fantastisch: als ich mich vertreten habe, organisierte Omar spontan ein Muli, sodass es nahtlos weiterging. Die zweite Tour ging nach Essaouira ans Meer in ein tolles Restaurant mit Meerblick und frischem Essen. Omar hat viel über Land und Leute erzählt, an tollen Spots gehalten und kein typisches Touri-Programm abgespult. Urlaubsfeeling pur! Vielen Dank an Amsirar, bis zum nächsten Mal :)"
       },
-      "ben": {
-        "name": "Ben Smith",
-        "country": "UK",
-        "alt": "Ben Smith Bewertung",
-        "quote": "Die Buchung bei Amsirar Trip war unkompliziert und verlässlich. Die Kommunikation war von Anfang bis Ende zügig und klar. Der Reiseplan war zwischen Wüstenrouten und Bergpässen gut ausgewogen, und die Reiseleiter waren während der gesamten Fahrt aufmerksam."
+      "bianca": {
+        "name": "Bianca V.",
+        "country": "Niederlande",
+        "alt": "Bianca V. TripAdvisor Bewertung",
+        "quote": "Ein fantastisches Familienerlebnis mit Amsirar! Alles war super gepflegt, sauber und hervorragend organisiert, dazu gab es fantastische marokkanische Küche. Der Gastgeber war herzlich und überaus hilfsbereit. Die Quad-Biking-Tour und der Ausflug zu den Ouzoud-Wasserfällen waren perfekt abgestimmt. Ein ganz besonderes Erlebnis für unsere ganze Familie, das uns für immer in Erinnerung bleibt. Wir können diese Organisation uneingeschränkt jedem empfehlen!"
       },
-      "sara": {
-        "name": "Sara Garcia",
-        "country": "Spanien",
-        "alt": "Sara Garcia Bewertung",
-        "quote": "Unsere Privattour mit Amsirar Trip wurde mit großer Sorgfalt durchgeführt, von den Unterkünften bis zum Transport durch den Atlas. Das Team war besonders entgegenkommend, als wir das Reisetempo anpassen wollten. Jeder Reiseabschnitt war gut organisiert und ließ uns genügend Zeit für Erkundungen."
+      "pac": {
+        "name": "Pa C.",
+        "country": "Deutschland",
+        "alt": "Pa C. TripAdvisor Bewertung",
+        "quote": "Mega Tour, sehr viel in der kurzen Zeit von der Gegend und der Kultur gesehen. Alles hat bei uns gepasst, das Wetter war auch Klasse. 100 Prozent empfehlenswert."
+      },
+      "franziska": {
+        "name": "Franziska B.",
+        "country": "Deutschland",
+        "alt": "Franziska B. TripAdvisor Bewertung",
+        "quote": "Die Tour durch Marokko war ein unvergessliches Erlebnis voller Abenteuer, Kultur und atemberaubender Landschaften. Die Kombination aus der lebendigen Stadt Marrakesch, der ruhigen Wüste in Merzouga und dem historischen Aït Ben Haddou machte diese Reise zu einem perfekten Erlebnis. Ich kann diese Tour jedem empfehlen, der die Schönheit und Vielfalt Marokkos entdecken möchte. Ein großes Dankeschön an die Reiseleitung, die uns mit Wissen und Leidenschaft bereichert hat!"
+      },
+      "tanja": {
+        "name": "Tanja F.",
+        "country": "Deutschland",
+        "alt": "Tanja F. TripAdvisor Bewertung",
+        "quote": "Super schöne Tour, wir haben viel gesehen und die Tour war toll geplant. Sehr freundlich und zuvorkommend. Vielen Dank dafür!"
+      },
+      "margret": {
+        "name": "Margret B.",
+        "country": "Deutschland",
+        "alt": "Margret B. TripAdvisor Bewertung",
+        "quote": "Wieder einmal ein ganz besonderes Erlebnis mit zahlreichen Highlights. Sehr gute Organisation und Durchführung der Tour. Das Markttreiben in Marrakesch ist einzigartig und farbenfroh, und mit dem Kamel durch die Wüste ein unvergessliches Erlebnis. Jederzeit wieder, absolut empfehlenswert!"
+      },
+      "marianne": {
+        "name": "Marianne B.",
+        "country": "Deutschland",
+        "alt": "Marianne B. TripAdvisor Bewertung",
+        "quote": "Jederzeit würde ich die Tour wiederholen. Die Tourguides waren super freundlich und kompetent. Es ist wie 1001 Nacht, was einem da gezeigt wird! Die Übernachtung in den Zelten einfach genial! Danke dafür und auf ein Wiedersehen!"
+      },
+      "melina": {
+        "name": "Melina O.",
+        "country": "Deutschland",
+        "alt": "Melina O. TripAdvisor Bewertung",
+        "quote": "So ein wundervolles Erlebnis! Wahnsinnig viele Eindrücke. Ein super Tourguide hat uns viel gezeigt und ständig für Fotos und Aussichtspunkte angehalten."
       }
     }
   },

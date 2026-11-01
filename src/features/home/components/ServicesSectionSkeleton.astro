@@ -70,40 +70,15 @@ const serviceCardSkeletons = [
             "flex flex-col items-center rounded-2xl border border-white/10 bg-white/10 p-8 text-center shadow-xs ring-1 ring-black/5 backdrop-blur-xl size-full",
             { "md:col-span-2 lg:col-span-1": index === 2 },
           ]}
-          style="-webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px);"
+          style="backdrop-filter: blur(20px);"
         >
-          {/* SVG icon container with dedicated image skeleton */}
+          {/* Circular icon skeleton */}
           <div class="mbe-6 inline-flex size-25 items-center justify-center rounded-full bg-white/5 ring-1 ring-white/10">
-            <div class="relative flex size-15 items-center justify-center overflow-hidden rounded-full bg-white/10 ring-1 ring-white/20">
-              <AsciiSkeleton
-                class="ars-image size-full text-white/35"
-                rows={10}
-                variant="dither"
-              />
-              <svg
-                aria-hidden="true"
-                class="relative z-10 size-8 text-white/30"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                viewBox="0 0 24 24"
-              >
-                <circle
-                  cx="12"
-                  cy="12"
-                  r="9"
-                  stroke-dasharray="3 3"
-                />
-                <path
-                  d="M3.6 9h16.8M3.6 15h16.8"
-                  stroke-dasharray="2 2"
-                />
-                <path
-                  d="M12 3a15.3 15.3 0 0 1 4 9 15.3 15.3 0 0 1-4 9 15.3 15.3 0 0 1-4-9 15.3 15.3 0 0 1 4-9z"
-                  stroke-dasharray="3 3"
-                />
-              </svg>
-            </div>
+            <AsciiSkeleton
+              class="size-15 rounded-full overflow-hidden text-white/40"
+              rows={3}
+              variant="dither"
+            />
           </div>
 
           {/* Card Title Skeleton matching exact h3 typography and content width */}

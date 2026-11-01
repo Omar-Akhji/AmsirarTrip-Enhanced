@@ -1,7 +1,6 @@
 ---
 import AsciiSkeleton from "@/shared/ui/AsciiSkeleton.astro";
 import PageHeaderSkeleton from "@/shared/ui/PageHeaderSkeleton.astro";
-import { ChevronRight, MapPinned } from "@lucide/astro";
 
 interface Props {
   class?: string | undefined;
@@ -33,14 +32,14 @@ const { class: className } = Astro.props;
         <AsciiSkeleton
           class="text-stone-400 text-sm"
           lines={1}
-          variant="scan"
+          variant="dither"
           widths={["12rem"]}
         />
       </div>
 
-      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 items-stretch">
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 items-stretch">
         {Array.from({ length: 3 }, () => (
-          <div class="flex size-full last:sm:col-span-2 last:xl:col-span-1">
+          <div class="flex size-full last:md:col-span-2 last:lg:col-span-1">
             <article class="group flex size-full flex-col justify-between rounded-2xl border border-stone-200/90 bg-stone-50/80 p-7 shadow-xs">
               <div>
                 <AsciiSkeleton
@@ -59,19 +58,13 @@ const { class: className } = Astro.props;
                 </div>
               </div>
 
+              {/* Action Button — rendered as complete ASCII skeleton pill */}
               <div class="mbs-6 border-t border-stone-200/60 pbs-4">
-                <div class="flex items-center justify-between rounded-full border border-stone-200 bg-white px-5 py-2.5">
-                  <AsciiSkeleton
-                    class="text-stone-500 font-mono text-xs"
-                    lines={1}
-                    variant="terminal"
-                    widths={["8rem"]}
-                  />
-                  <ChevronRight
-                    aria-hidden="true"
-                    class="size-4 text-stone-400"
-                  />
-                </div>
+                <AsciiSkeleton
+                  class="h-10 w-full rounded-full overflow-hidden text-stone-400"
+                  rows={2}
+                  variant="dither"
+                />
               </div>
             </article>
           </div>
@@ -96,7 +89,7 @@ const { class: className } = Astro.props;
         <AsciiSkeleton
           class="text-stone-400 text-sm"
           lines={1}
-          variant="scan"
+          variant="dither"
           widths={["32rem"]}
         />
       </div>
@@ -109,7 +102,7 @@ const { class: className } = Astro.props;
               <AsciiSkeleton
                 class="mbe-2 text-stone-400 font-mono text-xs uppercase"
                 lines={1}
-                variant="scan"
+                variant="dither"
                 widths={["7rem"]}
               />
               <AsciiSkeleton
@@ -127,7 +120,7 @@ const { class: className } = Astro.props;
                   <AsciiSkeleton
                     class="text-stone-300"
                     lines={1}
-                    variant="terminal"
+                    variant="dither"
                     widths={["6rem"]}
                   />
                 </div>
@@ -135,7 +128,7 @@ const { class: className } = Astro.props;
                   <AsciiSkeleton
                     class="text-stone-300"
                     lines={1}
-                    variant="terminal"
+                    variant="dither"
                     widths={["8rem"]}
                   />
                 </div>
@@ -147,7 +140,7 @@ const { class: className } = Astro.props;
                   <AsciiSkeleton
                     class="text-stone-300"
                     lines={1}
-                    variant="terminal"
+                    variant="dither"
                     widths={["7rem"]}
                   />
                 </div>
@@ -155,7 +148,7 @@ const { class: className } = Astro.props;
                   <AsciiSkeleton
                     class="text-stone-300"
                     lines={1}
-                    variant="terminal"
+                    variant="dither"
                     widths={["5rem"]}
                   />
                 </div>
@@ -171,30 +164,27 @@ const { class: className } = Astro.props;
                 />
               </div>
 
-              {/* Bottom: Captcha + Submit button */}
+              {/* Bottom: Captcha + Submit button — rendered as full ASCII skeleton pill */}
               <div class="flex flex-col gap-4 pbs-2 sm:flex-row sm:items-center sm:justify-between">
                 <div class="w-fit rounded-xl border border-stone-200 p-3 flex items-center gap-3">
                   <AsciiSkeleton
                     class="text-stone-400"
                     lines={1}
-                    variant="scan"
+                    variant="dither"
                     widths={["8rem"]}
                   />
                 </div>
-                <div class="rounded-full border border-stone-300 bg-stone-100 px-8 py-3 w-fit">
-                  <AsciiSkeleton
-                    class="text-stone-700 font-bold font-mono text-xs uppercase"
-                    lines={1}
-                    variant="scan"
-                    widths={["8rem"]}
-                  />
-                </div>
+                <AsciiSkeleton
+                  class="h-11 w-36 rounded-full overflow-hidden text-stone-400"
+                  rows={2}
+                  variant="dither"
+                />
               </div>
             </div>
           </div>
         </div>
 
-        {/* Right: Contact Sidebar in clean neutral gray (col-span-2) */}
+        {/* Right: Contact Sidebar (col-span-2) */}
         <aside class="block-full inline-full lg:col-span-2">
           <div class="flex flex-col justify-between rounded-2xl border border-stone-200/90 bg-stone-100 p-6 text-stone-900 shadow-xs block-full sm:p-8">
             <div>
@@ -202,7 +192,7 @@ const { class: className } = Astro.props;
                 <AsciiSkeleton
                   class="mbe-2 text-stone-500"
                   lines={1}
-                  variant="scan"
+                  variant="dither"
                   widths={["6rem"]}
                 />
                 <AsciiSkeleton
@@ -232,13 +222,13 @@ const { class: className } = Astro.props;
                       <AsciiSkeleton
                         class="text-stone-500 font-mono text-xs"
                         lines={1}
-                        variant="terminal"
+                        variant="dither"
                         widths={["3rem"]}
                       />
                       <AsciiSkeleton
                         class="text-stone-700 font-mono text-xs"
                         lines={1}
-                        variant="terminal"
+                        variant="dither"
                         widths={["9rem"]}
                       />
                     </div>
@@ -251,7 +241,7 @@ const { class: className } = Astro.props;
               <AsciiSkeleton
                 class="text-stone-400 text-xs font-mono"
                 lines={1}
-                variant="terminal"
+                variant="dither"
                 widths={["12rem"]}
               />
             </div>
@@ -277,7 +267,7 @@ const { class: className } = Astro.props;
         <AsciiSkeleton
           class="text-stone-400 text-sm"
           lines={1}
-          variant="scan"
+          variant="dither"
           widths={["11rem"]}
         />
       </div>
@@ -298,16 +288,16 @@ const { class: className } = Astro.props;
           ></div>
 
           <div class="relative z-10 text-center space-y-4 px-6 max-w-lg mx-auto">
-            {/* Centered MapPinned icon matching ContactView.astro */}
-            <div class="mx-auto flex size-14 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-stone-300 font-mono text-xs shadow-xs">
-              <MapPinned
-                aria-hidden="true"
-                class="size-6 text-stone-300"
-                stroke-width={2}
+            {/* Centered Map icon skeleton */}
+            <div class="mx-auto flex size-14 items-center justify-center rounded-2xl overflow-hidden text-stone-400">
+              <AsciiSkeleton
+                class="size-14 rounded-2xl overflow-hidden text-white/40"
+                rows={3}
+                variant="dither"
               />
             </div>
 
-            {/* Title: SHOW INTERACTIVE MAP (20ch) matching ContactView text-xl sm:text-2xl uppercase font-bold */}
+            {/* Title */}
             <div class="mx-auto text-center">
               <AsciiSkeleton
                 class="text-xl font-bold uppercase sm:text-2xl text-white/95 text-center mx-auto"
@@ -317,8 +307,7 @@ const { class: className } = Astro.props;
               />
             </div>
 
-            {/* Description: Clicking will load the Google Maps widget which may set cookies and load third-party scripts. */}
-            {/* 2 lines, centered in middle, matching font-mono text-xs sm:text-sm text-stone-300 */}
+            {/* Description */}
             <div class="mx-auto max-w-lg text-center">
               <AsciiSkeleton
                 class="font-mono text-xs sm:text-sm text-stone-300 leading-relaxed text-center mx-auto"
@@ -328,20 +317,13 @@ const { class: className } = Astro.props;
               />
             </div>
 
-            {/* Centered Load Map CTA Button skeleton */}
-            <div class="pt-2">
-              <div class="inline-flex min-h-11 items-center gap-2 rounded-full border border-white/20 bg-white/10 px-8 py-3 font-mono text-xs font-bold uppercase tracking-wider text-white">
-                <AsciiSkeleton
-                  class="text-white/80 font-mono text-xs font-bold uppercase"
-                  lines={1}
-                  variant="scan"
-                  widths={["8ch"]}
-                />
-                <ChevronRight
-                  aria-hidden="true"
-                  class="size-4 text-white/50"
-                />
-              </div>
+            {/* Centered Load Map CTA Button skeleton — full ASCII dither button pill */}
+            <div class="pt-2 flex justify-center">
+              <AsciiSkeleton
+                class="h-11 w-44 rounded-full overflow-hidden text-white/60"
+                rows={2}
+                variant="dither"
+              />
             </div>
           </div>
         </div>

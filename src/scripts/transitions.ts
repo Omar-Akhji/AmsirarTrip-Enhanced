@@ -1,5 +1,5 @@
 import type { TransitionBeforePreparationEvent } from "astro:transitions/client";
-import { initAsciiSkeletons } from "./ascii-skeleton";
+import { cleanupAsciiReveals, initAsciiSkeletons, triggerPageReveal } from "./ascii-skeleton";
 
 const SKELETON_DEV_DELAY_MS = 800;
 const PROGRESS_BAR_ID = "page-progress-bar";
@@ -99,6 +99,8 @@ export function resolveSkeletonRoute(pathname: string): string {
 }
 
 function showSkeleton(routeKey: string): void {
+  cleanupAsciiReveals();
+
   const container = document.querySelector<HTMLElement>("#skeleton-container");
   const content = document.querySelector<HTMLElement>("#page-content");
   if (!container || !content) return;
@@ -118,7 +120,8 @@ function showSkeleton(routeKey: string): void {
   container.classList.remove("hidden");
   container.removeAttribute("aria-hidden");
   container.style.opacity = "1";
-  content.classList.add("hidden");
+  content.style.opacity = "0";
+  content.style.pointerEvents = "none";
 
   // Animate the ASCII skeleton shimmer on the active skeleton
   initAsciiSkeletons(targetSkeleton);
@@ -129,24 +132,29 @@ function hideSkeleton(): void {
   const content = document.querySelector<HTMLElement>("#page-content");
   if (!container || !content) return;
 
-  container.style.transition = "opacity 200ms ease";
+  // Make content visible immediately
+  content.classList.remove("hidden");
+  content.style.opacity = "1";
+  content.style.pointerEvents = "auto";
+
+  // Hide skeleton smoothly and swiftly (90ms) so it doesn't mask the reveal wave
+  container.style.transition = "opacity 90ms cubic-bezier(0.4, 0, 0.2, 1)";
   container.style.opacity = "0";
 
   setTimeout(() => {
     container.classList.add("hidden");
     container.setAttribute("aria-hidden", "true");
     container.style.opacity = "1";
-    content.classList.remove("hidden");
-    content.style.opacity = "0";
-    content.style.transition = "opacity 250ms ease";
-    requestAnimationFrame(() => {
-      content.style.opacity = "1";
-    });
-  }, 200);
+  }, 100);
+
+  // Trigger dither reveal on loaded page content from current viewport position
+  const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
+  triggerPageReveal(content, { origin: { x: window.innerWidth / 2, y: scrollY }, lazy: false });
 }
 
 // Initial page load skeleton with wait
 let initialLoadShown = false;
+let isInitialPageLoad = true;
 function handleInitialLoad(): void {
   if (initialLoadShown) return;
   initialLoadShown = true;
@@ -154,15 +162,17 @@ function handleInitialLoad(): void {
   if (!globalThis.location.hash) {
     window.scrollTo({ left: 0, top: 0, behavior: "instant" });
     document.documentElement.scrollTop = 0;
-    if (document.body) document.body.scrollTop = 0;
+    document.body.scrollTop = 0;
   }
 
   const routeKey = resolveSkeletonRoute(globalThis.location.pathname);
   showSkeleton(routeKey);
 
-  // Keep skeleton visible for SKELETON_DEV_DELAY_MS so the user sees the skeleton
+  // Keep skeleton visible for SKELETON_DEV_DELAY_MS, then reveal content cleanly
   setTimeout(() => {
+    isInitialPageLoad = false;
     hideSkeleton();
+    finishProgressBar();
   }, SKELETON_DEV_DELAY_MS);
 }
 
@@ -170,13 +180,14 @@ function handleInitialLoad(): void {
 document.addEventListener("astro:before-preparation", (e: Event) => {
   if (!isPreparationEvent(e)) return;
 
+  cleanupAsciiReveals();
   startProgressBar();
 
   // Scroll to header immediately when navigating to another page without hash
   if (!e.to.hash) {
     window.scrollTo({ left: 0, top: 0, behavior: "instant" });
     document.documentElement.scrollTop = 0;
-    if (document.body) document.body.scrollTop = 0;
+    document.body.scrollTop = 0;
   }
 
   // In development mode (or on client nav), delay page loader so skeleton transition is visible
@@ -191,16 +202,15 @@ document.addEventListener("astro:before-preparation", (e: Event) => {
 });
 
 document.addEventListener("astro:after-swap", () => {
-  if (!globalThis.location.hash) {
-    window.scrollTo({ left: 0, top: 0, behavior: "instant" });
-    document.documentElement.scrollTop = 0;
-    if (document.body) document.body.scrollTop = 0;
-  }
-  hideSkeleton();
-  finishProgressBar();
+  if (globalThis.location.hash) return;
+  window.scrollTo({ left: 0, top: 0, behavior: "instant" });
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
 });
 
 document.addEventListener("astro:page-load", () => {
+  if (isInitialPageLoad) return;
+  hideSkeleton();
   finishProgressBar();
 });
 

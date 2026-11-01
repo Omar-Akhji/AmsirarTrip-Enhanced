@@ -1,5 +1,4 @@
 ---
-import { ChevronRight } from "@lucide/astro";
 import AsciiSkeleton from "./AsciiSkeleton.astro";
 
 interface Props {
@@ -49,36 +48,16 @@ const {
   <div class="relative z-20 mx-auto my-auto flex flex-col items-center justify-center px-4 text-center inline-full max-inline-7xl">
     <div class="w-full max-w-4xl space-y-6 text-center">
       {hasBreadcrumbs && (
-        <nav
-          aria-label="Loading breadcrumb"
-          class="mbe-6 sm:mbe-8 flex items-center justify-center gap-3"
-        >
-          <div class="flex list-none flex-wrap items-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 py-2 backdrop-blur-md min-h-9.5">
-            {crumbWidths.map((width, index) => (
-              <div class="flex h-5 items-center gap-2">
-                <AsciiSkeleton
-                  class:list={{
-                    "text-stone-300": index === crumbWidths.length - 1,
-                    "text-white/60": index !== crumbWidths.length - 1,
-                  }}
-                  lines={1}
-                  variant="scan"
-                  widths={[
-                    width.includes("w-") ?
-                      `${Math.trunc(Number(width.replace("w-", ""))) * 0.25}rem`
-                    : "4rem",
-                  ]}
-                />
-                {index < crumbWidths.length - 1 && (
-                  <ChevronRight
-                    aria-hidden="true"
-                    class="size-3 text-white/40 shrink-0"
-                  />
-                )}
-              </div>
-            ))}
-          </div>
-        </nav>
+        <div class="mbe-6 sm:mbe-8 flex items-center justify-center">
+          <AsciiSkeleton
+            class:list={[
+              "h-9 rounded-full overflow-hidden text-white/60",
+              { "w-64 sm:w-72": crumbWidths.length > 2, "w-48 sm:w-56": crumbWidths.length <= 2 },
+            ]}
+            rows={2}
+            variant="dither"
+          />
+        </div>
       )}
 
       <hgroup class="space-y-4 sm:space-y-5">
@@ -88,7 +67,7 @@ const {
             <AsciiSkeleton
               class="text-white/60"
               lines={1}
-              variant="scan"
+              variant="dither"
               widths={["8rem"]}
             />
             <span class="bg-white/20 block-px inline-8"></span>
@@ -120,28 +99,21 @@ const {
         </div>
       </hgroup>
 
-      <div class="flex flex-wrap items-center justify-center gap-4 pbs-2">
-        {hasButtons && (
-          <>
-            <div class="rounded-full border border-white/25 bg-white/10 px-6 py-2.5">
-              <AsciiSkeleton
-                class="text-white/75"
-                lines={1}
-                variant="scan"
-                widths={["7rem"]}
-              />
-            </div>
-            <div class="rounded-full border border-white/20 bg-white/10 px-6 py-2.5">
-              <AsciiSkeleton
-                class="text-white/75"
-                lines={1}
-                variant="scan"
-                widths={["9rem"]}
-              />
-            </div>
-          </>
-        )}
-      </div>
+      {/* Action Buttons — rendered as complete ASCII skeleton pills, not containers with text inside */}
+      {hasButtons && (
+        <div class="flex flex-wrap items-center justify-center gap-4 pbs-2">
+          <AsciiSkeleton
+            class="h-11 w-36 rounded-full overflow-hidden text-white/60"
+            rows={3}
+            variant="dither"
+          />
+          <AsciiSkeleton
+            class="h-11 w-44 rounded-full overflow-hidden text-white/60"
+            rows={3}
+            variant="dither"
+          />
+        </div>
+      )}
     </div>
   </div>
 </section>

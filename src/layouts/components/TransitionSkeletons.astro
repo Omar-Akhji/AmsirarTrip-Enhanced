@@ -12,10 +12,10 @@ import TourDetailSkeleton from "@/shared/ui/TourDetailSkeleton.astro";
 import TripCardSkeleton from "@/shared/ui/TripCardSkeleton.astro";
 ---
 
-{/* Skeleton container: hidden by default, shown during page transitions */}
+{/* Skeleton container: hidden by default, shown as an overlay during page transitions */}
 <div
   aria-hidden="true"
-  class="hidden"
+  class="pointer-events-none absolute inset-0 z-30 size-full overflow-hidden bg-white dark:bg-stone-950 transition-opacity duration-300 ease-out hidden"
   id="skeleton-container"
 >
   {/* Home Page Skeleton */}
@@ -57,7 +57,7 @@ import TripCardSkeleton from "@/shared/ui/TripCardSkeleton.astro";
               <AsciiSkeleton
                 class="text-stone-400 text-sm"
                 lines={1}
-                variant="scan"
+                variant="dither"
                 widths={["24rem"]}
               />
             </div>
@@ -70,7 +70,7 @@ import TripCardSkeleton from "@/shared/ui/TripCardSkeleton.astro";
                     <AsciiSkeleton
                       class="text-stone-500 font-mono text-xs font-bold"
                       lines={1}
-                      variant="scan"
+                      variant="dither"
                       widths={["4rem"]}
                     />
                     <span class="size-2 rounded-full bg-stone-400"></span>
@@ -154,7 +154,7 @@ import TripCardSkeleton from "@/shared/ui/TripCardSkeleton.astro";
               <AsciiSkeleton
                 class="text-stone-400 text-sm"
                 lines={1}
-                variant="scan"
+                variant="dither"
                 widths={["24rem"]}
               />
             </div>
@@ -167,7 +167,7 @@ import TripCardSkeleton from "@/shared/ui/TripCardSkeleton.astro";
                     <AsciiSkeleton
                       class="text-stone-500 font-mono text-xs font-bold"
                       lines={1}
-                      variant="scan"
+                      variant="dither"
                       widths={["4rem"]}
                     />
                     <span class="size-2 rounded-full bg-stone-400"></span>
@@ -258,7 +258,7 @@ import TripCardSkeleton from "@/shared/ui/TripCardSkeleton.astro";
             <AsciiSkeleton
               class="text-stone-400 text-sm"
               lines={1}
-              variant="scan"
+              variant="dither"
               widths={["14rem"]}
             />
           </div>
@@ -286,7 +286,7 @@ import TripCardSkeleton from "@/shared/ui/TripCardSkeleton.astro";
                 <AsciiSkeleton
                   class="text-stone-400 font-mono text-xs"
                   lines={1}
-                  variant="terminal"
+                  variant="dither"
                   widths={["10rem"]}
                 />
               </div>
@@ -297,7 +297,7 @@ import TripCardSkeleton from "@/shared/ui/TripCardSkeleton.astro";
                   <AsciiSkeleton
                     class="text-stone-400 font-mono text-xs uppercase"
                     lines={1}
-                    variant="scan"
+                    variant="dither"
                     widths={["9rem"]}
                   />
                   <AsciiSkeleton
@@ -314,7 +314,7 @@ import TripCardSkeleton from "@/shared/ui/TripCardSkeleton.astro";
                       <AsciiSkeleton
                         class="text-stone-600"
                         lines={1}
-                        variant="scan"
+                        variant="dither"
                         widths={["100%"]}
                       />
                     </div>
@@ -338,13 +338,13 @@ import TripCardSkeleton from "@/shared/ui/TripCardSkeleton.astro";
                 <AsciiSkeleton
                   class="text-stone-400 font-mono text-xs"
                   lines={1}
-                  variant="terminal"
+                  variant="dither"
                   widths={["10rem"]}
                 />
                 <AsciiSkeleton
                   class="text-stone-400 font-mono text-xs"
                   lines={1}
-                  variant="terminal"
+                  variant="dither"
                   widths={["7rem"]}
                 />
               </div>
@@ -367,7 +367,7 @@ import TripCardSkeleton from "@/shared/ui/TripCardSkeleton.astro";
               <AsciiSkeleton
                 class="text-stone-400 text-sm"
                 lines={1}
-                variant="scan"
+                variant="dither"
                 widths={["22rem"]}
               />
             </div>
@@ -389,7 +389,7 @@ import TripCardSkeleton from "@/shared/ui/TripCardSkeleton.astro";
                       <AsciiSkeleton
                         class="text-4xl font-mono font-bold text-orange-200/70"
                         lines={1}
-                        variant="terminal"
+                        variant="dither"
                         widths={["6rem"]}
                       />
                     </div>
@@ -397,7 +397,7 @@ import TripCardSkeleton from "@/shared/ui/TripCardSkeleton.astro";
                       <AsciiSkeleton
                         class="text-stone-400 font-mono text-xs uppercase"
                         lines={1}
-                        variant="scan"
+                        variant="dither"
                         widths={["8rem"]}
                       />
                     </div>
@@ -427,7 +427,7 @@ import TripCardSkeleton from "@/shared/ui/TripCardSkeleton.astro";
           <AsciiSkeleton
             class="text-stone-400 font-mono text-xs uppercase"
             lines={1}
-            variant="scan"
+            variant="dither"
             widths={["9rem"]}
           />
         </div>

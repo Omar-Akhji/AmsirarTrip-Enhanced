@@ -16,12 +16,15 @@ const t = useTranslations(locale);
 ---
 
 <testimonials-scroll-stack class="block relative w-full overflow-visible">
-  <!-- Scroll runway: comfortable distance to progressively stack the 3 review cards -->
-  <div class="testimonials-stack-track relative w-full h-[180vh] motion-reduce:h-auto!">
+  <!-- Scroll runway: comfortable distance to progressively stack all review cards -->
+  <div
+    class="testimonials-stack-track relative w-full h-auto motion-safe:h-[calc(100vh+var(--runway))]"
+    style={`--runway: ${testimonials.length * 40}vh;`}
+  >
     <!-- Pinned Stage: Stays sticky in the viewport, using full container width -->
-    <div class="testimonials-stack-stage sticky top-18 h-95 sm:h-100 w-full mx-auto overflow-visible select-none motion-reduce:static! motion-reduce:h-auto! motion-reduce:top-auto! motion-reduce:select-auto!">
+    <div class="testimonials-stack-stage static h-auto top-auto select-auto motion-safe:sticky motion-safe:top-18 motion-safe:h-105 sm:motion-safe:h-110 motion-safe:select-none w-full mx-auto overflow-visible">
       <!-- Cards Stack Layer with 3D perspective -->
-      <div class="cards-stack-layer absolute inset-x-0 top-2 h-75 sm:h-80 will-change-transform z-10 perspective-distant motion-reduce:static! motion-reduce:h-auto! motion-reduce:perspective-none! motion-reduce:flex! motion-reduce:flex-col! motion-reduce:gap-5!">
+      <div class="cards-stack-layer static h-auto flex flex-col gap-4 motion-safe:block motion-safe:absolute motion-safe:inset-x-0 motion-safe:top-2 motion-safe:h-78.75 sm:motion-safe:h-82.5 motion-safe:will-change-transform motion-safe:z-10 motion-safe:perspective-distant">
         {testimonials.map((tst, index) => {
           const guestName = t(`testimonials.items.${tst.key}.name`);
           const guestCountry = t(`testimonials.items.${tst.key}.country`);
@@ -30,24 +33,22 @@ const t = useTranslations(locale);
           return (
             <div
               data-stack-card={index}
-              class:list={[
-                "testimonial-card-slot absolute inset-x-0 top-0 w-full origin-top will-change-transform motion-reduce:static! motion-reduce:inset-auto! motion-reduce:transform-none! motion-reduce:opacity-100! motion-reduce:will-change-auto!",
-                { "z-10": index === 0, "z-12": index === 1, "z-14": index >= 2 },
-              ]}
+              class="testimonial-card-slot static inset-auto opacity-100 transform-none h-78.75 sm:h-82.5 w-full origin-top motion-safe:absolute motion-safe:inset-x-0 motion-safe:top-0 motion-safe:will-change-transform"
+              style={`z-index: ${10 + index * 2};`}
             >
-              <article class="group relative flex size-full flex-col justify-between rounded-2xl border border-stone-200/90 bg-white p-6 shadow-md transition duration-300 sm:p-8">
+              <article class="group relative flex h-full w-full flex-col justify-between rounded-2xl border border-stone-200/90 bg-white p-5 shadow-md transition duration-300 sm:p-6">
                 <figure class="m-0 flex size-full flex-col justify-between p-0">
                   <div>
                     <!-- Dispatch Meta Header -->
-                    <div class="mbe-4 flex items-center justify-between border-b border-stone-100 pbe-3 font-mono text-xs">
+                    <div class="mbe-3 flex items-center justify-between border-b border-stone-100 pbe-2.5 font-mono text-[11px]">
                       <span class="font-bold tracking-[0.14em] text-orange-600 uppercase">
-                        VERIFIED REVIEW
+                        TRIPADVISOR REVIEW
                       </span>
                       <div class="flex items-center gap-0.5 text-amber-500">
                         {Array.from({ length: 5 }, () => (
                           <Star
                             aria-hidden="true"
-                            class="size-3.5 fill-current"
+                            class="size-3 fill-current"
                             stroke-width={1.5}
                           />
                         ))}
@@ -55,23 +56,25 @@ const t = useTranslations(locale);
                     </div>
 
                     <!-- Editorial Quote -->
-                    <blockquote class="mbe-6 text-sm leading-relaxed text-stone-600 sm:text-base text-pretty">
+                    <blockquote class="mbe-4 text-xs leading-relaxed text-stone-600 sm:text-sm text-pretty">
                       “{guestQuote}”
                     </blockquote>
                   </div>
 
                   <!-- Guest Signature -->
-                  <figcaption class="mbs-auto border-t border-stone-100 pbs-4">
-                    <span class="block truncate text-sm font-bold text-stone-950">{guestName}</span>
-                    <div class="mbs-1 flex items-center gap-2 font-mono text-xs text-stone-500">
+                  <figcaption class="mbs-auto border-t border-stone-100 pbs-3">
+                    <span class="block truncate text-xs sm:text-sm font-bold text-stone-950">
+                      {guestName}
+                    </span>
+                    <div class="mbs-1 flex items-center gap-2 font-mono text-[11px] text-stone-500">
                       <span>{guestCountry}</span>
                       <span class="text-stone-300">·</span>
-                      <span class="inline-flex items-center gap-1 font-sans text-xs font-medium text-emerald-600">
+                      <span class="inline-flex items-center gap-1 font-sans text-[11px] font-medium text-emerald-600">
                         <CircleCheck
                           aria-hidden="true"
-                          class="size-3"
+                          class="size-2.5"
                         />
-                        Verified
+                        TripAdvisor
                       </span>
                     </div>
                   </figcaption>

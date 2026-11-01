@@ -318,6 +318,7 @@ const currentOgLocale = OG_LOCALE_MAP[locale] ?? locale;
     <Navbar />
     <main
       id="main-content"
+      class="relative isolate min-h-screen"
       transition:animate="fade"
     >
       <TransitionSkeletons />
@@ -333,6 +334,7 @@ const currentOgLocale = OG_LOCALE_MAP[locale] ?? locale;
 
     <!-- WhatsApp Side Tape (Right Edge) -->
     <a
+      data-ascii="skip"
       aria-label="Contact us on WhatsApp"
       class="group fixed inset-e-0 inset-be-33 z-40 flex size-11 items-center justify-center rounded-s-md border-[1.5px] border-e-0 border-emerald-500/50 bg-slate-950/95 text-emerald-400 shadow-xl backdrop-blur-md transition-[transform,background-color,border-color,color,box-shadow] duration-200 ease-out pointer-fine:hover:-translate-x-1.5 pointer-fine:hover:border-emerald-400 pointer-fine:hover:bg-slate-900 pointer-fine:hover:text-emerald-300 pointer-fine:hover:shadow-2xl pointer-fine:hover:shadow-emerald-950/40 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-2 motion-reduce:transform-none"
       href={WHATSAPP_LINK}

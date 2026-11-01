@@ -230,6 +230,7 @@ const eslintConfig = defineConfig(
   {
     files: ["**/*.astro"],
     rules: {
+      "unicorn/prefer-module": "off",
       "unicorn/name-replacements": "off",
       "unicorn/relative-url-style": "off",
       "astro/no-set-html-directive": "error",

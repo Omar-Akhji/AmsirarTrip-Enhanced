@@ -860,10 +860,45 @@ html.lenis {
    ASCII Reveal & ASCII Skeleton System (quanhoangindex/ascii-reveal)
    ========================================================================== */
 
+/* ─── AsciiReveal Core Engine Styles (Persistent for Astro ViewTransitions) ─── */
+[data-ar-t] {
+  -webkit-text-fill-color: transparent !important;
+  text-shadow: none !important;
+  text-decoration-color: transparent !important;
+}
+
+[data-ar-tc] {
+  background-image: none !important;
+}
+
+[data-ar-m],
+[data-ar-s],
+[data-ar-f] {
+  opacity: var(--ar-o, 0) !important;
+}
+
+[data-ar-pending] {
+  visibility: hidden;
+}
+
+.ar-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  overflow: visible;
+}
+
+.ar-overlay > canvas {
+  position: absolute;
+  pointer-events: none;
+  display: block;
+}
+
 :root {
   --ascii-font: var(--font-mono, "JetBrains Mono", ui-monospace, monospace);
   --ascii-skeleton: #9ca3af; /* zinc-400 / neutral gray */
-  --ascii-accent: #52525b; /* zinc-600 / monochrome gray */
+  --ascii-accent: #ea580c; /* orange-600 / Moroccan brand terracotta */
   --ars-wave-color: #3f3f46; /* zinc-700 / crisp monochrome highlight */
   --ars-radius: 12px;
 }
@@ -871,7 +906,7 @@ html.lenis {
 .dark,
 [data-theme="dark"] {
   --ascii-skeleton: #71717a; /* zinc-500 */
-  --ascii-accent: #a1a1aa; /* zinc-400 */
+  --ascii-accent: #f97316; /* orange-500 */
   --ars-wave-color: #f4f4f5; /* zinc-100 / silver monochrome highlight */
 }
 
@@ -948,6 +983,22 @@ html.lenis {
 .ars.h-full > .ars-block,
 .ars.ars-image > .ars-block {
   height: 100%;
+}
+
+/* Dedicated Button & Pill Skeleton Block — Fills the entire button as an ASCII dither block */
+.ars.rounded-full,
+.ars[class*="rounded-full"],
+.ars[class*="rounded-xl"] {
+  display: inline-flex;
+  overflow: hidden;
+}
+
+.ars.rounded-full > .ars-block,
+.ars[class*="rounded-full"] > .ars-block,
+.ars[class*="rounded-xl"] > .ars-block {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
 }
 
 /* Dedicated Image Wireframe Fill — Matches exact image width, height & aspect ratio */

@@ -50,7 +50,7 @@ const { class: className } = Astro.props;
           <AsciiSkeleton
             class="text-stone-300 font-bold"
             lines={1}
-            variant="scan"
+            variant="dither"
             widths={["23ch"]}
           />
           <span
@@ -74,12 +74,12 @@ const { class: className } = Astro.props;
           <AsciiSkeleton
             class="text-stone-300 font-extrabold"
             lines={1}
-            variant="scan"
+            variant="dither"
             widths={["19ch"]}
           />
         </div>
 
-        {/* Description: Specialist in Morocco travel and tours, Sahara desert trips, and excursions to the imperial cities of Morocco. (3 lines) */}
+        {/* Description */}
         <div class="description mt-3 mx-auto sm:mx-0 max-w-[min(100%,44ch)] text-center sm:text-left text-[clamp(0.8125rem,0.72rem+0.42vw,1.05rem)] font-normal leading-normal sm:mt-4 sm:max-w-[46ch] sm:leading-[1.58] md:mt-4 md:max-w-[min(46ch,calc(100vw-10%))] md:leading-[1.65] lg:mt-6 lg:max-w-[calc(var(--thumb-left)-max(7%,calc(50%-570px))-3rem)] lg:leading-[1.7] xl:max-w-120">
           <AsciiSkeleton
             class="text-white/60"
@@ -107,13 +107,13 @@ const { class: className } = Astro.props;
             <AsciiSkeleton
               class="text-white/80"
               lines={1}
-              variant="scan"
+              variant="dither"
               widths={["4rem"]}
             />
             <AsciiSkeleton
               class="text-white/50"
               lines={1}
-              variant="terminal"
+              variant="dither"
               widths={["5rem"]}
             />
           </div>
@@ -121,45 +121,21 @@ const { class: className } = Astro.props;
       ))}
     </div>
 
-    {/* Prev / Next Navigation Arrows & Progress matching HomeHero.astro */}
+    {/* Prev / Next Navigation Arrows & Progress — buttons rendered as full ASCII dither button blocks */}
     <div
       class="nextPrevArrows pagination absolute z-100 hidden w-auto items-center gap-3 md:flex left-[max(7%,calc(50%-570px))] max-lg:left-[5%] bottom-[calc(var(--thumb-bottom)+12px)] max-lg:bottom-[calc(var(--thumb-bottom)+10px)]"
       aria-hidden="true"
     >
-      <div class="grid size-12.5 place-items-center rounded-full border-2 border-white/20 bg-white/5 backdrop-blur-md">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          class="size-6 text-white/40"
-          aria-hidden="true"
-        >
-          <path
-            d="M15.75 19.5L8.25 12l7.5-7.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-          />
-        </svg>
-      </div>
-      <div class="grid size-12.5 place-items-center rounded-full border-2 border-white/20 bg-white/5 backdrop-blur-md">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          class="size-6 text-white/40"
-          aria-hidden="true"
-        >
-          <path
-            d="M8.25 4.5l7.5 7.5-7.5 7.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-          />
-        </svg>
-      </div>
+      <AsciiSkeleton
+        class="size-12.5 rounded-full overflow-hidden text-white/40"
+        rows={2}
+        variant="dither"
+      />
+      <AsciiSkeleton
+        class="size-12.5 rounded-full overflow-hidden text-white/40"
+        rows={2}
+        variant="dither"
+      />
 
       <div class="progress-sub-container z-60 flex h-12.5 w-[clamp(80px,14vw,220px)] items-center max-lg:w-[clamp(60px,10vw,130px)]">
         <div class="progress-sub-background h-0.75 w-full overflow-hidden rounded-full bg-white/20">
@@ -171,7 +147,7 @@ const { class: className } = Astro.props;
         <AsciiSkeleton
           class="text-white/60 font-mono text-sm"
           lines={1}
-          variant="terminal"
+          variant="dither"
           widths={["1.5rem"]}
         />
       </div>

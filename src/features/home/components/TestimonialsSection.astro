@@ -1,12 +1,20 @@
 ---
-import { useTranslations } from "@/i18n/utils";
-import { CircleCheck, Star } from "@lucide/astro";
 import TestimonialsScrollStack from "./TestimonialsScrollStack.astro";
+import TestimonialsSideScroll from "./TestimonialsSideScroll.astro";
 
 const locale = Astro.currentLocale || "en";
-const t = useTranslations(locale);
-const testimonials = [{ key: "kevin" }, { key: "ben" }, { key: "sara" }];
-const DELAY_CLASSES = ["delay-0", "delay-150", "delay-300"] as const;
+const testimonials = [
+  { key: "chrissy" },
+  { key: "bianca" },
+  { key: "pac" },
+  { key: "franziska" },
+  { key: "tanja" },
+  { key: "margret" },
+  { key: "marianne" },
+  { key: "melina" },
+];
+const TRIPADVISOR_URL =
+  "https://www.tripadvisor.com/Attraction_Review-g293734-d32584739-Reviews-Amsirar_Travel-Marrakech_Marrakech_Safi.html";
 ---
 
 <section
@@ -25,7 +33,7 @@ const DELAY_CLASSES = ["delay-0", "delay-150", "delay-300"] as const;
           id="testimonials-heading"
         >
           {locale === "fr" ?
-            "Témoignages de voyageurs"
+            "Avis de nos voyageurs"
           : locale === "es" ?
             "Experiencias de nuestros viajeros"
           : locale === "de" ?
@@ -34,15 +42,37 @@ const DELAY_CLASSES = ["delay-0", "delay-150", "delay-300"] as const;
         </h2>
         <p class="border-s-2 border-orange-600 ps-4 py-0.5 text-sm sm:text-base text-stone-600 leading-relaxed max-w-[62ch]">
           {locale === "fr" ?
-            "Avis vérifiés de nos clients après leurs circuits à travers le désert, l'Atlas et les villes impériales."
+            "Avis authentiques vérifiés sur TripAdvisor après leurs circuits dans le désert, l'Atlas et les villes impériales."
           : locale === "es" ?
-            "Opiniones verificadas tras expediciones privadas por el desierto, el Atlas y ciudades imperiales."
+            "Opiniones verificadas en TripAdvisor tras expediciones privadas por el desierto, el Atlas y ciudades imperiales."
           : locale === "de" ?
-            "Authentische Berichte von Reisenden nach privaten Sahara-, Atlas- und Königsstädte-Touren."
-          : "Firsthand accounts from private Sahara expeditions, High Atlas treks, and imperial city routes."
+            "Authentische TripAdvisor-Bewertungen von Reisenden nach Sahara-, Atlas- und Königsstädte-Touren."
+          : "Authentic TripAdvisor reviews from travelers after private Sahara expeditions, High Atlas treks, and imperial city routes."
           }
         </p>
       </hgroup>
+      <div class="flex items-center">
+        <a
+          href={TRIPADVISOR_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 rounded-full border border-stone-200 bg-white px-4 py-2 text-xs font-semibold text-stone-700 shadow-xs transition duration-200 pointer-fine:hover:border-stone-400 pointer-fine:hover:bg-stone-50"
+          aria-label="View our reviews on TripAdvisor"
+        >
+          <span class="inline-block size-2 rounded-full bg-emerald-500"></span>
+          <span>TripAdvisor</span>
+          <svg
+            class="size-3.5 text-stone-400"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
+          >
+            <path d="M7 17L17 7M17 7H7M17 7V17" />
+          </svg>
+        </a>
+      </div>
     </div>
     <div class="relative">
       <!-- Mobile View: Interactive Physical Card Scroll Stack -->
@@ -50,66 +80,9 @@ const DELAY_CLASSES = ["delay-0", "delay-150", "delay-300"] as const;
         <TestimonialsScrollStack testimonials={testimonials} />
       </div>
 
-      <!-- Desktop & Tablet View: 3-Column Responsive Grid -->
-      <div class="hidden md:grid md:grid-cols-2 lg:grid-cols-3 justify-items-stretch gap-6">
-        {testimonials.map((tst, index) => {
-          const guestName = t(`testimonials.items.${tst.key}.name`);
-          const guestCountry = t(`testimonials.items.${tst.key}.country`);
-          const guestQuote = t(`testimonials.items.${tst.key}.quote`);
-          return (
-            <div
-              class:list={[
-                `flex size-full`,
-                { "md:col-span-2 lg:col-span-1": index === 2 },
-                DELAY_CLASSES[index] || "delay-0",
-              ]}
-              data-animate="fade-up"
-            >
-              <article class="group relative flex size-full flex-col justify-between rounded-2xl border border-stone-200/90 bg-white p-6 shadow-xs transition duration-300 pointer-fine:hover:-translate-y-1 pointer-fine:hover:border-stone-300 pointer-fine:hover:shadow-xl sm:p-8">
-                <figure class="m-0 flex size-full flex-col justify-between p-0">
-                  <div>
-                    <!-- Dispatch Meta Header -->
-                    <div class="mbe-4 flex items-center justify-between border-b border-stone-100 pbe-3 font-mono text-xs">
-                      <span class="font-bold tracking-[0.14em] text-orange-600 uppercase">
-                        VERIFIED REVIEW
-                      </span>
-                      <div class="flex items-center gap-0.5 text-amber-500">
-                        {Array.from({ length: 5 }, () => (
-                          <Star
-                            aria-hidden="true"
-                            class="size-3.5 fill-current"
-                            stroke-width={1.5}
-                          />
-                        ))}
-                      </div>
-                    </div>
-
-                    <!-- Editorial Quote -->
-                    <blockquote class="mbe-6 text-sm leading-relaxed text-stone-600 sm:text-base text-pretty">
-                      “{guestQuote}”
-                    </blockquote>
-                  </div>
-
-                  <!-- Guest Signature -->
-                  <figcaption class="mbs-auto border-t border-stone-100 pbs-4">
-                    <span class="block truncate text-sm font-bold text-stone-950">{guestName}</span>
-                    <div class="mbs-1 flex items-center gap-2 font-mono text-xs text-stone-500">
-                      <span>{guestCountry}</span>
-                      <span class="text-stone-300">·</span>
-                      <span class="inline-flex items-center gap-1 font-sans text-xs font-medium text-emerald-600">
-                        <CircleCheck
-                          aria-hidden="true"
-                          class="size-3"
-                        />
-                        Verified
-                      </span>
-                    </div>
-                  </figcaption>
-                </figure>
-              </article>
-            </div>
-          );
-        })}
+      <!-- Desktop & Tablet View: Transition From Side On Scroll -->
+      <div class="hidden md:block w-full">
+        <TestimonialsSideScroll testimonials={testimonials} />
       </div>
     </div>
   </div>

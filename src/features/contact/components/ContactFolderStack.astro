@@ -16,10 +16,10 @@ const { methods } = Astro.props;
 ---
 
 <contact-folder-stack class="block relative w-full overflow-visible">
-  <div class="contact-folder-track relative w-full h-[220vh] motion-reduce:h-auto!">
-    <div class="contact-folder-stage sticky top-18 h-115 w-full mx-auto overflow-visible select-none motion-reduce:static! motion-reduce:h-auto! motion-reduce:top-auto! motion-reduce:select-auto!">
+  <div class="contact-folder-track relative w-full h-auto motion-safe:h-[220vh]">
+    <div class="contact-folder-stage static h-auto top-auto select-auto motion-safe:sticky motion-safe:top-18 motion-safe:h-115 motion-safe:select-none w-full mx-auto overflow-visible">
       <!-- Layer 1: Folder Back Plate (z-index: 2, behind cards) -->
-      <div class="folder-back-plate absolute inset-x-0 bottom-4 h-75 overflow-visible pointer-events-none will-change-transform z-2 opacity-0 translate-y-85 motion-reduce:hidden!">
+      <div class="folder-back-plate hidden motion-safe:block absolute inset-x-0 bottom-4 h-75 overflow-visible pointer-events-none will-change-transform z-2 opacity-0 translate-y-85">
         <!-- 1. Top Tab: Left edge at left-0 -->
         <div class="absolute top-0 left-0 h-7.75 w-28 rounded-tl-2xl bg-slate-950 border-t border-l border-white/10"></div>
 
@@ -52,12 +52,12 @@ const { methods } = Astro.props;
       </div>
 
       <!-- Layer 2: The Cards Stack (z-index: 10, between folder back and front pocket) -->
-      <div class="cards-stack-layer absolute inset-x-0 top-2 h-85 will-change-transform z-10 perspective-distant motion-reduce:static! motion-reduce:h-auto! motion-reduce:perspective-none! motion-reduce:flex! motion-reduce:flex-col! motion-reduce:gap-5!">
+      <div class="cards-stack-layer static h-auto flex flex-col gap-5 motion-safe:block motion-safe:absolute motion-safe:inset-x-0 motion-safe:top-2 motion-safe:h-85 motion-safe:will-change-transform motion-safe:z-10 motion-safe:perspective-distant">
         {methods.map((method, index) => (
           <div
             data-stack-card={index}
             class:list={[
-              "contact-card-slot absolute inset-x-0 top-0 w-full origin-top will-change-transform motion-reduce:static! motion-reduce:transform-none! motion-reduce:opacity-100!",
+              "contact-card-slot static inset-auto opacity-100 transform-none w-full origin-top motion-safe:absolute motion-safe:inset-x-0 motion-safe:top-0 motion-safe:will-change-transform",
               { "z-10": index === 0, "z-12": index === 1, "z-14": index >= 2 },
             ]}
           >
@@ -104,7 +104,7 @@ const { methods } = Astro.props;
       </div>
 
       <!-- Layer 3: Folder Front Pocket (z-index: 25, in front of the cards) -->
-      <div class="folder-front-pocket absolute inset-x-0 bottom-4 h-62.5 rounded-2xl bg-slate-900/98 border border-white/10 shadow-[0_-14px_35px_rgba(0,0,0,0.7)] ring-1 ring-white/5 will-change-transform overflow-hidden pointer-events-none z-25 opacity-0 origin-bottom translate-y-85 motion-reduce:hidden!">
+      <div class="folder-front-pocket hidden motion-safe:block absolute inset-x-0 bottom-4 h-62.5 rounded-2xl bg-slate-900/98 border border-white/10 shadow-[0_-14px_35px_rgba(0,0,0,0.7)] ring-1 ring-white/5 will-change-transform overflow-hidden pointer-events-none z-25 opacity-0 origin-bottom translate-y-85">
         <div class="size-full bg-linear-to-b from-slate-900/40 to-slate-950/80"></div>
       </div>
     </div>

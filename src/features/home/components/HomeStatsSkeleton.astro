@@ -20,7 +20,7 @@ const { class: className } = Astro.props;
         <AsciiSkeleton
           class="text-stone-400 font-mono text-xs uppercase"
           lines={1}
-          variant="scan"
+          variant="dither"
           widths={["14rem"]}
         />
         <AsciiSkeleton
@@ -41,9 +41,9 @@ const { class: className } = Astro.props;
     </div>
 
     {/* Stat Cards Grid matching HomeStats.astro breakpoints */}
-    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 items-stretch">
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 items-stretch">
       {Array.from({ length: 3 }, () => (
-        <div class="flex size-full last:sm:col-span-2 last:xl:col-span-1">
+        <div class="flex size-full last:md:col-span-2 last:lg:col-span-1">
           <article class="group relative flex h-full w-full flex-col justify-between rounded-2xl border border-stone-200/90 bg-stone-50/80 p-6 sm:p-8 shadow-xs">
             <div>
               {/* Editorial Bar */}
@@ -53,24 +53,24 @@ const { class: className } = Astro.props;
                   <AsciiSkeleton
                     class="text-stone-500 font-mono text-xs"
                     lines={1}
-                    variant="terminal"
+                    variant="dither"
                     widths={["7rem"]}
                   />
                 </div>
                 <AsciiSkeleton
                   class="text-stone-400 font-mono text-xs"
                   lines={1}
-                  variant="terminal"
+                  variant="dither"
                   widths={["2rem"]}
                 />
               </div>
 
-              {/* Stat Value (4xl tabular number) */}
+              {/* Stat Value */}
               <div class="mbe-3">
                 <AsciiSkeleton
                   class="text-3xl sm:text-4xl font-mono font-bold text-stone-800"
                   lines={1}
-                  variant="terminal"
+                  variant="dither"
                   widths={["6rem"]}
                 />
               </div>
@@ -101,13 +101,13 @@ const { class: className } = Astro.props;
               <AsciiSkeleton
                 class="text-stone-400 font-mono text-xs"
                 lines={1}
-                variant="terminal"
+                variant="dither"
                 widths={["4rem"]}
               />
               <AsciiSkeleton
                 class="text-stone-400 font-mono text-xs"
                 lines={1}
-                variant="terminal"
+                variant="dither"
                 widths={["6rem"]}
               />
             </div>

@@ -90,7 +90,7 @@
     },
     "sidebar": {
       "title": "Servicios de traslado al aeropuerto en Marruecos",
-      "mainBrand": "Amsirar Trip",
+      "mainBrand": "Amsirar Transporte turístico",
       "subBrand": "Transporte Turístico",
       "intro": "Ofrecemos traslados privados autorizados entre los principales aeropuertos de Marruecos (Marrakech RAK, Casablanca CMN, Agadir AGA, Fez FEZ) y su riad u hotel.",
       "details": "Su chófer le esperará en la terminal de llegadas con un cartel a su nombre, le ayudará con el equipaje y le llevará directamente a su destino en un vehículo climatizado con precio cerrado.",
@@ -248,7 +248,7 @@
     "sidebar": {
       "alt": "Vehículo de traslado al aeropuerto de Amsirar",
       "title": "Servicios de traslado al aeropuerto en Marruecos",
-      "mainBrand": "Amsirar Trip",
+      "mainBrand": "Amsirar Transporte turístico",
       "subBrand": "Transporte Turístico",
       "intro": "Ofrecemos traslados privados autorizados entre los principales aeropuertos de Marruecos (Marrakech RAK, Casablanca CMN, Agadir AGA, Fez FEZ) y su riad u hotel.",
       "details": "Su chófer le esperará en la terminal de llegadas con un cartel a su nombre, le ayudará con el equipaje y le llevará directamente a su destino en un vehículo climatizado con precio cerrado.",
@@ -1162,23 +1162,53 @@
     "smTitle": "lo que dicen nuestros clientes",
     "lgTitle": "testimonios",
     "items": {
-      "kevin": {
-        "name": "Kevin Wilson",
-        "country": "EE.UU.",
-        "alt": "Testimonio de Kevin Wilson",
-        "quote": "Nuestro chófer, Hassan, nos esperó en el aeropuerto de Marrakech y nos acompañó por el Alto Atlas hasta Erg Chebbi. Conocía muy bien la carretera del Tizi n'Tichka y nos llevó a lugares tranquilos fuera de las paradas turísticas habituales. Los riads y las jaimas del campamento estaban preparados sin demoras."
+      "chrissy": {
+        "name": "Chrissy B.",
+        "country": "Alemania",
+        "alt": "Opinión de TripAdvisor de Chrissy B.",
+        "quote": "Mi marido y yo pasamos nuestras vacaciones en Marrakech y reservamos excursiones a Imlil y Essaouira con Amsirar. Nuestro guía Omar nos recibió con gran calidez. La ruta por el Alto Atlas fue fantástica: cuando me torcí el pie, Omar organizó rápidamente una mula para continuar sin problemas. La segunda excursión a Essaouira nos llevó junto al mar a un restaurante excelente con vistas y comida fresca. Omar nos contó muchísimo sobre la cultura local, parando en lugares preciosos sin prisas comerciales. ¡Pura tranquilidad vacacional!"
       },
-      "ben": {
-        "name": "Ben Smith",
-        "country": "Reino Unido",
-        "alt": "Testimonio de Ben Smith",
-        "quote": "Reservar con Amsirar Trip fue un proceso directo y fiable. La comunicación fue rápida y clara de principio a fin. El itinerario estuvo bien equilibrado entre las rutas del desierto y los pasos de montaña, y los guías estuvieron atentos durante todo el viaje."
+      "bianca": {
+        "name": "Bianca V.",
+        "country": "Países Bajos",
+        "alt": "Opinión de TripAdvisor de Bianca V.",
+        "quote": "¡Una fantástica experiencia familiar con Amsirar! Todo estuvo impecable, limpio y perfectamente coordinado, acompañado de una deliciosa gastronomía marroquí tradicional. La atención fue muy amable y atenta. Nos organizaron una emocionante ruta en quad y la excursión a las cascadas de Ouzoud. Toda una experiencia inolvidable para nuestra familia. ¡Recomendamos este equipo y su organización al cien por cien!"
       },
-      "sara": {
-        "name": "Sara Garcia",
-        "country": "España",
-        "alt": "Testimonio de Sara Garcia",
-        "quote": "Nuestro tour privado con Amsirar Trip estuvo gestionado con verdadero cuidado, desde las reservas de alojamiento hasta el transporte a través del Atlas. El equipo fue muy flexible cuando pedimos ajustar el ritmo del recorrido. Cada etapa estuvo bien organizada y nos dio tiempo para explorar."
+      "pac": {
+        "name": "Pa C.",
+        "country": "Alemania",
+        "alt": "Opinión de TripAdvisor de Pa C.",
+        "quote": "¡Una ruta increíble! Vimos muchísimo de la región y de la cultura marroquí en poco tiempo. Todo encajó a la perfección y el tiempo acompañó de maravilla. Totalmente recomendable al 100 %."
+      },
+      "franziska": {
+        "name": "Franziska B.",
+        "country": "Alemania",
+        "alt": "Opinión de TripAdvisor de Franziska B.",
+        "quote": "Nuestra ruta de 3 días por Marruecos fue una experiencia inolvidable llena de aventura, cultura y paisajes asombrosos. La combinación entre la vibrante Marrakech, la calma del desierto de Merzouga y la histórica Aït Ben Haddou convirtió este viaje en una vivencia perfecta. Muchísimas gracias a nuestro guía, que nos acompañó durante todo el recorrido transmitiéndonos su conocimiento y pasión por Marruecos. ¡Totalmente recomendable!"
+      },
+      "tanja": {
+        "name": "Tanja F.",
+        "country": "Alemania",
+        "alt": "Opinión de TripAdvisor de Tanja F.",
+        "quote": "Un viaje precioso en el que vimos muchísimo y todo estuvo organizado a la perfección. Guías muy atentos, amables y serviciales en todo momento. ¡Muchísimas gracias a todo el equipo de Amsirar!"
+      },
+      "margret": {
+        "name": "Margret B.",
+        "country": "Alemania",
+        "alt": "Opinión de TripAdvisor de Margret B.",
+        "quote": "Una vez más, una experiencia muy especial repleta de momentos destacados. Organización e itinerario impecables. El bullicio de los mercados de Marrakech es único y colorido, y recorrer el desierto en dromedario una vivencia inolvidable. ¡Repetiríamos sin dudarlo, muy recomendable!"
+      },
+      "marianne": {
+        "name": "Marianne B.",
+        "country": "Alemania",
+        "alt": "Opinión de TripAdvisor de Marianne B.",
+        "quote": "Repetiría este viaje en cualquier momento. Los guías fueron súper amables y profesionales. Lo que se vive allí parece salido de Las Mil y Una Noches. La noche en el campamento de jaimas en el desierto fue sencillamente genial. ¡Gracias por todo y hasta la próxima!"
+      },
+      "melina": {
+        "name": "Melina O.",
+        "country": "Alemania",
+        "alt": "Opinión de TripAdvisor de Melina O.",
+        "quote": "¡Una experiencia maravillosa! Muchísimas impresiones y paisajes increíbles. Nuestro guía fue genial, nos enseñó infinidad de cosas y se detenía siempre para sacar fotos y disfrutar de las vistas."
       }
     }
   },

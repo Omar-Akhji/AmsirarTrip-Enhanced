@@ -1,5 +1,4 @@
 ---
-import { ChevronRight } from "@lucide/astro";
 import AsciiSkeleton from "./AsciiSkeleton.astro";
 
 interface Props {
@@ -33,14 +32,11 @@ const { class: className, hasItinerary = true, hasBadge = true } = Astro.props;
 
     {hasBadge && (
       <div class="absolute inset-s-3 top-3 z-10">
-        <div class="inline-flex items-center rounded-md border border-white/20 bg-slate-950/80 px-2.5 py-1 backdrop-blur-xs">
-          <AsciiSkeleton
-            class="text-white/80"
-            lines={1}
-            variant="scan"
-            widths={["4rem"]}
-          />
-        </div>
+        <AsciiSkeleton
+          class="h-6 w-20 rounded-md overflow-hidden text-white/80"
+          rows={1}
+          variant="dither"
+        />
       </div>
     )}
   </div>
@@ -52,7 +48,7 @@ const { class: className, hasItinerary = true, hasBadge = true } = Astro.props;
       <AsciiSkeleton
         class="mbe-1.5 text-stone-400 font-mono text-xs"
         lines={1}
-        variant="scan"
+        variant="dither"
         widths={["6rem"]}
       />
       {/* Title */}
@@ -74,40 +70,35 @@ const { class: className, hasItinerary = true, hasBadge = true } = Astro.props;
       />
     </div>
 
-    {/* Itinerary Metadata */}
-    {hasItinerary && (
-      <div class="m-0 mbe-4 grid grid-cols-2 gap-3 rounded-xl border border-stone-200/80 bg-stone-50/80 px-3.5 py-2.5 text-xs font-mono dark:border-stone-800 dark:bg-stone-800/40">
-        <div class="flex flex-col gap-1.5">
-          <AsciiSkeleton
-            class="text-stone-500"
-            lines={2}
-            variant="terminal"
-            widths={["3rem", "5rem"]}
-          />
+    {/* Bottom block pinned to same baseline */}
+    <div class="mbs-auto flex flex-col gap-6 pbs-2">
+      {hasItinerary && (
+        <div class="m-0 grid grid-cols-2 gap-3 rounded-xl border border-stone-200/80 bg-stone-50/80 px-3.5 py-2.5 text-xs font-mono dark:border-stone-800 dark:bg-stone-800/40">
+          <div class="flex flex-col gap-1.5">
+            <AsciiSkeleton
+              class="text-stone-500"
+              lines={2}
+              variant="dither"
+              widths={["3rem", "5rem"]}
+            />
+          </div>
+          <div class="flex flex-col border-s border-stone-200/80 ps-3 gap-1.5 dark:border-stone-800">
+            <AsciiSkeleton
+              class="text-stone-500"
+              lines={2}
+              variant="dither"
+              widths={["3rem", "5rem"]}
+            />
+          </div>
         </div>
-        <div class="flex flex-col border-s border-stone-200/80 ps-3 gap-1.5 dark:border-stone-800">
-          <AsciiSkeleton
-            class="text-stone-500"
-            lines={2}
-            variant="terminal"
-            widths={["3rem", "5rem"]}
-          />
-        </div>
-      </div>
-    )}
+      )}
 
-    {/* Footer CTA & circular action button */}
-    <div class="mbs-auto flex items-center justify-start pbs-3">
-      <div class="inline-flex items-center gap-1.5 rounded-full bg-stone-100/70 px-4 py-2 dark:bg-stone-800">
+      {/* Footer CTA & button — entire button as a pure ASCII skeleton pill */}
+      <div class="flex items-center justify-start pbe-1">
         <AsciiSkeleton
-          class="text-stone-400"
-          lines={1}
-          variant="scan"
-          widths={["4rem"]}
-        />
-        <ChevronRight
-          aria-hidden="true"
-          class="size-4 text-stone-300 dark:text-stone-600 rtl:rotate-180"
+          class="h-8.5 w-28 rounded-full overflow-hidden text-stone-400 dark:text-stone-500"
+          rows={2}
+          variant="dither"
         />
       </div>
     </div>

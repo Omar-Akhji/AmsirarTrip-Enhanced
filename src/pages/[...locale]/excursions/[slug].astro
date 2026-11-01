@@ -2,6 +2,7 @@
 import { getEntry } from "astro:content";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import BookingForm from "../../../features/booking/components/BookingForm.vue";
+import BookingSidebar from "../../../features/booking/components/BookingSidebar.astro";
 import ExcursionLayout from "../../../features/excursions/components/ExcursionLayout.astro";
 import { useTranslations } from "../../../i18n/utils";
 import Layout from "../../../layouts/Layout.astro";
@@ -15,11 +16,11 @@ import JsonLd from "../../../shared/ui/JsonLd.astro";
 const { slug } = Astro.params;
 const locale = Astro.currentLocale || "en";
 
-const excursionEntry = slug ? await getEntry("excursions", slug.toLowerCase()) : undefined;
+const excursionEntry =
+  slug ? await getEntry({ collection: "excursions", id: slug.toLowerCase() }) : undefined;
 
 if (!excursionEntry) {
   Astro.response.status = 404;
-  // eslint-disable-next-line unicorn/prefer-module
   return Astro.rewrite(locale === "en" ? "/404" : `/${locale}/404`);
 }
 
@@ -102,6 +103,11 @@ const breadcrumbJsonLd = generateBreadcrumbJsonLd([
       excursionTitle={excursionTitleClean}
       fullWidth
       locale={locale}
-    />
+    >
+      <BookingSidebar
+        slot="sidebar"
+        locale={locale}
+      />
+    </BookingForm>
   </ExcursionLayout>
 </Layout>

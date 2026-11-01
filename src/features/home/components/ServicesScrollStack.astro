@@ -19,16 +19,16 @@ const t = useTranslations(locale);
 
 <services-scroll-stack class="block relative w-full overflow-visible">
   <!-- Scroll runway: comfortable scroll distance to stack the 3 cards like in 20 Years of Experience -->
-  <div class="services-stack-track relative w-full h-[180vh] motion-reduce:h-auto!">
+  <div class="services-stack-track relative w-full h-auto motion-safe:h-[180vh]">
     <!-- Pinned Stage: Stays sticky in the viewport, using full container width -->
-    <div class="services-stack-stage sticky top-18 h-105 w-full mx-auto overflow-visible select-none motion-reduce:static! motion-reduce:h-auto! motion-reduce:top-auto! motion-reduce:select-auto!">
+    <div class="services-stack-stage static h-auto top-auto select-auto motion-safe:sticky motion-safe:top-18 motion-safe:h-105 motion-safe:select-none w-full mx-auto overflow-visible">
       <!-- The Cards Stack (pure cards, zero folder graphics) -->
-      <div class="cards-stack-layer absolute inset-x-0 top-2 h-85 will-change-transform z-10 perspective-distant motion-reduce:static! motion-reduce:h-auto! motion-reduce:perspective-none! motion-reduce:flex! motion-reduce:flex-col! motion-reduce:gap-5!">
+      <div class="cards-stack-layer static h-auto flex flex-col gap-5 motion-safe:block motion-safe:absolute motion-safe:inset-x-0 motion-safe:top-2 motion-safe:h-85 motion-safe:will-change-transform motion-safe:z-10 motion-safe:perspective-distant">
         {services.map((service, index) => (
           <div
             data-stack-card={index}
             class:list={[
-              "service-card-slot absolute inset-x-0 top-0 w-full origin-top will-change-transform motion-reduce:static! motion-reduce:inset-auto! motion-reduce:transform-none! motion-reduce:opacity-100! motion-reduce:will-change-auto!",
+              "service-card-slot static inset-auto opacity-100 transform-none w-full origin-top motion-safe:absolute motion-safe:inset-x-0 motion-safe:top-0 motion-safe:will-change-transform",
               { "z-10": index === 0, "z-12": index === 1, "z-14": index >= 2 },
             ]}
           >
@@ -36,7 +36,10 @@ const t = useTranslations(locale);
               class="group relative flex size-full flex-col items-center rounded-2xl border border-white/10 bg-white/10 p-8 text-center shadow-xs ring-1 ring-black/5 backdrop-blur-xl transition-all duration-300"
               style="backdrop-filter: blur(20px);"
             >
-              <div class="mbe-6 inline-flex size-25 items-center justify-center rounded-full bg-white/5 ring-1 ring-white/10 transition-transform duration-300 pointer-fine:group-hover:scale-105">
+              <div
+                data-ascii="fade"
+                class="mbe-6 inline-flex size-25 items-center justify-center rounded-full bg-white/5 ring-1 ring-white/10 transition-transform duration-300 pointer-fine:group-hover:scale-105"
+              >
                 <Image
                   alt={t(service.altKey)}
                   class="size-15"

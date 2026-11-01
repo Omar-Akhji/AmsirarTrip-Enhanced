@@ -8,15 +8,13 @@ function clamp01(value: number): number {
 function setupTestimonialsScrollStack(element: HTMLElement): (() => void) | null {
   const track = element.querySelector<HTMLElement>(".testimonials-stack-track");
   const stage = element.querySelector<HTMLElement>(".testimonials-stack-stage");
-  const card0 = element.querySelector<HTMLElement>('[data-stack-card="0"]');
-  const card1 = element.querySelector<HTMLElement>('[data-stack-card="1"]');
-  const card2 = element.querySelector<HTMLElement>('[data-stack-card="2"]');
+  const cardSlots = [...element.querySelectorAll<HTMLElement>("[data-stack-card]")];
 
-  if (!track || !stage || !card0 || !card1 || !card2) {
+  if (!track || !stage || cardSlots.length === 0) {
     return null;
   }
 
-  const cardSlots = [card0, card1, card2];
+  const count = cardSlots.length;
   const prefersReduced =
     typeof window !== "undefined"
     && globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -43,53 +41,63 @@ function setupTestimonialsScrollStack(element: HTMLElement): (() => void) | null
     const scrolled = 72 - trackRect.top;
     const progress = clamp01(scrolled / maxScroll);
 
-    // 2. Cards Scroll & Stack
-    // Card 1 scrolls up during first half (0.00 -> 0.45)
-    // Card 2 scrolls up during second half (0.45 -> 0.90)
-    // 0.90 -> 1.00 holds the finished stacked deck
-    const pCard1 = clamp01(progress / 0.45);
-    const pCard2 = clamp01((progress - 0.45) / 0.45);
+    // 2. Cards Scroll & Stack across all N cards
+    // Reserve last 10% (0.90 -> 1.00) to hold the finished stacked deck
+    const activeRange = 0.9;
+    const step = count > 1 ? activeRange / (count - 1) : 1;
+    const cardStepOffset = Math.min(14, Math.floor(96 / count));
 
-    // Card 1 scrolls up into 28px offset
-    const card1Y = 320 - pCard1 * (320 - 28);
-    const card1Opacity = clamp01(pCard1 * 2.5);
+    for (let i = 0; i < count; i++) {
+      const slot = cardSlots[i];
+      if (!slot) continue;
 
-    // Card 2 scrolls up into 56px offset
-    const card2Y = 320 - pCard2 * (320 - 56);
-    const card2Opacity = clamp01(pCard2 * 2.5);
+      let y = 0;
+      let opacity = 1;
+      let tilt = 0;
+      let scale = 1;
 
-    // Perspective & Scaling for physical card deck stacking
-    const tilt0 = -2.5 * pCard1 - 2.5 * pCard2;
-    const scale0 = 1 - 0.04 * pCard1 - 0.04 * pCard2;
-    const y0 = 0;
+      if (i === 0) {
+        // Base card gets pushed deeper into perspective as cards stack on top of it
+        let cardsOnTop = 0;
+        for (let j = 1; j < count; j++) {
+          const start = (j - 1) * step;
+          const p = clamp01((progress - start) / step);
+          cardsOnTop += p;
+        }
+        scale = Math.max(0.82, 1 - 0.022 * cardsOnTop);
+        tilt = -1.2 * cardsOnTop;
+        y = 0;
+        opacity = 1;
+      } else {
+        const start = (i - 1) * step;
+        const pCard = clamp01((progress - start) / step);
 
-    const tilt1 = -2.5 * pCard2;
-    const scale1 = 1 - 0.04 * pCard2;
-    const y1 = card1Y;
+        const targetY = i * cardStepOffset;
+        y = 280 - pCard * (280 - targetY);
+        opacity = clamp01(pCard * 2.5);
 
-    const scale2 = 1;
-    const y2 = card2Y;
+        // Subsequent cards landing on top of card i
+        let subsequentOnTop = 0;
+        for (let j = i + 1; j < count; j++) {
+          const s = (j - 1) * step;
+          const p = clamp01((progress - s) / step);
+          subsequentOnTop += p;
+        }
 
-    const cardsData = [
-      { y: y0, tilt: tilt0, scale: scale0, opacity: 1 },
-      { y: y1, tilt: tilt1, scale: scale1, opacity: card1Opacity },
-      { y: y2, tilt: 0, scale: scale2, opacity: card2Opacity },
-    ];
+        scale = Math.max(0.85, 1 - 0.022 * subsequentOnTop);
+        tilt = -1.2 * subsequentOnTop;
+      }
 
-    for (const [index, slot] of cardSlots.entries()) {
-      const cardData = cardsData[index];
-      if (!cardData) continue;
-
-      const slotTransform = `perspective(1200px) translateY(${cardData.y.toFixed(1)}px) rotateX(${cardData.tilt.toFixed(2)}deg) scale(${cardData.scale.toFixed(4)})`;
-      const slotCacheKey = `slot${index}`;
+      const slotTransform = `perspective(1200px) translateY(${y.toFixed(1)}px) rotateX(${tilt.toFixed(2)}deg) scale(${scale.toFixed(4)})`;
+      const slotCacheKey = `slot${i}`;
 
       if (cache.get(slotCacheKey) !== slotTransform) {
         cache.set(slotCacheKey, slotTransform);
         gsap.set(slot, { transform: slotTransform, transformOrigin: "top center", force3D: true });
       }
 
-      const opStr = cardData.opacity.toFixed(3);
-      const opCacheKey = `op${index}`;
+      const opStr = opacity.toFixed(3);
+      const opCacheKey = `op${i}`;
       if (cache.get(opCacheKey) === opStr) {
         continue;
       }

@@ -19,12 +19,12 @@ const { stats } = Astro.props;
 
 <stats-folder-stack class="block relative w-full overflow-visible">
   <!-- Scroll runway: Gives the user comfortable scroll distance to stack cards and see them slide into the folder -->
-  <div class="stats-folder-track relative w-full h-[220vh] motion-reduce:h-auto!">
+  <div class="stats-folder-track relative w-full h-auto motion-safe:h-[220vh]">
     <!-- Pinned Stage: Stays sticky in the viewport, using full container width -->
-    <div class="stats-folder-stage sticky top-18 h-102.5 w-full mx-auto overflow-visible select-none motion-reduce:static! motion-reduce:h-auto! motion-reduce:top-auto! motion-reduce:select-auto!">
+    <div class="stats-folder-stage static h-auto top-auto select-auto motion-safe:sticky motion-safe:top-18 motion-safe:h-102.5 motion-safe:select-none w-full mx-auto overflow-visible">
       <!-- Layer 1: Folder Back Plate (z-index: 2, behind the cards) -->
       <!-- Tab left edge and body left edge are aligned in the exact same vertical line at left-0 -->
-      <div class="folder-back-plate absolute inset-x-0 bottom-4 h-66.25 overflow-visible pointer-events-none will-change-transform z-2 opacity-0 translate-y-85 motion-reduce:hidden!">
+      <div class="folder-back-plate hidden motion-safe:block absolute inset-x-0 bottom-4 h-66.25 overflow-visible pointer-events-none will-change-transform z-2 opacity-0 translate-y-85">
         <!-- 1. Top Tab: Left edge at left-0, sharing the same vertical line -->
         <div class="absolute top-0 left-0 h-7.75 w-28 rounded-tl-2xl bg-slate-950 border-t border-l border-white/10"></div>
 
@@ -58,16 +58,16 @@ const { stats } = Astro.props;
       </div>
 
       <!-- Layer 2: The Cards Stack (z-index: 10, between folder back and front pocket) -->
-      <div class="cards-stack-layer absolute inset-x-0 top-2 h-85 will-change-transform z-10 perspective-distant motion-reduce:static! motion-reduce:h-auto! motion-reduce:perspective-none! motion-reduce:flex! motion-reduce:flex-col! motion-reduce:gap-5!">
+      <div class="cards-stack-layer static h-auto flex flex-col gap-5 motion-safe:block motion-safe:absolute motion-safe:inset-x-0 motion-safe:top-2 motion-safe:h-85 motion-safe:will-change-transform motion-safe:z-10 motion-safe:perspective-distant">
         {stats.map(({ icon: Icon, ...stat }, index) => (
           <div
             data-stack-card={index}
             class:list={[
-              "stat-card-slot absolute inset-x-0 top-0 w-full origin-top will-change-transform motion-reduce:static! motion-reduce:inset-auto! motion-reduce:transform-none! motion-reduce:opacity-100! motion-reduce:will-change-auto!",
-              { "z-10": index === 0, "z-[12]": index === 1, "z-[14]": index >= 2 },
+              "stat-card-slot static inset-auto opacity-100 transform-none w-full origin-top motion-safe:absolute motion-safe:inset-x-0 motion-safe:top-0 motion-safe:will-change-transform",
+              { "z-10": index === 0, "z-12": index === 1, "z-14": index >= 2 },
             ]}
           >
-            <article class="stat-card relative flex h-55 w-full flex-col justify-between rounded-2xl border border-stone-200/90 bg-stone-50/95 p-5 shadow-xl shadow-stone-900/10 backdrop-blur-xs transition-shadow duration-300 motion-reduce:transform-none!">
+            <article class="stat-card relative flex h-55 w-full flex-col justify-between rounded-2xl border border-stone-200/90 bg-stone-50/95 p-5 shadow-xl shadow-stone-900/10 backdrop-blur-xs transition-shadow duration-300">
               <div>
                 <div class="mbe-3 flex items-center justify-between border-b border-stone-200/70 pb-2 text-[11px] font-mono uppercase tracking-wider text-stone-400">
                   <span class="inline-flex items-center gap-2 font-semibold text-stone-600">
@@ -112,7 +112,7 @@ const { stats } = Astro.props;
 
       <!-- Layer 3: Folder Front Pocket (z-index: 25, in front of the cards) -->
       <!-- Matches reference folder graphic: clean, rounded all around (rounded-2xl), no text, no orange border -->
-      <div class="folder-front-pocket absolute inset-x-0 bottom-4 h-58.75 rounded-2xl bg-slate-900/98 border border-white/10 shadow-[0_-14px_35px_rgba(0,0,0,0.7)] ring-1 ring-white/5 will-change-transform overflow-hidden pointer-events-none z-[25] opacity-0 origin-bottom translate-y-[340px] motion-reduce:hidden!">
+      <div class="folder-front-pocket hidden motion-safe:block absolute inset-x-0 bottom-4 h-58.75 rounded-2xl bg-slate-900/98 border border-white/10 shadow-[0_-14px_35px_rgba(0,0,0,0.7)] ring-1 ring-white/5 will-change-transform overflow-hidden pointer-events-none z-25 opacity-0 origin-bottom translate-y-85">
         <!-- Pure clean folder front without text or orange borders -->
         <div class="size-full bg-linear-to-b from-slate-900/40 to-slate-950/80"></div>
       </div>

@@ -11,8 +11,6 @@
  * - Keyboard accessible modal & focus management
  */
 
-import gsap from "gsap";
-
 export interface CookiePreferences {
   readonly necessary: true;
   readonly analytics: boolean;
@@ -114,62 +112,6 @@ function getBadgeButton(): HTMLElement | null {
   return document.querySelector<HTMLElement>("#cookie-badge-btn");
 }
 
-/**
- * Animate a specific toggle switch track & thumb using GSAP. Translates thumb, morphs track
- * background and glow, and applies responsive spring dynamics.
- */
-export function animateToggleSwitch(input: HTMLInputElement, animate = true): void {
-  const label = input.closest("label");
-  if (!label) return;
-
-  const track = label.querySelector<HTMLElement>(".amsirar-toggle-track");
-  if (!track || track.classList.contains("is-locked")) return;
-
-  const thumb = track.querySelector<HTMLElement>(".amsirar-toggle-thumb");
-  if (!thumb) return;
-
-  const isChecked = input.checked;
-  const prefersReduced =
-    typeof globalThis !== "undefined"
-    && typeof globalThis.matchMedia === "function"
-    && globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  if (!animate || prefersReduced) {
-    gsap.killTweensOf([track, thumb]);
-    gsap.set(thumb, { x: isChecked ? 20 : 0 });
-    gsap.set(track, {
-      backgroundColor: isChecked ? "#c2410c" : "#27272a",
-      borderColor: isChecked ? "rgba(234, 88, 12, 0.8)" : "rgba(255, 255, 255, 0.2)",
-    });
-    return;
-  }
-
-  const tl = gsap.timeline({ overwrite: "auto" });
-
-  tl.to(
-    track,
-    {
-      backgroundColor: isChecked ? "#c2410c" : "#27272a",
-      borderColor: isChecked ? "rgba(234, 88, 12, 0.8)" : "rgba(255, 255, 255, 0.2)",
-      duration: 0.2,
-      ease: "power2.out",
-    },
-    0,
-  );
-
-  tl.to(thumb, { x: isChecked ? 20 : 0, duration: 0.2, ease: "power2.out" }, 0);
-}
-
-/** Synchronize all toggle switches in the preferences modal with GSAP. */
-export function syncAllToggleSwitches(animate = false): void {
-  const toggleInputs = document.querySelectorAll<HTMLInputElement>(
-    ".amsirar-toggle-input:not([disabled])",
-  );
-  for (const input of toggleInputs) {
-    animateToggleSwitch(input, animate);
-  }
-}
-
 export function showBanner(): void {
   const banner = getBannerElement();
   if (!banner) return;
@@ -217,8 +159,6 @@ export function openPreferencesModal(triggerElement?: HTMLElement): void {
     functionalInput.checked = Boolean(current?.functional);
   }
 
-  syncAllToggleSwitches(false);
-
   if (!modal.open) {
     modal.showModal();
   }
@@ -245,7 +185,6 @@ function handleAcceptAll(): void {
   const functionalInput = document.querySelector<HTMLInputElement>("#cookie-toggle-functional");
   if (analyticsInput) analyticsInput.checked = true;
   if (functionalInput) functionalInput.checked = true;
-  syncAllToggleSwitches(true);
 
   setCookieConsent({ analytics: true, functional: true });
   hideBanner();
@@ -258,7 +197,6 @@ function handleRejectAll(): void {
   const functionalInput = document.querySelector<HTMLInputElement>("#cookie-toggle-functional");
   if (analyticsInput) analyticsInput.checked = false;
   if (functionalInput) functionalInput.checked = false;
-  syncAllToggleSwitches(true);
 
   setCookieConsent({ analytics: false, functional: false });
   hideBanner();
@@ -298,17 +236,6 @@ export function initCookieConsent(): void {
   }
 
   updateBadgeVisibility();
-
-  const toggleInputs = document.querySelectorAll<HTMLInputElement>(
-    ".amsirar-toggle-input:not([disabled])",
-  );
-  for (const input of toggleInputs) {
-    input.addEventListener("change", () => {
-      animateToggleSwitch(input, true);
-    });
-  }
-
-  syncAllToggleSwitches(false);
 
   const acceptButtons = document.querySelectorAll<HTMLElement>("[data-cookie-accept-all]");
   for (const btn of acceptButtons) {
