@@ -209,9 +209,7 @@ function onPageLoad() {
 /** View transition preparation hook. */
 function onBeforePreparation(e: Event) {
   cleanupScrollAnimations();
-  const hasHash = Boolean(
-    e && typeof e === "object" && "to" in e && (e as { to: URL }).to?.hash,
-  );
+  const hasHash = Boolean(e && typeof e === "object" && "to" in e && (e as { to: URL }).to?.hash);
   if (!hasHash) {
     resetScrollToTop(true);
   }

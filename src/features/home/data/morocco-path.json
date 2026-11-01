@@ -10,90 +10,63 @@
       "id": "tangier",
       "name": "Tangier",
       "nameFr": "Tanger",
-      "coords": {
-        "x": 413.9,
-        "y": 29.8
-      },
+      "coords": { "x": 413.9, "y": 29.8 },
       "region": "Mediterranean Coast"
     },
     {
       "id": "chefchaouen",
       "name": "Chefchaouen",
       "nameFr": "Chefchaouen",
-      "coords": {
-        "x": 432.3,
-        "y": 55.9
-      },
+      "coords": { "x": 432.3, "y": 55.9 },
       "region": "Rif Mountains"
     },
     {
       "id": "fes",
       "name": "Fes",
       "nameFr": "Fès",
-      "coords": {
-        "x": 442.1,
-        "y": 104.2
-      },
+      "coords": { "x": 442.1, "y": 104.2 },
       "region": "Imperial Medina"
     },
     {
       "id": "marrakech",
       "name": "Marrakech",
       "nameFr": "Marrakech",
-      "coords": {
-        "x": 337.2,
-        "y": 203.7
-      },
+      "coords": { "x": 337.2, "y": 203.7 },
       "region": "Ochre City"
     },
     {
       "id": "toubkal",
       "name": "Mount Toubkal",
       "nameFr": "Mont Toubkal",
-      "coords": {
-        "x": 340,
-        "y": 227
-      },
+      "coords": { "x": 340, "y": 227 },
       "region": "High Atlas Summit"
     },
     {
       "id": "merzouga",
       "name": "Erg Chebbi (Merzouga)",
       "nameFr": "Merzouga",
-      "coords": {
-        "x": 476.2,
-        "y": 225.3
-      },
+      "coords": { "x": 476.2, "y": 225.3 },
       "region": "Sahara Dunes"
     },
     {
       "id": "essaouira",
       "name": "Essaouira",
       "nameFr": "Essaouira",
-      "coords": {
-        "x": 275.9,
-        "y": 208.6
-      },
+      "coords": { "x": 275.9, "y": 208.6 },
       "region": "Atlantic Coast"
     },
     {
       "id": "agafay",
       "name": "Agafay Desert",
       "nameFr": "Désert d'Agafay",
-      "coords": {
-        "x": 332,
-        "y": 211.1
-      },
+      "coords": { "x": 332, "y": 211.1 },
       "region": "Stone Oasis"
     },
     {
       "id": "dakhla",
       "name": "Dakhla",
       "nameFr": "Dakhla",
-      "coords": {
-        "x": 60.9,
-        "y": 515.3
-      },
+      "coords": { "x": 60.9, "y": 515.3 },
       "region": "South Atlantic Bay"
     }
   ]

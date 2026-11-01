@@ -62,9 +62,7 @@
     "activitiesLabel": "Activities",
     "arrivalLabel": "Arrival Time",
     "featured": "Featured",
-    "category": {
-      "departures": "Departures"
-    },
+    "category": { "departures": "Departures" },
     "cities": {
       "marrakech": "Marrakech",
       "casablanca": "Casablanca",
@@ -240,9 +238,7 @@
       "support": "On-trip support",
       "supportDesc": "Flexible departures and concierge-style planning."
     },
-    "card": {
-      "category": "Full Day"
-    },
+    "card": { "category": "Full Day" },
     "exploreLink": "View details",
     "sidebar": {
       "alt": "Amsirar airport transfer vehicle",
@@ -391,11 +387,7 @@
       "infoBadge": "Need details?",
       "infoTitle": "Plan handcrafted experiences",
       "infoCopy": "Our Marrakech team answers every message personally and can help with custom itineraries, desert camps, or last-minute transfers.",
-      "info": {
-        "address": "Visit",
-        "phone": "Call",
-        "email": "Email"
-      },
+      "info": { "address": "Visit", "phone": "Call", "email": "Email" },
       "infoFooter": "Available every day from 09:00 to 21:00 GMT+1"
     },
     "info": {
@@ -404,10 +396,7 @@
       "address": "Address",
       "message": "Message"
     },
-    "location": {
-      "smTitle": "Find Us",
-      "lgTitle": "Our Location"
-    }
+    "location": { "smTitle": "Find Us", "lgTitle": "Our Location" }
   },
   "excursion1": {
     "title": "Ouzoud Waterfalls Day Trip",
@@ -1291,14 +1280,8 @@
         "accommodation": "Riad/Hotel in Chefchaouen",
         "meals": "Breakfast included"
       },
-      "day2": {
-        "accommodation": "Riad in Fes",
-        "meals": "Breakfast included"
-      },
-      "day3": {
-        "accommodation": "Riad in Fes",
-        "meals": "Breakfast included"
-      },
+      "day2": { "accommodation": "Riad in Fes", "meals": "Breakfast included" },
+      "day3": { "accommodation": "Riad in Fes", "meals": "Breakfast included" },
       "day4": {
         "accommodation": "Hotel in Midelt",
         "meals": "Breakfast included"
@@ -1307,9 +1290,7 @@
         "accommodation": "Desert Camp in Merzouga",
         "meals": "Breakfast & Dinner included"
       },
-      "day6": {
-        "meals": "Breakfast included"
-      }
+      "day6": { "meals": "Breakfast included" }
     },
     "tour3": {
       "day1": {
@@ -1343,33 +1324,21 @@
         "accommodation": "Riad/Hotel in Fes",
         "meals": "Breakfast included"
       },
-      "day5": {
-        "meals": "Breakfast included"
-      }
+      "day5": { "meals": "Breakfast included" }
     },
     "tour5": {
-      "day1": {
-        "accommodation": "Riad/Hotel in Marrakech"
-      },
+      "day1": { "accommodation": "Riad/Hotel in Marrakech" },
       "day2": {
         "accommodation": "Riad/Hotel in Marrakech",
         "meals": "Breakfast included"
       },
-      "day3": {
-        "accommodation": "Hotel/Riad in Dades Valley"
-      },
+      "day3": { "accommodation": "Hotel/Riad in Dades Valley" },
       "day4": {
         "accommodation": "Desert Camp (standard or luxury)",
         "meals": "Breakfast and dinner included"
       },
-      "day5": {
-        "accommodation": "Riad in Fes",
-        "meals": "Breakfast included"
-      },
-      "day6": {
-        "accommodation": "Riad in Fes",
-        "meals": "Breakfast included"
-      },
+      "day5": { "accommodation": "Riad in Fes", "meals": "Breakfast included" },
+      "day6": { "accommodation": "Riad in Fes", "meals": "Breakfast included" },
       "day7": {
         "accommodation": "Riad/Hotel in Chefchaouen",
         "meals": "Breakfast included"
@@ -1382,9 +1351,7 @@
         "accommodation": "Hotel in Casablanca",
         "meals": "Breakfast included"
       },
-      "day10": {
-        "meals": "Breakfast included"
-      }
+      "day10": { "meals": "Breakfast included" }
     },
     "tour6": {
       "day1": {

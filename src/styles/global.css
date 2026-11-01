@@ -1,8 +1,13 @@
+/* ==========================================================================
+   1. Imports
+   ========================================================================== */
+
 @import "tailwindcss";
 @import "lenis/dist/lenis.css";
-@custom-variant dark (&:where(.dark, .dark *));
 
-/* Fonts */
+/* ==========================================================================
+   2. Fonts
+   ========================================================================== */
 
 @font-face {
   font-family: Montserrat;
@@ -15,7 +20,7 @@
 @font-face {
   font-family: Yellowtail;
   src: url("/fonts/Yellowtail-Regular.woff2") format("woff2");
-  font-weight: normal;
+  font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
@@ -28,21 +33,24 @@
   font-display: swap;
 }
 
-/* Typography tokens */
-
-@theme inline {
-  --font-sans: "Montserrat", -apple-system, blinkmacsystemfont, "Segoe UI", roboto, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Code", "Fira Code", monospace;
-  --font-brand: "Yellowtail", cursive;
-}
-
-/* Design Tokens */
+/* ==========================================================================
+   3. Theme tokens
+   Everything here becomes a Tailwind utility (bg-canvas, text-ink, rounded-md…).
+   Warm-tinted OKLCH: hue 65 = sandy neutrals, hue 33 = terracotta.
+   ========================================================================== */
 
 @theme {
+  /* Typography */
+  --font-sans:
+    "Montserrat", system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", roboto, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Code", "Fira Code", monospace;
+  --font-brand: "Yellowtail", cursive;
+
+  /* Breakpoints */
   --breakpoint-tablet: 768px;
   --breakpoint-desktop: 1090px;
 
-  /* Surfaces (warm-tinted OKLCH, hue 65 = sandy warmth) */
+  /* Surfaces */
   --color-canvas: oklch(98.5% 0.006 65deg);
   --color-surface: oklch(99.5% 0.003 65deg);
   --color-sunken: oklch(96% 0.008 65deg);
@@ -54,30 +62,30 @@
   --color-ink-muted: oklch(40% 0.01 65deg);
   --color-ink-subtle: oklch(55% 0.008 65deg);
 
-  /* Brand Accent — Terracotta (Moroccan clay) */
-  --color-orange: oklch(56% 0.19 33deg);
-  --color-orange-dark: oklch(51% 0.18 36deg);
+  /* Brand accent: terracotta (Moroccan clay) */
   --color-accent: oklch(56% 0.19 33deg);
   --color-accent-hover: oklch(50% 0.2 33deg);
   --color-accent-ink: oklch(99% 0.005 65deg);
+  --color-orange: oklch(56% 0.19 33deg);
+  --color-orange-dark: oklch(51% 0.18 36deg);
 
-  /* Golden Amber */
+  /* Golden amber */
   --color-yellow: oklch(84% 0.18 90deg);
   --color-amber-orange: oklch(72% 0.17 35deg);
-
-  /* External Brand Colors */
-  --color-whatsapp: oklch(76% 0.18 153deg);
-  --color-tripadvisor: #00af87;
-  --color-tripadvisor-bright: #34e0a1;
-  --color-tripadvisor-dark: #2bc48d;
-  --color-gmail: #ea4335;
 
   /* Status */
   --color-success: oklch(55% 0.13 150deg);
   --color-warning: oklch(72% 0.15 75deg);
   --color-danger: oklch(55% 0.19 25deg);
 
-  /* Warm-Tinted Neutrals */
+  /* External brands */
+  --color-whatsapp: oklch(76% 0.18 153deg);
+  --color-tripadvisor: #00af87;
+  --color-tripadvisor-bright: #34e0a1;
+  --color-tripadvisor-dark: #2bc48d;
+  --color-gmail: #ea4335;
+
+  /* Neutrals (legacy names, still used in markup) */
   --color-white: oklch(100% 0 0deg);
   --color-black: oklch(0% 0 0deg);
   --color-light-grey: oklch(97% 0.005 65deg);
@@ -97,11 +105,16 @@
   --radius-md: 12px;
   --radius-lg: 16px;
 
-  /* Layout Spacing */
+  /* Layout */
   --spacing-navbar: 4rem;
 
-  /* Animations */
-  --animate-fade-in-scale: fade-in-scale 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  /* Motion */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-fade-in-scale: fade-in-scale 0.2s var(--ease-out-expo);
+  --animate-reveal-fade-up: reveal-fade-up 750ms var(--ease-out-expo) both;
+  --animate-reveal-zoom-in: reveal-zoom-in 650ms var(--ease-out-expo) both;
+  --animate-reveal-slide-right: reveal-creative-slide-right 750ms var(--ease-out-expo) both;
+  --animate-reveal-slide-left: reveal-creative-slide-left 750ms var(--ease-out-expo) both;
 
   @keyframes fade-in-scale {
     from {
@@ -116,48 +129,124 @@
   }
 }
 
-html,
-body {
-  margin: 0;
-  width: 100%;
-  min-height: 100%;
+/* Dynamic runtime theme variables (inline utility bindings) */
+@theme inline {
+  --font-ascii: var(--ascii-font);
+  --color-ascii-skeleton: var(--ascii-skeleton);
+  --color-ascii-accent: var(--ascii-accent);
+  --color-ars-wave: var(--ars-wave-color);
 }
 
-:root {
-  --c1: var(--color-light-grey);
-  --c2: oklch(83% 0.006 65deg); /* warm-tinted mid-gray */
-  --s: 154px;
-  --gradient-pattern:
-    var(--c1) 0% 5%, var(--c2) 6% 15%, var(--c1) 16% 25%, var(--c2) 26% 35%, var(--c1) 36% 45%,
-    var(--c2) 46% 55%, var(--c1) 56% 65%, var(--c2) 66% 75%, var(--c1) 76% 85%, var(--c2) 86% 95%,
-    #0000 96%;
+/* ==========================================================================
+   4. Variants, utilities & at-rules
+   ========================================================================== */
 
-  accent-color: oklch(56% 0.19 33deg);
-  color-scheme: light;
-  interpolate-size: allow-keywords;
-}
+@custom-variant dark (&:where(.dark, .dark *));
 
+/* Opt-in cross-document view transitions (Astro) */
 @view-transition {
   navigation: auto;
 }
 
-/* Modern Baseline Accordions: CSS-native smooth height transitions without JavaScript */
-details::details-content {
-  transition:
-    block-size 300ms cubic-bezier(0.16, 1, 0.3, 1),
-    content-visibility 300ms allow-discrete,
-    opacity 250ms ease;
-  block-size: 0;
-  overflow: clip;
-  opacity: 0;
+/* Thin scrollbar for dark modals and drawers: `dark-scrollbar` */
+@utility dark-scrollbar {
+  color-scheme: dark;
+  scrollbar-width: thin;
+  scrollbar-color: oklch(100% 0 0deg / 0.2) transparent;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: oklch(100% 0 0deg / 0.2);
+    border-radius: 9999px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: oklch(100% 0 0deg / 0.4);
+  }
+
+  &::-webkit-scrollbar-button {
+    display: none;
+  }
 }
 
-details[open]::details-content {
-  block-size: auto;
-  opacity: 1;
-}
+/* ==========================================================================
+   5. Base
+   ========================================================================== */
 
 @layer base {
+  /* ------------------------------------------------------------------------
+     5.1 Runtime variables
+     Plain custom properties (no utilities generated), themeable per scope.
+     ------------------------------------------------------------------------ */
+
+  :root {
+    accent-color: var(--color-accent);
+    color-scheme: light;
+    interpolate-size: allow-keywords;
+
+    /* Page backdrop: tiled radial pattern painted on <html> */
+    --c1: var(--color-light-grey);
+    --c2: oklch(83% 0.006 65deg);
+    --s: 154px;
+    --gradient-pattern:
+      var(--c1) 0% 5%, var(--c2) 6% 15%, var(--c1) 16% 25%, var(--c2) 26% 35%, var(--c1) 36% 45%,
+      var(--c2) 46% 55%, var(--c1) 56% 65%, var(--c2) 66% 75%, var(--c1) 76% 85%, var(--c2) 86% 95%,
+      #0000 96%;
+
+    /* ASCII reveal & skeleton loading */
+    --ascii-font: var(--font-mono);
+    --ascii-skeleton: #9ca3af; /* zinc-400 */
+    --ascii-accent: #ea580c; /* orange-600 */
+    --ars-wave-color: #3f3f46; /* zinc-700 */
+    --ars-radius: 12px;
+
+    /* Document scrollbar: scales up with the viewport */
+    --scrollbar-size: 10px;
+    --scrollbar-thumb: oklch(82% 0.008 65deg);
+    --scrollbar-thumb-border: 3px;
+    --scrollbar-button-size: 1rem;
+
+    @media (width >= 580px) {
+      --scrollbar-button-size: 2rem;
+    }
+
+    /* stylelint-disable-next-line media-query-no-invalid */
+    @media (width >= theme(--breakpoint-tablet)) {
+      --scrollbar-size: 16px;
+      --scrollbar-thumb-border: 4px;
+    }
+
+    @media (width >= 1250px) {
+      --scrollbar-size: 1.25rem;
+      --scrollbar-thumb-border: 5px;
+    }
+  }
+
+  /* Must stay after :root (same specificity, source order decides) */
+  .dark,
+  [data-theme="dark"] {
+    --ascii-skeleton: #71717a; /* zinc-500 */
+    --ascii-accent: #f97316; /* orange-500 */
+    --ars-wave-color: #f4f4f5; /* zinc-100 */
+  }
+
+  /* ------------------------------------------------------------------------
+     5.2 Document
+     ------------------------------------------------------------------------ */
+
+  html,
+  body {
+    inline-size: 100%;
+    min-block-size: 100%;
+  }
+
   html {
     overflow: hidden auto;
     scrollbar-gutter: stable;
@@ -168,11 +257,6 @@ details[open]::details-content {
       radial-gradient(50% 50%, var(--gradient-pattern)) calc(var(--s) / 2) calc(var(--s) / 2)
         var(--c1);
     background-size: var(--s) var(--s);
-  }
-
-  ::selection {
-    background: oklch(56% 0.19 33deg / 20%);
-    color: inherit;
   }
 
   body {
@@ -197,28 +281,18 @@ details[open]::details-content {
     inline-size: 100%;
   }
 
-  a {
+  ::selection {
+    background: color-mix(in oklch, var(--color-accent) 20%, transparent);
     color: inherit;
   }
 
-  ul {
-    list-style: none;
-  }
+  /* ------------------------------------------------------------------------
+     5.3 Typography
+     ------------------------------------------------------------------------ */
 
-  textarea {
-    overflow: auto;
-  }
-
-  :where(button, [type="button"], [type="reset"], [type="submit"]) {
-    cursor: pointer;
-  }
-
+  /* Always sans, even inside a .font-brand / .font-mono wrapper (preflight only inherits) */
   :is(input, textarea, h1, h2, h3, h4) {
     font-family: var(--font-sans);
-  }
-
-  :is(button, [type="button"], [type="submit"], [type="reset"], [role="button"]) {
-    font-family: var(--font-mono);
   }
 
   :is(h1, h2, h3, h4) {
@@ -229,594 +303,943 @@ details[open]::details-content {
     text-wrap: pretty;
   }
 
+  /* ------------------------------------------------------------------------
+     5.4 Forms & controls
+     ------------------------------------------------------------------------ */
+
+  textarea {
+    overflow: auto;
+  }
+
+  /* Tailwind v4 preflight removed the pointer cursor; restore it deliberately */
+  :where(button, [type="button"], [type="reset"], [type="submit"]) {
+    cursor: pointer;
+  }
+
+  :is(button, [type="button"], [type="submit"], [type="reset"], [role="button"]) {
+    font-family: var(--font-mono);
+  }
+
   ::-webkit-calendar-picker-indicator {
     filter: invert(1);
   }
-}
 
-/* Scrollbar (Root / Body) */
+  /* ------------------------------------------------------------------------
+     5.5 Document scrollbars (WebKit / Blink)
+     Do not add `scrollbar-color` or `scrollbar-width` here: Chromium would
+     then ignore every ::-webkit-scrollbar rule below.
+     ------------------------------------------------------------------------ */
 
-html::-webkit-scrollbar,
-body::-webkit-scrollbar {
-  width: 10px;
-}
-
-@media (width >= 768px) {
   html::-webkit-scrollbar,
   body::-webkit-scrollbar {
-    width: 16px;
+    width: var(--scrollbar-size);
   }
-}
 
-@media (width >= 1250px) {
-  html::-webkit-scrollbar,
-  body::-webkit-scrollbar {
-    width: 1.25rem;
+  html::-webkit-scrollbar-track,
+  body::-webkit-scrollbar-track {
+    background: var(--color-canvas);
   }
-}
 
-html::-webkit-scrollbar-track,
-body::-webkit-scrollbar-track {
-  background: var(--color-canvas);
-}
-
-html::-webkit-scrollbar-thumb,
-body::-webkit-scrollbar-thumb {
-  background: oklch(82% 0.008 65deg);
-  border: 3px solid var(--color-canvas);
-  border-radius: 20px;
-}
-
-@media (width >= 768px) {
   html::-webkit-scrollbar-thumb,
   body::-webkit-scrollbar-thumb {
-    border-width: 4px;
+    background: var(--scrollbar-thumb);
+    border: var(--scrollbar-thumb-border) solid var(--color-canvas);
+    border-radius: 20px;
   }
-}
 
-@media (width >= 1250px) {
-  html::-webkit-scrollbar-thumb,
-  body::-webkit-scrollbar-thumb {
-    border-width: 5px;
+  html::-webkit-scrollbar-thumb:hover,
+  body::-webkit-scrollbar-thumb:hover {
+    background: var(--color-orange);
   }
-}
 
-html::-webkit-scrollbar-thumb:hover,
-body::-webkit-scrollbar-thumb:hover {
-  background: var(--color-orange);
-}
+  html::-webkit-scrollbar-thumb:active,
+  body::-webkit-scrollbar-thumb:active {
+    background: var(--color-orange-dark);
+  }
 
-html::-webkit-scrollbar-thumb:active,
-body::-webkit-scrollbar-thumb:active {
-  background: var(--color-orange-dark);
-}
-
-html::-webkit-scrollbar-button,
-body::-webkit-scrollbar-button {
-  height: 1rem;
-  background-color: var(--color-canvas);
-}
-
-@media (width >= 580px) {
   html::-webkit-scrollbar-button,
   body::-webkit-scrollbar-button {
-    height: 2rem;
+    height: var(--scrollbar-button-size);
+    background-color: var(--color-canvas);
   }
+
+
 }
 
-/* Dark Modal Scrollbar */
-@utility dark-scrollbar {
-  color-scheme: dark;
-  scrollbar-width: thin;
-  scrollbar-color: rgb(255 255 255 / 20%) transparent;
+/* ==========================================================================
+   6. Components
+   ========================================================================== */
 
-  &::-webkit-scrollbar {
-    width: 6px;
-  }
+@layer components {
+  /* ------------------------------------------------------------------------
+     6.1 Accordion
+     CSS-only height transition for <details> (needs interpolate-size on :root)
+     ------------------------------------------------------------------------ */
 
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: rgb(255 255 255 / 20%);
-    border-radius: 9999px;
-  }
-
-  &::-webkit-scrollbar-thumb:hover {
-    background: rgb(255 255 255 / 40%);
-  }
-
-  &::-webkit-scrollbar-button {
-    display: none;
-  }
-}
-
-/* Scroll-Driven Keyframes */
-@keyframes reveal-fade-up {
-  from {
+  details::details-content {
+    block-size: 0;
+    overflow: clip;
     opacity: 0;
-    transform: translateY(28px);
+    transition:
+      block-size 300ms var(--ease-out-expo),
+      content-visibility 300ms allow-discrete,
+      opacity 250ms ease;
   }
 
-  to {
+  details[open]::details-content {
+    block-size: auto;
     opacity: 1;
-    transform: none;
   }
-}
 
-@keyframes reveal-zoom-in {
-  from {
+  /* ------------------------------------------------------------------------
+     6.2 Scroll reveal
+     The TypeScript orchestrator adds `.scroll-init` to <html>, then toggles
+     `.is-visible` (IntersectionObserver) and `.is-done` (animation end).
+     Without JS nothing is hidden, so content stays crawlable.
+     Stagger with `delay-*` classes; they only set --reveal-delay.
+     ------------------------------------------------------------------------ */
+
+  @keyframes reveal-fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(28px);
+    }
+
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes reveal-zoom-in {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes reveal-creative-slide-right {
+    from {
+      opacity: 0;
+      transform: translateX(-28px);
+    }
+
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes reveal-creative-slide-left {
+    from {
+      opacity: 0;
+      transform: translateX(28px);
+    }
+
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  .scroll-init [data-animate] {
+    opacity: 0;
+
+    &.is-visible {
+      animation-duration: 750ms;
+      animation-timing-function: var(--ease-out-expo);
+      animation-fill-mode: both;
+      animation-delay: var(--reveal-delay, 0ms);
+
+      &:not(.is-done) {
+        will-change: transform, opacity;
+      }
+    }
+
+    &[data-animate="fade-up"].is-visible {
+      animation-name: reveal-fade-up;
+    }
+
+    &[data-animate="zoom-in"].is-visible {
+      animation-name: reveal-zoom-in;
+    }
+
+    &[data-animate="creative-slide-right"].is-visible {
+      animation-name: reveal-creative-slide-right;
+    }
+
+    &[data-animate="creative-slide-left"].is-visible {
+      animation-name: reveal-creative-slide-left;
+    }
+
+    /* Release the composite layer once finished (must follow the rules above) */
+    &.is-done {
+      opacity: 1;
+      animation: none;
+      will-change: auto;
+    }
+
+    /* Stagger steps */
+    &.delay-0 {
+      --reveal-delay: 0ms;
+    }
+
+    &.delay-75 {
+      --reveal-delay: 75ms;
+    }
+
+    &:is(.delay-80, .delay-\[80ms\]) {
+      --reveal-delay: 80ms;
+    }
+
+    &.delay-100 {
+      --reveal-delay: 100ms;
+    }
+
+    &:is(.delay-120, .delay-\[120ms\]) {
+      --reveal-delay: 120ms;
+    }
+
+    &.delay-150 {
+      --reveal-delay: 150ms;
+    }
+
+    &:is(.delay-160, .delay-\[160ms\]) {
+      --reveal-delay: 160ms;
+    }
+
+    &.delay-200 {
+      --reveal-delay: 200ms;
+    }
+
+    &:is(.delay-240, .delay-\[240ms\]) {
+      --reveal-delay: 240ms;
+    }
+
+    &.delay-300 {
+      --reveal-delay: 300ms;
+    }
+
+    &:is(.delay-320, .delay-\[320ms\]) {
+      --reveal-delay: 320ms;
+    }
+
+    &:is(.delay-360, .delay-\[360ms\]) {
+      --reveal-delay: 360ms;
+    }
+
+    &:is(.delay-400, .delay-\[400ms\]) {
+      --reveal-delay: 400ms;
+    }
+
+    &:is(.delay-450, .delay-\[450ms\]) {
+      --reveal-delay: 450ms;
+    }
+
+    &:is(.delay-480, .delay-\[480ms\]) {
+      --reveal-delay: 480ms;
+    }
+
+    &.delay-500 {
+      --reveal-delay: 500ms;
+    }
+
+    &:is(.delay-560, .delay-\[560ms\]) {
+      --reveal-delay: 560ms;
+    }
+
+    &:is(.delay-600, .delay-\[600ms\]) {
+      --reveal-delay: 600ms;
+    }
+
+    &:is(.delay-640, .delay-\[640ms\]) {
+      --reveal-delay: 640ms;
+    }
+
+    &.delay-700 {
+      --reveal-delay: 700ms;
+    }
+
+    &.delay-1000 {
+      --reveal-delay: 1000ms;
+    }
+  }
+
+  /* ------------------------------------------------------------------------
+     6.3 Parallax frames
+     ------------------------------------------------------------------------ */
+
+  [data-scroll-parallax] {
+    position: relative;
+    overflow: hidden;
+
+    & img {
+      will-change: transform;
+    }
+  }
+
+  /* ------------------------------------------------------------------------
+     6.4 Page transitions (Astro view transitions)
+     ------------------------------------------------------------------------ */
+
+  @keyframes astro-page-fade-out {
+    from {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    to {
+      opacity: 0;
+      transform: translateY(-4px) scale(0.995);
+    }
+  }
+
+  @keyframes astro-page-fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(4px) scale(0.995);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 360ms;
+    animation-timing-function: var(--ease-out-expo);
+    mix-blend-mode: normal;
+  }
+
+  ::view-transition-old(root) {
+    animation-name: astro-page-fade-out;
+  }
+
+  ::view-transition-new(root) {
+    animation-name: astro-page-fade-in;
+  }
+
+  /* Shared-element morphing */
+  ::view-transition-group(*) {
+    animation-duration: 320ms;
+    animation-timing-function: var(--ease-out-expo);
+  }
+
+  /* Persistent chrome: quick, no jump */
+  ::view-transition-group(main-navbar),
+  ::view-transition-group(mobile-bottom-nav) {
+    animation-duration: 200ms;
+    animation-timing-function: ease-out;
+  }
+
+  /* ------------------------------------------------------------------------
+     6.5 Hero slider: 3D carousel
+     Layout tokens live on the slider root (and its skeleton twin) so the
+     clip-path keyframes can morph a slide to and from its thumbnail frame.
+     ------------------------------------------------------------------------ */
+
+  #home-hero-slider,
+  #home-hero-slider-skeleton {
+    --thumb-width: 200px;
+    --thumb-height: 290px;
+    --thumb-gap: 18px;
+    --thumb-bottom: 26px;
+    --thumb-radius: var(--radius-lg);
+    --thumb-left: calc(100vw - (2.5 * var(--thumb-width) + 2 * var(--thumb-gap)));
+    --thumb-clip: inset(
+      calc(100% - var(--thumb-bottom) - var(--thumb-height))
+        calc(100% - var(--thumb-left) - var(--thumb-width)) var(--thumb-bottom) var(--thumb-left)
+        round var(--thumb-radius)
+    );
+
+    @media (width <= 1024px) {
+      --thumb-width: 165px;
+      --thumb-height: 245px;
+      --thumb-gap: 14px;
+      --thumb-bottom: 20px;
+      --thumb-radius: var(--radius-md);
+    }
+
+    /* stylelint-disable-next-line media-query-no-invalid */
+    @media (width < theme(--breakpoint-tablet)) {
+      --thumb-width: 130px;
+      --thumb-height: 190px;
+      --thumb-gap: 12px;
+      --thumb-bottom: calc(88px + env(safe-area-inset-bottom, 0px));
+      --thumb-radius: var(--radius-md);
+    }
+
+    @media (width <= 480px) {
+      --thumb-width: 105px;
+      --thumb-height: 155px;
+      --thumb-gap: 10px;
+      --thumb-bottom: calc(86px + env(safe-area-inset-bottom, 0px));
+      --thumb-radius: var(--radius-sm);
+    }
+  }
+
+  /* Mobile: centre the copy between the navbar and the thumbnail strip */
+  /* stylelint-disable-next-line media-query-no-invalid */
+  @media (width < theme(--breakpoint-tablet)) {
+    .slider .list .item .content,
+    #home-hero-slider-skeleton .content {
+      top: calc(
+        (
+            100dvh - var(--thumb-bottom) - var(--thumb-height) + 3.75rem +
+              env(safe-area-inset-top, 0px)
+          ) /
+          2
+      ) !important;
+      transform: translateY(-50%) !important;
+    }
+  }
+
+  .slider {
+    --hero-duration: 750ms;
+    --hero-exit-duration: 350ms;
+    --hero-fade-duration: 400ms;
+
+    /* Resting state: only the first slide is visible and interactive */
+    & .list .item {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    & .list .item:first-child {
+      opacity: 1;
+      pointer-events: auto;
+      z-index: 1;
+    }
+
+    & .list .item .content {
+      display: none;
+      pointer-events: none;
+    }
+
+    & .list .item:first-child .content {
+      display: block;
+      pointer-events: auto;
+    }
+
+    /* Both directions */
+    &:is(.is-next, .is-prev) {
+      & .nextPrevArrows button {
+        pointer-events: none;
+      }
+
+      & .list .item.is-outgoing .content {
+        animation: heroContentExit var(--hero-exit-duration) var(--ease-out-expo) forwards !important;
+      }
+
+      & .list .item.is-incoming .content {
+        display: block;
+        pointer-events: auto;
+      }
+    }
+
+    /* Next: the incoming slide grows out of its thumbnail over the outgoing one */
+    &.is-next {
+      & .list .item.is-outgoing {
+        opacity: 1;
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      & .list .item.is-outgoing img {
+        animation: heroOutgoingImage var(--hero-duration) var(--ease-out-expo) forwards;
+        will-change: transform, filter;
+      }
+
+      & .list .item.is-incoming {
+        opacity: 1;
+        z-index: 10;
+        pointer-events: auto;
+      }
+
+      & .list .item.is-incoming img {
+        animation: heroShowImageClip var(--hero-duration) var(--ease-out-expo) forwards;
+        will-change: clip-path, transform;
+      }
+
+      & .thumbnail {
+        animation: heroThumbTrackNext var(--hero-duration) var(--ease-out-expo) forwards;
+        will-change: transform;
+      }
+
+      & .thumbnail .item.is-expanding {
+        animation: heroThumbFadeOut var(--hero-fade-duration) var(--ease-out-expo) forwards;
+      }
+    }
+
+    /* Prev: the outgoing slide shrinks back into its thumbnail */
+    &.is-prev {
+      & .list .item.is-incoming {
+        opacity: 1;
+        z-index: 1;
+        pointer-events: auto;
+      }
+
+      & .list .item.is-outgoing {
+        opacity: 1;
+        z-index: 10;
+        pointer-events: none;
+      }
+
+      & .list .item.is-outgoing img {
+        animation: heroHideImageClip var(--hero-duration) var(--ease-out-expo) forwards;
+        will-change: clip-path, transform;
+      }
+
+      & .thumbnail {
+        animation: heroThumbTrackPrev var(--hero-duration) var(--ease-out-expo) forwards;
+        will-change: transform;
+      }
+    }
+  }
+
+  /* Keyframe names are camelCase on purpose: keep them if your JS reads animationName */
+
+  @keyframes heroOutgoingImage {
+    to {
+      transform: scale(1.04);
+      filter: brightness(0.8);
+    }
+  }
+
+  @keyframes heroContentExit {
+    to {
+      transform: translateY(-24px);
+      opacity: 0;
+      filter: blur(4px);
+    }
+  }
+
+  @keyframes heroShowImageClip {
+    from {
+      clip-path: var(--thumb-clip);
+      transform: scale(1.06);
+    }
+
+    to {
+      clip-path: inset(0 0 0 0 round 0);
+      transform: scale(1);
+    }
+  }
+
+  @keyframes heroHideImageClip {
+    from {
+      clip-path: inset(0 0 0 0 round 0);
+      transform: scale(1);
+    }
+
+    to {
+      clip-path: var(--thumb-clip);
+      transform: scale(1.06);
+    }
+  }
+
+  @keyframes heroThumbTrackNext {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(calc(-1 * (var(--thumb-width) + var(--thumb-gap))));
+    }
+  }
+
+  @keyframes heroThumbTrackPrev {
+    from {
+      transform: translateX(calc(-1 * (var(--thumb-width) + var(--thumb-gap))));
+    }
+
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes heroThumbFadeOut {
+    to {
+      opacity: 0;
+      transform: scale(0.92);
+    }
+  }
+
+  /* ------------------------------------------------------------------------
+     6.6 ASCII reveal engine
+     Rules the JS engine depends on; they persist across Astro view transitions.
+     ------------------------------------------------------------------------ */
+
+  [data-ar-t] {
+    -webkit-text-fill-color: transparent !important;
+    text-shadow: none !important;
+    text-decoration-color: transparent !important;
+  }
+
+  [data-ar-tc] {
+    background-image: none !important;
+  }
+
+  :is([data-ar-m], [data-ar-s], [data-ar-f]) {
+    opacity: var(--ar-o, 0) !important;
+  }
+
+  [data-ar-pending] {
+    visibility: hidden;
+  }
+
+  .ar-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    overflow: visible;
+
+    & > canvas {
+      position: absolute;
+      pointer-events: none;
+      display: block;
+    }
+  }
+
+  /* ------------------------------------------------------------------------
+     6.7 ASCII skeleton
+     Variants (.ars-dither / -braille / -scan / -terminal) only retune the
+     --ars-* variables; shapes (.ars-image, .ars-hero-bg, pills) size the block.
+     ------------------------------------------------------------------------ */
+
+  :where(.ars) {
+    --ars-base: 0.28;
+    --ars-wave: 0.95;
+    --ars-band: 45%;
+    --ars-speed: 1.8s;
+
+    position: relative;
+    display: block;
+    font-family: var(--ascii-font);
+    color: var(--ascii-skeleton);
+    user-select: none;
+    pointer-events: none;
+  }
+
+  .ars-line,
+  .ars-block {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    white-space: pre;
+    line-height: 1.3;
+    contain: inline-size layout paint style;
+  }
+
+  .ars-line + .ars-line {
+    margin-block-start: 0.55em;
+  }
+
+  .ars-block {
+    line-height: 1;
+    border-radius: var(--ars-radius);
+    background: color-mix(in oklch, currentColor 8%, transparent);
+  }
+
+  .ars-base {
+    display: block;
+    opacity: var(--ars-base);
+  }
+
+  /* Physical offsets on purpose: the engine positions the canvas, not the text flow */
+  .ars > canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+  }
+
+  /* Centred copy (page-header heroes) */
+  .text-center {
+    & .ars-line {
+      margin-inline: auto !important;
+      text-align: center;
+    }
+
+    & .ars-base {
+      text-align: center;
+    }
+  }
+
+  /* Sizing */
+  .ars:is(.size-full, .h-full, .ars-image) {
+    block-size: 100%;
+  }
+
+  .ars:is(.size-full, .w-full, .ars-image) {
+    inline-size: 100%;
+  }
+
+  .ars:is(.size-full, .h-full, .ars-image) > .ars-block {
+    block-size: 100%;
+  }
+
+  /* Buttons & pills: the whole control becomes a dither block */
+  .ars:is([class*="rounded-full"], [class*="rounded-xl"]) {
+    display: inline-flex;
+    overflow: hidden;
+
+    & > .ars-block {
+      inline-size: 100%;
+      block-size: 100%;
+      border-radius: inherit;
+    }
+  }
+
+  /* Image wireframe: matches the image's exact box and aspect ratio */
+  .ars.ars-image {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: inherit;
+    container-type: inline-size;
+
+    & > .ars-block {
+      inline-size: 100%;
+      flex: 1 1 100%;
+      display: flex;
+      flex-direction: column;
+      border-radius: inherit;
+      overflow: hidden;
+    }
+
+    & .ars-base {
+      inline-size: 100%;
+      block-size: 100%;
+      display: block;
+      overflow: hidden;
+      line-height: 1.15;
+      font-size: max(11px, calc(100cqi / 52));
+      letter-spacing: 0;
+      white-space: pre;
+      user-select: none;
+    }
+
+    & > canvas {
+      position: absolute;
+      inset: 0;
+      inline-size: 100% !important;
+      block-size: 100% !important;
+      pointer-events: none;
+      border-radius: inherit;
+    }
+  }
+
+  /* Full-bleed hero mesh: spans the viewport edge to edge */
+  .ars.ars-hero-bg {
+    inline-size: 100% !important;
+    block-size: 100% !important;
+
+    & > .ars-block {
+      inline-size: 100% !important;
+      block-size: 100% !important;
+    }
+
+    & .ars-base {
+      inline-size: 100% !important;
+      font-size: max(14px, calc(100vw / 55)) !important;
+      line-height: 1.18 !important;
+      letter-spacing: 0 !important;
+      white-space: pre !important;
+    }
+  }
+
+  /* Variants */
+  .ars-dither {
+    --ars-base: 0.24;
+    --ars-wave: 0.85;
+    --ars-band: 55%;
+
+    & .ars-line {
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+  }
+
+  .ars-braille {
+    --ars-base: 0.35;
+    --ars-wave: 1;
+    --ars-band: 40%;
+  }
+
+  .ars-scan {
+    --ars-base: 0.28;
+    --ars-wave: 0.95;
+    --ars-band: 38%;
+  }
+
+  .ars-terminal {
+    --ars-base: 0.16;
+    --ars-wave: 1;
+    --ars-band: 35%;
+    --ars-speed: 1.5s;
+    --ars-wave-color: var(--ascii-accent, currentColor);
+  }
+
+  /* ------------------------------------------------------------------------
+     6.8 Overlays: popover & dialog
+     Discrete transitions via allow-discrete + @starting-style.
+     ------------------------------------------------------------------------ */
+
+  /* Language selector: CSS anchor positioning, with a plain fallback */
+  .language-selector-popover {
+    position-anchor: auto;
+    inset: unset;
+    top: calc(anchor(bottom) + 8px);
+    right: anchor(right);
+    margin: 0;
     opacity: 0;
     transform: scale(0.95);
+    transition:
+      opacity 250ms var(--ease-out-expo),
+      transform 250ms var(--ease-out-expo),
+      display 250ms allow-discrete,
+      overlay 250ms allow-discrete;
+
+    &:popover-open {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
 
-  to {
-    opacity: 1;
-    transform: none;
+  @supports not (position-anchor: auto) {
+    .language-selector-popover {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      margin-top: 0.5rem;
+    }
   }
-}
 
-@keyframes reveal-creative-slide-right {
-  from {
+  /* Cookie preferences */
+  dialog.cookie-preferences-dialog {
     opacity: 0;
-    transform: translateX(-28px);
+    transform: scale(0.96);
+    transition:
+      opacity 250ms var(--ease-out-expo),
+      transform 250ms var(--ease-out-expo),
+      display 250ms allow-discrete,
+      overlay 250ms allow-discrete;
+
+    &[open] {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    &::backdrop {
+      opacity: 0;
+      background-color: oklch(0% 0 0deg / 0.75);
+      backdrop-filter: blur(2px);
+      transition:
+        opacity 250ms var(--ease-out-expo),
+        display 250ms allow-discrete,
+        overlay 250ms allow-discrete;
+    }
+
+    &[open]::backdrop {
+      opacity: 1;
+    }
   }
 
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
+  /* Entry states: keep after the rules they start from */
+  @starting-style {
+    .language-selector-popover:popover-open {
+      opacity: 0;
+      transform: scale(0.95);
+    }
 
-@keyframes reveal-creative-slide-left {
-  from {
-    opacity: 0;
-    transform: translateX(28px);
-  }
+    dialog.cookie-preferences-dialog[open] {
+      opacity: 0;
+      transform: scale(0.96);
+    }
 
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-/* JS-triggered Scroll Reveal */
-
-/* .scroll-init is added to <html> by the TypeScript orchestrator.
-   Without JS, content stays fully visible (SEO-safe). */
-
-.scroll-init [data-animate] {
-  opacity: 0;
-}
-
-/* When the IntersectionObserver adds .is-visible, play the animation */
-.scroll-init [data-animate].is-visible {
-  animation-fill-mode: both;
-  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-  animation-duration: 750ms;
-}
-
-/* Stagger delays for sequential card/item entrance */
-.scroll-init [data-animate].delay-0 { animation-delay: 0ms; }
-.scroll-init [data-animate].delay-75 { animation-delay: 75ms; }
-.scroll-init [data-animate].delay-100 { animation-delay: 100ms; }
-.scroll-init [data-animate].delay-150 { animation-delay: 150ms; }
-.scroll-init [data-animate].delay-200 { animation-delay: 200ms; }
-.scroll-init [data-animate].delay-300 { animation-delay: 300ms; }
-.scroll-init [data-animate].delay-450,
-.scroll-init [data-animate].delay-\[450ms\] { animation-delay: 450ms; }
-.scroll-init [data-animate].delay-500 { animation-delay: 500ms; }
-.scroll-init [data-animate].delay-600,
-.scroll-init [data-animate].delay-\[600ms\] { animation-delay: 600ms; }
-.scroll-init [data-animate].delay-700 { animation-delay: 700ms; }
-.scroll-init [data-animate].delay-1000 { animation-delay: 1000ms; }
-.scroll-init [data-animate].delay-\[120ms\] { animation-delay: 120ms; }
-.scroll-init [data-animate].delay-\[240ms\] { animation-delay: 240ms; }
-.scroll-init [data-animate].delay-\[360ms\] { animation-delay: 360ms; }
-.scroll-init [data-animate].delay-\[480ms\] { animation-delay: 480ms; }
-
-.scroll-init [data-animate].is-visible:not(.is-done) {
-  will-change: transform, opacity;
-}
-
-/* Map each data-animate value to its keyframes */
-.scroll-init [data-animate="fade-up"].is-visible {
-  animation-name: reveal-fade-up;
-}
-
-.scroll-init [data-animate="zoom-in"].is-visible {
-  animation-name: reveal-zoom-in;
-}
-
-.scroll-init [data-animate="creative-slide-right"].is-visible {
-  animation-name: reveal-creative-slide-right;
-}
-
-.scroll-init [data-animate="creative-slide-left"].is-visible {
-  animation-name: reveal-creative-slide-left;
-}
-
-/* After animation completes, clean up will-change and release composite layers */
-.scroll-init [data-animate].is-done {
-  will-change: auto;
-  animation: none;
-  opacity: 1;
-}
-
-/* Accessibility: respect user preferences for reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .scroll-init [data-animate] {
-    opacity: 1;
-    animation: none !important;
-    transform: none !important;
-    will-change: auto !important;
-  }
-}
-/* View Transitions */
-
-/* Root Page Crossfade & Micro-Slide */
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation-duration: 360ms;
-  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-  mix-blend-mode: normal;
-}
-
-::view-transition-old(root) {
-  animation-name: astro-page-fade-out;
-}
-
-::view-transition-new(root) {
-  animation-name: astro-page-fade-in;
-}
-
-@keyframes astro-page-fade-out {
-  from {
-    opacity: 1;
-    transform: translateY(0) scale(1);
+    dialog.cookie-preferences-dialog[open]::backdrop {
+      opacity: 0;
+    }
   }
 
-  to {
-    opacity: 0;
-    transform: translateY(-4px) scale(0.995);
-  }
-}
+  /* ------------------------------------------------------------------------
+     6.9 No-JS fallbacks
+     ------------------------------------------------------------------------ */
 
-@keyframes astro-page-fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(4px) scale(0.995);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-/* Shared element morphing smoothness */
-::view-transition-group(*) {
-  animation-duration: 320ms;
-  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* Ensure navbar transitions smoothly without jump */
-::view-transition-group(main-navbar),
-::view-transition-group(mobile-bottom-nav) {
-  animation-duration: 200ms;
-  animation-timing-function: ease-out;
-}
-
-/* Accessibility: respect user preferences for reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  ::view-transition-old(root),
-  ::view-transition-new(root),
-  ::view-transition-group(*) {
-    animation: none !important;
-  }
-}
-
-/* Print Styles */
-
-@media print {
-  header,
-  footer,
-  aside,
-  #cookie-banner,
-  #cookie-badge-btn {
-    display: none !important;
-  }
-}
-
-/* -------------------------------------------------------------
-   HOME HERO 3D CAROUSEL SLIDER (Terracotta & Amber Design System)
-   ------------------------------------------------------------- */
-#home-hero-slider,
-#home-hero-slider-skeleton {
-  --thumb-width: 200px;
-  --thumb-height: 290px;
-  --thumb-gap: 18px;
-  --thumb-bottom: 26px;
-  --thumb-radius: var(--radius-lg);
-  --thumb-left: calc(100vw - (2.5 * var(--thumb-width) + 2 * var(--thumb-gap)));
-}
-
-@media (width <= 1024px) {
-  #home-hero-slider,
-  #home-hero-slider-skeleton {
-    --thumb-width: 165px;
-    --thumb-height: 245px;
-    --thumb-gap: 14px;
-    --thumb-bottom: 20px;
-    --thumb-radius: var(--radius-md);
-  }
-}
-
-@media (width < 768px) {
-  #home-hero-slider,
-  #home-hero-slider-skeleton {
-    --thumb-width: 130px;
-    --thumb-height: 190px;
-    --thumb-gap: 12px;
-    --thumb-bottom: calc(88px + env(safe-area-inset-bottom, 0px));
-    --thumb-radius: var(--radius-md);
-  }
-}
-
-@media (width <= 480px) {
-  #home-hero-slider,
-  #home-hero-slider-skeleton {
-    --thumb-width: 105px;
-    --thumb-height: 155px;
-    --thumb-gap: 10px;
-    --thumb-bottom: calc(86px + env(safe-area-inset-bottom, 0px));
-    --thumb-radius: var(--radius-sm);
-  }
-}
-
-/* Content Block - Hidden by default for non-active slides to eliminate double text/buttons */
-.slider .list .item {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  pointer-events: none;
-  z-index: 0;
-  overflow: hidden;
-}
-
-.slider .list .item:first-child {
-  opacity: 1;
-  pointer-events: auto;
-  z-index: 1;
-}
-
-.slider .list .item .content {
-  display: none;
-  pointer-events: none;
-}
-
-.slider .list .item:first-child .content {
-  display: block;
-  pointer-events: auto;
-}
-
-/* On mobile, vertically balance content so space above it (from top navbar) equals space below it (to preview cards) */
-@media (width < 768px) {
-  .slider .list .item .content,
-  #home-hero-slider-skeleton .content {
-    top: calc(
-      (
-          100dvh - var(--thumb-bottom) - var(--thumb-height) + 3.75rem +
-            env(safe-area-inset-top, 0px)
-        ) /
-        2
-    ) !important;
-    transform: translateY(-50%) !important;
-  }
-}
-
-/* -------------------------------------------------------------
-   ANIMATION PART (Keyframes & GPU Hardware-Accelerated Sequencing)
-   ------------------------------------------------------------- */
-.no-js .blur-token {
-  opacity: 1 !important;
-  transform: none !important;
-  filter: none !important;
-}
-
-/* Disable navigation arrows during active slide transition */
-.slider.is-next .nextPrevArrows button,
-.slider.is-prev .nextPrevArrows button {
-  pointer-events: none;
-}
-
-/* =========================================================================
-   NEXT DIRECTION: Incoming slide expands smoothly over outgoing slide
-   ========================================================================= */
-
-/* Outgoing slide remains in background, subtle scale + gentle dimming */
-.slider.is-next .list .item.is-outgoing {
-  opacity: 1;
-  z-index: 1;
-  pointer-events: none;
-}
-
-.slider.is-next .list .item.is-outgoing img {
-  animation: heroOutgoingImage 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  will-change: transform, filter;
-}
-
-@keyframes heroOutgoingImage {
-  to {
-    transform: scale(1.04);
-    filter: brightness(0.8);
-  }
-}
-
-/* Outgoing content gently dissolves upward */
-.slider.is-next .list .item.is-outgoing .content,
-.slider.is-prev .list .item.is-outgoing .content {
-  animation: heroContentExit 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
-}
-
-@keyframes heroContentExit {
-  to {
-    transform: translateY(-24px);
-    opacity: 0;
-    filter: blur(4px);
-  }
-}
-
-/* Incoming slide expands from thumbnail frame to full-screen with clip-path (zero reflow) */
-.slider.is-next .list .item.is-incoming {
-  opacity: 1;
-  z-index: 10;
-  pointer-events: auto;
-}
-
-.slider.is-next .list .item.is-incoming .content {
-  display: block;
-  pointer-events: auto;
-}
-
-.slider.is-next .list .item.is-incoming img {
-  animation: heroShowImageClip 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  will-change: clip-path, transform;
-}
-
-@keyframes heroShowImageClip {
-  from {
-    clip-path: inset(
-      calc(100% - var(--thumb-bottom) - var(--thumb-height))
-      calc(100% - var(--thumb-left) - var(--thumb-width))
-      var(--thumb-bottom)
-      var(--thumb-left)
-      round var(--thumb-radius)
-    );
-    transform: scale(1.06);
-  }
-
-  to {
-    clip-path: inset(0 0 0 0 round 0);
-    transform: scale(1);
-  }
-}
-
-/* Thumbnail Track: horizontal glide left by 1 card distance */
-.slider.is-next .thumbnail {
-  animation: heroThumbTrackNext 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  will-change: transform;
-}
-
-@keyframes heroThumbTrackNext {
-  from {
-    transform: translateX(0);
-  }
-
-  to {
-    transform: translateX(calc(-1 * (var(--thumb-width) + var(--thumb-gap))));
-  }
-}
-
-/* The expanding thumbnail gently fades out */
-.slider.is-next .thumbnail .item.is-expanding {
-  animation: heroThumbFadeOut 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes heroThumbFadeOut {
-  to {
-    opacity: 0;
-    transform: scale(0.92);
-  }
-}
-
-/* =========================================================================
-   PREV DIRECTION: Outgoing slide shrinks back into thumbnail card frame
-   ========================================================================= */
-
-/* Underneath: Incoming slide is visible full screen */
-.slider.is-prev .list .item.is-incoming {
-  opacity: 1;
-  z-index: 1;
-  pointer-events: auto;
-}
-
-.slider.is-prev .list .item.is-incoming .content {
-  display: block;
-  pointer-events: auto;
-}
-
-/* On-top: Outgoing slide shrinks smoothly down into the thumbnail card */
-.slider.is-prev .list .item.is-outgoing {
-  opacity: 1;
-  z-index: 10;
-  pointer-events: none;
-}
-
-.slider.is-prev .list .item.is-outgoing img {
-  animation: heroHideImageClip 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  will-change: clip-path, transform;
-}
-
-@keyframes heroHideImageClip {
-  from {
-    clip-path: inset(0 0 0 0 round 0);
-    transform: scale(1);
-  }
-
-  to {
-    clip-path: inset(
-      calc(100% - var(--thumb-bottom) - var(--thumb-height))
-      calc(100% - var(--thumb-left) - var(--thumb-width))
-      var(--thumb-bottom)
-      var(--thumb-left)
-      round var(--thumb-radius)
-    );
-    transform: scale(1.06);
-  }
-}
-
-/* Thumbnail Track for Prev: glides smoothly to the right */
-.slider.is-prev .thumbnail {
-  animation: heroThumbTrackPrev 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  will-change: transform;
-}
-
-@keyframes heroThumbTrackPrev {
-  from {
-    transform: translateX(calc(-1 * (var(--thumb-width) + var(--thumb-gap))));
-  }
-
-  to {
-    transform: translateX(0);
-  }
-}
-
-/* Reduced motion accessibility support */
-@media (prefers-reduced-motion: reduce) {
-  .slider .list .item,
-  .slider .list .item img,
-  .slider .thumbnail,
-  .slider .thumbnail .item {
-    animation: none !important;
-    transition: none !important;
-    transform: none !important;
-    clip-path: none !important;
+  .no-js .blur-token {
     opacity: 1 !important;
+    transform: none !important;
     filter: none !important;
   }
+
+  /* ==========================================================================
+     7. Reduced motion
+     One place for every opt-out. Keep it last in this layer.
+     ========================================================================== */
+
+  @media (prefers-reduced-motion: reduce) {
+    /* Scroll reveal: show content immediately */
+    .scroll-init [data-animate] {
+      opacity: 1;
+      animation: none !important;
+      transform: none !important;
+      will-change: auto !important;
+    }
+
+    [data-scroll-parallax] img,
+    [data-scroll-cinematic] {
+      transform: none !important;
+      transition: none !important;
+    }
+
+    /* Page transitions */
+    ::view-transition-old(root),
+    ::view-transition-new(root),
+    ::view-transition-group(*) {
+      animation: none !important;
+    }
+
+    /* Hero slider: collapse to 1ms instead of `animation: none`, so
+       animationend still fires and the slider's state classes get cleaned up */
+    .slider {
+      --hero-duration: 1ms;
+      --hero-exit-duration: 1ms;
+      --hero-fade-duration: 1ms;
+    }
+
+    /* Accordion & overlays */
+    details::details-content {
+      transition: none;
+    }
+
+    .language-selector-popover,
+    dialog.cookie-preferences-dialog,
+    dialog.cookie-preferences-dialog::backdrop {
+      transition-duration: 1ms;
+    }
+  }
 }
 
-/* -------------------------------------------------------------
-   LENIS SMOOTH SCROLL & PARALLAX RULES
-   ------------------------------------------------------------- */
-html.lenis,
-html.lenis body {
-  height: auto;
-}
+/* ==========================================================================
+   8. Lenis overrides (intentionally unlayered)
+   lenis.css ships the rest, but not these two. They stay outside any layer,
+   as in the original, so they keep beating utility classes on <html>.
+   ========================================================================== */
 
 html.lenis {
   overflow-y: auto;
@@ -825,357 +1248,3 @@ html.lenis {
 .lenis.lenis-smooth {
   scroll-behavior: auto !important;
 }
-
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-
-.lenis.lenis-stopped {
-  overflow: clip;
-}
-
-.lenis.lenis-smooth iframe {
-  pointer-events: none;
-}
-
-/* Parallax card frames & cinematic scroll surfaces */
-[data-scroll-parallax] {
-  overflow: hidden;
-  position: relative;
-}
-
-[data-scroll-parallax] img {
-  will-change: transform;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  [data-scroll-parallax] img,
-  [data-scroll-cinematic] {
-    transform: none !important;
-    transition: none !important;
-  }
-}
-
-/* ==========================================================================
-   ASCII Reveal & ASCII Skeleton System (quanhoangindex/ascii-reveal)
-   ========================================================================== */
-
-/* ─── AsciiReveal Core Engine Styles (Persistent for Astro ViewTransitions) ─── */
-[data-ar-t] {
-  -webkit-text-fill-color: transparent !important;
-  text-shadow: none !important;
-  text-decoration-color: transparent !important;
-}
-
-[data-ar-tc] {
-  background-image: none !important;
-}
-
-[data-ar-m],
-[data-ar-s],
-[data-ar-f] {
-  opacity: var(--ar-o, 0) !important;
-}
-
-[data-ar-pending] {
-  visibility: hidden;
-}
-
-.ar-overlay {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 2;
-  overflow: visible;
-}
-
-.ar-overlay > canvas {
-  position: absolute;
-  pointer-events: none;
-  display: block;
-}
-
-:root {
-  --ascii-font: var(--font-mono, "JetBrains Mono", ui-monospace, monospace);
-  --ascii-skeleton: #9ca3af; /* zinc-400 / neutral gray */
-  --ascii-accent: #ea580c; /* orange-600 / Moroccan brand terracotta */
-  --ars-wave-color: #3f3f46; /* zinc-700 / crisp monochrome highlight */
-  --ars-radius: 12px;
-}
-
-.dark,
-[data-theme="dark"] {
-  --ascii-skeleton: #71717a; /* zinc-500 */
-  --ascii-accent: #f97316; /* orange-500 */
-  --ars-wave-color: #f4f4f5; /* zinc-100 / silver monochrome highlight */
-}
-
-:where(.ars) {
-  position: relative;
-  display: block;
-  font-family: var(--ascii-font);
-  color: var(--ascii-skeleton);
-  user-select: none;
-  pointer-events: none;
-  --ars-base: 0.28;
-  --ars-wave: 0.95;
-  --ars-band: 45%;
-  --ars-speed: 1.8s;
-}
-
-.ars-line,
-.ars-block {
-  position: relative;
-  display: block;
-  overflow: hidden;
-  white-space: pre;
-  line-height: 1.3;
-  contain: inline-size layout paint style;
-}
-
-.ars-line + .ars-line {
-  margin-top: 0.55em;
-}
-
-/* Center-aligned ASCII lines (e.g. PageHeader heroes & centered copy) */
-.text-center .ars-line,
-.ars.text-center .ars-line {
-  margin-inline: auto !important;
-  text-align: center;
-}
-
-.text-center .ars-base,
-.ars.text-center .ars-base {
-  text-align: center;
-}
-
-.ars-block {
-  line-height: 1;
-  border-radius: var(--ars-radius, 12px);
-  background: color-mix(in srgb, currentColor 8%, transparent);
-}
-
-.ars-base {
-  display: block;
-  opacity: var(--ars-base);
-}
-
-.ars > canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-}
-
-.ars.size-full,
-.ars.h-full,
-.ars.ars-image {
-  height: 100%;
-}
-
-.ars.size-full,
-.ars.w-full,
-.ars.ars-image {
-  width: 100%;
-}
-
-.ars.size-full > .ars-block,
-.ars.h-full > .ars-block,
-.ars.ars-image > .ars-block {
-  height: 100%;
-}
-
-/* Dedicated Button & Pill Skeleton Block — Fills the entire button as an ASCII dither block */
-.ars.rounded-full,
-.ars[class*="rounded-full"],
-.ars[class*="rounded-xl"] {
-  display: inline-flex;
-  overflow: hidden;
-}
-
-.ars.rounded-full > .ars-block,
-.ars[class*="rounded-full"] > .ars-block,
-.ars[class*="rounded-xl"] > .ars-block {
-  width: 100%;
-  height: 100%;
-  border-radius: inherit;
-}
-
-/* Dedicated Image Wireframe Fill — Matches exact image width, height & aspect ratio */
-.ars.ars-image {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  border-radius: inherit;
-  container-type: inline-size;
-}
-
-.ars.ars-image > .ars-block {
-  width: 100%;
-  flex: 1 1 100%;
-  display: flex;
-  flex-direction: column;
-  border-radius: inherit;
-  overflow: hidden;
-  background: color-mix(in srgb, currentColor 8%, transparent);
-}
-
-.ars.ars-image .ars-base {
-  width: 100%;
-  height: 100%;
-  display: block;
-  overflow: hidden;
-  line-height: 1.15;
-  font-size: clamp(11px, 2vw, 18px);
-  font-size: max(11px, calc(100cqi / 52));
-  letter-spacing: 0;
-  white-space: pre;
-  user-select: none;
-}
-
-.ars.ars-image > canvas {
-  position: absolute;
-  inset: 0;
-  width: 100% !important;
-  height: 100% !important;
-  pointer-events: none;
-  border-radius: inherit;
-}
-
-/* Full-screen Hero Background ASCII mesh — spans 100% viewport width edge-to-edge */
-.ars.ars-hero-bg {
-  width: 100% !important;
-  height: 100% !important;
-}
-
-.ars.ars-hero-bg > .ars-block {
-  width: 100% !important;
-  height: 100% !important;
-}
-
-.ars.ars-hero-bg .ars-base {
-  width: 100% !important;
-  font-size: max(14px, calc(100vw / 55)) !important;
-  line-height: 1.18 !important;
-  letter-spacing: 0 !important;
-  white-space: pre !important;
-}
-
-.ars-dither {
-  --ars-base: 0.24;
-  --ars-wave: 0.85;
-  --ars-band: 55%;
-}
-
-.ars-dither .ars-line {
-  line-height: 1.15;
-  letter-spacing: -0.02em;
-}
-
-.ars-braille {
-  --ars-base: 0.35;
-  --ars-wave: 1;
-  --ars-band: 40%;
-}
-
-.ars-scan {
-  --ars-base: 0.28;
-  --ars-wave: 0.95;
-  --ars-band: 38%;
-}
-
-.ars-terminal {
-  --ars-base: 0.16;
-  --ars-wave: 1;
-  --ars-band: 35%;
-  --ars-speed: 1.5s;
-  --ars-wave-color: var(--ascii-accent, currentColor);
-}
-
-/* ==========================================================================
-   Overlay & Popover Discrete Transitions (Language Selector & Cookie Modal)
-   ========================================================================== */
-
-/* Language Selector Popover (CSS Anchor Positioning + @starting-style transition) */
-.language-selector-popover {
-  position-anchor: auto;
-  inset: unset;
-  top: calc(anchor(bottom) + 8px);
-  right: anchor(right);
-  margin: 0;
-  transition:
-    opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-    display 0.25s allow-discrete,
-    overlay 0.25s allow-discrete;
-  opacity: 0;
-  transform: scale(0.95);
-}
-
-.language-selector-popover:popover-open {
-  opacity: 1;
-  transform: scale(1);
-}
-
-@starting-style {
-  .language-selector-popover:popover-open {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-}
-
-@supports not (position-anchor: auto) {
-  .language-selector-popover {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    margin-top: 0.5rem;
-  }
-}
-
-/* Cookie Preferences Dialog & Backdrop Discrete Transition */
-dialog.cookie-preferences-dialog {
-  transition:
-    opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-    display 0.25s allow-discrete,
-    overlay 0.25s allow-discrete;
-  opacity: 0;
-  transform: scale(0.96);
-}
-
-dialog.cookie-preferences-dialog[open] {
-  opacity: 1;
-  transform: scale(1);
-}
-
-@starting-style {
-  dialog.cookie-preferences-dialog[open] {
-    opacity: 0;
-    transform: scale(0.96);
-  }
-}
-
-dialog.cookie-preferences-dialog::backdrop {
-  transition:
-    opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-    display 0.25s allow-discrete,
-    overlay 0.25s allow-discrete;
-  opacity: 0;
-  background-color: rgb(0 0 0 / 75%);
-  backdrop-filter: blur(2px);
-}
-
-dialog.cookie-preferences-dialog[open]::backdrop {
-  opacity: 1;
-}
-
-@starting-style {
-  dialog.cookie-preferences-dialog[open]::backdrop {
-    opacity: 0;
-  }
-}
-
-i

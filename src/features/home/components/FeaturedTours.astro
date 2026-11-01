@@ -125,7 +125,7 @@ const DELAY_CLASSES = [
                 <div class="absolute inset-0 size-full">
                   <Image
                     alt={cityAlt}
-                    class="size-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105 motion-reduce:transform-none"
+                    class="size-full object-cover transition-transform duration-700 ease-out-expo group-hover:scale-105 motion-reduce:transform-none"
                     decoding="async"
                     height={450}
                     loading="lazy"
@@ -183,12 +183,12 @@ const DELAY_CLASSES = [
               <!-- Inner Image Card (Rounded image surface with dark luxury background) -->
               <div
                 data-scroll-parallax
-                class="relative size-full overflow-hidden rounded-2xl border border-stone-200/80 bg-slate-950 shadow-xs transition-shadow duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] pointer-fine:group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)]"
+                class="relative size-full overflow-hidden rounded-2xl border border-stone-200/80 bg-slate-950 shadow-xs transition-shadow duration-700 ease-out-expo pointer-fine:group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)]"
               >
                 <div class="parallax-media pointer-events-none absolute -inset-y-5 inset-x-0 size-[calc(100%+40px)]">
                   <Image
                     alt={cityAlt}
-                    class="size-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] pointer-fine:group-hover:scale-105 motion-reduce:transform-none"
+                    class="size-full object-cover transition-transform duration-700 ease-out-expo pointer-fine:group-hover:scale-105 motion-reduce:transform-none"
                     decoding="async"
                     height={450}
                     loading="lazy"
@@ -200,7 +200,7 @@ const DELAY_CLASSES = [
                 <!-- Ambient Scrim: Deepens smoothly on hover to frame the full text -->
                 <div
                   aria-hidden="true"
-                  class="pointer-events-none absolute inset-0 bg-linear-to-t from-slate-950/95 via-slate-950/50 via-45% to-slate-950/15 opacity-85 transition-opacity duration-600 ease-[cubic-bezier(0.16,1,0.3,1)] pointer-fine:group-hover:opacity-100"
+                  class="pointer-events-none absolute inset-0 bg-linear-to-t from-slate-950/95 via-slate-950/50 via-45% to-slate-950/15 opacity-85 transition-opacity duration-600 ease-out-expo pointer-fine:group-hover:opacity-100"
                 />
 
                 <!-- Editorial Typography Layer -->
@@ -215,9 +215,9 @@ const DELAY_CLASSES = [
                   </hgroup>
 
                   <!-- Full Text Animated Drawer (Opens smoothly on hover) -->
-                  <div class="grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity,margin-block-start] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] pointer-fine:group-hover:grid-rows-[1fr] pointer-fine:group-hover:opacity-100 pointer-fine:group-hover:mbs-2 max-sm:grid-rows-[1fr] max-sm:opacity-100 max-sm:mbs-2">
+                  <div class="grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity,margin-block-start] duration-500 ease-out-expo pointer-fine:group-hover:grid-rows-[1fr] pointer-fine:group-hover:opacity-100 pointer-fine:group-hover:mbs-2 max-sm:grid-rows-[1fr] max-sm:opacity-100 max-sm:mbs-2">
                     <div class="overflow-hidden">
-                      <p class="text-xs sm:text-sm text-stone-200/95 leading-relaxed drop-shadow-xs transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] translate-y-2 pointer-fine:group-hover:translate-y-0 max-sm:translate-y-0">
+                      <p class="text-xs sm:text-sm text-stone-200/95 leading-relaxed drop-shadow-xs transition-transform duration-500 ease-out-expo translate-y-2 pointer-fine:group-hover:translate-y-0 max-sm:translate-y-0">
                         {cityDesc}
                       </p>
                     </div>
@@ -233,7 +233,7 @@ const DELAY_CLASSES = [
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <rect
-                  class="opacity-0 [stroke-dasharray:100] [stroke-dashoffset:100] drop-shadow-[0_0_6px_oklch(84%_0.18_90deg/35%)] transition-[stroke-dashoffset,opacity] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] pointer-fine:group-hover:opacity-100 pointer-fine:group-hover:[stroke-dashoffset:0] pointer-fine:group-hover:duration-700 motion-reduce:opacity-100 motion-reduce:[stroke-dashoffset:0] motion-reduce:transition-opacity motion-reduce:duration-200"
+                  class="opacity-0 [stroke-dasharray:100] [stroke-dashoffset:100] drop-shadow-[0_0_6px_oklch(84%_0.18_90deg/35%)] transition-[stroke-dashoffset,opacity] duration-500 ease-out-expo pointer-fine:group-hover:opacity-100 pointer-fine:group-hover:[stroke-dashoffset:0] pointer-fine:group-hover:duration-700 motion-reduce:opacity-100 motion-reduce:[stroke-dashoffset:0] motion-reduce:transition-opacity motion-reduce:duration-200"
                   height="calc(100% - 2px)"
                   pathLength="100"
                   rx="23"

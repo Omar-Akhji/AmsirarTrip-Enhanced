@@ -62,9 +62,7 @@
     "activitiesLabel": "Activités",
     "arrivalLabel": "Heure d'arrivée",
     "featured": "En vedette",
-    "category": {
-      "departures": "Départs"
-    },
+    "category": { "departures": "Départs" },
     "cities": {
       "marrakech": "Marrakech",
       "casablanca": "Casablanca",
@@ -241,9 +239,7 @@
       "support": "Assistance en voyage",
       "supportDesc": "Départs flexibles et planification de type conciergerie."
     },
-    "card": {
-      "category": "Journée complète"
-    },
+    "card": { "category": "Journée complète" },
     "exploreLink": "Voir les détails",
     "sidebar": {
       "alt": "Véhicule de transfert aéroportuaire Amsirar",
@@ -392,11 +388,7 @@
       "infoBadge": "Besoin de détails?",
       "infoTitle": "Planifiez des expériences sur mesure",
       "infoCopy": "Notre équipe de Marrakech répond personnellement à chaque message et peut vous aider avec des itinéraires personnalisés, des camps dans le désert ou des transferts de dernière minute.",
-      "info": {
-        "address": "Visite",
-        "phone": "Appel",
-        "email": "E-mail"
-      },
+      "info": { "address": "Visite", "phone": "Appel", "email": "E-mail" },
       "infoFooter": "Disponible tous les jours de 09h00 à 21h00 GMT+1"
     },
     "info": {
@@ -405,10 +397,7 @@
       "address": "Adresse",
       "message": "Message"
     },
-    "location": {
-      "smTitle": "Nous Trouver",
-      "lgTitle": "Notre Emplacement"
-    }
+    "location": { "smTitle": "Nous Trouver", "lgTitle": "Notre Emplacement" }
   },
   "excursion1": {
     "title": "Excursion aux cascades d'Ouzoud",
@@ -1301,9 +1290,7 @@
         "accommodation": "Camp du Désert à Merzouga",
         "meals": "Petit-déjeuner & Dîner inclus"
       },
-      "day6": {
-        "meals": "Petit-déjeuner inclus"
-      }
+      "day6": { "meals": "Petit-déjeuner inclus" }
     },
     "tour3": {
       "day1": {
@@ -1337,21 +1324,15 @@
         "accommodation": "Riad/Hôtel à Fès",
         "meals": "Petit-déjeuner inclus"
       },
-      "day5": {
-        "meals": "Petit-déjeuner inclus"
-      }
+      "day5": { "meals": "Petit-déjeuner inclus" }
     },
     "tour5": {
-      "day1": {
-        "accommodation": "Riad/Hôtel à Marrakech"
-      },
+      "day1": { "accommodation": "Riad/Hôtel à Marrakech" },
       "day2": {
         "accommodation": "Riad/Hôtel à Marrakech",
         "meals": "Petit-déjeuner inclus"
       },
-      "day3": {
-        "accommodation": "Hôtel/Riad dans la Vallée de Dades"
-      },
+      "day3": { "accommodation": "Hôtel/Riad dans la Vallée de Dades" },
       "day4": {
         "accommodation": "Camp du Désert (standard ou luxe)",
         "meals": "Petit-déjeuner et dîner inclus"
@@ -1376,9 +1357,7 @@
         "accommodation": "Hôtel à Casablanca",
         "meals": "Petit-déjeuner inclus"
       },
-      "day10": {
-        "meals": "Petit-déjeuner inclus"
-      }
+      "day10": { "meals": "Petit-déjeuner inclus" }
     },
     "tour6": {
       "day1": {

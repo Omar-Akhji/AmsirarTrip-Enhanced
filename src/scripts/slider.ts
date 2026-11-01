@@ -261,7 +261,9 @@ function initSlider(): void {
     } else {
       // Bring target slide right behind the active slide so active slide stays visible while target expands
       for (let i = 0; i < forwardSteps - 1; i++) {
-        const intermediateSlide = sliderList.querySelector<HTMLElement>(":scope > .item:nth-child(2)");
+        const intermediateSlide = sliderList.querySelector<HTMLElement>(
+          ":scope > .item:nth-child(2)",
+        );
         const firstThumb = thumbnail.querySelector<HTMLElement>(":scope > .item");
         if (intermediateSlide) {
           sliderList.append(intermediateSlide);

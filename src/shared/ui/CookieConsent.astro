@@ -14,7 +14,7 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
   aria-describedby="cookie-banner-desc"
   aria-labelledby="cookie-banner-title"
   aria-label="Cookie consent"
-  class="pointer-events-none fixed inset-x-4 inset-be-4 z-50 transition-[opacity,transform] duration-200 ease-out opacity-0 translate-y-3 sm:inset-s-auto sm:inset-e-6 sm:inset-be-6 sm:max-w-md md:max-w-lg hidden"
+  class="pointer-events-none fixed inset-x-4 inset-be-4 z-50 transition-[opacity,transform] duration-200 ease-out opacity-0 translate-y-3 sm:inset-s-auto sm:inset-e-6 sm:inset-be-6 sm:max-w-md md:max-w-lg hidden print:hidden"
   id="cookie-banner"
   role="region"
 >
@@ -299,7 +299,7 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
 <!-- Cookie Settings Trigger -->
 <button
   aria-label={t("cookieConsent.modalTitle", "Cookie Settings")}
-  class="group fixed inset-e-0 inset-be-20 z-40 flex size-11 cursor-pointer items-center justify-start ps-2.5 rounded-s-md border-[1.5px] border-e-0 border-white/15 bg-slate-950/95 text-zinc-300 shadow-md backdrop-blur-md transition-[transform,background-color,border-color,color,box-shadow] duration-200 ease-out pointer-fine:hover:-translate-x-1.5 pointer-fine:hover:border-orange-400/50 pointer-fine:hover:bg-slate-900 pointer-fine:hover:text-white pointer-fine:hover:shadow-xl focus-visible:outline-2 focus-visible:outline-orange-400 motion-reduce:transform-none"
+  class="group fixed inset-e-0 inset-be-20 z-40 flex size-11 cursor-pointer items-center justify-start ps-2.5 rounded-s-md border-[1.5px] border-e-0 border-white/15 bg-slate-950/95 text-zinc-300 shadow-md backdrop-blur-md transition-[transform,background-color,border-color,color,box-shadow] duration-200 ease-out pointer-fine:hover:-translate-x-1.5 pointer-fine:hover:border-orange-400/50 pointer-fine:hover:bg-slate-900 pointer-fine:hover:text-white pointer-fine:hover:shadow-xl focus-visible:outline-2 focus-visible:outline-orange-400 motion-reduce:transform-none print:hidden"
   command="show-modal"
   commandfor="cookie-preferences-modal"
   data-cookie-open-preferences
