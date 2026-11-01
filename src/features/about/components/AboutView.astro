@@ -1,10 +1,13 @@
 ---
 import aboutImg from "@/assets/images/about-img.webp";
+import agafayImg from "@/assets/images/Excursions/Agafay.webp";
+import ourikaImg from "@/assets/images/Excursions/Ourika_Valley.webp";
 import bgImage from "@/assets/images/Header/header-1.webp";
 import aboutStats from "@/data/about-stats.json";
 import { useTranslations } from "@/i18n/utils";
 import PageHeader from "@/shared/layout/PageHeader.astro";
 import Button from "@/shared/ui/Button.astro";
+import { Quote } from "@lucide/astro";
 import { Image } from "astro:assets";
 
 const locale = Astro.currentLocale || "en";
@@ -57,7 +60,7 @@ const DELAY_CLASSES = ["delay-0", "delay-150", "delay-300", "delay-[450ms]"] as 
   >
     <div class="mx-auto px-4 max-inline-7xl">
       <div
-        class="mbe-8 sm:mbe-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-stone-200 pb-6 sm:pb-8"
+        class="mbe-8 sm:mbe-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-stone-200/80 pb-6 sm:pb-8"
         data-animate="fade-up"
       >
         <hgroup class="max-w-2xl space-y-2">
@@ -67,97 +70,122 @@ const DELAY_CLASSES = ["delay-0", "delay-150", "delay-300", "delay-[450ms]"] as 
           >
             {t("about.ourStory")}
           </h2>
-          <p class="border-s-2 border-orange-600 ps-4 py-0.5 text-sm sm:text-base text-stone-600 leading-relaxed max-w-[62ch] text-pretty">
+          <p class="text-sm sm:text-base text-stone-500 font-medium leading-relaxed max-w-[62ch] text-pretty">
             {t("about.experienceTitle")}
           </p>
         </hgroup>
       </div>
 
-      <div class="grid items-start gap-12 lg:grid-cols-12 lg:gap-16">
-        <!-- Editorial Text Column -->
-        <div class="order-2 lg:order-1 lg:col-span-7">
+      <div class="grid items-start gap-10 sm:gap-12 lg:grid-cols-12 lg:gap-14 xl:gap-16">
+        <!-- Left Column: 3 Images Collage (order-1 on Mobile & Tablet, Left on Desktop) -->
+        <div class="order-1 lg:order-1 lg:col-span-6">
+          <div
+            class="delay-200 flex flex-col gap-[clamp(0.75rem,0.6rem+0.4vw,1.125rem)]"
+            data-animate="zoom-in"
+          >
+            <!-- Top Landscape Image -->
+            <div class="group relative aspect-video overflow-hidden rounded-2xl border border-stone-200/80 bg-stone-100 shadow-xs">
+              <Image
+                alt={t("about.imageCaption") || "Atlas Mountains and Desert Valleys"}
+                class="size-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] pointer-fine:group-hover:scale-103 motion-reduce:transform-none"
+                height={675}
+                loading="eager"
+                src={agafayImg}
+                width={1200}
+              />
+            </div>
+
+            <!-- Bottom Row: 2 Images Side-by-Side -->
+            <div class="grid grid-cols-2 gap-[clamp(0.75rem,0.6rem+0.4vw,1.125rem)]">
+              <div class="group relative aspect-4/5 overflow-hidden rounded-2xl border border-stone-200/80 bg-stone-100 shadow-xs">
+                <Image
+                  alt="Ourika Valley green terraces and mountain villages"
+                  class="size-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] pointer-fine:group-hover:scale-104 motion-reduce:transform-none"
+                  height={750}
+                  loading="lazy"
+                  src={ourikaImg}
+                  width={600}
+                />
+              </div>
+
+              <div class="group relative aspect-4/5 overflow-hidden rounded-2xl border border-stone-200/80 bg-stone-100 shadow-xs">
+                <Image
+                  alt="Traditional Moroccan architecture and Atlas travel"
+                  class="size-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] pointer-fine:group-hover:scale-104 motion-reduce:transform-none"
+                  height={852}
+                  loading="lazy"
+                  src={aboutImg}
+                  width={720}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Editorial Narrative & Quote (order-2 on Mobile & Tablet, Right on Desktop) -->
+        <div class="order-2 lg:order-2 lg:col-span-6">
           <div
             class="inline-full"
             data-animate="fade-up"
           >
-            <article class="space-y-8">
-              <div class="space-y-5 text-stone-700">
-                <p class="text-base sm:text-lg leading-relaxed text-stone-800 font-normal">
+            <article class="flex flex-col gap-[clamp(1.5rem,1.25rem+1vw,2.5rem)]">
+              <!-- Lead & Narrative Story with Fluid Typography -->
+              <div class="flex flex-col gap-[clamp(0.875rem,0.75rem+0.4vw,1.375rem)]">
+                <p class="font-normal text-stone-800 text-[clamp(1.05rem,0.98rem+0.35vw,1.2rem)] leading-[clamp(1.65,1.55+0.3vw,1.8)] text-pretty">
                   {t("about.experienceText1")}
                 </p>
-                <p class="text-sm sm:text-base leading-relaxed text-stone-600">
+                <p class="text-stone-600 text-[clamp(0.925rem,0.875rem+0.2vw,1.025rem)] leading-[1.75] text-pretty">
                   {t("about.experienceText2")}
                 </p>
-                <p class="text-sm sm:text-base leading-relaxed text-stone-600">
+                <p class="text-stone-600 text-[clamp(0.925rem,0.875rem+0.2vw,1.025rem)] leading-[1.75] text-pretty">
                   {t("about.experienceText3")}
                 </p>
               </div>
 
-              <!-- Editorial Blockquote -->
-              <figure class="my-8 border-s-2 border-orange-600 ps-6 py-1">
-                <blockquote class="text-base sm:text-lg leading-relaxed text-stone-800 italic text-pretty">
+              <!-- Archival Editorial Quote Card -->
+              <figure class="relative overflow-hidden rounded-2xl border border-stone-200/90 bg-stone-50/70 p-[clamp(1.25rem,1rem+1vw,2rem)]">
+                <Quote
+                  aria-hidden="true"
+                  class="pointer-events-none absolute top-4 right-4 sm:top-5 sm:right-5 size-5 sm:size-6 text-orange-600/35"
+                />
+                <blockquote class="relative font-serif italic text-stone-800 text-[clamp(1.0625rem,0.95rem+0.5vw,1.25rem)] leading-[clamp(1.5,1.4+0.3vw,1.7)] text-pretty pe-8">
                   "{t("about.conclusionText")}"
                 </blockquote>
-                <figcaption class="mbs-2 text-xs font-semibold tracking-wider text-stone-500 uppercase">
-                  — Amsirar Expedition Atelier
+                <figcaption class="mbs-3 flex items-center gap-2 font-mono text-[clamp(0.7rem,0.65rem+0.2vw,0.8rem)] font-semibold tracking-wider text-stone-500 uppercase">
+                  <span class="size-1.5 rounded-full bg-orange-600"></span>
+                  <span>Amsirar Expedition Atelier</span>
                 </figcaption>
               </figure>
-
-              <!-- Core Pillars of Trust -->
-              <div class="border-t border-stone-200/90 pbs-8">
-                <hgroup class="mbe-6">
-                  <h3 class="text-lg sm:text-xl font-bold tracking-tight text-stone-900">
-                    {t("about.whyTrustTitle")}
-                  </h3>
-                </hgroup>
-                <ul
-                  role="list"
-                  class="m-0 p-0 list-none grid grid-cols-1 gap-3 sm:grid-cols-2"
-                >
-                  {[1, 2, 3, 4].map((number_) => (
-                    <li class="flex items-start gap-3 rounded-2xl border border-stone-200/80 bg-stone-50/70 p-4 shadow-2xs transition-colors hover:border-stone-300">
-                      <span class="text-xs font-bold text-orange-600 shrink-0 mbs-0.5">
-                        0{number_}
-                      </span>
-                      <p class="text-xs sm:text-sm leading-relaxed text-stone-700 text-pretty">
-                        {t(`about.whyTrust.point${number_}`)}
-                      </p>
-                    </li>
-                  ))}
-                </ul>
-              </div>
             </article>
           </div>
         </div>
+      </div>
 
-        <!-- Archival Image Column with Concentric Frame -->
-        <div class="order-1 lg:order-2 lg:col-span-5">
-          <div
-            class="delay-200"
-            data-animate="zoom-in"
-          >
-            <figure>
-              <div class="overflow-hidden rounded-2xl border border-stone-200/90 bg-stone-100/80 p-2 sm:p-3 shadow-2xs">
-                <div class="relative aspect-4/5 sm:aspect-4/3 lg:aspect-4/5 overflow-hidden rounded-2xl bg-stone-200">
-                  <Image
-                    alt="Amsirar landscape showcasing traditional Moroccan architecture and culture"
-                    class="size-full object-cover transition-transform duration-700 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] pointer-fine:hover:scale-103 motion-reduce:transform-none"
-                    height={852}
-                    src={aboutImg}
-                    width={720}
-                  />
-                </div>
-              </div>
-              <figcaption class="mbs-3 flex items-center justify-between px-2 font-mono text-xs text-stone-500">
-                <span class="flex items-center gap-2">
-                  <span class="size-1.5 rounded-full bg-orange-600"></span>
-                  {t("about.imageCaption") || "High Atlas & Desert Valleys"}
-                </span>
-                <span class="tabular-nums">EST. 2006 · MOROCCO</span>
-              </figcaption>
-            </figure>
-          </div>
-        </div>
+      <!-- Core Pillars of Trust Expanded Across Full Width Below Image & Story -->
+      <div
+        class="mbs-[clamp(2.5rem,2rem+2vw,4rem)] border-t border-stone-200/80 pt-[clamp(2rem,1.5rem+1.5vw,3rem)]"
+        data-animate="fade-up"
+      >
+        <hgroup class="mbe-[clamp(1.25rem,1rem+0.75vw,1.75rem)] max-w-2xl">
+          <h3 class="font-bold tracking-tight text-stone-900 text-[clamp(1.25rem,1.1rem+0.6vw,1.6rem)]">
+            {t("about.whyTrustTitle")}
+          </h3>
+        </hgroup>
+        <ul
+          role="list"
+          class="m-0 p-0 list-none grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[clamp(1rem,0.8rem+0.5vw,1.5rem)]"
+        >
+          {[1, 2, 3, 4].map((number_) => (
+            <li class="flex flex-col items-start gap-3 rounded-2xl border border-stone-200/80 bg-stone-50/60 p-[clamp(1.125rem,0.95rem+0.6vw,1.5rem)] shadow-2xs">
+              <span class="inline-flex size-7 items-center justify-center rounded-lg bg-orange-100/80 font-mono text-xs font-bold text-orange-700 tabular-nums shrink-0">
+                0{number_}
+              </span>
+              <p class="text-stone-700 text-[clamp(0.875rem,0.825rem+0.2vw,0.95rem)] leading-relaxed text-pretty">
+                {t(`about.whyTrust.point${number_}`)}
+              </p>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   </section>
