@@ -13,8 +13,8 @@ interface Props {
   locale?: string;
 }
 
-const props = defineProps<Props>();
-const { t } = useTranslation(props.locale);
+const { locale } = defineProps<Props>();
+const { t } = useTranslation(locale);
 const name = ref("");
 const email = ref("");
 const statusKey = ref("");

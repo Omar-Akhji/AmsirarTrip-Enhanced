@@ -8,13 +8,13 @@ interface Props {
   locale?: string;
 }
 
-const props = defineProps<Props>();
+const { locale } = defineProps<Props>();
 
-if (props.locale) {
-  provide("app-locale", props.locale);
+if (locale) {
+  provide("app-locale", locale);
 }
 
-const { t } = useTranslation(props.locale);
+const { t } = useTranslation(locale);
 
 const openModal = () => {
   const dialog = document.querySelector("#newsletter-dialog") as HTMLDialogElement | null;
@@ -142,6 +142,6 @@ const openModal = () => {
     </div>
 
     <!-- Newsletter dialog (always in DOM, shown via command="show-modal") -->
-    <NewsletterModal :locale="props.locale" />
+    <NewsletterModal :locale="locale" />
   </div>
 </template>

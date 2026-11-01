@@ -43,6 +43,7 @@ const subtitle = subtitleMap[locale] ?? subtitleMap["en"] ?? defaultSubtitle;
   <Image
     alt=""
     class="absolute inset-0 size-full object-cover"
+    decoding="async"
     height={1277}
     loading="lazy"
     src={servicesBg}
@@ -90,7 +91,9 @@ const subtitle = subtitleMap[locale] ?? subtitleMap["en"] ?? defaultSubtitle;
             <Image
               alt={t(service.altKey)}
               class="size-15"
+              decoding="async"
               height={60}
+              loading="lazy"
               src={service.icon}
               width={60}
             />
