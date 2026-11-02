@@ -904,7 +904,7 @@ const current: PrivacyCopy = (contentByLocale[locale] ?? defaultCopy) as Privacy
                   >
                     <span class="flex items-center gap-2 truncate min-w-0">
                       <span class="shrink-0 whitespace-nowrap font-mono text-xs font-bold text-slate-400 group-hover:text-orange group-data-[active=true]:text-orange">
-                        {idx + 1}&nbsp;//
+                        {String(idx + 1).padStart(2, "0")}
                       </span>
                       <span class="truncate">{sec.title}</span>
                     </span>
@@ -996,7 +996,7 @@ const current: PrivacyCopy = (contentByLocale[locale] ?? defaultCopy) as Privacy
             <div class="border-be border-stone-200/80 pbe-4">
               <div class="flex items-center gap-3">
                 <span class="flex shrink-0 whitespace-nowrap items-center justify-center rounded-full bg-orange/10 px-2 py-1 font-mono text-xs font-bold text-orange">
-                  {idx + 1}&nbsp;//
+                  {String(idx + 1).padStart(2, "0")}
                 </span>
                 <h2
                   class="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl"

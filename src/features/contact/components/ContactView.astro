@@ -76,28 +76,18 @@ import { DELAY_CLASSES } from "@/shared/ui/animation-constants";
 </PageHeader>
 
 <div class="text-zinc-900">
-  <!-- 01 // DIRECT CHANNELS -->
+  <!-- DIRECT CHANNELS -->
   <section
     aria-labelledby="contact-methods-heading"
     class="relative isolate bg-white py-12 sm:py-16 lg:py-24"
   >
     <div class="mx-auto px-4 max-inline-7xl">
-      <div
-        class="mbe-8 sm:mbe-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-stone-200 pb-6 sm:pb-8"
-        data-animate="fade-up"
+      <h2
+        class="sr-only"
+        id="contact-methods-heading"
       >
-        <hgroup class="max-w-2xl space-y-2">
-          <h2
-            class="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl text-balance"
-            id="contact-methods-heading"
-          >
-            {t("contact.methods.title", "Direct Communication Channels")}
-          </h2>
-          <p class="border-s-2 border-orange-600 ps-4 py-0.5 text-sm sm:text-base text-stone-600 leading-relaxed max-w-[62ch] text-pretty">
-            {t("contact.smTitle", "Get in Touch with Us")}
-          </p>
-        </hgroup>
-      </div>
+        {t("contact.methods.title", "Direct Communication Channels")}
+      </h2>
 
       <!-- Mobile Mode: Folder Stack (matches Home page experience) -->
       <div class="block md:hidden w-full">
@@ -141,10 +131,10 @@ import { DELAY_CLASSES } from "@/shared/ui/animation-constants";
                 >
                   <span class="uppercase tracking-wider">
                     {method.id === "phone" ?
-                      "WhatsApp Dispatch"
+                      "Chat on WhatsApp"
                     : method.id === "email" ?
-                      "Send Written Brief"
-                    : "Office Coordinates"}
+                      "Send Us a Message"
+                    : "View Office Location"}
                   </span>
                   <ChevronRight
                     aria-hidden="true"
@@ -159,7 +149,7 @@ import { DELAY_CLASSES } from "@/shared/ui/animation-constants";
     </div>
   </section>
 
-  <!-- 02 // EXPEDITION INQUIRY & DISPATCH -->
+  <!-- EXPEDITION INQUIRY -->
   <section
     aria-labelledby="contact-form-heading"
     class="relative isolate border-t border-stone-200 bg-stone-50 py-12 sm:py-16 lg:py-24"
@@ -190,7 +180,7 @@ import { DELAY_CLASSES } from "@/shared/ui/animation-constants";
     </div>
   </section>
 
-  <!-- PHYSICAL ATELIER & COORDINATES -->
+  <!-- OFFICE & LOCATION -->
   <section
     aria-labelledby="location-heading"
     class="relative isolate border-t border-stone-200/90 bg-white py-12 sm:py-16 lg:py-24"

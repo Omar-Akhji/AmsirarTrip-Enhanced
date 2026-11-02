@@ -16,57 +16,73 @@ interface RouteEntry {
   route: string;
   lastmod: string;
   imageLoc?: string;
+  imageTitle?: string;
+  imageCaption?: string;
+  hasVideo?: boolean;
 }
 
 export const GET: APIRoute = async ({ site }) => {
   const baseUrl = site ?? new URL("https://amsirartrip.com");
   const tours = await getCollection("tours");
   const excursions = await getCollection("excursions");
+  const today = new Date().toISOString().slice(0, 10);
 
   const routes: RouteEntry[] = [
     {
       route: "",
-      lastmod: "2026-10-27",
+      lastmod: today,
       imageLoc: new URL("/images/hero/marrakech-medina.webp", baseUrl).href,
+      imageTitle: "Amsirar Trip Marrakech Medina & Sahara Desert Tours",
+      imageCaption:
+        "Licensed Morocco travel operator in Marrakech offering private desert tours and day trips.",
+      hasVideo: true,
     },
     {
       route: "/tours",
-      lastmod: "2026-10-25",
+      lastmod: today,
       imageLoc: new URL("/images/hero/merzouga-desert.webp", baseUrl).href,
+      imageTitle: "Multi-Day Morocco Sahara Desert Tours",
+      imageCaption:
+        "Private Sahara desert tours from Marrakech, Casablanca, and Fes to Erg Chebbi dunes.",
     },
     {
       route: "/excursions",
-      lastmod: "2026-10-24",
+      lastmod: today,
       imageLoc: new URL("/images/hero/ouzoud-falls.webp", baseUrl).href,
+      imageTitle: "Marrakech Day Trips & Atlas Mountain Excursions",
+      imageCaption:
+        "Guided day excursions from Marrakech to Ouzoud Waterfalls, Essaouira, Ourika Valley, and Agafay Desert.",
     },
-    { route: "/about", lastmod: "2026-10-15" },
-    { route: "/contact", lastmod: "2026-10-15" },
+    { route: "/about", lastmod: today },
+    { route: "/contact", lastmod: today },
     { route: "/privacy-policy", lastmod: "2026-09-01" },
     { route: "/terms-of-service", lastmod: "2026-09-01" },
   ];
 
   const sortedTours = [...tours].toSorted((a, b) => a.data.bookingId - b.data.bookingId);
   for (const tour of sortedTours) {
-    const dayOffset = String(Math.max(10, 26 - tour.data.bookingId)).padStart(2, "0");
     routes.push({
       route: `/tours/${tour.id}`,
-      lastmod: `2026-10-${dayOffset}`,
+      lastmod: today,
       imageLoc: new URL(tour.data.image.src, baseUrl).href,
+      imageTitle: tour.data.seo.title,
+      imageCaption: tour.data.seo.imageAlt ?? tour.data.seo.metaDescription,
     });
   }
 
   const sortedExcursions = [...excursions].toSorted((a, b) => a.data.bookingId - b.data.bookingId);
   for (const excursion of sortedExcursions) {
-    const dayOffset = String(Math.max(10, 20 - excursion.data.bookingId)).padStart(2, "0");
     routes.push({
       route: `/excursions/${excursion.id}`,
-      lastmod: `2026-10-${dayOffset}`,
+      lastmod: today,
       imageLoc: new URL(excursion.data.image.src, baseUrl).href,
+      imageTitle: excursion.data.seo?.title ?? excursion.data.jsonLd.name,
+      imageCaption: excursion.data.seo?.imageAlt ?? excursion.data.jsonLd.description,
     });
   }
 
   let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
-  xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n`;
+  xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">\n`;
 
   for (const entry of routes) {
     for (const locale of LOCALES) {
@@ -86,7 +102,25 @@ export const GET: APIRoute = async ({ site }) => {
       if (entry.imageLoc) {
         xml += `    <image:image>\n`;
         xml += `      <image:loc>${escapeXml(entry.imageLoc)}</image:loc>\n`;
+        if (entry.imageTitle) {
+          xml += `      <image:title>${escapeXml(entry.imageTitle)}</image:title>\n`;
+        }
+        if (entry.imageCaption) {
+          xml += `      <image:caption>${escapeXml(entry.imageCaption)}</image:caption>\n`;
+        }
         xml += `    </image:image>\n`;
+      }
+
+      if (entry.hasVideo) {
+        const videoThumb = new URL("/images/hero/marrakech-medina.webp", baseUrl).href;
+        const videoContent = new URL("/videos/Morocco-Video.mp4", baseUrl).href;
+        xml += `    <video:video>\n`;
+        xml += `      <video:thumbnail_loc>${escapeXml(videoThumb)}</video:thumbnail_loc>\n`;
+        xml += `      <video:title>Morocco Sahara Desert Tours &amp; Cultural Expeditions</video:title>\n`;
+        xml += `      <video:description>Experience private Sahara desert camel treks, Atlas mountain passes, and historic Moroccan medinas with Amsirar Trip.</video:description>\n`;
+        xml += `      <video:content_loc>${escapeXml(videoContent)}</video:content_loc>\n`;
+        xml += `      <video:duration>105</video:duration>\n`;
+        xml += `    </video:video>\n`;
       }
 
       xml += `  </url>\n`;

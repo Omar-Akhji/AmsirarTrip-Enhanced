@@ -345,3 +345,56 @@ export function generateWebsiteJsonLd(): Record<string, unknown> {
     inLanguage: ["en", "fr", "de", "es"],
   };
 }
+
+export function generateVideoObjectJsonLd(data: {
+  name: string;
+  description: string;
+  thumbnailUrl: string;
+  uploadDate: string;
+  contentUrl: string;
+  duration?: string;
+}): Record<string, unknown> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    name: sanitizeForJsonLd(data.name),
+    description: sanitizeForJsonLd(data.description),
+    thumbnailUrl: resolveUrl(data.thumbnailUrl),
+    uploadDate: data.uploadDate,
+    contentUrl: resolveUrl(data.contentUrl),
+    embedUrl: BASE_URL,
+    ...(data.duration && { duration: data.duration }),
+    inLanguage: ["en", "fr", "de", "es"],
+    publisher: { "@id": `${BASE_URL}/#organization` },
+  };
+}
+
+export function generateContactPageJsonLd(data: {
+  name: string;
+  description: string;
+  url: string;
+}): Record<string, unknown> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    name: sanitizeForJsonLd(data.name),
+    description: sanitizeForJsonLd(data.description),
+    url: resolveUrl(data.url),
+    mainEntity: { "@id": `${BASE_URL}/#organization` },
+  };
+}
+
+export function generateAboutPageJsonLd(data: {
+  name: string;
+  description: string;
+  url: string;
+}): Record<string, unknown> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    name: sanitizeForJsonLd(data.name),
+    description: sanitizeForJsonLd(data.description),
+    url: resolveUrl(data.url),
+    mainEntity: { "@id": `${BASE_URL}/#organization` },
+  };
+}

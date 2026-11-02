@@ -4,7 +4,7 @@ import ContactForm from "../../features/contact/components/ContactForm.vue";
 import ContactView from "../../features/contact/components/ContactView.astro";
 import { useTranslations } from "../../i18n/utils";
 import Layout from "../../layouts/Layout.astro";
-import { generateBreadcrumbJsonLd } from "../../lib/structured-data";
+import { generateBreadcrumbJsonLd, generateContactPageJsonLd } from "../../lib/structured-data";
 import JsonLd from "../../shared/ui/JsonLd.astro";
 
 const locale = Astro.currentLocale || "en";
@@ -17,6 +17,12 @@ const breadcrumbJsonLd = generateBreadcrumbJsonLd([
   { name: t("nav.home") || "Home", url: getRelativeLocaleUrl(locale, "/") },
   { name: t("nav.contact") || "Contact", url: Astro.url.pathname },
 ]);
+
+const contactPageJsonLd = generateContactPageJsonLd({
+  name: title,
+  description,
+  url: Astro.url.pathname,
+});
 ---
 
 <Layout
@@ -26,6 +32,10 @@ const breadcrumbJsonLd = generateBreadcrumbJsonLd([
   <JsonLd
     data={breadcrumbJsonLd}
     id="contact-breadcrumb-jsonld"
+  />
+  <JsonLd
+    data={contactPageJsonLd}
+    id="contact-page-jsonld"
   />
   <ContactView>
     <ContactForm

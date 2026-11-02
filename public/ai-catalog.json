@@ -10,26 +10,26 @@
       "displayName": "Amsirar Trip WebMCP Tools",
       "type": "application/mcp-server-card+json",
       "url": "https://amsirartrip.com/",
-      "description": "Browser-accessible agentic tools for navigating Morocco tour itineraries, day excursions, and UI controls.",
+      "description": "Browser-accessible agentic tools for navigating licensed Morocco tour itineraries, private Sahara desert expeditions, Atlas mountain day excursions, and UI controls.",
       "representativeQueries": [
         "Explore Sahara desert tours from Marrakech",
         "Browse day excursions and Atlas mountain treks",
         "Switch language or theme on Amsirar Trip"
       ],
-      "tags": ["travel", "morocco", "tours", "desert", "mcp"]
+      "tags": ["travel", "morocco", "tours", "desert", "sahara", "marrakech", "mcp"]
     },
     {
       "identifier": "urn:air:amsirartrip:skills:travel-guide",
       "displayName": "Amsirar Trip Agent Skills & LLMs Manifest",
       "type": "text/markdown; profile=\"urn:air:agent-skills\"",
       "url": "https://amsirartrip.com/llms.txt",
-      "description": "Comprehensive knowledge base and navigation map of Moroccan tours and desert expeditions.",
+      "description": "Comprehensive knowledge base, verified company credentials (license 24/TT/RAK), and complete navigation map of Moroccan Sahara tours, camel treks, and Marrakech day excursions.",
       "representativeQueries": [
         "Get list of Morocco destinations and tour itineraries",
         "Check available day trips from Marrakech",
         "Read verified travel reviews and company credentials"
       ],
-      "tags": ["travel", "skills", "morocco", "destinations"]
+      "tags": ["travel", "skills", "morocco", "destinations", "sahara", "marrakech"]
     }
   ]
 }

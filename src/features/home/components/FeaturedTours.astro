@@ -111,13 +111,12 @@ const DELAY_CLASSES = [
         rotationAmount={1.5}
         holdDistance={180}
       >
-        {cities.map((city, index) => {
+        {cities.map((city) => {
           const regionKey = city.titleKey.replace(".title", ".region");
           const regionText = t(regionKey);
           const cityTitle = t(city.titleKey);
           const cityDesc = t(city.descriptionKey);
           const cityAlt = t(city.altKey) || cityTitle || "Morocco Destination";
-          const paddedIndex = String(index + 1).padStart(2, "0");
 
           return (
             <ScrollStackItem itemClassName="group">
@@ -146,7 +145,7 @@ const DELAY_CLASSES = [
                   >
                     <hgroup class="mbe-1.5">
                       <p class="font-mono text-[11px] font-semibold tracking-[0.16em] text-yellow uppercase mbe-1">
-                        {paddedIndex} // {regionText === regionKey ? "MOROCCO" : regionText}
+                        {regionText === regionKey ? "MOROCCO" : regionText}
                       </p>
                       <h3 class="text-xl font-bold tracking-tight text-white drop-shadow-xs">
                         {cityTitle}
@@ -177,7 +176,6 @@ const DELAY_CLASSES = [
         const cityTitle = t(city.titleKey);
         const cityDesc = t(city.descriptionKey);
         const cityAlt = t(city.altKey) || cityTitle || "Morocco Destination";
-        const paddedIndex = String(index + 1).padStart(2, "0");
 
         return (
           <div
@@ -216,7 +214,7 @@ const DELAY_CLASSES = [
                   >
                     <hgroup class="mbe-2">
                       <p class="font-mono text-[11px] font-semibold tracking-[0.16em] text-yellow uppercase mbe-1">
-                        {paddedIndex} // {regionText === regionKey ? "MOROCCO" : regionText}
+                        {regionText === regionKey ? "MOROCCO" : regionText}
                       </p>
                       <h3 class="text-xl font-bold tracking-tight text-white sm:text-2xl drop-shadow-xs">
                         {cityTitle}

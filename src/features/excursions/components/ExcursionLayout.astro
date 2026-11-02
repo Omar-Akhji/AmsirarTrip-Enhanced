@@ -1,6 +1,8 @@
 ---
 import { parseStringArray, useTranslations } from "@/i18n/utils";
 import TripLayout from "@/shared/layout/TripLayout.astro";
+import FaqAccordion from "@/shared/ui/FaqAccordion.astro";
+import PricingCard from "@/shared/ui/PricingCard.astro";
 import TripInfoSections from "@/shared/ui/TripInfoSections.astro";
 import type { ImageMetadata } from "astro";
 import type { CollectionEntry } from "astro:content";
@@ -108,7 +110,7 @@ const goodToKnow = excursion?.goodToKnow ?? [];
     ctaTitle: t("excursion.sidebar.ctaTitle", "Need Instant Help?"),
     ctaDescription: t(
       "excursion.sidebar.ctaDescription",
-      "Message our dispatch desk directly on WhatsApp for real-time questions and group rates.",
+      "Message our Marrakech team directly on WhatsApp for real-time questions and group rates.",
     ),
     ctaPoint01: t("excursion.sidebar.ctaPoint01", "Door-to-door hotel transfers"),
     ctaPoint02: t("excursion.sidebar.ctaPoint02", "Clean modern fleet"),
@@ -120,15 +122,9 @@ const goodToKnow = excursion?.goodToKnow ?? [];
 >
   <Fragment slot="content">
     <ExcursionSeoSections
-      faqTitle={t("excursion.common.faqTitle", "Frequently Asked Questions")}
-      faqs={faqs}
       highlights={highlights}
       highlightsTitle={t("excursion.common.highlights", "Key Experiences")}
       metrics={metrics}
-      price={price}
-      priceLabel={t("excursion.common.priceLabel", "Starting price")}
-      pricingTitle={t("excursion.common.pricingTitle", "Reservation & Pricing")}
-      reserveNow={t("booking.checkAvailability", "Reserve Now")}
     />
 
     <section
@@ -138,18 +134,18 @@ const goodToKnow = excursion?.goodToKnow ?? [];
     >
       <hgroup>
         <p class="font-sans text-xs font-bold tracking-wider text-orange-700 uppercase">
-          Journey Overview
+          About This Excursion
         </p>
         <h3
           id="excursion-overview-heading"
           class="mbs-1 mbe-4 text-xl font-bold tracking-tight text-stone-900 sm:text-2xl md:text-3xl"
         >
-          {t("excursion.common.overview", "Journey Overview")}
+          {t("excursion.common.overview", "Excursion Overview")}
         </h3>
       </hgroup>
       <div class="space-y-4 max-w-[68ch]">
         {overviewParagraphs.map((paragraph) => (
-          <p class="font-mono text-xs sm:text-sm leading-relaxed text-stone-700">{paragraph}</p>
+          <p class="font-sans text-sm sm:text-base leading-relaxed text-stone-700">{paragraph}</p>
         ))}
       </div>
     </section>
@@ -157,6 +153,7 @@ const goodToKnow = excursion?.goodToKnow ?? [];
     {program.length > 0 && (
       <ExcursionProgram
         program={program}
+        programTitle="Day Trip Schedule"
         programTitle={t("excursion.common.programTitle", "Timed Itinerary & Program")}
       />
     )}
@@ -170,6 +167,22 @@ const goodToKnow = excursion?.goodToKnow ?? [];
       includedTitle={t("excursion.common.included", "Included Services")}
       includes={includes}
     />
+
+    <PricingCard
+      idPrefix="excursion"
+      pricingTitle={t("excursion.common.pricingTitle", "Reservation & Pricing")}
+      priceLabel={t("excursion.common.priceLabel", "Starting price")}
+      price={price}
+      reserveNow={t("booking.checkAvailability", "Reserve Now")}
+    />
+
+    {faqs.length > 0 && (
+      <FaqAccordion
+        idPrefix="excursion"
+        faqTitle={t("excursion.common.faqTitle", "Frequently Asked Questions")}
+        faqs={faqs}
+      />
+    )}
   </Fragment>
   <slot />
 </TripLayout>

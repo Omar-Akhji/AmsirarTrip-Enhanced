@@ -1,7 +1,5 @@
 ---
-import FaqAccordion from "@/shared/ui/FaqAccordion.astro";
 import HighlightsList from "@/shared/ui/HighlightsList.astro";
-import PricingCard from "@/shared/ui/PricingCard.astro";
 import { Clock, Compass, Mountain, Route } from "@lucide/astro";
 
 interface Props {
@@ -13,25 +11,9 @@ interface Props {
   };
   readonly highlights: readonly string[];
   readonly highlightsTitle: string;
-  readonly price: { readonly label: string; readonly note: string };
-  readonly priceLabel: string;
-  readonly pricingTitle: string;
-  readonly reserveNow: string;
-  readonly faqs: readonly { readonly question: string; readonly answer: string }[];
-  readonly faqTitle: string;
 }
 
-const {
-  metrics,
-  highlights,
-  highlightsTitle,
-  price,
-  priceLabel,
-  pricingTitle,
-  reserveNow,
-  faqs,
-  faqTitle,
-} = Astro.props;
+const { metrics, highlights, highlightsTitle } = Astro.props;
 ---
 
 <div
@@ -105,18 +87,4 @@ const {
   idPrefix="excursion"
   highlightsTitle={highlightsTitle}
   highlights={highlights}
-/>
-
-<PricingCard
-  idPrefix="excursion"
-  pricingTitle={pricingTitle}
-  priceLabel={priceLabel}
-  price={price}
-  reserveNow={reserveNow}
-/>
-
-<FaqAccordion
-  idPrefix="excursion"
-  faqTitle={faqTitle}
-  faqs={faqs}
 />

@@ -6,9 +6,16 @@ interface Props {
   readonly price: { readonly label: string; readonly note: string };
   readonly reserveNow?: string | undefined;
   readonly reserveHref?: string | undefined;
+  readonly kicker?: string | undefined;
 }
 
-const { idPrefix = "trip", pricingTitle, priceLabel, price } = Astro.props;
+const {
+  idPrefix = "trip",
+  pricingTitle,
+  priceLabel,
+  price,
+  kicker = "Rates & Reservations",
+} = Astro.props;
 ---
 
 <div
@@ -23,7 +30,7 @@ const { idPrefix = "trip", pricingTitle, priceLabel, price } = Astro.props;
       <div class="space-y-1">
         <hgroup class="space-y-1">
           <p class="font-sans text-xs font-bold tracking-wider text-orange-700 uppercase">
-            Reservation & Pricing
+            {kicker}
           </p>
           <h3
             class="text-xl font-bold tracking-tight text-stone-900 sm:text-2xl"

@@ -62,7 +62,9 @@
     "activitiesLabel": "Aktivitäten",
     "arrivalLabel": "Ankunftszeit",
     "featured": "Empfohlen",
-    "category": { "departures": "Abfahrten" },
+    "category": {
+      "departures": "Abfahrten"
+    },
     "cities": {
       "marrakech": "Marrakesch",
       "casablanca": "Casablanca",
@@ -239,7 +241,9 @@
       "support": "Unterstützung unterwegs",
       "supportDesc": "Flexible Abfahrten und Concierge-Planung."
     },
-    "card": { "category": "Ganztägig" },
+    "card": {
+      "category": "Ganztägig"
+    },
     "exploreLink": "Details ansehen",
     "sidebar": {
       "alt": "Amsirar Flughafentransfer-Fahrzeug",
@@ -395,7 +399,11 @@
       "infoBadge": "Details benötigt?",
       "infoTitle": "Planen Sie handgefertigte Erlebnisse",
       "infoCopy": "Unser Team in Marrakesch beantwortet jede Nachricht persönlich und kann bei individuellen Reiseplänen, Wüstencamps oder Last-Minute-Transfers helfen.",
-      "info": { "address": "Besuchen", "phone": "Anrufen", "email": "E-Mail" },
+      "info": {
+        "address": "Besuchen",
+        "phone": "Anrufen",
+        "email": "E-Mail"
+      },
       "infoFooter": "Täglich von 09:00 bis 21:00 Uhr GMT+1 verfügbar"
     },
     "info": {
@@ -404,7 +412,10 @@
       "address": "Adresse",
       "message": "Nachricht"
     },
-    "location": { "smTitle": "Finden Sie Uns", "lgTitle": "Unser Standort" }
+    "location": {
+      "smTitle": "Finden Sie Uns",
+      "lgTitle": "Unser Standort"
+    }
   },
   "excursion1": {
     "title": "Tagesausflug zu den Ouzoud-Wasserfällen",
@@ -1072,8 +1083,8 @@
     "goodToKnow": "Diese Tour ist privat, Sie können also überall unterwegs anhalten.\nRiads in alten Medinas können kurze Gehstrecken erfordern.\nBequeme Wanderschuhe werden empfohlen.\nChefchaouen und Fès haben viele steil an- und absteigende Gassen.\nDas Wetter im Norden kann kühl sein, besonders im Winter.\nSie können die Tour anpassen: Tage hinzufügen, Hotels aufwerten, Wüstenerweiterung hinzufügen.\nVegetarische/vegane Mahlzeiten auf Anfrage verfügbar.\nGepäck ist während Besuche immer sicher im Auto."
   },
   "featured": {
-    "smTitle": "Erfahren Sie Mehr Vor Ihrer Reise",
-    "lgTitle": "Touristenstädte",
+    "smTitle": "Höhepunkte und Regionen",
+    "lgTitle": "Königsstädte und Wüstenregionen Marokkos",
     "cards": {
       "marrakech": {
         "title": "Marrakech",
@@ -1132,7 +1143,7 @@
     }
   },
   "services": {
-    "smTitle": "erfahren Sie mehr über unsere Leistungen",
+    "smTitle": "Warum Amsirar Trip Wählen",
     "lgTitle": "Unsere Leistungen",
     "cards": {
       "handcrafted": {
@@ -1299,7 +1310,9 @@
         "accommodation": "Wüstencamp in Merzouga",
         "meals": "Frühstück & Abendessen inbegriffen"
       },
-      "day6": { "meals": "Frühstück inbegriffen" }
+      "day6": {
+        "meals": "Frühstück inbegriffen"
+      }
     },
     "tour3": {
       "day1": {
@@ -1333,15 +1346,21 @@
         "accommodation": "Riad/Hotel in Fès",
         "meals": "Frühstück inbegriffen"
       },
-      "day5": { "meals": "Frühstück inbegriffen" }
+      "day5": {
+        "meals": "Frühstück inbegriffen"
+      }
     },
     "tour5": {
-      "day1": { "accommodation": "Riad/Hotel in Marrakech" },
+      "day1": {
+        "accommodation": "Riad/Hotel in Marrakech"
+      },
       "day2": {
         "accommodation": "Riad/Hotel in Marrakech",
         "meals": "Frühstück inbegriffen"
       },
-      "day3": { "accommodation": "Hotel/Riad im Dades-Tal" },
+      "day3": {
+        "accommodation": "Hotel/Riad im Dades-Tal"
+      },
       "day4": {
         "accommodation": "Wüstencamp (Standard oder Luxus)",
         "meals": "Frühstück und Abendessen inbegriffen"
@@ -1366,7 +1385,9 @@
         "accommodation": "Hotel in Casablanca",
         "meals": "Frühstück inbegriffen"
       },
-      "day10": { "meals": "Frühstück inbegriffen" }
+      "day10": {
+        "meals": "Frühstück inbegriffen"
+      }
     },
     "tour6": {
       "day1": {
@@ -1478,6 +1499,12 @@
       "termsOfService": "AGB",
       "cookieSettings": "Cookie-Einstellungen"
     }
+  },
+  "404": {
+    "title": "Seite Nicht Gefunden | Amsirar Trip",
+    "description": "Die gesuchte Seite existiert nicht oder wurde verschoben.",
+    "message": "Es scheint, als würde dieser Pfad nirgendwohin in Marokko führen. Kehren wir zurück auf die Route.",
+    "cta": "Zurück zur Startseite"
   },
   "notFound": {
     "title": "Seite nicht gefunden",

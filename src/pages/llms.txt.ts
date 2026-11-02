@@ -9,10 +9,12 @@ export const GET: APIRoute = async ({ site }) => {
 
   const sortedTours = [...tours].toSorted((a, b) => a.data.bookingId - b.data.bookingId);
   const sortedExcursions = [...excursions].toSorted((a, b) => a.data.bookingId - b.data.bookingId);
+  const today = new Date().toISOString().slice(0, 10);
 
   const lines: string[] = [
     `# ${agencyProfile.name}: Specialist Morocco Travel Agency`,
     "",
+    `> Last updated: ${today}`,
     `> ${agencyProfile.name} (${agencyProfile.legalName}) is a licensed Morocco tour operator (${agencyProfile.licenseNumber}) founded in ${agencyProfile.foundingDate} and headquartered in Marrakech, Morocco. We organize private Sahara desert tours, High Atlas Mountain treks, imperial city circuits, and Marrakech day excursions in English, French, German, and Spanish.`,
     "",
     "## Agency Credentials & Contact",

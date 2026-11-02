@@ -8,6 +8,9 @@ interface Props {
   readonly includedTitle?: string | undefined;
   readonly excludedTitle?: string | undefined;
   readonly goodToKnowTitle?: string | undefined;
+  readonly includedKicker?: string | undefined;
+  readonly excludedKicker?: string | undefined;
+  readonly goodToKnowKicker?: string | undefined;
   readonly idPrefix?: string | undefined;
 }
 
@@ -15,9 +18,12 @@ const {
   includes,
   excludes,
   goodToKnow,
-  includedTitle = "Included Services",
-  excludedTitle = "Excluded Services",
-  goodToKnowTitle = "Travel Advisories & Preparation",
+  includedTitle = "What's Included in Your Trip",
+  excludedTitle = "What's Not Included",
+  goodToKnowTitle = "Good to Know Before You Go",
+  includedKicker = "Included Services",
+  excludedKicker = "Out-of-Pocket Costs",
+  goodToKnowKicker = "Practical Travel Advice",
   idPrefix = "trip",
 } = Astro.props;
 
@@ -43,7 +49,7 @@ const goodToKnowList = normalizeList(goodToKnow);
     <section aria-labelledby={`${idPrefix}-included-heading`}>
       <hgroup class="mbe-4">
         <p class="font-sans text-xs font-bold tracking-wider text-orange-700 uppercase">
-          Service Coverage
+          {includedKicker}
         </p>
         <h3
           class="mbs-1 text-xl font-bold tracking-tight text-stone-900 sm:text-2xl md:text-3xl"
@@ -84,7 +90,7 @@ const goodToKnowList = normalizeList(goodToKnow);
     >
       <hgroup class="mbe-4">
         <p class="font-sans text-xs font-bold tracking-wider text-stone-500 uppercase">
-          Exclusions
+          {excludedKicker}
         </p>
         <h3
           class="mbs-1 text-xl font-bold tracking-tight text-stone-900 sm:text-2xl md:text-3xl"
@@ -125,7 +131,7 @@ const goodToKnowList = normalizeList(goodToKnow);
     >
       <hgroup class="mbe-4">
         <p class="font-sans text-xs font-bold tracking-wider text-orange-700 uppercase">
-          Travel Advisories
+          {goodToKnowKicker}
         </p>
         <h3
           class="mbs-1 text-xl font-bold tracking-tight text-stone-900 sm:text-2xl md:text-3xl"

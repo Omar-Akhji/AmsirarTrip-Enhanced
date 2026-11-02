@@ -67,7 +67,7 @@ const handleVideoClick = () => {
             class="inline-flex items-center gap-2 rounded-md border border-white/20 bg-slate-950/80 px-3 py-1 font-bold tracking-wider text-orange-400 uppercase shadow-xs backdrop-blur-xs"
           >
             <span class="size-2 animate-pulse rounded-full bg-orange-400"></span>
-            FIELD FOOTAGE // MOROCCO EXPEDITION
+            Morocco Travel Film
           </span>
         </div>
 
@@ -81,7 +81,7 @@ const handleVideoClick = () => {
           >
             <div class="mbe-3 inline-flex items-center gap-2 font-mono text-xs text-orange-400">
               <span class="size-2 rounded-full bg-orange-400"></span>
-              <span>ATELIER ARCHIVE</span>
+              <span>Featured Video</span>
             </div>
             <h3 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">
               {{ t("video.fallback.title") }}

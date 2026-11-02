@@ -62,7 +62,9 @@
     "activitiesLabel": "Actividades",
     "arrivalLabel": "Hora de llegada",
     "featured": "Destacado",
-    "category": { "departures": "Salidas" },
+    "category": {
+      "departures": "Salidas"
+    },
     "cities": {
       "marrakech": "Marrakech",
       "casablanca": "Casablanca",
@@ -239,7 +241,9 @@
       "support": "Soporte durante el viaje",
       "supportDesc": "Salidas flexibles y planificación tipo conserjería."
     },
-    "card": { "category": "Día completo" },
+    "card": {
+      "category": "Día completo"
+    },
     "exploreLink": "Ver detalles",
     "sidebar": {
       "alt": "Vehículo de traslado al aeropuerto de Amsirar",
@@ -395,7 +399,11 @@
       "infoBadge": "¿Necesitas detalles?",
       "infoTitle": "Planifica experiencias artesanales",
       "infoCopy": "Nuestro equipo de Marrakech responde cada mensaje personalmente y puede ayudar con itinerarios personalizados, campamentos en el desierto o traslados de última hora.",
-      "info": { "address": "Visitar", "phone": "Llamar", "email": "Correo" },
+      "info": {
+        "address": "Visitar",
+        "phone": "Llamar",
+        "email": "Correo"
+      },
       "infoFooter": "Disponible todos los días de 09:00 a 21:00 GMT+1"
     },
     "info": {
@@ -404,7 +412,10 @@
       "address": "Dirección",
       "message": "Mensaje"
     },
-    "location": { "smTitle": "Encuéntranos", "lgTitle": "Nuestra Ubicación" }
+    "location": {
+      "smTitle": "Encuéntranos",
+      "lgTitle": "Nuestra Ubicación"
+    }
   },
   "excursion1": {
     "title": "Excursión a las cascadas de Ouzoud",
@@ -1067,8 +1078,8 @@
     "goodToKnow": "Este tour es privado, así que puedes detenerte en cualquier lugar del camino.\nLos riads en medinas antiguas pueden requerir caminatas cortas.\nSe recomiendan zapatos de caminata cómodos.\nChefchaouen y Fez tienen muchas callejuelas empinadas.\nEl clima en el norte puede ser más fresco, especialmente en invierno.\nPuedes personalizar el tour: agregar días, mejorar hoteles, agregar extensión del desierto.\nComidas vegetarianas/veganas disponibles bajo solicitud.\nLo equipaje siempre está seguro en el automóvil durante las visitas."
   },
   "featured": {
-    "smTitle": "Conozca Lugares Antes de Su Viaje",
-    "lgTitle": "Ciudades turísticas",
+    "smTitle": "Destinos Emblemáticos",
+    "lgTitle": "Regiones y Ciudades Imperiales de Marruecos",
     "cards": {
       "marrakech": {
         "title": "Marrakech",
@@ -1127,7 +1138,7 @@
     }
   },
   "services": {
-    "smTitle": "conoce los servicios que ofrecemos",
+    "smTitle": "Por Qué Elegir Amsirar Trip",
     "lgTitle": "Nuestros servicios",
     "cards": {
       "handcrafted": {
@@ -1278,8 +1289,14 @@
         "accommodation": "Riad/Hotel en Chefchaouen",
         "meals": "Desayuno incluido"
       },
-      "day2": { "accommodation": "Riad en Fez", "meals": "Desayuno incluido" },
-      "day3": { "accommodation": "Riad en Fez", "meals": "Desayuno incluido" },
+      "day2": {
+        "accommodation": "Riad en Fez",
+        "meals": "Desayuno incluido"
+      },
+      "day3": {
+        "accommodation": "Riad en Fez",
+        "meals": "Desayuno incluido"
+      },
       "day4": {
         "accommodation": "Hotel en Midelt",
         "meals": "Desayuno incluido"
@@ -1288,7 +1305,9 @@
         "accommodation": "Campamento del Desierto en Merzouga",
         "meals": "Desayuno & Cena incluidos"
       },
-      "day6": { "meals": "Desayuno incluido" }
+      "day6": {
+        "meals": "Desayuno incluido"
+      }
     },
     "tour3": {
       "day1": {
@@ -1322,21 +1341,33 @@
         "accommodation": "Riad/Hotel en Fez",
         "meals": "Desayuno incluido"
       },
-      "day5": { "meals": "Desayuno incluido" }
+      "day5": {
+        "meals": "Desayuno incluido"
+      }
     },
     "tour5": {
-      "day1": { "accommodation": "Riad/Hotel en Marrakech" },
+      "day1": {
+        "accommodation": "Riad/Hotel en Marrakech"
+      },
       "day2": {
         "accommodation": "Riad/Hotel en Marrakech",
         "meals": "Desayuno incluido"
       },
-      "day3": { "accommodation": "Hotel/Riad en el Valle de Dades" },
+      "day3": {
+        "accommodation": "Hotel/Riad en el Valle de Dades"
+      },
       "day4": {
         "accommodation": "Campamento del Desierto (estándar o lujo)",
         "meals": "Desayuno y cena incluidos"
       },
-      "day5": { "accommodation": "Riad en Fez", "meals": "Desayuno incluido" },
-      "day6": { "accommodation": "Riad en Fez", "meals": "Desayuno incluido" },
+      "day5": {
+        "accommodation": "Riad en Fez",
+        "meals": "Desayuno incluido"
+      },
+      "day6": {
+        "accommodation": "Riad en Fez",
+        "meals": "Desayuno incluido"
+      },
       "day7": {
         "accommodation": "Riad/Hotel en Chefchaouen",
         "meals": "Desayuno incluido"
@@ -1349,7 +1380,9 @@
         "accommodation": "Hotel en Casablanca",
         "meals": "Desayuno incluido"
       },
-      "day10": { "meals": "Desayuno incluido" }
+      "day10": {
+        "meals": "Desayuno incluido"
+      }
     },
     "tour6": {
       "day1": {
@@ -1461,6 +1494,12 @@
       "termsOfService": "Términos de Servicio",
       "cookieSettings": "Ajustes de cookies"
     }
+  },
+  "404": {
+    "title": "Página No Encontrada | Amsirar Trip",
+    "description": "La página que buscas no existe o ha sido movida.",
+    "message": "Parece que el camino que tomaste no lleva a ninguna parte en Marruecos. Volvamos a la ruta.",
+    "cta": "Volver al Inicio"
   },
   "notFound": {
     "title": "Página no encontrada",

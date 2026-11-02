@@ -1,7 +1,5 @@
 ---
-import FaqAccordion from "@/shared/ui/FaqAccordion.astro";
 import HighlightsList from "@/shared/ui/HighlightsList.astro";
-import PricingCard from "@/shared/ui/PricingCard.astro";
 import { Clock, Flag, MapPinned } from "@lucide/astro";
 
 interface Props {
@@ -12,14 +10,8 @@ interface Props {
   readonly startCity: string;
   readonly endLabel: string;
   readonly endCity: string;
-  readonly priceLabel: string;
-  readonly price: { readonly label: string; readonly note: string };
   readonly highlightsTitle: string;
   readonly highlights: readonly string[];
-  readonly pricingTitle: string;
-  readonly reserveNow: string;
-  readonly faqTitle: string;
-  readonly faqs: readonly { readonly question: string; readonly answer: string }[];
 }
 
 const {
@@ -30,14 +22,8 @@ const {
   startCity,
   endLabel,
   endCity,
-  priceLabel,
-  price,
   highlightsTitle,
   highlights,
-  pricingTitle,
-  reserveNow,
-  faqTitle,
-  faqs,
 } = Astro.props;
 ---
 
@@ -98,18 +84,4 @@ const {
   idPrefix="tour"
   highlightsTitle={highlightsTitle}
   highlights={highlights}
-/>
-
-<PricingCard
-  idPrefix="tour"
-  pricingTitle={pricingTitle}
-  priceLabel={priceLabel}
-  price={price}
-  reserveNow={reserveNow}
-/>
-
-<FaqAccordion
-  idPrefix="tour"
-  faqTitle={faqTitle}
-  faqs={faqs}
 />
