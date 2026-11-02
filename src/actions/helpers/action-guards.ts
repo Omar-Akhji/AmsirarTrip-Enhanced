@@ -43,11 +43,10 @@ export function enforceRateLimit(
 
 export async function verifyCaptcha(
   token: string,
-  host: string,
   ip: string,
   actionName: string,
 ): Promise<boolean> {
-  const isValid = await verifyRecaptcha({ token, hostname: host, remoteip: ip });
+  const isValid = await verifyRecaptcha({ token, remoteip: ip });
   if (!isValid) {
     logSecurityEvent("CAPTCHA_FAILED", ip, actionName);
     return false;

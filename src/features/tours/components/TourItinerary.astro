@@ -25,10 +25,23 @@ export interface Props {
   mealsLabel: string;
   activitiesLabel: string;
   arrivalLabel: string;
+  kicker?: string | undefined;
+  defaultTitle?: string | undefined;
 }
 
-const { days, accommodationLabel, mealsLabel, activitiesLabel, arrivalLabel } =
-  Astro.props as Props;
+const {
+  days,
+  accommodationLabel,
+  mealsLabel,
+  activitiesLabel,
+  arrivalLabel,
+  kicker = "Expedition Itinerary",
+  defaultTitle = "Day-by-Day Itinerary",
+} = Astro.props as Props;
+
+const initialDay = days[0];
+const initialDayTitle =
+  initialDay ? `${getOrdinalSuffix(initialDay.number).toUpperCase()} DAY` : defaultTitle;
 
 const DAY_DELAYS = [
   "delay-0",
@@ -45,133 +58,225 @@ const DAY_DELAYS = [
 ] as const;
 ---
 
-<ol
-  role="list"
-  class="itinerary-stages-list m-0 list-none p-0 space-y-8"
->
-  {days.map((day: ItineraryDay, index: number) => {
-    const isRoute = day.title.includes("➜");
-    const routeLocations: string[] =
-      isRoute ? day.title.split("➜").map((s: string) => s.trim()) : [];
+<tour-itinerary-tracker class="block relative w-full">
+  {/* Sticky Header: 100% full article width */}
+  <header
+    class="sticky top-16 sm:top-20 z-20 -mx-4 sm:-mx-6 px-4 sm:px-6 w-[calc(100%+2rem)] sm:w-[calc(100%+3rem)] max-w-none bg-white/95 backdrop-blur-md pt-2 pb-5 border-b border-stone-200/80 mbe-8 transition-colors dark:bg-stone-900/95 dark:border-stone-800"
+    data-itinerary-header
+  >
+    <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
+      <hgroup class="space-y-1 min-w-0">
+        <p class="font-sans text-xs font-bold tracking-wider text-orange-700 uppercase dark:text-orange-400">
+          {kicker}
+        </p>
+        <h3
+          id="tour-itinerary-heading"
+          class="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-stone-950 transition-all duration-200 dark:text-stone-50"
+          data-sticky-heading
+        >
+          {initialDayTitle}
+        </h3>
 
-    return (
-      <li
-        class:list={[DAY_DELAYS[index] || "delay-0"]}
-        data-animate="fade-up"
-      >
-        <div class="group relative">
-          <div class="mbe-4 flex items-center gap-3">
-            <span class="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-1.5 font-mono text-xs font-bold tracking-[0.14em] text-orange-700 uppercase shadow-2xs">
-              <span class="size-2 rounded-full bg-orange-600"></span>
-              STAGE {String(day.number).padStart(2, "0")} ·{" "}
-              {getOrdinalSuffix(day.number).toUpperCase()} DAY
-            </span>
-          </div>
+        {/* Route City Pills in Sticky Bar */}
+        <div class="mbs-2 min-h-7">
+          {days.map((dayItem, dIndex) => {
+            const isRouteItem = dayItem.title.includes("➜");
+            const locations: string[] =
+              isRouteItem ? dayItem.title.split("➜").map((s: string) => s.trim()) : [dayItem.title];
 
-          <div class="relative space-y-4 border-s-0 ps-0 sm:ms-5 sm:border-s sm:border-stone-200 sm:ps-8">
-            {isRoute ?
-              <h4 class="text-base sm:text-lg font-bold text-stone-900 tracking-tight">
-                <span class="sr-only">{day.title.replaceAll("➜", " to ")}</span>
-                <span
-                  class="flex flex-wrap items-center gap-2 font-normal"
-                  aria-hidden="true"
-                >
-                  {routeLocations.map((location: string, locIndex: number) => (
-                    <span class="inline-flex items-center gap-2">
-                      <span class="inline-flex items-center gap-1.5 rounded-full border border-stone-200/90 bg-white px-3.5 py-1 font-mono text-xs font-semibold text-stone-800 shadow-2xs">
-                        <MapPinned class="size-3 text-orange-600 shrink-0" />
-                        {location}
-                      </span>
-                      {locIndex < routeLocations.length - 1 && (
-                        <Road class="size-3.5 shrink-0 text-orange-500" />
-                      )}
+            return (
+              <div
+                data-sticky-route-group={dIndex}
+                class:list={[
+                  "flex flex-wrap items-center gap-2 transition-opacity duration-200",
+                  { hidden: dIndex !== 0 },
+                ]}
+              >
+                {locations.map((loc, lIdx) => (
+                  <span class="inline-flex items-center gap-2">
+                    <span class="inline-flex items-center gap-1.5 rounded-full border border-stone-200/90 bg-white px-3 py-0.5 font-mono text-xs font-semibold text-stone-800 shadow-2xs dark:border-stone-800 dark:bg-stone-900 dark:text-stone-200">
+                      <MapPinned class="size-3 text-orange-600 shrink-0" />
+                      {loc}
                     </span>
-                  ))}
-                </span>
-              </h4>
-            : <h4 class="text-base sm:text-lg font-bold text-stone-900 tracking-tight">
-                {day.title}
-              </h4>
-            }
-
-            <div class="space-y-2.5">
-              {day.text.map((item: string) => (
-                <div class="flex items-start gap-3">
-                  <span class="mbs-2 size-1.5 shrink-0 rounded-full bg-orange-600"></span>
-                  <p class="flex-1 text-sm leading-relaxed text-stone-700 sm:text-base font-normal">
-                    {item}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-            {(day.accommodation || day.meals || day.activities || day.arrival) && (
-              <dl class="m-0 mbs-4 grid gap-3 p-0 sm:grid-cols-2">
-                {day.accommodation && (
-                  <div class="flex items-center gap-3 rounded-xl border border-stone-200/90 bg-stone-50/70 p-3 shadow-2xs">
-                    <Hotel
-                      aria-hidden="true"
-                      class="size-4 shrink-0 text-orange-600"
-                    />
-                    <div>
-                      <dt class="font-mono text-[10px] font-semibold tracking-wider text-stone-500 uppercase">
-                        {accommodationLabel}
-                      </dt>
-                      <dd class="m-0 font-mono text-xs font-bold text-stone-900">
-                        {day.accommodation}
-                      </dd>
-                    </div>
-                  </div>
-                )}
-                {day.meals && (
-                  <div class="flex items-center gap-3 rounded-xl border border-stone-200/90 bg-stone-50/70 p-3 shadow-2xs">
-                    <Utensils
-                      aria-hidden="true"
-                      class="size-4 shrink-0 text-orange-600"
-                    />
-                    <div>
-                      <dt class="font-mono text-[10px] font-semibold tracking-wider text-stone-500 uppercase">
-                        {mealsLabel}
-                      </dt>
-                      <dd class="m-0 font-mono text-xs font-bold text-stone-900">{day.meals}</dd>
-                    </div>
-                  </div>
-                )}
-                {day.activities && (
-                  <div class="flex items-center gap-3 rounded-xl border border-stone-200/90 bg-stone-50/70 p-3 shadow-2xs">
-                    <Tent
-                      aria-hidden="true"
-                      class="size-4 shrink-0 text-orange-600"
-                    />
-                    <div>
-                      <dt class="font-mono text-[10px] font-semibold tracking-wider text-stone-500 uppercase">
-                        {activitiesLabel}
-                      </dt>
-                      <dd class="m-0 font-mono text-xs font-bold text-stone-900">
-                        {day.activities}
-                      </dd>
-                    </div>
-                  </div>
-                )}
-                {day.arrival && (
-                  <div class="flex items-center gap-3 rounded-xl border border-stone-200/90 bg-stone-50/70 p-3 shadow-2xs">
-                    <Clock
-                      aria-hidden="true"
-                      class="size-4 shrink-0 text-orange-600"
-                    />
-                    <div>
-                      <dt class="font-mono text-[10px] font-semibold tracking-wider text-stone-500 uppercase">
-                        {arrivalLabel}
-                      </dt>
-                      <dd class="m-0 font-mono text-xs font-bold text-stone-900">{day.arrival}</dd>
-                    </div>
-                  </div>
-                )}
-              </dl>
-            )}
-          </div>
+                    {lIdx < locations.length - 1 && (
+                      <Road class="size-3.5 shrink-0 text-orange-500" />
+                    )}
+                  </span>
+                ))}
+              </div>
+            );
+          })}
         </div>
-      </li>
-    );
-  })}
-</ol>
+      </hgroup>
+
+      <div class="flex items-center gap-3 self-start sm:self-end shrink-0 pb-1">
+        <div class="flex items-center gap-1.5 font-mono text-xs font-bold text-stone-500 tabular-nums dark:text-stone-400">
+          <span data-sticky-counter-current>01</span>
+          <span class="text-stone-300 dark:text-stone-600">/</span>
+          <span>{String(days.length).padStart(2, "0")}</span>
+        </div>
+        <div class="w-20 sm:w-28 h-1.5 rounded-full bg-stone-200/80 overflow-hidden dark:bg-stone-800">
+          <div
+            class="h-full bg-orange-600 rounded-full transition-all duration-300 ease-out"
+            data-sticky-progress
+            style={`width: ${(1 / Math.max(1, days.length)) * 100}%`}
+          ></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  {/* Timeline Rail & Day-by-Day Stages List */}
+  <div class="relative w-full">
+    {/* Continuous Timeline Vertical Track */}
+    <div
+      class="timeline-track absolute left-3.5 sm:left-5 top-0 bottom-8 w-0.5 bg-stone-200 dark:bg-stone-800"
+      data-timeline-track
+      aria-hidden="true"
+    >
+      {/* Active Progress Fill */}
+      <div
+        class="timeline-progress-fill absolute top-0 inset-x-0 w-full bg-orange-600/70 transition-all duration-75"
+        data-timeline-progress-fill
+        style="height: 0%;"
+      ></div>
+      {/* Single Travelling Indicator Dot (Centered directly inside the vertical line) */}
+      <div
+        class="timeline-traveling-dot absolute left-1/2 top-0 size-3 rounded-full bg-orange-600 ring-4 ring-orange-100 shadow-md shadow-orange-600/30 transition-opacity duration-200 will-change-transform dark:ring-orange-950/60 z-20"
+        data-timeline-traveling-dot
+        style="transform: translate3d(-50%, -50%, 0);"
+      ></div>
+    </div>
+
+    <ol
+      role="list"
+      class="itinerary-stages-list m-0 list-none p-0 space-y-10"
+    >
+      {days.map((day: ItineraryDay, index: number) => {
+        return (
+          <li
+            class:list={[
+              "itinerary-stage-item group/stage relative pl-8 sm:pl-12 transition-all duration-300",
+              { "pt-8 sm:pt-10": index > 0 },
+              DAY_DELAYS[index] || "delay-0",
+            ]}
+            data-animate="fade-up"
+            data-itinerary-stage
+            data-stage-number={day.number}
+            data-stage-ordinal={`${getOrdinalSuffix(day.number)} Day`}
+            data-stage-title={day.title}
+            data-stage-route={day.title.replaceAll("➜", "→")}
+          >
+            {/* Horizontal Line separating stages with space from the vertical line */}
+            {index > 0 && (
+              <div
+                class="stage-separator absolute left-8 sm:left-12 right-0 top-0 h-px bg-stone-200/80 dark:bg-stone-800"
+                aria-hidden="true"
+              />
+            )}
+
+            {/* Vertical Dot in vertical line, in same baseline as horizontal line */}
+            <div
+              class:list={[
+                "stage-node absolute left-3.75 sm:left-5.25 -translate-x-1/2 -translate-y-1/2 z-10 size-3 rounded-full transition-all duration-300",
+                "bg-stone-300 ring-4 ring-stone-100 shadow-sm shadow-stone-300/30 dark:bg-stone-600 dark:ring-stone-800",
+                "group-data-[active=true]/stage:bg-orange-600 group-data-[active=true]/stage:ring-orange-100 group-data-[active=true]/stage:shadow-md group-data-[active=true]/stage:shadow-orange-600/30 dark:group-data-[active=true]/stage:ring-orange-950/60",
+                "group-data-[passed=true]/stage:bg-orange-600 group-data-[passed=true]/stage:ring-orange-100/70",
+                { "top-0": index > 0, "top-2.5": index === 0 },
+              ]}
+              aria-hidden="true"
+            />
+
+            <div class="relative space-y-4">
+              <div class="space-y-2.5">
+                {day.text.map((item: string) => (
+                  <div class="flex items-start gap-3">
+                    <span class="mbs-2 size-1.5 shrink-0 rounded-full bg-orange-600"></span>
+                    <p class="flex-1 text-sm leading-relaxed text-stone-700 sm:text-base font-normal">
+                      {item}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              {(day.accommodation || day.meals || day.activities || day.arrival) && (
+                <dl class="m-0 mbs-4 grid gap-3 p-0 sm:grid-cols-2">
+                  {day.accommodation && (
+                    <div class="flex items-center gap-3 rounded-xl border border-stone-200/90 bg-stone-50/70 p-3 shadow-2xs">
+                      <Hotel
+                        aria-hidden="true"
+                        class="size-4 shrink-0 text-orange-600"
+                      />
+                      <div>
+                        <dt class="font-mono text-[10px] font-semibold tracking-wider text-stone-500 uppercase">
+                          {accommodationLabel}
+                        </dt>
+                        <dd class="m-0 font-mono text-xs font-bold text-stone-900">
+                          {day.accommodation}
+                        </dd>
+                      </div>
+                    </div>
+                  )}
+                  {day.meals && (
+                    <div class="flex items-center gap-3 rounded-xl border border-stone-200/90 bg-stone-50/70 p-3 shadow-2xs">
+                      <Utensils
+                        aria-hidden="true"
+                        class="size-4 shrink-0 text-orange-600"
+                      />
+                      <div>
+                        <dt class="font-mono text-[10px] font-semibold tracking-wider text-stone-500 uppercase">
+                          {mealsLabel}
+                        </dt>
+                        <dd class="m-0 font-mono text-xs font-bold text-stone-900">{day.meals}</dd>
+                      </div>
+                    </div>
+                  )}
+                  {day.activities && (
+                    <div class="flex items-center gap-3 rounded-xl border border-stone-200/90 bg-stone-50/70 p-3 shadow-2xs">
+                      <Tent
+                        aria-hidden="true"
+                        class="size-4 shrink-0 text-orange-600"
+                      />
+                      <div>
+                        <dt class="font-mono text-[10px] font-semibold tracking-wider text-stone-500 uppercase">
+                          {activitiesLabel}
+                        </dt>
+                        <dd class="m-0 font-mono text-xs font-bold text-stone-900">
+                          {day.activities}
+                        </dd>
+                      </div>
+                    </div>
+                  )}
+                  {day.arrival && (
+                    <div class="flex items-center gap-3 rounded-xl border border-stone-200/90 bg-stone-50/70 p-3 shadow-2xs">
+                      <Clock
+                        aria-hidden="true"
+                        class="size-4 shrink-0 text-orange-600"
+                      />
+                      <div>
+                        <dt class="font-mono text-[10px] font-semibold tracking-wider text-stone-500 uppercase">
+                          {arrivalLabel}
+                        </dt>
+                        <dd class="m-0 font-mono text-xs font-bold text-stone-900">
+                          {day.arrival}
+                        </dd>
+                      </div>
+                    </div>
+                  )}
+                </dl>
+              )}
+            </div>
+          </li>
+        );
+      })}
+    </ol>
+
+    {/* Horizontal Line separating final stage from Service Coverage */}
+    <div
+      class="final-stage-separator w-full h-px bg-stone-200/80 dark:bg-stone-800 mbs-10 sm:mbs-12"
+      aria-hidden="true"
+    />
+  </div>
+</tour-itinerary-tracker>
+
+<script src="../scripts/tour-itinerary-tracker.ts"></script>

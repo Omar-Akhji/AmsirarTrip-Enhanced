@@ -7,64 +7,66 @@
   "startLocation": "Fes",
   "endLocation": "Marrakech",
   "keywords": [
-    "Fes to Marrakech tour",
-    "3 day desert tour",
-    "Caravan experience Morocco",
-    "Kasbah tour",
-    "Merzouga from Fes",
-    "Sahara desert tour",
-    "Morocco 3 day adventure",
-    "Atlas Mountains crossing"
+    "3 day desert tour Fes to Marrakech",
+    "Fes to Marrakech desert tour",
+    "Merzouga desert tour from Fes",
+    "Erg Chebbi camel trek Fes",
+    "Fes to Marrakech private 4x4",
+    "Ziz Valley Sahara tour",
+    "Ait Ben Haddou kasbah route",
+    "Todra Gorges tour from Fes"
   ],
   "seo": {
-    "title": "Fes to Marrakech Desert Tour",
-    "metaDescription": "Take a 3-day Fes to Marrakech desert tour via Ifrane, Ziz Valley, Merzouga camel trek, Todra Gorge, Dades Valley, and Ait Ben Haddou.",
-    "lead": "A practical 3-day Fes to Marrakech desert tour that crosses the Middle Atlas, reaches the Erg Chebbi dunes, and continues through southern Morocco's kasbah valleys.",
-    "primaryKeyword": "Fes to Marrakech desert tour 3 days",
+    "title": "3-Day Desert Tour from Fes to Marrakech | Erg Chebbi & Atlas Mountains",
+    "metaDescription": "Direct 3-day private desert tour from Fes to Marrakech. Cross the Middle Atlas cedar forests, explore Ziz Valley, ride camels across Erg Chebbi dunes, and cross the High Atlas to Marrakech.",
+    "lead": "A 3-day private point-to-point desert journey connecting the imperial medina of Fes to the vibrant souks of Marrakech. The route crosses the Middle Atlas cedar forests, traverses the dramatic Ziz Gorge, includes an overnight desert bivouac in the golden Erg Chebbi dunes of Merzouga, and continues past Todra Gorges and Kasbah Ait Ben Haddou over the High Atlas Mountains.",
+    "primaryKeyword": "3 day desert tour from Fes to Marrakech",
     "secondaryKeywords": [
-      "3 day desert tour from Fes",
+      "Fes to Marrakech desert tour",
       "Fes to Merzouga camel trek",
-      "Merzouga to Marrakech tour",
-      "Sahara desert tour from Fes"
+      "Merzouga to Marrakech private tour",
+      "Morocco point to point desert tour"
     ],
     "price": {
-      "label": "Custom quote",
-      "note": "Final pricing depends on travel dates, group size, accommodation level, and private or shared transport. Send your dates for an exact quote."
+      "label": "From EUR 310 per person",
+      "note": "Price includes private air-conditioned transport, licensed multilingual Berber driver-guide, 1 night in an Erg Chebbi desert bivouac, 1 night in a boutique Dades Valley riad, sunset camel trek, dinners, and daily breakfasts."
     },
-    "imageAlt": "Camel caravan in Erg Chebbi on a 3-day Fes to Marrakech desert tour",
+    "imageAlt": "Camel caravan traversing the golden sand dunes of Erg Chebbi on a 3-day desert tour from Fes to Marrakech",
     "highlights": [
-      "Travel from Fes through Ifrane, Azrou, Midelt, and Ziz Valley",
-      "Ride camels into Erg Chebbi for sunset and desert camping",
-      "Visit Todra Gorge, Dades Valley, Ouarzazate, and Ait Ben Haddou",
-      "End in Marrakech after crossing the High Atlas Mountains"
+      "Cross the Middle Atlas Mountains with stops in Ifrane and the ancient Azrou cedar forest",
+      "Observe wild Barbary macaques in their native cedar woodland habitat",
+      "Travel along the sweeping palm oases of the Ziz Valley and canyon gorges",
+      "Sunset and sunrise camel trek across the monumental Erg Chebbi dunes in Merzouga",
+      "Overnight in a private Sahara desert camp with traditional tagines and Berber drum music around the fire",
+      "Walk beneath the 300-meter cliffs of Todra Gorges and explore UNESCO Kasbah Ait Ben Haddou"
     ],
     "faqs": [
       {
-        "question": "Can this desert tour start in Fes and end in Marrakech?",
-        "answer": "Yes. This itinerary is designed as a point-to-point route from Fes to Marrakech with a Sahara desert night in Merzouga."
+        "question": "Is this a direct point-to-point tour between Fes and Marrakech?",
+        "answer": "Yes. This tour begins with pickup at your riad or hotel in Fes on Day 1 and finishes with drop-off at your accommodation in Marrakech on Day 3, eliminating the need to backtrack across Morocco."
       },
       {
-        "question": "How long are the driving days?",
-        "answer": "Driving times vary by day, with the longest stretches on the Fes to Merzouga and Dades to Marrakech routes. The itinerary includes scenic breaks and visits along the way."
+        "question": "What is the driving duration between Fes and the Merzouga desert on Day 1?",
+        "answer": "Day 1 covers approximately 470 km (roughly 7.5 to 8 hours total). The journey is broken into comfortable legs with stops in alpine Ifrane, the Azrou monkey forest, lunch in Midelt, and a panoramic viewpoint over the Ziz Valley before reaching Merzouga for the late afternoon camel trek."
       },
       {
-        "question": "Is luggage safe during the camel trek?",
-        "answer": "Your main luggage stays secure with the vehicle or camp team. Bring a small overnight bag for the desert camp."
+        "question": "What happens to my heavy luggage during the camel ride to the camp?",
+        "answer": "Your large suitcases and heavy bags stay securely locked inside your private transport vehicle or are transferred directly to camp via 4x4 support. You only need a small daypack with your overnight clothing and camera essentials."
       },
       {
-        "question": "What desert dunes does this tour visit?",
-        "answer": "The tour visits the Erg Chebbi dunes near Merzouga, one of Morocco's most popular Sahara camel trekking areas."
+        "question": "What tent amenities are provided at the Merzouga desert camp?",
+        "answer": "Standard camps provide private furnished Berber tents with shared bathroom facilities. Luxury camp upgrades include spacious private canvas suites with plush bedding, private ensuite hot showers, flush toilets, and electrical charging outlets."
       },
       {
-        "question": "Can I choose a luxury camp for the Merzouga night?",
-        "answer": "Yes. Standard and luxury camp upgrades can be arranged depending on availability and your budget."
+        "question": "Are special dietary requirements catered for during the tour?",
+        "answer": "Yes. Vegetarian, vegan, and gluten-free dietary preferences are fully accommodated throughout all riad dinners and desert camp meals. Please notify us of any dietary needs during reservation."
       }
     ]
   },
   "jsonLd": {
-    "name": "Caravan and Kasbah Experience - 3 Days",
-    "description": "Travel from Fes to Marrakech through Middle Atlas cedar forests, Erg Chebbi sand dunes, Todra Gorges, and Ait Ben Haddou.",
-    "price": 260,
+    "name": "3-Day Desert Tour from Fes to Marrakech",
+    "description": "Travel from Fes to Marrakech through Middle Atlas cedar forests, Erg Chebbi sand dunes, Todra Gorges, and Ait Ben Haddou on a private 3-day expedition.",
+    "price": 310,
     "currency": "EUR"
   }
 }

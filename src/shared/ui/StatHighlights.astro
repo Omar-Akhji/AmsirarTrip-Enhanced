@@ -8,14 +8,9 @@ interface Props {
   readonly cardBg?: string;
 }
 
+import { DELAY_CLASSES } from "@/shared/ui/animation-constants";
+
 const { stats, cardBg = "bg-stone-50/80" } = Astro.props;
-const DELAY_CLASSES = [
-  "delay-0",
-  "delay-150",
-  "delay-300",
-  "delay-[450ms]",
-  "delay-[600ms]",
-] as const;
 ---
 
 <div class="w-full">

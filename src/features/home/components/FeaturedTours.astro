@@ -139,18 +139,23 @@ const DELAY_CLASSES = [
                   class="pointer-events-none absolute inset-0 bg-linear-to-t from-slate-950 via-slate-950/65 via-50% to-slate-950/20"
                 />
 
-                <div class="relative z-10 flex size-full flex-col justify-end p-5 text-white">
-                  <hgroup class="mbe-1.5">
-                    <p class="font-mono text-[11px] font-semibold tracking-[0.16em] text-yellow uppercase mbe-1">
-                      {paddedIndex} // {regionText === regionKey ? "MOROCCO" : regionText}
+                <div class="relative z-10 flex size-full flex-col justify-end p-3.5 sm:p-4 text-white">
+                  <div
+                    class="rounded-2xl border border-white/10 bg-white/10 p-4 shadow-xs ring-1 ring-black/5 backdrop-blur-xl"
+                    style="backdrop-filter: blur(20px);"
+                  >
+                    <hgroup class="mbe-1.5">
+                      <p class="font-mono text-[11px] font-semibold tracking-[0.16em] text-yellow uppercase mbe-1">
+                        {paddedIndex} // {regionText === regionKey ? "MOROCCO" : regionText}
+                      </p>
+                      <h3 class="text-xl font-bold tracking-tight text-white drop-shadow-xs">
+                        {cityTitle}
+                      </h3>
+                    </hgroup>
+                    <p class="text-xs text-stone-200/95 leading-relaxed line-clamp-3 drop-shadow-xs">
+                      {cityDesc}
                     </p>
-                    <h3 class="text-xl font-bold tracking-tight text-white drop-shadow-xs">
-                      {cityTitle}
-                    </h3>
-                  </hgroup>
-                  <p class="text-xs text-stone-200/95 leading-relaxed line-clamp-3 drop-shadow-xs">
-                    {cityDesc}
-                  </p>
+                  </div>
                 </div>
 
                 <div
@@ -204,22 +209,27 @@ const DELAY_CLASSES = [
                 />
 
                 <!-- Editorial Typography Layer -->
-                <div class="relative z-10 flex size-full flex-col justify-end p-5 sm:p-6 text-white pointer-events-none">
-                  <hgroup class="mbe-2">
-                    <p class="font-mono text-[11px] font-semibold tracking-[0.16em] text-yellow uppercase mbe-1">
-                      {paddedIndex} // {regionText === regionKey ? "MOROCCO" : regionText}
-                    </p>
-                    <h3 class="text-xl font-bold tracking-tight text-white sm:text-2xl drop-shadow-xs">
-                      {cityTitle}
-                    </h3>
-                  </hgroup>
-
-                  <!-- Full Text Animated Drawer (Opens smoothly on hover) -->
-                  <div class="grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity,margin-block-start] duration-500 ease-out-expo pointer-fine:group-hover:grid-rows-[1fr] pointer-fine:group-hover:opacity-100 pointer-fine:group-hover:mbs-2 max-sm:grid-rows-[1fr] max-sm:opacity-100 max-sm:mbs-2">
-                    <div class="overflow-hidden">
-                      <p class="text-xs sm:text-sm text-stone-200/95 leading-relaxed drop-shadow-xs transition-transform duration-500 ease-out-expo translate-y-2 pointer-fine:group-hover:translate-y-0 max-sm:translate-y-0">
-                        {cityDesc}
+                <div class="relative z-10 flex size-full flex-col justify-end p-3 sm:p-3.5 text-white pointer-events-none">
+                  <div
+                    class="rounded-2xl border border-white/10 bg-white/10 p-4 sm:p-5 shadow-xs ring-1 ring-black/5 backdrop-blur-xl transition-all duration-300 pointer-fine:group-hover:border-white/20 pointer-fine:group-hover:bg-white/15"
+                    style="backdrop-filter: blur(20px);"
+                  >
+                    <hgroup class="mbe-2">
+                      <p class="font-mono text-[11px] font-semibold tracking-[0.16em] text-yellow uppercase mbe-1">
+                        {paddedIndex} // {regionText === regionKey ? "MOROCCO" : regionText}
                       </p>
+                      <h3 class="text-xl font-bold tracking-tight text-white sm:text-2xl drop-shadow-xs">
+                        {cityTitle}
+                      </h3>
+                    </hgroup>
+
+                    <!-- Full Text Animated Drawer (Opens smoothly on hover) -->
+                    <div class="grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity,margin-block-start] duration-500 ease-out-expo pointer-fine:group-hover:grid-rows-[1fr] pointer-fine:group-hover:opacity-100 pointer-fine:group-hover:mbs-2 max-sm:grid-rows-[1fr] max-sm:opacity-100 max-sm:mbs-2">
+                      <div class="overflow-hidden">
+                        <p class="text-xs sm:text-sm text-stone-200/95 leading-relaxed drop-shadow-xs transition-transform duration-500 ease-out-expo translate-y-2 pointer-fine:group-hover:translate-y-0 max-sm:translate-y-0">
+                          {cityDesc}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>

@@ -124,8 +124,9 @@ function initSlider(): void {
       return;
     }
 
+    const activeSlide = currentSliderItems[0];
+
     if (direction === "next") {
-      const activeSlide = currentSliderItems[0];
       const incomingSlide = currentSliderItems[1];
       const firstThumb = currentThumbnailItems[0];
 
@@ -161,7 +162,6 @@ function initSlider(): void {
 
       setTimeout(finalizeNext, 760);
     } else {
-      const activeSlide = currentSliderItems[0];
       const lastSlide = currentSliderItems[currentSliderItems.length - 1];
       const lastThumb = currentThumbnailItems[currentThumbnailItems.length - 1];
 

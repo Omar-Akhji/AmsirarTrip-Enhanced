@@ -75,21 +75,26 @@ const { count = 6, class: className } = Astro.props;
             ></div>
 
             {/* Editorial Typography Layer matching FeaturedTours resting state */}
-            <div class="relative z-10 flex size-full flex-col justify-end p-5 sm:p-6 text-white pointer-events-none">
-              <hgroup class="mbe-1.5">
-                <AsciiSkeleton
-                  class="text-stone-300 font-bold mbe-1.5 text-xs font-mono uppercase"
-                  lines={1}
-                  variant="dither"
-                  widths={["7rem"]}
-                />
-                <AsciiSkeleton
-                  class="text-xl sm:text-2xl text-white font-bold"
-                  lines={1}
-                  variant="dither"
-                  widths={["11rem"]}
-                />
-              </hgroup>
+            <div class="relative z-10 flex size-full flex-col justify-end p-3 sm:p-3.5 text-white pointer-events-none">
+              <div
+                class="rounded-2xl border border-white/10 bg-white/10 p-4 sm:p-5 shadow-xs ring-1 ring-black/5 backdrop-blur-xl"
+                style="backdrop-filter: blur(20px);"
+              >
+                <hgroup class="mbe-1.5">
+                  <AsciiSkeleton
+                    class="text-stone-300 font-bold mbe-1.5 text-xs font-mono uppercase"
+                    lines={1}
+                    variant="dither"
+                    widths={["7rem"]}
+                  />
+                  <AsciiSkeleton
+                    class="text-xl sm:text-2xl text-white font-bold"
+                    lines={1}
+                    variant="dither"
+                    widths={["11rem"]}
+                  />
+                </hgroup>
+              </div>
             </div>
           </div>
         </article>

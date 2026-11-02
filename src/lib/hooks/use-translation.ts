@@ -1,7 +1,6 @@
 import { inject, unref, type Ref } from "vue";
+import { type TranslationFunction, useTranslations } from "../../i18n/utils";
 import { DEFAULT_LOCALE as defaultLang, isLocale, type Locale } from "../../i18n/locales";
-import { ui } from "../../i18n/ui";
-import { createTranslationHelper, lookupKey, type TranslationFunction } from "../../i18n/core";
 
 export function getResolvedLocale(explicitLocale?: string): Locale {
   if (explicitLocale && isLocale(explicitLocale)) {
@@ -35,8 +34,5 @@ export interface UseTranslationReturn {
 
 export function useTranslation(explicitLocale?: string): UseTranslationReturn {
   const locale = getResolvedLocale(explicitLocale);
-  const translations = ui[locale];
-  const tFunc = createTranslationHelper((key) => lookupKey(translations, key));
-
-  return { t: tFunc, i18n: { language: locale } };
+  return { t: useTranslations(locale), i18n: { language: locale } };
 }

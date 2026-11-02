@@ -168,17 +168,15 @@ function cleanupScrollAnimations() {
 }
 
 /** Resets scroll position to the page header / top (unless targeting an anchor hash). */
-function resetScrollToTop(immediate = true) {
+function resetScrollToTop() {
   if (globalThis.location.hash) return;
 
   if (lenis) {
-    lenis.scrollTo(0, { immediate });
+    lenis.scrollTo(0, { immediate: true });
   }
-  window.scrollTo({ left: 0, top: 0, behavior: "instant" });
+  globalThis.scrollTo({ left: 0, top: 0, behavior: "instant" });
   document.documentElement.scrollTop = 0;
-  if (document.body) {
-    document.body.scrollTop = 0;
-  }
+  document.body.scrollTop = 0;
 }
 
 /** Full page load orchestrator. */
@@ -196,7 +194,7 @@ function onPageLoad() {
       }
     }
   } else {
-    resetScrollToTop(true);
+    resetScrollToTop();
   }
 
   // Small delay to allow layout recalculation after transition skeletons vanish
@@ -209,16 +207,16 @@ function onPageLoad() {
 /** View transition preparation hook. */
 function onBeforePreparation(e: Event) {
   cleanupScrollAnimations();
-  const hasHash = Boolean(e && typeof e === "object" && "to" in e && (e as { to: URL }).to?.hash);
+  const hasHash = Boolean("to" in e && (e as { to: URL }).to.hash);
   if (!hasHash) {
-    resetScrollToTop(true);
+    resetScrollToTop();
   }
 }
 
 /** View transition swap hook to ensure new page starts at header. */
 function onAfterSwap() {
   if (!globalThis.location.hash) {
-    resetScrollToTop(true);
+    resetScrollToTop();
   }
 }
 

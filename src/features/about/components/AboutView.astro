@@ -27,7 +27,7 @@ const factStats = aboutStats.map((stat) => ({
   ),
 }));
 
-const DELAY_CLASSES = ["delay-0", "delay-150", "delay-300", "delay-[450ms]"] as const;
+import { DELAY_CLASSES } from "@/shared/ui/animation-constants";
 ---
 
 <PageHeader
@@ -80,7 +80,7 @@ const DELAY_CLASSES = ["delay-0", "delay-150", "delay-300", "delay-[450ms]"] as 
         <!-- Left Column: 3 Images Collage (order-1 on Mobile & Tablet, Left on Desktop) -->
         <div class="order-1 lg:order-1 lg:col-span-6">
           <div
-            class="delay-200 flex flex-col gap-[clamp(0.75rem,0.6rem+0.4vw,1.125rem)]"
+            class="delay-200 flex flex-col gap-gap-tight"
             data-animate="zoom-in"
           >
             <!-- Top Landscape Image -->
@@ -96,7 +96,7 @@ const DELAY_CLASSES = ["delay-0", "delay-150", "delay-300", "delay-[450ms]"] as 
             </div>
 
             <!-- Bottom Row: 2 Images Side-by-Side -->
-            <div class="grid grid-cols-2 gap-[clamp(0.75rem,0.6rem+0.4vw,1.125rem)]">
+            <div class="grid grid-cols-2 gap-gap-tight">
               <div class="group relative aspect-4/5 overflow-hidden rounded-2xl border border-stone-200/80 bg-stone-100 shadow-xs">
                 <Image
                   alt="Ourika Valley green terraces and mountain villages"
@@ -128,30 +128,30 @@ const DELAY_CLASSES = ["delay-0", "delay-150", "delay-300", "delay-[450ms]"] as 
             class="inline-full"
             data-animate="fade-up"
           >
-            <article class="flex flex-col gap-[clamp(1.5rem,1.25rem+1vw,2.5rem)]">
+            <article class="flex flex-col gap-gap">
               <!-- Lead & Narrative Story with Fluid Typography -->
-              <div class="flex flex-col gap-[clamp(0.875rem,0.75rem+0.4vw,1.375rem)]">
-                <p class="font-normal text-stone-800 text-[clamp(1.05rem,0.98rem+0.35vw,1.2rem)] leading-[clamp(1.65,1.55+0.3vw,1.8)] text-pretty">
+              <div class="flex flex-col gap-gap-tight">
+                <p class="font-normal text-stone-800 text-lead text-pretty">
                   {t("about.experienceText1")}
                 </p>
-                <p class="text-stone-600 text-[clamp(0.925rem,0.875rem+0.2vw,1.025rem)] leading-[1.75] text-pretty">
+                <p class="text-stone-600 text-fluid-base leading-relaxed text-pretty">
                   {t("about.experienceText2")}
                 </p>
-                <p class="text-stone-600 text-[clamp(0.925rem,0.875rem+0.2vw,1.025rem)] leading-[1.75] text-pretty">
+                <p class="text-stone-600 text-fluid-base leading-relaxed text-pretty">
                   {t("about.experienceText3")}
                 </p>
               </div>
 
               <!-- Archival Editorial Quote Card -->
-              <figure class="relative overflow-hidden rounded-2xl border border-stone-200/90 bg-stone-50/70 p-[clamp(1.25rem,1rem+1vw,2rem)]">
+              <figure class="relative overflow-hidden rounded-2xl border border-stone-200/90 bg-stone-50/70 p-gutter">
                 <Quote
                   aria-hidden="true"
                   class="pointer-events-none absolute top-4 right-4 sm:top-5 sm:right-5 size-5 sm:size-6 text-orange-600/35"
                 />
-                <blockquote class="relative font-serif italic text-stone-800 text-[clamp(1.0625rem,0.95rem+0.5vw,1.25rem)] leading-[clamp(1.5,1.4+0.3vw,1.7)] text-pretty pe-8">
+                <blockquote class="relative font-serif italic text-stone-800 text-lead text-pretty pe-8">
                   "{t("about.conclusionText")}"
                 </blockquote>
-                <figcaption class="mbs-3 flex items-center gap-2 font-mono text-[clamp(0.7rem,0.65rem+0.2vw,0.8rem)] font-semibold tracking-wider text-stone-500 uppercase">
+                <figcaption class="mbs-3 flex items-center gap-2 font-mono text-fluid-sm font-semibold tracking-wider text-stone-500 uppercase">
                   <span class="size-1.5 rounded-full bg-orange-600"></span>
                   <span>Amsirar Expedition Atelier</span>
                 </figcaption>

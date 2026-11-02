@@ -7,64 +7,66 @@
   "startLocation": "Tangier",
   "endLocation": "Marrakech",
   "keywords": [
-    "Morocco 7 day tour",
-    "Northern Morocco tour",
-    "Tangier to Marrakech",
-    "Chefchaouen tour",
-    "Rif Mountains tour",
-    "Morocco heritage trail",
-    "Fes Tangier tour",
-    "Blue city Morocco tour"
+    "7 day Morocco tour from Tangier",
+    "Tangier to Marrakech 7 days",
+    "northern Morocco heritage tour",
+    "Chefchaouen Fes Marrakech tour",
+    "Rif Mountains and Atlas tour",
+    "Tangier ferry port Morocco tour",
+    "private Morocco cross country circuit",
+    "best 7 day Morocco tour"
   ],
   "seo": {
-    "title": "Northern Morocco Tour from Tangier",
-    "metaDescription": "Explore a 7-day northern Morocco tour from Tangier to Chefchaouen, Fes, Meknes, Volubilis, Middle Atlas, and Marrakech.",
-    "lead": "A 7-day northern Morocco tour from Tangier that connects Mediterranean coast, Chefchaouen, Fes, Roman ruins, Middle Atlas scenery, and Marrakech.",
-    "primaryKeyword": "7 day northern Morocco tour",
+    "title": "7-Day Northern Morocco Tour from Tangier | Rif Mountains, Fes & Marrakech",
+    "metaDescription": "Journey across Morocco on a 7-day private tour from Tangier to Marrakech. Explore Tangier's kasbah, Chefchaouen's blue medina, Roman Volubilis, medieval Fes, and High Atlas passes.",
+    "lead": "A 7-day private cross-country journey from the Mediterranean gateway of Tangier to the vibrant Red City of Marrakech. Traversing northern Morocco and the Middle Atlas, this cultural expedition connects the coastal Kasbah of Tangier, the blue mountain alleys of Chefchaouen, the Roman ruins of Volubilis, the UNESCO medina of Fes, alpine Ifrane, and imperial Marrakech.",
+    "primaryKeyword": "7 day northern Morocco tour from Tangier",
     "secondaryKeywords": [
-      "Tangier Chefchaouen Fes tour",
-      "Tangier to Marrakech tour",
-      "Northern Morocco itinerary",
-      "Chefchaouen and Fes tour package"
+      "Tangier to Marrakech tour 7 days",
+      "Chefchaouen and Fes private tour",
+      "northern Morocco cross country route",
+      "Tangier ferry Morocco private tour"
     ],
     "price": {
-      "label": "Custom quote",
-      "note": "Final pricing depends on travel dates, group size, accommodation level, and private or shared transport. Send your dates for an exact quote."
+      "label": "From EUR 690 per person",
+      "note": "Price includes private air-conditioned vehicle with dedicated multilingual Berber driver-guide, 6 nights in boutique riads and hotels (Chefchaouen, Fes, Marrakech), official guided walking tours in Fes and Marrakech, entrance coordination, and daily breakfasts."
     },
-    "imageAlt": "Chefchaouen blue medina street on a 7-day northern Morocco tour from Tangier",
+    "imageAlt": "Sunlit blue medina alley of Chefchaouen on a 7-day northern Morocco expedition from Tangier to Marrakech",
     "highlights": [
-      "Start in Tangier with coast, caves, kasbah, and medina highlights",
-      "Spend time in Chefchaouen, the Blue Pearl of Morocco",
-      "Explore Fes, Meknes, and Volubilis with cultural stops",
-      "Cross the Middle Atlas and finish in Marrakech"
+      "Explore the historic medina, Grand Socco, and Caves of Hercules overlooking the Atlantic in Tangier",
+      "Wander through the cobalt-blue painted streets and mountain cafes of Chefchaouen in the Rif Mountains",
+      "Marvel at the grand mosaic floors, triumphal arch, and Roman basilica at UNESCO-listed Volubilis",
+      "Immerse yourself in Fes el-Bali on a full-day guided walking tour through 1,200 years of artisan history",
+      "Drive through the cedar forests of the Middle Atlas, observing native Barbary macaques in the wild",
+      "Conclude in Marrakech with a private guided visit to Bahia Palace, Saadian Tombs, and Jemaa el-Fnaa square"
     ],
     "faqs": [
       {
-        "question": "Can this northern Morocco tour start in Tangier?",
-        "answer": "Yes. Pickup can be arranged from Tangier airport, ferry port, hotel, or another agreed meeting point."
+        "question": "Can this tour pick us up from the Tangier ferry port or airport?",
+        "answer": "Yes. Your private driver meets you directly at Tangier City Port (arriving by ferry from Tarifa, Spain), Tangier Med Port, Tangier Ibn Battouta Airport (TNG), or your Tangier hotel at your requested time."
       },
       {
-        "question": "Does the route include Chefchaouen?",
-        "answer": "Yes. Chefchaouen is a core stop on this itinerary, with time to explore the blue medina and viewpoints."
+        "question": "Is this 7-day route suitable for travelers arriving from Spain or southern Europe?",
+        "answer": "Yes. This itinerary is the premier cross-country route for travelers arriving in northern Morocco, allowing you to experience the Mediterranean north, the Rif Mountains, imperial cities, and Marrakech without redundant travel."
       },
       {
-        "question": "Is this tour a good alternative to a Sahara trip?",
-        "answer": "Yes. It is better for travelers focused on northern cities, culture, Roman heritage, and mountain scenery rather than desert camping."
+        "question": "What is the balance between driving time and sightseeing?",
+        "answer": "Daily driving stretches average 3 to 4 hours along modern highways and scenic mountain passes, leaving abundant time for afternoon exploration, guided medina walks, relaxed lunches, and photography."
       },
       {
-        "question": "Can I add a Sahara desert extension?",
-        "answer": "Yes. The tour can be extended from Fes or Marrakech to include Merzouga or Chegaga desert routes."
+        "question": "Are certified city guides included in Fes and Marrakech?",
+        "answer": "Yes. Official certified local guides are fully included for dedicated half-day walking tours in both Fes and Marrakech to navigate the souks and uncover the rich architectural heritage of each imperial capital."
       },
       {
-        "question": "What pace should I expect on this 7-day route?",
-        "answer": "The itinerary mixes guided city time with transfer days. Comfortable walking shoes are recommended for medinas and hillside streets."
+        "question": "Can a Sahara desert overnight be integrated into this 7-day trip?",
+        "answer": "If you wish to add the Sahara desert (Merzouga or Erg Chebbi), we can customize the route between Fes and Marrakech, or extend the itinerary to 8 or 9 days for an unhurried desert bivouac experience."
       }
     ]
   },
   "jsonLd": {
-    "name": "Northern Heritage Trail - 7 Days",
-    "description": "Explore Morocco's northern heritage from Tangier to Marrakech on this 7-day journey through the Rif Mountains and blue city of Chefchaouen.",
-    "price": 630,
+    "name": "7-Day Northern Morocco Tour from Tangier to Marrakech",
+    "description": "Explore Morocco's northern heritage from Tangier to Marrakech on this 7-day private journey through the Rif Mountains, Chefchaouen, and Fes.",
+    "price": 690,
     "currency": "EUR"
   }
 }

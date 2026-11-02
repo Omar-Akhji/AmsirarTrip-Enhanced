@@ -1,10 +1,10 @@
 import { defineAction, type ActionAPIContext } from "astro:actions";
 import { z } from "astro/zod";
 import { useTranslations as getTranslations } from "../i18n/utils";
-import { env as environment } from "../lib/env";
 import { createErrorResponse, type FormState } from "../lib/form-types";
 import { getBookingSchema, getContactSchema, getNewsletterSchema } from "../lib/schemas";
-import { getMailer, logger } from "../lib/server-utils";
+import { logger } from "../lib/server-utils";
+import { sendTransactionalEmail } from "../services/email";
 import {
   enforceRateLimit,
   extractClientIp,
@@ -17,10 +17,6 @@ import {
   buildNewsletterEmail,
 } from "./helpers/email-templates";
 import { extractZodErrors, getFormString, getOptionalFormString } from "./helpers/form-helpers";
-
-function getRecipientEmail(): string {
-  return environment.MAIL_TO.length > 0 ? environment.MAIL_TO : environment.GMAIL_USER;
-}
 
 export const server = {
   booking: defineAction({
@@ -64,23 +60,13 @@ export const server = {
         }
 
         const data = validationResult.data;
-        const host = context.request.headers.get("host")?.split(":", 1)[0] ?? "";
 
-        if (!(await verifyCaptcha(data.recaptchaToken, host, ip, "booking-action"))) {
+        if (!(await verifyCaptcha(data.recaptchaToken, ip, "booking-action"))) {
           return { success: false, message: "Security verification failed. Please try again." };
         }
 
         const emailContent = buildBookingEmail(data);
-        const transporter = getMailer();
-
-        await transporter.sendMail({
-          from: `Amsirar Trip Bookings <${environment.GMAIL_USER}>`,
-          to: getRecipientEmail(),
-          replyTo: emailContent.replyTo,
-          subject: emailContent.subject,
-          text: emailContent.text,
-          html: emailContent.html,
-        });
+        await sendTransactionalEmail({ category: "Bookings", ...emailContent });
 
         return { success: true, message: "Your booking request has been sent successfully!" };
       } catch (error) {
@@ -125,23 +111,13 @@ export const server = {
         }
 
         const data = validationResult.data;
-        const host = context.request.headers.get("host")?.split(":", 1)[0] ?? "";
 
-        if (!(await verifyCaptcha(data.recaptchaToken, host, ip, "contact-action"))) {
+        if (!(await verifyCaptcha(data.recaptchaToken, ip, "contact-action"))) {
           return { success: false, message: "Security verification failed. Please try again." };
         }
 
         const emailContent = buildContactEmail(data);
-        const transporter = getMailer();
-
-        await transporter.sendMail({
-          from: `Amsirar Trip Contact <${environment.GMAIL_USER}>`,
-          to: getRecipientEmail(),
-          replyTo: emailContent.replyTo,
-          subject: emailContent.subject,
-          text: emailContent.text,
-          html: emailContent.html,
-        });
+        await sendTransactionalEmail({ category: "Contact", ...emailContent });
 
         return { success: true, message: "Message sent! We will reply within 24 hours." };
       } catch (error) {
@@ -173,23 +149,13 @@ export const server = {
         }
 
         const data = validationResult.data;
-        const host = context.request.headers.get("host")?.split(":", 1)[0] ?? "";
 
-        if (!(await verifyCaptcha(data.recaptchaToken, host, ip, "newsletter-action"))) {
+        if (!(await verifyCaptcha(data.recaptchaToken, ip, "newsletter-action"))) {
           return { ok: false, statusKey: "footer.newsletterCaptchaError" };
         }
 
         const emailContent = buildNewsletterEmail(data);
-        const transporter = getMailer();
-
-        await transporter.sendMail({
-          from: `Amsirar Trip Newsletter <${environment.GMAIL_USER}>`,
-          to: getRecipientEmail(),
-          replyTo: emailContent.replyTo,
-          subject: emailContent.subject,
-          text: emailContent.text,
-          html: emailContent.html,
-        });
+        await sendTransactionalEmail({ category: "Newsletter", ...emailContent });
 
         return { ok: true, statusKey: "footer.newsletterSuccess" };
       } catch (error) {

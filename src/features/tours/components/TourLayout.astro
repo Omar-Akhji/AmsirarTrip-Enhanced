@@ -191,22 +191,13 @@ for (let index = 1; index <= duration; index++) {
       class="delay-450"
       data-animate="fade-up"
     >
-      <hgroup>
-        <p class="font-sans text-xs font-bold tracking-wider text-orange-700 uppercase">
-          Expedition Itinerary
-        </p>
-        <h3
-          id="tour-itinerary-heading"
-          class="mbs-1 mbe-8 text-xl font-bold tracking-tight text-stone-900 sm:text-2xl md:text-3xl"
-        >
-          {t("tours.itinerary")}
-        </h3>
-      </hgroup>
       <TourItinerary
         accommodationLabel={accommodationLabel}
         activitiesLabel={activitiesLabel}
         arrivalLabel={arrivalLabel}
         days={days}
+        defaultTitle={t("tours.itinerary")}
+        kicker="Expedition Itinerary"
         mealsLabel={mealsLabel}
       />
     </section>

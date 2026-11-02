@@ -14,7 +14,6 @@ import { TRUSTED_HOSTS } from "@/lib/constants/hosts";
 
 interface VerifyOptions {
   readonly token: string;
-  readonly hostname?: string | undefined;
   readonly remoteip?: string | undefined;
 }
 

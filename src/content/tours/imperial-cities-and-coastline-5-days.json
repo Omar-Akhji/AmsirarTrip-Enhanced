@@ -7,64 +7,66 @@
   "startLocation": "Casablanca",
   "endLocation": "Fes",
   "keywords": [
-    "Morocco 5 day tour",
-    "Imperial cities tour",
-    "Casablanca Fes Marrakech",
-    "Morocco cultural tour",
-    "Rabat Meknes tour",
-    "Morocco heritage tour",
-    "Best Morocco tour",
-    "Morocco coastline tour"
+    "5 day Morocco imperial cities tour",
+    "Casablanca to Fes 5 days",
+    "northern Morocco cultural tour",
+    "Chefchaouen from Casablanca 5 days",
+    "Rabat Meknes Volubilis Fes tour",
+    "Morocco UNESCO heritage tour",
+    "private imperial cities circuit",
+    "Casablanca airport heritage tour"
   ],
   "seo": {
-    "title": "Imperial Cities Tour from Casablanca",
-    "metaDescription": "Explore a 5-day imperial cities tour from Casablanca to Rabat, Chefchaouen, Volubilis, Meknes, and Fes with private Morocco transport.",
-    "lead": "A culture-first 5-day imperial cities tour from Casablanca through Rabat, Chefchaouen, Roman Volubilis, Meknes, and Fes.",
+    "title": "5-Day Imperial Cities Tour from Casablanca | Rabat, Chefchaouen & Fes",
+    "metaDescription": "Immerse yourself in northern Morocco's rich history on a 5-day private tour from Casablanca. Discover Rabat, Chefchaouen's blue medina, Roman Volubilis, Meknes, and medieval Fes.",
+    "lead": "A 5-day private cultural immersion across northern Morocco's imperial capitals and mountain settlements. Starting in Casablanca at the iconic Hassan II Mosque, the journey visits the political capital of Rabat, the blue-washed alleys of Chefchaouen in the Rif Mountains, the preserved Roman city of Volubilis, imperial Meknes, and concludes with an in-depth guided exploration of medieval Fes.",
     "primaryKeyword": "5 day Morocco imperial cities tour",
     "secondaryKeywords": [
-      "Casablanca to Fes tour",
-      "Rabat Chefchaouen Fes itinerary",
-      "Volubilis and Meknes tour",
-      "Northern Morocco cultural tour"
+      "Casablanca to Fes tour 5 days",
+      "Rabat Chefchaouen Fes private tour",
+      "Volubilis and Meknes cultural circuit",
+      "northern Morocco heritage tour"
     ],
     "price": {
-      "label": "Custom quote",
-      "note": "Final pricing depends on travel dates, group size, accommodation level, and private or shared transport. Send your dates for an exact quote."
+      "label": "From EUR 490 per person",
+      "note": "Price includes private air-conditioned vehicle with dedicated Berber driver-guide, 4 nights in boutique riads/hotels (Chefchaouen, Fes), guided walking tour in Fes el-Bali with licensed local guide, monument entrance coordination, and daily breakfasts."
     },
-    "imageAlt": "Blue streets of Chefchaouen on a northern Morocco imperial cities tour from Casablanca",
+    "imageAlt": "Blue-painted steps and doorways of Chefchaouen medina during a 5-day northern Morocco imperial cities tour from Casablanca",
     "highlights": [
-      "Begin in Casablanca with Hassan II Mosque and coastal city stops",
-      "Visit Rabat, the capital of Morocco",
-      "Spend time in Chefchaouen, the Blue Pearl of the Rif Mountains",
-      "Explore Volubilis, Meknes, and Fes with cultural depth"
+      "Marvel at the architectural splendor and towering ocean minaret of the Hassan II Mosque in Casablanca",
+      "Tour the ancient Kasbah of the Udayas and Mohammed V Mausoleum in the capital city of Rabat",
+      "Stroll the photogenic blue streets, artisan weaving shops, and relaxed plazas of Chefchaouen",
+      "Walk among the remarkably preserved Roman triumph arches, basilicas, and mosaics at UNESCO Volubilis",
+      "Admire the monumental 18th-century Bab Mansour gate and royal granaries in imperial Meknes",
+      "Comprehensive guided historical walking tour inside the world's largest living medieval medina in Fes"
     ],
     "faqs": [
       {
-        "question": "Is this 5-day Morocco tour focused on culture?",
-        "answer": "Yes. The itinerary focuses on northern Morocco, imperial cities, medinas, Roman heritage, and guided cultural visits."
+        "question": "Is this 5-day tour focused primarily on culture and architecture?",
+        "answer": "Yes. This itinerary is tailored for travelers who want to dive deep into Morocco's imperial architecture, UNESCO world heritage landmarks, artisan handicrafts, and culinary traditions without long desert driving legs."
       },
       {
-        "question": "Does this tour include the Sahara desert?",
-        "answer": "No. This route is designed for Casablanca, Rabat, Chefchaouen, Meknes, Volubilis, and Fes. A Sahara extension can be added on request."
+        "question": "Can this tour return to Casablanca instead of ending in Fes?",
+        "answer": "Yes. On Day 5, after completing your guided morning exploration of Fes, your private driver can easily transfer you back to Casablanca or Casablanca Airport (approx. 3 hours via highway)."
       },
       {
-        "question": "Can the tour end in Fes or Casablanca?",
-        "answer": "Yes. The itinerary can end in Fes or return to Casablanca depending on your flight plans and preferred route."
+        "question": "How much time is spent exploring the blue medina of Chefchaouen?",
+        "answer": "You arrive in Chefchaouen on Day 2 in the early afternoon and stay overnight, giving you the late afternoon golden hour and early morning quiet before day-tripper crowds arrive."
       },
       {
-        "question": "Is Chefchaouen included overnight?",
-        "answer": "Yes. The route includes time in Chefchaouen so you can enjoy the blue medina outside the busiest day-trip hours."
+        "question": "Is a certified local guide included for the medina of Fes?",
+        "answer": "Yes. A licensed historical expert accompanies you in Fes to explore Al-Qarawiyyin University, Bou Inania Madrasa, the Nejjarine woodworking museum, and the centuries-old Chouara leather tanneries."
       },
       {
-        "question": "Can hotels be upgraded?",
-        "answer": "Yes. Riads and hotels can be arranged in standard, comfort, or luxury categories based on your budget."
+        "question": "Are private airport transfers included?",
+        "answer": "Yes. Pickup on Day 1 is coordinated directly from Casablanca Mohammed V Airport (CMN) or your city hotel, and final drop-off is provided to Fes Saïss Airport (FEZ) or your next destination."
       }
     ]
   },
   "jsonLd": {
-    "name": "Imperial Cities and Coastline - 5 Days",
-    "description": "Discover northern Morocco on this 5-day route from Casablanca to Fes via Rabat, Chefchaouen, Volubilis, and Meknes.",
-    "price": 450,
+    "name": "5-Day Imperial Cities Tour from Casablanca",
+    "description": "Discover northern Morocco on this 5-day private route from Casablanca to Fes via Rabat, Chefchaouen, Volubilis, and Meknes.",
+    "price": 490,
     "currency": "EUR"
   }
 }

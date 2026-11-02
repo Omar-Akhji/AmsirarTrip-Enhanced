@@ -29,28 +29,38 @@ const {
 const locale = Astro.currentLocale || "en";
 
 let gradientValue =
-  "bg-[radial-gradient(circle_at_top,color-mix(in_oklch,var(--color-orange)_35%,transparent),transparent_65%)]";
+  "bg-[radial-gradient(circle_at_top,color-mix(in_oklch,var(--color-orange)_15%,transparent),transparent_70%)]";
 if (gradientPosition === "top-right") {
   gradientValue =
-    "bg-[radial-gradient(circle_at_top_right,color-mix(in_oklch,var(--color-orange)_35%,transparent),transparent_65%)]";
+    "bg-[radial-gradient(circle_at_top_right,color-mix(in_oklch,var(--color-orange)_15%,transparent),transparent_70%)]";
 } else if (gradientPosition === "center") {
   gradientValue =
-    "bg-[radial-gradient(circle_at_center,color-mix(in_oklch,var(--color-orange)_35%,transparent),transparent_65%)]";
+    "bg-[radial-gradient(circle_at_center,color-mix(in_oklch,var(--color-orange)_15%,transparent),transparent_70%)]";
 }
 ---
 
-<section class="relative isolate flex flex-col justify-center overflow-hidden bg-zinc-950 pbs-24 pbe-12 sm:pbs-28 sm:pbe-16 lg:pbs-32 lg:pbe-20 text-center text-white shadow-xl inline-full min-h-[48dvh] sm:min-h-[52dvh] lg:min-h-[56dvh] max-h-150 print:hidden">
+<section class="relative flex flex-col justify-center overflow-hidden bg-zinc-950 pbs-24 pbe-12 sm:pbs-28 sm:pbe-16 lg:pbs-32 lg:pbe-20 text-center text-white shadow-xl inline-full min-h-[48dvh] sm:min-h-[52dvh] lg:min-h-[56dvh] max-h-150 print:hidden">
   {bgImage ?
-    <Image
-      alt=""
-      class="absolute inset-0 -z-30 size-full object-cover"
-      decoding="async"
-      fetchpriority="high"
-      height={1280}
-      loading="eager"
-      src={bgImage as string}
-      width={1920}
-    />
+    typeof bgImage === "string" ?
+      <Image
+        alt=""
+        class="absolute inset-0 size-full object-cover"
+        decoding="async"
+        fetchpriority="high"
+        height={1280}
+        loading="eager"
+        src={bgImage}
+        width={1920}
+      />
+    : <Image
+        alt=""
+        class="absolute inset-0 size-full object-cover"
+        decoding="async"
+        fetchpriority="high"
+        loading="eager"
+        src={bgImage}
+      />
+
   : null}
 
   <div
@@ -59,10 +69,10 @@ if (gradientPosition === "top-right") {
   ></div>
   <div
     aria-hidden="true"
-    class="absolute inset-0 z-10 bg-linear-to-b from-zinc-950/80 via-zinc-950/60 to-zinc-950/90"
+    class="absolute inset-0 bg-linear-to-b from-black/40 via-black/20 to-black/45"
   ></div>
 
-  <div class="relative z-20 mx-auto my-auto flex flex-col items-center justify-center px-4 text-center inline-full max-inline-7xl">
+  <div class="relative mx-auto my-auto flex flex-col items-center justify-center px-4 text-center inline-full max-inline-7xl">
     <div class="w-full max-w-4xl space-y-6 text-center">
       {breadcrumbs && breadcrumbs.length > 0 ?
         <nav
@@ -70,9 +80,9 @@ if (gradientPosition === "top-right") {
           class="mbe-6 sm:mbe-8 flex items-center justify-center gap-3"
         >
           <ol
-            data-ascii="fade"
             role="list"
-            class="flex list-none flex-wrap items-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 py-2 backdrop-blur-md"
+            class="flex list-none flex-wrap items-center gap-2 rounded-full border border-white/10 bg-white/10 px-6 py-2 shadow-xs ring-1 ring-black/5 backdrop-blur-xl"
+            style="backdrop-filter: blur(20px);"
           >
             {breadcrumbs.map((crumb, index) => (
               <li class="flex items-center gap-2">

@@ -18,7 +18,11 @@ export default {
     ],
     "declaration-property-value-no-unknown": [
       true,
-      { ignoreProperties: { "/.+/": ["/anchor\\(/", "/anchor-size\\(/", "/color-mix\\(/"] } },
+      {
+        ignoreProperties: {
+          "/.+/": [String.raw`/anchor\(/`, String.raw`/anchor-size\(/`, String.raw`/color-mix\(/`],
+        },
+      },
     ],
     "property-no-unknown": [true, { ignoreProperties: ["position-anchor", "anchor-name"] }],
     "selector-pseudo-class-no-unknown": [
@@ -81,7 +85,7 @@ export default {
       { message: "Expected keyframes name to be kebab-case or camelCase" },
     ],
     "selector-class-pattern": [
-      "^[a-zA-Z0-9_\\-\\/\\[\\]:.]+$",
+      String.raw`^[a-zA-Z0-9_\-\/\[\]:.]+$`,
       {
         resolveNestedSelectors: true,
         message:
