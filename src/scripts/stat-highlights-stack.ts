@@ -1,4 +1,4 @@
-import { registerFolderStackElement } from "@/shared/scripts/folder-stack-controller";
+import { registerFolderStackElement } from "@/scripts/folder-stack-controller";
 
 registerFolderStackElement("stat-highlights-stack", {
   trackSelector: ".stat-highlights-track",

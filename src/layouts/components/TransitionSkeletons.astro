@@ -4,12 +4,12 @@ import HomeStatsSkeleton from "@/features/home/components/HomeStatsSkeleton.astr
 import ServicesSectionSkeleton from "@/features/home/components/ServicesSectionSkeleton.astro";
 import TestimonialsSectionSkeleton from "@/features/home/components/TestimonialsSectionSkeleton.astro";
 import VideoSectionSkeleton from "@/features/home/components/VideoSectionSkeleton.astro";
-import AsciiSkeleton from "@/shared/ui/AsciiSkeleton.astro";
-import ContactSkeleton from "@/shared/ui/ContactSkeleton.astro";
-import HomeHeroSkeleton from "@/shared/ui/HomeHeroSkeleton.astro";
-import PageHeaderSkeleton from "@/shared/ui/PageHeaderSkeleton.astro";
-import TourDetailSkeleton from "@/shared/ui/TourDetailSkeleton.astro";
-import TripCardSkeleton from "@/shared/ui/TripCardSkeleton.astro";
+import AsciiSkeleton from "@/shared/ui/feedback/AsciiSkeleton.astro";
+import ContactSkeleton from "@/shared/ui/feedback/ContactSkeleton.astro";
+import HomeHeroSkeleton from "@/shared/ui/feedback/HomeHeroSkeleton.astro";
+import PageHeaderSkeleton from "@/shared/ui/feedback/PageHeaderSkeleton.astro";
+import TourDetailSkeleton from "@/shared/ui/feedback/TourDetailSkeleton.astro";
+import TripCardSkeleton from "@/shared/ui/feedback/TripCardSkeleton.astro";
 ---
 
 {/* Skeleton container: hidden by default, shown as an overlay during page transitions */}
@@ -40,7 +40,8 @@ import TripCardSkeleton from "@/shared/ui/TripCardSkeleton.astro";
   >
     <PageHeaderSkeleton
       crumbWidths={["w-12", "w-16"]}
-      hasButtons={true}
+      hasButtons={false}
+      hasUnderline={true}
     />
     <div class="text-zinc-900">
       {/* EXPEDITION STANDARDS */}
@@ -137,7 +138,8 @@ import TripCardSkeleton from "@/shared/ui/TripCardSkeleton.astro";
   >
     <PageHeaderSkeleton
       crumbWidths={["w-12", "w-20"]}
-      hasButtons={true}
+      hasButtons={false}
+      hasUnderline={true}
     />
     <div class="text-zinc-900">
       {/* DAY-TRIP STANDARDS */}
@@ -242,7 +244,8 @@ import TripCardSkeleton from "@/shared/ui/TripCardSkeleton.astro";
   >
     <PageHeaderSkeleton
       crumbWidths={["w-12", "w-18"]}
-      hasButtons={true}
+      hasButtons={false}
+      hasUnderline={true}
     />
     <div class="bg-white">
       {/* HERITAGE & MISSION */}
@@ -466,7 +469,8 @@ import TripCardSkeleton from "@/shared/ui/TripCardSkeleton.astro";
   >
     <PageHeaderSkeleton
       crumbWidths={["w-12", "w-20"]}
-      hasButtons={true}
+      hasButtons={false}
+      hasUnderline={true}
     />
     <section class="bg-neutral-50 py-16">
       <div class="mx-auto max-w-7xl px-4">

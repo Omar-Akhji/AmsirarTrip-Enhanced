@@ -83,3 +83,14 @@ progress messages. For editing tasks, announce before the first edit and omit it
 answer. To update antislop later: `npx antislop-ai --update`, or run `npx antislop-ai` and pick
 Overwrite them.
 <!-- antislop:end -->
+
+<!-- ponytail:start -->
+## 4. Ponytail: Always-On Core Directive
+
+`ponytail` is permanently active across all tasks (always on, no matter what). Follow `.agents/skills/ponytail/SKILL.md` strictly:
+- **Core Principle**: The best code is the code never written. Solve the whole problem with the least new code (shortest working diff).
+- **YAGNI & Simplicity**: No speculative abstractions, wrappers, type conversions, boilerplate, or unneeded dependencies. Keep values in native formats.
+- **Reuse First**: Use existing codebase patterns/helpers first, then standard library / platform features, then installed dependencies.
+- **Completeness**: Be lazy about the solution, never about the change. Update every caller, fixture, and test touched.
+- **Accountability Footer**: Every coding response must end with a 1-2 line summary of what was intentionally skipped or not checked, and any associated risk.
+<!-- ponytail:end -->

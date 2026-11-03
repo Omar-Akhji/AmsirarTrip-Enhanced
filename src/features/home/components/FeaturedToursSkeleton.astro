@@ -1,5 +1,5 @@
 ---
-import AsciiSkeleton from "@/shared/ui/AsciiSkeleton.astro";
+import AsciiSkeleton from "@/shared/ui/feedback/AsciiSkeleton.astro";
 
 interface Props {
   count?: number | undefined;
@@ -60,7 +60,7 @@ const { count = 6, class: className } = Astro.props;
     <div class="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3">
       {Array.from({ length: count }, () => (
         <article class="group relative block aspect-4/3 w-full select-none">
-          <div class="relative size-full overflow-hidden rounded-2xl border border-stone-200/90 bg-stone-100 dark:bg-stone-900 shadow-xs">
+          <div class="relative size-full overflow-hidden rounded-2xl border-2 border-stone-200/90 bg-stone-100 dark:bg-stone-900 shadow-xs">
             {/* Background ASCII Dither decoding matching full aspect-4/3 card */}
             <AsciiSkeleton
               class="ars-image size-full text-stone-400"

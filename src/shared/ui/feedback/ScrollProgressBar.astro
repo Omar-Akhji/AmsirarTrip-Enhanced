@@ -1,0 +1,29 @@
+---
+interface Props {
+  class?: string;
+  width?: string;
+}
+
+const { class: className = "", width = "w-2" } = Astro.props;
+---
+
+<!-- Scroll Progress Bar Track -->
+<div
+  aria-hidden="true"
+  class:list={[
+    "scroll-progress-container fixed inset-y-0 inset-e-0 z-40 bg-black/5 backdrop-blur-[1px] transition-opacity duration-300 pointer-events-auto cursor-pointer select-none",
+    width,
+    className,
+  ]}
+  id="scrollProgressBarContainer"
+  title="Scroll position"
+  transition:persist="scroll-progress-container"
+>
+  <!-- Scroll Progress Indicator -->
+  <div
+    class="scroll-progress-bar h-0 w-full opacity-0 rounded-none bg-linear-to-b from-yellow via-amber-orange to-orange shadow-[0_0_10px_oklch(56%_0.19_33deg/60%),0_0_4px_oklch(72%_0.17_35deg/50%)] transition-opacity duration-150 ease-out will-change-[height,opacity]"
+    id="scrollProgressBar"
+  ></div>
+</div>
+
+<script src="../../../scripts/scroll-progress.ts"></script>

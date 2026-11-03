@@ -287,6 +287,8 @@ export function generateOrganizationJsonLd(): Record<string, unknown> {
     },
     sameAs: agency.socials,
     aggregateRating: {
+      // Source: TripAdvisor listing — https://www.tripadvisor.com/Attraction_Review-g293734-d32584739-Reviews-Amsirar_Travel-Marrakech_Marrakech_Safi.html
+      // Update ratingValue and reviewCount whenever the TripAdvisor listing changes.
       "@type": "AggregateRating",
       ratingValue: "4.8",
       reviewCount: "250",

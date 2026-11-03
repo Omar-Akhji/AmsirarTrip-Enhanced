@@ -3,10 +3,11 @@ import "../styles/global.css";
 import { ClientRouter } from "astro:transitions";
 import { Image } from "astro:assets";
 import { generateOrganizationJsonLd, generateWebsiteJsonLd } from "../lib/structured-data";
-import Footer from "../shared/layout/Footer.astro";
-import Navbar from "../shared/layout/Navbar.astro";
-import CookieConsent from "../shared/ui/CookieConsent.astro";
-import JsonLd from "../shared/ui/JsonLd.astro";
+import Footer from "./Footer.astro";
+import Navbar from "./Navbar.astro";
+import CookieConsent from "../shared/ui/widgets/CookieConsent.astro";
+import ScrollProgressBar from "../shared/ui/feedback/ScrollProgressBar.astro";
+import JsonLd from "../shared/ui/primitives/JsonLd.astro";
 import { WHATSAPP_LINK } from "../lib/constants/contact";
 import { LOCALES, DEFAULT_LOCALE, isLocale, type Locale } from "../i18n/locales";
 import { getLocalizedPath, stripLocaleFromPath } from "../i18n/utils";
@@ -343,6 +344,7 @@ const currentOgLocale = OG_LOCALE_MAP[locale] ?? locale;
     </main>
     <Footer />
     <CookieConsent />
+    <ScrollProgressBar />
 
     <!-- WhatsApp Side Tape (Right Edge) -->
     <a

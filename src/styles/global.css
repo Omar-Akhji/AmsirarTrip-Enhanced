@@ -297,7 +297,8 @@
 
   html {
     overflow: hidden auto;
-    scrollbar-gutter: stable;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
     background:
       radial-gradient(50% 50% at 100% 0, var(--gradient-pattern)),
       radial-gradient(50% 50% at 0 100%, var(--gradient-pattern)),
@@ -364,8 +365,8 @@
     cursor: pointer;
   }
 
-  :is(button, [type="button"], [type="submit"], [type="reset"], [role="button"]) {
-    font-family: var(--font-mono);
+  :is(button, [type="button"], [type="submit"], [type="reset"], [role="button"], .btn) {
+    font-family: var(--font-mono, "JetBrains Mono", ui-monospace, monospace);
   }
 
   ::-webkit-calendar-picker-indicator {
@@ -380,38 +381,11 @@
 
   html::-webkit-scrollbar,
   body::-webkit-scrollbar {
-    width: var(--scrollbar-size);
+    width: 0;
+    height: 0;
+    display: none;
+    background: transparent;
   }
-
-  html::-webkit-scrollbar-track,
-  body::-webkit-scrollbar-track {
-    background: var(--color-canvas);
-  }
-
-  html::-webkit-scrollbar-thumb,
-  body::-webkit-scrollbar-thumb {
-    background: var(--scrollbar-thumb);
-    border: var(--scrollbar-thumb-border) solid var(--color-canvas);
-    border-radius: 20px;
-  }
-
-  html::-webkit-scrollbar-thumb:hover,
-  body::-webkit-scrollbar-thumb:hover {
-    background: var(--color-orange);
-  }
-
-  html::-webkit-scrollbar-thumb:active,
-  body::-webkit-scrollbar-thumb:active {
-    background: var(--color-orange-dark);
-  }
-
-  html::-webkit-scrollbar-button,
-  body::-webkit-scrollbar-button {
-    height: var(--scrollbar-button-size);
-    background-color: var(--color-canvas);
-  }
-
-
 }
 
 /* ==========================================================================

@@ -1,6 +1,7 @@
 ---
 import TestimonialsScrollStack from "./TestimonialsScrollStack.astro";
 import TestimonialsSideScroll from "./TestimonialsSideScroll.astro";
+import Button from "@/shared/ui/primitives/Button.astro";
 
 const locale = Astro.currentLocale || "en";
 const testimonials = [
@@ -52,11 +53,13 @@ const TRIPADVISOR_URL =
         </p>
       </hgroup>
       <div class="flex items-center">
-        <a
+        <Button
           href={TRIPADVISOR_URL}
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 rounded-full border border-stone-200 bg-white px-4 py-2 text-xs font-semibold text-stone-700 shadow-xs transition duration-200 pointer-fine:hover:border-stone-400 pointer-fine:hover:bg-stone-50"
+          variant="outline"
+          size="sm"
+          class="gap-2 text-xs font-semibold text-stone-700"
           aria-label="View our reviews on TripAdvisor"
         >
           <span class="inline-block size-2 rounded-full bg-emerald-500"></span>
@@ -71,7 +74,7 @@ const TRIPADVISOR_URL =
           >
             <path d="M7 17L17 7M17 7H7M17 7V17" />
           </svg>
-        </a>
+        </Button>
       </div>
     </div>
     <div class="relative">

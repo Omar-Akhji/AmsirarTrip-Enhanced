@@ -2,6 +2,7 @@
 import { useTranslations } from "@/i18n/utils";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { Cookie, X } from "@lucide/astro";
+import TactileSwitch from "../primitives/TactileSwitch.astro";
 
 const locale = Astro.currentLocale || "en";
 const t = useTranslations(locale);
@@ -55,7 +56,7 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
     <div class="mbs-4 flex flex-col gap-2.5 border-bs border-white/10 pbs-4 sm:flex-row sm:items-center sm:justify-between">
       <div class="grid grid-cols-2 gap-2.5 sm:flex sm:items-center sm:gap-2">
         <button
-          class="inline-flex min-h-11 h-11 cursor-pointer items-center justify-center whitespace-nowrap shrink-0 rounded-xl bg-orange px-4 font-sans text-xs font-semibold text-white shadow-sm transition-colors hover:bg-orange-dark active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-400 sm:h-10 sm:min-h-10 sm:text-sm"
+          class="inline-flex min-h-11 h-11 cursor-pointer items-center justify-center whitespace-nowrap shrink-0 rounded-xl bg-orange px-4 font-mono text-xs font-semibold text-white shadow-sm transition-colors hover:bg-orange-dark active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-400 sm:h-10 sm:min-h-10 sm:text-sm"
           data-cookie-accept-all
           type="button"
         >
@@ -63,7 +64,7 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
         </button>
 
         <button
-          class="inline-flex min-h-11 h-11 cursor-pointer items-center justify-center whitespace-nowrap shrink-0 rounded-xl border border-white/15 bg-white/5 px-4 font-sans text-xs font-medium text-zinc-200 transition-colors hover:border-white/25 hover:bg-white/10 hover:text-white active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-400 sm:h-10 sm:min-h-10 sm:text-sm"
+          class="inline-flex min-h-11 h-11 cursor-pointer items-center justify-center whitespace-nowrap shrink-0 rounded-xl border border-white/15 bg-white/5 px-4 font-mono text-xs font-medium text-zinc-200 transition-colors hover:border-white/25 hover:bg-white/10 hover:text-white active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-400 sm:h-10 sm:min-h-10 sm:text-sm"
           data-cookie-reject-all
           type="button"
         >
@@ -72,7 +73,7 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
       </div>
 
       <button
-        class="inline-flex min-h-11 h-11 cursor-pointer items-center justify-center whitespace-nowrap shrink-0 rounded-xl border border-transparent px-3 font-sans text-xs font-medium text-zinc-400 transition-colors hover:text-white hover:bg-white/5 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-400 sm:h-10 sm:min-h-10"
+        class="inline-flex min-h-11 h-11 cursor-pointer items-center justify-center whitespace-nowrap shrink-0 rounded-xl border border-transparent px-3 font-mono text-xs font-medium text-zinc-400 transition-colors hover:text-white hover:bg-white/5 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-400 sm:h-10 sm:min-h-10"
         command="show-modal"
         commandfor="cookie-preferences-modal"
         data-cookie-open-preferences
@@ -154,20 +155,13 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
             </p>
           </div>
 
-          <div class="relative inline-flex shrink-0 cursor-not-allowed items-center pbs-1">
-            <input
-              checked
-              class="amsirar-toggle-input peer sr-only"
-              disabled
+          <div class="pbs-1">
+            <TactileSwitch
+              ariaLabel={t("cookieConsent.necessaryTitle", "Essential cookies")}
+              checked={true}
+              disabled={true}
               id="cookie-toggle-necessary"
-              type="checkbox"
             />
-            <div
-              aria-hidden="true"
-              class="amsirar-toggle-track is-locked flex h-6 w-11 shrink-0 cursor-not-allowed select-none items-center rounded-full border border-emerald-600/80 bg-emerald-700 p-0.5"
-            >
-              <div class="amsirar-toggle-thumb flex size-5 shrink-0 translate-x-5 rounded-full bg-white shadow-xs"></div>
-            </div>
           </div>
         </div>
       </div>
@@ -194,22 +188,12 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
             </p>
           </div>
 
-          <label
-            class="relative inline-flex shrink-0 cursor-pointer items-center pbs-1"
-            for="cookie-toggle-analytics"
-          >
-            <input
-              class="amsirar-toggle-input peer sr-only"
+          <div class="pbs-1">
+            <TactileSwitch
+              ariaLabel={t("cookieConsent.analyticsTitle", "Analytics cookies")}
               id="cookie-toggle-analytics"
-              type="checkbox"
             />
-            <div
-              aria-hidden="true"
-              class="amsirar-toggle-track flex h-6 w-11 shrink-0 cursor-pointer select-none items-center rounded-full border border-white/20 bg-zinc-800 p-0.5 transition-[background-color,border-color] duration-200 ease-out peer-checked:border-orange-500/80 peer-checked:bg-[#c2410c] peer-checked:[&>.amsirar-toggle-thumb]:translate-x-5 peer-focus-visible:ring-2 peer-focus-visible:ring-orange-400 peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-slate-950 motion-reduce:transition-none"
-            >
-              <div class="amsirar-toggle-thumb flex size-5 shrink-0 rounded-full bg-white shadow-xs transition-transform duration-200 ease-out will-change-transform motion-reduce:transition-none"></div>
-            </div>
-          </label>
+          </div>
         </div>
       </div>
 
@@ -235,22 +219,12 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
             </p>
           </div>
 
-          <label
-            class="relative inline-flex shrink-0 cursor-pointer items-center pbs-1"
-            for="cookie-toggle-functional"
-          >
-            <input
-              class="amsirar-toggle-input peer sr-only"
+          <div class="pbs-1">
+            <TactileSwitch
+              ariaLabel={t("cookieConsent.functionalTitle", "Preference cookies")}
               id="cookie-toggle-functional"
-              type="checkbox"
             />
-            <div
-              aria-hidden="true"
-              class="amsirar-toggle-track flex h-6 w-11 shrink-0 cursor-pointer select-none items-center rounded-full border border-white/20 bg-zinc-800 p-0.5 transition-[background-color,border-color] duration-200 ease-out peer-checked:border-orange-500/80 peer-checked:bg-[#c2410c] peer-checked:[&>.amsirar-toggle-thumb]:translate-x-5 peer-focus-visible:ring-2 peer-focus-visible:ring-orange-400 peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-slate-950 motion-reduce:transition-none"
-            >
-              <div class="amsirar-toggle-thumb flex size-5 shrink-0 rounded-full bg-white shadow-xs transition-transform duration-200 ease-out will-change-transform motion-reduce:transition-none"></div>
-            </div>
-          </label>
+          </div>
         </div>
       </div>
     </div>
@@ -269,7 +243,7 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
     <div class="flex flex-col items-stretch gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
       <div class="grid grid-cols-2 gap-2 sm:flex sm:items-center sm:gap-2">
         <button
-          class="inline-flex h-9 cursor-pointer items-center justify-center whitespace-nowrap shrink-0 rounded-lg border border-white/15 bg-white/5 px-4 font-sans text-xs font-medium text-zinc-200 transition-colors hover:border-white/25 hover:bg-white/10 hover:text-white active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-400 sm:text-sm"
+          class="inline-flex h-9 cursor-pointer items-center justify-center whitespace-nowrap shrink-0 rounded-lg border border-white/15 bg-white/5 px-4 font-mono text-xs font-medium text-zinc-200 transition-colors hover:border-white/25 hover:bg-white/10 hover:text-white active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-400 sm:text-sm"
           data-cookie-reject-all
           type="button"
         >
@@ -277,7 +251,7 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
         </button>
 
         <button
-          class="inline-flex h-9 cursor-pointer items-center justify-center whitespace-nowrap shrink-0 rounded-lg border border-white/15 bg-white/5 px-4 font-sans text-xs font-medium text-zinc-200 transition-colors hover:border-white/25 hover:bg-white/10 hover:text-white active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-400 sm:text-sm"
+          class="inline-flex h-9 cursor-pointer items-center justify-center whitespace-nowrap shrink-0 rounded-lg border border-white/15 bg-white/5 px-4 font-mono text-xs font-medium text-zinc-200 transition-colors hover:border-white/25 hover:bg-white/10 hover:text-white active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-400 sm:text-sm"
           data-cookie-accept-all
           type="button"
         >
@@ -286,7 +260,7 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
       </div>
 
       <button
-        class="inline-flex h-9 cursor-pointer items-center justify-center whitespace-nowrap shrink-0 rounded-lg bg-linear-to-br from-amber-orange to-orange px-4 font-sans text-xs font-semibold text-white shadow-sm shadow-orange/25 transition-all duration-150 hover:brightness-105 hover:shadow-md hover:shadow-orange/35 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-400 sm:text-sm"
+        class="inline-flex h-9 cursor-pointer items-center justify-center whitespace-nowrap shrink-0 rounded-lg bg-linear-to-br from-amber-orange to-orange px-4 font-mono text-xs font-semibold text-white shadow-sm shadow-orange/25 transition-all duration-150 hover:brightness-105 hover:shadow-md hover:shadow-orange/35 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-400 sm:text-sm"
         data-cookie-save-preferences
         type="button"
       >
@@ -313,4 +287,4 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
   />
 </button>
 
-<script src="../../scripts/cookie-consent.ts"></script>
+<script src="../../../scripts/cookie-consent.ts"></script>

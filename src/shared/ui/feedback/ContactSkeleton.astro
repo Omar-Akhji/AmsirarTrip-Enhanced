@@ -1,6 +1,6 @@
 ---
-import AsciiSkeleton from "@/shared/ui/AsciiSkeleton.astro";
-import PageHeaderSkeleton from "@/shared/ui/PageHeaderSkeleton.astro";
+import AsciiSkeleton from "@/shared/ui/feedback/AsciiSkeleton.astro";
+import PageHeaderSkeleton from "@/shared/ui/feedback/PageHeaderSkeleton.astro";
 
 interface Props {
   class?: string | undefined;
@@ -16,7 +16,8 @@ const { class: className } = Astro.props;
 >
   <PageHeaderSkeleton
     crumbWidths={["w-12", "w-20"]}
-    hasButtons={true}
+    hasButtons={false}
+    hasUnderline={true}
   />
 
   {/* DIRECT CHANNELS SKELETON */}

@@ -18,7 +18,7 @@ import {
   generateItemListJsonLd,
   generateVideoObjectJsonLd,
 } from "../../lib/structured-data";
-import JsonLd from "../../shared/ui/JsonLd.astro";
+import JsonLd from "../../shared/ui/primitives/JsonLd.astro";
 
 const locale = Astro.currentLocale || "en";
 const t = useTranslations(locale);
@@ -58,7 +58,7 @@ const videoJsonLd = generateVideoObjectJsonLd({
   thumbnailUrl: "/images/hero/marrakech-medina.webp",
   uploadDate: "2026-01-15T09:00:00+01:00",
   contentUrl: "/videos/Morocco-Video.mp4",
-  duration: "PT1M45S",
+  duration: "PT1M19S",
 });
 ---
 

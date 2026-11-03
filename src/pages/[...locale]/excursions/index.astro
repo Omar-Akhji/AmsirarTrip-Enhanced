@@ -5,7 +5,7 @@ import ExcursionView from "../../../features/excursions/components/ExcursionsVie
 import { useTranslations } from "../../../i18n/utils";
 import Layout from "../../../layouts/Layout.astro";
 import { generateBreadcrumbJsonLd, generateItemListJsonLd } from "../../../lib/structured-data";
-import JsonLd from "../../../shared/ui/JsonLd.astro";
+import JsonLd from "../../../shared/ui/primitives/JsonLd.astro";
 
 const locale = Astro.currentLocale || "en";
 const t = useTranslations(locale);

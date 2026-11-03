@@ -5,8 +5,7 @@ import ourikaImg from "@/assets/images/Excursions/Ourika_Valley.webp";
 import bgImage from "@/assets/images/Header/header-1.webp";
 import aboutStats from "@/data/about-stats.json";
 import { useTranslations } from "@/i18n/utils";
-import PageHeader from "@/shared/layout/PageHeader.astro";
-import Button from "@/shared/ui/Button.astro";
+import PageHeader from "@/layouts/PageHeader.astro";
 import { Quote } from "@lucide/astro";
 import { Image } from "astro:assets";
 
@@ -27,29 +26,17 @@ const factStats = aboutStats.map((stat) => ({
   ),
 }));
 
-import { DELAY_CLASSES } from "@/shared/ui/animation-constants";
+import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
 ---
 
 <PageHeader
   bgImage={bgImage}
   breadcrumbs={[{ label: t("nav.home"), href: "/" }, { label: t("nav.about") }]}
+  hasUnderline={true}
   headingId="about-page-title"
   subtitle={t("about.headerSubtitle")}
   title={t("about.title")}
->
-  <Button
-    variant="secondary"
-    href="#about"
-  >
-    {t("about.ourStory")}
-  </Button>
-  <Button
-    variant="ghost"
-    href="#facts"
-  >
-    {t("about.facts.smTitle")}
-  </Button>
-</PageHeader>
+/>
 
 <div class="bg-white">
   <!-- HERITAGE & MISSION -->

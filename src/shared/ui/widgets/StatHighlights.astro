@@ -8,7 +8,8 @@ interface Props {
   readonly cardBg?: string;
 }
 
-import { DELAY_CLASSES } from "@/shared/ui/animation-constants";
+import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
+import FolderShape from "@/shared/ui/primitives/FolderShape.astro";
 
 const { stats, cardBg = "bg-stone-50/80" } = Astro.props;
 ---
@@ -22,37 +23,8 @@ const { stats, cardBg = "bg-stone-50/80" } = Astro.props;
         <!-- Pinned Stage -->
         <div class="stat-highlights-stage static h-auto top-auto select-auto motion-safe:sticky motion-safe:top-18 motion-safe:h-102.5 motion-safe:select-none w-full mx-auto overflow-visible">
           <!-- Layer 1: Folder Back Plate (z-index: 2, behind the cards) -->
-          <div class="folder-back-plate hidden motion-safe:block absolute inset-x-0 bottom-4 h-66.25 overflow-visible pointer-events-none will-change-transform z-2 opacity-0 translate-y-85">
-            <!-- 1. Top Tab: Left edge at left-0, sharing the same vertical line -->
-            <div class="absolute top-0 left-0 h-7.75 w-28 rounded-tl-2xl bg-slate-950 border-t border-l border-white/10"></div>
-
-            <!-- 2. Diagonal Slanted Shoulder: Starts at left-28 (112px), width 24px -->
-            <div class="absolute top-0 left-28 h-7.75 w-6">
-              <svg
-                class="size-full text-slate-950"
-                viewBox="0 0 24 31"
-                fill="currentColor"
-              >
-                <polygon points="0,0 24,31 0,31"></polygon>
-                <line
-                  x1="0"
-                  y1="0"
-                  x2="24"
-                  y2="31"
-                  stroke="rgba(255,255,255,0.12)"
-                  stroke-width="1.2"
-                ></line>
-              </svg>
-            </div>
-
-            <!-- 3. Top-Right Shoulder Border: Continues from shoulder to right edge -->
-            <div class="absolute top-7.5 left-34 right-0 h-px bg-white/10"></div>
-
-            <!-- 4. Main Back Body: Left edge at left-0 in exact same vertical line with tab -->
-            <div class="absolute top-7.5 inset-x-0 bottom-0 rounded-b-2xl rounded-tr-2xl bg-slate-950 border-x border-b border-white/10 shadow-2xl">
-              <!-- Subtle interior backdrop -->
-              <div class="absolute inset-0 rounded-b-2xl rounded-tr-2xl bg-linear-to-b from-slate-900/60 to-slate-950 pointer-events-none"></div>
-            </div>
+          <div class="folder-back-plate hidden motion-safe:block absolute inset-x-0 bottom-4 h-66.25 overflow-visible pointer-events-none will-change-transform z-2 opacity-0 translate-y-85 drop-shadow-[0_12px_24px_rgba(0,0,0,0.5)]">
+            <FolderShape id="highlights-back" variant="back" />
           </div>
 
           <!-- Layer 2: The Cards Stack (z-index: 10, between folder back and front pocket) -->
@@ -99,8 +71,9 @@ const { stats, cardBg = "bg-stone-50/80" } = Astro.props;
           </div>
 
           <!-- Layer 3: Folder Front Pocket (z-index: 25, in front of the cards) -->
-          <div class="folder-front-pocket hidden motion-safe:block absolute inset-x-0 bottom-4 h-58.75 rounded-2xl bg-slate-900/98 border border-white/10 shadow-[0_-14px_35px_rgba(0,0,0,0.7)] ring-1 ring-white/5 will-change-transform overflow-hidden pointer-events-none z-25 opacity-0 origin-bottom translate-y-85">
-            <div class="size-full bg-linear-to-b from-slate-900/40 to-slate-950/80"></div>
+          <!-- Matches reference folder silhouette: tabbed folder with smooth shoulder, no texts, original obsidian palette -->
+          <div class="folder-front-pocket hidden motion-safe:block absolute inset-x-0 bottom-4 h-58.75 overflow-visible pointer-events-none will-change-transform z-25 opacity-0 origin-bottom translate-y-85 drop-shadow-[0_-12px_28px_rgba(0,0,0,0.65)]">
+            <FolderShape id="highlights-front" variant="front" />
           </div>
         </div>
       </div>
@@ -152,4 +125,4 @@ const { stats, cardBg = "bg-stone-50/80" } = Astro.props;
   </div>
 </div>
 
-<script src="./stat-highlights-stack.ts"></script>
+<script src="../../../scripts/stat-highlights-stack.ts"></script>

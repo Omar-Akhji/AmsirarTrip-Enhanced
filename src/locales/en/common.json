@@ -206,7 +206,19 @@
     "duration": "Duration",
     "days": "Days",
     "start": "Start",
-    "end": "End"
+    "end": "End",
+    "faq": {
+      "title": "Common Questions About Our Morocco Tours",
+      "subtitle": "Everything you need to plan your desert journey.",
+      "q1": "What types of desert tours are available from Marrakech?",
+      "a1": "Amsirar Trip offers multi-day Morocco tours ranging from 3 to 14 days. Options include Sahara desert camel treks starting from Marrakech to Erg Chebbi dunes in Merzouga, High Atlas mountain crossings via Tizi n'Tichka pass, and imperial city circuits through Fes, Meknes, and Rabat. All tours depart from Marrakech and are available year-round with private 4×4 vehicles and licensed Moroccan guides.",
+      "q2": "Is Amsirar Trip a licensed tour operator in Morocco?",
+      "a2": "Yes. Amsirar Trip operates under Moroccan tourism license number 24/TT/RAK, issued by the Ministry of Tourism, Handicraft, Social Economy and Solidarity. We are headquartered in Marrakech and fully comply with Moroccan travel industry regulations.",
+      "q3": "What is the best time of year for a Sahara desert tour from Marrakech?",
+      "a3": "The ideal months for a Sahara desert tour from Marrakech are October to April, when daytime temperatures in the Erg Chebbi dunes range between 18°C and 28°C. Summer (June–August) sees temperatures above 40°C in the desert but remains manageable in the High Atlas. We operate tours year-round and can advise on the best itinerary for your travel dates.",
+      "q4": "Are tours private or shared group departures?",
+      "a4": "All Amsirar Trip tours are private departures. Your group travels exclusively with your party in a dedicated 4×4 or minibus, with a personal driver-guide. We do not combine guests from different bookings. This allows flexible start times, route adjustments, and personalised stop preferences throughout your Morocco journey."
+    }
   },
   "excursion": {
     "404": {
@@ -313,7 +325,19 @@
       "smTitle": "Single-Day Adventures",
       "lgTitle": "Day Trips Departing from Marrakech"
     },
-    "readMore": "Read more"
+    "readMore": "Read more",
+    "faq": {
+      "title": "Common Questions About Marrakech Day Excursions",
+      "subtitle": "Plan your perfect day trip from Marrakech.",
+      "q1": "What day excursions can I do from Marrakech?",
+      "a1": "From Marrakech you can book day excursions to Ouzoud Waterfalls (Africa's tallest accessible waterfall at 110 m), the Agafay Stone Desert with its lunar landscape 40 km from the city, the Ourika Valley with Berber villages and Atlas foothills, and the Ait Benhaddou UNESCO kasbah. All excursions depart in the morning from Marrakech and return the same evening.",
+      "q2": "How far is the Agafay Desert from Marrakech?",
+      "a2": "The Agafay Desert is approximately 40 km southwest of Marrakech, about a 45-minute drive. It is a rocky, arid plateau at the foothills of the High Atlas—distinct from the sandy Sahara but equally dramatic. Our Agafay day excursion includes camel trekking, sunset views over the Atlas range, and optional dinner at a desert camp.",
+      "q3": "Are the excursions guided and in English?",
+      "a3": "Yes. All Amsirar Trip excursions are fully guided in English (also available in French, Spanish, and German upon request). Each excursion includes a licensed Moroccan guide, private transportation in an air-conditioned 4×4, and hotel pickup and drop-off within Marrakech.",
+      "q4": "Can I combine a Sahara camel trek with a day excursion?",
+      "a4": "Yes. Amsirar Trip can combine day excursions with a multi-day Sahara tour. For example, you could do an Ouzoud Waterfalls day trip followed by a 3-day Merzouga desert tour, or an Agafay sunset excursion as an add-on to a longer itinerary. Contact us to build a custom Morocco itinerary that fits your available days."
+    }
   },
   "about": {
     "meta": {

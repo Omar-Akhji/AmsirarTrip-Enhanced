@@ -3,7 +3,8 @@ import { getRelativeLocaleUrl } from "astro:i18n";
 import headerImg from "@/assets/images/Header/header-2.webp";
 import { useTranslations } from "@/i18n/utils";
 import { PHONE_DISPLAY, PHONE_LINK, WHATSAPP_LINK } from "@/lib/constants/contact";
-import PageHeader from "@/shared/layout/PageHeader.astro";
+import PageHeader from "@/layouts/PageHeader.astro";
+import Button from "@/shared/ui/primitives/Button.astro";
 import {
   Calendar,
   CircleCheck,
@@ -792,6 +793,7 @@ const current: PrivacyCopy = (contentByLocale[locale] ?? defaultCopy) as Privacy
   bgImage={headerImg}
   breadcrumbs={[{ label: t("nav.home"), href: "/" }, { label: current.title }]}
   gradientPosition="top-right"
+  hasUnderline={true}
   headingId="privacy-policy-heading"
   subtitle={current.subtitle}
   title={current.title}
@@ -914,14 +916,16 @@ const current: PrivacyCopy = (contentByLocale[locale] ?? defaultCopy) as Privacy
             </ul>
 
             <div class="mbs-3 pbs-3 border-bs border-stone-200/80">
-              <button
-                class="flex w-full min-h-10 cursor-pointer items-center justify-center gap-2 rounded-full border border-stone-200 bg-stone-50 px-4 py-2 text-xs font-semibold text-slate-700 transition-colors hover:bg-stone-100 active:scale-[0.98]"
+              <Button
+                variant="outline"
+                size="sm"
+                class="w-full bg-stone-50 text-slate-700 hover:bg-stone-100"
                 id="privacy-print-btn"
                 type="button"
               >
                 <Printer class="size-3.5 text-slate-500" />
                 <span>{current.printLabel}</span>
-              </button>
+              </Button>
             </div>
           </nav>
 
@@ -1046,13 +1050,15 @@ const current: PrivacyCopy = (contentByLocale[locale] ?? defaultCopy) as Privacy
                       </p>
                     </div>
                   </div>
-                  <button
-                    class="inline-flex min-h-11 cursor-pointer items-center justify-center whitespace-nowrap rounded-full bg-linear-to-br from-amber-orange to-orange px-6 py-3 text-xs font-semibold text-white shadow-md shadow-orange/20 transition-all hover:brightness-105 active:scale-[0.98]"
+                  <Button
+                    variant="primary"
+                    size="md"
+                    class="text-xs uppercase tracking-wider"
                     data-open-cookie-settings
                     type="button"
                   >
                     <span>{current.cookieCta.buttonLabel}</span>
-                  </button>
+                  </Button>
                 </div>
               </div>
             )}

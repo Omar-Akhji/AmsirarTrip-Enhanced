@@ -119,7 +119,7 @@ export const GET: APIRoute = async ({ site }) => {
         xml += `      <video:title>Morocco Sahara Desert Tours &amp; Cultural Expeditions</video:title>\n`;
         xml += `      <video:description>Experience private Sahara desert camel treks, Atlas mountain passes, and historic Moroccan medinas with Amsirar Trip.</video:description>\n`;
         xml += `      <video:content_loc>${escapeXml(videoContent)}</video:content_loc>\n`;
-        xml += `      <video:duration>105</video:duration>\n`;
+        xml += `      <video:duration>79</video:duration>\n`;
         xml += `    </video:video>\n`;
       }
 

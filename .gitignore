@@ -12,6 +12,10 @@ dist-*
 .eslintcache
 *.tsbuildinfo
 
+# ─── Documentation & plans ────────────────────────────────
+docs/
+plans/
+
 # ─── Dependencies ─────────────────────────────────────────
 node_modules/
 
@@ -58,11 +62,14 @@ Desktop.ini
 # ─── IDEs & editors ──────────────────────────────────────
 .idea/
 .vscode/
+.cursor/
+*.code-workspace
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+*.patch
 
 # ─── AI agents & tooling ─────────────────────────────────
 .agents/
@@ -73,10 +80,11 @@ Desktop.ini
 .kiro/
 .junie/
 .gemini/
+.antigravity/
 opencode.json
 skills-lock.json
 .mcp.json
-Screenshot*.png
+/Screenshot*.png
 
 # Auto-generated agent skill mirrors & workspaces
 .adal/

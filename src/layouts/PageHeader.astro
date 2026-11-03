@@ -23,7 +23,7 @@ const {
   gradientPosition = "top",
   bgImage,
   breadcrumbs,
-  hasUnderline = false,
+  hasUnderline = true,
 } = Astro.props;
 
 const locale = Astro.currentLocale || "en";
@@ -133,7 +133,7 @@ if (gradientPosition === "top-right") {
         {hasUnderline ?
           <div
             aria-hidden="true"
-            class="mx-auto mt-3 block-1 inline-20 rounded-full bg-orange-500"
+            class="mx-auto mt-3 block-1 inline-20 rounded-none bg-orange-500"
           />
         : null}
 
@@ -143,12 +143,14 @@ if (gradientPosition === "top-right") {
           </p>
         : null}
       </hgroup>
-      <div
-        data-ascii="fade"
-        class="flex flex-wrap items-center justify-center gap-4 pbs-2"
-      >
-        <slot />
-      </div>
+      {Astro.slots.has("default") && (
+        <div
+          data-ascii="fade"
+          class="flex flex-wrap items-center justify-center gap-4 pbs-2"
+        >
+          <slot />
+        </div>
+      )}
     </div>
   </div>
 </section>

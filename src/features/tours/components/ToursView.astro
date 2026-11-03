@@ -1,11 +1,9 @@
 ---
 import bgImage from "@/assets/images/Header/header-1.webp";
 import { useTranslations } from "@/i18n/utils";
-import PageHeader from "@/shared/layout/PageHeader.astro";
-import Button from "@/shared/ui/Button.astro";
-import StatHighlights from "@/shared/ui/StatHighlights.astro";
-import TripCard from "@/shared/ui/TripCard.astro";
-import { ChevronRight } from "@lucide/astro";
+import PageHeader from "@/layouts/PageHeader.astro";
+import StatHighlights from "@/shared/ui/widgets/StatHighlights.astro";
+import TripCard from "@/shared/ui/widgets/TripCard.astro";
 import { getToursData } from "../data/tours-data";
 
 const locale = Astro.currentLocale || "en";
@@ -39,34 +37,16 @@ const tourStats = [
   },
 ];
 
-import { DELAY_CLASSES } from "@/shared/ui/animation-constants";
+import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
 ---
 
 <PageHeader
   bgImage={bgImage}
   breadcrumbs={[{ label: t("nav.home"), href: "/" }, { label: t("nav.tours") }]}
+  hasUnderline={true}
   subtitle={t("tours.headerSubtitle")}
   title={t("tours.title")}
->
-  <Button
-    variant="secondary"
-    href="#tours-grid"
-  >
-    <span>{t("tours.detailsTitle")}</span>
-    <ChevronRight
-      aria-hidden="true"
-      class="size-4"
-    />
-  </Button>
-  <Button
-    variant="ghost"
-    href="https://www.tripadvisor.com/Attraction_Review-g293734-d32584739-Reviews-Amsirar_Travel-Marrakech_Marrakech_Safi.html"
-    rel="noopener noreferrer"
-    target="_blank"
-  >
-    Offers on TripAdvisor
-  </Button>
-</PageHeader>
+/>
 
 <div class="text-zinc-900">
   <section
@@ -133,6 +113,172 @@ import { DELAY_CLASSES } from "@/shared/ui/animation-constants";
           </div>
         ))}
       </div>
+    </div>
+  </section>
+
+  <section
+    aria-labelledby="tours-faq-heading"
+    class="border-t border-zinc-200 bg-white py-12 sm:py-16 lg:py-20"
+  >
+    <div class="mx-auto px-4 max-inline-7xl">
+      <hgroup
+        class="mb-8 max-w-2xl"
+        data-animate="fade-up"
+      >
+        <h2
+          class="text-2xl font-bold tracking-tight text-stone-900 sm:text-3xl"
+          id="tours-faq-heading"
+        >
+          {t("tours.faq.title") || "Common Questions About Our Morocco Tours"}
+        </h2>
+        <p class="mt-2 text-sm text-stone-500">
+          {t("tours.faq.subtitle") || "Everything you need to plan your desert journey."}
+        </p>
+      </hgroup>
+
+      <dl
+        class="divide-y divide-stone-200 max-w-3xl"
+        data-animate="fade-up"
+        itemscope
+        itemtype="https://schema.org/FAQPage"
+      >
+        <div
+          class="py-5"
+          itemprop="mainEntity"
+          itemscope
+          itemtype="https://schema.org/Question"
+        >
+          <dt>
+            <details class="group">
+              <summary class="flex cursor-pointer items-start justify-between gap-4 text-base font-semibold text-stone-900 marker:content-none list-none">
+                <span itemprop="name">
+                  {t("tours.faq.q1") || "What types of desert tours are available from Marrakech?"}
+                </span>
+                <span
+                  aria-hidden="true"
+                  class="mt-0.5 shrink-0 text-orange-600 group-open:rotate-45 transition-transform duration-200"
+                >
+                  +
+                </span>
+              </summary>
+              <div
+                class="mt-3 text-sm leading-7 text-stone-600 prose prose-sm max-w-none"
+                itemprop="acceptedAnswer"
+                itemscope
+                itemtype="https://schema.org/Answer"
+              >
+                <p itemprop="text">
+                  {t("tours.faq.a1")
+                    || "Amsirar Trip offers multi-day Morocco tours ranging from 3 to 14 days. Options include Sahara desert camel treks starting from Marrakech to Erg Chebbi dunes in Merzouga, High Atlas mountain crossings via Tizi n'Tichka pass, and imperial city circuits through Fes, Meknes, and Rabat. All tours depart from Marrakech and are available year-round with private 4×4 vehicles and licensed Moroccan guides."}
+                </p>
+              </div>
+            </details>
+          </dt>
+        </div>
+
+        <div
+          class="py-5"
+          itemprop="mainEntity"
+          itemscope
+          itemtype="https://schema.org/Question"
+        >
+          <dt>
+            <details class="group">
+              <summary class="flex cursor-pointer items-start justify-between gap-4 text-base font-semibold text-stone-900 marker:content-none list-none">
+                <span itemprop="name">
+                  {t("tours.faq.q2") || "Is Amsirar Trip a licensed tour operator in Morocco?"}
+                </span>
+                <span
+                  aria-hidden="true"
+                  class="mt-0.5 shrink-0 text-orange-600 group-open:rotate-45 transition-transform duration-200"
+                >
+                  +
+                </span>
+              </summary>
+              <div
+                class="mt-3 text-sm leading-7 text-stone-600 prose prose-sm max-w-none"
+                itemprop="acceptedAnswer"
+                itemscope
+                itemtype="https://schema.org/Answer"
+              >
+                <p itemprop="text">
+                  {t("tours.faq.a2")
+                    || "Yes. Amsirar Trip operates under Moroccan tourism license number 24/TT/RAK, issued by the Ministry of Tourism, Handicraft, Social Economy and Solidarity. We are headquartered in Marrakech and fully comply with Moroccan travel industry regulations."}
+                </p>
+              </div>
+            </details>
+          </dt>
+        </div>
+
+        <div
+          class="py-5"
+          itemprop="mainEntity"
+          itemscope
+          itemtype="https://schema.org/Question"
+        >
+          <dt>
+            <details class="group">
+              <summary class="flex cursor-pointer items-start justify-between gap-4 text-base font-semibold text-stone-900 marker:content-none list-none">
+                <span itemprop="name">
+                  {t("tours.faq.q3")
+                    || "What is the best time of year for a Sahara desert tour from Marrakech?"}
+                </span>
+                <span
+                  aria-hidden="true"
+                  class="mt-0.5 shrink-0 text-orange-600 group-open:rotate-45 transition-transform duration-200"
+                >
+                  +
+                </span>
+              </summary>
+              <div
+                class="mt-3 text-sm leading-7 text-stone-600 prose prose-sm max-w-none"
+                itemprop="acceptedAnswer"
+                itemscope
+                itemtype="https://schema.org/Answer"
+              >
+                <p itemprop="text">
+                  {t("tours.faq.a3")
+                    || "The ideal months for a Sahara desert tour from Marrakech are October to April, when daytime temperatures in the Erg Chebbi dunes range between 18°C and 28°C. Summer (June–August) sees temperatures above 40°C in the desert but remains manageable in the High Atlas. We operate tours year-round and can advise on the best itinerary for your travel dates."}
+                </p>
+              </div>
+            </details>
+          </dt>
+        </div>
+
+        <div
+          class="py-5"
+          itemprop="mainEntity"
+          itemscope
+          itemtype="https://schema.org/Question"
+        >
+          <dt>
+            <details class="group">
+              <summary class="flex cursor-pointer items-start justify-between gap-4 text-base font-semibold text-stone-900 marker:content-none list-none">
+                <span itemprop="name">
+                  {t("tours.faq.q4") || "Are tours private or shared group departures?"}
+                </span>
+                <span
+                  aria-hidden="true"
+                  class="mt-0.5 shrink-0 text-orange-600 group-open:rotate-45 transition-transform duration-200"
+                >
+                  +
+                </span>
+              </summary>
+              <div
+                class="mt-3 text-sm leading-7 text-stone-600 prose prose-sm max-w-none"
+                itemprop="acceptedAnswer"
+                itemscope
+                itemtype="https://schema.org/Answer"
+              >
+                <p itemprop="text">
+                  {t("tours.faq.a4")
+                    || "All Amsirar Trip tours are private departures. Your group travels exclusively with your party in a dedicated 4×4 or minibus, with a personal driver-guide. We do not combine guests from different bookings. This allows flexible start times, route adjustments, and personalised stop preferences throughout your Morocco journey."}
+                </p>
+              </div>
+            </details>
+          </dt>
+        </div>
+      </dl>
     </div>
   </section>
 </div>

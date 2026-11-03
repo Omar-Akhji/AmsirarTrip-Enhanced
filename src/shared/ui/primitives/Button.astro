@@ -1,0 +1,46 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { buttonStyles, type ButtonSize, type ButtonVariant } from "./button-variants";
+
+type ButtonTag = "button" | "a" | "div" | "span";
+
+interface BaseProps {
+  as?: ButtonTag | undefined;
+  variant?: ButtonVariant | undefined;
+  size?: ButtonSize | undefined;
+  class?: string | undefined;
+}
+
+type AnchorProps = HTMLAttributes<"a"> & { href: string; as?: "a" };
+type NativeButtonProps = HTMLAttributes<"button"> & { href?: never; as?: "button" };
+type ElementProps = HTMLAttributes<"div"> & { as: "div" | "span"; href?: string | undefined };
+
+type Props = BaseProps & (AnchorProps | NativeButtonProps | ElementProps | Record<string, any>);
+
+const {
+  as,
+  variant = "primary",
+  size = "md",
+  class: className,
+  ...props
+} = Astro.props as Props;
+
+const isLink = "href" in props && typeof (props as any).href === "string" && !as;
+const Tag = as || (isLink ? "a" : "button");
+const classes = buttonStyles({ variant, size, className });
+---
+
+<Tag
+  class:list={["font-mono", classes]}
+  style="font-family: var(--font-mono, 'JetBrains Mono', ui-monospace, monospace);"
+  type={Tag === "button" ? ((props as any).type ?? "button") : undefined}
+  {...props}
+>
+  <slot />
+</Tag>
+
+<style>
+  :is(a, button, div, span) {
+    font-family: var(--font-mono, "JetBrains Mono", ui-monospace, monospace);
+  }
+</style>

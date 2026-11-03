@@ -32,7 +32,7 @@ const openModal = () => {
         {{ t("footer.newsletter") }}
       </h3>
     </div>
-    <span class="mbe-6 block rounded bg-orange block-1 inline-12" />
+    <span class="mbe-6 block bg-orange block-1 inline-12" />
     <div
       class="rounded-2xl border border-white/10 bg-linear-to-br from-white/5 to-white/2 p-4 backdrop-blur-sm"
     >

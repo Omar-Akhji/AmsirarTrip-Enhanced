@@ -1,14 +1,14 @@
 ---
 import bgImage from "@/assets/images/Header/header-1.webp";
-import DetailsSidebar from "@/shared/layout/DetailsSidebar.astro";
-import PageHeader from "@/shared/layout/PageHeader.astro";
+import DetailsSidebar from "@/layouts/DetailsSidebar.astro";
+import PageHeader from "@/layouts/PageHeader.astro";
 import { Image } from "astro:assets";
 
 const {
   title,
   pageTitle,
   pageSubtitle,
-  hasUnderline = false,
+  hasUnderline = true,
   lead,
   smTitle,
   breadcrumbs,

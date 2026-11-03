@@ -1,0 +1,95 @@
+---
+interface Props {
+  readonly variant: "front" | "back";
+  readonly id?: string;
+  readonly class?: string;
+  readonly borderColor?: string;
+}
+
+const { variant, id = "default", class: className = "", borderColor = "#6b7280" } = Astro.props;
+---
+
+{variant === "front" ?
+  <svg
+    aria-hidden="true"
+    class:list={["size-full overflow-visible", className]}
+    fill="none"
+    preserveAspectRatio="none"
+    viewBox="0 0 736 480"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <defs>
+      <linearGradient
+        id={`folder-front-grad-${id}`}
+        x1="0%"
+        x2="0%"
+        y1="0%"
+        y2="100%"
+      >
+        <stop
+          offset="0%"
+          stop-color="#18191d"
+          stop-opacity="0.98"
+        />
+        <stop
+          offset="45%"
+          stop-color="#111216"
+          stop-opacity="0.99"
+        />
+        <stop
+          offset="100%"
+          stop-color="#090a0d"
+          stop-opacity="1"
+        />
+      </linearGradient>
+    </defs>
+    <path
+      d="M 1 22 A 22 22 0 0 1 22 1 L 230 1 C 262 1, 263 55, 295 55 L 714 55 A 22 22 0 0 1 735 76 L 735 458 A 22 22 0 0 1 714 479 L 22 479 A 22 22 0 0 1 1 458 Z"
+      fill={`url(#folder-front-grad-${id})`}
+      stroke={borderColor}
+      stroke-width="2"
+      vector-effect="non-scaling-stroke"
+    />
+  </svg>
+: <svg
+    aria-hidden="true"
+    class:list={["size-full overflow-visible", className]}
+    fill="none"
+    preserveAspectRatio="none"
+    viewBox="0 0 736 530"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <defs>
+      <linearGradient
+        id={`folder-back-grad-${id}`}
+        x1="0%"
+        x2="0%"
+        y1="0%"
+        y2="100%"
+      >
+        <stop
+          offset="0%"
+          stop-color="#111215"
+          stop-opacity="0.98"
+        />
+        <stop
+          offset="50%"
+          stop-color="#0b0c0f"
+          stop-opacity="0.99"
+        />
+        <stop
+          offset="100%"
+          stop-color="#050507"
+          stop-opacity="1"
+        />
+      </linearGradient>
+    </defs>
+    <path
+      d="M 1 65 A 22 22 0 0 1 22 45 L 260 45 C 290 45, 295 1, 325 1 L 714 1 A 22 22 0 0 1 735 22 L 735 508 A 22 22 0 0 1 714 530 L 22 530 A 22 22 0 0 1 1 508 Z"
+      fill={`url(#folder-back-grad-${id})`}
+      stroke={borderColor}
+      stroke-width="2"
+      vector-effect="non-scaling-stroke"
+    />
+  </svg>
+}

@@ -1,12 +1,19 @@
 import { cn } from "@/lib/utils";
 
 export type ButtonVariant =
-  "primary" | "secondary" | "outline" | "ghost" | "tripadvisor" | "whatsapp" | "danger";
+  | "primary"
+  | "secondary"
+  | "outline"
+  | "ghost"
+  | "tripadvisor"
+  | "whatsapp"
+  | "danger"
+  | "card";
 
 export type ButtonSize = "sm" | "md" | "lg";
 
 const baseButtonStyles =
-  "inline-flex items-center justify-center rounded-full font-mono font-semibold transition-all duration-200 cursor-pointer select-none active:scale-[0.98] focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50";
+  "inline-flex items-center justify-center rounded-full font-mono font-semibold tracking-wider transition-all duration-200 cursor-pointer select-none active:scale-[0.98] focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50";
 
 const buttonSizeStyles: Record<ButtonSize, string> = {
   sm: "min-h-11 sm:min-h-9 px-4 py-1.5 text-xs gap-1.5",
@@ -28,6 +35,8 @@ const buttonVariantStyles: Record<ButtonVariant, string> = {
   whatsapp:
     "border-[1.5px] border-emerald-500/50 bg-slate-950/95 text-emerald-400 hover:bg-slate-900 hover:text-emerald-300 hover:border-emerald-400 focus-visible:ring-emerald-500",
   danger: "bg-red-600 text-white hover:bg-red-500 focus-visible:ring-red-500",
+  card:
+    "w-full bg-slate-950 text-white tracking-wider transition-all duration-300 hover:bg-linear-to-br hover:from-amber-orange hover:to-orange hover:text-white hover:shadow-lg hover:shadow-orange/30 group-hover:bg-linear-to-br group-hover:from-amber-orange group-hover:to-orange group-hover:text-white group-hover:shadow-lg group-hover:shadow-orange/30 dark:bg-black dark:text-white dark:hover:text-white dark:group-hover:text-white",
 };
 
 export interface ButtonStylesOptions {
