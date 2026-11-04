@@ -1,15 +1,14 @@
 import mdx from "@astrojs/mdx";
-import node from "@astrojs/node";
 import vercel from "@astrojs/vercel";
+import { cacheVercel } from "@astrojs/vercel/cache";
 import vue from "@astrojs/vue";
 import htmlValidate from "astro-html-validate";
 import compress from "@playform/compress";
 import tailwindcss from "@tailwindcss/vite";
-import { defineConfig, envField, memoryCache } from "astro/config";
+import { defineConfig, envField } from "astro/config";
 import { fileURLToPath } from "node:url";
 
 const srcDir = fileURLToPath(new URL("src", import.meta.url));
-const isNode = process.env["OUTPUT_ADAPTER"] === "node";
 
 export default defineConfig({
   // ─── Site ────────────────────────────────────────────────────────────────
@@ -21,7 +20,12 @@ export default defineConfig({
 
   // ─── Output & Adapter ────────────────────────────────────────────────────
   output: "server",
-  adapter: isNode ? node({ mode: "standalone" }) : vercel(),
+  adapter: vercel({
+    webAnalytics: { enabled: true },
+    imagesConfig: {
+      sizes: [320, 640, 1280],
+    },
+  }),
 
   // ─── Integrations ────────────────────────────────────────────────────────
   integrations: [
@@ -42,13 +46,14 @@ export default defineConfig({
     checkOrigin: true,
     allowedDomains: [
       { hostname: "amsirartrip.com", protocol: "https" },
-      { hostname: "*.amsirartrip.com", protocol: "https" },
+      { hostname: "**.amsirartrip.com", protocol: "https" },
+      { hostname: "**.vercel.app", protocol: "https" },
     ],
     actionBodySizeLimit: 65_536,
   },
 
-  // ─── Cache (Astro 7+) ───────────────────────────────────────────────────
-  cache: { provider: memoryCache() },
+  // ─── Cache (Vercel CDN Edge Cache) ───────────────────────────────────────
+  cache: { provider: cacheVercel() },
 
   // ─── Route Rules (Astro 7+) ──────────────────────────────────────────────
   routeRules: {
@@ -83,8 +88,8 @@ export default defineConfig({
   // ─── Type-safe environment variables ─────────────────────────────────────
   env: {
     schema: {
-      GMAIL_USER: envField.string({ context: "server", access: "secret" }),
-      GMAIL_PASS: envField.string({ context: "server", access: "secret" }),
+      GMAIL_USER: envField.string({ context: "server", access: "secret", optional: true }),
+      GMAIL_PASS: envField.string({ context: "server", access: "secret", optional: true }),
       MAIL_TO: envField.string({ context: "server", access: "secret", optional: true }),
       RECAPTCHA_SECRET_KEY: envField.string({
         context: "server",

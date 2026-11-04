@@ -2,7 +2,8 @@ import { LOCAL_HOSTS, TRUSTED_HOSTS } from "@/lib/constants/hosts";
 
 export const getSecurityHeaders = (nonce: string, host: string) => {
   const normalizedHost = host.toLowerCase().replaceAll(/[^a-z0-9.-]/g, "");
-  const safeConnectHost = TRUSTED_HOSTS.has(normalizedHost) ? ` https://${normalizedHost}` : "";
+  const isTrusted = TRUSTED_HOSTS.has(normalizedHost) || normalizedHost.endsWith(".vercel.app");
+  const safeConnectHost = isTrusted ? ` https://${normalizedHost}` : "";
   const isLocal = LOCAL_HOSTS.has(normalizedHost);
 
   return [
