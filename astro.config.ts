@@ -9,10 +9,20 @@ import { defineConfig, envField } from "astro/config";
 import { fileURLToPath } from "node:url";
 
 const srcDir = fileURLToPath(new URL("src", import.meta.url));
+const siteUrl =
+  process.env["SITE_URL"]
+  ?? (process.env["VERCEL_URL"] ?
+    `https://${process.env["VERCEL_URL"]}`
+  : "https://amsirartrip.com");
+const siteUrl =
+  process.env["SITE_URL"]
+  ?? (process.env["VERCEL_URL"] ?
+    `https://${process.env["VERCEL_URL"]}`
+  : "https://amsirartrip.com");
 
 export default defineConfig({
   // ─── Site ────────────────────────────────────────────────────────────────
-  site: "https://amsirartrip.com",
+  site: siteUrl,
   compressHTML: "jsx",
 
   // ─── Build Options ───────────────────────────────────────────────────────
@@ -20,12 +30,7 @@ export default defineConfig({
 
   // ─── Output & Adapter ────────────────────────────────────────────────────
   output: "server",
-  adapter: vercel({
-    webAnalytics: { enabled: true },
-    imagesConfig: {
-      sizes: [320, 640, 1280],
-    },
-  }),
+  adapter: vercel({ webAnalytics: { enabled: true }, imagesConfig: { sizes: [320, 640, 1280] } }),
 
   // ─── Integrations ────────────────────────────────────────────────────────
   integrations: [
@@ -48,6 +53,8 @@ export default defineConfig({
       { hostname: "amsirartrip.com", protocol: "https" },
       { hostname: "**.amsirartrip.com", protocol: "https" },
       { hostname: "**.vercel.app", protocol: "https" },
+      { hostname: "*.vercel.app", protocol: "https" },
+      { hostname: "amsirar-trip-enhanced.vercel.app", protocol: "https" },
     ],
     actionBodySizeLimit: 65_536,
   },
