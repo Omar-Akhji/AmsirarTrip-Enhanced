@@ -15,6 +15,7 @@ RUN bun install --frozen-lockfile
 FROM build-deps AS build
 ARG PUBLIC_RECAPTCHA_SITE_KEY
 ENV PUBLIC_RECAPTCHA_SITE_KEY=$PUBLIC_RECAPTCHA_SITE_KEY
+ENV OUTPUT_ADAPTER=node
 COPY . .
 RUN bun run build
 

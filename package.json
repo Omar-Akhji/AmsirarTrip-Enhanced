@@ -52,6 +52,7 @@
   "dependencies": {
     "@astrojs/mdx": "^8.1.2",
     "@astrojs/node": "^11.1.9",
+    "@astrojs/vercel": "^11.0.18",
     "@astrojs/vue": "^7.1.2",
     "@lucide/astro": "^1.68.0",
     "@lucide/vue": "^1.68.0",

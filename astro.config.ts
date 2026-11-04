@@ -1,5 +1,6 @@
 import mdx from "@astrojs/mdx";
 import node from "@astrojs/node";
+import vercel from "@astrojs/vercel";
 import vue from "@astrojs/vue";
 import htmlValidate from "astro-html-validate";
 import compress from "@playform/compress";
@@ -8,6 +9,7 @@ import { defineConfig, envField, memoryCache } from "astro/config";
 import { fileURLToPath } from "node:url";
 
 const srcDir = fileURLToPath(new URL("src", import.meta.url));
+const isNode = process.env["OUTPUT_ADAPTER"] === "node";
 
 export default defineConfig({
   // ─── Site ────────────────────────────────────────────────────────────────
@@ -19,7 +21,7 @@ export default defineConfig({
 
   // ─── Output & Adapter ────────────────────────────────────────────────────
   output: "server",
-  adapter: node({ mode: "standalone" }),
+  adapter: isNode ? node({ mode: "standalone" }) : vercel(),
 
   // ─── Integrations ────────────────────────────────────────────────────────
   integrations: [
