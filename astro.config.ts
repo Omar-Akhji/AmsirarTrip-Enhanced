@@ -1,28 +1,17 @@
 import mdx from "@astrojs/mdx";
-import vercel from "@astrojs/vercel";
-import { cacheVercel } from "@astrojs/vercel/cache";
+import node from "@astrojs/node";
 import vue from "@astrojs/vue";
 import htmlValidate from "astro-html-validate";
 import compress from "@playform/compress";
 import tailwindcss from "@tailwindcss/vite";
-import { defineConfig, envField } from "astro/config";
+import { defineConfig, envField, memoryCache } from "astro/config";
 import { fileURLToPath } from "node:url";
 
 const srcDir = fileURLToPath(new URL("src", import.meta.url));
-const siteUrl =
-  process.env["SITE_URL"]
-  ?? (process.env["VERCEL_URL"] ?
-    `https://${process.env["VERCEL_URL"]}`
-  : "https://amsirartrip.com");
-const siteUrl =
-  process.env["SITE_URL"]
-  ?? (process.env["VERCEL_URL"] ?
-    `https://${process.env["VERCEL_URL"]}`
-  : "https://amsirartrip.com");
 
 export default defineConfig({
   // ─── Site ────────────────────────────────────────────────────────────────
-  site: siteUrl,
+  site: "https://amsirartrip.com",
   compressHTML: "jsx",
 
   // ─── Build Options ───────────────────────────────────────────────────────
@@ -30,7 +19,7 @@ export default defineConfig({
 
   // ─── Output & Adapter ────────────────────────────────────────────────────
   output: "server",
-  adapter: vercel({ webAnalytics: { enabled: true }, imagesConfig: { sizes: [320, 640, 1280] } }),
+  adapter: node({ mode: "standalone" }),
 
   // ─── Integrations ────────────────────────────────────────────────────────
   integrations: [
@@ -46,21 +35,18 @@ export default defineConfig({
   // ─── Image ───────────────────────────────────────────────────────────────
   image: { domains: [], remotePatterns: [] },
 
-  // ─── Security ────────────────────────────────────────────────────────────
+  // ─── Security ────────────────────────────────────────────────────
   security: {
     checkOrigin: true,
     allowedDomains: [
       { hostname: "amsirartrip.com", protocol: "https" },
-      { hostname: "**.amsirartrip.com", protocol: "https" },
-      { hostname: "**.vercel.app", protocol: "https" },
-      { hostname: "*.vercel.app", protocol: "https" },
-      { hostname: "amsirar-trip-enhanced.vercel.app", protocol: "https" },
+      { hostname: "*.amsirartrip.com", protocol: "https" },
     ],
     actionBodySizeLimit: 65_536,
   },
 
-  // ─── Cache (Vercel CDN Edge Cache) ───────────────────────────────────────
-  cache: { provider: cacheVercel() },
+  // ─── Cache (Astro 7+) ───────────────────────────────────────────────────
+  cache: { provider: memoryCache() },
 
   // ─── Route Rules (Astro 7+) ──────────────────────────────────────────────
   routeRules: {

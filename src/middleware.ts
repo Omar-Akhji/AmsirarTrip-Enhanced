@@ -37,10 +37,9 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
 
   const host = new URL(context.request.url).hostname;
   const headers = getSecurityHeaders(nonce, host);
-  const customHeaders = new Headers(response.headers);
 
   for (const { key, value } of headers) {
-    customHeaders.set(key, value);
+    response.headers.set(key, value);
   }
 
   // For HTML responses, inject the nonce onto every <script> tag so that
@@ -59,6 +58,7 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
       /<script(?![^>]*\bnonce=)(\s|>)/g,
       (_match, space) => `<script ${nonceAttr}${space}`,
     );
+    const customHeaders = new Headers(response.headers);
     customHeaders.delete("content-length");
     return new Response(processed, {
       status: response.status,
@@ -67,9 +67,5 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
     });
   }
 
-  return new Response(response.body, {
-    status: response.status,
-    statusText: response.statusText,
-    headers: customHeaders,
-  });
+  return response;
 };

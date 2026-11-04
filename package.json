@@ -17,7 +17,7 @@
     "lint:style:fix": "stylelint \"src/**/*.{css,astro,vue}\" --fix",
     "prepare": "git update-index --assume-unchanged .husky/pre-commit 2>/dev/null || true",
     "preview": "astro preview",
-    "start": "astro preview",
+    "start": "node ./dist/server/entry.mjs",
     "test:e2e": "playwright test",
     "test:lighthouse": "bun run build && bun scripts/lighthouse-test.ts",
     "type-check": "tsc --noEmit"
@@ -51,7 +51,7 @@
   },
   "dependencies": {
     "@astrojs/mdx": "^8.1.2",
-    "@astrojs/vercel": "^11.0.18",
+    "@astrojs/node": "^11.1.9",
     "@astrojs/vue": "^7.1.2",
     "@lucide/astro": "^1.68.0",
     "@lucide/vue": "^1.68.0",
