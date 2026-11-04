@@ -89,8 +89,7 @@ function initLenis(): Lenis | undefined {
     anchors: { offset: -72 },
     prevent: (node: Element) =>
       (node instanceof HTMLElement && Boolean(node.dataset["lenisPrevent"]))
-      || Boolean(node.closest("[data-lenis-prevent]"))
-      || node.classList.contains("dark-scrollbar"),
+      || Boolean(node.closest("[data-lenis-prevent]")),
   });
 
   Object.assign(globalThis, { __lenis: lenis });

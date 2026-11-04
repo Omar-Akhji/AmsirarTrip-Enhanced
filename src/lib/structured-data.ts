@@ -137,7 +137,24 @@ export function generateTourJsonLd(data: TourStructuredData): Record<string, unk
     ["Adventure", "Cultural", "Nature"],
     {
       logo: `${BASE_URL}/horse-head.svg`,
-      address: { "@type": "PostalAddress", addressCountry: "MA", addressLocality: "Marrakech" },
+      legalName: agency.legalName ?? agency.name,
+      license: agency.licenseNumber,
+      identifier: agency.rc,
+      taxID: agency.patente,
+      priceRange: agency.priceRange ?? "€€",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: agency.address.streetAddress,
+        addressLocality: agency.address.addressLocality,
+        addressRegion: agency.address.addressRegion,
+        postalCode: agency.address.postalCode,
+        addressCountry: agency.address.addressCountry,
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: agency.geo.latitude,
+        longitude: agency.geo.longitude,
+      },
       contactPoint: {
         "@type": "ContactPoint",
         telephone: "+212-661-173-144",
@@ -169,7 +186,24 @@ export function generateExcursionJsonLd(data: ExcursionStructuredData): Record<s
     ["Day Trip", "Cultural Experience"],
     {
       logo: `${BASE_URL}/horse-head.svg`,
-      address: { "@type": "PostalAddress", addressCountry: "MA", addressLocality: "Marrakech" },
+      legalName: agency.legalName ?? agency.name,
+      license: agency.licenseNumber,
+      identifier: agency.rc,
+      taxID: agency.patente,
+      priceRange: agency.priceRange ?? "€€",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: agency.address.streetAddress,
+        addressLocality: agency.address.addressLocality,
+        addressRegion: agency.address.addressRegion,
+        postalCode: agency.address.postalCode,
+        addressCountry: agency.address.addressCountry,
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: agency.geo.latitude,
+        longitude: agency.geo.longitude,
+      },
       contactPoint: {
         "@type": "ContactPoint",
         telephone: "+212-661-173-144",

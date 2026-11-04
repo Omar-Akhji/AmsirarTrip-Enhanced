@@ -34,6 +34,7 @@ export async function getToursData(): Promise<Tour[]> {
         description: descriptionKey,
         duration: durationDays,
         start: startKey,
+        startLocation: startLocation.toLowerCase(),
         route: `/tours/${entry.id}`,
         end: endKey,
       } satisfies Tour;

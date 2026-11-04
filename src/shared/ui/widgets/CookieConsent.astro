@@ -125,105 +125,112 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
     </form>
   </div>
 
-  <div class="dark-scrollbar flex-1 flex flex-col gap-4 overflow-y-auto p-5 sm:p-6 text-sm text-zinc-300">
-    <div class="rounded-xl border border-white/10 bg-white/3 p-4 text-xs leading-relaxed text-zinc-300 sm:text-[13px]">
-      <p>
-        {t(
-          "cookieConsent.modalSubtitle",
-          "Choose which cookies you allow on your device. You can update or withdraw your consent at any time.",
-        )}
-      </p>
-    </div>
+  <div class="modal-scroll-root flex-1 min-h-0 flex flex-col">
+    <div
+      class="modal-scroll-viewport flex-1 min-h-0"
+      data-lenis-prevent
+    >
+      <div class="modal-scroll-content flex flex-col gap-4 p-5 sm:p-6 text-sm text-zinc-300">
+        <div class="rounded-xl border border-white/10 bg-white/3 p-4 text-xs leading-relaxed text-zinc-300 sm:text-[13px]">
+          <p>
+            {t(
+              "cookieConsent.modalSubtitle",
+              "Choose which cookies you allow on your device. You can update or withdraw your consent at any time.",
+            )}
+          </p>
+        </div>
 
-    <div class="flex flex-col gap-3">
-      <div class="rounded-xl border border-white/10 bg-white/2 p-4 sm:p-5">
-        <div class="flex items-start justify-between gap-4">
-          <div class="flex-1 min-w-0">
-            <div class="flex flex-wrap items-center gap-2">
-              <h3 class="text-sm font-semibold tracking-tight text-white sm:text-base font-sans">
-                {t("cookieConsent.necessaryTitle", "Essential cookies")}
-              </h3>
-              <span class="inline-flex items-center rounded-sm border border-emerald-500/30 bg-emerald-500/10 px-2 py-1 text-[11px] font-medium text-emerald-400">
-                {t("cookieConsent.alwaysActive", "Always Active")}
-              </span>
+        <div class="flex flex-col gap-3">
+          <div class="rounded-xl border border-white/10 bg-white/2 p-4 sm:p-5">
+            <div class="flex items-start justify-between gap-4">
+              <div class="flex-1 min-w-0">
+                <div class="flex flex-wrap items-center gap-2">
+                  <h3 class="text-sm font-semibold tracking-tight text-white sm:text-base font-sans">
+                    {t("cookieConsent.necessaryTitle", "Essential cookies")}
+                  </h3>
+                  <span class="inline-flex items-center rounded-sm border border-emerald-500/30 bg-emerald-500/10 px-2 py-1 text-[11px] font-medium text-emerald-400">
+                    {t("cookieConsent.alwaysActive", "Always Active")}
+                  </span>
+                </div>
+                <p class="pbs-2 text-xs leading-relaxed text-zinc-300 sm:text-[13px]">
+                  {t(
+                    "cookieConsent.necessaryDesc",
+                    "Required for secure navigation, session security, and language routing. These cannot be disabled.",
+                  )}
+                </p>
+              </div>
+
+              <div class="pbs-1">
+                <TactileSwitch
+                  ariaLabel={t("cookieConsent.necessaryTitle", "Essential cookies")}
+                  checked={true}
+                  disabled={true}
+                  id="cookie-toggle-necessary"
+                />
+              </div>
             </div>
-            <p class="pbs-2 text-xs leading-relaxed text-zinc-300 sm:text-[13px]">
-              {t(
-                "cookieConsent.necessaryDesc",
-                "Required for secure navigation, session security, and language routing. These cannot be disabled.",
-              )}
-            </p>
           </div>
 
-          <div class="pbs-1">
-            <TactileSwitch
-              ariaLabel={t("cookieConsent.necessaryTitle", "Essential cookies")}
-              checked={true}
-              disabled={true}
-              id="cookie-toggle-necessary"
-            />
-          </div>
-        </div>
-      </div>
+          <div class="group rounded-xl border border-white/10 bg-white/2 p-4 transition-colors hover:border-white/20 sm:p-5">
+            <div class="flex items-start justify-between gap-4">
+              <div class="flex-1 min-w-0">
+                <label
+                  class="flex cursor-pointer flex-wrap items-center gap-2"
+                  for="cookie-toggle-analytics"
+                >
+                  <h3 class="text-sm font-semibold tracking-tight text-white transition-colors group-hover:text-orange-300 sm:text-base font-sans">
+                    {t("cookieConsent.analyticsTitle", "Analytics cookies")}
+                  </h3>
+                  <span class="inline-flex items-center rounded-sm border border-white/10 bg-white/5 px-2 py-1 text-[11px] font-medium text-zinc-400">
+                    {t("cookieConsent.optional", "Optional")}
+                  </span>
+                </label>
+                <p class="pbs-2 text-xs leading-relaxed text-zinc-300 sm:text-[13px]">
+                  {t(
+                    "cookieConsent.analyticsDesc",
+                    "Collects anonymous page visit counts and speed metrics to help us see which tour itineraries are popular and improve site performance.",
+                  )}
+                </p>
+              </div>
 
-      <div class="group rounded-xl border border-white/10 bg-white/2 p-4 transition-colors hover:border-white/20 sm:p-5">
-        <div class="flex items-start justify-between gap-4">
-          <div class="flex-1 min-w-0">
-            <label
-              class="flex cursor-pointer flex-wrap items-center gap-2"
-              for="cookie-toggle-analytics"
-            >
-              <h3 class="text-sm font-semibold tracking-tight text-white transition-colors group-hover:text-orange-300 sm:text-base font-sans">
-                {t("cookieConsent.analyticsTitle", "Analytics cookies")}
-              </h3>
-              <span class="inline-flex items-center rounded-sm border border-white/10 bg-white/5 px-2 py-1 text-[11px] font-medium text-zinc-400">
-                {t("cookieConsent.optional", "Optional")}
-              </span>
-            </label>
-            <p class="pbs-2 text-xs leading-relaxed text-zinc-300 sm:text-[13px]">
-              {t(
-                "cookieConsent.analyticsDesc",
-                "Collects anonymous page visit counts and speed metrics to help us see which tour itineraries are popular and improve site performance.",
-              )}
-            </p>
+              <div class="pbs-1">
+                <TactileSwitch
+                  ariaLabel={t("cookieConsent.analyticsTitle", "Analytics cookies")}
+                  id="cookie-toggle-analytics"
+                />
+              </div>
+            </div>
           </div>
 
-          <div class="pbs-1">
-            <TactileSwitch
-              ariaLabel={t("cookieConsent.analyticsTitle", "Analytics cookies")}
-              id="cookie-toggle-analytics"
-            />
-          </div>
-        </div>
-      </div>
+          <div class="group rounded-xl border border-white/10 bg-white/2 p-4 transition-colors hover:border-white/20 sm:p-5">
+            <div class="flex items-start justify-between gap-4">
+              <div class="flex-1 min-w-0">
+                <label
+                  class="flex cursor-pointer flex-wrap items-center gap-2"
+                  for="cookie-toggle-functional"
+                >
+                  <h3 class="text-sm font-semibold tracking-tight text-white transition-colors group-hover:text-orange-300 sm:text-base font-sans">
+                    {t("cookieConsent.functionalTitle", "Preference cookies")}
+                  </h3>
+                  <span class="inline-flex items-center rounded-sm border border-white/10 bg-white/5 px-2 py-1 text-[11px] font-medium text-zinc-400">
+                    {t("cookieConsent.optional", "Optional")}
+                  </span>
+                </label>
+                <p class="pbs-2 text-xs leading-relaxed text-zinc-300 sm:text-[13px]">
+                  {t(
+                    "cookieConsent.functionalDesc",
+                    "Remembers your choices (such as interactive itinerary map views and currency selections) across visits.",
+                  )}
+                </p>
+              </div>
 
-      <div class="group rounded-xl border border-white/10 bg-white/2 p-4 transition-colors hover:border-white/20 sm:p-5">
-        <div class="flex items-start justify-between gap-4">
-          <div class="flex-1 min-w-0">
-            <label
-              class="flex cursor-pointer flex-wrap items-center gap-2"
-              for="cookie-toggle-functional"
-            >
-              <h3 class="text-sm font-semibold tracking-tight text-white transition-colors group-hover:text-orange-300 sm:text-base font-sans">
-                {t("cookieConsent.functionalTitle", "Preference cookies")}
-              </h3>
-              <span class="inline-flex items-center rounded-sm border border-white/10 bg-white/5 px-2 py-1 text-[11px] font-medium text-zinc-400">
-                {t("cookieConsent.optional", "Optional")}
-              </span>
-            </label>
-            <p class="pbs-2 text-xs leading-relaxed text-zinc-300 sm:text-[13px]">
-              {t(
-                "cookieConsent.functionalDesc",
-                "Remembers your choices (such as interactive itinerary map views and currency selections) across visits.",
-              )}
-            </p>
-          </div>
-
-          <div class="pbs-1">
-            <TactileSwitch
-              ariaLabel={t("cookieConsent.functionalTitle", "Preference cookies")}
-              id="cookie-toggle-functional"
-            />
+              <div class="pbs-1">
+                <TactileSwitch
+                  ariaLabel={t("cookieConsent.functionalTitle", "Preference cookies")}
+                  id="cookie-toggle-functional"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>

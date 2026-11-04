@@ -9,6 +9,7 @@ export type Tour = {
   readonly description: string;
   readonly duration: number;
   readonly start: string;
+  readonly startLocation: string;
   readonly route: string;
   readonly end: string;
 };

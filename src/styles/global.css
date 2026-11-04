@@ -180,31 +180,47 @@
   navigation: auto;
 }
 
-/* Thin scrollbar for dark modals and drawers: `dark-scrollbar` */
-@utility dark-scrollbar {
-  color-scheme: dark;
-  scrollbar-width: thin;
-  scrollbar-color: oklch(100% 0 0deg / 0.2) transparent;
+/* Capsule pill scrollbar for modal viewports (matches modern color-mix spec) */
+.modal-scroll-root {
+  --scrollbar-space: 14px;
+  --scrollbar-theme: hsl(0deg 0% 75%);
+
+  padding-inline-end: var(--scrollbar-space);
+}
+
+.modal-scroll-viewport {
+  overflow: hidden auto;
+  overscroll-behavior-y: contain;
 
   &::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: oklch(100% 0 0deg / 0.2);
-    border-radius: 9999px;
-  }
-
-  &::-webkit-scrollbar-thumb:hover {
-    background: oklch(100% 0 0deg / 0.4);
+    width: 10px;
   }
 
   &::-webkit-scrollbar-button {
     display: none;
+    width: 0;
+    height: 0;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: color-mix(in sRGB, var(--scrollbar-theme, hsl(0deg 0% 75%)), transparent 82%);
+    border-radius: 1000px;
+    background-clip: padding-box;
+    margin-block: 1.25rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: color-mix(in sRGB, var(--scrollbar-theme, hsl(0deg 0% 75%)), transparent 28%);
+    border-radius: 1000px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: color-mix(in sRGB, var(--scrollbar-theme, hsl(0deg 0% 75%)), transparent 12%);
+  }
+
+  @supports (-moz-appearance: none) {
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in sRGB, var(--scrollbar-theme, hsl(0deg 0% 75%)), transparent 28%) transparent;
   }
 }
 
@@ -254,27 +270,6 @@
     --ascii-accent: #ea580c; /* orange-600 */
     --ars-wave-color: #3f3f46; /* zinc-700 */
     --ars-radius: 12px;
-
-    /* Document scrollbar: scales up with the viewport */
-    --scrollbar-size: 10px;
-    --scrollbar-thumb: oklch(82% 0.008 65deg);
-    --scrollbar-thumb-border: 3px;
-    --scrollbar-button-size: 1rem;
-
-    @media (width >= 580px) {
-      --scrollbar-button-size: 2rem;
-    }
-
-    /* stylelint-disable-next-line media-query-no-invalid */
-    @media (width >= theme(--breakpoint-tablet)) {
-      --scrollbar-size: 16px;
-      --scrollbar-thumb-border: 4px;
-    }
-
-    @media (width >= 1250px) {
-      --scrollbar-size: 1.25rem;
-      --scrollbar-thumb-border: 5px;
-    }
   }
 
   /* Must stay after :root (same specificity, source order decides) */
