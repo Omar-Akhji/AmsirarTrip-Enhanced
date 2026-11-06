@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, computed, watch } from "vue";
-import { ChevronLeft, ChevronRight, Calendar as CalendarIcon } from "lucide-vue-next";
 import { useTranslation, getResolvedLocale } from "@/lib/hooks/use-translation";
 
 interface Props {
@@ -169,11 +168,42 @@ watch(
           :aria-label="t('calendar.prevMonth', 'Previous month')"
           @click="navigateMonth('prev')"
         >
-          <ChevronLeft class="size-4" />
+          <svg
+            class="size-4"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="m15 18-6-6 6-6" />
+          </svg>
         </button>
 
         <div class="flex items-center gap-2">
-          <CalendarIcon class="size-4 text-orange-600" />
+          <svg
+            class="size-4 text-orange-600"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M8 2v4" />
+            <path d="M16 2v4" />
+            <rect
+              width="18"
+              height="18"
+              x="3"
+              y="4"
+              rx="2"
+            />
+            <path d="M3 10h18" />
+          </svg>
           <span class="font-mono text-sm font-semibold text-stone-900 capitalize">
             {{ formattedMonthYear }}
           </span>
@@ -185,7 +215,18 @@ watch(
           :aria-label="t('calendar.nextMonth', 'Next month')"
           @click="navigateMonth('next')"
         >
-          <ChevronRight class="size-4" />
+          <svg
+            class="size-4"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="m9 18 6-6-6-6" />
+          </svg>
         </button>
       </div>
 

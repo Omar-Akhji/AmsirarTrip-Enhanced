@@ -1,5 +1,6 @@
 ---
 import AsciiSkeleton from "./AsciiSkeleton.astro";
+import ButtonSkeleton from "./ButtonSkeleton.astro";
 
 interface Props {
   class?: string | undefined;
@@ -34,7 +35,7 @@ const { class: className, hasItinerary = true, hasBadge = true } = Astro.props;
       <div class="absolute inset-s-0 top-0 z-10">
         <div class="h-7 w-24 rounded-ee-2xl bg-white dark:bg-stone-900 p-1 flex items-center justify-center">
           <AsciiSkeleton
-            class="h-4 w-16 text-orange-500"
+            class="h-4 w-16 text-stone-400"
             rows={1}
             variant="dither"
           />
@@ -44,68 +45,68 @@ const { class: className, hasItinerary = true, hasBadge = true } = Astro.props;
   </div>
 
   {/* Card body matching TripCard.astro typography & spacing */}
-  <div class="flex flex-1 flex-col justify-between pt-4 pb-1">
-    <div>
-      {/* Excursion Tagline Pill Skeleton on top of title */}
-      {!hasItinerary && (
-        <div class="mbe-2 flex items-center">
-          <AsciiSkeleton
-            class="h-6 w-28 rounded-full text-stone-400 dark:text-stone-600"
-            rows={1}
-            variant="dither"
-          />
-        </div>
-      )}
-
-      {/* Title */}
-      <div class="mbe-2">
+  <div class="flex flex-1 flex-col pt-4 pb-1">
+    {/* Excursion Tagline Pill Skeleton on top of title */}
+    {!hasItinerary && (
+      <div class="mbe-2 flex items-center">
         <AsciiSkeleton
-          class="text-stone-800 font-bold text-lg sm:text-xl dark:text-stone-200"
-          lines={1}
+          class="h-6 w-28 rounded-full text-stone-400 dark:text-stone-600"
+          rows={1}
           variant="dither"
-          widths={["75%"]}
         />
       </div>
+    )}
 
-      {/* Description */}
-      <div class="mbe-3 space-y-1.5 pt-1">
-        <AsciiSkeleton
-          class="text-stone-400"
-          lines={3}
-          variant="dither"
-          widths={["100%", "92%", "75%"]}
-        />
-      </div>
-
-      {/* Start / End Itinerary Box */}
-      {hasItinerary && (
-        <div class="mbe-3 m-0 grid grid-cols-2 gap-3 rounded-xl border border-stone-200/80 bg-stone-50/80 px-3.5 py-2.5 text-xs font-mono dark:border-stone-800 dark:bg-stone-800/40">
-          <div class="flex flex-col gap-1.5">
-            <AsciiSkeleton
-              class="text-stone-500"
-              lines={2}
-              variant="dither"
-              widths={["3rem", "5rem"]}
-            />
-          </div>
-          <div class="flex flex-col border-s border-stone-200/80 ps-3 gap-1.5 dark:border-stone-800">
-            <AsciiSkeleton
-              class="text-stone-500"
-              lines={2}
-              variant="dither"
-              widths={["3rem", "5rem"]}
-            />
-          </div>
-        </div>
-      )}
+    {/* Title */}
+    <div class="mbe-2">
+      <AsciiSkeleton
+        class="text-stone-800 font-bold text-lg sm:text-xl dark:text-stone-200"
+        lines={1}
+        variant="dither"
+        widths={["75%"]}
+      />
     </div>
 
-    {/* Footer CTA full pill button */}
-    <div class="pt-2">
+    {/* Description */}
+    <div class="mbe-3 space-y-1.5 pt-1">
       <AsciiSkeleton
-        class="h-12 w-full rounded-full overflow-hidden text-stone-400 dark:text-stone-500"
-        rows={2}
+        class="text-stone-400"
+        lines={3}
         variant="dither"
+        widths={["100%", "92%", "75%"]}
+      />
+    </div>
+
+    {/* Start / End Itinerary Box */}
+    {hasItinerary && (
+      <div class="mt-auto mbe-3 m-0 grid grid-cols-2 gap-3 rounded-xl border border-stone-200/80 bg-stone-50/80 px-3.5 py-2.5 text-xs font-mono dark:border-stone-800 dark:bg-stone-800/40">
+        <div class="flex flex-col gap-1.5">
+          <AsciiSkeleton
+            class="text-stone-500"
+            lines={2}
+            variant="dither"
+            widths={["3rem", "5rem"]}
+          />
+        </div>
+        <div class="flex flex-col border-s border-stone-200/80 ps-3 gap-1.5 dark:border-stone-800">
+          <AsciiSkeleton
+            class="text-stone-500"
+            lines={2}
+            variant="dither"
+            widths={["3rem", "5rem"]}
+          />
+        </div>
+      </div>
+    )}
+
+    {/* Footer CTA full pill button */}
+    <div
+      class:list={["pt-2", !hasItinerary && "mt-auto"]}
+    >
+      <ButtonSkeleton
+        class="w-full"
+        size="md"
+        variant="card"
       />
     </div>
   </div>

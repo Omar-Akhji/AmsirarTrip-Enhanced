@@ -110,6 +110,7 @@ function buildTripJsonLd<TLocation>(
         price: data.price,
         priceCurrency: data.currency && data.currency.trim() !== "" ? data.currency.trim() : "EUR",
         availability: "https://schema.org/InStock",
+        priceValidUntil: "2027-12-31",
         url: resolveUrl(data.url),
       },
     }),
@@ -136,7 +137,7 @@ export function generateTourJsonLd(data: TourStructuredData): Record<string, unk
     ],
     ["Adventure", "Cultural", "Nature"],
     {
-      logo: `${BASE_URL}/horse-head.svg`,
+      logo: `${BASE_URL}/favicon.svg`,
       legalName: agency.legalName ?? agency.name,
       license: agency.licenseNumber,
       identifier: agency.rc,
@@ -185,7 +186,7 @@ export function generateExcursionJsonLd(data: ExcursionStructuredData): Record<s
     [{ "@type": "TouristDestination", name: data.location.point }],
     ["Day Trip", "Cultural Experience"],
     {
-      logo: `${BASE_URL}/horse-head.svg`,
+      logo: `${BASE_URL}/favicon.svg`,
       legalName: agency.legalName ?? agency.name,
       license: agency.licenseNumber,
       identifier: agency.rc,
@@ -252,7 +253,7 @@ export function generateOrganizationJsonLd(): Record<string, unknown> {
     name: agency.name,
     alternateName: ["Amsirar", "AmsirarTrip", "amsirartrip", "Amsirar Tours", "Amsirar Morocco"],
     url: "https://amsirartrip.com",
-    logo: "https://amsirartrip.com/horse-head.svg",
+    logo: `${BASE_URL}/favicon.svg`,
     image: "https://amsirartrip.com/images/hero/marrakech-medina.webp",
     description:
       "Amsirar Trip is a specialist Morocco travel agency offering authentic Sahara desert tours, imperial city excursions, Atlas Mountains treks, and cultural experiences. Book your Morocco adventure with local experts.",

@@ -1,0 +1,201 @@
+---
+export type NavIconName =
+  "home" | "tours" | "excursions" | "about" | "contact" | "map-point" | "menu";
+
+interface Props {
+  name: NavIconName;
+  class?: string;
+}
+
+const { name, class: className = "" } = Astro.props;
+---
+
+{name === "home" && (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    class={className}
+    aria-hidden="true"
+  >
+    <path
+      d="M12 15L12 18"
+      stroke="currentColor"
+      stroke-width="1.75"
+      stroke-linecap="round"
+    />
+    <path
+      d="M22 12.2039V13.725C22 17.6258 22 19.5763 20.8284 20.7881C19.6569 22 17.7712 22 14 22H10C6.22876 22 4.34315 22 3.17157 20.7881C2 19.5763 2 17.6258 2 13.725V12.2039C2 9.91549 2 8.77128 2.5192 7.82274C3.0384 6.87421 3.98695 6.28551 5.88403 5.10813L7.88403 3.86687C9.88939 2.62229 10.8921 2 12 2C13.1079 2 14.1106 2.62229 16.116 3.86687L18.116 5.10812C20.0131 6.28551 20.9616 6.87421 21.4808 7.82274"
+      stroke="currentColor"
+      stroke-width="1.75"
+      stroke-linecap="round"
+    />
+  </svg>
+)}
+
+{name === "tours" && (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    class={className}
+    aria-hidden="true"
+  >
+    <path
+      d="M13.024 14.5601C10.7142 15.484 9.5593 15.946 8.89964 15.4977C8.74324 15.3914 8.60834 15.2565 8.50206 15.1001C8.0538 14.4405 8.51575 13.2856 9.43967 10.9758C9.63673 10.4831 9.73527 10.2368 9.90474 10.0435C9.94792 9.99429 9.99429 9.94792 10.0435 9.90474C10.2368 9.73527 10.4831 9.63673 10.9758 9.43966C13.2856 8.51575 14.4405 8.0538 15.1001 8.50206C15.2565 8.60834 15.3914 8.74324 15.4977 8.89964C15.946 9.5593 15.484 10.7142 14.5601 13.024C14.363 13.5166 14.2645 13.763 14.095 13.9562C14.0518 14.0055 14.0055 14.0518 13.9562 14.095C13.763 14.2645 13.5166 14.363 13.024 14.5601Z"
+      stroke="currentColor"
+      stroke-width="1.75"
+    />
+    <path
+      d="M7 3.33782C8.47087 2.48697 10.1786 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 10.1786 2.48697 8.47087 3.33782 7"
+      stroke="currentColor"
+      stroke-width="1.75"
+      stroke-linecap="round"
+    />
+  </svg>
+)}
+
+{name === "excursions" && (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    class={className}
+    aria-hidden="true"
+  >
+    <path
+      d="M20 15L4 22"
+      stroke="currentColor"
+      stroke-width="1.75"
+      stroke-linecap="round"
+    />
+    <path
+      d="M4 15L9 17.1875M20 22L14.5 19.5938"
+      stroke="currentColor"
+      stroke-width="1.75"
+      stroke-linecap="round"
+    />
+    <path
+      d="M15 10C14.8 10.6667 13.92 12 12 12"
+      stroke="currentColor"
+      stroke-width="1.75"
+      stroke-linecap="round"
+    />
+    <path
+      d="M6 8.86038C6 13.7721 9.73333 15 11.6 15C12.5558 15 13.9398 14.7535 15.1765 14.0397M17.0969 12.2372C17.6485 11.3763 18 10.2701 18 8.86038C18 5.73366 15.999 3.5006 14.1898 2.22031C13.3721 1.64162 12.3529 2.27717 12.3529 3.26468V3.48822C12.3529 4.48412 11.925 6.30196 10.736 7.05807C10.1289 7.4441 9.47331 6.86632 9.39953 6.16158L9.33895 5.58289C9.26852 4.91013 8.56829 4.50173 8.01879 4.9119C7.54443 5.26599 7.05981 5.74788 6.68431 6.36616"
+      stroke="currentColor"
+      stroke-width="1.75"
+      stroke-linecap="round"
+    />
+  </svg>
+)}
+
+{name === "about" && (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    class={className}
+    aria-hidden="true"
+  >
+    <path
+      d="M12 17V11"
+      stroke="currentColor"
+      stroke-width="1.75"
+      stroke-linecap="round"
+    />
+    <path
+      d="M7 3.33782C8.47087 2.48697 10.1786 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 10.1786 2.48697 8.47087 3.33782 7"
+      stroke="currentColor"
+      stroke-width="1.75"
+      stroke-linecap="round"
+    />
+    <path
+      d="M12 8H12.0001"
+      stroke="currentColor"
+      stroke-width="1.75"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+)}
+
+{name === "contact" && (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    class={className}
+    aria-hidden="true"
+  >
+    <circle
+      cx="12"
+      cy="6"
+      r="4"
+      stroke="currentColor"
+      stroke-width="1.75"
+    />
+    <path
+      d="M19.9975 18C20 17.8358 20 17.669 20 17.5C20 15.0147 16.4183 13 12 13C7.58172 13 4 15.0147 4 17.5C4 19.9853 4 22 12 22C14.231 22 15.8398 21.8433 17 21.5634"
+      stroke="currentColor"
+      stroke-width="1.75"
+      stroke-linecap="round"
+    />
+  </svg>
+)}
+
+{name === "map-point" && (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    class={className}
+    aria-hidden="true"
+  >
+    <path
+      d="M5.5 8.75732C5.5 6.95835 7.067 5.5 9 5.5C10.933 5.5 12.5 6.95835 12.5 8.75732C12.5 10.5422 11.3829 12.625 9.64003 13.3698C9.23374 13.5434 8.76626 13.5434 8.35997 13.3698C6.61708 12.625 5.5 10.5422 5.5 8.75732Z"
+      stroke="currentColor"
+      stroke-width="1.75"
+    />
+    <path
+      d="M14.0004 13.9993L20.5004 20.4993M14.0004 13.9993L6.39453 21.6053M14.0004 13.9993L16 11.9998M21.6072 6.39258L19 8.99978"
+      stroke="currentColor"
+      stroke-width="1.75"
+      stroke-linecap="round"
+    />
+    <circle
+      cx="9"
+      cy="9"
+      r="1"
+      fill="currentColor"
+    />
+    <path
+      d="M2 12C2 16.714 2 19.0711 3.46447 20.5355C4.92893 22 7.28595 22 12 22C16.714 22 19.0711 22 20.5355 20.5355C22 19.0711 22 16.714 22 12C22 7.28595 22 4.92893 20.5355 3.46447C19.0711 2 16.714 2 12 2C7.28595 2 4.92893 2 3.46447 3.46447C2.49073 4.43821 2.16444 5.80655 2.0551 8"
+      stroke="currentColor"
+      stroke-width="1.75"
+      stroke-linecap="round"
+    />
+  </svg>
+)}
+
+{name === "menu" && (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    class={className}
+    aria-hidden="true"
+  >
+    <path
+      d="M4 7L7 7M20 7L11 7"
+      stroke="currentColor"
+      stroke-width="1.75"
+      stroke-linecap="round"
+    />
+    <path
+      d="M20 17H17M4 17L13 17"
+      stroke="currentColor"
+      stroke-width="1.75"
+      stroke-linecap="round"
+    />
+    <path
+      d="M4 12H7L20 12"
+      stroke="currentColor"
+      stroke-width="1.75"
+      stroke-linecap="round"
+    />
+  </svg>
+)}

@@ -1,6 +1,9 @@
 ---
+import ClockCircleIcon from "@/shared/ui/icons/ClockCircleIcon.astro";
+import FlagIcon from "@/shared/ui/icons/FlagIcon.astro";
+import PointOnMapIcon from "@/shared/ui/icons/PointOnMapIcon.astro";
+import SparklesIcon from "@/shared/ui/icons/SparklesIcon.astro";
 import HighlightsList from "@/shared/ui/widgets/HighlightsList.astro";
-import { Clock, Flag, MapPinned } from "@lucide/astro";
 
 interface Props {
   readonly duration?: number | undefined;
@@ -12,6 +15,8 @@ interface Props {
   readonly endCity: string;
   readonly highlightsTitle: string;
   readonly highlights: readonly string[];
+  readonly tourTypeLabel?: string | undefined;
+  readonly tourTypeValue?: string | undefined;
 }
 
 const {
@@ -24,6 +29,8 @@ const {
   endCity,
   highlightsTitle,
   highlights,
+  tourTypeLabel,
+  tourTypeValue,
 } = Astro.props;
 ---
 
@@ -31,9 +38,17 @@ const {
   class="delay-150"
   data-animate="fade-up"
 >
-  <dl class="m-0 p-0 grid grid-cols-1 gap-3 sm:gap-4 sm:grid-cols-3">
-    <div class="flex items-center gap-4 rounded-2xl border border-stone-200/90 bg-white px-5 py-3 shadow-2xs transition-colors hover:border-stone-300 min-block-20">
-      <Clock
+  <dl
+    class:list={[
+      "m-0 p-0 grid grid-cols-1 gap-3 sm:gap-4",
+      tourTypeLabel ? "grid-cols-2 lg:grid-cols-4" : "sm:grid-cols-3",
+    ]}
+  >
+    <div
+      class="flex items-center gap-4 rounded-2xl border border-stone-200/90 bg-white px-5 py-3 shadow-2xs transition-colors hover:border-stone-300 min-block-20"
+      data-ascii="surface"
+    >
+      <ClockCircleIcon
         aria-hidden="true"
         class="size-5 shrink-0 text-orange-600"
       />
@@ -41,17 +56,22 @@ const {
         <dt class="font-mono text-xs font-semibold tracking-wider text-stone-500 uppercase">
           {durationLabel}
         </dt>
-        <dd class="m-0 font-mono text-sm sm:text-base font-bold text-stone-900 tabular-nums">
+        <dd
+          class="m-0 font-mono text-sm sm:text-base font-bold text-stone-900 tabular-nums"
+          data-ascii-digits
+        >
           {duration ?? 3} {daysLabel}
         </dd>
       </div>
     </div>
 
-    <div class="flex items-center gap-4 rounded-2xl border border-stone-200/90 bg-white px-5 py-3 shadow-2xs transition-colors hover:border-stone-300 min-block-20">
-      <MapPinned
+    <div
+      class="flex items-center gap-4 rounded-2xl border border-stone-200/90 bg-white px-5 py-3 shadow-2xs transition-colors hover:border-stone-300 min-block-20"
+      data-ascii="surface"
+    >
+      <PointOnMapIcon
         aria-hidden="true"
         class="size-5 shrink-0 text-orange-600"
-        stroke-width={2}
       />
       <div class="text-start min-w-0">
         <dt class="font-mono text-xs font-semibold tracking-wider text-stone-500 uppercase">
@@ -63,8 +83,11 @@ const {
       </div>
     </div>
 
-    <div class="flex items-center gap-4 rounded-2xl border border-stone-200/90 bg-white px-5 py-3 shadow-2xs transition-colors hover:border-stone-300 min-block-20">
-      <Flag
+    <div
+      class="flex items-center gap-4 rounded-2xl border border-stone-200/90 bg-white px-5 py-3 shadow-2xs transition-colors hover:border-stone-300 min-block-20"
+      data-ascii="surface"
+    >
+      <FlagIcon
         aria-hidden="true"
         class="size-5 shrink-0 text-orange-600"
       />
@@ -77,6 +100,26 @@ const {
         </dd>
       </div>
     </div>
+
+    {tourTypeLabel && (
+      <div
+        class="flex items-center gap-4 rounded-2xl border border-stone-200/90 bg-white px-5 py-3 shadow-2xs transition-colors hover:border-stone-300 min-block-20"
+        data-ascii="surface"
+      >
+        <SparklesIcon
+          aria-hidden="true"
+          class="size-5 shrink-0 text-orange-600"
+        />
+        <div class="text-start min-w-0">
+          <dt class="font-mono text-xs font-semibold tracking-wider text-stone-500 uppercase">
+            {tourTypeLabel}
+          </dt>
+          <dd class="m-0 font-mono text-sm sm:text-base font-bold text-stone-900 truncate">
+            {tourTypeValue || "Private & Shared"}
+          </dd>
+        </div>
+      </div>
+    )}
   </dl>
 </div>
 

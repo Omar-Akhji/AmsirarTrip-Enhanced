@@ -1,0 +1,253 @@
+---
+import AsciiSkeleton from "./AsciiSkeleton.astro";
+import PageHeaderSkeleton from "./PageHeaderSkeleton.astro";
+
+interface Props {
+  class?: string | undefined;
+}
+
+const { class: className } = Astro.props;
+---
+
+<div
+  class:list={["about-skeleton", className]}
+  aria-busy="true"
+  aria-label="Loading About Us"
+>
+  <PageHeaderSkeleton
+    crumbWidths={["w-12", "w-18"]}
+    hasButtons={false}
+    hasUnderline={true}
+  />
+
+  <div class="bg-white">
+    {/* HERITAGE & MISSION: OUR STORY */}
+    <section
+      aria-label="Loading our story"
+      class="relative isolate overflow-hidden py-12 sm:py-16 lg:py-24 text-stone-900"
+    >
+      <div class="mx-auto px-4 max-inline-7xl">
+        {/* Section Header */}
+        <div class="mbe-8 sm:mbe-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-stone-200/80 pb-6 sm:pb-8">
+          <div class="max-w-2xl space-y-2">
+            <AsciiSkeleton
+              class="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl"
+              lines={1}
+              variant="dither"
+              widths={["13rem"]}
+            />
+            <div class="border-s-2 border-stone-300 ps-4 py-0.5 max-w-[62ch]">
+              <AsciiSkeleton
+                class="text-stone-600 text-sm sm:text-base leading-relaxed"
+                lines={2}
+                variant="dither"
+                widths={["100%", "72%"]}
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* 2-Column Content Grid */}
+        <div class="grid items-start gap-10 sm:gap-12 lg:grid-cols-12 lg:gap-14 xl:gap-16">
+          {/* Left Column: 3 Images Collage (order-1 on mobile/tablet, left on desktop) */}
+          <div class="order-1 lg:order-1 lg:col-span-6">
+            <div class="flex flex-col gap-3.5 sm:gap-4.5">
+              {/* Top Landscape Image */}
+              <div class="relative aspect-video overflow-hidden rounded-2xl border border-stone-200/80 bg-stone-100 shadow-xs">
+                <AsciiSkeleton
+                  class="ars-image size-full text-stone-400"
+                  rows={24}
+                  variant="dither"
+                />
+              </div>
+
+              {/* Bottom Row: 2 Images Side-by-Side */}
+              <div class="grid grid-cols-2 gap-3.5 sm:gap-4.5">
+                <div class="relative aspect-4/5 overflow-hidden rounded-2xl border border-stone-200/80 bg-stone-100 shadow-xs">
+                  <AsciiSkeleton
+                    class="ars-image size-full text-stone-400"
+                    rows={22}
+                    variant="dither"
+                  />
+                </div>
+                <div class="relative aspect-4/5 overflow-hidden rounded-2xl border border-stone-200/80 bg-stone-100 shadow-xs">
+                  <AsciiSkeleton
+                    class="ars-image size-full text-stone-400"
+                    rows={22}
+                    variant="dither"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column: Editorial Narrative & Quote (order-2 on mobile/tablet, right on desktop) */}
+          <div class="order-2 lg:order-2 lg:col-span-6">
+            <div class="inline-full">
+              <article class="flex flex-col gap-6 sm:gap-8">
+                {/* 3 Lead & Narrative Story Paragraphs */}
+                <div class="flex flex-col gap-3.5 sm:gap-4.5">
+                  <div class="space-y-1.5">
+                    <AsciiSkeleton
+                      class="text-stone-700 text-base sm:text-lg"
+                      lines={3}
+                      variant="dither"
+                      widths={["100%", "96%", "82%"]}
+                    />
+                  </div>
+                  <div class="space-y-1.5">
+                    <AsciiSkeleton
+                      class="text-stone-600 text-sm sm:text-base"
+                      lines={3}
+                      variant="dither"
+                      widths={["100%", "94%", "78%"]}
+                    />
+                  </div>
+                  <div class="space-y-1.5">
+                    <AsciiSkeleton
+                      class="text-stone-600 text-sm sm:text-base"
+                      lines={3}
+                      variant="dither"
+                      widths={["100%", "98%", "68%"]}
+                    />
+                  </div>
+                </div>
+
+                {/* Archival Editorial Quote Card */}
+                <figure class="relative overflow-hidden rounded-2xl border border-stone-200/90 bg-stone-50/70 p-5 sm:p-6 shadow-2xs">
+                  <div
+                    aria-hidden="true"
+                    class="pointer-events-none absolute top-4 right-4 sm:top-5 sm:right-5 size-5 sm:size-6 rounded-full bg-stone-200/80"
+                  ></div>
+                  <div class="pe-8 space-y-1.5">
+                    <AsciiSkeleton
+                      class="text-stone-700 italic text-base sm:text-lg"
+                      lines={2}
+                      variant="dither"
+                      widths={["100%", "72%"]}
+                    />
+                  </div>
+                  <div class="mbs-3 flex items-center gap-2">
+                    <span
+                      class="size-1.5 rounded-full bg-stone-400"
+                      aria-hidden="true"
+                    ></span>
+                    <AsciiSkeleton
+                      class="text-stone-400 font-mono text-xs uppercase"
+                      lines={1}
+                      variant="dither"
+                      widths={["11rem"]}
+                    />
+                  </div>
+                </figure>
+              </article>
+            </div>
+          </div>
+        </div>
+
+        {/* Core Pillars of Trust Expanded Across Full Width Below Image & Story */}
+        <div class="mbs-[clamp(2.5rem,2rem+2vw,4rem)] border-t border-stone-200/80 pt-[clamp(2rem,1.5rem+1.5vw,3rem)]">
+          <div class="mbe-[clamp(1.25rem,1rem+0.75vw,1.75rem)] max-w-2xl">
+            <AsciiSkeleton
+              class="text-lg sm:text-xl font-bold text-stone-900"
+              lines={1}
+              variant="dither"
+              widths={["22rem"]}
+            />
+          </div>
+          <ul
+            role="list"
+            class="m-0 p-0 list-none grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[clamp(1rem,0.8rem+0.5vw,1.5rem)]"
+          >
+            {[
+              ["100%", "96%", "92%", "65%"],
+              ["100%", "95%", "88%", "55%"],
+              ["100%", "98%", "90%", "60%"],
+              ["100%", "94%", "92%", "50%"],
+            ].map((widths, index) => (
+              <li class="flex flex-col items-start gap-3 rounded-2xl border border-stone-200/80 bg-stone-50/60 p-[clamp(1.125rem,0.95rem+0.6vw,1.5rem)] shadow-2xs">
+                <span class="inline-flex size-7 items-center justify-center rounded-lg bg-stone-200/80 font-mono text-xs font-bold text-stone-600 tabular-nums shrink-0">
+                  0{index + 1}
+                </span>
+                <div class="space-y-1.5 w-full">
+                  <AsciiSkeleton
+                    class="text-stone-600 text-xs sm:text-sm leading-relaxed"
+                    lines={4}
+                    variant="dither"
+                    widths={widths}
+                  />
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    {/* EXPEDITION METRICS: OUR JOURNEY IN NUMBERS */}
+    <section class="relative isolate overflow-hidden border-t border-stone-200/90 bg-stone-50/60 py-12 sm:py-16 lg:py-24 text-stone-900">
+      <div class="mx-auto px-4 max-inline-7xl">
+        <div class="mbe-8 sm:mbe-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-stone-200 pb-6 sm:pb-8">
+          <div class="max-w-2xl space-y-2">
+            <AsciiSkeleton
+              class="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl text-balance"
+              lines={1}
+              variant="dither"
+              widths={["20rem"]}
+            />
+            <div class="border-s-2 border-stone-300 ps-4 py-0.5 max-w-[62ch]">
+              <AsciiSkeleton
+                class="text-stone-600 text-sm sm:text-base leading-relaxed"
+                lines={1}
+                variant="dither"
+                widths={["100%"]}
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="mbs-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            { valueWidth: "6.5rem", labelWidth: "12rem" },
+            { valueWidth: "4.5rem", labelWidth: "11rem" },
+            { valueWidth: "3.5rem", labelWidth: "10rem" },
+            { valueWidth: "4.5rem", labelWidth: "11rem" },
+          ].map((card) => (
+            <div class="flex size-full">
+              <article class="flex size-full flex-col items-center justify-between overflow-hidden rounded-2xl border border-slate-900 bg-slate-950 px-8 py-10 text-center shadow-xl">
+                <div class="flex flex-col items-center gap-y-6 w-full">
+                  <figure class="relative inline-flex size-24 shrink-0 items-center justify-center overflow-hidden rounded-full border-2 border-white/20 bg-white/5 p-3">
+                    <AsciiSkeleton
+                      circle
+                      width={70}
+                      height={70}
+                      rows={5}
+                      variant="dither"
+                      class="text-stone-400"
+                    />
+                  </figure>
+                  <div class="flex justify-center w-full">
+                    <AsciiSkeleton
+                      class="text-4xl font-mono font-bold text-stone-400"
+                      lines={1}
+                      variant="dither"
+                      widths={[card.valueWidth]}
+                    />
+                  </div>
+                  <div class="flex justify-center w-full">
+                    <AsciiSkeleton
+                      class="text-stone-400 font-mono text-xs sm:text-sm uppercase tracking-wider font-semibold"
+                      lines={1}
+                      variant="dither"
+                      widths={[card.labelWidth]}
+                    />
+                  </div>
+                </div>
+              </article>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

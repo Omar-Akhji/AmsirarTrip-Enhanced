@@ -9,38 +9,48 @@ interface BaseProps {
   variant?: ButtonVariant | undefined;
   size?: ButtonSize | undefined;
   class?: string | undefined;
+  type?: "button" | "submit" | "reset" | string | undefined;
 }
 
-type AnchorProps = HTMLAttributes<"a"> & { href: string; as?: "a" };
-type NativeButtonProps = HTMLAttributes<"button"> & { href?: never; as?: "button" };
+type AnchorProps = HTMLAttributes<"a"> & { href: string; as?: "a" | undefined };
+type NativeButtonProps = HTMLAttributes<"button"> & { href?: never; as?: "button" | undefined };
 type ElementProps = HTMLAttributes<"div"> & { as: "div" | "span"; href?: string | undefined };
 
-type Props = BaseProps & (AnchorProps | NativeButtonProps | ElementProps | Record<string, any>);
+type Props = BaseProps & (AnchorProps | NativeButtonProps | ElementProps | Record<string, unknown>);
 
 const {
   as,
   variant = "primary",
   size = "md",
   class: className,
+  type: explicitType,
   ...props
 } = Astro.props as Props;
 
-const isLink = "href" in props && typeof (props as any).href === "string" && !as;
+const rawProps = props as Record<string, unknown>;
+const isLink = typeof rawProps["href"] === "string" && !as;
 const Tag = as || (isLink ? "a" : "button");
 const classes = buttonStyles({ variant, size, className });
+
+const BUTTON_TYPES = ["button", "submit", "reset"] as const;
+type ButtonNativeType = (typeof BUTTON_TYPES)[number];
+
+const isButtonType = (val: unknown): val is ButtonNativeType =>
+  typeof val === "string" && (BUTTON_TYPES as readonly string[]).includes(val);
+
+const buttonType: ButtonNativeType | undefined =
+  Tag === "button" ?
+    isButtonType(explicitType) ? explicitType
+    : "button"
+  : undefined;
 ---
 
 <Tag
+  data-ascii={rawProps["data-ascii"] ?? "fade"}
   class:list={["font-mono", classes]}
-  style="font-family: var(--font-mono, 'JetBrains Mono', ui-monospace, monospace);"
-  type={Tag === "button" ? ((props as any).type ?? "button") : undefined}
+  style="font-family: var(--font-mono, 'DM Mono', ui-monospace, monospace);"
+  type={buttonType}
   {...props}
 >
   <slot />
 </Tag>
-
-<style>
-  :is(a, button, div, span) {
-    font-family: var(--font-mono, "JetBrains Mono", ui-monospace, monospace);
-  }
-</style>

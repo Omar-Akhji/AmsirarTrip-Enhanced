@@ -1,10 +1,9 @@
 ---
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { stripLocaleFromPath, useTranslations } from "@/i18n/utils";
-import { Compass, House, Mountain, User, Users } from "@lucide/astro";
 import LanguageSelector from "./navbar/LanguageSelector.astro";
 import MobileBottomNav from "./navbar/MobileBottomNav.astro";
-import SocialLinks from "./navbar/SocialLinks.astro";
+import NavIcon, { type NavIconName } from "./navbar/NavIcon.astro";
 
 const locale = Astro.currentLocale || "en";
 const t = useTranslations(locale);
@@ -19,12 +18,17 @@ const normalizedPath = stripLocaleFromPath(Astro.url.pathname);
 const isActive = (to: string) =>
   normalizedPath === to || (to !== "/" && normalizedPath.startsWith(`${to}/`));
 
-const NAV_ITEMS = [
-  { to: "/", labelKey: "nav.home", defaultLabel: "Home", icon: House },
-  { to: "/tours", labelKey: "nav.tours", defaultLabel: "Tours", icon: Compass },
-  { to: "/excursions", labelKey: "nav.excursions", defaultLabel: "Excursions", icon: Mountain },
-  { to: "/about", labelKey: "nav.about", defaultLabel: "About", icon: Users },
-  { to: "/contact", labelKey: "nav.contact", defaultLabel: "Contact", icon: User },
+const NAV_ITEMS: readonly {
+  to: string;
+  labelKey: string;
+  defaultLabel: string;
+  icon: NavIconName;
+}[] = [
+  { to: "/", labelKey: "nav.home", defaultLabel: "Home", icon: "home" },
+  { to: "/tours", labelKey: "nav.tours", defaultLabel: "Tours", icon: "tours" },
+  { to: "/excursions", labelKey: "nav.excursions", defaultLabel: "Excursions", icon: "excursions" },
+  { to: "/about", labelKey: "nav.about", defaultLabel: "About", icon: "about" },
+  { to: "/contact", labelKey: "nav.contact", defaultLabel: "Contact", icon: "contact" },
 ] as const;
 ---
 
@@ -70,7 +74,6 @@ const NAV_ITEMS = [
         {NAV_ITEMS.map((item) => {
           const active = isActive(item.to);
           const label = t(item.labelKey, item.defaultLabel);
-          const IconComponent = item.icon;
           return (
             <a
               aria-current={active ? "page" : undefined}
@@ -81,9 +84,9 @@ const NAV_ITEMS = [
               data-indicator={active ? "true" : undefined}
               href={localize(item.to)}
             >
-              <IconComponent
-                aria-hidden="true"
-                class="size-5 shrink-0 stroke-[2.2] transition-transform duration-200 group-hover/link:scale-110 lg:hidden motion-reduce:transform-none"
+              <NavIcon
+                name={item.icon}
+                class="size-5 shrink-0 transition-transform duration-200 group-hover/link:scale-110 lg:hidden motion-reduce:transform-none"
               />
               <span
                 class:list={[
@@ -100,7 +103,6 @@ const NAV_ITEMS = [
       </nav>
 
       <div class="flex items-center gap-1.5 sm:gap-2">
-        <SocialLinks compact={true} />
         <LanguageSelector
           placement="right"
           size="sm"

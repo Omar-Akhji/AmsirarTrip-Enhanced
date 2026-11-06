@@ -40,13 +40,13 @@ const serviceCardSkeletons = [
       <hgroup class="max-w-2xl space-y-2">
         <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl text-balance flex flex-wrap items-baseline gap-x-3">
           <AsciiSkeleton
-            class="text-white"
+            class="text-stone-300"
             lines={1}
             variant="dither"
             widths={["14rem"]}
           />
           <AsciiSkeleton
-            class="text-yellow"
+            class="text-stone-400"
             lines={1}
             variant="dither"
             widths={["17rem"]}
@@ -75,8 +75,8 @@ const serviceCardSkeletons = [
           {/* Circular icon skeleton */}
           <div class="mbe-6 inline-flex size-25 items-center justify-center rounded-full bg-white/5 ring-1 ring-white/10">
             <AsciiSkeleton
-              class="size-15 rounded-full overflow-hidden text-white/40"
-              rows={3}
+              class="size-15 rounded-full overflow-hidden text-stone-400"
+              rows={5}
               variant="dither"
             />
           </div>
@@ -84,7 +84,7 @@ const serviceCardSkeletons = [
           {/* Card Title Skeleton matching exact h3 typography and content width */}
           <h3 class="w-full text-center text-xl font-semibold text-white">
             <AsciiSkeleton
-              class="text-white text-center"
+              class="text-stone-300 text-center"
               lines={1}
               variant="dither"
               widths={[card.titleWidth]}

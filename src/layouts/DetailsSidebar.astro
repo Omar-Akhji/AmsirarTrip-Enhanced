@@ -1,4 +1,7 @@
 ---
+import type { RouteMapData } from "@/features/maps/types";
+import RouteMapCard from "@/shared/ui/widgets/RouteMapCard.astro";
+
 interface Props {
   sidebarTitle: string;
   mainBrand: string;
@@ -12,6 +15,7 @@ interface Props {
   ctaPoint01?: string | undefined;
   ctaPoint02?: string | undefined;
   ctaPoint03?: string | undefined;
+  routeMap?: RouteMapData | undefined;
 }
 
 const {
@@ -27,6 +31,7 @@ const {
   ctaPoint01,
   ctaPoint02,
   ctaPoint03,
+  routeMap,
 } = Astro.props;
 
 const points =
@@ -41,12 +46,30 @@ const points =
   aria-label={sidebarTitle}
   class="space-y-6 self-start lg:sticky lg:top-24"
 >
+  {
+    routeMap && (
+      <div
+        class="inline-full"
+        data-animate="creative-slide-left"
+        data-delay="75"
+      >
+        <RouteMapCard routeMap={routeMap} />
+      </div>
+    )
+  }
+
   <div
     class="inline-full"
     data-animate="creative-slide-left"
     data-delay="150"
   >
-    <div class="overflow-hidden rounded-2xl bg-slate-950 text-white shadow-xl">
+    <div
+      class="overflow-hidden rounded-2xl bg-slate-950 text-white shadow-xl"
+      data-ascii="surface"
+      style="
+
+--ascii-glyph: #cbd5e1; --ascii-surface: #020617;"
+    >
       <div class="p-6 sm:p-8">
         <hgroup class="text-center">
           <p class="font-mono text-xs font-semibold tracking-[0.16em] text-orange-400 uppercase">
@@ -83,7 +106,10 @@ const points =
     data-animate="creative-slide-left"
     data-delay="300"
   >
-    <div class="rounded-2xl border border-dashed border-stone-200 bg-white p-6 shadow-2xs">
+    <div
+      class="rounded-2xl border border-dashed border-stone-200 bg-white p-6 shadow-2xs"
+      data-ascii="surface"
+    >
       <h3 class="text-base font-bold text-stone-900 tracking-tight">{ctaTitle}</h3>
       <p class="mbs-2 font-mono text-xs text-stone-600 leading-relaxed">{ctaDescription}</p>
       <ul

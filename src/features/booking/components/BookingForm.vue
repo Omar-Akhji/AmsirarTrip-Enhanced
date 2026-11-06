@@ -8,7 +8,6 @@ import Loading from "@/shared/ui/primitives/Loading.vue";
 import Recaptcha from "@/shared/ui/widgets/Recaptcha.vue";
 import BookingFormFields from "./BookingFormFields.vue";
 import FormStatusMessages from "./FormStatusMessages.vue";
-import { CircleAlert } from "lucide-vue-next";
 
 interface Props {
   locale?: string;
@@ -202,7 +201,34 @@ const handleSubmit = async (event: Event) => {
                     :key="field"
                     class="flex items-start gap-2"
                   >
-                    <CircleAlert class="mbs-0.5 size-4 shrink-0 text-orange-600" />
+                    <svg
+                      class="mbs-0.5 size-4 shrink-0 text-orange-600"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <circle
+                        cx="12"
+                        cy="12"
+                        r="10"
+                      />
+                      <line
+                        x1="12"
+                        x2="12"
+                        y1="8"
+                        y2="12"
+                      />
+                      <line
+                        x1="12"
+                        x2="12.01"
+                        y1="16"
+                        y2="16"
+                      />
+                    </svg>
                     <span>{{ error }}</span>
                   </li>
                 </ul>
@@ -270,6 +296,7 @@ const handleSubmit = async (event: Event) => {
 
                 <button
                   type="submit"
+                  data-ascii="fade"
                   class="inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-full bg-linear-to-br from-amber-orange to-orange px-8 py-3 font-mono text-xs font-semibold tracking-wider text-white uppercase shadow-md shadow-orange/20 transition-all duration-200 hover:shadow-lg hover:shadow-orange/30 hover:brightness-105 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
                   :disabled="isSubmitting"
                   :aria-busy="isSubmitting"

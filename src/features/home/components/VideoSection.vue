@@ -66,7 +66,51 @@ const handleVideoClick = () => {
           <span
             class="inline-flex items-center gap-2 rounded-md border border-white/20 bg-slate-950/80 px-3 py-1 font-bold tracking-wider text-orange-400 uppercase shadow-xs backdrop-blur-xs"
           >
-            <span class="size-2 animate-pulse rounded-full bg-orange-400"></span>
+            <svg
+              class="size-4 shrink-0 text-orange-400"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M17 3.5V20.5"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+              />
+              <path
+                d="M12 2V22"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-dasharray="3 3"
+              />
+              <path
+                d="M7 3.5V20.5"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+              />
+              <path
+                d="M3 8.5L7 8.5M21 8.5H17"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+              />
+              <path
+                d="M3 15.5L5.75 15.5L7 15.5M21 15.5L17 15.5"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+              />
+              <path
+                d="M14.5 3.00293C17.2939 3.02331 18.8237 3.16641 19.8284 4.17112C20.8916 5.23426 20.99 6.8854 20.9991 10M14.5 20.9962C17.2939 20.9758 18.8237 20.8327 19.8284 19.828C20.8916 18.7648 20.99 17.1137 20.9991 13.9991M9.49991 20.9962C6.70609 20.9758 5.17627 20.8327 4.17157 19.828C3 18.6564 3 16.7708 3 12.9995V10.9995C3 7.22831 3 5.34269 4.17157 4.17112C5.17627 3.16642 6.70609 3.02331 9.49991 3.00293"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
             Morocco Travel Film
           </span>
         </div>
@@ -80,7 +124,51 @@ const handleVideoClick = () => {
             class="max-w-lg rounded-2xl border border-white/15 bg-slate-950/90 p-8 shadow-2xl backdrop-blur-md"
           >
             <div class="mbe-3 inline-flex items-center gap-2 font-mono text-xs text-orange-400">
-              <span class="size-2 rounded-full bg-orange-400"></span>
+              <svg
+                class="size-4 shrink-0 text-orange-400"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M17 3.5V20.5"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M12 2V22"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-dasharray="3 3"
+                />
+                <path
+                  d="M7 3.5V20.5"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M3 8.5L7 8.5M21 8.5H17"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M3 15.5L5.75 15.5L7 15.5M21 15.5L17 15.5"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M14.5 3.00293C17.2939 3.02331 18.8237 3.16641 19.8284 4.17112C20.8916 5.23426 20.99 6.8854 20.9991 10M14.5 20.9962C17.2939 20.9758 18.8237 20.8327 19.8284 19.828C20.8916 18.7648 20.99 17.1137 20.9991 13.9991M9.49991 20.9962C6.70609 20.9758 5.17627 20.8327 4.17157 19.828C3 18.6564 3 16.7708 3 12.9995V10.9995C3 7.22831 3 5.34269 4.17157 4.17112C5.17627 3.16642 6.70609 3.02331 9.49991 3.00293"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
               <span>Featured Video</span>
             </div>
             <h3 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">
@@ -170,11 +258,17 @@ const handleVideoClick = () => {
                 class="flex size-18 items-center justify-center rounded-full border-2 border-white bg-linear-to-br from-amber-orange to-orange text-white shadow-xl shadow-orange/35 backdrop-blur-md transition-all duration-300 group-hover:scale-108 group-hover:border-white/60 group-hover:shadow-2xl group-hover:shadow-orange/50 group-hover:brightness-110 group-active:scale-95 sm:size-20"
               >
                 <svg
-                  class="size-7 translate-x-0.5 fill-current drop-shadow-sm transition-transform duration-300 group-hover:scale-110"
+                  class="size-8 translate-x-0.5 text-white drop-shadow-sm transition-transform duration-300 group-hover:scale-110"
                   viewBox="0 0 24 24"
+                  fill="none"
                   aria-hidden="true"
                 >
-                  <polygon points="7 4 19 12 7 20 7 4" />
+                  <path
+                    d="M3 12L3 18.9671C3 21.2763 5.53435 22.736 7.59662 21.6145L10.7996 19.8727M3 8L3 5.0329C3 2.72368 5.53435 1.26402 7.59661 2.38548L20.4086 9.35258C22.5305 10.5065 22.5305 13.4935 20.4086 14.6474L14.0026 18.131"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
                 </svg>
               </div>
             </div>

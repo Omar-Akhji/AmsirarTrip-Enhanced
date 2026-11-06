@@ -7,9 +7,13 @@ interface Props {
   lines?: number | undefined;
   widths?: (string | number)[] | undefined;
   rows?: number | undefined;
+  width?: number | string | undefined;
+  height?: number | string | undefined;
+  circle?: boolean | undefined;
   seed?: number | undefined;
   animate?: boolean | undefined;
   class?: string | undefined;
+  style?: string | undefined;
 }
 
 const {
@@ -17,9 +21,13 @@ const {
   lines,
   widths,
   rows,
+  width,
+  height,
+  circle,
   seed = Math.floor(Math.random() * 100_000),
   animate = true,
   class: className,
+  style: styleProp,
 } = Astro.props;
 
 // Build spec respecting exactOptionalPropertyTypes
@@ -35,9 +43,53 @@ const spec: SkeletonSpec = {
 
 const rawHtml = asciiSkeletonHTML(spec);
 
-// Inject consumer classes directly into root .ars container using a replacer function
-const html =
-  className ? rawHtml.replace('class="ars ', () => `class="ars ${cn(className)} `) : rawHtml;
+// Format pixel dimensions
+const formatDim = (val: number | string | undefined): string | undefined => {
+  if (val === undefined) return undefined;
+  return typeof val === "number" ? `${val}px` : val;
+};
+
+const w = formatDim(width);
+const h = formatDim(height);
+
+// Compute styles for .ars-block when rows is specified (image / avatar block)
+const blockStyles: string[] = [];
+if (w) blockStyles.push(`width:${w};`);
+if (h) blockStyles.push(`height:${h};`);
+if (circle) blockStyles.push("--ars-radius:50%;border-radius:50%;");
+const blockStyleAttr = blockStyles.join("");
+
+let html = rawHtml;
+
+// Inject block styles into .ars-block
+if (blockStyleAttr) {
+  html = html.replace(
+    'class="ars-block" style=""',
+    () => `class="ars-block" style="${blockStyleAttr}"`,
+  );
+}
+
+// Compute styles for the root .ars container
+const rootStyles: string[] = [];
+if (circle) {
+  rootStyles.push("display:inline-flex;border-radius:50%;overflow:hidden;");
+} else if (w && !className?.includes("w-") && !className?.includes("size-")) {
+  rootStyles.push("display:inline-block;");
+}
+if (styleProp) {
+  rootStyles.push(styleProp);
+}
+
+// Inject consumer classes directly into root .ars container
+if (className) {
+  html = html.replace('class="ars ', () => `class="ars ${cn(className)} `);
+}
+
+// Inject root styles if present
+if (rootStyles.length > 0) {
+  const rootStyleAttr = rootStyles.join("");
+  html = html.replace('class="ars', () => `style="${rootStyleAttr}" class="ars`);
+}
 ---
 
 <Fragment set:html={html} />

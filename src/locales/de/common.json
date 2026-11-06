@@ -1,4 +1,10 @@
 {
+  "404": {
+    "title": "Seite Nicht Gefunden | Amsirar Trip",
+    "description": "Die gesuchte Seite existiert nicht oder wurde verschoben.",
+    "message": "Es scheint, als würde dieser Pfad nirgendwohin in Marokko führen. Kehren wir zurück auf die Route.",
+    "cta": "Zurück zur Startseite"
+  },
   "helplineTitle": "Für weitere Anfragen :",
   "helplineNumber": "+212 (0) 6 61 17 31 44",
   "validations": {
@@ -206,7 +212,23 @@
     "duration": "Dauer",
     "days": "Tage",
     "start": "Start",
-    "end": "Ende"
+    "end": "Ende",
+    "tourTypeLabel": "Tour-Format",
+    "tourTypeValue": "Privat & Kleingruppe",
+    "bothAvailable": "Privat & Geteilt",
+    "formatComparisonTitle": "Verfügbare Tour-Formate",
+    "privateOption": "Private VIP-Abreise",
+    "privateOptionBadge": "Am Beliebtesten",
+    "privateOptionDesc": "Exklusives klimatisiertes Fahrzeug, persönlicher Berber-Fahrer-Guide, flexible Startzeiten und Fotostopps nach Wunsch.",
+    "sharedOption": "Kleine Gruppe (Geteilt)",
+    "sharedBadge": "Preisbewusst",
+    "sharedDesc": "Preiswerte Buchung pro Sitzplatz mit max. 8–14 Reisenden. Fester Reiseplan und traditionelles Wüstencamp. Termine per WhatsApp erfragen.",
+    "sharedPriceLabel": "Ab ca. 95€ / Pers.",
+    "sharedPriceNote": "Preiswerter Gruppentarif (feste Termine)",
+    "pricingSubtitle": "Transparente Preise für private VIP-Touren und Kleingruppen.",
+    "relatedTagline": "Alternative Marokko-Rundreisen",
+    "relatedTitle": "Entdecken Sie verwandte Rundreisen",
+    "relatedSubtitle": "Entdecken Sie alternative Reisedauern und Routen mit privatem 4x4-Transport und luxuriösen Wüstencamps."
   },
   "excursion": {
     "404": {
@@ -1499,12 +1521,6 @@
       "termsOfService": "AGB",
       "cookieSettings": "Cookie-Einstellungen"
     }
-  },
-  "404": {
-    "title": "Seite Nicht Gefunden | Amsirar Trip",
-    "description": "Die gesuchte Seite existiert nicht oder wurde verschoben.",
-    "message": "Es scheint, als würde dieser Pfad nirgendwohin in Marokko führen. Kehren wir zurück auf die Route.",
-    "cta": "Zurück zur Startseite"
   },
   "notFound": {
     "title": "Seite nicht gefunden",

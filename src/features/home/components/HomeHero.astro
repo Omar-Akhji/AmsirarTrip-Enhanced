@@ -5,6 +5,8 @@ import bg2 from "../../../assets/images/Header/header-2.webp";
 import bg3 from "../../../assets/images/Header/header-3.webp";
 import SliderCards, { type SlideCardItem } from "./SliderCards.astro";
 import SliderDetails from "./SliderDetails.astro";
+import AltArrowLeftIcon from "@/shared/ui/icons/AltArrowLeftIcon.astro";
+import AltArrowRightIcon from "@/shared/ui/icons/AltArrowRightIcon.astro";
 
 interface Props {
   images?: (ImageMetadata | string)[];
@@ -139,7 +141,7 @@ const thumbnailCards: SlideCardItem[] = currentSlides.map((slide) => ({
 
 <section
   id="home-hero-slider-section"
-  class="relative isolate w-full min-h-screen h-dvh overflow-hidden bg-black text-white"
+  class="home-hero-ascii relative isolate w-full min-h-screen h-dvh overflow-hidden bg-black text-white"
   aria-roledescription="carousel"
   aria-label="Amsirar Trip Hero Carousel"
 >
@@ -153,6 +155,7 @@ const thumbnailCards: SlideCardItem[] = currentSlides.map((slide) => ({
         <div
           class="item absolute inset-0 size-full"
           data-index={index}
+          {...(index !== 0 ? { "data-ascii": "skip" } : {})}
         >
           {typeof slide.image === "string" ?
             <Image
@@ -163,6 +166,7 @@ const thumbnailCards: SlideCardItem[] = currentSlides.map((slide) => ({
               loading="eager"
               width={1920}
               height={1080}
+              data-ascii="skip"
               class="size-full object-cover"
             />
           : <Image
@@ -171,11 +175,13 @@ const thumbnailCards: SlideCardItem[] = currentSlides.map((slide) => ({
               decoding="async"
               fetchpriority={index === 0 ? "high" : "low"}
               loading="eager"
+              data-ascii="skip"
               class="size-full object-cover"
             />
           }
           <div
             class="slide-overlay pointer-events-none absolute inset-0 z-1 bg-[linear-gradient(to_bottom,rgb(0_0_0/55%)_0%,rgb(0_0_0/15%)_18%,transparent_32%),linear-gradient(to_top,rgb(0_0_0/40%)_0%,transparent_32%)]"
+            data-ascii="skip"
             aria-hidden="true"
           />
           <SliderDetails
@@ -200,50 +206,25 @@ const thumbnailCards: SlideCardItem[] = currentSlides.map((slide) => ({
       aria-label="Slider navigation and progress"
     >
       <button
+        data-ascii="fade"
         class="prev arrow arrow-left group grid size-12.5 cursor-pointer place-items-center rounded-full border-2 border-white/33 bg-white/5 backdrop-blur-md transition-[transform,background-color,border-color] duration-160 ease-out pointer-fine:hover:border-white/80 pointer-fine:hover:bg-white/10 active:scale-[0.96] motion-reduce:transform-none"
         type="button"
         aria-label="Previous slide"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          class="size-6 text-white/60 transition-colors duration-160 pointer-fine:group-hover:text-white"
-          aria-hidden="true"
-        >
-          <path
-            d="M15.75 19.5L8.25 12l7.5-7.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-          />
-        </svg>
+        <AltArrowLeftIcon class="size-6 text-white/60 transition-colors duration-160 pointer-fine:group-hover:text-white" />
       </button>
       <button
+        data-ascii="fade"
         class="next arrow arrow-right group grid size-12.5 cursor-pointer place-items-center rounded-full border-2 border-white/33 bg-white/5 backdrop-blur-md transition-[transform,background-color,border-color] duration-160 ease-out pointer-fine:hover:border-white/80 pointer-fine:hover:bg-white/10 active:scale-[0.96] motion-reduce:transform-none"
         type="button"
         aria-label="Next slide"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          class="size-6 text-white/60 transition-colors duration-160 pointer-fine:group-hover:text-white"
-          aria-hidden="true"
-        >
-          <path
-            d="M8.25 4.5l7.5 7.5-7.5 7.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-          />
-        </svg>
+        <AltArrowRightIcon class="size-6 text-white/60 transition-colors duration-160 pointer-fine:group-hover:text-white" />
       </button>
 
       <!-- Yellow Progress Band from Marrakech-Tours -->
       <div
+        data-ascii="fade"
         class="progress-sub-container z-60 flex h-12.5 w-[clamp(80px,14vw,220px)] items-center max-lg:w-[clamp(60px,10vw,130px)]"
         aria-hidden="true"
       >
@@ -257,6 +238,7 @@ const thumbnailCards: SlideCardItem[] = currentSlides.map((slide) => ({
 
       <!-- Slide Numbers Counter from Marrakech-Tours -->
       <div
+        data-ascii="fade"
         class="slide-numbers relative z-60 h-12.5 w-11 overflow-hidden"
         id="slide-numbers"
         aria-live="polite"
@@ -279,3 +261,12 @@ const thumbnailCards: SlideCardItem[] = currentSlides.map((slide) => ({
 </section>
 
 <script src="../../../scripts/slider.ts"></script>
+
+<style>
+  .home-hero-ascii {
+    --ascii-glyph: #d4d4d8;
+    --ascii-surface: #09090b;
+    --ascii-accent: #f15d30;
+    --ascii-flash: #f15d30;
+  }
+</style>

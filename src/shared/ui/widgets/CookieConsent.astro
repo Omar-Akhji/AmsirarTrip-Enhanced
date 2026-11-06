@@ -1,8 +1,8 @@
 ---
 import { useTranslations } from "@/i18n/utils";
 import { getRelativeLocaleUrl } from "astro:i18n";
-import { Cookie, X } from "@lucide/astro";
 import TactileSwitch from "../primitives/TactileSwitch.astro";
+import CookieIcon from "@/shared/ui/icons/CookieIcon.astro";
 
 const locale = Astro.currentLocale || "en";
 const t = useTranslations(locale);
@@ -18,13 +18,14 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
   class="pointer-events-none fixed inset-x-4 inset-be-4 z-50 transition-[opacity,transform] duration-200 ease-out opacity-0 translate-y-3 sm:inset-s-auto sm:inset-e-6 sm:inset-be-6 sm:max-w-md md:max-w-lg hidden print:hidden"
   id="cookie-banner"
   role="region"
+  data-ascii="skip"
 >
   <div class="pointer-events-auto relative overflow-hidden rounded-2xl border border-white/10 bg-slate-950 p-5 sm:p-6 text-white shadow-xl">
     <div class="flex items-start gap-4">
       <div class="flex size-10 shrink-0 items-center justify-center rounded-lg border border-orange/20 bg-orange/10 text-orange-400 sm:size-11">
-        <Cookie
+        <CookieIcon
+          aria-hidden="true"
           class="size-5"
-          stroke-width={1.75}
         />
       </div>
 
@@ -117,10 +118,19 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
         type="submit"
         value="cancel"
       >
-        <X
+        <svg
+          aria-hidden="true"
           class="size-4"
-          stroke-width={2}
-        />
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <path d="M18 6 6 18" />
+          <path d="m6 6 12 12" />
+        </svg>
       </button>
     </form>
   </div>
@@ -288,10 +298,23 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
   title={t("cookieConsent.customize", "Cookie Settings")}
   type="button"
 >
-  <Cookie
+  <svg
+    aria-hidden="true"
     class="size-6 shrink-0 text-orange-400 transition-transform duration-200 ease-out pointer-fine:group-hover:scale-110 motion-reduce:transform-none"
-    stroke-width={1.75}
-  />
+    fill="none"
+    stroke="currentColor"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="1.75"
+    viewBox="0 0 24 24"
+  >
+    <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5" />
+    <path d="M8.5 8.5v.01" />
+    <path d="M16 15.5v.01" />
+    <path d="M12 12v.01" />
+    <path d="M11 17v.01" />
+    <path d="M7 14v.01" />
+  </svg>
 </button>
 
 <script src="../../../scripts/cookie-consent.ts"></script>

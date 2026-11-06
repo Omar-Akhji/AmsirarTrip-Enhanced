@@ -1,4 +1,6 @@
 ---
+import { getCollection } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
 import bg4 from "../../assets/images/Excursions/Agafay.webp";
 import bg1 from "../../assets/images/Header/header-1.webp";
 import bg2 from "../../assets/images/Header/header-2.webp";
@@ -11,8 +13,6 @@ import TestimonialsSection from "../../features/home/components/TestimonialsSect
 import VideoSection from "../../features/home/components/VideoSection.vue";
 import { useTranslations } from "../../i18n/utils";
 import Layout from "../../layouts/Layout.astro";
-import { getCollection } from "astro:content";
-import { getRelativeLocaleUrl } from "astro:i18n";
 import {
   generateBreadcrumbJsonLd,
   generateItemListJsonLd,

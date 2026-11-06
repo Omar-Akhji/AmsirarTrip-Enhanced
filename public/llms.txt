@@ -1,25 +1,53 @@
-# Amsirar Trip
+# Amsirar Trip: Specialist Morocco Travel Agency
 
-> Private Sahara desert tours, imperial city excursions, and guided Moroccan itineraries.
-> Last updated: 2026-11-02
+> Amsirar Trip (Amsirar Trip SARL) is an officially licensed Morocco tour operator (License N° 24/TT/RAK, Patente: 45129840, RC Marrakech: 82415) founded in 2004 and headquartered in Marrakech, Morocco. We organize private Sahara desert tours, High Atlas Mountain treks, imperial city circuits, and Marrakech day excursions in English, French, German, and Spanish.
 
-Amsirar Trip is a licensed local Moroccan travel agency based in Marrakech (License No. 24/TT/RAK). Founded in 2004, the agency operates private Sahara desert tours, Atlas Mountain excursions, and cultural circuits across Morocco.
-
-## Agency details
+## Agency Credentials & Contact
+- Official website: https://amsirartrip.com
 - Legal entity: Amsirar Trip SARL
-- Official license: Agrément Ministère du Tourisme N° 24/TT/RAK (Patente: 45129840, RC Marrakech: 82415)
+- Tourism license: Agrément Ministère du Tourisme N° 24/TT/RAK
 - Headquarters: Imm. J appt N° 5, Résidence La Perle de l'Atlas, angle Rue aboubakr, Marrakech, Morocco
-- Founded: 2004
-- Services: Private 4x4 and minivan tours, Erg Chebbi and Erg Chegaga desert camps, camel treks, High Atlas hikes, imperial city circuits, Marrakech day trips
-- Languages: English, French (Français), German (Deutsch), Spanish (Español)
-- Direct booking and contact:
-  - WhatsApp: [+212 661 17 31 44](https://wa.me/212661173144)
-  - Official website: [amsirartrip.com](https://amsirartrip.com)
-  - Email: [amsirare@gmail.com](mailto:amsirare@gmail.com)
+- Phone / WhatsApp: +212 661 17 31 44
+- Email: contact@amsirartrip.com / amsirare@gmail.com
+- Operating hours: Monday - Sunday, 09:00 - 21:00 (GMT+1)
+- Supported languages: English (`/...`), French (`/fr/...`), German (`/de/...`), Spanish (`/es/...`)
 
-## Core navigation and destinations
-- [Home Page](https://amsirartrip.com/): Morocco travel overview, desert expeditions, customer reviews, and trip builder.
-- [Tours](https://amsirartrip.com/tours): Multi-day Morocco tours (Merzouga Desert 3-Days, Imperial Cities & Coastline 5-Days, Grand Moroccan Circuit 10-Days).
-- [Excursions](https://amsirartrip.com/excursions): Private day excursions from Marrakech (Agafay Desert Sunset, Essaouira Coastal Escape, Ouzoud Waterfalls, Imlil & Toubkal Adventure, Hot Air Balloon).
-- [About Us](https://amsirartrip.com/about): Story of Amsirar Trip, licensed local guides, and safety standards.
-- [Contact](https://amsirartrip.com/contact): Direct booking inquiries, tailored itineraries, and WhatsApp support.
+## Multi-Day Morocco Tours
+- [3-Day Desert Tour from Marrakech to Merzouga](https://amsirartrip.com/tours/merzouga-desert-adventure-3-days): 3-day tour from Marrakech to Marrakech (From 280 EUR). Private Sahara desert adventure to Erg Chebbi dunes with Dades Valley, Todra Gorges, and sunset camel trekking.
+- [6-Day Morocco Tour from Casablanca](https://amsirartrip.com/tours/coast-and-cities-explorer-6-days): 6-day tour from Casablanca to Marrakech (From 640 EUR). Explore Casablanca, the blue city of Chefchaouen, imperial Fes, Merzouga Sahara dunes, and Marrakech.
+- [3-Day Desert Tour from Fes to Marrakech](https://amsirartrip.com/tours/caravan-and-kasbah-experience-3-days): 3-day tour from Fes to Marrakech (From 310 EUR). Direct point-to-point desert expedition via Middle Atlas cedar forests, Ziz Valley, Erg Chebbi bivouac, and Kasbah Ait Ben Haddou.
+- [5-Day Imperial Cities Tour from Casablanca](https://amsirartrip.com/tours/imperial-cities-and-coastline-5-days): 5-day tour from Casablanca to Fes (From 520 EUR). Cultural exploration of Rabat, Chefchaouen, Volubilis Roman ruins, Meknes, and imperial Fes medina.
+- [10-Day Grand Morocco Circuit](https://amsirartrip.com/tours/grand-moroccan-circuit-10-days): 10-day tour from Marrakech to Casablanca (From 1150 EUR). Comprehensive Moroccan journey covering Marrakech, Atlas passes, Erg Chebbi desert, Fes, Chefchaouen, Rabat, and Casablanca.
+- [4-Day Desert Tour from Marrakech to Merzouga](https://amsirartrip.com/tours/atlas-and-desert-escape-4-days): 4-day tour from Marrakech to Marrakech (From 390 EUR). Extended Sahara desert itinerary with leisurely exploration of Dades Valley, Todra Gorges, and two nights in the desert region.
+- [4-Day Desert Tour from Agadir to Marrakech](https://amsirartrip.com/tours/coastal-and-desert-odyssey-4-days): 4-day tour from Agadir to Marrakech (From 420 EUR). From the Atlantic coast through Taroudant and saffron capital Taliouine to Merzouga dunes and Marrakech.
+- [Erg Chegaga Desert Tour from Marrakech](https://amsirartrip.com/tours/chegaga-wilderness-expedition-3-days): 3-day tour from Marrakech to Marrakech (From 340 EUR). Off-the-beaten-path Sahara expedition to the wild, towering dunes of Erg Chegaga via Zagora and M'Hamid El Ghizlane.
+- [7-Day Northern Morocco Tour from Tangier](https://amsirartrip.com/tours/northern-heritage-trail-7-days): 7-day tour from Tangier to Marrakech (From 780 EUR). Northern heritage route crossing the Rif Mountains, Chefchaouen, Fes, Middle Atlas, and Marrakech.
+
+## Marrakech Day Excursions
+- [Agafay Desert Sunset Camel Ride & Dinner](https://amsirartrip.com/excursions/agafay-desert-sunset): Agafay Desert (From 45 EUR). Sunset camel trek across stony desert dunes followed by an authentic Berber dinner under canvas tents.
+- [Essaouira Coastal Escape Day Trip](https://amsirartrip.com/excursions/essaouira-coastal-escape): Essaouira (From 35 EUR). Historic Portuguese ramparts, artisan wood workshops, active fishing harbor, and coastal breeze.
+- [Imlil & Toubkal Atlas Adventure](https://amsirartrip.com/excursions/imlil-toubkal-adventure): High Atlas Mountains (From 40 EUR). Guided hike through Berber walnut groves and mountain trails with views of Mount Toubkal (4,167 m).
+- [Ourika Valley & Setti Fatma Waterfalls](https://amsirartrip.com/excursions/ourika-valley-discovery): Ourika Valley (From 30 EUR). Mountain riverbanks, lush valley orchards, and guided hike to the 7 waterfalls of Setti Fatma.
+- [Ouzoud Waterfalls Guided Day Trip](https://amsirartrip.com/excursions/ouzoud-waterfalls-day-trip): Ouzoud Waterfalls (From 35 EUR). Morocco's highest waterfalls (110 m), wild Barbary macaques, and scenic boat ride at the cascade basin.
+- [Marrakech Hot Air Balloon Sunrise Flight](https://amsirartrip.com/excursions/sunrise-hot-air-balloon): Marrakech Palmeraie (From 190 EUR). Sunrise flight over desert plains and Atlas peaks with traditional Berber breakfast in a caidal tent.
+
+## Departure Hubs & Gateways
+- Marrakech (RAK): Gateway to Erg Chebbi (Merzouga), Erg Chegaga, Dades Valley, Ait Ben Haddou, and Agafay Desert.
+- Fes (FEZ): Direct departures crossing the Middle Atlas, Ziz Valley, and Merzouga dunes toward Marrakech.
+- Casablanca (CMN): Grand tours connecting the Atlantic Coast, Imperial Cities (Rabat, Meknes, Fes), and the Sahara.
+- Tangier (TNG): Northern hub connecting ferry arrivals and flights to Chefchaouen, the Rif Mountains, and southward circuits.
+
+## Key Search Routes
+- 3-Day Marrakech to Fes Desert Tour
+- 3-Day Fes to Marrakech Desert Tour
+- 3-Day Marrakech to Merzouga Sahara Adventure
+- 10-Day Grand Moroccan Circuit
+- Marrakech to Agafay Desert Sunset Excursion
+
+## Core Navigation & Sitemaps
+- [Home](https://amsirartrip.com/): Morocco travel overview, desert expeditions, and trip builder.
+- [All Tours](https://amsirartrip.com/tours): Catalog of multi-day tours from Marrakech, Casablanca, Fes, Tangier, and Agadir.
+- [All Excursions](https://amsirartrip.com/excursions): Day trips to Ouzoud, Essaouira, Imlil, Ourika, Agafay, and Hot Air Ballooning.
+- [About Us](https://amsirartrip.com/about): Local Berber heritage, fleet safety, and licensed guides.
+- [Contact](https://amsirartrip.com/contact): Inquiries, custom itineraries, and WhatsApp support.
+- [XML Sitemap](https://amsirartrip.com/sitemap.xml): Complete multilingual XML sitemap with hreflang.

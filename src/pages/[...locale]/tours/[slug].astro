@@ -4,6 +4,7 @@ import { getRelativeLocaleUrl } from "astro:i18n";
 import BookingForm from "../../../features/booking/components/BookingForm.vue";
 import BookingSidebar from "../../../features/booking/components/BookingSidebar.astro";
 import TourLayout from "../../../features/tours/components/TourLayout.astro";
+import { getToursData } from "../../../features/tours/data/tours-data";
 import { useTranslations } from "../../../i18n/utils";
 import Layout from "../../../layouts/Layout.astro";
 import {
@@ -12,6 +13,7 @@ import {
   generateTourJsonLd,
 } from "../../../lib/structured-data";
 import JsonLd from "../../../shared/ui/primitives/JsonLd.astro";
+import TripCard from "../../../shared/ui/widgets/TripCard.astro";
 
 const { slug } = Astro.params;
 const locale = Astro.currentLocale || "en";
@@ -78,6 +80,17 @@ const breadcrumbJsonLd = generateBreadcrumbJsonLd([
   { name: t("nav.tours") || "Tours", url: getRelativeLocaleUrl(locale, "tours") },
   { name: tourTitleClean, url: Astro.url.pathname },
 ]);
+
+const allTours = await getToursData();
+const currentStart = tour.startLocation.toLowerCase();
+const relatedTours = allTours
+  .filter((item) => item.id !== tour.bookingId)
+  .sort((a, b) => {
+    const aSame = a.startLocation === currentStart ? -1 : 1;
+    const bSame = b.startLocation === currentStart ? -1 : 1;
+    return aSame - bSame;
+  })
+  .slice(0, 3);
 ---
 
 <Layout
@@ -120,5 +133,51 @@ const breadcrumbJsonLd = generateBreadcrumbJsonLd([
         locale={locale}
       />
     </BookingForm>
+
+    {relatedTours.length > 0 && (
+      <section
+        aria-labelledby="related-tours-heading"
+        class="border-t border-stone-200 bg-white py-12 sm:py-16 lg:py-24"
+        data-animate="fade-up"
+      >
+        <div class="mx-auto px-4 max-inline-7xl">
+          <div class="mbe-8 sm:mbe-12 flex flex-col gap-4 border-b border-stone-200 pb-6 sm:pb-8">
+            <hgroup class="max-w-2xl space-y-2">
+              <p class="font-sans text-xs font-bold tracking-wider text-orange-700 uppercase">
+                {t("tours.relatedTagline", "Alternative Morocco Circuits")}
+              </p>
+              <h2
+                id="related-tours-heading"
+                class="text-2xl font-bold tracking-tight text-stone-900 sm:text-3xl md:text-4xl text-balance"
+              >
+                {t("tours.relatedTitle", "Explore Companion Desert Itineraries")}
+              </h2>
+              <p class="border-s-2 border-orange-600 ps-4 py-0.5 text-sm sm:text-base text-stone-600 leading-relaxed max-w-[62ch] text-pretty">
+                {t(
+                  "tours.relatedSubtitle",
+                  "Discover alternative durations and route variations crafted with private 4x4 transport and luxury desert camps.",
+                )}
+              </p>
+            </hgroup>
+          </div>
+          <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {relatedTours.map((item) => (
+              <TripCard
+                badge={`${item.duration} Days`}
+                description={t(item.description)}
+                end={t(item.end)}
+                endLabel={t("tours.endLabelShort") || "End"}
+                exploreLink={t("tours.exploreLink")}
+                item={{ image: item.image, imageAlt: t(item.title), route: item.route }}
+                start={t(item.start)}
+                startLabel={t("tours.startLabelShort") || "Start"}
+                title={t(item.title)}
+                tourTypeBadge={t("tours.bothAvailable", "Private & Shared")}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
   </TourLayout>
 </Layout>

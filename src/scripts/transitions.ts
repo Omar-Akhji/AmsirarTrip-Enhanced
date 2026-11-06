@@ -98,15 +98,24 @@ export function resolveSkeletonRoute(pathname: string): string {
   return "default";
 }
 
+let stopActiveSkeleton: (() => void) | null = null;
+
 function showSkeleton(routeKey: string): void {
   cleanupAsciiReveals();
+
+  if (stopActiveSkeleton) {
+    stopActiveSkeleton();
+    stopActiveSkeleton = null;
+  }
 
   const container = document.querySelector<HTMLElement>("#skeleton-container");
   const content = document.querySelector<HTMLElement>("#page-content");
   if (!container || !content) return;
 
-  let targetSkeleton = container.querySelector(`[data-skeleton="${CSS.escape(routeKey)}"]`);
-  targetSkeleton ??= container.querySelector('[data-skeleton="default"]');
+  let targetSkeleton = container.querySelector<HTMLElement>(
+    `[data-skeleton="${CSS.escape(routeKey)}"]`,
+  );
+  targetSkeleton ??= container.querySelector<HTMLElement>('[data-skeleton="default"]');
 
   if (!targetSkeleton) return;
 
@@ -123,14 +132,23 @@ function showSkeleton(routeKey: string): void {
   content.style.opacity = "0";
   content.style.pointerEvents = "none";
 
-  // Animate the ASCII skeleton shimmer on the active skeleton
-  initAsciiSkeletons(targetSkeleton);
+  // Force synchronous layout so getBoundingClientRect() calculates real dimensions
+  void targetSkeleton.offsetHeight;
+
+  // Animate the ASCII skeleton shimmer on the active skeleton with real dimensions
+  stopActiveSkeleton = initAsciiSkeletons(targetSkeleton, { force: true });
 }
 
 function hideSkeleton(): void {
   const container = document.querySelector<HTMLElement>("#skeleton-container");
   const content = document.querySelector<HTMLElement>("#page-content");
   if (!container || !content) return;
+
+  // Dispose running skeleton shimmer canvases and frame loops
+  if (stopActiveSkeleton) {
+    stopActiveSkeleton();
+    stopActiveSkeleton = null;
+  }
 
   // Make content visible immediately
   content.classList.remove("hidden");
@@ -148,8 +166,7 @@ function hideSkeleton(): void {
   }, 100);
 
   // Trigger dither reveal on loaded page content from current viewport position
-  const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
-  triggerPageReveal(content, { origin: { x: window.innerWidth / 2, y: scrollY }, lazy: false });
+  triggerPageReveal(content, { origin: "center", speed: 2, lazy: false });
 }
 
 // Initial page load skeleton with wait

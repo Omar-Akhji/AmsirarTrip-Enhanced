@@ -1,0 +1,67 @@
+---
+import type { ButtonSize, ButtonVariant } from "../primitives/button-variants";
+import AsciiSkeleton from "./AsciiSkeleton.astro";
+
+interface Props {
+  size?: ButtonSize | undefined;
+  variant?: ButtonVariant | undefined;
+  class?: string | undefined;
+  width?: string | number | undefined;
+  rows?: number | undefined;
+  seed?: number | undefined;
+}
+
+const {
+  size = "md",
+  variant = "primary",
+  class: className,
+  width,
+  rows: explicitRows,
+  seed,
+} = Astro.props;
+
+const sizeHeights: Record<ButtonSize, string> = { sm: "h-9", md: "h-11", lg: "h-13" };
+
+const sizeRows: Record<ButtonSize, number> = { sm: 3, md: 3, lg: 4 };
+
+const variantClasses: Record<ButtonVariant, string> = {
+  primary:
+    "text-stone-400 bg-stone-200/60 border border-stone-300/80 dark:text-stone-400 dark:bg-stone-800/60 dark:border-stone-700/80",
+  secondary:
+    "text-stone-400 bg-stone-200/50 border border-stone-300/60 dark:text-stone-400 dark:bg-stone-800/50 dark:border-stone-700/60",
+  outline:
+    "text-stone-500 bg-stone-100 border border-stone-300 dark:bg-stone-900 dark:border-stone-800 dark:text-stone-400",
+  ghost: "text-stone-400 bg-stone-200/40 dark:bg-stone-800/40",
+  tripadvisor:
+    "text-stone-400 bg-stone-200/60 border border-stone-300/80 dark:text-stone-400 dark:bg-stone-800/60 dark:border-stone-700/80",
+  whatsapp:
+    "text-stone-400 bg-stone-200/60 border border-stone-300/80 dark:text-stone-400 dark:bg-stone-800/60 dark:border-stone-700/80",
+  danger:
+    "text-stone-400 bg-stone-200/60 border border-stone-300/80 dark:text-stone-400 dark:bg-stone-800/60 dark:border-stone-700/80",
+  card: "w-full text-stone-400 bg-stone-200/70 border border-stone-300/80 dark:bg-stone-800/70 dark:border-stone-700/80",
+};
+
+const rows = explicitRows ?? sizeRows[size];
+---
+
+<AsciiSkeleton
+  class:list={[
+    "inline-flex items-center justify-center rounded-full overflow-hidden select-none",
+    sizeHeights[size],
+    variantClasses[variant],
+    className,
+  ]}
+  rows={rows}
+  seed={seed}
+  style={[
+    "--ars-radius: 999px;",
+    width ?
+      typeof width === "number" ?
+        `width: ${width}px;`
+      : `width: ${width};`
+    : undefined,
+  ]
+    .filter(Boolean)
+    .join(" ")}
+  variant="dither"
+/>

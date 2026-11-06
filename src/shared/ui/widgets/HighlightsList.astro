@@ -1,5 +1,5 @@
 ---
-import { BadgeCheck } from "@lucide/astro";
+import VerifiedCheckIcon from "@/shared/ui/icons/VerifiedCheckIcon.astro";
 
 interface Props {
   readonly highlights: readonly string[];
@@ -8,12 +8,7 @@ interface Props {
   readonly kicker?: string | undefined;
 }
 
-const {
-  highlights,
-  highlightsTitle,
-  idPrefix = "trip",
-  kicker = "Trip Highlights",
-} = Astro.props;
+const { highlights, highlightsTitle, idPrefix = "trip", kicker = "Trip Highlights" } = Astro.props;
 ---
 
 <div
@@ -22,9 +17,7 @@ const {
 >
   <section aria-labelledby={`${idPrefix}-highlights-title`}>
     <hgroup class="mbe-4">
-      <p class="font-sans text-xs font-bold tracking-wider text-orange-700 uppercase">
-        {kicker}
-      </p>
+      <p class="font-sans text-xs font-bold tracking-wider text-orange-700 uppercase">{kicker}</p>
       <h3
         class="mbs-1 text-xl font-bold tracking-tight text-stone-900 sm:text-2xl md:text-3xl"
         id={`${idPrefix}-highlights-title`}
@@ -33,14 +26,17 @@ const {
       </h3>
     </hgroup>
 
-    <div class="rounded-2xl border border-stone-200/90 bg-white p-5 sm:p-6 shadow-2xs">
+    <div
+      class="rounded-2xl border border-stone-200/90 bg-white p-5 sm:p-6 shadow-2xs"
+      data-ascii="surface"
+    >
       <ul
         role="list"
         class="m-0 p-0 list-none grid gap-x-6 gap-y-3.5 sm:grid-cols-2"
       >
         {highlights.map((highlight) => (
           <li class="flex items-start gap-3">
-            <BadgeCheck
+            <VerifiedCheckIcon
               aria-hidden="true"
               class="mbs-0.5 size-5 shrink-0 text-orange-600"
             />

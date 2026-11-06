@@ -1,4 +1,10 @@
 {
+  "404": {
+    "title": "Página No Encontrada | Amsirar Trip",
+    "description": "La página que buscas no existe o ha sido movida.",
+    "message": "Parece que el camino que tomaste no lleva a ninguna parte en Marruecos. Volvamos a la ruta.",
+    "cta": "Volver al Inicio"
+  },
   "helplineTitle": "Para más consultas :",
   "helplineNumber": "+212 (0) 6 61 17 31 44",
   "validations": {
@@ -206,7 +212,23 @@
     "duration": "Duración",
     "days": "Días",
     "start": "Inicio",
-    "end": "Fin"
+    "end": "Fin",
+    "tourTypeLabel": "Formato del Tour",
+    "tourTypeValue": "Privado VIP & Compartido",
+    "bothAvailable": "Privado & Compartido",
+    "formatComparisonTitle": "Formatos de Tour Disponibles",
+    "privateOption": "Salida Privada VIP",
+    "privateOptionBadge": "Más Popular",
+    "privateOptionDesc": "Vehículo con aire acondicionado exclusivo, chófer-guía bereber privado, horarios flexibles y paradas fotográficas a tu ritmo.",
+    "sharedOption": "Grupo Reducido Compartido",
+    "sharedBadge": "Económico",
+    "sharedDesc": "Tarifa económica por persona con grupo de máx. 8–14 viajeros. Itinerario fijo y campamento tradicional. Consulta fechas por WhatsApp.",
+    "sharedPriceLabel": "Desde ~95€ / pers.",
+    "sharedPriceNote": "Tarifa compartida económica (fechas programadas)",
+    "pricingSubtitle": "Precios claros tanto para rutas privadas VIP como salidas en grupo.",
+    "relatedTagline": "Circuitos Alternativos por Marruecos",
+    "relatedTitle": "Descubra otros itinerarios recomendados",
+    "relatedSubtitle": "Explore diferentes duraciones y variantes de rutas con transporte 4x4 privado y campamentos de lujo en el desierto."
   },
   "excursion": {
     "404": {
@@ -1494,12 +1516,6 @@
       "termsOfService": "Términos de Servicio",
       "cookieSettings": "Ajustes de cookies"
     }
-  },
-  "404": {
-    "title": "Página No Encontrada | Amsirar Trip",
-    "description": "La página que buscas no existe o ha sido movida.",
-    "message": "Parece que el camino que tomaste no lleva a ninguna parte en Marruecos. Volvamos a la ruta.",
-    "cta": "Volver al Inicio"
   },
   "notFound": {
     "title": "Página no encontrada",

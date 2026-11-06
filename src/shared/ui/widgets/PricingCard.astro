@@ -7,6 +7,13 @@ interface Props {
   readonly reserveNow?: string | undefined;
   readonly reserveHref?: string | undefined;
   readonly kicker?: string | undefined;
+  readonly formatComparisonTitle?: string | undefined;
+  readonly privateOption?: string | undefined;
+  readonly privateBadge?: string | undefined;
+  readonly privateDesc?: string | undefined;
+  readonly sharedOption?: string | undefined;
+  readonly sharedBadge?: string | undefined;
+  readonly sharedDesc?: string | undefined;
 }
 
 const {
@@ -15,6 +22,13 @@ const {
   priceLabel,
   price,
   kicker = "Rates & Reservations",
+  formatComparisonTitle,
+  privateOption,
+  privateBadge,
+  privateDesc,
+  sharedOption,
+  sharedBadge,
+  sharedDesc,
 } = Astro.props;
 ---
 
@@ -25,28 +39,97 @@ const {
   <section
     aria-labelledby={`${idPrefix}-pricing-title`}
     class="rounded-2xl border border-stone-200/90 bg-stone-50/80 p-6 sm:p-8 shadow-xs"
+    data-ascii="surface"
   >
-    <div class="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-      <div class="space-y-1">
-        <hgroup class="space-y-1">
-          <p class="font-sans text-xs font-bold tracking-wider text-orange-700 uppercase">
-            {kicker}
-          </p>
-          <h3
-            class="text-xl font-bold tracking-tight text-stone-900 sm:text-2xl"
-            id={`${idPrefix}-pricing-title`}
-          >
-            {pricingTitle}
-          </h3>
-        </hgroup>
-        <p class="font-sans text-xs font-semibold tracking-wider text-stone-500 uppercase pbs-1">
-          {priceLabel}
-        </p>
-        <p class="font-mono text-3xl font-bold text-orange-600 tabular-nums pbs-0.5">
-          {price.label}
-        </p>
-        <p class="font-sans text-xs text-stone-600 leading-relaxed max-w-[62ch]">{price.note}</p>
+    <div class="space-y-6">
+      <div class="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+        <div class="space-y-1">
+          <hgroup class="space-y-1">
+            <p class="font-sans text-xs font-bold tracking-wider text-orange-700 uppercase">
+              {kicker}
+            </p>
+            <h3
+              class="text-xl font-bold tracking-tight text-stone-900 sm:text-2xl"
+              id={`${idPrefix}-pricing-title`}
+            >
+              {pricingTitle}
+            </h3>
+          </hgroup>
+          {!privateOption && (
+            <>
+              <p class="font-sans text-xs font-semibold tracking-wider text-stone-500 uppercase pbs-1">
+                {priceLabel}
+              </p>
+              <p class="font-mono text-3xl font-bold text-orange-600 tabular-nums pbs-0.5">
+                {price.label}
+              </p>
+            </>
+          )}
+          <p class="font-sans text-xs text-stone-600 leading-relaxed">{price.note}</p>
+        </div>
       </div>
+
+      {/* Tour Format Comparison */}
+      {privateOption && (
+        <div class="border-t border-stone-200/80 pt-6 dark:border-stone-800">
+          <p class="mbe-3 font-sans text-xs font-bold tracking-wider text-stone-500 uppercase">
+            {formatComparisonTitle || "Available Tour Formats"}
+          </p>
+          <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+            {/* Option 1: Private VIP */}
+            <div class="relative flex flex-col justify-between rounded-xl border-2 border-orange-600/30 bg-white p-4.5 shadow-2xs dark:border-orange-500/30 dark:bg-stone-900/90">
+              <div>
+                <div class="flex items-center justify-between gap-2 border-b border-stone-100 pb-2.5 dark:border-stone-800">
+                  <span class="font-sans text-sm font-bold text-stone-900 dark:text-stone-100">
+                    {privateOption}
+                  </span>
+                  {privateBadge && (
+                    <span class="rounded-full border border-orange-200/60 bg-orange-50 px-2 py-0.5 text-[10px] font-semibold text-orange-700 dark:border-orange-800/60 dark:bg-orange-950/50 dark:text-orange-300">
+                      {privateBadge}
+                    </span>
+                  )}
+                </div>
+                <p class="pt-2.5 font-sans text-xs leading-relaxed text-stone-600 dark:text-stone-300">
+                  {privateDesc}
+                </p>
+              </div>
+              <div class="mbs-3 flex flex-col gap-0.5 border-t border-stone-100 pt-2.5 font-mono dark:border-stone-800">
+                <span class="text-xs text-stone-500">Personal Driver & 4x4</span>
+                <span class="text-base font-bold text-orange-600 dark:text-orange-400 tabular-nums">
+                  {price.label}
+                </span>
+              </div>
+            </div>
+
+            {/* Option 2: Small Group Shared */}
+            {sharedOption && (
+              <div class="relative flex flex-col justify-between rounded-xl border border-stone-200 bg-white/70 p-4.5 shadow-2xs dark:border-stone-800 dark:bg-stone-900/60">
+                <div>
+                  <div class="flex items-center justify-between gap-2 border-b border-stone-100 pb-2.5 dark:border-stone-800">
+                    <span class="font-sans text-sm font-bold text-stone-800 dark:text-stone-200">
+                      {sharedOption}
+                    </span>
+                    {sharedBadge && (
+                      <span class="rounded-full border border-emerald-200/60 bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold text-emerald-700 dark:border-emerald-800/60 dark:bg-emerald-950/50 dark:text-emerald-300">
+                        {sharedBadge}
+                      </span>
+                    )}
+                  </div>
+                  <p class="pt-2.5 font-sans text-xs leading-relaxed text-stone-600 dark:text-stone-400">
+                    {sharedDesc}
+                  </p>
+                </div>
+                <div class="mbs-3 flex flex-col gap-0.5 border-t border-stone-100 pt-2.5 font-mono dark:border-stone-800">
+                  <span class="text-xs text-stone-500">Group departures</span>
+                  <span class="text-base font-bold text-emerald-600 dark:text-emerald-400">
+                    Inquire via WhatsApp
+                  </span>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   </section>
 </div>

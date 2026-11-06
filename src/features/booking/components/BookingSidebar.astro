@@ -1,8 +1,8 @@
 ---
 import { useTranslations } from "@/i18n/utils";
 import Button from "@/shared/ui/primitives/Button.astro";
-import { ExternalLink } from "@lucide/astro";
-import { Image } from "astro:assets";
+import SquareTopDownIcon from "@/shared/ui/icons/SquareTopDownIcon.astro";
+import TripAdvisorIcon from "@/shared/ui/icons/TripAdvisorIcon.astro";
 
 interface Props {
   locale?: string;
@@ -18,61 +18,64 @@ const perks = [
 ];
 ---
 
-<aside class="overflow-hidden rounded-2xl bg-slate-950 p-6 text-white shadow-xl block-full lg:p-8">
-  <div class="flex flex-col gap-8">
-    <div class="flex flex-col items-center gap-3 text-center">
-      <p class="font-mono text-xs font-semibold tracking-[0.16em] text-orange-400 uppercase">
-        {t("booking.checkBadge", "Check us")}
+<aside
+  class="group relative flex flex-col justify-between rounded-2xl border border-slate-900 bg-slate-950 p-6 text-white shadow-xl transition-all duration-300 block-full hover:-translate-y-1 hover:border-slate-800 hover:shadow-2xl sm:p-8"
+  data-ascii="surface"
+  style="
+
+--ascii-glyph: #cbd5e1; --ascii-surface: #020617;"
+>
+  <div class="flex h-full flex-col justify-between">
+    <div class="space-y-4 sm:space-y-6">
+      <hgroup class="flex flex-col items-center gap-2 sm:gap-2.5 text-center">
+        <p class="font-mono text-xs font-semibold tracking-[0.16em] sm:tracking-[0.2em] text-orange-400 uppercase">
+          {t("booking.checkBadge", "Check us")}
+        </p>
+        <h3 class="mbs-1 font-sans text-2xl font-semibold tracking-tight sm:text-3xl text-balance">
+          {t("booking.checkTitle", "Find us on TripAdvisor")}
+        </h3>
+        <div class="inline-flex size-24 sm:size-28 lg:size-32 items-center justify-center rounded-full border border-slate-800 bg-slate-900/60 p-3 sm:p-4 shadow-inner ring-1 ring-white/5">
+          <TripAdvisorIcon class="size-16 sm:size-20 text-white" />
+        </div>
+      </hgroup>
+
+      <div class="mx-auto flex w-fit items-center gap-3 rounded-xl border border-slate-800 bg-slate-900/60 px-4 py-2.5 sm:py-3 shadow-xs">
+        <div class="font-mono text-2xl leading-none font-extrabold text-amber-300 tabular-nums">
+          5.0
+        </div>
+        <div class="font-sans text-xs text-slate-200">
+          {t("booking.ratingLabel", "Average guest rating")}
+          <span class="block font-sans text-xs font-medium text-amber-200">
+            {t("booking.reviewCount", "Based on 180+ verified reviews")}
+          </span>
+        </div>
+      </div>
+
+      <p class="font-sans text-xs sm:text-sm leading-relaxed text-slate-300 text-pretty text-center sm:text-start">
+        {t(
+          "booking.checkCopy",
+          "Read honest reviews and, if you prefer, request your booking directly through our TripAdvisor listing.",
+        )}
       </p>
-      <h3 class="mbs-1 font-sans text-2xl font-semibold tracking-tight sm:text-3xl">
-        {t("booking.checkTitle", "Find us on TripAdvisor")}
-      </h3>
-      <div class="inline-flex size-36 items-center justify-center rounded-full border border-slate-800 bg-slate-900/60 p-4 shadow-inner ring-1 ring-white/5">
-        <Image
-          src="/icons/tripadvisor-nav_icon.svg"
-          alt={t("booking.tripadvisorAlt", "TripAdvisor icon")}
-          width={96}
-          height={96}
-          loading="lazy"
-          decoding="async"
-          class="size-24 object-contain"
-        />
-      </div>
+
+      <address class="not-italic">
+        <ul class="space-y-3 sm:space-y-4 font-sans text-sm m-0 p-0 list-none">
+          {perks.map((perk, index) => (
+            <li class="grid grid-cols-[28px_1fr] sm:grid-cols-[32px_1fr] items-center gap-3">
+              <span class="inline-flex size-7 sm:size-8 shrink-0 items-center justify-center rounded-full bg-white/10 text-orange-300 font-mono text-xs font-bold tabular-nums border border-white/5">
+                0{index + 1}
+              </span>
+              <span class="font-mono text-xs leading-relaxed text-slate-200 sm:text-sm">
+                {perk.text}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </address>
     </div>
 
-    <div class="mx-auto flex w-fit items-center gap-3 rounded-xl border border-slate-800 bg-slate-900/60 px-4 py-3">
-      <div class="font-mono text-2xl leading-none font-extrabold text-amber-300 tabular-nums">
-        5.0
-      </div>
-      <div class="font-sans text-xs text-slate-200">
-        {t("booking.ratingLabel", "Average guest rating")}
-        <span class="block font-sans text-xs font-medium text-amber-200">
-          {t("booking.reviewCount", "Based on 180+ verified reviews")}
-        </span>
-      </div>
-    </div>
-
-    <p class="font-sans text-sm leading-relaxed text-slate-300">
-      {t(
-        "booking.checkCopy",
-        "Read honest reviews and, if you prefer, request your booking directly through our TripAdvisor listing.",
-      )}
-    </p>
-
-    <ul class="grid gap-4 font-sans text-sm">
-      {perks.map((perk, index) => (
-        <li class="inline-flex items-center gap-3">
-          <span class="inline-flex size-6 shrink-0 items-center justify-center rounded-full bg-orange-500/20 text-orange-400 font-mono text-xs font-bold tabular-nums">
-            {index + 1}
-          </span>
-          <span class="flex-1 font-sans text-xs leading-relaxed text-slate-200 sm:text-sm">
-            {perk.text}
-          </span>
-        </li>
-      ))}
-    </ul>
-
-    <div class="flex flex-col items-center justify-center gap-3 sm:flex-row">
+    <!-- Bottom Action Row: baseline aligned with Booking Form submit row -->
+    <div class="mbs-6 flex flex-col items-center justify-center gap-3 sm:flex-row sm:items-center min-h-12.25">
       <Button
         href="https://www.tripadvisor.com/Attraction_Review-g293734-d32584739-Reviews-Amsirar_Travel-Marrakech_Marrakech_Safi.html"
         target="_blank"
@@ -82,7 +85,7 @@ const perks = [
         aria-label={t("booking.tripadvisorCtaAria", "Open TripAdvisor reviews in new tab")}
       >
         <span>{t("booking.checkCta", "Check reviews & book")}</span>
-        <ExternalLink
+        <SquareTopDownIcon
           class="size-4"
           aria-hidden="true"
         />

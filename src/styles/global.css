@@ -26,9 +26,17 @@
 }
 
 @font-face {
-  font-family: "JetBrains Mono";
-  src: url("/fonts/JetBrainsMono-Regular.woff2") format("woff2");
+  font-family: "DM Mono";
+  src: url("/fonts/DMMono-Regular.woff2") format("woff2");
   font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "DM Mono";
+  src: url("/fonts/DMMono-Medium.woff2") format("woff2");
+  font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
@@ -43,40 +51,35 @@
   /* Typography */
   --font-sans:
     "Montserrat", system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", roboto, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Code", "Fira Code", monospace;
+  --font-mono: "DM Mono", ui-monospace, "Cascadia Code", "Fira Code", monospace;
   --font-brand: "Yellowtail", cursive;
 
   /* Breakpoints */
   --breakpoint-tablet: 768px;
-  --breakpoint-desktop: 1090px;
-
-  /* Surfaces */
-  --color-canvas: oklch(98.5% 0.006 65deg);
-  --color-surface: oklch(99.5% 0.003 65deg);
-  --color-sunken: oklch(96% 0.008 65deg);
-  --color-line: oklch(90% 0.008 65deg);
-  --color-line-subtle: oklch(94% 0.006 65deg);
 
   /* Text */
   --color-ink: oklch(15% 0.01 65deg);
-  --color-ink-muted: oklch(40% 0.01 65deg);
-  --color-ink-subtle: oklch(55% 0.008 65deg);
 
-  /* Brand accent: terracotta (Moroccan clay) */
-  --color-accent: oklch(56% 0.19 33deg);
-  --color-accent-hover: oklch(50% 0.2 33deg);
-  --color-accent-ink: oklch(99% 0.005 65deg);
-  --color-orange: oklch(56% 0.19 33deg);
-  --color-orange-dark: oklch(51% 0.18 36deg);
+  /* Brand accent: Unified Pacific Orange (#f15d30) */
+  --color-orange: #f15d30;
+  --color-orange-dark: #d94a1f;
 
-  /* Golden amber */
-  --color-yellow: oklch(84% 0.18 90deg);
-  --color-amber-orange: oklch(72% 0.17 35deg);
+  /* Golden highlight for button & navlink gradients (radiant base: #f15d30) */
+  --color-yellow: #ffb70f;
+  --color-amber-orange: #f78848;
 
-  /* Status */
-  --color-success: oklch(55% 0.13 150deg);
-  --color-warning: oklch(72% 0.15 75deg);
-  --color-danger: oklch(55% 0.19 25deg);
+  /* United Tailwind Orange scale anchored on #f15d30 for UI consistency */
+  --color-orange-50: oklch(98% 0.02 36.9deg);
+  --color-orange-100: oklch(95% 0.04 36.9deg);
+  --color-orange-200: oklch(90% 0.08 36.9deg);
+  --color-orange-300: oklch(82% 0.13 36.9deg);
+  --color-orange-400: oklch(74% 0.17 36.9deg);
+  --color-orange-500: #f15d30;
+  --color-orange-600: #f15d30;
+  --color-orange-700: #f15d30;
+  --color-orange-800: #d94a1f;
+  --color-orange-900: #b53812;
+  --color-orange-950: #782106;
 
   /* External brands */
   --color-whatsapp: oklch(76% 0.18 153deg);
@@ -85,22 +88,11 @@
   --color-tripadvisor-dark: #2bc48d;
   --color-gmail: #ea4335;
 
-  /* Neutrals (legacy names, still used in markup) */
-  --color-white: oklch(100% 0 0deg);
-  --color-black: oklch(0% 0 0deg);
-  --color-light-grey: oklch(97% 0.005 65deg);
-  --color-light-grey-alt: oklch(96.5% 0.005 65deg);
-  --color-light-grey-alt2: oklch(91% 0.01 65deg);
-  --color-grey: oklch(51% 0.008 65deg);
-  --color-grey-alt: oklch(48% 0.008 65deg);
-  --color-grey-close: oklch(50% 0.008 65deg);
+  /* Dark shades for navigation scroll states */
   --color-dark: oklch(10% 0.006 65deg);
   --color-dark-grey: oklch(8% 0.005 65deg);
-  --color-footer-start: oklch(11% 0.005 65deg);
-  --color-footer-end: oklch(13% 0.005 65deg);
 
-  /* Radius */
-  --radius-xs: 4px;
+  /* Radius (referenced in carousel sizing) */
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
@@ -108,30 +100,13 @@
   /* Layout */
   --spacing-navbar: 4rem;
 
-  /* Fluid Spacing (Scale smoothly with viewport size without breakpoint jumps) */
-  --spacing-section: clamp(3rem, 2rem + 4.5vw, 7rem);
+  /* Fluid Spacing */
   --spacing-gap: clamp(1rem, 0.75rem + 1.2vw, 2rem);
   --spacing-gap-tight: clamp(0.75rem, 0.6rem + 0.4vw, 1.125rem);
   --spacing-gutter: clamp(1rem, 0.6rem + 1.8vw, 2.5rem);
 
-  /* Fluid Typography (Defined once, scales continuously without stepping) */
+  /* Fluid Typography */
   /* stylelint-disable custom-property-pattern */
-  --text-display: clamp(2.25rem, 1.5rem + 3.2vw, 4.25rem);
-  --text-display--line-height: 1.1;
-  --text-display--letter-spacing: -0.03em;
-  --text-display--font-weight: 800;
-  --text-h1: clamp(1.85rem, 1.35rem + 2.2vw, 3.25rem);
-  --text-h1--line-height: 1.15;
-  --text-h1--letter-spacing: -0.025em;
-  --text-h1--font-weight: 700;
-  --text-h2: clamp(1.45rem, 1.15rem + 1.3vw, 2.25rem);
-  --text-h2--line-height: 1.25;
-  --text-h2--letter-spacing: -0.02em;
-  --text-h2--font-weight: 700;
-  --text-h3: clamp(1.2rem, 1.05rem + 0.65vw, 1.625rem);
-  --text-h3--line-height: 1.35;
-  --text-h3--letter-spacing: -0.015em;
-  --text-h3--font-weight: 600;
   --text-lead: clamp(1.05rem, 0.98rem + 0.35vw, 1.25rem);
   --text-lead--line-height: 1.7;
   --text-fluid-base: clamp(0.9375rem, 0.9rem + 0.16vw, 1.0625rem);
@@ -143,10 +118,6 @@
   /* Motion */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --animate-fade-in-scale: fade-in-scale 0.2s var(--ease-out-expo);
-  --animate-reveal-fade-up: reveal-fade-up 750ms var(--ease-out-expo) both;
-  --animate-reveal-zoom-in: reveal-zoom-in 650ms var(--ease-out-expo) both;
-  --animate-reveal-slide-right: reveal-creative-slide-right 750ms var(--ease-out-expo) both;
-  --animate-reveal-slide-left: reveal-creative-slide-left 750ms var(--ease-out-expo) both;
 
   @keyframes fade-in-scale {
     from {
@@ -159,14 +130,6 @@
       transform: scale(1);
     }
   }
-}
-
-/* Dynamic runtime theme variables (inline utility bindings) */
-@theme inline {
-  --font-ascii: var(--ascii-font);
-  --color-ascii-skeleton: var(--ascii-skeleton);
-  --color-ascii-accent: var(--ascii-accent);
-  --color-ars-wave: var(--ars-wave-color);
 }
 
 /* ==========================================================================
@@ -220,24 +183,9 @@
 
   @supports (-moz-appearance: none) {
     scrollbar-width: thin;
-    scrollbar-color: color-mix(in sRGB, var(--scrollbar-theme, hsl(0deg 0% 75%)), transparent 28%) transparent;
+    scrollbar-color: color-mix(in sRGB, var(--scrollbar-theme, hsl(0deg 0% 75%)), transparent 28%)
+      transparent;
   }
-}
-
-/* Autofit Grids: Automatically fit columns to container space without rigid media queries */
-@utility grid-autofit-sm {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
-}
-
-@utility grid-autofit-md {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
-}
-
-@utility grid-autofit-lg {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr));
 }
 
 /* ==========================================================================
@@ -251,33 +199,34 @@
      ------------------------------------------------------------------------ */
 
   :root {
-    accent-color: var(--color-accent);
+    accent-color: var(--color-orange);
     color-scheme: light;
     interpolate-size: allow-keywords;
 
-    /* Page backdrop: tiled radial pattern painted on <html> */
-    --c1: var(--color-light-grey);
-    --c2: oklch(83% 0.006 65deg);
-    --s: 154px;
-    --gradient-pattern:
-      var(--c1) 0% 5%, var(--c2) 6% 15%, var(--c1) 16% 25%, var(--c2) 26% 35%, var(--c1) 36% 45%,
-      var(--c2) 46% 55%, var(--c1) 56% 65%, var(--c2) 66% 75%, var(--c1) 76% 85%, var(--c2) 86% 95%,
-      #0000 96%;
+    /* Page backdrop: Moroccan geometric star pattern */
+    --pattern-bg-color: #efefef;
+    --pattern-bg-image: url("/patterns/moroccan-geometric.svg");
+    --pattern-bg-size: 350px 350px;
 
     /* ASCII reveal & skeleton loading */
-    --ascii-font: var(--font-mono);
-    --ascii-skeleton: #9ca3af; /* zinc-400 */
-    --ascii-accent: #ea580c; /* orange-600 */
-    --ars-wave-color: #3f3f46; /* zinc-700 */
-    --ars-radius: 12px;
+    --ascii-font: "Geist Mono", "DM Mono", ui-monospace, "SF Mono", menlo, consolas, monospace;
+    --ascii-skeleton: #78716c; /* neutral gray skeleton glyphs */
+    --ascii-accent: #f15d30; /* pacific orange */
+    --ars-wave-color: currentColor;
+    --ars-radius: 8px;
   }
 
   /* Must stay after :root (same specificity, source order decides) */
-  .dark,
-  [data-theme="dark"] {
-    --ascii-skeleton: #71717a; /* zinc-500 */
-    --ascii-accent: #f97316; /* orange-500 */
-    --ars-wave-color: #f4f4f5; /* zinc-100 */
+  .dark {
+    --ascii-skeleton: #a8a29e; /* neutral gray skeleton glyphs */
+    --ascii-accent: #f15d30; /* pacific orange */
+    --ascii-glyph: #d4d4d8;
+    --ascii-surface: #09090b;
+    --ars-wave-color: currentColor;
+
+    /* Dark mode backdrop pattern */
+    --pattern-bg-color: #09090b;
+    --pattern-bg-image: url("/patterns/moroccan-geometric-dark.svg");
   }
 
   /* ------------------------------------------------------------------------
@@ -294,13 +243,10 @@
     overflow: hidden auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    background:
-      radial-gradient(50% 50% at 100% 0, var(--gradient-pattern)),
-      radial-gradient(50% 50% at 0 100%, var(--gradient-pattern)),
-      radial-gradient(50% 50%, var(--gradient-pattern)),
-      radial-gradient(50% 50%, var(--gradient-pattern)) calc(var(--s) / 2) calc(var(--s) / 2)
-        var(--c1);
-    background-size: var(--s) var(--s);
+    background-color: var(--pattern-bg-color);
+    background-image: var(--pattern-bg-image);
+    background-repeat: repeat;
+    background-size: var(--pattern-bg-size);
   }
 
   body {
@@ -312,6 +258,10 @@
     font-size: 1rem;
     line-height: 1.6;
     color: var(--color-ink);
+    background-color: var(--pattern-bg-color);
+    background-image: var(--pattern-bg-image);
+    background-repeat: repeat;
+    background-size: var(--pattern-bg-size);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-feature-settings:
@@ -326,7 +276,7 @@
   }
 
   ::selection {
-    background: color-mix(in oklch, var(--color-accent) 20%, transparent);
+    background: color-mix(in oklch, var(--color-orange) 20%, transparent);
     color: inherit;
   }
 
@@ -360,12 +310,12 @@
     cursor: pointer;
   }
 
-  :is(button, [type="button"], [type="submit"], [type="reset"], [role="button"], .btn) {
-    font-family: var(--font-mono, "JetBrains Mono", ui-monospace, monospace);
+  :is(button, [type="button"], [type="submit"], [type="reset"], [role="button"]) {
+    font-family: var(--font-mono, "DM Mono", ui-monospace, monospace);
   }
 
-  ::-webkit-calendar-picker-indicator {
-    filter: invert(1);
+  hgroup p {
+    font-family: var(--font-mono, "DM Mono", ui-monospace, monospace);
   }
 
   /* ------------------------------------------------------------------------
@@ -506,76 +456,20 @@
       --reveal-delay: 0ms;
     }
 
-    &.delay-75 {
-      --reveal-delay: 75ms;
-    }
-
-    &:is(.delay-80, .delay-\[80ms\]) {
-      --reveal-delay: 80ms;
-    }
-
     &.delay-100 {
       --reveal-delay: 100ms;
-    }
-
-    &:is(.delay-120, .delay-\[120ms\]) {
-      --reveal-delay: 120ms;
-    }
-
-    &.delay-150 {
-      --reveal-delay: 150ms;
-    }
-
-    &:is(.delay-160, .delay-\[160ms\]) {
-      --reveal-delay: 160ms;
     }
 
     &.delay-200 {
       --reveal-delay: 200ms;
     }
 
-    &:is(.delay-240, .delay-\[240ms\]) {
-      --reveal-delay: 240ms;
-    }
-
     &.delay-300 {
       --reveal-delay: 300ms;
     }
 
-    &:is(.delay-320, .delay-\[320ms\]) {
-      --reveal-delay: 320ms;
-    }
-
-    &:is(.delay-360, .delay-\[360ms\]) {
-      --reveal-delay: 360ms;
-    }
-
-    &:is(.delay-400, .delay-\[400ms\]) {
-      --reveal-delay: 400ms;
-    }
-
     &:is(.delay-450, .delay-\[450ms\]) {
       --reveal-delay: 450ms;
-    }
-
-    &:is(.delay-480, .delay-\[480ms\]) {
-      --reveal-delay: 480ms;
-    }
-
-    &.delay-500 {
-      --reveal-delay: 500ms;
-    }
-
-    &:is(.delay-560, .delay-\[560ms\]) {
-      --reveal-delay: 560ms;
-    }
-
-    &:is(.delay-600, .delay-\[600ms\]) {
-      --reveal-delay: 600ms;
-    }
-
-    &:is(.delay-640, .delay-\[640ms\]) {
-      --reveal-delay: 640ms;
     }
 
     &.delay-700 {
@@ -936,16 +830,26 @@
      --ars-* variables; shapes (.ars-image, .ars-hero-bg, pills) size the block.
      ------------------------------------------------------------------------ */
 
-  :where(.ars) {
-    --ars-base: 0.28;
-    --ars-wave: 0.95;
+  :where(.ars),
+  .ars {
+    --ars-base: 0.3;
+    --ars-wave: 0.9;
     --ars-band: 45%;
     --ars-speed: 1.8s;
 
     position: relative;
     display: block;
-    font-family: var(--ascii-font);
-    color: var(--ascii-skeleton);
+    font-family: var(
+      --ascii-font,
+      "DM Mono",
+      ui-monospace,
+      "SF Mono",
+      menlo,
+      consolas,
+      monospace
+    ) !important;
+    font-variant-ligatures: none;
+    color: var(--ascii-skeleton, #78716c);
     user-select: none;
     pointer-events: none;
   }
@@ -966,13 +870,14 @@
 
   .ars-block {
     line-height: 1;
-    border-radius: var(--ars-radius);
-    background: color-mix(in oklch, currentColor 8%, transparent);
+    border-radius: var(--ars-radius, 8px);
+    background: color-mix(in sRGB, currentColor 6%, transparent);
   }
 
   .ars-base {
     display: block;
     opacity: var(--ars-base);
+    text-align: start !important;
   }
 
   /* Physical offsets on purpose: the engine positions the canvas, not the text flow */
@@ -987,11 +892,6 @@
   .text-center {
     & .ars-line {
       margin-inline: auto !important;
-      text-align: center;
-    }
-
-    & .ars-base {
-      text-align: center;
     }
   }
 
@@ -1008,20 +908,45 @@
     block-size: 100%;
   }
 
-  /* Buttons & pills: the whole control becomes a dither block */
-  .ars:is([class*="rounded-full"], [class*="rounded-xl"]) {
+  /* Buttons, pills, form inputs, & boxes: the whole control becomes an edge-to-edge dither block */
+  .ars:is(
+    [class*="rounded-full"],
+    [class*="rounded-xl"],
+    [class*="rounded-lg"],
+    [class*="rounded-2xl"]
+  ) {
+    --ars-band: 65%;
+
     display: inline-flex;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
 
     & > .ars-block {
       inline-size: 100%;
       block-size: 100%;
       border-radius: inherit;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      line-height: 1.1;
+    }
+
+    & .ars-base {
+      inline-size: 100%;
+      display: block;
+      overflow: hidden;
+      line-height: inherit;
+      letter-spacing: 0;
+      white-space: pre;
+      user-select: none;
     }
   }
 
   /* Image wireframe: matches the image's exact box and aspect ratio */
   .ars.ars-image {
+    --ars-band: 65%;
+
     position: absolute;
     inset: 0;
     display: flex;
@@ -1045,7 +970,7 @@
       display: block;
       overflow: hidden;
       line-height: 1.15;
-      font-size: max(11px, calc(100cqi / 52));
+      font-size: max(12px, calc(100cqi / 42));
       letter-spacing: 0;
       white-space: pre;
       user-select: none;
@@ -1054,8 +979,6 @@
     & > canvas {
       position: absolute;
       inset: 0;
-      inline-size: 100% !important;
-      block-size: 100% !important;
       pointer-events: none;
       border-radius: inherit;
     }
@@ -1063,6 +986,8 @@
 
   /* Full-bleed hero mesh: spans the viewport edge to edge */
   .ars.ars-hero-bg {
+    --ars-band: 65%;
+
     inline-size: 100% !important;
     block-size: 100% !important;
 
@@ -1073,7 +998,7 @@
 
     & .ars-base {
       inline-size: 100% !important;
-      font-size: max(14px, calc(100vw / 55)) !important;
+      font-size: max(15px, calc(100vw / 42)) !important;
       line-height: 1.18 !important;
       letter-spacing: 0 !important;
       white-space: pre !important;
@@ -1082,12 +1007,12 @@
 
   /* Variants */
   .ars-dither {
-    --ars-base: 0.24;
-    --ars-wave: 0.85;
-    --ars-band: 55%;
+    --ars-base: 0.22;
+    --ars-wave: 0.75;
+    --ars-band: 65%;
 
     & .ars-line {
-      line-height: 1.15;
+      line-height: 1;
       letter-spacing: -0.02em;
     }
   }
@@ -1119,11 +1044,9 @@
 
   /* Language selector: CSS anchor positioning, with a plain fallback */
   .language-selector-popover {
-    position-anchor: auto;
-    inset: unset;
-    top: calc(anchor(bottom) + 8px);
-    right: anchor(right);
-    margin: 0;
+    position-anchor: --lang-selector-btn;
+    position-area: bottom span-left;
+    margin: 8px 0 0;
     opacity: 0;
     transform: scale(0.95);
     transition:
@@ -1135,6 +1058,16 @@
     &:popover-open {
       opacity: 1;
       transform: scale(1);
+    }
+  }
+
+  @supports not (position-area: bottom span-left) {
+    .language-selector-popover {
+      position-anchor: --lang-selector-btn;
+      inset: unset;
+      top: calc(anchor(bottom) + 8px);
+      right: anchor(right);
+      margin: 0;
     }
   }
 
@@ -1202,6 +1135,44 @@
     opacity: 1 !important;
     transform: none !important;
     filter: none !important;
+  }
+
+  /* ------------------------------------------------------------------------
+     6.10 Tactile switch
+     Skeuomorphic toggle switch physics and state tracking
+     ------------------------------------------------------------------------ */
+
+  .tactile-switch-base {
+    background: linear-gradient(rgb(0 0 0 / 0.07), rgb(255 255 255 / 0)), #ddd;
+    box-shadow:
+      inset 0 0.07em 0.1em -0.1em rgb(0 0 0 / 0.4),
+      0 0.05em 0.08em -0.01em rgb(255 255 255 / 0.7);
+  }
+
+  .tactile-switch-channel {
+    background: linear-gradient(rgb(0 0 0 / 0.07), rgb(255 255 255 / 0.1)), #d0d0d0;
+    box-shadow:
+      inset 0 0.08em 0.15em -0.1em rgb(0 0 0 / 0.5),
+      0 0.05em 0.08em -0.01em rgb(255 255 255 / 0.7),
+      inset 0 0 0 0 rgb(68 204 102 / 0.75);
+  }
+
+  .peer:checked ~ .tactile-switch-base .tactile-switch-channel {
+    box-shadow:
+      inset 0 0.08em 0.15em -0.1em rgb(0 0 0 / 0.5),
+      0 0.05em 0.08em -0.01em rgb(255 255 255 / 0.7),
+      inset 3em 0 0 0 rgb(68 204 102 / 0.85);
+  }
+
+  .tactile-switch-thumb {
+    background: linear-gradient(#f5f5f5 10%, #eee);
+    box-shadow:
+      inset 0 0.1em 0.15em -0.05em rgb(255 255 255 / 0.9),
+      0 0.2em 0.25em -0.12em rgb(0 0 0 / 0.45);
+  }
+
+  .peer:checked ~ .tactile-switch-base .tactile-switch-thumb {
+    left: 3em;
   }
 
   /* ==========================================================================

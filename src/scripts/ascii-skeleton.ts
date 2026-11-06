@@ -1,9 +1,10 @@
 import {
-  animateSkeletons,
+  animateSkeleton,
   createAsciiReveal,
   type AsciiRevealController,
   type AsciiRevealOptions,
   type Duration,
+  type Origin,
   type Preset,
   type PresetName,
 } from "ascii-reveal/core";
@@ -13,7 +14,7 @@ import {
  * progressive cell sizes for realistic, silky-smooth character & image decodes.
  */
 export const SMOOTH_DITHER_PRESET: Preset = {
-  ramp: " ░▒▓█",
+  ramp: "░▒▓█",
   scramble: "░▒▓█",
   mode: "ramp",
   color: "source",
@@ -31,8 +32,17 @@ const noop = (): void => {
 /**
  * Initializes ASCII skeleton shimmer animations within a given scope. Safe for SSR and respects
  * prefers-reduced-motion.
+ *
+ * Skeletons inside hidden containers (such as `#skeleton-container` before it's displayed) are
+ * skipped during document load so they never get registered with 0x0 canvas bounds.
+ *
+ * Pass `{ force: true }` when an active skeleton is unhidden to immediately measure and run its
+ * ~30fps glyph shimmer canvas.
  */
-export function initAsciiSkeletons(scope: ParentNode = document): () => void {
+export function initAsciiSkeletons(
+  scope: ParentNode = document,
+  options?: { force?: boolean },
+): () => void {
   if (
     typeof window === "undefined"
     || typeof document === "undefined"
@@ -47,13 +57,49 @@ export function initAsciiSkeletons(scope: ParentNode = document): () => void {
     stopGlobalShimmer = null;
   }
 
-  const stop = animateSkeletons(scope);
+  // Find candidate skeleton elements: include scope itself if it matches, plus descendants
+  const elements: HTMLElement[] = [];
+  if (scope instanceof HTMLElement && scope.matches("[data-ars-animate]")) {
+    elements.push(scope);
+  }
+  elements.push(...scope.querySelectorAll<HTMLElement>("[data-ars-animate]"));
 
-  if (scope === document) {
-    stopGlobalShimmer = stop;
+  // Filter: Unless forced, skip elements that are inside hidden containers
+  const visibleElements =
+    options?.force ? elements : (
+      elements.filter((el) => {
+        return !el.parentElement?.closest(".hidden, [aria-hidden='true']");
+      })
+    );
+
+  const cleanups: (() => void)[] = [];
+
+  for (const el of visibleElements) {
+    // Check if element has an existing canvas or previous registration with 0 size
+    const existingCanvas = el.querySelector("canvas");
+    if (existingCanvas && (existingCanvas.width <= 1 || existingCanvas.clientHeight === 0)) {
+      // Invoking animateSkeleton on an already registered element returns its cleanup function;
+      // calling it immediately purges the stale 0x0 registration from Pe/pe and removes the canvas.
+      const purge = animateSkeleton(el);
+      purge();
+    }
+
+    // Start fresh skeleton shimmer animation with real rendered dimensions
+    const stop = animateSkeleton(el);
+    cleanups.push(stop);
   }
 
-  return stop;
+  const stopAll = (): void => {
+    for (const cleanup of cleanups) {
+      cleanup();
+    }
+  };
+
+  if (scope === document) {
+    stopGlobalShimmer = stopAll;
+  }
+
+  return stopAll;
 }
 
 /** Attaches a dynamic ASCII reveal effect to an element (defaults to "dither" preset). */
@@ -66,7 +112,8 @@ export function revealWithAscii(
   const controller = createAsciiReveal(element, {
     preset: "dither",
     duration: "fast",
-    speed: 1,
+    speed: 2,
+    origin: "center",
     ...options,
   });
 
@@ -113,16 +160,13 @@ export function triggerPageReveal(
 
   cleanupAsciiReveals();
 
-  const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
-  const defaultOrigin = { x: window.innerWidth / 2, y: scrollY };
-
   const controller = createAsciiReveal(target, {
     preset: SMOOTH_DITHER_PRESET,
     duration: "cinematic",
-    speed: 1.35,
+    speed: 2,
     lazy: false,
     fallback: false,
-    origin: defaultOrigin,
+    origin: "center",
     ...options,
   });
 
@@ -152,10 +196,24 @@ export function initAsciiReveals(scope: ParentNode = document): void {
     const preset = (presetAttr && presetAttr.length > 0 ? presetAttr : "dither") as PresetName;
     const duration = (el.dataset["asciiRevealDuration"] ?? "fast") as Duration;
     const speedRaw = el.dataset["asciiRevealSpeed"];
-    const speed = speedRaw ? Number(speedRaw) : 1;
-    const origin = el.dataset["asciiRevealOrigin"] as "center" | "top-left" | "pointer" | undefined;
+    const speed = speedRaw ? Number(speedRaw) : 2;
 
-    const ctrl = revealWithAscii(el, { preset, duration, speed, origin });
+    const originAttr = el.dataset["asciiRevealOrigin"];
+    let origin: Origin = "center";
+    if (originAttr) {
+      if (originAttr.startsWith("{")) {
+        try {
+          origin = JSON.parse(originAttr) as { x: number; y: number };
+        } catch {
+          origin = "center";
+        }
+      } else if (["top-left", "pointer", "center"].includes(originAttr)) {
+        origin = originAttr as Origin;
+      }
+    }
+
+    const isLazy = el.dataset["asciiRevealLazy"] === "true";
+    const ctrl = revealWithAscii(el, { preset, duration, speed, origin, lazy: isLazy });
     void ctrl?.reveal();
   });
 }

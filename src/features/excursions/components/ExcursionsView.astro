@@ -3,12 +3,19 @@ import bgImage from "@/assets/images/Header/header-1.webp";
 import { getExcursionsData } from "@/features/excursions/data/excursions-data";
 import { useTranslations } from "@/i18n/utils";
 import PageHeader from "@/layouts/PageHeader.astro";
+import { splitTitleAccent } from "@/lib/utils";
+import QuestionCircleIcon from "@/shared/ui/icons/QuestionCircleIcon.astro";
 import StatHighlights from "@/shared/ui/widgets/StatHighlights.astro";
 import TripCard from "@/shared/ui/widgets/TripCard.astro";
 
 const locale = Astro.currentLocale || "en";
 const t = useTranslations(locale);
 const excursions = await getExcursionsData();
+
+const excursionsGridTitle = splitTitleAccent(t("excursion.blog.lgTitle"));
+const excursionsFaqTitle = splitTitleAccent(
+  t("excursion.faq.title") || "Common Questions About Marrakech Day Excursions",
+);
 
 const highlightStats = [
   {
@@ -33,6 +40,37 @@ const highlightStats = [
       t("excursion.stats.supportDesc") || "Flexible departures and concierge-style planning.",
   },
 ];
+
+const EXCURSIONS_FAQS = [
+  {
+    q: "excursion.faq.q1",
+    defQ: "What day excursions can I do from Marrakech?",
+    a: "excursion.faq.a1",
+    defA:
+      "From Marrakech you can book day excursions to Ouzoud Waterfalls (Africa's tallest accessible waterfall at 110 m), the Agafay Stone Desert with its lunar landscape 40 km from the city, the Ourika Valley with Berber villages and Atlas foothills, and the Ait Benhaddou UNESCO kasbah. All excursions depart in the morning from Marrakech and return the same evening.",
+  },
+  {
+    q: "excursion.faq.q2",
+    defQ: "How far is the Agafay Desert from Marrakech?",
+    a: "excursion.faq.a2",
+    defA:
+      "The Agafay Desert is approximately 40 km southwest of Marrakech, about a 45-minute drive. It is a rocky, arid plateau at the foothills of the High Atlas—distinct from the sandy Sahara but equally dramatic. Our Agafay day excursion includes camel trekking, sunset views over the Atlas range, and optional dinner at a desert camp.",
+  },
+  {
+    q: "excursion.faq.q3",
+    defQ: "Are the excursions guided and in English?",
+    a: "excursion.faq.a3",
+    defA:
+      "Yes. All Amsirar Trip excursions are fully guided in English (also available in French, Spanish, and German upon request). Each excursion includes a licensed Moroccan guide, private transportation in an air-conditioned 4×4, and hotel pickup and drop-off within Marrakech. Group sizes are kept small for a personalised experience.",
+  },
+  {
+    q: "excursion.faq.q4",
+    defQ: "Can I combine a Sahara camel trek with a day excursion?",
+    a: "excursion.faq.a4",
+    defA:
+      "Yes. Amsirar Trip can combine day excursions with a multi-day Sahara tour. For example, you could do an Ouzoud Waterfalls day trip followed by a 3-day Merzouga desert tour, or an Agafay sunset excursion as an add-on to a longer itinerary. Contact us to build a custom Morocco itinerary that fits your available days.",
+  },
+] as const;
 
 import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
 ---
@@ -82,7 +120,10 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
             class="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl text-balance"
             id="excursion-grid-heading"
           >
-            {t("excursion.blog.lgTitle")}
+            {excursionsGridTitle.main}{" "}
+            {excursionsGridTitle.accent && (
+              <span class="text-orange">{excursionsGridTitle.accent}</span>
+            )}
           </h2>
           <p class="border-s-2 border-orange-600 ps-4 py-0.5 text-sm sm:text-base text-stone-600 leading-relaxed max-w-[62ch] text-pretty">
             {t("excursion.sectionSubtitle")}
@@ -98,6 +139,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
           >
             <TripCard
               badge={t("excursion.card.category")}
+              tourTypeBadge={t("tours.bothAvailable", "Private & Shared")}
               description={t(excursion.description)}
               exploreLink={t("excursion.exploreLink")}
               item={{ image: excursion.image, imageAlt: t(excursion.alt), route: excursion.route }}
@@ -123,155 +165,63 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
           class="text-2xl font-bold tracking-tight text-stone-900 sm:text-3xl"
           id="excursions-faq-heading"
         >
-          {t("excursion.faq.title") || "Common Questions About Marrakech Day Excursions"}
+          {excursionsFaqTitle.main}{" "}
+          {excursionsFaqTitle.accent && (
+            <span class="text-orange">{excursionsFaqTitle.accent}</span>
+          )}
         </h2>
-        <p class="mt-2 text-sm text-stone-500">
+        <p class="mt-2 border-s-2 border-orange-600 ps-4 py-0.5 text-sm sm:text-base text-stone-600 leading-relaxed max-w-[62ch] text-pretty">
           {t("excursion.faq.subtitle") || "Plan your perfect day trip from Marrakech."}
         </p>
       </hgroup>
 
       <dl
-        class="divide-y divide-stone-200 max-w-3xl"
+        class="max-w-3xl overflow-hidden rounded-2xl border border-stone-200/90 bg-white shadow-2xs divide-y divide-stone-200/80"
         data-animate="fade-up"
+        data-ascii="surface"
         itemscope
         itemtype="https://schema.org/FAQPage"
       >
-        <div
-          class="py-5"
-          itemprop="mainEntity"
-          itemscope
-          itemtype="https://schema.org/Question"
-        >
-          <dt>
-            <details class="group">
-              <summary class="flex cursor-pointer items-start justify-between gap-4 text-base font-semibold text-stone-900 marker:content-none list-none">
-                <span itemprop="name">
-                  {t("excursion.faq.q1") || "What day excursions can I do from Marrakech?"}
-                </span>
-                <span
-                  aria-hidden="true"
-                  class="mt-0.5 shrink-0 text-orange-600 group-open:rotate-45 transition-transform duration-200"
+        {EXCURSIONS_FAQS.map((faq) => (
+          <div
+            itemprop="mainEntity"
+            itemscope
+            itemtype="https://schema.org/Question"
+          >
+            <dt>
+              <details class="group px-4 py-3.5 sm:px-5 sm:py-4 transition-colors open:bg-stone-50/40">
+                <summary class="flex cursor-pointer items-start justify-between gap-4 text-base font-semibold text-stone-900 marker:content-none list-none select-none">
+                  <span
+                    class="flex items-center gap-2.5 min-w-0"
+                    itemprop="name"
+                  >
+                    <QuestionCircleIcon
+                      aria-hidden="true"
+                      class="size-5 shrink-0 text-orange-600"
+                    />
+                    <span>{t(faq.q) || faq.defQ}</span>
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    class="mt-0.5 shrink-0 text-orange-600 group-open:rotate-45 transition-transform duration-200 font-medium text-lg leading-none select-none"
+                  >
+                    +
+                  </span>
+                </summary>
+                <div
+                  class="mt-4 pt-3.5 border-t border-stone-100 text-sm leading-relaxed text-stone-600 prose prose-sm max-w-none"
+                  itemprop="acceptedAnswer"
+                  itemscope
+                  itemtype="https://schema.org/Answer"
                 >
-                  +
-                </span>
-              </summary>
-              <div
-                class="mt-3 text-sm leading-7 text-stone-600 prose prose-sm max-w-none"
-                itemprop="acceptedAnswer"
-                itemscope
-                itemtype="https://schema.org/Answer"
-              >
-                <p itemprop="text">
-                  {t("excursion.faq.a1")
-                    || "From Marrakech you can book day excursions to Ouzoud Waterfalls (Africa's tallest accessible waterfall at 110 m), the Agafay Stone Desert with its lunar landscape 40 km from the city, the Ourika Valley with Berber villages and Atlas foothills, and the Ait Benhaddou UNESCO kasbah. All excursions depart in the morning from Marrakech and return the same evening."}
-                </p>
-              </div>
-            </details>
-          </dt>
-        </div>
-
-        <div
-          class="py-5"
-          itemprop="mainEntity"
-          itemscope
-          itemtype="https://schema.org/Question"
-        >
-          <dt>
-            <details class="group">
-              <summary class="flex cursor-pointer items-start justify-between gap-4 text-base font-semibold text-stone-900 marker:content-none list-none">
-                <span itemprop="name">
-                  {t("excursion.faq.q2") || "How far is the Agafay Desert from Marrakech?"}
-                </span>
-                <span
-                  aria-hidden="true"
-                  class="mt-0.5 shrink-0 text-orange-600 group-open:rotate-45 transition-transform duration-200"
-                >
-                  +
-                </span>
-              </summary>
-              <div
-                class="mt-3 text-sm leading-7 text-stone-600 prose prose-sm max-w-none"
-                itemprop="acceptedAnswer"
-                itemscope
-                itemtype="https://schema.org/Answer"
-              >
-                <p itemprop="text">
-                  {t("excursion.faq.a2")
-                    || "The Agafay Desert is approximately 40 km southwest of Marrakech, about a 45-minute drive. It is a rocky, arid plateau at the foothills of the High Atlas—distinct from the sandy Sahara but equally dramatic. Our Agafay day excursion includes camel trekking, sunset views over the Atlas range, and optional dinner at a desert camp."}
-                </p>
-              </div>
-            </details>
-          </dt>
-        </div>
-
-        <div
-          class="py-5"
-          itemprop="mainEntity"
-          itemscope
-          itemtype="https://schema.org/Question"
-        >
-          <dt>
-            <details class="group">
-              <summary class="flex cursor-pointer items-start justify-between gap-4 text-base font-semibold text-stone-900 marker:content-none list-none">
-                <span itemprop="name">
-                  {t("excursion.faq.q3") || "Are the excursions guided and in English?"}
-                </span>
-                <span
-                  aria-hidden="true"
-                  class="mt-0.5 shrink-0 text-orange-600 group-open:rotate-45 transition-transform duration-200"
-                >
-                  +
-                </span>
-              </summary>
-              <div
-                class="mt-3 text-sm leading-7 text-stone-600 prose prose-sm max-w-none"
-                itemprop="acceptedAnswer"
-                itemscope
-                itemtype="https://schema.org/Answer"
-              >
-                <p itemprop="text">
-                  {t("excursion.faq.a3")
-                    || "Yes. All Amsirar Trip excursions are fully guided in English (also available in French, Spanish, and German upon request). Each excursion includes a licensed Moroccan guide, private transportation in an air-conditioned 4×4, and hotel pickup and drop-off within Marrakech. Group sizes are kept small for a personalised experience."}
-                </p>
-              </div>
-            </details>
-          </dt>
-        </div>
-
-        <div
-          class="py-5"
-          itemprop="mainEntity"
-          itemscope
-          itemtype="https://schema.org/Question"
-        >
-          <dt>
-            <details class="group">
-              <summary class="flex cursor-pointer items-start justify-between gap-4 text-base font-semibold text-stone-900 marker:content-none list-none">
-                <span itemprop="name">
-                  {t("excursion.faq.q4")
-                    || "Can I combine a Sahara camel trek with a day excursion?"}
-                </span>
-                <span
-                  aria-hidden="true"
-                  class="mt-0.5 shrink-0 text-orange-600 group-open:rotate-45 transition-transform duration-200"
-                >
-                  +
-                </span>
-              </summary>
-              <div
-                class="mt-3 text-sm leading-7 text-stone-600 prose prose-sm max-w-none"
-                itemprop="acceptedAnswer"
-                itemscope
-                itemtype="https://schema.org/Answer"
-              >
-                <p itemprop="text">
-                  {t("excursion.faq.a4")
-                    || "Yes. Amsirar Trip can combine day excursions with a multi-day Sahara tour. For example, you could do an Ouzoud Waterfalls day trip followed by a 3-day Merzouga desert tour, or an Agafay sunset excursion as an add-on to a longer itinerary. Contact us to build a custom Morocco itinerary that fits your available days."}
-                </p>
-              </div>
-            </details>
-          </dt>
-        </div>
+                  <p itemprop="text">
+                    {t(faq.a) || faq.defA}
+                  </p>
+                </div>
+              </details>
+            </dt>
+          </div>
+        ))}
       </dl>
     </div>
   </section>

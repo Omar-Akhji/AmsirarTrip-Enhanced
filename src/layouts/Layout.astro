@@ -1,7 +1,6 @@
 ---
 import "../styles/global.css";
 import { ClientRouter } from "astro:transitions";
-import { Image } from "astro:assets";
 import { generateOrganizationJsonLd, generateWebsiteJsonLd } from "../lib/structured-data";
 import Footer from "./Footer.astro";
 import Navbar from "./Navbar.astro";
@@ -12,6 +11,7 @@ import { WHATSAPP_LINK } from "../lib/constants/contact";
 import { LOCALES, DEFAULT_LOCALE, isLocale, type Locale } from "../i18n/locales";
 import { getLocalizedPath, stripLocaleFromPath } from "../i18n/utils";
 import TransitionSkeletons from "./components/TransitionSkeletons.astro";
+import WhatsappIcon from "../shared/ui/icons/WhatsappIcon.astro";
 
 interface Props {
   title?: string | undefined;
@@ -84,7 +84,7 @@ const currentOgLocale = OG_LOCALE_MAP[locale] ?? locale;
     <link
       as="font"
       crossorigin="anonymous"
-      href="/fonts/JetBrainsMono-Regular.woff2"
+      href="/fonts/DMMono-Regular.woff2"
       rel="preload"
       type="font/woff2"
     />
@@ -319,7 +319,7 @@ const currentOgLocale = OG_LOCALE_MAP[locale] ?? locale;
   <body>
     <div
       aria-hidden="true"
-      class="fixed top-0 inset-s-0 z-100000 h-0.75 w-full pointer-events-none opacity-0 origin-left scale-x-0 bg-linear-to-r from-orange via-amber-orange to-orange shadow-[0_0_12px_oklch(56%_0.19_33deg/70%),0_0_6px_oklch(75%_0.18_55deg/50%)] transition-[transform,opacity] duration-200 ease-out"
+      class="fixed top-0 inset-s-0 z-100000 h-0.75 w-full pointer-events-none opacity-0 origin-left scale-x-0 bg-linear-to-r from-orange via-amber-orange to-orange shadow-[0_0_12px_rgba(241,93,48,0.7),0_0_6px_rgba(247,136,72,0.5)] transition-[transform,opacity] duration-200 ease-out"
       id="page-progress-bar"
       transition:persist="page-progress-bar"
     ></div>
@@ -362,15 +362,7 @@ const currentOgLocale = OG_LOCALE_MAP[locale] ?? locale;
           aria-hidden="true"
           class="absolute inset-0 -z-10 animate-ping rounded-full bg-emerald-400 opacity-25 duration-1000 motion-reduce:hidden"
         ></span>
-        <Image
-          alt="WhatsApp"
-          class="size-6 shrink-0 transition-transform duration-200 ease-out pointer-fine:group-hover:scale-110 motion-reduce:transform-none"
-          decoding="async"
-          height={24}
-          loading="eager"
-          src="/icons/whatsapp.svg"
-          width={24}
-        />
+        <WhatsappIcon class="size-6 shrink-0 transition-transform duration-200 ease-out pointer-fine:group-hover:scale-110 motion-reduce:transform-none" />
       </span>
     </a>
   </body>

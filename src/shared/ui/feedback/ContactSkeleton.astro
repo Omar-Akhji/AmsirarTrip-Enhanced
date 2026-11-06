@@ -1,5 +1,6 @@
 ---
 import AsciiSkeleton from "@/shared/ui/feedback/AsciiSkeleton.astro";
+import ButtonSkeleton from "@/shared/ui/feedback/ButtonSkeleton.astro";
 import PageHeaderSkeleton from "@/shared/ui/feedback/PageHeaderSkeleton.astro";
 
 interface Props {
@@ -21,50 +22,35 @@ const { class: className } = Astro.props;
   />
 
   {/* DIRECT CHANNELS SKELETON */}
-  <section class="relative isolate bg-white py-16">
+  <section class="relative isolate bg-white py-12 sm:py-16 lg:py-24">
     <div class="mx-auto px-4 max-inline-7xl">
-      <div class="mbe-10 sm:mbe-12 max-w-3xl space-y-2">
-        <AsciiSkeleton
-          class="text-2xl sm:text-3xl text-stone-800 font-bold"
-          lines={1}
-          variant="dither"
-          widths={["20rem"]}
-        />
-        <AsciiSkeleton
-          class="text-stone-400 text-sm"
-          lines={1}
-          variant="dither"
-          widths={["12rem"]}
-        />
-      </div>
-
       <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 items-stretch">
         {Array.from({ length: 3 }, () => (
           <div class="flex size-full last:md:col-span-2 last:lg:col-span-1">
-            <article class="group flex size-full flex-col justify-between rounded-2xl border border-stone-200/90 bg-stone-50/80 p-7 shadow-xs">
+            <article class="group flex size-full flex-col justify-between rounded-2xl border border-stone-200/90 bg-stone-50/80 p-6 sm:p-8 shadow-xs shadow-stone-900/5">
               <div>
                 <AsciiSkeleton
-                  class="mbe-3 text-lg font-bold text-stone-800"
-                  lines={1}
+                  class="mbe-3 text-xl font-bold tracking-tight text-stone-950"
+                  lines={2}
                   variant="dither"
-                  widths={["75%"]}
+                  widths={["100%", "60%"]}
                 />
                 <div class="pt-1">
                   <AsciiSkeleton
-                    class="text-stone-400"
+                    class="text-sm leading-relaxed text-stone-600"
                     lines={3}
                     variant="dither"
-                    widths={["100%", "90%", "70%"]}
+                    widths={["100%", "95%", "70%"]}
                   />
                 </div>
               </div>
 
-              {/* Action Button — rendered as complete ASCII skeleton pill */}
+              {/* Action Button */}
               <div class="mbs-6 border-t border-stone-200/60 pbs-4">
-                <AsciiSkeleton
-                  class="h-10 w-full rounded-full overflow-hidden text-stone-400"
-                  rows={2}
-                  variant="dither"
+                <ButtonSkeleton
+                  size="md"
+                  variant="outline"
+                  class="w-full"
                 />
               </div>
             </article>
@@ -76,109 +62,151 @@ const { class: className } = Astro.props;
 
   {/* EXPEDITION INQUIRY SKELETON */}
   <section
-    class="relative isolate border-t border-stone-200 bg-stone-50 py-20 sm:py-24"
-    id="contact-form-section-skeleton"
+    class="relative isolate border-t border-stone-200 bg-stone-50 py-12 sm:py-16 lg:py-24"
+    id="contact-form-section"
   >
     <div class="mx-auto px-4 max-inline-7xl">
-      <div class="mbe-10 sm:mbe-12 max-w-3xl space-y-2">
-        <AsciiSkeleton
-          class="text-2xl sm:text-3xl text-stone-800 font-bold"
-          lines={1}
-          variant="dither"
-          widths={["16rem"]}
-        />
-        <AsciiSkeleton
-          class="text-stone-400 text-sm"
-          lines={1}
-          variant="dither"
-          widths={["32rem"]}
-        />
+      <div class="mbe-8 sm:mbe-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-stone-200 pb-6 sm:pb-8">
+        <div class="max-w-2xl space-y-2">
+          <AsciiSkeleton
+            class="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl text-balance"
+            lines={1}
+            variant="dither"
+            widths={["17rem"]}
+          />
+          <div class="border-s-2 border-stone-300 ps-4 py-0.5 max-w-[62ch]">
+            <AsciiSkeleton
+              class="text-stone-600 text-sm sm:text-base leading-relaxed"
+              lines={2}
+              variant="dither"
+              widths={["100%", "72%"]}
+            />
+          </div>
+        </div>
       </div>
 
       <div class="grid grid-cols-1 items-stretch gap-8 lg:grid-cols-5">
         {/* Left: Contact Form Card (col-span-3) */}
         <div class="inline-full lg:col-span-3">
-          <div class="rounded-2xl border border-stone-200/90 bg-white p-6 shadow-2xs block-full sm:p-8">
+          <div class="rounded-2xl border border-stone-200/90 bg-white p-6 shadow-xs shadow-stone-900/5 block-full sm:p-8">
             <div class="mbe-6 border-b border-stone-100 pbe-5">
               <AsciiSkeleton
-                class="mbe-2 text-stone-400 font-mono text-xs uppercase"
+                class="font-mono text-xs uppercase"
                 lines={1}
                 variant="dither"
-                widths={["7rem"]}
+                widths={["8rem"]}
               />
-              <AsciiSkeleton
-                class="text-xl sm:text-2xl text-stone-800 font-bold"
-                lines={1}
-                variant="dither"
-                widths={["16rem"]}
-              />
+              <div class="mbs-1">
+                <AsciiSkeleton
+                  class="text-xl sm:text-2xl font-bold tracking-tight"
+                  lines={2}
+                  variant="dither"
+                  widths={["100%", "48%"]}
+                />
+              </div>
             </div>
 
             <div class="flex flex-col gap-5">
               {/* Row 1: Name & Email */}
               <div class="grid gap-5 md:grid-cols-2">
-                <div class="h-12 w-full rounded-xl bg-stone-50/80 border border-stone-200/90 p-3 flex items-center">
+                <div>
+                  <div class="mbe-1.5">
+                    <AsciiSkeleton
+                      class="font-sans text-xs font-semibold"
+                      lines={1}
+                      variant="dither"
+                      widths={["5.5rem"]}
+                    />
+                  </div>
                   <AsciiSkeleton
-                    class="text-stone-300"
-                    lines={1}
+                    class="h-12 w-full rounded-xl border border-stone-200/90 bg-stone-50/50 text-stone-400 select-none"
+                    rows={3}
                     variant="dither"
-                    widths={["6rem"]}
                   />
                 </div>
-                <div class="h-12 w-full rounded-xl bg-stone-50/80 border border-stone-200/90 p-3 flex items-center">
+                <div>
+                  <div class="mbe-1.5">
+                    <AsciiSkeleton
+                      class="font-sans text-xs font-semibold"
+                      lines={1}
+                      variant="dither"
+                      widths={["4rem"]}
+                    />
+                  </div>
                   <AsciiSkeleton
-                    class="text-stone-300"
-                    lines={1}
+                    class="h-12 w-full rounded-xl border border-stone-200/90 bg-stone-50/50 text-stone-400 select-none"
+                    rows={3}
                     variant="dither"
-                    widths={["8rem"]}
                   />
                 </div>
               </div>
 
               {/* Row 2: Phone & Topic */}
               <div class="grid gap-5 md:grid-cols-2">
-                <div class="h-12 w-full rounded-xl bg-stone-50/80 border border-stone-200/90 p-3 flex items-center">
+                <div>
+                  <div class="mbe-1.5">
+                    <AsciiSkeleton
+                      class="font-sans text-xs font-semibold"
+                      lines={1}
+                      variant="dither"
+                      widths={["6.5rem"]}
+                    />
+                  </div>
                   <AsciiSkeleton
-                    class="text-stone-300"
-                    lines={1}
+                    class="h-12 w-full rounded-xl border border-stone-200/90 bg-stone-50/50 text-stone-400 select-none"
+                    rows={3}
                     variant="dither"
-                    widths={["7rem"]}
                   />
                 </div>
-                <div class="h-12 w-full rounded-xl bg-stone-50/80 border border-stone-200/90 p-3 flex items-center">
+                <div>
+                  <div class="mbe-1.5">
+                    <AsciiSkeleton
+                      class="font-sans text-xs font-semibold"
+                      lines={1}
+                      variant="dither"
+                      widths={["9rem"]}
+                    />
+                  </div>
                   <AsciiSkeleton
-                    class="text-stone-300"
-                    lines={1}
+                    class="h-12 w-full rounded-xl border border-stone-200/90 bg-stone-50/50 text-stone-400 select-none"
+                    rows={3}
                     variant="dither"
-                    widths={["5rem"]}
                   />
                 </div>
               </div>
 
               {/* Row 3: Message */}
-              <div class="min-block-40 w-full rounded-xl bg-stone-50/80 border border-stone-200/90 p-4">
-                <AsciiSkeleton
-                  class="text-stone-300"
-                  lines={3}
-                  variant="dither"
-                  widths={["100%", "90%", "60%"]}
-                />
-              </div>
-
-              {/* Bottom: Captcha + Submit button — rendered as full ASCII skeleton pill */}
-              <div class="flex flex-col gap-4 pbs-2 sm:flex-row sm:items-center sm:justify-between">
-                <div class="w-fit rounded-xl border border-stone-200 p-3 flex items-center gap-3">
+              <div>
+                <div class="mbe-1.5">
                   <AsciiSkeleton
-                    class="text-stone-400"
+                    class="font-sans text-xs font-semibold"
                     lines={1}
                     variant="dither"
-                    widths={["8rem"]}
+                    widths={["5rem"]}
                   />
                 </div>
                 <AsciiSkeleton
-                  class="h-11 w-36 rounded-full overflow-hidden text-stone-400"
-                  rows={2}
+                  class="h-40 min-block-40 w-full rounded-xl border border-stone-200/90 bg-stone-50/50 text-stone-400 select-none"
+                  rows={10}
                   variant="dither"
+                />
+              </div>
+
+              {/* Bottom: Captcha + Submit button */}
+              <div class="flex flex-col gap-4 pbs-2 sm:flex-row sm:items-center sm:justify-between">
+                <div class="flex justify-center sm:justify-start">
+                  <div class="w-fit origin-center scale-85 rounded-xl border border-dashed border-stone-200 p-2 sm:scale-100">
+                    <AsciiSkeleton
+                      class="h-19.5 w-76 rounded-lg border border-stone-200/80 bg-stone-50/60 text-stone-400 select-none overflow-hidden"
+                      rows={5}
+                      variant="dither"
+                    />
+                  </div>
+                </div>
+                <ButtonSkeleton
+                  size="md"
+                  variant="primary"
+                  class="w-48"
                 />
               </div>
             </div>
@@ -187,63 +215,105 @@ const { class: className } = Astro.props;
 
         {/* Right: Contact Sidebar (col-span-2) */}
         <aside class="block-full inline-full lg:col-span-2">
-          <div class="flex flex-col justify-between rounded-2xl border border-stone-200/90 bg-stone-100 p-6 text-stone-900 shadow-xs block-full sm:p-8">
+          <div class="flex flex-col justify-between rounded-2xl border border-slate-900 bg-slate-950 p-6 text-white shadow-xl block-full sm:p-8">
             <div>
-              <div class="border-b border-stone-200 pb-4">
+              <header>
                 <AsciiSkeleton
-                  class="mbe-2 text-stone-500"
+                  class="font-mono text-xs uppercase"
                   lines={1}
                   variant="dither"
-                  widths={["6rem"]}
+                  widths={["7rem"]}
                 />
-                <AsciiSkeleton
-                  class="text-lg font-bold text-stone-800"
-                  lines={1}
-                  variant="dither"
-                  widths={["12rem"]}
-                />
-              </div>
-
-              <div class="mbs-4">
-                <AsciiSkeleton
-                  class="text-stone-400 text-sm"
-                  lines={2}
-                  variant="dither"
-                  widths={["100%", "85%"]}
-                />
-              </div>
+                <div class="mbs-3">
+                  <AsciiSkeleton
+                    class="text-2xl sm:text-3xl font-semibold"
+                    lines={2}
+                    variant="dither"
+                    widths={["100%", "65%"]}
+                  />
+                </div>
+                <div class="mbs-4">
+                  <AsciiSkeleton
+                    class="font-mono text-xs sm:text-sm leading-relaxed"
+                    lines={3}
+                    variant="dither"
+                    widths={["100%", "95%", "60%"]}
+                  />
+                </div>
+              </header>
 
               <div class="mbs-8 space-y-6 text-sm">
-                {["01", "02", "03"].map((num) => (
-                  <div class="grid grid-cols-[48px_1fr] items-start gap-4">
-                    <span class="inline-flex size-12 shrink-0 items-center justify-center rounded-full bg-stone-200 font-mono text-sm font-bold text-stone-500 tabular-nums">
-                      {num}
-                    </span>
-                    <div class="space-y-1.5 self-start pt-1">
-                      <AsciiSkeleton
-                        class="text-stone-500 font-mono text-xs"
-                        lines={1}
-                        variant="dither"
-                        widths={["3rem"]}
-                      />
-                      <AsciiSkeleton
-                        class="text-stone-700 font-mono text-xs"
-                        lines={1}
-                        variant="dither"
-                        widths={["9rem"]}
-                      />
-                    </div>
+                <!-- Item 1: Visit -->
+                <div class="grid grid-cols-[48px_1fr] items-start gap-4">
+                  <span class="inline-flex size-12 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white/15 font-mono text-sm leading-none font-bold text-stone-300 tabular-nums">
+                    01
+                  </span>
+                  <div class="self-start space-y-1">
+                    <AsciiSkeleton
+                      class="font-mono text-xs uppercase"
+                      lines={1}
+                      variant="dither"
+                      widths={["3.5rem"]}
+                    />
+                    <AsciiSkeleton
+                      class="font-mono text-xs sm:text-sm leading-relaxed"
+                      lines={2}
+                      variant="dither"
+                      widths={["100%", "70%"]}
+                    />
                   </div>
-                ))}
+                </div>
+
+                <!-- Item 2: Call -->
+                <div class="grid grid-cols-[48px_1fr] items-start gap-4">
+                  <span class="inline-flex size-12 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white/15 font-mono text-sm leading-none font-bold text-stone-300 tabular-nums">
+                    02
+                  </span>
+                  <div class="self-start space-y-1">
+                    <AsciiSkeleton
+                      class="font-mono text-xs uppercase"
+                      lines={1}
+                      variant="dither"
+                      widths={["3rem"]}
+                    />
+                    <AsciiSkeleton
+                      class="font-mono text-xs sm:text-sm"
+                      lines={1}
+                      variant="dither"
+                      widths={["12rem"]}
+                    />
+                  </div>
+                </div>
+
+                <!-- Item 3: Email -->
+                <div class="grid grid-cols-[48px_1fr] items-start gap-4">
+                  <span class="inline-flex size-12 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white/15 font-mono text-sm leading-none font-bold text-stone-300 tabular-nums">
+                    03
+                  </span>
+                  <div class="self-start space-y-1">
+                    <AsciiSkeleton
+                      class="font-mono text-xs uppercase"
+                      lines={1}
+                      variant="dither"
+                      widths={["3.5rem"]}
+                    />
+                    <AsciiSkeleton
+                      class="font-mono text-xs sm:text-sm"
+                      lines={1}
+                      variant="dither"
+                      widths={["11rem"]}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
 
             <div class="mbs-8">
               <AsciiSkeleton
-                class="text-stone-400 text-xs font-mono"
+                class="font-mono text-xs"
                 lines={1}
                 variant="dither"
-                widths={["12rem"]}
+                widths={["18rem"]}
               />
             </div>
           </div>
@@ -254,23 +324,27 @@ const { class: className } = Astro.props;
 
   {/* OFFICE & LOCATION SKELETON */}
   <section
-    class="relative isolate border-t border-stone-200/90 bg-white py-20 sm:py-24"
+    class="relative isolate border-t border-stone-200/90 bg-white py-12 sm:py-16 lg:py-24"
     id="location-skeleton"
   >
     <div class="mx-auto px-4 max-inline-7xl">
-      <div class="mbe-10 sm:mbe-12 max-w-3xl space-y-2">
-        <AsciiSkeleton
-          class="text-2xl sm:text-3xl text-stone-800 font-bold"
-          lines={1}
-          variant="dither"
-          widths={["16rem"]}
-        />
-        <AsciiSkeleton
-          class="text-stone-400 text-sm"
-          lines={1}
-          variant="dither"
-          widths={["11rem"]}
-        />
+      <div class="mbe-8 sm:mbe-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-stone-200 pb-6 sm:pb-8">
+        <div class="max-w-2xl space-y-2">
+          <AsciiSkeleton
+            class="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl text-balance"
+            lines={1}
+            variant="dither"
+            widths={["18rem"]}
+          />
+          <div class="border-s-2 border-stone-300 ps-4 py-0.5 max-w-[62ch]">
+            <AsciiSkeleton
+              class="text-stone-600 text-sm sm:text-base leading-relaxed"
+              lines={2}
+              variant="dither"
+              widths={["100%", "45%"]}
+            />
+          </div>
+        </div>
       </div>
 
       <div class="overflow-hidden rounded-2xl border border-slate-900 bg-slate-950 text-white shadow-xl">
@@ -290,9 +364,9 @@ const { class: className } = Astro.props;
 
           <div class="relative z-10 text-center space-y-4 px-6 max-w-lg mx-auto">
             {/* Centered Map icon skeleton */}
-            <div class="mx-auto flex size-14 items-center justify-center rounded-2xl overflow-hidden text-stone-400">
+            <div class="mx-auto flex size-14 items-center justify-center rounded-full overflow-hidden text-stone-400">
               <AsciiSkeleton
-                class="size-14 rounded-2xl overflow-hidden text-white/40"
+                class="size-14 rounded-full overflow-hidden text-stone-400"
                 rows={3}
                 variant="dither"
               />
@@ -301,29 +375,29 @@ const { class: className } = Astro.props;
             {/* Title */}
             <div class="mx-auto text-center">
               <AsciiSkeleton
-                class="text-xl font-bold uppercase sm:text-2xl text-white/95 text-center mx-auto"
+                class="text-xl font-bold uppercase sm:text-2xl text-stone-200 text-center mx-auto"
                 lines={1}
                 variant="dither"
-                widths={["20ch"]}
+                widths={["16rem"]}
               />
             </div>
 
             {/* Description */}
             <div class="mx-auto max-w-lg text-center">
               <AsciiSkeleton
-                class="font-mono text-xs sm:text-sm text-stone-300 leading-relaxed text-center mx-auto"
+                class="font-mono text-xs sm:text-sm text-stone-400 leading-relaxed text-center mx-auto"
                 lines={2}
                 variant="dither"
-                widths={["100%", "68%"]}
+                widths={["100%", "65%"]}
               />
             </div>
 
             {/* Centered Load Map CTA Button skeleton — full ASCII dither button pill */}
             <div class="pt-2 flex justify-center">
-              <AsciiSkeleton
-                class="h-11 w-44 rounded-full overflow-hidden text-white/60"
-                rows={2}
-                variant="dither"
+              <ButtonSkeleton
+                size="md"
+                variant="primary"
+                class="w-40"
               />
             </div>
           </div>

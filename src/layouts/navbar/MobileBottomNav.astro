@@ -1,7 +1,7 @@
 ---
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { stripLocaleFromPath, useTranslations } from "@/i18n/utils";
-import { Compass, House, Mountain, User, Users } from "@lucide/astro";
+import NavIcon, { type NavIconName } from "./NavIcon.astro";
 
 interface Props {
   class?: string;
@@ -26,15 +26,15 @@ interface NavDockItem {
   readonly to: string;
   readonly labelKey: string;
   readonly defaultLabel: string;
-  readonly icon: typeof House;
+  readonly icon: NavIconName;
 }
 
 const NAV_ITEMS: readonly NavDockItem[] = [
-  { to: "/", labelKey: "nav.home", defaultLabel: "Home", icon: House },
-  { to: "/tours", labelKey: "nav.tours", defaultLabel: "Tours", icon: Compass },
-  { to: "/excursions", labelKey: "nav.excursions", defaultLabel: "Excursions", icon: Mountain },
-  { to: "/about", labelKey: "nav.about", defaultLabel: "About", icon: Users },
-  { to: "/contact", labelKey: "nav.contact", defaultLabel: "Contact", icon: User },
+  { to: "/", labelKey: "nav.home", defaultLabel: "Home", icon: "home" },
+  { to: "/tours", labelKey: "nav.tours", defaultLabel: "Tours", icon: "tours" },
+  { to: "/excursions", labelKey: "nav.excursions", defaultLabel: "Excursions", icon: "excursions" },
+  { to: "/about", labelKey: "nav.about", defaultLabel: "About", icon: "about" },
+  { to: "/contact", labelKey: "nav.contact", defaultLabel: "Contact", icon: "contact" },
 ] as const;
 ---
 
@@ -58,7 +58,6 @@ const NAV_ITEMS: readonly NavDockItem[] = [
   {NAV_ITEMS.map((item) => {
     const active = isActive(item.to);
     const label = t(item.labelKey, item.defaultLabel);
-    const IconComponent = item.icon;
 
     return (
       <a
@@ -70,7 +69,10 @@ const NAV_ITEMS: readonly NavDockItem[] = [
         href={localize(item.to)}
         title={label}
       >
-        <IconComponent class="pointer-events-none size-5 shrink-0 stroke-[2.2] transition-transform duration-200 group-hover/link:scale-110 motion-reduce:transform-none" />
+        <NavIcon
+          name={item.icon}
+          class="pointer-events-none size-5 shrink-0 transition-transform duration-200 group-hover/link:scale-110 motion-reduce:transform-none"
+        />
         <span
           class:list={[
             "mobile-dock-label pointer-events-none inline-block overflow-hidden whitespace-nowrap text-xs font-semibold tracking-tight motion-reduce:transition-none",

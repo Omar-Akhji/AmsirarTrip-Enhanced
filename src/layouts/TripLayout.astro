@@ -18,6 +18,7 @@ const {
   headingId,
   sidebar,
   transitionName,
+  routeMap,
 } = Astro.props;
 const sl = Astro.slots.has("default");
 ---
@@ -37,8 +38,11 @@ const sl = Astro.slots.has("default");
     class="py-12 sm:py-16 lg:py-24"
     id={sectionId}
   >
-    <div class="mx-auto grid gap-10 px-4 max-inline-7xl lg:grid-cols-[4fr_2fr]">
-      <article class="rounded-2xl bg-white p-4 pbe-8 shadow-xs ring-1 ring-zinc-100 sm:p-6 sm:pbe-12">
+    <div class="mx-auto grid gap-4 px-4 max-inline-7xl lg:grid-cols-[minmax(0,1fr)_403px]">
+      <article
+        class="rounded-2xl bg-white p-4 pbe-8 shadow-xs ring-1 ring-zinc-100 sm:p-6 sm:pbe-12"
+        data-ascii="surface"
+      >
         <div data-animate="zoom-in">
           <figure class="relative mbe-8 aspect-4/3 overflow-hidden rounded-xl border border-zinc-100 shadow-md inline-full bg-stone-100 dark:bg-stone-800">
             <Image
@@ -67,7 +71,7 @@ const sl = Astro.slots.has("default");
               {title}
             </h2>
             {lead ?
-              <p class="mbs-3 text-base sm:text-lg leading-relaxed text-stone-700 max-w-[68ch] text-pretty">
+              <p class="mbs-3 sm:mbs-4 border-s-2 border-orange-600 ps-4 py-0.5 text-sm sm:text-base leading-relaxed text-stone-600 text-pretty">
                 {lead}
               </p>
             : null}
@@ -90,6 +94,7 @@ const sl = Astro.slots.has("default");
         details={sidebar.details}
         intro={sidebar.intro}
         mainBrand={sidebar.mainBrand}
+        routeMap={routeMap}
         sidebarItems={sidebar.sidebarItems}
         sidebarTitle={sidebar.sidebarTitle}
       />

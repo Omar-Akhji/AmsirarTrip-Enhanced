@@ -1,4 +1,10 @@
 {
+  "404": {
+    "title": "Page Non Trouvée | Amsirar Trip",
+    "description": "La page que vous cherchez n'existe pas ou a été déplacée.",
+    "message": "Il semble que ce chemin ne mène nulle part au Maroc. Reprenons la route ensemble.",
+    "cta": "Retour à l'Accueil"
+  },
   "helplineTitle": "Pour plus d'informations :",
   "helplineNumber": "+212 (0) 6 61 17 31 44",
   "validations": {
@@ -206,7 +212,23 @@
     "duration": "Durée",
     "days": "Jours",
     "start": "Départ",
-    "end": "Arrivée"
+    "end": "Arrivée",
+    "tourTypeLabel": "Format du Circuit",
+    "tourTypeValue": "Privé VIP & Partagé",
+    "bothAvailable": "Privé & Partagé",
+    "formatComparisonTitle": "Formats de Circuit Disponibles",
+    "privateOption": "Départ Privé VIP",
+    "privateOptionBadge": "Le Plus Demandé",
+    "privateOptionDesc": "Véhicule climatisé exclusif, chauffeur-guide berbère dédié, horaires flexibles et arrêts photos personnalisés.",
+    "sharedOption": "Petit Groupe Partagé",
+    "sharedBadge": "Économique",
+    "sharedDesc": "Tarif avantageux avec 8 à 14 voyageurs max. Itinéraire fixe et bivouac saharien authentique. Contactez-nous sur WhatsApp pour les dates.",
+    "sharedPriceLabel": "Dès ~95€ / pers.",
+    "sharedPriceNote": "Tarif partagé économique (dates programmées)",
+    "pricingSubtitle": "Tarifs transparents pour circuits privés exclusifs ou départs partagés.",
+    "relatedTagline": "Circuits Alternatifs au Maroc",
+    "relatedTitle": "Découvrez d'autres itinéraires recommandés",
+    "relatedSubtitle": "Explorez différentes durées et variantes d'itinéraires conçus en 4x4 privé et bivouacs de luxe."
   },
   "excursion": {
     "404": {
@@ -1490,12 +1512,6 @@
       "termsOfService": "Conditions d'utilisation",
       "cookieSettings": "Paramètres des cookies"
     }
-  },
-  "404": {
-    "title": "Page Non Trouvée | Amsirar Trip",
-    "description": "La page que vous cherchez n'existe pas ou a été déplacée.",
-    "message": "Il semble que ce chemin ne mène nulle part au Maroc. Reprenons la route ensemble.",
-    "cta": "Retour à l'Accueil"
   },
   "notFound": {
     "title": "Page introuvable",

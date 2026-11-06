@@ -48,12 +48,21 @@ const DELAY_CLASSES = [
           id="featured-heading"
         >
           {locale === "fr" ?
-            "Destinations emblématiques du Maroc"
+            <>
+              Destinations emblématiques <span class="text-orange">du Maroc</span>
+            </>
           : locale === "es" ?
-            "Destinos emblemáticos de Marruecos"
+            <>
+              Destinos emblemáticos <span class="text-orange">de Marruecos</span>
+            </>
           : locale === "de" ?
-            "Höhepunkte und Regionen Marokkos"
-          : "Signature destinations across Morocco"}
+            <>
+              Höhepunkte und <span class="text-orange">Regionen Marokkos</span>
+            </>
+          : <>
+              Signature Destinations <span class="text-orange">Across Morocco</span>
+            </>
+          }
         </h2>
         <p class="border-s-2 border-orange-600 ps-4 py-0.5 text-sm sm:text-base text-stone-600 leading-relaxed max-w-[62ch]">
           {locale === "fr" ?
@@ -82,7 +91,7 @@ const DELAY_CLASSES = [
         >
           <stop
             offset="0%"
-            stop-color="var(--color-yellow, #ffc814)"
+            stop-color="var(--color-yellow, #FFB70F)"
           ></stop>
           <stop
             offset="50%"
@@ -90,7 +99,7 @@ const DELAY_CLASSES = [
           ></stop>
           <stop
             offset="100%"
-            stop-color="var(--color-yellow, #ffc814)"
+            stop-color="var(--color-yellow, #FFB70F)"
           ></stop>
         </linearGradient>
       </defs>
@@ -120,7 +129,13 @@ const DELAY_CLASSES = [
 
           return (
             <ScrollStackItem itemClassName="group">
-              <article class="relative size-full overflow-hidden rounded-2xl bg-slate-950 border-2 border-stone-800/80 shadow-2xl select-none">
+              <article
+                class="relative size-full overflow-hidden rounded-2xl bg-slate-950 border-2 border-stone-800/80 shadow-2xl select-none"
+                data-ascii="surface"
+                style="
+
+--ascii-glyph: #e4e4e7; --ascii-surface: #09090b;"
+              >
                 <div class="absolute inset-0 size-full">
                   <Image
                     alt={cityAlt}
@@ -182,7 +197,13 @@ const DELAY_CLASSES = [
             class:list={[DELAY_CLASSES[index] || "delay-0"]}
             data-animate="fade-up"
           >
-            <article class="group relative block aspect-4/3 w-full select-none">
+            <article
+              class="group relative block aspect-4/3 w-full select-none"
+              data-ascii="surface"
+              style="
+
+--ascii-glyph: #e4e4e7; --ascii-surface: #09090b;"
+            >
               <!-- Inner Image Card (Rounded image surface with dark luxury background) -->
               <div
                 data-scroll-parallax

@@ -22,19 +22,15 @@
 
 Colors are expressed in perceptual **OKLCH** matching `src/styles/global.css`:
 
-| Role                            | Token Name            | OKLCH Value                | CSS Variable           | Visual Intent                                        |
-| ------------------------------- | --------------------- | -------------------------- | ---------------------- | ---------------------------------------------------- |
-| **Canvas**                      | `canvas`              | `oklch(98.5% 0.006 65deg)` | `--color-canvas`       | Primary warm sandy ground                            |
-| **Surface**                     | `surface`             | `oklch(99.5% 0.003 65deg)` | `--color-surface`      | Elevated clean paper surface                         |
-| **Sunken**                      | `sunken`              | `oklch(96% 0.008 65deg)`   | `--color-sunken`       | Sunken inputs, badges, wells                         |
-| **Ink**                         | `ink`                 | `oklch(15% 0.01 65deg)`    | `--color-ink`          | Deep charcoal running copy (not pure black)          |
-| **Ink Muted**                   | `ink-muted`           | `oklch(40% 0.01 65deg)`    | `--color-ink-muted`    | Secondary captions, tour metadata                    |
-| **Ink Subtle**                  | `ink-subtle`          | `oklch(55% 0.008 65deg)`   | `--color-ink-subtle`   | Tertiary timestamps, borders                         |
-| **Accent (Terracotta)**         | `orange` / `accent`   | `oklch(56% 0.19 33deg)`    | `--color-orange`       | Primary brand Moroccan clay CTA                      |
-| **Accent Dark**                 | `orange-dark`         | `oklch(51% 0.18 36deg)`    | `--color-orange-dark`  | Hover & pressed states on accent                     |
-| **Golden Amber**                | `amber-orange`        | `oklch(72% 0.17 35deg)`    | `--color-amber-orange` | Star ratings, badges, highlights                     |
-| **Sahara Night / Dark Surface** | `slate-950` / `night` | `oklch(14% 0.01 65deg)`    | `--color-night`        | Unified dark card surfaces, sidebar modules & footer |
-| **Line / Divider**              | `line`                | `oklch(90% 0.008 65deg)`   | `--color-line`         | Subtle tone steps between cards                      |
+| Role                        | Token Name           | OKLCH / Hex Value                        | CSS Variable / Utility    | Visual Intent                                                   |
+| --------------------------- | -------------------- | ---------------------------------------- | ------------------------- | --------------------------------------------------------------- |
+| **Accent (Pacific Orange)** | `orange` / `accent`  | `#f15d30` / `oklch(66.5% 0.191 36.9deg)` | `--color-orange`          | Unified brand primary orange across all UI, badges, icons & CTA |
+| **Accent Dark**             | `orange-dark`        | `#d94a1f`                                | `--color-orange-dark`     | Hover & pressed states on accent                                |
+| **Golden Amber Highlight**  | `amber-orange`       | `#f78848`                                | `--color-amber-orange`    | Gradient top-left highlight partner for buttons & navlinks      |
+| **Yellow Highlight**        | `yellow`             | `#FFB70F`                                | `--color-yellow`          | Golden yellow highlight & accent text                           |
+| **Ink Running Copy**        | `ink`                | `oklch(15% 0.01 65deg)`                  | `--color-ink`             | Deep charcoal running body copy                                 |
+| **Primary Surfaces**        | `stone-50` / `white` | Native Tailwind neutrals                 | `bg-stone-50`, `bg-white` | Light mode clean ground surfaces                                |
+| **Sahara Night Surface**    | `slate-950`          | Native Tailwind slate                    | `bg-slate-950`            | Dark card surfaces, sidebar modules & footer                    |
 
 ---
 
@@ -46,8 +42,9 @@ Colors are expressed in perceptual **OKLCH** matching `src/styles/global.css`:
   Line height `1.5` to `1.6`. Running body font size `16px` minimum.
 - **Brand Signature Accent (`--font-brand`)**: `Yellowtail`, cursive. Used selectively for
   single-phrase accents or hero signatures. Never used for multi-line copy or UI buttons.
-- **Code & Tour IDs (`--font-mono`)**: `JetBrains Mono`. Used strictly for tour itinerary day
-  markers, GPS coordinates, and license accreditation numbers (`Agrément N° 24/TT/RAK`).
+- **Code & Tour IDs (`--font-mono`)**: `DM Mono`. Used for tour itinerary day markers, GPS
+  coordinates, license accreditation numbers (`Agrément N° 24/TT/RAK`), and editorial section
+  subtitles.
 
 ---
 

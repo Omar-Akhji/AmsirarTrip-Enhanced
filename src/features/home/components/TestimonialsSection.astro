@@ -34,12 +34,21 @@ const TRIPADVISOR_URL =
           id="testimonials-heading"
         >
           {locale === "fr" ?
-            "Avis de nos voyageurs"
+            <>
+              Avis de <span class="text-orange">Nos Voyageurs</span>
+            </>
           : locale === "es" ?
-            "Experiencias de nuestros viajeros"
+            <>
+              Experiencias de <span class="text-orange">Nuestros Viajeros</span>
+            </>
           : locale === "de" ?
-            "Erfahrungen unserer Reisenden"
-          : "What our guests say"}
+            <>
+              Erfahrungen <span class="text-orange">Unserer Reisenden</span>
+            </>
+          : <>
+              What Our <span class="text-orange">Guests Say</span>
+            </>
+          }
         </h2>
         <p class="border-s-2 border-orange-600 ps-4 py-0.5 text-sm sm:text-base text-stone-600 leading-relaxed max-w-[62ch]">
           {locale === "fr" ?

@@ -31,14 +31,14 @@ export const getSecurityHeaders = (nonce: string, host: string) => {
         "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
         // Fonts: self + Google Fonts
         "font-src 'self' https://fonts.gstatic.com",
-        // Images: self + blob/data (Astro image optimization) + tripadvisor + Google
-        `img-src 'self' blob: data: https://*.tripadvisor.com https://*.tripadvisor.de https://*.google.com https://*.gstatic.com`,
+        // Images: self + blob/data (Astro image optimization) + tripadvisor + Google + OpenStreetMap/Carto tiles
+        `img-src 'self' blob: data: https://*.tripadvisor.com https://*.tripadvisor.de https://*.google.com https://*.gstatic.com https://*.tile.openstreetmap.org https://*.basemaps.cartocdn.com`,
         // Frames: self + Google reCAPTCHA & Maps
-        "frame-src 'self' https://www.google.com https://www.google.com/maps/",
+        "frame-src 'self' https://www.google.com https://www.google.com/maps/ https://maps.google.com",
         // Frame ancestors: prevent clickjacking
         "frame-ancestors 'self'",
-        // Connections: self + own host + Google (reCAPTCHA verification calls)
-        `connect-src 'self'${safeConnectHost} https://www.google.com`,
+        // Connections: self + own host + Google (reCAPTCHA verification calls) + map tile hosts
+        `connect-src 'self'${safeConnectHost} https://www.google.com https://*.tile.openstreetmap.org https://*.basemaps.cartocdn.com`,
         // Workers: self only (no third-party workers)
         "worker-src 'self'",
         // Web app manifest: self only

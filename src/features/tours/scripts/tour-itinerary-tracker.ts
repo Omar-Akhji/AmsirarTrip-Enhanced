@@ -15,6 +15,7 @@ interface LenisGlobal {
   __lenis?: {
     stop: () => void;
     start: () => void;
+    isLocked?: boolean;
     scrollTo: (target: number | HTMLElement, options?: { immediate?: boolean }) => void;
   };
 }
@@ -60,10 +61,10 @@ export function initTourItineraryTracker(): () => void {
   let canResumeScroll = false;
   let pauseCooldownTimer: ReturnType<typeof setTimeout> | undefined;
   let lastPausedStageIndex = -1;
+  let currentStickyOffset = 0;
 
   const getTriggerLine = (): number => {
-    const stickyBottom = stickyHeader ? stickyHeader.getBoundingClientRect().bottom : 80;
-    return stickyBottom + 24;
+    return stickyHeader ? stickyHeader.getBoundingClientRect().bottom : 80;
   };
 
   const getStageNodeCenterY = (stageEl: HTMLElement, trackTop: number): number => {
@@ -92,7 +93,7 @@ export function initTourItineraryTracker(): () => void {
 
     const lenis = getLenis();
     if (lenis) {
-      lenis.start();
+      lenis.isLocked = false;
     }
   };
 
@@ -103,9 +104,13 @@ export function initTourItineraryTracker(): () => void {
     const stage = stages[stageIndex];
     if (!stage) return;
 
-    // Align the stage node directly with triggerLine so the orange dot replaces the gray one
+    // Align directly with triggerLine so the sticky bar line is exactly on the stage line
     const triggerLine = getTriggerLine();
-    const nodeViewportY = getStageNodeViewportY(stage.element);
+    const separator = stage.element.querySelector<HTMLElement>(".stage-separator");
+    const nodeViewportY =
+      stageIndex === totalStages - 1 && separator ?
+        separator.getBoundingClientRect().bottom
+      : getStageNodeViewportY(stage.element);
     const snapDelta = nodeViewportY - triggerLine;
 
     const lenis = getLenis();
@@ -118,18 +123,19 @@ export function initTourItineraryTracker(): () => void {
       }
     }
 
-    // Stop scrolling at this exact position until another scroll is made
+    // Stop scrolling at this exact position until pause duration elapses or user initiates next gesture
     isScrollPaused = true;
     canResumeScroll = false;
 
     if (lenis) {
-      lenis.stop();
+      lenis.isLocked = true;
     }
 
     clearTimeout(pauseCooldownTimer);
     pauseCooldownTimer = setTimeout(() => {
       canResumeScroll = true;
-    }, 400);
+      resumeScroll();
+    }, 450);
   };
 
   const syncActiveStage = (index: number): void => {
@@ -167,15 +173,50 @@ export function initTourItineraryTracker(): () => void {
   };
 
   const update = (): void => {
+    // End stickiness when reaching final stage: lock sticky bar directly to final stage line
+    const lastStage = stages.at(-1);
+    if (lastStage && stickyHeader) {
+      const separator = lastStage.element.querySelector<HTMLElement>(".stage-separator");
+      const targetElement =
+        separator ?? lastStage.element.querySelector<HTMLElement>(".stage-node");
+      if (targetElement) {
+        const untranslatedBottom =
+          stickyHeader.getBoundingClientRect().bottom + currentStickyOffset;
+        const targetBottom = targetElement.getBoundingClientRect().bottom;
+        const overflow = untranslatedBottom - targetBottom;
+
+        currentStickyOffset = overflow > 0 ? overflow : 0;
+      }
+    } else {
+      currentStickyOffset = 0;
+    }
+
+    if (stickyHeader) {
+      stickyHeader.style.transform =
+        currentStickyOffset > 0 ? `translate3d(0, -${currentStickyOffset}px, 0)` : "";
+    }
+
     const triggerLine = getTriggerLine();
 
     let newActiveIndex = 0;
-    for (const [i, stage] of stages.entries()) {
-      const nodeViewportY = getStageNodeViewportY(stage.element);
-      if (nodeViewportY <= triggerLine) {
-        newActiveIndex = i;
-      } else {
-        break;
+    if (isScrollPaused && activeIndex >= 0) {
+      newActiveIndex = activeIndex;
+    } else {
+      for (const [i, stage] of stages.entries()) {
+        const nodeViewportY = getStageNodeViewportY(stage.element);
+        // 2px buffer prevents subpixel rounding jitter on the boundary
+        if (nodeViewportY <= triggerLine + 2) {
+          newActiveIndex = i;
+        } else {
+          break;
+        }
+      }
+    }
+
+    if (newActiveIndex < activeIndex) {
+      // User is scrolling upwards towards previous days -> allow re-snapping when scrolling down again
+      if (lastPausedStageIndex > newActiveIndex) {
+        lastPausedStageIndex = newActiveIndex;
       }
     }
 
@@ -191,17 +232,13 @@ export function initTourItineraryTracker(): () => void {
 
     if (!timelineTrack || !timelineDot) return;
     const trackRect = timelineTrack.getBoundingClientRect();
-    const stickyBottom = stickyHeader ? stickyHeader.getBoundingClientRect().bottom : 80;
 
     let dotOffset = 0;
     if (newActiveIndex >= totalStages - 1) {
       const lastStage = stages.at(-1);
       if (lastStage) {
         dotOffset = getStageNodeCenterY(lastStage.element, trackRect.top);
-
-        // When scrolling past the final stage, hide orange dot so it does not appear in front of it
-        const lastNodeViewportY = getStageNodeViewportY(lastStage.element);
-        timelineDot.style.opacity = lastNodeViewportY < stickyBottom ? "0" : "1";
+        timelineDot.style.opacity = "1";
       }
     } else {
       timelineDot.style.opacity = "1";
@@ -245,10 +282,10 @@ export function initTourItineraryTracker(): () => void {
   const handleUserScrollInput = (e: Event): void => {
     if (!isScrollPaused) return;
     if (!canResumeScroll) {
-      e.preventDefault();
+      if (e.cancelable) e.preventDefault();
       return;
     }
-    // The user initiated another scroll gesture -> unlock and allow movement
+    // The user initiated another scroll gesture after the pause window -> unlock and allow movement
     resumeScroll();
   };
 
@@ -261,7 +298,7 @@ export function initTourItineraryTracker(): () => void {
     }
 
     if (!canResumeScroll) {
-      e.preventDefault();
+      if (e.cancelable) e.preventDefault();
       return;
     }
     resumeScroll();
@@ -269,18 +306,30 @@ export function initTourItineraryTracker(): () => void {
 
   globalThis.addEventListener("scroll", requestTick, { passive: true });
   globalThis.addEventListener("resize", requestTick, { passive: true });
-  globalThis.addEventListener("wheel", handleUserScrollInput, { passive: false });
-  globalThis.addEventListener("touchmove", handleUserScrollInput, { passive: false });
-  globalThis.addEventListener("keydown", handleKeyDown);
+  globalThis.addEventListener("wheel", handleUserScrollInput, { passive: false, capture: true });
+  globalThis.addEventListener("touchmove", handleUserScrollInput, {
+    passive: false,
+    capture: true,
+  });
+  globalThis.addEventListener("keydown", handleKeyDown, { capture: true });
 
   update();
 
   return () => {
     globalThis.removeEventListener("scroll", requestTick);
     globalThis.removeEventListener("resize", requestTick);
-    globalThis.removeEventListener("wheel", handleUserScrollInput);
-    globalThis.removeEventListener("touchmove", handleUserScrollInput);
-    globalThis.removeEventListener("keydown", handleKeyDown);
+    globalThis.removeEventListener("wheel", handleUserScrollInput, {
+      capture: true,
+    } as EventListenerOptions);
+    globalThis.removeEventListener("touchmove", handleUserScrollInput, {
+      capture: true,
+    } as EventListenerOptions);
+    globalThis.removeEventListener("keydown", handleKeyDown, {
+      capture: true,
+    } as EventListenerOptions);
+    if (stickyHeader) {
+      stickyHeader.style.transform = "";
+    }
     resumeScroll();
   };
 }

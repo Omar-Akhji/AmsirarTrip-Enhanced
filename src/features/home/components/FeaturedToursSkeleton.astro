@@ -1,5 +1,6 @@
 ---
 import AsciiSkeleton from "@/shared/ui/feedback/AsciiSkeleton.astro";
+import ButtonSkeleton from "@/shared/ui/feedback/ButtonSkeleton.astro";
 
 interface Props {
   count?: number | undefined;
@@ -48,11 +49,11 @@ const { count = 6, class: className } = Astro.props;
         </div>
       </div>
 
-      {/* View all destinations button — rendered as full ASCII dither button pill */}
-      <AsciiSkeleton
-        class="h-8.5 w-32 rounded-full overflow-hidden text-stone-400"
-        rows={2}
-        variant="dither"
+      {/* View all destinations button */}
+      <ButtonSkeleton
+        size="sm"
+        variant="outline"
+        class="w-32"
       />
     </div>
 
@@ -88,7 +89,7 @@ const { count = 6, class: className } = Astro.props;
                     widths={["7rem"]}
                   />
                   <AsciiSkeleton
-                    class="text-xl sm:text-2xl text-white font-bold"
+                    class="text-xl sm:text-2xl text-stone-300 font-bold"
                     lines={1}
                     variant="dither"
                     widths={["11rem"]}

@@ -1,5 +1,6 @@
 ---
 import AsciiSkeleton from "./AsciiSkeleton.astro";
+import ButtonSkeleton from "./ButtonSkeleton.astro";
 
 interface Props {
   hasBreadcrumbs?: boolean | undefined;
@@ -99,18 +100,18 @@ const {
         </div>
       </hgroup>
 
-      {/* Action Buttons — rendered as complete ASCII skeleton pills, not containers with text inside */}
+      {/* Action Buttons — using matching ButtonSkeleton */}
       {hasButtons && (
         <div class="flex flex-wrap items-center justify-center gap-4 pbs-2">
-          <AsciiSkeleton
-            class="h-11 w-36 rounded-full overflow-hidden text-white/60"
-            rows={3}
-            variant="dither"
+          <ButtonSkeleton
+            size="md"
+            variant="primary"
+            class="w-36 text-white/80"
           />
-          <AsciiSkeleton
-            class="h-11 w-44 rounded-full overflow-hidden text-white/60"
-            rows={3}
-            variant="dither"
+          <ButtonSkeleton
+            size="md"
+            variant="secondary"
+            class="w-44 text-white/80"
           />
         </div>
       )}

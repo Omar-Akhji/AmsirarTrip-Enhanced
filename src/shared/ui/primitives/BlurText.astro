@@ -3,6 +3,7 @@ export interface Props {
   text: string;
   as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "div" | "p" | "span";
   class?: string;
+  style?: string;
   animateBy?: "words" | "letters";
   direction?: "top" | "bottom";
   delay?: number;
@@ -16,6 +17,7 @@ const {
   text,
   as: Tag = "p",
   class: className = "",
+  style: styleProp,
   animateBy = "words",
   direction = "top",
   delay = 200,
@@ -31,6 +33,7 @@ const tokens: string[] = animateBy === "letters" ? [...text] : text.split(" ");
 <Tag
   aria-label={text}
   class:list={["blur-text-root", className]}
+  style={styleProp}
   data-animate-by={animateBy}
   data-blur={blur}
   data-blur-text

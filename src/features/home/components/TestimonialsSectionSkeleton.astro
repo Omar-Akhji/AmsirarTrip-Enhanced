@@ -1,5 +1,6 @@
 ---
 import AsciiSkeleton from "@/shared/ui/feedback/AsciiSkeleton.astro";
+import ButtonSkeleton from "@/shared/ui/feedback/ButtonSkeleton.astro";
 
 interface Props {
   class?: string | undefined;
@@ -31,6 +32,13 @@ const { class: className } = Astro.props;
           />
         </div>
       </hgroup>
+      <div class="flex items-center">
+        <ButtonSkeleton
+          size="sm"
+          variant="outline"
+          class="w-32"
+        />
+      </div>
     </div>
 
     <div class="relative">
@@ -46,7 +54,7 @@ const { class: className } = Astro.props;
                       class="text-stone-400 font-bold tracking-[0.14em] uppercase"
                       lines={1}
                       variant="dither"
-                      widths={["13ch"]}
+                      widths={["8ch"]}
                     />
                     <AsciiSkeleton
                       class="text-stone-300"

@@ -1,4 +1,5 @@
 ---
+import { getTourRouteMap } from "@/features/maps/data/routes";
 import { parseStringArray, useTranslations } from "@/i18n/utils";
 import TripLayout from "@/layouts/TripLayout.astro";
 import FaqAccordion from "@/shared/ui/widgets/FaqAccordion.astro";
@@ -113,6 +114,8 @@ for (let index = 1; index <= duration; index++) {
     });
   }
 }
+
+const routeMap = getTourRouteMap(tourKey, startCity, endCity, dossierTitle);
 ---
 
 <TripLayout
@@ -128,6 +131,7 @@ for (let index = 1; index <= duration; index++) {
   lead={lead}
   pageSubtitle={heroSubtitle}
   pageTitle={t("tours.detailsTitle", "Tours Details")}
+  routeMap={routeMap}
   sectionId="tour-single"
   sidebar={{
     sidebarTitle: t("tours.sidebar.title"),
@@ -157,6 +161,8 @@ for (let index = 1; index <= duration; index++) {
       highlightsTitle={highlightsTitle}
       startCity={startCity}
       startLabel={t("tours.start")}
+      tourTypeLabel={t("tours.tourTypeLabel", "Tour Format")}
+      tourTypeValue={t("tours.tourTypeValue", "Private VIP & Shared")}
     />
 
     <section
@@ -175,7 +181,7 @@ for (let index = 1; index <= duration; index++) {
           {t("tours.overview")}
         </h3>
       </hgroup>
-      <p class="font-sans text-sm sm:text-base leading-relaxed whitespace-pre-line text-stone-700 max-w-[68ch]">
+      <p class="font-sans text-sm sm:text-base leading-relaxed whitespace-pre-line text-stone-700">
         {overview}
       </p>
     </section>
@@ -214,6 +220,19 @@ for (let index = 1; index <= duration; index++) {
         seo.price ?? { label: priceLabel, note: "Private transport and licensed guides included" }
       }
       reserveNow={reserveNow}
+      formatComparisonTitle={t("tours.formatComparisonTitle", "Available Tour Formats")}
+      privateOption={t("tours.privateOption", "Private VIP Departure")}
+      privateBadge={t("tours.privateOptionBadge", "Most Popular")}
+      privateDesc={t(
+        "tours.privateOptionDesc",
+        "Dedicated air-conditioned vehicle, personal Berber driver-guide, flexible departure times and custom scenic photo stops.",
+      )}
+      sharedOption={t("tours.sharedOption", "Small-Group Shared")}
+      sharedBadge={t("tours.sharedOptionBadge", "Budget-Friendly")}
+      sharedDesc={t(
+        "tours.sharedOptionDesc",
+        "Cost-effective departure with max 8–14 travelers. Fixed scenic itinerary and authentic desert bivouac. Inquire on WhatsApp for shared dates.",
+      )}
     />
 
     {seo.faqs && seo.faqs.length > 0 && (

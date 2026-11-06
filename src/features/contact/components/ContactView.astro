@@ -2,18 +2,22 @@
 import bgImage from "@/assets/images/Header/header-1.webp";
 import { useTranslations } from "@/i18n/utils";
 import { WHATSAPP_LINK } from "@/lib/constants/contact";
+import { splitTitleAccent } from "@/lib/utils";
 import PageHeader from "@/layouts/PageHeader.astro";
 import Button from "@/shared/ui/primitives/Button.astro";
 import ContactFolderStack from "./ContactFolderStack.astro";
-import { ChevronRight, Mail, MapPinned, Phone } from "@lucide/astro";
+import PointOnMapIcon from "@/shared/ui/icons/PointOnMapIcon.astro";
+import AltArrowRightIcon from "@/shared/ui/icons/AltArrowRightIcon.astro";
 
 const locale = Astro.currentLocale || "en";
 const t = useTranslations(locale);
 
+const contactTitle = splitTitleAccent(t("contact.lgTitle", "Contact Us"));
+const locationTitle = splitTitleAccent(t("contact.location.lgTitle"));
+
 const contactMethods = [
   {
     id: "phone",
-    icon: Phone,
     title: t("contact.card.phoneTitle", "Call or WhatsApp our Marrakech desk"),
     description: t(
       "contact.card.phoneSeo",
@@ -22,7 +26,6 @@ const contactMethods = [
   },
   {
     id: "email",
-    icon: Mail,
     title: t("contact.card.emailTitle", "Send a message - we'll reply with a tailored plan"),
     description: t(
       "contact.card.emailSeo",
@@ -31,7 +34,6 @@ const contactMethods = [
   },
   {
     id: "location",
-    icon: MapPinned,
     title: t("contact.card.visitTitle", "Visit our Marrakech office - friendly, local support"),
     description: t(
       "contact.card.visitSeo",
@@ -86,6 +88,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
             <article
               aria-label={typeof method.title === "string" ? method.title : undefined}
               class="contact-info-card group relative flex size-full flex-col justify-between rounded-2xl border border-stone-200/90 bg-stone-50/80 p-6 sm:p-8 shadow-xs shadow-stone-900/5 transition-all duration-300 hover:-translate-y-1 hover:border-stone-300 hover:shadow-md motion-reduce:transform-none"
+              data-ascii="surface"
             >
               <div>
                 <h3 class="mbe-3 text-xl font-bold tracking-tight text-stone-950 transition-colors duration-200 group-hover:text-orange-600">
@@ -97,7 +100,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
               <!-- Tactile Action Link -->
               <div class="mbs-6 border-t border-stone-200/60 pbs-4">
                 <Button
-                  class="flex w-full min-h-11 items-center justify-between border-stone-200 bg-white px-6 py-3 text-xs font-bold text-stone-800 transition-[border-color,background,color,box-shadow] duration-160 ease-out pointer-fine:hover:border-orange/60 pointer-fine:hover:bg-linear-to-br pointer-fine:hover:from-amber-orange pointer-fine:hover:to-orange pointer-fine:hover:text-white pointer-fine:hover:shadow-md pointer-fine:hover:shadow-orange/20"
+                  class="flex w-full min-h-11 items-center justify-between border-stone-200 bg-white px-6 py-3 text-xs font-bold text-stone-800 transition-[border-color,background,color,box-shadow] duration-160 ease-out hover:border-transparent pointer-fine:hover:border-transparent pointer-fine:hover:bg-linear-to-br pointer-fine:hover:from-amber-orange pointer-fine:hover:to-orange pointer-fine:hover:text-white pointer-fine:hover:shadow-md pointer-fine:hover:shadow-orange/20"
                   variant="outline"
                   href={
                     method.id === "phone" ? WHATSAPP_LINK
@@ -115,7 +118,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
                       "Send Us a Message"
                     : "View Office Location"}
                   </span>
-                  <ChevronRight
+                  <AltArrowRightIcon
                     aria-hidden="true"
                     class="size-4"
                   />
@@ -144,7 +147,8 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
             class="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl text-balance"
             id="contact-form-heading"
           >
-            {t("contact.lgTitle", "Contact Us")}
+            {contactTitle.main}{" "}
+            {contactTitle.accent && <span class="text-orange">{contactTitle.accent}</span>}
           </h2>
           <p class="border-s-2 border-orange-600 ps-4 py-0.5 text-sm sm:text-base text-stone-600 leading-relaxed max-w-[62ch] text-pretty">
             {t(
@@ -175,7 +179,8 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
             class="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl text-balance"
             id="location-heading"
           >
-            {t("contact.location.lgTitle")}
+            {locationTitle.main}{" "}
+            {locationTitle.accent && <span class="text-orange">{locationTitle.accent}</span>}
           </h2>
           <p class="border-s-2 border-orange-600 ps-4 py-0.5 text-sm sm:text-base text-stone-600 leading-relaxed max-w-[62ch] text-pretty">
             {t("contact.location.smTitle")}
@@ -183,15 +188,20 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
         </hgroup>
       </div>
 
-      <details class="group overflow-hidden rounded-2xl border border-slate-900 bg-slate-950 text-white shadow-xl">
+      <details
+        class="group overflow-hidden rounded-2xl border border-slate-900 bg-slate-950 text-white shadow-xl"
+        data-ascii="surface"
+        style="
+
+--ascii-glyph: #d4d4d8; --ascii-surface: #020617;"
+      >
         <summary class="group/summary relative flex flex-col items-center justify-center bg-slate-950 text-white cursor-pointer list-none select-none transition duration-300 block-75 md:block-100 lg:block-125 marker:hidden group-open:hidden">
-          <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(234,88,12,0.12),transparent_70%)]"></div>
+          <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(241,93,48,0.12),transparent_70%)]"></div>
           <div class="relative z-10 text-center space-y-4 px-6 max-w-lg mx-auto">
-            <div class="mx-auto flex size-14 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-orange-400 font-mono text-xs shadow-xs group-hover/summary:scale-105 transition duration-300">
-              <MapPinned
+            <div class="mx-auto flex size-14 items-center justify-center rounded-full border border-white/10 bg-white/5 text-orange-400 font-mono text-xs shadow-xs group-hover/summary:scale-105 transition duration-300">
+              <PointOnMapIcon
                 aria-hidden="true"
                 class="size-6"
-                stroke-width={2}
               />
             </div>
             <h3 class="text-xl font-bold tracking-tight text-white uppercase sm:text-2xl">
@@ -204,9 +214,12 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
               )}
             </p>
             <div class="pt-2">
-              <span class="inline-flex min-h-11 items-center gap-2 rounded-full border border-orange-500/50 bg-linear-to-br from-amber-orange to-orange px-8 py-3 font-mono text-xs font-bold uppercase tracking-wider text-white shadow-md shadow-orange/20 transition-[filter,box-shadow,transform] duration-160 ease-out pointer-fine:hover:brightness-105 pointer-fine:hover:shadow-lg pointer-fine:hover:shadow-orange/30 active:scale-[0.98] motion-reduce:transform-none">
+              <span
+                class="inline-flex min-h-11 items-center gap-2 rounded-full border border-orange-500/50 bg-linear-to-br from-amber-orange to-orange px-8 py-3 font-mono text-xs font-bold uppercase tracking-wider text-white shadow-md shadow-orange/20 transition-[filter,box-shadow,transform] duration-160 ease-out pointer-fine:hover:brightness-105 pointer-fine:hover:shadow-lg pointer-fine:hover:shadow-orange/30 active:scale-[0.98] motion-reduce:transform-none"
+                data-ascii="fade"
+              >
                 <span>{t("contact.map.loadBtn", "Load Map")}</span>
-                <ChevronRight
+                <AltArrowRightIcon
                   aria-hidden="true"
                   class="size-4"
                 />

@@ -1,6 +1,8 @@
 ---
 import { useTranslations } from "@/i18n/utils";
-import { Compass, MapPinned, ShieldCheck } from "@lucide/astro";
+import CompassIcon from "@/shared/ui/icons/CompassIcon.astro";
+import PointOnMapIcon from "@/shared/ui/icons/PointOnMapIcon.astro";
+import ShieldCheckIcon from "@/shared/ui/icons/ShieldCheckIcon.astro";
 import StatsFolderStack from "./StatsFolderStack.astro";
 
 const locale = Astro.currentLocale || "en";
@@ -72,7 +74,7 @@ const statHighlights = [
     description: copy.experience,
     footerLeft: "Est. 2004",
     footerRight: "Marrakech HQ",
-    icon: Compass,
+    icon: CompassIcon,
   },
   {
     id: "routes",
@@ -82,7 +84,7 @@ const statHighlights = [
     description: copy.routes,
     footerLeft: "All 12 Regions",
     footerRight: "Bespoke Routes",
-    icon: MapPinned,
+    icon: PointOnMapIcon,
   },
   {
     id: "care",
@@ -92,7 +94,7 @@ const statHighlights = [
     description: copy.care,
     footerLeft: "Real-Time",
     footerRight: "Direct WhatsApp",
-    icon: ShieldCheck,
+    icon: ShieldCheckIcon,
   },
 ];
 
@@ -127,13 +129,13 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
           ]}
           data-animate="fade-up"
         >
-          <article class="group relative flex h-full w-full flex-col justify-between rounded-2xl border border-stone-200/90 bg-stone-50/80 p-6 sm:p-7 shadow-xs shadow-stone-900/5 transition-all duration-300 hover:-translate-y-1 hover:border-stone-300 hover:shadow-md">
+          <article
+            class="group relative flex h-full w-full flex-col justify-between rounded-2xl border border-stone-200/90 bg-stone-50/80 p-6 sm:p-7 shadow-xs shadow-stone-900/5 transition-all duration-300 hover:-translate-y-1 hover:border-stone-300 hover:shadow-md"
+            data-ascii="surface"
+          >
             <div>
               <div class="mbe-5 flex items-center justify-between border-b border-stone-200/60 pb-3 text-[11px] font-mono uppercase tracking-wider text-stone-400">
-                <span class="inline-flex items-center gap-2 font-semibold text-stone-500">
-                  <span class="size-2 rounded-full bg-orange-600"></span>
-                  {stat.code}
-                </span>
+                <span class="font-semibold text-stone-500">{stat.code}</span>
                 <div class="flex items-center gap-2 text-stone-400 transition-colors group-hover:text-stone-700">
                   <Icon
                     aria-hidden="true"

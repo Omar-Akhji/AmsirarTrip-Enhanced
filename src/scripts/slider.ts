@@ -107,7 +107,6 @@ function initSlider(): void {
   }
 
   updatePagination();
-  animateBlurText(sliderList.querySelector<HTMLElement>(":scope > .item:first-child"));
 
   let isAnimating = false;
   let autoplayTimer: ReturnType<typeof setInterval> | undefined;
