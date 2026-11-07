@@ -1,9 +1,8 @@
 /**
  * Interactive Slider Controller Inspired by Lun Dev Magic 3D Carousel Slider Implements fluid
  * thumbnail expansion, bidirectional animation, touch gestures, keyboard controls, and accessible
- * lifecycle management with GSAP BlurText word animation.
+ * lifecycle management with Web Animations API BlurText word animation.
  */
-import gsap from "gsap";
 
 function animateBlurText(slideItem: HTMLElement | null): void {
   if (!slideItem) return;
@@ -12,7 +11,12 @@ function animateBlurText(slideItem: HTMLElement | null): void {
 
   if (globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     const allTokens = slideItem.querySelectorAll<HTMLElement>(".blur-token");
-    gsap.set(allTokens, { opacity: 1, y: 0, filter: "none" });
+    for (const token of allTokens) {
+      for (const anim of token.getAnimations()) anim.cancel();
+      token.style.opacity = "1";
+      token.style.transform = "";
+      token.style.filter = "";
+    }
     return;
   }
 
@@ -21,32 +25,39 @@ function animateBlurText(slideItem: HTMLElement | null): void {
     if (tokens.length === 0) continue;
 
     const direction = container.dataset["direction"] ?? "bottom";
-    const delay = Number(container.dataset["delay"] ?? 200) / 1000;
-    const duration = Number(container.dataset["stepDuration"] ?? 0.65);
+    const delayMs = Number(container.dataset["delay"] ?? 200);
+    const durationMs = Number(container.dataset["stepDuration"] ?? 0.65) * 1000;
     const blur = Number(container.dataset["blur"] ?? 4);
     const distance = Number(container.dataset["distance"] ?? 20);
-    const stagger = Number(container.dataset["stagger"] ?? 0.02);
+    const staggerMs = Number(container.dataset["stagger"] ?? 0.02) * 1000;
 
     const initialY = direction === "top" ? -distance : distance;
 
-    gsap.killTweensOf(tokens);
-    gsap.set(tokens, {
-      opacity: 0,
-      y: initialY,
-      filter: `blur(${blur}px)`,
-      willChange: "transform, filter, opacity",
-    });
+    for (const [index, token] of tokens.entries()) {
+      for (const anim of token.getAnimations()) anim.cancel();
+      token.style.willChange = "transform, filter, opacity";
 
-    gsap.to(tokens, {
-      opacity: 1,
-      y: 0,
-      filter: "blur(0px)",
-      duration,
-      stagger: { each: stagger, from: "start" },
-      ease: "power3.out",
-      delay,
-      clearProps: "willChange,filter",
-    });
+      const anim = token.animate(
+        [
+          { opacity: 0, transform: `translateY(${initialY}px)`, filter: `blur(${blur}px)` },
+          { opacity: 1, transform: "translateY(0px)", filter: "blur(0px)" },
+        ],
+        {
+          duration: durationMs,
+          delay: delayMs + index * staggerMs,
+          easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+          fill: "both",
+        },
+      );
+
+      anim.onfinish = () => {
+        token.style.opacity = "1";
+        token.style.transform = "";
+        token.style.filter = "";
+        token.style.willChange = "";
+        anim.cancel();
+      };
+    }
   }
 }
 

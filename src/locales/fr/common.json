@@ -59,9 +59,9 @@
   "tours": {
     "meta": {
       "title": "Circuits Désert au Maroc & Itinéraires Sahara | Amsirar Trip",
-      "description": "Découvrez nos circuits privés dans le désert marocain au départ de Marrakech et Fès. Nuit en bivouac luxe, balade à dos de dromadaire et dunes de l'Erg Chebbi."
+      "description": "Découvrez nos circuits privés et partagés dans le désert marocain au départ de Marrakech et Fès. Nuit en bivouac luxe, balade à dos de dromadaire et dunes de l'Erg Chebbi."
     },
-    "title": "Nos excursions",
+    "title": "Nos circuits",
     "day": "Jour",
     "accommodationLabel": "Hébergement",
     "mealsLabel": "Repas",
@@ -121,7 +121,7 @@
       "supportDesc": "Coordination en cours de route pour hôtels et demandes spécifiques."
     },
     "tour": {
-      "smTitle": "Circuits privés de plusieurs jours",
+      "smTitle": "Circuits privés et partagés de plusieurs jours",
       "lgTitle": "tours récents"
     },
     "readMore": "En savoir plus",

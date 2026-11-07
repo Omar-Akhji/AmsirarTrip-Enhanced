@@ -1,8 +1,8 @@
-import gsap from "gsap";
-
 let currentActiveLink: HTMLAnchorElement | null = null;
 let currentHoveredLink: HTMLAnchorElement | null = null;
 let leaveTimer: ReturnType<typeof setTimeout> | null = null;
+
+const EASE_OUT = "cubic-bezier(0.22, 1, 0.36, 1)";
 
 function findMatchingLink(nav: HTMLElement, currentPath: string): HTMLAnchorElement | null {
   const cleanPath = currentPath === "/" ? "/" : currentPath.replace(/\/$/, "");
@@ -75,51 +75,34 @@ function setHovered(targetLink: HTMLAnchorElement | null, immediate = false): vo
 
     if (link === target) {
       link.dataset["indicator"] = "true";
-      gsap.killTweensOf(label);
-      if (immediate || prefersReducedMotion) {
-        gsap.set(label, { width: label.scrollWidth, opacity: 1, marginLeft: 8 });
-      } else {
-        gsap.to(label, {
-          width: label.scrollWidth,
-          opacity: 1,
-          marginLeft: 8,
-          duration: 0.22,
-          ease: "power2.out",
-          overwrite: "auto",
-        });
-      }
+      label.style.transition =
+        immediate || prefersReducedMotion ? "none" : (
+          `width 220ms ${EASE_OUT}, opacity 220ms ${EASE_OUT}, margin-left 220ms ${EASE_OUT}`
+        );
+      label.style.width = `${label.scrollWidth}px`;
+      label.style.opacity = "1";
+      label.style.marginLeft = "8px";
     } else {
       delete link.dataset["indicator"];
-      gsap.killTweensOf(label);
-      if (immediate || prefersReducedMotion) {
-        gsap.set(label, { width: 0, opacity: 0, marginLeft: 0 });
-      } else {
-        gsap.to(label, {
-          width: 0,
-          opacity: 0,
-          marginLeft: 0,
-          duration: 0.2,
-          ease: "power2.out",
-          overwrite: "auto",
-        });
-      }
+      label.style.transition =
+        immediate || prefersReducedMotion ? "none" : (
+          `width 200ms ${EASE_OUT}, opacity 200ms ${EASE_OUT}, margin-left 200ms ${EASE_OUT}`
+        );
+      label.style.width = "0px";
+      label.style.opacity = "0";
+      label.style.marginLeft = "0px";
     }
   }
 
   // Animate the orange indicator in exact sync with the label
-  gsap.killTweensOf(indicator);
-  if (immediate || prefersReducedMotion) {
-    gsap.set(indicator, { x: targetX, width: targetWidth, autoAlpha: 1 });
-  } else {
-    gsap.to(indicator, {
-      x: targetX,
-      width: targetWidth,
-      autoAlpha: 1,
-      duration: 0.22,
-      ease: "power2.out",
-      overwrite: "auto",
-    });
-  }
+  indicator.style.transition =
+    immediate || prefersReducedMotion ? "none" : (
+      `transform 220ms ${EASE_OUT}, width 220ms ${EASE_OUT}, opacity 220ms ${EASE_OUT}`
+    );
+  indicator.style.transform = `translate3d(${targetX}px, 0, 0)`;
+  indicator.style.width = `${targetWidth}px`;
+  indicator.style.opacity = "1";
+  indicator.style.visibility = "visible";
 }
 
 function setupMobileNav(): void {

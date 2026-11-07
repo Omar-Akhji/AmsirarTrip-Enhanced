@@ -1,5 +1,4 @@
 import type Lenis from "lenis";
-import gsap from "gsap";
 
 export interface FolderStackConfig {
   readonly trackSelector: string;
@@ -86,7 +85,8 @@ export function setupFolderStack(
     const backTransform = `translateY(${folderY.toFixed(1)}px)`;
     if (cache.get("backT") !== backTransform) {
       cache.set("backT", backTransform);
-      gsap.set(folderBack, { transform: backTransform, force3D: true });
+      folderBack.style.translate = "0px 0px";
+      folderBack.style.transform = backTransform;
     }
     const folderOpStr = folderOpacity.toFixed(3);
     if (cache.get("backO") !== folderOpStr) {
@@ -97,11 +97,9 @@ export function setupFolderStack(
     const frontTransform = `perspective(1000px) translateY(${folderY.toFixed(1)}px) rotateX(${frontTilt.toFixed(2)}deg)`;
     if (cache.get("frontT") !== frontTransform) {
       cache.set("frontT", frontTransform);
-      gsap.set(folderFront, {
-        transform: frontTransform,
-        transformOrigin: "bottom center",
-        force3D: true,
-      });
+      folderFront.style.translate = "0px 0px";
+      folderFront.style.transformOrigin = "bottom center";
+      folderFront.style.transform = frontTransform;
     }
     if (cache.get("frontO") !== folderOpStr) {
       cache.set("frontO", folderOpStr);
@@ -137,7 +135,8 @@ export function setupFolderStack(
 
       if (cache.get(slotCacheKey) !== slotTransform) {
         cache.set(slotCacheKey, slotTransform);
-        gsap.set(slot, { transform: slotTransform, transformOrigin: "top center", force3D: true });
+        slot.style.transformOrigin = "top center";
+        slot.style.transform = slotTransform;
       }
 
       const opStr = cardData.opacity.toFixed(3);

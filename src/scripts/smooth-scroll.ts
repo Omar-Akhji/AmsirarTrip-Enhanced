@@ -1,18 +1,16 @@
 import Lenis from "lenis";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 declare global {
   var __lenis: Lenis | undefined;
 }
 
-// Register ScrollTrigger with GSAP
-gsap.registerPlugin(ScrollTrigger);
-
 let lenis: Lenis | undefined;
-let activeTriggers: ScrollTrigger[] = [];
+let scrollAnimationCleanup: (() => void) | undefined;
 let bodyObserver: MutationObserver | undefined;
-let isTickerBound = false;
+
+function clamp01(value: number): number {
+  return Math.min(Math.max(value, 0), 1);
+}
 
 /** Checks if user prefers reduced motion. */
 function prefersReducedMotion(): boolean {
@@ -20,19 +18,6 @@ function prefersReducedMotion(): boolean {
     typeof window !== "undefined"
     && globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches
   );
-}
-
-/** Ensures GSAP ticker loop is bound exactly once to drive Lenis with zero multi-loop drift. */
-function ensureTicker() {
-  if (isTickerBound) return;
-
-  gsap.ticker.add((time: number) => {
-    lenis?.raf(time * 1000);
-  });
-
-  // Zero lag-smoothing prevents delayed jumps after heavy JS frames
-  gsap.ticker.lagSmoothing(0);
-  isTickerBound = true;
 }
 
 /** Monitors body class mutations to stop Lenis when modals lock the scrollbar. */
@@ -84,6 +69,7 @@ function initLenis(): Lenis | undefined {
     wheelMultiplier: 1, // 1:1 true-to-hand wheel sensitivity
     smoothWheel: true,
     syncTouch: false, // Keep native 120Hz touch scrolling on mobile and precision trackpads
+    autoRaf: true,
     autoResize: true,
     autoToggle: true,
     anchors: { offset: -72 },
@@ -93,77 +79,94 @@ function initLenis(): Lenis | undefined {
   });
 
   Object.assign(globalThis, { __lenis: lenis });
-
-  // Sync Lenis scroll updates with GSAP ScrollTrigger
-  lenis.on("scroll", () => {
-    ScrollTrigger.update();
-  });
-
-  ensureTicker();
   setupBodyObserver(lenis);
 
   return lenis;
 }
 
 /**
- * Initializes continuous scroll-linked parallax animations (cards, video, monumental brand).
- * One-shot reveals are handled separately by scroll-animate.ts via CSS to avoid layout fighting.
+ * Initializes continuous scroll-linked parallax animations (cards, video showcase). One-shot
+ * reveals are handled separately by scroll-animate.ts via CSS to avoid layout fighting.
  */
 function initScrollAnimations() {
   cleanupScrollAnimations();
 
   if (prefersReducedMotion()) return;
 
-  // 1. Subtle Spatial Parallax for Destination & Tour Cards
-  const parallaxContainers = document.querySelectorAll<HTMLElement>("[data-scroll-parallax]");
-  parallaxContainers.forEach((container) => {
+  const parallaxItems: { container: HTMLElement; target: HTMLElement; scale: number }[] = [];
+  for (const container of document.querySelectorAll<HTMLElement>("[data-scroll-parallax]")) {
     const mediaWrapper = container.querySelector<HTMLElement>(".parallax-media");
     const img = container.querySelector<HTMLElement>("img");
     const target = mediaWrapper ?? img;
-    if (!target) return;
+    if (!target) continue;
+    parallaxItems.push({ container, target, scale: mediaWrapper ? 1 : 1.1 });
+  }
 
-    const tween = gsap.fromTo(
-      target,
-      { yPercent: -6, scale: mediaWrapper ? 1 : 1.1 },
-      {
-        yPercent: 6,
-        scale: mediaWrapper ? 1 : 1.1,
-        ease: "none",
-        scrollTrigger: { trigger: container, start: "top bottom", end: "bottom top", scrub: 0.6 },
-      },
-    );
+  const videoItems: { container: HTMLElement; lastY: number }[] = Array.from(
+    document.querySelectorAll<HTMLElement>("[data-scroll-cinematic]"),
+    (container) => ({ container, lastY: 0 }),
+  );
 
-    const trigger = tween.scrollTrigger;
-    if (trigger) activeTriggers.push(trigger);
-  });
+  if (parallaxItems.length === 0 && videoItems.length === 0) return;
 
-  // 2. Cinematic Video Showcase Frame Expansion
-  const videoContainers = document.querySelectorAll<HTMLElement>("[data-scroll-cinematic]");
-  videoContainers.forEach((container) => {
-    const tween = gsap.fromTo(
-      container,
-      { scale: 0.95, y: 24 },
-      {
-        scale: 1,
-        y: 0,
-        ease: "power2.out",
-        scrollTrigger: { trigger: container, start: "top 92%", end: "top 35%", scrub: 1 },
-      },
-    );
+  let rafId: number | null = null;
 
-    const trigger = tween.scrollTrigger;
-    if (trigger) activeTriggers.push(trigger);
-  });
+  const update = () => {
+    rafId = null;
+    const vh = globalThis.innerHeight || 1;
 
-  ScrollTrigger.refresh();
+    // 1. Subtle Spatial Parallax for Destination & Tour Cards (top bottom -> bottom top: -6% -> +6%)
+    for (const item of parallaxItems) {
+      const rect = item.container.getBoundingClientRect();
+      const totalSpan = vh + rect.height;
+      if (totalSpan <= 0) continue;
+      const progress = clamp01((vh - rect.top) / totalSpan);
+      const yPercent = -6 + 12 * progress;
+      item.target.style.transform =
+        item.scale === 1 ?
+          `translate3d(0, ${yPercent.toFixed(2)}%, 0)`
+        : `translate3d(0, ${yPercent.toFixed(2)}%, 0) scale(${item.scale})`;
+    }
+
+    // 2. Cinematic Video Showcase Frame Expansion (top 92% -> top 35%: scale 0.95->1, y 24->0, power2.out)
+    for (const item of videoItems) {
+      const rect = item.container.getBoundingClientRect();
+      const naturalTop = rect.top - item.lastY;
+      const startTop = vh * 0.92;
+      const endTop = vh * 0.35;
+      const progress = clamp01((startTop - naturalTop) / Math.max(1, startTop - endTop));
+      const eased = 1 - (1 - progress) ** 3;
+      const scale = 0.95 + 0.05 * eased;
+      const y = 24 * (1 - eased);
+      item.lastY = y;
+      item.container.style.transform = `translate3d(0, ${y.toFixed(2)}px, 0) scale(${scale.toFixed(4)})`;
+    }
+  };
+
+  const schedule = () => {
+    rafId ??= globalThis.requestAnimationFrame(update);
+  };
+
+  lenis?.on("scroll", schedule);
+  globalThis.addEventListener("scroll", schedule, { passive: true });
+  globalThis.addEventListener("resize", schedule, { passive: true });
+
+  update();
+
+  scrollAnimationCleanup = () => {
+    if (rafId !== null) {
+      globalThis.cancelAnimationFrame(rafId);
+    }
+    lenis?.off("scroll", schedule);
+    globalThis.removeEventListener("scroll", schedule);
+    globalThis.removeEventListener("resize", schedule);
+  };
 }
 
-/** Cleans up active ScrollTrigger instances to prevent leaks during Astro View Transitions. */
+/** Cleans up active scroll animation listeners during Astro View Transitions. */
 function cleanupScrollAnimations() {
-  for (const trigger of activeTriggers) {
-    trigger.kill();
-  }
-  activeTriggers = [];
+  scrollAnimationCleanup?.();
+  scrollAnimationCleanup = undefined;
 }
 
 /** Resets scroll position to the page header / top (unless targeting an anchor hash). */

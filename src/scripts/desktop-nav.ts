@@ -1,8 +1,11 @@
-import gsap from "gsap";
-
 let currentActiveLink: HTMLAnchorElement | null = null;
 let currentHoveredLink: HTMLAnchorElement | null = null;
 let leaveTimer: ReturnType<typeof setTimeout> | null = null;
+let lastIndicatorX = 0;
+let lastIndicatorWidth = 0;
+let lastIndicatorVisible = false;
+
+const EASE_OUT = "cubic-bezier(0.22, 1, 0.36, 1)";
 
 function isTabletMode(): boolean {
   return typeof window !== "undefined" && window.innerWidth < 1024;
@@ -84,19 +87,26 @@ function setIndicator(targetLink: HTMLAnchorElement | null, immediate = false): 
   }
 
   if (!target || target.offsetWidth === 0) {
-    gsap.killTweensOf(indicator);
-    gsap.to(indicator, { autoAlpha: 0, duration: 0.2, overwrite: "auto" });
+    indicator.style.transition = `opacity 200ms ${EASE_OUT}, visibility 200ms ${EASE_OUT}`;
+    indicator.style.opacity = "0";
+    indicator.style.visibility = "hidden";
+    lastIndicatorVisible = false;
     return;
   }
 
   const inTablet = isTabletMode();
   const prefersReducedMotion = globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  let targetX = target.offsetLeft;
+  let targetWidth = target.offsetWidth;
+
   if (inTablet) {
     const targetIndex = links.indexOf(target);
     if (targetIndex === -1) return;
 
-    const { x: targetX, width: targetWidth } = getTabletLinkGeometry(nav, links, targetIndex);
+    const geometry = getTabletLinkGeometry(nav, links, targetIndex);
+    targetX = geometry.x;
+    targetWidth = geometry.width;
 
     // Synchronously animate all labels: target label expands, others shrink to 0 (identical to mobile bottom nav dock)
     for (const link of links) {
@@ -105,88 +115,60 @@ function setIndicator(targetLink: HTMLAnchorElement | null, immediate = false): 
 
       if (link === target) {
         label.dataset["expanded"] = "true";
-        gsap.killTweensOf(label);
+        label.style.transition =
+          immediate || prefersReducedMotion ? "none" : (
+            `width 220ms ${EASE_OUT}, opacity 220ms ${EASE_OUT}, margin-left 220ms ${EASE_OUT}`
+          );
         const targetLabelWidth = getLabelWidth(label);
-        if (immediate || prefersReducedMotion) {
-          gsap.set(label, { width: targetLabelWidth, opacity: 1, marginLeft: 8 });
-        } else {
-          gsap.to(label, {
-            width: targetLabelWidth,
-            opacity: 1,
-            marginLeft: 8,
-            duration: 0.22,
-            ease: "power2.out",
-            overwrite: "auto",
-          });
-        }
+        label.style.width = `${targetLabelWidth}px`;
+        label.style.opacity = "1";
+        label.style.marginLeft = "8px";
       } else {
         delete label.dataset["expanded"];
-        gsap.killTweensOf(label);
-        if (immediate || prefersReducedMotion) {
-          gsap.set(label, { width: 0, opacity: 0, marginLeft: 0 });
-        } else {
-          gsap.to(label, {
-            width: 0,
-            opacity: 0,
-            marginLeft: 0,
-            duration: 0.2,
-            ease: "power2.out",
-            overwrite: "auto",
-          });
-        }
+        label.style.transition =
+          immediate || prefersReducedMotion ? "none" : (
+            `width 200ms ${EASE_OUT}, opacity 200ms ${EASE_OUT}, margin-left 200ms ${EASE_OUT}`
+          );
+        label.style.width = "0px";
+        label.style.opacity = "0";
+        label.style.marginLeft = "0px";
       }
     }
 
     // Animate the orange indicator in exact sync with the label
-    gsap.killTweensOf(indicator);
-    if (immediate || prefersReducedMotion) {
-      gsap.set(indicator, { x: targetX, width: targetWidth, autoAlpha: 1 });
-    } else {
-      gsap.to(indicator, {
-        x: targetX,
-        width: targetWidth,
-        autoAlpha: 1,
-        duration: 0.22,
-        ease: "power2.out",
-        overwrite: "auto",
-      });
-    }
+    indicator.style.transition =
+      immediate || prefersReducedMotion ? "none" : (
+        `transform 220ms ${EASE_OUT}, width 220ms ${EASE_OUT}, opacity 220ms ${EASE_OUT}`
+      );
   } else {
     // Desktop mode (>= 1024px)
     for (const link of links) {
       const label = link.querySelector<HTMLElement>(".desktop-nav-label");
       if (!label) continue;
-      gsap.killTweensOf(label);
-      gsap.set(label, { clearProps: "width,opacity,marginLeft" });
+      label.style.removeProperty("transition");
+      label.style.removeProperty("width");
+      label.style.removeProperty("opacity");
+      label.style.removeProperty("margin-left");
     }
-
-    const targetX = target.offsetLeft;
-    const targetWidth = target.offsetWidth;
-
-    gsap.killTweensOf(indicator);
-
-    const currentAlpha = Number(gsap.getProperty(indicator, "autoAlpha"));
-    const currentX = Number(gsap.getProperty(indicator, "x"));
-    const currentWidth = Number(gsap.getProperty(indicator, "width"));
 
     const isAlreadyAtTarget =
-      currentAlpha > 0.5
-      && Math.abs(currentX - targetX) < 1
-      && Math.abs(currentWidth - targetWidth) < 1;
+      lastIndicatorVisible
+      && Math.abs(lastIndicatorX - targetX) < 1
+      && Math.abs(lastIndicatorWidth - targetWidth) < 1;
 
-    if (immediate || currentAlpha === 0 || isAlreadyAtTarget || prefersReducedMotion) {
-      gsap.set(indicator, { x: targetX, width: targetWidth, autoAlpha: 1 });
-    } else {
-      gsap.to(indicator, {
-        x: targetX,
-        width: targetWidth,
-        autoAlpha: 1,
-        duration: 0.18,
-        ease: "power2.out",
-        overwrite: "auto",
-      });
-    }
+    indicator.style.transition =
+      immediate || !lastIndicatorVisible || isAlreadyAtTarget || prefersReducedMotion ?
+        "none"
+      : `transform 180ms ${EASE_OUT}, width 180ms ${EASE_OUT}, opacity 180ms ${EASE_OUT}`;
   }
+
+  indicator.style.transform = `translate3d(${targetX}px, 0, 0)`;
+  indicator.style.width = `${targetWidth}px`;
+  indicator.style.opacity = "1";
+  indicator.style.visibility = "visible";
+  lastIndicatorX = targetX;
+  lastIndicatorWidth = targetWidth;
+  lastIndicatorVisible = true;
 }
 
 function syncActiveLink(nav: HTMLElement): HTMLAnchorElement | null {

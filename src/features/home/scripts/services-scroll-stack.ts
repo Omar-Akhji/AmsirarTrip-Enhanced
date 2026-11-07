@@ -1,5 +1,4 @@
 import type Lenis from "lenis";
-import gsap from "gsap";
 
 function clamp01(value: number): number {
   return Math.min(Math.max(value, 0), 1);
@@ -85,7 +84,8 @@ function setupServicesScrollStack(element: HTMLElement): (() => void) | null {
 
       if (cache.get(slotCacheKey) !== slotTransform) {
         cache.set(slotCacheKey, slotTransform);
-        gsap.set(slot, { transform: slotTransform, transformOrigin: "top center", force3D: true });
+        slot.style.transformOrigin = "top center";
+        slot.style.transform = slotTransform;
       }
 
       const opStr = cardData.opacity.toFixed(3);

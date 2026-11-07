@@ -1,5 +1,4 @@
 import type Lenis from "lenis";
-import gsap from "gsap";
 
 function toLength(value: string | number): string {
   return typeof value === "number" ? `${value}px` : value;
@@ -109,7 +108,8 @@ function setupScrollStack(element: HTMLElement): (() => void) | null {
 
       if (cache.get(`transform${i}`) !== transform) {
         cache.set(`transform${i}`, transform);
-        gsap.set(card, { transform, transformOrigin: "top center", force3D: true });
+        card.style.transformOrigin = "top center";
+        card.style.transform = transform;
       }
 
       const filterVal = blur > 0.05 ? `blur(${blur.toFixed(2)}px)` : "";
