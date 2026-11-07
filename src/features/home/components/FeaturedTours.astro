@@ -154,10 +154,7 @@ const DELAY_CLASSES = [
                 />
 
                 <div class="relative z-10 flex size-full flex-col justify-end p-3.5 sm:p-4 text-white">
-                  <div
-                    class="rounded-2xl border border-white/10 bg-white/10 p-4 shadow-xs ring-1 ring-black/5 backdrop-blur-xl"
-                    style="backdrop-filter: blur(20px);"
-                  >
+                  <div class="rounded-2xl border border-white/10 bg-white/10 p-4 shadow-xs ring-1 ring-black/5 backdrop-blur-[20px]">
                     <hgroup class="mbe-1.5">
                       <p class="font-mono text-[11px] font-semibold tracking-[0.16em] text-yellow uppercase mbe-1">
                         {regionText === regionKey ? "MOROCCO" : regionText}
@@ -212,7 +209,7 @@ const DELAY_CLASSES = [
                 <div class="parallax-media pointer-events-none absolute -inset-y-5 inset-x-0 size-[calc(100%+40px)]">
                   <Image
                     alt={cityAlt}
-                    class="size-full object-cover transition-transform duration-700 ease-out-expo pointer-fine:group-hover:scale-105 motion-reduce:transform-none"
+                    class="size-full object-cover will-change-transform transition-transform duration-700 ease-out-expo pointer-fine:motion-safe:group-hover:scale-105 motion-reduce:transform-none motion-reduce:transition-none"
                     decoding="async"
                     height={450}
                     loading="lazy"
@@ -229,10 +226,7 @@ const DELAY_CLASSES = [
 
                 <!-- Editorial Typography Layer -->
                 <div class="relative z-10 flex size-full flex-col justify-end p-3 sm:p-3.5 text-white pointer-events-none">
-                  <div
-                    class="rounded-2xl border border-white/10 bg-white/10 p-4 sm:p-5 shadow-xs ring-1 ring-black/5 backdrop-blur-xl transition-all duration-300 pointer-fine:group-hover:border-white/20 pointer-fine:group-hover:bg-white/15"
-                    style="backdrop-filter: blur(20px);"
-                  >
+                  <div class="rounded-2xl border border-white/10 bg-white/10 p-4 sm:p-5 shadow-xs ring-1 ring-black/5 backdrop-blur-[20px] transition-all duration-300 pointer-fine:group-hover:border-white/20 pointer-fine:group-hover:bg-white/15">
                     <hgroup class="mbe-2">
                       <p class="font-mono text-[11px] font-semibold tracking-[0.16em] text-yellow uppercase mbe-1">
                         {regionText === regionKey ? "MOROCCO" : regionText}
@@ -243,9 +237,9 @@ const DELAY_CLASSES = [
                     </hgroup>
 
                     <!-- Full Text Animated Drawer (Opens smoothly on hover) -->
-                    <div class="grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity,margin-block-start] duration-500 ease-out-expo pointer-fine:group-hover:grid-rows-[1fr] pointer-fine:group-hover:opacity-100 pointer-fine:group-hover:mbs-2 max-sm:grid-rows-[1fr] max-sm:opacity-100 max-sm:mbs-2">
+                    <div class="grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity,margin-block-start] duration-500 ease-out-expo motion-reduce:transition-none pointer-fine:group-hover:grid-rows-[1fr] pointer-fine:group-hover:opacity-100 pointer-fine:group-hover:mbs-2 pointer-coarse:grid-rows-[1fr] pointer-coarse:opacity-100 pointer-coarse:mbs-2">
                       <div class="overflow-hidden">
-                        <p class="text-xs sm:text-sm text-stone-200/95 leading-relaxed drop-shadow-xs transition-transform duration-500 ease-out-expo translate-y-2 pointer-fine:group-hover:translate-y-0 max-sm:translate-y-0">
+                        <p class="text-xs sm:text-sm text-stone-200/95 leading-relaxed drop-shadow-xs transition-transform duration-500 ease-out-expo motion-reduce:transition-none translate-y-2 pointer-fine:group-hover:translate-y-0 pointer-coarse:translate-y-0">
                           {cityDesc}
                         </p>
                       </div>

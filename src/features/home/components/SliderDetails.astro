@@ -12,7 +12,7 @@ interface Props {
 const { tagline, title, type, description, isH1 = false } = Astro.props;
 ---
 
-<div class="content absolute top-[clamp(4.25rem,9.5vh,5.5rem)] max-sm:inset-x-4 max-sm:flex max-sm:flex-col max-sm:items-center max-sm:text-center sm:left-8 sm:w-auto md:left-[5%] lg:left-[max(7%,calc(50%-570px))] z-10 box-border max-w-[calc(100vw-2rem)] text-white text-shadow-sm text-shadow-black/40 sm:top-[clamp(3.75rem,8.5vh,5rem)] md:top-[clamp(4.25rem,9.5vh,6rem)] lg:top-[clamp(4.75rem,11vh,7rem)] xl:top-[clamp(5.25rem,13vh,7.5rem)]">
+<div class="content absolute max-md:top-[calc((100dvh-var(--thumb-bottom)-var(--thumb-height)+3.75rem+env(safe-area-inset-top,0px))/2)] max-md:-translate-y-1/2 max-sm:inset-x-4 max-sm:flex max-sm:flex-col max-sm:items-center max-sm:text-center sm:left-8 sm:w-auto md:left-[5%] lg:left-[max(7%,calc(50%-570px))] z-10 box-border max-w-[calc(100vw-2rem)] text-white text-shadow-sm text-shadow-black/40 md:top-[clamp(4.25rem,9.5vh,6rem)] lg:top-[clamp(4.75rem,11vh,7rem)] xl:top-[clamp(5.25rem,13vh,7.5rem)]">
   {tagline && (
     <div
       style="color: #fdba74;"

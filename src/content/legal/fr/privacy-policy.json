@@ -1,0 +1,172 @@
+{
+  "locale": "fr",
+  "title": "Politique de Confidentialité et Cookies",
+  "subtitle": "Engagement clair pour la protection de vos données personnelles, gouvernance transparente des cookies et droits des voyageurs au Maroc.",
+  "lastUpdated": "Dernière mise à jour : Janvier 2026",
+  "badgeDoc": "Charte de Protection des Données",
+  "badgeStatus": "Conforme RGPD & CNDP",
+  "badgeJurisdiction": "Royaume du Maroc & UE",
+  "summaryTitle": "Garanties de Confidentialité en un Coup d'Œil",
+  "summarySubtitle": "Protections essentielles des voyageurs et gouvernance transparente des données résumées en toute clarté avant votre voyage.",
+  "summaryCards": [
+    {
+      "title": "Zéro Vente de Données",
+      "description": "Nous ne monétisons, ne louons et ne cédons jamais vos données personnelles. Elles servent exclusivement à l'organisation de vos voyages."
+    },
+    {
+      "title": "Conformité RGPD & CNDP",
+      "description": "Parfaitement aligné avec le Règlement européen 2016/679 et la Loi marocaine n° 09-08 relative à la protection des données."
+    },
+    {
+      "title": "Chiffrement TLS 1.3 & CSP",
+      "description": "Chiffrement cryptographique de pointe et politique de sécurité du contenu stricte protégeant chaque interaction sur notre plateforme."
+    },
+    {
+      "title": "Contrôle Immédiat des Cookies",
+      "description": "Gestion granulaire des préférences avec révocation instantanée. Les cookies non essentiels requièrent votre consentement explicite préalable."
+    }
+  ],
+  "tocTitle": "Sommaire du Document",
+  "printLabel": "Imprimer / Enregistrer en PDF",
+  "agencyCard": {
+    "title": "Amsirar Trip SARL",
+    "badge": "Agence Touristique Agréée au Maroc",
+    "hours": "Support client disponible 7j/7",
+    "chatCta": "Discussion sur WhatsApp"
+  },
+  "cookieCta": {
+    "title": "Préférences Interactives de Cookies",
+    "desc": "Personnalisez vos choix de consentement à tout instant. Les cookies nécessaires restent actifs pour garantir les réservations.",
+    "buttonLabel": "Gérer mes Préférences Cookies"
+  },
+  "cookieTable": {
+    "title": "Inventaire Officiel des Cookies et Jetons",
+    "subtitle": "Transparence totale sur les cookies et identifiants techniques utilisés sur notre plateforme :",
+    "colName": "Cookie / Identifiant",
+    "colProvider": "Fournisseur",
+    "colCategory": "Catégorie",
+    "colPurpose": "Finalité Opérationnelle",
+    "colLifespan": "Durée",
+    "rows": [
+      {
+        "name": "amsirar_cookie_consent",
+        "provider": "Amsirar Trip (Interne)",
+        "category": "Strictement Nécessaire",
+        "categoryClass": "bg-emerald-500/10 text-emerald-800 border-emerald-500/30",
+        "purpose": "Enregistre vos choix de consentement relatifs aux cookies d'une session à l'autre.",
+        "lifespan": "1 An"
+      },
+      {
+        "name": "app-locale / astro-locale",
+        "provider": "Amsirar Trip (Interne)",
+        "category": "Strictement Nécessaire",
+        "categoryClass": "bg-emerald-500/10 text-emerald-800 border-emerald-500/30",
+        "purpose": "Mémorise votre langue sélectionnée (français, anglais, espagnol, allemand).",
+        "lifespan": "1 An"
+      },
+      {
+        "name": "Jetons CSRF & Sécurité",
+        "provider": "Amsirar Trip / Hostinger",
+        "category": "Strictement Nécessaire",
+        "categoryClass": "bg-emerald-500/10 text-emerald-800 border-emerald-500/30",
+        "purpose": "Protège les formulaires de demande et de réservation contre les attaques automatisées.",
+        "lifespan": "Session"
+      },
+      {
+        "name": "_ga, _ga_*",
+        "provider": "Google Analytics (Tiers)",
+        "category": "Analyse & Performance",
+        "categoryClass": "bg-amber-500/10 text-amber-800 border-amber-500/30",
+        "purpose": "Mesure anonyme et agrégée de la fréquentation, des circuits prisés et des temps de chargement.",
+        "lifespan": "Jusqu'à 2 Ans"
+      },
+      {
+        "name": "NID, CONSENT",
+        "provider": "Google Maps (Tiers)",
+        "category": "Fonctionnalité & Carte",
+        "categoryClass": "bg-blue-500/10 text-blue-800 border-blue-500/30",
+        "purpose": "Permet l'affichage interactif de l'emplacement de notre bureau à Marrakech.",
+        "lifespan": "Jusqu'à 6 Mois"
+      }
+    ]
+  },
+  "sections": [
+    {
+      "id": "collection",
+      "num": "01",
+      "title": "Données Personnelles Collectées",
+      "paragraphs": [
+        "Nous recueillons les informations personnelles que vous nous transmettez directement lors de la préparation ou de la réservation de circuits dans le désert, d'excursions culturelles ou d'itinéraires sur mesure au Maroc.",
+        "Ces éléments comprennent votre nom complet, adresse e-mail, numéro de téléphone / WhatsApp, pays de résidence, dates de séjour et demandes personnalisées. Lors de votre visite, des données techniques standard (type de navigateur, appareil, adresse IP) sont collectées via des journaux de serveurs sécurisés.",
+        "Nous ne collectons aucune donnée personnelle sensible (origines, convictions religieuses ou opinions politiques) sans impératif opérationnel et consentement explicite préalable."
+      ]
+    },
+    {
+      "id": "usage",
+      "num": "02",
+      "title": "Utilisation de vos Données",
+      "paragraphs": [
+        "Vos données sont traitées dans le respect le plus strict du RGPD européen et de la Loi marocaine n° 09-08 régie par la CNDP (Commission Nationale de contrôle de la protection des Données à caractère Personnel).",
+        "Les finalités principales incluent la délivrance des autorisations de transport touristique, la planification des chauffeurs certifiés, la réservation des riads et bivouacs, et la confirmation officielle de vos voyages.",
+        "Nous ne vendons ni ne louons jamais vos données à des fins publicitaires ou à des courtiers d'informations."
+      ]
+    },
+    {
+      "id": "cookies",
+      "num": "03",
+      "title": "Politique Complète Relative aux Cookies",
+      "paragraphs": [
+        "Les cookies sont de petits fichiers texte déposés sur votre terminal lors de la consultation de nos pages web. Ils permettent d'enregistrer vos paramètres de navigation et d'assurer une expérience fluide.",
+        "Conformément à la directive ePrivacy et au RGPD (Art. 6(1)(f)), les cookies strictement nécessaires sont activés pour assurer les fonctions fondamentales. Les cookies d'analyse optionnels ne sont déployés qu'avec votre accord explicite préalable (Art. 6(1)(a))."
+      ],
+      "callout": {
+        "title": "Autonomie Totale du Visiteur",
+        "desc": "Vous pouvez modifier ou retirer votre consentement à tout moment sans restreindre votre accès aux descriptifs de circuits ou à notre formulaire de contact."
+      }
+    },
+    {
+      "id": "inventory",
+      "num": "04",
+      "title": "Inventaire et Catégories de Cookies",
+      "paragraphs": [
+        "Nous appliquons une politique de transparence absolue quant aux cookies actifs sur votre navigateur. Consultez le tableau ci-dessous détaillant chaque identifiant technique, son émetteur et sa durée."
+      ]
+    },
+    {
+      "id": "security",
+      "num": "05",
+      "title": "Sécurité des Données et Chiffrement",
+      "paragraphs": [
+        "Nous déployons des mesures organisationnelles et technologiques de pointe pour préserver vos données contre toute perte fortuite, altération, intrusion ou divulgation non autorisée.",
+        "Tous les flux web sont sécurisés de bout en bout grâce au protocole TLS 1.3 avec redirection HTTPS systématique. Les en-têtes de sécurité CSP (Content Security Policy) neutralisent les failles d'injection de scripts.",
+        "L'accès aux données des dossiers de voyage est réservé exclusivement aux coordinateurs logistiques dédiés à votre séjour marocain."
+      ]
+    },
+    {
+      "id": "providers",
+      "num": "06",
+      "title": "Prestataires et Sous-Traitants Tiers",
+      "paragraphs": [
+        "Afin d'assurer une haute fiabilité opérationnelle, nous faisons appel à des prestataires d'infrastructure réputés appliquant des normes rigoureuses de confidentialité :",
+        "Hostinger Cloud pour l'hébergement VPS sur serveurs européens sécurisés ; Google Workspace pour la messagerie transactionnelle chiffrée ; et Google Maps pour la cartographie interactive optionnelle."
+      ]
+    },
+    {
+      "id": "rights",
+      "num": "07",
+      "title": "Vos Droits selon le RGPD et la Loi Marocaine",
+      "paragraphs": [
+        "Quel que soit votre pays d'origine, vous bénéficiez de droits étendus garantis par le RGPD et la loi marocaine n° 09-08 :",
+        "Droit d'accès à vos informations, droit de rectification de données erronées, droit à l'effacement définitif à la clôture des prestations, et droit d'opposition ou de retrait de votre consentement."
+      ]
+    },
+    {
+      "id": "contact",
+      "num": "08",
+      "title": "Délégué à la Protection et Contact Direct",
+      "paragraphs": [
+        "Pour toute question relative à cette politique de confidentialité ou pour exercer vos droits d'accès, contactez notre équipe à Marrakech :"
+      ]
+    }
+  ]
+}

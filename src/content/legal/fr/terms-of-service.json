@@ -1,0 +1,144 @@
+{
+  "locale": "fr",
+  "title": "Conditions Générales de Vente",
+  "subtitle": "Cadre contractuel, conditions de réservation et protections des voyageurs pour les services d'Amsirar Trip au Maroc.",
+  "lastUpdated": "Dernière mise à jour : Janvier 2026",
+  "badgeDoc": "Cadre Contractuel Officiel",
+  "badgeStatus": "Légalement Valide & Appliqué",
+  "badgeJurisdiction": "Royaume du Maroc",
+  "summaryTitle": "Points Clés de la Réservation",
+  "summarySubtitle": "Vos protections contractuelles résumées en toute clarté avant votre départ.",
+  "summaryCards": [
+    {
+      "title": "Acompte & Confirmation",
+      "description": "Un acompte confirme votre circuit privé. Le solde est payable avant le départ selon les modalités convenues."
+    },
+    {
+      "title": "Politique d'Annulation",
+      "description": "Remboursement à 100% à plus de 30 jours, 50% entre 15 et 29 jours. Paliers de préavis clairs et équitables."
+    },
+    {
+      "title": "Opérateur Agréé",
+      "description": "Agence marocaine agréée avec chauffeurs certifiés, 4x4 assurés et guides de montagne officiels."
+    },
+    {
+      "title": "Tribunaux de Marrakech",
+      "description": "Contrat régi exclusivement par le droit marocain et la juridiction commerciale de Marrakech."
+    }
+  ],
+  "tocTitle": "Sommaire du Document",
+  "printLabel": "Imprimer / Enregistrer en PDF",
+  "agencyCard": {
+    "title": "Amsirar Trip SARL",
+    "badge": "Agence Touristique Marocaine Agréée",
+    "hours": "Assistance voyage 7 jours sur 7",
+    "chatCta": "Échanger sur WhatsApp"
+  },
+  "cancellationMatrix": {
+    "title": "Barème des Remboursements en Cas d'Annulation",
+    "subtitle": "Calculé en jours calendaires avant la date officielle de départ :",
+    "tiers": [
+      {
+        "days": "Plus de 30 jours avant",
+        "badge": "Remboursement 100%",
+        "badgeClass": "bg-emerald-500/10 text-emerald-700 border-emerald-500/30",
+        "desc": "Remboursement intégral effectué sur votre mode de paiement, déduction faite des frais bancaires et de dossier."
+      },
+      {
+        "days": "Entre 15 et 29 jours",
+        "badge": "Remboursement 50%",
+        "badgeClass": "bg-amber-500/10 text-amber-800 border-amber-500/30",
+        "desc": "50% de remboursement. Le solde couvre les acomptes fermes engagés pour les hébergements et le transport."
+      },
+      {
+        "days": "Moins de 15 jours",
+        "badge": "Non remboursable",
+        "badgeClass": "bg-zinc-500/10 text-zinc-700 border-zinc-500/30",
+        "desc": "Non remboursable. L'ensemble des réservations, bivouacs du désert et chauffeurs sont irrévocablement bloqués."
+      }
+    ],
+    "insuranceTitle": "Assurance Voyage Fortement Recommandée",
+    "insuranceDesc": "Nous recommandons expressément à chaque voyageur de souscrire une assurance voyage multirisque couvrant l'annulation de vol, le rapatriement médical et les imprévus."
+  },
+  "sections": [
+    {
+      "id": "acceptance",
+      "num": "01",
+      "title": "Acceptation des Conditions",
+      "paragraphs": [
+        "En accédant au site web d'Amsirar Trip, en réservant nos circuits ou en participant à nos excursions au Maroc, vous acceptez d'être juridiquement lié par les présentes Conditions Générales.",
+        "Si vous refusez ces dispositions, vous êtes invité à ne pas utiliser nos prestations. Amsirar Trip se réserve le droit de mettre à jour ses conditions pour respecter l'évolution réglementaire au Maroc. Votre participation continue vaut acceptation pleine et entière."
+      ]
+    },
+    {
+      "id": "services",
+      "num": "02",
+      "title": "Nos Services & Prestations de Voyage",
+      "paragraphs": [
+        "Amsirar Trip est une agence locale organisant des circuits sur mesure, des traversées du Sahara, des randonnées dans le Haut Atlas et des circuits culturels dans les villes impériales du Maroc.",
+        "Toutes les réservations sont soumises à disponibilité et confirmation écrite. Les itinéraires et photographies sont indicatifs : des ajustements d'horaires ou de parcours peuvent intervenir pour des impératifs météo ou de sécurité."
+      ]
+    },
+    {
+      "id": "bookings",
+      "num": "03",
+      "title": "Modalités de Réservation & Paiement",
+      "paragraphs": [
+        "Toute réservation nécessite le règlement d'un acompte pour garantir les véhicules 4x4, chauffeurs et nuits en campements du désert.",
+        "Le solde restant est exigible avant le départ selon les termes convenus. Les prix annoncés comprennent expressément les services listés sur votre voucher. Les pourboires et dépenses personnelles demeurent à la charge du voyageur."
+      ],
+      "callout": {
+        "title": "Transparence Tarifaire",
+        "desc": "Nos tarifs confirmés sont garantis sans majoration cachée ni frais imprévus à l'arrivée."
+      }
+    },
+    {
+      "id": "cancellation",
+      "num": "04",
+      "title": "Politique d'Annulation & Remboursements",
+      "paragraphs": [
+        "L'organisation d'itinéraires dans le désert marocain implique des réservations fermes auprès de partenaires locaux et campements isolés.",
+        "Toute demande d'annulation doit impérativement être transmise par écrit par email (amsirare@gmail.com) ou WhatsApp officiel selon le barème certifié ci-dessous."
+      ]
+    },
+    {
+      "id": "liability",
+      "num": "05",
+      "title": "Limitation de Responsabilité & Force Majeure",
+      "paragraphs": [
+        "Amsirar Trip sélectionne avec rigueur des guides agréés, chauffeurs chevronnés et prestataires reconnus pour leur professionnalisme.",
+        "Notre responsabilité ne saurait être engagée pour des retards, déviations ou annulations causés par un cas de force majeure (tempêtes de sable, crues, fermetures de routes ou événements imprévisibles). Notre engagement financier est strictement plafonné au montant total perçu pour la réservation."
+      ]
+    },
+    {
+      "id": "intellectual-property",
+      "num": "06",
+      "title": "Propriété Intellectuelle",
+      "paragraphs": [
+        "L'ensemble des contenus de ce site (textes, photographies originales, tracés d'itinéraires et logos) est la propriété exclusive d'Amsirar Trip SARL et protégé par les conventions internationales du droit d'auteur.",
+        "Toute reproduction ou diffusion commerciale sans accord écrit préalable est strictement interdite."
+      ]
+    },
+    {
+      "id": "governing-law",
+      "num": "07",
+      "title": "Loi Applicable & Juridiction Compétente",
+      "paragraphs": [
+        "Les présentes conditions générales sont soumises au droit du Royaume du Maroc.",
+        "En cas de réclamation qui ne trouverait pas de règlement amiable direct, compétence exclusive est attribuée aux tribunaux de commerce de Marrakech, Maroc."
+      ],
+      "callout": {
+        "title": "Enregistrement Commercial à Marrakech",
+        "desc": "Amsirar Trip SARL opère en parfaite conformité avec la réglementation du Ministère du Tourisme du Maroc."
+      }
+    },
+    {
+      "id": "contact",
+      "num": "08",
+      "title": "Contact Officiel & Mentions Légales",
+      "paragraphs": [
+        "Pour toute question relative à nos conditions générales de vente, vous pouvez joindre notre équipe à Marrakech :"
+      ]
+    }
+  ]
+}

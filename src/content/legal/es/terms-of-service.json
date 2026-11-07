@@ -1,0 +1,143 @@
+{
+  "locale": "es",
+  "title": "Términos y Condiciones de Servicio",
+  "subtitle": "Marco operativo, condiciones de reserva y garantías para los viajeros de Amsirar Trip en Marruecos.",
+  "lastUpdated": "Última actualización: Enero 2026",
+  "badgeDoc": "Contrato Oficial de Viaje",
+  "badgeStatus": "Vigente y Vinculante",
+  "badgeJurisdiction": "Reino de Marruecos",
+  "summaryTitle": "Garantías y Aspectos Clave",
+  "summarySubtitle": "Resumen transparente de los puntos esenciales de su reserva antes de partir.",
+  "summaryCards": [
+    {
+      "title": "Depósito Inicial",
+      "description": "Un depósito asegura sus vehículos 4x4, chófer privado y campamentos. Saldo abonado antes de la salida."
+    },
+    {
+      "title": "Cancelación Justa",
+      "description": "100% de reembolso a más de 30 días, 50% entre 15 y 29 días. Tiempos de preaviso claros."
+    },
+    {
+      "title": "Operador Acreditado",
+      "description": "Agencia local registrada en Marruecos con transportes turísticos autorizados y guías certificados."
+    },
+    {
+      "title": "Tribunales de Marrakech",
+      "description": "Contrato regulado conforme a la legislación marroquí y la jurisdicción comercial de Marrakech."
+    }
+  ],
+  "tocTitle": "Índice de Secciones",
+  "printLabel": "Imprimir / Guardar en PDF",
+  "agencyCard": {
+    "title": "Amsirar Trip SARL",
+    "badge": "Agencia Turística Acreditada en Marruecos",
+    "hours": "Atención al viajero 7 días a la semana",
+    "chatCta": "Contactar por WhatsApp"
+  },
+  "cancellationMatrix": {
+    "title": "Baremos de Cancelación y Devoluciones",
+    "subtitle": "Calculado en días naturales previos a la salida oficial:",
+    "tiers": [
+      {
+        "days": "Más de 30 días antes",
+        "badge": "Reembolso 100%",
+        "badgeClass": "bg-emerald-500/10 text-emerald-700 border-emerald-500/30",
+        "desc": "Reembolso íntegro a su forma de pago original, deducidos los gastos de gestión bancaria."
+      },
+      {
+        "days": "Entre 15 y 29 días",
+        "badge": "Reembolso 50%",
+        "badgeClass": "bg-amber-500/10 text-amber-800 border-amber-500/30",
+        "desc": "50% de devolución. La cantidad retenida cubre bloqueos de hoteles y logística en ruta."
+      },
+      {
+        "days": "Menos de 15 días",
+        "badge": "Sin reembolso",
+        "badgeClass": "bg-zinc-500/10 text-zinc-700 border-zinc-500/30",
+        "desc": "Sin reembolso. Vehículos, chóferes y haimas en el desierto quedan formalmente bloqueados."
+      }
+    ],
+    "insuranceTitle": "Seguro Integral Altamente Recomendado",
+    "insuranceDesc": "Aconsejamos encarecidamente contratar un seguro de viaje integral que cubra cancelaciones médicas, retrasos aéreos y emergencias durante su estancia."
+  },
+  "sections": [
+    {
+      "id": "acceptance",
+      "num": "01",
+      "title": "Aceptación de los Términos",
+      "paragraphs": [
+        "Al navegar por amsirartrip.com o confirmar una reserva de circuito en Marruecos, usted suscribe un acuerdo legal regulado por estos términos.",
+        "Si no está conforme con estas cláusulas, le rogamos no contratar nuestros servicios. Amsirar Trip se reserva el derecho de actualizar sus condiciones conforme a la normativa turística marroquí."
+      ]
+    },
+    {
+      "id": "services",
+      "num": "02",
+      "title": "Nuestros Servicios y Rutas",
+      "paragraphs": [
+        "Amsirar Trip es una agencia local especializada en tours por el desierto del Sahara, excursiones desde Marrakech, expediciones en el Atlas y rutas culturales en Marruecos.",
+        "Las descripciones y fotografías de la web tienen carácter orientativo. Las rutas pueden sufrir modificaciones por causas meteorológicas o seguridad del pasaje."
+      ]
+    },
+    {
+      "id": "bookings",
+      "num": "03",
+      "title": "Reservas, Depósitos y Formas de Pago",
+      "paragraphs": [
+        "Toda reserva requiere un anticipo formal para confirmar la asignación del vehículo y alojamiento.",
+        "El saldo restante se abonará antes de iniciar la ruta según lo pactado. Los precios incluyen exclusivamente los servicios detallados en el itinerario oficial."
+      ],
+      "callout": {
+        "title": "Precios Transparentes",
+        "desc": "Sin suplementos sorpresa ni cargos ocultos tras la emisión del presupuesto formal."
+      }
+    },
+    {
+      "id": "cancellation",
+      "num": "04",
+      "title": "Política de Cancelación y Reembolsos",
+      "paragraphs": [
+        "La coordinación en el desierto y montaña exige compromisos vinculantes con los campamentos locales.",
+        "Las cancelaciones deben notificarse por escrito vía correo electrónico (amsirare@gmail.com) o WhatsApp según la escala expuesta a continuación."
+      ]
+    },
+    {
+      "id": "liability",
+      "num": "05",
+      "title": "Limitación de Responsabilidad y Fuerza Mayor",
+      "paragraphs": [
+        "Amsirar Trip no asume responsabilidad por retrasos o cambios de ruta derivados de causas de fuerza mayor (tormentas de arena, desprendimientos de pistas o alteraciones meteorológicas imprevistas).",
+        "Nuestra responsabilidad contractual queda limitada a la cuantía total abonada por la reserva contratada."
+      ]
+    },
+    {
+      "id": "intellectual-property",
+      "num": "06",
+      "title": "Propiedad Intelectual",
+      "paragraphs": [
+        "Los textos, imágenes, rutas y materiales gráficos de este sitio web son propiedad exclusiva de Amsirar Trip SARL y están protegidos por la legislación internacional."
+      ]
+    },
+    {
+      "id": "governing-law",
+      "num": "07",
+      "title": "Legislación Aplicable y Jurisdicción",
+      "paragraphs": [
+        "Estos términos se rigen por la legislación del Reino de Marruecos.",
+        "Cualquier disputa que no pueda solucionarse de mutuo acuerdo se someterá a los juzgados y tribunales competentes de Marrakech."
+      ],
+      "callout": {
+        "title": "Inscripción en Marrakech",
+        "desc": "Empresa legalmente registrada y auditada bajo las normas del Ministerio de Turismo de Marruecos."
+      }
+    },
+    {
+      "id": "contact",
+      "num": "08",
+      "title": "Contacto Oficial y Notificaciones",
+      "paragraphs": [
+        "Para consultas formales o aclaraciones sobre su contrato de viaje, contacte con nuestra oficina en Marrakech:"
+      ]
+    }
+  ]
+}

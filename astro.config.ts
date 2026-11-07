@@ -1,4 +1,3 @@
-import mdx from "@astrojs/mdx";
 import node from "@astrojs/node";
 import vue from "@astrojs/vue";
 import htmlValidate from "astro-html-validate";
@@ -23,7 +22,6 @@ export default defineConfig({
 
   // ─── Integrations ────────────────────────────────────────────────────────
   integrations: [
-    mdx(),
     vue(),
     htmlValidate(),
     compress({ CSS: false, HTML: false, Image: true, JavaScript: false, SVG: true }),

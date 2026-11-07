@@ -48,7 +48,7 @@ const tokens: string[] = animateBy === "letters" ? [...text] : text.split(" ");
     class="blur-text-tokens inline"
   >
     {tokens.map((token: string, idx: number) => (
-      <span class="blur-token inline-block will-change-[transform,filter,opacity]">
+      <span class="blur-token inline-block will-change-[transform,filter,opacity] in-[.no-js]:opacity-100 in-[.no-js]:transform-none in-[.no-js]:filter-none">
         {token === " " ? "\u{A0}" : token}
         {animateBy === "words" && idx < tokens.length - 1 ? "\u{A0}" : ""}
       </span>

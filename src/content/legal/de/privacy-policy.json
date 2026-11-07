@@ -1,0 +1,170 @@
+{
+  "locale": "de",
+  "title": "Datenschutzerklärung & Cookie-Richtlinie",
+  "subtitle": "Klares Bekenntnis zum Schutz Ihrer persönlichen Daten, transparente Cookie-Verwaltung und Reiserechte in Marokko.",
+  "lastUpdated": "Zuletzt aktualisiert: Januar 2026",
+  "badgeDoc": "Datenschutz-Charta",
+  "badgeStatus": "DSGVO & CNDP-konform",
+  "badgeJurisdiction": "Königreich Marokko & EU",
+  "summaryTitle": "Datenschutzgarantien auf einen Blick",
+  "summarySubtitle": "Wesentliche Schutzrechte für Reisende und transparente Datenverwaltung verständlich zusammengefasst vor Ihrer Reise.",
+  "summaryCards": [
+    {
+      "title": "Kein Datenverkauf",
+      "description": "Wir verkaufen, vermieten oder handeln niemals mit Ihren persönlichen Daten. Daten werden ausschließlich für Ihre Reiseabwicklung verarbeitet."
+    },
+    {
+      "title": "DSGVO & Marokko Gesetz 09-08",
+      "description": "Vollständig konform mit der EU-Verordnung 2016/679 sowie dem marokkanischen Datenschutzgesetz Nr. 09-08 (CNDP)."
+    },
+    {
+      "title": "TLS 1.3 & CSP-Schutz",
+      "description": "Vollständige Transportverschlüsselung und strikte Content Security Policy schützen jede Interaktion auf unserer Plattform."
+    },
+    {
+      "title": "Direkte Cookie-Kontrolle",
+      "description": "Granulare Einstellungen mit sofortiger Widerrufsmöglichkeit. Nicht notwendige Cookies erfordern Ihre ausdrückliche Zustimmung."
+    }
+  ],
+  "tocTitle": "Inhaltsverzeichnis",
+  "printLabel": "Drucken / Als PDF speichern",
+  "agencyCard": {
+    "title": "Amsirar Trip SARL",
+    "badge": "Lizenzierte marokkanische Reiseagentur",
+    "hours": "Kundenservice an 7 Tagen pro Woche erreichbar",
+    "chatCta": "WhatsApp-Chat starten"
+  },
+  "cookieCta": {
+    "title": "Interaktive Cookie-Einstellungen",
+    "desc": "Passen Sie Ihre Einwilligungseinstellungen jederzeit an. Notwendige Cookies bleiben aktiv, um Basisfunktionen bereitzustellen.",
+    "buttonLabel": "Cookie-Einstellungen öffnen"
+  },
+  "cookieTable": {
+    "title": "Offizielle Cookie- & Token-Übersicht",
+    "subtitle": "Vollständige Offenlegung aller clientseitigen Cookies und Identifikatoren auf unserer Website:",
+    "colName": "Cookie / Kennung",
+    "colProvider": "Anbieter",
+    "colCategory": "Kategorie",
+    "colPurpose": "Betriebszweck",
+    "colLifespan": "Speicherdauer",
+    "rows": [
+      {
+        "name": "amsirar_cookie_consent",
+        "provider": "Amsirar Trip (First-Party)",
+        "category": "Technisch notwendig",
+        "categoryClass": "bg-emerald-500/10 text-emerald-800 border-emerald-500/30",
+        "purpose": "Speichert Ihre Cookie-Auswahl und Einstellungen für zukünftige Sitzungen.",
+        "lifespan": "1 Jahr"
+      },
+      {
+        "name": "app-locale / astro-locale",
+        "provider": "Amsirar Trip (First-Party)",
+        "category": "Technisch notwendig",
+        "categoryClass": "bg-emerald-500/10 text-emerald-800 border-emerald-500/30",
+        "purpose": "Merkt sich Ihre ausgewählte Sprache (Deutsch, Englisch, Französisch, Spanisch).",
+        "lifespan": "1 Jahr"
+      },
+      {
+        "name": "Sicherheits- & CSRF-Token",
+        "provider": "Amsirar Trip / Hostinger",
+        "category": "Technisch notwendig",
+        "categoryClass": "bg-emerald-500/10 text-emerald-800 border-emerald-500/30",
+        "purpose": "Schützt Kontakt- und Buchungsformulare vor Bot-Angriffen und Missbrauch.",
+        "lifespan": "Sitzung"
+      },
+      {
+        "name": "_ga, _ga_*",
+        "provider": "Google Analytics (Drittanbieter)",
+        "category": "Analyse & Leistung",
+        "categoryClass": "bg-amber-500/10 text-amber-800 border-amber-500/30",
+        "purpose": "Anonyme aggregierte Nutzungsstatistiken, beliebte Touren und Ladezeiten.",
+        "lifespan": "Bis zu 2 Jahre"
+      },
+      {
+        "name": "NID, CONSENT",
+        "provider": "Google Maps (Drittanbieter)",
+        "category": "Funktion & Karten",
+        "categoryClass": "bg-blue-500/10 text-blue-800 border-blue-500/30",
+        "purpose": "Ermöglicht die interaktive Anzeige unseres Agenturstandorts in Marrakesch.",
+        "lifespan": "Bis zu 6 Monate"
+      }
+    ]
+  },
+  "sections": [
+    {
+      "id": "collection",
+      "num": "01",
+      "title": "Von uns erfasste Daten",
+      "paragraphs": [
+        "Wir erfassen personenbezogene Daten, die Sie uns direkt bei Reiseanfragen, Buchungen privater Touren oder bei der Kontaktaufnahme übermitteln.",
+        "Hierzu zählen Name, E-Mail-Adresse, Telefon- / WhatsApp-Nummer, Reisedaten, Teilnehmeranzahl und gewünschte Reiserouten durch Marokko.",
+        "Besondere Kategorien personenbezogener Daten werden ohne zwingende betriebliche Erforderlichkeit und ausdrückliche Einwilligung nicht erfasst."
+      ]
+    },
+    {
+      "id": "usage",
+      "num": "02",
+      "title": "Nutzung Ihrer Daten",
+      "paragraphs": [
+        "Ihre Daten werden streng nach den Vorgaben der europäischen DSGVO und des marokkanischen Gesetzes Nr. 09-08 verarbeitet.",
+        "Zu den Kernzwecken gehören die Organisation behördlicher Fahrtgenehmigungen, Reservierungen lizenzierter Wüstenfahrer, Unterkünfte in Riads und Bereitstellung von Reiseunterlagen.",
+        "Wir verkaufen oder vermieten Ihre Daten keinesfalls zu Werbezwecken an Dritte."
+      ]
+    },
+    {
+      "id": "cookies",
+      "num": "03",
+      "title": "Umfassende Cookie-Richtlinie",
+      "paragraphs": [
+        "Cookies sind kleine Textdateien, die beim Besuch unserer Website in Ihrem Browser gespeichert werden, um Navigationspräferenzen zu sichern.",
+        "Technisch notwendige Cookies werden zur Gewährleistung der Grundfunktionen gesetzt. Optionale Analyse-Cookies aktivieren wir nur nach Ihrer ausdrücklichen Einwilligung."
+      ],
+      "callout": {
+        "title": "Volle Kontrolle für Reisende",
+        "desc": "Sie können Ihre Cookie-Zustimmung jederzeit unkompliziert anpassen oder widerrufen, ohne Einschränkung beim Zugriff auf Reiseangebote."
+      }
+    },
+    {
+      "id": "inventory",
+      "num": "04",
+      "title": "Cookie-Übersicht & Zweck",
+      "paragraphs": [
+        "Wir legen alle verwendeten Tracker transparent offen. Die nachfolgende Tabelle erläutert jeden Identifikator, den Anbieter und die jeweilige Speicherdauer."
+      ]
+    },
+    {
+      "id": "security",
+      "num": "05",
+      "title": "Datensicherheit & Verschlüsselung",
+      "paragraphs": [
+        "Wir setzen moderne technische und organisatorische Sicherheitsmaßnahmen ein, um Ihre Daten vor Verlust und unbefugtem Zugriff zu schützen.",
+        "Der Datenverkehr wird durchgängig mit TLS 1.3 verschlüsselt. Strenge CSP-Header unterbinden Cross-Site-Scripting-Risiken.",
+        "Der Zugriff auf Buchungsunterlagen ist ausschließlich autorisierten Logistik-Koordinatoren für Ihre Reise vorbehalten."
+      ]
+    },
+    {
+      "id": "providers",
+      "num": "06",
+      "title": "Eingesetzte Drittanbieter",
+      "paragraphs": [
+        "Für den zuverlässigen Betrieb arbeiten wir mit ausgewählten Dienstleistern zusammen: Hostinger Cloud für europäisches VPS-Hosting, Google Workspace für Buchungsbestätigungen und Google Maps für interaktive Standortkarten."
+      ]
+    },
+    {
+      "id": "rights",
+      "num": "07",
+      "title": "Ihre gesetzlichen Rechte",
+      "paragraphs": [
+        "Ihnen stehen umfassende Rechte auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu."
+      ]
+    },
+    {
+      "id": "contact",
+      "num": "08",
+      "title": "Datenschutz-Team & Direkter Kontakt",
+      "paragraphs": [
+        "Bei Anliegen zum Datenschutz oder zur Geltendmachung Ihrer Rechte erreichen Sie unser Büro in Marrakesch direkt über folgende Kanäle:"
+      ]
+    }
+  ]
+}

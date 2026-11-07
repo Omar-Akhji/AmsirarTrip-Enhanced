@@ -51,7 +51,7 @@ const baseTripSchema = ({ image }: SchemaContext) =>
   });
 
 const toursCollection = defineCollection({
-  loader: glob({ pattern: "**/*.{json,mdx}", base: "./src/content/tours" }),
+  loader: glob({ pattern: "**/*.json", base: "./src/content/tours" }),
   schema: (context) =>
     baseTripSchema(context).extend({
       tourKey: z.string(),
@@ -64,7 +64,7 @@ const toursCollection = defineCollection({
 });
 
 const excursionsCollection = defineCollection({
-  loader: glob({ pattern: "**/*.{json,mdx}", base: "./src/content/excursions" }),
+  loader: glob({ pattern: "**/*.json", base: "./src/content/excursions" }),
   schema: (context) =>
     baseTripSchema(context).extend({
       excursionKey: z.string(),
@@ -82,7 +82,7 @@ const excursionsCollection = defineCollection({
 });
 
 const destinationsCollection = defineCollection({
-  loader: glob({ pattern: "**/*.{json,mdx}", base: "./src/content/destinations" }),
+  loader: glob({ pattern: "**/*.json", base: "./src/content/destinations" }),
   schema: ({ image }) =>
     z.object({
       image: image(),
@@ -94,13 +94,80 @@ const destinationsCollection = defineCollection({
     }),
 });
 
+const legalSummaryCardSchema = z.object({ title: z.string(), description: z.string() });
+
+const legalAgencyCardSchema = z.object({
+  title: z.string(),
+  badge: z.string(),
+  hours: z.string(),
+  chatCta: z.string(),
+});
+
+const legalCalloutSchema = z.object({ title: z.string(), desc: z.string() });
+
+const legalSectionSchema = z.object({
+  id: z.string(),
+  num: z.string(),
+  title: z.string(),
+  paragraphs: z.array(z.string()),
+  callout: legalCalloutSchema.optional(),
+});
+
+const cookieRowSchema = z.object({
+  name: z.string(),
+  provider: z.string(),
+  category: z.string(),
+  categoryClass: z.string(),
+  purpose: z.string(),
+  lifespan: z.string(),
+});
+
+const cookieTableSchema = z.object({
+  title: z.string(),
+  subtitle: z.string(),
+  colName: z.string(),
+  colProvider: z.string(),
+  colCategory: z.string(),
+  colPurpose: z.string(),
+  colLifespan: z.string(),
+  rows: z.array(cookieRowSchema),
+});
+
+const cancellationTierSchema = z.object({
+  days: z.string(),
+  badge: z.string(),
+  badgeClass: z.string(),
+  desc: z.string(),
+});
+
+const cancellationMatrixSchema = z.object({
+  title: z.string(),
+  subtitle: z.string(),
+  tiers: z.array(cancellationTierSchema),
+  insuranceTitle: z.string(),
+  insuranceDesc: z.string(),
+});
+
 const legalCollection = defineCollection({
-  loader: glob({ pattern: "**/*.mdx", base: "./src/content/legal" }),
+  loader: glob({ pattern: "**/*.json", base: "./src/content/legal" }),
   schema: z.object({
-    title: z.string(),
-    subtitle: z.string().optional(),
-    lastUpdated: z.string(),
     locale: z.enum(["en", "fr", "de", "es"]),
+    title: z.string(),
+    subtitle: z.string(),
+    lastUpdated: z.string(),
+    badgeDoc: z.string(),
+    badgeStatus: z.string(),
+    badgeJurisdiction: z.string(),
+    summaryTitle: z.string(),
+    summarySubtitle: z.string(),
+    summaryCards: z.array(legalSummaryCardSchema),
+    tocTitle: z.string(),
+    printLabel: z.string(),
+    agencyCard: legalAgencyCardSchema,
+    cookieCta: legalCalloutSchema.extend({ buttonLabel: z.string() }).optional(),
+    cookieTable: cookieTableSchema.optional(),
+    cancellationMatrix: cancellationMatrixSchema.optional(),
+    sections: z.array(legalSectionSchema),
   }),
 });
 

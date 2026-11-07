@@ -39,7 +39,7 @@ if (gradientPosition === "top-right") {
 }
 ---
 
-<section class="page-header-ascii relative flex flex-col justify-center overflow-hidden bg-zinc-950 pbs-24 pbe-12 sm:pbs-28 sm:pbe-16 lg:pbs-32 lg:pbe-20 text-center text-white shadow-xl inline-full min-h-[48dvh] sm:min-h-[52dvh] lg:min-h-[56dvh] max-h-150 print:hidden">
+<section class="relative flex flex-col justify-center overflow-hidden bg-zinc-950 pbs-24 pbe-12 sm:pbs-28 sm:pbe-16 lg:pbs-32 lg:pbe-20 text-center text-white shadow-xl inline-full min-h-[48dvh] sm:min-h-[52dvh] lg:min-h-[56dvh] max-h-150 print:hidden [--ascii-glyph:#d4d4d8] [--ascii-surface:#09090b] [--ascii-accent:#f15d30]">
   {bgImage ?
     typeof bgImage === "string" ?
       <Image
@@ -82,14 +82,12 @@ if (gradientPosition === "top-right") {
         >
           <ol
             role="list"
-            class="flex list-none flex-wrap items-center gap-2 rounded-full border border-white/10 bg-white/10 px-6 py-2 shadow-xs ring-1 ring-black/5 backdrop-blur-xl"
-            style="backdrop-filter: blur(20px);"
+            class="flex list-none flex-wrap items-center gap-2 rounded-full border border-white/10 bg-white/10 px-6 py-2 shadow-xs ring-1 ring-black/5 backdrop-blur-[20px]"
           >
             {breadcrumbs.map((crumb, index) => (
               <li class="flex items-center gap-2">
                 {crumb.href ?
                   <a
-                    style="color: #e4e4e7;"
                     class="text-sm font-medium text-white/80 transition-colors pointer-fine:hover:text-white"
                     href={getRelativeLocaleUrl(locale, crumb.href)}
                   >
@@ -97,7 +95,6 @@ if (gradientPosition === "top-right") {
                   </a>
                 : <span
                     aria-current="page"
-                    style="color: #facc15;"
                     class="text-sm font-semibold text-yellow"
                   >
                     {crumb.label}
@@ -107,7 +104,6 @@ if (gradientPosition === "top-right") {
                   <AltArrowRightIcon
                     aria-hidden="true"
                     class="size-3 text-white/40"
-                    style="color: #a1a1aa;"
                   />
                 )}
               </li>
@@ -165,11 +161,3 @@ if (gradientPosition === "top-right") {
     </div>
   </div>
 </section>
-
-<style>
-  .page-header-ascii {
-    --ascii-glyph: #d4d4d8;
-    --ascii-surface: #09090b;
-    --ascii-accent: #f15d30;
-  }
-</style>

@@ -15,7 +15,7 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
   aria-describedby="cookie-banner-desc"
   aria-labelledby="cookie-banner-title"
   aria-label="Cookie consent"
-  class="pointer-events-none fixed inset-x-4 inset-be-4 z-50 transition-[opacity,transform] duration-200 ease-out opacity-0 translate-y-3 sm:inset-s-auto sm:inset-e-6 sm:inset-be-6 sm:max-w-md md:max-w-lg hidden print:hidden"
+  class="pointer-events-none fixed inset-x-4 inset-be-4 z-50 transition-[opacity,transform] duration-200 ease-out opacity-0 translate-y-3 motion-reduce:transition-none motion-reduce:transform-none sm:inset-s-auto sm:inset-e-6 sm:inset-be-6 sm:max-w-md md:max-w-lg hidden print:hidden"
   id="cookie-banner"
   role="region"
   data-ascii="skip"
@@ -89,7 +89,7 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
 <!-- Cookie Preferences Modal -->
 <dialog
   aria-labelledby="cookie-modal-title"
-  class="cookie-preferences-dialog fixed inset-0 m-auto z-50 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-3rem)] lg:max-h-140 w-[calc(100vw-2rem)] sm:w-full max-w-xl flex-col overflow-hidden rounded-2xl border border-white/10 bg-slate-950 p-0 text-white shadow-2xl scheme-dark backdrop:bg-black/75 backdrop:backdrop-blur-xs open:flex"
+  class="fixed inset-0 m-auto z-50 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-3rem)] lg:max-h-140 w-[calc(100vw-2rem)] sm:w-full max-w-xl flex-col overflow-hidden rounded-2xl border border-white/10 bg-slate-950 p-0 text-white shadow-2xl scheme-dark opacity-0 scale-96 transition-[opacity,transform,display,overlay] duration-250 ease-out-expo transition-discrete motion-reduce:duration-[1ms] open:flex open:opacity-100 open:scale-100 starting:open:opacity-0 starting:open:scale-96 backdrop:opacity-0 backdrop:bg-[oklch(0%_0_0deg/0.75)] backdrop:backdrop-blur-[2px] backdrop:transition-[opacity,display,overlay] backdrop:duration-250 backdrop:ease-out-expo backdrop:transition-discrete motion-reduce:backdrop:duration-[1ms] open:backdrop:opacity-100 starting:open:backdrop:opacity-0"
   id="cookie-preferences-modal"
 >
   <div class="flex items-center justify-between border-b border-white/10 bg-slate-900/60 px-5 py-4 sm:px-6">
@@ -135,12 +135,12 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
     </form>
   </div>
 
-  <div class="modal-scroll-root flex-1 min-h-0 flex flex-col">
+  <div class="flex-1 min-h-0 flex flex-col [--scrollbar-space:14px] [--scrollbar-theme:hsl(0deg_0%_75%)] pe-(--scrollbar-space)">
     <div
-      class="modal-scroll-viewport flex-1 min-h-0"
+      class="flex-1 min-h-0 overflow-x-hidden overflow-y-auto overscroll-y-contain [&::-webkit-scrollbar]:w-2.5 [&::-webkit-scrollbar-button]:hidden [&::-webkit-scrollbar-button]:size-0 [&::-webkit-scrollbar-track]:bg-[color-mix(in_sRGB,var(--scrollbar-theme,hsl(0deg_0%_75%)),transparent_82%)] [&::-webkit-scrollbar-track]:rounded-[1000px] [&::-webkit-scrollbar-track]:bg-clip-padding [&::-webkit-scrollbar-track]:my-5 [&::-webkit-scrollbar-thumb]:bg-[color-mix(in_sRGB,var(--scrollbar-theme,hsl(0deg_0%_75%)),transparent_28%)] [&::-webkit-scrollbar-thumb]:rounded-[1000px] [&::-webkit-scrollbar-thumb:hover]:bg-[color-mix(in_sRGB,var(--scrollbar-theme,hsl(0deg_0%_75%)),transparent_12%)] supports-[-moz-appearance:none]:scrollbar-thin supports-[-moz-appearance:none]:[scrollbar-color:color-mix(in_sRGB,var(--scrollbar-theme,hsl(0deg_0%_75%)),transparent_28%)_transparent]"
       data-lenis-prevent
     >
-      <div class="modal-scroll-content flex flex-col gap-4 p-5 sm:p-6 text-sm text-zinc-300">
+      <div class="flex flex-col gap-4 p-5 sm:p-6 text-sm text-zinc-300">
         <div class="rounded-xl border border-white/10 bg-white/3 p-4 text-xs leading-relaxed text-zinc-300 sm:text-[13px]">
           <p>
             {t(

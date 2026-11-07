@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import { format as formatDate } from "date-fns";
 import type { FormState } from "@/lib/form-types";
 import { useTranslation } from "@/lib/hooks/use-translation";
-import { cn } from "@/lib/utils";
 import EnhancedCalendar from "@/shared/ui/widgets/Calendar.vue";
 import NativePopover from "@/shared/ui/widgets/NativePopover.vue";
 
@@ -20,6 +18,9 @@ const emit = defineEmits<{
   "update:calendarOpen": [open: boolean];
   "update:reservationDate": [date: Date | null];
 }>();
+
+const formatIsoDate = (date: Date): string =>
+  `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
 
 const { t } = useTranslation(locale);
 const minimumReservationDate = ref<Date | null>(null);
@@ -145,14 +146,11 @@ onMounted(() => {
         >
           <template #trigger>
             <span
-              :class="
-                cn(
-                  'flex h-12 cursor-pointer items-center justify-start rounded-xl border border-stone-200/90 bg-stone-50/50 px-4 text-start font-sans text-sm transition-colors inline-full group-focus-visible:border-orange-500 group-focus-visible:bg-white group-focus-visible:ring-2 group-focus-visible:ring-orange-500/20 pointer-fine:group-hover:border-stone-300 pointer-fine:group-hover:bg-white',
-                  !reservationDate && 'text-stone-400',
-                  reservationDate && 'text-stone-900',
-                  state?.errors?.date && 'border-red-300',
-                )
-              "
+              class="flex h-12 cursor-pointer items-center justify-start rounded-xl border border-stone-200/90 bg-stone-50/50 px-4 text-start font-sans text-sm transition-colors inline-full group-focus-visible:border-orange-500 group-focus-visible:bg-white group-focus-visible:ring-2 group-focus-visible:ring-orange-500/20 pointer-fine:group-hover:border-stone-300 pointer-fine:group-hover:bg-white"
+              :class="[
+                reservationDate ? 'text-stone-900' : 'text-stone-400',
+                state?.errors?.date && 'border-red-300',
+              ]"
               :aria-describedby="state?.errors?.date ? 'reservationDate-error' : undefined"
             >
               <svg
@@ -246,7 +244,7 @@ onMounted(() => {
           type="hidden"
           name="reservationDate"
           toolparamdescription="The selected start date for the reservation in YYYY-MM-DD format"
-          :value="reservationDate ? formatDate(reservationDate, 'yyyy-MM-dd') : ''"
+          :value="reservationDate ? formatIsoDate(reservationDate) : ''"
         />
         <p
           v-if="state?.errors?.date"

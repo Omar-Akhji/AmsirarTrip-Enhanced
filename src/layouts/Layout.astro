@@ -56,7 +56,7 @@ const currentOgLocale = OG_LOCALE_MAP[locale] ?? locale;
 
 <!doctype html>
 <html
-  class="no-js"
+  class="no-js inline-full min-block-full overflow-x-hidden overflow-y-auto scrollbar-none [-ms-overflow-style:none] bg-(--pattern-bg-color) bg-(image:--pattern-bg-image) bg-repeat bg-size-(--pattern-bg-size) [&::-webkit-scrollbar]:hidden [&::-webkit-scrollbar]:size-0 [&::-webkit-scrollbar]:bg-transparent"
   itemscope
   itemtype="https://schema.org/WebPage"
   lang={locale}
@@ -327,7 +327,7 @@ const currentOgLocale = OG_LOCALE_MAP[locale] ?? locale;
     />
   </head>
 
-  <body>
+  <body class="flex flex-col inline-full min-block-full overflow-visible font-sans text-base leading-[1.6] text-ink bg-(--pattern-bg-color) bg-(image:--pattern-bg-image) bg-repeat bg-size-(--pattern-bg-size) antialiased font-features-['kern'_1,'liga'_1] selection:bg-[color-mix(in_oklch,var(--color-orange)_20%,transparent)] selection:text-inherit [&::-webkit-scrollbar]:hidden [&::-webkit-scrollbar]:size-0 [&::-webkit-scrollbar]:bg-transparent">
     <div
       aria-hidden="true"
       class="fixed top-0 inset-s-0 z-100000 h-0.75 w-full pointer-events-none opacity-0 origin-left scale-x-0 bg-linear-to-r from-orange via-amber-orange to-orange shadow-[0_0_12px_rgba(241,93,48,0.7),0_0_6px_rgba(247,136,72,0.5)] transition-[transform,opacity] duration-200 ease-out"
@@ -342,7 +342,7 @@ const currentOgLocale = OG_LOCALE_MAP[locale] ?? locale;
     <Navbar />
     <main
       id="main-content"
-      class="relative isolate min-h-screen"
+      class="relative isolate block flex-[1_0_auto] inline-full min-h-screen"
       transition:animate="fade"
     >
       <TransitionSkeletons />

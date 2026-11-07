@@ -37,12 +37,12 @@ const {
   />
   <span
     aria-hidden="true"
-    class="tactile-switch-base relative block h-[3em] w-[5.5em] rounded-[1.5em] transition-[box-shadow,opacity] duration-300 peer-focus-visible:ring-2 peer-focus-visible:ring-orange-400 peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-slate-950 motion-reduce:transition-none"
+    class="relative block h-[3em] w-[5.5em] rounded-[1.5em] bg-[#ddd] bg-[linear-gradient(rgb(0_0_0/0.07),rgb(255_255_255/0))] shadow-[inset_0_0.07em_0.1em_-0.1em_rgb(0_0_0/0.4),0_0.05em_0.08em_-0.01em_rgb(255_255_255/0.7)] transition-[box-shadow,opacity] duration-300 peer-focus-visible:ring-2 peer-focus-visible:ring-orange-400 peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-slate-950 peer-checked:[&>.tactile-switch-channel]:shadow-[inset_0_0.08em_0.15em_-0.1em_rgb(0_0_0/0.5),0_0.05em_0.08em_-0.01em_rgb(255_255_255/0.7),inset_3em_0_0_0_rgb(68_204_102/0.85)] peer-checked:[&>.tactile-switch-thumb]:left-[3em] motion-reduce:transition-none"
   >
     <!-- Channel (recessed groove with active green fill) -->
-    <span class="tactile-switch-channel absolute inset-x-[0.75em] inset-y-[0.75em] h-[1.5em] w-[4em] rounded-[0.75em] transition-shadow duration-250 ease-in-out motion-reduce:transition-none"></span>
+    <span class="tactile-switch-channel absolute inset-x-[0.75em] inset-y-[0.75em] h-[1.5em] w-[4em] rounded-[0.75em] bg-[#d0d0d0] bg-[linear-gradient(rgb(0_0_0/0.07),rgb(255_255_255/0.1))] shadow-[inset_0_0.08em_0.15em_-0.1em_rgb(0_0_0/0.5),0_0.05em_0.08em_-0.01em_rgb(255_255_255/0.7),inset_0_0_0_0_rgb(68_204_102/0.75)] transition-shadow duration-250 ease-in-out motion-reduce:transition-none"></span>
 
     <!-- Switch knob / thumb -->
-    <span class="tactile-switch-thumb absolute top-[0.5em] left-[0.5em] size-[2em] rounded-full transition-[left] duration-250 ease-in-out motion-reduce:transition-none"></span>
+    <span class="tactile-switch-thumb absolute top-[0.5em] left-[0.5em] size-[2em] rounded-full bg-[linear-gradient(#f5f5f5_10%,#eee)] shadow-[inset_0_0.1em_0.15em_-0.05em_rgb(255_255_255/0.9),0_0.2em_0.25em_-0.12em_rgb(0_0_0/0.45)] transition-[left] duration-250 ease-in-out motion-reduce:transition-none"></span>
   </span>
 </label>

@@ -140,51 +140,6 @@
   navigation: auto;
 }
 
-/* Capsule pill scrollbar for modal viewports (matches modern color-mix spec) */
-.modal-scroll-root {
-  --scrollbar-space: 14px;
-  --scrollbar-theme: hsl(0deg 0% 75%);
-
-  padding-inline-end: var(--scrollbar-space);
-}
-
-.modal-scroll-viewport {
-  overflow: hidden auto;
-  overscroll-behavior-y: contain;
-
-  &::-webkit-scrollbar {
-    width: 10px;
-  }
-
-  &::-webkit-scrollbar-button {
-    display: none;
-    width: 0;
-    height: 0;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: color-mix(in sRGB, var(--scrollbar-theme, hsl(0deg 0% 75%)), transparent 82%);
-    border-radius: 1000px;
-    background-clip: padding-box;
-    margin-block: 1.25rem;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: color-mix(in sRGB, var(--scrollbar-theme, hsl(0deg 0% 75%)), transparent 28%);
-    border-radius: 1000px;
-  }
-
-  &::-webkit-scrollbar-thumb:hover {
-    background: color-mix(in sRGB, var(--scrollbar-theme, hsl(0deg 0% 75%)), transparent 12%);
-  }
-
-  @supports (-moz-appearance: none) {
-    scrollbar-width: thin;
-    scrollbar-color: color-mix(in sRGB, var(--scrollbar-theme, hsl(0deg 0% 75%)), transparent 28%)
-      transparent;
-  }
-}
-
 /* ==========================================================================
    5. Base
    ========================================================================== */
@@ -227,58 +182,7 @@
   }
 
   /* ------------------------------------------------------------------------
-     5.2 Document
-     ------------------------------------------------------------------------ */
-
-  html,
-  body {
-    inline-size: 100%;
-    min-block-size: 100%;
-  }
-
-  html {
-    overflow: hidden auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    background-color: var(--pattern-bg-color);
-    background-image: var(--pattern-bg-image);
-    background-repeat: repeat;
-    background-size: var(--pattern-bg-size);
-  }
-
-  body {
-    display: flex;
-    flex-direction: column;
-    min-block-size: 100%;
-    overflow: visible;
-    font-family: var(--font-sans);
-    font-size: 1rem;
-    line-height: 1.6;
-    color: var(--color-ink);
-    background-color: var(--pattern-bg-color);
-    background-image: var(--pattern-bg-image);
-    background-repeat: repeat;
-    background-size: var(--pattern-bg-size);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-feature-settings:
-      "kern" 1,
-      "liga" 1;
-  }
-
-  main {
-    display: block;
-    flex: 1 0 auto;
-    inline-size: 100%;
-  }
-
-  ::selection {
-    background: color-mix(in oklch, var(--color-orange) 20%, transparent);
-    color: inherit;
-  }
-
-  /* ------------------------------------------------------------------------
-     5.3 Typography
+     5.2 Typography
      ------------------------------------------------------------------------ */
 
   /* Always sans, even inside a .font-brand / .font-mono wrapper (preflight only inherits) */
@@ -295,7 +199,7 @@
   }
 
   /* ------------------------------------------------------------------------
-     5.4 Forms & controls
+     5.3 Forms & controls
      ------------------------------------------------------------------------ */
 
   textarea {
@@ -314,20 +218,6 @@
   hgroup p {
     font-family: var(--font-mono, "DM Mono", ui-monospace, monospace);
   }
-
-  /* ------------------------------------------------------------------------
-     5.5 Document scrollbars (WebKit / Blink)
-     Do not add `scrollbar-color` or `scrollbar-width` here: Chromium would
-     then ignore every ::-webkit-scrollbar rule below.
-     ------------------------------------------------------------------------ */
-
-  html::-webkit-scrollbar,
-  body::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-    display: none;
-    background: transparent;
-  }
 }
 
 /* ==========================================================================
@@ -336,27 +226,7 @@
 
 @layer components {
   /* ------------------------------------------------------------------------
-     6.1 Accordion
-     CSS-only height transition for <details> (needs interpolate-size on :root)
-     ------------------------------------------------------------------------ */
-
-  details::details-content {
-    block-size: 0;
-    overflow: clip;
-    opacity: 0;
-    transition:
-      block-size 300ms var(--ease-out-expo),
-      content-visibility 300ms allow-discrete,
-      opacity 250ms ease;
-  }
-
-  details[open]::details-content {
-    block-size: auto;
-    opacity: 1;
-  }
-
-  /* ------------------------------------------------------------------------
-     6.2 Scroll reveal
+     6.1 Scroll reveal
      The TypeScript orchestrator adds `.scroll-init` to <html>, then toggles
      `.is-visible` (IntersectionObserver) and `.is-done` (animation end).
      Without JS nothing is hidden, so content stays crawlable.
@@ -418,7 +288,6 @@
       animation-duration: 750ms;
       animation-timing-function: var(--ease-out-expo);
       animation-fill-mode: both;
-      animation-delay: var(--reveal-delay, 0ms);
 
       &:not(.is-done) {
         will-change: transform, opacity;
@@ -447,52 +316,10 @@
       animation: none;
       will-change: auto;
     }
-
-    /* Stagger steps */
-    &.delay-0 {
-      --reveal-delay: 0ms;
-    }
-
-    &.delay-100 {
-      --reveal-delay: 100ms;
-    }
-
-    &.delay-200 {
-      --reveal-delay: 200ms;
-    }
-
-    &.delay-300 {
-      --reveal-delay: 300ms;
-    }
-
-    &:is(.delay-450, .delay-\[450ms\]) {
-      --reveal-delay: 450ms;
-    }
-
-    &.delay-700 {
-      --reveal-delay: 700ms;
-    }
-
-    &.delay-1000 {
-      --reveal-delay: 1000ms;
-    }
   }
 
   /* ------------------------------------------------------------------------
-     6.3 Parallax frames
-     ------------------------------------------------------------------------ */
-
-  [data-scroll-parallax] {
-    position: relative;
-    overflow: hidden;
-
-    & img {
-      will-change: transform;
-    }
-  }
-
-  /* ------------------------------------------------------------------------
-     6.4 Page transitions (Astro view transitions)
+     6.2 Page transitions (Astro view transitions)
      ------------------------------------------------------------------------ */
 
   @keyframes astro-page-fade-out {
@@ -592,21 +419,6 @@
     }
   }
 
-  /* Mobile: centre the copy between the navbar and the thumbnail strip */
-  @media (width < 768px) {
-    .slider .list .item .content,
-    #home-hero-slider-skeleton .content {
-      top: calc(
-        (
-            100dvh - var(--thumb-bottom) - var(--thumb-height) + 3.75rem +
-              env(safe-area-inset-top, 0px)
-          ) /
-          2
-      ) !important;
-      transform: translateY(-50%) !important;
-    }
-  }
-
   .slider {
     --hero-duration: 750ms;
     --hero-exit-duration: 350ms;
@@ -645,7 +457,7 @@
       }
 
       & .list .item.is-outgoing .content {
-        animation: heroContentExit var(--hero-exit-duration) var(--ease-out-expo) forwards !important;
+        animation: heroContentExit var(--hero-exit-duration) var(--ease-out-expo) forwards;
       }
 
       & .list .item.is-incoming .content {
@@ -787,20 +599,6 @@
      Rules the JS engine depends on; they persist across Astro view transitions.
      ------------------------------------------------------------------------ */
 
-  [data-ar-t] {
-    -webkit-text-fill-color: transparent !important;
-    text-shadow: none !important;
-    text-decoration-color: transparent !important;
-  }
-
-  [data-ar-tc] {
-    background-image: none !important;
-  }
-
-  :is([data-ar-m], [data-ar-s], [data-ar-f]) {
-    opacity: var(--ar-o, 0) !important;
-  }
-
   [data-ar-pending] {
     visibility: hidden;
   }
@@ -834,15 +632,7 @@
 
     position: relative;
     display: block;
-    font-family: var(
-      --ascii-font,
-      "DM Mono",
-      ui-monospace,
-      "SF Mono",
-      menlo,
-      consolas,
-      monospace
-    ) !important;
+    font-family: var(--ascii-font, "DM Mono", ui-monospace, "SF Mono", menlo, consolas, monospace);
     font-variant-ligatures: none;
     color: var(--ascii-skeleton, #78716c);
     user-select: none;
@@ -872,7 +662,7 @@
   .ars-base {
     display: block;
     opacity: var(--ars-base);
-    text-align: start !important;
+    text-align: start;
   }
 
   /* Physical offsets on purpose: the engine positions the canvas, not the text flow */
@@ -886,7 +676,7 @@
   /* Centred copy (page-header heroes) */
   .text-center {
     & .ars-line {
-      margin-inline: auto !important;
+      margin-inline: auto;
     }
   }
 
@@ -983,20 +773,20 @@
   .ars.ars-hero-bg {
     --ars-band: 65%;
 
-    inline-size: 100% !important;
-    block-size: 100% !important;
+    inline-size: 100%;
+    block-size: 100%;
 
     & > .ars-block {
-      inline-size: 100% !important;
-      block-size: 100% !important;
+      inline-size: 100%;
+      block-size: 100%;
     }
 
     & .ars-base {
-      inline-size: 100% !important;
-      font-size: max(15px, calc(100vw / 42)) !important;
-      line-height: 1.18 !important;
-      letter-spacing: 0 !important;
-      white-space: pre !important;
+      inline-size: 100%;
+      font-size: max(15px, calc(100vw / 42));
+      line-height: 1.18;
+      letter-spacing: 0;
+      white-space: pre;
     }
   }
 
@@ -1012,163 +802,6 @@
     }
   }
 
-  /* ------------------------------------------------------------------------
-     6.8 Overlays: popover & dialog
-     Discrete transitions via allow-discrete + @starting-style.
-     ------------------------------------------------------------------------ */
-
-  /* Language selector: CSS anchor positioning with viewport fallback */
-  .language-selector-popover {
-    /* Fallback for browsers without CSS Anchor Positioning */
-    position: fixed;
-    top: 4.5rem;
-    inset-inline-end: max(1rem, calc((100vw - min(1100px, 100vw - 2rem)) / 2 + 1rem));
-    margin: 0;
-    opacity: 0;
-    transform: translateY(-8px) scale(0.96);
-    transform-origin: top right;
-    transition:
-      opacity 250ms var(--ease-out-expo),
-      transform 250ms var(--ease-out-expo),
-      display 250ms allow-discrete,
-      overlay 250ms allow-discrete;
-
-    &:popover-open {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-  }
-
-  /* Anchor positioning for Chromium 125+ */
-  @supports (top: anchor(bottom)) {
-    .language-selector-popover {
-      position-anchor: --lang-selector-btn;
-      top: calc(anchor(bottom) + 18px) !important;
-      right: anchor(right) !important;
-      left: unset !important;
-      bottom: unset !important;
-      margin: 0 !important;
-    }
-  }
-
-  /* Modern position-area positioning for Chromium 129+ */
-  @supports (position-area: bottom span-left) {
-    .language-selector-popover {
-      position-anchor: --lang-selector-btn;
-      position-area: bottom span-left;
-    }
-  }
-
-  /* Chevron rotation and active trigger state when open */
-  .language-selector-root:has(:popover-open) .lang-chevron {
-    transform: rotate(180deg);
-  }
-
-  .language-selector-root:has(:popover-open) button[popovertarget] {
-    border-color: rgb(255 255 255 / 0.45);
-    background-color: rgb(255 255 255 / 0.2);
-    box-shadow: 0 4px 16px rgb(0 0 0 / 0.25);
-  }
-
-  .group[data-scrolled] .language-selector-root:has(:popover-open) button[popovertarget] {
-    background-color: var(--color-orange-dark, #d94a1f);
-  }
-
-  /* Cookie preferences */
-  dialog.cookie-preferences-dialog {
-    opacity: 0;
-    transform: scale(0.96);
-    transition:
-      opacity 250ms var(--ease-out-expo),
-      transform 250ms var(--ease-out-expo),
-      display 250ms allow-discrete,
-      overlay 250ms allow-discrete;
-
-    &[open] {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    &::backdrop {
-      opacity: 0;
-      background-color: oklch(0% 0 0deg / 0.75);
-      backdrop-filter: blur(2px);
-      transition:
-        opacity 250ms var(--ease-out-expo),
-        display 250ms allow-discrete,
-        overlay 250ms allow-discrete;
-    }
-
-    &[open]::backdrop {
-      opacity: 1;
-    }
-  }
-
-  /* Entry states: keep after the rules they start from */
-  @starting-style {
-    .language-selector-popover:popover-open {
-      opacity: 0;
-      transform: translateY(-8px) scale(0.96);
-    }
-
-    dialog.cookie-preferences-dialog[open] {
-      opacity: 0;
-      transform: scale(0.96);
-    }
-
-    dialog.cookie-preferences-dialog[open]::backdrop {
-      opacity: 0;
-    }
-  }
-
-  /* ------------------------------------------------------------------------
-     6.9 No-JS fallbacks
-     ------------------------------------------------------------------------ */
-
-  .no-js .blur-token {
-    opacity: 1 !important;
-    transform: none !important;
-    filter: none !important;
-  }
-
-  /* ------------------------------------------------------------------------
-     6.10 Tactile switch
-     Skeuomorphic toggle switch physics and state tracking
-     ------------------------------------------------------------------------ */
-
-  .tactile-switch-base {
-    background: linear-gradient(rgb(0 0 0 / 0.07), rgb(255 255 255 / 0)), #ddd;
-    box-shadow:
-      inset 0 0.07em 0.1em -0.1em rgb(0 0 0 / 0.4),
-      0 0.05em 0.08em -0.01em rgb(255 255 255 / 0.7);
-  }
-
-  .tactile-switch-channel {
-    background: linear-gradient(rgb(0 0 0 / 0.07), rgb(255 255 255 / 0.1)), #d0d0d0;
-    box-shadow:
-      inset 0 0.08em 0.15em -0.1em rgb(0 0 0 / 0.5),
-      0 0.05em 0.08em -0.01em rgb(255 255 255 / 0.7),
-      inset 0 0 0 0 rgb(68 204 102 / 0.75);
-  }
-
-  .peer:checked ~ .tactile-switch-base .tactile-switch-channel {
-    box-shadow:
-      inset 0 0.08em 0.15em -0.1em rgb(0 0 0 / 0.5),
-      0 0.05em 0.08em -0.01em rgb(255 255 255 / 0.7),
-      inset 3em 0 0 0 rgb(68 204 102 / 0.85);
-  }
-
-  .tactile-switch-thumb {
-    background: linear-gradient(#f5f5f5 10%, #eee);
-    box-shadow:
-      inset 0 0.1em 0.15em -0.05em rgb(255 255 255 / 0.9),
-      0 0.2em 0.25em -0.12em rgb(0 0 0 / 0.45);
-  }
-
-  .peer:checked ~ .tactile-switch-base .tactile-switch-thumb {
-    left: 3em;
-  }
-
   /* ==========================================================================
      7. Reduced motion
      One place for every opt-out. Keep it last in this layer.
@@ -1176,24 +809,19 @@
 
   @media (prefers-reduced-motion: reduce) {
     /* Scroll reveal: show content immediately */
-    .scroll-init [data-animate] {
+    .scroll-init [data-animate],
+    .scroll-init [data-animate].is-visible {
       opacity: 1;
-      animation: none !important;
-      transform: none !important;
-      will-change: auto !important;
-    }
-
-    [data-scroll-parallax] img,
-    [data-scroll-cinematic] {
-      transform: none !important;
-      transition: none !important;
+      animation: none;
+      transform: none;
+      will-change: auto;
     }
 
     /* Page transitions */
     ::view-transition-old(root),
     ::view-transition-new(root),
     ::view-transition-group(*) {
-      animation: none !important;
+      animation: none;
     }
 
     /* Hero slider: collapse to 1ms instead of `animation: none`, so
@@ -1203,24 +831,12 @@
       --hero-exit-duration: 1ms;
       --hero-fade-duration: 1ms;
     }
-
-    /* Accordion & overlays */
-    details::details-content {
-      transition: none;
-    }
-
-    .language-selector-popover,
-    dialog.cookie-preferences-dialog,
-    dialog.cookie-preferences-dialog::backdrop {
-      transition-duration: 1ms;
-    }
   }
 }
 
 /* ==========================================================================
-   8. Lenis overrides (intentionally unlayered)
-   lenis.css ships the rest, but not these two. They stay outside any layer,
-   as in the original, so they keep beating utility classes on <html>.
+   8. Unlayered runtime overrides (Lenis & ASCII reveal)
+   Placed outside @layer so they naturally beat @layer utilities without !important.
    ========================================================================== */
 
 html.lenis {
@@ -1228,5 +844,19 @@ html.lenis {
 }
 
 .lenis.lenis-smooth {
-  scroll-behavior: auto !important;
+  scroll-behavior: auto;
+}
+
+[data-ar-t] {
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
+  text-decoration-color: transparent;
+}
+
+[data-ar-tc] {
+  background-image: none;
+}
+
+:is([data-ar-m], [data-ar-s], [data-ar-f]) {
+  opacity: var(--ar-o, 0);
 }

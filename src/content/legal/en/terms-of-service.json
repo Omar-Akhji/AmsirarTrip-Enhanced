@@ -1,0 +1,144 @@
+{
+  "locale": "en",
+  "title": "Terms of Service",
+  "subtitle": "Complete operational agreement, booking conditions, and traveler protections for Amsirar Trip services in Morocco.",
+  "lastUpdated": "Last updated: January 2026",
+  "badgeDoc": "Official Booking Framework",
+  "badgeStatus": "Legally Active & Enforced",
+  "badgeJurisdiction": "Kingdom of Morocco",
+  "summaryTitle": "Essential Booking Highlights",
+  "summarySubtitle": "Core protections and contractual commitments summarized in plain language before your departure.",
+  "summaryCards": [
+    {
+      "title": "Deposit & Confirmation",
+      "description": "An initial deposit confirms your private tour or excursion. Balance is payable before departure as per itinerary."
+    },
+    {
+      "title": "Tiered Refund Policy",
+      "description": "100% refund for cancellations 30+ days prior, 50% refund at 15 to 29 days. Structured and fair notice windows."
+    },
+    {
+      "title": "Licensed Operations",
+      "description": "Accredited Moroccan tourism operator with certified desert drivers, insured transport, and licensed mountain guides."
+    },
+    {
+      "title": "Marrakech Jurisdiction",
+      "description": "Governed exclusively under Moroccan tourism legislation and the commercial court jurisdiction of Marrakech."
+    }
+  ],
+  "tocTitle": "Document Contents",
+  "printLabel": "Print / Save as PDF",
+  "agencyCard": {
+    "title": "Amsirar Trip SARL",
+    "badge": "Licensed Moroccan Tour Agency",
+    "hours": "Customer support available 7 days a week",
+    "chatCta": "Chat on WhatsApp"
+  },
+  "cancellationMatrix": {
+    "title": "Standard Cancellation & Refund Schedule",
+    "subtitle": "Calculated based on calendar days prior to the official departure date:",
+    "tiers": [
+      {
+        "days": "30+ Days Prior",
+        "badge": "100% Refundable",
+        "badgeClass": "bg-emerald-500/10 text-emerald-700 border-emerald-500/30",
+        "desc": "Full refund returned to original payment method minus minor banking administration charges."
+      },
+      {
+        "days": "15 to 29 Days Prior",
+        "badge": "50% Refundable",
+        "badgeClass": "bg-amber-500/10 text-amber-800 border-amber-500/30",
+        "desc": "50% refund issued. The remainder covers advanced hotel deposits and vehicle holds."
+      },
+      {
+        "days": "Less than 15 Days",
+        "badge": "Non-Refundable",
+        "badgeClass": "bg-zinc-500/10 text-zinc-700 border-zinc-500/30",
+        "desc": "Non-refundable. All vehicle permits, accommodations, and private staff are fully locked and committed."
+      }
+    ],
+    "insuranceTitle": "Travel Insurance Strongly Recommended",
+    "insuranceDesc": "We strongly advise all international guests to carry comprehensive travel insurance covering trip cancellations, medical emergencies, flight schedule changes, and unexpected travel delays."
+  },
+  "sections": [
+    {
+      "id": "acceptance",
+      "num": "01",
+      "title": "Acceptance of Terms",
+      "paragraphs": [
+        "By accessing or using Amsirar Trip's website, reserving travel itineraries, or confirming private excursions in Morocco, you enter into a legally binding agreement governed by these Terms of Service.",
+        "If you do not accept these terms in their entirety, you should not access or make reservations through our services. Amsirar Trip reserves the right to update these terms to reflect changes in Moroccan legislation or company policy. Continued participation in our tours constitutes acceptance of any published modifications."
+      ]
+    },
+    {
+      "id": "services",
+      "num": "02",
+      "title": "Our Services & Tour Operations",
+      "paragraphs": [
+        "Amsirar Trip provides tailor-made travel planning, Sahara desert expeditions, High Atlas mountain trekking, imperial city cultural journeys, and bespoke excursions across the Kingdom of Morocco.",
+        "All published tours are subject to availability and formal written confirmation. Route descriptions, photographs, and itineraries displayed on our platforms serve an illustrative purpose. Actual experiences, stops, and timings may adjust based on weather conditions, seasonal daylight, road closures, and passenger safety considerations."
+      ]
+    },
+    {
+      "id": "bookings",
+      "num": "03",
+      "title": "Booking, Deposit & Payment Schedule",
+      "paragraphs": [
+        "To secure vehicle allocation, licensed driver scheduling, and desert camp lodging, all reservations require an advance confirmation deposit.",
+        "The remaining balance is due prior to departure or according to the explicit terms established during your booking confirmation. Quoted prices include only the specific inclusions enumerated in your official itinerary. Optional upgrades, gratuities, personal incidentals, and individual travel insurance are not included unless expressly invoiced."
+      ],
+      "callout": {
+        "title": "Transparent Pricing Guarantee",
+        "desc": "All quotations are fixed in the contracted currency upon deposit receipt. We never charge hidden tourist surcharges or unexpected booking fees."
+      }
+    },
+    {
+      "id": "cancellation",
+      "num": "04",
+      "title": "Cancellation & Refund Policy",
+      "paragraphs": [
+        "We understand travel plans can shift unexpectedly. However, organizing private journeys across the Moroccan desert and mountains requires binding commitments with local Berber camps, nomadic hosts, and licensed transport providers.",
+        "Cancellations must be communicated in writing via email (amsirare@gmail.com) or official WhatsApp. Refund percentages apply strictly according to the departure timeline detailed in the matrix below."
+      ]
+    },
+    {
+      "id": "liability",
+      "num": "05",
+      "title": "Limitation of Liability & Force Majeure",
+      "paragraphs": [
+        "Amsirar Trip operates with utmost diligence, collaborating exclusively with licensed professional drivers, official local mountain guides, and vetted accommodation partners across Morocco.",
+        "To the maximum extent permitted under Moroccan law, Amsirar Trip shall not be held liable for damages, route modifications, or financial losses caused by events of Force Majeure (including severe weather, desert sandstorms, road damage, political disruptions, or border regulations beyond our reasonable control). Our total aggregate liability for any proven operational failure is strictly capped at the total booking amount paid."
+      ]
+    },
+    {
+      "id": "intellectual-property",
+      "num": "06",
+      "title": "Intellectual Property & Content Rights",
+      "paragraphs": [
+        "All proprietary content presented on amsirartrip.com (including written itineraries, destination guides, high-resolution photography, brand typography, and design elements) is protected under Moroccan and international intellectual property law.",
+        "No content, maps, or editorial text may be copied, repurposed, or republished for commercial tour operations without express prior written permission from Amsirar Trip SARL."
+      ]
+    },
+    {
+      "id": "governing-law",
+      "num": "07",
+      "title": "Governing Law & Legal Jurisdiction",
+      "paragraphs": [
+        "These Terms of Service, all passenger contracts, and any disputes arising out of your booking with Amsirar Trip are governed by the laws of the Kingdom of Morocco.",
+        "In the event of any claim, disagreement, or controversy that cannot be resolved amicably through direct customer service mediation, the parties irrevocably submit to the exclusive jurisdiction of the competent commercial courts of Marrakech, Morocco."
+      ],
+      "callout": {
+        "title": "Official Moroccan Agency Registration",
+        "desc": "Amsirar Trip is an officially registered tourism venture domiciled in Marrakech, operating in full compliance with the Moroccan Ministry of Tourism standards."
+      }
+    },
+    {
+      "id": "contact",
+      "num": "08",
+      "title": "Official Agency Contact & Legal Notices",
+      "paragraphs": [
+        "Formal legal notices, inquiries regarding booking terms, or contractual questions should be directed to our Marrakech central administration office via the channels listed below."
+      ]
+    }
+  ]
+}

@@ -1,5 +1,4 @@
 ---
-import { cn } from "@/lib/utils";
 import { asciiSkeletonHTML, type SkeletonSpec, type SkeletonVariant } from "ascii-reveal/core";
 
 interface Props {
@@ -82,7 +81,7 @@ if (styleProp) {
 
 // Inject consumer classes directly into root .ars container
 if (className) {
-  html = html.replace('class="ars ', () => `class="ars ${cn(className)} `);
+  html = html.replace('class="ars ', () => `class="ars ${className.trim()} `);
 }
 
 // Inject root styles if present

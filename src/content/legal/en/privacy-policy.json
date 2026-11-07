@@ -1,0 +1,172 @@
+{
+  "locale": "en",
+  "title": "Privacy & Cookie Policy",
+  "subtitle": "Clear commitment to your personal data privacy, transparent cookie governance, and traveler rights across Morocco.",
+  "lastUpdated": "Last updated: January 2026",
+  "badgeDoc": "Data Protection Charter",
+  "badgeStatus": "GDPR & CNDP Enforced",
+  "badgeJurisdiction": "Kingdom of Morocco & EU",
+  "summaryTitle": "Privacy Safeguards at a Glance",
+  "summarySubtitle": "Key traveler protections and transparent data governance summarized in plain language before your Moroccan expedition.",
+  "summaryCards": [
+    {
+      "title": "Zero Data Selling",
+      "description": "We never monetize, rent, or trade your personal records. Data is processed strictly for authentic travel operations."
+    },
+    {
+      "title": "GDPR & Moroccan Law",
+      "description": "Fully aligned with EU Regulation 2016/679 and Moroccan Personal Data Protection Law No. 09-08 (CNDP)."
+    },
+    {
+      "title": "TLS 1.3 & CSP Shield",
+      "description": "Bank-grade cryptographic transport encryption with strict Content Security Policy guardrails protecting every interaction."
+    },
+    {
+      "title": "Instant Cookie Control",
+      "description": "Granular consent preferences with instant revocation. Non-essential cookies require your explicit prior opt-in."
+    }
+  ],
+  "tocTitle": "Document Contents",
+  "printLabel": "Print / Save as PDF",
+  "agencyCard": {
+    "title": "Amsirar Trip SARL",
+    "badge": "Licensed Moroccan Tour Agency",
+    "hours": "Customer support available 7 days a week",
+    "chatCta": "Chat on WhatsApp"
+  },
+  "cookieCta": {
+    "title": "Interactive Cookie Preferences",
+    "desc": "Customize your tracking consent choices at any time. Essential cookies remain active to provide core booking capabilities.",
+    "buttonLabel": "Manage Cookie Preferences"
+  },
+  "cookieTable": {
+    "title": "Official Cookie & Token Inventory",
+    "subtitle": "Full disclosure of client-side cookies and identifiers utilized across our digital platform:",
+    "colName": "Cookie / Identifier",
+    "colProvider": "Provider",
+    "colCategory": "Category",
+    "colPurpose": "Operational Purpose",
+    "colLifespan": "Lifespan",
+    "rows": [
+      {
+        "name": "amsirar_cookie_consent",
+        "provider": "Amsirar Trip (First-party)",
+        "category": "Strictly Necessary",
+        "categoryClass": "bg-emerald-500/10 text-emerald-800 border-emerald-500/30",
+        "purpose": "Stores your verified cookie consent selections across browsing sessions.",
+        "lifespan": "1 Year"
+      },
+      {
+        "name": "app-locale / astro-locale",
+        "provider": "Amsirar Trip (First-party)",
+        "category": "Strictly Necessary",
+        "categoryClass": "bg-emerald-500/10 text-emerald-800 border-emerald-500/30",
+        "purpose": "Preserves your chosen language (English, French, Spanish, German).",
+        "lifespan": "1 Year"
+      },
+      {
+        "name": "CSRF & Security Tokens",
+        "provider": "Amsirar Trip / Hostinger",
+        "category": "Strictly Necessary",
+        "categoryClass": "bg-emerald-500/10 text-emerald-800 border-emerald-500/30",
+        "purpose": "Guards booking forms and inquiries against bot attacks and cross-site forgery.",
+        "lifespan": "Session"
+      },
+      {
+        "name": "_ga, _ga_*",
+        "provider": "Google Analytics (Third-party)",
+        "category": "Analytics & Performance",
+        "categoryClass": "bg-amber-500/10 text-amber-800 border-amber-500/30",
+        "purpose": "Anonymous aggregated audience metrics, route popularity, and load speeds.",
+        "lifespan": "Up to 2 Years"
+      },
+      {
+        "name": "NID, CONSENT",
+        "provider": "Google Maps (Third-party)",
+        "category": "Functional & Maps",
+        "categoryClass": "bg-blue-500/10 text-blue-800 border-blue-500/30",
+        "purpose": "Powers the optional interactive map displaying our Marrakech office location.",
+        "lifespan": "Up to 6 Months"
+      }
+    ]
+  },
+  "sections": [
+    {
+      "id": "collection",
+      "num": "01",
+      "title": "Information We Collect",
+      "paragraphs": [
+        "We collect personal information that you provide directly to us when planning or reserving private desert tours, imperial city excursions, or tailor-made Moroccan expeditions.",
+        "This includes your full name, email address, telephone / WhatsApp number, country of residence, party size, travel dates, and itinerary customizations. When interacting with our website, standard technical diagnostics such as browser type, device category, and IP address are collected securely via encrypted server logs.",
+        "We never collect sensitive personal categories (such as racial background, political opinions, or religious beliefs) without explicit operational necessity or your prior written consent."
+      ]
+    },
+    {
+      "id": "usage",
+      "num": "02",
+      "title": "How We Use Your Information",
+      "paragraphs": [
+        "Your data is processed strictly in accordance with international data protection principles (GDPR) and Moroccan Law No. 09-08 promulgated by the CNDP (Commission Nationale de contrôle de la protection des Données à caractère Personnel).",
+        "Primary operational purposes include securing private transport permits, scheduling accredited Berber desert drivers, booking boutique riads, answering customer inquiries, and issuing official reservation vouchers.",
+        "We never sell, lease, or distribute your personal details to advertising networks or third-party data brokers."
+      ]
+    },
+    {
+      "id": "cookies",
+      "num": "03",
+      "title": "Comprehensive Cookie Policy",
+      "paragraphs": [
+        "Cookies are compact text files stored on your computer or mobile device when you browse websites. They enable our platform to remember your navigation choices and ensure secure operation.",
+        "Under the EU ePrivacy Directive and GDPR Art. 6(1)(f), strictly necessary cookies are placed to deliver core security and navigation features. Optional analytics cookies are placed exclusively upon your freely given, informed, and revocable consent (Art. 6(1)(a))."
+      ],
+      "callout": {
+        "title": "Full Visitor Autonomy",
+        "desc": "You can modify or withdraw your cookie permissions at any time without impacting your ability to browse our tours or contact our team."
+      }
+    },
+    {
+      "id": "inventory",
+      "num": "04",
+      "title": "Cookie Inventory & Categories",
+      "paragraphs": [
+        "We maintain complete transparency regarding every tracking identifier and cookie stored on your browser. Review the active cookie matrix below for technical specifics, providers, and expiration durations."
+      ]
+    },
+    {
+      "id": "security",
+      "num": "05",
+      "title": "Data Security & Technical Safeguards",
+      "paragraphs": [
+        "We implement rigorous administrative, physical, and digital safeguards to defend your personal information against accidental loss, unauthorized access, alteration, and disclosure.",
+        "All web traffic is encrypted end-to-end using modern TLS 1.3 cryptographic protocols with strict HTTPS enforcement. Strict Content Security Policy (CSP) headers prevent cross-site scripting (XSS) and code injection vulnerabilities.",
+        "Access to guest reservation details is strictly compartmentalized to authorized logistics coordinators managing your private Moroccan itinerary."
+      ]
+    },
+    {
+      "id": "providers",
+      "num": "06",
+      "title": "Third-Party Service Processors",
+      "paragraphs": [
+        "To deliver dependable travel planning, we collaborate with select infrastructure partners adhering to strict confidentiality and international privacy frameworks:",
+        "Hostinger Cloud Infrastructure for secure European VPS hosting; Google Workspace / Gmail SMTP for encrypted reservation confirmations; and Google Maps API for optional interactive location maps (initiated only upon visitor consent)."
+      ]
+    },
+    {
+      "id": "rights",
+      "num": "07",
+      "title": "Your Rights Under GDPR & Moroccan Law",
+      "paragraphs": [
+        "Regardless of your location, you hold comprehensive rights regarding your personal records under GDPR and Moroccan Law No. 09-08:",
+        "Right of Access: Request a verified copy of your personal data. Right to Rectification: Correct inaccurate or outdated details. Right to Erasure: Request full deletion of your profile once contractual obligations conclude. Right to Restrict Processing & Data Portability: Limit processing or export records in standard formats."
+      ]
+    },
+    {
+      "id": "contact",
+      "num": "08",
+      "title": "Data Protection Team & Contact",
+      "paragraphs": [
+        "If you have inquiries regarding this Privacy Policy, wish to exercise your data rights, or need copies of your booking data, reach out directly to our Marrakech headquarters:"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,143 @@
+{
+  "locale": "de",
+  "title": "Allgemeine Geschäftsbedingungen",
+  "subtitle": "Vertragliche Grundlagen, Buchungsrichtlinien und Reisendenschutz für Angebote von Amsirar Trip in Marokko.",
+  "lastUpdated": "Zuletzt aktualisiert: Januar 2026",
+  "badgeDoc": "Offizieller Reisevertrag",
+  "badgeStatus": "Gültig & Rechtsverbindlich",
+  "badgeJurisdiction": "Königreich Marokko",
+  "summaryTitle": "Wesentliche Vertragsinhalte",
+  "summarySubtitle": "Die wichtigsten Konditionen auf einen Blick für absolute Klarheit vor Reiseantritt.",
+  "summaryCards": [
+    {
+      "title": "Buchungsanzahlung",
+      "description": "Eine Anzahlung bestätigt Ihre private Tour verbindlich. Die Restzahlung erfolgt vor Reiseantritt."
+    },
+    {
+      "title": "Faire Stornierungsfristen",
+      "description": "100% Erstattung ab 30 Tagen vor Abreise, 50% bei 15 bis 29 Tagen. Klare und nachvollziehbare Fristen."
+    },
+    {
+      "title": "Lizenzierter Veranstalter",
+      "description": "In Marokko registrierte Reiseagentur mit lizenzierten Fahrern, versicherten Fahrzeugen und Bergführern."
+    },
+    {
+      "title": "Gerichtsstand Marrakesch",
+      "description": "Unterliegt ausschließlich marokkanischem Recht und der Zuständigkeit der Gerichte in Marrakesch."
+    }
+  ],
+  "tocTitle": "Inhaltsübersicht",
+  "printLabel": "Drucken / Als PDF speichern",
+  "agencyCard": {
+    "title": "Amsirar Trip SARL",
+    "badge": "Lizenzierte Marokkanische Reiseagentur",
+    "hours": "Kundenbetreuung an 7 Tagen pro Woche",
+    "chatCta": "Über WhatsApp anfragen"
+  },
+  "cancellationMatrix": {
+    "title": "Stornierungsstaffel & Rückerstattungen",
+    "subtitle": "Berechnung erfolgt nach Kalendertagen vor dem offiziellen Reisebeginn:",
+    "tiers": [
+      {
+        "days": "Mehr als 30 Tage vorher",
+        "badge": "100% Erstattungsfähig",
+        "badgeClass": "bg-emerald-500/10 text-emerald-700 border-emerald-500/30",
+        "desc": "Vollständige Erstattung auf Ihr Zahlungsmittel abzüglich geringer Bank- und Bearbeitungsspesen."
+      },
+      {
+        "days": "15 bis 29 Tage vorher",
+        "badge": "50% Erstattungsfähig",
+        "badgeClass": "bg-amber-500/10 text-amber-800 border-amber-500/30",
+        "desc": "50% Rückerstattung. Der Restbetrag deckt feste Anzahlungen für Wüstencamps und Chauffeure."
+      },
+      {
+        "days": "Weniger als 15 Tage",
+        "badge": "Keine Erstattung",
+        "badgeClass": "bg-zinc-500/10 text-zinc-700 border-zinc-500/30",
+        "desc": "Keine Erstattung möglich. Sämtliche Fahrzeuge, Camps und Guides sind unwiderruflich gebucht."
+      }
+    ],
+    "insuranceTitle": "Reiseversicherung Dringend Empfohlen",
+    "insuranceDesc": "Wir empfehlen allen internationalen Reisenden den Abschluss einer umfassenden Auslandsreisekranken- und Reiserücktrittsversicherung."
+  },
+  "sections": [
+    {
+      "id": "acceptance",
+      "num": "01",
+      "title": "Geltungsbereich & Annahme der Bedingungen",
+      "paragraphs": [
+        "Mit dem Zugriff auf amsirartrip.com oder der verbindlichen Buchung unserer Marokko-Reisen schließen Sie einen rechtsverbindlichen Reisevertrag ab.",
+        "Sollten Sie diesen Bestimmungen nicht zustimmen, bitten wir Sie, von einer Buchung abzusehen. Fortgesetzte Nutzung gilt als Einverständnis mit den jeweils aktuellen Bestimmungen."
+      ]
+    },
+    {
+      "id": "services",
+      "num": "02",
+      "title": "Unsere Reiseleistungen & Angebote",
+      "paragraphs": [
+        "Amsirar Trip bietet maßgeschneiderte Rundreisen, Wüstenausflüge in die Sahara, Bergtouren im Atlas und Kulturtouren in Marokko an.",
+        "Alle Buchungen erfolgen vorbehaltlich Verfügbarkeit. Reiserouten können wetterbedingt oder aus Sicherheitsgründen angepasst werden."
+      ]
+    },
+    {
+      "id": "bookings",
+      "num": "03",
+      "title": "Buchung, Anzahlung & Zahlungsbedingungen",
+      "paragraphs": [
+        "Für verbindliche Reservierungen ist eine Anzahlung zur Sicherung von Allradfahrzeugen und Wüstencamps erforderlich.",
+        "Der Restbetrag ist vor Reisebeginn fällig. Die angegebenen Preise umfassen alle schriftlich bestätigten Leistungen Ihres Reiseplans."
+      ],
+      "callout": {
+        "title": "Preistransparenz",
+        "desc": "Verbindliche Festpreise ohne versteckte Zuschläge oder nachträgliche Sonderabgaben."
+      }
+    },
+    {
+      "id": "cancellation",
+      "num": "04",
+      "title": "Stornierungs- & Rückerstattungsrichtlinien",
+      "paragraphs": [
+        "Die Durchführung privater Expeditionen erfordert verbindliche Vereinbarungen mit lokalen Partnern in abgelegenen Wüstenregionen.",
+        "Stornierungen bedürfen der Schriftform per E-Mail (amsirare@gmail.com) oder WhatsApp gemäß der nachfolgenden Staffel."
+      ]
+    },
+    {
+      "id": "liability",
+      "num": "05",
+      "title": "Haftungsbeschränkung & Höhere Gewalt",
+      "paragraphs": [
+        "Für Verzögerungen oder Ausfälle infolge höherer Gewalt (Sandstürme, Unwetter, Straßensperren) übernimmt Amsirar Trip keine Haftung.",
+        "Unsere Haftung beschränkt sich in jedem Fall auf die Höhe des insgesamt für die Buchung bezahlten Reisepreises."
+      ]
+    },
+    {
+      "id": "intellectual-property",
+      "num": "06",
+      "title": "Urheberrecht & Geistiges Eigentum",
+      "paragraphs": [
+        "Sämtliche Texte, Fotografien und Routenverläufe dieser Webseite unterliegen dem Urheberrecht von Amsirar Trip SARL."
+      ]
+    },
+    {
+      "id": "governing-law",
+      "num": "07",
+      "title": "Anwendbares Recht & Gerichtsstand",
+      "paragraphs": [
+        "Es gilt ausschließlich das Recht des Königreichs Marokko.",
+        "Für Streitigkeiten, die nicht gütlich beigelegt werden können, ist der ausschließliche Gerichtsstand Marrakesch."
+      ],
+      "callout": {
+        "title": "Lizenzierter Tourismusbetrieb",
+        "desc": "Amsirar Trip SARL ist in Marrakesch registriert und erfüllt alle Vorgaben des marokkanischen Tourismusministeriums."
+      }
+    },
+    {
+      "id": "contact",
+      "num": "08",
+      "title": "Offizielle Kontaktaufnahme & Rechtshinweise",
+      "paragraphs": [
+        "Für vertragsrechtliche Rückfragen steht Ihnen unsere Leitung in Marrakesch gerne zur Verfügung:"
+      ]
+    }
+  ]
+}

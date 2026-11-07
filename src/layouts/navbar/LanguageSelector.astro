@@ -34,7 +34,7 @@ const getLocalizedHref = (code: string) => {
 const menuId = `${id}-popover`;
 ---
 
-<div class:list={["language-selector-root relative inline-block", className]}>
+<div class:list={["group/lang-root relative inline-block", className]}>
   <button
     popovertarget={menuId}
     aria-haspopup="menu"
@@ -44,7 +44,8 @@ const menuId = `${id}-popover`;
       "group/lang-btn relative inline-flex items-center rounded-full font-medium transition-all duration-200 cursor-pointer select-none active:scale-[0.98]",
       "border border-white/20 bg-black/30 backdrop-blur-md text-white shadow-xs hover:border-white/40 hover:bg-white/15 hover:shadow-md",
       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange/80 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950",
-      "group-data-scrolled:border-transparent group-data-scrolled:bg-orange group-data-scrolled:text-white group-data-scrolled:shadow-[0_4px_14px_rgba(241,93,48,0.35)] group-data-scrolled:hover:bg-orange-600",
+      "group-has-[:popover-open]/lang-root:border-white/45 group-has-[:popover-open]/lang-root:bg-white/20 group-has-[:popover-open]/lang-root:shadow-[0_4px_16px_rgb(0_0_0/0.25)]",
+      "group-data-scrolled:border-transparent group-data-scrolled:bg-orange group-data-scrolled:text-white group-data-scrolled:shadow-[0_4px_14px_rgba(241,93,48,0.35)] group-data-scrolled:hover:bg-orange-600 group-data-scrolled:group-has-[:popover-open]/lang-root:bg-orange-dark",
       {
         "h-9.5 px-3.5 gap-2 text-xs sm:text-sm": size === "sm",
         "h-11 px-4 gap-2.5 text-sm": size === "md",
@@ -58,7 +59,7 @@ const menuId = `${id}-popover`;
     </span>
     <svg
       aria-hidden="true"
-      class="lang-chevron size-3.5 shrink-0 text-white/70 transition-transform duration-250 ease-out group-hover/lang-btn:text-white group-data-scrolled:text-white/90"
+      class="size-3.5 shrink-0 text-white/70 transition-transform duration-250 ease-out group-hover/lang-btn:text-white group-data-scrolled:text-white/90 group-has-[:popover-open]/lang-root:rotate-180"
       fill="none"
       stroke="currentColor"
       stroke-linecap="round"
@@ -75,9 +76,12 @@ const menuId = `${id}-popover`;
     popover="auto"
     aria-orientation="vertical"
     class:list={[
-      "language-selector-popover min-w-50 sm:min-w-55 overflow-hidden border border-white/12 bg-slate-950/95 text-white shadow-[0_20px_45px_-12px_rgba(0,0,0,0.7),0_0_0_1px_rgba(255,255,255,0.06)] backdrop-blur-2xl ring-1 ring-white/10 rounded-2xl p-1.5",
+      "fixed top-18 m-0 min-w-50 sm:min-w-55 overflow-hidden border border-white/12 bg-slate-950/95 text-white shadow-[0_20px_45px_-12px_rgba(0,0,0,0.7),0_0_0_1px_rgba(255,255,255,0.06)] backdrop-blur-2xl ring-1 ring-white/10 rounded-2xl p-1.5 opacity-0 -translate-y-2 scale-96 origin-top-right transition-[opacity,transform,display,overlay] duration-250 ease-out-expo transition-discrete motion-reduce:duration-[1ms] open:opacity-100 open:translate-y-0 open:scale-100 starting:open:opacity-0 starting:open:-translate-y-2 starting:open:scale-96 supports-[top:anchor(bottom)]:[position-anchor:--lang-selector-btn] supports-[top:anchor(bottom)]:top-[calc(anchor(bottom)+18px)] supports-[top:anchor(bottom)]:right-[anchor(right)] supports-[top:anchor(bottom)]:left-auto supports-[top:anchor(bottom)]:bottom-auto supports-[top:anchor(bottom)]:inset-s-auto supports-[top:anchor(bottom)]:inset-e-auto supports-[top:anchor(bottom)]:m-0",
       "group-data-scrolled:border-stone-200/90 group-data-scrolled:bg-white/98 group-data-scrolled:text-slate-800 group-data-scrolled:shadow-[0_20px_45px_-10px_rgba(0,0,0,0.18),0_0_0_1px_rgba(0,0,0,0.04)]",
-      { "inset-inline-start-0": placement === "left", "inset-inline-end-0": placement === "right" },
+      {
+        "inset-s-[max(1rem,calc((100vw-min(1100px,100vw-2rem))/2+1rem))]": placement === "left",
+        "inset-e-[max(1rem,calc((100vw-min(1100px,100vw-2rem))/2+1rem))]": placement === "right",
+      },
     ]}
     role="menu"
   >

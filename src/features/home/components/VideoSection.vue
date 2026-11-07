@@ -57,7 +57,7 @@ const handleVideoClick = () => {
       <div
         data-animate="fade-up"
         data-scroll-cinematic
-        class="relative overflow-hidden rounded-2xl border border-slate-900 bg-slate-950 p-2 shadow-2xl will-change-transform block-[55vh] inline-full sm:p-3 sm:block-[65vh] lg:block-[75vh] xl:block-[85vh]"
+        class="relative overflow-hidden rounded-2xl border border-slate-900 bg-slate-950 p-2 shadow-2xl will-change-transform block-[55vh] inline-full motion-reduce:transform-none motion-reduce:transition-none sm:p-3 sm:block-[65vh] lg:block-[75vh] xl:block-[85vh]"
       >
         <!-- Top Telemetry Badge -->
         <div
