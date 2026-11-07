@@ -19,7 +19,7 @@ import FolderShape from "@/shared/ui/primitives/FolderShape.astro";
 const { stats } = Astro.props;
 ---
 
-<stats-folder-stack class="block relative w-full overflow-visible">
+<stats-folder-stack class="block relative w-full overflow-x-clip">
   <!-- Scroll runway: Gives the user comfortable scroll distance to stack cards and see them slide into the folder -->
   <div class="stats-folder-track relative w-full h-auto motion-safe:h-[220vh]">
     <!-- Pinned Stage: Stays sticky in the viewport, using full container width -->

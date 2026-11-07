@@ -25,9 +25,9 @@ const { crumbWidths = ["w-12", "w-14", "w-52"], class: className } = Astro.props
 
   {/* Trip Content Section matching TripLayout.astro */}
   <section class="py-12 sm:py-16 lg:py-24">
-    <div class="mx-auto grid gap-4 px-4 max-inline-7xl lg:grid-cols-[minmax(0,1fr)_403px]">
+    <div class="mx-auto grid gap-4 sm:gap-6 lg:gap-8 px-4 sm:px-6 lg:px-8 max-inline-7xl 2xl:max-inline-360 3xl:max-inline-420 lg:grid-cols-[minmax(0,1fr)_380px] xl:grid-cols-[minmax(0,1fr)_403px] 2xl:grid-cols-[minmax(0,1fr)_440px]">
       {/* Left Column: Dossier Article */}
-      <article class="rounded-2xl bg-white p-4 pbe-8 shadow-xs ring-1 ring-zinc-100 sm:p-6 sm:pbe-12">
+      <article class="rounded-2xl bg-white p-4 pbe-8 shadow-xs ring-1 ring-zinc-100 xs:p-5 sm:p-6 sm:pbe-12 2xl:p-8">
         {/* Featured Image with rich ASCII dither matching TripLayout.astro 4/3 ratio */}
         <figure class="relative mbe-8 aspect-4/3 overflow-hidden rounded-xl border border-zinc-100 shadow-md inline-full bg-stone-100 dark:bg-stone-800">
           <AsciiSkeleton

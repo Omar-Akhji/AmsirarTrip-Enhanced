@@ -24,7 +24,7 @@ const buttonVariantStyles: Record<ButtonVariant, string> = {
   ghost:
     "bg-white/10 text-white backdrop-blur transition hover:bg-white/20 focus-visible:ring-offset-black",
   tripadvisor:
-    "bg-tripadvisor-bright text-black hover:bg-tripadvisor-dark hover:shadow-lg focus-visible:ring-tripadvisor-bright",
+    "bg-linear-to-br from-emerald-400 to-emerald-600 text-white shadow-md shadow-emerald-500/25 hover:shadow-lg hover:shadow-emerald-500/35 hover:brightness-105 active:scale-[0.98] focus-visible:ring-emerald-500 focus-visible:ring-offset-black",
   whatsapp:
     "border-[1.5px] border-emerald-500/50 bg-slate-950/95 text-emerald-400 hover:bg-slate-900 hover:text-emerald-300 hover:border-emerald-400 focus-visible:ring-emerald-500",
   danger: "bg-red-600 text-white hover:bg-red-500 focus-visible:ring-red-500",

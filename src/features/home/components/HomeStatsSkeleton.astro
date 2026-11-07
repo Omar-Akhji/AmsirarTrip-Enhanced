@@ -13,7 +13,7 @@ const { class: className } = Astro.props;
   aria-label="Loading expedition heritage statistics"
   class:list={["bg-white py-12 sm:py-16 lg:py-24", className]}
 >
-  <div class="mx-auto px-4 max-inline-7xl">
+  <div class="mx-auto px-4 sm:px-6 lg:px-8 max-inline-7xl 2xl:max-inline-360 3xl:max-inline-420">
     {/* Section Header matching HomeStats.astro */}
     <div class="mbe-8 sm:mbe-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-stone-200 pb-6 sm:pb-8">
       <div class="max-w-2xl space-y-2">
@@ -41,7 +41,7 @@ const { class: className } = Astro.props;
     </div>
 
     {/* Stat Cards Grid matching HomeStats.astro breakpoints */}
-    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 items-stretch">
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 2xl:gap-8 items-stretch">
       {Array.from({ length: 3 }, () => (
         <div class="flex size-full last:md:col-span-2 last:lg:col-span-1">
           <article class="group relative flex h-full w-full flex-col justify-between rounded-2xl border border-stone-200/90 bg-stone-50/80 p-6 sm:p-8 shadow-xs">

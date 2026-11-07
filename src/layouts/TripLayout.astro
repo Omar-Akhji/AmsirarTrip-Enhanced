@@ -38,9 +38,9 @@ const sl = Astro.slots.has("default");
     class="py-12 sm:py-16 lg:py-24"
     id={sectionId}
   >
-    <div class="mx-auto grid gap-4 px-4 max-inline-7xl lg:grid-cols-[minmax(0,1fr)_403px]">
+    <div class="mx-auto grid gap-4 sm:gap-6 lg:gap-8 px-4 sm:px-6 lg:px-8 max-inline-7xl 2xl:max-inline-360 3xl:max-inline-420 lg:grid-cols-[minmax(0,1fr)_380px] xl:grid-cols-[minmax(0,1fr)_403px] 2xl:grid-cols-[minmax(0,1fr)_440px]">
       <article
-        class="rounded-2xl bg-white p-4 pbe-8 shadow-xs ring-1 ring-zinc-100 sm:p-6 sm:pbe-12"
+        class="rounded-2xl bg-white p-4 pbe-8 shadow-xs ring-1 ring-zinc-100 xs:p-5 sm:p-6 sm:pbe-12 2xl:p-8"
         data-ascii="surface"
       >
         <div data-animate="zoom-in">
@@ -50,7 +50,7 @@ const sl = Astro.slots.has("default");
               class="absolute inset-0 size-full object-cover"
               height={600}
               loading="eager"
-              sizes="(max-width: 600px) 400px, (max-width: 900px) 600px, 800px"
+              sizes="(max-width: 480px) 400px, (max-width: 768px) 600px, 800px"
               src={imageSrc}
               transition:name={transitionName}
               width={800}

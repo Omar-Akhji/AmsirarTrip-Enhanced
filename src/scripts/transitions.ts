@@ -27,14 +27,15 @@ function startProgressBar(): void {
 
   progressValue = 25;
   bar.style.opacity = "1";
-  bar.style.transform = "scaleX(0.25)";
-  bar.style.transition = "transform 250ms cubic-bezier(0.23, 1, 0.32, 1), opacity 150ms ease";
+  bar.style.scale = "0.25 1";
+  bar.style.transform = "";
+  bar.style.transition = "scale 250ms cubic-bezier(0.23, 1, 0.32, 1), opacity 150ms ease";
 
   progressTimer = setInterval(() => {
     if (progressValue >= 85) return;
     progressValue += Math.random() * 12 + 4;
     const scale = Math.min(progressValue, 85) / 100;
-    bar.style.transform = `scaleX(${scale.toFixed(3)})`;
+    bar.style.scale = `${scale.toFixed(3)} 1`;
   }, 180);
 }
 
@@ -44,13 +45,14 @@ function finishProgressBar(): void {
 
   clearInterval(progressTimer);
   progressValue = 100;
-  bar.style.transform = "scaleX(1)";
-  bar.style.transition = "transform 180ms cubic-bezier(0.23, 1, 0.32, 1), opacity 200ms ease 120ms";
+  bar.style.scale = "1 1";
+  bar.style.transform = "";
+  bar.style.transition = "scale 180ms cubic-bezier(0.23, 1, 0.32, 1), opacity 200ms ease 120ms";
   bar.style.opacity = "0";
 
   progressResetTimeout = setTimeout(() => {
     if (progressValue < 100) return;
-    bar.style.transform = "scaleX(0)";
+    bar.style.scale = "0 1";
     bar.style.transition = "none";
   }, 350);
 }

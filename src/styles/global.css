@@ -83,7 +83,6 @@
   --color-tripadvisor: #00af87;
   --color-tripadvisor-bright: #34e0a1;
   --color-tripadvisor-dark: #2bc48d;
-  --color-gmail: #ea4335;
 
   /* Dark shades for navigation scroll states */
   --color-dark: oklch(10% 0.006 65deg);
@@ -96,6 +95,23 @@
 
   /* Layout */
   --spacing-navbar: 4rem;
+
+  /* Responsive Breakpoints (Senior UI/UX 7-Tier System)
+     - xs  (30rem / 480px):   Compact mobile / phablet reflow
+     - sm  (40rem / 640px):   Mobile landscape / standard phablet
+     - md  (48rem / 768px):   Tablet portrait / touch-to-desktop navigation threshold
+     - lg  (64rem / 1024px):  Tablet landscape / compact laptop canvas
+     - xl  (80rem / 1280px):  Standard desktop & MacBook display (100% zoom)
+     - 2xl (85rem / 1360px):  Large desktop & QHD tier (90% zoom)
+     - 3xl (96rem / 1536px):  Widescreen & FHD desktop tier (80% zoom)
+  */
+  --breakpoint-xs: 30rem;
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 80rem;
+  --breakpoint-2xl: 85rem;
+  --breakpoint-3xl: 96rem;
 
   /* Fluid Spacing */
   --spacing-gap: clamp(1rem, 0.75rem + 1.2vw, 2rem);
@@ -382,11 +398,12 @@
 
   #home-hero-slider,
   #home-hero-slider-skeleton {
-    --thumb-width: 200px;
-    --thumb-height: 290px;
-    --thumb-gap: 18px;
-    --thumb-bottom: 26px;
-    --thumb-radius: var(--radius-lg);
+    /* Base (< 480px): Compact mobile */
+    --thumb-width: 105px;
+    --thumb-height: 155px;
+    --thumb-gap: 10px;
+    --thumb-bottom: calc(86px + env(safe-area-inset-bottom, 0px));
+    --thumb-radius: var(--radius-sm);
     --thumb-left: calc(100vw - (2.5 * var(--thumb-width) + 2 * var(--thumb-gap)));
     --thumb-clip: inset(
       calc(100% - var(--thumb-bottom) - var(--thumb-height))
@@ -394,7 +411,24 @@
         round var(--thumb-radius)
     );
 
-    @media (width <= 1024px) {
+    /* xs (480px+): Phablet / large phone */
+    @media (width >= 30rem) {
+      --thumb-width: 120px;
+      --thumb-height: 175px;
+      --thumb-gap: 11px;
+      --thumb-bottom: calc(88px + env(safe-area-inset-bottom, 0px));
+      --thumb-radius: var(--radius-md);
+    }
+
+    /* sm (640px+): Mobile landscape */
+    @media (width >= 40rem) {
+      --thumb-width: 135px;
+      --thumb-height: 195px;
+      --thumb-gap: 12px;
+    }
+
+    /* md (768px+): Tablet portrait (bottom dock hidden, top nav active) */
+    @media (width >= 48rem) {
       --thumb-width: 165px;
       --thumb-height: 245px;
       --thumb-gap: 14px;
@@ -402,20 +436,37 @@
       --thumb-radius: var(--radius-md);
     }
 
-    @media (width < 768px) {
-      --thumb-width: 130px;
-      --thumb-height: 190px;
-      --thumb-gap: 12px;
-      --thumb-bottom: calc(88px + env(safe-area-inset-bottom, 0px));
-      --thumb-radius: var(--radius-md);
+    /* lg (1024px+): Tablet landscape / compact laptop */
+    @media (width >= 64rem) {
+      --thumb-width: 185px;
+      --thumb-height: 270px;
+      --thumb-gap: 16px;
+      --thumb-bottom: 24px;
+      --thumb-radius: var(--radius-lg);
     }
 
-    @media (width <= 480px) {
-      --thumb-width: 105px;
-      --thumb-height: 155px;
-      --thumb-gap: 10px;
-      --thumb-bottom: calc(86px + env(safe-area-inset-bottom, 0px));
-      --thumb-radius: var(--radius-sm);
+    /* xl (1280px+): Standard desktop */
+    @media (width >= 80rem) {
+      --thumb-width: 200px;
+      --thumb-height: 290px;
+      --thumb-gap: 18px;
+      --thumb-bottom: 26px;
+    }
+
+    /* 2xl (1536px+): High-density desktop */
+    @media (width >= 96rem) {
+      --thumb-width: 220px;
+      --thumb-height: 320px;
+      --thumb-gap: 20px;
+      --thumb-bottom: 30px;
+    }
+
+    /* 3xl (1920px+): Ultra-wide & FHD/4K canvas */
+    @media (width >= 120rem) {
+      --thumb-width: 240px;
+      --thumb-height: 350px;
+      --thumb-gap: 22px;
+      --thumb-bottom: 34px;
     }
   }
 

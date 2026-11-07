@@ -105,7 +105,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
   aria-labelledby="home-highlights"
   class="bg-white py-12 sm:py-16 lg:py-24"
 >
-  <div class="mx-auto px-4 max-inline-7xl">
+  <div class="mx-auto px-4 sm:px-6 lg:px-8 max-inline-7xl 2xl:max-inline-360 3xl:max-inline-420">
     <h2
       class="sr-only"
       id="home-highlights"
@@ -119,7 +119,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
     </div>
 
     {/* Desktop & Tablet Mode: 3-column Grid */}
-    <div class="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
+    <div class="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 2xl:gap-8 items-stretch">
       {statHighlights.map(({ icon: Icon, ...stat }, index) => (
         <div
           class:list={[

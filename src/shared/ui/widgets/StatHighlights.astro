@@ -17,7 +17,7 @@ const { stats, cardBg = "bg-stone-50/80" } = Astro.props;
 <div class="w-full">
   <!-- Mobile Mode: Folder Stack (matches Home page experience) -->
   <div class="block md:hidden w-full">
-    <stat-highlights-stack class="block relative w-full overflow-visible">
+    <stat-highlights-stack class="block relative w-full overflow-x-clip">
       <!-- Scroll runway -->
       <div class="stat-highlights-track relative w-full h-auto motion-safe:h-[220vh]">
         <!-- Pinned Stage -->
@@ -85,7 +85,7 @@ const { stats, cardBg = "bg-stone-50/80" } = Astro.props;
   </div>
 
   <!-- Desktop & Tablet Mode: Responsive Multi-Column Grid -->
-  <div class="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
+  <div class="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 2xl:gap-8 items-stretch">
     {stats.map((stat, index) => (
       <div
         class:list={[

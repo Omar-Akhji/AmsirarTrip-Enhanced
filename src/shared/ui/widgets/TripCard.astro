@@ -97,7 +97,7 @@ const categoryText = badge || tagline || "Morocco Tour";
         decoding="async"
         height={480}
         loading={priority ? "eager" : "lazy"}
-        sizes="(max-width: 480px) 320px, (max-width: 768px) 480px, 640px"
+        sizes="(max-width: 480px) 320px, (max-width: 640px) 480px, (max-width: 1024px) 560px, 640px"
         src={item.image as ImageMetadata}
         {...(cardTransitionName ? { "transition:name": cardTransitionName } : {})}
         width={640}
@@ -112,7 +112,7 @@ const categoryText = badge || tagline || "Morocco Tour";
         decoding="async"
         height={480}
         loading="lazy"
-        sizes="(max-width: 480px) 320px, (max-width: 768px) 480px, 640px"
+        sizes="(max-width: 480px) 320px, (max-width: 640px) 480px, (max-width: 1024px) 560px, 640px"
         src={item.image as ImageMetadata}
         width={640}
         widths={[320, 480, 640]}

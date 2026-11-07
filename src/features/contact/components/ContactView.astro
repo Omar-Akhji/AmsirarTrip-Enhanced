@@ -61,7 +61,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
     aria-labelledby="contact-methods-heading"
     class="relative isolate bg-white py-12 sm:py-16 lg:py-24"
   >
-    <div class="mx-auto px-4 max-inline-7xl">
+    <div class="mx-auto px-4 sm:px-6 lg:px-8 max-inline-7xl 2xl:max-inline-360 3xl:max-inline-420">
       <h2
         class="sr-only"
         id="contact-methods-heading"
@@ -75,7 +75,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
       </div>
 
       <!-- Desktop & Tablet Mode: Responsive Multi-Column Grid -->
-      <div class="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
+      <div class="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 2xl:gap-8 items-stretch">
         {contactMethods.map((method, index) => (
           <div
             class:list={[
@@ -91,7 +91,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
               data-ascii="surface"
             >
               <div>
-                <h3 class="mbe-3 border-b border-stone-200/80 pb-3 text-xl font-bold tracking-tight text-stone-950 transition-colors duration-200 group-hover:text-orange-600">
+                <h3 class="mbe-3 border-b border-stone-200/80 pb-3 text-lg lg:text-xl font-bold leading-snug tracking-tight text-stone-950 transition-colors duration-200 group-hover:text-orange-600">
                   {method.title}
                 </h3>
                 <p class="text-sm leading-relaxed text-stone-600">{method.description}</p>
@@ -137,7 +137,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
     class="relative isolate border-t border-stone-200 bg-stone-50 py-12 sm:py-16 lg:py-24"
     id="contact-form-section"
   >
-    <div class="mx-auto px-4 max-inline-7xl">
+    <div class="mx-auto px-4 sm:px-6 lg:px-8 max-inline-7xl 2xl:max-inline-360 3xl:max-inline-420">
       <div
         class="mbe-8 sm:mbe-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-stone-200 pb-6 sm:pb-8"
         data-animate="fade-up"
@@ -169,7 +169,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
     class="relative isolate border-t border-stone-200/90 bg-white py-12 sm:py-16 lg:py-24"
     id="location"
   >
-    <div class="mx-auto px-4 max-inline-7xl">
+    <div class="mx-auto px-4 sm:px-6 lg:px-8 max-inline-7xl 2xl:max-inline-360 3xl:max-inline-420">
       <div
         class="mbe-8 sm:mbe-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-stone-200 pb-6 sm:pb-8"
         data-animate="fade-up"

@@ -35,7 +35,7 @@ const serviceCardSkeletons = [
     class="absolute inset-0 bg-black/45"
   ></div>
 
-  <div class="relative mx-auto px-4 max-inline-7xl sm:px-6 lg:px-8">
+  <div class="relative mx-auto px-4 max-inline-7xl 2xl:max-inline-360 3xl:max-inline-420 sm:px-6 lg:px-8">
     <div class="mbe-8 sm:mbe-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-white/10 pb-6 sm:pb-8">
       <hgroup class="max-w-2xl space-y-2">
         <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl text-balance flex flex-wrap items-baseline gap-x-3">
@@ -63,7 +63,7 @@ const serviceCardSkeletons = [
       </hgroup>
     </div>
 
-    <div class="grid justify-items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3">
+    <div class="grid justify-items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3 2xl:gap-8">
       {serviceCardSkeletons.map((card, index) => (
         <article
           class:list={[

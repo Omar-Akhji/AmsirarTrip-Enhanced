@@ -23,8 +23,8 @@ const { class: className } = Astro.props;
 
   {/* DIRECT CHANNELS SKELETON */}
   <section class="relative isolate bg-white py-12 sm:py-16 lg:py-24">
-    <div class="mx-auto px-4 max-inline-7xl">
-      <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 items-stretch">
+    <div class="mx-auto px-4 sm:px-6 lg:px-8 max-inline-7xl 2xl:max-inline-360 3xl:max-inline-420">
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 2xl:gap-8 items-stretch">
         {Array.from({ length: 3 }, () => (
           <div class="flex size-full last:md:col-span-2 last:lg:col-span-1">
             <article class="group flex size-full flex-col justify-between rounded-2xl border border-stone-200/90 bg-stone-50/80 p-6 sm:p-8 shadow-xs shadow-stone-900/5">
@@ -65,7 +65,7 @@ const { class: className } = Astro.props;
     class="relative isolate border-t border-stone-200 bg-stone-50 py-12 sm:py-16 lg:py-24"
     id="contact-form-section"
   >
-    <div class="mx-auto px-4 max-inline-7xl">
+    <div class="mx-auto px-4 sm:px-6 lg:px-8 max-inline-7xl 2xl:max-inline-360 3xl:max-inline-420">
       <div class="mbe-8 sm:mbe-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-stone-200 pb-6 sm:pb-8">
         <div class="max-w-2xl space-y-2">
           <AsciiSkeleton
@@ -327,7 +327,7 @@ const { class: className } = Astro.props;
     class="relative isolate border-t border-stone-200/90 bg-white py-12 sm:py-16 lg:py-24"
     id="location-skeleton"
   >
-    <div class="mx-auto px-4 max-inline-7xl">
+    <div class="mx-auto px-4 sm:px-6 lg:px-8 max-inline-7xl 2xl:max-inline-360 3xl:max-inline-420">
       <div class="mbe-8 sm:mbe-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-stone-200 pb-6 sm:pb-8">
         <div class="max-w-2xl space-y-2">
           <AsciiSkeleton

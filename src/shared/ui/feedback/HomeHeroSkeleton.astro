@@ -36,11 +36,11 @@ const { class: className } = Astro.props;
       </div>
 
       {/* Slider Details exact position & typography match for Erg Chebbi Dunes slide */}
-      <div class="content absolute max-md:top-[calc((100dvh-var(--thumb-bottom)-var(--thumb-height)+3.75rem+env(safe-area-inset-top,0px))/2)] max-md:-translate-y-1/2 max-sm:inset-x-4 max-sm:flex max-sm:flex-col max-sm:items-center max-sm:text-center sm:left-8 sm:w-auto md:left-[5%] lg:left-[max(7%,calc(50%-570px))] z-10 box-border max-w-[calc(100vw-2rem)] text-white text-shadow-sm text-shadow-black/40 md:top-[clamp(4.25rem,9.5vh,6rem)] lg:top-[clamp(4.75rem,11vh,7rem)] xl:top-[clamp(5.25rem,13vh,7.5rem)]">
+      <div class="content absolute max-md:top-[calc((100dvh-var(--thumb-bottom)-var(--thumb-height)+3.75rem+env(safe-area-inset-top,0px))/2)] max-md:-translate-y-1/2 max-sm:inset-x-4 max-sm:flex max-sm:flex-col max-sm:items-center max-sm:text-center sm:left-8 sm:w-auto md:left-[5%] lg:left-[max(7%,calc(50%-570px))] 2xl:left-[max(7%,calc(50%-640px))] 3xl:left-[max(8%,calc(50%-720px))] z-10 box-border max-w-[calc(100vw-2rem)] text-white text-shadow-sm text-shadow-black/40 md:top-[clamp(4.25rem,9.5vh,6rem)] lg:top-[clamp(4.75rem,11vh,7rem)] xl:top-[clamp(5.25rem,13vh,7.5rem)] 2xl:top-[clamp(6rem,14vh,8.5rem)] 3xl:top-[clamp(7rem,15vh,10rem)]">
         {/* Tagline: Sahara Desert Expeditions (24ch) */}
-        <div class="tagline mb-2 inline-flex items-center justify-center sm:justify-start gap-2 whitespace-nowrap text-shadow-xs text-shadow-black/80 sm:mb-2 sm:gap-2 md:mb-3 md:gap-3 text-[0.7rem] sm:text-xs md:text-xs font-bold uppercase tracking-[0.16em] sm:tracking-[0.2em] md:tracking-[0.25em] text-stone-400">
+        <div class="tagline mb-2 inline-flex items-center justify-center sm:justify-start gap-2 whitespace-nowrap text-shadow-xs text-shadow-black/80 sm:mb-2 sm:gap-2 md:mb-3 md:gap-3 text-[0.7rem] xs:text-xs font-bold uppercase tracking-[0.16em] sm:tracking-[0.2em] md:tracking-[0.25em] text-stone-400">
           <span
-            class="tagline-line inline-block h-[1.5px] w-5 shrink-0 bg-stone-500/60 sm:w-8 md:w-12"
+            class="tagline-line inline-block h-[1.5px] w-5 shrink-0 bg-stone-500/60 xs:w-6 sm:w-8 md:w-12"
             aria-hidden="true"
           ></span>
           <AsciiSkeleton
@@ -50,13 +50,13 @@ const { class: className } = Astro.props;
             widths={["24ch"]}
           />
           <span
-            class="tagline-line inline-block h-[1.5px] w-5 shrink-0 bg-stone-500/60 sm:w-8 md:w-12"
+            class="tagline-line inline-block h-[1.5px] w-5 shrink-0 bg-stone-500/60 xs:w-6 sm:w-8 md:w-12"
             aria-hidden="true"
           ></span>
         </div>
 
         {/* Title: Erg Chebbi Dunes (16ch) */}
-        <div class="title m-0 whitespace-nowrap text-center sm:text-left text-shadow-md text-shadow-black/50 text-[clamp(1.25rem,4.6vw,1.9rem)] font-extrabold uppercase leading-[1.08] tracking-tight sm:text-[clamp(1.65rem,4vw,2.6rem)] sm:leading-[1.1] md:text-[clamp(2.1rem,3.8vw,3.6rem)] md:leading-[1.12] lg:text-[clamp(2.6rem,4.2vw,4.5rem)]">
+        <div class="title m-0 whitespace-nowrap text-center sm:text-left text-shadow-md text-shadow-black/50 text-[clamp(1.25rem,4.6vw,1.9rem)] xs:text-[clamp(1.45rem,4.4vw,2.2rem)] font-extrabold uppercase leading-[1.08] tracking-tight sm:text-[clamp(1.65rem,4vw,2.6rem)] sm:leading-[1.1] md:text-[clamp(2.1rem,3.8vw,3.6rem)] md:leading-[1.12] lg:text-[clamp(2.6rem,4.2vw,4.5rem)] 2xl:text-[clamp(3rem,4vw,5rem)] 3xl:text-[clamp(3.5rem,3.8vw,5.5rem)]">
           <AsciiSkeleton
             class="text-stone-300"
             lines={1}
@@ -66,7 +66,7 @@ const { class: className } = Astro.props;
         </div>
 
         {/* Type: & Desert Camp Nights (21ch) */}
-        <div class="type m-0 mt-0.5 whitespace-nowrap text-center sm:text-left text-shadow-md text-shadow-black/45 text-[clamp(1.25rem,4.6vw,1.9rem)] font-extrabold uppercase leading-[1.08] tracking-tight text-stone-400 sm:mt-1 sm:text-[clamp(1.65rem,4vw,2.6rem)] sm:leading-[1.1] md:mt-2 md:text-[clamp(2.1rem,3.8vw,3.6rem)] md:leading-[1.12] lg:mt-2 lg:text-[clamp(2.6rem,4.2vw,4.5rem)]">
+        <div class="type m-0 mt-0.5 whitespace-nowrap text-center sm:text-left text-shadow-md text-shadow-black/45 text-[clamp(1.25rem,4.6vw,1.9rem)] xs:text-[clamp(1.45rem,4.4vw,2.2rem)] font-extrabold uppercase leading-[1.08] tracking-tight text-stone-400 sm:mt-1 sm:text-[clamp(1.65rem,4vw,2.6rem)] sm:leading-[1.1] md:mt-2 md:text-[clamp(2.1rem,3.8vw,3.6rem)] md:leading-[1.12] lg:mt-2 lg:text-[clamp(2.6rem,4.2vw,4.5rem)] 2xl:text-[clamp(3rem,4vw,5rem)] 3xl:text-[clamp(3.5rem,3.8vw,5.5rem)]">
           <AsciiSkeleton
             class="text-stone-400 font-extrabold"
             lines={1}
@@ -76,7 +76,7 @@ const { class: className } = Astro.props;
         </div>
 
         {/* Description: 3 lines matching paragraph font-size */}
-        <div class="description mt-3 mx-auto sm:mx-0 max-w-[min(100%,44ch)] text-center sm:text-left text-shadow-md text-shadow-black/85 text-[clamp(0.8125rem,0.72rem+0.42vw,1.05rem)] font-normal leading-normal text-pretty text-slate-100/95 sm:mt-4 sm:max-w-[46ch] sm:leading-[1.58] md:mt-4 md:max-w-[min(46ch,calc(100vw-10%))] md:leading-[1.65] lg:mt-6 lg:max-w-[calc(var(--thumb-left)-max(7%,calc(50%-570px))-3rem)] lg:leading-[1.7] xl:max-w-120">
+        <div class="description mt-3 mx-auto sm:mx-0 max-w-[min(100%,42ch)] xs:max-w-[min(100%,44ch)] text-center sm:text-left text-shadow-md text-shadow-black/85 text-[clamp(0.8125rem,0.72rem+0.42vw,1.05rem)] font-normal leading-normal text-pretty text-slate-100/95 sm:mt-4 sm:max-w-[46ch] sm:leading-[1.58] md:mt-4 md:max-w-[min(46ch,calc(100vw-10%))] md:leading-[1.65] lg:mt-6 lg:max-w-[calc(var(--thumb-left)-max(7%,calc(50%-570px))-3rem)] lg:leading-[1.7] xl:max-w-120 2xl:max-w-136 3xl:max-w-150">
           <AsciiSkeleton
             class="text-slate-200/90"
             lines={3}
@@ -119,7 +119,7 @@ const { class: className } = Astro.props;
 
     {/* Prev / Next Navigation Arrows & Progress matching HomeHero.astro controls */}
     <div
-      class="nextPrevArrows pagination absolute z-100 hidden w-auto items-center gap-3 md:flex left-[max(7%,calc(50%-570px))] max-lg:left-[5%] bottom-[calc(var(--thumb-bottom)+12px)] max-lg:bottom-[calc(var(--thumb-bottom)+10px)]"
+      class="nextPrevArrows pagination absolute z-100 hidden w-auto items-center gap-3 md:flex left-[max(7%,calc(50%-570px))] 2xl:left-[max(7%,calc(50%-640px))] 3xl:left-[max(8%,calc(50%-720px))] max-lg:left-[5%] bottom-[calc(var(--thumb-bottom)+12px)] max-lg:bottom-[calc(var(--thumb-bottom)+10px)]"
       aria-hidden="true"
     >
       <div class="grid size-12.5 place-items-center rounded-full border-2 border-white/33 bg-white/5 overflow-hidden">

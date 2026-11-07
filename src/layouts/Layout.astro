@@ -56,7 +56,7 @@ const currentOgLocale = OG_LOCALE_MAP[locale] ?? locale;
 
 <!doctype html>
 <html
-  class="no-js inline-full min-block-full overflow-x-hidden overflow-y-auto scrollbar-none [-ms-overflow-style:none] bg-(--pattern-bg-color) bg-(image:--pattern-bg-image) bg-repeat bg-size-(--pattern-bg-size) [&::-webkit-scrollbar]:hidden [&::-webkit-scrollbar]:size-0 [&::-webkit-scrollbar]:bg-transparent"
+  class="no-js inline-full min-block-full overflow-x-clip overflow-y-auto scrollbar-none [-ms-overflow-style:none] bg-(--pattern-bg-color) bg-(image:--pattern-bg-image) bg-repeat bg-size-(--pattern-bg-size) [&::-webkit-scrollbar]:hidden [&::-webkit-scrollbar]:size-0 [&::-webkit-scrollbar]:bg-transparent"
   itemscope
   itemtype="https://schema.org/WebPage"
   lang={locale}
@@ -327,10 +327,10 @@ const currentOgLocale = OG_LOCALE_MAP[locale] ?? locale;
     />
   </head>
 
-  <body class="flex flex-col inline-full min-block-full overflow-visible font-sans text-base leading-[1.6] text-ink bg-(--pattern-bg-color) bg-(image:--pattern-bg-image) bg-repeat bg-size-(--pattern-bg-size) antialiased font-features-['kern'_1,'liga'_1] selection:bg-[color-mix(in_oklch,var(--color-orange)_20%,transparent)] selection:text-inherit [&::-webkit-scrollbar]:hidden [&::-webkit-scrollbar]:size-0 [&::-webkit-scrollbar]:bg-transparent">
+  <body class="flex flex-col inline-full min-block-full overflow-x-clip font-sans text-base leading-[1.6] text-ink bg-(--pattern-bg-color) bg-(image:--pattern-bg-image) bg-repeat bg-size-(--pattern-bg-size) antialiased font-features-['kern'_1,'liga'_1] selection:bg-[color-mix(in_oklch,var(--color-orange)_20%,transparent)] selection:text-inherit [&::-webkit-scrollbar]:hidden [&::-webkit-scrollbar]:size-0 [&::-webkit-scrollbar]:bg-transparent">
     <div
       aria-hidden="true"
-      class="fixed top-0 inset-s-0 z-100000 h-0.75 w-full pointer-events-none opacity-0 origin-left scale-x-0 bg-linear-to-r from-orange via-amber-orange to-orange shadow-[0_0_12px_rgba(241,93,48,0.7),0_0_6px_rgba(247,136,72,0.5)] transition-[transform,opacity] duration-200 ease-out"
+      class="fixed top-0 inset-s-0 z-100000 h-0.75 w-full pointer-events-none opacity-0 origin-left scale-x-0 bg-linear-to-r from-orange via-amber-orange to-orange shadow-[0_0_12px_rgba(241,93,48,0.7),0_0_6px_rgba(247,136,72,0.5)] transition-[scale,opacity] duration-200 ease-out"
       id="page-progress-bar"
       transition:persist="page-progress-bar"
     ></div>
@@ -342,7 +342,7 @@ const currentOgLocale = OG_LOCALE_MAP[locale] ?? locale;
     <Navbar />
     <main
       id="main-content"
-      class="relative isolate block flex-[1_0_auto] inline-full min-h-screen"
+      class="relative isolate block flex-[1_0_auto] inline-full min-h-screen overflow-x-clip"
       transition:animate="fade"
     >
       <TransitionSkeletons />
@@ -361,7 +361,7 @@ const currentOgLocale = OG_LOCALE_MAP[locale] ?? locale;
     <a
       data-ascii="skip"
       aria-label="Contact us on WhatsApp"
-      class="group fixed inset-e-0 inset-be-33 z-40 flex size-11 items-center justify-center rounded-s-md border-[1.5px] border-e-0 border-emerald-500/50 bg-slate-950/95 text-emerald-400 shadow-xl backdrop-blur-md transition-[transform,background-color,border-color,color,box-shadow] duration-200 ease-out pointer-fine:hover:-translate-x-1.5 pointer-fine:hover:border-emerald-400 pointer-fine:hover:bg-slate-900 pointer-fine:hover:text-emerald-300 pointer-fine:hover:shadow-2xl pointer-fine:hover:shadow-emerald-950/40 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-2 motion-reduce:transform-none print:hidden"
+      class="group fixed inset-e-0 inset-be-33 z-40 flex size-11 items-center justify-center overflow-hidden rounded-s-md border-[1.5px] border-e-0 border-emerald-500/50 bg-slate-950/95 text-emerald-400 shadow-xl backdrop-blur-md transition-[transform,background-color,border-color,color,box-shadow] duration-200 ease-out pointer-fine:hover:-translate-x-1.5 pointer-fine:hover:border-emerald-400 pointer-fine:hover:bg-slate-900 pointer-fine:hover:text-emerald-300 pointer-fine:hover:shadow-2xl pointer-fine:hover:shadow-emerald-950/40 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-2 motion-reduce:transform-none print:hidden"
       href={WHATSAPP_LINK}
       rel="noopener noreferrer"
       target="_blank"

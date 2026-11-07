@@ -136,7 +136,9 @@ const handleSubmit = async (event: Event) => {
     class="relative isolate border-bs border-stone-200 bg-stone-50 py-12 sm:py-16 lg:py-24"
     :class="[fullWidth ? 'booking-form-fullwidth' : '']"
   >
-    <div class="booking-form-inner mx-auto px-4 inline-full max-inline-7xl">
+    <div
+      class="booking-form-inner mx-auto px-4 inline-full max-inline-7xl 2xl:max-inline-360 3xl:max-inline-420"
+    >
       <div class="grid grid-cols-1 items-stretch gap-8 lg:grid-cols-5">
         <!-- Left: Form Card -->
         <div
