@@ -108,7 +108,7 @@ export function initTourItineraryTracker(): () => void {
     const triggerLine = getTriggerLine();
     const separator = stage.element.querySelector<HTMLElement>(".stage-separator");
     const nodeViewportY =
-      stageIndex === totalStages - 1 && separator ?
+      separator && stageIndex === totalStages - 1 ?
         separator.getBoundingClientRect().bottom
       : getStageNodeViewportY(stage.element);
     const snapDelta = nodeViewportY - triggerLine;
@@ -185,7 +185,7 @@ export function initTourItineraryTracker(): () => void {
         const targetBottom = targetElement.getBoundingClientRect().bottom;
         const overflow = untranslatedBottom - targetBottom;
 
-        currentStickyOffset = overflow > 0 ? overflow : 0;
+        currentStickyOffset = Math.max(0, overflow);
       }
     } else {
       currentStickyOffset = 0;
@@ -213,11 +213,9 @@ export function initTourItineraryTracker(): () => void {
       }
     }
 
-    if (newActiveIndex < activeIndex) {
-      // User is scrolling upwards towards previous days -> allow re-snapping when scrolling down again
-      if (lastPausedStageIndex > newActiveIndex) {
-        lastPausedStageIndex = newActiveIndex;
-      }
+    // User is scrolling upwards towards previous days -> allow re-snapping when scrolling down again
+    if (newActiveIndex < activeIndex && lastPausedStageIndex > newActiveIndex) {
+      lastPausedStageIndex = newActiveIndex;
     }
 
     if (newActiveIndex !== activeIndex) {
@@ -318,15 +316,9 @@ export function initTourItineraryTracker(): () => void {
   return () => {
     globalThis.removeEventListener("scroll", requestTick);
     globalThis.removeEventListener("resize", requestTick);
-    globalThis.removeEventListener("wheel", handleUserScrollInput, {
-      capture: true,
-    } as EventListenerOptions);
-    globalThis.removeEventListener("touchmove", handleUserScrollInput, {
-      capture: true,
-    } as EventListenerOptions);
-    globalThis.removeEventListener("keydown", handleKeyDown, {
-      capture: true,
-    } as EventListenerOptions);
+    globalThis.removeEventListener("wheel", handleUserScrollInput, { capture: true });
+    globalThis.removeEventListener("touchmove", handleUserScrollInput, { capture: true });
+    globalThis.removeEventListener("keydown", handleKeyDown, { capture: true });
     if (stickyHeader) {
       stickyHeader.style.transform = "";
     }

@@ -114,13 +114,11 @@ const { routeMap, kicker = "Google Maps Route" } = Astro.props;
 
   <!-- External Google Maps Link -->
   <footer class="mbs-3 flex items-center justify-between gap-2 pt-2 text-[11px]">
-    {
-      routeMap.startCity.toLowerCase() !== routeMap.endCity.toLowerCase() && (
-        <span class="font-mono text-stone-400 dark:text-stone-500">
-          {routeMap.startCity} ➔ {routeMap.endCity}
-        </span>
-      )
-    }
+    {routeMap.startCity.toLowerCase() !== routeMap.endCity.toLowerCase() && (
+      <span class="font-mono text-stone-400 dark:text-stone-500">
+        {routeMap.startCity} ➔ {routeMap.endCity}
+      </span>
+    )}
     <a
       href={routeMap.googleMapsAppUrl}
       target="_blank"

@@ -917,9 +917,10 @@ export function getTourRouteMap(
   const isRoundtrip = startLocation.toLowerCase() === endLocation.toLowerCase();
   const mainHighlight = waypoints.find((w) => w.type === "highlight")?.name;
   const subtitle =
-    !isRoundtrip ? `${startLocation} ? ${endLocation}`
-    : mainHighlight ? `${startLocation} ? ${mainHighlight}`
-    : `${startLocation} Expedition`;
+    isRoundtrip ?
+      mainHighlight ? `${startLocation} ? ${mainHighlight}`
+      : `${startLocation} Expedition`
+    : `${startLocation} ? ${endLocation}`;
 
   return buildRouteMap(
     normalizedKey,
@@ -944,7 +945,11 @@ export function getExcursionRouteMap(
     normalizedKey,
     config,
     title,
-    { subtitle: locationName, startCity: "Marrakech", endCity: waypoints.at(-1)?.name ?? "Marrakech" },
+    {
+      subtitle: locationName,
+      startCity: "Marrakech",
+      endCity: waypoints.at(-1)?.name ?? "Marrakech",
+    },
     waypoints,
   );
 }

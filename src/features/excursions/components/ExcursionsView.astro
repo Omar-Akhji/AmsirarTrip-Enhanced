@@ -46,29 +46,25 @@ const EXCURSIONS_FAQS = [
     q: "excursion.faq.q1",
     defQ: "What day excursions can I do from Marrakech?",
     a: "excursion.faq.a1",
-    defA:
-      "From Marrakech you can book day excursions to Ouzoud Waterfalls (Africa's tallest accessible waterfall at 110 m), the Agafay Stone Desert with its lunar landscape 40 km from the city, the Ourika Valley with Berber villages and Atlas foothills, and the Ait Benhaddou UNESCO kasbah. All excursions depart in the morning from Marrakech and return the same evening.",
+    defA: "From Marrakech you can book day excursions to Ouzoud Waterfalls (Africa's tallest accessible waterfall at 110 m), the Agafay Stone Desert with its lunar landscape 40 km from the city, the Ourika Valley with Berber villages and Atlas foothills, and the Ait Benhaddou UNESCO kasbah. All excursions depart in the morning from Marrakech and return the same evening.",
   },
   {
     q: "excursion.faq.q2",
     defQ: "How far is the Agafay Desert from Marrakech?",
     a: "excursion.faq.a2",
-    defA:
-      "The Agafay Desert is approximately 40 km southwest of Marrakech, about a 45-minute drive. It is a rocky, arid plateau at the foothills of the High Atlas—distinct from the sandy Sahara but equally dramatic. Our Agafay day excursion includes camel trekking, sunset views over the Atlas range, and optional dinner at a desert camp.",
+    defA: "The Agafay Desert is approximately 40 km southwest of Marrakech, about a 45-minute drive. It is a rocky, arid plateau at the foothills of the High Atlas—distinct from the sandy Sahara but equally dramatic. Our Agafay day excursion includes camel trekking, sunset views over the Atlas range, and optional dinner at a desert camp.",
   },
   {
     q: "excursion.faq.q3",
     defQ: "Are the excursions guided and in English?",
     a: "excursion.faq.a3",
-    defA:
-      "Yes. All Amsirar Trip excursions are fully guided in English (also available in French, Spanish, and German upon request). Each excursion includes a licensed Moroccan guide, private transportation in an air-conditioned 4×4, and hotel pickup and drop-off within Marrakech. Group sizes are kept small for a personalised experience.",
+    defA: "Yes. All Amsirar Trip excursions are fully guided in English (also available in French, Spanish, and German upon request). Each excursion includes a licensed Moroccan guide, private transportation in an air-conditioned 4×4, and hotel pickup and drop-off within Marrakech. Group sizes are kept small for a personalised experience.",
   },
   {
     q: "excursion.faq.q4",
     defQ: "Can I combine a Sahara camel trek with a day excursion?",
     a: "excursion.faq.a4",
-    defA:
-      "Yes. Amsirar Trip can combine day excursions with a multi-day Sahara tour. For example, you could do an Ouzoud Waterfalls day trip followed by a 3-day Merzouga desert tour, or an Agafay sunset excursion as an add-on to a longer itinerary. Contact us to build a custom Morocco itinerary that fits your available days.",
+    defA: "Yes. Amsirar Trip can combine day excursions with a multi-day Sahara tour. For example, you could do an Ouzoud Waterfalls day trip followed by a 3-day Merzouga desert tour, or an Agafay sunset excursion as an add-on to a longer itinerary. Contact us to build a custom Morocco itinerary that fits your available days.",
   },
 ] as const;
 
@@ -214,9 +210,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
                   itemscope
                   itemtype="https://schema.org/Answer"
                 >
-                  <p itemprop="text">
-                    {t(faq.a) || faq.defA}
-                  </p>
+                  <p itemprop="text">{t(faq.a) || faq.defA}</p>
                 </div>
               </details>
             </dt>

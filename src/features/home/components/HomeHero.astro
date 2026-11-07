@@ -155,7 +155,7 @@ const thumbnailCards: SlideCardItem[] = currentSlides.map((slide) => ({
         <div
           class="item absolute inset-0 size-full"
           data-index={index}
-          {...(index !== 0 ? { "data-ascii": "skip" } : {})}
+          {...(index === 0 ? {} : { "data-ascii": "skip" })}
         >
           {typeof slide.image === "string" ?
             <Image
@@ -267,6 +267,5 @@ const thumbnailCards: SlideCardItem[] = currentSlides.map((slide) => ({
     --ascii-glyph: #d4d4d8;
     --ascii-surface: #09090b;
     --ascii-accent: #f15d30;
-    --ascii-flash: #f15d30;
   }
 </style>

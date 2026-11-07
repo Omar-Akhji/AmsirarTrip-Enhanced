@@ -46,17 +46,15 @@ const points =
   aria-label={sidebarTitle}
   class="space-y-6 self-start lg:sticky lg:top-24"
 >
-  {
-    routeMap && (
-      <div
-        class="inline-full"
-        data-animate="creative-slide-left"
-        data-delay="75"
-      >
-        <RouteMapCard routeMap={routeMap} />
-      </div>
-    )
-  }
+  {routeMap && (
+    <div
+      class="inline-full"
+      data-animate="creative-slide-left"
+      data-delay="75"
+    >
+      <RouteMapCard routeMap={routeMap} />
+    </div>
+  )}
 
   <div
     class="inline-full"

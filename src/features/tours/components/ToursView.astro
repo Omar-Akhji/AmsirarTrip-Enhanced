@@ -49,29 +49,25 @@ const TOURS_FAQS = [
     q: "tours.faq.q1",
     defQ: "What types of desert tours are available from Marrakech?",
     a: "tours.faq.a1",
-    defA:
-      "Amsirar Trip offers multi-day Morocco tours ranging from 3 to 14 days. Options include Sahara desert camel treks starting from Marrakech to Erg Chebbi dunes in Merzouga, High Atlas mountain crossings via Tizi n'Tichka pass, and imperial city circuits through Fes, Meknes, and Rabat. All tours depart from Marrakech and are available year-round with private 4×4 vehicles and licensed Moroccan guides.",
+    defA: "Amsirar Trip offers multi-day Morocco tours ranging from 3 to 14 days. Options include Sahara desert camel treks starting from Marrakech to Erg Chebbi dunes in Merzouga, High Atlas mountain crossings via Tizi n'Tichka pass, and imperial city circuits through Fes, Meknes, and Rabat. All tours depart from Marrakech and are available year-round with private 4×4 vehicles and licensed Moroccan guides.",
   },
   {
     q: "tours.faq.q2",
     defQ: "Is Amsirar Trip a licensed tour operator in Morocco?",
     a: "tours.faq.a2",
-    defA:
-      "Yes. Amsirar Trip operates under Moroccan tourism license number 24/TT/RAK, issued by the Ministry of Tourism, Handicraft, Social Economy and Solidarity. We are headquartered in Marrakech and fully comply with Moroccan travel industry regulations.",
+    defA: "Yes. Amsirar Trip operates under Moroccan tourism license number 24/TT/RAK, issued by the Ministry of Tourism, Handicraft, Social Economy and Solidarity. We are headquartered in Marrakech and fully comply with Moroccan travel industry regulations.",
   },
   {
     q: "tours.faq.q3",
     defQ: "What is the best time of year for a Sahara desert tour from Marrakech?",
     a: "tours.faq.a3",
-    defA:
-      "The ideal months for a Sahara desert tour from Marrakech are October to April, when daytime temperatures in the Erg Chebbi dunes range between 18°C and 28°C. Summer (June–August) sees temperatures above 40°C in the desert but remains manageable in the High Atlas. We operate tours year-round and can advise on the best itinerary for your travel dates.",
+    defA: "The ideal months for a Sahara desert tour from Marrakech are October to April, when daytime temperatures in the Erg Chebbi dunes range between 18°C and 28°C. Summer (June–August) sees temperatures above 40°C in the desert but remains manageable in the High Atlas. We operate tours year-round and can advise on the best itinerary for your travel dates.",
   },
   {
     q: "tours.faq.q4",
     defQ: "Are tours private or shared group departures?",
     a: "tours.faq.a4",
-    defA:
-      "All Amsirar Trip tours are private departures. Your group travels exclusively with your party in a dedicated 4×4 or minibus, with a personal driver-guide. We do not combine guests from different bookings. This allows flexible start times, route adjustments, and personalised stop preferences throughout your Morocco journey.",
+    defA: "All Amsirar Trip tours are private departures. Your group travels exclusively with your party in a dedicated 4×4 or minibus, with a personal driver-guide. We do not combine guests from different bookings. This allows flexible start times, route adjustments, and personalised stop preferences throughout your Morocco journey.",
   },
 ] as const;
 
@@ -270,9 +266,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
                   itemscope
                   itemtype="https://schema.org/Answer"
                 >
-                  <p itemprop="text">
-                    {t(faq.a) || faq.defA}
-                  </p>
+                  <p itemprop="text">{t(faq.a) || faq.defA}</p>
                 </div>
               </details>
             </dt>
@@ -283,39 +277,4 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
   </section>
 </div>
 
-<script>
-  function setupDepartureFilter() {
-    const buttons = document.querySelectorAll<HTMLButtonElement>(".hub-filter-btn");
-    const items = document.querySelectorAll<HTMLElement>(".tour-card-item");
-
-    if (!buttons.length || !items.length) return;
-
-    buttons.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const selectedCity = btn.dataset["city"] || "all";
-
-        buttons.forEach((b) => {
-          if (b === btn) {
-            b.classList.remove("bg-stone-100", "text-stone-700", "hover:bg-stone-200");
-            b.classList.add("bg-stone-900", "text-white");
-          } else {
-            b.classList.remove("bg-stone-900", "text-white");
-            b.classList.add("bg-stone-100", "text-stone-700", "hover:bg-stone-200");
-          }
-        });
-
-        items.forEach((item) => {
-          const departure = item.dataset["departure"] || "";
-          if (selectedCity === "all" || departure === selectedCity) {
-            item.classList.remove("hidden");
-          } else {
-            item.classList.add("hidden");
-          }
-        });
-      });
-    });
-  }
-
-  setupDepartureFilter();
-  document.addEventListener("astro:page-load", setupDepartureFilter);
-</script>
+<script src="../scripts/tour-departure-filter.ts"></script>

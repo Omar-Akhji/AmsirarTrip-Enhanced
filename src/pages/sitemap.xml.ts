@@ -76,8 +76,8 @@ export const GET: APIRoute = async ({ site }) => {
       route: `/excursions/${excursion.id}`,
       lastmod: today,
       imageLoc: new URL(excursion.data.image.src, baseUrl).href,
-      imageTitle: excursion.data.seo?.title ?? excursion.data.jsonLd.name,
-      imageCaption: excursion.data.seo?.imageAlt ?? excursion.data.jsonLd.description,
+      imageTitle: excursion.data.seo.title,
+      imageCaption: excursion.data.seo.imageAlt ?? excursion.data.jsonLd.description,
     });
   }
 

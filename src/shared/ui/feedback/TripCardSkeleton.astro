@@ -100,9 +100,7 @@ const { class: className, hasItinerary = true, hasBadge = true } = Astro.props;
     )}
 
     {/* Footer CTA full pill button */}
-    <div
-      class:list={["pt-2", !hasItinerary && "mt-auto"]}
-    >
+    <div class:list={["pt-2", !hasItinerary && "mt-auto"]}>
       <ButtonSkeleton
         class="w-full"
         size="md"

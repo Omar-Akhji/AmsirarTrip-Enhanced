@@ -133,7 +133,7 @@ function showSkeleton(routeKey: string): void {
   content.style.pointerEvents = "none";
 
   // Force synchronous layout so getBoundingClientRect() calculates real dimensions
-  void targetSkeleton.offsetHeight;
+  targetSkeleton.getBoundingClientRect();
 
   // Animate the ASCII skeleton shimmer on the active skeleton with real dimensions
   stopActiveSkeleton = initAsciiSkeletons(targetSkeleton, { force: true });

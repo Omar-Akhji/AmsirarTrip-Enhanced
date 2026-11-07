@@ -30,7 +30,7 @@ const {
   highlightsTitle,
   highlights,
   tourTypeLabel,
-  tourTypeValue,
+  tourTypeValue = "Private & Shared",
 } = Astro.props;
 ---
 
@@ -41,7 +41,7 @@ const {
   <dl
     class:list={[
       "m-0 p-0 grid grid-cols-1 gap-3 sm:gap-4",
-      tourTypeLabel ? "grid-cols-2 lg:grid-cols-4" : "sm:grid-cols-3",
+      { "grid-cols-2 lg:grid-cols-4": tourTypeLabel, "sm:grid-cols-3": !tourTypeLabel },
     ]}
   >
     <div
@@ -115,7 +115,7 @@ const {
             {tourTypeLabel}
           </dt>
           <dd class="m-0 font-mono text-sm sm:text-base font-bold text-stone-900 truncate">
-            {tourTypeValue || "Private & Shared"}
+            {tourTypeValue}
           </dd>
         </div>
       </div>

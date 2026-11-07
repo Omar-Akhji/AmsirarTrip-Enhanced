@@ -34,7 +34,7 @@ const sortedTours = [...toursEntries]
 
 const featuredToursItemListJsonLd = generateItemListJsonLd({
   name: locale === "en" ? "Featured Morocco Desert Tours" : t("home.featured.title") || title,
-  description: description,
+  description,
   url: Astro.url.pathname,
   items: sortedTours.map((entry) => ({
     name: locale === "en" ? entry.data.seo.title : t(`${entry.data.tourKey}.title`),

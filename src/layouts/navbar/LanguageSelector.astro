@@ -42,7 +42,8 @@ const menuId = `${id}-popover`;
     style="anchor-name: --lang-selector-btn;"
     class:list={[
       "group/lang-btn relative inline-flex items-center rounded-full font-medium transition-all duration-200 cursor-pointer select-none active:scale-[0.98]",
-      "border border-white/20 bg-black/25 backdrop-blur-md text-white shadow-xs hover:border-white/40 hover:bg-white/15 hover:shadow-md",
+      "border border-white/20 bg-black/30 backdrop-blur-md text-white shadow-xs hover:border-white/40 hover:bg-white/15 hover:shadow-md",
+      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange/80 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950",
       "group-data-scrolled:border-transparent group-data-scrolled:bg-orange group-data-scrolled:text-white group-data-scrolled:shadow-[0_4px_14px_rgba(241,93,48,0.35)] group-data-scrolled:hover:bg-orange-600",
       {
         "h-9.5 px-3.5 gap-2 text-xs sm:text-sm": size === "sm",
@@ -51,11 +52,13 @@ const menuId = `${id}-popover`;
     ]}
     type="button"
   >
-    <GlobalIcon class="size-4 shrink-0 text-white/90 group-hover/lang-btn:text-white group-data-scrolled:text-white transition-colors" />
-    <span class="font-semibold tracking-wider uppercase">{currentLanguage.shortName}</span>
+    <GlobalIcon class="size-4 shrink-0 text-white/90 transition-colors group-hover/lang-btn:text-white group-data-scrolled:text-white" />
+    <span class="font-mono font-semibold tracking-wider uppercase text-[11px] sm:text-xs">
+      {currentLanguage.shortName}
+    </span>
     <svg
       aria-hidden="true"
-      class="size-3.5 shrink-0 text-white/70 transition-transform duration-200 group-hover/lang-btn:text-white group-data-scrolled:text-white/90"
+      class="lang-chevron size-3.5 shrink-0 text-white/70 transition-transform duration-250 ease-out group-hover/lang-btn:text-white group-data-scrolled:text-white/90"
       fill="none"
       stroke="currentColor"
       stroke-linecap="round"
@@ -71,17 +74,24 @@ const menuId = `${id}-popover`;
     id={menuId}
     popover="auto"
     aria-orientation="vertical"
-    style="
-
---menu-outer-radius: 14px; --menu-padding: 5px;"
     class:list={[
-      "language-selector-popover m-0 min-w-40 overflow-hidden border border-white/10 bg-slate-950/95 text-white shadow-2xl backdrop-blur-xl ring-1 ring-white/10",
-      "rounded-(--menu-outer-radius) p-(--menu-padding)",
-      "group-data-scrolled:border-black/10 group-data-scrolled:bg-white group-data-scrolled:text-slate-800 group-data-scrolled:shadow-[0_12px_32px_rgba(0,0,0,0.15)]",
+      "language-selector-popover min-w-50 sm:min-w-55 overflow-hidden border border-white/12 bg-slate-950/95 text-white shadow-[0_20px_45px_-12px_rgba(0,0,0,0.7),0_0_0_1px_rgba(255,255,255,0.06)] backdrop-blur-2xl ring-1 ring-white/10 rounded-2xl p-1.5",
+      "group-data-scrolled:border-stone-200/90 group-data-scrolled:bg-white/98 group-data-scrolled:text-slate-800 group-data-scrolled:shadow-[0_20px_45px_-10px_rgba(0,0,0,0.18),0_0_0_1px_rgba(0,0,0,0.04)]",
       { "inset-inline-start-0": placement === "left", "inset-inline-end-0": placement === "right" },
     ]}
     role="menu"
   >
+    {/* Subtle Header */}
+    <div class="px-3 pt-2 pb-1.5 text-[10px] font-mono uppercase tracking-widest text-zinc-400 group-data-scrolled:text-stone-500 select-none font-semibold">
+      {t("language") || "Language"}
+    </div>
+
+    <div
+      class="my-1 mx-1.5 h-px bg-white/10 group-data-scrolled:bg-stone-200/70"
+      role="separator"
+    ></div>
+
+    {/* Language List */}
     <div class="flex flex-col gap-0.5">
       {LANGUAGES.map((lang) => {
         const isCurrent = lang.code === currentLanguage.code;
@@ -90,19 +100,31 @@ const menuId = `${id}-popover`;
             aria-checked={isCurrent}
             aria-label={lang.name}
             class:list={[
-              "flex items-center whitespace-nowrap px-3 py-1.5 text-xs sm:text-sm font-medium transition-colors duration-150 inline-full",
-              "rounded-[calc(var(--menu-outer-radius)-var(--menu-padding))]",
+              "group/item relative flex items-center gap-2.5 px-2.5 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all duration-150 inline-full select-none cursor-pointer",
+              "outline-none focus-visible:ring-2 focus-visible:ring-orange/80 focus-visible:ring-offset-1 focus-visible:ring-offset-slate-950",
               {
-                "bg-white/15 text-white font-semibold group-data-scrolled:bg-orange group-data-scrolled:text-white":
+                "bg-white/15 text-white font-semibold group-data-scrolled:bg-orange/10 group-data-scrolled:text-orange-950 shadow-xs":
                   isCurrent,
-                "text-zinc-300 hover:bg-white/10 hover:text-white group-data-scrolled:text-zinc-600 group-data-scrolled:hover:bg-zinc-100 group-data-scrolled:hover:text-zinc-900":
+                "text-zinc-300 hover:bg-white/10 hover:text-white group-data-scrolled:text-stone-600 group-data-scrolled:hover:bg-stone-100 group-data-scrolled:hover:text-stone-900":
                   !isCurrent,
               },
             ]}
             href={getLocalizedHref(lang.code)}
             role="menuitemradio"
           >
-            <span>{lang.name}</span>
+            <span
+              class:list={[
+                "flex h-5.5 w-7 items-center justify-center rounded-md font-mono text-[10px] font-bold tracking-wider uppercase transition-colors shrink-0",
+                {
+                  "bg-orange text-white shadow-xs": isCurrent,
+                  "bg-white/10 text-zinc-300 group-hover/item:bg-white/20 group-hover/item:text-white group-data-scrolled:bg-stone-200/80 group-data-scrolled:text-stone-700 group-data-scrolled:group-hover/item:bg-stone-300/80":
+                    !isCurrent,
+                },
+              ]}
+            >
+              {lang.shortName}
+            </span>
+            <span class="truncate text-[13px]">{lang.name}</span>
           </a>
         );
       })}

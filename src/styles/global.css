@@ -54,9 +54,6 @@
   --font-mono: "DM Mono", ui-monospace, "Cascadia Code", "Fira Code", monospace;
   --font-brand: "Yellowtail", cursive;
 
-  /* Breakpoints */
-  --breakpoint-tablet: 768px;
-
   /* Text */
   --color-ink: oklch(15% 0.01 65deg);
 
@@ -578,8 +575,7 @@
       --thumb-radius: var(--radius-md);
     }
 
-    /* stylelint-disable-next-line media-query-no-invalid */
-    @media (width < theme(--breakpoint-tablet)) {
+    @media (width < 768px) {
       --thumb-width: 130px;
       --thumb-height: 190px;
       --thumb-gap: 12px;
@@ -597,8 +593,7 @@
   }
 
   /* Mobile: centre the copy between the navbar and the thumbnail strip */
-  /* stylelint-disable-next-line media-query-no-invalid */
-  @media (width < theme(--breakpoint-tablet)) {
+  @media (width < 768px) {
     .slider .list .item .content,
     #home-hero-slider-skeleton .content {
       top: calc(
@@ -1017,38 +1012,21 @@
     }
   }
 
-  .ars-braille {
-    --ars-base: 0.35;
-    --ars-wave: 1;
-    --ars-band: 40%;
-  }
-
-  .ars-scan {
-    --ars-base: 0.28;
-    --ars-wave: 0.95;
-    --ars-band: 38%;
-  }
-
-  .ars-terminal {
-    --ars-base: 0.16;
-    --ars-wave: 1;
-    --ars-band: 35%;
-    --ars-speed: 1.5s;
-    --ars-wave-color: var(--ascii-accent, currentColor);
-  }
-
   /* ------------------------------------------------------------------------
      6.8 Overlays: popover & dialog
      Discrete transitions via allow-discrete + @starting-style.
      ------------------------------------------------------------------------ */
 
-  /* Language selector: CSS anchor positioning, with a plain fallback */
+  /* Language selector: CSS anchor positioning with viewport fallback */
   .language-selector-popover {
-    position-anchor: --lang-selector-btn;
-    position-area: bottom span-left;
-    margin: 8px 0 0;
+    /* Fallback for browsers without CSS Anchor Positioning */
+    position: fixed;
+    top: 4.5rem;
+    inset-inline-end: max(1rem, calc((100vw - min(1100px, 100vw - 2rem)) / 2 + 1rem));
+    margin: 0;
     opacity: 0;
-    transform: scale(0.95);
+    transform: translateY(-8px) scale(0.96);
+    transform-origin: top right;
     transition:
       opacity 250ms var(--ease-out-expo),
       transform 250ms var(--ease-out-expo),
@@ -1057,27 +1035,43 @@
 
     &:popover-open {
       opacity: 1;
-      transform: scale(1);
+      transform: translateY(0) scale(1);
     }
   }
 
-  @supports not (position-area: bottom span-left) {
+  /* Anchor positioning for Chromium 125+ */
+  @supports (top: anchor(bottom)) {
     .language-selector-popover {
       position-anchor: --lang-selector-btn;
-      inset: unset;
-      top: calc(anchor(bottom) + 8px);
-      right: anchor(right);
-      margin: 0;
+      top: calc(anchor(bottom) + 18px) !important;
+      right: anchor(right) !important;
+      left: unset !important;
+      bottom: unset !important;
+      margin: 0 !important;
     }
   }
 
-  @supports not (position-anchor: auto) {
+  /* Modern position-area positioning for Chromium 129+ */
+  @supports (position-area: bottom span-left) {
     .language-selector-popover {
-      position: absolute;
-      top: 100%;
-      right: 0;
-      margin-top: 0.5rem;
+      position-anchor: --lang-selector-btn;
+      position-area: bottom span-left;
     }
+  }
+
+  /* Chevron rotation and active trigger state when open */
+  .language-selector-root:has(:popover-open) .lang-chevron {
+    transform: rotate(180deg);
+  }
+
+  .language-selector-root:has(:popover-open) button[popovertarget] {
+    border-color: rgb(255 255 255 / 0.45);
+    background-color: rgb(255 255 255 / 0.2);
+    box-shadow: 0 4px 16px rgb(0 0 0 / 0.25);
+  }
+
+  .group[data-scrolled] .language-selector-root:has(:popover-open) button[popovertarget] {
+    background-color: var(--color-orange-dark, #d94a1f);
   }
 
   /* Cookie preferences */
@@ -1114,7 +1108,7 @@
   @starting-style {
     .language-selector-popover:popover-open {
       opacity: 0;
-      transform: scale(0.95);
+      transform: translateY(-8px) scale(0.96);
     }
 
     dialog.cookie-preferences-dialog[open] {

@@ -85,7 +85,7 @@ const allTours = await getToursData();
 const currentStart = tour.startLocation.toLowerCase();
 const relatedTours = allTours
   .filter((item) => item.id !== tour.bookingId)
-  .sort((a, b) => {
+  .toSorted((a, b) => {
     const aSame = a.startLocation === currentStart ? -1 : 1;
     const bSame = b.startLocation === currentStart ? -1 : 1;
     return aSame - bSame;
