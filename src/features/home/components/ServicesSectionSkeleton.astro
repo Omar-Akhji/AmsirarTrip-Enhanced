@@ -9,8 +9,8 @@ const { class: className } = Astro.props;
 
 const serviceCardSkeletons = [
   { key: "handcrafted", titleWidth: "15rem", textLines: 3, textWidths: ["100%", "94%", "68%"] },
-  { key: "guide", titleWidth: "8.5rem", textLines: 4, textWidths: ["100%", "98%", "92%", "58%"] },
-  { key: "price", titleWidth: "9.5rem", textLines: 3, textWidths: ["100%", "95%", "76%"] },
+  { key: "guide", titleWidth: "11rem", textLines: 4, textWidths: ["100%", "98%", "92%", "58%"] },
+  { key: "price", titleWidth: "12rem", textLines: 3, textWidths: ["100%", "95%", "76%"] },
 ];
 ---
 
@@ -18,7 +18,7 @@ const serviceCardSkeletons = [
   aria-busy="true"
   aria-label="Loading services"
   class:list={[
-    "relative overflow-hidden py-12 sm:py-16 lg:py-24 text-orange-200 bg-stone-950",
+    "relative overflow-visible py-12 sm:py-16 lg:py-24 text-orange-200 bg-stone-950",
     className,
   ]}
 >
@@ -52,18 +52,55 @@ const serviceCardSkeletons = [
             widths={["17rem"]}
           />
         </h2>
-        <p class="border-s-2 border-yellow ps-4 py-0.5 text-sm sm:text-base text-zinc-100/90 leading-relaxed max-w-[62ch]">
+        <div class="border-s-2 border-yellow ps-4 py-0.5 text-sm sm:text-base text-zinc-100/90 leading-relaxed max-w-[62ch]">
           <AsciiSkeleton
             class="text-zinc-100/85"
             lines={2}
             variant="dither"
             widths={["100%", "85%"]}
           />
-        </p>
+        </div>
       </hgroup>
     </div>
 
-    <div class="grid justify-items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3 2xl:gap-8">
+    {/* Mobile Mode: Stacked Cards matching ServicesScrollStack */}
+    <div class="block md:hidden w-full">
+      <div class="flex flex-col gap-5 w-full">
+        {serviceCardSkeletons.map((card) => (
+          <article
+            class="flex flex-col items-center rounded-2xl border border-white/10 bg-white/10 p-8 text-center shadow-xs ring-1 ring-black/5 backdrop-blur-xl size-full"
+            style="backdrop-filter: blur(20px);"
+          >
+            <div class="mbe-6 inline-flex size-25 items-center justify-center rounded-full bg-white/5 ring-1 ring-white/10">
+              <AsciiSkeleton
+                class="size-15 rounded-full overflow-hidden text-stone-400"
+                rows={5}
+                variant="dither"
+              />
+            </div>
+            <h3 class="w-full text-center text-xl font-semibold text-white">
+              <AsciiSkeleton
+                class="text-stone-300 text-center mx-auto"
+                lines={1}
+                variant="dither"
+                widths={[card.titleWidth]}
+              />
+            </h3>
+            <div class="mbs-3 w-full text-center text-sm text-zinc-200 leading-relaxed">
+              <AsciiSkeleton
+                class="text-zinc-200/85 text-center mx-auto"
+                lines={card.textLines}
+                variant="dither"
+                widths={card.textWidths}
+              />
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+
+    {/* Desktop & Tablet Mode: 3-column Grid matching ServicesSection.astro */}
+    <div class="hidden md:grid md:grid-cols-2 lg:grid-cols-3 justify-items-stretch gap-6 2xl:gap-8">
       {serviceCardSkeletons.map((card, index) => (
         <article
           class:list={[
@@ -84,7 +121,7 @@ const serviceCardSkeletons = [
           {/* Card Title Skeleton matching exact h3 typography and content width */}
           <h3 class="w-full text-center text-xl font-semibold text-white">
             <AsciiSkeleton
-              class="text-stone-300 text-center"
+              class="text-stone-300 text-center mx-auto"
               lines={1}
               variant="dither"
               widths={[card.titleWidth]}
@@ -92,14 +129,14 @@ const serviceCardSkeletons = [
           </h3>
 
           {/* Card Description Skeleton matching exact p typography and line count */}
-          <p class="mbs-3 w-full text-center text-sm text-zinc-200 leading-relaxed">
+          <div class="mbs-3 w-full text-center text-sm text-zinc-200 leading-relaxed">
             <AsciiSkeleton
-              class="text-zinc-200/85 text-center"
+              class="text-zinc-200/85 text-center mx-auto"
               lines={card.textLines}
               variant="dither"
               widths={card.textWidths}
             />
-          </p>
+          </div>
         </article>
       ))}
     </div>

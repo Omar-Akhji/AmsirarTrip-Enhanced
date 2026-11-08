@@ -60,6 +60,22 @@ const blockStyleAttr = blockStyles.join("");
 
 let html = rawHtml;
 
+// Expand .ars-base text lines to at least 320 characters to guarantee full-bleed edge coverage
+html = html.replace(/<span class="ars-base">([\s\S]*?)<\/span>/g, (_, content: string) => {
+  const expanded = content
+    .split("\n")
+    .map((line: string) => {
+      if (line.length >= 320) return line;
+      let rep = line;
+      while (rep.length < 320) {
+        rep += line;
+      }
+      return rep.slice(0, 320);
+    })
+    .join("\n");
+  return `<span class="ars-base">${expanded}</span>`;
+});
+
 // Inject block styles into .ars-block
 if (blockStyleAttr) {
   html = html.replace(

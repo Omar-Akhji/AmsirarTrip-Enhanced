@@ -13,7 +13,7 @@ const { class: className } = Astro.props;
 <div
   aria-busy="true"
   aria-label="Loading contact view"
-  class:list={["size-full bg-white text-stone-900 pb-20", className]}
+  class:list={["size-full bg-white text-stone-900", className]}
 >
   <PageHeaderSkeleton
     crumbWidths={["w-12", "w-20"]}
@@ -24,23 +24,62 @@ const { class: className } = Astro.props;
   {/* DIRECT CHANNELS SKELETON */}
   <section class="relative isolate bg-white py-12 sm:py-16 lg:py-24">
     <div class="mx-auto px-4 sm:px-6 lg:px-8 max-inline-7xl 2xl:max-inline-360 3xl:max-inline-420">
-      <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 2xl:gap-8 items-stretch">
-        {Array.from({ length: 3 }, () => (
-          <div class="flex size-full last:md:col-span-2 last:lg:col-span-1">
-            <article class="group flex size-full flex-col justify-between rounded-2xl border border-stone-200/90 bg-stone-50/80 p-6 sm:p-8 shadow-xs shadow-stone-900/5">
+      {/* Mobile Mode: Card Stack matching ContactFolderStack */}
+      <div class="block md:hidden w-full">
+        <div class="flex flex-col gap-5 w-full">
+          {Array.from({ length: 3 }, () => (
+            <article class="contact-info-card group flex h-auto w-full flex-col rounded-2xl border border-stone-200/90 bg-stone-50/95 p-5 sm:p-6 shadow-xl shadow-stone-900/10">
               <div>
-                <AsciiSkeleton
-                  class="mbe-3 text-xl font-bold tracking-tight text-stone-950"
-                  lines={2}
-                  variant="dither"
-                  widths={["100%", "60%"]}
+                <div class="mbe-2.5 border-b border-stone-200/80 pb-2.5">
+                  <AsciiSkeleton
+                    class="text-base sm:text-lg font-bold text-stone-950"
+                    lines={1}
+                    variant="dither"
+                    widths={["12rem"]}
+                  />
+                </div>
+                <div class="space-y-1">
+                  <AsciiSkeleton
+                    class="text-sm leading-relaxed text-stone-600"
+                    lines={2}
+                    variant="dither"
+                    widths={["100%", "85%"]}
+                  />
+                </div>
+              </div>
+
+              <div class="mbs-3.5 border-t border-stone-200/60 pbs-3.5">
+                <ButtonSkeleton
+                  size="md"
+                  variant="outline"
+                  class="w-full"
                 />
-                <div class="pt-1">
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      {/* Desktop & Tablet Mode: 3-column Grid matching ContactView.astro */}
+      <div class="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 2xl:gap-8 items-stretch">
+        {Array.from({ length: 3 }, (_, index) => (
+          <div class:list={["flex size-full", { "md:col-span-2 lg:col-span-1": index === 2 }]}>
+            <article class="contact-info-card group relative flex size-full flex-col justify-between rounded-2xl border border-stone-200/90 bg-stone-50/80 p-6 sm:p-8 shadow-xs shadow-stone-900/5">
+              <div>
+                <div class="mbe-3 border-b border-stone-200/80 pb-3">
+                  <AsciiSkeleton
+                    class="text-lg lg:text-xl font-bold text-stone-950"
+                    lines={1}
+                    variant="dither"
+                    widths={["13rem"]}
+                  />
+                </div>
+                <div class="space-y-1 pt-1">
                   <AsciiSkeleton
                     class="text-sm leading-relaxed text-stone-600"
                     lines={3}
                     variant="dither"
-                    widths={["100%", "95%", "70%"]}
+                    widths={["100%", "92%", "75%"]}
                   />
                 </div>
               </div>
@@ -67,14 +106,16 @@ const { class: className } = Astro.props;
   >
     <div class="mx-auto px-4 sm:px-6 lg:px-8 max-inline-7xl 2xl:max-inline-360 3xl:max-inline-420">
       <div class="mbe-8 sm:mbe-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-stone-200 pb-6 sm:pb-8">
-        <div class="max-w-2xl space-y-2">
-          <AsciiSkeleton
-            class="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl text-balance"
-            lines={1}
-            variant="dither"
-            widths={["17rem"]}
-          />
-          <div class="border-s-2 border-stone-300 ps-4 py-0.5 max-w-[62ch]">
+        <hgroup class="max-w-2xl space-y-2">
+          <h2 class="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl text-balance">
+            <AsciiSkeleton
+              class="text-stone-900 font-bold"
+              lines={1}
+              variant="dither"
+              widths={["18rem"]}
+            />
+          </h2>
+          <div class="border-s-2 border-orange-600 ps-4 py-0.5 max-w-[62ch]">
             <AsciiSkeleton
               class="text-stone-600 text-sm sm:text-base leading-relaxed"
               lines={2}
@@ -82,7 +123,7 @@ const { class: className } = Astro.props;
               widths={["100%", "72%"]}
             />
           </div>
-        </div>
+        </hgroup>
       </div>
 
       <div class="grid grid-cols-1 items-stretch gap-8 lg:grid-cols-5">
@@ -90,19 +131,23 @@ const { class: className } = Astro.props;
         <div class="inline-full lg:col-span-3">
           <div class="rounded-2xl border border-stone-200/90 bg-white p-6 shadow-xs shadow-stone-900/5 block-full sm:p-8">
             <div class="mbe-6 border-b border-stone-100 pbe-5">
-              <AsciiSkeleton
-                class="font-mono text-xs uppercase"
-                lines={1}
-                variant="dither"
-                widths={["8rem"]}
-              />
-              <div class="mbs-1">
+              <span class="font-mono text-xs font-semibold tracking-[0.14em] text-orange-600 uppercase">
                 <AsciiSkeleton
-                  class="text-xl sm:text-2xl font-bold tracking-tight"
-                  lines={2}
+                  class="text-orange-600 font-mono text-xs uppercase"
+                  lines={1}
                   variant="dither"
-                  widths={["100%", "48%"]}
+                  widths={["8rem"]}
                 />
+              </span>
+              <div class="mbs-1">
+                <h3 class="text-xl font-bold tracking-tight text-stone-900 sm:text-2xl">
+                  <AsciiSkeleton
+                    class="text-stone-900 font-bold"
+                    lines={1}
+                    variant="dither"
+                    widths={["16rem"]}
+                  />
+                </h3>
               </div>
             </div>
 
@@ -112,7 +157,7 @@ const { class: className } = Astro.props;
                 <div>
                   <div class="mbe-1.5">
                     <AsciiSkeleton
-                      class="font-sans text-xs font-semibold"
+                      class="font-sans text-xs font-semibold text-stone-700"
                       lines={1}
                       variant="dither"
                       widths={["5.5rem"]}
@@ -127,7 +172,7 @@ const { class: className } = Astro.props;
                 <div>
                   <div class="mbe-1.5">
                     <AsciiSkeleton
-                      class="font-sans text-xs font-semibold"
+                      class="font-sans text-xs font-semibold text-stone-700"
                       lines={1}
                       variant="dither"
                       widths={["4rem"]}
@@ -146,7 +191,7 @@ const { class: className } = Astro.props;
                 <div>
                   <div class="mbe-1.5">
                     <AsciiSkeleton
-                      class="font-sans text-xs font-semibold"
+                      class="font-sans text-xs font-semibold text-stone-700"
                       lines={1}
                       variant="dither"
                       widths={["6.5rem"]}
@@ -161,7 +206,7 @@ const { class: className } = Astro.props;
                 <div>
                   <div class="mbe-1.5">
                     <AsciiSkeleton
-                      class="font-sans text-xs font-semibold"
+                      class="font-sans text-xs font-semibold text-stone-700"
                       lines={1}
                       variant="dither"
                       widths={["9rem"]}
@@ -179,7 +224,7 @@ const { class: className } = Astro.props;
               <div>
                 <div class="mbe-1.5">
                   <AsciiSkeleton
-                    class="font-sans text-xs font-semibold"
+                    class="font-sans text-xs font-semibold text-stone-700"
                     lines={1}
                     variant="dither"
                     widths={["5rem"]}
@@ -219,22 +264,24 @@ const { class: className } = Astro.props;
             <div>
               <header>
                 <AsciiSkeleton
-                  class="font-mono text-xs uppercase"
+                  class="font-mono text-xs uppercase text-orange-400"
                   lines={1}
                   variant="dither"
                   widths={["7rem"]}
                 />
                 <div class="mbs-3">
-                  <AsciiSkeleton
-                    class="text-2xl sm:text-3xl font-semibold"
-                    lines={2}
-                    variant="dither"
-                    widths={["100%", "65%"]}
-                  />
+                  <h3 class="text-2xl sm:text-3xl font-semibold text-white">
+                    <AsciiSkeleton
+                      class="text-white"
+                      lines={2}
+                      variant="dither"
+                      widths={["100%", "65%"]}
+                    />
+                  </h3>
                 </div>
                 <div class="mbs-4">
                   <AsciiSkeleton
-                    class="font-mono text-xs sm:text-sm leading-relaxed"
+                    class="font-mono text-xs sm:text-sm leading-relaxed text-slate-300"
                     lines={3}
                     variant="dither"
                     widths={["100%", "95%", "60%"]}
@@ -250,13 +297,13 @@ const { class: className } = Astro.props;
                   </span>
                   <div class="self-start space-y-1">
                     <AsciiSkeleton
-                      class="font-mono text-xs uppercase"
+                      class="font-mono text-xs uppercase text-orange-400"
                       lines={1}
                       variant="dither"
                       widths={["3.5rem"]}
                     />
                     <AsciiSkeleton
-                      class="font-mono text-xs sm:text-sm leading-relaxed"
+                      class="font-mono text-xs sm:text-sm leading-relaxed text-slate-200"
                       lines={2}
                       variant="dither"
                       widths={["100%", "70%"]}
@@ -271,13 +318,13 @@ const { class: className } = Astro.props;
                   </span>
                   <div class="self-start space-y-1">
                     <AsciiSkeleton
-                      class="font-mono text-xs uppercase"
+                      class="font-mono text-xs uppercase text-orange-400"
                       lines={1}
                       variant="dither"
                       widths={["3rem"]}
                     />
                     <AsciiSkeleton
-                      class="font-mono text-xs sm:text-sm"
+                      class="font-mono text-xs sm:text-sm text-slate-200"
                       lines={1}
                       variant="dither"
                       widths={["12rem"]}
@@ -292,13 +339,13 @@ const { class: className } = Astro.props;
                   </span>
                   <div class="self-start space-y-1">
                     <AsciiSkeleton
-                      class="font-mono text-xs uppercase"
+                      class="font-mono text-xs uppercase text-orange-400"
                       lines={1}
                       variant="dither"
                       widths={["3.5rem"]}
                     />
                     <AsciiSkeleton
-                      class="font-mono text-xs sm:text-sm"
+                      class="font-mono text-xs sm:text-sm text-slate-200"
                       lines={1}
                       variant="dither"
                       widths={["11rem"]}
@@ -310,7 +357,7 @@ const { class: className } = Astro.props;
 
             <div class="mbs-8">
               <AsciiSkeleton
-                class="font-mono text-xs"
+                class="font-mono text-xs text-slate-400"
                 lines={1}
                 variant="dither"
                 widths={["18rem"]}
@@ -329,14 +376,16 @@ const { class: className } = Astro.props;
   >
     <div class="mx-auto px-4 sm:px-6 lg:px-8 max-inline-7xl 2xl:max-inline-360 3xl:max-inline-420">
       <div class="mbe-8 sm:mbe-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-stone-200 pb-6 sm:pb-8">
-        <div class="max-w-2xl space-y-2">
-          <AsciiSkeleton
-            class="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl text-balance"
-            lines={1}
-            variant="dither"
-            widths={["18rem"]}
-          />
-          <div class="border-s-2 border-stone-300 ps-4 py-0.5 max-w-[62ch]">
+        <hgroup class="max-w-2xl space-y-2">
+          <h2 class="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl text-balance">
+            <AsciiSkeleton
+              class="text-stone-900 font-bold"
+              lines={1}
+              variant="dither"
+              widths={["18rem"]}
+            />
+          </h2>
+          <div class="border-s-2 border-orange-600 ps-4 py-0.5 max-w-[62ch]">
             <AsciiSkeleton
               class="text-stone-600 text-sm sm:text-base leading-relaxed"
               lines={2}
@@ -344,12 +393,12 @@ const { class: className } = Astro.props;
               widths={["100%", "45%"]}
             />
           </div>
-        </div>
+        </hgroup>
       </div>
 
       <div class="overflow-hidden rounded-2xl border border-slate-900 bg-slate-950 text-white shadow-xl">
         <div class="relative flex flex-col items-center justify-center bg-slate-950 text-white block-75 md:block-100 lg:block-125">
-          {/* Full-width ASCII background mesh spanning 100% edge-to-edge */}
+          {/* Full-width ASCII background mesh */}
           <div class="absolute inset-0 size-full overflow-hidden bg-slate-950">
             <AsciiSkeleton
               class="ars-image ars-hero-bg size-full text-stone-700/35"
@@ -374,25 +423,27 @@ const { class: className } = Astro.props;
 
             {/* Title */}
             <div class="mx-auto text-center">
-              <AsciiSkeleton
-                class="text-xl font-bold uppercase sm:text-2xl text-stone-200 text-center mx-auto"
-                lines={1}
-                variant="dither"
-                widths={["16rem"]}
-              />
+              <h3 class="text-xl font-bold uppercase sm:text-2xl text-white tracking-tight">
+                <AsciiSkeleton
+                  class="text-white text-center mx-auto"
+                  lines={1}
+                  variant="dither"
+                  widths={["16rem"]}
+                />
+              </h3>
             </div>
 
             {/* Description */}
             <div class="mx-auto max-w-lg text-center">
               <AsciiSkeleton
-                class="font-mono text-xs sm:text-sm text-stone-400 leading-relaxed text-center mx-auto"
+                class="font-mono text-xs sm:text-sm text-stone-300 leading-relaxed text-center mx-auto"
                 lines={2}
                 variant="dither"
                 widths={["100%", "65%"]}
               />
             </div>
 
-            {/* Centered Load Map CTA Button skeleton — full ASCII dither button pill */}
+            {/* Centered Load Map CTA Button skeleton */}
             <div class="pt-2 flex justify-center">
               <ButtonSkeleton
                 size="md"

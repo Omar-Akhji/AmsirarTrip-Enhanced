@@ -14,101 +14,126 @@ const { class: className } = Astro.props;
   class:list={["bg-white py-12 sm:py-16 lg:py-24", className]}
 >
   <div class="mx-auto px-4 sm:px-6 lg:px-8 max-inline-7xl 2xl:max-inline-360 3xl:max-inline-420">
-    {/* Section Header matching HomeStats.astro */}
-    <div class="mbe-8 sm:mbe-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-stone-200 pb-6 sm:pb-8">
-      <div class="max-w-2xl space-y-2">
-        <AsciiSkeleton
-          class="text-stone-400 font-mono text-xs uppercase"
-          lines={1}
-          variant="dither"
-          widths={["14rem"]}
-        />
-        <AsciiSkeleton
-          class="text-2xl sm:text-3xl md:text-4xl text-stone-800 font-bold"
-          lines={1}
-          variant="dither"
-          widths={["20rem"]}
-        />
-        <div class="pt-1">
-          <AsciiSkeleton
-            class="text-stone-400 text-sm"
-            lines={2}
-            variant="dither"
-            widths={["100%", "75%"]}
-          />
-        </div>
-      </div>
-    </div>
-
-    {/* Stat Cards Grid matching HomeStats.astro breakpoints */}
-    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 2xl:gap-8 items-stretch">
-      {Array.from({ length: 3 }, () => (
-        <div class="flex size-full last:md:col-span-2 last:lg:col-span-1">
-          <article class="group relative flex h-full w-full flex-col justify-between rounded-2xl border border-stone-200/90 bg-stone-50/80 p-6 sm:p-8 shadow-xs">
+    {/* Mobile Mode: Card Stack matching HomeStats mobile layout */}
+    <div class="block md:hidden w-full">
+      <div class="flex flex-col gap-5 w-full">
+        {Array.from({ length: 3 }, () => (
+          <article class="stat-card relative flex h-55 w-full flex-col justify-between rounded-2xl border border-stone-200/90 bg-stone-50/95 p-5 shadow-xl shadow-stone-900/10">
             <div>
-              {/* Editorial Bar */}
-              <div class="mbe-4 flex items-center justify-between border-b border-stone-200/60 pb-3 text-[11px] font-mono uppercase tracking-wider">
-                <div class="flex items-center gap-2">
-                  <span class="size-2 rounded-full bg-stone-400"></span>
-                  <AsciiSkeleton
-                    class="text-stone-500 font-mono text-xs"
-                    lines={1}
-                    variant="dither"
-                    widths={["7rem"]}
-                  />
-                </div>
+              <div class="mbe-3 flex items-center justify-between border-b border-stone-200/70 pb-2 text-[11px] font-mono uppercase tracking-wider text-stone-400">
                 <AsciiSkeleton
-                  class="text-stone-400 font-mono text-xs"
-                  lines={1}
-                  variant="dither"
-                  widths={["2rem"]}
-                />
-              </div>
-
-              {/* Stat Value */}
-              <div class="mbe-3">
-                <AsciiSkeleton
-                  class="text-3xl sm:text-4xl font-mono font-bold text-stone-800"
+                  class="text-stone-500 font-mono text-xs"
                   lines={1}
                   variant="dither"
                   widths={["6rem"]}
                 />
               </div>
 
-              {/* Stat Label */}
               <div class="mbe-2">
                 <AsciiSkeleton
-                  class="text-lg font-bold text-stone-700"
+                  class="text-3xl font-bold text-orange-600"
+                  lines={1}
+                  variant="dither"
+                  widths={["4.5rem"]}
+                />
+              </div>
+
+              <AsciiSkeleton
+                class="text-base font-semibold text-stone-900"
+                lines={1}
+                variant="dither"
+                widths={["10rem"]}
+              />
+
+              <div class="mbs-2">
+                <AsciiSkeleton
+                  class="text-xs text-stone-600"
+                  lines={2}
+                  variant="dither"
+                  widths={["100%", "85%"]}
+                />
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between border-t border-stone-200/70 pt-2 text-[11px] font-mono uppercase tracking-wider">
+              <AsciiSkeleton
+                class="text-stone-500 text-[11px]"
+                lines={1}
+                variant="dither"
+                widths={["5rem"]}
+              />
+              <AsciiSkeleton
+                class="text-stone-500 text-[11px]"
+                lines={1}
+                variant="dither"
+                widths={["6rem"]}
+              />
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+
+    {/* Desktop & Tablet Mode: 3-column Grid matching HomeStats.astro */}
+    <div class="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 2xl:gap-8 items-stretch">
+      {Array.from({ length: 3 }, (_, index) => (
+        <div class:list={["flex size-full", { "md:col-span-2 lg:col-span-1": index === 2 }]}>
+          <article class="group relative flex h-full w-full flex-col justify-between rounded-2xl border border-stone-200/90 bg-stone-50/80 p-6 sm:p-7 shadow-xs shadow-stone-900/5">
+            <div>
+              {/* Editorial Bar */}
+              <div class="mbe-5 flex items-center justify-between border-b border-stone-200/60 pb-3 text-[11px] font-mono uppercase tracking-wider text-stone-400">
+                <AsciiSkeleton
+                  class="text-stone-500 font-mono text-xs"
+                  lines={1}
+                  variant="dither"
+                  widths={["6.5rem"]}
+                />
+              </div>
+
+              {/* Stat Value */}
+              <div class="mbe-3">
+                <AsciiSkeleton
+                  class="text-4xl font-bold tracking-tight text-orange-600"
+                  lines={1}
+                  variant="dither"
+                  widths={["5rem"]}
+                />
+              </div>
+
+              {/* Stat Label */}
+              <h3 class="text-base sm:text-lg font-semibold tracking-tight text-stone-900">
+                <AsciiSkeleton
+                  class="text-stone-900"
                   lines={1}
                   variant="dither"
                   widths={["11rem"]}
                 />
-              </div>
+              </h3>
 
               {/* Stat Description */}
-              <div class="mbs-2.5 space-y-1.5">
+              <div class="mbs-2 space-y-1">
                 <AsciiSkeleton
-                  class="text-stone-400 text-sm"
+                  class="text-stone-600 text-sm leading-relaxed"
                   lines={3}
                   variant="dither"
-                  widths={["100%", "90%", "70%"]}
+                  widths={["100%", "92%", "74%"]}
                 />
               </div>
             </div>
 
             {/* Footer Metadata */}
-            <div class="mbs-6 flex items-center justify-between border-t border-stone-200/60 pt-3.5 text-[11px] font-mono uppercase tracking-wider">
+            <div class="mbs-6 flex items-center justify-between border-t border-stone-200/60 pt-3 text-[11px] font-mono text-stone-400 uppercase tracking-wider">
               <AsciiSkeleton
-                class="text-stone-400 font-mono text-xs"
+                class="text-stone-500 text-[11px]"
                 lines={1}
                 variant="dither"
-                widths={["4rem"]}
+                widths={["5.5rem"]}
               />
               <AsciiSkeleton
-                class="text-stone-400 font-mono text-xs"
+                class="text-stone-600 text-[11px]"
                 lines={1}
                 variant="dither"
-                widths={["6rem"]}
+                widths={["6.5rem"]}
               />
             </div>
           </article>

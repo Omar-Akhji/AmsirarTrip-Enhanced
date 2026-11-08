@@ -5,6 +5,7 @@ interface Props {
   readonly count?: number | undefined;
   readonly categoryWidth?: string | undefined;
   readonly headingWidth?: string | undefined;
+  readonly hasCategoryKicker?: boolean | undefined;
   readonly hasSubtitle?: boolean | undefined;
   readonly subtitleWidth?: string | undefined;
   readonly questionWidths?: readonly string[] | undefined;
@@ -16,10 +17,11 @@ const {
   count = 4,
   categoryWidth = "6rem",
   headingWidth = "18rem",
-  hasSubtitle = false,
+  isListing = false,
+  hasCategoryKicker = !isListing,
+  hasSubtitle = isListing,
   subtitleWidth = "22rem",
   questionWidths = ["85%", "75%", "90%", "65%", "80%"],
-  isListing = false,
   maxDlWidth = isListing ? "max-w-3xl" : "w-full",
 } = Astro.props;
 
@@ -30,15 +32,17 @@ const items = Array.from({ length: count }, (_, i) => ({
 
 {isListing ?
   <section class="border-t border-zinc-200 bg-white py-12 sm:py-16 lg:py-20">
-    <div class="mx-auto px-4 max-inline-7xl 2xl:max-inline-360 3xl:max-inline-420">
-      <hgroup class="mb-8">
-        <AsciiSkeleton
-          class="font-sans text-xs font-bold tracking-wider text-orange-700 uppercase"
-          lines={1}
-          variant="dither"
-          widths={[categoryWidth]}
-        />
-        <div class="mt-1">
+    <div class="mx-auto px-4 sm:px-6 lg:px-8 max-inline-7xl 2xl:max-inline-360 3xl:max-inline-420">
+      <hgroup class="mb-8 max-w-2xl">
+        {hasCategoryKicker && (
+          <AsciiSkeleton
+            class="font-sans text-xs font-bold tracking-wider text-orange-700 uppercase"
+            lines={1}
+            variant="dither"
+            widths={[categoryWidth]}
+          />
+        )}
+        <div class={hasCategoryKicker ? "mt-1" : ""}>
           <AsciiSkeleton
             class="text-2xl font-bold tracking-tight text-stone-900 sm:text-3xl"
             lines={1}
@@ -47,9 +51,9 @@ const items = Array.from({ length: count }, (_, i) => ({
           />
         </div>
         {hasSubtitle && (
-          <div class="mt-2">
+          <div class="mt-2 border-s-2 border-orange-600 ps-4 py-0.5">
             <AsciiSkeleton
-              class="text-sm text-stone-500"
+              class="text-sm sm:text-base text-stone-600"
               lines={1}
               variant="dither"
               widths={[subtitleWidth]}
@@ -68,7 +72,7 @@ const items = Array.from({ length: count }, (_, i) => ({
         {items.map((item) => (
           <div class="px-4 py-3.5 sm:px-5 sm:py-4">
             <div class="flex items-start justify-between gap-4 text-base font-semibold text-stone-900">
-              <div class="flex items-center gap-2.5 w-full">
+              <div class="flex items-center gap-2.5 min-w-0 flex-1">
                 <AsciiSkeleton
                   class="size-5 shrink-0 rounded-full"
                   lines={1}
@@ -97,13 +101,15 @@ const items = Array.from({ length: count }, (_, i) => ({
 : <div>
     <section>
       <hgroup class="mbe-4">
-        <AsciiSkeleton
-          class="font-sans text-xs font-bold tracking-wider text-orange-700 uppercase"
-          lines={1}
-          variant="dither"
-          widths={[categoryWidth]}
-        />
-        <div class="mbs-1">
+        {hasCategoryKicker && (
+          <AsciiSkeleton
+            class="font-sans text-xs font-bold tracking-wider text-orange-700 uppercase"
+            lines={1}
+            variant="dither"
+            widths={[categoryWidth]}
+          />
+        )}
+        <div class={hasCategoryKicker ? "mbs-1" : ""}>
           <AsciiSkeleton
             class="text-xl font-bold tracking-tight text-stone-900 sm:text-2xl md:text-3xl"
             lines={1}
@@ -111,6 +117,16 @@ const items = Array.from({ length: count }, (_, i) => ({
             widths={[headingWidth]}
           />
         </div>
+        {hasSubtitle && (
+          <div class="mt-2 border-s-2 border-orange-600 ps-4 py-0.5">
+            <AsciiSkeleton
+              class="text-sm sm:text-base text-stone-600"
+              lines={1}
+              variant="dither"
+              widths={[subtitleWidth]}
+            />
+          </div>
+        )}
       </hgroup>
 
       <dl
@@ -123,7 +139,7 @@ const items = Array.from({ length: count }, (_, i) => ({
         {items.map((item) => (
           <div class="px-4 py-3.5 sm:px-5 sm:py-4">
             <div class="flex items-start justify-between gap-4 text-base font-semibold text-stone-900">
-              <div class="flex items-center gap-2.5 w-full">
+              <div class="flex items-center gap-2.5 min-w-0 flex-1">
                 <AsciiSkeleton
                   class="size-5 shrink-0 rounded-full"
                   lines={1}

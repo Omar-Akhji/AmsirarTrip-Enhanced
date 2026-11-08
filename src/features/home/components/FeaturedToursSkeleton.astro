@@ -1,6 +1,5 @@
 ---
 import AsciiSkeleton from "@/shared/ui/feedback/AsciiSkeleton.astro";
-import ButtonSkeleton from "@/shared/ui/feedback/ButtonSkeleton.astro";
 
 interface Props {
   count?: number | undefined;
@@ -14,7 +13,7 @@ const { count = 6, class: className } = Astro.props;
   aria-busy="true"
   aria-label="Loading regional destinations"
   class:list={[
-    "relative isolate overflow-hidden bg-neutral-50 py-12 sm:py-16 lg:py-24 text-neutral-900",
+    "relative isolate overflow-visible bg-neutral-50 py-12 sm:py-16 lg:py-24 text-neutral-900",
     className,
   ]}
 >
@@ -26,45 +25,81 @@ const { count = 6, class: className } = Astro.props;
   <div class="relative z-10 mx-auto px-4 sm:px-6 lg:px-8 max-inline-7xl 2xl:max-inline-360 3xl:max-inline-420">
     {/* Section Header matching FeaturedTours.astro */}
     <div class="mbe-8 sm:mbe-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-stone-200 pb-6 sm:pb-8">
-      <div class="max-w-2xl space-y-2">
-        <AsciiSkeleton
-          class="text-stone-400 font-mono text-xs uppercase"
-          lines={1}
-          variant="dither"
-          widths={["12rem"]}
-        />
-        <AsciiSkeleton
-          class="text-2xl sm:text-3xl text-stone-800 font-bold"
-          lines={1}
-          variant="dither"
-          widths={["20rem"]}
-        />
-        <div class="pt-1">
+      <hgroup class="max-w-2xl space-y-2">
+        <h2 class="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl text-balance">
           <AsciiSkeleton
-            class="text-stone-400 text-sm"
+            class="text-stone-900 font-bold"
+            lines={1}
+            variant="dither"
+            widths={["22rem"]}
+          />
+        </h2>
+        <div class="border-s-2 border-orange-600 ps-4 py-0.5 text-sm sm:text-base leading-relaxed max-w-[62ch]">
+          <AsciiSkeleton
+            class="text-stone-600"
             lines={2}
             variant="dither"
             widths={["100%", "75%"]}
           />
         </div>
-      </div>
-
-      {/* View all destinations button */}
-      <ButtonSkeleton
-        size="sm"
-        variant="outline"
-        class="w-32"
-      />
+      </hgroup>
     </div>
 
-    {/* Destination Cards Grid matching FeaturedTours.astro */}
-    <div class="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3 2xl:gap-10">
+    {/* Mobile Mode: Stacked destination cards matching ScrollStack mobile resting position */}
+    <div class="block md:hidden w-full">
+      <div class="flex flex-col gap-5 w-full">
+        {Array.from({ length: 3 }, () => (
+          <article class="relative aspect-4/3 w-full overflow-hidden rounded-2xl bg-slate-950 border-2 border-stone-800/80 shadow-2xl select-none">
+            <div class="absolute inset-0 size-full">
+              <AsciiSkeleton
+                class="ars-image size-full text-stone-700/40"
+                rows={24}
+                variant="dither"
+              />
+            </div>
+            <div
+              aria-hidden="true"
+              class="pointer-events-none absolute inset-0 bg-linear-to-t from-slate-950 via-slate-950/65 via-50% to-slate-950/20"
+            />
+            <div class="relative z-10 flex size-full flex-col justify-end p-3.5 sm:p-4 text-white">
+              <div class="rounded-2xl border border-white/10 bg-white/10 p-4 shadow-xs ring-1 ring-black/5 backdrop-blur-[20px]">
+                <div class="mbe-1.5">
+                  <AsciiSkeleton
+                    class="font-mono text-[11px] font-semibold tracking-[0.16em] uppercase text-stone-300"
+                    lines={1}
+                    variant="dither"
+                    widths={["5.5rem"]}
+                  />
+                  <div class="mbs-1">
+                    <AsciiSkeleton
+                      class="text-xl font-bold tracking-tight text-white"
+                      lines={1}
+                      variant="dither"
+                      widths={["9rem"]}
+                    />
+                  </div>
+                </div>
+                <AsciiSkeleton
+                  class="text-xs text-stone-300"
+                  lines={2}
+                  variant="dither"
+                  widths={["100%", "80%"]}
+                />
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+
+    {/* Desktop & Tablet Mode: 3-column Grid matching FeaturedTours.astro */}
+    <div class="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 2xl:gap-10">
       {Array.from({ length: count }, () => (
         <article class="group relative block aspect-4/3 w-full select-none">
-          <div class="relative size-full overflow-hidden rounded-2xl border-2 border-stone-200/90 bg-stone-100 dark:bg-stone-900 shadow-xs">
+          <div class="relative size-full overflow-hidden rounded-2xl border-2 border-stone-200/80 bg-slate-950 shadow-xs">
             {/* Background ASCII Dither decoding matching full aspect-4/3 card */}
             <AsciiSkeleton
-              class="ars-image size-full text-stone-400"
+              class="ars-image size-full text-stone-700/40"
               rows={30}
               variant="dither"
             />
@@ -72,29 +107,32 @@ const { count = 6, class: className } = Astro.props;
             {/* Ambient Scrim Overlay in gray tone */}
             <div
               aria-hidden="true"
-              class="pointer-events-none absolute inset-0 bg-linear-to-t from-black/85 via-black/40 to-transparent"
+              class="pointer-events-none absolute inset-0 bg-linear-to-t from-slate-950/95 via-slate-950/50 via-45% to-slate-950/15"
             ></div>
 
             {/* Editorial Typography Layer matching FeaturedTours resting state */}
             <div class="relative z-10 flex size-full flex-col justify-end p-3 sm:p-3.5 text-white pointer-events-none">
-              <div
-                class="rounded-2xl border border-white/10 bg-white/10 p-4 sm:p-5 shadow-xs ring-1 ring-black/5 backdrop-blur-xl"
-                style="backdrop-filter: blur(20px);"
-              >
-                <hgroup class="mbe-1.5">
+              <div class="rounded-2xl border border-white/10 bg-white/10 p-4 sm:p-5 shadow-xs ring-1 ring-black/5 backdrop-blur-[20px]">
+                <hgroup class="mbe-2">
                   <AsciiSkeleton
-                    class="text-stone-300 font-bold mbe-1.5 text-xs font-mono uppercase"
+                    class="font-mono text-[11px] font-semibold tracking-[0.16em] text-stone-300 uppercase mbe-1"
                     lines={1}
                     variant="dither"
-                    widths={["7rem"]}
+                    widths={["6rem"]}
                   />
                   <AsciiSkeleton
-                    class="text-xl sm:text-2xl text-stone-300 font-bold"
+                    class="text-xl sm:text-2xl text-white font-bold tracking-tight"
                     lines={1}
                     variant="dither"
-                    widths={["11rem"]}
+                    widths={["10rem"]}
                   />
                 </hgroup>
+                <AsciiSkeleton
+                  class="text-xs sm:text-sm text-stone-300"
+                  lines={2}
+                  variant="dither"
+                  widths={["100%", "75%"]}
+                />
               </div>
             </div>
           </div>

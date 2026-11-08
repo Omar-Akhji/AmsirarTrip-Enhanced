@@ -716,18 +716,36 @@
     text-align: start;
   }
 
-  /* Physical offsets on purpose: the engine positions the canvas, not the text flow */
+  /* Canvas overlay for ASCII skeleton shimmer: covers 100% of the element */
   .ars > canvas {
     position: absolute;
-    top: 0;
-    left: 0;
+    inset: 0;
+    inline-size: 100%;
+    block-size: 100%;
     pointer-events: none;
+    border-radius: inherit;
   }
 
   /* Centred copy (page-header heroes) */
-  .text-center {
+  .text-center:not([class*="sm:text-left"], [class*="md:text-left"], [class*="lg:text-left"]) {
     & .ars-line {
       margin-inline: auto;
+    }
+  }
+
+  @media (width < 40rem) {
+    :is(.text-center, .max-sm\:text-center) {
+      & .ars-line {
+        margin-inline: auto;
+      }
+    }
+  }
+
+  @media (width >= 40rem) {
+    :is(.sm\:text-left, .md\:text-left, .lg\:text-left) {
+      & .ars-line {
+        margin-inline: 0 auto;
+      }
     }
   }
 
@@ -851,6 +869,19 @@
       line-height: 1;
       letter-spacing: -0.02em;
     }
+  }
+
+  /* Typography-inheriting ASCII skeleton lines */
+  :is(.title, .type, .tagline) .ars-line {
+    line-height: inherit;
+  }
+
+  .description .ars-line {
+    line-height: inherit;
+  }
+
+  .description .ars-line + .ars-line {
+    margin-block-start: 0;
   }
 
   /* ==========================================================================
