@@ -116,17 +116,26 @@ onUnmounted(() => {
             @click="handleClose"
           >
             <svg
-              class="size-5"
+              class="size-5 solar solar-close-broken"
               viewBox="0 0 24 24"
               fill="none"
+              stroke-width="1.5"
               aria-hidden="true"
             >
               <path
-                d="M19 5L5 19M5 5L19 19"
+                d="M19.0068 5L15.5068 8.5"
                 stroke="currentColor"
-                stroke-width="1.75"
                 stroke-linecap="round"
-                stroke-linejoin="round"
+              />
+              <path
+                d="M12.0068 12L5.00684 19"
+                stroke="currentColor"
+                stroke-linecap="round"
+              />
+              <path
+                d="M19 19L5 5"
+                stroke="currentColor"
+                stroke-linecap="round"
               />
             </svg>
           </button>

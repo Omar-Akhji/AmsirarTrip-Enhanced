@@ -3,6 +3,7 @@ import { useTranslations } from "@/i18n/utils";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import TactileSwitch from "../primitives/TactileSwitch.astro";
 import CookieIcon from "@/shared/ui/icons/CookieIcon.astro";
+import CloseIcon from "@/shared/ui/icons/CloseIcon.astro";
 
 const locale = Astro.locals.locale ?? Astro.currentLocale ?? "en";
 const t = useTranslations(locale);
@@ -115,19 +116,7 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
         type="submit"
         value="cancel"
       >
-        <svg
-          aria-hidden="true"
-          class="size-4"
-          fill="none"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-        >
-          <path d="M18 6 6 18" />
-          <path d="m6 6 12 12" />
-        </svg>
+        <CloseIcon class="size-4" />
       </button>
     </form>
   </div>

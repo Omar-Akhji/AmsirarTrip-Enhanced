@@ -1,0 +1,33 @@
+---
+interface Props {
+  class?: string;
+  [key: string]: unknown;
+}
+
+const { class: className = "size-5", ...rest } = Astro.props;
+---
+
+<svg
+  aria-hidden="true"
+  class:list={["solar solar-close-broken", className]}
+  fill="none"
+  stroke-width="1.5"
+  viewBox="0 0 24 24"
+  {...rest}
+>
+  <path
+    d="M19.0068 5L15.5068 8.5"
+    stroke="currentColor"
+    stroke-linecap="round"
+  />
+  <path
+    d="M12.0068 12L5.00684 19"
+    stroke="currentColor"
+    stroke-linecap="round"
+  />
+  <path
+    d="M19 19L5 5"
+    stroke="currentColor"
+    stroke-linecap="round"
+  />
+</svg>

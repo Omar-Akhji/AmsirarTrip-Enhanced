@@ -118,14 +118,40 @@
   --spacing-gap-tight: clamp(0.75rem, 0.6rem + 0.4vw, 1.125rem);
   --spacing-gutter: clamp(1rem, 0.6rem + 1.8vw, 2.5rem);
 
-  /* Fluid Typography */
+  /* Lumos Fluid Spacing & Section Rhythm */
+  --spacing-fluid-xs: clamp(0.5rem, 0.43rem + 0.3vw, 0.67rem);
+  --spacing-fluid-sm: clamp(0.75rem, 0.64rem + 0.47vw, 1.01rem);
+  --spacing-fluid-md: clamp(1rem, 0.85rem + 0.65vw, 1.36rem);
+  --spacing-fluid-lg: clamp(1.5rem, 1.28rem + 0.95vw, 2.03rem);
+  --spacing-fluid-xl: clamp(2rem, 1.7rem + 1.3vw, 2.73rem);
+  --spacing-fluid-2xl: clamp(2.5rem, 2.07rem + 1.85vw, 3.53rem);
+  --spacing-section-sm: clamp(2.5rem, 1.8rem + 2.5vw, 4rem);
+  --spacing-section-md: clamp(3.5rem, 2.5rem + 4vw, 6rem);
+  --spacing-section-lg: clamp(5rem, 3.5rem + 6vw, 9rem);
+  --spacing-site-margin: clamp(1rem, 0.43rem + 2.86vw, 3rem);
+
+  /* Lumos Fluid Typography Scale (WCAG 1.4.4 rem-anchored clamp) */
   /* stylelint-disable custom-property-pattern */
   --text-lead: clamp(1.05rem, 0.98rem + 0.35vw, 1.25rem);
   --text-lead--line-height: 1.7;
-  --text-fluid-base: clamp(0.9375rem, 0.9rem + 0.16vw, 1.0625rem);
-  --text-fluid-base--line-height: 1.65;
   --text-fluid-sm: clamp(0.8125rem, 0.8rem + 0.08vw, 0.875rem);
   --text-fluid-sm--line-height: 1.5;
+  --text-fluid-base: clamp(0.9375rem, 0.9rem + 0.16vw, 1.0625rem);
+  --text-fluid-base--line-height: 1.65;
+  --text-fluid-md: clamp(1.125rem, 1.05rem + 0.33vw, 1.31rem);
+  --text-fluid-md--line-height: 1.5;
+  --text-fluid-lg: clamp(1.25rem, 1.13rem + 0.52vw, 1.54rem);
+  --text-fluid-lg--line-height: 1.4;
+  --text-fluid-xl: clamp(1.5rem, 1.32rem + 0.77vw, 1.93rem);
+  --text-fluid-xl--line-height: 1.3;
+  --text-fluid-2xl: clamp(1.75rem, 1.48rem + 1.16vw, 2.4rem);
+  --text-fluid-2xl--line-height: 1.25;
+  --text-fluid-3xl: clamp(2.125rem, 1.73rem + 1.69vw, 3.08rem);
+  --text-fluid-3xl--line-height: 1.2;
+  --text-fluid-4xl: clamp(2.5rem, 1.95rem + 2.37vw, 3.84rem);
+  --text-fluid-4xl--line-height: 1.15;
+  --text-fluid-display: clamp(3rem, 2.22rem + 3.35vw, 4.9rem);
+  --text-fluid-display--line-height: 1.08;
   /* stylelint-enable custom-property-pattern */
 
   /* Motion */
@@ -154,6 +180,35 @@
 /* Opt-in cross-document view transitions (Astro) */
 @view-transition {
   navigation: auto;
+}
+
+/* --------------------------------------------------------------------------
+   Lumos Intrinsic Layout & Container Utilities (Tailwind v4 tree-shakeable)
+   -------------------------------------------------------------------------- */
+
+/* Intrinsic auto-fit grid: dynamic columns without breakpoint overrides */
+@utility grid-auto-fit {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--grid-min, 18rem)), 1fr));
+}
+
+/* Intrinsic auto-fill grid: preserves empty track slots */
+@utility grid-auto-fill {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--grid-min, 18rem)), 1fr));
+}
+
+/* Container context for component-level responsive reflow */
+@utility container-inline {
+  container-type: inline-size;
+}
+
+/* Intrinsic site container wrapper */
+@utility container-site {
+  inline-size: 100%;
+  max-inline-size: 90rem;
+  margin-inline: auto;
+  padding-inline: var(--spacing-site-margin);
 }
 
 /* ==========================================================================
@@ -716,6 +771,19 @@
     text-align: start;
   }
 
+  /* Typography-inheriting ASCII skeleton lines */
+  :is(.title, .type, .tagline) .ars-line {
+    line-height: inherit;
+  }
+
+  .description .ars-line {
+    line-height: inherit;
+  }
+
+  .description .ars-line + .ars-line {
+    margin-block-start: 0;
+  }
+
   /* Canvas overlay for ASCII skeleton shimmer: covers 100% of the element */
   .ars > canvas {
     position: absolute;
@@ -865,23 +933,10 @@
     --ars-wave: 0.75;
     --ars-band: 65%;
 
-    & .ars-line {
+    & :where(.ars-line) {
       line-height: 1;
       letter-spacing: -0.02em;
     }
-  }
-
-  /* Typography-inheriting ASCII skeleton lines */
-  :is(.title, .type, .tagline) .ars-line {
-    line-height: inherit;
-  }
-
-  .description .ars-line {
-    line-height: inherit;
-  }
-
-  .description .ars-line + .ars-line {
-    margin-block-start: 0;
   }
 
   /* ==========================================================================

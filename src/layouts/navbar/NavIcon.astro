@@ -1,6 +1,13 @@
 ---
 export type NavIconName =
-  "home" | "tours" | "excursions" | "about" | "contact" | "map-point" | "menu";
+  | "home"
+  | "tours"
+  | "excursions"
+  | "about"
+  | "contact"
+  | "map-point"
+  | "menu"
+  | "close";
 
 interface Props {
   name: NavIconName;
@@ -195,6 +202,32 @@ const { name, class: className = "" } = Astro.props;
       d="M4 12H7L20 12"
       stroke="currentColor"
       stroke-width="1.75"
+      stroke-linecap="round"
+    />
+  </svg>
+)}
+
+{name === "close" && (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke-width="1.5"
+    class:list={["solar solar-close-broken", className]}
+    aria-hidden="true"
+  >
+    <path
+      d="M19.0068 5L15.5068 8.5"
+      stroke="currentColor"
+      stroke-linecap="round"
+    />
+    <path
+      d="M12.0068 12L5.00684 19"
+      stroke="currentColor"
+      stroke-linecap="round"
+    />
+    <path
+      d="M19 19L5 5"
+      stroke="currentColor"
       stroke-linecap="round"
     />
   </svg>
