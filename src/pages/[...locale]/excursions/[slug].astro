@@ -14,7 +14,7 @@ import {
 import JsonLd from "../../../shared/ui/primitives/JsonLd.astro";
 
 const { slug } = Astro.params;
-const locale = Astro.currentLocale || "en";
+const locale = Astro.locals.locale;
 
 const excursionEntry =
   slug ? await getEntry({ collection: "excursions", id: slug.toLowerCase() }) : undefined;

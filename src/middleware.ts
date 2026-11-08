@@ -1,6 +1,8 @@
 import type { MiddlewareHandler } from "astro";
 import { generateNonce } from "./lib/csp";
 import { getSecurityHeaders } from "./lib/security-headers";
+import { DEFAULT_LOCALE, isLocale, type Locale } from "./i18n/locales";
+import { getLocalizedPath } from "./i18n/core";
 
 const STATIC_PATH_PREFIXES = [
   "/_astro/",
@@ -14,6 +16,22 @@ const STATIC_PATH_PREFIXES = [
 export const onRequest: MiddlewareHandler = async (context, next) => {
   const pathname = new URL(context.request.url).pathname;
   const isStaticAsset = STATIC_PATH_PREFIXES.some((prefix) => pathname.startsWith(prefix));
+
+  // Handle i18n routing validation & locale resolution
+  const localeParam = context.params["locale"];
+  if (localeParam !== undefined) {
+    if (localeParam === DEFAULT_LOCALE) {
+      const canonicalPath = getLocalizedPath(pathname, DEFAULT_LOCALE);
+      const search = new URL(context.request.url).search;
+      return context.redirect(canonicalPath + search, 301);
+    }
+    if (!isLocale(localeParam)) {
+      return context.rewrite("/404");
+    }
+    context.locals.locale = localeParam as Locale;
+  } else {
+    context.locals.locale = DEFAULT_LOCALE;
+  }
 
   // Generate a unique nonce per request for CSP script-src
   const nonce = generateNonce();

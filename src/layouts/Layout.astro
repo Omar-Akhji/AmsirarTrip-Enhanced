@@ -33,8 +33,7 @@ const {
 
 const pageTitle = title.includes("Amsirar Trip") ? title : `${title} | Amsirar Trip`;
 
-const locale: Locale =
-  Astro.currentLocale && isLocale(Astro.currentLocale) ? Astro.currentLocale : DEFAULT_LOCALE;
+const locale: Locale = Astro.locals.locale ?? (Astro.currentLocale && isLocale(Astro.currentLocale) ? Astro.currentLocale : DEFAULT_LOCALE);
 const site = Astro.site ?? Astro.url;
 const pathname = Astro.url.pathname;
 

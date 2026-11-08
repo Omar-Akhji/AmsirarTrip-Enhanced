@@ -4,7 +4,7 @@ import { useTranslations } from "../../i18n/utils";
 import Layout from "../../layouts/Layout.astro";
 import Button from "../../shared/ui/primitives/Button.astro";
 
-const locale = Astro.currentLocale || "en";
+const locale = Astro.locals.locale;
 const t = useTranslations(locale);
 Astro.response.status = 404;
 ---

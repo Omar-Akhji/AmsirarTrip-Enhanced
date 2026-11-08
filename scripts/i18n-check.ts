@@ -1,5 +1,5 @@
-import { readFileSync } from "node:fs";
-import { Glob } from "bun";
+import { readdirSync, readFileSync, statSync } from "node:fs";
+import { join } from "node:path";
 
 const root = process.cwd();
 const LOCALES = ["en", "fr", "de", "es"] as const;
@@ -64,7 +64,9 @@ for (const loc of LOCALES) {
   for (const [k, type] of enLeaves) {
     if (targetLeaves.has(k) && targetLeaves.get(k) !== type) {
       hasError = true;
-      console.error(`\n❌ [${loc}] Type mismatch on key "${k}": expected ${type}, got ${targetLeaves.get(k)}`);
+      console.error(
+        `\n❌ [${loc}] Type mismatch on key "${k}": expected ${type}, got ${targetLeaves.get(k)}`,
+      );
     }
   }
 }
@@ -73,18 +75,33 @@ for (const loc of LOCALES) {
 console.log(`[i18n-check] Scanning codebase for translation key usage...`);
 const usedKeys = new Map<string, string>(); // key -> file
 
-const codeGlob = new Glob("src/**/*.{astro,vue,ts}");
-for (const file of codeGlob.scanSync(root)) {
-  const normFile = file.replaceAll("\\", "/");
-  if (normFile.startsWith("src/i18n/") || normFile.startsWith("src/locales/")) continue;
+function scanFiles(dir: string): string[] {
+  const results: string[] = [];
+  const entries = readdirSync(dir);
+  for (const entry of entries) {
+    const fullPath = join(dir, entry);
+    const stat = statSync(fullPath);
+    if (stat.isDirectory()) {
+      results.push(...scanFiles(fullPath));
+    } else if (/\.(astro|vue|ts)$/.test(entry)) {
+      results.push(fullPath);
+    }
+  }
+  return results;
+}
 
-  const content = readFileSync(`${root}/${file}`, "utf8");
+const codeFiles = scanFiles(join(root, "src"));
+for (const fullPath of codeFiles) {
+  const normFile = fullPath.replaceAll("\\", "/");
+  if (normFile.includes("/src/i18n/") || normFile.includes("/src/locales/")) continue;
+
+  const content = readFileSync(fullPath, "utf8");
 
   // Matches t("key") or t('key') or t.raw("key") or t.raw('key')
   const matches = content.matchAll(/\bt(?:\.raw)?\(\s*["']([a-zA-Z0-9_.]+)["']/g);
   for (const m of matches) {
     const key = m[1];
-    if (!usedKeys.has(key)) {
+    if (key && !usedKeys.has(key)) {
       usedKeys.set(key, normFile);
     }
   }

@@ -6,7 +6,9 @@ test.describe("i18n routing & document standards", () => {
   for (const locale of LOCALES) {
     const path = locale === "en" ? "/" : `/${locale}`;
 
-    test(`renders root page for locale [${locale}] with correct html lang and hreflang links`, async ({ page }) => {
+    test(`renders root page for locale [${locale}] with correct html lang and hreflang links`, async ({
+      page,
+    }) => {
       const response = await page.goto(path);
       expect(response?.status()).toBe(200);
 
@@ -27,7 +29,7 @@ test.describe("i18n routing & document standards", () => {
   });
 
   test("default locale prefix (/en/about) redirects to canonical (/about)", async ({ page }) => {
-    const response = await page.goto("/en/about");
+    await page.goto("/en/about");
     // Either redirected response or landed on /about
     expect(page.url()).not.toContain("/en/about");
     expect(new URL(page.url()).pathname).toBe("/about");

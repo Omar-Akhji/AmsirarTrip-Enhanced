@@ -16,7 +16,7 @@ import JsonLd from "../../../shared/ui/primitives/JsonLd.astro";
 import TripCard from "../../../shared/ui/widgets/TripCard.astro";
 
 const { slug } = Astro.params;
-const locale = Astro.currentLocale || "en";
+const locale = Astro.locals.locale;
 
 const tourEntry =
   slug ? await getEntry({ collection: "tours", id: slug.toLowerCase() }) : undefined;
