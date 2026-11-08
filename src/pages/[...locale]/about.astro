@@ -13,8 +13,8 @@ const title = t("about.meta.title");
 const description = t("about.meta.description");
 
 const breadcrumbJsonLd = generateBreadcrumbJsonLd([
-  { name: t("nav.home") || "Home", url: getRelativeLocaleUrl(locale, "/") },
-  { name: t("nav.about") || "About Us", url: Astro.url.pathname },
+  { name: t("nav.home"), url: getRelativeLocaleUrl(locale, "/") },
+  { name: t("nav.about"), url: Astro.url.pathname },
 ]);
 
 const aboutPageJsonLd = generateAboutPageJsonLd({

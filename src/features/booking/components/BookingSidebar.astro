@@ -12,9 +12,9 @@ const { locale = "en" } = Astro.props;
 const t = useTranslations(locale);
 
 const perks = [
-  { id: "experts", text: t("booking.perkLocalExperts", "Licensed local drivers & guides") },
-  { id: "flexible", text: t("booking.perkFlexible", "Flexible departures from Marrakech") },
-  { id: "support", text: t("booking.perkSupport", "Fast responses within 24 hours") },
+  { id: "experts", text: t("booking.perkLocalExperts") },
+  { id: "flexible", text: t("booking.perkFlexible") },
+  { id: "support", text: t("booking.perkSupport") },
 ];
 ---
 
@@ -29,10 +29,10 @@ const perks = [
     <div class="space-y-4 sm:space-y-6">
       <hgroup class="flex flex-col items-center gap-2 sm:gap-2.5 text-center">
         <p class="font-mono text-xs font-semibold tracking-[0.16em] sm:tracking-[0.2em] text-orange-400 uppercase">
-          {t("booking.checkBadge", "Check us")}
+          {t("booking.checkBadge")}
         </p>
         <h3 class="mbs-1 font-sans text-2xl font-semibold tracking-tight sm:text-3xl text-balance">
-          {t("booking.checkTitle", "Find us on TripAdvisor")}
+          {t("booking.checkTitle")}
         </h3>
         <div class="inline-flex size-24 sm:size-28 lg:size-32 items-center justify-center rounded-full border border-slate-800 bg-slate-900/60 p-3 sm:p-4 shadow-inner ring-1 ring-white/5">
           <TripAdvisorIcon class="size-16 sm:size-20 text-white" />
@@ -44,18 +44,15 @@ const perks = [
           5.0
         </div>
         <div class="font-sans text-xs text-slate-200">
-          {t("booking.ratingLabel", "Average guest rating")}
+          {t("booking.ratingLabel")}
           <span class="block font-sans text-xs font-medium text-amber-200">
-            {t("booking.reviewCount", "Based on 180+ verified reviews")}
+            {t("booking.reviewCount")}
           </span>
         </div>
       </div>
 
       <p class="font-sans text-xs sm:text-sm leading-relaxed text-slate-300 text-pretty text-center sm:text-start">
-        {t(
-          "booking.checkCopy",
-          "Read honest reviews and, if you prefer, request your booking directly through our TripAdvisor listing.",
-        )}
+        {t("booking.checkCopy")}
       </p>
 
       <address class="not-italic">
@@ -82,9 +79,9 @@ const perks = [
         rel="noopener noreferrer"
         variant="tripadvisor"
         class="uppercase tracking-wider text-xs px-8 py-3"
-        aria-label={t("booking.tripadvisorCtaAria", "Open TripAdvisor reviews in new tab")}
+        aria-label={t("booking.tripadvisorCtaAria")}
       >
-        <span>{t("booking.checkCta", "Check reviews & book")}</span>
+        <span>{t("booking.checkCta")}</span>
         <SquareTopDownIcon
           class="size-4"
           aria-hidden="true"

@@ -128,7 +128,7 @@ const routeMap = getExcursionRouteMap(excursionKey, excursion?.location ?? "Moro
     >
       <hgroup>
         <p class="font-sans text-xs font-bold tracking-wider text-orange-700 uppercase">
-          About This Excursion
+          {t("excursion.common.kickerAbout")}
         </p>
         <h3
           id="excursion-overview-heading"
@@ -146,6 +146,7 @@ const routeMap = getExcursionRouteMap(excursionKey, excursion?.location ?? "Moro
 
     {program.length > 0 && (
       <ExcursionProgram
+        kicker={t("excursion.common.kickerSchedule")}
         program={program}
         programTitle={t("excursion.common.programTitle")}
       />

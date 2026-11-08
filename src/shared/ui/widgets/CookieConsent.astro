@@ -40,10 +40,7 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
           class="text-xs leading-relaxed text-zinc-300 sm:text-[13px]"
           id="cookie-banner-desc"
         >
-          {t(
-            "cookieConsent.description",
-            "We use essential cookies to maintain secure sessions and keep your chosen language. With your consent, we also collect anonymized metrics to improve tour itineraries.",
-          )}{" "}
+          {t("cookieConsent.description")}{" "}
           <a
             class="font-medium text-orange-400 underline underline-offset-4 decoration-orange-400/40 transition-colors hover:text-orange-300 hover:decoration-orange-300 focus-visible:outline-2 focus-visible:outline-orange-400 rounded-xs"
             href={privacyPolicyHref}
@@ -142,12 +139,7 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
     >
       <div class="flex flex-col gap-4 p-5 sm:p-6 text-sm text-zinc-300">
         <div class="rounded-xl border border-white/10 bg-white/3 p-4 text-xs leading-relaxed text-zinc-300 sm:text-[13px]">
-          <p>
-            {t(
-              "cookieConsent.modalSubtitle",
-              "Choose which cookies you allow on your device. You can update or withdraw your consent at any time.",
-            )}
-          </p>
+          <p>{t("cookieConsent.modalSubtitle")}</p>
         </div>
 
         <div class="flex flex-col gap-3">
@@ -163,10 +155,7 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
                   </span>
                 </div>
                 <p class="pbs-2 text-xs leading-relaxed text-zinc-300 sm:text-[13px]">
-                  {t(
-                    "cookieConsent.necessaryDesc",
-                    "Required for secure navigation, session security, and language routing. These cannot be disabled.",
-                  )}
+                  {t("cookieConsent.necessaryDesc")}
                 </p>
               </div>
 
@@ -196,10 +185,7 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
                   </span>
                 </label>
                 <p class="pbs-2 text-xs leading-relaxed text-zinc-300 sm:text-[13px]">
-                  {t(
-                    "cookieConsent.analyticsDesc",
-                    "Collects anonymous page visit counts and speed metrics to help us see which tour itineraries are popular and improve site performance.",
-                  )}
+                  {t("cookieConsent.analyticsDesc")}
                 </p>
               </div>
 
@@ -227,10 +213,7 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
                   </span>
                 </label>
                 <p class="pbs-2 text-xs leading-relaxed text-zinc-300 sm:text-[13px]">
-                  {t(
-                    "cookieConsent.functionalDesc",
-                    "Remembers your choices (such as interactive itinerary map views and currency selections) across visits.",
-                  )}
+                  {t("cookieConsent.functionalDesc")}
                 </p>
               </div>
 

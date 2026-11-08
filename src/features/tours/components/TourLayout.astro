@@ -76,9 +76,10 @@ const arrivalLabel = t("tours.arrivalLabel");
 const days = [];
 for (let index = 1; index <= duration; index++) {
   const dayKey = `${tourKey}.day${index}`;
-  let dayTitle = t.has(`${dayKey}.title`) ? t(`${dayKey}.title`) : `Day ${index}`;
+  const defaultDayTitle = `${t("tours.day")} ${index}`;
+  let dayTitle = t.has(`${dayKey}.title`) ? t(`${dayKey}.title`) : defaultDayTitle;
   if (!dayTitle || dayTitle === `${dayKey}.title`) {
-    dayTitle = `Day ${index}`;
+    dayTitle = defaultDayTitle;
   }
   const rawDayText = t.raw(`${dayKey}.text`);
   const dayText = Array.isArray(rawDayText) ? (rawDayText as string[]) : [];
@@ -171,7 +172,7 @@ const routeMap = getTourRouteMap(tourKey, startCity, endCity, dossierTitle);
     >
       <hgroup>
         <p class="font-sans text-xs font-bold tracking-wider text-orange-700 uppercase">
-          About This Route
+          {t("tours.kickerAbout")}
         </p>
         <h3
           id="tour-overview-heading"
@@ -196,7 +197,7 @@ const routeMap = getTourRouteMap(tourKey, startCity, endCity, dossierTitle);
         arrivalLabel={arrivalLabel}
         days={days}
         defaultTitle={t("tours.itinerary")}
-        kicker="Daily Schedule"
+        kicker={t("tours.kickerSchedule")}
         mealsLabel={mealsLabel}
       />
     </section>
@@ -215,9 +216,7 @@ const routeMap = getTourRouteMap(tourKey, startCity, endCity, dossierTitle);
       idPrefix="tour"
       pricingTitle={pricingTitle}
       priceLabel={priceLabel}
-      price={
-        seo.price ?? { label: priceLabel, note: "Private transport and licensed guides included" }
-      }
+      price={seo.price ?? { label: priceLabel, note: t("tours.priceNote") }}
       reserveNow={reserveNow}
       formatComparisonTitle={t("tours.formatComparisonTitle")}
       privateOption={t("tours.privateOption")}

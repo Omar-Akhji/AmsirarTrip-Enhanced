@@ -50,7 +50,7 @@ const handleVideoClick = () => {
 <template>
   <section
     id="video"
-    :aria-label="t('video.sectionLabel', 'Morocco Travel Video')"
+    :aria-label="t('video.sectionLabel')"
     class="relative overflow-hidden py-8 text-white inline-full sm:py-12 lg:py-16"
   >
     <div class="mx-auto px-4 max-inline-7xl sm:px-6 lg:px-8 2xl:max-inline-360 3xl:max-inline-420">
@@ -238,9 +238,7 @@ const handleVideoClick = () => {
                 'bg-black/0 pointer-fine:hover:bg-black/15'
               : 'bg-black/30 pointer-fine:hover:bg-black/45',
             ]"
-            :aria-label="
-              isPlaying ? t('video.pause', 'Pause video') : t('video.playAria', 'Play video')
-            "
+            :aria-label="t(isPlaying ? 'video.pause' : 'video.playAria')"
             @click="handleVideoClick"
           >
             <div

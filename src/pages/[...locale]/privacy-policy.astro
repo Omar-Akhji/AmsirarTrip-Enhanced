@@ -13,7 +13,7 @@ const title = t("legal.privacy.meta.title");
 const description = t("legal.privacy.meta.description");
 
 const breadcrumbJsonLd = generateBreadcrumbJsonLd([
-  { name: t("nav.home") || "Home", url: getRelativeLocaleUrl(locale, "/") },
+  { name: t("nav.home"), url: getRelativeLocaleUrl(locale, "/") },
   { name: title, url: Astro.url.pathname },
 ]);
 ---

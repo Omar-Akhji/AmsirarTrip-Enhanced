@@ -14,8 +14,8 @@ const title = t("contact.meta.title");
 const description = t("contact.meta.description");
 
 const breadcrumbJsonLd = generateBreadcrumbJsonLd([
-  { name: t("nav.home") || "Home", url: getRelativeLocaleUrl(locale, "/") },
-  { name: t("nav.contact") || "Contact", url: Astro.url.pathname },
+  { name: t("nav.home"), url: getRelativeLocaleUrl(locale, "/") },
+  { name: t("nav.contact"), url: Astro.url.pathname },
 ]);
 
 const contactPageJsonLd = generateContactPageJsonLd({

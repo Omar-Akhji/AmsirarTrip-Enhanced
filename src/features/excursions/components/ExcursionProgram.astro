@@ -11,9 +11,10 @@ interface Stage {
 interface Props {
   readonly program: readonly Stage[];
   readonly programTitle?: string | undefined;
+  readonly kicker?: string | undefined;
 }
 
-const { program, programTitle = "Day Trip Schedule" } = Astro.props;
+const { program, programTitle = "Day Trip Schedule", kicker = "Schedule & Stops" } = Astro.props;
 const STAGE_DELAYS = [
   "delay-0",
   "delay-[80ms]",
@@ -34,9 +35,7 @@ const STAGE_DELAYS = [
   data-animate="fade-up"
 >
   <hgroup class="mbe-8">
-    <p class="font-sans text-xs font-bold tracking-wider text-orange-700 uppercase">
-      Schedule & Stops
-    </p>
+    <p class="font-sans text-xs font-bold tracking-wider text-orange-700 uppercase">{kicker}</p>
     <h3
       id="excursion-itinerary-heading"
       class="mbs-1 text-xl font-bold tracking-tight text-stone-900 sm:text-2xl md:text-3xl"

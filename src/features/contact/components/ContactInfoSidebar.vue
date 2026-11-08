@@ -8,18 +8,13 @@ const { t } = useTranslation();
 <template>
   <hgroup>
     <p class="font-mono text-xs font-semibold tracking-[0.45em] text-orange-200 uppercase">
-      {{ t("contact.form.infoBadge", "Need details?") }}
+      {{ t("contact.form.infoBadge") }}
     </p>
     <h3 class="mbs-3 text-2xl font-semibold sm:text-3xl">
-      {{ t("contact.form.infoTitle", "Plan handcrafted experiences") }}
+      {{ t("contact.form.infoTitle") }}
     </h3>
     <p class="mbs-4 font-mono text-xs leading-relaxed text-slate-200 sm:text-sm">
-      {{
-        t(
-          "contact.form.infoCopy",
-          "Our Marrakech team answers every message personally and can help with custom itineraries, desert camps, or last-minute transfers.",
-        )
-      }}
+      {{ t("contact.form.infoCopy") }}
     </p>
   </hgroup>
 
@@ -34,7 +29,7 @@ const { t } = useTranslation();
         </span>
         <div class="self-start">
           <p class="font-mono text-xs tracking-wide text-slate-300 uppercase">
-            {{ t("contact.form.info.address", "Visit") }}
+            {{ t("contact.form.info.address") }}
           </p>
           <p class="mbs-1 font-mono text-xs leading-relaxed text-white sm:text-sm">
             {{ agencyProfile.address.fullAddress }}
@@ -51,7 +46,7 @@ const { t } = useTranslation();
         </span>
         <div class="self-start">
           <p class="font-mono text-xs tracking-wide text-slate-300 uppercase">
-            {{ t("contact.form.info.phone", "Call") }}
+            {{ t("contact.form.info.phone") }}
           </p>
           <a
             v-for="phone in agencyProfile.contact.phones"
@@ -73,7 +68,7 @@ const { t } = useTranslation();
         </span>
         <div class="self-start">
           <p class="font-mono text-xs tracking-wide text-slate-300 uppercase">
-            {{ t("contact.form.info.email", "Email") }}
+            {{ t("contact.form.info.email") }}
           </p>
           <a
             v-for="email in agencyProfile.contact.emails"
@@ -89,8 +84,6 @@ const { t } = useTranslation();
   </address>
 
   <p class="mbs-8 font-mono text-xs text-slate-400">
-    {{
-      t("contact.form.infoFooter", `Available every day from ${agencyProfile.contact.workingHours}`)
-    }}
+    {{ t("contact.form.infoFooter") }}
   </p>
 </template>

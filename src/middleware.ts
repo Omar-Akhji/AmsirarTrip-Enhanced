@@ -17,6 +17,19 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
   const pathname = new URL(context.request.url).pathname;
   const isStaticAsset = STATIC_PATH_PREFIXES.some((prefix) => pathname.startsWith(prefix));
 
+  if (isStaticAsset) {
+    const response = await next();
+    const newResponse = new Response(response.body, response);
+    newResponse.headers.set("X-Content-Type-Options", "nosniff");
+    newResponse.headers.set("Cross-Origin-Resource-Policy", "same-origin");
+    if (pathname.startsWith("/_astro/")) {
+      newResponse.headers.set("Cache-Control", "public, max-age=31536000, immutable");
+    } else {
+      newResponse.headers.set("Cache-Control", "public, max-age=2592000");
+    }
+    return newResponse;
+  }
+
   // Handle i18n routing validation & locale resolution
   const localeParam = context.params["locale"];
   if (localeParam === undefined) {
@@ -38,18 +51,6 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
   context.locals.cspNonce = nonce;
 
   const response = await next();
-
-  if (isStaticAsset) {
-    const newResponse = new Response(response.body, response);
-    newResponse.headers.set("X-Content-Type-Options", "nosniff");
-    newResponse.headers.set("Cross-Origin-Resource-Policy", "same-origin");
-    if (pathname.startsWith("/_astro/")) {
-      newResponse.headers.set("Cache-Control", "public, max-age=31536000, immutable");
-    } else {
-      newResponse.headers.set("Cache-Control", "public, max-age=2592000");
-    }
-    return newResponse;
-  }
 
   const host = new URL(context.request.url).hostname;
   const headers = getSecurityHeaders(nonce, host);

@@ -8,64 +8,39 @@ import QuestionCircleIcon from "@/shared/ui/icons/QuestionCircleIcon.astro";
 import StatHighlights from "@/shared/ui/widgets/StatHighlights.astro";
 import TripCard from "@/shared/ui/widgets/TripCard.astro";
 
-const locale = Astro.currentLocale || "en";
+const locale = Astro.locals.locale;
 const t = useTranslations(locale);
 const excursions = await getExcursionsData();
 
 const excursionsGridTitle = splitTitleAccent(t("excursion.blog.lgTitle"));
-const excursionsFaqTitle = splitTitleAccent(
-  t("excursion.faq.title") || "Common Questions About Marrakech Day Excursions",
-);
+const excursionsFaqTitle = splitTitleAccent(t("excursion.faq.title"));
 
 const highlightStats = [
   {
     id: "routes",
     value: "6+",
-    label: t("excursion.stats.routes") || "Signature excursions",
-    description:
-      t("excursion.stats.routesDesc") || "Handpicked day trips from waterfalls to desert sunsets.",
+    label: t("excursion.stats.routes"),
+    description: t("excursion.stats.routesDesc"),
   },
   {
     id: "local",
     value: "100%",
-    label: t("excursion.stats.local") || "Local expertise",
-    description:
-      t("excursion.stats.localDesc") || "Guided by Marrakech-based storytellers and drivers.",
+    label: t("excursion.stats.local"),
+    description: t("excursion.stats.localDesc"),
   },
   {
     id: "support",
     value: "24/7",
-    label: t("excursion.stats.support") || "On-trip support",
-    description:
-      t("excursion.stats.supportDesc") || "Flexible departures and concierge-style planning.",
+    label: t("excursion.stats.support"),
+    description: t("excursion.stats.supportDesc"),
   },
 ];
 
 const EXCURSIONS_FAQS = [
-  {
-    q: "excursion.faq.q1",
-    defQ: "What day excursions can I do from Marrakech?",
-    a: "excursion.faq.a1",
-    defA: "From Marrakech you can book day excursions to Ouzoud Waterfalls (Africa's tallest accessible waterfall at 110 m), the Agafay Stone Desert with its lunar landscape 40 km from the city, the Ourika Valley with Berber villages and Atlas foothills, and the Ait Benhaddou UNESCO kasbah. All excursions depart in the morning from Marrakech and return the same evening.",
-  },
-  {
-    q: "excursion.faq.q2",
-    defQ: "How far is the Agafay Desert from Marrakech?",
-    a: "excursion.faq.a2",
-    defA: "The Agafay Desert is approximately 40 km southwest of Marrakech, about a 45-minute drive. It is a rocky, arid plateau at the foothills of the High Atlas—distinct from the sandy Sahara but equally dramatic. Our Agafay day excursion includes camel trekking, sunset views over the Atlas range, and optional dinner at a desert camp.",
-  },
-  {
-    q: "excursion.faq.q3",
-    defQ: "Are the excursions guided and in English?",
-    a: "excursion.faq.a3",
-    defA: "Yes. All Amsirar Trip excursions are fully guided in English (also available in French, Spanish, and German upon request). Each excursion includes a licensed Moroccan guide, private transportation in an air-conditioned 4×4, and hotel pickup and drop-off within Marrakech. Group sizes are kept small for a personalised experience.",
-  },
-  {
-    q: "excursion.faq.q4",
-    defQ: "Can I combine a Sahara camel trek with a day excursion?",
-    a: "excursion.faq.a4",
-    defA: "Yes. Amsirar Trip can combine day excursions with a multi-day Sahara tour. For example, you could do an Ouzoud Waterfalls day trip followed by a 3-day Merzouga desert tour, or an Agafay sunset excursion as an add-on to a longer itinerary. Contact us to build a custom Morocco itinerary that fits your available days.",
-  },
+  { q: "excursion.faq.q1", a: "excursion.faq.a1" },
+  { q: "excursion.faq.q2", a: "excursion.faq.a2" },
+  { q: "excursion.faq.q3", a: "excursion.faq.a3" },
+  { q: "excursion.faq.q4", a: "excursion.faq.a4" },
 ] as const;
 
 import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
@@ -135,7 +110,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
           >
             <TripCard
               badge={t("excursion.card.category")}
-              tourTypeBadge={t("tours.bothAvailable", "Private & Shared")}
+              tourTypeBadge={t("tours.bothAvailable")}
               description={t(excursion.description)}
               exploreLink={t("excursion.exploreLink")}
               item={{ image: excursion.image, imageAlt: t(excursion.alt), route: excursion.route }}
@@ -167,7 +142,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
           )}
         </h2>
         <p class="mt-2 border-s-2 border-orange-600 ps-4 py-0.5 text-sm sm:text-base text-stone-600 leading-relaxed max-w-[62ch] text-pretty">
-          {t("excursion.faq.subtitle") || "Plan your perfect day trip from Marrakech."}
+          {t("excursion.faq.subtitle")}
         </p>
       </hgroup>
 
@@ -195,7 +170,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
                       aria-hidden="true"
                       class="size-5 shrink-0 text-orange-600"
                     />
-                    <span>{t(faq.q) || faq.defQ}</span>
+                    <span>{t(faq.q)}</span>
                   </span>
                   <span
                     aria-hidden="true"
@@ -210,7 +185,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
                   itemscope
                   itemtype="https://schema.org/Answer"
                 >
-                  <p itemprop="text">{t(faq.a) || faq.defA}</p>
+                  <p itemprop="text">{t(faq.a)}</p>
                 </div>
               </details>
             </dt>

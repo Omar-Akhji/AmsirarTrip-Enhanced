@@ -57,7 +57,9 @@
       "care": "Kundenbetreuung",
       "satisfaction": "Kundenzufriedenheit"
     },
-    "featured": { "title": "Empfohlene Wüstentouren & Expeditionen" }
+    "featured": {
+      "title": "Empfohlene Wüstentouren & Expeditionen"
+    }
   },
   "tours": {
     "meta": {
@@ -71,7 +73,9 @@
     "activitiesLabel": "Aktivitäten",
     "arrivalLabel": "Ankunftszeit",
     "featured": "Empfohlen",
-    "category": { "departures": "Abfahrten" },
+    "category": {
+      "departures": "Abfahrten"
+    },
     "cities": {
       "marrakech": "Marrakesch",
       "casablanca": "Casablanca",
@@ -243,7 +247,10 @@
       "a3": "Die beste Reisezeit ist von Oktober bis April mit angenehmen Tagestemperaturen zwischen 18°C und 28°C. Im Hochsommer kann es in der Sahara über 40°C heiß werden.",
       "q4": "Werden die Touren privat oder in Gruppen durchgeführt?",
       "a4": "Wir bieten sowohl exklusive private VIP-Reisen als auch preisgünstige Kleingruppenreisen mit 8 bis 14 Personen an."
-    }
+    },
+    "kickerAbout": "Über diese Route",
+    "kickerSchedule": "Tagesprogramm",
+    "priceNote": "Privater Transport und lizensierte Guides inbegriffen"
   },
   "excursion": {
     "404": {
@@ -274,7 +281,9 @@
       "included": "Inbegriffene Leistungen",
       "pricingTitle": "Reservierung & Preise",
       "priceLabel": "Ab-Preis",
-      "faqTitle": "Häufig gestellte Fragen"
+      "faqTitle": "Häufig gestellte Fragen",
+      "kickerAbout": "Über diesen Ausflug",
+      "kickerSchedule": "Zeitplan & Stationen"
     },
     "stats": {
       "routes": "Signature-Ausflüge",
@@ -284,7 +293,9 @@
       "support": "Unterstützung unterwegs",
       "supportDesc": "Flexible Abfahrten und Concierge-Planung."
     },
-    "card": { "category": "Ganztägig" },
+    "card": {
+      "category": "Ganztägig"
+    },
     "exploreLink": "Details ansehen",
     "sidebar": {
       "alt": "Amsirar Flughafentransfer-Fahrzeug",
@@ -445,7 +456,11 @@
       "infoBadge": "Details benötigt?",
       "infoTitle": "Planen Sie handgefertigte Erlebnisse",
       "infoCopy": "Unser Team in Marrakesch beantwortet jede Nachricht persönlich und kann bei individuellen Reiseplänen, Wüstencamps oder Last-Minute-Transfers helfen.",
-      "info": { "address": "Besuchen", "phone": "Anrufen", "email": "E-Mail" },
+      "info": {
+        "address": "Besuchen",
+        "phone": "Anrufen",
+        "email": "E-Mail"
+      },
       "infoFooter": "Täglich von 09:00 bis 21:00 Uhr GMT+1 verfügbar",
       "details": "Kontaktdaten",
       "placeholders": {
@@ -469,8 +484,13 @@
       "address": "Adresse",
       "message": "Nachricht"
     },
-    "location": { "smTitle": "Finden Sie Uns", "lgTitle": "Unser Standort" },
-    "methods": { "title": "Direkte Kommunikationskanäle" },
+    "location": {
+      "smTitle": "Finden Sie Uns",
+      "lgTitle": "Unser Standort"
+    },
+    "methods": {
+      "title": "Direkte Kommunikationskanäle"
+    },
     "map": {
       "placeholderTitle": "Interaktive Karte anzeigen",
       "placeholderDesc": "Erkunden Sie unseren genauen Bürostandort in Marrakesch und Sehenswürdigkeiten in der Nähe.",
@@ -1376,7 +1396,9 @@
         "accommodation": "Wüstencamp in Merzouga",
         "meals": "Frühstück & Abendessen inbegriffen"
       },
-      "day6": { "meals": "Frühstück inbegriffen" }
+      "day6": {
+        "meals": "Frühstück inbegriffen"
+      }
     },
     "tour3": {
       "day1": {
@@ -1410,15 +1432,21 @@
         "accommodation": "Riad/Hotel in Fès",
         "meals": "Frühstück inbegriffen"
       },
-      "day5": { "meals": "Frühstück inbegriffen" }
+      "day5": {
+        "meals": "Frühstück inbegriffen"
+      }
     },
     "tour5": {
-      "day1": { "accommodation": "Riad/Hotel in Marrakech" },
+      "day1": {
+        "accommodation": "Riad/Hotel in Marrakech"
+      },
       "day2": {
         "accommodation": "Riad/Hotel in Marrakech",
         "meals": "Frühstück inbegriffen"
       },
-      "day3": { "accommodation": "Hotel/Riad im Dades-Tal" },
+      "day3": {
+        "accommodation": "Hotel/Riad im Dades-Tal"
+      },
       "day4": {
         "accommodation": "Wüstencamp (Standard oder Luxus)",
         "meals": "Frühstück und Abendessen inbegriffen"
@@ -1443,7 +1471,9 @@
         "accommodation": "Hotel in Casablanca",
         "meals": "Frühstück inbegriffen"
       },
-      "day10": { "meals": "Frühstück inbegriffen" }
+      "day10": {
+        "meals": "Frühstück inbegriffen"
+      }
     },
     "tour6": {
       "day1": {
@@ -1465,7 +1495,9 @@
       }
     },
     "sending": "Wird gesendet...",
-    "errors": { "captcha": "Recaptcha-Überprüfung ist erforderlich" },
+    "errors": {
+      "captcha": "Recaptcha-Überprüfung ist erforderlich"
+    },
     "personalDetails": "Angaben zu den Gästen",
     "tripDetails": "Reisedetails",
     "placeholders": {

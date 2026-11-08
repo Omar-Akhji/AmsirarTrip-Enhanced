@@ -253,7 +253,7 @@ onUnmounted(() => {
             for="newsletter-status"
             class="sr-only"
           >
-            {{ t("footer.newsletterStatus", "Subscription status") }}
+            {{ t("footer.newsletterStatus") }}
           </label>
           <output
             v-if="statusKey"

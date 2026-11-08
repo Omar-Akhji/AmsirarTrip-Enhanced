@@ -61,7 +61,10 @@ const formattedMonthYear = computed(() => {
       currentMonth.value,
     );
   } catch {
-    return currentMonth.value.toLocaleDateString("en-US", { month: "long", year: "numeric" });
+    return currentMonth.value.toLocaleDateString(activeLocale.value, {
+      month: "long",
+      year: "numeric",
+    });
   }
 });
 
@@ -88,7 +91,7 @@ const formattedSelectedDate = computed(() => {
       year: "numeric",
     }).format(selectedDate.value);
   } catch {
-    return selectedDate.value.toLocaleDateString();
+    return selectedDate.value.toLocaleDateString(activeLocale.value);
   }
 });
 
@@ -165,7 +168,7 @@ watch(
         <button
           type="button"
           class="flex size-8 items-center justify-center rounded-lg text-stone-600 transition-colors focus:ring-0 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-1 pointer-fine:hover:bg-stone-100 pointer-fine:hover:text-stone-900"
-          :aria-label="t('calendar.prevMonth', 'Previous month')"
+          :aria-label="t('calendar.prevMonth')"
           @click="navigateMonth('prev')"
         >
           <svg
@@ -212,7 +215,7 @@ watch(
         <button
           type="button"
           class="flex size-8 items-center justify-center rounded-lg text-stone-600 transition-colors focus:ring-0 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-1 pointer-fine:hover:bg-stone-100 pointer-fine:hover:text-stone-900"
-          :aria-label="t('calendar.nextMonth', 'Next month')"
+          :aria-label="t('calendar.nextMonth')"
           @click="navigateMonth('next')"
         >
           <svg
@@ -252,7 +255,7 @@ watch(
                 type="button"
                 :disabled="day.isDisabled"
                 :aria-label="
-                  day.date.toLocaleDateString(activeLocale, {
+                  day.date.toLocaleDateString(activeLocale.value, {
                     month: 'short',
                     day: 'numeric',
                     year: 'numeric',
@@ -304,9 +307,11 @@ watch(
           <div class="flex-1 min-inline-0">
             <p class="font-mono text-[11px] font-medium tracking-wider text-stone-500 uppercase">
               {{
-                initialDate && isSameDay(selectedDate, initialDate) ?
-                  t("calendar.currentDate", "Current Date")
-                : t("calendar.selectedDate", "Selected Date")
+                t(
+                  initialDate && isSameDay(selectedDate, initialDate) ? "calendar.currentDate" : (
+                    "calendar.selectedDate"
+                  ),
+                )
               }}
             </p>
             <p class="truncate font-mono text-xs font-semibold text-stone-900 capitalize">
@@ -322,7 +327,7 @@ watch(
           class="rounded-lg border border-stone-200/90 bg-stone-50 px-3 py-2 font-mono text-xs font-semibold text-stone-700 transition-colors focus:ring-0 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-1 pointer-fine:hover:border-stone-300 pointer-fine:hover:bg-stone-100"
           @click="goToToday"
         >
-          {{ t("calendar.today", "Today") }}
+          {{ t("calendar.today") }}
         </button>
 
         <div class="flex gap-2">
@@ -331,7 +336,7 @@ watch(
             class="rounded-lg border border-stone-200/90 bg-white px-4 py-2 font-mono text-xs font-semibold text-stone-700 transition-colors duration-150 focus:ring-0 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-1 pointer-fine:hover:border-stone-300 pointer-fine:hover:bg-stone-50"
             @click="emit('close')"
           >
-            {{ t("calendar.cancel", "Cancel") }}
+            {{ t("calendar.cancel") }}
           </button>
           <button
             :disabled="!selectedDate || (initialDate && isSameDay(selectedDate, initialDate))"
@@ -339,7 +344,7 @@ watch(
             class="rounded-lg bg-linear-to-br from-amber-orange to-orange px-4 py-2 font-mono text-xs font-semibold text-white shadow-2xs shadow-orange/20 transition-all duration-150 focus:ring-0 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-40 pointer-fine:hover:shadow-sm pointer-fine:hover:shadow-orange/30 pointer-fine:hover:brightness-105"
             @click="handleApply"
           >
-            {{ t("calendar.apply", "Apply") }}
+            {{ t("calendar.apply") }}
           </button>
         </div>
       </div>

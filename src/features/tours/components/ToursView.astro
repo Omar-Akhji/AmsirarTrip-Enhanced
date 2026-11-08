@@ -8,67 +8,39 @@ import TripCard from "@/shared/ui/widgets/TripCard.astro";
 import QuestionCircleIcon from "@/shared/ui/icons/QuestionCircleIcon.astro";
 import { getToursData } from "../data/tours-data";
 
-const locale = Astro.currentLocale || "en";
+const locale = Astro.locals.locale;
 const tours = await getToursData();
 const t = useTranslations(locale);
 
 const toursGridTitle = splitTitleAccent(t("tours.tour.lgTitle"));
-const toursFaqTitle = splitTitleAccent(
-  t("tours.faq.title") || "Common Questions About Our Morocco Tours",
-);
+const toursFaqTitle = splitTitleAccent(t("tours.faq.title"));
 
 const tourStats = [
   {
     id: "routes",
     value: "12+",
-    label: t("tours.stats.routes") || "Signature itineraries",
-    description:
-      t("tours.stats.routesDesc")
-      || "Multi-day journeys curated across imperial cities, desert dunes, and Atlas passes.",
+    label: t("tours.stats.routes"),
+    description: t("tours.stats.routesDesc"),
   },
   {
     id: "comfort",
     value: "4x4",
-    label: t("tours.stats.comfort") || "Comfort fleet",
-    description:
-      t("tours.stats.comfortDesc")
-      || "Modern 4x4s and mini-coaches with seasoned driver-guides on every route.",
+    label: t("tours.stats.comfort"),
+    description: t("tours.stats.comfortDesc"),
   },
   {
     id: "support",
     value: "24/7",
-    label: t("tours.stats.support") || "Concierge support",
-    description:
-      t("tours.stats.supportDesc")
-      || "On-trip coordination for hotels, dietary requests, and schedule tweaks.",
+    label: t("tours.stats.support"),
+    description: t("tours.stats.supportDesc"),
   },
 ];
 
 const TOURS_FAQS = [
-  {
-    q: "tours.faq.q1",
-    defQ: "What types of desert tours are available from Marrakech?",
-    a: "tours.faq.a1",
-    defA: "Amsirar Trip offers multi-day Morocco tours ranging from 3 to 14 days. Options include Sahara desert camel treks starting from Marrakech to Erg Chebbi dunes in Merzouga, High Atlas mountain crossings via Tizi n'Tichka pass, and imperial city circuits through Fes, Meknes, and Rabat. All tours depart from Marrakech and are available year-round with private 4×4 vehicles and licensed Moroccan guides.",
-  },
-  {
-    q: "tours.faq.q2",
-    defQ: "Is Amsirar Trip a licensed tour operator in Morocco?",
-    a: "tours.faq.a2",
-    defA: "Yes. Amsirar Trip operates under Moroccan tourism license number 24/TT/RAK, issued by the Ministry of Tourism, Handicraft, Social Economy and Solidarity. We are headquartered in Marrakech and fully comply with Moroccan travel industry regulations.",
-  },
-  {
-    q: "tours.faq.q3",
-    defQ: "What is the best time of year for a Sahara desert tour from Marrakech?",
-    a: "tours.faq.a3",
-    defA: "The ideal months for a Sahara desert tour from Marrakech are October to April, when daytime temperatures in the Erg Chebbi dunes range between 18°C and 28°C. Summer (June–August) sees temperatures above 40°C in the desert but remains manageable in the High Atlas. We operate tours year-round and can advise on the best itinerary for your travel dates.",
-  },
-  {
-    q: "tours.faq.q4",
-    defQ: "Are tours private or shared group departures?",
-    a: "tours.faq.a4",
-    defA: "Amsirar Trip offers both private VIP departures and budget-friendly small-group shared departures. Private tours travel exclusively with your party in a dedicated 4×4 or minibus with flexible start times and custom stops, while shared departures connect small groups of 8 to 14 travelers on scheduled desert routes.",
-  },
+  { q: "tours.faq.q1", a: "tours.faq.a1" },
+  { q: "tours.faq.q2", a: "tours.faq.a2" },
+  { q: "tours.faq.q3", a: "tours.faq.a3" },
+  { q: "tours.faq.q4", a: "tours.faq.a4" },
 ] as const;
 
 import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
@@ -123,7 +95,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
             {toursGridTitle.accent && <span class="text-orange">{toursGridTitle.accent}</span>}
           </h2>
           <p class="border-s-2 border-orange-600 ps-4 py-0.5 text-sm sm:text-base text-stone-600 leading-relaxed max-w-[62ch] text-pretty">
-            {t("tours.sectionSubtitle") || t("tours.detailsSubtitle")}
+            {t("tours.sectionSubtitle")}
           </p>
         </hgroup>
 
@@ -190,14 +162,14 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
           >
             <TripCard
               badge={`${tour.duration} Days`}
-              tourTypeBadge={t("tours.bothAvailable", "Private & Shared")}
+              tourTypeBadge={t("tours.bothAvailable")}
               description={t(tour.description)}
               end={t(tour.end)}
-              endLabel={t("tours.endLabelShort") || "End"}
+              endLabel={t("tours.endLabelShort")}
               exploreLink={t("tours.exploreLink")}
               item={{ image: tour.image, imageAlt: t(tour.title), route: tour.route }}
               start={t(tour.start)}
-              startLabel={t("tours.startLabelShort") || "Start"}
+              startLabel={t("tours.startLabelShort")}
               title={t(tour.title)}
             />
           </div>
@@ -223,7 +195,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
           {toursFaqTitle.accent && <span class="text-orange">{toursFaqTitle.accent}</span>}
         </h2>
         <p class="mt-2 border-s-2 border-orange-600 ps-4 py-0.5 text-sm sm:text-base text-stone-600 leading-relaxed max-w-[62ch] text-pretty">
-          {t("tours.faq.subtitle") || "Everything you need to plan your desert journey."}
+          {t("tours.faq.subtitle")}
         </p>
       </hgroup>
 
@@ -251,7 +223,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
                       aria-hidden="true"
                       class="size-5 shrink-0 text-orange-600"
                     />
-                    <span>{t(faq.q) || faq.defQ}</span>
+                    <span>{t(faq.q)}</span>
                   </span>
                   <span
                     aria-hidden="true"
@@ -266,7 +238,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
                   itemscope
                   itemtype="https://schema.org/Answer"
                 >
-                  <p itemprop="text">{t(faq.a) || faq.defA}</p>
+                  <p itemprop="text">{t(faq.a)}</p>
                 </div>
               </details>
             </dt>

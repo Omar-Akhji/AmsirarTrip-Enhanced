@@ -34,4 +34,20 @@ test.describe("i18n routing & document standards", () => {
     expect(page.url()).not.toContain("/en/about");
     expect(new URL(page.url()).pathname).toBe("/about");
   });
+
+  test("localized contact page (/fr/contact) renders localized strings and no English sentinels", async ({
+    page,
+  }) => {
+    const response = await page.goto("/fr/contact", { waitUntil: "domcontentloaded" });
+    expect(response?.status()).toBe(200);
+
+    const htmlLang = await page.locator("html").getAttribute("lang");
+    expect(htmlLang).toBe("fr");
+
+    const content = await page.content();
+    // French translation of "Visit" is "Visite" or "Rendez-nous visite"
+    expect(content).toContain("Visite");
+    // English sentinels should not appear
+    expect(content).not.toContain("Alternative Morocco Circuits");
+  });
 });

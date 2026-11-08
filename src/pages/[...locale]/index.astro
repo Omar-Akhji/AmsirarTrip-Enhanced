@@ -33,7 +33,7 @@ const sortedTours = [...toursEntries]
   .slice(0, 6);
 
 const featuredToursItemListJsonLd = generateItemListJsonLd({
-  name: locale === "en" ? "Featured Morocco Desert Tours" : t("home.featured.title") || title,
+  name: t("home.featured.title"),
   description,
   url: Astro.url.pathname,
   items: sortedTours.map((entry) => ({
@@ -48,14 +48,12 @@ const featuredToursItemListJsonLd = generateItemListJsonLd({
 });
 
 const homeBreadcrumbJsonLd = generateBreadcrumbJsonLd([
-  { name: t("nav.home") || "Home", url: getRelativeLocaleUrl(locale, "/") },
+  { name: t("nav.home"), url: getRelativeLocaleUrl(locale, "/") },
 ]);
 
 const videoJsonLd = generateVideoObjectJsonLd({
-  name: t("video.name") || "Morocco Sahara Desert Tours & Cultural Expeditions - Amsirar Trip",
-  description:
-    t("video.description")
-    || "Discover authentic Morocco travel experiences: Erg Chebbi dunes, camel treks at sunset, High Atlas mountain passes, and historic imperial cities with Amsirar Trip.",
+  name: t("video.name"),
+  description: t("video.description"),
   thumbnailUrl: "/images/hero/marrakech-medina.webp",
   uploadDate: "2026-01-15T09:00:00+01:00",
   contentUrl: "/videos/Morocco-Video.mp4",

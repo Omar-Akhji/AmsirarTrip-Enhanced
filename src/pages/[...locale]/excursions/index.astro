@@ -30,8 +30,8 @@ const excursionsItemListJsonLd = generateItemListJsonLd({
 });
 
 const breadcrumbJsonLd = generateBreadcrumbJsonLd([
-  { name: t("nav.home") || "Home", url: getRelativeLocaleUrl(locale, "/") },
-  { name: t("nav.excursions") || "Excursions", url: Astro.url.pathname },
+  { name: t("nav.home"), url: getRelativeLocaleUrl(locale, "/") },
+  { name: t("nav.excursions"), url: Astro.url.pathname },
 ]);
 ---
 

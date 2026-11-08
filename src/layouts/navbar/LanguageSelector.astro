@@ -1,5 +1,5 @@
 ---
-import type { Locale } from "@/i18n/locales";
+import type { Language, Locale } from "@/i18n/locales";
 import { getLocalizedPath, useTranslations } from "@/i18n/utils";
 import GlobalIcon from "@/shared/ui/icons/GlobalIcon.astro";
 import { LANGUAGES } from "./constants";
@@ -18,11 +18,16 @@ const {
   id = "lang-selector",
 } = Astro.props;
 
-const locale = Astro.locals.locale ?? Astro.currentLocale ?? "en";
+const locale = Astro.locals.locale;
 const t = useTranslations(locale);
 
-const currentLanguage = LANGUAGES.find((l) => l.code === locale)
-  ?? LANGUAGES[0] ?? { code: "en", name: "English", shortName: "EN", ogLocale: "en_US" };
+const defaultLanguage: Language = LANGUAGES[0] ?? {
+  code: "en",
+  name: "English",
+  shortName: "EN",
+  ogLocale: "en_US",
+};
+const currentLanguage = LANGUAGES.find((l) => l.code === locale) ?? defaultLanguage;
 
 const getLocalizedHref = (code: Locale) => {
   return getLocalizedPath(Astro.url.pathname, code) + Astro.url.search;
@@ -35,7 +40,7 @@ const menuId = `${id}-popover`;
   <button
     popovertarget={menuId}
     aria-haspopup="menu"
-    aria-label={`${t("language") || "Language"}: ${currentLanguage.name}`}
+    aria-label={`${t("language")}: ${currentLanguage.name}`}
     style="anchor-name: --lang-selector-btn;"
     class:list={[
       "group/lang-btn relative inline-flex items-center rounded-full font-medium transition-all duration-200 cursor-pointer select-none active:scale-[0.98]",
@@ -84,7 +89,7 @@ const menuId = `${id}-popover`;
   >
     {/* Subtle Header */}
     <div class="px-3 pt-2 pb-1.5 text-[10px] font-mono uppercase tracking-widest text-zinc-400 group-data-scrolled:text-stone-500 select-none font-semibold">
-      {t("language") || "Language"}
+      {t("language")}
     </div>
 
     <div

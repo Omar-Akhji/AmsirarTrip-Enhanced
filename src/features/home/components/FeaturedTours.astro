@@ -5,7 +5,7 @@ import { getCollection } from "astro:content";
 import ScrollStack from "./ScrollStack.astro";
 import ScrollStackItem from "./ScrollStackItem.astro";
 
-const locale = Astro.currentLocale || "en";
+const locale = Astro.locals.locale;
 const t = useTranslations(locale);
 
 const destinationEntries = await getCollection("destinations");
@@ -125,7 +125,7 @@ const DELAY_CLASSES = [
           const regionText = t(regionKey);
           const cityTitle = t(city.titleKey);
           const cityDesc = t(city.descriptionKey);
-          const cityAlt = t(city.altKey) || cityTitle || "Morocco Destination";
+          const cityAlt = t.has(city.altKey) ? t(city.altKey) : cityTitle;
 
           return (
             <ScrollStackItem itemClassName="group">
@@ -187,7 +187,7 @@ const DELAY_CLASSES = [
         const regionText = t(regionKey);
         const cityTitle = t(city.titleKey);
         const cityDesc = t(city.descriptionKey);
-        const cityAlt = t(city.altKey) || cityTitle || "Morocco Destination";
+        const cityAlt = t.has(city.altKey) ? t(city.altKey) : cityTitle;
 
         return (
           <div

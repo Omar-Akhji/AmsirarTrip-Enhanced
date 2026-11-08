@@ -73,8 +73,8 @@ const excursionTitleClean =
   isEnglish && excursion.seo?.title ? excursion.seo.title : t(`${keyPrefix}.title`);
 
 const breadcrumbJsonLd = generateBreadcrumbJsonLd([
-  { name: t("nav.home") || "Home", url: getRelativeLocaleUrl(locale, "/") },
-  { name: t("nav.excursions") || "Excursions", url: getRelativeLocaleUrl(locale, "excursions") },
+  { name: t("nav.home"), url: getRelativeLocaleUrl(locale, "/") },
+  { name: t("nav.excursions"), url: getRelativeLocaleUrl(locale, "excursions") },
   { name: excursionTitleClean, url: Astro.url.pathname },
 ]);
 ---

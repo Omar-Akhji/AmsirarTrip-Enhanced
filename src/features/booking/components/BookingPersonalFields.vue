@@ -14,7 +14,7 @@ const { t } = useTranslation();
 <template>
   <fieldset class="m-0 flex flex-col gap-5 border-0 p-0">
     <legend class="sr-only">
-      {{ t("booking.personalDetails", "Guest Details") }}
+      {{ t("booking.personalDetails") }}
     </legend>
     <div class="grid items-start gap-5 md:grid-cols-2">
       <div>
@@ -22,7 +22,7 @@ const { t } = useTranslation();
           for="fullName"
           class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700"
         >
-          {{ t("booking.fullName", "Full Name") }}
+          {{ t("booking.fullName") }}
           <span
             class="text-orange-600"
             aria-hidden="true"
@@ -53,7 +53,7 @@ const { t } = useTranslation();
           <input
             id="fullName"
             class="peer h-12 rounded-xl border border-stone-200/90 bg-stone-50/50 ps-10.5 pe-4 font-sans text-sm text-stone-900 transition-colors inline-full placeholder:text-stone-400 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden"
-            :placeholder="t('booking.placeholders.fullName', 'Enter your full name')"
+            :placeholder="t('booking.placeholders.fullName')"
             :maxlength="100"
             type="text"
             name="fullName"
@@ -78,7 +78,7 @@ const { t } = useTranslation();
           for="email"
           class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700"
         >
-          {{ t("booking.email", "Email") }}
+          {{ t("booking.email") }}
           <span
             class="text-orange-600"
             aria-hidden="true"
@@ -108,7 +108,7 @@ const { t } = useTranslation();
           <input
             id="email"
             class="peer h-12 rounded-xl border border-stone-200/90 bg-stone-50/50 ps-10.5 pe-4 font-sans text-sm text-stone-900 transition-colors inline-full placeholder:text-stone-400 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden"
-            :placeholder="t('booking.placeholders.email', 'Enter your email address')"
+            :placeholder="t('booking.placeholders.email')"
             type="email"
             name="email"
             toolparamdescription="The email address of the guest"
@@ -133,7 +133,7 @@ const { t } = useTranslation();
         for="phone"
         class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700"
       >
-        {{ t("booking.phone", "Phone Number") }}
+        {{ t("booking.phone") }}
         <span
           class="text-orange-600"
           aria-hidden="true"
@@ -157,7 +157,7 @@ const { t } = useTranslation();
         <input
           id="phone"
           class="peer h-12 rounded-xl border border-stone-200/90 bg-stone-50/50 ps-10.5 pe-4 font-sans text-sm text-stone-900 transition-colors inline-full placeholder:text-stone-400 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden"
-          :placeholder="t('booking.placeholders.phone', 'Enter your phone number')"
+          :placeholder="t('booking.placeholders.phone')"
           :maxlength="20"
           type="tel"
           name="phone"

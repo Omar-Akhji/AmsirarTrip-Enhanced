@@ -39,7 +39,7 @@ const description =
     tour.seo.metaDescription
   : `${t(`tours.${tour.tourKey}.description`)} ${t(`${tour.tourKey}.overview`)}`;
 
-const dayLabel = t("tours.day") || "Day";
+const dayLabel = t("tours.day");
 const itinerary = Array.from({ length: tour.durationDays }, (_, index) => {
   const dayNumber = index + 1;
   const dayKey = `${tour.tourKey}.day${dayNumber}`;
@@ -86,8 +86,8 @@ const faqJsonLd = generateFaqJsonLd(tour.seo.faqs);
 const tourTitleClean = isEnglish ? tour.seo.title : t(`${tour.tourKey}.title`);
 
 const breadcrumbJsonLd = generateBreadcrumbJsonLd([
-  { name: t("nav.home") || "Home", url: getRelativeLocaleUrl(locale, "/") },
-  { name: t("nav.tours") || "Tours", url: getRelativeLocaleUrl(locale, "tours") },
+  { name: t("nav.home"), url: getRelativeLocaleUrl(locale, "/") },
+  { name: t("nav.tours"), url: getRelativeLocaleUrl(locale, "tours") },
   { name: tourTitleClean, url: Astro.url.pathname },
 ]);
 
@@ -176,13 +176,13 @@ const relatedTours = allTours
                 badge={`${item.duration} Days`}
                 description={t(item.description)}
                 end={t(item.end)}
-                endLabel={t("tours.endLabelShort") || "End"}
+                endLabel={t("tours.endLabelShort")}
                 exploreLink={t("tours.exploreLink")}
                 item={{ image: item.image, imageAlt: t(item.title), route: item.route }}
                 start={t(item.start)}
-                startLabel={t("tours.startLabelShort") || "Start"}
+                startLabel={t("tours.startLabelShort")}
                 title={t(item.title)}
-                tourTypeBadge={t("tours.bothAvailable", "Private & Shared")}
+                tourTypeBadge={t("tours.bothAvailable")}
               />
             ))}
           </div>

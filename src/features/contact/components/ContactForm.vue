@@ -71,10 +71,8 @@ const handleSubmit = async (event: Event) => {
   if (!recaptchaToken) {
     state.value = {
       success: false,
-      message: t("contact.form.errors.captcha", "Recaptcha verification is required"),
-      errors: {
-        recaptchaToken: t("contact.form.errors.captcha", "Recaptcha verification is required"),
-      },
+      message: t("contact.form.errors.captcha"),
+      errors: { recaptchaToken: t("contact.form.errors.captcha") },
     };
     isSubmitting.value = false;
     return;
@@ -147,7 +145,7 @@ onUnmounted(() => {
             id="contact-heading"
             class="mbs-1 text-xl font-bold tracking-tight text-stone-900 sm:text-2xl"
           >
-            {{ t("contact.form.title", "Design Your Custom Morocco Tour & Private Itinerary") }}
+            {{ t("contact.form.title") }}
           </h3>
         </div>
 
@@ -177,7 +175,7 @@ onUnmounted(() => {
             role="alert"
           >
             <p class="mbe-2 font-mono text-xs font-bold tracking-wider text-orange-900 uppercase">
-              {{ t("contact.form.errors.title", "Please complete these fields:") }}
+              {{ t("contact.form.errors.title") }}
             </p>
             <ul class="space-y-1 font-mono text-xs text-orange-800">
               <li
@@ -277,11 +275,7 @@ onUnmounted(() => {
                 size="sm"
               />
               <span>
-                {{
-                  isSubmitting ?
-                    t("contact.form.sending", "Sending…")
-                  : t("contact.form.cta", "Send message")
-                }}
+                {{ t(isSubmitting ? "contact.form.sending" : "contact.form.cta") }}
               </span>
             </button>
           </div>

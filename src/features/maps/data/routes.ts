@@ -918,9 +918,9 @@ export function getTourRouteMap(
   const mainHighlight = waypoints.find((w) => w.type === "highlight")?.name;
   const subtitle =
     isRoundtrip ?
-      mainHighlight ? `${startLocation} ? ${mainHighlight}`
+      mainHighlight ? `${startLocation} → ${mainHighlight}`
       : `${startLocation} Expedition`
-    : `${startLocation} ? ${endLocation}`;
+    : `${startLocation} → ${endLocation}`;
 
   return buildRouteMap(
     normalizedKey,

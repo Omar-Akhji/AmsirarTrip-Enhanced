@@ -2,6 +2,7 @@ import type { APIRoute } from "astro";
 import { getCollection } from "astro:content";
 import { DEFAULT_LOCALE, LOCALES } from "@/i18n/locales";
 import { getLocalizedPath } from "@/i18n/core";
+import { ui } from "@/i18n/ui";
 
 function escapeXml(unsafe: string): string {
   return unsafe
@@ -114,10 +115,12 @@ export const GET: APIRoute = async ({ site }) => {
       if (entry.hasVideo) {
         const videoThumb = new URL("/images/hero/marrakech-medina.webp", baseUrl).href;
         const videoContent = new URL("/videos/Morocco-Video.mp4", baseUrl).href;
+        const videoTitle = ui[locale].video.name;
+        const videoDescription = ui[locale].video.description;
         xml += `    <video:video>\n`;
         xml += `      <video:thumbnail_loc>${escapeXml(videoThumb)}</video:thumbnail_loc>\n`;
-        xml += `      <video:title>Morocco Sahara Desert Tours &amp; Cultural Expeditions</video:title>\n`;
-        xml += `      <video:description>Experience private Sahara desert camel treks, Atlas mountain passes, and historic Moroccan medinas with Amsirar Trip.</video:description>\n`;
+        xml += `      <video:title>${escapeXml(videoTitle)}</video:title>\n`;
+        xml += `      <video:description>${escapeXml(videoDescription)}</video:description>\n`;
         xml += `      <video:content_loc>${escapeXml(videoContent)}</video:content_loc>\n`;
         xml += `      <video:duration>79</video:duration>\n`;
         xml += `    </video:video>\n`;

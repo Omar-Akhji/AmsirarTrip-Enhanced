@@ -5,7 +5,7 @@ import PointOnMapIcon from "@/shared/ui/icons/PointOnMapIcon.astro";
 import ShieldCheckIcon from "@/shared/ui/icons/ShieldCheckIcon.astro";
 import StatsFolderStack from "./StatsFolderStack.astro";
 
-const locale = Astro.locals.locale ?? Astro.currentLocale ?? "en";
+const locale = Astro.locals.locale;
 const t = useTranslations(locale);
 
 interface CopyType {
@@ -80,7 +80,7 @@ const statHighlights = [
     id: "routes",
     code: "EXPEDITIONS",
     value: "35+",
-    label: t("excursion.stats.routes", "Signature excursions"),
+    label: t("excursion.stats.routes"),
     description: copy.routes,
     footerLeft: "All 12 Regions",
     footerRight: "Bespoke Routes",
@@ -90,7 +90,7 @@ const statHighlights = [
     id: "care",
     code: "CONCIERGE",
     value: "24/7",
-    label: t("excursion.stats.support", "On-trip support"),
+    label: t("excursion.stats.support"),
     description: copy.care,
     footerLeft: "Real-Time",
     footerRight: "Direct WhatsApp",
