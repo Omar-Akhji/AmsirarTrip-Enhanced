@@ -5,6 +5,7 @@ import compress from "@playform/compress";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig, envField, memoryCache } from "astro/config";
 import { fileURLToPath } from "node:url";
+import { DEFAULT_LOCALE, LOCALES } from "./src/i18n/locales";
 
 const srcDir = fileURLToPath(new URL("src", import.meta.url));
 
@@ -71,8 +72,8 @@ export default defineConfig({
 
   // ─── i18n ────────────────────────────────────────────────────────────────
   i18n: {
-    locales: ["en", "fr", "de", "es"],
-    defaultLocale: "en",
+    locales: [...LOCALES],
+    defaultLocale: DEFAULT_LOCALE,
     routing: { prefixDefaultLocale: false },
   },
 

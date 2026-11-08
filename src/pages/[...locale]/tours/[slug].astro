@@ -39,10 +39,11 @@ const description =
     tour.seo.metaDescription
   : `${t(`tours.${tour.tourKey}.description`)} ${t(`${tour.tourKey}.overview`)}`;
 
+const dayLabel = t("tours.day") || "Day";
 const itinerary = Array.from({ length: tour.durationDays }, (_, index) => {
   const dayNumber = index + 1;
   const dayKey = `${tour.tourKey}.day${dayNumber}`;
-  let name = `Day ${dayNumber}`;
+  let name = `${dayLabel} ${dayNumber}`;
   let dayDesc = "";
 
   try {
@@ -56,12 +57,21 @@ const itinerary = Array.from({ length: tour.durationDays }, (_, index) => {
     }
   } catch {}
 
-  return { position: dayNumber, name: `Day ${dayNumber}: ${name}`, description: dayDesc };
+  return { position: dayNumber, name: `${dayLabel} ${dayNumber}: ${name}`, description: dayDesc };
 });
 
+const tourName =
+  isEnglish ? tour.jsonLd.name
+  : t.has(`${tour.tourKey}.title`) ? t(`${tour.tourKey}.title`)
+  : tour.jsonLd.name;
+const tourDescription =
+  isEnglish ? tour.seo.lead || tour.jsonLd.description
+  : t.has(`${tour.tourKey}.overview`) ? t(`${tour.tourKey}.overview`)
+  : tour.seo.lead || tour.jsonLd.description;
+
 const tourJsonLd = generateTourJsonLd({
-  name: tour.jsonLd.name,
-  description: tour.seo.lead || tour.jsonLd.description,
+  name: tourName,
+  description: tourDescription,
   provider: "Amsirar Trip",
   image: `https://amsirartrip.com${tour.image.src}`,
   price: tour.jsonLd.price,

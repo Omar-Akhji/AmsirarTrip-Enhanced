@@ -111,6 +111,6 @@ declare module "ascii-reveal/core" {
 declare namespace App {
   interface Locals {
     cspNonce: string;
-    locale: import("./i18n/locales").Locale;
+    locale: "en" | "fr" | "de" | "es";
   }
 }

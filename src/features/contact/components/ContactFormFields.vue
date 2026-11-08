@@ -17,7 +17,7 @@ const isTopicExpanded = ref(false);
 <template>
   <fieldset class="m-0 flex flex-col gap-5 border-0 p-0">
     <legend class="sr-only">
-      {{ t("contact.form.details", "Contact Details") }}
+      {{ t("contact.form.details") }}
     </legend>
     <div class="grid gap-5 md:grid-cols-2">
       <div>
@@ -25,7 +25,7 @@ const isTopicExpanded = ref(false);
           for="contact-name"
           class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700"
         >
-          {{ t("contact.form.fields.name", "Full name") }}
+          {{ t("contact.form.fields.name") }}
           <span
             class="text-orange-600"
             aria-hidden="true"
@@ -58,7 +58,7 @@ const isTopicExpanded = ref(false);
             name="name"
             type="text"
             class="peer h-12 rounded-xl border border-stone-200/90 bg-stone-50/50 ps-10.5 pe-4 font-sans text-sm text-stone-900 transition-colors inline-full placeholder:text-stone-400 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden"
-            :placeholder="t('contact.form.placeholders.name', 'Enter your full name')"
+            :placeholder="t('contact.form.placeholders.name')"
             :maxlength="100"
             toolparamdescription="The full name of the contact person"
             autocomplete="name"
@@ -80,7 +80,7 @@ const isTopicExpanded = ref(false);
           for="contact-email"
           class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700"
         >
-          {{ t("contact.form.fields.email", "Email") }}
+          {{ t("contact.form.fields.email") }}
           <span
             class="text-orange-600"
             aria-hidden="true"
@@ -112,7 +112,7 @@ const isTopicExpanded = ref(false);
             name="email"
             type="email"
             class="peer h-12 rounded-xl border border-stone-200/90 bg-stone-50/50 ps-10.5 pe-4 font-sans text-sm text-stone-900 transition-colors inline-full placeholder:text-stone-400 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden"
-            :placeholder="t('contact.form.placeholders.email', 'Enter your email address')"
+            :placeholder="t('contact.form.placeholders.email')"
             toolparamdescription="The email address of the contact person"
             autocomplete="email"
             required
@@ -136,7 +136,7 @@ const isTopicExpanded = ref(false);
           for="contact-phone"
           class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700"
         >
-          {{ t("contact.form.fields.phone", "Phone number") }}
+          {{ t("contact.form.fields.phone") }}
           <span
             class="text-orange-600"
             aria-hidden="true"
@@ -162,7 +162,7 @@ const isTopicExpanded = ref(false);
             name="phone"
             type="tel"
             class="peer h-12 rounded-xl border border-stone-200/90 bg-stone-50/50 ps-10.5 pe-4 font-sans text-sm text-stone-900 transition-colors inline-full placeholder:text-stone-400 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden"
-            :placeholder="t('contact.form.placeholders.phone', 'Enter your phone number')"
+            :placeholder="t('contact.form.placeholders.phone')"
             :maxlength="20"
             toolparamdescription="The phone/WhatsApp number of the contact person"
             autocomplete="tel"
@@ -184,7 +184,7 @@ const isTopicExpanded = ref(false);
           for="contact-topic"
           class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700"
         >
-          {{ t("contact.form.fields.topic", "Trip focus (optional)") }}
+          {{ t("contact.form.fields.topic") }}
         </label>
         <div class="relative">
           <svg
@@ -214,9 +214,7 @@ const isTopicExpanded = ref(false);
             :aria-expanded="isTopicExpanded"
             aria-controls="contact-topics"
             class="peer h-12 rounded-xl border border-stone-200/90 bg-stone-50/50 ps-10.5 pe-4 font-sans text-sm text-stone-900 transition-colors inline-full placeholder:text-stone-400 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden"
-            :placeholder="
-              t('contact.form.placeholders.topic', 'Enter trip focus (e.g. Sahara, Atlas, Custom)')
-            "
+            :placeholder="t('contact.form.placeholders.topic')"
             toolparamdescription="The specific focus or interest of the trip, e.g., Sahara desert, imperial cities, custom trek"
             autocomplete="off"
             @focus="isTopicExpanded = true"
@@ -225,15 +223,11 @@ const isTopicExpanded = ref(false);
           />
         </div>
         <datalist id="contact-topics">
-          <option :value="t('contact.form.topics.desert', 'Sahara Desert Expedition')" />
-          <option :value="t('contact.form.topics.atlas', 'High Atlas Mountain Trek')" />
-          <option
-            :value="t('contact.form.topics.imperial', 'Imperial Cities & Cultural Heritage')"
-          />
-          <option
-            :value="t('contact.form.topics.coastal', 'Atlantic Coast & Essaouira Excursion')"
-          />
-          <option :value="t('contact.form.topics.custom', 'Tailored Private Morocco Itinerary')" />
+          <option :value="t('contact.form.topics.desert')" />
+          <option :value="t('contact.form.topics.atlas')" />
+          <option :value="t('contact.form.topics.imperial')" />
+          <option :value="t('contact.form.topics.coastal')" />
+          <option :value="t('contact.form.topics.custom')" />
         </datalist>
       </div>
     </div>
@@ -243,7 +237,7 @@ const isTopicExpanded = ref(false);
         for="contact-message"
         class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700"
       >
-        {{ t("contact.form.fields.message", "Message") }}
+        {{ t("contact.form.fields.message") }}
         <span
           class="text-orange-600"
           aria-hidden="true"
@@ -286,9 +280,7 @@ const isTopicExpanded = ref(false);
           id="contact-message"
           name="message"
           class="peer rounded-xl border border-stone-200/90 bg-stone-50/50 py-3 ps-10.5 pe-4 font-sans text-sm text-stone-900 transition-colors inline-full min-block-40 placeholder:text-stone-400 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden"
-          :placeholder="
-            t('contact.form.placeholders.message', 'Enter your message or travel request...')
-          "
+          :placeholder="t('contact.form.placeholders.message')"
           :maxlength="1000"
           toolparamdescription="The detailed message or description of the custom Morocco itinerary/dream tour request"
           autocomplete="off"

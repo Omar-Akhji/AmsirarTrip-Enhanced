@@ -74,6 +74,7 @@ function animateCounter(el: HTMLElement) {
   const duration = durationAttr === undefined ? 1800 : Number(durationAttr);
 
   const startTime = performance.now();
+  const docLang = typeof document === "undefined" ? "en" : document.documentElement.lang || "en";
 
   function tick(now: number) {
     const elapsed = now - startTime;
@@ -83,7 +84,7 @@ function animateCounter(el: HTMLElement) {
     const eased = 1 - (1 - progress) ** 3;
     const current = Math.round(eased * targetVal);
 
-    el.textContent = `${prefix}${current.toLocaleString()}${suffix}`;
+    el.textContent = `${prefix}${current.toLocaleString(docLang)}${suffix}`;
 
     if (progress < 1) {
       requestAnimationFrame(tick);

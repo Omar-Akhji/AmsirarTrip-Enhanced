@@ -42,9 +42,18 @@ const itinerary = excursion.program.map((stage, index) => ({
   description: stage.description,
 }));
 
+const excursionName =
+  isEnglish && excursion.seo?.title ? excursion.seo.title
+  : t.has(`${keyPrefix}.title`) ? t(`${keyPrefix}.title`)
+  : excursion.jsonLd.name;
+const excursionDescription =
+  isEnglish ? (excursion.seo?.lead ?? excursion.jsonLd.description)
+  : t.has(`${keyPrefix}.overview`) ? t(`${keyPrefix}.overview`)
+  : (excursion.seo?.lead ?? excursion.jsonLd.description);
+
 const excursionJsonLd = generateExcursionJsonLd({
-  name: isEnglish && excursion.seo?.title ? excursion.seo.title : excursion.jsonLd.name,
-  description: excursion.seo?.lead ?? excursion.jsonLd.description,
+  name: excursionName,
+  description: excursionDescription,
   provider: "Amsirar Trip",
   image: `https://amsirartrip.com${excursion.image.src}`,
   price: excursion.jsonLd.price,

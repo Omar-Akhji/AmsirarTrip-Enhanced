@@ -1,4 +1,5 @@
 import { glob } from "astro/loaders";
+import { LOCALES } from "./i18n/locales";
 import { defineCollection, type SchemaContext } from "astro:content";
 import { z } from "astro/zod";
 
@@ -151,7 +152,7 @@ const cancellationMatrixSchema = z.object({
 const legalCollection = defineCollection({
   loader: glob({ pattern: "**/*.json", base: "./src/content/legal" }),
   schema: z.object({
-    locale: z.enum(["en", "fr", "de", "es"]),
+    locale: z.enum(LOCALES),
     title: z.string(),
     subtitle: z.string(),
     lastUpdated: z.string(),

@@ -42,17 +42,16 @@ const sidebarItems = parseStringArray(t.raw("excursion.sidebar.items"));
 
 const title = isEnglish && excursion?.seo?.title ? excursion.seo.title : t(`${excursionKey}.title`);
 const lead =
-  isEnglish && excursion?.seo?.lead ?
-    excursion.seo.lead
-  : t("excursion.detailsSubtitle", "Full-day private and small-group journeys from Marrakech");
+  isEnglish && excursion?.seo?.lead ? excursion.seo.lead : t("excursion.detailsSubtitle");
 
-const heroSubtitle =
+const heroSubtitle = t(
   excursion?.i18nKeyPrefix && t.has(`excursion.list.${excursion.i18nKeyPrefix}.tagline`) ?
-    t(`excursion.list.${excursion.i18nKeyPrefix}.tagline`)
-  : t("excursion.headerSubtitle", "Our Excursions and packages");
+    `excursion.list.${excursion.i18nKeyPrefix}.tagline`
+  : "excursion.headerSubtitle",
+);
 
-const distanceLabel = t(`${excursionKey}.distanceValue`, "~150 km from Marrakech");
-const durationLabel = t(`${excursionKey}.durationLabel`, "Full-day excursion");
+const distanceLabel = t(`${excursionKey}.distanceValue`);
+const durationLabel = t(`${excursionKey}.durationLabel`);
 const altText = excursion?.seo?.imageAlt ?? t(`${excursionKey}.alt`);
 
 const metrics = excursion?.metrics ?? {
@@ -85,9 +84,9 @@ const routeMap = getExcursionRouteMap(excursionKey, excursion?.location ?? "Moro
 
 <TripLayout
   breadcrumbs={[
-    { label: t("nav.home", "Home"), href: "/" },
-    { label: t("nav.excursions", "Excursions"), href: "/excursions" },
-    { label: t("excursion.detailsTitle", "Excursion Details") },
+    { label: t("nav.home"), href: "/" },
+    { label: t("nav.excursions"), href: "/excursions" },
+    { label: t("excursion.detailsTitle") },
   ]}
   hasUnderline={true}
   headingId="excursion-title"
@@ -95,39 +94,30 @@ const routeMap = getExcursionRouteMap(excursionKey, excursion?.location ?? "Moro
   imageSrc={imageSrc}
   lead={lead}
   pageSubtitle={heroSubtitle}
-  pageTitle={t("excursion.detailsTitle", "Excursion Details")}
+  pageTitle={t("excursion.detailsTitle")}
   routeMap={routeMap}
   sectionId="excursion-single"
   sidebar={{
-    sidebarTitle: t("excursion.sidebar.title", "Airport Transfer Services in Morocco"),
-    mainBrand: t("excursion.sidebar.mainBrand", "Amsirar Transport Touristique"),
-    intro: t("excursion.sidebar.intro", "Licensed Moroccan transport agency based in Marrakech."),
-    details: t(
-      "excursion.sidebar.details",
-      "Modern air-conditioned Mercedes-Benz vehicles with registered professional drivers.",
-    ),
+    sidebarTitle: t("excursion.sidebar.title"),
+    mainBrand: t("excursion.sidebar.mainBrand"),
+    intro: t("excursion.sidebar.intro"),
+    details: t("excursion.sidebar.details"),
     sidebarItems,
-    conclusion: t(
-      "excursion.sidebar.conclusion",
-      "Flexible pickup directly from your riad or hotel in Marrakech.",
-    ),
-    ctaTitle: t("excursion.sidebar.ctaTitle", "Need Instant Help?"),
-    ctaDescription: t(
-      "excursion.sidebar.ctaDescription",
-      "Message our Marrakech team directly on WhatsApp for real-time questions and group rates.",
-    ),
-    ctaPoint01: t("excursion.sidebar.ctaPoint01", "Door-to-door hotel transfers"),
-    ctaPoint02: t("excursion.sidebar.ctaPoint02", "Clean modern fleet"),
-    ctaPoint03: t("excursion.sidebar.ctaPoint03", "Transparent fixed pricing"),
+    conclusion: t("excursion.sidebar.conclusion"),
+    ctaTitle: t("excursion.sidebar.ctaTitle"),
+    ctaDescription: t("excursion.sidebar.ctaDescription"),
+    ctaPoint01: t("excursion.sidebar.ctaPoint01"),
+    ctaPoint02: t("excursion.sidebar.ctaPoint02"),
+    ctaPoint03: t("excursion.sidebar.ctaPoint03"),
   }}
-  smTitle={t("excursion.detailsTitle", "Excursion Details")}
+  smTitle={t("excursion.detailsTitle")}
   title={title}
   transitionName={transitionName}
 >
   <Fragment slot="content">
     <ExcursionSeoSections
       highlights={highlights}
-      highlightsTitle={t("excursion.common.highlights", "Key Experiences")}
+      highlightsTitle={t("excursion.common.highlights")}
       metrics={metrics}
     />
 
@@ -144,7 +134,7 @@ const routeMap = getExcursionRouteMap(excursionKey, excursion?.location ?? "Moro
           id="excursion-overview-heading"
           class="mbs-1 mbe-4 text-xl font-bold tracking-tight text-stone-900 sm:text-2xl md:text-3xl"
         >
-          {t("excursion.common.overview", "Excursion Overview")}
+          {t("excursion.common.overview")}
         </h3>
       </hgroup>
       <div class="space-y-4">
@@ -157,33 +147,32 @@ const routeMap = getExcursionRouteMap(excursionKey, excursion?.location ?? "Moro
     {program.length > 0 && (
       <ExcursionProgram
         program={program}
-        programTitle="Day Trip Schedule"
-        programTitle={t("excursion.common.programTitle", "Timed Itinerary & Program")}
+        programTitle={t("excursion.common.programTitle")}
       />
     )}
 
     <TripInfoSections
       idPrefix="excursion"
-      excludedTitle={t("excursion.common.excluded", "Excluded Services")}
+      excludedTitle={t("excursion.common.excluded")}
       excludes={excludes}
       goodToKnow={goodToKnow}
-      goodToKnowTitle={t("excursion.common.goodToKnow", "Travel Advisories & Preparation")}
-      includedTitle={t("excursion.common.included", "Included Services")}
+      goodToKnowTitle={t("excursion.common.goodToKnow")}
+      includedTitle={t("excursion.common.included")}
       includes={includes}
     />
 
     <PricingCard
       idPrefix="excursion"
-      pricingTitle={t("excursion.common.pricingTitle", "Reservation & Pricing")}
-      priceLabel={t("excursion.common.priceLabel", "Starting price")}
+      pricingTitle={t("excursion.common.pricingTitle")}
+      priceLabel={t("excursion.common.priceLabel")}
       price={price}
-      reserveNow={t("booking.checkAvailability", "Reserve Now")}
+      reserveNow={t("booking.checkAvailability")}
     />
 
     {faqs.length > 0 && (
       <FaqAccordion
         idPrefix="excursion"
-        faqTitle={t("excursion.common.faqTitle", "Frequently Asked Questions")}
+        faqTitle={t("excursion.common.faqTitle")}
         faqs={faqs}
       />
     )}

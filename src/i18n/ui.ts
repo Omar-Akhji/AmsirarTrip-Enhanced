@@ -2,27 +2,16 @@ import de from "../locales/de/common.json";
 import en from "../locales/en/common.json";
 import es from "../locales/es/common.json";
 import fr from "../locales/fr/common.json";
+import type { Locale } from "./locales";
+import type { Messages } from "./types";
 
-import { type LocaleData, validateLocale } from "./schema";
+export type { MessageKey, Messages } from "./types";
 
 /**
- * Locale objects cast to the schema type. Runtime `safeParse` validation in DEV/CI catches any
- * structural drift between the JSON files and the schema — the `as` cast bridges the small gap
- * between Astro's JSON-import type inference and Zod's inferred type.
+ * Locale dictionaries adhering strictly to the Messages shape inferred directly from
+ * `en/common.json`. Compile-time static type verification ensures no structural drift between
+ * languages.
  */
-const _ui = { en, fr, de, es } as const satisfies Record<string, LocaleData>;
-
-// Run full schema validation in development/CI builds
-if (import.meta.env.DEV || process.env["CI"]) {
-  for (const [lang, data] of Object.entries(_ui)) {
-    try {
-      validateLocale(data, lang);
-    } catch (error) {
-      console.error(`[i18n] Locale "${lang}" failed validation:`, error);
-    }
-  }
-}
-
-export const ui = _ui;
+export const ui = { en, fr, de, es } as const satisfies Record<Locale, Messages>;
 
 export { DEFAULT_LOCALE as defaultLang } from "./locales";

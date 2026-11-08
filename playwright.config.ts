@@ -8,9 +8,9 @@ export default defineConfig({
   workers: process.env["CI"] ? 1 : "100%",
   reporter: "html",
   use: { baseURL: "http://localhost:4321", trace: "on-first-retry" },
-  projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],
+  projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"], channel: "chrome" } }],
   webServer: {
-    command: "bun run dev",
+    command: "bun run preview",
     url: "http://localhost:4321",
     reuseExistingServer: !process.env["CI"],
     timeout: 120 * 1000,

@@ -18,17 +18,14 @@ const {
   id = "lang-selector",
 } = Astro.props;
 
-const locale = Astro.currentLocale || "en";
+const locale = Astro.locals.locale ?? Astro.currentLocale ?? "en";
 const t = useTranslations(locale);
 
-const currentLanguage = LANGUAGES.find((l) => l.code === locale) || {
-  code: "en",
-  name: "English",
-  shortName: "EN",
-};
+const currentLanguage = LANGUAGES.find((l) => l.code === locale)
+  ?? LANGUAGES[0] ?? { code: "en", name: "English", shortName: "EN", ogLocale: "en_US" };
 
-const getLocalizedHref = (code: string) => {
-  return getLocalizedPath(Astro.url.pathname, code as Locale) + Astro.url.search;
+const getLocalizedHref = (code: Locale) => {
+  return getLocalizedPath(Astro.url.pathname, code) + Astro.url.search;
 };
 
 const menuId = `${id}-popover`;
@@ -103,6 +100,8 @@ const menuId = `${id}-popover`;
           <a
             aria-checked={isCurrent}
             aria-label={lang.name}
+            hreflang={lang.code}
+            lang={lang.code}
             class:list={[
               "group/item relative flex items-center gap-2.5 px-2.5 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all duration-150 inline-full select-none cursor-pointer",
               "outline-none focus-visible:ring-2 focus-visible:ring-orange/80 focus-visible:ring-offset-1 focus-visible:ring-offset-slate-950",

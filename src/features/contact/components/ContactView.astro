@@ -9,37 +9,16 @@ import ContactFolderStack from "./ContactFolderStack.astro";
 import PointOnMapIcon from "@/shared/ui/icons/PointOnMapIcon.astro";
 import AltArrowRightIcon from "@/shared/ui/icons/AltArrowRightIcon.astro";
 
-const locale = Astro.currentLocale || "en";
+const locale = Astro.locals.locale ?? Astro.currentLocale ?? "en";
 const t = useTranslations(locale);
 
-const contactTitle = splitTitleAccent(t("contact.lgTitle", "Contact Us"));
+const contactTitle = splitTitleAccent(t("contact.lgTitle"));
 const locationTitle = splitTitleAccent(t("contact.location.lgTitle"));
 
 const contactMethods = [
-  {
-    id: "phone",
-    title: t("contact.card.phoneTitle", "Call or WhatsApp our Marrakech desk"),
-    description: t(
-      "contact.card.phoneSeo",
-      "Our team answers booking questions, availability requests, and route changes from 09:00 to 21:00 GMT+1 daily.",
-    ),
-  },
-  {
-    id: "email",
-    title: t("contact.card.emailTitle", "Send a message - we'll reply with a tailored plan"),
-    description: t(
-      "contact.card.emailSeo",
-      "Prefer to write? Send us your plans, dates and priorities - we'll prepare a personalised itinerary and respond quickly with options and clear next steps.",
-    ),
-  },
-  {
-    id: "location",
-    title: t("contact.card.visitTitle", "Visit our Marrakech office - friendly, local support"),
-    description: t(
-      "contact.card.visitSeo",
-      "Drop by for an in-person chat, help with bookings, or to learn more about our desert excursions and private tours - our team is ready to welcome you.",
-    ),
-  },
+  { id: "phone", title: t("contact.card.phoneTitle"), description: t("contact.card.phoneSeo") },
+  { id: "email", title: t("contact.card.emailTitle"), description: t("contact.card.emailSeo") },
+  { id: "location", title: t("contact.card.visitTitle"), description: t("contact.card.visitSeo") },
 ];
 
 import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
@@ -50,7 +29,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
   breadcrumbs={[{ label: t("nav.home"), href: "/" }, { label: t("nav.contact") }]}
   gradientPosition="top-right"
   hasUnderline={true}
-  smTitle={t("contact.smTitle", "Get in Touch with Us")}
+  smTitle={t("contact.smTitle")}
   subtitle={t("contact.headerSubtitle")}
   title={t("contact.title")}
 />
@@ -66,7 +45,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
         class="sr-only"
         id="contact-methods-heading"
       >
-        {t("contact.methods.title", "Direct Communication Channels")}
+        {t("contact.methods.title")}
       </h2>
 
       <!-- Mobile Mode: Folder Stack (matches Home page experience) -->
@@ -151,10 +130,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
             {contactTitle.accent && <span class="text-orange">{contactTitle.accent}</span>}
           </h2>
           <p class="border-s-2 border-orange-600 ps-4 py-0.5 text-sm sm:text-base text-stone-600 leading-relaxed max-w-[62ch] text-pretty">
-            {t(
-              "contact.form.subtitle",
-              "Share your dates, party size, and travel priorities. Our local Marrakech office prepares a tailored proposal within 24 hours.",
-            )}
+            {t("contact.form.subtitle")}
           </p>
         </hgroup>
       </div>
@@ -205,20 +181,17 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
               />
             </div>
             <h3 class="text-xl font-bold tracking-tight text-white uppercase sm:text-2xl">
-              {t("contact.map.placeholderTitle", "Show Interactive Map")}
+              {t("contact.map.placeholderTitle")}
             </h3>
             <p class="font-mono text-xs sm:text-sm text-stone-300 leading-relaxed">
-              {t(
-                "contact.map.placeholderDesc",
-                "Clicking will load the Google Maps widget which may set cookies and load third-party scripts.",
-              )}
+              {t("contact.map.placeholderDesc")}
             </p>
             <div class="pt-2">
               <span
                 class="inline-flex min-h-11 items-center gap-2 rounded-full border border-orange-500/50 bg-linear-to-br from-amber-orange to-orange px-8 py-3 font-mono text-xs font-bold uppercase tracking-wider text-white shadow-md shadow-orange/20 transition-[filter,box-shadow,transform] duration-160 ease-out pointer-fine:hover:brightness-105 pointer-fine:hover:shadow-lg pointer-fine:hover:shadow-orange/30 active:scale-[0.98] motion-reduce:transform-none"
                 data-ascii="fade"
               >
-                <span>{t("contact.map.loadBtn", "Load Map")}</span>
+                <span>{t("contact.map.loadBtn")}</span>
                 <AltArrowRightIcon
                   aria-hidden="true"
                   class="size-4"

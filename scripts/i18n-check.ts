@@ -1,4 +1,5 @@
-import { readdirSync, readFileSync, statSync } from "node:fs";
+/* eslint-disable unicorn/no-process-exit, unicorn/import-style, unicorn/prefer-iterator-to-array, unicorn/no-useless-else, @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument, security/detect-non-literal-fs-filename */
+import { readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 const root = process.cwd();
@@ -10,8 +11,8 @@ for (const loc of LOCALES) {
   try {
     const raw = readFileSync(`${root}/src/locales/${loc}/common.json`, "utf8");
     dictionaries[loc] = JSON.parse(raw);
-  } catch (err) {
-    console.error(`Failed to read/parse locale file for "${loc}":`, err);
+  } catch (error) {
+    console.error(`Failed to read/parse locale file for "${loc}":`, error);
     process.exit(1);
   }
 }
@@ -62,12 +63,11 @@ for (const loc of LOCALES) {
 
   // Type mismatch check
   for (const [k, type] of enLeaves) {
-    if (targetLeaves.has(k) && targetLeaves.get(k) !== type) {
-      hasError = true;
-      console.error(
-        `\n❌ [${loc}] Type mismatch on key "${k}": expected ${type}, got ${targetLeaves.get(k)}`,
-      );
-    }
+    if (!targetLeaves.has(k) || targetLeaves.get(k) === type) continue;
+    hasError = true;
+    console.error(
+      `\n❌ [${loc}] Type mismatch on key "${k}": expected ${type}, got ${targetLeaves.get(k)}`,
+    );
   }
 }
 
@@ -113,7 +113,8 @@ const missingInEn: { key: string; file: string }[] = [];
 
 for (const [key, file] of usedKeys) {
   // Allow validations.* shorthand if looked up via helper in schemas.ts
-  const isPresent = enLeaves.has(key) || (file.includes("schemas.ts") && enLeaves.has(`validations.${key}`));
+  const isPresent =
+    enLeaves.has(key) || (file.includes("schemas.ts") && enLeaves.has(`validations.${key}`));
   if (!isPresent) {
     missingInEn.push({ key, file });
   }
@@ -121,7 +122,9 @@ for (const [key, file] of usedKeys) {
 
 if (missingInEn.length > 0) {
   hasError = true;
-  console.error(`\n❌ Found ${missingInEn.length} translation keys used in code but missing from EN dictionary:`);
+  console.error(
+    `\n❌ Found ${missingInEn.length} translation keys used in code but missing from EN dictionary:`,
+  );
   for (const { key, file } of missingInEn) {
     console.error(`  • ${key} (in ${file})`);
   }
@@ -131,5 +134,43 @@ if (hasError) {
   console.error("\n❌ [i18n-check] FAILED. Please fix missing or extra keys.");
   process.exit(1);
 } else {
+  // Regenerate client-data.ts automatically to ensure sync
+  try {
+    const pick = (d: any) => ({
+      booking: d.booking,
+      calendar: d.calendar,
+      contact: { form: d.contact?.form },
+      footer: {
+        newsletter: d.footer?.newsletter,
+        newsletterDescription: d.footer?.newsletterDescription,
+        newsletterCloseAria: d.footer?.newsletterCloseAria,
+        newsletterAria: d.footer?.newsletterAria,
+        newsletterNameLabel: d.footer?.newsletterNameLabel,
+        newsletterInputAria: d.footer?.newsletterInputAria,
+        newsletterStatus: d.footer?.newsletterStatus,
+        newsletterSubscribe: d.footer?.newsletterSubscribe,
+        newsletterButtonAria: d.footer?.newsletterButtonAria,
+        social: d.footer?.social,
+        socialAria: d.footer?.socialAria,
+      },
+      video: d.video,
+      validations: d.validations,
+    });
+    const clientData = {
+      en: pick(dictionaries.en),
+      fr: pick(dictionaries.fr),
+      de: pick(dictionaries.de),
+      es: pick(dictionaries.es),
+    };
+    writeFileSync(
+      join(root, "src/i18n/client-data.ts"),
+      `export const clientUi = ${JSON.stringify(clientData, null, 2)} as const;\n`,
+      "utf8",
+    );
+    console.log("⚡ [i18n-check] Synced src/i18n/client-data.ts with latest locale keys.");
+  } catch (error) {
+    console.warn("⚠️ [i18n-check] Could not auto-sync client-data.ts:", error);
+  }
+
   console.log("\n✅ [i18n-check] All keys in sync and verified.");
 }

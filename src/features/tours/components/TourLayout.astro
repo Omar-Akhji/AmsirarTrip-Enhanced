@@ -51,10 +51,9 @@ const dossierTitle = baseTitle
 
 const lead = isEnglish && seo?.lead ? seo.lead : overview;
 
-const heroSubtitle =
-  t.has(`tours.${tourKey}.description`) ?
-    t(`tours.${tourKey}.description`)
-  : t("tours.headerSubtitle", "Our Tours and packages");
+const heroSubtitle = t(
+  t.has(`tours.${tourKey}.description`) ? `tours.${tourKey}.description` : "tours.headerSubtitle",
+);
 
 const startCityKey =
   tour ? `tours.cities.${tour.startLocation.toLowerCase()}` : "tours.cities.marrakech";
@@ -63,11 +62,11 @@ const endCityKey =
 const endCity = t(endCityKey);
 const startCity = t(startCityKey);
 
-const highlightsTitle = t("tours.highlightsTitle", "Tour Highlights");
-const pricingTitle = t("tours.pricingTitle", "Pricing & Booking");
-const priceLabel = t("tours.priceLabel", "Starting price");
-const faqTitle = t("tours.faqTitle", "Frequently Asked Questions");
-const reserveNow = t("booking.checkAvailability", "Reserve Now");
+const highlightsTitle = t("tours.highlightsTitle");
+const pricingTitle = t("tours.pricingTitle");
+const priceLabel = t("tours.priceLabel");
+const faqTitle = t("tours.faqTitle");
+const reserveNow = t("booking.checkAvailability");
 
 const accommodationLabel = t("tours.accommodationLabel");
 const mealsLabel = t("tours.mealsLabel");
@@ -120,9 +119,9 @@ const routeMap = getTourRouteMap(tourKey, startCity, endCity, dossierTitle);
 
 <TripLayout
   breadcrumbs={[
-    { label: t("nav.home", "Home"), href: "/" },
-    { label: t("nav.tours", "Tours"), href: "/tours" },
-    { label: t("tours.detailsTitle", "Tours Details") },
+    { label: t("nav.home"), href: "/" },
+    { label: t("nav.tours"), href: "/tours" },
+    { label: t("tours.detailsTitle") },
   ]}
   hasUnderline={true}
   headingId="tour-title"
@@ -130,7 +129,7 @@ const routeMap = getTourRouteMap(tourKey, startCity, endCity, dossierTitle);
   imageSrc={imageSrc}
   lead={lead}
   pageSubtitle={heroSubtitle}
-  pageTitle={t("tours.detailsTitle", "Tours Details")}
+  pageTitle={t("tours.detailsTitle")}
   routeMap={routeMap}
   sectionId="tour-single"
   sidebar={{
@@ -161,8 +160,8 @@ const routeMap = getTourRouteMap(tourKey, startCity, endCity, dossierTitle);
       highlightsTitle={highlightsTitle}
       startCity={startCity}
       startLabel={t("tours.start")}
-      tourTypeLabel={t("tours.tourTypeLabel", "Tour Format")}
-      tourTypeValue={t("tours.tourTypeValue", "Private VIP & Shared")}
+      tourTypeLabel={t("tours.tourTypeLabel")}
+      tourTypeValue={t("tours.tourTypeValue")}
     />
 
     <section
@@ -220,19 +219,13 @@ const routeMap = getTourRouteMap(tourKey, startCity, endCity, dossierTitle);
         seo.price ?? { label: priceLabel, note: "Private transport and licensed guides included" }
       }
       reserveNow={reserveNow}
-      formatComparisonTitle={t("tours.formatComparisonTitle", "Available Tour Formats")}
-      privateOption={t("tours.privateOption", "Private VIP Departure")}
-      privateBadge={t("tours.privateOptionBadge", "Most Popular")}
-      privateDesc={t(
-        "tours.privateOptionDesc",
-        "Dedicated air-conditioned vehicle, personal Berber driver-guide, flexible departure times and custom scenic photo stops.",
-      )}
-      sharedOption={t("tours.sharedOption", "Small-Group Shared")}
-      sharedBadge={t("tours.sharedOptionBadge", "Budget-Friendly")}
-      sharedDesc={t(
-        "tours.sharedOptionDesc",
-        "Cost-effective departure with max 8–14 travelers. Fixed scenic itinerary and authentic desert bivouac. Inquire on WhatsApp for shared dates.",
-      )}
+      formatComparisonTitle={t("tours.formatComparisonTitle")}
+      privateOption={t("tours.privateOption")}
+      privateBadge={t("tours.privateOptionBadge")}
+      privateDesc={t("tours.privateOptionDesc")}
+      sharedOption={t("tours.sharedOption")}
+      sharedBadge={t("tours.sharedOptionBadge")}
+      sharedDesc={t("tours.sharedOptionDesc")}
     />
 
     {seo.faqs && seo.faqs.length > 0 && (

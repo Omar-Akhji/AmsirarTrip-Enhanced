@@ -1,3 +1,6 @@
+import { DEFAULT_LOCALE, isLocale, type Locale } from "./locales";
+import type { MessageKey } from "./types";
+
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null;
 }
@@ -17,14 +20,42 @@ export function lookupKey(tree: unknown, key: string): unknown {
 }
 
 export interface TranslationFunction {
-  (key: string, values?: string | Record<string, string | number>): string;
+  (key: MessageKey | (string & {}), values?: string | Record<string, string | number>): string;
   raw: (key: string) => unknown;
   has: (key: string) => boolean;
 }
 
-export function createTranslationHelper(lookupFn: (key: string) => unknown): TranslationFunction {
-  function t(key: string, values?: string | Record<string, string | number>): string {
-    const result = lookupFn(key);
+export function createTranslationHelper(
+  lookupFn: (key: string) => unknown,
+  fallbackLookupFn?: (key: string) => unknown,
+  currentLocale: string = DEFAULT_LOCALE,
+): TranslationFunction {
+  function t(
+    key: MessageKey | (string & {}),
+    values?: string | Record<string, string | number>,
+  ): string {
+    let result: unknown;
+
+    // Pluralization support: if values is an object with a numeric "count"
+    if (values && typeof values === "object" && typeof values["count"] === "number") {
+      try {
+        const pluralForm = new Intl.PluralRules(currentLocale).select(values["count"]);
+        result = lookupFn(`${key}_${pluralForm}`);
+        if (result === undefined && fallbackLookupFn) {
+          result = fallbackLookupFn(`${key}_${pluralForm}`);
+        }
+      } catch {
+        // Fall back to standard key lookup if PluralRules throws
+      }
+    }
+
+    if (result === undefined) {
+      result = lookupFn(key);
+    }
+
+    if (result === undefined && fallbackLookupFn) {
+      result = fallbackLookupFn(key);
+    }
 
     if (result === undefined) {
       return typeof values === "string" ? values : key;
@@ -47,10 +78,11 @@ export function createTranslationHelper(lookupFn: (key: string) => unknown): Tra
 
   return Object.assign(t, {
     raw(key: string): unknown {
-      return lookupFn(key);
+      const val = lookupFn(key);
+      return val ?? fallbackLookupFn?.(key);
     },
     has(key: string): boolean {
-      return lookupFn(key) !== undefined;
+      return lookupFn(key) !== undefined || fallbackLookupFn?.(key) !== undefined;
     },
   });
 }
@@ -60,8 +92,6 @@ export function parseStringArray(value: unknown): readonly string[] {
       value
     : [];
 }
-
-import { DEFAULT_LOCALE, isLocale, type Locale } from "./locales";
 
 /**
  * Strips the leading locale prefix (e.g. "/fr/tours" -> "/tours", "/de" -> "/"). Returns a

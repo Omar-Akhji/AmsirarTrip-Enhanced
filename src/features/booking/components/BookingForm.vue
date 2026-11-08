@@ -77,8 +77,8 @@ const handleSubmit = async (event: Event) => {
   if (!recaptchaToken) {
     state.value = {
       success: false,
-      message: t("booking.errors.captcha", "Recaptcha verification is required"),
-      errors: { recaptchaToken: t("booking.errors.captcha", "Recaptcha verification is required") },
+      message: t("booking.errors.captcha"),
+      errors: { recaptchaToken: t("booking.errors.captcha") },
     };
     return;
   }
@@ -152,13 +152,13 @@ const handleSubmit = async (event: Event) => {
               <span
                 class="font-mono text-xs font-semibold tracking-[0.14em] text-orange-600 uppercase"
               >
-                {{ t("contact.form.badge", "Plan with locals") }}
+                {{ t("contact.form.badge") }}
               </span>
               <h3
                 id="booking-heading"
                 class="mbs-1 text-xl font-bold tracking-tight text-stone-900 sm:text-2xl"
               >
-                {{ t("booking.makeReservation", "Make your reservation") }}
+                {{ t("booking.makeReservation") }}
               </h3>
             </div>
 
@@ -193,7 +193,7 @@ const handleSubmit = async (event: Event) => {
                 <p
                   class="mbe-2 font-mono text-xs font-bold tracking-wider text-orange-900 uppercase"
                 >
-                  {{ t("contact.form.errors.title", "Please complete these fields:") }}
+                  {{ t("contact.form.errors.title") }}
                 </p>
                 <ul class="flex flex-col gap-1 font-mono text-xs text-orange-800">
                   <li
@@ -309,8 +309,8 @@ const handleSubmit = async (event: Event) => {
                   />
                   <span>
                     {{
-                      isSubmitting ? t("booking.sending", "Sending...")
-                      : buttonText === "booking.checkAvailability" ? t(buttonText, "Reserve Now")
+                      isSubmitting ? t("booking.sending")
+                      : buttonText === "booking.checkAvailability" ? t(buttonText)
                       : buttonText
                     }}
                   </span>

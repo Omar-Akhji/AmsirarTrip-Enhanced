@@ -9,7 +9,7 @@ test.describe("i18n routing & document standards", () => {
     test(`renders root page for locale [${locale}] with correct html lang and hreflang links`, async ({
       page,
     }) => {
-      const response = await page.goto(path);
+      const response = await page.goto(path, { waitUntil: "domcontentloaded" });
       expect(response?.status()).toBe(200);
 
       const htmlLang = await page.locator("html").getAttribute("lang");
@@ -24,12 +24,12 @@ test.describe("i18n routing & document standards", () => {
   }
 
   test("unknown locale returns 404", async ({ page }) => {
-    const response = await page.goto("/xx/about");
+    const response = await page.goto("/xx/about", { waitUntil: "domcontentloaded" });
     expect(response?.status()).toBe(404);
   });
 
   test("default locale prefix (/en/about) redirects to canonical (/about)", async ({ page }) => {
-    await page.goto("/en/about");
+    await page.goto("/en/about", { waitUntil: "domcontentloaded" });
     // Either redirected response or landed on /about
     expect(page.url()).not.toContain("/en/about");
     expect(new URL(page.url()).pathname).toBe("/about");

@@ -41,7 +41,7 @@ onMounted(() => {
 <template>
   <fieldset class="m-0 flex flex-col gap-5 border-0 p-0">
     <legend class="sr-only">
-      {{ t("booking.tripDetails", "Trip Details") }}
+      {{ t("booking.tripDetails") }}
     </legend>
     <div class="grid items-start gap-5 md:grid-cols-2">
       <div>
@@ -49,7 +49,7 @@ onMounted(() => {
           for="numberOfPeople"
           class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700"
         >
-          {{ t("booking.numberOfPeople", "Number of People") }}
+          {{ t("booking.numberOfPeople") }}
           <span
             class="text-orange-600"
             aria-hidden="true"
@@ -104,9 +104,7 @@ onMounted(() => {
           <input
             id="numberOfPeople"
             class="peer h-12 rounded-xl border border-stone-200/90 bg-stone-50/50 ps-10.5 pe-4 font-sans text-sm text-stone-900 transition-colors inline-full placeholder:text-stone-400 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden"
-            :placeholder="
-              t('booking.placeholders.numberOfPeople', 'Enter number of people (e.g. 2)')
-            "
+            :placeholder="t('booking.placeholders.numberOfPeople')"
             type="number"
             name="numberOfPeople"
             toolparamdescription="The total number of people participating in the tour"
@@ -132,7 +130,7 @@ onMounted(() => {
           for="reservationDate"
           class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700"
         >
-          {{ t("booking.reservationDate", "Select your travel date") }}
+          {{ t("booking.reservationDate") }}
           <span
             class="text-orange-600"
             aria-hidden="true"
@@ -141,7 +139,7 @@ onMounted(() => {
         </label>
         <NativePopover
           :is-open="calendarOpen"
-          :aria-label="t('booking.reservationDate', 'Select your travel date')"
+          :aria-label="t('booking.reservationDate')"
           @update:is-open="emit('update:calendarOpen', $event)"
         >
           <template #trigger>
@@ -217,7 +215,7 @@ onMounted(() => {
                   })
                 }}
               </span>
-              <span v-else>{{ t("booking.reservationDate", "Select your travel date") }}</span>
+              <span v-else>{{ t("booking.reservationDate") }}</span>
             </span>
           </template>
 
@@ -261,7 +259,7 @@ onMounted(() => {
         for="message"
         class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700"
       >
-        {{ t("booking.message", "Your message") }}
+        {{ t("booking.message") }}
       </label>
       <div class="relative">
         <svg
@@ -299,9 +297,7 @@ onMounted(() => {
           id="message"
           name="message"
           class="peer rounded-xl border border-stone-200/90 bg-stone-50/50 py-3 ps-10.5 pe-4 font-sans text-sm text-stone-900 transition-colors inline-full min-block-40 placeholder:text-stone-400 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden"
-          :placeholder="
-            t('booking.placeholders.message', 'Enter any custom requests, message, or questions...')
-          "
+          :placeholder="t('booking.placeholders.message')"
           :maxlength="1000"
           toolparamdescription="Any custom requests, message, or notes from the guest regarding the booking"
           autocomplete="off"

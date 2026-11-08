@@ -20,7 +20,8 @@
     "personsMin": "Mindestens 1 Person erforderlich",
     "personsMax": "Maximal 50 Personen",
     "invalidDate": "Ungültiges Datumsformat",
-    "datePast": "Das Datum darf nicht in der Vergangenheit liegen"
+    "datePast": "Das Datum darf nicht in der Vergangenheit liegen",
+    "topicTooLong": "Thema darf 200 Zeichen nicht überschreiten"
   },
   "nav": {
     "home": "Startseite",
@@ -29,7 +30,8 @@
     "blog": "Blog",
     "about": "Über uns",
     "contact": "Kontakt",
-    "toggleMenu": "Navigationsmenü umschalten"
+    "toggleMenu": "Navigationsmenü umschalten",
+    "mainAria": "Hauptnavigation"
   },
   "language": "Sprache",
   "selectLanguage": "Sprache auswählen",
@@ -54,7 +56,8 @@
       "destinations": "Reiseziele",
       "care": "Kundenbetreuung",
       "satisfaction": "Kundenzufriedenheit"
-    }
+    },
+    "featured": { "title": "Empfohlene Wüstentouren & Expeditionen" }
   },
   "tours": {
     "meta": {
@@ -226,7 +229,21 @@
     "pricingSubtitle": "Transparente Preise für private VIP-Touren und Kleingruppen.",
     "relatedTagline": "Alternative Marokko-Rundreisen",
     "relatedTitle": "Entdecken Sie verwandte Rundreisen",
-    "relatedSubtitle": "Entdecken Sie alternative Reisedauern und Routen mit privatem 4x4-Transport und luxuriösen Wüstencamps."
+    "relatedSubtitle": "Entdecken Sie alternative Reisedauern und Routen mit privatem 4x4-Transport und luxuriösen Wüstencamps.",
+    "sharedOptionBadge": "Preisgünstig",
+    "sharedOptionDesc": "Schließen Sie sich einer kleinen Reisegruppe von 8–14 Personen mit garantierten Abfahrten an.",
+    "faq": {
+      "title": "Häufige Fragen zu unseren Marokko-Touren",
+      "subtitle": "Alles, was Sie für die Planung Ihrer Wüstenreise wissen müssen.",
+      "q1": "Welche Arten von Wüstentouren ab Marrakesch werden angeboten?",
+      "a1": "Amsirar Trip bietet 3- bis 14-tägige Marokko-Reisen an: Kameltouren in den Erg Chebbi Dünen von Merzouga, Überquerung des Hohen Atlas über den Tizi n'Tichka-Pass und Königsstädte-Rundreisen. Alle Touren starten in Marrakesch mit privaten 4x4-Fahrzeugen und lizenzierten Guides.",
+      "q2": "Ist Amsirar Trip ein lizenzierter Reiseveranstalter in Marokko?",
+      "a2": "Ja. Amsirar Trip besitzt die offizielle Tourismuslizenz 24/TT/RAK des marokkanischen Tourismusministeriums mit Sitz in Marrakesch.",
+      "q3": "Wann ist die beste Reisezeit für eine Wüstentour ab Marrakesch?",
+      "a3": "Die beste Reisezeit ist von Oktober bis April mit angenehmen Tagestemperaturen zwischen 18°C und 28°C. Im Hochsommer kann es in der Sahara über 40°C heiß werden.",
+      "q4": "Werden die Touren privat oder in Gruppen durchgeführt?",
+      "a4": "Wir bieten sowohl exklusive private VIP-Reisen als auch preisgünstige Kleingruppenreisen mit 8 bis 14 Personen an."
+    }
   },
   "excursion": {
     "404": {
@@ -240,7 +257,6 @@
       "description": "Die besten Tagesausflüge ab Marrakesch: Agafay-Wüste mit Sonnenuntergang & Dinner, Ourika-Tal, Ouzoud-Wasserfälle und Essaouira im privaten Fahrzeug."
     },
     "title": "Unsere Ausflüge",
-    "featured": "Empfohlen",
     "sectionSubtitle": "Tagestouren ab Marrakesch in die Atlas-Täler, an die Atlantikküste und in die Wüstenplateaus.",
     "detailsTitle": "Ausflugsdetails",
     "detailsSubtitle": "Entdecken Sie Marokkos verborgene Schätze",
@@ -251,7 +267,14 @@
       "distanceLabel": "Entfernung",
       "durationLabel": "Dauer",
       "highlights": "Höhepunkte",
-      "overview": "Überblick"
+      "overview": "Überblick",
+      "programTitle": "Tagesprogramm & Ablauf",
+      "excluded": "Nicht inbegriffene Leistungen",
+      "goodToKnow": "Reisehinweise & Vorbereitung",
+      "included": "Inbegriffene Leistungen",
+      "pricingTitle": "Reservierung & Preise",
+      "priceLabel": "Ab-Preis",
+      "faqTitle": "Häufig gestellte Fragen"
     },
     "stats": {
       "routes": "Signature-Ausflüge",
@@ -332,7 +355,19 @@
       "smTitle": "lesen Sie diese Ausflüge für Informationen",
       "lgTitle": "Ausflüge von Marrakech"
     },
-    "readMore": "Mehr erfahren"
+    "readMore": "Mehr erfahren",
+    "faq": {
+      "title": "Häufige Fragen zu unseren Tagesausflügen ab Marrakesch",
+      "subtitle": "Planen Sie Ihren perfekten Tagesausflug von Marrakesch.",
+      "q1": "Welche Tagesausflüge ab Marrakesch sind möglich?",
+      "a1": "Beliebte Tagesausflüge führen zu den Ouzoud-Wasserfällen, in die Agafay-Steinwüste, ins Ourika-Tal oder zur UNESCO-Kasbah Ait Benhaddou. Abfahrt am Morgen, Rückkehr am Abend.",
+      "q2": "Wie weit ist die Agafay-Wüste von Marrakesch entfernt?",
+      "a2": "Die Agafay-Wüste liegt etwa 40 km südwestlich von Marrakesch (ca. 45 Minuten Fahrzeit). Sie bietet Kamelritte, wunderschöne Sonnenuntergänge und Abendessen im Camp.",
+      "q3": "Sind die Ausflüge geführt und mehrsprachig?",
+      "a3": "Ja. Alle Ausflüge werden von lizenzierten Guides begleitet, inklusive privatem klimatisiertem Transfer und Abholung vom Hotel in Marrakesch.",
+      "q4": "Kann man einen Tagesausflug mit einer Sahara-Rundreise kombinieren?",
+      "a4": "Ja, wir stellen Ihnen gerne eine individuelle Kombination aus Tagesausflügen und Mehrtages-Wüstentouren zusammen."
+    }
   },
   "about": {
     "meta": {
@@ -386,13 +421,6 @@
       "badge": "Planen Sie mit Einheimischen",
       "title": "Entwerfen Sie Ihre Individuelle Marokko-Reise & Privaten Reiseplan",
       "subtitle": "Teilen Sie uns Ihre Reisedaten mit und wir erstellen einen maßgeschneiderten Routenvorschlag für Sie.",
-      "nameLabel": "Ihr Name",
-      "namePlaceholder": "Ihr Name",
-      "emailLabel": "Ihre E‑Mail",
-      "emailPlaceholder": "Ihre E‑Mail",
-      "messageLabel": "Ihre Nachricht",
-      "messagePlaceholder": "Ihre Nachricht",
-      "submit": "Nachricht senden",
       "cta": "Nachricht senden",
       "sending": "Wird gesendet…",
       "success": "Nachricht gesendet! Wir antworten innerhalb von 24 Stunden.",
@@ -418,7 +446,22 @@
       "infoTitle": "Planen Sie handgefertigte Erlebnisse",
       "infoCopy": "Unser Team in Marrakesch beantwortet jede Nachricht persönlich und kann bei individuellen Reiseplänen, Wüstencamps oder Last-Minute-Transfers helfen.",
       "info": { "address": "Besuchen", "phone": "Anrufen", "email": "E-Mail" },
-      "infoFooter": "Täglich von 09:00 bis 21:00 Uhr GMT+1 verfügbar"
+      "infoFooter": "Täglich von 09:00 bis 21:00 Uhr GMT+1 verfügbar",
+      "details": "Kontaktdaten",
+      "placeholders": {
+        "name": "Geben Sie Ihren vollständigen Namen ein",
+        "email": "Geben Sie Ihre E-Mail-Adresse ein",
+        "phone": "Geben Sie Ihre Telefonnummer ein",
+        "topic": "Reisefokus eingeben (z. B. Sahara, Atlas, Individuell)",
+        "message": "Geben Sie Ihre Nachricht oder Reiseanfrage ein..."
+      },
+      "topics": {
+        "desert": "Sahara-Wüstenexpedition",
+        "atlas": "Wanderung im Hohen Atlas",
+        "imperial": "Königsstädte & Kulturerbe",
+        "coastal": "Atlantikküste & Essaouira-Ausflug",
+        "custom": "Maßgeschneiderte private Marokko-Reiseroute"
+      }
     },
     "info": {
       "mobile": "Mobil",
@@ -426,7 +469,13 @@
       "address": "Adresse",
       "message": "Nachricht"
     },
-    "location": { "smTitle": "Finden Sie Uns", "lgTitle": "Unser Standort" }
+    "location": { "smTitle": "Finden Sie Uns", "lgTitle": "Unser Standort" },
+    "methods": { "title": "Direkte Kommunikationskanäle" },
+    "map": {
+      "placeholderTitle": "Interaktive Karte anzeigen",
+      "placeholderDesc": "Erkunden Sie unseren genauen Bürostandort in Marrakesch und Sehenswürdigkeiten in der Nähe.",
+      "loadBtn": "Karte laden"
+    }
   },
   "excursion1": {
     "title": "Tagesausflug zu den Ouzoud-Wasserfällen",
@@ -1253,7 +1302,8 @@
       "twitter": "Twitter",
       "instagram": "Instagram",
       "tiktok": "TikTok"
-    }
+    },
+    "newsletterStatus": "Abonnementstatus"
   },
   "button": "Schaltfläche",
   "locale": "Gebietsschema",
@@ -1275,7 +1325,12 @@
       "title": "Private Expeditionen durch Marokko",
       "subtitle": "Erkunden Sie die Sahara, Hochatlas-Pässe und Königsstädte mit erfahrenen lokalen Fahrern.",
       "cta": "Reiserouten entdecken"
-    }
+    },
+    "sectionLabel": "Marokko Reisevideo",
+    "pause": "Video pausieren",
+    "playAria": "Video abspielen",
+    "name": "Marokko Sahara-Wüstentouren & Kulturexpeditionen - Amsirar Trip",
+    "description": "Erleben Sie authentische Marokkoreisen: Erg Chebbi-Dünen, Kameltouren zum Sonnenuntergang, Pässe des Hohen Atlas und Königsstädte mit Amsirar Trip."
   },
   "booking": {
     "makeReservation": "Buchen Sie Ihre Reservierung",
@@ -1409,7 +1464,17 @@
         "arrival": "Gegen 17:00 bis 18:00 Uhr"
       }
     },
-    "sending": "Wird gesendet..."
+    "sending": "Wird gesendet...",
+    "errors": { "captcha": "Recaptcha-Überprüfung ist erforderlich" },
+    "personalDetails": "Angaben zu den Gästen",
+    "tripDetails": "Reisedetails",
+    "placeholders": {
+      "fullName": "Geben Sie Ihren vollständigen Namen ein",
+      "email": "Geben Sie Ihre E-Mail-Adresse ein",
+      "phone": "Geben Sie Ihre Telefonnummer ein",
+      "numberOfPeople": "Geben Sie die Personenanzahl ein (z. B. 2)",
+      "message": "Geben Sie Sonderwünsche, Nachricht oder Fragen ein..."
+    }
   },
   "legal": {
     "backToHome": "Zurück zur Startseite",

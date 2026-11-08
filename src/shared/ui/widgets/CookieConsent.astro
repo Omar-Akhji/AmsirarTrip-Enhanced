@@ -4,7 +4,7 @@ import { getRelativeLocaleUrl } from "astro:i18n";
 import TactileSwitch from "../primitives/TactileSwitch.astro";
 import CookieIcon from "@/shared/ui/icons/CookieIcon.astro";
 
-const locale = Astro.currentLocale || "en";
+const locale = Astro.locals.locale ?? Astro.currentLocale ?? "en";
 const t = useTranslations(locale);
 
 const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
@@ -34,7 +34,7 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
           class="text-sm font-semibold tracking-tight text-white sm:text-base font-sans"
           id="cookie-banner-title"
         >
-          {t("cookieConsent.title", "Cookie preferences")}
+          {t("cookieConsent.title")}
         </h2>
         <p
           class="text-xs leading-relaxed text-zinc-300 sm:text-[13px]"
@@ -48,7 +48,7 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
             class="font-medium text-orange-400 underline underline-offset-4 decoration-orange-400/40 transition-colors hover:text-orange-300 hover:decoration-orange-300 focus-visible:outline-2 focus-visible:outline-orange-400 rounded-xs"
             href={privacyPolicyHref}
           >
-            {t("cookieConsent.privacyPolicyLink", "Read our Privacy Policy")}
+            {t("cookieConsent.privacyPolicyLink")}
           </a>
         </p>
       </div>
@@ -61,7 +61,7 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
           data-cookie-accept-all
           type="button"
         >
-          <span>{t("cookieConsent.acceptAll", "Accept All")}</span>
+          <span>{t("cookieConsent.acceptAll")}</span>
         </button>
 
         <button
@@ -69,7 +69,7 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
           data-cookie-reject-all
           type="button"
         >
-          <span>{t("cookieConsent.rejectAll", "Essential Only")}</span>
+          <span>{t("cookieConsent.rejectAll")}</span>
         </button>
       </div>
 
@@ -80,7 +80,7 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
         data-cookie-open-preferences
         type="button"
       >
-        <span>{t("cookieConsent.customize", "Cookie Settings")}</span>
+        <span>{t("cookieConsent.customize")}</span>
       </button>
     </div>
   </div>
@@ -95,13 +95,13 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
   <div class="flex items-center justify-between border-b border-white/10 bg-slate-900/60 px-5 py-4 sm:px-6">
     <div>
       <p class="text-[11px] font-medium tracking-wide text-orange-400/90 uppercase">
-        {t("cookieConsent.complianceNote", "Privacy Controls")}
+        {t("cookieConsent.complianceNote")}
       </p>
       <h2
         class="mbs-0.5 text-base font-semibold tracking-tight text-white sm:text-lg font-sans"
         id="cookie-modal-title"
       >
-        {t("cookieConsent.modalTitle", "Cookie & Privacy Preferences")}
+        {t("cookieConsent.modalTitle")}
       </h2>
     </div>
 
@@ -110,7 +110,7 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
       class="m-0"
     >
       <button
-        aria-label={t("cookieConsent.close", "Close")}
+        aria-label={t("cookieConsent.close")}
         class="inline-flex size-8 cursor-pointer items-center justify-center rounded-lg border border-white/10 bg-white/5 text-zinc-400 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-2 focus-visible:outline-orange-400"
         command="close"
         commandfor="cookie-preferences-modal"
@@ -156,10 +156,10 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
               <div class="flex-1 min-w-0">
                 <div class="flex flex-wrap items-center gap-2">
                   <h3 class="text-sm font-semibold tracking-tight text-white sm:text-base font-sans">
-                    {t("cookieConsent.necessaryTitle", "Essential cookies")}
+                    {t("cookieConsent.necessaryTitle")}
                   </h3>
                   <span class="inline-flex items-center rounded-sm border border-emerald-500/30 bg-emerald-500/10 px-2 py-1 text-[11px] font-medium text-emerald-400">
-                    {t("cookieConsent.alwaysActive", "Always Active")}
+                    {t("cookieConsent.alwaysActive")}
                   </span>
                 </div>
                 <p class="pbs-2 text-xs leading-relaxed text-zinc-300 sm:text-[13px]">
@@ -172,7 +172,7 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
 
               <div class="pbs-1">
                 <TactileSwitch
-                  ariaLabel={t("cookieConsent.necessaryTitle", "Essential cookies")}
+                  ariaLabel={t("cookieConsent.necessaryTitle")}
                   checked={true}
                   disabled={true}
                   id="cookie-toggle-necessary"
@@ -189,10 +189,10 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
                   for="cookie-toggle-analytics"
                 >
                   <h3 class="text-sm font-semibold tracking-tight text-white transition-colors group-hover:text-orange-300 sm:text-base font-sans">
-                    {t("cookieConsent.analyticsTitle", "Analytics cookies")}
+                    {t("cookieConsent.analyticsTitle")}
                   </h3>
                   <span class="inline-flex items-center rounded-sm border border-white/10 bg-white/5 px-2 py-1 text-[11px] font-medium text-zinc-400">
-                    {t("cookieConsent.optional", "Optional")}
+                    {t("cookieConsent.optional")}
                   </span>
                 </label>
                 <p class="pbs-2 text-xs leading-relaxed text-zinc-300 sm:text-[13px]">
@@ -205,7 +205,7 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
 
               <div class="pbs-1">
                 <TactileSwitch
-                  ariaLabel={t("cookieConsent.analyticsTitle", "Analytics cookies")}
+                  ariaLabel={t("cookieConsent.analyticsTitle")}
                   id="cookie-toggle-analytics"
                 />
               </div>
@@ -220,10 +220,10 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
                   for="cookie-toggle-functional"
                 >
                   <h3 class="text-sm font-semibold tracking-tight text-white transition-colors group-hover:text-orange-300 sm:text-base font-sans">
-                    {t("cookieConsent.functionalTitle", "Preference cookies")}
+                    {t("cookieConsent.functionalTitle")}
                   </h3>
                   <span class="inline-flex items-center rounded-sm border border-white/10 bg-white/5 px-2 py-1 text-[11px] font-medium text-zinc-400">
-                    {t("cookieConsent.optional", "Optional")}
+                    {t("cookieConsent.optional")}
                   </span>
                 </label>
                 <p class="pbs-2 text-xs leading-relaxed text-zinc-300 sm:text-[13px]">
@@ -236,7 +236,7 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
 
               <div class="pbs-1">
                 <TactileSwitch
-                  ariaLabel={t("cookieConsent.functionalTitle", "Preference cookies")}
+                  ariaLabel={t("cookieConsent.functionalTitle")}
                   id="cookie-toggle-functional"
                 />
               </div>
@@ -253,7 +253,7 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
         class="inline-flex items-center text-xs text-zinc-400 underline underline-offset-4 decoration-zinc-600 transition-colors hover:text-orange-400 hover:decoration-orange-400 focus-visible:outline-2 focus-visible:outline-orange-400 rounded-xs"
         href={privacyPolicyHref}
       >
-        <span>{t("cookieConsent.privacyPolicyLink", "Read our Privacy Policy")}</span>
+        <span>{t("cookieConsent.privacyPolicyLink")}</span>
       </a>
     </div>
 
@@ -264,7 +264,7 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
           data-cookie-reject-all
           type="button"
         >
-          <span>{t("cookieConsent.rejectAll", "Essential Only")}</span>
+          <span>{t("cookieConsent.rejectAll")}</span>
         </button>
 
         <button
@@ -272,7 +272,7 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
           data-cookie-accept-all
           type="button"
         >
-          <span>{t("cookieConsent.acceptAll", "Accept All")}</span>
+          <span>{t("cookieConsent.acceptAll")}</span>
         </button>
       </div>
 
@@ -281,7 +281,7 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
         data-cookie-save-preferences
         type="button"
       >
-        <span>{t("cookieConsent.savePreferences", "Save Preferences")}</span>
+        <span>{t("cookieConsent.savePreferences")}</span>
       </button>
     </div>
   </div>
@@ -289,13 +289,13 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
 
 <!-- Cookie Settings Trigger -->
 <button
-  aria-label={t("cookieConsent.modalTitle", "Cookie Settings")}
+  aria-label={t("cookieConsent.modalTitle")}
   class="group fixed inset-e-0 inset-be-20 z-40 flex size-11 cursor-pointer items-center justify-start ps-2.5 rounded-s-md border-[1.5px] border-e-0 border-white/15 bg-slate-950/95 text-zinc-300 shadow-md backdrop-blur-md transition-[transform,background-color,border-color,color,box-shadow] duration-200 ease-out pointer-fine:hover:-translate-x-1.5 pointer-fine:hover:border-orange-400/50 pointer-fine:hover:bg-slate-900 pointer-fine:hover:text-white pointer-fine:hover:shadow-xl focus-visible:outline-2 focus-visible:outline-orange-400 motion-reduce:transform-none print:hidden"
   command="show-modal"
   commandfor="cookie-preferences-modal"
   data-cookie-open-preferences
   id="cookie-badge-btn"
-  title={t("cookieConsent.customize", "Cookie Settings")}
+  title={t("cookieConsent.customize")}
   type="button"
 >
   <svg

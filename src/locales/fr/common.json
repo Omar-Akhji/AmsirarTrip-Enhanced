@@ -20,7 +20,8 @@
     "personsMin": "Au moins 1 personne est requise",
     "personsMax": "Maximum 50 personnes",
     "invalidDate": "Format de date invalide",
-    "datePast": "La date ne peut pas être dans le passé"
+    "datePast": "La date ne peut pas être dans le passé",
+    "topicTooLong": "Le sujet ne doit pas dépasser 200 caractères"
   },
   "nav": {
     "home": "Accueil",
@@ -29,7 +30,8 @@
     "blog": "Blog",
     "about": "À propos",
     "contact": "Contact",
-    "toggleMenu": "Basculer le menu de navigation"
+    "toggleMenu": "Basculer le menu de navigation",
+    "mainAria": "Navigation principale"
   },
   "language": "Langue",
   "selectLanguage": "Sélectionner la langue",
@@ -54,7 +56,8 @@
       "destinations": "Destinations",
       "care": "Service client",
       "satisfaction": "Satisfaction client"
-    }
+    },
+    "featured": { "title": "Circuits et expéditions dans le désert en vedette" }
   },
   "tours": {
     "meta": {
@@ -226,7 +229,21 @@
     "pricingSubtitle": "Tarifs transparents pour circuits privés exclusifs ou départs partagés.",
     "relatedTagline": "Circuits Alternatifs au Maroc",
     "relatedTitle": "Découvrez d'autres itinéraires recommandés",
-    "relatedSubtitle": "Explorez différentes durées et variantes d'itinéraires conçus en 4x4 privé et bivouacs de luxe."
+    "relatedSubtitle": "Explorez différentes durées et variantes d'itinéraires conçus en 4x4 privé et bivouacs de luxe.",
+    "sharedOptionBadge": "Économique",
+    "sharedOptionDesc": "Rejoignez un petit groupe programmé de 8 à 14 voyageurs avec départs garantis.",
+    "faq": {
+      "title": "Questions fréquentes sur nos circuits au Maroc",
+      "subtitle": "Tout ce dont vous avez besoin pour préparer votre voyage dans le désert.",
+      "q1": "Quels types d'excursions et circuits dans le désert sont disponibles depuis Marrakech ?",
+      "a1": "Amsirar Trip propose des circuits au Maroc de 3 à 14 jours. Nos formules comprennent des randonnées chamelières dans les dunes de l'Erg Chebbi à Merzouga, la traversée du Haut Atlas via le col de Tizi n'Tichka et des circuits dans les villes impériales. Tous nos départs se font en 4x4 privé climatisé avec guide agréé.",
+      "q2": "Amsirar Trip est-elle une agence de voyage agréée au Maroc ?",
+      "a2": "Oui. Amsirar Trip opère sous licence officielle de tourisme numéro 24/TT/RAK, délivrée par le Ministère du Tourisme. Basés à Marrakech, nous respectons scrupuleusement la réglementation touristique marocaine.",
+      "q3": "Quelle est la meilleure période pour un circuit dans le désert au départ de Marrakech ?",
+      "a3": "La période idéale s'étend d'octobre à avril, avec des températures diurnes agréables entre 18°C et 28°C dans l'Erg Chebbi. En été, les températures désertiques dépassent 40°C mais restent tempérées dans l'Atlas. Nous opérons toute l'année.",
+      "q4": "Les circuits sont-ils privés ou en groupe partagé ?",
+      "a4": "Nous proposons des départs privés VIP ainsi que des petits groupes partagés de 8 à 14 personnes à tarifs avantageux sur les circuits les plus populaires."
+    }
   },
   "excursion": {
     "404": {
@@ -240,7 +257,6 @@
       "description": "Meilleures excursions d'une journée depuis Marrakech : coucher de soleil à Agafay, cascades d'Ouzoud, vallée de l'Ourika et Essaouira avec chauffeur privé."
     },
     "title": "Nos excursions",
-    "featured": "En vedette",
     "sectionSubtitle": "Excursions d'une journée au départ de Marrakech vers les vallées de l'Atlas, la côte atlantique et le désert.",
     "detailsTitle": "Détails de l'excursion",
     "detailsSubtitle": "Explorez les trésors cachés du Maroc",
@@ -251,7 +267,14 @@
       "distanceLabel": "Distance",
       "durationLabel": "Durée",
       "highlights": "Points forts",
-      "overview": "Aperçu"
+      "overview": "Aperçu",
+      "programTitle": "Programme détaillé et horaires",
+      "excluded": "Services exclus",
+      "goodToKnow": "Conseils de voyage et préparation",
+      "included": "Services inclus",
+      "pricingTitle": "Réservation et tarifs",
+      "priceLabel": "Prix de départ",
+      "faqTitle": "Questions fréquemment posées"
     },
     "stats": {
       "routes": "Excursions signatures",
@@ -332,7 +355,19 @@
       "smTitle": "lisez ces excursions pour en savoir plus",
       "lgTitle": "Excursions de Marrakech"
     },
-    "readMore": "En savoir plus"
+    "readMore": "En savoir plus",
+    "faq": {
+      "title": "Questions fréquentes sur les excursions d'une journée",
+      "subtitle": "Organisez votre excursion idéale au départ de Marrakech.",
+      "q1": "Quelles excursions d'une journée peut-on faire depuis Marrakech ?",
+      "a1": "Vous pouvez réserver des excursions vers les cascades d'Ouzoud (110 m de haut), le désert d'Agafay à 40 km, la vallée de l'Ourika et la kasbah d'Aït Benhaddou. Toutes partent le matin et rentrent le soir.",
+      "q2": "À quelle distance se trouve le désert d'Agafay de Marrakech ?",
+      "a2": "Agafay se situe à environ 40 km au sud-ouest de Marrakech, soit 45 minutes de route. Ce plateau aride offre balades à dos de chameau, couchers de soleil et dîners sous les étoiles.",
+      "q3": "Les excursions sont-elles accompagnées de guides francophones ?",
+      "a3": "Oui. Toutes nos excursions incluent un chauffeur-guide professionnel francophone, le transport privé en 4x4 climatisé et la prise en charge à votre hôtel à Marrakech.",
+      "q4": "Peut-on combiner une excursion d'une journée avec un circuit dans le Sahara ?",
+      "a4": "Oui. Nous pouvons combiner une excursion à la journée avec un circuit de plusieurs jours dans le Sahara pour composer un itinéraire sur mesure."
+    }
   },
   "about": {
     "meta": {
@@ -411,7 +446,22 @@
       "infoTitle": "Planifiez des expériences sur mesure",
       "infoCopy": "Notre équipe de Marrakech répond personnellement à chaque message et peut vous aider avec des itinéraires personnalisés, des camps dans le désert ou des transferts de dernière minute.",
       "info": { "address": "Visite", "phone": "Appel", "email": "E-mail" },
-      "infoFooter": "Disponible tous les jours de 09h00 à 21h00 GMT+1"
+      "infoFooter": "Disponible tous les jours de 09h00 à 21h00 GMT+1",
+      "details": "Coordonnées de contact",
+      "placeholders": {
+        "name": "Entrez votre nom complet",
+        "email": "Entrez votre adresse email",
+        "phone": "Entrez votre numéro de téléphone",
+        "topic": "Thème du voyage (ex. Sahara, Atlas, Sur mesure)",
+        "message": "Entrez votre message ou demande de voyage..."
+      },
+      "topics": {
+        "desert": "Expédition dans le désert du Sahara",
+        "atlas": "Trek dans le Haut Atlas",
+        "imperial": "Villes impériales et patrimoine culturel",
+        "coastal": "Côte atlantique et excursion à Essaouira",
+        "custom": "Itinéraire privé sur mesure au Maroc"
+      }
     },
     "info": {
       "mobile": "Mobile",
@@ -419,7 +469,13 @@
       "address": "Adresse",
       "message": "Message"
     },
-    "location": { "smTitle": "Nous Trouver", "lgTitle": "Notre Emplacement" }
+    "location": { "smTitle": "Nous Trouver", "lgTitle": "Notre Emplacement" },
+    "methods": { "title": "Canaux de communication directe" },
+    "map": {
+      "placeholderTitle": "Afficher la carte interactive",
+      "placeholderDesc": "Découvrez l'emplacement exact de nos bureaux à Marrakech et ses environs.",
+      "loadBtn": "Charger la carte"
+    }
   },
   "excursion1": {
     "title": "Excursion aux cascades d'Ouzoud",
@@ -598,8 +654,9 @@
         "Arrivée à Merzouga au pied des dunes de l'Erg Chebbi.",
         "Balade à dos de chameau dans les dunes de l'Erg Chebbi, coucher de soleil et dîner sous les étoiles."
       ],
-      "accommodation": "Hôtel à Midelt",
-      "meals": "Petit-déjeuner inclus"
+      "accommodation": "Campement dans le désert à Merzouga (standard ou luxe)",
+      "meals": "Dîner et petit-déjeuner inclus",
+      "activities": "Balade à dos de chameau, Sandboard, Musique berbère"
     },
     "day5": {
       "title": "Merzouga ➜ Gorges du Todra ➜ Vallée du Dadès",
@@ -1244,7 +1301,8 @@
       "twitter": "Twitter",
       "instagram": "Instagram",
       "tiktok": "TikTok"
-    }
+    },
+    "newsletterStatus": "Statut de l'inscription"
   },
   "button": "Bouton",
   "locale": "Locale",
@@ -1266,7 +1324,12 @@
       "title": "Expéditions privées à travers le Maroc",
       "subtitle": "Traversez le Sahara, le Haut Atlas et les cités impériales avec nos chauffeurs locaux expérimentés.",
       "cta": "Découvrir nos itinéraires"
-    }
+    },
+    "sectionLabel": "Vidéo de voyage au Maroc",
+    "pause": "Mettre la vidéo en pause",
+    "playAria": "Lire la vidéo",
+    "name": "Circuits désert du Sahara et voyages culturels au Maroc - Amsirar Trip",
+    "description": "Découvrez des expériences authentiques au Maroc : dunes de l'Erg Chebbi, méharées au coucher du soleil, cols du Haut Atlas et villes impériales avec Amsirar Trip."
   },
   "booking": {
     "makeReservation": "Faites votre réservation",
@@ -1400,7 +1463,17 @@
         "arrival": "Vers 17h00 ou 18h00"
       }
     },
-    "sending": "Envoi en cours..."
+    "sending": "Envoi en cours...",
+    "errors": { "captcha": "La vérification Recaptcha est requise" },
+    "personalDetails": "Coordonnées des voyageurs",
+    "tripDetails": "Détails du voyage",
+    "placeholders": {
+      "fullName": "Entrez votre nom complet",
+      "email": "Entrez votre adresse email",
+      "phone": "Entrez votre numéro de téléphone",
+      "numberOfPeople": "Nombre de personnes (ex. 2)",
+      "message": "Entrez vos souhaits particuliers, message ou questions..."
+    }
   },
   "legal": {
     "backToHome": "Retour à l'accueil",

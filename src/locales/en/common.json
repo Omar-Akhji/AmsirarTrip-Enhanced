@@ -20,7 +20,8 @@
     "personsMin": "At least 1 person required",
     "personsMax": "Max 50 persons",
     "invalidDate": "Invalid date format",
-    "datePast": "Date cannot be in the past"
+    "datePast": "Date cannot be in the past",
+    "topicTooLong": "Topic must not exceed 200 characters"
   },
   "nav": {
     "home": "Home",
@@ -29,7 +30,8 @@
     "blog": "Blog",
     "about": "About",
     "contact": "Contact",
-    "toggleMenu": "Toggle navigation menu"
+    "toggleMenu": "Toggle navigation menu",
+    "mainAria": "Main Navigation"
   },
   "language": "Language",
   "selectLanguage": "Select language",
@@ -54,7 +56,8 @@
       "destinations": "Destinations",
       "care": "Customer Care",
       "satisfaction": "Customer Satisfaction"
-    }
+    },
+    "featured": { "title": "Featured Desert Tours & Expeditions" }
   },
   "tours": {
     "meta": {
@@ -238,7 +241,9 @@
     "pricingSubtitle": "Transparent pricing for both exclusive private journeys and small-group departures.",
     "relatedTagline": "Alternative Morocco Circuits",
     "relatedTitle": "Explore Companion Desert Itineraries",
-    "relatedSubtitle": "Discover alternative durations and route variations crafted with private 4x4 transport and luxury desert camps."
+    "relatedSubtitle": "Discover alternative durations and route variations crafted with private 4x4 transport and luxury desert camps.",
+    "sharedOptionBadge": "Budget-Friendly",
+    "sharedOptionDesc": "Join a small scheduled group of 8-14 travelers with guaranteed departures."
   },
   "excursion": {
     "404": {
@@ -262,7 +267,14 @@
       "distanceLabel": "Distance",
       "durationLabel": "Duration",
       "highlights": "What Makes This Day Trip Special",
-      "overview": "Day Trip Overview"
+      "overview": "Day Trip Overview",
+      "programTitle": "Timed Itinerary & Program",
+      "excluded": "Excluded Services",
+      "goodToKnow": "Travel Advisories & Preparation",
+      "included": "Included Services",
+      "pricingTitle": "Reservation & Pricing",
+      "priceLabel": "Starting price",
+      "faqTitle": "Frequently Asked Questions"
     },
     "stats": {
       "routes": "Signature excursions",
@@ -434,7 +446,22 @@
       "infoTitle": "Plan handcrafted experiences",
       "infoCopy": "Our Marrakech team answers every message personally and can help with custom itineraries, desert camps, or last-minute transfers.",
       "info": { "address": "Visit", "phone": "Call", "email": "Email" },
-      "infoFooter": "Available every day from 09:00 to 21:00 GMT+1"
+      "infoFooter": "Available every day from 09:00 to 21:00 GMT+1",
+      "details": "Contact Details",
+      "placeholders": {
+        "name": "Enter your full name",
+        "email": "Enter your email address",
+        "phone": "Enter your phone number",
+        "topic": "Enter trip focus (e.g. Sahara, Atlas, Custom)",
+        "message": "Enter your message or travel request..."
+      },
+      "topics": {
+        "desert": "Sahara Desert Expedition",
+        "atlas": "High Atlas Mountain Trek",
+        "imperial": "Imperial Cities & Cultural Heritage",
+        "coastal": "Atlantic Coast & Essaouira Excursion",
+        "custom": "Tailored Private Morocco Itinerary"
+      }
     },
     "info": {
       "mobile": "Mobile",
@@ -445,6 +472,12 @@
     "location": {
       "smTitle": "Drop by for an in-person route consultation, coffee, and local travel advice.",
       "lgTitle": "Visit Our Marrakech Office"
+    },
+    "methods": { "title": "Direct Communication Channels" },
+    "map": {
+      "placeholderTitle": "Show Interactive Map",
+      "placeholderDesc": "Explore our exact office location in Marrakech and nearby landmarks.",
+      "loadBtn": "Load Map"
     }
   },
   "excursion1": {
@@ -1289,7 +1322,8 @@
       "twitter": "Twitter",
       "instagram": "Instagram",
       "tiktok": "TikTok"
-    }
+    },
+    "newsletterStatus": "Subscription status"
   },
   "video": {
     "loading": "Loading video...",
@@ -1298,7 +1332,12 @@
       "title": "Private Expeditions Across Morocco",
       "subtitle": "Explore the Sahara, High Atlas passes, and imperial cities with experienced local drivers.",
       "cta": "Explore itineraries"
-    }
+    },
+    "sectionLabel": "Morocco Travel Video",
+    "pause": "Pause video",
+    "playAria": "Play video",
+    "name": "Morocco Sahara Desert Tours & Cultural Expeditions - Amsirar Trip",
+    "description": "Discover authentic Morocco travel experiences: Erg Chebbi dunes, camel treks at sunset, High Atlas mountain passes, and historic imperial cities with Amsirar Trip."
   },
   "button": "Button",
   "locale": "Locale",
@@ -1433,7 +1472,17 @@
         "arrival": "Around 5:00 to 6:00 PM"
       }
     },
-    "sending": "Sending..."
+    "sending": "Sending...",
+    "errors": { "captcha": "Recaptcha verification is required" },
+    "personalDetails": "Guest Details",
+    "tripDetails": "Trip Details",
+    "placeholders": {
+      "fullName": "Enter your full name",
+      "email": "Enter your email address",
+      "phone": "Enter your phone number",
+      "numberOfPeople": "Enter number of people (e.g. 2)",
+      "message": "Enter any custom requests, message, or questions..."
+    }
   },
   "legal": {
     "backToHome": "Back to Home",

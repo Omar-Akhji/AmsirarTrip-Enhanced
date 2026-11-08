@@ -20,7 +20,8 @@
     "personsMin": "Se requiere al menos 1 persona",
     "personsMax": "Máximo 50 personas",
     "invalidDate": "Formato de fecha no válido",
-    "datePast": "La fecha no puede ser en el pasado"
+    "datePast": "La fecha no puede ser en el pasado",
+    "topicTooLong": "El tema no debe exceder los 200 caracteres"
   },
   "nav": {
     "home": "Inicio",
@@ -29,7 +30,8 @@
     "blog": "Blog",
     "about": "Acerca de",
     "contact": "Contacto",
-    "toggleMenu": "Alternar menú de navegación"
+    "toggleMenu": "Alternar menú de navegación",
+    "mainAria": "Navegación principal"
   },
   "language": "Idioma",
   "selectLanguage": "Seleccionar idioma",
@@ -54,7 +56,8 @@
       "destinations": "Destinos",
       "care": "Atención al cliente",
       "satisfaction": "Satisfacción del cliente"
-    }
+    },
+    "featured": { "title": "Tours y expediciones destacados por el desierto" }
   },
   "tours": {
     "meta": {
@@ -226,7 +229,21 @@
     "pricingSubtitle": "Precios claros tanto para rutas privadas VIP como salidas en grupo.",
     "relatedTagline": "Circuitos Alternativos por Marruecos",
     "relatedTitle": "Descubra otros itinerarios recomendados",
-    "relatedSubtitle": "Explore diferentes duraciones y variantes de rutas con transporte 4x4 privado y campamentos de lujo en el desierto."
+    "relatedSubtitle": "Explore diferentes duraciones y variantes de rutas con transporte 4x4 privado y campamentos de lujo en el desierto.",
+    "sharedOptionBadge": "Económico",
+    "sharedOptionDesc": "Únase a un grupo reducido programado de 8 a 14 viajeros con salidas garantizadas.",
+    "faq": {
+      "title": "Preguntas frecuentes sobre nuestros tours por Marruecos",
+      "subtitle": "Todo lo que necesita para planificar su aventura en el desierto.",
+      "q1": "¿Qué tipos de tours por el desierto están disponibles desde Marrakech?",
+      "a1": "Amsirar Trip ofrece circuitos por Marruecos de 3 a 14 días: paseos en camello por las dunas de Erg Chebbi en Merzouga, cruces del Alto Atlas por el paso Tizi n'Tichka y rutas por ciudades imperiales con vehículos 4x4 privados y guías oficiales.",
+      "q2": "¿Es Amsirar Trip una agencia de viajes autorizada en Marruecos?",
+      "a2": "Sí. Amsirar Trip opera con la licencia oficial de turismo 24/TT/RAK emitida por el Ministerio de Turismo de Marruecos, con sede en Marrakech.",
+      "q3": "¿Cuál es la mejor época del año para visitar el desierto de Merzouga?",
+      "a3": "La época ideal es de octubre a abril, con temperaturas diurnas templadas de entre 18°C y 28°C en las dunas de Erg Chebbi. Operamos durante todo el año.",
+      "q4": "¿Los tours son privados o en grupos compartidos?",
+      "a4": "Ofrecemos tanto salidas privadas exclusivas VIP como salidas en grupos reducidos de 8 a 14 viajeros."
+    }
   },
   "excursion": {
     "404": {
@@ -240,7 +257,6 @@
       "description": "Las mejores excursiones desde Marrakech: atardecer y cena en el desierto de Agafay, cascadas de Ouzoud, valle de Ourika y Essaouira con chófer privado."
     },
     "title": "Nuestras excursiones",
-    "featured": "Destacado",
     "sectionSubtitle": "Excursiones de un día desde Marrakech hacia los valles del Atlas, la costa atlántica y el desierto.",
     "detailsTitle": "Detalles de la excursión",
     "detailsSubtitle": "Explora los tesoros ocultos de Marruecos",
@@ -251,7 +267,14 @@
       "distanceLabel": "Distancia",
       "durationLabel": "Duración",
       "highlights": "Puntos destacados",
-      "overview": "Resumen"
+      "overview": "Resumen",
+      "programTitle": "Itinerario detallado y horarios",
+      "excluded": "Servicios no incluidos",
+      "goodToKnow": "Consejos de viaje y preparación",
+      "included": "Servicios incluidos",
+      "pricingTitle": "Reserva y precios",
+      "priceLabel": "Precio inicial",
+      "faqTitle": "Preguntas frecuentes"
     },
     "stats": {
       "routes": "Excursiones emblemáticas",
@@ -332,7 +355,19 @@
       "smTitle": "lee estas excursiones para más información",
       "lgTitle": "Excursiones desde Marrakech"
     },
-    "readMore": "Leer más"
+    "readMore": "Leer más",
+    "faq": {
+      "title": "Preguntas frecuentes sobre excursiones de un día desde Marrakech",
+      "subtitle": "Planifique su excursión ideal de un día desde Marrakech.",
+      "q1": "¿Qué excursiones de un día se pueden realizar desde Marrakech?",
+      "a1": "Puede reservar excursiones a las Cascadas de Ouzoud, al desierto rocoso de Agafay, al Valle de Ourika y a la kasbah de Ait Ben Haddou. Todas salen por la mañana y regresan al atardecer.",
+      "q2": "¿A qué distancia está el desierto de Agafay de Marrakech?",
+      "a2": "El desierto de Agafay está a unos 40 km al suroeste de Marrakech (unos 45 minutos en coche). Ofrece paseos en camello, puestas de sol sobre el Atlas y cenas en campamentos.",
+      "q3": "¿Las excursiones incluyen guía en español?",
+      "a3": "Sí, todas nuestras excursiones se ofrecen con guías en español, vehículo 4x4 con aire acondicionado y recogida en su alojamiento de Marrakech.",
+      "q4": "¿Se puede combinar una excursión de un día con un tour por el Sahara?",
+      "a4": "Sí. Podemos diseñar un viaje personalizado combinando una excursión de un día con un circuito de varios días al desierto de Merzouga."
+    }
   },
   "about": {
     "meta": {
@@ -386,13 +421,6 @@
       "badge": "Planifica con locales",
       "title": "Diseña Tu Tour Personalizado a Marruecos & Itinerario Privado",
       "subtitle": "Comparta sus detalles de viaje y le prepararemos una propuesta de ruta adaptada a sus fechas.",
-      "nameLabel": "Tu nombre",
-      "namePlaceholder": "Tu nombre",
-      "emailLabel": "Tu correo electrónico",
-      "emailPlaceholder": "Tu correo electrónico",
-      "messageLabel": "Tu mensaje",
-      "messagePlaceholder": "Tu mensaje",
-      "submit": "Enviar mensaje",
       "cta": "Enviar mensaje",
       "sending": "Enviando…",
       "success": "¡Mensaje enviado! Responderemos en 24 horas.",
@@ -418,7 +446,22 @@
       "infoTitle": "Planifica experiencias artesanales",
       "infoCopy": "Nuestro equipo de Marrakech responde cada mensaje personalmente y puede ayudar con itinerarios personalizados, campamentos en el desierto o traslados de última hora.",
       "info": { "address": "Visitar", "phone": "Llamar", "email": "Correo" },
-      "infoFooter": "Disponible todos los días de 09:00 a 21:00 GMT+1"
+      "infoFooter": "Disponible todos los días de 09:00 a 21:00 GMT+1",
+      "details": "Detalles de contacto",
+      "placeholders": {
+        "name": "Ingrese su nombre completo",
+        "email": "Ingrese su correo electrónico",
+        "phone": "Ingrese su número de teléfono",
+        "topic": "Tipo de viaje (ej. Sahara, Atlas, Personalizado)",
+        "message": "Ingrese su mensaje o consulta de viaje..."
+      },
+      "topics": {
+        "desert": "Expedición al Desierto del Sahara",
+        "atlas": "Ruta de montaña por el Alto Atlas",
+        "imperial": "Ciudades Imperiales y Patrimonio Cultural",
+        "coastal": "Costa Atlántica y Excursión a Essaouira",
+        "custom": "Itinerario privado a medida en Marruecos"
+      }
     },
     "info": {
       "mobile": "Móvil",
@@ -426,7 +469,13 @@
       "address": "Dirección",
       "message": "Mensaje"
     },
-    "location": { "smTitle": "Encuéntranos", "lgTitle": "Nuestra Ubicación" }
+    "location": { "smTitle": "Encuéntranos", "lgTitle": "Nuestra Ubicación" },
+    "methods": { "title": "Canales de comunicación directa" },
+    "map": {
+      "placeholderTitle": "Mostrar mapa interactivo",
+      "placeholderDesc": "Explore la ubicación exacta de nuestra oficina en Marrakech y lugares de interés cercanos.",
+      "loadBtn": "Cargar mapa"
+    }
   },
   "excursion1": {
     "title": "Excursión a las cascadas de Ouzoud",
@@ -1248,7 +1297,8 @@
     "newsletterFailure": "Error al suscribirse. Por favor, inténtalo de nuevo.",
     "newsletterNetwork": "Error de red. Verifica tu conexión.",
     "copyright": "Todos los derechos reservados.",
-    "description": "Amsirar Trip es una agencia de viajes oficial en Marrakech (Licencia N° 24/TT/RAK). Especialistas en expediciones privadas por el Sahara, rutas por el Atlas e itinerarios a medida en Marruecos."
+    "description": "Amsirar Trip es una agencia de viajes oficial en Marrakech (Licencia N° 24/TT/RAK). Especialistas en expediciones privadas por el Sahara, rutas por el Atlas e itinerarios a medida en Marruecos.",
+    "newsletterStatus": "Estado de la suscripción"
   },
   "button": "Botón",
   "locale": "Configuración regional",
@@ -1270,7 +1320,12 @@
       "title": "Expediciones privadas por Marruecos",
       "subtitle": "Recorre el Sahara, los pasos del Alto Atlas y las ciudades imperiales con conductores locales experimentados.",
       "cta": "Ver itinerarios"
-    }
+    },
+    "sectionLabel": "Video de viaje por Marruecos",
+    "pause": "Pausar video",
+    "playAria": "Reproducir video",
+    "name": "Tours por el Desierto del Sahara y Rutas Culturales en Marruecos - Amsirar Trip",
+    "description": "Descubra experiencias auténticas en Marruecos: dunas de Erg Chebbi, paseos en camello al atardecer, puertos del Alto Atlas y ciudades imperiales con Amsirar Trip."
   },
   "booking": {
     "makeReservation": "Haga su reserva",
@@ -1392,7 +1447,17 @@
         "arrival": "Hacia las 17:00 o 18:00 horas"
       }
     },
-    "sending": "Enviando..."
+    "sending": "Enviando...",
+    "errors": { "captcha": "Se requiere verificación Recaptcha" },
+    "personalDetails": "Datos de los pasajeros",
+    "tripDetails": "Detalles del viaje",
+    "placeholders": {
+      "fullName": "Ingrese su nombre completo",
+      "email": "Ingrese su correo electrónico",
+      "phone": "Ingrese su número de teléfono",
+      "numberOfPeople": "Ingrese el número de personas (ej. 2)",
+      "message": "Ingrese peticiones personalizadas, mensajes o dudas..."
+    }
   },
   "legal": {
     "backToHome": "Volver al inicio",

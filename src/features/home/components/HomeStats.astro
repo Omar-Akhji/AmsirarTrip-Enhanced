@@ -5,7 +5,7 @@ import PointOnMapIcon from "@/shared/ui/icons/PointOnMapIcon.astro";
 import ShieldCheckIcon from "@/shared/ui/icons/ShieldCheckIcon.astro";
 import StatsFolderStack from "./StatsFolderStack.astro";
 
-const locale = Astro.currentLocale || "en";
+const locale = Astro.locals.locale ?? Astro.currentLocale ?? "en";
 const t = useTranslations(locale);
 
 interface CopyType {

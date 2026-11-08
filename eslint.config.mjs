@@ -291,6 +291,26 @@ const eslintConfig = defineConfig(
     rules: { "unicorn/max-nested-calls": "off" },
   },
 
+  // ─── Client Bundle Guardrail ───────────────────────────────────────────────
+  // Prevent importing server/full i18n dictionaries in Vue components or scripts
+  {
+    files: ["src/**/*.vue", "src/scripts/**/*.ts"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            {
+              group: ["@/i18n/ui", "@/i18n/utils", "**/locales/**"],
+              message:
+                "Do not import full locale dictionaries into client components or client scripts. Use @/lib/hooks/use-translation instead.",
+            },
+          ],
+        },
+      ],
+    },
+  },
+
   // ─── Prettier — MUST be last ──────────────────────────────────────────────
   prettierRecommended,
 
@@ -302,6 +322,7 @@ const eslintConfig = defineConfig(
       "node_modules/**",
       "public/**",
       "scratch/**",
+      "src/i18n/client-data.ts",
       ".gemini/**",
       ".kiro/**",
       ".agent/**",

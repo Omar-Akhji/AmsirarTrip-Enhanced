@@ -8,7 +8,7 @@ import CookieConsent from "../shared/ui/widgets/CookieConsent.astro";
 import ScrollProgressBar from "../shared/ui/feedback/ScrollProgressBar.astro";
 import JsonLd from "../shared/ui/primitives/JsonLd.astro";
 import { WHATSAPP_LINK } from "../lib/constants/contact";
-import { LOCALES, DEFAULT_LOCALE, isLocale, type Locale } from "../i18n/locales";
+import { LOCALES, DEFAULT_LOCALE, OG_LOCALE_MAP, isLocale, type Locale } from "../i18n/locales";
 import { getLocalizedPath, stripLocaleFromPath } from "../i18n/utils";
 import TransitionSkeletons from "./components/TransitionSkeletons.astro";
 import WhatsappIcon from "../shared/ui/icons/WhatsappIcon.astro";
@@ -33,7 +33,9 @@ const {
 
 const pageTitle = title.includes("Amsirar Trip") ? title : `${title} | Amsirar Trip`;
 
-const locale: Locale = Astro.locals.locale ?? (Astro.currentLocale && isLocale(Astro.currentLocale) ? Astro.currentLocale : DEFAULT_LOCALE);
+const locale: Locale =
+  Astro.locals.locale
+  ?? (Astro.currentLocale && isLocale(Astro.currentLocale) ? Astro.currentLocale : DEFAULT_LOCALE);
 const site = Astro.site ?? Astro.url;
 const pathname = Astro.url.pathname;
 
@@ -44,12 +46,6 @@ const preloadImageHref = image;
 const shouldPreload = Boolean(preloadImage);
 const defaultOgImage = new URL(preloadImageHref, site).href;
 const resolvedImageAlt = imageAlt ?? pageTitle;
-const OG_LOCALE_MAP: Record<string, string> = {
-  en: "en_US",
-  fr: "fr_FR",
-  de: "de_DE",
-  es: "es_ES",
-};
 const currentOgLocale = OG_LOCALE_MAP[locale] ?? locale;
 ---
 

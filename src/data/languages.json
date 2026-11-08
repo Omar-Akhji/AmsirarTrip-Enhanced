@@ -1,6 +1,6 @@
 [
-  { "code": "en", "name": "English", "shortName": "EN" },
-  { "code": "fr", "name": "Français", "shortName": "FR" },
-  { "code": "de", "name": "Deutsch", "shortName": "DE" },
-  { "code": "es", "name": "Español", "shortName": "ES" }
+  { "code": "en", "name": "English", "shortName": "EN", "ogLocale": "en_US" },
+  { "code": "fr", "name": "Français", "shortName": "FR", "ogLocale": "fr_FR" },
+  { "code": "de", "name": "Deutsch", "shortName": "DE", "ogLocale": "de_DE" },
+  { "code": "es", "name": "Español", "shortName": "ES", "ogLocale": "es_ES" }
 ]
