@@ -1,0 +1,141 @@
+/**
+ * Embedded inline image attachments for transactional emails using MIME CID (Content-ID). Follows
+ * Nodemailer specification (verified via Context7) for 100% reliable image rendering across Gmail,
+ * Outlook, Apple Mail, and mobile clients with zero external HTTP dependencies.
+ */
+
+export interface InlineCidAttachment {
+  readonly filename: string;
+  readonly content: Buffer;
+  readonly cid: string;
+  readonly contentType: "image/png";
+  readonly contentDisposition: "inline";
+}
+
+export const EMAIL_CID = {
+  logo: "amsirar-logo@amsirartrip.com",
+  emailIcon: "email-icon@amsirartrip.com",
+  whatsappIcon: "whatsapp-icon@amsirartrip.com",
+  phoneIcon: "phone-icon@amsirartrip.com",
+  inboxBadge: "inbox-badge@amsirartrip.com",
+  calendarBadge: "calendar-badge@amsirartrip.com",
+} as const;
+
+/** High-res retina brand logo with pure vector Montserrat 'Amsirar' and Yellowtail cursive 'Trip' */
+const AMSIRAR_LOGO_BASE64 =
+  "iVBORw0KGgoAAAANSUhEUgAAAWgAAACYCAMAAAD+3oNKAAAAulBMVEVMaXH////+/v7////////////////////////50sD////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////qVwvqWQ3qVwv////qVwvqVwvqVwvpWAvqVwzqVwvqVwvqVwvqVwv////qWAy0tLS7u7vh4eHY2Nj39/fKysrt7e27w/cQAAAANXRSTlMATPxEO2/+zBADM6AKr5kGvizSeKgeYIfG7rZn9IDgWeeT2RckjlIT7xJEG5/H3TEiiV5wtBD/JBEAAAAJcEhZcwAACxMAAAsTAQCanBgAABM7SURBVHja7V1nY6pIFJUmUgVFQIoFBZOY9pLgprz8/7+1MzAgVUFNhF3uh/eM3cPlzLlt6PU666yzzjrrrLPOOuuss84666yzzjrrrLPOOuuss87+L8YQrrTwBaZD4lQbTNYyy7Lr7eAAiENz5gPT+Q6v2h66xsaiQS9wPzZ8piuuyRaAScwcmxT82aDDrY4NWZMbJQCGZk1ns9FotphaPj7i1G3qBdpszvQIHyc77CobT2h60okdwzUxdpLw4oFMqLYguETEJAwnwocNf9zBV9HksbQH2ZJcVc7TMjOAxvd4UiXWwT2uCf/d4LNhh2Al1bCcxSAvBIrNYjzBxpw0WkSHwZG4MQaRVkPCmPtqB2IFlMVpzBbSWM4+TNrSNIGwRplzjGBZkpj0tmz4nLHTKbujjOFGfupPOWywZVNL3dYUQpBxGvjwJEfq6H9X64A8vPqZekwYS4ygRI1IrHy8Z+AhyBp2WLtpcoflAWNFK/Zl01RoEeNTj07DA0AcX+fYDsxS21AjhHLfoMYGbZgpYiAk+NDMJTvyPcvWy8iZFy7wZZrDkoAyGGSUvuR1KJ9npNFHziyNNZ3W7XXqYcyBB8CedECdF2OrEWcsNJWjaclML3RrAz40rpsh4rv1ME3NdqTm9Llq0LShBoiuoxBlJQKhsaBOSMQRdkc0e9Ec6QxcIUwJwDwPFAWpRRmhOVAa1vi0fCelrzqE09RsiSyEWVIDmNeihshjJYAHjZO5WZx19JGiZnsSwhw47mCsz9FTVODO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";
+
+const EMAIL_ICON_BASE64 =
+  "iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAACuklEQVRYhe1WvYsTQRQfUU5338tdIeeJWPjxDyieH6BwlhaH3ea95HLYWnjaHBaCghyeBzaehSeIVh4oNjaWNga1M72g8TuZ2UNOELUQI28zO9lokk0k6fKDheXN+5o3vzfzlBpiiBYIs95BTf68ZryvCZ8YwpIheN3bhyWxrfvw50P2JlUaKsHYbkPw3DDWBvPBM4nRMrgO/O2a8WPC4LtmeCo7MAw3DcNSTx/BSmRLUBRfsV9N+KFSgG3/JGAY7kYKjL80w1wtUCOqT3h1Qm02DGfFdz0JuN2kUAvURk3w1SZwXQ0ImnA5rm75lNriFoQgrvQ5nHLyLMxo8mdrSm3oNZjYiK34iGVrudFD7ihyeMwpVxkKbiEYx0iWH9vjZIz3mjJOgeiKTWwvvkReKUxA4xj82UZpGOas8k+3g0CNCGsTDH7xOcDxtOBCZtFNMj/JJ8N4TTptbcbb6YwM4SVrUGmxk9WEs6VOwSucOSwsT1RutavKaYIFa/Cu5Vkyno8uliwerU2pTSF7O/7WqzKelgpaP78N4YWuuaMZrkRZE75N0zUEDyWAJnxg2N+v8/6++n/c5/DFUGa6U0tqGt3b7JThqi3xm9RkCR+3vekISzHh2m6A4ZHohgT5/0rg07Ty7ZG5280QfBN+vA+Ul2ZvGMrWZrGxq/gIGMqqS0gpq9nMEenn8OTWTLd2wjN7VAsNYQcS9htxl2iGy07Yrg0HAUNYtXy52MiqxUU0sATiViU444StruJBQHy765mh4BbaPUb9RkhwPI4T5v0DbiF6jhnW7cCwPKgEDOENS8B1idm0qAnuxAOJDA/SZn0dSAjOtR1I3EiWeEiii4agaMeqlV5HMk1wy41khD+SI1mVYUK1HUo5+QT3+SMoVmhsl0pDyN5kcizXhC97HcvFpmksT5JuiCFUA38AZwq/RwgY0gIAAAAASUVORK5CYII=";
+
+const WHATSAPP_ICON_BASE64 =
+  "iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAEKUlEQVRYhdVXW2hcZRDexnprxWqy/5xECwrGKz4IwbuwgiZ7Zs6W9sGAxQe1ohXUJuqL1MARRNEHlSIo0Yftzuz2YbEPgpQq1likBUVBn6SK+FAtXh+NmthG5j/3s+e02RgL/WFh+W/zzfzffDOnUjnTxkinUa22EQ3TA8A0A0w+CE5VhTzYs8n5f4zONtZVmXYA40Fg/AeElsp+hukzEHfadGsX/HfLc7W1wN4jwPhjsTH8CZiOGaE/C9Z+BaGtK7a9sTsxaJg+zF38sQ13x7uyMjt2drx5qbKm2sKroI0PG8a5ZD9+uSLjhidGgfGb2BvBw6bl3rHc88Pi3ghCbwDjeN/GN3S8i9PGQXBXxfcHKqdlzNXWxmFnOuEwPVQ5nQOUcAmbX8gsdifPMuLeA4I7Qdy79N37urvl3W2Eviol5shsY13CdjyUDvtlzdp5Opcj5Ot9AVBOhNlRmKJVzfPI+xzhNnYnzwfBvRoBh8fXg9CLwTPhluUCcDreTQl4d7oXIePBKNUyC74/4DTrl/fog9ARI3Sg0seIUlTFqkdeIVY4nMoAE9oKTIuaHdl5bBqh71fEMUvwcYgXVNuj8FiRyRxy7wtQT4zG+6U+EirdO/0AGJL61bGdlksJAHG3hd4fzyicZW/jVrvWos2J9/QsCC3kwZ5y+P6AEfrLAmDakfKSZgLFo5/zZ67rTp5jBP8wQm9mCYvHHfau7wtAYOtY+Ax+PGkEnwsj8EPRIcP0tmGcj8rtJa0tQ7oXhL4dbtG1Q53GNYbxXcP4HTDtq7bcWhmA8OnU1s4ElbjTYY7OF8mu2e1eoUQ0TG9Fcw7TzdabgLwLRugXEGpZLWE6AW18On/P6C73XLsW2HowXrDNRKyACdkyoRN8KXgm7/54bs8mxwg9YwSfN00ajgVNkHVvPn01UonWePUUgPpIhExLahGAgAt0QL0t25Nnu8PevTknngrff1HLfdZDxi/C0HxUdvGguBeC4P6wRL9atk8Bhop3SxYAfVJqAwSnovCoB6XuaVFifM0w/a41wrTphmrHG9P/KtmaITbVmN5PH3PEuzPVLT1W6J0JWyvD+HgpgDxwxq972jXG9zLKaUFrr2jDf1SB9lzk8Ph6w/h3IDr46HIBDO72Lg3lOuiQtQvKlWoQejlWQHG3FV5kmNyUHI9VVmkkfLC5v1+jUQbglZBcv61KC7ZUWZMInP0dyRe0LFKmfeHGoMD4/oBGAoS2G6EnTkrM3FDCGcZP08ZVzE56CAT3RnKsIDQSBb2+1vPttgiloqQaEeS+zXObaumwb2huvuiUqE0bb4/FKPtbiMmZBTOvsqsFrPAriemolduyNy8EwXSbLSpCHygnlJiaHZqi4afZ5yUgI6OLqpaa54WpthrDNGlYmwlgetKSjGlGP1QVbI+8ngnjXykwqoz8tpC6AAAAAElFTkSuQmCC";
+
+const PHONE_ICON_BASE64 =
+  "iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAACf0lEQVRYhe2Wu4sUQRDGezlfiIGBp1ygy059NVvVKyeyGvnYP0HFE0EwVRANRNFQ0EATDRRFUJNDBGV9IBoY3kMwkENO8NRMMzkVEQx8oNK7PXvtMis33s4Fsh9MMFMz27+uqv5qjempp79oMIpWCuiUAuPCeK1M94WjHWY+ZONos4KmlfGr/RKmq8aYQq4AAow1FgN9V6a6Mp1T0FQCYZn35wpggV3K9CiOo03JMwCLBfSkAQGaXlcsLjfzrUpc2qiMnw6izHSk6wso81aX7rWl0qpO7wjw0JdntOsAAnrWrDOd7AgJXPDNONF9AKYJD3AxLW6tXaTAK/9OvfsAoFG/u+tpcWU60zqSMW3vPgBjuFN6a7XaAmV8asZx0+Qhy3TI7/AHgP4w5hqz5QPAUC4AFYBajgccaAsXhPE2OAF9ubqggqbaFwky5Mp0LYyXgZ0K3FHGUwGNOJ/4J7OywFCwyL62cJ8bSkGWxjSm3cK4lTY3FPTe23am2VFILFcYHytEq8NgdWBgaQjxx6ACvVDgrIIeJI7ZBMGVTFkol6MNAvrmPx4vFotL2jMhTAeF8SYBVabT1Wp1YWjbrdnhLqJtmSAEOD6zu4bppDVdwZ+W1IZ04Ap66ct1NxOAaXb9cFDP2ymZmM1GzvvfeJ71W+NS6uuZ1PmxjaI1mQAY95KGzQyQQISZENAHIaqaWUiAmjM1D3DCzEEFZToqoK++MY8FsdT6K9FeYXzxTfoujuMVcwFoSIH1Ahy21i5z98J0ye2wefzohpuijZoDk0HvfFbmLSYPCWgk1YBmzv9kHJcGTV4C0O/cUkCXXYO6KdrIBlO9DOxx/x9yW7yn/0K/Ab5aAAJqoaP0AAAAAElFTkSuQmCC";
+
+const CALENDAR_BADGE_BASE64 =
+  "iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAC8UlEQVRYhe1XPWgUURB+RtDLzhxWIUYwYG2jqKiQy85cTogIFsZYpVabRAtBLSSYmESQGO3FwiqohZUQELLvbfxp0oiNAaNJBG38SZNKPJm9/b0fsuaywcKB1+y8+ebbeTNv5in1X9YRXYTLhnB+zrYOqJQie8VGbFWzYhgWDGNZM4yltZG9YiO2G3Lq9LQe0WxdMYzTmmDNAyP4oQk+pFmy1yNdsZ0WrDm79fD6zAu79hmCVxX2GSyCl+KjrvNZ29qtCT8HmzXjmiEwDsGMIXztME5phttplrfXxjdiqxlcDysisvKiCO21f0/wsMISfxmGwXf9aofaJHneq3YagqEKtpcbDxIbHver7Zpg1Wd4T2UkmvG+fxQ/xWeokASJhb47KwKuDRT4SSSlsWEgUDjdWHDZOhSsWbsN64VUaj2+L80S7DAXbBgIAR2CR40yVxO8Lyu1LU7AMDxrvipgMCLA8HSrCWjGGxEgwaiv+FIdts08AlmG8Kt/s94MAWNX50eVsWjCJb8SRuMRmPAJLGZNQH7SJzBeQ0Du8awJeL2iQmDi3yegC1aHd5cTrGrGySRQ/pTfO1bconUyrjOEU97NSmCkx6QhMF4vBwQoXjqunT8W6hhXYrrl4LvTkz9eVW6T9XIgMV9ohluVCOCnJFu8m2yn+aPNEmhUBSPVQCISPgmjNA9DeCeuk7D7JJaNbfUmnDBO+kegq1tvSJxgJG5w3c+Bbypj0QzfveMkvBp9LOLFYBYoD6uWrJwLdjATuIznIwKEfeGZFayOrAgIdtRjsC9UuKVcZ9Qm8WxWBNwi9ocVVcp1Jtn59akZnMS0skkimF5CN7rwHIJLselVSyTmSq17mnVsurDN4fxpudBi+EP1E4Rr5wLN+FuqY923AMNC/CU0c6IdDOPbWjx40jDRy8OqpRIJWNzQoEE4H2DpQm5vNAV7SbckU1DqKnNLuU6H8YwmvKAZr6V4D4w53dbBBIaNXQ7DOZdh/98d3BbKHyoy/X/5mgF+AAAAAElFTkSuQmCC";
+
+const INBOX_BADGE_BASE64 =
+  "iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAC/klEQVRYhc0XTWtTQfAV/ADBlja7aXryoIJWPRVEm5kX/Dj4CzQUoQVFbS14b2tmmljSihePHvRivQueldrioYKIXjwpFT1ZLxV6qrEy7+3bvCQveQn00Q4sLDu7M7PzPY6zl0E9wIEU4UVFkNcEE4phWhHOt1wM095dgnx6Fi5pymU640qDBzThpCL4rBm3d2Ipxk+a8a7QbslbUy6jCd5HE4ItRfhLMX5tvWBdE/xtQmO1uUZIfh5iTrikGUdTlDvRR2e7O1Oj48ibvqJ7UhOOaYa3IW2sOJTbF/F7nLSXCGecHQbFQFX6cKvxAhmbEy45yUCXYnhntPCx0fZsbTWakACOIrxpPvmvm871WYQXLkYAsVtSAvRT7nTAR8LbIlLkjljEwvDhpAQYoKFDAZ80wXWLkMQRhJrYKikBfF74x/cD95499LKXdwjrSTL3eBEUJB+oons8JBUUjQZ+OLsBmqFkbPN9lwTAOZOA1pLmdezxlYO6NHy05lAxlE2G+pa0AIrgpR+G7kjoMPvME6AAW/XFRTN80ASPesrQ2y4TuStv5G1DsSrAlmfuAjy1DzTDm9iSSriWKZ0/Esdc7ogvxZdp93VYAw8NYqO+wdAEi5qxYqLkS00KrQPByR1Dq6IYnzfQY9zwtZ1dqGogJgzThHfCZVocKdK5/BLuZ1TG21G0NOFPQ4erGmgjEQWOatYrTVlQRRiSJXvvzNZ8KDelQ/DbOPxUWAPtpOIuzfAi1rYEiy1pmG5JtBqWKm+rYavu58nQfvmdYtyM6Ps2vZ9HdTsGeucv91Sd2r1qETXlmGCwqQAhQdJF90xgAtnLWdyz/mL2lPWRWfeCRdQ0JIRjTtINCeN2Zg50HTJoyWA5MQEYVyJbMgHp20P2vO8kUoZtez7eRlsOy4rxhthNnKdThvJGWjChEfw8mA2aDija8wVYbRJiFckTsYOJH+eVzgeTWk1MiJ3aGbvaWT4tGI8dzZw6EE+VcFGM14SAZK/Y4ZRgytzNy9sGb99r8B/J1mZ44zlzCgAAAABJRU5ErkJggg==";
+
+const AMSIRAR_LOGO_BUFFER = Buffer.from(AMSIRAR_LOGO_BASE64, "base64");
+const EMAIL_ICON_BUFFER = Buffer.from(EMAIL_ICON_BASE64, "base64");
+const WHATSAPP_ICON_BUFFER = Buffer.from(WHATSAPP_ICON_BASE64, "base64");
+const PHONE_ICON_BUFFER = Buffer.from(PHONE_ICON_BASE64, "base64");
+const CALENDAR_BADGE_BUFFER = Buffer.from(CALENDAR_BADGE_BASE64, "base64");
+const INBOX_BADGE_BUFFER = Buffer.from(INBOX_BADGE_BASE64, "base64");
+
+export const BOOKING_EMAIL_ATTACHMENTS: readonly InlineCidAttachment[] = [
+  {
+    filename: "amsirar-logo.png",
+    content: AMSIRAR_LOGO_BUFFER,
+    cid: EMAIL_CID.logo,
+    contentType: "image/png",
+    contentDisposition: "inline",
+  },
+  {
+    filename: "email-icon.png",
+    content: EMAIL_ICON_BUFFER,
+    cid: EMAIL_CID.emailIcon,
+    contentType: "image/png",
+    contentDisposition: "inline",
+  },
+  {
+    filename: "whatsapp-icon.png",
+    content: WHATSAPP_ICON_BUFFER,
+    cid: EMAIL_CID.whatsappIcon,
+    contentType: "image/png",
+    contentDisposition: "inline",
+  },
+  {
+    filename: "phone-icon.png",
+    content: PHONE_ICON_BUFFER,
+    cid: EMAIL_CID.phoneIcon,
+    contentType: "image/png",
+    contentDisposition: "inline",
+  },
+  {
+    filename: "calendar-badge.png",
+    content: CALENDAR_BADGE_BUFFER,
+    cid: EMAIL_CID.calendarBadge,
+    contentType: "image/png",
+    contentDisposition: "inline",
+  },
+];
+
+export const CONTACT_EMAIL_ATTACHMENTS: readonly InlineCidAttachment[] = [
+  {
+    filename: "amsirar-logo.png",
+    content: AMSIRAR_LOGO_BUFFER,
+    cid: EMAIL_CID.logo,
+    contentType: "image/png",
+    contentDisposition: "inline",
+  },
+  {
+    filename: "email-icon.png",
+    content: EMAIL_ICON_BUFFER,
+    cid: EMAIL_CID.emailIcon,
+    contentType: "image/png",
+    contentDisposition: "inline",
+  },
+  {
+    filename: "whatsapp-icon.png",
+    content: WHATSAPP_ICON_BUFFER,
+    cid: EMAIL_CID.whatsappIcon,
+    contentType: "image/png",
+    contentDisposition: "inline",
+  },
+  {
+    filename: "phone-icon.png",
+    content: PHONE_ICON_BUFFER,
+    cid: EMAIL_CID.phoneIcon,
+    contentType: "image/png",
+    contentDisposition: "inline",
+  },
+  {
+    filename: "inbox-badge.png",
+    content: INBOX_BADGE_BUFFER,
+    cid: EMAIL_CID.inboxBadge,
+    contentType: "image/png",
+    contentDisposition: "inline",
+  },
+];
+
+export const NEWSLETTER_EMAIL_ATTACHMENTS: readonly InlineCidAttachment[] = [
+  {
+    filename: "amsirar-logo.png",
+    content: AMSIRAR_LOGO_BUFFER,
+    cid: EMAIL_CID.logo,
+    contentType: "image/png",
+    contentDisposition: "inline",
+  },
+  {
+    filename: "email-icon.png",
+    content: EMAIL_ICON_BUFFER,
+    cid: EMAIL_CID.emailIcon,
+    contentType: "image/png",
+    contentDisposition: "inline",
+  },
+];

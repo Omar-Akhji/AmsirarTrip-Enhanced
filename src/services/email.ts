@@ -51,7 +51,8 @@ export interface TransactionalEmailOptions {
   readonly html: string;
   readonly cc?: string | string[];
   readonly bcc?: string | string[];
-  readonly attachments?: SendMailOptions["attachments"];
+  readonly attachments?:
+    readonly NonNullable<SendMailOptions["attachments"]>[number][] | SendMailOptions["attachments"];
   readonly headers?: Record<string, string>;
 }
 
@@ -81,7 +82,7 @@ export async function sendTransactionalEmail(
     html: options.html,
     cc: options.cc,
     bcc: options.bcc,
-    attachments: options.attachments,
+    attachments: options.attachments as SendMailOptions["attachments"],
     headers: options.headers,
   });
 }
