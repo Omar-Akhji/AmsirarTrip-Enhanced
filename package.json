@@ -6,7 +6,7 @@
     "astro": "astro",
     "build": "astro build",
     "build:timings": "astro build --timings",
-    "check": "astro check && tsc --noEmit",
+    "check": "bun scripts/i18n-check.ts && astro check && tsc --noEmit",
     "dev": "astro dev",
     "format": "bun run format:tailwind && prettier --write .",
     "format:check": "bun run format:tailwind:check && prettier --check .",
