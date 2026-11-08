@@ -28,11 +28,6 @@ const submitTimeout = ref<ReturnType<typeof setTimeout> | null>(null);
 // Debounce submission to prevent double-clicks (500ms window)
 const DEBOUNCE_MS = 500;
 
-const alertClasses = {
-  success: "bg-emerald-50 text-emerald-800 border border-emerald-200 font-mono text-xs",
-  error: "bg-rose-50 text-rose-700 border border-rose-200 font-mono text-xs",
-};
-
 const handleVerify = (token: string) => {
   captchaToken.value = token;
 };
@@ -159,10 +154,8 @@ onUnmounted(() => {
           @submit.prevent="handleSubmit"
         >
           <output
-            v-if="state?.message"
-            class="block rounded-2xl border px-4 py-3 font-mono text-xs leading-relaxed"
-            :class="[state.success ? alertClasses.success : alertClasses.error]"
-            :role="state.success ? undefined : 'alert'"
+            v-if="state?.success && state?.message"
+            class="block rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 font-mono text-xs leading-relaxed text-emerald-800"
             aria-live="polite"
             aria-label="Submission status"
           >
@@ -170,14 +163,21 @@ onUnmounted(() => {
           </output>
 
           <div
-            v-if="state?.errors && Object.keys(state.errors).length > 0"
+            v-if="
+              !state?.success
+              && ((state?.errors && Object.keys(state.errors).length > 0)
+                || (state?.message && (!state?.errors || Object.keys(state.errors).length === 0)))
+            "
             class="rounded-2xl border border-orange-200/80 bg-orange-50/60 p-4"
             role="alert"
           >
             <p class="mbe-2 font-mono text-xs font-bold tracking-wider text-orange-900 uppercase">
               {{ t("contact.form.errors.title") }}
             </p>
-            <ul class="space-y-1 font-mono text-xs text-orange-800">
+            <ul
+              v-if="state?.errors && Object.keys(state.errors).length > 0"
+              class="space-y-1 font-mono text-xs text-orange-800"
+            >
               <li
                 v-for="[field, error] in Object.entries(state.errors)"
                 :key="field"
@@ -214,18 +214,54 @@ onUnmounted(() => {
                 <span>{{ error }}</span>
               </li>
             </ul>
+            <div
+              v-else-if="state?.message"
+              class="flex items-start gap-2 font-mono text-xs text-orange-800"
+            >
+              <svg
+                class="mbs-0.5 size-4 shrink-0 text-orange-600"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="10"
+                />
+                <line
+                  x1="12"
+                  x2="12"
+                  y1="8"
+                  y2="12"
+                />
+                <line
+                  x1="12"
+                  x2="12.01"
+                  y1="16"
+                  y2="16"
+                />
+              </svg>
+              <span>{{ state.message }}</span>
+            </div>
           </div>
 
-          <!-- Honeypot -->
+          <!-- Honeypot (hidden from DOM flow & browser autofill heuristics) -->
           <div
             aria-hidden="true"
-            class="absolute left-[-9999px] h-0 overflow-hidden"
+            class="hidden"
+            style="display: none !important"
           >
             <input
               type="text"
               name="website"
               tabindex="-1"
-              autocomplete="off"
+              autocomplete="new-password"
+              aria-hidden="true"
               aria-label="Leave this field empty"
               toolparamdescription="A honeypot field that must be left blank"
             />
@@ -237,7 +273,7 @@ onUnmounted(() => {
             <div class="flex justify-center sm:justify-start">
               <div
                 class="w-fit origin-center scale-85 rounded-xl border border-dashed p-2 transition-all sm:scale-100"
-                :class="[state?.errors?.recaptchaToken ? 'border-red-300' : 'border-stone-200']"
+                :class="[state?.errors?.['recaptchaToken'] ? 'border-red-300' : 'border-stone-200']"
               >
                 <Recaptcha
                   v-if="hasRecaptchaV2"
@@ -256,11 +292,11 @@ onUnmounted(() => {
             </div>
 
             <p
-              v-if="state?.errors?.recaptchaToken"
+              v-if="state?.errors?.['recaptchaToken']"
               id="recaptchaToken-error"
               class="mbs-1 font-mono text-xs text-red-600"
             >
-              {{ state.errors.recaptchaToken }}
+              {{ state.errors["recaptchaToken"] }}
             </p>
 
             <button

@@ -17,8 +17,16 @@ export function extractClientIp(request: Request, clientAddress?: string | undef
 }
 
 export function isHoneypotTriggered(value: string, ip: string, actionName: string): boolean {
-  if (value.length > 0) {
-    logSecurityEvent("HONEYPOT", ip, actionName);
+  if (value.trim().length > 0) {
+    if (import.meta.env.DEV || ip === "::1" || ip === "127.0.0.1") {
+      logSecurityEvent(
+        "HONEYPOT",
+        ip,
+        `${actionName} (ignored in dev: "${value.trim().slice(0, 32)}")`,
+      );
+      return false;
+    }
+    logSecurityEvent("HONEYPOT", ip, `${actionName} (value: "${value.trim().slice(0, 32)}")`);
     return true;
   }
   return false;

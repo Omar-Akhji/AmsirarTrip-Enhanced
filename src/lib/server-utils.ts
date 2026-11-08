@@ -1,6 +1,6 @@
 /** Server utilities — re-exports from services and HTML escape utility. */
 
-export { getMailer, sendTransactionalEmail } from "@/services/email";
+export { getMailer, sendTransactionalEmail, verifyMailer } from "@/services/email";
 export { logger, logSecurityEvent } from "@/services/logger";
 
 export function escapeHtml(string_ = ""): string {

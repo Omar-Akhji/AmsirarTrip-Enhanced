@@ -2,7 +2,7 @@ import { z } from "astro/zod";
 
 const sanitize = (value: string) => value.trim();
 
-const phoneRegex = /^[+]?[(]?[0-9]{1,4}[)]?[-\s.]?[(]?[0-9]{1,4}[)]?[-\s.]?[0-9]{1,9}$/;
+const phoneRegex = /^\+?[0-9\s().-]{7,25}$/;
 
 const RecaptchaSchema = (t: (key: string) => string) =>
   z.object({ recaptchaToken: z.string().min(1, t("recaptchaRequired")) });
@@ -19,7 +19,7 @@ export const getContactSchema = (t: (key: string) => string) =>
       phone: z
         .string()
         .regex(phoneRegex, { message: t("phoneInvalid") })
-        .max(20, { message: t("phoneTooLong") })
+        .max(25, { message: t("phoneTooLong") })
         .transform(sanitize),
       topic: z
         .string()
@@ -63,7 +63,7 @@ export const getBookingSchema = (t: (key: string) => string) =>
       phone: z
         .string()
         .regex(phoneRegex, { message: t("phoneInvalid") })
-        .max(20, { message: t("phoneTooLong") })
+        .max(25, { message: t("phoneTooLong") })
         .transform(sanitize),
       persons: z.coerce
         .number()

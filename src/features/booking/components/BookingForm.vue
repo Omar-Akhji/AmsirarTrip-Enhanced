@@ -236,16 +236,18 @@ const handleSubmit = async (event: Event) => {
                 </ul>
               </div>
 
-              <!-- Honeypot (hidden from layout and screen readers without creating phantom gaps) -->
+              <!-- Honeypot (hidden from layout, screen readers, and browser autofill) -->
               <div
                 aria-hidden="true"
                 class="hidden"
+                style="display: none !important"
               >
                 <input
                   type="text"
                   name="website"
                   tabindex="-1"
-                  autocomplete="off"
+                  autocomplete="new-password"
+                  aria-hidden="true"
                   aria-label="Leave this field empty"
                   toolparamdescription="A honeypot field that must be left blank"
                 />
