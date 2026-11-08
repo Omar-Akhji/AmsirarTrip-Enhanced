@@ -157,8 +157,8 @@ base unit.
     *,
     ::before,
     ::after {
-      animation-duration: 0.01ms !important;
-      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms;
+      transition-duration: 0.01ms;
     }
   }
   ```

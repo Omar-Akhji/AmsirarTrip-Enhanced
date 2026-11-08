@@ -123,37 +123,37 @@ function wrapEmailLayout({
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Yellowtail&display=swap" rel="stylesheet" />
   <style type="text/css">
     body, table, td, p, a, span, h1, h2, h3 {
-      font-family: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+      font-family: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
     @media only screen and (max-width: 600px) {
       .email-main-table {
-        width: 100% !important;
-        max-width: 100% !important;
+        width: 100%;
+        max-width: 100%;
       }
       .email-header-cell {
-        padding: 22px 14px 18px 14px !important;
+        padding: 22px 14px 18px 14px;
       }
       .email-content-cell {
-        padding: 22px 14px 18px 14px !important;
+        padding: 22px 14px 18px 14px;
       }
       .email-footer-cell {
-        padding: 16px 14px 22px 14px !important;
+        padding: 16px 14px 22px 14px;
       }
       .btn-stack-table tr {
-        display: block !important;
-        width: 100% !important;
+        display: block;
+        width: 100%;
       }
       .btn-stack-cell {
-        display: block !important;
-        width: 100% !important;
-        padding: 5px 0 !important;
-        box-sizing: border-box !important;
+        display: block;
+        width: 100%;
+        padding: 5px 0;
+        box-sizing: border-box;
       }
       .btn-responsive {
-        width: 100% !important;
-        box-sizing: border-box !important;
-        padding: 12px 14px !important;
-        font-size: 13.5px !important;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 12px 14px;
+        font-size: 13.5px;
       }
     }
   </style>

@@ -174,7 +174,7 @@ const handleSubmit = async (event: Event) => {
             >
               <FormStatusMessages
                 v-bind="{
-                  ...(state?.errors?.submit ? { submitError: state.errors.submit } : {}),
+                  ...(state?.errors?.['submit'] ? { submitError: state.errors['submit'] } : {}),
                   ...(state?.success !== undefined ? { success: state.success } : {}),
                   ...(state?.message ? { successMessage: state.message } : {}),
                 }"
@@ -240,7 +240,7 @@ const handleSubmit = async (event: Event) => {
               <div
                 aria-hidden="true"
                 class="hidden"
-                style="display: none !important"
+                style="display: none"
               >
                 <input
                   type="text"
@@ -272,7 +272,9 @@ const handleSubmit = async (event: Event) => {
                 <div class="flex justify-center sm:justify-start">
                   <div
                     class="w-fit origin-center scale-85 rounded-xl border border-dashed p-2 transition-all sm:scale-100"
-                    :class="[state?.errors?.recaptchaToken ? 'border-red-300' : 'border-stone-200']"
+                    :class="[
+                      state?.errors?.['recaptchaToken'] ? 'border-red-300' : 'border-stone-200',
+                    ]"
                   >
                     <Recaptcha
                       v-if="hasRecaptchaV2"
@@ -291,11 +293,11 @@ const handleSubmit = async (event: Event) => {
                 </div>
 
                 <p
-                  v-if="state?.errors?.recaptchaToken"
+                  v-if="state?.errors?.['recaptchaToken']"
                   id="recaptchaToken-error"
                   class="mbs-1 font-mono text-xs text-red-600"
                 >
-                  {{ state.errors.recaptchaToken }}
+                  {{ state.errors["recaptchaToken"] }}
                 </p>
 
                 <button
