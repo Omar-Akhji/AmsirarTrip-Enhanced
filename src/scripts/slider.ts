@@ -88,7 +88,11 @@ function initSlider(): void {
   const dotButtons = slider.querySelectorAll<HTMLButtonElement>(".hero-dot-btn");
   const lineFills = slider.querySelectorAll<HTMLElement>(".hero-dot-line-fill");
   const paginationNav = slider.querySelector<HTMLElement>("#pagination");
+  const section = document.querySelector<HTMLElement>("#home-hero-slider-section");
   const totalSlides = sliderList.querySelectorAll<HTMLElement>(":scope > .item").length || 3;
+
+  let pendingTargetIndex: number | null = null;
+  let isScrollSyncing = false;
 
   function positionPagination(): void {
     if (!paginationNav) return;
@@ -201,6 +205,19 @@ function initSlider(): void {
         slider.classList.remove("is-next");
 
         isAnimating = false;
+        positionPagination();
+
+        if (pendingTargetIndex !== null) {
+          const nextTarget = pendingTargetIndex;
+          pendingTargetIndex = null;
+          const currentActive = sliderList.querySelector<HTMLElement>(
+            ":scope > .item:first-child",
+          );
+          const currentIndex = Number(currentActive?.dataset["index"] ?? 0);
+          if (nextTarget !== currentIndex) {
+            goToSlide(nextTarget);
+          }
+        }
       };
 
       setTimeout(finalizeNext, 760);
@@ -214,7 +231,7 @@ function initSlider(): void {
       }
 
       sliderList.prepend(lastSlide);
-      thumbnail.prepend(lastThumb);
+      lastThumb.style.opacity = "0";
 
       activeSlide.classList.add("is-outgoing");
       lastSlide.classList.add("is-incoming");
@@ -229,11 +246,27 @@ function initSlider(): void {
         if (cleanedUp) return;
         cleanedUp = true;
 
+        thumbnail.prepend(lastThumb);
+        lastThumb.style.opacity = "";
+
         activeSlide.classList.remove("is-outgoing");
         lastSlide.classList.remove("is-incoming");
         slider.classList.remove("is-prev");
 
         isAnimating = false;
+        positionPagination();
+
+        if (pendingTargetIndex !== null) {
+          const nextTarget = pendingTargetIndex;
+          pendingTargetIndex = null;
+          const currentActive = sliderList.querySelector<HTMLElement>(
+            ":scope > .item:first-child",
+          );
+          const currentIndex = Number(currentActive?.dataset["index"] ?? 0);
+          if (nextTarget !== currentIndex) {
+            goToSlide(nextTarget);
+          }
+        }
       };
 
       setTimeout(finalizePrev, 760);
@@ -241,11 +274,7 @@ function initSlider(): void {
   }
 
   function startAutoplay(): void {
-    if (globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     stopAutoplay();
-    autoplayTimer = setInterval(() => {
-      moveSlider("next");
-    }, 7000);
   }
 
   function stopAutoplay(): void {
@@ -289,30 +318,68 @@ function initSlider(): void {
 
     stopAutoplay();
 
-    const forwardSteps = (targetIndex - activeIndex + totalSlides) % totalSlides;
-
-    if (forwardSteps === totalSlides - 1) {
-      moveSlider("prev");
-    } else if (forwardSteps === 1) {
-      moveSlider("next");
-    } else {
-      // Bring target slide right behind the active slide so active slide stays visible while target expands
-      for (let i = 0; i < forwardSteps - 1; i++) {
-        const intermediateSlide = sliderList.querySelector<HTMLElement>(
-          ":scope > .item:nth-child(2)",
-        );
-        const firstThumb = thumbnail.querySelector<HTMLElement>(":scope > .item");
-        if (intermediateSlide) {
-          sliderList.append(intermediateSlide);
+    if (targetIndex > activeIndex) {
+      const steps = targetIndex - activeIndex;
+      if (steps === 1) {
+        moveSlider("next");
+      } else {
+        // Multi-step forward: bring target slide right behind active slide
+        for (let i = 0; i < steps - 1; i++) {
+          const intermediateSlide = sliderList.querySelector<HTMLElement>(
+            ":scope > .item:nth-child(2)",
+          );
+          const firstThumb = thumbnail.querySelector<HTMLElement>(":scope > .item");
+          if (intermediateSlide) {
+            sliderList.append(intermediateSlide);
+          }
+          if (firstThumb) {
+            thumbnail.append(firstThumb);
+          }
         }
-        if (firstThumb) {
-          thumbnail.append(firstThumb);
-        }
+        moveSlider("next");
       }
-      moveSlider("next");
+    } else {
+      const steps = activeIndex - targetIndex;
+      if (steps === 1) {
+        moveSlider("prev");
+      } else {
+        // Multi-step backward: bring target slide to the end so moveSlider("prev") prepends it
+        for (let i = 0; i < steps - 1; i++) {
+          const lastSlide = sliderList.querySelector<HTMLElement>(
+            ":scope > .item:last-child",
+          );
+          const lastThumb = thumbnail.querySelector<HTMLElement>(
+            ":scope > .item:last-child",
+          );
+          if (lastSlide) {
+            sliderList.prepend(lastSlide);
+          }
+          if (lastThumb) {
+            thumbnail.prepend(lastThumb);
+          }
+        }
+        moveSlider("prev");
+      }
     }
 
     startAutoplay();
+  }
+
+  function scrollToSlide(targetIndex: number): void {
+    if (!section) return;
+    const maxScroll = section.offsetHeight - globalThis.innerHeight;
+    if (maxScroll <= 0) return;
+    const targetScroll = Math.round(
+      section.offsetTop + (targetIndex / (totalSlides - 1)) * maxScroll,
+    );
+    const lenis = (
+      globalThis as unknown as { __lenis?: { scrollTo: (y: number) => void } }
+    ).__lenis;
+    if (lenis) {
+      lenis.scrollTo(targetScroll);
+    } else {
+      globalThis.scrollTo({ top: targetScroll, behavior: "smooth" });
+    }
   }
 
   // Vertical dot buttons navigation
@@ -322,7 +389,9 @@ function initSlider(): void {
     if (!btn || isAnimating) return;
     const targetIndexStr = btn.dataset["index"];
     if (targetIndexStr !== undefined) {
-      goToSlide(Number(targetIndexStr));
+      const idx = Number(targetIndexStr);
+      scrollToSlide(idx);
+      goToSlide(idx);
     }
   };
 
@@ -343,7 +412,9 @@ function initSlider(): void {
       return;
     }
 
-    goToSlide(Number(targetIndexStr));
+    const idx = Number(targetIndexStr);
+    scrollToSlide(idx);
+    goToSlide(idx);
   };
 
   const onThumbnailKeyDown = (e: KeyboardEvent) => {
@@ -380,6 +451,69 @@ function initSlider(): void {
   };
 
   globalThis.addEventListener("keydown", onKeyDown);
+
+  // Scroll runway interaction: scrolling through the sticky section switches slides until the final image, then naturally unpins to subsequent sections
+  function syncScrollToSlide(): void {
+    if (!section) return;
+    const sectionRect = section.getBoundingClientRect();
+    const maxScroll = section.offsetHeight - globalThis.innerHeight;
+    if (maxScroll <= 0) return;
+
+    const scrolled = -sectionRect.top;
+    if (scrolled < 0) return;
+
+    const progress = Math.max(0, Math.min(1, scrolled / maxScroll));
+
+    let targetIndex = 0;
+    if (progress >= 0.65) {
+      targetIndex = 2;
+    } else if (progress >= 0.30) {
+      targetIndex = 1;
+    } else {
+      targetIndex = 0;
+    }
+
+    const activeItem = sliderList.querySelector<HTMLElement>(
+      ":scope > .item:first-child",
+    );
+    const activeIndex = Number(activeItem?.dataset["index"] ?? 0);
+
+    if (targetIndex !== activeIndex) {
+      if (isAnimating) {
+        pendingTargetIndex = targetIndex;
+        return;
+      }
+      stopAutoplay();
+      goToSlide(targetIndex);
+    }
+  }
+
+  const onScroll = () => {
+    if (globalThis.scrollY > 20) {
+      stopAutoplay();
+    }
+    if (isScrollSyncing) return;
+    isScrollSyncing = true;
+    requestAnimationFrame(() => {
+      syncScrollToSlide();
+      isScrollSyncing = false;
+    });
+  };
+
+  const lenis = (
+    globalThis as unknown as {
+      __lenis?: {
+        on: (event: string, fn: () => void) => void;
+        off: (event: string, fn: () => void) => void;
+      };
+    }
+  ).__lenis;
+
+  if (lenis) {
+    lenis.on("scroll", onScroll);
+  }
+  globalThis.addEventListener("scroll", onScroll, { passive: true });
+  syncScrollToSlide();
 
   // Touch swipe support
   let touchStartX = 0;
@@ -426,6 +560,10 @@ function initSlider(): void {
     delete slider.dataset["sliderInitialized"];
     stopAutoplay();
     globalThis.removeEventListener("resize", positionPagination);
+    if (lenis) {
+      lenis.off("scroll", onScroll);
+    }
+    globalThis.removeEventListener("scroll", onScroll);
     nextBtn?.removeEventListener("click", onNextClick);
     prevBtn?.removeEventListener("click", onPrevClick);
     for (const dot of dotButtons) {

@@ -46,7 +46,7 @@
     "heroSubtitleAlt1": "Private Reisen über die Pässe des Hohen Atlas und durch die Wüstendünen",
     "heroSubtitleAlt2": "Ihr Tor zu Sahara-Abenteuern und Erkundungen der Königsstädte",
     "heroAlt1": "Pässe des Hohen Atlas und Erg Chebbi-Dünen",
-    "heroAlt2": "Private 4x4-Reisen mit lokalen Berber-Fahrern",
+    "heroAlt2": "Private 4x4-Reisen mit lokalen Fahrern",
     "exploreOurTours": "Unsere Touren Entdecken",
     "contactForMore": "Kontaktieren Sie Uns Für Mehr Informationen",
     "stats": {
@@ -144,6 +144,7 @@
       }
     },
     "detailsTitle": "Tour‑Details",
+    "breadcrumb": "Tour‑Details",
     "detailsSubtitle": "Geschichten, Tipps und Einblicke aus unseren Abenteuern",
     "exploreThisTour": "Diese Tour entdecken",
     "overview": "Überblick",
@@ -224,7 +225,7 @@
     "formatComparisonTitle": "Verfügbare Tour-Formate",
     "privateOption": "Private VIP-Abreise",
     "privateOptionBadge": "Am Beliebtesten",
-    "privateOptionDesc": "Exklusives klimatisiertes Fahrzeug, persönlicher Berber-Fahrer-Guide, flexible Startzeiten und Fotostopps nach Wunsch.",
+    "privateOptionDesc": "Exklusives klimatisiertes Fahrzeug, persönlicher Fahrer-Guide, flexible Startzeiten und Fotostopps nach Wunsch.",
     "sharedOption": "Kleine Gruppe (Geteilt)",
     "sharedBadge": "Preisbewusst",
     "sharedDesc": "Preiswerte Buchung pro Sitzplatz mit max. 8–14 Reisenden. Fester Reiseplan und traditionelles Wüstencamp. Termine per WhatsApp erfragen.",
@@ -266,6 +267,7 @@
     "title": "Unsere Ausflüge",
     "sectionSubtitle": "Tagestouren ab Marrakesch in die Atlas-Täler, an die Atlantikküste und in die Wüstenplateaus.",
     "detailsTitle": "Ausflugsdetails",
+    "breadcrumb": "Ausflugsdetails",
     "detailsSubtitle": "Entdecken Sie Marokkos verborgene Schätze",
     "exploreThisExcursion": "Diesen Ausflug entdecken",
     "common": {
@@ -392,7 +394,7 @@
     "experienceTitle": "20 Jahre Erfahrung",
     "whyTrustTitle": "Wie wir private Marokko-Reisen organisieren:",
     "whyTrust": {
-      "point1": "Direkte Absprache mit lizenzierten lokalen Berber-Fahrern",
+      "point1": "Direkte Absprache mit lizenzierten lokalen Fahrern",
       "point2": "Moderne, klimatisierte 4x4-Fahrzeuge und Minibusse für Gebirgsstrecken",
       "point3": "Flexible Routenplanung angepasst an Ihren Zeitplan",
       "point4": "Klare Festpreise ohne ungeplante Verkaufsstopps"
@@ -401,7 +403,7 @@
     "experienceText2": "Unsere Touren verbinden Gebirgsfahrten über den Tizi n'Tichka-Pass mit ruhigen Aufenthalten in Taldörfern und Übernachtungen in bewährten Wüstencamps.",
     "experienceText3": "Unsere Fahrer kennen die regionalen Straßenverhältnisse, verlässliche Rastplätze und gute Aussichtspunkte. Wir richten jede Fahrt nach Ihren Reisedaten aus.",
     "conclusionText": "Ob Sie eine 3-tägige Wüstentour planen oder eine 10-tägige Rundreise durch die Königsstädte: Wir stimmen jede Etappe auf Ihre Reisedaten ab.",
-    "imageCaption": "Berber-Fahrer im Hohen Atlas",
+    "imageCaption": "Fahrer im Hohen Atlas",
     "facts": {
       "smTitle": "Agentur-Überblick",
       "lgTitle": "Wichtige Kennzahlen",

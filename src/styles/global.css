@@ -26,17 +26,41 @@
 }
 
 @font-face {
-  font-family: "DM Mono";
-  src: url("/fonts/DMMono-Regular.woff2") format("woff2");
+  font-family: "JetBrains Mono";
+  src: url("/fonts/JetBrainsMono-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "DM Mono";
-  src: url("/fonts/DMMono-Medium.woff2") format("woff2");
+  font-family: "JetBrains Mono";
+  src: url("/fonts/JetBrainsMono-Medium.woff2") format("woff2");
   font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/fonts/JetBrainsMono-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/fonts/JetBrainsMono-Bold.woff2") format("woff2");
+  font-weight: 700 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono Variable";
+  src: url("/fonts/JetBrainsMono-Variable.woff2") format("woff2");
+  font-weight: 100 800;
   font-style: normal;
   font-display: swap;
 }
@@ -51,7 +75,7 @@
   /* Typography */
   --font-sans:
     "Montserrat", system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", roboto, sans-serif;
-  --font-mono: "DM Mono", ui-monospace, "Cascadia Code", "Fira Code", monospace;
+  --font-mono: "JetBrains Mono", "JetBrains Mono Variable", ui-monospace, monospace;
   --font-brand: "Yellowtail", cursive;
 
   /* Text */
@@ -246,7 +270,7 @@
     --pattern-bg-size: 350px 350px;
 
     /* ASCII reveal & skeleton loading */
-    --ascii-font: "Geist Mono", "DM Mono", ui-monospace, "SF Mono", menlo, consolas, monospace;
+    --ascii-font: "JetBrains Mono", "JetBrains Mono Variable", ui-monospace, "SF Mono", menlo, consolas, monospace;
     --ascii-skeleton: #78716c; /* neutral gray skeleton glyphs */
     --ascii-accent: #f15d30; /* pacific orange */
     --ars-wave-color: currentColor;
@@ -296,12 +320,12 @@
     cursor: pointer;
   }
 
-  :is(button, [type="button"], [type="submit"], [type="reset"], [role="button"]) {
-    font-family: var(--font-mono, "DM Mono", ui-monospace, monospace);
+  :is(button, [type="button"], [type="submit"], [type="reset"], [role="button"], .font-mono) {
+    font-family: var(--font-mono, "JetBrains Mono", "JetBrains Mono Variable", ui-monospace, monospace);
   }
 
   hgroup p {
-    font-family: var(--font-mono, "DM Mono", ui-monospace, monospace);
+    font-family: var(--font-mono, "JetBrains Mono", "JetBrains Mono Variable", ui-monospace, monospace);
   }
 }
 
@@ -667,24 +691,20 @@
   @keyframes heroShowImageClip {
     from {
       clip-path: var(--thumb-clip);
-      transform: scale(1.06);
     }
 
     to {
       clip-path: inset(0 0 0 0 round 0);
-      transform: scale(1);
     }
   }
 
   @keyframes heroHideImageClip {
     from {
       clip-path: inset(0 0 0 0 round 0);
-      transform: scale(1);
     }
 
     to {
       clip-path: var(--thumb-clip);
-      transform: scale(1.06);
     }
   }
 
@@ -700,11 +720,11 @@
 
   @keyframes heroThumbTrackPrev {
     from {
-      transform: translateX(calc(-1 * (var(--thumb-width) + var(--thumb-gap))));
+      transform: translateX(0);
     }
 
     to {
-      transform: translateX(0);
+      transform: translateX(calc(var(--thumb-width) + var(--thumb-gap)));
     }
   }
 
@@ -753,7 +773,7 @@
 
     position: relative;
     display: block;
-    font-family: var(--ascii-font, "DM Mono", ui-monospace, "SF Mono", menlo, consolas, monospace);
+    font-family: var(--ascii-font, "JetBrains Mono", ui-monospace, "SF Mono", menlo, consolas, monospace);
     font-variant-ligatures: none;
     color: var(--ascii-skeleton, #78716c);
     user-select: none;
@@ -1011,4 +1031,9 @@ html.lenis {
 
 :is([data-ar-m], [data-ar-s], [data-ar-f]) {
   opacity: var(--ar-o, 0);
+}
+
+/* Ensure all buttons, role=button triggers, and mono controls use JetBrains Mono without layer conflict */
+:is(button, [type="button"], [type="submit"], [type="reset"], [role="button"], .btn, .font-mono) {
+  font-family: var(--font-mono, "JetBrains Mono", "JetBrains Mono Variable", ui-monospace, monospace);
 }

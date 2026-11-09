@@ -12,7 +12,7 @@ export const clientUi = {
       "reservationDate": "Select your travel date",
       "message": "Your message",
       "checkAvailability": "Reserve Now",
-      "perkLocalExperts": "Licensed Berber drivers & certified city guides",
+      "perkLocalExperts": "Licensed drivers & certified city guides",
       "perkFlexible": "Flexible daily departures & custom pickup from riads",
       "perkSupport": "Direct 24/7 on-trip assistance & transparent pricing",
       "checkBadge": "Guest Reviews",

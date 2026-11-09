@@ -43,7 +43,7 @@ const openModal = () => {
         command="show-modal"
         commandfor="newsletter-dialog"
         :aria-label="t('footer.newsletterButtonAria')"
-        class="flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-full bg-linear-to-br from-amber-orange to-orange font-sans text-sm font-semibold text-white shadow-md shadow-orange/20 transition-all duration-200 select-none inline-full hover:shadow-lg hover:shadow-orange/30 hover:brightness-105 focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 focus-visible:ring-offset-black focus-visible:outline-hidden active:scale-[0.98]"
+        class="flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-full bg-linear-to-br from-amber-orange to-orange font-mono text-sm font-semibold text-white shadow-md shadow-orange/20 transition-all duration-200 select-none inline-full hover:shadow-lg hover:shadow-orange/30 hover:brightness-105 focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 focus-visible:ring-offset-black focus-visible:outline-hidden active:scale-[0.98]"
         @click="openModal"
       >
         <svg

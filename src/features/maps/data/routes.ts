@@ -881,7 +881,7 @@ function buildRouteMap(
   normalizedKey: string,
   config: TourRouteConfig,
   title: string,
-  cities: Pick<RouteMapData, "subtitle" | "startCity" | "endCity">,
+  cities: Pick<RouteMapData, "startCity" | "endCity">,
   waypoints: RouteWaypoint[],
 ): RouteMapData {
   const { embedUrl, appUrl } = buildGoogleMapsUrls(waypoints);
@@ -914,26 +914,18 @@ export function getTourRouteMap(
   if (!config) return undefined;
 
   const waypoints = toWaypoints(config);
-  const isRoundtrip = startLocation.toLowerCase() === endLocation.toLowerCase();
-  const mainHighlight = waypoints.find((w) => w.type === "highlight")?.name;
-  const subtitle =
-    isRoundtrip ?
-      mainHighlight ? `${startLocation} → ${mainHighlight}`
-      : `${startLocation} Expedition`
-    : `${startLocation} → ${endLocation}`;
-
   return buildRouteMap(
     normalizedKey,
     config,
     title,
-    { subtitle, startCity: startLocation, endCity: endLocation },
+    { startCity: startLocation, endCity: endLocation },
     waypoints,
   );
 }
 
 export function getExcursionRouteMap(
   excursionKey: string,
-  locationName: string,
+  _locationName: string,
   title: string,
 ): RouteMapData | undefined {
   const normalizedKey = excursionKey.toLowerCase().trim();
@@ -946,7 +938,6 @@ export function getExcursionRouteMap(
     config,
     title,
     {
-      subtitle: locationName,
       startCity: "Marrakech",
       endCity: waypoints.at(-1)?.name ?? "Marrakech",
     },

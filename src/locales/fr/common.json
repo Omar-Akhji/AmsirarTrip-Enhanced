@@ -46,7 +46,7 @@
     "heroSubtitleAlt1": "Circuits privés à travers les cols du Haut Atlas et les dunes du Sahara",
     "heroSubtitleAlt2": "Votre porte d'entrée vers les aventures du Sahara et les explorations des villes impériales",
     "heroAlt1": "Cols du Haut Atlas et dunes de l'Erg Chebbi",
-    "heroAlt2": "Circuits privés en 4x4 avec chauffeurs berbères locaux",
+    "heroAlt2": "Circuits privés en 4x4 avec chauffeurs locaux",
     "exploreOurTours": "Explorez Nos Circuits",
     "contactForMore": "Contactez-Nous Pour Plus d'Informations",
     "stats": {
@@ -144,6 +144,7 @@
       }
     },
     "detailsTitle": "Détails des circuits",
+    "breadcrumb": "Détails du circuit",
     "detailsSubtitle": "Histoires, conseils et inspirations de nos aventures",
     "exploreThisTour": "Explorer ce circuit",
     "overview": "Aperçu",
@@ -224,7 +225,7 @@
     "formatComparisonTitle": "Formats de Circuit Disponibles",
     "privateOption": "Départ Privé VIP",
     "privateOptionBadge": "Le Plus Demandé",
-    "privateOptionDesc": "Véhicule climatisé exclusif, chauffeur-guide berbère dédié, horaires flexibles et arrêts photos personnalisés.",
+    "privateOptionDesc": "Véhicule climatisé exclusif, chauffeur-guide dédié, horaires flexibles et arrêts photos personnalisés.",
     "sharedOption": "Petit Groupe Partagé",
     "sharedBadge": "Économique",
     "sharedDesc": "Tarif avantageux avec 8 à 14 voyageurs max. Itinéraire fixe et bivouac saharien authentique. Contactez-nous sur WhatsApp pour les dates.",
@@ -266,6 +267,7 @@
     "title": "Nos excursions",
     "sectionSubtitle": "Excursions d'une journée au départ de Marrakech vers les vallées de l'Atlas, la côte atlantique et le désert.",
     "detailsTitle": "Détails de l'excursion",
+    "breadcrumb": "Détails de l'excursion",
     "detailsSubtitle": "Explorez les trésors cachés du Maroc",
     "exploreThisExcursion": "Découvrez cette excursion",
     "common": {
@@ -392,16 +394,16 @@
     "experienceTitle": "20 ans d'expérience",
     "whyTrustTitle": "Comment nous organisons vos voyages au Maroc :",
     "whyTrust": {
-      "point1": "Coordination directe avec des chauffeurs-guides berbères agréés",
+      "point1": "Coordination directe avec des chauffeurs-guides agréés",
       "point2": "Véhicules 4x4 et minivans climatisés entretenus pour la montagne",
       "point3": "Itinéraires personnalisés selon votre rythme et vos souhaits",
       "point4": "Tarification transparente sans arrêts commerciaux forcés"
     },
-    "experienceText1": "Depuis 2004, notre équipe basée à Marrakech accompagne les voyageurs à travers le sud du Maroc, des cols du Haut Atlas aux dunes de Merzouga et Chegaga. Nous coordonnons transports, étapes de montagne et séjours en riad directement avec des chauffeurs berbères locaux.",
+    "experienceText1": "Depuis 2004, notre équipe basée à Marrakech accompagne les voyageurs à travers le sud du Maroc, des cols du Haut Atlas aux dunes de Merzouga et Chegaga. Nous coordonnons transports, étapes de montagne et séjours en riad directement avec des chauffeurs locaux.",
     "experienceText2": "Nos circuits associent la traversée du col du Tizi n'Tichka à des arrêts à pied dans les villages de vallée et des nuits dans des bivouacs désertiques bien établis.",
     "experienceText3": "Nos chauffeurs connaissent les routes locales, les points de vue panoramiques et les étapes de restauration fiables. Nous adaptons chaque trajet à vos dates et à votre groupe.",
     "conclusionText": "Que vous prépariez une escapade de 3 jours dans le désert ou un circuit complet de 10 jours dans les villes impériales, nous organisons votre voyage selon votre calendrier.",
-    "imageCaption": "Chauffeur-guide berbère au pied du Haut Atlas",
+    "imageCaption": "Chauffeur-guide au pied du Haut Atlas",
     "facts": {
       "smTitle": "Repères de l'agence",
       "lgTitle": "Chiffres clés",

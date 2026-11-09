@@ -42,11 +42,11 @@
     },
     "title": "Welcome to Amsirar Trip",
     "heroTitle": "Private Morocco Desert Tours & Sahara Expeditions",
-    "heroSubtitle": "Licensed Marrakech travel agency specializing in private Sahara desert tours to Erg Chebbi and Chegaga, High Atlas mountain treks, and custom imperial city itineraries with experienced Berber driver-guides.",
+    "heroSubtitle": "Licensed Marrakech travel agency specializing in private Sahara desert tours to Erg Chebbi and Chegaga, High Atlas mountain treks, and custom imperial city itineraries with experienced driver-guides.",
     "heroSubtitleAlt1": "Private journeys across High Atlas passes and golden Erg Chebbi dunes",
-    "heroSubtitleAlt2": "Late-model 4x4 transport and licensed Berber guides across all 12 regions of Morocco",
+    "heroSubtitleAlt2": "Late-model 4x4 transport and licensed guides across all 12 regions of Morocco",
     "heroAlt1": "High Atlas Passes and Erg Chebbi Sand Dunes",
-    "heroAlt2": "Private 4x4 Expeditions with Certified Local Berber Guides",
+    "heroAlt2": "Private 4x4 Expeditions with Certified Local Guides",
     "exploreOurTours": "Explore Multi-Day Tours",
     "contactForMore": "Request Custom Itinerary",
     "stats": {
@@ -118,7 +118,7 @@
       "ctaPoint02": "Flexible itineraries tailored to you",
       "ctaPoint03": "24/7 on-trip assistance across Morocco"
     },
-    "headerSubtitle": "Handcrafted multi-day circuits connecting medieval medinas, High Atlas passes, and golden Saharan dunes with licensed local Berber drivers.",
+    "headerSubtitle": "Handcrafted multi-day circuits connecting medieval medinas, High Atlas passes, and golden Saharan dunes with licensed local drivers.",
     "stats": {
       "routes": "Signature itineraries",
       "routesDesc": "Multi-day journeys across imperial cities, desert dunes, and High Atlas passes.",
@@ -144,6 +144,7 @@
       }
     },
     "detailsTitle": "Multi-Day Morocco Expeditions",
+    "breadcrumb": "Tour details",
     "detailsSubtitle": "Handcrafted private and shared circuits connecting High Atlas mountain passes, medieval imperial medinas, and golden Saharan dunes.",
     "exploreThisTour": "Explore this Tour",
     "overview": "Route Overview",
@@ -236,7 +237,7 @@
     "formatComparisonTitle": "Available Tour Formats",
     "privateOption": "Private VIP Departure",
     "privateOptionBadge": "Most Popular",
-    "privateOptionDesc": "Dedicated air-conditioned vehicle, personal Berber driver-guide, flexible departure times and custom scenic photo stops.",
+    "privateOptionDesc": "Dedicated air-conditioned vehicle, personal driver-guide, flexible departure times and custom scenic photo stops.",
     "sharedOption": "Small-Group Shared",
     "sharedBadge": "Budget-Friendly",
     "sharedDesc": "Cost-effective departure with max 8–14 travelers. Fixed scenic itinerary and authentic desert bivouac. Inquire on WhatsApp for shared dates.",
@@ -266,6 +267,7 @@
     "title": "Marrakech Day Trips & Excursions",
     "sectionSubtitle": "Explore Morocco's most picturesque valleys, waterfalls, and coastal medinas within easy day-trip distance of your riad.",
     "detailsTitle": "Signature Marrakech Day Trips",
+    "breadcrumb": "Excursion details",
     "detailsSubtitle": "Single-day departures from Marrakech into High Atlas valleys, Atlantic coastal ramparts, and desert plateaus.",
     "exploreThisExcursion": "Explore this excursion",
     "common": {
@@ -315,7 +317,7 @@
       "ctaDescription": "Share your preferences and we will craft an itinerary that matches your pace, style, and travel dates.",
       "ctaPoint01": "Private driver & modern vehicle",
       "ctaPoint02": "Flexible departures from Marrakech",
-      "ctaPoint03": "Local Berber guides and flexible daily routes"
+      "ctaPoint03": "Local guides and flexible daily routes"
     },
     "list": {
       "ouzoud": {
@@ -389,10 +391,10 @@
     "headerSubtitle": "Licensed Morocco tour operator based in Marrakech, guiding private desert expeditions and cultural circuits since 2004.",
     "smTitle": "About our agency",
     "ourStory": "Our Story",
-    "experienceTitle": "Over two decades of guiding travelers through the Sahara, High Atlas, and historic medinas with licensed local Berber drivers.",
+    "experienceTitle": "Over two decades of guiding travelers through the Sahara, High Atlas, and historic medinas with licensed local drivers.",
     "whyTrustTitle": "Why Travelers Choose Amsirar Trip",
     "whyTrust": {
-      "point1": "Direct coordination with licensed local Berber driver-guides born and raised in Morocco's desert and mountain regions.",
+      "point1": "Direct coordination with licensed local driver-guides born and raised in Morocco's desert and mountain regions.",
       "point2": "Modern, impeccably maintained fleet of air-conditioned 4x4 Toyota Prados and Mercedes-Benz minivans.",
       "point3": "Flexible daily schedules allowing spontaneous photo stops, village walks, and family-friendly pacing.",
       "point4": "Upfront, transparent pricing with vetted boutique riads and verified luxury desert bivouac partners."
@@ -401,7 +403,7 @@
     "experienceText2": "Our itineraries are paced for true cultural discovery rather than rushed highway transit. We cross the legendary Tizi n'Tichka pass (2,260m), explore centuries-old UNESCO ksour like Ait Ben Haddou, and lead you into authentic Saharan camps where candlelit tagines and campfire melodies await.",
     "experienceText3": "With our dedicated team in Marrakech, professional licensed drivers, and 24/7 on-trip assistance, we handle every detail—from airport pickups to dietary arrangements—ensuring your Morocco journey is well-paced and hassle-free.",
     "conclusionText": "Whether embarking on a 3-day Sahara escape or a comprehensive 10-day imperial circuit, we craft every mile around your curiosity and pace.",
-    "imageCaption": "Berber driver-guide in the High Atlas foothills",
+    "imageCaption": "Driver-guide in the High Atlas foothills",
     "facts": {
       "smTitle": "Over 20 years guiding travelers across Morocco's mountains, deserts, and imperial cities.",
       "lgTitle": "Our Journey in Numbers",
@@ -1249,8 +1251,8 @@
         "alt": "Handcrafted tour experiences icon"
       },
       "guide": {
-        "title": "Licensed Berber Driver-Guides",
-        "text": "Travel with seasoned Berber drivers and certified local historians who share authentic regional culture, ancestral folklore, and hidden scenic viewpoints.",
+        "title": "Licensed Driver-Guides",
+        "text": "Travel with seasoned drivers and certified local historians who share authentic regional culture, ancestral folklore, and hidden scenic viewpoints.",
         "alt": "Professional travel guide icon"
       },
       "price": {
@@ -1381,7 +1383,7 @@
     "reservationDate": "Select your travel date",
     "message": "Your message",
     "checkAvailability": "Reserve Now",
-    "perkLocalExperts": "Licensed Berber drivers & certified city guides",
+    "perkLocalExperts": "Licensed drivers & certified city guides",
     "perkFlexible": "Flexible daily departures & custom pickup from riads",
     "perkSupport": "Direct 24/7 on-trip assistance & transparent pricing",
     "checkBadge": "Guest Reviews",

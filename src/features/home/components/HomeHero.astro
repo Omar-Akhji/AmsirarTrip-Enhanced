@@ -127,12 +127,12 @@ const thumbnailCards: SlideCardItem[] = currentSlides.map((slide) => ({
 
 <section
   id="home-hero-slider-section"
-  class="relative isolate w-full min-h-screen h-dvh overflow-hidden bg-black text-white [--ascii-glyph:#d4d4d8] [--ascii-surface:#09090b] [--ascii-accent:#f15d30]"
+  class="relative isolate w-full h-[300vh] overflow-x-clip bg-black text-white [--ascii-glyph:#d4d4d8] [--ascii-surface:#09090b] [--ascii-accent:#f15d30]"
   aria-roledescription="carousel"
   aria-label="Amsirar Trip Hero Carousel"
 >
   <div
-    class="slider relative h-screen w-screen overflow-hidden bg-[#050505] font-sans"
+    class="slider sticky top-0 h-screen w-full overflow-hidden bg-[#050505] font-sans"
     id="home-hero-slider"
   >
     <!-- List of Full-Screen Slides -->
@@ -213,7 +213,7 @@ const thumbnailCards: SlideCardItem[] = currentSlides.map((slide) => ({
 
             {index < currentSlides.length - 1 && (
               <div
-                class="hero-dot-line relative h-6 sm:h-7 w-[2px] bg-white/20 overflow-hidden my-0.5 rounded-full transition-colors duration-300"
+                class="hero-dot-line relative h-6 sm:h-7 w-0.5 bg-white/20 overflow-hidden my-0.5 rounded-full transition-colors duration-300"
                 aria-hidden="true"
                 data-line-index={index}
               >
@@ -236,13 +236,13 @@ const thumbnailCards: SlideCardItem[] = currentSlides.map((slide) => ({
     top: clamp(19.5rem, 50vh, 23rem);
   }
 
-  @media (min-width: 768px) {
+  @media (width >= 768px) {
     .hero-dots-nav {
       top: clamp(20rem, 38vh, 26rem);
     }
   }
 
-  @media (min-width: 1024px) {
+  @media (width >= 1024px) {
     .hero-dots-nav {
       top: clamp(22rem, 42vh, 28rem);
     }

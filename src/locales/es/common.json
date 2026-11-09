@@ -144,6 +144,7 @@
       }
     },
     "detailsTitle": "Detalles del tour",
+    "breadcrumb": "Detalles del tour",
     "detailsSubtitle": "Historias, consejos e ideas de nuestras aventuras",
     "exploreThisTour": "Explora este tour",
     "overview": "Resumen",
@@ -266,6 +267,7 @@
     "title": "Nuestras excursiones",
     "sectionSubtitle": "Excursiones de un día desde Marrakech hacia los valles del Atlas, la costa atlántica y el desierto.",
     "detailsTitle": "Detalles de la excursión",
+    "breadcrumb": "Detalles de la excursión",
     "detailsSubtitle": "Explora los tesoros ocultos de Marruecos",
     "exploreThisExcursion": "Descubre esta excursión",
     "common": {

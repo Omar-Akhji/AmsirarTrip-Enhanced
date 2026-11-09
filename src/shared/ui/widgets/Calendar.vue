@@ -172,41 +172,22 @@ watch(
           @click="navigateMonth('prev')"
         >
           <svg
-            class="size-4"
+            class="size-4.5"
             viewBox="0 0 24 24"
             fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
             aria-hidden="true"
           >
-            <path d="m15 18-6-6 6-6" />
+            <path
+              d="M15 19L9 12L10.5 10.25M15 5L13 7.33333"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
           </svg>
         </button>
 
-        <div class="flex items-center gap-2">
-          <svg
-            class="size-4 text-orange-600"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M8 2v4" />
-            <path d="M16 2v4" />
-            <rect
-              width="18"
-              height="18"
-              x="3"
-              y="4"
-              rx="2"
-            />
-            <path d="M3 10h18" />
-          </svg>
+        <div class="flex items-center">
           <span class="font-mono text-sm font-semibold text-stone-900 capitalize dark:text-mist-100">
             {{ formattedMonthYear }}
           </span>
@@ -219,16 +200,18 @@ watch(
           @click="navigateMonth('next')"
         >
           <svg
-            class="size-4"
+            class="size-4.5"
             viewBox="0 0 24 24"
             fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
             aria-hidden="true"
           >
-            <path d="m9 18 6-6-6-6" />
+            <path
+              d="M9 5L11 7.33333M9 19L15 12L13.5 10.25"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
           </svg>
         </button>
       </div>
@@ -296,16 +279,29 @@ watch(
 
       <div
         v-if="selectedDate"
-        class="mbs-4 border-t border-stone-100 pbs-3"
+        class="mbs-4 border-t border-stone-100 pbs-3 dark:border-white/10"
       >
         <div
-          class="flex items-center gap-3 rounded-lg border border-stone-200/80 bg-stone-50/80 px-4 py-3"
+          class="flex items-center gap-3 rounded-lg border border-stone-200/80 bg-stone-50/80 px-4 py-3 dark:border-white/10 dark:bg-white/5"
         >
-          <div class="shrink-0">
-            <div class="size-2 rounded-full bg-linear-to-br from-amber-orange to-orange" />
+          <div class="shrink-0 text-orange-600 dark:text-orange-500">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="size-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke-width="1.5"
+              aria-hidden="true"
+            >
+              <path d="M7 4V2.5" stroke-linecap="round" stroke="currentColor"/>
+              <path d="M17 4V2.5" stroke-linecap="round" stroke="currentColor"/>
+              <circle cx="16.5" cy="16.5" r="1.5" stroke="currentColor" stroke-linecap="round"/>
+              <path d="M21.5 9H16.625H10.75M5.875 9H2" stroke-linecap="round" stroke="currentColor"/>
+              <path d="M14 22H10C6.22876 22 4.34315 22 3.17157 20.8284C2 19.6569 2 17.7712 2 14V12C2 8.22876 2 6.34315 3.17157 5.17157C4.34315 4 6.22876 4 10 4H14C17.7712 4 19.6569 4 20.8284 5.17157C22 6.34315 22 8.22876 22 12V14C22 17.7712 22 19.6569 20.8284 20.8284C20.1752 21.4816 19.3001 21.7706 18 21.8985" stroke-linecap="round" stroke="currentColor"/>
+            </svg>
           </div>
           <div class="flex-1 min-inline-0">
-            <p class="font-mono text-[11px] font-medium tracking-wider text-stone-500 uppercase">
+            <p class="font-mono text-[11px] font-medium tracking-wider text-stone-500 uppercase dark:text-mist-400">
               {{
                 t(
                   initialDate && isSameDay(selectedDate, initialDate) ? "calendar.currentDate" : (
@@ -314,7 +310,7 @@ watch(
                 )
               }}
             </p>
-            <p class="truncate font-mono text-xs font-semibold text-stone-900 capitalize">
+            <p class="truncate font-mono text-xs font-semibold text-stone-900 capitalize dark:text-mist-100">
               {{ formattedSelectedDate }}
             </p>
           </div>

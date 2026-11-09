@@ -12,7 +12,6 @@ export interface RouteWaypoint {
 export interface RouteMapData {
   readonly id: string;
   readonly title: string;
-  readonly subtitle?: string | undefined;
   readonly startCity: string;
   readonly endCity: string;
   readonly distance?: string | undefined;

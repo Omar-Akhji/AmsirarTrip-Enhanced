@@ -137,7 +137,7 @@ const handleSubmit = async (event: Event) => {
     :class="[fullWidth ? 'booking-form-fullwidth' : '']"
   >
     <div
-      class="booking-form-inner mx-auto px-4 inline-full max-inline-7xl 2xl:max-inline-360 3xl:max-inline-420"
+      class="booking-form-inner mx-auto px-4 sm:px-6 lg:px-8 inline-full max-inline-7xl 2xl:max-inline-360 3xl:max-inline-420"
     >
       <div class="grid grid-cols-1 items-stretch gap-8 lg:grid-cols-5">
         <!-- Left: Form Card -->
@@ -148,7 +148,7 @@ const handleSubmit = async (event: Event) => {
           <div
             class="rounded-2xl border border-stone-200/90 bg-white p-6 shadow-2xs block-full sm:p-8 dark:border-white/10 dark:bg-surface-card/90 dark:shadow-[0_16px_40px_rgba(0,0,0,0.5)]"
           >
-            <div class="mbe-6 border-be border-stone-100 dark:border-white/10 pbe-4">
+            <div class="mbe-6 border-be border-stone-100 dark:border-white/10 pbe-5">
               <span
                 class="font-mono text-xs font-semibold tracking-[0.14em] text-orange-600 dark:text-orange uppercase"
               >
@@ -164,7 +164,7 @@ const handleSubmit = async (event: Event) => {
 
             <form
               :key="formKey"
-              class="flex flex-col gap-6"
+              class="flex flex-col gap-5"
               novalidate
               data-form="booking"
               :data-hydrated="isMounted"
@@ -268,7 +268,7 @@ const handleSubmit = async (event: Event) => {
                 :locale="i18n.language"
               />
 
-              <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div class="flex flex-col gap-4 pbs-2 sm:flex-row sm:items-center sm:justify-between">
                 <div class="flex justify-center sm:justify-start">
                   <div
                     class="w-fit origin-center scale-85 rounded-xl border border-dashed p-2 transition-all sm:scale-100"

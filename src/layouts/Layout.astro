@@ -24,7 +24,7 @@ interface Props {
 
 const {
   title = "Amsirar Trip | Morocco Tours & Desert Adventures",
-  description = "Private Sahara desert tours, High Atlas mountain treks, and day excursions across Morocco with licensed local Berber guides.",
+  description = "Private Sahara desert tours, High Atlas mountain treks, and day excursions across Morocco with licensed local guides.",
   noindex = false,
   image = "/images/hero/marrakech-medina.webp",
   imageAlt,
@@ -58,21 +58,7 @@ const currentOgLocale = OG_LOCALE_MAP[locale] ?? locale;
 >
   <head>
     <meta charset="utf-8" />
-    <script is:inline>
-      (function() {
-        try {
-          var stored = localStorage.getItem('amsirar-theme');
-          var isDark = stored ? stored === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
-          if (isDark) {
-            document.documentElement.classList.add('dark');
-            document.documentElement.style.colorScheme = 'dark';
-          } else {
-            document.documentElement.classList.remove('dark');
-            document.documentElement.style.colorScheme = 'light';
-          }
-        } catch (e) {}
-      })();
-    </script>
+    <script src="../scripts/theme-init.ts"></script>
     <script src="../scripts/no-js.ts"></script>
     <script src="../scripts/theme.ts"></script>
     <!--
@@ -95,7 +81,14 @@ const currentOgLocale = OG_LOCALE_MAP[locale] ?? locale;
     <link
       as="font"
       crossorigin="anonymous"
-      href="/fonts/DMMono-Regular.woff2"
+      href="/fonts/JetBrainsMono-Regular.woff2"
+      rel="preload"
+      type="font/woff2"
+    />
+    <link
+      as="font"
+      crossorigin="anonymous"
+      href="/fonts/JetBrainsMono-SemiBold.woff2"
       rel="preload"
       type="font/woff2"
     />
