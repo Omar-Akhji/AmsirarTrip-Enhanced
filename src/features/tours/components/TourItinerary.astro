@@ -64,7 +64,7 @@ const DAY_DELAYS = [
 <tour-itinerary-tracker class="block relative w-full">
   {/* Sticky Header: matching stage separator width */}
   <header
-    class="sticky top-16 sm:top-20 z-20 ms-6 sm:ms-8 w-[calc(100%-1.5rem)] sm:w-[calc(100%-2rem)] bg-white/95 backdrop-blur-md pt-2 pb-4 border-b border-stone-200/80 mbe-8 transition-colors dark:bg-stone-900/95 dark:border-stone-800"
+    class="sticky top-16 sm:top-20 z-20 ms-6 sm:ms-8 w-[calc(100%-1.5rem)] sm:w-[calc(100%-2rem)] bg-white/95 backdrop-blur-md pt-2 pb-4 border-b border-stone-200/80 mbe-8 transition-colors dark:bg-[#0d0e12]/95 dark:border-white/10"
     data-itinerary-header
   >
     <div class="space-y-3">
@@ -74,7 +74,7 @@ const DAY_DELAYS = [
         </p>
         <h3
           id="tour-itinerary-heading"
-          class="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-stone-950 transition-all duration-200 dark:text-stone-50"
+          class="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-stone-950 transition-all duration-200 dark:text-mist-100"
           data-sticky-heading
         >
           {initialDayTitle}
@@ -96,7 +96,7 @@ const DAY_DELAYS = [
                 { hidden: dIndex !== 0 },
               ]}
             >
-              <div class="inline-flex flex-wrap items-center gap-2 rounded-full border border-stone-200/90 bg-white px-3.5 py-1 font-mono text-xs font-semibold text-stone-800 shadow-2xs dark:border-stone-800 dark:bg-stone-900 dark:text-stone-200">
+              <div class="inline-flex flex-wrap items-center gap-2 rounded-full border border-stone-200/90 bg-white px-3.5 py-1 font-mono text-xs font-semibold text-stone-800 shadow-2xs dark:border-white/10 dark:bg-surface-card dark:text-mist-100">
                 {locations.map((loc, lIdx) => (
                   <span class="inline-flex items-center gap-2">
                     <span>{loc}</span>
@@ -128,12 +128,12 @@ const DAY_DELAYS = [
 
       {/* 01 / 03 counter and progress bar positioned below the cities, aligned to the right */}
       <div class="flex items-center justify-end gap-3 pt-0.5 w-full">
-        <div class="flex items-center gap-1.5 font-mono text-xs font-bold text-stone-500 tabular-nums dark:text-stone-400">
+        <div class="flex items-center gap-1.5 font-mono text-xs font-bold text-stone-500 tabular-nums dark:text-mist-400">
           <span data-sticky-counter-current>01</span>
-          <span class="text-stone-300 dark:text-stone-600">/</span>
+          <span class="text-stone-300 dark:text-mist-500">/</span>
           <span>{String(days.length).padStart(2, "0")}</span>
         </div>
-        <div class="w-24 sm:w-36 h-1.5 bg-stone-200/80 overflow-hidden dark:bg-stone-800">
+        <div class="w-24 sm:w-36 h-1.5 bg-stone-200/80 overflow-hidden dark:bg-white/10">
           <div
             class="h-full bg-orange-600 transition-all duration-300 ease-out"
             data-sticky-progress
@@ -148,7 +148,7 @@ const DAY_DELAYS = [
   <div class="relative w-full">
     {/* Continuous Timeline Vertical Track */}
     <div
-      class="timeline-track absolute left-0 top-0 bottom-8 w-0.5 bg-stone-200 dark:bg-stone-800"
+      class="timeline-track absolute left-0 top-0 bottom-8 w-0.5 bg-stone-200 dark:bg-white/10"
       data-timeline-track
       aria-hidden="true"
     >
@@ -188,7 +188,7 @@ const DAY_DELAYS = [
             {/* Horizontal Line separating stages with space from the vertical line */}
             {index > 0 && (
               <div
-                class="stage-separator absolute left-6 sm:left-8 right-0 top-0 h-px bg-stone-200/80 dark:bg-stone-800"
+                class="stage-separator absolute left-6 sm:left-8 right-0 top-0 h-px bg-stone-200/80 dark:bg-white/10"
                 aria-hidden="true"
               />
             )}
@@ -197,7 +197,7 @@ const DAY_DELAYS = [
             <div
               class:list={[
                 "stage-node absolute left-px -translate-x-1/2 -translate-y-1/2 z-10 size-3 rounded-full transition-all duration-300",
-                "bg-stone-300 ring-4 ring-stone-100 shadow-sm shadow-stone-300/30 dark:bg-stone-600 dark:ring-stone-800",
+                "bg-stone-300 ring-4 ring-stone-100 shadow-sm shadow-stone-300/30 dark:bg-mist-400 dark:ring-white/10",
                 "group-data-[active=true]/stage:bg-orange-600 group-data-[active=true]/stage:ring-orange-100 group-data-[active=true]/stage:shadow-md group-data-[active=true]/stage:shadow-orange-600/30 dark:group-data-[active=true]/stage:ring-orange-950/60",
                 "group-data-[passed=true]/stage:bg-orange-600 group-data-[passed=true]/stage:ring-orange-100/70",
                 { "top-0": index > 0, "top-2.5": index === 0 },
@@ -210,7 +210,7 @@ const DAY_DELAYS = [
                 {day.text.map((item: string) => (
                   <div class="flex items-start gap-3">
                     <span class="mbs-2 size-1.5 shrink-0 rounded-full bg-orange-600"></span>
-                    <p class="flex-1 text-sm leading-relaxed text-stone-700 sm:text-base font-normal">
+                    <p class="flex-1 text-sm leading-relaxed text-stone-700 sm:text-base font-normal dark:text-mist-200">
                       {item}
                     </p>
                   </div>
@@ -221,7 +221,7 @@ const DAY_DELAYS = [
                 <dl class="m-0 mbs-4 grid gap-3 p-0 sm:grid-cols-2">
                   {day.accommodation && (
                     <div
-                      class="flex items-center gap-3 rounded-xl border border-stone-200/90 bg-stone-50/70 p-3 shadow-2xs"
+                      class="flex items-center gap-3 rounded-xl border border-stone-200/90 bg-stone-50/70 p-3 shadow-2xs dark:border-white/10 dark:bg-surface-card/85"
                       data-ascii="surface"
                     >
                       <BuildingsIcon
@@ -229,10 +229,10 @@ const DAY_DELAYS = [
                         class="size-4 shrink-0 text-orange-600"
                       />
                       <div>
-                        <dt class="font-mono text-[10px] font-semibold tracking-wider text-stone-500 uppercase">
+                        <dt class="font-mono text-[10px] font-semibold tracking-wider text-stone-500 uppercase dark:text-mist-400">
                           {accommodationLabel}
                         </dt>
-                        <dd class="m-0 font-mono text-xs font-bold text-stone-900">
+                        <dd class="m-0 font-mono text-xs font-bold text-stone-900 dark:text-mist-100">
                           {day.accommodation}
                         </dd>
                       </div>
@@ -240,7 +240,7 @@ const DAY_DELAYS = [
                   )}
                   {day.meals && (
                     <div
-                      class="flex items-center gap-3 rounded-xl border border-stone-200/90 bg-stone-50/70 p-3 shadow-2xs"
+                      class="flex items-center gap-3 rounded-xl border border-stone-200/90 bg-stone-50/70 p-3 shadow-2xs dark:border-white/10 dark:bg-surface-card/85"
                       data-ascii="surface"
                     >
                       <UtensilsIcon
@@ -248,16 +248,16 @@ const DAY_DELAYS = [
                         class="size-4 shrink-0 text-orange-600"
                       />
                       <div>
-                        <dt class="font-mono text-[10px] font-semibold tracking-wider text-stone-500 uppercase">
+                        <dt class="font-mono text-[10px] font-semibold tracking-wider text-stone-500 uppercase dark:text-mist-400">
                           {mealsLabel}
                         </dt>
-                        <dd class="m-0 font-mono text-xs font-bold text-stone-900">{day.meals}</dd>
+                        <dd class="m-0 font-mono text-xs font-bold text-stone-900 dark:text-mist-100">{day.meals}</dd>
                       </div>
                     </div>
                   )}
                   {day.activities && (
                     <div
-                      class="flex items-center gap-3 rounded-xl border border-stone-200/90 bg-stone-50/70 p-3 shadow-2xs"
+                      class="flex items-center gap-3 rounded-xl border border-stone-200/90 bg-stone-50/70 p-3 shadow-2xs dark:border-white/10 dark:bg-surface-card/85"
                       data-ascii="surface"
                     >
                       <BicyclingIcon
@@ -265,10 +265,10 @@ const DAY_DELAYS = [
                         class="size-4 shrink-0 text-orange-600"
                       />
                       <div>
-                        <dt class="font-mono text-[10px] font-semibold tracking-wider text-stone-500 uppercase">
+                        <dt class="font-mono text-[10px] font-semibold tracking-wider text-stone-500 uppercase dark:text-mist-400">
                           {activitiesLabel}
                         </dt>
-                        <dd class="m-0 font-mono text-xs font-bold text-stone-900">
+                        <dd class="m-0 font-mono text-xs font-bold text-stone-900 dark:text-mist-100">
                           {day.activities}
                         </dd>
                       </div>
@@ -276,7 +276,7 @@ const DAY_DELAYS = [
                   )}
                   {day.arrival && (
                     <div
-                      class="flex items-center gap-3 rounded-xl border border-stone-200/90 bg-stone-50/70 p-3 shadow-2xs"
+                      class="flex items-center gap-3 rounded-xl border border-stone-200/90 bg-stone-50/70 p-3 shadow-2xs dark:border-white/10 dark:bg-surface-card/85"
                       data-ascii="surface"
                     >
                       <ClockCircleIcon
@@ -284,10 +284,10 @@ const DAY_DELAYS = [
                         class="size-4 shrink-0 text-orange-600"
                       />
                       <div>
-                        <dt class="font-mono text-[10px] font-semibold tracking-wider text-stone-500 uppercase">
+                        <dt class="font-mono text-[10px] font-semibold tracking-wider text-stone-500 uppercase dark:text-mist-400">
                           {arrivalLabel}
                         </dt>
-                        <dd class="m-0 font-mono text-xs font-bold text-stone-900">
+                        <dd class="m-0 font-mono text-xs font-bold text-stone-900 dark:text-mist-100">
                           {day.arrival}
                         </dd>
                       </div>
@@ -303,7 +303,7 @@ const DAY_DELAYS = [
 
     {/* Horizontal Line separating final stage from Service Coverage */}
     <div
-      class="final-stage-separator w-full h-px bg-stone-200/80 dark:bg-stone-800 mbs-10 sm:mbs-12"
+      class="final-stage-separator w-full h-px bg-stone-200/80 dark:bg-white/10 mbs-10 sm:mbs-12"
       aria-hidden="true"
     />
   </div>

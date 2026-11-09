@@ -38,18 +38,18 @@ const {
 >
   <section
     aria-labelledby={`${idPrefix}-pricing-title`}
-    class="rounded-2xl border border-stone-200/90 bg-stone-50/80 p-6 sm:p-8 shadow-xs"
+    class="rounded-2xl border border-stone-200/90 bg-stone-50/80 p-6 sm:p-8 shadow-xs dark:border-white/10 dark:bg-surface-card/85"
     data-ascii="surface"
   >
     <div class="space-y-6">
       <div class="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
         <div class="space-y-1">
           <hgroup class="space-y-1">
-            <p class="font-sans text-xs font-bold tracking-wider text-orange-700 uppercase">
+            <p class="font-sans text-xs font-bold tracking-wider text-orange-700 uppercase dark:text-orange-400">
               {kicker}
             </p>
             <h3
-              class="text-xl font-bold tracking-tight text-stone-900 sm:text-2xl"
+              class="text-xl font-bold tracking-tight text-stone-900 sm:text-2xl dark:text-mist-100"
               id={`${idPrefix}-pricing-title`}
             >
               {pricingTitle}
@@ -57,30 +57,30 @@ const {
           </hgroup>
           {!privateOption && (
             <>
-              <p class="font-sans text-xs font-semibold tracking-wider text-stone-500 uppercase pbs-1">
+              <p class="font-sans text-xs font-semibold tracking-wider text-stone-500 uppercase pbs-1 dark:text-mist-400">
                 {priceLabel}
               </p>
-              <p class="font-mono text-3xl font-bold text-orange-600 tabular-nums pbs-0.5">
+              <p class="font-mono text-3xl font-bold text-orange-600 tabular-nums pbs-0.5 dark:text-orange-400">
                 {price.label}
               </p>
             </>
           )}
-          <p class="font-sans text-xs text-stone-600 leading-relaxed">{price.note}</p>
+          <p class="font-sans text-xs text-stone-600 leading-relaxed dark:text-mist-300">{price.note}</p>
         </div>
       </div>
 
       {/* Tour Format Comparison */}
       {privateOption && (
-        <div class="border-t border-stone-200/80 pt-6 dark:border-stone-800">
-          <p class="mbe-3 font-sans text-xs font-bold tracking-wider text-stone-500 uppercase">
+        <div class="border-t border-stone-200/80 pt-6 dark:border-white/10">
+          <p class="mbe-3 font-sans text-xs font-bold tracking-wider text-stone-500 uppercase dark:text-mist-400">
             {formatComparisonTitle}
           </p>
           <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
             {/* Option 1: Private VIP */}
-            <div class="relative flex flex-col justify-between rounded-xl border-2 border-orange-600/30 bg-white p-4.5 shadow-2xs dark:border-orange-500/30 dark:bg-stone-900/90">
+            <div class="relative flex flex-col justify-between rounded-xl border-2 border-orange-600/30 bg-white p-4.5 shadow-2xs dark:border-orange-500/30 dark:bg-surface-card">
               <div>
-                <div class="flex items-center justify-between gap-2 border-b border-stone-100 pb-2.5 dark:border-stone-800">
-                  <span class="font-sans text-sm font-bold text-stone-900 dark:text-stone-100">
+                <div class="flex items-center justify-between gap-2 border-b border-stone-100 pb-2.5 dark:border-white/10">
+                  <span class="font-sans text-sm font-bold text-stone-900 dark:text-mist-100">
                     {privateOption}
                   </span>
                   {privateBadge && (
@@ -89,12 +89,12 @@ const {
                     </span>
                   )}
                 </div>
-                <p class="pt-2.5 font-sans text-xs leading-relaxed text-stone-600 dark:text-stone-300">
+                <p class="pt-2.5 font-sans text-xs leading-relaxed text-stone-600 dark:text-mist-300">
                   {privateDesc}
                 </p>
               </div>
-              <div class="mbs-3 flex flex-col gap-0.5 border-t border-stone-100 pt-2.5 font-mono dark:border-stone-800">
-                <span class="text-xs text-stone-500">Personal Driver & 4x4</span>
+              <div class="mbs-3 flex flex-col gap-0.5 border-t border-stone-100 pt-2.5 font-mono dark:border-white/10">
+                <span class="text-xs text-stone-500 dark:text-mist-400">Personal Driver & 4x4</span>
                 <span class="text-base font-bold text-orange-600 dark:text-orange-400 tabular-nums">
                   {price.label}
                 </span>
@@ -103,10 +103,10 @@ const {
 
             {/* Option 2: Small Group Shared */}
             {sharedOption && (
-              <div class="relative flex flex-col justify-between rounded-xl border border-stone-200 bg-white/70 p-4.5 shadow-2xs dark:border-stone-800 dark:bg-stone-900/60">
+              <div class="relative flex flex-col justify-between rounded-xl border border-stone-200 bg-white/70 p-4.5 shadow-2xs dark:border-white/10 dark:bg-surface-card/60">
                 <div>
-                  <div class="flex items-center justify-between gap-2 border-b border-stone-100 pb-2.5 dark:border-stone-800">
-                    <span class="font-sans text-sm font-bold text-stone-800 dark:text-stone-200">
+                  <div class="flex items-center justify-between gap-2 border-b border-stone-100 pb-2.5 dark:border-white/10">
+                    <span class="font-sans text-sm font-bold text-stone-800 dark:text-mist-100">
                       {sharedOption}
                     </span>
                     {sharedBadge && (
@@ -115,12 +115,12 @@ const {
                       </span>
                     )}
                   </div>
-                  <p class="pt-2.5 font-sans text-xs leading-relaxed text-stone-600 dark:text-stone-400">
+                  <p class="pt-2.5 font-sans text-xs leading-relaxed text-stone-600 dark:text-mist-300">
                     {sharedDesc}
                   </p>
                 </div>
-                <div class="mbs-3 flex flex-col gap-0.5 border-t border-stone-100 pt-2.5 font-mono dark:border-stone-800">
-                  <span class="text-xs text-stone-500">Group departures</span>
+                <div class="mbs-3 flex flex-col gap-0.5 border-t border-stone-100 pt-2.5 font-mono dark:border-white/10">
+                  <span class="text-xs text-stone-500 dark:text-mist-400">Group departures</span>
                   <span class="text-base font-bold text-emerald-600 dark:text-emerald-400">
                     Inquire via WhatsApp
                   </span>

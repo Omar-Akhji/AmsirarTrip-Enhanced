@@ -107,7 +107,7 @@ const current = entry.data as unknown as PrivacyCopy;
   </div>
 </PageHeader>
 
-<div class="relative bg-stone-50/70 text-slate-900 transition-colors print:bg-white print:text-black">
+<div class="relative bg-stone-50/70 text-slate-900 transition-colors print:bg-white print:text-black dark:bg-surface-base dark:text-mist-100">
   <!-- Subtle background texture -->
   <div
     aria-hidden="true"
@@ -117,7 +117,7 @@ const current = entry.data as unknown as PrivacyCopy;
   <!-- 2. Executive Summary Bento (Anti-Slop Transparency Cards) -->
   <section
     aria-labelledby="privacy-summary-heading"
-    class="relative z-10 border-be border-stone-200/80 bg-white py-12 lg:py-16"
+    class="relative z-10 border-be border-stone-200/80 bg-white py-12 lg:py-16 dark:border-white/10 dark:bg-surface-base"
   >
     <div class="mx-auto max-w-7xl 2xl:max-w-360 3xl:max-w-420 px-4 sm:px-6 lg:px-8">
       <div class="max-w-2xl">
@@ -131,12 +131,12 @@ const current = entry.data as unknown as PrivacyCopy;
           </span>
         </div>
         <h2
-          class="mbs-2 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl"
+          class="mbs-2 text-2xl font-bold tracking-tight text-slate-900 dark:text-mist-100 sm:text-3xl"
           id="privacy-summary-heading"
         >
           {current.summaryTitle}
         </h2>
-        <p class="mbs-2 text-sm text-slate-600 sm:text-base leading-relaxed">
+        <p class="mbs-2 text-sm text-slate-600 dark:text-mist-300 sm:text-base leading-relaxed">
           {current.summarySubtitle}
         </p>
       </div>
@@ -144,21 +144,21 @@ const current = entry.data as unknown as PrivacyCopy;
       <div class="mbs-8 grid grid-cols-1 gap-4 xs:grid-cols-2 lg:grid-cols-4 2xl:gap-6">
         {current.summaryCards.map((card, idx) => (
           <div
-            class="group relative flex flex-col justify-between rounded-2xl border border-stone-200/90 bg-stone-50/60 p-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-orange-500/30 hover:bg-white hover:shadow-lg hover:shadow-orange-500/5"
+            class="group relative flex flex-col justify-between rounded-2xl border border-stone-200/90 bg-stone-50/60 p-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-orange-500/30 hover:bg-white hover:shadow-lg hover:shadow-orange-500/5 dark:border-white/10 dark:bg-surface-card/75 dark:shadow-[0_4px_20px_-2px_rgba(0,0,0,0.4)] dark:hover:border-white/20 dark:hover:bg-surface-hover/90"
             data-ascii="surface"
           >
             <div>
               <div class="flex items-center justify-between">
                 <span class="font-mono text-xs font-bold text-orange-600">0{idx + 1}</span>
               </div>
-              <h3 class="mbs-3 text-base font-bold text-slate-900 group-hover:text-orange-600 transition-colors">
+              <h3 class="mbs-3 text-base font-bold text-slate-900 dark:text-mist-100 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">
                 {card.title}
               </h3>
-              <p class="mbs-2 text-xs leading-relaxed text-slate-600 sm:text-sm">
+              <p class="mbs-2 text-xs leading-relaxed text-slate-600 dark:text-mist-300 sm:text-sm">
                 {card.description}
               </p>
             </div>
-            <div class="mbs-4 pbs-3 border-bs border-stone-200/60 flex items-center gap-2 text-xs font-medium text-slate-500">
+            <div class="mbs-4 pbs-3 border-bs border-stone-200/60 dark:border-white/10 flex items-center gap-2 text-xs font-medium text-slate-500 dark:text-mist-400">
               <VerifiedCheckIcon class="size-4 text-emerald-600" />
               <span>Verified Policy</span>
             </div>
@@ -177,20 +177,20 @@ const current = entry.data as unknown as PrivacyCopy;
           <!-- Table of Contents Card -->
           <nav
             aria-label={current.tocTitle}
-            class="rounded-2xl border border-stone-200/90 bg-white p-4 sm:p-5 shadow-sm"
+            class="rounded-2xl border border-stone-200/90 bg-white p-4 sm:p-5 shadow-sm dark:border-white/10 dark:bg-surface-card/85 dark:shadow-[0_4px_20px_-2px_rgba(0,0,0,0.4)]"
             data-ascii="surface"
           >
-            <div class="flex items-center justify-between border-be border-stone-200/80 pbe-3">
+            <div class="flex items-center justify-between border-be border-stone-200/80 dark:border-white/10 pbe-3">
               <div class="flex items-center gap-2">
                 <DocumentTextIcon
                   aria-hidden="true"
                   class="size-4 text-orange-600"
                 />
-                <h3 class="font-mono text-xs font-bold tracking-wider text-slate-900 uppercase">
+                <h3 class="font-mono text-xs font-bold tracking-wider text-slate-900 dark:text-mist-100 uppercase">
                   {current.tocTitle}
                 </h3>
               </div>
-              <span class="rounded-full bg-stone-100 px-2 py-1 font-mono text-[11px] font-semibold text-slate-600">
+              <span class="rounded-full bg-stone-100 dark:bg-white/10 px-2 py-1 font-mono text-[11px] font-semibold text-slate-600 dark:text-mist-300">
                 0{current.sections.length}
               </span>
             </div>
@@ -202,12 +202,12 @@ const current = entry.data as unknown as PrivacyCopy;
               {current.sections.map((sec, idx) => (
                 <li>
                   <a
-                    class="group flex items-center rounded-full px-3 py-2 text-slate-600 transition-all duration-150 hover:bg-orange-500/5 hover:text-orange-600 data-[active=true]:bg-orange-500/10 data-[active=true]:font-semibold data-[active=true]:text-orange-600"
+                    class="group flex items-center rounded-full px-3 py-2 text-slate-600 dark:text-mist-300 transition-all duration-150 hover:bg-orange-500/5 hover:text-orange-600 dark:hover:bg-white/10 dark:hover:text-yellow data-[active=true]:bg-orange-500/10 data-[active=true]:font-semibold data-[active=true]:text-orange-600 dark:data-[active=true]:bg-white/10 dark:data-[active=true]:text-yellow"
                     data-section-id={sec.id}
                     href={`#${sec.id}`}
                   >
                     <span class="flex items-center gap-2 truncate min-w-0">
-                      <span class="shrink-0 whitespace-nowrap font-mono text-xs font-bold text-slate-400 group-hover:text-orange-600 group-data-[active=true]:text-orange-600">
+                      <span class="shrink-0 whitespace-nowrap font-mono text-xs font-bold text-slate-400 group-hover:text-orange-600 group-data-[active=true]:text-orange-600 dark:text-mist-400 dark:group-hover:text-yellow dark:group-data-[active=true]:text-yellow">
                         {String(idx + 1).padStart(2, "0")}
                       </span>
                       <span class="truncate">{sec.title}</span>
@@ -217,17 +217,17 @@ const current = entry.data as unknown as PrivacyCopy;
               ))}
             </ul>
 
-            <div class="mbs-3 pbs-3 border-bs border-stone-200/80">
+            <div class="mbs-3 pbs-3 border-bs border-stone-200/80 dark:border-white/10">
               <Button
                 variant="outline"
                 size="sm"
-                class="w-full bg-stone-50 text-slate-700 hover:bg-stone-100"
+                class="w-full bg-stone-50 text-slate-700 hover:bg-stone-100 dark:bg-white/5 dark:text-mist-200 dark:hover:bg-white/10 dark:border-white/10"
                 id="privacy-print-btn"
                 type="button"
               >
                 <PrinterIcon
                   aria-hidden="true"
-                  class="size-3.5 text-slate-500"
+                  class="size-3.5 text-slate-500 dark:text-mist-400"
                 />
                 <span>{current.printLabel}</span>
               </Button>
@@ -340,17 +340,17 @@ const current = entry.data as unknown as PrivacyCopy;
 
             <!-- Callout if defined -->
             {sec.callout && (
-              <div class="mbs-6 rounded-2xl border border-orange-500/20 bg-orange-500/5 p-4 sm:p-5">
+              <div class="mbs-6 rounded-2xl border border-orange-500/20 bg-orange-500/5 p-4 sm:p-5 dark:border-orange-500/30 dark:bg-orange-950/20">
                 <div class="flex items-start gap-4">
-                  <div class="flex size-9 shrink-0 items-center justify-center rounded-full bg-orange-500/10 text-orange-600">
+                  <div class="flex size-9 shrink-0 items-center justify-center rounded-full bg-orange-500/10 text-orange-600 dark:bg-orange-500/20 dark:text-orange-400">
                     <ShieldCheckIcon
                       aria-hidden="true"
                       class="size-4.5"
                     />
                   </div>
                   <div>
-                    <h4 class="text-sm font-bold text-slate-900">{sec.callout.title}</h4>
-                    <p class="mbs-1 text-xs sm:text-sm text-slate-700 leading-relaxed">
+                    <h4 class="text-sm font-bold text-slate-900 dark:text-mist-100">{sec.callout.title}</h4>
+                    <p class="mbs-1 text-xs sm:text-sm text-slate-700 dark:text-mist-300 leading-relaxed">
                       {sec.callout.desc}
                     </p>
                   </div>

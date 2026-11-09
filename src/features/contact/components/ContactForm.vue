@@ -130,15 +130,15 @@ onUnmounted(() => {
       data-animate="creative-slide-right"
     >
       <div
-        class="rounded-2xl border border-stone-200/90 bg-white p-6 shadow-xs shadow-stone-900/5 transition-all duration-300 block-full hover:-translate-y-1 hover:border-stone-300 hover:shadow-md sm:p-8"
+        class="rounded-2xl border border-stone-200/90 bg-white p-6 shadow-xs shadow-stone-900/5 transition-all duration-300 block-full hover:-translate-y-1 hover:border-stone-300 hover:shadow-md sm:p-8 dark:border-white/10 dark:bg-surface-card/90 dark:shadow-[0_16px_40px_rgba(0,0,0,0.5)] dark:hover:border-white/20"
       >
-        <div class="mbe-6 border-b border-stone-100 pbe-5">
-          <span class="font-mono text-xs font-semibold tracking-[0.14em] text-orange-600 uppercase">
+        <div class="mbe-6 border-b border-stone-100 dark:border-stone-800 pbe-5">
+          <span class="font-mono text-xs font-semibold tracking-[0.14em] text-orange-600 dark:text-orange-400 uppercase">
             {{ t("contact.form.badge", "Plan with locals") }}
           </span>
           <h3
             id="contact-heading"
-            class="mbs-1 text-xl font-bold tracking-tight text-stone-900 sm:text-2xl"
+            class="mbs-1 text-xl font-bold tracking-tight text-stone-900 dark:text-stone-100 sm:text-2xl"
           >
             {{ t("contact.form.title") }}
           </h3>

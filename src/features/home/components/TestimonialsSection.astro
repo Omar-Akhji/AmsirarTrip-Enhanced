@@ -20,17 +20,17 @@ const TRIPADVISOR_URL =
 
 <section
   aria-labelledby="testimonials-heading"
-  class="bg-zinc-50 py-12 sm:py-16 lg:py-24"
+  class="bg-zinc-50 py-12 sm:py-16 lg:py-24 dark:bg-surface-base"
   id="testimonials"
 >
   <div class="mx-auto px-4 sm:px-6 lg:px-8 max-inline-7xl 2xl:max-inline-360 3xl:max-inline-420">
     <div
-      class="mbe-8 sm:mbe-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-stone-200 pb-6 sm:pb-8"
+      class="mbe-8 sm:mbe-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-stone-200 pb-6 sm:pb-8 dark:border-white/10"
       data-animate="fade-up"
     >
       <hgroup class="max-w-2xl space-y-2">
         <h2
-          class="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl text-balance"
+          class="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl text-balance dark:text-mist-100"
           id="testimonials-heading"
         >
           {locale === "fr" ?
@@ -50,7 +50,7 @@ const TRIPADVISOR_URL =
             </>
           }
         </h2>
-        <p class="border-s-2 border-orange-600 ps-4 py-0.5 text-sm sm:text-base text-stone-600 leading-relaxed max-w-[62ch]">
+        <p class="border-s-2 border-orange-600 ps-4 py-0.5 text-sm sm:text-base text-stone-600 dark:text-mist-300 leading-relaxed max-w-[62ch]">
           {locale === "fr" ?
             "Avis authentiques vérifiés sur TripAdvisor après leurs circuits dans le désert, l'Atlas et les villes impériales."
           : locale === "es" ?

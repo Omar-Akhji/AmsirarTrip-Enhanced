@@ -54,7 +54,7 @@ const categoryText = badge || tagline || "Morocco Tour";
 
 <article
   data-ascii="surface"
-  class="group relative flex flex-col justify-between overflow-hidden rounded-[2.5rem] border border-stone-200/90 bg-white p-4 shadow-[0_20px_40px_-14px_rgba(0,0,0,0.12)] transition duration-500 ease-out-expo size-full dark:border-stone-800 dark:bg-stone-900/95 pointer-fine:hover:-translate-y-1.5 pointer-fine:hover:shadow-[0_28px_50px_-14px_rgba(0,0,0,0.22)]"
+  class="group relative flex flex-col justify-between overflow-hidden rounded-[2.5rem] border border-stone-200/90 bg-white p-4 shadow-[0_20px_40px_-14px_rgba(0,0,0,0.12)] transition duration-500 ease-out-expo size-full dark:border-white/10 dark:bg-surface-card/85 dark:shadow-[0_4px_20px_-2px_rgba(0,0,0,0.4)] pointer-fine:hover:-translate-y-1.5 pointer-fine:hover:shadow-[0_28px_50px_-14px_rgba(0,0,0,0.22)] dark:pointer-fine:hover:border-white/20 dark:pointer-fine:hover:bg-surface-hover/95 dark:pointer-fine:hover:shadow-[0_16px_36px_-8px_rgba(0,0,0,0.6)]"
 >
   {/* Full-card accessible click target */}
   <a
@@ -67,13 +67,13 @@ const categoryText = badge || tagline || "Morocco Tour";
   </a>
 
   {/* Image Thumbnail with Scoop Category Tab & Hover Reveal Stack */}
-  <div class="relative aspect-4/3 w-full shrink-0 overflow-hidden rounded-3xl bg-stone-100 dark:bg-stone-800">
+  <div class="relative aspect-4/3 w-full shrink-0 overflow-hidden rounded-3xl bg-stone-100 dark:bg-surface-card">
     {/* Inverted Scoop Category Badge at Top-Left */}
     <div
-      class="absolute top-0 left-0 z-20 pointer-events-none inline-flex items-center px-5 py-2 rounded-ee-2xl bg-white dark:bg-stone-900 drop-shadow-[4px_4px_6px_rgba(0,0,0,0.12)] before:content-[''] before:absolute before:top-0 before:left-full before:size-4 before:bg-inherit before:[-webkit-mask-image:radial-gradient(circle_at_100%_100%,transparent_16px,#000_17px)] before:mask-[radial-gradient(circle_at_100%_100%,transparent_16px,#000_17px)] after:content-[''] after:absolute after:top-full after:left-0 after:size-4 after:bg-inherit after:[-webkit-mask-image:radial-gradient(circle_at_100%_100%,transparent_16px,#000_17px)] after:mask-[radial-gradient(circle_at_100%_100%,transparent_16px,#000_17px)]"
+      class="absolute top-0 left-0 z-20 pointer-events-none inline-flex items-center px-5 py-2 rounded-ee-2xl bg-white dark:bg-surface-card drop-shadow-[4px_4px_6px_rgba(0,0,0,0.12)] before:content-[''] before:absolute before:top-0 before:left-full before:size-4 before:bg-inherit before:[-webkit-mask-image:radial-gradient(circle_at_100%_100%,transparent_16px,#000_17px)] before:mask-[radial-gradient(circle_at_100%_100%,transparent_16px,#000_17px)] after:content-[''] after:absolute after:top-full after:left-0 after:size-4 after:bg-inherit after:[-webkit-mask-image:radial-gradient(circle_at_100%_100%,transparent_16px,#000_17px)] after:mask-[radial-gradient(circle_at_100%_100%,transparent_16px,#000_17px)]"
       data-ascii="fade"
     >
-      <span class="font-mono text-[11px] font-bold tracking-[0.08em] uppercase text-orange-600 dark:text-orange-400">
+      <span class="font-mono text-[11px] font-bold tracking-[0.08em] uppercase text-orange-600 dark:text-yellow">
         {categoryText}
       </span>
     </div>
@@ -125,7 +125,7 @@ const categoryText = badge || tagline || "Morocco Tour";
     {/* Tagline Badge with Gray Background (On top of title) */}
     {tagline && (
       <div class="mbe-2 flex flex-wrap items-center gap-2">
-        <span class="inline-flex rounded-full bg-stone-100 px-3 py-1 font-mono text-xs font-medium text-stone-700 dark:bg-stone-800 dark:text-stone-300">
+        <span class="inline-flex rounded-full bg-stone-100 px-3 py-1 font-mono text-xs font-medium text-stone-700 dark:bg-white/10 dark:text-mist-200">
           {tagline}
         </span>
       </div>
@@ -133,30 +133,30 @@ const categoryText = badge || tagline || "Morocco Tour";
 
     {/* Heading */}
     <div class="mbe-2">
-      <h3 class="line-clamp-2 text-xl font-bold tracking-tight text-stone-900 transition-colors duration-200 group-hover:text-orange-600 dark:text-stone-50 dark:group-hover:text-orange-400">
+      <h3 class="line-clamp-2 text-xl font-bold tracking-tight text-stone-900 transition-colors duration-200 group-hover:text-orange-600 dark:text-mist-100 dark:group-hover:text-orange-400">
         {title}
       </h3>
     </div>
 
     {/* Description */}
-    <p class="mbe-3 line-clamp-3 text-sm leading-relaxed text-stone-600 dark:text-stone-300">
+    <p class="mbe-3 line-clamp-3 text-sm leading-relaxed text-stone-600 dark:text-mist-300">
       {description}
     </p>
 
     {/* Start / End Itinerary Box */}
     {start && end && (
-      <dl class="mt-auto mbe-3 m-0 grid grid-cols-2 gap-3 rounded-xl border border-stone-200/80 bg-stone-50/80 px-3.5 py-2.5 text-xs font-mono dark:border-stone-800 dark:bg-stone-800/40">
+      <dl class="mt-auto mbe-3 m-0 grid grid-cols-2 gap-3 rounded-xl border border-stone-200/80 bg-stone-50/80 px-3.5 py-2.5 text-xs font-mono dark:border-white/10 dark:bg-white/5">
         <div class="flex flex-col">
-          <dt class="text-[10px] tracking-wider text-stone-400 uppercase dark:text-stone-500">
+          <dt class="text-[10px] tracking-wider text-stone-400 uppercase dark:text-mist-400">
             {startLabel}
           </dt>
-          <dd class="m-0 truncate font-semibold text-stone-900 dark:text-stone-100">{start}</dd>
+          <dd class="m-0 truncate font-semibold text-stone-900 dark:text-mist-100">{start}</dd>
         </div>
-        <div class="flex flex-col border-s border-stone-200/80 ps-3 dark:border-stone-800">
-          <dt class="text-[10px] tracking-wider text-stone-400 uppercase dark:text-stone-500">
+        <div class="flex flex-col border-s border-stone-200/80 ps-3 dark:border-white/10">
+          <dt class="text-[10px] tracking-wider text-stone-400 uppercase dark:text-mist-400">
             {endLabel}
           </dt>
-          <dd class="m-0 truncate font-semibold text-stone-900 dark:text-stone-100">{end}</dd>
+          <dd class="m-0 truncate font-semibold text-stone-900 dark:text-mist-100">{end}</dd>
         </div>
       </dl>
     )}

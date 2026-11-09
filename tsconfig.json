@@ -6,30 +6,15 @@
   "exclude": ["dist", "node_modules"],
 
   "compilerOptions": {
-    // ─── Target & Lib ──────────────────────────────────────────────────────
-    // TS6 defaults to ES2025 but explicit is clearer
     "target": "ES2025",
     "lib": ["ES2023", "ES2024", "ES2025", "ESNext", "DOM"],
     "noEmit": true,
-
-    // ─── Vue Template & JSX Preservation ──────────────────────────────────
     "jsx": "preserve",
-
-    // ─── Module ────────────────────────────────────────────────────────────
     "module": "ESNext",
     "moduleResolution": "bundler",
-    // Forces every file to be treated as a module, not a global script
     "moduleDetection": "force",
-    // Allows .ts extensions in imports — required for Bun native TS execution
     "allowImportingTsExtensions": true,
-
-    // ─── Interop ───────────────────────────────────────────────────────────
-    // Enforces `import type` for type-only imports
-    // Modern replacement for esModuleInterop (deprecated in TS6)
     "verbatimModuleSyntax": true,
-
-    // ─── TS Strictness (Strictest 2026 Standard) ─────────────────────────
-    "strict": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
     "strictFunctionTypes": true,
@@ -38,8 +23,6 @@
     "noImplicitThis": true,
     "useUnknownInCatchVariables": true,
     "alwaysStrict": true,
-
-    /* Advanced Strict Safety */
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true,
     "noImplicitOverride": true,
@@ -53,22 +36,10 @@
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "skipLibCheck": true,
-    // No enums/namespaces — required for Bun native TS stripping
     "erasableSyntaxOnly": true,
-    // Explicit even though TS6 default — important behavior to document
     "noUncheckedSideEffectImports": true,
-
-    // ─── Types ─────────────────────────────────────────────────────────────
-    // CRITICAL in TS6: @types/* no longer auto-discovered
-    // Add bun-types only if you use Bun APIs (Bun.serve, Bun.file, etc.)
-    // Add node if you use Node APIs (process.env, path, fs, etc.)
     "types": ["node"],
-
-    // ─── Astro TS Plugin ───────────────────────────────────────────────────
-    // Enables IntelliSense for .astro files in editors
     "plugins": [{ "name": "@astrojs/ts-plugin" }],
-
-    // ─── Path aliases ──────────────────────────────────────────────────────
     "paths": { "@/*": ["./src/*"] }
   }
 }

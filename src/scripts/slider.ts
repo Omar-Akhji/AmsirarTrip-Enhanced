@@ -85,7 +85,20 @@ function initSlider(): void {
   const prevBtn = slider.querySelector<HTMLButtonElement>(".prev");
   const progressBar = slider.querySelector<HTMLElement>("#slider-progress-bar");
   const numberItems = slider.querySelectorAll<HTMLElement>(":scope .slide-numbers .number-item");
+  const dotButtons = slider.querySelectorAll<HTMLButtonElement>(".hero-dot-btn");
+  const lineFills = slider.querySelectorAll<HTMLElement>(".hero-dot-line-fill");
+  const paginationNav = slider.querySelector<HTMLElement>("#pagination");
   const totalSlides = sliderList.querySelectorAll<HTMLElement>(":scope > .item").length || 3;
+
+  function positionPagination(): void {
+    if (!paginationNav) return;
+    const activeDesc = sliderList.querySelector<HTMLElement>(":scope > .item:first-child .description");
+    if (!activeDesc) return;
+    const descRect = activeDesc.getBoundingClientRect();
+    const sliderRect = slider.getBoundingClientRect();
+    const relativeTop = Math.round(descRect.bottom - sliderRect.top + 16);
+    paginationNav.style.top = `${relativeTop}px`;
+  }
 
   function updatePagination(forcedIndex?: number): void {
     let activeIndex: number;
@@ -105,6 +118,26 @@ function initSlider(): void {
     for (const [index, el] of numberItems.entries()) {
       el.classList.toggle("active", index === activeIndex);
     }
+
+    for (const [index, dot] of dotButtons.entries()) {
+      const isActive = index === activeIndex;
+      dot.classList.toggle("active", isActive);
+      if (isActive) {
+        dot.setAttribute("aria-current", "true");
+      } else {
+        dot.removeAttribute("aria-current");
+      }
+    }
+
+    for (const [lineIndex, lineFill] of lineFills.entries()) {
+      if (lineIndex < activeIndex) {
+        lineFill.style.height = "100%";
+      } else {
+        lineFill.style.height = "0%";
+      }
+    }
+
+    positionPagination();
   }
 
   // Re-order initial thumbnail by 1 step so that thumbnail list displays the upcoming slide first
@@ -239,25 +272,19 @@ function initSlider(): void {
   nextBtn?.addEventListener("click", onNextClick);
   prevBtn?.addEventListener("click", onPrevClick);
 
-  // Thumbnail direct click & multi-slide navigation
-  const onThumbnailClick = (e: MouseEvent) => {
-    const target = (e.target as HTMLElement).closest<HTMLElement>(".item");
-    if (!target || isAnimating) return;
+  function goToSlide(targetIndex: number): void {
+    if (isAnimating) return;
 
-    const targetIndexStr = target.dataset["index"];
+    const currentSliderItems = sliderList.querySelectorAll<HTMLElement>(":scope > .item");
+    const currentThumbnailItems = thumbnail.querySelectorAll<HTMLElement>(":scope > .item");
+
+    if (currentSliderItems.length < 2 || currentThumbnailItems.length < 2) return;
+
     const activeItem = sliderList.querySelector<HTMLElement>(":scope > .item:first-child");
     const activeIndexStr = activeItem?.dataset["index"];
+    if (activeIndexStr === undefined) return;
 
-    if (!targetIndexStr || !activeIndexStr) {
-      stopAutoplay();
-      moveSlider("next");
-      startAutoplay();
-      return;
-    }
-
-    const targetIndex = Number(targetIndexStr);
     const activeIndex = Number(activeIndexStr);
-
     if (targetIndex === activeIndex) return;
 
     stopAutoplay();
@@ -286,6 +313,37 @@ function initSlider(): void {
     }
 
     startAutoplay();
+  }
+
+  // Vertical dot buttons navigation
+  const onDotClick = (e: MouseEvent) => {
+    e.preventDefault();
+    const btn = (e.currentTarget as HTMLElement).closest<HTMLButtonElement>(".hero-dot-btn");
+    if (!btn || isAnimating) return;
+    const targetIndexStr = btn.dataset["index"];
+    if (targetIndexStr !== undefined) {
+      goToSlide(Number(targetIndexStr));
+    }
+  };
+
+  for (const dot of dotButtons) {
+    dot.addEventListener("click", onDotClick);
+  }
+
+  // Thumbnail direct click & multi-slide navigation
+  const onThumbnailClick = (e: MouseEvent) => {
+    const target = (e.target as HTMLElement).closest<HTMLElement>(".item");
+    if (!target || isAnimating) return;
+
+    const targetIndexStr = target.dataset["index"];
+    if (!targetIndexStr) {
+      stopAutoplay();
+      moveSlider("next");
+      startAutoplay();
+      return;
+    }
+
+    goToSlide(Number(targetIndexStr));
   };
 
   const onThumbnailKeyDown = (e: KeyboardEvent) => {
@@ -359,6 +417,7 @@ function initSlider(): void {
   slider.addEventListener("mouseleave", startAutoplay);
   slider.addEventListener("focusin", stopAutoplay);
   slider.addEventListener("focusout", startAutoplay);
+  globalThis.addEventListener("resize", positionPagination);
 
   startAutoplay();
 
@@ -366,8 +425,12 @@ function initSlider(): void {
   const cleanup = () => {
     delete slider.dataset["sliderInitialized"];
     stopAutoplay();
+    globalThis.removeEventListener("resize", positionPagination);
     nextBtn?.removeEventListener("click", onNextClick);
     prevBtn?.removeEventListener("click", onPrevClick);
+    for (const dot of dotButtons) {
+      dot.removeEventListener("click", onDotClick);
+    }
     thumbnail.removeEventListener("click", onThumbnailClick);
     thumbnail.removeEventListener("keydown", onThumbnailKeyDown);
     globalThis.removeEventListener("keydown", onKeyDown);

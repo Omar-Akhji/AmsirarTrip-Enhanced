@@ -43,13 +43,13 @@ const { stats } = Astro.props;
             ]}
           >
             <article
-              class="stat-card relative flex h-55 w-full flex-col justify-between rounded-2xl border border-stone-200/90 bg-stone-50/95 p-5 shadow-xl shadow-stone-900/10 backdrop-blur-xs transition-shadow duration-300"
+              class="stat-card relative flex h-55 w-full flex-col justify-between rounded-2xl border border-stone-200/90 bg-stone-50/95 p-5 shadow-xl shadow-stone-900/10 backdrop-blur-xs transition-shadow duration-300 dark:border-white/10 dark:bg-surface-card/90 dark:shadow-[0_12px_28px_rgba(0,0,0,0.6)]"
               data-ascii="surface"
             >
               <div>
-                <div class="mbe-3 flex items-center justify-between border-b border-stone-200/70 pb-2 text-[11px] font-mono uppercase tracking-wider text-stone-400">
-                  <span class="font-semibold text-stone-600">{stat.code}</span>
-                  <div class="flex items-center gap-2 text-stone-400">
+                <div class="mbe-3 flex items-center justify-between border-b border-stone-200/70 pb-2 text-[11px] font-mono uppercase tracking-wider text-stone-400 dark:border-white/10 dark:text-mist-400">
+                  <span class="font-semibold text-stone-600 dark:text-mist-200">{stat.code}</span>
+                  <div class="flex items-center gap-2 text-stone-400 dark:text-mist-400">
                     <Icon
                       aria-hidden="true"
                       class="size-4"
@@ -61,23 +61,25 @@ const { stats } = Astro.props;
                 <div class="mbe-1.5">
                   <data
                     value={stat.value}
-                    class="text-4xl font-bold tracking-tight text-orange-600 tabular-nums block"
+                    class="text-4xl font-bold tracking-tight text-orange-600 dark:text-orange-500 tabular-nums block"
                     data-ascii-digits
                   >
                     {stat.value}
                   </data>
                 </div>
 
-                <h3 class="text-base font-semibold tracking-tight text-stone-900">{stat.label}</h3>
+                <h3 class="text-base font-semibold tracking-tight text-stone-900 dark:text-mist-100">
+                  {stat.label}
+                </h3>
 
-                <p class="mbs-1 text-xs leading-relaxed text-stone-600 line-clamp-2">
+                <p class="mbs-1 text-xs leading-relaxed text-stone-600 dark:text-mist-200 line-clamp-2">
                   {stat.description}
                 </p>
               </div>
 
-              <div class="mbs-2 flex items-center justify-between border-t border-stone-200/60 pt-2 text-[11px] font-mono text-stone-400 uppercase tracking-wider">
-                <span class="text-stone-500">{stat.footerLeft}</span>
-                <span class="inline-flex items-center gap-1 text-stone-600">
+              <div class="mbs-2 flex items-center justify-between border-t border-stone-200/60 pt-2 text-[11px] font-mono text-stone-400 uppercase tracking-wider dark:border-white/10 dark:text-mist-400">
+                <span class="text-stone-500 dark:text-mist-400">{stat.footerLeft}</span>
+                <span class="inline-flex items-center gap-1 text-stone-600 dark:text-mist-200">
                   {stat.footerRight}
                 </span>
               </div>

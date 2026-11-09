@@ -9,13 +9,9 @@ function setupDepartureFilter(): void {
       const selectedCity = btn.dataset["city"] ?? "all";
 
       buttons.forEach((b) => {
-        if (b === btn) {
-          b.classList.remove("bg-stone-100", "text-stone-700", "hover:bg-stone-200");
-          b.classList.add("bg-stone-900", "text-white");
-        } else {
-          b.classList.remove("bg-stone-900", "text-white");
-          b.classList.add("bg-stone-100", "text-stone-700", "hover:bg-stone-200");
-        }
+        const isActive = b === btn;
+        b.dataset["active"] = isActive ? "true" : "false";
+        b.setAttribute("aria-pressed", isActive ? "true" : "false");
       });
 
       items.forEach((item) => {

@@ -54,10 +54,10 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
   title={t("excursion.title")}
 />
 
-<div class="text-zinc-900">
+<div class="text-zinc-900 dark:text-mist-100">
   <section
     aria-labelledby="excursion-highlights"
-    class="bg-white py-12 sm:py-16 lg:py-24"
+    class="bg-white py-12 sm:py-16 lg:py-24 dark:bg-surface-base"
   >
     <div class="mx-auto px-4 sm:px-6 lg:px-8 max-inline-7xl 2xl:max-inline-360 3xl:max-inline-420">
       <h2
@@ -69,7 +69,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
 
       <div>
         <StatHighlights
-          cardBg="bg-stone-50/80"
+          cardBg="bg-stone-50/80 dark:bg-surface-card/75 dark:border-white/10 dark:hover:border-white/20 dark:hover:bg-surface-hover/90"
           stats={highlightStats}
         />
       </div>
@@ -78,17 +78,17 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
 
   <section
     aria-labelledby="excursion-grid-heading"
-    class="border-t border-zinc-200 bg-linear-to-b from-zinc-50 to-white py-12 sm:py-16 lg:py-24"
+    class="border-t border-zinc-200 bg-linear-to-b from-zinc-50 to-white py-12 sm:py-16 lg:py-24 dark:border-white/10 dark:bg-surface-base dark:bg-none"
     id="excursions-grid"
   >
     <div class="mx-auto px-4 sm:px-6 lg:px-8 max-inline-7xl 2xl:max-inline-360 3xl:max-inline-420">
       <div
-        class="mbe-8 sm:mbe-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-stone-200 pb-6 sm:pb-8"
+        class="mbe-8 sm:mbe-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-stone-200 pb-6 sm:pb-8 dark:border-white/10"
         data-animate="fade-up"
       >
         <hgroup class="max-w-2xl space-y-2">
           <h2
-            class="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl text-balance"
+            class="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl text-balance dark:text-mist-100"
             id="excursion-grid-heading"
           >
             {excursionsGridTitle.main}{" "}
@@ -96,7 +96,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
               <span class="text-orange">{excursionsGridTitle.accent}</span>
             )}
           </h2>
-          <p class="border-s-2 border-orange-600 ps-4 py-0.5 text-sm sm:text-base text-stone-600 leading-relaxed max-w-[62ch] text-pretty">
+          <p class="border-s-2 border-orange-600 ps-4 py-0.5 text-sm sm:text-base text-stone-600 leading-relaxed max-w-[62ch] text-pretty dark:text-mist-300">
             {t("excursion.sectionSubtitle")}
           </p>
         </hgroup>
@@ -125,7 +125,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
 
   <section
     aria-labelledby="excursions-faq-heading"
-    class="border-t border-zinc-200 bg-white py-12 sm:py-16 lg:py-20"
+    class="border-t border-zinc-200 bg-white py-12 sm:py-16 lg:py-20 dark:border-white/10 dark:bg-surface-base"
   >
     <div class="mx-auto px-4 sm:px-6 lg:px-8 max-inline-7xl 2xl:max-inline-360 3xl:max-inline-420">
       <hgroup
@@ -133,7 +133,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
         data-animate="fade-up"
       >
         <h2
-          class="text-2xl font-bold tracking-tight text-stone-900 sm:text-3xl"
+          class="text-2xl font-bold tracking-tight text-stone-900 sm:text-3xl dark:text-mist-100"
           id="excursions-faq-heading"
         >
           {excursionsFaqTitle.main}{" "}
@@ -141,13 +141,13 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
             <span class="text-orange">{excursionsFaqTitle.accent}</span>
           )}
         </h2>
-        <p class="mt-2 border-s-2 border-orange-600 ps-4 py-0.5 text-sm sm:text-base text-stone-600 leading-relaxed max-w-[62ch] text-pretty">
+        <p class="mt-2 border-s-2 border-orange-600 ps-4 py-0.5 text-sm sm:text-base text-stone-600 leading-relaxed max-w-[62ch] text-pretty dark:text-mist-300">
           {t("excursion.faq.subtitle")}
         </p>
       </hgroup>
 
       <dl
-        class="max-w-3xl overflow-hidden rounded-2xl border border-stone-200/90 bg-white shadow-2xs divide-y divide-stone-200/80"
+        class="max-w-3xl overflow-hidden rounded-2xl border border-stone-200/90 bg-white shadow-2xs divide-y divide-stone-200/80 dark:border-white/10 dark:bg-surface-card/85 dark:divide-white/10 dark:shadow-[0_4px_20px_-2px_rgba(0,0,0,0.4)]"
         data-animate="fade-up"
         data-ascii="surface"
         itemscope
@@ -160,27 +160,27 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
             itemtype="https://schema.org/Question"
           >
             <dt>
-              <details class="group px-4 py-3.5 sm:px-5 sm:py-4 transition-colors open:bg-stone-50/40 details-content:block-0 details-content:overflow-clip details-content:opacity-0 details-content:transition-[block-size,content-visibility,opacity] details-content:duration-300 details-content:ease-out-expo details-content:transition-discrete motion-reduce:details-content:transition-none open:details-content:block-auto open:details-content:opacity-100">
-                <summary class="flex cursor-pointer items-start justify-between gap-4 text-base font-semibold text-stone-900 marker:content-none list-none select-none">
+              <details class="group px-4 py-3.5 sm:px-5 sm:py-4 transition-colors open:bg-stone-50/40 dark:open:bg-white/5 details-content:block-0 details-content:overflow-clip details-content:opacity-0 details-content:transition-[block-size,content-visibility,opacity] details-content:duration-300 details-content:ease-out-expo details-content:transition-discrete motion-reduce:details-content:transition-none open:details-content:block-auto open:details-content:opacity-100">
+                <summary class="flex cursor-pointer items-start justify-between gap-4 text-base font-semibold text-stone-900 dark:text-mist-100 marker:content-none list-none select-none">
                   <span
                     class="flex items-center gap-2.5 min-w-0"
                     itemprop="name"
                   >
                     <QuestionCircleIcon
                       aria-hidden="true"
-                      class="size-5 shrink-0 text-orange-600"
+                      class="size-5 shrink-0 text-orange-600 dark:text-orange"
                     />
                     <span>{t(faq.q)}</span>
                   </span>
                   <span
                     aria-hidden="true"
-                    class="mt-0.5 shrink-0 text-orange-600 group-open:rotate-45 transition-transform duration-200 motion-reduce:transition-none font-medium text-lg leading-none select-none"
+                    class="mt-0.5 shrink-0 text-orange-600 dark:text-orange group-open:rotate-45 transition-transform duration-200 motion-reduce:transition-none font-medium text-lg leading-none select-none"
                   >
                     +
                   </span>
                 </summary>
                 <div
-                  class="mt-4 pt-3.5 border-t border-stone-100 text-sm leading-relaxed text-stone-600 prose prose-sm max-w-none"
+                  class="mt-4 pt-3.5 border-t border-stone-100 dark:border-white/10 text-sm leading-relaxed text-stone-600 dark:text-mist-300 prose prose-sm max-w-none"
                   itemprop="acceptedAnswer"
                   itemscope
                   itemtype="https://schema.org/Answer"

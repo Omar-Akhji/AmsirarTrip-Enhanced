@@ -20,7 +20,7 @@ const buttonVariantStyles: Record<ButtonVariant, string> = {
   secondary:
     "border-[1.5px] border-white/30 bg-white/5 text-white backdrop-blur-xs hover:bg-white/15 hover:border-white/50 focus-visible:ring-offset-black",
   outline:
-    "border-[1.5px] border-stone-300 bg-white text-stone-800 hover:border-stone-400 hover:bg-stone-50 shadow-2xs",
+    "border-[1.5px] border-stone-300 bg-white text-stone-800 hover:border-stone-400 hover:bg-stone-50 shadow-2xs dark:border-white/15 dark:bg-white/5 dark:text-mist-100 dark:hover:border-white/30 dark:hover:bg-white/10",
   ghost:
     "bg-white/10 text-white backdrop-blur transition hover:bg-white/20 focus-visible:ring-offset-black",
   tripadvisor:

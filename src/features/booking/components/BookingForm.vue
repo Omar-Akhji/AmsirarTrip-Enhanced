@@ -133,7 +133,7 @@ const handleSubmit = async (event: Event) => {
   <section
     id="booking"
     aria-labelledby="booking-heading"
-    class="relative isolate border-bs border-stone-200 bg-stone-50 py-12 sm:py-16 lg:py-24"
+    class="relative isolate border-bs border-stone-200 bg-stone-50 py-12 sm:py-16 lg:py-24 dark:border-white/10 dark:bg-surface-base"
     :class="[fullWidth ? 'booking-form-fullwidth' : '']"
   >
     <div
@@ -146,17 +146,17 @@ const handleSubmit = async (event: Event) => {
           data-animate="creative-slide-right"
         >
           <div
-            class="rounded-2xl border border-stone-200/90 bg-white p-6 shadow-2xs block-full sm:p-8"
+            class="rounded-2xl border border-stone-200/90 bg-white p-6 shadow-2xs block-full sm:p-8 dark:border-white/10 dark:bg-surface-card/90 dark:shadow-[0_16px_40px_rgba(0,0,0,0.5)]"
           >
-            <div class="mbe-6 border-be border-stone-100 pbe-4">
+            <div class="mbe-6 border-be border-stone-100 dark:border-white/10 pbe-4">
               <span
-                class="font-mono text-xs font-semibold tracking-[0.14em] text-orange-600 uppercase"
+                class="font-mono text-xs font-semibold tracking-[0.14em] text-orange-600 dark:text-orange uppercase"
               >
                 {{ t("contact.form.badge") }}
               </span>
               <h3
                 id="booking-heading"
-                class="mbs-1 text-xl font-bold tracking-tight text-stone-900 sm:text-2xl"
+                class="mbs-1 text-xl font-bold tracking-tight text-stone-900 dark:text-mist-100 sm:text-2xl"
               >
                 {{ t("booking.makeReservation") }}
               </h3>

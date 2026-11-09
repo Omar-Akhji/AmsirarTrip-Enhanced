@@ -140,42 +140,56 @@ watch(
     class="relative w-full"
   >
     <div
-      class="group flex h-12 w-full items-center rounded-xl border border-stone-200/90 bg-stone-50/50 transition-colors focus-within:border-orange-500 focus-within:bg-white focus-within:ring-2 focus-within:ring-orange-500/20"
+      class="group flex h-12 w-full items-center rounded-xl border border-stone-200/90 bg-stone-50/50 transition-colors focus-within:border-orange-500 focus-within:bg-white focus-within:ring-2 focus-within:ring-orange-500/20 dark:border-white/10 dark:bg-white/5 dark:focus-within:border-orange-500 dark:focus-within:bg-white/10"
       :class="{ 'border-red-400 bg-red-50/20': ariaInvalid === 'true' || ariaInvalid === true }"
     >
       <!-- Country Code Trigger Button (Clean Dial Code only, no MA/FR ISO letters) -->
       <button
         type="button"
-        class="flex h-full shrink-0 cursor-pointer items-center gap-1.5 rounded-s-xl border-e border-stone-200/80 px-3.5 transition-colors hover:bg-stone-100/70 focus:bg-stone-100 focus:outline-hidden"
+        class="flex h-full shrink-0 cursor-pointer items-center gap-1.5 rounded-s-xl border-e border-stone-200/80 px-3.5 transition-colors hover:bg-stone-100/70 focus:bg-stone-100 focus:outline-hidden dark:border-white/10 dark:hover:bg-white/10 dark:focus:bg-white/10"
         :aria-expanded="isOpen"
         aria-haspopup="listbox"
         :aria-label="`Selected country dial code: ${selectedCountry.name} (${selectedCountry.dialCode}). Click to change.`"
         @click="toggleDropdown"
       >
-        <span class="font-sans text-xs font-semibold text-stone-800">
+        <span class="font-sans text-xs font-semibold text-stone-800 dark:text-mist-100">
           {{ selectedCountry.dialCode }}
         </span>
         <!-- Vertical up/down option chevrons -->
         <svg
-          class="size-3.5 text-stone-400 transition-colors"
-          :class="{ 'text-stone-700': isOpen }"
-          viewBox="0 0 20 20"
+          class="size-3.5 text-stone-400 transition-colors dark:text-mist-400"
+          :class="{ 'text-stone-700 dark:text-mist-200': isOpen }"
+          viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
           stroke-width="1.75"
-          stroke-linecap="round"
-          stroke-linejoin="round"
           aria-hidden="true"
         >
-          <!-- Up chevron ^ -->
-          <path d="M7 8L10 5L13 8" />
-          <!-- Down chevron v -->
-          <path d="M7 12L10 15L13 12" />
+          <path
+            d="M13.5 19.5L12 21L6 15"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M16.5 16.5L18 15"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M13.5 4.5L12 3L6 9"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M16.5 7.5L18 9"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
         </svg>
       </button>
 
       <!-- National Phone Number Input -->
-      <div class="relative flex flex-1 items-center">
+      <div class="relative flex h-full flex-1 items-center">
         <input
           :id="id"
           type="tel"
@@ -186,9 +200,22 @@ watch(
           :required="required"
           :aria-invalid="ariaInvalid"
           :aria-describedby="ariaDescribedby"
-          class="h-full w-full bg-transparent px-3 font-sans text-sm text-stone-900 placeholder:text-stone-400 focus:outline-hidden"
+          class="peer h-full w-full bg-transparent ps-10.5 pe-4 font-sans text-sm text-stone-900 placeholder:text-stone-400 focus:outline-hidden dark:text-mist-100 dark:placeholder:text-mist-500"
           @input="handleInput"
         />
+        <svg
+          class="pointer-events-none absolute inset-s-3.5 top-1/2 size-4.5 -translate-y-1/2 text-stone-400 transition-colors peer-focus:text-orange-500 dark:text-stone-500"
+          viewBox="0 0 24 24"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M4.00655 7.93309C3.93421 9.84122 4.41713 13.0817 7.6677 16.3323C8.45191 17.1165 9.23553 17.7396 10 18.2327M5.53781 4.93723C6.93076 3.54428 9.15317 3.73144 10.0376 5.31617L10.6866 6.4791C11.2723 7.52858 11.0372 8.90532 10.1147 9.8278C10.1147 9.8278 10.1147 9.8278 10.1147 9.8278C10.1146 9.82792 8.99588 10.9468 11.0245 12.9755C13.0525 15.0035 14.1714 13.8861 14.1722 13.8853C14.1722 13.8853 14.1722 13.8853 14.1722 13.8853C15.0947 12.9628 16.4714 12.7277 17.5209 13.3134L18.6838 13.9624C20.2686 14.8468 20.4557 17.0692 19.0628 18.4622C18.2258 19.2992 17.2004 19.9505 16.0669 19.9934C15.2529 20.0243 14.1963 19.9541 13 19.6111"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+          />
+        </svg>
       </div>
 
       <!-- Hidden standard input submitting the combined full international phone number -->
@@ -208,14 +235,14 @@ watch(
     <!-- Custom Designed Dropdown Menu (full width matching input field & rounded-xl) -->
     <div
       v-if="isOpen"
-      class="absolute inset-x-0 top-full z-50 mbs-1.5 w-full overflow-hidden rounded-xl border border-stone-200/90 bg-white shadow-xl shadow-stone-900/10"
+      class="absolute inset-x-0 top-full z-50 mbs-1.5 w-full overflow-hidden rounded-xl border border-stone-200/90 bg-white shadow-xl shadow-stone-900/10 dark:border-white/10 dark:bg-surface-card dark:shadow-[0_16px_40px_rgba(0,0,0,0.65)]"
       role="listbox"
       :aria-label="`Select country phone code. Currently selected: ${selectedCountry.name}`"
     >
       <!-- Search Input Header -->
-      <div class="relative border-b border-stone-100 bg-stone-50/70 p-2">
+      <div class="relative border-b border-stone-100 bg-stone-50/70 p-2 dark:border-white/10 dark:bg-white/5">
         <svg
-          class="pointer-events-none absolute inset-s-4.5 top-1/2 size-3.5 -translate-y-1/2 text-stone-400"
+          class="pointer-events-none absolute inset-s-4.5 top-1/2 size-3.5 -translate-y-1/2 text-stone-400 dark:text-mist-400"
           viewBox="0 0 20 20"
           fill="currentColor"
           aria-hidden="true"
@@ -232,7 +259,7 @@ watch(
           type="text"
           aria-label="Search country or code"
           placeholder="Search country or code..."
-          class="h-8.5 w-full rounded-lg border border-stone-200/80 bg-white ps-8 pe-3 font-sans text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-400 focus:ring-1 focus:ring-stone-400/20 focus:outline-hidden"
+          class="h-8.5 w-full rounded-lg border border-stone-200/80 bg-white ps-8 pe-3 font-sans text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-400 focus:ring-1 focus:ring-stone-400/20 focus:outline-hidden dark:border-white/10 dark:bg-surface-base dark:text-mist-100 dark:placeholder:text-mist-500"
           @keydown.stop
         />
       </div>
@@ -242,7 +269,7 @@ watch(
         class="flex flex-col px-(--scrollbar-space) py-1 [--scrollbar-space:8px] [--scrollbar-theme:hsl(0deg_0%_75%)]"
       >
         <div
-          class="max-h-60 divide-y divide-stone-100/60 overflow-x-hidden overflow-y-auto overscroll-y-contain pe-(--scrollbar-space) supports-[-moz-appearance:none]:scrollbar-thin supports-[-moz-appearance:none]:[scrollbar-color:color-mix(in_sRGB,var(--scrollbar-theme,hsl(0deg_0%_75%)),transparent_28%)_transparent] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-button]:hidden [&::-webkit-scrollbar-button]:size-0 [&::-webkit-scrollbar-thumb]:rounded-[1000px] [&::-webkit-scrollbar-thumb]:bg-[color-mix(in_sRGB,var(--scrollbar-theme,hsl(0deg_0%_75%)),transparent_28%)] [&::-webkit-scrollbar-thumb:hover]:bg-[color-mix(in_sRGB,var(--scrollbar-theme,hsl(0deg_0%_75%)),transparent_12%)] [&::-webkit-scrollbar-track]:my-2.5 [&::-webkit-scrollbar-track]:rounded-[1000px] [&::-webkit-scrollbar-track]:bg-[color-mix(in_sRGB,var(--scrollbar-theme,hsl(0deg_0%_75%)),transparent_82%)] [&::-webkit-scrollbar-track]:bg-clip-padding"
+          class="max-h-60 divide-y divide-stone-100/60 overflow-x-hidden overflow-y-auto overscroll-y-contain pe-(--scrollbar-space) supports-[-moz-appearance:none]:scrollbar-thin supports-[-moz-appearance:none]:[scrollbar-color:color-mix(in_sRGB,var(--scrollbar-theme,hsl(0deg_0%_75%)),transparent_28%)_transparent] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-button]:hidden [&::-webkit-scrollbar-button]:size-0 [&::-webkit-scrollbar-thumb]:rounded-[1000px] [&::-webkit-scrollbar-thumb]:bg-[color-mix(in_sRGB,var(--scrollbar-theme,hsl(0deg_0%_75%)),transparent_28%)] [&::-webkit-scrollbar-thumb:hover]:bg-[color-mix(in_sRGB,var(--scrollbar-theme,hsl(0deg_0%_75%)),transparent_12%)] [&::-webkit-scrollbar-track]:my-2.5 [&::-webkit-scrollbar-track]:rounded-[1000px] [&::-webkit-scrollbar-track]:bg-[color-mix(in_sRGB,var(--scrollbar-theme,hsl(0deg_0%_75%)),transparent_82%)] [&::-webkit-scrollbar-track]:bg-clip-padding dark:divide-white/5"
           tabindex="-1"
           data-lenis-prevent
         >
@@ -252,19 +279,19 @@ watch(
             type="button"
             role="option"
             :aria-selected="country.code === selectedCountry.code"
-            class="flex w-full cursor-pointer items-center justify-between gap-2 rounded-none px-3 py-2 text-start transition-colors hover:bg-stone-100 focus:bg-stone-100 focus:outline-hidden active:bg-stone-200/70"
+            class="flex w-full cursor-pointer items-center justify-between gap-2 rounded-none px-3 py-2 text-start transition-colors hover:bg-stone-100 focus:bg-stone-100 focus:outline-hidden active:bg-stone-200/70 dark:hover:bg-white/5 dark:focus:bg-white/5"
             :class="{
-              'bg-stone-100 font-medium text-stone-900': country.code === selectedCountry.code,
+              'bg-stone-100 font-medium text-stone-900 dark:bg-white/10 dark:text-mist-100': country.code === selectedCountry.code,
             }"
             @click="selectCountry(country)"
           >
             <div class="min-w-0 flex-1">
-              <span class="block truncate font-sans text-xs text-stone-800">
+              <span class="block truncate font-sans text-xs text-stone-800 dark:text-mist-200">
                 {{ country.name }}
               </span>
             </div>
             <div class="flex shrink-0 items-center">
-              <span class="font-sans text-xs font-medium text-stone-500">
+              <span class="font-sans text-xs font-medium text-stone-500 dark:text-mist-400">
                 {{ country.dialCode }}
               </span>
             </div>
@@ -273,7 +300,7 @@ watch(
           <!-- Empty search state -->
           <div
             v-if="filteredCountries.length === 0"
-            class="px-3 py-6 text-center font-sans text-xs text-stone-500"
+            class="px-3 py-6 text-center font-sans text-xs text-stone-500 dark:text-mist-400"
           >
             No countries found
           </div>

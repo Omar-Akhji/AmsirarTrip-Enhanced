@@ -17,23 +17,49 @@ function updateScrolled(nav: HTMLElement) {
   const brandSpans = nav.querySelectorAll(".brand-logo-span");
 
   if (isScrolled) {
-    nav.classList.remove("bg-white/10", "text-white", "shadow-[0_10px_30px_rgba(3,7,18,0.12)]");
-    nav.classList.add("bg-white/80", "text-dark", "shadow-[0_12px_30px_oklch(0%_0_0deg/8%)]");
+    nav.classList.remove(
+      "bg-white/10",
+      "text-white",
+      "shadow-[0_10px_30px_rgba(3,7,18,0.12)]",
+      "dark:bg-white/5"
+    );
+    nav.classList.add(
+      "bg-white/90",
+      "text-dark",
+      "shadow-[0_12px_30px_oklch(0%_0_0deg/8%)]",
+      "dark:bg-[#0d0e12]",
+      "dark:text-mist-100",
+      "dark:border-white/10",
+      "dark:shadow-[0_16px_40px_rgba(0,0,0,0.7)]"
+    );
 
     brandLinks.forEach((brandLink) => {
       brandLink.classList.remove("text-white");
-      brandLink.classList.add("text-dark-grey");
+      brandLink.classList.add("text-dark-grey", "dark:text-mist-100");
     });
     brandSpans.forEach((brandSpan) => {
       brandSpan.classList.remove("text-white");
       brandSpan.classList.add("text-orange");
     });
   } else {
-    nav.classList.remove("bg-white/80", "text-dark", "shadow-[0_12px_30px_oklch(0%_0_0deg/8%)]");
-    nav.classList.add("bg-white/10", "text-white", "shadow-[0_10px_30px_rgba(3,7,18,0.12)]");
+    nav.classList.remove(
+      "bg-white/90",
+      "text-dark",
+      "shadow-[0_12px_30px_oklch(0%_0_0deg/8%)]",
+      "dark:bg-[#0d0e12]",
+      "dark:text-mist-100",
+      "dark:border-white/10",
+      "dark:shadow-[0_16px_40px_rgba(0,0,0,0.7)]"
+    );
+    nav.classList.add(
+      "bg-white/10",
+      "text-white",
+      "shadow-[0_10px_30px_rgba(3,7,18,0.12)]",
+      "dark:bg-white/5"
+    );
 
     brandLinks.forEach((brandLink) => {
-      brandLink.classList.remove("text-dark-grey");
+      brandLink.classList.remove("text-dark-grey", "dark:text-mist-100");
       brandLink.classList.add("text-white");
     });
     brandSpans.forEach((brandSpan) => {

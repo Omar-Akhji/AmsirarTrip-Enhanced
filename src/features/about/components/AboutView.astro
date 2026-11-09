@@ -42,27 +42,27 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
   title={t("about.title")}
 />
 
-<div class="bg-white">
+<div class="bg-white dark:bg-surface-base">
   <!-- HERITAGE & MISSION -->
   <section
     aria-labelledby="our-story-heading"
-    class="relative isolate overflow-hidden py-12 sm:py-16 lg:py-24 text-stone-900"
+    class="relative isolate overflow-hidden py-12 sm:py-16 lg:py-24 text-stone-900 dark:text-mist-100"
     id="about"
   >
     <div class="mx-auto px-4 sm:px-6 lg:px-8 max-inline-7xl 2xl:max-inline-360 3xl:max-inline-420">
       <div
-        class="mbe-8 sm:mbe-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-stone-200/80 pb-6 sm:pb-8"
+        class="mbe-8 sm:mbe-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-stone-200/80 pb-6 sm:pb-8 dark:border-white/10"
         data-animate="fade-up"
       >
         <hgroup class="max-w-2xl space-y-2">
           <h2
-            class="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl text-balance"
+            class="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl text-balance dark:text-mist-100"
             id="our-story-heading"
           >
             {storyTitle.main}{" "}
             {storyTitle.accent && <span class="text-orange">{storyTitle.accent}</span>}
           </h2>
-          <p class="border-s-2 border-orange-600 ps-4 py-0.5 text-sm sm:text-base text-stone-600 leading-relaxed max-w-[62ch] text-pretty">
+          <p class="border-s-2 border-orange-600 ps-4 py-0.5 text-sm sm:text-base text-stone-600 dark:text-mist-300 leading-relaxed max-w-[62ch] text-pretty">
             {t("about.experienceTitle")}
           </p>
         </hgroup>
@@ -76,7 +76,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
             data-animate="zoom-in"
           >
             <!-- Top Landscape Image -->
-            <div class="group relative aspect-video overflow-hidden rounded-2xl border border-stone-200/80 bg-stone-100 shadow-xs">
+            <div class="group relative aspect-video overflow-hidden rounded-2xl border border-stone-200/80 bg-stone-100 shadow-xs dark:border-white/10 dark:bg-surface-card">
               <Image
                 alt={t("about.imageCaption")}
                 class="size-full object-cover transition-transform duration-700 ease-out-expo pointer-fine:group-hover:scale-103 motion-reduce:transform-none"
@@ -89,7 +89,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
 
             <!-- Bottom Row: 2 Images Side-by-Side -->
             <div class="grid grid-cols-2 gap-gap-tight">
-              <div class="group relative aspect-4/5 overflow-hidden rounded-2xl border border-stone-200/80 bg-stone-100 shadow-xs">
+              <div class="group relative aspect-4/5 overflow-hidden rounded-2xl border border-stone-200/80 bg-stone-100 shadow-xs dark:border-white/10 dark:bg-surface-card">
                 <Image
                   alt="Ourika Valley green terraces and mountain villages"
                   class="size-full object-cover transition-transform duration-700 ease-out-expo pointer-fine:group-hover:scale-104 motion-reduce:transform-none"
@@ -100,7 +100,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
                 />
               </div>
 
-              <div class="group relative aspect-4/5 overflow-hidden rounded-2xl border border-stone-200/80 bg-stone-100 shadow-xs">
+              <div class="group relative aspect-4/5 overflow-hidden rounded-2xl border border-stone-200/80 bg-stone-100 shadow-xs dark:border-white/10 dark:bg-surface-card">
                 <Image
                   alt="Traditional Moroccan architecture and Atlas travel"
                   class="size-full object-cover transition-transform duration-700 ease-out-expo pointer-fine:group-hover:scale-104 motion-reduce:transform-none"
@@ -123,30 +123,30 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
             <article class="flex flex-col gap-gap">
               <!-- Lead & Narrative Story with Fluid Typography -->
               <div class="flex flex-col gap-gap-tight">
-                <p class="font-normal text-stone-800 text-lead text-pretty">
+                <p class="font-normal text-stone-800 dark:text-mist-100 text-lead text-pretty">
                   {t("about.experienceText1")}
                 </p>
-                <p class="text-stone-600 text-fluid-base leading-relaxed text-pretty">
+                <p class="text-stone-600 dark:text-mist-300 text-fluid-base leading-relaxed text-pretty">
                   {t("about.experienceText2")}
                 </p>
-                <p class="text-stone-600 text-fluid-base leading-relaxed text-pretty">
+                <p class="text-stone-600 dark:text-mist-300 text-fluid-base leading-relaxed text-pretty">
                   {t("about.experienceText3")}
                 </p>
               </div>
 
               <!-- Archival Editorial Quote Card -->
               <figure
-                class="relative overflow-hidden rounded-2xl border border-stone-200/90 bg-stone-50/70 p-gutter"
+                class="relative overflow-hidden rounded-2xl border border-stone-200/90 bg-stone-50/70 p-gutter dark:border-white/10 dark:bg-surface-card/80"
                 data-ascii="surface"
               >
                 <QuoteIcon
                   aria-hidden="true"
                   class="pointer-events-none absolute top-4 right-4 sm:top-5 sm:right-5 size-5 sm:size-6 text-orange-600/35"
                 />
-                <blockquote class="relative font-serif italic text-stone-800 text-lead text-pretty pe-8">
+                <blockquote class="relative font-serif italic text-stone-800 dark:text-mist-100 text-lead text-pretty pe-8">
                   "{t("about.conclusionText")}"
                 </blockquote>
-                <figcaption class="mbs-3 flex items-center gap-2 font-mono text-fluid-sm font-semibold tracking-wider text-stone-500 uppercase">
+                <figcaption class="mbs-3 flex items-center gap-2 font-mono text-fluid-sm font-semibold tracking-wider text-stone-500 dark:text-mist-400 uppercase">
                   <span class="size-1.5 rounded-full bg-orange-600"></span>
                   <span>Amsirar Trip Marrakech</span>
                 </figcaption>
@@ -158,11 +158,11 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
 
       <!-- Core Pillars of Trust Expanded Across Full Width Below Image & Story -->
       <div
-        class="mbs-[clamp(2.5rem,2rem+2vw,4rem)] border-t border-stone-200/80 pt-[clamp(2rem,1.5rem+1.5vw,3rem)]"
+        class="mbs-[clamp(2.5rem,2rem+2vw,4rem)] border-t border-stone-200/80 pt-[clamp(2rem,1.5rem+1.5vw,3rem)] dark:border-white/10"
         data-animate="fade-up"
       >
         <hgroup class="mbe-[clamp(1.25rem,1rem+0.75vw,1.75rem)] max-w-2xl">
-          <h3 class="font-bold tracking-tight text-stone-900 text-[clamp(1.25rem,1.1rem+0.6vw,1.6rem)]">
+          <h3 class="font-bold tracking-tight text-stone-900 dark:text-mist-100 text-[clamp(1.25rem,1.1rem+0.6vw,1.6rem)]">
             {t("about.whyTrustTitle")}
           </h3>
         </hgroup>
@@ -172,13 +172,13 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
         >
           {[1, 2, 3, 4].map((number_) => (
             <li
-              class="flex flex-col items-start gap-3 rounded-2xl border border-stone-200/80 bg-stone-50/60 p-[clamp(1.125rem,0.95rem+0.6vw,1.5rem)] shadow-2xs"
+              class="flex flex-col items-start gap-3 rounded-2xl border border-stone-200/80 bg-stone-50/60 p-[clamp(1.125rem,0.95rem+0.6vw,1.5rem)] shadow-2xs dark:border-white/10 dark:bg-surface-card/60"
               data-ascii="surface"
             >
-              <span class="inline-flex size-7 items-center justify-center rounded-lg bg-orange-100/80 font-mono text-xs font-bold text-orange-700 tabular-nums shrink-0">
+              <span class="inline-flex size-7 items-center justify-center rounded-lg bg-orange-100/80 dark:bg-orange-950/80 font-mono text-xs font-bold text-orange-700 dark:text-orange-400 tabular-nums shrink-0">
                 0{number_}
               </span>
-              <p class="text-stone-700 text-[clamp(0.875rem,0.825rem+0.2vw,0.95rem)] leading-relaxed text-pretty">
+              <p class="text-stone-700 dark:text-mist-200 text-[clamp(0.875rem,0.825rem+0.2vw,0.95rem)] leading-relaxed text-pretty">
                 {t(`about.whyTrust.point${number_}`)}
               </p>
             </li>
@@ -191,23 +191,23 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
   <!-- EXPEDITION METRICS -->
   <section
     aria-labelledby="facts-heading"
-    class="relative isolate overflow-hidden border-t border-stone-200/90 bg-stone-50/60 py-12 sm:py-16 lg:py-24 text-stone-900"
+    class="relative isolate overflow-hidden border-t border-stone-200/90 bg-stone-50/60 py-12 sm:py-16 lg:py-24 text-stone-900 dark:border-white/10 dark:bg-surface-base dark:text-mist-100"
     id="facts"
   >
     <div class="mx-auto px-4 sm:px-6 lg:px-8 max-inline-7xl 2xl:max-inline-360 3xl:max-inline-420">
       <div
-        class="mbe-8 sm:mbe-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-stone-200 pb-6 sm:pb-8"
+        class="mbe-8 sm:mbe-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-stone-200 pb-6 sm:pb-8 dark:border-white/10"
         data-animate="fade-up"
       >
         <hgroup class="max-w-2xl space-y-2">
           <h2
-            class="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl text-balance"
+            class="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl text-balance dark:text-mist-100"
             id="facts-heading"
           >
             {factsTitle.main}{" "}
             {factsTitle.accent && <span class="text-orange">{factsTitle.accent}</span>}
           </h2>
-          <p class="border-s-2 border-orange-600 ps-4 py-0.5 text-sm sm:text-base text-stone-600 leading-relaxed max-w-[62ch] text-pretty">
+          <p class="border-s-2 border-orange-600 ps-4 py-0.5 text-sm sm:text-base text-stone-600 dark:text-mist-300 leading-relaxed max-w-[62ch] text-pretty">
             {t("about.facts.smTitle")}
           </p>
         </hgroup>

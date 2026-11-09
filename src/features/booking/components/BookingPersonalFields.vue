@@ -21,7 +21,7 @@ const { t } = useTranslation();
       <div>
         <label
           for="fullName"
-          class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700"
+          class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700 dark:text-mist-200"
         >
           {{ t("booking.fullName") }}
           <span
@@ -32,7 +32,7 @@ const { t } = useTranslation();
         </label>
         <div class="relative">
           <svg
-            class="pointer-events-none absolute inset-s-3.5 top-1/2 size-4.5 -translate-y-1/2 text-stone-400 transition-colors peer-focus:text-orange-500"
+            class="pointer-events-none absolute inset-s-3.5 top-1/2 size-4.5 -translate-y-1/2 text-stone-400 dark:text-mist-400 transition-colors peer-focus:text-orange-500"
             viewBox="0 0 24 24"
             fill="none"
             aria-hidden="true"
@@ -53,7 +53,7 @@ const { t } = useTranslation();
           </svg>
           <input
             id="fullName"
-            class="peer h-12 rounded-xl border border-stone-200/90 bg-stone-50/50 ps-10.5 pe-4 font-sans text-sm text-stone-900 transition-colors inline-full placeholder:text-stone-400 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden"
+            class="peer h-12 rounded-xl border border-stone-200/90 bg-stone-50/50 ps-10.5 pe-4 font-sans text-sm text-stone-900 transition-colors inline-full placeholder:text-stone-400 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden dark:border-white/10 dark:bg-white/5 dark:text-mist-100 dark:placeholder:text-mist-500 dark:focus:border-orange-500 dark:focus:bg-white/10"
             :placeholder="t('booking.placeholders.fullName')"
             :maxlength="100"
             type="text"
@@ -77,7 +77,7 @@ const { t } = useTranslation();
       <div>
         <label
           for="email"
-          class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700"
+          class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700 dark:text-mist-200"
         >
           {{ t("booking.email") }}
           <span
@@ -88,7 +88,7 @@ const { t } = useTranslation();
         </label>
         <div class="relative">
           <svg
-            class="pointer-events-none absolute inset-s-3.5 top-1/2 size-4.5 -translate-y-1/2 text-stone-400 transition-colors peer-focus:text-orange-500"
+            class="pointer-events-none absolute inset-s-3.5 top-1/2 size-4.5 -translate-y-1/2 text-stone-400 dark:text-mist-400 transition-colors peer-focus:text-orange-500"
             viewBox="0 0 24 24"
             fill="none"
             aria-hidden="true"
@@ -108,7 +108,7 @@ const { t } = useTranslation();
           </svg>
           <input
             id="email"
-            class="peer h-12 rounded-xl border border-stone-200/90 bg-stone-50/50 ps-10.5 pe-4 font-sans text-sm text-stone-900 transition-colors inline-full placeholder:text-stone-400 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden"
+            class="peer h-12 rounded-xl border border-stone-200/90 bg-stone-50/50 ps-10.5 pe-4 font-sans text-sm text-stone-900 transition-colors inline-full placeholder:text-stone-400 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden dark:border-white/10 dark:bg-white/5 dark:text-mist-100 dark:placeholder:text-mist-500 dark:focus:border-orange-500 dark:focus:bg-white/10"
             :placeholder="t('booking.placeholders.email')"
             type="email"
             name="email"
@@ -132,7 +132,7 @@ const { t } = useTranslation();
     <div>
       <label
         for="booking-phone"
-        class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700"
+        class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700 dark:text-mist-200"
       >
         {{ t("booking.phone") }}
         <span

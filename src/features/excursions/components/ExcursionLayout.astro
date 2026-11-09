@@ -127,19 +127,19 @@ const routeMap = getExcursionRouteMap(excursionKey, excursion?.location ?? "Moro
       data-animate="fade-up"
     >
       <hgroup>
-        <p class="font-sans text-xs font-bold tracking-wider text-orange-700 uppercase">
+        <p class="font-sans text-xs font-bold tracking-wider text-orange-700 uppercase dark:text-orange-400">
           {t("excursion.common.kickerAbout")}
         </p>
         <h3
           id="excursion-overview-heading"
-          class="mbs-1 mbe-4 text-xl font-bold tracking-tight text-stone-900 sm:text-2xl md:text-3xl"
+          class="mbs-1 mbe-4 text-xl font-bold tracking-tight text-stone-900 sm:text-2xl md:text-3xl dark:text-mist-100"
         >
           {t("excursion.common.overview")}
         </h3>
       </hgroup>
       <div class="space-y-4">
         {overviewParagraphs.map((paragraph) => (
-          <p class="font-sans text-sm sm:text-base leading-relaxed text-stone-700">{paragraph}</p>
+          <p class="font-sans text-sm sm:text-base leading-relaxed text-stone-700 dark:text-mist-200">{paragraph}</p>
         ))}
       </div>
     </section>

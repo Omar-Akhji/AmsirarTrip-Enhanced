@@ -45,7 +45,7 @@ const {
     ]}
   >
     <div
-      class="flex items-center gap-4 rounded-2xl border border-stone-200/90 bg-white px-5 py-3 shadow-2xs transition-colors hover:border-stone-300 min-block-20"
+      class="flex items-center gap-4 rounded-2xl border border-stone-200/90 bg-white px-5 py-3 shadow-2xs transition-colors hover:border-stone-300 min-block-20 dark:border-white/10 dark:bg-surface-card/85 dark:hover:border-white/20"
       data-ascii="surface"
     >
       <ClockCircleIcon
@@ -53,11 +53,11 @@ const {
         class="size-5 shrink-0 text-orange-600"
       />
       <div class="text-start min-w-0">
-        <dt class="font-mono text-xs font-semibold tracking-wider text-stone-500 uppercase">
+        <dt class="font-mono text-xs font-semibold tracking-wider text-stone-500 uppercase dark:text-mist-400">
           {durationLabel}
         </dt>
         <dd
-          class="m-0 font-mono text-sm sm:text-base font-bold text-stone-900 tabular-nums"
+          class="m-0 font-mono text-sm sm:text-base font-bold text-stone-900 tabular-nums dark:text-mist-100"
           data-ascii-digits
         >
           {duration ?? 3} {daysLabel}
@@ -66,7 +66,7 @@ const {
     </div>
 
     <div
-      class="flex items-center gap-4 rounded-2xl border border-stone-200/90 bg-white px-5 py-3 shadow-2xs transition-colors hover:border-stone-300 min-block-20"
+      class="flex items-center gap-4 rounded-2xl border border-stone-200/90 bg-white px-5 py-3 shadow-2xs transition-colors hover:border-stone-300 min-block-20 dark:border-white/10 dark:bg-surface-card/85 dark:hover:border-white/20"
       data-ascii="surface"
     >
       <PointOnMapIcon
@@ -74,17 +74,17 @@ const {
         class="size-5 shrink-0 text-orange-600"
       />
       <div class="text-start min-w-0">
-        <dt class="font-mono text-xs font-semibold tracking-wider text-stone-500 uppercase">
+        <dt class="font-mono text-xs font-semibold tracking-wider text-stone-500 uppercase dark:text-mist-400">
           {startLabel}
         </dt>
-        <dd class="m-0 font-mono text-sm sm:text-base font-bold text-stone-900 truncate">
+        <dd class="m-0 font-mono text-sm sm:text-base font-bold text-stone-900 truncate dark:text-mist-100">
           {startCity}
         </dd>
       </div>
     </div>
 
     <div
-      class="flex items-center gap-4 rounded-2xl border border-stone-200/90 bg-white px-5 py-3 shadow-2xs transition-colors hover:border-stone-300 min-block-20"
+      class="flex items-center gap-4 rounded-2xl border border-stone-200/90 bg-white px-5 py-3 shadow-2xs transition-colors hover:border-stone-300 min-block-20 dark:border-white/10 dark:bg-surface-card/85 dark:hover:border-white/20"
       data-ascii="surface"
     >
       <FlagIcon
@@ -92,10 +92,10 @@ const {
         class="size-5 shrink-0 text-orange-600"
       />
       <div class="text-start min-w-0">
-        <dt class="font-mono text-xs font-semibold tracking-wider text-stone-500 uppercase">
+        <dt class="font-mono text-xs font-semibold tracking-wider text-stone-500 uppercase dark:text-mist-400">
           {endLabel}
         </dt>
-        <dd class="m-0 font-mono text-sm sm:text-base font-bold text-stone-900 truncate">
+        <dd class="m-0 font-mono text-sm sm:text-base font-bold text-stone-900 truncate dark:text-mist-100">
           {endCity}
         </dd>
       </div>
@@ -103,7 +103,7 @@ const {
 
     {tourTypeLabel && (
       <div
-        class="flex items-center gap-4 rounded-2xl border border-stone-200/90 bg-white px-5 py-3 shadow-2xs transition-colors hover:border-stone-300 min-block-20"
+        class="flex items-center gap-4 rounded-2xl border border-stone-200/90 bg-white px-5 py-3 shadow-2xs transition-colors hover:border-stone-300 min-block-20 dark:border-white/10 dark:bg-surface-card/85 dark:hover:border-white/20"
         data-ascii="surface"
       >
         <SparklesIcon
@@ -111,10 +111,10 @@ const {
           class="size-5 shrink-0 text-orange-600"
         />
         <div class="text-start min-w-0">
-          <dt class="font-mono text-xs font-semibold tracking-wider text-stone-500 uppercase">
+          <dt class="font-mono text-xs font-semibold tracking-wider text-stone-500 uppercase dark:text-mist-400">
             {tourTypeLabel}
           </dt>
-          <dd class="m-0 font-mono text-sm sm:text-base font-bold text-stone-900 truncate">
+          <dd class="m-0 font-mono text-sm sm:text-base font-bold text-stone-900 truncate dark:text-mist-100">
             {tourTypeValue}
           </dd>
         </div>

@@ -84,6 +84,20 @@
   --color-tripadvisor-bright: #34e0a1;
   --color-tripadvisor-dark: #2bc48d;
 
+  /* Mist neutral text & surface scale (from Elite Regewelt design system) */
+  --color-mist-100: oklch(94% 0.01 250deg);
+  --color-mist-200: oklch(88% 0.01 250deg);
+  --color-mist-300: oklch(80% 0.015 250deg);
+  --color-mist-400: oklch(72% 0.02 250deg);
+  --color-mist-500: oklch(65% 0.02 250deg);
+  --color-mist-600: oklch(52% 0.02 250deg);
+
+  /* Elite Regewelt dark backdrop & elevated card surface tokens */
+  --color-surface-base: oklch(14.1% 0.01 240deg); /* #060a0d ~ #0d0e12 */
+  --color-surface-card: oklch(18% 0.012 245deg);  /* #0d1217 */
+  --color-surface-hover: oklch(21% 0.015 245deg); /* #121820 */
+  --color-surface-overlay: oklch(22% 0.018 250deg); /* #141b23 */
+
   /* Dark shades for navigation scroll states */
   --color-dark: oklch(10% 0.006 65deg);
   --color-dark-grey: oklch(8% 0.005 65deg);
@@ -243,12 +257,12 @@
   .dark {
     --ascii-skeleton: #a8a29e; /* neutral gray skeleton glyphs */
     --ascii-accent: #f15d30; /* pacific orange */
-    --ascii-glyph: #d4d4d8;
-    --ascii-surface: #09090b;
+    --ascii-glyph: #e2e8f0;
+    --ascii-surface: #0d0e12;
     --ars-wave-color: currentColor;
 
-    /* Dark mode backdrop pattern */
-    --pattern-bg-color: #09090b;
+    /* Elite Regewelt deep obsidian canvas backdrop */
+    --pattern-bg-color: #0d0e12;
     --pattern-bg-image: url("/patterns/moroccan-geometric-dark.svg");
   }
 
@@ -558,7 +572,8 @@
 
     /* Both directions */
     &:is(.is-next, .is-prev) {
-      & .nextPrevArrows button {
+      & .nextPrevArrows button,
+      & .hero-dots-nav button {
         pointer-events: none;
       }
 

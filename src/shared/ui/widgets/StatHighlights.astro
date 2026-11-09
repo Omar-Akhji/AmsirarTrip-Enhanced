@@ -11,7 +11,10 @@ interface Props {
 import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
 import FolderShape from "@/shared/ui/primitives/FolderShape.astro";
 
-const { stats, cardBg = "bg-stone-50/80" } = Astro.props;
+const {
+  stats,
+  cardBg = "bg-stone-50/80 dark:bg-surface-card/75 dark:border-white/10 dark:shadow-[0_4px_20px_-2px_rgba(0,0,0,0.4)] dark:hover:border-white/20 dark:hover:bg-surface-hover/90",
+} = Astro.props;
 ---
 
 <div class="w-full">
@@ -49,20 +52,20 @@ const { stats, cardBg = "bg-stone-50/80" } = Astro.props;
                   data-ascii="surface"
                 >
                   <div>
-                    <div class="mbe-3.5 flex items-center justify-between border-b border-stone-100 pb-2.5 text-[11px] font-mono uppercase tracking-wider text-stone-400">
-                      <span class="font-semibold text-stone-500">Standard</span>
-                      <span class="text-stone-400">Verified</span>
+                    <div class="mbe-3.5 flex items-center justify-between border-b border-stone-100 pb-2.5 text-[11px] font-mono uppercase tracking-wider text-stone-400 dark:border-white/10 dark:text-mist-400">
+                      <span class="font-semibold text-stone-500 dark:text-mist-300">Standard</span>
+                      <span class="text-stone-400 dark:text-mist-500">Verified</span>
                     </div>
                     <data
                       value={stat.value}
-                      class="text-4xl font-bold tracking-tight text-orange-600 block tabular-nums"
+                      class="text-4xl font-bold tracking-tight text-orange-600 dark:text-orange block tabular-nums"
                     >
                       {stat.value}
                     </data>
-                    <h3 class="mbs-2.5 text-base font-semibold tracking-tight text-stone-900">
+                    <h3 class="mbs-2.5 text-base font-semibold tracking-tight text-stone-900 dark:text-mist-100">
                       {stat.label}
                     </h3>
-                    <p class="mbs-1.5 text-xs leading-relaxed text-stone-600 line-clamp-2">
+                    <p class="mbs-1.5 text-xs leading-relaxed text-stone-600 dark:text-mist-300 line-clamp-2">
                       {stat.description}
                     </p>
                   </div>
@@ -104,20 +107,20 @@ const { stats, cardBg = "bg-stone-50/80" } = Astro.props;
           data-ascii="surface"
         >
           <div>
-            <div class="mbe-5 flex items-center justify-between border-b border-stone-100 pb-3 text-[11px] font-mono uppercase tracking-wider text-stone-400">
-              <span class="font-semibold text-stone-500">Standard</span>
-              <span class="text-stone-400">Verified</span>
+            <div class="mbe-5 flex items-center justify-between border-b border-stone-100 pb-3 text-[11px] font-mono uppercase tracking-wider text-stone-400 dark:border-white/10 dark:text-mist-400">
+              <span class="font-semibold text-stone-500 dark:text-mist-300">Standard</span>
+              <span class="text-stone-400 dark:text-mist-500">Verified</span>
             </div>
             <data
               value={stat.value}
-              class="text-4xl font-bold tracking-tight text-orange-600 block"
+              class="text-4xl font-bold tracking-tight text-orange-600 dark:text-orange block"
             >
               {stat.value}
             </data>
-            <h3 class="mbs-3 text-base sm:text-lg font-semibold tracking-tight text-stone-900">
+            <h3 class="mbs-3 text-base sm:text-lg font-semibold tracking-tight text-stone-900 dark:text-mist-100">
               {stat.label}
             </h3>
-            <p class="mbs-2 text-sm leading-relaxed text-stone-600 text-pretty">
+            <p class="mbs-2 text-sm leading-relaxed text-stone-600 dark:text-mist-300 text-pretty">
               {stat.description}
             </p>
           </div>

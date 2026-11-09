@@ -50,18 +50,18 @@ const goodToKnowList = normalizeList(goodToKnow);
   <div data-animate="fade-up">
     <section aria-labelledby={`${idPrefix}-included-heading`}>
       <hgroup class="mbe-4">
-        <p class="font-sans text-xs font-bold tracking-wider text-orange-700 uppercase">
+        <p class="font-sans text-xs font-bold tracking-wider text-orange-700 uppercase dark:text-orange-400">
           {includedKicker}
         </p>
         <h3
-          class="mbs-1 text-xl font-bold tracking-tight text-stone-900 sm:text-2xl md:text-3xl"
+          class="mbs-1 text-xl font-bold tracking-tight text-stone-900 sm:text-2xl md:text-3xl dark:text-mist-100"
           id={`${idPrefix}-included-heading`}
         >
           {includedTitle}
         </h3>
       </hgroup>
       <div
-        class="rounded-2xl border border-emerald-500/20 bg-emerald-50/30 p-6 shadow-2xs"
+        class="rounded-2xl border border-emerald-500/20 bg-emerald-50/30 p-6 shadow-2xs dark:border-emerald-500/20 dark:bg-emerald-950/20"
         data-ascii="surface"
       >
         <ul
@@ -72,9 +72,9 @@ const goodToKnowList = normalizeList(goodToKnow);
             <li class="flex items-start gap-3">
               <CheckCircleIcon
                 aria-hidden="true"
-                class="mbs-0.5 size-5 shrink-0 text-emerald-600"
+                class="mbs-0.5 size-5 shrink-0 text-emerald-600 dark:text-emerald-400"
               />
-              <span class="flex-1 text-start font-sans text-sm text-stone-800 leading-relaxed">
+              <span class="flex-1 text-start font-sans text-sm text-stone-800 leading-relaxed dark:text-mist-200">
                 {item}
               </span>
             </li>
@@ -92,18 +92,18 @@ const goodToKnowList = normalizeList(goodToKnow);
       class="mbs-8"
     >
       <hgroup class="mbe-4">
-        <p class="font-sans text-xs font-bold tracking-wider text-stone-500 uppercase">
+        <p class="font-sans text-xs font-bold tracking-wider text-stone-500 uppercase dark:text-mist-400">
           {excludedKicker}
         </p>
         <h3
-          class="mbs-1 text-xl font-bold tracking-tight text-stone-900 sm:text-2xl md:text-3xl"
+          class="mbs-1 text-xl font-bold tracking-tight text-stone-900 sm:text-2xl md:text-3xl dark:text-mist-100"
           id={`${idPrefix}-excluded-heading`}
         >
           {excludedTitle}
         </h3>
       </hgroup>
       <div
-        class="rounded-2xl border border-stone-200/90 bg-stone-50/60 p-6 shadow-2xs"
+        class="rounded-2xl border border-stone-200/90 bg-stone-50/60 p-6 shadow-2xs dark:border-white/10 dark:bg-surface-card/85"
         data-ascii="surface"
       >
         <ul
@@ -114,9 +114,9 @@ const goodToKnowList = normalizeList(goodToKnow);
             <li class="flex items-start gap-3">
               <CloseCircleIcon
                 aria-hidden="true"
-                class="mbs-0.5 size-5 shrink-0 text-stone-400"
+                class="mbs-0.5 size-5 shrink-0 text-stone-400 dark:text-mist-400"
               />
-              <span class="flex-1 text-start font-sans text-sm text-stone-600 leading-relaxed">
+              <span class="flex-1 text-start font-sans text-sm text-stone-600 leading-relaxed dark:text-mist-300">
                 {item}
               </span>
             </li>
@@ -134,18 +134,18 @@ const goodToKnowList = normalizeList(goodToKnow);
       class="mbs-8"
     >
       <hgroup class="mbe-4">
-        <p class="font-sans text-xs font-bold tracking-wider text-orange-700 uppercase">
+        <p class="font-sans text-xs font-bold tracking-wider text-orange-700 uppercase dark:text-orange-400">
           {goodToKnowKicker}
         </p>
         <h3
-          class="mbs-1 text-xl font-bold tracking-tight text-stone-900 sm:text-2xl md:text-3xl"
+          class="mbs-1 text-xl font-bold tracking-tight text-stone-900 sm:text-2xl md:text-3xl dark:text-mist-100"
           id={`${idPrefix}-advisories-heading`}
         >
           {goodToKnowTitle}
         </h3>
       </hgroup>
       <div
-        class="rounded-2xl border border-orange-500/20 bg-orange-50/30 p-6 shadow-2xs"
+        class="rounded-2xl border border-orange-500/20 bg-orange-50/30 p-6 shadow-2xs dark:border-orange-500/20 dark:bg-orange-950/20"
         data-ascii="surface"
       >
         <ul
@@ -156,9 +156,9 @@ const goodToKnowList = normalizeList(goodToKnow);
             <li class="flex items-start gap-3">
               <DangerCircleIcon
                 aria-hidden="true"
-                class="mbs-0.5 size-5 shrink-0 text-orange-600"
+                class="mbs-0.5 size-5 shrink-0 text-orange-600 dark:text-orange-400"
               />
-              <span class="flex-1 text-start font-sans text-sm text-stone-800 leading-relaxed">
+              <span class="flex-1 text-start font-sans text-sm text-stone-800 leading-relaxed dark:text-mist-200">
                 {item}
               </span>
             </li>

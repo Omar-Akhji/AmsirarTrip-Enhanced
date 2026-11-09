@@ -147,22 +147,22 @@ const relatedTours = allTours
     {relatedTours.length > 0 && (
       <section
         aria-labelledby="related-tours-heading"
-        class="border-t border-stone-200 bg-white py-12 sm:py-16 lg:py-24"
+        class="border-t border-stone-200 bg-white dark:border-white/10 dark:bg-transparent py-12 sm:py-16 lg:py-24"
         data-animate="fade-up"
       >
         <div class="mx-auto px-4 max-inline-7xl">
-          <div class="mbe-8 sm:mbe-12 flex flex-col gap-4 border-b border-stone-200 pb-6 sm:pb-8">
+          <div class="mbe-8 sm:mbe-12 flex flex-col gap-4 border-b border-stone-200 pb-6 sm:pb-8 dark:border-white/10">
             <hgroup class="max-w-2xl space-y-2">
-              <p class="font-sans text-xs font-bold tracking-wider text-orange-700 uppercase">
+              <p class="font-sans text-xs font-bold tracking-wider text-orange-700 uppercase dark:text-orange-400">
                 {t("tours.relatedTagline", "Alternative Morocco Circuits")}
               </p>
               <h2
                 id="related-tours-heading"
-                class="text-2xl font-bold tracking-tight text-stone-900 sm:text-3xl md:text-4xl text-balance"
+                class="text-2xl font-bold tracking-tight text-stone-900 sm:text-3xl md:text-4xl text-balance dark:text-mist-100"
               >
                 {t("tours.relatedTitle", "Explore Companion Desert Itineraries")}
               </h2>
-              <p class="border-s-2 border-orange-600 ps-4 py-0.5 text-sm sm:text-base text-stone-600 leading-relaxed max-w-[62ch] text-pretty">
+              <p class="border-s-2 border-orange-600 ps-4 py-0.5 text-sm sm:text-base text-stone-600 leading-relaxed max-w-[62ch] text-pretty dark:text-mist-200">
                 {t(
                   "tours.relatedSubtitle",
                   "Discover alternative durations and route variations crafted with private 4x4 transport and luxury desert camps.",

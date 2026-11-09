@@ -24,7 +24,7 @@ const isTopicExpanded = ref(false);
       <div>
         <label
           for="contact-name"
-          class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700"
+          class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700 dark:text-stone-300"
         >
           {{ t("contact.form.fields.name") }}
           <span
@@ -35,7 +35,7 @@ const isTopicExpanded = ref(false);
         </label>
         <div class="relative">
           <svg
-            class="pointer-events-none absolute inset-s-3.5 top-1/2 size-4.5 -translate-y-1/2 text-stone-400 transition-colors peer-focus:text-orange-500"
+            class="pointer-events-none absolute inset-s-3.5 top-1/2 size-4.5 -translate-y-1/2 text-stone-400 dark:text-stone-500 transition-colors peer-focus:text-orange-500"
             viewBox="0 0 24 24"
             fill="none"
             aria-hidden="true"
@@ -58,7 +58,7 @@ const isTopicExpanded = ref(false);
             id="contact-name"
             name="name"
             type="text"
-            class="peer h-12 rounded-xl border border-stone-200/90 bg-stone-50/50 ps-10.5 pe-4 font-sans text-sm text-stone-900 transition-colors inline-full placeholder:text-stone-400 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden"
+            class="peer h-12 rounded-xl border border-stone-200/90 bg-stone-50/50 ps-10.5 pe-4 font-sans text-sm text-stone-900 transition-colors inline-full placeholder:text-stone-400 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden dark:border-white/10 dark:bg-white/5 dark:text-mist-100 dark:placeholder:text-mist-500 dark:focus:border-orange-500 dark:focus:bg-white/10"
             :placeholder="t('contact.form.placeholders.name')"
             :maxlength="100"
             toolparamdescription="The full name of the contact person"
@@ -79,7 +79,7 @@ const isTopicExpanded = ref(false);
       <div>
         <label
           for="contact-email"
-          class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700"
+          class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700 dark:text-stone-300"
         >
           {{ t("contact.form.fields.email") }}
           <span
@@ -90,7 +90,7 @@ const isTopicExpanded = ref(false);
         </label>
         <div class="relative">
           <svg
-            class="pointer-events-none absolute inset-s-3.5 top-1/2 size-4.5 -translate-y-1/2 text-stone-400 transition-colors peer-focus:text-orange-500"
+            class="pointer-events-none absolute inset-s-3.5 top-1/2 size-4.5 -translate-y-1/2 text-stone-400 dark:text-stone-500 transition-colors peer-focus:text-orange-500"
             viewBox="0 0 24 24"
             fill="none"
             aria-hidden="true"
@@ -112,7 +112,7 @@ const isTopicExpanded = ref(false);
             id="contact-email"
             name="email"
             type="email"
-            class="peer h-12 rounded-xl border border-stone-200/90 bg-stone-50/50 ps-10.5 pe-4 font-sans text-sm text-stone-900 transition-colors inline-full placeholder:text-stone-400 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden"
+            class="peer h-12 rounded-xl border border-stone-200/90 bg-stone-50/50 ps-10.5 pe-4 font-sans text-sm text-stone-900 transition-colors inline-full placeholder:text-stone-400 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden dark:border-white/10 dark:bg-white/5 dark:text-mist-100 dark:placeholder:text-mist-500 dark:focus:border-orange-500 dark:focus:bg-white/10"
             :placeholder="t('contact.form.placeholders.email')"
             toolparamdescription="The email address of the contact person"
             autocomplete="email"
@@ -135,7 +135,7 @@ const isTopicExpanded = ref(false);
       <div>
         <label
           for="contact-phone"
-          class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700"
+          class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700 dark:text-stone-300"
         >
           {{ t("contact.form.fields.phone") }}
           <span
@@ -164,13 +164,13 @@ const isTopicExpanded = ref(false);
       <div>
         <label
           for="contact-topic"
-          class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700"
+          class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700 dark:text-stone-300"
         >
           {{ t("contact.form.fields.topic") }}
         </label>
         <div class="relative">
           <svg
-            class="pointer-events-none absolute inset-s-3.5 top-1/2 size-4.5 -translate-y-1/2 text-stone-400 transition-colors peer-focus:text-orange-500"
+            class="pointer-events-none absolute inset-s-3.5 top-1/2 size-4.5 -translate-y-1/2 text-stone-400 dark:text-stone-500 transition-colors peer-focus:text-orange-500"
             viewBox="0 0 24 24"
             fill="none"
             aria-hidden="true"
@@ -195,7 +195,7 @@ const isTopicExpanded = ref(false);
             aria-autocomplete="list"
             :aria-expanded="isTopicExpanded"
             aria-controls="contact-topics"
-            class="peer h-12 rounded-xl border border-stone-200/90 bg-stone-50/50 ps-10.5 pe-4 font-sans text-sm text-stone-900 transition-colors inline-full placeholder:text-stone-400 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden"
+            class="peer h-12 rounded-xl border border-stone-200/90 bg-stone-50/50 ps-10.5 pe-4 font-sans text-sm text-stone-900 transition-colors inline-full placeholder:text-stone-400 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden dark:border-white/10 dark:bg-white/5 dark:text-mist-100 dark:placeholder:text-mist-500 dark:focus:border-orange-500 dark:focus:bg-white/10"
             :placeholder="t('contact.form.placeholders.topic')"
             toolparamdescription="The specific focus or interest of the trip, e.g., Sahara desert, imperial cities, custom trek"
             autocomplete="off"
@@ -217,7 +217,7 @@ const isTopicExpanded = ref(false);
     <div>
       <label
         for="contact-message"
-        class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700"
+        class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700 dark:text-stone-300"
       >
         {{ t("contact.form.fields.message") }}
         <span
@@ -228,7 +228,7 @@ const isTopicExpanded = ref(false);
       </label>
       <div class="relative">
         <svg
-          class="pointer-events-none absolute inset-s-3.5 top-3.5 size-4.5 text-stone-400 transition-colors peer-focus:text-orange-500"
+          class="pointer-events-none absolute inset-s-3.5 top-3.5 size-4.5 text-stone-400 dark:text-stone-500 transition-colors peer-focus:text-orange-500"
           viewBox="0 0 24 24"
           fill="none"
           aria-hidden="true"
@@ -261,7 +261,7 @@ const isTopicExpanded = ref(false);
         <textarea
           id="contact-message"
           name="message"
-          class="peer rounded-xl border border-stone-200/90 bg-stone-50/50 py-3 ps-10.5 pe-4 font-sans text-sm text-stone-900 transition-colors inline-full min-block-40 placeholder:text-stone-400 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden"
+          class="peer rounded-xl border border-stone-200/90 bg-stone-50/50 py-3 ps-10.5 pe-4 font-sans text-sm text-stone-900 transition-colors inline-full min-block-40 placeholder:text-stone-400 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden dark:border-white/10 dark:bg-white/5 dark:text-mist-100 dark:placeholder:text-mist-500 dark:focus:border-orange-500 dark:focus:bg-white/10"
           :placeholder="t('contact.form.placeholders.message')"
           :maxlength="1000"
           toolparamdescription="The detailed message or description of the custom Morocco itinerary/dream tour request"

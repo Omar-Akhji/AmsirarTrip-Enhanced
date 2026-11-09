@@ -47,7 +47,7 @@ onMounted(() => {
       <div>
         <label
           for="numberOfPeople"
-          class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700"
+          class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700 dark:text-mist-200"
         >
           {{ t("booking.numberOfPeople") }}
           <span
@@ -58,7 +58,7 @@ onMounted(() => {
         </label>
         <div class="relative">
           <svg
-            class="pointer-events-none absolute inset-s-3.5 top-1/2 size-4.5 -translate-y-1/2 text-stone-400 transition-colors peer-focus:text-orange-500"
+            class="pointer-events-none absolute inset-s-3.5 top-1/2 size-4.5 -translate-y-1/2 text-stone-400 dark:text-mist-400 transition-colors peer-focus:text-orange-500"
             viewBox="0 0 24 24"
             fill="none"
             aria-hidden="true"
@@ -103,7 +103,7 @@ onMounted(() => {
           </svg>
           <input
             id="numberOfPeople"
-            class="peer h-12 rounded-xl border border-stone-200/90 bg-stone-50/50 ps-10.5 pe-4 font-sans text-sm text-stone-900 transition-colors inline-full placeholder:text-stone-400 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden"
+            class="peer h-12 rounded-xl border border-stone-200/90 bg-stone-50/50 ps-10.5 pe-4 font-sans text-sm text-stone-900 transition-colors inline-full placeholder:text-stone-400 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden dark:border-white/10 dark:bg-white/5 dark:text-mist-100 dark:placeholder:text-mist-500 dark:focus:border-orange-500 dark:focus:bg-white/10"
             :placeholder="t('booking.placeholders.numberOfPeople')"
             type="number"
             name="numberOfPeople"
@@ -128,7 +128,7 @@ onMounted(() => {
       <div>
         <label
           for="reservationDate"
-          class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700"
+          class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700 dark:text-mist-200"
         >
           {{ t("booking.reservationDate") }}
           <span
@@ -144,9 +144,9 @@ onMounted(() => {
         >
           <template #trigger>
             <span
-              class="flex h-12 cursor-pointer items-center justify-start rounded-xl border border-stone-200/90 bg-stone-50/50 px-4 text-start font-sans text-sm transition-colors inline-full group-focus-visible:border-orange-500 group-focus-visible:bg-white group-focus-visible:ring-2 group-focus-visible:ring-orange-500/20 pointer-fine:group-hover:border-stone-300 pointer-fine:group-hover:bg-white"
+              class="flex h-12 cursor-pointer items-center justify-start rounded-xl border border-stone-200/90 bg-stone-50/50 px-4 text-start font-sans text-sm transition-colors inline-full group-focus-visible:border-orange-500 group-focus-visible:bg-white group-focus-visible:ring-2 group-focus-visible:ring-orange-500/20 pointer-fine:group-hover:border-stone-300 pointer-fine:group-hover:bg-white dark:border-white/10 dark:bg-white/5 dark:group-focus-visible:border-orange-500 dark:group-focus-visible:bg-white/10 dark:pointer-fine:group-hover:border-white/20 dark:pointer-fine:group-hover:bg-white/10"
               :class="[
-                reservationDate ? 'text-stone-900' : 'text-stone-400',
+                reservationDate ? 'text-stone-900 dark:text-mist-100' : 'text-stone-400 dark:text-mist-500',
                 state?.errors?.date && 'border-red-300',
               ]"
               :aria-describedby="state?.errors?.date ? 'reservationDate-error' : undefined"
@@ -257,13 +257,13 @@ onMounted(() => {
     <div class="inline-full">
       <label
         for="message"
-        class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700"
+        class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700 dark:text-mist-200"
       >
         {{ t("booking.message") }}
       </label>
       <div class="relative">
         <svg
-          class="pointer-events-none absolute inset-s-3.5 top-3.5 size-4.5 text-stone-400 transition-colors peer-focus:text-orange-500"
+          class="pointer-events-none absolute inset-s-3.5 top-3.5 size-4.5 text-stone-400 dark:text-mist-400 transition-colors peer-focus:text-orange-500"
           viewBox="0 0 24 24"
           fill="none"
           aria-hidden="true"
@@ -296,7 +296,7 @@ onMounted(() => {
         <textarea
           id="message"
           name="message"
-          class="peer rounded-xl border border-stone-200/90 bg-stone-50/50 py-3 ps-10.5 pe-4 font-sans text-sm text-stone-900 transition-colors inline-full min-block-40 placeholder:text-stone-400 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden"
+          class="peer rounded-xl border border-stone-200/90 bg-stone-50/50 py-3 ps-10.5 pe-4 font-sans text-sm text-stone-900 transition-colors inline-full min-block-40 placeholder:text-stone-400 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden dark:border-white/10 dark:bg-white/5 dark:text-mist-100 dark:placeholder:text-mist-500 dark:focus:border-orange-500 dark:focus:bg-white/10"
           :placeholder="t('booking.placeholders.message')"
           :maxlength="1000"
           toolparamdescription="Any custom requests, message, or notes from the guest regarding the booking"

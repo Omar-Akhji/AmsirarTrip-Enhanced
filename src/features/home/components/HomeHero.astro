@@ -5,8 +5,6 @@ import bg2 from "../../../assets/images/Header/header-2.webp";
 import bg3 from "../../../assets/images/Header/header-3.webp";
 import SliderCards, { type SlideCardItem } from "./SliderCards.astro";
 import SliderDetails from "./SliderDetails.astro";
-import AltArrowLeftIcon from "@/shared/ui/icons/AltArrowLeftIcon.astro";
-import AltArrowRightIcon from "@/shared/ui/icons/AltArrowRightIcon.astro";
 
 interface Props {
   images?: (ImageMetadata | string)[];
@@ -24,7 +22,6 @@ const slidesData = {
   en: [
     {
       id: "sahara",
-      tagline: "Sahara Desert Expeditions",
       title: "Erg Chebbi Dunes",
       type: "& Desert Camp Nights",
       description:
@@ -32,7 +29,6 @@ const slidesData = {
     },
     {
       id: "atlas",
-      tagline: "High Atlas Mountain Treks",
       title: "Mountain Passes",
       type: "& Ancient Kasbahs",
       description:
@@ -40,7 +36,6 @@ const slidesData = {
     },
     {
       id: "imperial",
-      tagline: "Tailored Morocco Circuits",
       title: "Imperial Medinas",
       type: "& Atlantic Coast",
       description:
@@ -50,7 +45,6 @@ const slidesData = {
   fr: [
     {
       id: "sahara",
-      tagline: "Expéditions dans le Sahara",
       title: "Dunes de l'Erg Chebbi",
       type: "et nuits au bivouac",
       description:
@@ -58,7 +52,6 @@ const slidesData = {
     },
     {
       id: "atlas",
-      tagline: "Randonnées dans le Haut Atlas",
       title: "Cols de montagne",
       type: "et kasbahs anciennes",
       description:
@@ -66,7 +59,6 @@ const slidesData = {
     },
     {
       id: "imperial",
-      tagline: "Circuits sur mesure au Maroc",
       title: "Médinas impériales",
       type: "et côte atlantique",
       description:
@@ -76,7 +68,6 @@ const slidesData = {
   es: [
     {
       id: "sahara",
-      tagline: "Expediciones al Sahara",
       title: "Dunas de Erg Chebbi",
       type: "y noches en campamento",
       description:
@@ -84,15 +75,13 @@ const slidesData = {
     },
     {
       id: "atlas",
-      tagline: "Rutas por el Alto Atlas",
-      title: "Pasos de montaña",
-      type: "y antiguas kasbahs",
+      title: "Rutas por el Alto Atlas",
+      type: "Pasos de montaña",
       description:
         "Cruce los puertos panorámicos del Atlas, explore kasbahs de adobe declaradas Patrimonio Mundial y oasis fértiles.",
     },
     {
       id: "imperial",
-      tagline: "Circuitos a medida por Marruecos",
       title: "Medinas imperiales",
       type: "y costa atlántica",
       description:
@@ -102,7 +91,6 @@ const slidesData = {
   de: [
     {
       id: "sahara",
-      tagline: "Sahara-Wüstenreisen",
       title: "Erg Chebbi Dünen",
       type: "& Nächte im Wüstencamp",
       description:
@@ -110,7 +98,6 @@ const slidesData = {
     },
     {
       id: "atlas",
-      tagline: "Touren im Hohen Atlas",
       title: "Gebirgspässe",
       type: "& historische Kasbahs",
       description:
@@ -118,7 +105,6 @@ const slidesData = {
     },
     {
       id: "imperial",
-      tagline: "Maßgeschneiderte Marokko-Routen",
       title: "Königsstädte",
       type: "& Atlantikküste",
       description:
@@ -187,7 +173,6 @@ const thumbnailCards: SlideCardItem[] = currentSlides.map((slide) => ({
           <SliderDetails
             description={slide.description}
             isH1={index === 0}
-            tagline={slide.tagline}
             title={slide.title}
             type={slide.type}
           />
@@ -198,66 +183,115 @@ const thumbnailCards: SlideCardItem[] = currentSlides.map((slide) => ({
     <!-- Thumbnail Carousel Cards -->
     <SliderCards items={thumbnailCards} />
 
-    <!-- Prev / Next Navigation Arrows & Marrakech-Tours Pagination Progress -->
-    <div
-      class="nextPrevArrows pagination absolute z-100 hidden w-auto items-center gap-3 md:flex left-[max(7%,calc(50%-570px))] 2xl:left-[max(7%,calc(50%-640px))] 3xl:left-[max(8%,calc(50%-720px))] max-lg:left-[5%] bottom-[calc(var(--thumb-bottom)+12px)] max-lg:bottom-[calc(var(--thumb-bottom)+10px)]"
+    <!-- Vertical Dots Navigation directly below the orange line and along the same vertical axis -->
+    <nav
+      class="hero-dots-nav pagination absolute z-100 flex flex-col items-center -translate-x-1/2 left-4 sm:left-8 md:left-[5%] lg:left-[max(7%,calc(50%-570px))] 2xl:left-[max(7%,calc(50%-640px))] 3xl:left-[max(8%,calc(50%-720px))]"
       id="pagination"
       role="region"
-      aria-label="Slider navigation and progress"
+      aria-label="Slider vertical dots navigation"
     >
-      <button
-        data-ascii="fade"
-        class="prev arrow arrow-left group grid size-12.5 cursor-pointer place-items-center rounded-full border-2 border-white/33 bg-white/5 backdrop-blur-md transition-[transform,background-color,border-color] duration-160 ease-out pointer-fine:hover:border-white/80 pointer-fine:hover:bg-white/10 active:scale-[0.96] motion-reduce:transform-none"
-        type="button"
-        aria-label="Previous slide"
-      >
-        <AltArrowLeftIcon class="size-6 text-white/60 transition-colors duration-160 pointer-fine:group-hover:text-white" />
-      </button>
-      <button
-        data-ascii="fade"
-        class="next arrow arrow-right group grid size-12.5 cursor-pointer place-items-center rounded-full border-2 border-white/33 bg-white/5 backdrop-blur-md transition-[transform,background-color,border-color] duration-160 ease-out pointer-fine:hover:border-white/80 pointer-fine:hover:bg-white/10 active:scale-[0.96] motion-reduce:transform-none"
-        type="button"
-        aria-label="Next slide"
-      >
-        <AltArrowRightIcon class="size-6 text-white/60 transition-colors duration-160 pointer-fine:group-hover:text-white" />
-      </button>
-
-      <!-- Yellow Progress Band from Marrakech-Tours -->
-      <div
-        data-ascii="fade"
-        class="progress-sub-container z-60 flex h-12.5 w-[clamp(80px,14vw,220px)] items-center max-lg:w-[clamp(60px,10vw,130px)]"
-        aria-hidden="true"
-      >
-        <div class="progress-sub-background h-0.75 w-full overflow-hidden bg-white/20">
+      <div class="relative flex flex-col items-center">
+        {currentSlides.map((slide, index) => (
           <div
-            class="progress-sub-foreground h-full w-1/3 bg-[#ecad29] shadow-[0_0_10px_rgb(236_173_41/50%)] transition-[width] duration-(--hero-duration) ease-out-expo"
-            id="slider-progress-bar"
-          ></div>
-        </div>
-      </div>
-
-      <!-- Slide Numbers Counter from Marrakech-Tours -->
-      <div
-        data-ascii="fade"
-        class="slide-numbers relative z-60 h-12.5 w-11 overflow-hidden"
-        id="slide-numbers"
-        aria-live="polite"
-      >
-        {currentSlides.map((_, index) => (
-          <div
-            class:list={[
-              "number-item pointer-events-none absolute inset-0 grid place-items-center text-[clamp(1.25rem,1.8vw,1.85rem)] font-bold text-white select-none transition-[transform,opacity] duration-(--hero-duration) ease-out-expo translate-y-full opacity-0 [&.active]:translate-y-0 [&.active]:opacity-100",
-              { active: index === 0 },
-            ]}
-            id={`slide-item-${index}`}
-            data-number-index={index}
+            class="relative flex flex-col items-center"
+            data-dot-wrapper={index}
           >
-            {index + 1}
+            <button
+              type="button"
+              class:list={[
+                "hero-dot-btn group relative flex size-7 sm:size-8 items-center justify-center cursor-pointer rounded-full transition-transform duration-200 active:scale-90 focus-visible:outline-2 focus-visible:outline-[#ecad29] focus-visible:outline-offset-2 motion-reduce:transform-none",
+                { active: index === 0 },
+              ]}
+              data-index={index}
+              aria-label={`Go to slide ${index + 1}: ${slide.title}`}
+              aria-current={index === 0 ? "true" : undefined}
+            >
+              <span class="hero-dot-indicator relative grid size-3.5 sm:size-4 place-items-center rounded-full border border-white/35 bg-black/40 backdrop-blur-xs transition-all duration-300">
+                <span class="hero-dot-core size-1.5 sm:size-2 rounded-full transition-all duration-300" />
+              </span>
+            </button>
+
+            {index < currentSlides.length - 1 && (
+              <div
+                class="hero-dot-line relative h-6 sm:h-7 w-[2px] bg-white/20 overflow-hidden my-0.5 rounded-full transition-colors duration-300"
+                aria-hidden="true"
+                data-line-index={index}
+              >
+                <div
+                  class="hero-dot-line-fill absolute inset-x-0 top-0 w-full bg-linear-to-b from-[#ecad29] to-orange-500 shadow-[0_0_6px_rgb(236_173_41/60%)] transition-[height] duration-500 ease-out"
+                  style="height: 0%;"
+                />
+              </div>
+            )}
           </div>
         ))}
       </div>
-    </div>
+    </nav>
   </div>
 </section>
+
+<style>
+  /* CSS-driven active & hover styles for rock-solid stability */
+  .hero-dots-nav {
+    top: clamp(19.5rem, 50vh, 23rem);
+  }
+
+  @media (min-width: 768px) {
+    .hero-dots-nav {
+      top: clamp(20rem, 38vh, 26rem);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-dots-nav {
+      top: clamp(22rem, 42vh, 28rem);
+    }
+  }
+
+  /* Dot default / inactive state */
+  .hero-dot-btn .hero-dot-indicator {
+    border-color: rgb(255 255 255 / 0.35);
+    background-color: rgb(0 0 0 / 0.4);
+  }
+
+  .hero-dot-btn .hero-dot-core {
+    background-color: rgb(255 255 255 / 0.55);
+    transform: scale(0.75);
+  }
+
+  /* Hover on inactive dot */
+  .hero-dot-btn:not(.active):hover .hero-dot-indicator {
+    border-color: rgb(255 255 255 / 0.8);
+    background-color: rgb(255 255 255 / 0.2);
+    transform: scale(1.1);
+  }
+
+  .hero-dot-btn:not(.active):hover .hero-dot-core {
+    background-color: rgb(255 255 255 / 0.95);
+    transform: scale(0.9);
+  }
+
+  /* Active dot state */
+  .hero-dot-btn.active .hero-dot-indicator {
+    border-color: rgb(236 173 41 / 0.9);
+    background-color: rgb(236 173 41 / 0.25);
+    box-shadow: 0 0 10px rgb(236 173 41 / 0.5);
+    transform: scale(1.15);
+  }
+
+  .hero-dot-btn.active .hero-dot-core {
+    background-color: #ecad29;
+    box-shadow: 0 0 8px rgb(236 173 41 / 0.9);
+    transform: scale(1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-dot-indicator,
+    .hero-dot-core,
+    .hero-dot-line-fill {
+      transition: none;
+    }
+  }
+</style>
 
 <script src="../../../scripts/slider.ts"></script>
