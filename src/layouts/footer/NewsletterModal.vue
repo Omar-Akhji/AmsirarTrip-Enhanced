@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onUnmounted, useTemplateRef } from "vue";
 import { actions } from "astro:actions";
-import { hasRecaptchaV2, RECAPTCHA_V2_SITE_KEY } from "@/lib/client-env";
+import { hasCaptcha } from "@/lib/client-env";
 import { useTranslation } from "@/lib/hooks/use-translation";
 import Recaptcha from "@/shared/ui/widgets/Recaptcha.vue";
 
@@ -235,23 +235,26 @@ onUnmounted(() => {
               </div>
             </div>
 
-            <div class="flex justify-center pbs-1">
+            <div class="flex justify-center pbs-2">
               <div
-                class="w-fit origin-center scale-85 rounded-xl border border-dashed p-2 transition-all sm:scale-100"
-                :class="[statusKey.includes('Captcha') ? 'border-red-400/80' : 'border-white/10']"
+                class="w-fit rounded-2xl border border-dashed p-1.5 transition-all"
+                :class="[
+                  statusKey.includes('Captcha') ?
+                    'border-red-400 bg-red-950/20'
+                  : 'border-white/15 bg-white/2',
+                ]"
               >
                 <Recaptcha
-                  v-if="hasRecaptchaV2"
+                  v-if="hasCaptcha"
                   ref="recaptchaRef"
-                  :sitekey="RECAPTCHA_V2_SITE_KEY"
                   theme="dark"
                   size="normal"
                 />
                 <div
                   v-else
-                  class="rounded-lg border border-white/10 bg-white/5 p-2 font-mono text-xs text-slate-400"
+                  class="rounded-xl border border-white/10 bg-white/5 p-2 font-mono text-xs text-slate-400"
                 >
-                  reCAPTCHA not configured
+                  CAPTCHA not configured
                 </div>
               </div>
             </div>

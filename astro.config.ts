@@ -23,7 +23,7 @@ export default defineConfig({
 
   // ─── Integrations ────────────────────────────────────────────────────────
   integrations: [
-    vue(),
+    vue({ template: { compilerOptions: { isCustomElement: (tag) => tag.startsWith("cap-") } } }),
     htmlValidate(),
     compress({ CSS: false, HTML: false, Image: true, JavaScript: false, SVG: true }),
   ],
@@ -89,6 +89,12 @@ export default defineConfig({
         optional: true,
       }),
       PUBLIC_RECAPTCHA_SITE_KEY: envField.string({
+        context: "client",
+        access: "public",
+        optional: true,
+      }),
+      CAP_SECRET_KEY: envField.string({ context: "server", access: "secret", optional: true }),
+      PUBLIC_CAP_API_ENDPOINT: envField.string({
         context: "client",
         access: "public",
         optional: true,

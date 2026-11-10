@@ -6,14 +6,14 @@ const { t } = useTranslation();
 </script>
 
 <template>
-  <hgroup>
-    <p class="font-mono text-xs font-semibold tracking-[0.45em] text-orange-200 uppercase">
+  <hgroup class="space-y-1.5">
+    <p class="font-mono text-xs font-semibold tracking-wider text-orange-400 uppercase">
       {{ t("contact.form.infoBadge") }}
     </p>
-    <h3 class="mbs-3 text-2xl font-semibold sm:text-3xl">
+    <h3 class="text-2xl font-bold tracking-tight text-white sm:text-3xl text-balance">
       {{ t("contact.form.infoTitle") }}
     </h3>
-    <p class="mbs-4 font-mono text-xs leading-relaxed text-slate-200 sm:text-sm">
+    <p class="font-sans text-xs leading-relaxed text-slate-300 sm:text-sm text-pretty">
       {{ t("contact.form.infoCopy") }}
     </p>
   </hgroup>

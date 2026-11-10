@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, useTemplateRef, provide } from "vue";
 import { actions } from "astro:actions";
-import { hasRecaptchaV2, RECAPTCHA_V2_SITE_KEY } from "@/lib/client-env";
+import { hasCaptcha } from "@/lib/client-env";
 import type { FormState } from "@/lib/form-types";
 import { useTranslation } from "@/lib/hooks/use-translation";
 import Recaptcha from "@/shared/ui/widgets/Recaptcha.vue";
@@ -138,7 +138,7 @@ const handleSubmit = async (event: Event) => {
     <div
       class="booking-form-inner mx-auto px-2 inline-full max-inline-7xl sm:px-6 lg:px-8 2xl:max-inline-360 3xl:max-inline-420"
     >
-      <div class="grid grid-cols-1 items-stretch gap-8 lg:grid-cols-golden">
+      <div class="grid grid-cols-1 items-stretch gap-8 lg:grid-cols-golden lg:gap-6 xl:gap-8">
         <!-- Left: Form Card -->
         <div
           class="inline-full"
@@ -267,42 +267,43 @@ const handleSubmit = async (event: Event) => {
                 :locale="i18n.language"
               />
 
-              <div class="flex flex-col gap-4 pbs-2 sm:flex-row sm:items-center sm:justify-between">
-                <div class="flex justify-center sm:justify-start">
+              <div class="flex flex-col gap-5 pbs-3 sm:flex-row sm:items-center sm:justify-between">
+                <div class="flex flex-col items-center gap-1.5 sm:items-start">
                   <div
-                    class="w-fit origin-center scale-85 rounded-xl border border-dashed p-2 transition-all sm:scale-100"
+                    class="w-fit rounded-2xl border border-dashed p-1.5 transition-all"
                     :class="[
-                      state?.errors?.['recaptchaToken'] ? 'border-red-300' : 'border-stone-200',
+                      state?.errors?.['recaptchaToken'] ?
+                        'border-red-400 bg-red-50/30 dark:border-red-400/80 dark:bg-red-950/20'
+                      : 'border-stone-300 bg-stone-50/40 dark:border-white/15 dark:bg-white/2',
                     ]"
                   >
                     <Recaptcha
-                      v-if="hasRecaptchaV2"
+                      v-if="hasCaptcha"
                       ref="recaptchaRef"
-                      :sitekey="RECAPTCHA_V2_SITE_KEY"
                       @verify="handleVerify"
                       @expired="handleExpired"
                     />
                     <div
                       v-else
-                      class="rounded-lg bg-stone-100 p-2 font-mono text-xs text-stone-600"
+                      class="rounded-xl border border-stone-200 bg-stone-100 p-2 font-mono text-xs text-stone-600 dark:border-white/10 dark:bg-stone-800 dark:text-stone-300"
                     >
-                      reCAPTCHA not configured
+                      CAPTCHA not configured
                     </div>
                   </div>
-                </div>
 
-                <p
-                  v-if="state?.errors?.['recaptchaToken']"
-                  id="recaptchaToken-error"
-                  class="mbs-1 font-mono text-xs text-red-600"
-                >
-                  {{ state.errors["recaptchaToken"] }}
-                </p>
+                  <p
+                    v-if="state?.errors?.['recaptchaToken']"
+                    id="recaptchaToken-error"
+                    class="font-mono text-xs text-red-600 dark:text-red-400"
+                  >
+                    {{ state.errors["recaptchaToken"] }}
+                  </p>
+                </div>
 
                 <button
                   type="submit"
                   data-ascii="fade"
-                  class="group inline-flex min-h-12 cursor-pointer items-center justify-between gap-3 rounded-full border border-white/10 bg-slate-950 py-1.5 ps-5 pe-1.5 font-mono text-xs font-semibold tracking-wider text-white uppercase shadow-lg shadow-black/25 transition-colors duration-200 hover:border-white/20 hover:bg-black hover:shadow-xl active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 sm:gap-4 sm:ps-6 sm:pe-2 dark:border-white/15 dark:bg-black dark:hover:bg-slate-950"
+                  class="group inline-flex min-h-12 cursor-pointer items-center justify-between gap-3 rounded-full border border-white/10 bg-slate-950 py-1.5 ps-5 pe-1.5 font-mono text-xs font-semibold tracking-wider text-white uppercase shadow-lg shadow-black/25 transition-colors duration-200 hover:border-white/20 hover:bg-black hover:shadow-xl active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 sm:gap-4 sm:ps-6 sm:pe-2 dark:border-stone-300 dark:bg-white dark:text-dark-surface dark:hover:bg-white"
                   :disabled="isSubmitting"
                   :aria-busy="isSubmitting"
                 >

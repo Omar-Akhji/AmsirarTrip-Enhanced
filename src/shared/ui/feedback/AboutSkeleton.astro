@@ -48,9 +48,9 @@ const { class: className } = Astro.props;
         </div>
 
         {/* 2-Column Content Grid */}
-        <div class="grid items-start gap-10 sm:gap-12 lg:grid-cols-12 lg:gap-14 xl:gap-16">
+        <div class="grid items-start gap-10 sm:gap-12 lg:grid-cols-golden lg:gap-6 xl:gap-8">
           {/* Left Column: 3 Images Collage (order-1 on mobile/tablet, left on desktop) */}
-          <div class="order-1 lg:order-1 lg:col-span-6">
+          <div class="order-1 lg:order-1">
             <div class="flex flex-col gap-3.5 sm:gap-4.5">
               {/* Top Landscape Image */}
               <div class="relative aspect-golden overflow-hidden rounded-2xl border border-stone-200/80 bg-stone-100 shadow-xs">
@@ -82,7 +82,7 @@ const { class: className } = Astro.props;
           </div>
 
           {/* Right Column: Editorial Narrative & Quote (order-2 on mobile/tablet, right on desktop) */}
-          <div class="order-2 lg:order-2 lg:col-span-6">
+          <div class="order-2 lg:order-2">
             <div class="inline-full">
               <article class="flex flex-col gap-6 sm:gap-8">
                 {/* 3 Lead & Narrative Story Paragraphs */}

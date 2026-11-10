@@ -27,17 +27,20 @@ const perks = [
 >
   <div class="flex h-full flex-col justify-between">
     <div class="space-y-4 sm:space-y-6">
-      <hgroup class="flex flex-col items-center gap-2 sm:gap-2.5 text-center">
-        <p class="font-mono text-xs font-semibold tracking-[0.16em] sm:tracking-[0.2em] text-orange-400 uppercase">
+      <hgroup class="flex flex-col items-center gap-1.5 text-center">
+        <p class="font-mono text-xs font-semibold tracking-wider text-orange-400 uppercase">
           {t("booking.checkBadge")}
         </p>
-        <h3 class="mbs-1 font-sans text-2xl font-semibold tracking-tight sm:text-3xl text-balance">
+        <h3 class="font-sans text-2xl font-bold tracking-tight sm:text-3xl text-balance">
           {t("booking.checkTitle")}
         </h3>
+      </hgroup>
+
+      <div class="flex justify-center">
         <div class="inline-flex size-24 sm:size-28 lg:size-32 items-center justify-center rounded-full border border-slate-800 bg-slate-900/60 p-3 sm:p-4 shadow-inner ring-1 ring-white/5">
           <TripAdvisorIcon class="size-16 sm:size-20 text-white" />
         </div>
-      </hgroup>
+      </div>
 
       <div class="mx-auto flex w-fit items-center gap-3 rounded-xl border border-slate-800 bg-slate-900/60 px-4 py-2.5 sm:py-3 shadow-xs">
         <div class="font-mono text-2xl leading-none font-extrabold text-amber-300 tabular-nums">
