@@ -16,9 +16,12 @@ const props = withDefaults(defineProps<Props>(), {
 
 const emit = defineEmits<{ verify: [token: string]; expired: []; error: [] }>();
 
-const activeEndpoint = props.endpoint || CAP_API_ENDPOINT || "http://localhost:3000/";
+const isDev = import.meta.env.DEV;
+const rawEndpoint = props.endpoint || CAP_API_ENDPOINT || "/api/cap/";
+const activeEndpoint = rawEndpoint.endsWith("/") ? rawEndpoint : `${rawEndpoint}/`;
 const capWidget = useTemplateRef<HTMLElement>("capWidget");
 const currentToken = ref<string>("");
+const isDevBypassed = ref<boolean>(false);
 
 const onCapSolve = (event: Event) => {
   const customEvent = event as CustomEvent<{ token: string }>;
@@ -26,15 +29,23 @@ const onCapSolve = (event: Event) => {
     customEvent.detail?.token || (capWidget.value as unknown as { token?: string })?.token || "";
   if (!token) return;
   currentToken.value = token;
+  isDevBypassed.value = false;
   emit("verify", token);
 };
 
 const onCapReset = () => {
   currentToken.value = "";
+  isDevBypassed.value = false;
   emit("expired");
 };
 
 const onCapError = () => {
+  if (isDev) {
+    currentToken.value = "cap_dev_token";
+    isDevBypassed.value = true;
+    emit("verify", "cap_dev_token");
+    return;
+  }
   currentToken.value = "";
   emit("error");
 };
@@ -81,7 +92,7 @@ defineExpose({ getValue, reset });
 </script>
 
 <template>
-  <div class="m-0 flex items-center justify-center p-0 leading-none">
+  <div class="m-0 flex flex-col items-center justify-center p-0 leading-none">
     <cap-widget
       ref="capWidget"
       :data-cap-api-endpoint="activeEndpoint"

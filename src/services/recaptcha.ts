@@ -2,6 +2,7 @@ import { z } from "astro/zod";
 import { PUBLIC_CAP_API_ENDPOINT } from "astro:env/client";
 import { env } from "@/lib/env";
 import { TRUSTED_HOSTS } from "@/lib/constants/hosts";
+import { capStore } from "./cap-store";
 
 const recaptchaResponseSchema = z.object({
   success: z.boolean(),
@@ -19,13 +20,25 @@ interface VerifyOptions {
 
 /** Verifies a CAPTCHA token using Cap (trycap.dev) if configured, or Google reCAPTCHA as fallback. */
 export async function verifyRecaptcha({ token, remoteip }: VerifyOptions): Promise<boolean> {
+  const isDev = import.meta.env.DEV || process.env["NODE_ENV"] === "development";
+
   // Guard: invalid token shape
   if (!token || typeof token !== "string" || token.length < 5 || token.length > 4096) {
     return false;
   }
 
-  // 1. Cap (trycap.dev) verification
-  if (env.CAP_SECRET_KEY && PUBLIC_CAP_API_ENDPOINT) {
+  // Development bypass token
+  if (isDev && token === "cap_dev_token") {
+    return true;
+  }
+
+  // 1. Cap Core native verification (atomic single-use delete on read)
+  if (token.includes(":") && capStore.consumeToken(token)) {
+    return true;
+  }
+
+  // 2. External Cap server (capd) HTTP siteverify
+  if (env.CAP_SECRET_KEY && PUBLIC_CAP_API_ENDPOINT?.startsWith("http")) {
     try {
       const endpoint =
         PUBLIC_CAP_API_ENDPOINT.endsWith("/") ? PUBLIC_CAP_API_ENDPOINT : (
@@ -122,7 +135,6 @@ export async function verifyRecaptcha({ token, remoteip }: VerifyOptions): Promi
   }
 
   // Guard: no secret configured = fail-closed in production, skip in dev
-  const isDev = import.meta.env.DEV || process.env["NODE_ENV"] === "development";
   if (isDev) {
     console.warn("[captcha] Neither CAP_SECRET_KEY nor RECAPTCHA_SECRET_KEY set — skipping in dev");
     return true;

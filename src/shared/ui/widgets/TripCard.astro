@@ -1,8 +1,6 @@
 ---
-import AltArrowRightIcon from "@/shared/ui/icons/AltArrowRightIcon.astro";
 import { Image } from "astro:assets";
 import { getRelativeLocaleUrl } from "astro:i18n";
-import Button from "../primitives/Button.astro";
 
 interface Props {
   readonly item: {
@@ -78,16 +76,6 @@ const categoryText = badge || tagline || "Morocco Tour";
       </span>
     </div>
 
-    {/* Tour Type Badge at Top-Right */}
-    {tourTypeBadge && (
-      <div
-        class="absolute top-3.5 right-3.5 z-20 pointer-events-none inline-flex items-center rounded-full bg-stone-950/80 px-2.5 py-1 font-mono text-[10px] font-semibold tracking-wider text-white backdrop-blur-md border border-white/20 shadow-md uppercase"
-        data-ascii="fade"
-      >
-        <span>{tourTypeBadge}</span>
-      </div>
-    )}
-
     {/* Thumbnail Stack (Dual-layer wipe on hover) */}
     <div class="relative grid size-full overflow-hidden rounded-3xl filter-[url(#svg-inset-shadow)] *:col-start-1 *:row-start-1 *:size-full">
       {/* Base Layer: Atmospheric tone */}
@@ -161,23 +149,49 @@ const categoryText = badge || tagline || "Morocco Tour";
       </dl>
     )}
 
-    {/* Full Pill Action Button */}
+    {/* Action Row: Tour Type Badge (Left) + Signature Reserve-Style Action Button (Right) */}
     <div
-      class:list={["pt-2", !start && "mt-auto"]}
+      class:list={["pt-2 flex items-center justify-between gap-3", !start && "mt-auto"]}
       data-ascii="fade"
     >
-      <Button
-        as="div"
-        variant="card"
-        size="md"
-        class="w-full text-xs"
-      >
-        <span>{exploreLink}</span>
-        <AltArrowRightIcon
-          aria-hidden="true"
-          class="size-4 shrink-0 transition-transform duration-300 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1"
-        />
-      </Button>
+      {tourTypeBadge && (
+        <span class="inline-flex items-center rounded-full border border-stone-200/90 bg-stone-100/90 px-3 py-1.5 font-mono text-[10px] font-semibold tracking-wider text-stone-700 uppercase shadow-xs transition-colors duration-300 group-hover:border-stone-300 group-hover:bg-stone-200/90 dark:border-white/10 dark:bg-white/5 dark:text-mist-200 dark:group-hover:border-white/20 dark:group-hover:bg-white/10">
+          {tourTypeBadge}
+        </span>
+      )}
+      <div class="inline-flex min-h-12 items-center justify-between gap-3 rounded-full border border-white/10 bg-slate-950 py-1.5 ps-5 pe-1.5 font-mono text-xs font-semibold tracking-wider text-white uppercase shadow-lg shadow-black/25 transition-colors duration-200 group-hover:border-white/20 group-hover:bg-black group-hover:shadow-xl sm:gap-4 sm:ps-6 sm:pe-2 dark:border-stone-300 dark:bg-white dark:text-dark-surface dark:group-hover:bg-white">
+        <span class="truncate">{exploreLink}</span>
+        <span class="relative flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-full bg-linear-to-br from-amber-orange to-orange text-white shadow-xs shadow-orange/40 transition-transform duration-300 ease-out group-hover:scale-105">
+          <span class="relative flex size-full items-center justify-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="absolute size-4.5 transition-all duration-300 ease-out group-hover:translate-x-3 group-hover:-translate-y-3 group-hover:opacity-0 rtl:-scale-x-100 rtl:group-hover:-translate-x-3"
+              aria-hidden="true"
+            >
+              <path d="M18 15V6H9M18 6L11.5 12.5M6 18L8.5 15.5" />
+            </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="absolute size-4.5 -translate-x-3 translate-y-2 opacity-0 transition-all duration-300 ease-out group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 rtl:translate-x-3 rtl:-scale-x-100 rtl:group-hover:translate-x-0"
+              aria-hidden="true"
+            >
+              <path d="M14 18L20 12L14 6M20 12H9.5M4 12H6.5" />
+            </svg>
+          </span>
+        </span>
+      </div>
     </div>
   </div>
 

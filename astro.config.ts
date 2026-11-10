@@ -63,6 +63,7 @@ export default defineConfig({
     "/robots.txt": { maxAge: 3600, swr: 86_400 },
     "/sitemap.xml": { maxAge: 3600, swr: 86_400 },
     "/sitemap-index.xml": { maxAge: 3600, swr: 86_400 },
+    "/api/cap/[...path]": { maxAge: 0 },
     "/api/[...path]": { maxAge: 900, swr: 3600 },
     "/_actions/[...path]": { maxAge: 0 },
   },

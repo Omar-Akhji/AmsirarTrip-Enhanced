@@ -25,8 +25,8 @@ export const getSecurityHeaders = (nonce: string, host: string) => {
       value: [
         // Default: self only
         "default-src 'self'",
-        // Scripts: nonce + strict-dynamic for Astro view transitions + Google reCAPTCHA
-        `script-src 'self' 'nonce-${nonce}' 'strict-dynamic' https://www.google.com https://www.gstatic.com`,
+        // Scripts: nonce + strict-dynamic for Astro view transitions + Cap WASM + Google reCAPTCHA
+        `script-src 'self' 'nonce-${nonce}' 'strict-dynamic' 'wasm-unsafe-eval' https://www.google.com https://www.gstatic.com`,
         // Styles: self + inline (Tailwind atomic CSS injection) + Google Fonts
         "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
         // Fonts: self + Google Fonts
@@ -39,8 +39,8 @@ export const getSecurityHeaders = (nonce: string, host: string) => {
         "frame-ancestors 'self'",
         // Connections: self + own host + Google (reCAPTCHA verification calls) + map tile hosts
         `connect-src 'self'${safeConnectHost} https://www.google.com https://*.tile.openstreetmap.org https://*.basemaps.cartocdn.com`,
-        // Workers: self only (no third-party workers)
-        "worker-src 'self'",
+        // Workers: self + blob for Cap WebAssembly workers
+        "worker-src 'self' blob:",
         // Web app manifest: self only
         "manifest-src 'self'",
         // Objects/plugins: block all

@@ -1,6 +1,5 @@
 ---
 import { useTranslations } from "@/i18n/utils";
-import Button from "@/shared/ui/primitives/Button.astro";
 import SquareTopDownIcon from "@/shared/ui/icons/SquareTopDownIcon.astro";
 import TripAdvisorIcon from "@/shared/ui/icons/TripAdvisorIcon.astro";
 
@@ -76,20 +75,22 @@ const perks = [
 
     <!-- Bottom Action Row: baseline aligned with Booking Form submit row -->
     <div class="mbs-6 flex flex-col items-center justify-center gap-3 sm:flex-row sm:items-center min-h-12.25">
-      <Button
+      <a
         href="https://www.tripadvisor.com/Attraction_Review-g293734-d32584739-Reviews-Amsirar_Travel-Marrakech_Marrakech_Safi.html"
         target="_blank"
         rel="noopener noreferrer"
-        variant="tripadvisor"
-        class="uppercase tracking-wider text-xs px-8 py-3"
+        data-ascii="fade"
+        class="group/btn inline-flex min-h-12 cursor-pointer items-center justify-between gap-3 rounded-full border border-stone-200/90 bg-white py-1.5 ps-5 pe-1.5 font-mono text-xs font-semibold tracking-wider text-black uppercase shadow-md shadow-black/10 transition-colors duration-200 hover:border-stone-300 hover:bg-white active:scale-[0.98] sm:gap-4 sm:ps-6 sm:pe-2 dark:border-white/10 dark:bg-white/5 dark:text-mist-100 dark:hover:bg-white/10"
         aria-label={t("booking.tripadvisorCtaAria")}
       >
-        <span>{t("booking.checkCta")}</span>
-        <SquareTopDownIcon
-          class="size-4"
-          aria-hidden="true"
-        />
-      </Button>
+        <span class="truncate">{t("booking.checkCta")}</span>
+        <span class="relative flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-full bg-linear-to-br from-emerald-400 to-emerald-600 text-white shadow-xs shadow-emerald-500/30">
+          <SquareTopDownIcon
+            class="size-4 text-white"
+            aria-hidden="true"
+          />
+        </span>
+      </a>
     </div>
   </div>
 </aside>

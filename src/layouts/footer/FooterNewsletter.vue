@@ -71,85 +71,135 @@ const openModal = () => {
       <!-- FooterSocialLinks -->
       <nav
         :aria-label="t('footer.socialAria')"
-        class="mbs-4"
+        class="mbs-6"
       >
-        <ul class="flex flex-wrap items-center justify-center gap-3">
-          <li>
+        <ul
+          class="social"
+          role="list"
+        >
+          <li
+            :data-tooltip="t('footer.social.facebook')"
+            class="social-facebook"
+          >
             <a
-              href="https://www.facebook.com/profile.php?id=61571322141368"
               :aria-label="t('footer.social.facebook')"
-              class="inline-flex size-10 items-center justify-center rounded-full bg-white text-center transition-[transform_0.12s_ease,box-shadow_0.12s_ease] sm:size-11 pointer-fine:hover:-translate-y-1 pointer-fine:hover:shadow-[0_8px_18px_rgba(0,0,0,0.28)]"
-              target="_blank"
+              href="https://www.facebook.com/profile.php?id=61571322141368"
               rel="noopener noreferrer"
+              target="_blank"
             >
               <svg
-                viewBox="0 0 320 512"
-                class="size-4 text-dark-grey sm:size-4.5"
-                fill="currentColor"
                 aria-hidden="true"
+                class="size-5 shrink-0 fill-current"
+                viewBox="0 0 20 20"
               >
                 <path
-                  d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4.4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z"
+                  d="M8.46 18h2.93v-7.3h2.45l.37-2.84h-2.82V6.04c0-.82.23-1.38 1.41-1.38h1.51V2.11c-.26-.03-1.15-.11-2.19-.11-2.18 0-3.66 1.33-3.66 3.76v2.1H6v2.84h2.46V18z"
                 />
               </svg>
             </a>
           </li>
-          <li>
+
+          <li
+            :data-tooltip="t('footer.social.twitter')"
+            class="social-twitter"
+          >
             <a
-              href="https://x.com/AmsirarTravel"
               :aria-label="t('footer.social.twitter')"
-              class="inline-flex size-10 items-center justify-center rounded-full bg-white text-center transition-[transform_0.12s_ease,box-shadow_0.12s_ease] sm:size-11 pointer-fine:hover:-translate-y-1 pointer-fine:hover:shadow-[0_8px_18px_rgba(0,0,0,0.28)]"
-              target="_blank"
+              href="https://x.com/AmsirarTravel"
               rel="noopener noreferrer"
+              target="_blank"
             >
               <svg
-                viewBox="0 0 512 512"
-                class="size-4 text-dark-grey sm:size-4.5"
-                fill="currentColor"
                 aria-hidden="true"
+                class="size-4.5 shrink-0 fill-current"
+                viewBox="0 0 24 24"
               >
                 <path
-                  d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"
+                  d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
                 />
               </svg>
             </a>
           </li>
-          <li>
+
+          <li
+            :data-tooltip="t('footer.social.instagram')"
+            class="social-instagram"
+          >
             <a
-              href="https://www.instagram.com/amsirar.trip?igsh=ZDlxanNsbTA5M2Zi"
               :aria-label="t('footer.social.instagram')"
-              class="inline-flex size-10 items-center justify-center rounded-full bg-white text-center transition-[transform_0.12s_ease,box-shadow_0.12s_ease] sm:size-11 pointer-fine:hover:-translate-y-1 pointer-fine:hover:shadow-[0_8px_18px_rgba(0,0,0,0.28)]"
-              target="_blank"
+              href="https://www.instagram.com/amsirar.trip?igsh=ZDlxanNsbTA5M2Zi"
               rel="noopener noreferrer"
+              target="_blank"
             >
               <svg
-                viewBox="0 0 448 512"
-                class="size-4 text-dark-grey sm:size-4.5"
-                fill="currentColor"
                 aria-hidden="true"
+                class="size-5 shrink-0"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                viewBox="0 0 24 24"
               >
                 <path
-                  d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"
+                  d="M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z"
+                  stroke-width="1.5"
+                />
+                <path
+                  d="M12 15.5C13.933 15.5 15.5 13.933 15.5 12C15.5 10.067 13.933 8.5 12 8.5C10.067 8.5 8.5 10.067 8.5 12C8.5 13.933 10.067 15.5 12 15.5Z"
+                  stroke-width="1.5"
+                />
+                <path
+                  d="M17.6361 7H17.6477"
+                  stroke-width="2"
                 />
               </svg>
             </a>
           </li>
-          <li>
+
+          <li
+            :data-tooltip="t('footer.social.tiktok')"
+            class="social-tiktok"
+          >
             <a
-              href="https://www.tiktok.com/@amsirartrip"
               :aria-label="t('footer.social.tiktok')"
-              class="inline-flex size-10 items-center justify-center rounded-full bg-white text-center transition-[transform_0.12s_ease,box-shadow_0.12s_ease] sm:size-11 pointer-fine:hover:-translate-y-1 pointer-fine:hover:shadow-[0_8px_18px_rgba(0,0,0,0.28)]"
-              target="_blank"
+              href="https://www.tiktok.com/@amsirartrip"
               rel="noopener noreferrer"
+              target="_blank"
             >
               <svg
-                viewBox="0 0 448 512"
-                class="size-4 text-dark-grey sm:size-4.5"
-                fill="currentColor"
                 aria-hidden="true"
+                class="tiktok-default size-5 shrink-0 fill-current"
+                viewBox="0 0 448 512"
               >
                 <path
                   d="M448 209.9a210.1 210.1 0 0 1-122.8-39.3V349.4A162.6 162.6 0 1 1 185 188.3V278.2a74.6 74.6 0 1 0 52.2 71.2V0l88 0a121.2 121.2 0 0 0 1.9 22.2h0A122.2 122.2 0 0 0 381 102.4a121.4 121.4 0 0 0 67 20.1z"
+                />
+              </svg>
+              <svg
+                aria-hidden="true"
+                class="tiktok-hover size-5.5 shrink-0"
+                fill="none"
+                viewBox="0 0 32 32"
+              >
+                <path
+                  d="M8.45095 19.7926C8.60723 18.4987 9.1379 17.7743 10.1379 17.0317C11.5688 16.0259 13.3561 16.5948 13.3561 16.5948V13.2197C13.7907 13.2085 14.2254 13.2343 14.6551 13.2966V17.6401C14.6551 17.6401 12.8683 17.0712 11.4375 18.0775C10.438 18.8196 9.90623 19.5446 9.7505 20.8385C9.74562 21.5411 9.87747 22.4595 10.4847 23.2536C10.3345 23.1766 10.1815 23.0889 10.0256 22.9905C8.68807 22.0923 8.44444 20.7449 8.45095 19.7926ZM22.0352 6.97898C21.0509 5.90039 20.6786 4.81139 20.5441 4.04639H21.7823C21.7823 4.04639 21.5354 6.05224 23.3347 8.02482L23.3597 8.05134C22.8747 7.7463 22.43 7.38624 22.0352 6.97898ZM28 10.0369V14.293C28 14.293 26.42 14.2312 25.2507 13.9337C23.6179 13.5176 22.5685 12.8795 22.5685 12.8795C22.5685 12.8795 21.8436 12.4245 21.785 12.3928V21.1817C21.785 21.6711 21.651 22.8932 21.2424 23.9125C20.709 25.246 19.8859 26.1212 19.7345 26.3001C19.7345 26.3001 18.7334 27.4832 16.9672 28.28C15.3752 28.9987 13.9774 28.9805 13.5596 28.9987C13.5596 28.9987 11.1434 29.0944 8.96915 27.6814C8.49898 27.3699 8.06011 27.0172 7.6582 26.6277L7.66906 26.6355C9.84383 28.0485 12.2595 27.9528 12.2595 27.9528C12.6779 27.9346 14.0756 27.9528 15.6671 27.2341C17.4317 26.4374 18.4344 25.2543 18.4344 25.2543C18.5842 25.0754 19.4111 24.2001 19.9423 22.8662C20.3498 21.8474 20.4849 20.6247 20.4849 20.1354V11.3475C20.5435 11.3797 21.2679 11.8347 21.2679 11.8347C21.2679 11.8347 22.3179 12.4734 23.9506 12.8889C25.1204 13.1864 26.7 13.2483 26.7 13.2483V9.91314C27.2404 10.0343 27.7011 10.0671 28 10.0369Z"
+                  fill="#ee1d52"
+                />
+                <path
+                  d="M26.7009 9.91314V13.2472C26.7009 13.2472 25.1213 13.1853 23.9515 12.8879C22.3188 12.4718 21.2688 11.8337 21.2688 11.8337C21.2688 11.8337 20.5444 11.3787 20.4858 11.3464V20.1364C20.4858 20.6258 20.3518 21.8484 19.9432 22.8672C19.4098 24.2012 18.5867 25.0764 18.4353 25.2553C18.4353 25.2553 17.4337 26.4384 15.668 27.2352C14.0765 27.9539 12.6788 27.9357 12.2604 27.9539C12.2604 27.9539 9.84473 28.0496 7.66995 26.6366L7.6591 26.6288C7.42949 26.4064 7.21336 26.1717 7.01177 25.9257C6.31777 25.0795 5.89237 24.0789 5.78547 23.7934C5.78529 23.7922 5.78529 23.791 5.78547 23.7898C5.61347 23.2937 5.25209 22.1022 5.30147 20.9482C5.38883 18.9122 6.10507 17.6625 6.29444 17.3494C6.79597 16.4957 7.44828 15.7318 8.22233 15.0919C8.90538 14.5396 9.6796 14.1002 10.5132 13.7917C11.4144 13.4295 12.3794 13.2353 13.3565 13.2197V16.5948C13.3565 16.5948 11.5691 16.028 10.1388 17.0317C9.13879 17.7743 8.60812 18.4987 8.45185 19.7926C8.44534 20.7449 8.68897 22.0923 10.0254 22.991C10.1813 23.0898 10.3343 23.1775 10.4845 23.2541C10.7179 23.5576 11.0021 23.8221 11.3255 24.0368C12.631 24.8632 13.7249 24.9209 15.1238 24.3842C16.0565 24.0254 16.7586 23.2167 17.0842 22.3206C17.2888 21.7611 17.2861 21.1978 17.2861 20.6154V4.04639H20.5417C20.6763 4.81139 21.0485 5.90039 22.0328 6.97898C22.4276 7.38624 22.8724 7.7463 23.3573 8.05134C23.5006 8.19955 24.2331 8.93231 25.1734 9.38216C25.6596 9.61469 26.1722 9.79285 26.7009 9.91314Z"
+                  fill="currentColor"
+                />
+                <path
+                  d="M4.48926 22.7568V22.7594L4.57004 22.9784C4.56076 22.9529 4.53074 22.8754 4.48926 22.7568Z"
+                  fill="#69c9d0"
+                />
+                <path
+                  d="M10.5128 13.7916C9.67919 14.1002 8.90498 14.5396 8.22192 15.0918C7.44763 15.7332 6.79548 16.4987 6.29458 17.354C6.10521 17.6661 5.38897 18.9168 5.30161 20.9528C5.25223 22.1068 5.61361 23.2983 5.78561 23.7944C5.78543 23.7956 5.78543 23.7968 5.78561 23.798C5.89413 24.081 6.31791 25.0815 7.01191 25.9303C7.2135 26.1763 7.42963 26.4111 7.65924 26.6334C6.92357 26.1457 6.26746 25.5562 5.71236 24.8839C5.02433 24.0451 4.60001 23.0549 4.48932 22.7626C4.48919 22.7605 4.48919 22.7584 4.48932 22.7564V22.7527C4.31677 22.2571 3.95431 21.0651 4.00477 19.9096C4.09213 17.8736 4.80838 16.6239 4.99775 16.3108C5.4985 15.4553 6.15067 14.6898 6.92509 14.0486C7.608 13.4961 8.38225 13.0567 9.21598 12.7484C9.73602 12.5416 10.2778 12.3891 10.8319 12.2934C11.6669 12.1537 12.5198 12.1415 13.3588 12.2575V13.2196C12.3808 13.2349 11.4148 13.4291 10.5128 13.7916Z"
+                  fill="#69c9d0"
+                />
+                <path
+                  d="M20.5438 4.04635H17.2881V20.6159C17.2881 21.1983 17.2881 21.76 17.0863 22.3211C16.7575 23.2167 16.058 24.0253 15.1258 24.3842C13.7265 24.923 12.6326 24.8632 11.3276 24.0368C11.0036 23.823 10.7187 23.5594 10.4844 23.2567C11.5962 23.8251 12.5913 23.8152 13.8241 23.341C14.7558 22.9821 15.4563 22.1734 15.784 21.2774C15.9891 20.7178 15.9864 20.1546 15.9864 19.5726V3H20.4819C20.4819 3 20.4315 3.41188 20.5438 4.04635ZM26.7002 8.99104V9.9131C26.1725 9.79263 25.6609 9.61447 25.1755 9.38213C24.2352 8.93228 23.5026 8.19952 23.3594 8.0513C23.5256 8.1559 23.6981 8.25106 23.8759 8.33629C25.0192 8.88339 26.1451 9.04669 26.7002 8.99104Z"
+                  fill="#69c9d0"
                 />
               </svg>
             </a>
@@ -162,3 +212,167 @@ const openModal = () => {
     <NewsletterModal :locale="locale" />
   </div>
 </template>
+
+<style scoped>
+  .social {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .social li {
+    position: relative;
+    isolation: isolate;
+    flex: 0 0 2.75rem;
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .social-facebook {
+    --bg: #1877f2;
+  }
+
+  .social-twitter {
+    --bg: #101419;
+  }
+
+  .social-instagram {
+    --bg: linear-gradient(-45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+  }
+
+  .social-tiktok {
+    --bg: #010101;
+  }
+
+  @media (width >= 640px) {
+    .social li {
+      flex-basis: 3rem;
+      width: 3rem;
+      height: 3rem;
+    }
+  }
+
+  .social li::after {
+    position: absolute;
+    inset-block-start: -45%;
+    inset-inline-start: 50%;
+    z-index: 0;
+    content: attr(data-tooltip);
+    translate: -50% 0;
+    padding: 0.25rem 0.75rem;
+    font-family: inherit;
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.25;
+    color: #fff;
+    white-space: nowrap;
+    pointer-events: none;
+    visibility: hidden;
+    opacity: 0;
+    background: var(--bg, #070707);
+    border: 1px solid rgb(255 255 255 / 0.15);
+    border-radius: 9999px;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.4);
+    transition:
+      inset 0.4s cubic-bezier(0.47, 2, 0.41, 1.5),
+      visibility 0.3s ease-in-out,
+      opacity 0.2s ease-in-out;
+  }
+
+  .social li:has(a:hover, a:focus-visible) {
+    z-index: 20;
+  }
+
+  .social li:has(a:hover, a:focus-visible)::after {
+    inset-block-start: -70%;
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .social a {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1;
+    overflow: hidden;
+    color: #cbd5e1;
+    text-decoration: none;
+    background: rgb(255 255 255 / 0.04);
+    border: 1.5px solid rgb(255 255 255 / 0.15);
+    border-radius: 9999px;
+    outline: none;
+    transition:
+      color 0.3s ease-in-out,
+      border-color 0.3s ease-in-out,
+      box-shadow 0.3s ease-in-out;
+  }
+
+  .social a > svg {
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .tiktok-hover {
+    display: none;
+  }
+
+  .social a:hover .tiktok-default,
+  .social a:focus-visible .tiktok-default {
+    display: none;
+  }
+
+  .social a:hover .tiktok-hover,
+  .social a:focus-visible .tiktok-hover {
+    display: block;
+  }
+
+  .social a::after {
+    position: absolute;
+    content: "";
+    inset: 100% 0 0;
+    pointer-events: none;
+    background: var(--bg, #070707);
+    transition: inset 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .social a:hover,
+  .social a:focus-visible {
+    color: #fff;
+    border-color: rgb(255 255 255 / 0.3);
+    box-shadow: 0 4px 16px rgb(0 0 0 / 0.4);
+  }
+
+  .social a:hover > svg,
+  .social a:focus-visible > svg {
+    transform: scale(1.1);
+  }
+
+  .social a:hover::after,
+  .social a:focus-visible::after {
+    inset-block-start: 0;
+  }
+
+  .social a:focus-visible {
+    outline: 2px solid var(--color-orange, #f70);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .social li::after,
+    .social a,
+    .social a::after,
+    .social a > svg {
+      transition: none;
+    }
+  }
+</style>
