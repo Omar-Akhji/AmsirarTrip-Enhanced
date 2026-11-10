@@ -32,7 +32,7 @@ const { t } = useTranslation();
         </label>
         <div class="relative">
           <svg
-            class="pointer-events-none absolute inset-s-3.5 top-1/2 size-4.5 -translate-y-1/2 text-stone-400 dark:text-mist-400 transition-colors peer-focus:text-orange-500"
+            class="pointer-events-none absolute inset-s-3.5 top-1/2 size-4.5 -translate-y-1/2 text-stone-400 transition-colors peer-focus:text-orange-500 dark:text-mist-400"
             viewBox="0 0 24 24"
             fill="none"
             aria-hidden="true"
@@ -88,7 +88,7 @@ const { t } = useTranslation();
         </label>
         <div class="relative">
           <svg
-            class="pointer-events-none absolute inset-s-3.5 top-1/2 size-4.5 -translate-y-1/2 text-stone-400 dark:text-mist-400 transition-colors peer-focus:text-orange-500"
+            class="pointer-events-none absolute inset-s-3.5 top-1/2 size-4.5 -translate-y-1/2 text-stone-400 transition-colors peer-focus:text-orange-500 dark:text-mist-400"
             viewBox="0 0 24 24"
             fill="none"
             aria-hidden="true"

@@ -937,10 +937,7 @@ export function getExcursionRouteMap(
     normalizedKey,
     config,
     title,
-    {
-      startCity: "Marrakech",
-      endCity: waypoints.at(-1)?.name ?? "Marrakech",
-    },
+    { startCity: "Marrakech", endCity: waypoints.at(-1)?.name ?? "Marrakech" },
     waypoints,
   );
 }

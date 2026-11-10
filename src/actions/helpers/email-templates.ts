@@ -158,19 +158,19 @@ function wrapEmailLayout({
     }
   </style>
 </head>
-<body style="margin: 0; padding: 0; background-color: #ffffff; font-family: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; -webkit-font-smoothing: antialiased; word-break: break-word;">
+<body style="margin: 0; padding: 0; background-color: #FAFAFA; font-family: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; -webkit-font-smoothing: antialiased; word-break: break-word;">
   <!-- Preheader text -->
-  <div style="display: none; font-size: 1px; color: #ffffff; line-height: 1px; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden;">
+  <div style="display: none; font-size: 1px; color: #FAFAFA; line-height: 1px; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden;">
     ${escapeHtml(headline ?? badgeText)} &bull; Amsirar Trip Morocco
   </div>
 
   <!-- Seamless, edge-to-edge canvas (no card-in-background padding on mobile) -->
-  <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #ffffff; margin: 0; padding: 0; table-layout: fixed;">
+  <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #FAFAFA; margin: 0; padding: 0; table-layout: fixed;">
     <tr>
       <td align="center" style="padding: 0; margin: 0;">
 
         <!-- Main Email Container (Max 580px centered on desktop, 100% full width on mobile) -->
-        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" class="email-main-table" style="max-width: 580px; margin: 0 auto; background-color: #ffffff;">
+        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" class="email-main-table" style="max-width: 580px; margin: 0 auto; background-color: #FAFAFA;">
 
           <!-- Brand Header Banner (Matching Slate-950 Footer Color #020617) -->
           <tr>
@@ -209,7 +209,7 @@ function wrapEmailLayout({
 
           <!-- Main Body Content (Seamless full width, zero double-padding) -->
           <tr>
-            <td class="email-content-cell" style="padding: 24px 20px 18px 20px; background-color: #ffffff;">
+            <td class="email-content-cell" style="padding: 24px 20px 18px 20px; background-color: #FAFAFA;">
               ${
                 headline ?
                   `

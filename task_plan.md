@@ -20,7 +20,7 @@ errors without making unauthorized git commits.
 
 | Phase   | Description                                                                                                                     | Status       |
 | ------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------ |
-| Phase 0 | Safety net (audit script `scripts/i18n-check.ts` + Playwright `tests/i18n.spec.ts` 6/6 tests passing)                          | **COMPLETE** |
+| Phase 0 | Safety net (audit script `scripts/i18n-check.ts` + Playwright `tests/i18n.spec.ts` 6/6 tests passing)                           | **COMPLETE** |
 | Phase 1 | P0 Correctness (Middleware locale check, 39 missing keys added across all 4 locales, Vue payload slimming)                      | **COMPLETE** |
 | Phase 2 | Type Safety & Code Simplification (Deleted `schema.ts`, added `types.ts`, `Intl.PluralRules`, single `locales.ts` import)       | **COMPLETE** |
 | Phase 3 | Localized Trip Content & Structured Data (JSON-LD name/description/itinerary localized for tours, excursions, and video)        | **COMPLETE** |
@@ -31,5 +31,6 @@ errors without making unauthorized git commits.
 ## Rules
 
 - NO GIT COMMITS unless explicitly commanded by user.
-- All modifications tested with `bun run check`, `bun run lint`, `bun run build`, and `bun test:e2e`.
+- All modifications tested with `bun run check`, `bun run lint`, `bun run build`, and
+  `bun test:e2e`.
 - Maintain strict focus with file-backed memory.

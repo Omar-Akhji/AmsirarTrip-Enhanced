@@ -2,7 +2,7 @@ let currentActiveLink: HTMLAnchorElement | null = null;
 let currentHoveredLink: HTMLAnchorElement | null = null;
 let leaveTimer: ReturnType<typeof setTimeout> | null = null;
 
-const EASE_OUT = "cubic-bezier(0.22, 1, 0.36, 1)";
+const EASE_OUT = "cubic-bezier(0.16, 1, 0.3, 1)";
 
 function findMatchingLink(nav: HTMLElement, currentPath: string): HTMLAnchorElement | null {
   const cleanPath = currentPath === "/" ? "/" : currentPath.replace(/\/$/, "");
@@ -39,14 +39,20 @@ function getLinkGeometry(
   if (!targetLink) return { x: 0, width: 0 };
 
   const comp = globalThis.getComputedStyle(nav);
-  const paddingLeft = Number(comp.paddingLeft.replace("px", "")) || 6;
+  const paddingLeft = Number(comp.paddingLeft.replace("px", "")) || 4;
   const rawGap = comp.columnGap || comp.gap;
-  const gap = Number(rawGap.replace("px", "")) || 4;
-  const collapsedWidth = 44;
+  const gap = Number(rawGap.replace("px", "")) || 2;
+
+  // Measure actual collapsed width dynamically from an inactive sibling link
+  const sampleCollapsed =
+    links.find((l) => l !== targetLink && !l.dataset["indicator"])
+    ?? links.find((l) => l !== targetLink);
+  const collapsedWidth =
+    sampleCollapsed && sampleCollapsed.offsetWidth > 0 ? sampleCollapsed.offsetWidth : 44;
 
   const label = targetLink.querySelector<HTMLElement>(".mobile-dock-label");
   const labelWidth = label ? label.scrollWidth : 0;
-  const targetWidth = collapsedWidth + (labelWidth > 0 ? labelWidth + 16 : 0);
+  const targetWidth = collapsedWidth + (labelWidth > 0 ? labelWidth + 8 : 0);
 
   const targetX = paddingLeft + targetIndex * (collapsedWidth + gap);
 
@@ -65,7 +71,6 @@ function setHovered(targetLink: HTMLAnchorElement | null, immediate = false): vo
   const targetIndex = links.indexOf(target);
   if (targetIndex === -1) return;
 
-  const { x: targetX, width: targetWidth } = getLinkGeometry(nav, links, targetIndex);
   const prefersReducedMotion = globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   // Synchronously animate all labels: target label expands, other labels shrink to 0
@@ -77,7 +82,7 @@ function setHovered(targetLink: HTMLAnchorElement | null, immediate = false): vo
       link.dataset["indicator"] = "true";
       label.style.transition =
         immediate || prefersReducedMotion ? "none" : (
-          `width 220ms ${EASE_OUT}, opacity 220ms ${EASE_OUT}, margin-left 220ms ${EASE_OUT}`
+          `width 260ms ${EASE_OUT}, opacity 200ms ease-out, margin-left 260ms ${EASE_OUT}`
         );
       label.style.width = `${label.scrollWidth}px`;
       label.style.opacity = "1";
@@ -86,7 +91,7 @@ function setHovered(targetLink: HTMLAnchorElement | null, immediate = false): vo
       delete link.dataset["indicator"];
       label.style.transition =
         immediate || prefersReducedMotion ? "none" : (
-          `width 200ms ${EASE_OUT}, opacity 200ms ${EASE_OUT}, margin-left 200ms ${EASE_OUT}`
+          `width 240ms ${EASE_OUT}, opacity 160ms ease-out, margin-left 240ms ${EASE_OUT}`
         );
       label.style.width = "0px";
       label.style.opacity = "0";
@@ -94,19 +99,48 @@ function setHovered(targetLink: HTMLAnchorElement | null, immediate = false): vo
     }
   }
 
+  let targetX: number;
+  let targetWidth: number;
+
+  if (immediate && target.offsetWidth > 0) {
+    targetX = target.offsetLeft;
+    targetWidth = target.offsetWidth;
+  } else {
+    const geometry = getLinkGeometry(nav, links, targetIndex);
+    targetX = geometry.x;
+    targetWidth = geometry.width;
+  }
+
   // Animate the orange indicator in exact sync with the label
   indicator.style.transition =
     immediate || prefersReducedMotion ? "none" : (
-      `transform 220ms ${EASE_OUT}, width 220ms ${EASE_OUT}, opacity 220ms ${EASE_OUT}`
+      `transform 260ms ${EASE_OUT}, width 260ms ${EASE_OUT}, opacity 260ms ${EASE_OUT}`
     );
   indicator.style.transform = `translate3d(${targetX}px, 0, 0)`;
   indicator.style.width = `${targetWidth}px`;
   indicator.style.opacity = "1";
   indicator.style.visibility = "visible";
+
+  // Re-sync with exact layout positions once the CSS transition completes
+  if (!immediate && !prefersReducedMotion) {
+    globalThis.setTimeout(() => {
+      if (!(
+        (currentActiveLink === target || currentHoveredLink === target)
+        && target.offsetWidth > 0
+      )) {
+        return;
+      }
+
+      indicator.style.transition = "none";
+      indicator.style.transform = `translate3d(${target.offsetLeft}px, 0, 0)`;
+      indicator.style.width = `${target.offsetWidth}px`;
+    }, 270);
+  }
 }
 
 function setupMobileNav(): void {
   const nav = document.querySelector<HTMLElement>("#mobile-bottom-nav");
+  const indicator = document.querySelector<HTMLElement>("#mobile-nav-indicator");
   if (!nav) return;
 
   currentActiveLink = findMatchingLink(nav, globalThis.location.pathname);
@@ -122,7 +156,11 @@ function setupMobileNav(): void {
         delete link.dataset["active"];
       }
     }
-    setHovered(currentActiveLink, true);
+    const alreadySettled =
+      Boolean(indicator)
+      && indicator?.style.visibility === "visible"
+      && indicator?.style.opacity === "1";
+    setHovered(currentActiveLink, !alreadySettled);
   }
 
   if (nav.dataset["eventsBound"] === "true") return;

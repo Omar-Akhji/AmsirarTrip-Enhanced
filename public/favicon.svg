@@ -36,7 +36,7 @@
 
   <!-- ==================== 1. WHITE CIRCLE & CRIMSON RING ==================== -->
   <g id="circular-badge">
-    <circle cx="512" cy="512" r="470" fill="#ffffff" filter="url(#badge-shadow)" />
+    <circle cx="512" cy="512" r="470" fill="#FAFAFA" filter="url(#badge-shadow)" />
     <circle cx="512" cy="512" r="446.5" fill="none" stroke="#781522" stroke-width="5.5" />
   </g>
 

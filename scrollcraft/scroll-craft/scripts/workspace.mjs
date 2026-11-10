@@ -1,23 +1,18 @@
 #!/usr/bin/env node
 /**
- * Resolve the scrollcraft workspace: the one directory that holds this user's
- * builds and their fingerprint registry.
+ * Resolve the scrollcraft workspace: the one directory that holds this user's builds and their
+ * fingerprint registry.
  *
- * The skill used to hardcode one author's repo layout, which meant the
- * fingerprint gate dead-ended on every other machine. Nothing is hardcoded now.
- * Resolution order, first hit wins:
+ * The skill used to hardcode one author's repo layout, which meant the fingerprint gate dead-ended
+ * on every other machine. Nothing is hardcoded now. Resolution order, first hit wins:
  *
- *   1. SCROLLCRAFT_HOME              env var, absolute or relative to cwd
- *   2. .scrollcraft.json             nearest one walking up from cwd,
- *                                    { "workspace": "some/path" } relative to
- *                                    the file that declares it
- *   3. <project root>/scrollcraft    project root = nearest ancestor with .git,
- *                                    otherwise cwd
+ * 1. SCROLLCRAFT_HOME env var, absolute or relative to cwd
+ * 2. .scrollcraft.json nearest one walking up from cwd, { "workspace": "some/path" } relative to the
+ *    file that declares it
+ * 3. <project root>/scrollcraft project root = nearest ancestor with .git, otherwise cwd
  *
- * USAGE
- *   node scripts/workspace.mjs                 print the workspace path
- *   node scripts/workspace.mjs --json          print every resolved path
- *   node scripts/workspace.mjs --ensure        create it and seed the registry
+ * USAGE node scripts/workspace.mjs print the workspace path node scripts/workspace.mjs --json print
+ * every resolved path node scripts/workspace.mjs --ensure create it and seed the registry
  */
 
 import fs from "node:fs";
@@ -90,7 +85,10 @@ export function ensure(cwd = process.cwd()) {
 }
 
 // ------------------------------------------------------------------- cli ----
-if (process.argv[1] && path.resolve(process.argv[1]) === path.resolve(fileURLToPath(import.meta.url))) {
+if (
+  process.argv[1]
+  && path.resolve(process.argv[1]) === path.resolve(fileURLToPath(import.meta.url))
+) {
   const argv = process.argv.slice(2);
   const p = argv.includes("--ensure") ? ensure() : paths();
   if (argv.includes("--json")) {
@@ -98,7 +96,9 @@ if (process.argv[1] && path.resolve(process.argv[1]) === path.resolve(fileURLToP
   } else if (argv.includes("--ensure")) {
     console.log(p.workspace);
     console.error(`  builds       ${p.builds}`);
-    console.error(`  registry     ${p.fingerprints}${p.seeded ? "  (seeded, empty)" : "  (already present)"}`);
+    console.error(
+      `  registry     ${p.fingerprints}${p.seeded ? "  (seeded, empty)" : "  (already present)"}`,
+    );
     console.error(`  resolved via ${p.via}`);
   } else {
     console.log(p.workspace);

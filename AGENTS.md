@@ -108,8 +108,13 @@ Overwrite them.
 
 ## 5. Absolute Ban on `!important` (Never Use `!important`)
 
-- **Strict Ban**: NEVER use `!important` under any circumstances in CSS, HTML styles, Tailwind utility overrides (`!block`, `!hidden`, etc.), inline styles, email templates, or stylesheets anywhere in this project.
-- **Root-Cause Specificity**: If a style needs precedence, solve it cleanly using standard cascade mechanisms: correct `@layer` hierarchy, proper selector specificity, CSS variables, or clean DOM structure.
-- **Zero-Tolerance**: No exceptions for reduced motion, honeypot fields, third-party component overrides, email styling, or quick fixes. `!important` is completely forbidden.
+- **Strict Ban**: NEVER use `!important` under any circumstances in CSS, HTML styles, Tailwind
+  utility overrides (`!block`, `!hidden`, etc.), inline styles, email templates, or stylesheets
+  anywhere in this project.
+- **Root-Cause Specificity**: If a style needs precedence, solve it cleanly using standard cascade
+  mechanisms: correct `@layer` hierarchy, proper selector specificity, CSS variables, or clean DOM
+  structure.
+- **Zero-Tolerance**: No exceptions for reduced motion, honeypot fields, third-party component
+  overrides, email styling, or quick fixes. `!important` is completely forbidden.
 
 <!-- no-important:end -->

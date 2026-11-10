@@ -59,7 +59,12 @@ function getTabletLinkGeometry(
   const paddingLeft = Number(comp.paddingLeft.replace("px", "")) || 6;
   const rawGap = comp.columnGap || comp.gap;
   const gap = Number(rawGap.replace("px", "")) || 4;
-  const collapsedWidth = 44;
+
+  const sampleCollapsed =
+    links.find((l) => l !== targetLink && !l.dataset["expanded"])
+    ?? links.find((l) => l !== targetLink);
+  const collapsedWidth =
+    sampleCollapsed && sampleCollapsed.offsetWidth > 0 ? sampleCollapsed.offsetWidth : 44;
 
   const label = targetLink.querySelector<HTMLElement>(".desktop-nav-label");
   const labelWidth = label ? getLabelWidth(label) : 0;
@@ -104,9 +109,14 @@ function setIndicator(targetLink: HTMLAnchorElement | null, immediate = false): 
     const targetIndex = links.indexOf(target);
     if (targetIndex === -1) return;
 
-    const geometry = getTabletLinkGeometry(nav, links, targetIndex);
-    targetX = geometry.x;
-    targetWidth = geometry.width;
+    if (immediate && target.offsetWidth > 0) {
+      targetX = target.offsetLeft;
+      targetWidth = target.offsetWidth;
+    } else {
+      const geometry = getTabletLinkGeometry(nav, links, targetIndex);
+      targetX = geometry.x;
+      targetWidth = geometry.width;
+    }
 
     // Synchronously animate all labels: target label expands, others shrink to 0 (identical to mobile bottom nav dock)
     for (const link of links) {
@@ -140,6 +150,22 @@ function setIndicator(targetLink: HTMLAnchorElement | null, immediate = false): 
       immediate || prefersReducedMotion ? "none" : (
         `transform 220ms ${EASE_OUT}, width 220ms ${EASE_OUT}, opacity 220ms ${EASE_OUT}`
       );
+
+    // Re-sync with exact layout positions once the transition completes
+    if (!immediate && !prefersReducedMotion) {
+      globalThis.setTimeout(() => {
+        if (!(
+          (currentActiveLink === target || currentHoveredLink === target)
+          && target.offsetWidth > 0
+        )) {
+          return;
+        }
+
+        indicator.style.transition = "none";
+        indicator.style.transform = `translate3d(${target.offsetLeft}px, 0, 0)`;
+        indicator.style.width = `${target.offsetWidth}px`;
+      }, 230);
+    }
   } else {
     // Desktop mode (>= 1024px)
     for (const link of links) {

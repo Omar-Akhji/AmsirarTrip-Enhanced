@@ -138,7 +138,10 @@ import TripCardSkeleton from "@/shared/ui/feedback/TripCardSkeleton.astro";
               </span>
               {Array.from({ length: 4 }, () => (
                 <span class="rounded-full px-3.5 py-1.5 text-xs font-medium bg-stone-100 text-stone-400">
-                  <AsciiSkeleton lines={1} widths={["5.5rem"]} />
+                  <AsciiSkeleton
+                    lines={1}
+                    widths={["5.5rem"]}
+                  />
                 </span>
               ))}
             </nav>
@@ -318,13 +321,25 @@ import TripCardSkeleton from "@/shared/ui/feedback/TripCardSkeleton.astro";
       <div class="flex flex-wrap items-center justify-center gap-2 pbs-2">
         <div class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1 text-xs font-mono font-medium text-white backdrop-blur-md">
           <span class="size-2 rounded-full bg-emerald-400"></span>
-          <AsciiSkeleton class="text-white" lines={1} widths={["7rem"]} />
+          <AsciiSkeleton
+            class="text-white"
+            lines={1}
+            widths={["7rem"]}
+          />
         </div>
         <div class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1 text-xs font-mono font-medium text-white/90 backdrop-blur-md">
-          <AsciiSkeleton class="text-white/90" lines={1} widths={["7.5rem"]} />
+          <AsciiSkeleton
+            class="text-white/90"
+            lines={1}
+            widths={["7.5rem"]}
+          />
         </div>
         <div class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1 text-xs font-mono font-medium text-white/90 backdrop-blur-md">
-          <AsciiSkeleton class="text-white/90" lines={1} widths={["6.5rem"]} />
+          <AsciiSkeleton
+            class="text-white/90"
+            lines={1}
+            widths={["6.5rem"]}
+          />
         </div>
       </div>
     </PageHeaderSkeleton>
@@ -404,9 +419,9 @@ import TripCardSkeleton from "@/shared/ui/feedback/TripCardSkeleton.astro";
 
     {/* Two-Column Swiss Editorial Layout */}
     <div class="relative z-10 mx-auto max-w-7xl 2xl:max-w-360 3xl:max-w-420 px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-      <div class="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-8 xl:gap-8">
+      <div class="grid grid-cols-1 gap-6 lg:grid-cols-golden-rev lg:gap-8 xl:gap-8">
         {/* STICKY SIDEBAR (TOC + AGENCY CARD) */}
-        <aside class="lg:col-span-4">
+        <aside>
           <div class="sticky top-24 space-y-4">
             {/* Table of Contents Card */}
             <div
@@ -427,9 +442,7 @@ import TripCardSkeleton from "@/shared/ui/feedback/TripCardSkeleton.astro";
               <div class="mbs-3 flex flex-col gap-1 text-xs sm:text-sm font-medium">
                 {Array.from({ length: 6 }, (_, idx) => (
                   <div class="flex items-center gap-2 rounded-full px-3 py-2 text-slate-600">
-                    <span class="font-mono text-xs font-bold text-slate-400">
-                      0{idx + 1}
-                    </span>
+                    <span class="font-mono text-xs font-bold text-slate-400">0{idx + 1}</span>
                     <AsciiSkeleton
                       class="text-xs sm:text-sm text-slate-600 flex-1"
                       lines={1}
@@ -476,9 +489,21 @@ import TripCardSkeleton from "@/shared/ui/feedback/TripCardSkeleton.astro";
                 />
               </div>
               <div class="mbs-4 flex flex-col gap-3 border-bs border-white/10 pbs-3 text-xs text-zinc-300">
-                <AsciiSkeleton lines={1} variant="dither" widths={["95%"]} />
-                <AsciiSkeleton lines={1} variant="dither" widths={["65%"]} />
-                <AsciiSkeleton lines={1} variant="dither" widths={["55%"]} />
+                <AsciiSkeleton
+                  lines={1}
+                  variant="dither"
+                  widths={["95%"]}
+                />
+                <AsciiSkeleton
+                  lines={1}
+                  variant="dither"
+                  widths={["65%"]}
+                />
+                <AsciiSkeleton
+                  lines={1}
+                  variant="dither"
+                  widths={["55%"]}
+                />
               </div>
               <div class="mbs-4 pbs-2">
                 <ButtonSkeleton
@@ -492,7 +517,7 @@ import TripCardSkeleton from "@/shared/ui/feedback/TripCardSkeleton.astro";
         </aside>
 
         {/* CONTENT SECTIONS */}
-        <div class="lg:col-span-8 flex flex-col gap-8">
+        <div class="flex flex-col gap-8">
           {Array.from({ length: 3 }, (_, idx) => (
             <article
               class="scroll-mt-24 rounded-2xl border border-stone-200/90 bg-white p-6 shadow-sm sm:p-8"
@@ -510,8 +535,16 @@ import TripCardSkeleton from "@/shared/ui/feedback/TripCardSkeleton.astro";
                 />
               </div>
               <div class="mbs-6 flex flex-col gap-4 text-sm leading-relaxed text-slate-700 sm:text-base">
-                <AsciiSkeleton lines={3} variant="dither" widths={["100%", "98%", "82%"]} />
-                <AsciiSkeleton lines={3} variant="dither" widths={["100%", "95%", "75%"]} />
+                <AsciiSkeleton
+                  lines={3}
+                  variant="dither"
+                  widths={["100%", "98%", "82%"]}
+                />
+                <AsciiSkeleton
+                  lines={3}
+                  variant="dither"
+                  widths={["100%", "95%", "75%"]}
+                />
               </div>
             </article>
           ))}

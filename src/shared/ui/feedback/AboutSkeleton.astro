@@ -53,7 +53,7 @@ const { class: className } = Astro.props;
           <div class="order-1 lg:order-1 lg:col-span-6">
             <div class="flex flex-col gap-3.5 sm:gap-4.5">
               {/* Top Landscape Image */}
-              <div class="relative aspect-video overflow-hidden rounded-2xl border border-stone-200/80 bg-stone-100 shadow-xs">
+              <div class="relative aspect-golden overflow-hidden rounded-2xl border border-stone-200/80 bg-stone-100 shadow-xs">
                 <AsciiSkeleton
                   class="ars-image size-full text-stone-400"
                   rows={24}
@@ -62,15 +62,15 @@ const { class: className } = Astro.props;
               </div>
 
               {/* Bottom Row: 2 Images Side-by-Side */}
-              <div class="grid grid-cols-2 gap-3.5 sm:gap-4.5">
-                <div class="relative aspect-4/5 overflow-hidden rounded-2xl border border-stone-200/80 bg-stone-100 shadow-xs">
+              <div class="grid grid-cols-2 gap-gap-tight">
+                <div class="relative aspect-golden-portrait overflow-hidden rounded-2xl border border-stone-200/80 bg-stone-100 shadow-xs">
                   <AsciiSkeleton
                     class="ars-image size-full text-stone-400"
                     rows={22}
                     variant="dither"
                   />
                 </div>
-                <div class="relative aspect-4/5 overflow-hidden rounded-2xl border border-stone-200/80 bg-stone-100 shadow-xs">
+                <div class="relative aspect-golden-portrait overflow-hidden rounded-2xl border border-stone-200/80 bg-stone-100 shadow-xs">
                   <AsciiSkeleton
                     class="ars-image size-full text-stone-400"
                     rows={22}

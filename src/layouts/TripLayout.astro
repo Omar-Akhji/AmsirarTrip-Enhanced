@@ -9,7 +9,6 @@ const {
   pageTitle,
   pageSubtitle,
   hasUnderline = true,
-  lead,
   smTitle,
   breadcrumbs,
   imageSrc,
@@ -38,13 +37,13 @@ const sl = Astro.slots.has("default");
     class="py-12 sm:py-16 lg:py-24"
     id={sectionId}
   >
-    <div class="mx-auto grid gap-4 sm:gap-6 lg:gap-8 px-4 sm:px-6 lg:px-8 max-inline-7xl 2xl:max-inline-360 3xl:max-inline-420 lg:grid-cols-[minmax(0,1fr)_380px] xl:grid-cols-[minmax(0,1fr)_403px] 2xl:grid-cols-[minmax(0,1fr)_440px]">
+    <div class="mx-auto grid gap-4 sm:gap-6 lg:gap-8 px-2 sm:px-6 lg:px-8 max-inline-7xl 2xl:max-inline-360 3xl:max-inline-420 lg:grid-cols-golden">
       <article
         class="rounded-2xl bg-white p-4 pbe-8 shadow-xs ring-1 ring-zinc-100 xs:p-5 sm:p-6 sm:pbe-12 2xl:p-8 dark:border-2 dark:border-white/10 dark:bg-surface-card/85 dark:ring-0 dark:shadow-[0_4px_20px_-2px_rgba(0,0,0,0.4)]"
         data-ascii="surface"
       >
         <div data-animate="zoom-in">
-          <figure class="relative mbe-8 aspect-4/3 overflow-hidden rounded-xl border border-zinc-100 shadow-md inline-full bg-stone-100 dark:border-white/10 dark:bg-surface-card">
+          <figure class="relative mbe-8 aspect-golden overflow-hidden rounded-xl border border-zinc-100 shadow-md inline-full bg-stone-100 dark:border-white/10 dark:bg-surface-card">
             <Image
               alt={imageAlt}
               class="absolute inset-0 size-full object-cover"
@@ -65,16 +64,11 @@ const sl = Astro.slots.has("default");
         >
           <hgroup class="mbe-8 sm:mbe-12 block border-b border-stone-200 pb-6 sm:pb-8 text-start dark:border-white/10">
             <h2
-              class="text-2xl font-bold tracking-tight text-stone-900 sm:text-3xl md:text-4xl text-balance dark:text-mist-100"
+              class="text-2xl sm:text-3xl lg:text-4xl 2xl:text-[2.625rem] font-bold tracking-tight text-stone-900 leading-[1.15] text-balance dark:text-mist-100"
               id={headingId}
             >
               {title}
             </h2>
-            {lead ?
-              <p class="mbs-3 sm:mbs-4 border-s-2 border-orange-600 ps-4 py-0.5 text-sm sm:text-base leading-relaxed text-stone-600 text-pretty dark:text-mist-300">
-                {lead}
-              </p>
-            : null}
           </hgroup>
         </div>
 

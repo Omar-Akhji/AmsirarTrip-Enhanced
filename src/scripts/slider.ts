@@ -96,7 +96,9 @@ function initSlider(): void {
 
   function positionPagination(): void {
     if (!paginationNav) return;
-    const activeDesc = sliderList.querySelector<HTMLElement>(":scope > .item:first-child .description");
+    const activeDesc = sliderList.querySelector<HTMLElement>(
+      ":scope > .item:first-child .description",
+    );
     if (!activeDesc) return;
     const descRect = activeDesc.getBoundingClientRect();
     const sliderRect = slider.getBoundingClientRect();
@@ -210,9 +212,7 @@ function initSlider(): void {
         if (pendingTargetIndex !== null) {
           const nextTarget = pendingTargetIndex;
           pendingTargetIndex = null;
-          const currentActive = sliderList.querySelector<HTMLElement>(
-            ":scope > .item:first-child",
-          );
+          const currentActive = sliderList.querySelector<HTMLElement>(":scope > .item:first-child");
           const currentIndex = Number(currentActive?.dataset["index"] ?? 0);
           if (nextTarget !== currentIndex) {
             goToSlide(nextTarget);
@@ -259,9 +259,7 @@ function initSlider(): void {
         if (pendingTargetIndex !== null) {
           const nextTarget = pendingTargetIndex;
           pendingTargetIndex = null;
-          const currentActive = sliderList.querySelector<HTMLElement>(
-            ":scope > .item:first-child",
-          );
+          const currentActive = sliderList.querySelector<HTMLElement>(":scope > .item:first-child");
           const currentIndex = Number(currentActive?.dataset["index"] ?? 0);
           if (nextTarget !== currentIndex) {
             goToSlide(nextTarget);
@@ -345,12 +343,8 @@ function initSlider(): void {
       } else {
         // Multi-step backward: bring target slide to the end so moveSlider("prev") prepends it
         for (let i = 0; i < steps - 1; i++) {
-          const lastSlide = sliderList.querySelector<HTMLElement>(
-            ":scope > .item:last-child",
-          );
-          const lastThumb = thumbnail.querySelector<HTMLElement>(
-            ":scope > .item:last-child",
-          );
+          const lastSlide = sliderList.querySelector<HTMLElement>(":scope > .item:last-child");
+          const lastThumb = thumbnail.querySelector<HTMLElement>(":scope > .item:last-child");
           if (lastSlide) {
             sliderList.prepend(lastSlide);
           }
@@ -372,9 +366,8 @@ function initSlider(): void {
     const targetScroll = Math.round(
       section.offsetTop + (targetIndex / (totalSlides - 1)) * maxScroll,
     );
-    const lenis = (
-      globalThis as unknown as { __lenis?: { scrollTo: (y: number) => void } }
-    ).__lenis;
+    const lenis = (globalThis as unknown as { __lenis?: { scrollTo: (y: number) => void } })
+      .__lenis;
     if (lenis) {
       lenis.scrollTo(targetScroll);
     } else {
@@ -467,15 +460,13 @@ function initSlider(): void {
     let targetIndex = 0;
     if (progress >= 0.65) {
       targetIndex = 2;
-    } else if (progress >= 0.30) {
+    } else if (progress >= 0.3) {
       targetIndex = 1;
     } else {
       targetIndex = 0;
     }
 
-    const activeItem = sliderList.querySelector<HTMLElement>(
-      ":scope > .item:first-child",
-    );
+    const activeItem = sliderList.querySelector<HTMLElement>(":scope > .item:first-child");
     const activeIndex = Number(activeItem?.dataset["index"] ?? 0);
 
     if (targetIndex !== activeIndex) {

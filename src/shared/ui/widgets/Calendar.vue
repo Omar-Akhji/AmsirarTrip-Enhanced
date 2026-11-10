@@ -164,10 +164,12 @@ watch(
     <div
       class="overflow-hidden rounded-2xl border border-stone-200/90 bg-white p-4 shadow-xl ring-1 ring-stone-900/5 dark:border-white/10 dark:bg-surface-card dark:shadow-[0_16px_40px_rgba(0,0,0,0.65)] dark:ring-white/5"
     >
-      <div class="mbe-4 flex items-center justify-between border-b border-stone-100 pbe-3 dark:border-white/10">
+      <div
+        class="mbe-4 flex items-center justify-between border-b border-stone-100 pbe-3 dark:border-white/10"
+      >
         <button
           type="button"
-          class="flex size-8 items-center justify-center rounded-lg text-stone-600 transition-colors focus:ring-0 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-1 pointer-fine:hover:bg-stone-100 pointer-fine:hover:text-stone-900 dark:text-mist-400 dark:pointer-fine:hover:bg-white/10 dark:pointer-fine:hover:text-mist-100"
+          class="flex size-8 items-center justify-center rounded-lg text-stone-600 transition-colors focus:ring-0 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-1 dark:text-mist-400 pointer-fine:hover:bg-stone-100 pointer-fine:hover:text-stone-900 dark:pointer-fine:hover:bg-white/10 dark:pointer-fine:hover:text-mist-100"
           :aria-label="t('calendar.prevMonth')"
           @click="navigateMonth('prev')"
         >
@@ -188,14 +190,16 @@ watch(
         </button>
 
         <div class="flex items-center">
-          <span class="font-mono text-sm font-semibold text-stone-900 capitalize dark:text-mist-100">
+          <span
+            class="font-mono text-sm font-semibold text-stone-900 capitalize dark:text-mist-100"
+          >
             {{ formattedMonthYear }}
           </span>
         </div>
 
         <button
           type="button"
-          class="flex size-8 items-center justify-center rounded-lg text-stone-600 transition-colors focus:ring-0 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-1 pointer-fine:hover:bg-stone-100 pointer-fine:hover:text-stone-900 dark:text-mist-400 dark:pointer-fine:hover:bg-white/10 dark:pointer-fine:hover:text-mist-100"
+          class="flex size-8 items-center justify-center rounded-lg text-stone-600 transition-colors focus:ring-0 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-1 dark:text-mist-400 pointer-fine:hover:bg-stone-100 pointer-fine:hover:text-stone-900 dark:pointer-fine:hover:bg-white/10 dark:pointer-fine:hover:text-mist-100"
           :aria-label="t('calendar.nextMonth')"
           @click="navigateMonth('next')"
         >
@@ -293,15 +297,39 @@ watch(
               stroke-width="1.5"
               aria-hidden="true"
             >
-              <path d="M7 4V2.5" stroke-linecap="round" stroke="currentColor"/>
-              <path d="M17 4V2.5" stroke-linecap="round" stroke="currentColor"/>
-              <circle cx="16.5" cy="16.5" r="1.5" stroke="currentColor" stroke-linecap="round"/>
-              <path d="M21.5 9H16.625H10.75M5.875 9H2" stroke-linecap="round" stroke="currentColor"/>
-              <path d="M14 22H10C6.22876 22 4.34315 22 3.17157 20.8284C2 19.6569 2 17.7712 2 14V12C2 8.22876 2 6.34315 3.17157 5.17157C4.34315 4 6.22876 4 10 4H14C17.7712 4 19.6569 4 20.8284 5.17157C22 6.34315 22 8.22876 22 12V14C22 17.7712 22 19.6569 20.8284 20.8284C20.1752 21.4816 19.3001 21.7706 18 21.8985" stroke-linecap="round" stroke="currentColor"/>
+              <path
+                d="M7 4V2.5"
+                stroke-linecap="round"
+                stroke="currentColor"
+              />
+              <path
+                d="M17 4V2.5"
+                stroke-linecap="round"
+                stroke="currentColor"
+              />
+              <circle
+                cx="16.5"
+                cy="16.5"
+                r="1.5"
+                stroke="currentColor"
+                stroke-linecap="round"
+              />
+              <path
+                d="M21.5 9H16.625H10.75M5.875 9H2"
+                stroke-linecap="round"
+                stroke="currentColor"
+              />
+              <path
+                d="M14 22H10C6.22876 22 4.34315 22 3.17157 20.8284C2 19.6569 2 17.7712 2 14V12C2 8.22876 2 6.34315 3.17157 5.17157C4.34315 4 6.22876 4 10 4H14C17.7712 4 19.6569 4 20.8284 5.17157C22 6.34315 22 8.22876 22 12V14C22 17.7712 22 19.6569 20.8284 20.8284C20.1752 21.4816 19.3001 21.7706 18 21.8985"
+                stroke-linecap="round"
+                stroke="currentColor"
+              />
             </svg>
           </div>
           <div class="flex-1 min-inline-0">
-            <p class="font-mono text-[11px] font-medium tracking-wider text-stone-500 uppercase dark:text-mist-400">
+            <p
+              class="font-mono text-[11px] font-medium tracking-wider text-stone-500 uppercase dark:text-mist-400"
+            >
               {{
                 t(
                   initialDate && isSameDay(selectedDate, initialDate) ? "calendar.currentDate" : (
@@ -310,17 +338,21 @@ watch(
                 )
               }}
             </p>
-            <p class="truncate font-mono text-xs font-semibold text-stone-900 capitalize dark:text-mist-100">
+            <p
+              class="truncate font-mono text-xs font-semibold text-stone-900 capitalize dark:text-mist-100"
+            >
               {{ formattedSelectedDate }}
             </p>
           </div>
         </div>
       </div>
 
-      <div class="mbs-4 flex items-center justify-between gap-2 border-t border-stone-100 pbs-3 dark:border-white/10">
+      <div
+        class="mbs-4 flex items-center justify-between gap-2 border-t border-stone-100 pbs-3 dark:border-white/10"
+      >
         <button
           type="button"
-          class="rounded-lg border border-stone-200/90 bg-stone-50 px-3 py-2 font-mono text-xs font-semibold text-stone-700 transition-colors focus:ring-0 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-1 pointer-fine:hover:border-stone-300 pointer-fine:hover:bg-stone-100 dark:border-white/10 dark:bg-white/5 dark:text-mist-200 dark:pointer-fine:hover:bg-white/10"
+          class="rounded-lg border border-stone-200/90 bg-stone-50 px-3 py-2 font-mono text-xs font-semibold text-stone-700 transition-colors focus:ring-0 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-1 dark:border-white/10 dark:bg-white/5 dark:text-mist-200 pointer-fine:hover:border-stone-300 pointer-fine:hover:bg-stone-100 dark:pointer-fine:hover:bg-white/10"
           @click="goToToday"
         >
           {{ t("calendar.today") }}
@@ -329,7 +361,7 @@ watch(
         <div class="flex gap-2">
           <button
             type="button"
-            class="rounded-lg border border-stone-200/90 bg-white px-4 py-2 font-mono text-xs font-semibold text-stone-700 transition-colors duration-150 focus:ring-0 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-1 pointer-fine:hover:border-stone-300 pointer-fine:hover:bg-stone-50 dark:border-white/10 dark:bg-white/5 dark:text-mist-200 dark:pointer-fine:hover:bg-white/10"
+            class="rounded-lg border border-stone-200/90 bg-white px-4 py-2 font-mono text-xs font-semibold text-stone-700 transition-colors duration-150 focus:ring-0 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-1 dark:border-white/10 dark:bg-white/5 dark:text-mist-200 pointer-fine:hover:border-stone-300 pointer-fine:hover:bg-stone-50 dark:pointer-fine:hover:bg-white/10"
             @click="emit('close')"
           >
             {{ t("calendar.cancel") }}

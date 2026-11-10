@@ -4,7 +4,7 @@
   "description": "Licensed Morocco travel agency in Marrakech. Specialist in authentic Sahara desert tours, imperial city excursions, and Atlas Mountains treks.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
+  "background_color": "#FAFAFA",
   "theme_color": "#f97316",
   "icons": [
     {

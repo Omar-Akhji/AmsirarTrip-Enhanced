@@ -126,9 +126,9 @@ const { class: className } = Astro.props;
         </hgroup>
       </div>
 
-      <div class="grid grid-cols-1 items-stretch gap-8 lg:grid-cols-5">
-        {/* Left: Contact Form Card (col-span-3) */}
-        <div class="inline-full lg:col-span-3">
+      <div class="grid grid-cols-1 items-stretch gap-8 lg:grid-cols-golden">
+        {/* Left: Contact Form Card */}
+        <div class="inline-full">
           <div class="rounded-2xl border border-stone-200/90 bg-white p-6 shadow-xs shadow-stone-900/5 block-full sm:p-8">
             <div class="mbe-6 border-b border-stone-100 pbe-5">
               <span class="font-mono text-xs font-semibold tracking-[0.14em] text-orange-600 uppercase">
@@ -250,7 +250,7 @@ const { class: className } = Astro.props;
                 </div>
                 <ButtonSkeleton
                   size="md"
-                  variant="primary"
+                  variant="card"
                   class="w-48"
                 />
               </div>
@@ -258,8 +258,8 @@ const { class: className } = Astro.props;
           </div>
         </div>
 
-        {/* Right: Contact Sidebar (col-span-2) */}
-        <aside class="block-full inline-full lg:col-span-2">
+        {/* Right: Contact Sidebar */}
+        <aside class="block-full inline-full">
           <div class="flex flex-col justify-between rounded-2xl border border-slate-900 bg-slate-950 p-6 text-white shadow-xl block-full sm:p-8">
             <div>
               <header>

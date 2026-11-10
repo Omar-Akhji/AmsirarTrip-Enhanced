@@ -170,9 +170,9 @@ const current = entry.data as unknown as PrivacyCopy;
 
   <!-- 3. Two-Column Swiss Editorial Layout -->
   <div class="relative z-10 mx-auto max-w-7xl 2xl:max-w-360 3xl:max-w-420 px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-    <div class="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-8 xl:gap-8">
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-golden-rev lg:gap-8 xl:gap-8">
       <!-- STICKY SIDEBAR (TOC + AGENCY CARD + ACTIONS) -->
-      <aside class="lg:col-span-4 print:hidden">
+      <aside class="print:hidden">
         <div class="sticky top-24 space-y-4">
           <!-- Table of Contents Card -->
           <nav
@@ -309,7 +309,7 @@ const current = entry.data as unknown as PrivacyCopy;
       </aside>
 
       <!-- MAIN CONTENT COLUMN -->
-      <article class="lg:col-span-8 space-y-6 print:w-full">
+      <article class="space-y-6 print:w-full">
         {current.sections.map((sec, idx) => (
           <section
             aria-labelledby={`heading-${sec.id}`}
@@ -349,7 +349,9 @@ const current = entry.data as unknown as PrivacyCopy;
                     />
                   </div>
                   <div>
-                    <h4 class="text-sm font-bold text-slate-900 dark:text-mist-100">{sec.callout.title}</h4>
+                    <h4 class="text-sm font-bold text-slate-900 dark:text-mist-100">
+                      {sec.callout.title}
+                    </h4>
                     <p class="mbs-1 text-xs sm:text-sm text-slate-700 dark:text-mist-300 leading-relaxed">
                       {sec.callout.desc}
                     </p>

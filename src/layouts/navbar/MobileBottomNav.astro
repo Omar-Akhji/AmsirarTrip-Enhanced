@@ -42,14 +42,13 @@ const NAV_ITEMS: readonly NavDockItem[] = [
   aria-label={t("nav.mainAria")}
   class:list={[
     "group/dock fixed bottom-4 inset-x-0 mx-auto z-40 w-fit max-w-[calc(100vw-1.5rem)] xs:max-w-[calc(100vw-2rem)] mbe-[env(safe-area-inset-bottom,0)]",
-    "flex items-center gap-0.5 xs:gap-1 p-1 xs:p-1.5 rounded-full border-2 border-white/10 bg-white/10 text-white shadow-[0_10px_30px_rgba(3,7,18,0.12)] backdrop-blur-xl transition-all duration-200 md:hidden print:hidden",
-    "data-scrolled:border-stone-200/90 data-scrolled:bg-stone-100/90 data-scrolled:text-dark-grey data-scrolled:shadow-[0_12px_30px_oklch(0%_0_0deg/8%)]",
-    "dark:border-white/12 dark:bg-[oklch(14.1%_0.01_240deg/85%)] dark:text-mist-100 dark:shadow-[0_16px_40px_rgba(0,0,0,0.65)]",
-    "data-scrolled:dark:border-white/12 data-scrolled:dark:bg-[oklch(14.1%_0.01_240deg/90%)] data-scrolled:dark:text-mist-100",
+    "flex items-center gap-0.5 xs:gap-1 p-1 xs:p-1.5 overflow-hidden rounded-full border-2 border-stone-200/90 bg-white/95 text-dark-grey shadow-[0_12px_30px_oklch(0%_0_0deg/8%)] backdrop-blur-xl transition-all duration-200 md:hidden print:hidden",
+    "dark:border-white/12 dark:bg-[oklch(14.1%_0.01_240deg/90%)] dark:text-mist-100 dark:shadow-[0_16px_40px_rgba(0,0,0,0.65)]",
     className,
   ]}
   id="mobile-bottom-nav"
   transition:name="mobile-bottom-nav"
+  transition:persist="mobile-bottom-nav"
 >
   <!-- Sliding indicator identical to desktop navbar indicator -->
   <div
@@ -65,7 +64,7 @@ const NAV_ITEMS: readonly NavDockItem[] = [
       <a
         aria-current={active ? "page" : undefined}
         aria-label={label}
-        class="group/link mobile-dock-link relative z-10 inline-flex min-h-11 h-11 items-center justify-center whitespace-nowrap shrink-0 rounded-full px-2.5 xs:px-3 py-2 text-xs font-semibold select-none transition-colors duration-200 text-white/75 hover:text-white group-data-scrolled/dock:text-dark-grey group-data-scrolled/dock:hover:text-dark group-data-scrolled/dock:dark:text-stone-300 group-data-scrolled/dock:dark:hover:text-white data-indicator:text-white group-data-scrolled/dock:data-indicator:text-white data-indicator:px-3.5 xs:data-indicator:px-4"
+        class="group/link mobile-dock-link relative z-10 inline-flex min-h-11 h-11 items-center justify-center whitespace-nowrap shrink-0 rounded-full px-3 py-2 text-xs font-semibold select-none transition-all duration-200 active:scale-95 text-dark-grey hover:text-dark dark:text-stone-300 dark:hover:text-white data-indicator:text-white"
         data-active={active ? "true" : undefined}
         data-indicator={active ? "true" : undefined}
         href={localize(item.to)}

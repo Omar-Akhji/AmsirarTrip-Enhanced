@@ -116,7 +116,7 @@ onUnmounted(() => {
             @click="handleClose"
           >
             <svg
-              class="size-5 solar solar-close-broken"
+              class="solar solar-close-broken size-5"
               viewBox="0 0 24 24"
               fill="none"
               stroke-width="1.5"

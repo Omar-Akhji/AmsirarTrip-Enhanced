@@ -3,14 +3,11 @@ let scrollListener: (() => void) | undefined;
 
 function updateScrolled(nav: HTMLElement) {
   const isScrolled = window.scrollY > 0;
-  const bottomNav = document.querySelector<HTMLElement>("#mobile-bottom-nav");
 
   if (isScrolled) {
     nav.dataset["scrolled"] = "";
-    if (bottomNav) bottomNav.dataset["scrolled"] = "";
   } else {
     delete nav.dataset["scrolled"];
-    if (bottomNav) delete bottomNav.dataset["scrolled"];
   }
 
   const brandLinks = nav.querySelectorAll(".brand-logo-link");
@@ -21,7 +18,7 @@ function updateScrolled(nav: HTMLElement) {
       "bg-white/10",
       "text-white",
       "shadow-[0_10px_30px_rgba(3,7,18,0.12)]",
-      "dark:bg-white/5"
+      "dark:bg-white/5",
     );
     nav.classList.add(
       "bg-white/90",
@@ -30,7 +27,7 @@ function updateScrolled(nav: HTMLElement) {
       "dark:bg-[#0d0e12]",
       "dark:text-mist-100",
       "dark:border-white/10",
-      "dark:shadow-[0_16px_40px_rgba(0,0,0,0.7)]"
+      "dark:shadow-[0_16px_40px_rgba(0,0,0,0.7)]",
     );
 
     brandLinks.forEach((brandLink) => {
@@ -49,13 +46,13 @@ function updateScrolled(nav: HTMLElement) {
       "dark:bg-[#0d0e12]",
       "dark:text-mist-100",
       "dark:border-white/10",
-      "dark:shadow-[0_16px_40px_rgba(0,0,0,0.7)]"
+      "dark:shadow-[0_16px_40px_rgba(0,0,0,0.7)]",
     );
     nav.classList.add(
       "bg-white/10",
       "text-white",
       "shadow-[0_10px_30px_rgba(3,7,18,0.12)]",
-      "dark:bg-white/5"
+      "dark:bg-white/5",
     );
 
     brandLinks.forEach((brandLink) => {

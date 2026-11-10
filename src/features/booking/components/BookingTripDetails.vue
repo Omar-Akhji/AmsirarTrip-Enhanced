@@ -58,7 +58,7 @@ onMounted(() => {
         </label>
         <div class="relative">
           <svg
-            class="pointer-events-none absolute inset-s-3.5 top-1/2 size-4.5 -translate-y-1/2 text-stone-400 dark:text-mist-400 transition-colors peer-focus:text-orange-500"
+            class="pointer-events-none absolute inset-s-3.5 top-1/2 size-4.5 -translate-y-1/2 text-stone-400 transition-colors peer-focus:text-orange-500 dark:text-mist-400"
             viewBox="0 0 24 24"
             fill="none"
             aria-hidden="true"
@@ -144,9 +144,11 @@ onMounted(() => {
         >
           <template #trigger>
             <span
-              class="flex h-12 cursor-pointer items-center justify-start rounded-xl border border-stone-200/90 bg-stone-50/50 px-4 text-start font-sans text-sm transition-colors inline-full group-focus-visible:border-orange-500 group-focus-visible:bg-white group-focus-visible:ring-2 group-focus-visible:ring-orange-500/20 pointer-fine:group-hover:border-stone-300 pointer-fine:group-hover:bg-white dark:border-white/10 dark:bg-white/5 dark:group-focus-visible:border-orange-500 dark:group-focus-visible:bg-white/10 dark:pointer-fine:group-hover:border-white/20 dark:pointer-fine:group-hover:bg-white/10"
+              class="flex h-12 cursor-pointer items-center justify-start rounded-xl border border-stone-200/90 bg-stone-50/50 px-4 text-start font-sans text-sm transition-colors inline-full group-focus-visible:border-orange-500 group-focus-visible:bg-white group-focus-visible:ring-2 group-focus-visible:ring-orange-500/20 dark:border-white/10 dark:bg-white/5 dark:group-focus-visible:border-orange-500 dark:group-focus-visible:bg-white/10 pointer-fine:group-hover:border-stone-300 pointer-fine:group-hover:bg-white dark:pointer-fine:group-hover:border-white/20 dark:pointer-fine:group-hover:bg-white/10"
               :class="[
-                reservationDate ? 'text-stone-900 dark:text-mist-100' : 'text-stone-400 dark:text-mist-500',
+                reservationDate ?
+                  'text-stone-900 dark:text-mist-100'
+                : 'text-stone-400 dark:text-mist-500',
                 state?.errors?.date && 'border-red-300',
               ]"
               :aria-describedby="state?.errors?.date ? 'reservationDate-error' : undefined"
@@ -158,11 +160,33 @@ onMounted(() => {
                 stroke-width="1.5"
                 aria-hidden="true"
               >
-                <path d="M7 4V2.5" stroke-linecap="round" stroke="currentColor"/>
-                <path d="M17 4V2.5" stroke-linecap="round" stroke="currentColor"/>
-                <circle cx="16.5" cy="16.5" r="1.5" stroke="currentColor" stroke-linecap="round"/>
-                <path d="M21.5 9H16.625H10.75M5.875 9H2" stroke-linecap="round" stroke="currentColor"/>
-                <path d="M14 22H10C6.22876 22 4.34315 22 3.17157 20.8284C2 19.6569 2 17.7712 2 14V12C2 8.22876 2 6.34315 3.17157 5.17157C4.34315 4 6.22876 4 10 4H14C17.7712 4 19.6569 4 20.8284 5.17157C22 6.34315 22 8.22876 22 12V14C22 17.7712 22 19.6569 20.8284 20.8284C20.1752 21.4816 19.3001 21.7706 18 21.8985" stroke-linecap="round" stroke="currentColor"/>
+                <path
+                  d="M7 4V2.5"
+                  stroke-linecap="round"
+                  stroke="currentColor"
+                />
+                <path
+                  d="M17 4V2.5"
+                  stroke-linecap="round"
+                  stroke="currentColor"
+                />
+                <circle
+                  cx="16.5"
+                  cy="16.5"
+                  r="1.5"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M21.5 9H16.625H10.75M5.875 9H2"
+                  stroke-linecap="round"
+                  stroke="currentColor"
+                />
+                <path
+                  d="M14 22H10C6.22876 22 4.34315 22 3.17157 20.8284C2 19.6569 2 17.7712 2 14V12C2 8.22876 2 6.34315 3.17157 5.17157C4.34315 4 6.22876 4 10 4H14C17.7712 4 19.6569 4 20.8284 5.17157C22 6.34315 22 8.22876 22 12V14C22 17.7712 22 19.6569 20.8284 20.8284C20.1752 21.4816 19.3001 21.7706 18 21.8985"
+                  stroke-linecap="round"
+                  stroke="currentColor"
+                />
               </svg>
               <span v-if="reservationDate">
                 {{
@@ -221,7 +245,7 @@ onMounted(() => {
       </label>
       <div class="relative">
         <svg
-          class="pointer-events-none absolute inset-s-3.5 top-3.5 size-4.5 text-stone-400 dark:text-mist-400 transition-colors peer-focus:text-orange-500"
+          class="pointer-events-none absolute inset-s-3.5 top-3.5 size-4.5 text-stone-400 transition-colors peer-focus:text-orange-500 dark:text-mist-400"
           viewBox="0 0 24 24"
           fill="none"
           aria-hidden="true"

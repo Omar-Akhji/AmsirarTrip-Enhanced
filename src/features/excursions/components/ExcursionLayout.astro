@@ -139,7 +139,9 @@ const routeMap = getExcursionRouteMap(excursionKey, excursion?.location ?? "Moro
       </hgroup>
       <div class="space-y-4">
         {overviewParagraphs.map((paragraph) => (
-          <p class="font-sans text-sm sm:text-base leading-relaxed text-stone-700 dark:text-mist-200">{paragraph}</p>
+          <p class="font-sans text-sm sm:text-base leading-relaxed text-stone-700 dark:text-mist-200">
+            {paragraph}
+          </p>
         ))}
       </div>
     </section>

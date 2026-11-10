@@ -33,7 +33,7 @@ const { tagline, title, type, description, isH1 = false } = Astro.props;
   <BlurText
     as={isH1 ? "h1" : "h2"}
     blur={4}
-    style="color: #fff;"
+    style="color: #FAFAFA;"
     class="title m-0 max-sm:text-balance sm:whitespace-nowrap text-left text-shadow-md text-shadow-black/50 text-[clamp(1.85rem,7.5vw,2.4rem)] xs:text-[clamp(2.1rem,7vw,2.75rem)] font-extrabold uppercase leading-[1.08] tracking-tight sm:text-[clamp(2.4rem,4.8vw,3.2rem)] sm:leading-[1.1] md:text-[clamp(2.6rem,4vw,3.8rem)] md:leading-[1.12] lg:text-[clamp(3rem,4.2vw,4.6rem)] 2xl:text-[clamp(3.5rem,4.2vw,5.2rem)] 3xl:text-[clamp(4rem,4vw,6rem)]"
     delay={150}
     direction="bottom"

@@ -22,15 +22,15 @@
 
 Colors are expressed in perceptual **OKLCH** matching `src/styles/global.css`:
 
-| Role                        | Token Name           | OKLCH / Hex Value                        | CSS Variable / Utility    | Visual Intent                                                   |
-| --------------------------- | -------------------- | ---------------------------------------- | ------------------------- | --------------------------------------------------------------- |
-| **Accent (Pacific Orange)** | `orange` / `accent`  | `#f15d30` / `oklch(66.5% 0.191 36.9deg)` | `--color-orange`          | Unified brand primary orange across all UI, badges, icons & CTA |
-| **Accent Dark**             | `orange-dark`        | `#d94a1f`                                | `--color-orange-dark`     | Hover & pressed states on accent                                |
-| **Golden Amber Highlight**  | `amber-orange`       | `#f78848`                                | `--color-amber-orange`    | Gradient top-left highlight partner for buttons & navlinks      |
-| **Yellow Highlight**        | `yellow`             | `#FFB70F`                                | `--color-yellow`          | Golden yellow highlight & accent text                           |
-| **Ink Running Copy**        | `ink`                | `oklch(15% 0.01 65deg)`                  | `--color-ink`             | Deep charcoal running body copy                                 |
-| **Primary Surfaces**        | `stone-50` / `white` | Native Tailwind neutrals                 | `bg-stone-50`, `bg-white` | Light mode clean ground surfaces                                |
-| **Sahara Night Surface**    | `slate-950`          | Native Tailwind slate                    | `bg-slate-950`            | Dark card surfaces, sidebar modules & footer                    |
+| Role                        | Token Name                | OKLCH / Hex Value                        | CSS Variable / Utility                   | Visual Intent                                                   |
+| --------------------------- | ------------------------- | ---------------------------------------- | ---------------------------------------- | --------------------------------------------------------------- |
+| **Accent (Pacific Orange)** | `orange` / `accent`       | `#f15d30` / `oklch(66.5% 0.191 36.9deg)` | `--color-orange`                         | Unified brand primary orange across all UI, badges, icons & CTA |
+| **Accent Dark**             | `orange-dark`             | `#d94a1f`                                | `--color-orange-dark`                    | Hover & pressed states on accent                                |
+| **Golden Amber Highlight**  | `amber-orange`            | `#f78848`                                | `--color-amber-orange`                   | Gradient top-left highlight partner for buttons & navlinks      |
+| **Antique Gold Highlight**  | `yellow` / `antique-gold` | `#B58A45`                                | `--color-yellow`, `--color-antique-gold` | Antique Gold warm luxury highlight & accent text                |
+| **Ink Running Copy**        | `ink`                     | `oklch(15% 0.01 65deg)`                  | `--color-ink`                            | Deep charcoal running body copy                                 |
+| **Primary Surfaces**        | `stone-50` / `white`      | Native Tailwind neutrals                 | `bg-stone-50`, `bg-white`                | Light mode clean ground surfaces                                |
+| **Sahara Night Surface**    | `slate-950`               | Native Tailwind slate                    | `bg-slate-950`                           | Dark card surfaces, sidebar modules & footer                    |
 
 ---
 

@@ -240,7 +240,9 @@ watch(
       :aria-label="`Select country phone code. Currently selected: ${selectedCountry.name}`"
     >
       <!-- Search Input Header -->
-      <div class="relative border-b border-stone-100 bg-stone-50/70 p-2 dark:border-white/10 dark:bg-white/5">
+      <div
+        class="relative border-b border-stone-100 bg-stone-50/70 p-2 dark:border-white/10 dark:bg-white/5"
+      >
         <svg
           class="pointer-events-none absolute inset-s-4.5 top-1/2 size-3.5 -translate-y-1/2 text-stone-400 dark:text-mist-400"
           viewBox="0 0 20 20"
@@ -269,7 +271,7 @@ watch(
         class="flex flex-col px-(--scrollbar-space) py-1 [--scrollbar-space:8px] [--scrollbar-theme:hsl(0deg_0%_75%)]"
       >
         <div
-          class="max-h-60 divide-y divide-stone-100/60 overflow-x-hidden overflow-y-auto overscroll-y-contain pe-(--scrollbar-space) supports-[-moz-appearance:none]:scrollbar-thin supports-[-moz-appearance:none]:[scrollbar-color:color-mix(in_sRGB,var(--scrollbar-theme,hsl(0deg_0%_75%)),transparent_28%)_transparent] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-button]:hidden [&::-webkit-scrollbar-button]:size-0 [&::-webkit-scrollbar-thumb]:rounded-[1000px] [&::-webkit-scrollbar-thumb]:bg-[color-mix(in_sRGB,var(--scrollbar-theme,hsl(0deg_0%_75%)),transparent_28%)] [&::-webkit-scrollbar-thumb:hover]:bg-[color-mix(in_sRGB,var(--scrollbar-theme,hsl(0deg_0%_75%)),transparent_12%)] [&::-webkit-scrollbar-track]:my-2.5 [&::-webkit-scrollbar-track]:rounded-[1000px] [&::-webkit-scrollbar-track]:bg-[color-mix(in_sRGB,var(--scrollbar-theme,hsl(0deg_0%_75%)),transparent_82%)] [&::-webkit-scrollbar-track]:bg-clip-padding dark:divide-white/5"
+          class="max-h-60 divide-y divide-stone-100/60 overflow-x-hidden overflow-y-auto overscroll-y-contain pe-(--scrollbar-space) supports-[-moz-appearance:none]:scrollbar-thin supports-[-moz-appearance:none]:[scrollbar-color:color-mix(in_sRGB,var(--scrollbar-theme,hsl(0deg_0%_75%)),transparent_28%)_transparent] dark:divide-white/5 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-button]:hidden [&::-webkit-scrollbar-button]:size-0 [&::-webkit-scrollbar-thumb]:rounded-[1000px] [&::-webkit-scrollbar-thumb]:bg-[color-mix(in_sRGB,var(--scrollbar-theme,hsl(0deg_0%_75%)),transparent_28%)] [&::-webkit-scrollbar-thumb:hover]:bg-[color-mix(in_sRGB,var(--scrollbar-theme,hsl(0deg_0%_75%)),transparent_12%)] [&::-webkit-scrollbar-track]:my-2.5 [&::-webkit-scrollbar-track]:rounded-[1000px] [&::-webkit-scrollbar-track]:bg-[color-mix(in_sRGB,var(--scrollbar-theme,hsl(0deg_0%_75%)),transparent_82%)] [&::-webkit-scrollbar-track]:bg-clip-padding"
           tabindex="-1"
           data-lenis-prevent
         >
@@ -281,7 +283,8 @@ watch(
             :aria-selected="country.code === selectedCountry.code"
             class="flex w-full cursor-pointer items-center justify-between gap-2 rounded-none px-3 py-2 text-start transition-colors hover:bg-stone-100 focus:bg-stone-100 focus:outline-hidden active:bg-stone-200/70 dark:hover:bg-white/5 dark:focus:bg-white/5"
             :class="{
-              'bg-stone-100 font-medium text-stone-900 dark:bg-white/10 dark:text-mist-100': country.code === selectedCountry.code,
+              'bg-stone-100 font-medium text-stone-900 dark:bg-white/10 dark:text-mist-100':
+                country.code === selectedCountry.code,
             }"
             @click="selectCountry(country)"
           >

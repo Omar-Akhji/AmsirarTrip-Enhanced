@@ -67,7 +67,7 @@ const VARIANTS: Record<string, { ramp: string; wave: string }> = {
 };
 
 function pseudoRandom(seed: number): number {
-  let n = Math.imul(seed | 0, 668265261) ^ Math.imul((seed | 0) + 2654435769 | 0, 2246822507);
+  let n = Math.imul(seed | 0, 668265261) ^ Math.imul(((seed | 0) + 2654435769) | 0, 2246822507);
   n ^= n >>> 15;
   n = Math.imul(n, 739982445);
   n ^= n >>> 12;
@@ -115,8 +115,7 @@ function measureAndBuildRows(inst: SkeletonInstance): void {
 
     const textLines = (baseEl.textContent || "").split("\n").length || 1;
     const lineH = parseFloat(rowStyle.lineHeight) || rowRect.height / textLines;
-    const textColor =
-      !waveColor || /currentcolor/i.test(waveColor) ? baseStyle.color : waveColor;
+    const textColor = !waveColor || /currentcolor/i.test(waveColor) ? baseStyle.color : waveColor;
 
     const C = Math.max(1, Math.ceil((rowRect.width + 160) * dpr));
     const T = Math.max(1, Math.ceil(rowRect.height * dpr));
@@ -137,10 +136,9 @@ function measureAndBuildRows(inst: SkeletonInstance): void {
       }
 
       // Measure actual glyph width instead of 'M' to guarantee 100% full edge coverage
-      const charW = Math.max(
-        1,
-        octx.measureText("█").width || octx.measureText("░").width || 8,
-      ) + letterSpacing;
+      const charW =
+        Math.max(1, octx.measureText("█").width || octx.measureText("░").width || 8)
+        + letterSpacing;
 
       // Generous character count ensuring glyphs reach beyond the right edge by at least 16 chars
       const charsNeeded = Math.ceil(rowRect.width / charW) + 20;
@@ -162,9 +160,9 @@ function measureAndBuildRows(inst: SkeletonInstance): void {
 
     const radiusRaw = rowStyle.borderTopLeftRadius;
     const radius =
-      radiusRaw.endsWith("%")
-        ? (parseFloat(radiusRaw) / 100) * Math.min(rowRect.width, rowRect.height)
-        : parseFloat(radiusRaw) || 0;
+      radiusRaw.endsWith("%") ?
+        (parseFloat(radiusRaw) / 100) * Math.min(rowRect.width, rowRect.height)
+      : parseFloat(radiusRaw) || 0;
 
     return {
       i: rowIdx,
@@ -203,7 +201,7 @@ function drawSkeletonInstance(inst: SkeletonInstance, timestamp: number): void {
   for (const row of inst.rows) {
     if (row.w <= 0 || row.h <= 0) continue;
 
-    const s = ((timestamp - row.i * 90) % inst.speed + inst.speed) % inst.speed / inst.speed;
+    const s = ((((timestamp - row.i * 90) % inst.speed) + inst.speed) % inst.speed) / inst.speed;
     const eased = s < 0.5 ? 4 * s * s * s : 1 - Math.pow(-2 * s + 2, 3) / 2;
 
     const l = row.w * inst.band;
@@ -232,7 +230,10 @@ function drawSkeletonInstance(inst: SkeletonInstance, timestamp: number): void {
       if (b <= f) continue;
 
       const x = (p + 0.5) / SLICES;
-      const alpha = (x < 0.45 ? x / 0.45 : x > 0.55 ? (1 - x) / 0.45 : 1) * inst.opacity;
+      const alpha =
+        (x < 0.45 ? x / 0.45
+        : x > 0.55 ? (1 - x) / 0.45
+        : 1) * inst.opacity;
       ctx.globalAlpha = alpha;
 
       ctx.drawImage(

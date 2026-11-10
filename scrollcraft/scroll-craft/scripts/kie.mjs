@@ -1,21 +1,18 @@
 #!/usr/bin/env node
 /**
- * scrollcraft asset generator: kie.ai unified jobs API.
+ * Scrollcraft asset generator: kie.ai unified jobs API.
  *
- *   POST https://api.kie.ai/api/v1/jobs/createTask   { model, input }
- *   GET  https://api.kie.ai/api/v1/jobs/recordInfo?taskId=...
+ * POST https://api.kie.ai/api/v1/jobs/createTask { model, input } GET
+ * https://api.kie.ai/api/v1/jobs/recordInfo?taskId=...
  *
- * COMMANDS
- *   still  <prompt> <out.png> [--ar 16:9] [--ref a.png]
- *          seedream/5-pro-text-to-image (or -image-to-image with --ref).
- *          Photoreal by default. Stills are cheap; generate, look, reroll.
+ * COMMANDS still <prompt> <out.png> [--ar 16:9] [--ref a.png] seedream/5-pro-text-to-image (or
+ * -image-to-image with --ref). Photoreal by default. Stills are cheap; generate, look, reroll.
  *
- *   shot   <prompt> <in.png> <out.mp4> [--tail b.png] [--dur 5]
- *          kling/v2-1-pro image-to-video. --tail pins the LAST frame, which is
- *          the whole trick behind a seamless chain: leg N's tail is leg N+1's
- *          head, so the cut between them is frame-identical and invisible.
+ * Shot <prompt> <in.png> <out.mp4> [--tail b.png] [--dur 5] kling/v2-1-pro image-to-video. --tail
+ * pins the LAST frame, which is the whole trick behind a seamless chain: leg N's tail is leg N+1's
+ * head, so the cut between them is frame-identical and invisible.
  *
- *   probe  print account credit and exit.
+ * Probe print account credit and exit.
  *
  * Env: KIE_AI_API_KEY, read from the project-root .env if not already set.
  */
@@ -27,9 +24,9 @@ const API = "https://api.kie.ai";
 const UPLOAD = "https://kieai.redpandaai.co/api/file-base64-upload";
 
 const MODELS = {
-  still:     "seedream/5-pro-text-to-image",
+  still: "seedream/5-pro-text-to-image",
   stillEdit: "seedream/5-pro-image-to-image",
-  shot:      "kling/v2-1-pro",
+  shot: "kling/v2-1-pro",
 };
 
 // ---------------------------------------------------------------- key ----
@@ -47,7 +44,8 @@ function findEnv(start) {
 function loadKey() {
   if (process.env.KIE_AI_API_KEY) return process.env.KIE_AI_API_KEY;
   const envPath = findEnv(process.cwd());
-  if (!envPath) throw new Error("KIE_AI_API_KEY not set and no .env found walking up from " + process.cwd());
+  if (!envPath)
+    throw new Error("KIE_AI_API_KEY not set and no .env found walking up from " + process.cwd());
   for (const line of fs.readFileSync(envPath, "utf8").split(/\r?\n/)) {
     const m = line.match(/^\s*KIE_AI_API_KEY\s*=\s*(.+?)\s*$/);
     if (m) return m[1].replace(/^["']|["']$/g, "");
@@ -67,8 +65,13 @@ async function uploadLocal(file) {
   const mime = ext === "jpg" ? "image/jpeg" : `image/${ext}`;
   const dataUrl = `data:${mime};base64,${fs.readFileSync(abs).toString("base64")}`;
   const res = await fetch(UPLOAD, {
-    method: "POST", headers: H,
-    body: JSON.stringify({ base64Data: dataUrl, uploadPath: "scrollcraft", fileName: path.basename(abs) }),
+    method: "POST",
+    headers: H,
+    body: JSON.stringify({
+      base64Data: dataUrl,
+      uploadPath: "scrollcraft",
+      fileName: path.basename(abs),
+    }),
   });
   const j = await res.json();
   const url = j?.data?.downloadUrl || j?.data?.fileUrl || j?.data?.url;
@@ -81,10 +84,13 @@ const asUrl = (v) => (/^https?:\/\//i.test(v) ? Promise.resolve(v) : uploadLocal
 
 async function createTask(model, input) {
   const res = await fetch(`${API}/api/v1/jobs/createTask`, {
-    method: "POST", headers: H, body: JSON.stringify({ model, input }),
+    method: "POST",
+    headers: H,
+    body: JSON.stringify({ model, input }),
   });
   const j = await res.json();
-  if (j.code !== 200 || !j?.data?.taskId) throw new Error(`createTask ${model}: ${JSON.stringify(j)}`);
+  if (j.code !== 200 || !j?.data?.taskId)
+    throw new Error(`createTask ${model}: ${JSON.stringify(j)}`);
   return j.data.taskId;
 }
 
@@ -92,22 +98,32 @@ async function waitTask(taskId, { label = "job", timeoutMs = 15 * 60 * 1000 } = 
   const t0 = Date.now();
   let delay = 4000;
   for (;;) {
-    if (Date.now() - t0 > timeoutMs) throw new Error(`${label}: timed out after ${Math.round((Date.now() - t0) / 1000)}s`);
-    const res = await fetch(`${API}/api/v1/jobs/recordInfo?taskId=${encodeURIComponent(taskId)}`, { headers: H });
+    if (Date.now() - t0 > timeoutMs)
+      throw new Error(`${label}: timed out after ${Math.round((Date.now() - t0) / 1000)}s`);
+    const res = await fetch(`${API}/api/v1/jobs/recordInfo?taskId=${encodeURIComponent(taskId)}`, {
+      headers: H,
+    });
     const j = await res.json();
     const d = j?.data || {};
     const state = d.state || d.status;
     if (state === "success") {
       let out = d.resultJson;
-      if (typeof out === "string") { try { out = JSON.parse(out); } catch {} }
+      if (typeof out === "string") {
+        try {
+          out = JSON.parse(out);
+        } catch {}
+      }
       const urls = out?.resultUrls || out?.result_urls || out?.urls || [];
-      if (!urls.length) throw new Error(`${label}: success with no result url: ${JSON.stringify(d)}`);
+      if (!urls.length)
+        throw new Error(`${label}: success with no result url: ${JSON.stringify(d)}`);
       return urls;
     }
     if (state === "fail" || state === "failed") {
       throw new Error(`${label} failed: ${d.failMsg || d.failCode || JSON.stringify(d)}`);
     }
-    process.stderr.write(`  ${label}: ${state || "queued"} (${Math.round((Date.now() - t0) / 1000)}s)\n`);
+    process.stderr.write(
+      `  ${label}: ${state || "queued"} (${Math.round((Date.now() - t0) / 1000)}s)\n`,
+    );
     await sleep(delay);
     delay = Math.min(delay * 1.25, 15000);
   }
@@ -127,7 +143,9 @@ function flag(argv, name, dflt = null) {
 }
 function flags(argv, name) {
   const out = [];
-  argv.forEach((a, i) => { if (a === name && argv[i + 1]) out.push(argv[i + 1]); });
+  argv.forEach((a, i) => {
+    if (a === name && argv[i + 1]) out.push(argv[i + 1]);
+  });
   return out;
 }
 
@@ -139,10 +157,10 @@ try {
     const r = await fetch(`${API}/api/v1/chat/credit`, { headers: H });
     const j = await r.json();
     console.log("credit:", j.data);
-
   } else if (cmd === "still") {
     const [prompt, out] = rest;
-    if (!prompt || !out) throw new Error('usage: kie.mjs still "<prompt>" <out.png> [--ar 16:9] [--ref a.png]');
+    if (!prompt || !out)
+      throw new Error('usage: kie.mjs still "<prompt>" <out.png> [--ar 16:9] [--ref a.png]');
     const ar = flag(rest, "--ar", "16:9");
     const refs = flags(rest, "--ref");
     let model = MODELS.still;
@@ -164,11 +182,12 @@ try {
     const urls = await waitTask(id, { label: path.basename(out) });
     await download(urls[0], out);
     console.log(out);
-
   } else if (cmd === "shot") {
     const [prompt, head, out] = rest;
     if (!prompt || !head || !out) {
-      throw new Error('usage: kie.mjs shot "<prompt>" <head.png> <out.mp4> [--tail b.png] [--dur 5]');
+      throw new Error(
+        'usage: kie.mjs shot "<prompt>" <head.png> <out.mp4> [--tail b.png] [--dur 5]',
+      );
     }
     const dur = flag(rest, "--dur", "5");
     const tail = flag(rest, "--tail");
@@ -178,7 +197,8 @@ try {
       duration: String(dur),
       // Camera-move clips are graded on smoothness, so the negative prompt
       // targets exactly what breaks a scrub: judder, warping, cuts.
-      negative_prompt: "blur, distortion, low quality, warping, morphing, jitter, flicker, text, watermark, cut, scene change",
+      negative_prompt:
+        "blur, distortion, low quality, warping, morphing, jitter, flicker, text, watermark, cut, scene change",
       cfg_scale: 0.5,
     };
     if (tail) input.tail_image_url = await asUrl(tail);
@@ -186,7 +206,6 @@ try {
     const urls = await waitTask(id, { label: path.basename(out), timeoutMs: 20 * 60 * 1000 });
     await download(urls[0], out);
     console.log(out);
-
   } else {
     console.error(`scrollcraft asset generator
 
