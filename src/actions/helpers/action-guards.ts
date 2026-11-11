@@ -4,13 +4,21 @@ import { logSecurityEvent } from "../../lib/server-utils";
 import { verifyRecaptcha } from "../../services/recaptcha";
 
 /**
- * Safely extracts client IP address prioritizing trusted proxy headers (X-Real-IP) set by the edge
- * Nginx reverse proxy, falling back to Astro context.clientAddress.
+ * Safely extracts client IP address prioritizing trusted proxy headers (x-vercel-forwarded-for,
+ * x-real-ip, or the first hop of x-forwarded-for), falling back to Astro context.clientAddress.
  */
 export function extractClientIp(request: Request, clientAddress?: string | undefined): string {
+  const vercelIp = request.headers.get("x-vercel-forwarded-for")?.split(",", 1)[0]?.trim();
+  if (vercelIp && isIP(vercelIp) !== 0) {
+    return vercelIp;
+  }
   const realIp = request.headers.get("x-real-ip")?.trim();
   if (realIp && isIP(realIp) !== 0) {
     return realIp;
+  }
+  const forwardedFor = request.headers.get("x-forwarded-for")?.split(",", 1)[0]?.trim();
+  if (forwardedFor && isIP(forwardedFor) !== 0) {
+    return forwardedFor;
   }
   const fallback = clientAddress?.trim();
   return fallback && isIP(fallback) !== 0 ? fallback : "unknown";
@@ -18,7 +26,7 @@ export function extractClientIp(request: Request, clientAddress?: string | undef
 
 export function isHoneypotTriggered(value: string, ip: string, actionName: string): boolean {
   if (value.trim().length > 0) {
-    if (import.meta.env.DEV || ip === "::1" || ip === "127.0.0.1") {
+    if (ip === "::1" || ip === "127.0.0.1" || import.meta.env.DEV) {
       logSecurityEvent(
         "HONEYPOT",
         ip,

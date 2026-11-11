@@ -58,7 +58,10 @@ function formatLogEntry(level: LogLevel, message: string, meta?: Record<string, 
   return JSON.stringify(entry);
 }
 
+const isServerless = Boolean(process.env["VERCEL"] || process.env["AWS_LAMBDA_FUNCTION_NAME"]);
+
 function writeToFile(level: LogLevel, line: string) {
+  if (isServerless) return;
   try {
     ensureLogDir();
     getStream(level).write(`${line}\n`);
