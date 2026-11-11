@@ -76,7 +76,7 @@ const handleKeyDown = (event: KeyboardEvent) => {
   if (focusableElements.length === 0) return;
 
   const firstFocusable = focusableElements[0];
-  const lastFocusable = focusableElements.at(-1);
+  const lastFocusable = focusableElements[focusableElements.length - 1];
 
   if (event.shiftKey) {
     if (document.activeElement === firstFocusable) {

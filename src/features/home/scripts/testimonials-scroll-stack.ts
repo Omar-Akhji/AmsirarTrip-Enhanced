@@ -45,6 +45,8 @@ function setupTestimonialsScrollStack(element: HTMLElement): (() => void) | null
     const activeRange = 0.9;
     const step = count > 1 ? activeRange / (count - 1) : 1;
     const cardStepOffset = Math.min(14, Math.floor(96 / count));
+    const cardHeight = cardSlots[0]?.offsetHeight || 420;
+    const initialY = Math.round(cardHeight * 0.88);
 
     for (let i = 0; i < count; i++) {
       const slot = cardSlots[i];
@@ -72,7 +74,7 @@ function setupTestimonialsScrollStack(element: HTMLElement): (() => void) | null
         const pCard = clamp01((progress - start) / step);
 
         const targetY = i * cardStepOffset;
-        y = 280 - pCard * (280 - targetY);
+        y = initialY - pCard * (initialY - targetY);
         opacity = clamp01(pCard * 2.5);
 
         // Subsequent cards landing on top of card i

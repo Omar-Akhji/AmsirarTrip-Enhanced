@@ -24,9 +24,9 @@ const t = useTranslations(locale);
     style={`--runway: ${testimonials.length * 40}vh;`}
   >
     <!-- Pinned Stage: Stays sticky in the viewport, using full container width -->
-    <div class="testimonials-stack-stage static h-auto top-auto select-auto motion-safe:sticky motion-safe:top-18 motion-safe:h-105 sm:motion-safe:h-110 motion-safe:select-none w-full mx-auto overflow-visible">
+    <div class="testimonials-stack-stage static h-auto top-auto select-auto motion-safe:sticky motion-safe:top-18 motion-safe:h-135 sm:motion-safe:h-140 motion-safe:select-none w-full mx-auto overflow-visible">
       <!-- Cards Stack Layer with 3D perspective -->
-      <div class="cards-stack-layer static h-auto flex flex-col gap-4 motion-safe:block motion-safe:absolute motion-safe:inset-x-0 motion-safe:top-2 motion-safe:h-78.75 sm:motion-safe:h-82.5 motion-safe:will-change-transform motion-safe:z-10 motion-safe:perspective-distant">
+      <div class="cards-stack-layer static h-auto flex flex-col gap-4 motion-safe:block motion-safe:absolute motion-safe:inset-x-0 motion-safe:top-2 motion-safe:h-105 sm:motion-safe:h-108 motion-safe:will-change-transform motion-safe:z-10 motion-safe:perspective-distant">
         {testimonials.map((tst, index) => {
           const guestName = t(`testimonials.items.${tst.key}.name`);
           const guestCountry = t(`testimonials.items.${tst.key}.country`);
@@ -35,7 +35,7 @@ const t = useTranslations(locale);
           return (
             <div
               data-stack-card={index}
-              class="testimonial-card-slot static inset-auto opacity-100 transform-none h-78.75 sm:h-82.5 w-full origin-top motion-safe:absolute motion-safe:inset-x-0 motion-safe:top-0 motion-safe:will-change-transform"
+              class="testimonial-card-slot static inset-auto opacity-100 transform-none h-105 sm:h-108 w-full origin-top motion-safe:absolute motion-safe:inset-x-0 motion-safe:top-0 motion-safe:will-change-transform"
               style={`z-index: ${10 + index * 2};`}
             >
               <article
