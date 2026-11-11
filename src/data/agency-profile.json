@@ -2,14 +2,17 @@
   "name": "Amsirar Trip",
   "legalName": "Amsirar Trip SARL",
   "licenseNumber": "Agrément Ministère du Tourisme N° 24/TT/RAK",
+  "ice": "001627534000007",
+  "if": "6520387",
   "patente": "45129840",
-  "rc": "RC Marrakech N° 82415",
-  "foundingDate": "2004",
+  "rc": "RC Marrakech N° 25397",
+  "rcNumber": "25397",
+  "foundingDate": "2006",
   "priceRange": "€€",
   "employeeRange": { "min": 10, "max": 50 },
   "address": {
-    "fullAddress": "Imm. J appt N° 5, Résidence La Perle de l'Atlas, angle Rue aboubakr, Marrakech",
-    "streetAddress": "Imm. J appt N° 5, Résidence La Perle de l'Atlas, angle Rue aboubakr",
+    "fullAddress": "APT 5 RDC IMM J RES PERLE DE L'ATLAS QI MARRAKECH",
+    "streetAddress": "APT 5 RDC IMM J RES PERLE DE L'ATLAS QI",
     "addressLocality": "Marrakech",
     "addressRegion": "Marrakech-Safi",
     "postalCode": "40000",
@@ -18,8 +21,11 @@
   "geo": { "latitude": 31.6295, "longitude": -7.9811 },
   "contact": {
     "phones": [
-      { "display": "+212 (0) 6 61 17 31 44", "value": "+212661173144" }
+      { "display": "+212 (0) 6 61 17 23 93", "value": "+212661172393" },
+      { "display": "+212 (0) 5 24 43 44 09 (Fax)", "value": "+212524434409" }
     ],
+    "mobile": "+212661172393",
+    "fax": "+212524434409",
     "emails": ["amsirare@gmail.com"],
     "workingHours": "09:00 to 21:00 GMT+1"
   },

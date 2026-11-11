@@ -41,9 +41,8 @@ const menuId = `${id}-popover`;
     popovertarget={menuId}
     aria-haspopup="menu"
     aria-label={`${t("language")}: ${currentLanguage.name}`}
-    style="anchor-name: --lang-selector-btn;"
     class:list={[
-      "group/lang-btn relative inline-flex items-center rounded-full font-medium transition-all duration-200 cursor-pointer select-none active:scale-[0.98]",
+      "[anchor-name:--lang-selector-btn] group/lang-btn relative inline-flex items-center rounded-full font-medium transition-all duration-200 cursor-pointer select-none active:scale-[0.98]",
       "border border-white/20 bg-black/30 backdrop-blur-md text-white shadow-xs hover:border-white/40 hover:bg-white/15 hover:shadow-md",
       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange/80 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950",
       "group-has-[:popover-open]/lang-root:border-white/45 group-has-[:popover-open]/lang-root:bg-white/20 group-has-[:popover-open]/lang-root:shadow-[0_4px_16px_rgb(0_0_0/0.25)]",

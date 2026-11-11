@@ -1,4 +1,5 @@
 ---
+import agencyProfile from "@/data/agency-profile.json";
 import { useTranslations } from "@/i18n/utils";
 import { getRelativeLocaleUrl } from "astro:i18n";
 
@@ -17,7 +18,7 @@ const currentYear = new Date().getFullYear();
         <p class="text-sm font-medium text-zinc-500">
           &copy; <time datetime={currentYear.toString()}>{currentYear}</time>
           <span class="mx-1.5 opacity-20">&bull;</span>
-          <span class="text-zinc-400">Amsirar Trip SARL</span>
+          <span class="text-zinc-400">{agencyProfile.legalName}</span>
           <span class="mx-1.5 hidden opacity-20 sm:inline-block">&bull;</span>
           <span class="inline sm:hidden"> </span>
           {t("footer.copyright")}

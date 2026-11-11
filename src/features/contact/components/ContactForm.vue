@@ -255,7 +255,6 @@ onUnmounted(() => {
           <div
             aria-hidden="true"
             class="hidden"
-            style="display: none"
           >
             <input
               type="text"

@@ -4,8 +4,11 @@ interface AgencyProfileData {
   readonly name: string;
   readonly legalName?: string | undefined;
   readonly licenseNumber?: string | undefined;
+  readonly ice?: string | undefined;
+  readonly if?: string | undefined;
   readonly patente?: string | undefined;
   readonly rc?: string | undefined;
+  readonly rcNumber?: string | undefined;
   readonly foundingDate: string;
   readonly priceRange?: string | undefined;
   readonly employeeRange: { readonly min: number; readonly max: number };
@@ -141,7 +144,8 @@ export function generateTourJsonLd(data: TourStructuredData): Record<string, unk
       legalName: agency.legalName ?? agency.name,
       license: agency.licenseNumber,
       identifier: agency.rc,
-      taxID: agency.patente,
+      taxID: agency.if ?? agency.patente,
+      vatID: agency.ice,
       priceRange: agency.priceRange ?? "€€",
       address: {
         "@type": "PostalAddress",
@@ -158,7 +162,7 @@ export function generateTourJsonLd(data: TourStructuredData): Record<string, unk
       },
       contactPoint: {
         "@type": "ContactPoint",
-        telephone: "+212-661-173-144",
+        telephone: "+212-661-172-393",
         contactType: "Customer Service",
         availableLanguage: ["English", "French", "Spanish", "German"],
       },
@@ -190,7 +194,8 @@ export function generateExcursionJsonLd(data: ExcursionStructuredData): Record<s
       legalName: agency.legalName ?? agency.name,
       license: agency.licenseNumber,
       identifier: agency.rc,
-      taxID: agency.patente,
+      taxID: agency.if ?? agency.patente,
+      vatID: agency.ice,
       priceRange: agency.priceRange ?? "€€",
       address: {
         "@type": "PostalAddress",
@@ -207,7 +212,7 @@ export function generateExcursionJsonLd(data: ExcursionStructuredData): Record<s
       },
       contactPoint: {
         "@type": "ContactPoint",
-        telephone: "+212-661-173-144",
+        telephone: "+212-661-172-393",
         contactType: "Customer Service",
         availableLanguage: ["English", "French", "Spanish", "German"],
       },
@@ -258,8 +263,12 @@ export function generateOrganizationJsonLd(): Record<string, unknown> {
     description:
       "Amsirar Trip is a specialist Morocco travel agency offering authentic Sahara desert tours, imperial city excursions, Atlas Mountains treks, and cultural experiences. Book your Morocco adventure with local experts.",
     legalName: agency.legalName ?? agency.name,
+    identifier: agency.rc,
+    taxID: agency.if ?? agency.patente,
+    vatID: agency.ice,
     foundingDate: agency.foundingDate,
-    telephone: "+212-661-173-144",
+    telephone: "+212-661-172-393",
+    faxNumber: "+212-524-434-409",
     email: agency.contact.emails[0] ?? "contact@amsirartrip.com",
     hasMap: `https://www.google.com/maps?q=${agency.geo.latitude},${agency.geo.longitude}`,
     numberOfEmployees: {
@@ -315,7 +324,8 @@ export function generateOrganizationJsonLd(): Record<string, unknown> {
     },
     contactPoint: {
       "@type": "ContactPoint",
-      telephone: "+212661173144",
+      telephone: "+212661172393",
+      faxNumber: "+212524434409",
       contactType: "Customer Service",
       areaServed: "MA",
       availableLanguage: ["English", "French", "Spanish", "German"],
@@ -366,8 +376,8 @@ export function generateWebsiteJsonLd(): Record<string, unknown> {
     "@type": "WebSite",
     "@id": `${BASE_URL}/#website`,
     name: "Amsirar Trip",
-    alternateName: ["AmsirarTrip", "Amsirar"],
-    url: "https://amsirartrip.com",
+    alternateName: ["AmsirarTrip", "Amsirar", "Amsirar Trip Morocco", "Amsirar Tours"],
+    url: `${BASE_URL}/`,
     description:
       "Amsirar Trip offers authentic Morocco tours, Sahara desert adventures, and cultural experiences with local experts.",
     publisher: { "@id": `${BASE_URL}/#organization` },

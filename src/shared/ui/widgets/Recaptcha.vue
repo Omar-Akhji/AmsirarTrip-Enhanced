@@ -97,23 +97,7 @@ defineExpose({ getValue, reset });
       ref="capWidget"
       :data-cap-api-endpoint="activeEndpoint"
       data-cap-hidden-field-name="recaptchaToken"
-      class="cap-theme-adaptive max-w-full"
+      class="block m-0 p-0 max-w-full [--cap-border-radius:0.625rem] [--cap-focus-ring:#ea580c] dark:[--cap-background:#1a1a1a] dark:[--cap-border-color:rgb(255_255_255/0.15)] dark:[--cap-color:#fafafa]"
     />
   </div>
 </template>
-
-<style scoped>
-.cap-theme-adaptive {
-  --cap-border-radius: 0.625rem;
-  --cap-focus-ring: #ea580c;
-  display: block;
-  margin: 0;
-  padding: 0;
-}
-
-:global(.dark) .cap-theme-adaptive {
-  --cap-background: #1a1a1a;
-  --cap-border-color: rgba(255, 255, 255, 0.15);
-  --cap-color: #fafafa;
-}
-</style>

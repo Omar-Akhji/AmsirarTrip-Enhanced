@@ -17,15 +17,15 @@
 
 import { PUBLIC_WHATSAPP_NUMBER } from "astro:env/client";
 
-const raw: string = PUBLIC_WHATSAPP_NUMBER ?? "212661173144";
+const raw: string = PUBLIC_WHATSAPP_NUMBER ?? "212661172393";
 
 /** WhatsApp link — wa.me/{number} */
 export const WHATSAPP_LINK = `https://wa.me/${raw}`;
 
-/** Tel link for the phone number */
+/** Tel link for the mobile phone number */
 export const PHONE_LINK = `tel:+${raw}`;
 
-/** Human-readable phone display: "+212 (0) 6 61 17 31 44" */
+/** Human-readable phone display: "+212 (0) 6 61 17 23 93" */
 export const PHONE_DISPLAY = (() => {
   const cleaned = raw.replaceAll(/\D/g, "");
   if (cleaned.length === 12 && cleaned.startsWith("212")) {
@@ -34,3 +34,8 @@ export const PHONE_DISPLAY = (() => {
   }
   return `+${cleaned}`;
 })();
+
+/** Agency Fax & Landline */
+export const FAX_NUMBER = "212524434409";
+export const FAX_LINK = "tel:+212524434409";
+export const FAX_DISPLAY = "+212 (0) 5 24 43 44 09";

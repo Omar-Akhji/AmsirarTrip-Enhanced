@@ -74,22 +74,23 @@ const openModal = () => {
         class="mbs-6"
       >
         <ul
-          class="social"
+          class="flex flex-wrap items-center justify-center gap-3 p-0 m-0 list-none"
           role="list"
         >
           <li
             :data-tooltip="t('footer.social.facebook')"
-            class="social-facebook"
+            class="relative isolate size-11 sm:size-12 shrink-0 [--bg:#1877f2] has-[a:hover]:z-20 has-[a:focus-visible]:z-20 after:content-[attr(data-tooltip)] after:absolute after:start-1/2 after:-top-[45%] after:-translate-x-1/2 after:z-0 after:py-1 after:px-3 after:font-inherit after:text-xs after:font-semibold after:leading-tight after:text-white after:whitespace-nowrap after:pointer-events-none after:invisible after:opacity-0 after:[background:var(--bg,#070707)] after:border after:border-white/15 after:rounded-full after:shadow-[0_4px_12px_rgb(0_0_0/0.4)] after:transition-[inset,visibility,opacity] after:duration-300 has-[a:hover]:after:-top-[70%] has-[a:hover]:after:visible has-[a:hover]:after:opacity-100 has-[a:focus-visible]:after:-top-[70%] has-[a:focus-visible]:after:visible has-[a:focus-visible]:after:opacity-100 motion-reduce:after:transition-none"
           >
             <a
               :aria-label="t('footer.social.facebook')"
               href="https://www.facebook.com/profile.php?id=61571322141368"
               rel="noopener noreferrer"
               target="_blank"
+              class="group/social-link relative z-1 flex size-full aspect-square items-center justify-center overflow-hidden rounded-full border-[1.5px] border-white/15 bg-white/[0.04] text-slate-300 no-underline outline-none transition-[color,border-color,box-shadow] duration-300 hover:border-white/30 hover:text-white hover:shadow-[0_4px_16px_rgb(0_0_0/0.4)] focus-visible:border-white/30 focus-visible:text-white focus-visible:shadow-[0_4px_16px_rgb(0_0_0/0.4)] focus-visible:outline-2 focus-visible:outline-(--color-orange,#f70) focus-visible:outline-offset-2 after:content-[''] after:absolute after:inset-x-0 after:top-full after:bottom-0 after:pointer-events-none after:[background:var(--bg,#070707)] after:transition-[inset] after:duration-300 after:ease-out hover:after:top-0 focus-visible:after:top-0 motion-reduce:transition-none motion-reduce:after:transition-none"
             >
               <svg
                 aria-hidden="true"
-                class="size-5 shrink-0 fill-current"
+                class="relative z-1 size-5 shrink-0 fill-current transition-transform duration-300 group-hover/social-link:scale-110 group-focus-visible/social-link:scale-110 motion-reduce:transition-none"
                 viewBox="0 0 20 20"
               >
                 <path
@@ -101,17 +102,18 @@ const openModal = () => {
 
           <li
             :data-tooltip="t('footer.social.twitter')"
-            class="social-twitter"
+            class="relative isolate size-11 sm:size-12 shrink-0 [--bg:#101419] has-[a:hover]:z-20 has-[a:focus-visible]:z-20 after:content-[attr(data-tooltip)] after:absolute after:start-1/2 after:-top-[45%] after:-translate-x-1/2 after:z-0 after:py-1 after:px-3 after:font-inherit after:text-xs after:font-semibold after:leading-tight after:text-white after:whitespace-nowrap after:pointer-events-none after:invisible after:opacity-0 after:[background:var(--bg,#070707)] after:border after:border-white/15 after:rounded-full after:shadow-[0_4px_12px_rgb(0_0_0/0.4)] after:transition-[inset,visibility,opacity] after:duration-300 has-[a:hover]:after:-top-[70%] has-[a:hover]:after:visible has-[a:hover]:after:opacity-100 has-[a:focus-visible]:after:-top-[70%] has-[a:focus-visible]:after:visible has-[a:focus-visible]:after:opacity-100 motion-reduce:after:transition-none"
           >
             <a
               :aria-label="t('footer.social.twitter')"
               href="https://x.com/AmsirarTravel"
               rel="noopener noreferrer"
               target="_blank"
+              class="group/social-link relative z-1 flex size-full aspect-square items-center justify-center overflow-hidden rounded-full border-[1.5px] border-white/15 bg-white/[0.04] text-slate-300 no-underline outline-none transition-[color,border-color,box-shadow] duration-300 hover:border-white/30 hover:text-white hover:shadow-[0_4px_16px_rgb(0_0_0/0.4)] focus-visible:border-white/30 focus-visible:text-white focus-visible:shadow-[0_4px_16px_rgb(0_0_0/0.4)] focus-visible:outline-2 focus-visible:outline-(--color-orange,#f70) focus-visible:outline-offset-2 after:content-[''] after:absolute after:inset-x-0 after:top-full after:bottom-0 after:pointer-events-none after:[background:var(--bg,#070707)] after:transition-[inset] after:duration-300 after:ease-out hover:after:top-0 focus-visible:after:top-0 motion-reduce:transition-none motion-reduce:after:transition-none"
             >
               <svg
                 aria-hidden="true"
-                class="size-4.5 shrink-0 fill-current"
+                class="relative z-1 size-4.5 shrink-0 fill-current transition-transform duration-300 group-hover/social-link:scale-110 group-focus-visible/social-link:scale-110 motion-reduce:transition-none"
                 viewBox="0 0 24 24"
               >
                 <path
@@ -123,17 +125,18 @@ const openModal = () => {
 
           <li
             :data-tooltip="t('footer.social.instagram')"
-            class="social-instagram"
+            class="relative isolate size-11 sm:size-12 shrink-0 [--bg:linear-gradient(-45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5)] has-[a:hover]:z-20 has-[a:focus-visible]:z-20 after:content-[attr(data-tooltip)] after:absolute after:start-1/2 after:-top-[45%] after:-translate-x-1/2 after:z-0 after:py-1 after:px-3 after:font-inherit after:text-xs after:font-semibold after:leading-tight after:text-white after:whitespace-nowrap after:pointer-events-none after:invisible after:opacity-0 after:[background:var(--bg,#070707)] after:border after:border-white/15 after:rounded-full after:shadow-[0_4px_12px_rgb(0_0_0/0.4)] after:transition-[inset,visibility,opacity] after:duration-300 has-[a:hover]:after:-top-[70%] has-[a:hover]:after:visible has-[a:hover]:after:opacity-100 has-[a:focus-visible]:after:-top-[70%] has-[a:focus-visible]:after:visible has-[a:focus-visible]:after:opacity-100 motion-reduce:after:transition-none"
           >
             <a
               :aria-label="t('footer.social.instagram')"
               href="https://www.instagram.com/amsirar.trip?igsh=ZDlxanNsbTA5M2Zi"
               rel="noopener noreferrer"
               target="_blank"
+              class="group/social-link relative z-1 flex size-full aspect-square items-center justify-center overflow-hidden rounded-full border-[1.5px] border-white/15 bg-white/[0.04] text-slate-300 no-underline outline-none transition-[color,border-color,box-shadow] duration-300 hover:border-white/30 hover:text-white hover:shadow-[0_4px_16px_rgb(0_0_0/0.4)] focus-visible:border-white/30 focus-visible:text-white focus-visible:shadow-[0_4px_16px_rgb(0_0_0/0.4)] focus-visible:outline-2 focus-visible:outline-(--color-orange,#f70) focus-visible:outline-offset-2 after:content-[''] after:absolute after:inset-x-0 after:top-full after:bottom-0 after:pointer-events-none after:[background:var(--bg,#070707)] after:transition-[inset] after:duration-300 after:ease-out hover:after:top-0 focus-visible:after:top-0 motion-reduce:transition-none motion-reduce:after:transition-none"
             >
               <svg
                 aria-hidden="true"
-                class="size-5 shrink-0"
+                class="relative z-1 size-5 shrink-0 transition-transform duration-300 group-hover/social-link:scale-110 group-focus-visible/social-link:scale-110 motion-reduce:transition-none"
                 fill="none"
                 stroke="currentColor"
                 stroke-linecap="round"
@@ -158,17 +161,18 @@ const openModal = () => {
 
           <li
             :data-tooltip="t('footer.social.tiktok')"
-            class="social-tiktok"
+            class="relative isolate size-11 sm:size-12 shrink-0 [--bg:#010101] has-[a:hover]:z-20 has-[a:focus-visible]:z-20 after:content-[attr(data-tooltip)] after:absolute after:start-1/2 after:-top-[45%] after:-translate-x-1/2 after:z-0 after:py-1 after:px-3 after:font-inherit after:text-xs after:font-semibold after:leading-tight after:text-white after:whitespace-nowrap after:pointer-events-none after:invisible after:opacity-0 after:[background:var(--bg,#070707)] after:border after:border-white/15 after:rounded-full after:shadow-[0_4px_12px_rgb(0_0_0/0.4)] after:transition-[inset,visibility,opacity] after:duration-300 has-[a:hover]:after:-top-[70%] has-[a:hover]:after:visible has-[a:hover]:after:opacity-100 has-[a:focus-visible]:after:-top-[70%] has-[a:focus-visible]:after:visible has-[a:focus-visible]:after:opacity-100 motion-reduce:after:transition-none"
           >
             <a
               :aria-label="t('footer.social.tiktok')"
               href="https://www.tiktok.com/@amsirartrip"
               rel="noopener noreferrer"
               target="_blank"
+              class="group/social-link relative z-1 flex size-full aspect-square items-center justify-center overflow-hidden rounded-full border-[1.5px] border-white/15 bg-white/[0.04] text-slate-300 no-underline outline-none transition-[color,border-color,box-shadow] duration-300 hover:border-white/30 hover:text-white hover:shadow-[0_4px_16px_rgb(0_0_0/0.4)] focus-visible:border-white/30 focus-visible:text-white focus-visible:shadow-[0_4px_16px_rgb(0_0_0/0.4)] focus-visible:outline-2 focus-visible:outline-(--color-orange,#f70) focus-visible:outline-offset-2 after:content-[''] after:absolute after:inset-x-0 after:top-full after:bottom-0 after:pointer-events-none after:[background:var(--bg,#070707)] after:transition-[inset] after:duration-300 after:ease-out hover:after:top-0 focus-visible:after:top-0 motion-reduce:transition-none motion-reduce:after:transition-none"
             >
               <svg
                 aria-hidden="true"
-                class="tiktok-default size-5 shrink-0 fill-current"
+                class="tiktok-default relative z-1 size-5 shrink-0 fill-current transition-transform duration-300 group-hover/social-link:hidden group-focus-visible/social-link:hidden group-hover/social-link:scale-110 group-focus-visible/social-link:scale-110 motion-reduce:transition-none"
                 viewBox="0 0 448 512"
               >
                 <path
@@ -177,7 +181,7 @@ const openModal = () => {
               </svg>
               <svg
                 aria-hidden="true"
-                class="tiktok-hover size-5.5 shrink-0"
+                class="tiktok-hover relative z-1 hidden size-5.5 shrink-0 transition-transform duration-300 group-hover/social-link:block group-focus-visible/social-link:block group-hover/social-link:scale-110 group-focus-visible/social-link:scale-110 motion-reduce:transition-none"
                 fill="none"
                 viewBox="0 0 32 32"
               >
@@ -212,167 +216,3 @@ const openModal = () => {
     <NewsletterModal :locale="locale" />
   </div>
 </template>
-
-<style scoped>
-.social {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-
-.social li {
-  position: relative;
-  isolation: isolate;
-  flex: 0 0 2.75rem;
-  width: 2.75rem;
-  height: 2.75rem;
-}
-
-.social-facebook {
-  --bg: #1877f2;
-}
-
-.social-twitter {
-  --bg: #101419;
-}
-
-.social-instagram {
-  --bg: linear-gradient(-45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
-}
-
-.social-tiktok {
-  --bg: #010101;
-}
-
-@media (width >= 640px) {
-  .social li {
-    flex-basis: 3rem;
-    width: 3rem;
-    height: 3rem;
-  }
-}
-
-.social li::after {
-  position: absolute;
-  inset-block-start: -45%;
-  inset-inline-start: 50%;
-  z-index: 0;
-  content: attr(data-tooltip);
-  translate: -50% 0;
-  padding: 0.25rem 0.75rem;
-  font-family: inherit;
-  font-size: 0.75rem;
-  font-weight: 600;
-  line-height: 1.25;
-  color: #fff;
-  white-space: nowrap;
-  pointer-events: none;
-  visibility: hidden;
-  opacity: 0;
-  background: var(--bg, #070707);
-  border: 1px solid rgb(255 255 255 / 0.15);
-  border-radius: 9999px;
-  box-shadow: 0 4px 12px rgb(0 0 0 / 0.4);
-  transition:
-    inset 0.4s cubic-bezier(0.47, 2, 0.41, 1.5),
-    visibility 0.3s ease-in-out,
-    opacity 0.2s ease-in-out;
-}
-
-.social li:has(a:hover, a:focus-visible) {
-  z-index: 20;
-}
-
-.social li:has(a:hover, a:focus-visible)::after {
-  inset-block-start: -70%;
-  visibility: visible;
-  opacity: 1;
-}
-
-.social a {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  aspect-ratio: 1;
-  overflow: hidden;
-  color: #cbd5e1;
-  text-decoration: none;
-  background: rgb(255 255 255 / 0.04);
-  border: 1.5px solid rgb(255 255 255 / 0.15);
-  border-radius: 9999px;
-  outline: none;
-  transition:
-    color 0.3s ease-in-out,
-    border-color 0.3s ease-in-out,
-    box-shadow 0.3s ease-in-out;
-}
-
-.social a > svg {
-  position: relative;
-  z-index: 1;
-  transition: transform 0.3s ease-in-out;
-}
-
-.tiktok-hover {
-  display: none;
-}
-
-.social a:hover .tiktok-default,
-.social a:focus-visible .tiktok-default {
-  display: none;
-}
-
-.social a:hover .tiktok-hover,
-.social a:focus-visible .tiktok-hover {
-  display: block;
-}
-
-.social a::after {
-  position: absolute;
-  content: "";
-  inset: 100% 0 0;
-  pointer-events: none;
-  background: var(--bg, #070707);
-  transition: inset 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.social a:hover,
-.social a:focus-visible {
-  color: #fff;
-  border-color: rgb(255 255 255 / 0.3);
-  box-shadow: 0 4px 16px rgb(0 0 0 / 0.4);
-}
-
-.social a:hover > svg,
-.social a:focus-visible > svg {
-  transform: scale(1.1);
-}
-
-.social a:hover::after,
-.social a:focus-visible::after {
-  inset-block-start: 0;
-}
-
-.social a:focus-visible {
-  outline: 2px solid var(--color-orange, #f70);
-  outline-offset: 2px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .social li::after,
-  .social a,
-  .social a::after,
-  .social a > svg {
-    transition: none;
-  }
-}
-</style>

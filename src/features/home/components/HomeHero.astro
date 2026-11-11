@@ -181,7 +181,7 @@ const thumbnailCards: SlideCardItem[] = currentSlides.map((slide) => ({
 
     <!-- Vertical Dots Navigation directly below the orange line and along the same vertical axis -->
     <nav
-      class="hero-dots-nav pagination absolute z-100 flex flex-col items-center -translate-x-1/2 left-4 sm:left-8 md:left-[5%] lg:left-[max(7%,calc(50%-570px))] 2xl:left-[max(7%,calc(50%-640px))] 3xl:left-[max(8%,calc(50%-720px))]"
+      class="hero-dots-nav pagination absolute z-100 flex flex-col items-center -translate-x-1/2 left-4 sm:left-8 md:left-[5%] lg:left-[max(7%,calc(50%-570px))] 2xl:left-[max(7%,calc(50%-640px))] 3xl:left-[max(8%,calc(50%-720px))] top-[clamp(19.5rem,50vh,23rem)] md:top-[clamp(20rem,38vh,26rem)] lg:top-[clamp(22rem,42vh,28rem)]"
       id="pagination"
       aria-label="Slider vertical dots navigation"
     >
@@ -201,8 +201,8 @@ const thumbnailCards: SlideCardItem[] = currentSlides.map((slide) => ({
               aria-label={`Go to slide ${index + 1}: ${slide.title}`}
               aria-current={index === 0 ? "true" : undefined}
             >
-              <span class="hero-dot-indicator relative grid size-3.5 sm:size-4 place-items-center rounded-full border border-white/35 bg-black/40 backdrop-blur-xs transition-all duration-300">
-                <span class="hero-dot-core size-1.5 sm:size-2 rounded-full transition-all duration-300" />
+              <span class="hero-dot-indicator relative grid size-3.5 sm:size-4 place-items-center rounded-full border border-white/35 bg-black/40 backdrop-blur-xs transition-all duration-300 group-[.active]:border-[#ecad29]/90 group-[.active]:bg-[#ecad29]/25 group-[.active]:shadow-[0_0_10px_rgb(236_173_41/50%)] group-[.active]:scale-115 group-[&:not(.active):hover]:border-white/80 group-[&:not(.active):hover]:bg-white/20 group-[&:not(.active):hover]:scale-110 motion-reduce:transition-none">
+                <span class="hero-dot-core size-1.5 sm:size-2 rounded-full transition-all duration-300 bg-white/55 scale-75 group-[.active]:bg-[#ecad29] group-[.active]:shadow-[0_0_8px_rgb(236_173_41/90%)] group-[.active]:scale-100 group-[&:not(.active):hover]:bg-white/95 group-[&:not(.active):hover]:scale-90 motion-reduce:transition-none" />
               </span>
             </button>
 
@@ -213,8 +213,7 @@ const thumbnailCards: SlideCardItem[] = currentSlides.map((slide) => ({
                 data-line-index={index}
               >
                 <div
-                  class="hero-dot-line-fill absolute inset-x-0 top-0 w-full bg-linear-to-b from-[#ecad29] to-orange-500 shadow-[0_0_6px_rgb(236_173_41/60%)] transition-[height] duration-500 ease-out"
-                  style="height: 0%;"
+                  class="hero-dot-line-fill absolute inset-x-0 top-0 h-0 w-full bg-linear-to-b from-[#ecad29] to-orange-500 shadow-[0_0_6px_rgb(236_173_41/60%)] transition-[height] duration-500 ease-out motion-reduce:transition-none"
                 />
               </div>
             )}
@@ -224,69 +223,5 @@ const thumbnailCards: SlideCardItem[] = currentSlides.map((slide) => ({
     </nav>
   </div>
 </section>
-
-<style>
-  /* CSS-driven active & hover styles for rock-solid stability */
-  .hero-dots-nav {
-    top: clamp(19.5rem, 50vh, 23rem);
-  }
-
-  @media (width >= 768px) {
-    .hero-dots-nav {
-      top: clamp(20rem, 38vh, 26rem);
-    }
-  }
-
-  @media (width >= 1024px) {
-    .hero-dots-nav {
-      top: clamp(22rem, 42vh, 28rem);
-    }
-  }
-
-  /* Dot default / inactive state */
-  .hero-dot-btn .hero-dot-indicator {
-    border-color: rgb(255 255 255 / 0.35);
-    background-color: rgb(0 0 0 / 0.4);
-  }
-
-  .hero-dot-btn .hero-dot-core {
-    background-color: rgb(255 255 255 / 0.55);
-    transform: scale(0.75);
-  }
-
-  /* Active dot state */
-  .hero-dot-btn.active .hero-dot-indicator {
-    border-color: rgb(236 173 41 / 0.9);
-    background-color: rgb(236 173 41 / 0.25);
-    box-shadow: 0 0 10px rgb(236 173 41 / 0.5);
-    transform: scale(1.15);
-  }
-
-  .hero-dot-btn.active .hero-dot-core {
-    background-color: #ecad29;
-    box-shadow: 0 0 8px rgb(236 173 41 / 0.9);
-    transform: scale(1);
-  }
-
-  /* Hover on inactive dot */
-  .hero-dot-btn:not(.active):hover .hero-dot-indicator {
-    border-color: rgb(255 255 255 / 0.8);
-    background-color: rgb(255 255 255 / 0.2);
-    transform: scale(1.1);
-  }
-
-  .hero-dot-btn:not(.active):hover .hero-dot-core {
-    background-color: rgb(255 255 255 / 0.95);
-    transform: scale(0.9);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .hero-dot-indicator,
-    .hero-dot-core,
-    .hero-dot-line-fill {
-      transition: none;
-    }
-  }
-</style>
 
 <script src="../../../scripts/slider.ts"></script>
