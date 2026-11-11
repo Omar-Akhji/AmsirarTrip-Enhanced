@@ -14,9 +14,7 @@ const { tagline, title, type, description, isH1 = false } = Astro.props;
 
 <div class="content absolute max-md:top-[calc((100dvh-var(--thumb-bottom)-var(--thumb-height)+3.75rem+env(safe-area-inset-top,0px))/2)] max-md:-translate-y-1/2 left-4 sm:left-8 md:left-[5%] lg:left-[max(7%,calc(50%-570px))] 2xl:left-[max(7%,calc(50%-640px))] 3xl:left-[max(8%,calc(50%-720px))] z-10 box-border max-w-[calc(100vw-2rem)] text-white text-shadow-sm text-shadow-black/40 md:top-[clamp(4.75rem,10.5vh,6.75rem)] lg:top-[clamp(5.25rem,12vh,7.75rem)] xl:top-[clamp(5.75rem,13.5vh,8.5rem)] 2xl:top-[clamp(6.5rem,14.5vh,9.25rem)] 3xl:top-[clamp(7.5rem,15.5vh,10.5rem)]">
   {tagline && (
-    <div
-      class="tagline mb-3 inline-flex items-center justify-start gap-2 whitespace-nowrap text-shadow-xs text-shadow-black/80 sm:mb-3 sm:gap-2.5 md:mb-4 md:gap-3 text-[0.7rem] xs:text-xs font-bold uppercase tracking-[0.16em] sm:tracking-[0.2em] md:tracking-[0.25em] text-orange-300"
-    >
+    <div class="tagline mb-3 inline-flex items-center justify-start gap-2 whitespace-nowrap text-shadow-xs text-shadow-black/80 sm:mb-3 sm:gap-2.5 md:mb-4 md:gap-3 text-[0.7rem] xs:text-xs font-bold uppercase tracking-[0.16em] sm:tracking-[0.2em] md:tracking-[0.25em] text-orange-300">
       <span
         class="tagline-line inline-block h-[1.5px] w-5 shrink-0 bg-orange-400/60 xs:w-6 sm:w-8 md:w-12"
         aria-hidden="true"

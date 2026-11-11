@@ -3,7 +3,13 @@ import { getEntry } from "astro:content";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import headerImg from "@/assets/images/Header/header-2.webp";
 import { useTranslations } from "@/i18n/utils";
-import { FAX_DISPLAY, FAX_LINK, PHONE_DISPLAY, PHONE_LINK, WHATSAPP_LINK } from "@/lib/constants/contact";
+import {
+  FAX_DISPLAY,
+  FAX_LINK,
+  PHONE_DISPLAY,
+  PHONE_LINK,
+  WHATSAPP_LINK,
+} from "@/lib/constants/contact";
 import PageHeader from "@/layouts/PageHeader.astro";
 import Button from "@/shared/ui/primitives/Button.astro";
 import CalendarIcon from "@/shared/ui/icons/CalendarIcon.astro";

@@ -73,20 +73,17 @@ const openModal = () => {
         :aria-label="t('footer.socialAria')"
         class="mbs-6"
       >
-        <ul
-          class="flex flex-wrap items-center justify-center gap-3 p-0 m-0 list-none"
-          role="list"
-        >
+        <ul class="m-0 flex list-none flex-wrap items-center justify-center gap-3 p-0">
           <li
             :data-tooltip="t('footer.social.facebook')"
-            class="relative isolate size-11 sm:size-12 shrink-0 [--bg:#1877f2] has-[a:hover]:z-20 has-[a:focus-visible]:z-20 after:content-[attr(data-tooltip)] after:absolute after:start-1/2 after:-top-[45%] after:-translate-x-1/2 after:z-0 after:py-1 after:px-3 after:font-inherit after:text-xs after:font-semibold after:leading-tight after:text-white after:whitespace-nowrap after:pointer-events-none after:invisible after:opacity-0 after:[background:var(--bg,#070707)] after:border after:border-white/15 after:rounded-full after:shadow-[0_4px_12px_rgb(0_0_0/0.4)] after:transition-[inset,visibility,opacity] after:duration-300 has-[a:hover]:after:-top-[70%] has-[a:hover]:after:visible has-[a:hover]:after:opacity-100 has-[a:focus-visible]:after:-top-[70%] has-[a:focus-visible]:after:visible has-[a:focus-visible]:after:opacity-100 motion-reduce:after:transition-none"
+            class="after:font-inherit relative isolate size-11 shrink-0 [--bg:#1877f2] after:pointer-events-none after:invisible after:absolute after:inset-s-1/2 after:top-[-45%] after:z-0 after:-translate-x-1/2 after:rounded-full after:border after:border-white/15 after:px-3 after:py-1 after:text-xs after:leading-tight after:font-semibold after:whitespace-nowrap after:text-white after:opacity-0 after:shadow-[0_4px_12px_rgb(0_0_0/0.4)] after:transition-[inset,visibility,opacity] after:duration-300 after:content-[attr(data-tooltip)] after:[background:var(--bg,#070707)] has-[a:focus-visible]:z-20 has-[a:focus-visible]:after:visible has-[a:focus-visible]:after:top-[-70%] has-[a:focus-visible]:after:opacity-100 has-[a:hover]:z-20 has-[a:hover]:after:visible has-[a:hover]:after:top-[-70%] has-[a:hover]:after:opacity-100 motion-reduce:after:transition-none sm:size-12"
           >
             <a
               :aria-label="t('footer.social.facebook')"
               href="https://www.facebook.com/profile.php?id=61571322141368"
               rel="noopener noreferrer"
               target="_blank"
-              class="group/social-link relative z-1 flex size-full aspect-square items-center justify-center overflow-hidden rounded-full border-[1.5px] border-white/15 bg-white/[0.04] text-slate-300 no-underline outline-none transition-[color,border-color,box-shadow] duration-300 hover:border-white/30 hover:text-white hover:shadow-[0_4px_16px_rgb(0_0_0/0.4)] focus-visible:border-white/30 focus-visible:text-white focus-visible:shadow-[0_4px_16px_rgb(0_0_0/0.4)] focus-visible:outline-2 focus-visible:outline-(--color-orange,#f70) focus-visible:outline-offset-2 after:content-[''] after:absolute after:inset-x-0 after:top-full after:bottom-0 after:pointer-events-none after:[background:var(--bg,#070707)] after:transition-[inset] after:duration-300 after:ease-out hover:after:top-0 focus-visible:after:top-0 motion-reduce:transition-none motion-reduce:after:transition-none"
+              class="group/social-link relative z-1 flex aspect-square size-full items-center justify-center overflow-hidden rounded-full border-[1.5px] border-white/15 bg-white/4 text-slate-300 no-underline transition-[color,border-color,box-shadow] duration-300 outline-none after:pointer-events-none after:absolute after:inset-x-0 after:top-full after:bottom-0 after:transition-[inset] after:duration-300 after:ease-out after:content-[''] after:[background:var(--bg,#070707)] hover:border-white/30 hover:text-white hover:shadow-[0_4px_16px_rgb(0_0_0/0.4)] hover:after:top-0 focus-visible:border-white/30 focus-visible:text-white focus-visible:shadow-[0_4px_16px_rgb(0_0_0/0.4)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--color-orange,#f70) focus-visible:after:top-0 motion-reduce:transition-none motion-reduce:after:transition-none"
             >
               <svg
                 aria-hidden="true"
@@ -102,14 +99,14 @@ const openModal = () => {
 
           <li
             :data-tooltip="t('footer.social.twitter')"
-            class="relative isolate size-11 sm:size-12 shrink-0 [--bg:#101419] has-[a:hover]:z-20 has-[a:focus-visible]:z-20 after:content-[attr(data-tooltip)] after:absolute after:start-1/2 after:-top-[45%] after:-translate-x-1/2 after:z-0 after:py-1 after:px-3 after:font-inherit after:text-xs after:font-semibold after:leading-tight after:text-white after:whitespace-nowrap after:pointer-events-none after:invisible after:opacity-0 after:[background:var(--bg,#070707)] after:border after:border-white/15 after:rounded-full after:shadow-[0_4px_12px_rgb(0_0_0/0.4)] after:transition-[inset,visibility,opacity] after:duration-300 has-[a:hover]:after:-top-[70%] has-[a:hover]:after:visible has-[a:hover]:after:opacity-100 has-[a:focus-visible]:after:-top-[70%] has-[a:focus-visible]:after:visible has-[a:focus-visible]:after:opacity-100 motion-reduce:after:transition-none"
+            class="after:font-inherit relative isolate size-11 shrink-0 [--bg:#101419] after:pointer-events-none after:invisible after:absolute after:inset-s-1/2 after:top-[-45%] after:z-0 after:-translate-x-1/2 after:rounded-full after:border after:border-white/15 after:px-3 after:py-1 after:text-xs after:leading-tight after:font-semibold after:whitespace-nowrap after:text-white after:opacity-0 after:shadow-[0_4px_12px_rgb(0_0_0/0.4)] after:transition-[inset,visibility,opacity] after:duration-300 after:content-[attr(data-tooltip)] after:[background:var(--bg,#070707)] has-[a:focus-visible]:z-20 has-[a:focus-visible]:after:visible has-[a:focus-visible]:after:top-[-70%] has-[a:focus-visible]:after:opacity-100 has-[a:hover]:z-20 has-[a:hover]:after:visible has-[a:hover]:after:top-[-70%] has-[a:hover]:after:opacity-100 motion-reduce:after:transition-none sm:size-12"
           >
             <a
               :aria-label="t('footer.social.twitter')"
               href="https://x.com/AmsirarTravel"
               rel="noopener noreferrer"
               target="_blank"
-              class="group/social-link relative z-1 flex size-full aspect-square items-center justify-center overflow-hidden rounded-full border-[1.5px] border-white/15 bg-white/[0.04] text-slate-300 no-underline outline-none transition-[color,border-color,box-shadow] duration-300 hover:border-white/30 hover:text-white hover:shadow-[0_4px_16px_rgb(0_0_0/0.4)] focus-visible:border-white/30 focus-visible:text-white focus-visible:shadow-[0_4px_16px_rgb(0_0_0/0.4)] focus-visible:outline-2 focus-visible:outline-(--color-orange,#f70) focus-visible:outline-offset-2 after:content-[''] after:absolute after:inset-x-0 after:top-full after:bottom-0 after:pointer-events-none after:[background:var(--bg,#070707)] after:transition-[inset] after:duration-300 after:ease-out hover:after:top-0 focus-visible:after:top-0 motion-reduce:transition-none motion-reduce:after:transition-none"
+              class="group/social-link relative z-1 flex aspect-square size-full items-center justify-center overflow-hidden rounded-full border-[1.5px] border-white/15 bg-white/4 text-slate-300 no-underline transition-[color,border-color,box-shadow] duration-300 outline-none after:pointer-events-none after:absolute after:inset-x-0 after:top-full after:bottom-0 after:transition-[inset] after:duration-300 after:ease-out after:content-[''] after:[background:var(--bg,#070707)] hover:border-white/30 hover:text-white hover:shadow-[0_4px_16px_rgb(0_0_0/0.4)] hover:after:top-0 focus-visible:border-white/30 focus-visible:text-white focus-visible:shadow-[0_4px_16px_rgb(0_0_0/0.4)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--color-orange,#f70) focus-visible:after:top-0 motion-reduce:transition-none motion-reduce:after:transition-none"
             >
               <svg
                 aria-hidden="true"
@@ -125,14 +122,14 @@ const openModal = () => {
 
           <li
             :data-tooltip="t('footer.social.instagram')"
-            class="relative isolate size-11 sm:size-12 shrink-0 [--bg:linear-gradient(-45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5)] has-[a:hover]:z-20 has-[a:focus-visible]:z-20 after:content-[attr(data-tooltip)] after:absolute after:start-1/2 after:-top-[45%] after:-translate-x-1/2 after:z-0 after:py-1 after:px-3 after:font-inherit after:text-xs after:font-semibold after:leading-tight after:text-white after:whitespace-nowrap after:pointer-events-none after:invisible after:opacity-0 after:[background:var(--bg,#070707)] after:border after:border-white/15 after:rounded-full after:shadow-[0_4px_12px_rgb(0_0_0/0.4)] after:transition-[inset,visibility,opacity] after:duration-300 has-[a:hover]:after:-top-[70%] has-[a:hover]:after:visible has-[a:hover]:after:opacity-100 has-[a:focus-visible]:after:-top-[70%] has-[a:focus-visible]:after:visible has-[a:focus-visible]:after:opacity-100 motion-reduce:after:transition-none"
+            class="after:font-inherit relative isolate size-11 shrink-0 [--bg:linear-gradient(-45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5)] after:pointer-events-none after:invisible after:absolute after:inset-s-1/2 after:top-[-45%] after:z-0 after:-translate-x-1/2 after:rounded-full after:border after:border-white/15 after:px-3 after:py-1 after:text-xs after:leading-tight after:font-semibold after:whitespace-nowrap after:text-white after:opacity-0 after:shadow-[0_4px_12px_rgb(0_0_0/0.4)] after:transition-[inset,visibility,opacity] after:duration-300 after:content-[attr(data-tooltip)] after:[background:var(--bg,#070707)] has-[a:focus-visible]:z-20 has-[a:focus-visible]:after:visible has-[a:focus-visible]:after:top-[-70%] has-[a:focus-visible]:after:opacity-100 has-[a:hover]:z-20 has-[a:hover]:after:visible has-[a:hover]:after:top-[-70%] has-[a:hover]:after:opacity-100 motion-reduce:after:transition-none sm:size-12"
           >
             <a
               :aria-label="t('footer.social.instagram')"
               href="https://www.instagram.com/amsirar.trip?igsh=ZDlxanNsbTA5M2Zi"
               rel="noopener noreferrer"
               target="_blank"
-              class="group/social-link relative z-1 flex size-full aspect-square items-center justify-center overflow-hidden rounded-full border-[1.5px] border-white/15 bg-white/[0.04] text-slate-300 no-underline outline-none transition-[color,border-color,box-shadow] duration-300 hover:border-white/30 hover:text-white hover:shadow-[0_4px_16px_rgb(0_0_0/0.4)] focus-visible:border-white/30 focus-visible:text-white focus-visible:shadow-[0_4px_16px_rgb(0_0_0/0.4)] focus-visible:outline-2 focus-visible:outline-(--color-orange,#f70) focus-visible:outline-offset-2 after:content-[''] after:absolute after:inset-x-0 after:top-full after:bottom-0 after:pointer-events-none after:[background:var(--bg,#070707)] after:transition-[inset] after:duration-300 after:ease-out hover:after:top-0 focus-visible:after:top-0 motion-reduce:transition-none motion-reduce:after:transition-none"
+              class="group/social-link relative z-1 flex aspect-square size-full items-center justify-center overflow-hidden rounded-full border-[1.5px] border-white/15 bg-white/4 text-slate-300 no-underline transition-[color,border-color,box-shadow] duration-300 outline-none after:pointer-events-none after:absolute after:inset-x-0 after:top-full after:bottom-0 after:transition-[inset] after:duration-300 after:ease-out after:content-[''] after:[background:var(--bg,#070707)] hover:border-white/30 hover:text-white hover:shadow-[0_4px_16px_rgb(0_0_0/0.4)] hover:after:top-0 focus-visible:border-white/30 focus-visible:text-white focus-visible:shadow-[0_4px_16px_rgb(0_0_0/0.4)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--color-orange,#f70) focus-visible:after:top-0 motion-reduce:transition-none motion-reduce:after:transition-none"
             >
               <svg
                 aria-hidden="true"
@@ -161,18 +158,18 @@ const openModal = () => {
 
           <li
             :data-tooltip="t('footer.social.tiktok')"
-            class="relative isolate size-11 sm:size-12 shrink-0 [--bg:#010101] has-[a:hover]:z-20 has-[a:focus-visible]:z-20 after:content-[attr(data-tooltip)] after:absolute after:start-1/2 after:-top-[45%] after:-translate-x-1/2 after:z-0 after:py-1 after:px-3 after:font-inherit after:text-xs after:font-semibold after:leading-tight after:text-white after:whitespace-nowrap after:pointer-events-none after:invisible after:opacity-0 after:[background:var(--bg,#070707)] after:border after:border-white/15 after:rounded-full after:shadow-[0_4px_12px_rgb(0_0_0/0.4)] after:transition-[inset,visibility,opacity] after:duration-300 has-[a:hover]:after:-top-[70%] has-[a:hover]:after:visible has-[a:hover]:after:opacity-100 has-[a:focus-visible]:after:-top-[70%] has-[a:focus-visible]:after:visible has-[a:focus-visible]:after:opacity-100 motion-reduce:after:transition-none"
+            class="after:font-inherit relative isolate size-11 shrink-0 [--bg:#010101] after:pointer-events-none after:invisible after:absolute after:inset-s-1/2 after:top-[-45%] after:z-0 after:-translate-x-1/2 after:rounded-full after:border after:border-white/15 after:px-3 after:py-1 after:text-xs after:leading-tight after:font-semibold after:whitespace-nowrap after:text-white after:opacity-0 after:shadow-[0_4px_12px_rgb(0_0_0/0.4)] after:transition-[inset,visibility,opacity] after:duration-300 after:content-[attr(data-tooltip)] after:[background:var(--bg,#070707)] has-[a:focus-visible]:z-20 has-[a:focus-visible]:after:visible has-[a:focus-visible]:after:top-[-70%] has-[a:focus-visible]:after:opacity-100 has-[a:hover]:z-20 has-[a:hover]:after:visible has-[a:hover]:after:top-[-70%] has-[a:hover]:after:opacity-100 motion-reduce:after:transition-none sm:size-12"
           >
             <a
               :aria-label="t('footer.social.tiktok')"
               href="https://www.tiktok.com/@amsirartrip"
               rel="noopener noreferrer"
               target="_blank"
-              class="group/social-link relative z-1 flex size-full aspect-square items-center justify-center overflow-hidden rounded-full border-[1.5px] border-white/15 bg-white/[0.04] text-slate-300 no-underline outline-none transition-[color,border-color,box-shadow] duration-300 hover:border-white/30 hover:text-white hover:shadow-[0_4px_16px_rgb(0_0_0/0.4)] focus-visible:border-white/30 focus-visible:text-white focus-visible:shadow-[0_4px_16px_rgb(0_0_0/0.4)] focus-visible:outline-2 focus-visible:outline-(--color-orange,#f70) focus-visible:outline-offset-2 after:content-[''] after:absolute after:inset-x-0 after:top-full after:bottom-0 after:pointer-events-none after:[background:var(--bg,#070707)] after:transition-[inset] after:duration-300 after:ease-out hover:after:top-0 focus-visible:after:top-0 motion-reduce:transition-none motion-reduce:after:transition-none"
+              class="group/social-link relative z-1 flex aspect-square size-full items-center justify-center overflow-hidden rounded-full border-[1.5px] border-white/15 bg-white/4 text-slate-300 no-underline transition-[color,border-color,box-shadow] duration-300 outline-none after:pointer-events-none after:absolute after:inset-x-0 after:top-full after:bottom-0 after:transition-[inset] after:duration-300 after:ease-out after:content-[''] after:[background:var(--bg,#070707)] hover:border-white/30 hover:text-white hover:shadow-[0_4px_16px_rgb(0_0_0/0.4)] hover:after:top-0 focus-visible:border-white/30 focus-visible:text-white focus-visible:shadow-[0_4px_16px_rgb(0_0_0/0.4)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--color-orange,#f70) focus-visible:after:top-0 motion-reduce:transition-none motion-reduce:after:transition-none"
             >
               <svg
                 aria-hidden="true"
-                class="tiktok-default relative z-1 size-5 shrink-0 fill-current transition-transform duration-300 group-hover/social-link:hidden group-focus-visible/social-link:hidden group-hover/social-link:scale-110 group-focus-visible/social-link:scale-110 motion-reduce:transition-none"
+                class="tiktok-default relative z-1 size-5 shrink-0 fill-current transition-transform duration-300 group-hover/social-link:hidden group-hover/social-link:scale-110 group-focus-visible/social-link:hidden group-focus-visible/social-link:scale-110 motion-reduce:transition-none"
                 viewBox="0 0 448 512"
               >
                 <path
@@ -181,7 +178,7 @@ const openModal = () => {
               </svg>
               <svg
                 aria-hidden="true"
-                class="tiktok-hover relative z-1 hidden size-5.5 shrink-0 transition-transform duration-300 group-hover/social-link:block group-focus-visible/social-link:block group-hover/social-link:scale-110 group-focus-visible/social-link:scale-110 motion-reduce:transition-none"
+                class="tiktok-hover relative z-1 hidden size-5.5 shrink-0 transition-transform duration-300 group-hover/social-link:block group-hover/social-link:scale-110 group-focus-visible/social-link:block group-focus-visible/social-link:scale-110 motion-reduce:transition-none"
                 fill="none"
                 viewBox="0 0 32 32"
               >
@@ -213,6 +210,6 @@ const openModal = () => {
     </div>
 
     <!-- Newsletter dialog (always in DOM, shown via command="show-modal") -->
-    <NewsletterModal :locale="locale" />
+    <NewsletterModal v-bind="locale !== undefined ? { locale } : {}" />
   </div>
 </template>

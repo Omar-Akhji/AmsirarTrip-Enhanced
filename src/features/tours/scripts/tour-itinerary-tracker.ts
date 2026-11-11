@@ -38,7 +38,6 @@ export function initTourItineraryTracker(): () => void {
   const stickyProgress = container.querySelector<HTMLElement>("[data-sticky-progress]");
   const timelineTrack = container.querySelector<HTMLElement>("[data-timeline-track]");
   const timelineFill = container.querySelector<HTMLElement>("[data-timeline-progress-fill]");
-  const timelineDot = container.querySelector<HTMLElement>("[data-timeline-traveling-dot]");
   const routeGroups = [...container.querySelectorAll<HTMLElement>("[data-sticky-route-group]")];
 
   const stageElements = [...container.querySelectorAll<HTMLElement>("[data-itinerary-stage]")];
@@ -228,18 +227,16 @@ export function initTourItineraryTracker(): () => void {
       }
     }
 
-    if (!timelineTrack || !timelineDot) return;
+    if (!timelineTrack) return;
     const trackRect = timelineTrack.getBoundingClientRect();
 
-    let dotOffset = 0;
+    let fillOffset = 0;
     if (newActiveIndex >= totalStages - 1) {
       const lastStage = stages.at(-1);
       if (lastStage) {
-        dotOffset = getStageNodeCenterY(lastStage.element, trackRect.top);
-        timelineDot.style.opacity = "1";
+        fillOffset = getStageNodeCenterY(lastStage.element, trackRect.top);
       }
     } else {
-      timelineDot.style.opacity = "1";
       const currentStage = stages[newActiveIndex];
       const nextStage = stages[newActiveIndex + 1];
       if (currentStage && nextStage) {
@@ -256,15 +253,12 @@ export function initTourItineraryTracker(): () => void {
           t = Math.max(0, Math.min(1, scrollDistance / stageDistance));
         }
 
-        dotOffset = currentY + t * (nextY - currentY);
+        fillOffset = currentY + t * (nextY - currentY);
       }
     }
 
-    // Place the center of the orange dot exactly at dotOffset
-    timelineDot.style.transform = `translate3d(-50%, calc(${dotOffset}px - 50%), 0)`;
-
     if (!timelineFill) return;
-    const fillPercentage = (dotOffset / trackRect.height) * 100;
+    const fillPercentage = (fillOffset / trackRect.height) * 100;
     timelineFill.style.height = `${fillPercentage}%`;
   };
 

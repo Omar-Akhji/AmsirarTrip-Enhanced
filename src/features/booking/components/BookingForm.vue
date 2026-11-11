@@ -138,7 +138,7 @@ const handleSubmit = async (event: Event) => {
     <div
       class="booking-form-inner mx-auto px-2 inline-full max-inline-7xl sm:px-6 lg:px-8 2xl:max-inline-360 3xl:max-inline-420"
     >
-      <div class="grid grid-cols-1 items-stretch gap-8 lg:grid-cols-golden lg:gap-6 xl:gap-8">
+      <div class="lg:grid-cols-golden grid grid-cols-1 items-stretch gap-8 lg:gap-6 xl:gap-8">
         <!-- Left: Form Card -->
         <div
           class="inline-full"

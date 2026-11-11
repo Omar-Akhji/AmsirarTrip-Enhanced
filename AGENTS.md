@@ -125,9 +125,15 @@ Overwrite them.
 
 The **Elephant & Goldfish Methodology (EGM)** is an active default protocol for all tasks:
 
-- **The Elephant (Persistent Memory & State)**: The primary agent context acts as the persistent Elephant. It holds architectural context, evaluates findings, coordinates transformations, and applies surgical changes with zero regressions.
-- **The Goldfish (Adversarial Auditors)**: When auditing, reviewing, or stress-testing, deploy stateless Goldfish personas (`egm-review`, `egm-review-loop`, `egm-resolve`, etc.) in isolated context windows to catch blind spots, assumption creep, and specification drift without historical bias.
-- **Stress-Testing & Plain English**: Stress-test designs and changes before affirming them, eliminate praise/sycophancy, and express all summaries in clear, technical, jargon-free plain English.
+- **The Elephant (Persistent Memory & State)**: The primary agent context acts as the persistent
+  Elephant. It holds architectural context, evaluates findings, coordinates transformations, and
+  applies surgical changes with zero regressions.
+- **The Goldfish (Adversarial Auditors)**: When auditing, reviewing, or stress-testing, deploy
+  stateless Goldfish personas (`egm-review`, `egm-review-loop`, `egm-resolve`, etc.) in isolated
+  context windows to catch blind spots, assumption creep, and specification drift without historical
+  bias.
+- **Stress-Testing & Plain English**: Stress-test designs and changes before affirming them,
+  eliminate praise/sycophancy, and express all summaries in clear, technical, jargon-free plain
+  English.
 
 <!-- egm:end -->
-

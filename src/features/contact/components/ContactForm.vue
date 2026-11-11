@@ -122,7 +122,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="grid grid-cols-1 items-stretch gap-8 lg:grid-cols-golden lg:gap-6 xl:gap-8">
+  <div class="lg:grid-cols-golden grid grid-cols-1 items-stretch gap-8 lg:gap-6 xl:gap-8">
     <!-- Left: Form Card -->
     <div
       class="inline-full"

@@ -7,21 +7,14 @@ interface Props {
   variant?: "dark" | "light" | undefined;
 }
 
-const {
-  crumbWidths = ["w-14", "w-24"],
-  class: className,
-  variant = "dark",
-} = Astro.props;
+const { crumbWidths = ["w-14", "w-24"], class: className, variant = "dark" } = Astro.props;
 
 const containerClasses =
-  variant === "light"
-    ? "border border-stone-200/90 bg-stone-100/80 text-stone-400"
-    : "border-[1.5px] border-white/10 bg-white/10 text-white/40 shadow-xs ring-1 ring-black/5 backdrop-blur-[20px]";
+  variant === "light" ?
+    "border border-stone-200/90 bg-stone-100/80 text-stone-400"
+  : "border-[1.5px] border-white/10 bg-white/10 text-white/40 shadow-xs ring-1 ring-black/5 backdrop-blur-[20px]";
 
-const crumbClasses =
-  variant === "light"
-    ? "bg-stone-300/80 dark:bg-stone-700/80"
-    : "bg-white/25";
+const crumbClasses = variant === "light" ? "bg-stone-300/80 dark:bg-stone-700/80" : "bg-white/25";
 ---
 
 <nav
@@ -39,7 +32,10 @@ const crumbClasses =
       <li class="flex items-center gap-2">
         <Skeleton class:list={["h-3.5 rounded-full", crumbClasses, w]} />
         {index < crumbWidths.length - 1 && (
-          <span class="text-xs opacity-60" aria-hidden="true">
+          <span
+            class="text-xs opacity-60"
+            aria-hidden="true"
+          >
             /
           </span>
         )}

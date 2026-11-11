@@ -25,8 +25,8 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
   const pathname = new URL(context.request.url).pathname;
   const isStaticAsset = STATIC_PATH_PREFIXES.some((prefix) => pathname.startsWith(prefix));
   const isDiscoveryAsset =
-    DISCOVERY_PATHS.has(pathname) ||
-    (pathname.startsWith("/sitemap-") && pathname.endsWith(".xml"));
+    DISCOVERY_PATHS.has(pathname)
+    || (pathname.startsWith("/sitemap-") && pathname.endsWith(".xml"));
 
   if (isDiscoveryAsset) {
     const response = await next();
