@@ -1,7 +1,7 @@
 try {
   const stored = localStorage.getItem("amsirar-theme");
   const isDark =
-    stored ? stored === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+    stored ? stored === "dark" : globalThis.matchMedia("(prefers-color-scheme: dark)").matches;
   if (isDark) {
     document.documentElement.classList.add("dark");
     document.documentElement.style.colorScheme = "dark";

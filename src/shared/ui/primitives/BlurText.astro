@@ -31,7 +31,6 @@ const tokens: string[] = animateBy === "letters" ? [...text] : text.split(" ");
 ---
 
 <Tag
-  aria-label={text}
   class:list={["blur-text-root", className]}
   style={styleProp}
   data-animate-by={animateBy}
@@ -54,4 +53,5 @@ const tokens: string[] = animateBy === "letters" ? [...text] : text.split(" ");
       </span>
     ))}
   </span>
+  <span class="sr-only">{text}</span>
 </Tag>
