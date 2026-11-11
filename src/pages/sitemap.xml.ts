@@ -1,4 +1,7 @@
 import type { APIRoute } from "astro";
+
+export const prerender = true;
+
 import { getCollection } from "astro:content";
 import { DEFAULT_LOCALE, LOCALES } from "@/i18n/locales";
 import { getLocalizedPath } from "@/i18n/core";
@@ -135,7 +138,9 @@ export const GET: APIRoute = async ({ site }) => {
   return new Response(xml, {
     headers: {
       "Content-Type": "application/xml; charset=utf-8",
-      "Cache-Control": "public, max-age=3600, s-maxage=86400",
+      "Access-Control-Allow-Origin": "*",
+      "Cross-Origin-Resource-Policy": "cross-origin",
+      "Cache-Control": "public, max-age=86400, s-maxage=604800",
     },
   });
 };

@@ -2,6 +2,8 @@ import agencyProfile from "@/data/agency-profile.json";
 import type { APIRoute } from "astro";
 import { getCollection } from "astro:content";
 
+export const prerender = true;
+
 export const GET: APIRoute = async ({ site }) => {
   const baseUrl = site ?? new URL("https://amsirartrip.com");
   const tours = await getCollection("tours");
@@ -9,26 +11,20 @@ export const GET: APIRoute = async ({ site }) => {
 
   const sortedTours = [...tours].toSorted((a, b) => a.data.bookingId - b.data.bookingId);
   const sortedExcursions = [...excursions].toSorted((a, b) => a.data.bookingId - b.data.bookingId);
-  const today = new Date().toISOString().slice(0, 10);
 
   const lines: string[] = [
-    `# ${agencyProfile.name}: Specialist Morocco Travel Agency`,
+    `# ${agencyProfile.name}`,
     "",
-    `> Last updated: ${today}`,
-    `> ${agencyProfile.name} (${agencyProfile.legalName}) is a licensed Morocco tour operator (${agencyProfile.licenseNumber}) founded in ${agencyProfile.foundingDate} and headquartered in Marrakech, Morocco. We organize private Sahara desert tours, High Atlas Mountain treks, imperial city circuits, and Marrakech day excursions in English, French, German, and Spanish.`,
+    "> Licensed Morocco tour operator specializing in private Sahara desert expeditions, High Atlas treks, and imperial city tours in English, French, German, and Spanish.",
     "",
-    "## Agency Credentials & Contact",
+    "## Docs",
     "",
-    `- Official website: ${new URL("/", baseUrl).href}`,
-    `- Legal name: ${agencyProfile.legalName}`,
-    `- Tourism license: ${agencyProfile.licenseNumber}`,
-    `- Headquarters: ${agencyProfile.address.fullAddress}`,
-    `- Phone / WhatsApp: ${agencyProfile.contact.phones.map((p) => p.display).join(" / ")}`,
-    `- Email: ${agencyProfile.contact.emails.join(", ")}`,
-    `- Operating hours: ${agencyProfile.contact.workingHours}`,
-    `- Supported languages: English (\`/...\`), French (\`/fr/...\`), German (\`/de/...\`), Spanish (\`/es/...\`)`,
+    `- [All Morocco Tours](${new URL("/tours", baseUrl).href}): Catalog of handcrafted multi-day Sahara desert circuits, imperial city routes, and mountain treks.`,
+    `- [Marrakech Day Excursions](${new URL("/excursions", baseUrl).href}): Private day trips to Agafay Desert, Essaouira, Ouzoud Waterfalls, Imlil & Toubkal, and Ourika Valley.`,
+    `- [About Us](${new URL("/about", baseUrl).href}): Over 20 years of local Berber heritage, licensed mountain guides, and modern air-conditioned vehicle fleet.`,
+    `- [Contact & Booking Inquiries](${new URL("/contact", baseUrl).href}): Direct WhatsApp and email booking consultation for custom private Morocco travel itineraries.`,
     "",
-    "## Multi-Day Morocco Tours",
+    "## Multi-Day Tours",
     "",
   ];
 
@@ -58,35 +54,32 @@ export const GET: APIRoute = async ({ site }) => {
 
   lines.push(
     "",
-    "## Departure Hubs & Airport Gateways",
+    "## Key Facts",
     "",
-    "- Marrakech (RAK): Gateway to Erg Chebbi (Merzouga), Erg Chegaga, Dades Valley, Ait Ben Haddou, and Agafay Desert.",
-    "- Fes (FEZ): Direct departures crossing the Middle Atlas, Ziz Valley, and Merzouga dunes toward Marrakech.",
-    "- Casablanca (CMN): Grand tours connecting the Atlantic Coast, Imperial Cities (Rabat, Meknes, Fes), and the Sahara.",
-    "- Tangier (TNG): Northern hub connecting ferry arrivals and flights to Chefchaouen, the Rif Mountains, and southward circuits.",
+    `- Legal Entity: ${agencyProfile.legalName}`,
+    `- Tourism License: ${agencyProfile.licenseNumber}`,
+    `- Founded: ${agencyProfile.foundingDate}`,
+    `- Headquarters: ${agencyProfile.address.fullAddress}`,
+    `- WhatsApp / Phone: ${agencyProfile.contact.phones.map((p) => p.display).join(" / ")}`,
+    `- Email: ${agencyProfile.contact.emails.join(", ")}`,
+    `- Operating Hours: ${agencyProfile.contact.workingHours}`,
+    `- Supported Languages: English, French, German, Spanish`,
     "",
-    "## Signature Search Routes & Highlights",
+    "## Optional",
     "",
-    "- 3-Day Marrakech to Fes Desert Tour: Crosses Tizi n'Tichka pass, Kasbah Ait Ben Haddou, Todra Gorges, Erg Chebbi camel bivouac, arriving in Fes.",
-    "- 3-Day Fes to Marrakech Desert Tour: Departs Fes through Ifrane and Midelt to Merzouga dunes, Todra Gorge, and High Atlas passes to Marrakech.",
-    "- 3-Day Marrakech to Merzouga Sahara Adventure: Classic out-and-back circuit exploring Dades Valley, Todra Gorges, and Erg Chebbi sunset camel treks.",
-    "- 10-Day Grand Moroccan Circuit: Complete multi-region journey covering Casablanca, Chefchaouen, Fes, Merzouga, Dades, and Marrakech.",
-    "",
-    "## Core Pages & Sitemaps",
-    "",
-    `- [Home](${new URL("/", baseUrl).href}): Overview of Morocco desert tours, day trips, destinations, and traveler reviews.`,
-    `- [All Morocco Tours](${new URL("/tours", baseUrl).href}): Complete catalog of multi-day Morocco circuits from Marrakech, Casablanca, Fes, Tangier, and Agadir.`,
-    `- [Marrakech Excursions](${new URL("/excursions", baseUrl).href}): Day trips from Marrakech to Ouzoud Waterfalls, Essaouira, Imlil & Toubkal, Ourika Valley, Agafay Desert, and Hot Air Ballooning.`,
-    `- [About Amsirar Trip](${new URL("/about", baseUrl).href}): Our local Berber heritage, fleet safety standards, and licensed guides.`,
-    `- [Contact & Custom Itinerary Quote](${new URL("/contact", baseUrl).href}): Direct WhatsApp, phone, and email inquiry form for custom Morocco itineraries.`,
-    `- [XML Sitemap](${new URL("/sitemap.xml", baseUrl).href}): Full multilingual XML sitemap with hreflang and image extensions.`,
+    `- [Full Content Catalog (/llms-full.txt)](${new URL("/llms-full.txt", baseUrl).href}): Extended documentation index with full itinerary schedules and details.`,
+    `- [Terms of Service](${new URL("/terms-of-service", baseUrl).href}): Booking policies, payment procedures, cancellation timeline, and operator responsibilities.`,
+    `- [Privacy Policy](${new URL("/privacy-policy", baseUrl).href}): Data protection, cookie policies, and customer privacy commitments.`,
+    `- [XML Sitemap](${new URL("/sitemap.xml", baseUrl).href}): Full multilingual XML sitemap with hreflang annotations.`,
     "",
   );
 
   return new Response(lines.join("\n"), {
     headers: {
-      "Content-Type": "text/plain; charset=utf-8",
-      "Cache-Control": "public, max-age=3600, s-maxage=86400",
+      "Content-Type": "text/markdown; charset=utf-8",
+      "Access-Control-Allow-Origin": "*",
+      "Cross-Origin-Resource-Policy": "cross-origin",
+      "Cache-Control": "public, max-age=86400, s-maxage=604800",
     },
   });
 };

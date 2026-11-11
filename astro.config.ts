@@ -64,6 +64,7 @@ export default defineConfig({
     "/[...locale]/tours": { maxAge: 900, swr: 3600 },
     "/[...locale]/tours/[slug]": { maxAge: 1800, swr: 86_400 },
     "/llms.txt": { maxAge: 3600, swr: 86_400 },
+    "/llms-full.txt": { maxAge: 3600, swr: 86_400 },
     "/robots.txt": { maxAge: 3600, swr: 86_400 },
     "/sitemap.xml": { maxAge: 3600, swr: 86_400 },
     "/sitemap-index.xml": { maxAge: 3600, swr: 86_400 },

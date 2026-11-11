@@ -254,18 +254,6 @@ const thumbnailCards: SlideCardItem[] = currentSlides.map((slide) => ({
     transform: scale(0.75);
   }
 
-  /* Hover on inactive dot */
-  .hero-dot-btn:not(.active):hover .hero-dot-indicator {
-    border-color: rgb(255 255 255 / 0.8);
-    background-color: rgb(255 255 255 / 0.2);
-    transform: scale(1.1);
-  }
-
-  .hero-dot-btn:not(.active):hover .hero-dot-core {
-    background-color: rgb(255 255 255 / 0.95);
-    transform: scale(0.9);
-  }
-
   /* Active dot state */
   .hero-dot-btn.active .hero-dot-indicator {
     border-color: rgb(236 173 41 / 0.9);
@@ -278,6 +266,18 @@ const thumbnailCards: SlideCardItem[] = currentSlides.map((slide) => ({
     background-color: #ecad29;
     box-shadow: 0 0 8px rgb(236 173 41 / 0.9);
     transform: scale(1);
+  }
+
+  /* Hover on inactive dot */
+  .hero-dot-btn:not(.active):hover .hero-dot-indicator {
+    border-color: rgb(255 255 255 / 0.8);
+    background-color: rgb(255 255 255 / 0.2);
+    transform: scale(1.1);
+  }
+
+  .hero-dot-btn:not(.active):hover .hero-dot-core {
+    background-color: rgb(255 255 255 / 0.95);
+    transform: scale(0.9);
   }
 
   @media (prefers-reduced-motion: reduce) {

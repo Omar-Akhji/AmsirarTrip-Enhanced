@@ -13,9 +13,29 @@ const STATIC_PATH_PREFIXES = [
   "/images/",
 ];
 
+const DISCOVERY_PATHS = new Set([
+  "/robots.txt",
+  "/llms.txt",
+  "/llms-full.txt",
+  "/sitemap.xml",
+  "/sitemap-index.xml",
+]);
+
 export const onRequest: MiddlewareHandler = async (context, next) => {
   const pathname = new URL(context.request.url).pathname;
   const isStaticAsset = STATIC_PATH_PREFIXES.some((prefix) => pathname.startsWith(prefix));
+  const isDiscoveryAsset =
+    DISCOVERY_PATHS.has(pathname) ||
+    (pathname.startsWith("/sitemap-") && pathname.endsWith(".xml"));
+
+  if (isDiscoveryAsset) {
+    const response = await next();
+    const newResponse = new Response(response.body, response);
+    newResponse.headers.set("Access-Control-Allow-Origin", "*");
+    newResponse.headers.set("Cross-Origin-Resource-Policy", "cross-origin");
+    newResponse.headers.set("X-Content-Type-Options", "nosniff");
+    return newResponse;
+  }
 
   if (isStaticAsset) {
     const response = await next();

@@ -1,5 +1,7 @@
 import type { APIRoute } from "astro";
 
+export const prerender = true;
+
 export const GET: APIRoute = ({ site }) => {
   const baseUrl = site ?? new URL("https://amsirartrip.com");
   const sitemapIndexUrl = new URL("sitemap-index.xml", baseUrl);
@@ -69,7 +71,9 @@ Sitemap: ${sitemapUrl.href}
   return new Response(robotsTxt, {
     headers: {
       "Content-Type": "text/plain; charset=utf-8",
-      "Cache-Control": "public, max-age=3600, s-maxage=86400",
+      "Access-Control-Allow-Origin": "*",
+      "Cross-Origin-Resource-Policy": "cross-origin",
+      "Cache-Control": "public, max-age=86400, s-maxage=604800",
     },
   });
 };
