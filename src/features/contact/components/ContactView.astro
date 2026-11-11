@@ -67,7 +67,6 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
             <article
               aria-label={typeof method.title === "string" ? method.title : undefined}
               class="contact-info-card group relative flex size-full flex-col justify-between rounded-2xl border border-stone-200/90 bg-stone-50/80 p-6 sm:p-8 shadow-xs shadow-stone-900/5 transition-all duration-300 hover:-translate-y-1 hover:border-stone-300 hover:shadow-md motion-reduce:transform-none dark:border-white/10 dark:bg-surface-card/80 dark:shadow-[0_4px_20px_-2px_rgba(0,0,0,0.4)] dark:hover:border-white/20 dark:hover:bg-surface-hover/90"
-              data-ascii="surface"
             >
               <div>
                 <h3 class="mbe-3 border-b border-stone-200/80 pb-3 text-lg lg:text-xl font-bold leading-snug tracking-tight text-stone-950 dark:text-mist-100 transition-colors duration-200 group-hover:text-orange-600 dark:border-white/10">
@@ -166,13 +165,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
         </hgroup>
       </div>
 
-      <details
-        class="group overflow-hidden rounded-2xl border border-slate-900 bg-slate-950 text-white shadow-xl details-content:block-0 details-content:overflow-clip details-content:opacity-0 details-content:transition-[block-size,content-visibility,opacity] details-content:duration-300 details-content:ease-out-expo details-content:transition-discrete motion-reduce:details-content:transition-none open:details-content:block-auto open:details-content:opacity-100"
-        data-ascii="surface"
-        style="
-
---ascii-glyph: #d4d4d8; --ascii-surface: #020617;"
-      >
+      <details class="group overflow-hidden rounded-2xl border border-slate-900 bg-slate-950 text-white shadow-xl details-content:block-0 details-content:overflow-clip details-content:opacity-0 details-content:transition-[block-size,content-visibility,opacity] details-content:duration-300 details-content:ease-out-expo details-content:transition-discrete motion-reduce:details-content:transition-none open:details-content:block-auto open:details-content:opacity-100">
         <summary class="group/summary relative flex flex-col items-center justify-center bg-slate-950 text-white cursor-pointer list-none select-none transition duration-300 block-75 md:block-100 lg:block-125 marker:hidden group-open:hidden">
           <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(241,93,48,0.12),transparent_70%)]"></div>
           <div class="relative z-10 text-center space-y-4 px-6 max-w-lg mx-auto">
@@ -189,10 +182,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
               {t("contact.map.placeholderDesc")}
             </p>
             <div class="pt-2">
-              <span
-                class="inline-flex min-h-11 items-center gap-2 rounded-full border border-orange-500/50 bg-linear-to-br from-amber-orange to-orange px-8 py-3 font-mono text-xs font-bold uppercase tracking-wider text-white shadow-md shadow-orange/20 transition-[filter,box-shadow,transform] duration-160 ease-out pointer-fine:hover:brightness-105 pointer-fine:hover:shadow-lg pointer-fine:hover:shadow-orange/30 active:scale-[0.98] motion-reduce:transform-none"
-                data-ascii="fade"
-              >
+              <span class="inline-flex min-h-11 items-center gap-2 rounded-full border border-orange-500/50 bg-linear-to-br from-amber-orange to-orange px-8 py-3 font-mono text-xs font-bold uppercase tracking-wider text-white shadow-md shadow-orange/20 transition-[filter,box-shadow,transform] duration-160 ease-out pointer-fine:hover:brightness-105 pointer-fine:hover:shadow-lg pointer-fine:hover:shadow-orange/30 active:scale-[0.98] motion-reduce:transform-none">
                 <span>{t("contact.map.loadBtn")}</span>
                 <AltArrowRightIcon
                   aria-hidden="true"

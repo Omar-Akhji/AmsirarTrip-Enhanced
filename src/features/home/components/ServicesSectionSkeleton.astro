@@ -1,5 +1,5 @@
 ---
-import AsciiSkeleton from "@/shared/ui/feedback/AsciiSkeleton.astro";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface Props {
   class?: string | undefined;
@@ -8,9 +8,9 @@ interface Props {
 const { class: className } = Astro.props;
 
 const serviceCardSkeletons = [
-  { key: "handcrafted", titleWidth: "15rem", textLines: 3, textWidths: ["100%", "94%", "68%"] },
-  { key: "guide", titleWidth: "11rem", textLines: 4, textWidths: ["100%", "98%", "92%", "58%"] },
-  { key: "price", titleWidth: "12rem", textLines: 3, textWidths: ["100%", "95%", "76%"] },
+  { key: "handcrafted", titleWidth: "w-48" },
+  { key: "guide", titleWidth: "w-40" },
+  { key: "price", titleWidth: "w-44" },
 ];
 ---
 
@@ -22,13 +22,9 @@ const serviceCardSkeletons = [
     className,
   ]}
 >
-  {/* Background ASCII skeleton image & dark overlay matching services-bg.webp */}
+  {/* Dark background */}
   <div class="absolute inset-0 size-full overflow-hidden bg-stone-950">
-    <AsciiSkeleton
-      class="ars-image ars-hero-bg size-full text-stone-700/35"
-      rows={40}
-      variant="dither"
-    />
+    <Skeleton class="size-full rounded-none bg-stone-900/60" />
   </div>
   <div
     aria-hidden="true"
@@ -37,28 +33,14 @@ const serviceCardSkeletons = [
 
   <div class="relative mx-auto px-4 max-inline-7xl 2xl:max-inline-360 3xl:max-inline-420 sm:px-6 lg:px-8">
     <div class="mbe-8 sm:mbe-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-white/10 pb-6 sm:pb-8">
-      <hgroup class="max-w-2xl space-y-2">
-        <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl text-balance flex flex-wrap items-baseline gap-x-3">
-          <AsciiSkeleton
-            class="text-stone-300"
-            lines={1}
-            variant="dither"
-            widths={["14rem"]}
-          />
-          <AsciiSkeleton
-            class="text-stone-400"
-            lines={1}
-            variant="dither"
-            widths={["17rem"]}
-          />
-        </h2>
-        <div class="border-s-2 border-yellow ps-4 py-0.5 text-sm sm:text-base text-zinc-100/90 leading-relaxed max-w-[62ch]">
-          <AsciiSkeleton
-            class="text-zinc-100/85"
-            lines={2}
-            variant="dither"
-            widths={["100%", "85%"]}
-          />
+      <hgroup class="max-w-2xl space-y-3">
+        <div class="flex flex-wrap items-baseline gap-3">
+          <Skeleton class="h-9 w-44 bg-white/20" />
+          <Skeleton class="h-9 w-52 bg-white/15" />
+        </div>
+        <div class="border-s-2 border-yellow ps-4 py-0.5 space-y-2 max-w-[62ch]">
+          <Skeleton class="h-4 w-full bg-white/15" />
+          <Skeleton class="h-4 w-4/5 bg-white/15" />
         </div>
       </hgroup>
     </div>
@@ -72,27 +54,15 @@ const serviceCardSkeletons = [
             style="backdrop-filter: blur(20px);"
           >
             <div class="mbe-6 inline-flex size-25 items-center justify-center rounded-full bg-white/5 ring-1 ring-white/10">
-              <AsciiSkeleton
-                class="size-15 rounded-full overflow-hidden text-stone-400"
-                rows={5}
-                variant="dither"
-              />
+              <Skeleton class="size-15 rounded-full bg-white/15" />
             </div>
-            <h3 class="w-full text-center text-xl font-semibold text-white">
-              <AsciiSkeleton
-                class="text-stone-300 text-center mx-auto"
-                lines={1}
-                variant="dither"
-                widths={[card.titleWidth]}
-              />
-            </h3>
-            <div class="mbs-3 w-full text-center text-sm text-zinc-200 leading-relaxed">
-              <AsciiSkeleton
-                class="text-zinc-200/85 text-center mx-auto"
-                lines={card.textLines}
-                variant="dither"
-                widths={card.textWidths}
-              />
+            <div class="w-full flex justify-center">
+              <Skeleton class:list={["h-6 bg-white/20", card.titleWidth]} />
+            </div>
+            <div class="mbs-3 w-full space-y-2 flex flex-col items-center">
+              <Skeleton class="h-3.5 w-full bg-white/15" />
+              <Skeleton class="h-3.5 w-11/12 bg-white/15" />
+              <Skeleton class="h-3.5 w-3/4 bg-white/15" />
             </div>
           </article>
         ))}
@@ -111,31 +81,19 @@ const serviceCardSkeletons = [
         >
           {/* Circular icon skeleton */}
           <div class="mbe-6 inline-flex size-25 items-center justify-center rounded-full bg-white/5 ring-1 ring-white/10">
-            <AsciiSkeleton
-              class="size-15 rounded-full overflow-hidden text-stone-400"
-              rows={5}
-              variant="dither"
-            />
+            <Skeleton class="size-15 rounded-full bg-white/15" />
           </div>
 
-          {/* Card Title Skeleton matching exact h3 typography and content width */}
-          <h3 class="w-full text-center text-xl font-semibold text-white">
-            <AsciiSkeleton
-              class="text-stone-300 text-center mx-auto"
-              lines={1}
-              variant="dither"
-              widths={[card.titleWidth]}
-            />
-          </h3>
+          {/* Card Title Skeleton */}
+          <div class="w-full flex justify-center">
+            <Skeleton class:list={["h-6 bg-white/20", card.titleWidth]} />
+          </div>
 
-          {/* Card Description Skeleton matching exact p typography and line count */}
-          <div class="mbs-3 w-full text-center text-sm text-zinc-200 leading-relaxed">
-            <AsciiSkeleton
-              class="text-zinc-200/85 text-center mx-auto"
-              lines={card.textLines}
-              variant="dither"
-              widths={card.textWidths}
-            />
+          {/* Card Description Skeleton */}
+          <div class="mbs-3 w-full space-y-2 flex flex-col items-center">
+            <Skeleton class="h-3.5 w-full bg-white/15" />
+            <Skeleton class="h-3.5 w-11/12 bg-white/15" />
+            <Skeleton class="h-3.5 w-3/4 bg-white/15" />
           </div>
         </article>
       ))}

@@ -43,7 +43,6 @@
     "@astrojs/vercel": "^11.0.21",
     "@astrojs/vue": "^7.1.4",
     "@fontsource/jetbrains-mono": "^5.3.0",
-    "ascii-reveal": "^0.3.0",
     "astro": "^7.4.10",
     "cap-widget": "^0.1.62",
     "capjs-core": "^0.1.14",
@@ -91,7 +90,7 @@
     "vue-eslint-parser": "^10.4.2"
   },
   "engines": {
-    "node": "24.x",
-    "bun": ">=1.4.4"
+    "bun": ">=1.4.4",
+    "node": "24.x"
   }
 }

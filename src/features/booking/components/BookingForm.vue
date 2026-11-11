@@ -302,7 +302,6 @@ const handleSubmit = async (event: Event) => {
 
                 <button
                   type="submit"
-                  data-ascii="fade"
                   class="group inline-flex min-h-12 cursor-pointer items-center justify-between gap-3 rounded-full border border-white/10 bg-slate-950 py-1.5 ps-5 pe-1.5 font-mono text-xs font-semibold tracking-wider text-white uppercase shadow-lg shadow-black/25 transition-colors duration-200 hover:border-white/20 hover:bg-black hover:shadow-xl active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 sm:gap-4 sm:ps-6 sm:pe-2 dark:border-stone-300 dark:bg-white dark:text-dark-surface dark:hover:bg-white"
                   :disabled="isSubmitting"
                   :aria-busy="isSubmitting"

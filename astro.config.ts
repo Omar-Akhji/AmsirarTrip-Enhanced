@@ -22,11 +22,7 @@ export default defineConfig({
 
   // ─── Output & Adapter ────────────────────────────────────────────────────
   output: "server",
-  adapter: isVercel ?
-    vercel({
-      maxDuration: 30,
-    })
-  : node({ mode: "standalone" }),
+  adapter: isVercel ? vercel({ maxDuration: 30 }) : node({ mode: "standalone" }),
 
   // ─── Integrations ────────────────────────────────────────────────────────
   integrations: [

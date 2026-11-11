@@ -20,9 +20,7 @@ class CapMemoryStore {
     }
   }
 
-  /**
-   * Consume a nonce. Returns true if nonce is fresh, false if already consumed (replay attack).
-   */
+  /** Consume a nonce. Returns true if nonce is fresh, false if already consumed (replay attack). */
   public consumeNonce = async (sigHex: string, ttlMs: number): Promise<boolean> => {
     const now = Date.now();
     const existing = this.nonces.get(sigHex);
@@ -33,18 +31,15 @@ class CapMemoryStore {
     return true;
   };
 
-  /**
-   * Store a validated tokenKey with its expiration timestamp.
-   */
+  /** Store a validated tokenKey with its expiration timestamp. */
   public saveToken = (tokenKey: string, expiresMs: number): void => {
     this.tokens.set(tokenKey, { expires: expiresMs });
   };
 
   /**
-   * Re-derive tokenKey and consume it (atomic delete-on-read).
-   * Follows exact recipe from Cap Core docs:
-   * const [id, secret] = token.split(":");
-   * const tokenKey = `${id}:${createHash("sha256").update(secret).digest("hex")}`;
+   * Re-derive tokenKey and consume it (atomic delete-on-read). Follows exact recipe from Cap Core
+   * docs: const [id, secret] = token.split(":"); const tokenKey =
+   * `${id}:${createHash("sha256").update(secret).digest("hex")}`;
    */
   public consumeToken = (token: string): boolean => {
     if (!token || typeof token !== "string") return false;
@@ -63,9 +58,7 @@ class CapMemoryStore {
     return item.expires >= Date.now();
   };
 
-  /**
-   * Prune expired tokens and nonces to avoid memory leaks.
-   */
+  /** Prune expired tokens and nonces to avoid memory leaks. */
   private pruneExpired(): void {
     const now = Date.now();
     for (const [key, item] of this.tokens.entries()) {

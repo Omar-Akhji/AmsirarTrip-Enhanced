@@ -1,5 +1,5 @@
 ---
-import AsciiSkeleton from "@/shared/ui/feedback/AsciiSkeleton.astro";
+import { Skeleton } from "@/components/ui/skeleton";
 import ButtonSkeleton from "@/shared/ui/feedback/ButtonSkeleton.astro";
 import FaqSkeleton from "@/shared/ui/feedback/FaqSkeleton.astro";
 import PageHeaderSkeleton from "@/shared/ui/feedback/PageHeaderSkeleton.astro";
@@ -28,56 +28,26 @@ const { crumbWidths = ["w-12", "w-14", "w-52"], class: className } = Astro.props
     <div class="mx-auto grid gap-4 sm:gap-6 lg:gap-8 px-2 sm:px-6 lg:px-8 max-inline-7xl 2xl:max-inline-360 3xl:max-inline-420 lg:grid-cols-golden">
       {/* Left Column: Dossier Article */}
       <article class="rounded-2xl bg-white p-4 pbe-8 shadow-xs ring-1 ring-zinc-100 xs:p-5 sm:p-6 sm:pbe-12 2xl:p-8 space-y-8">
-        {/* Featured Image with rich ASCII dither matching TripLayout.astro golden ratio */}
+        {/* Featured Image matching TripLayout.astro golden ratio */}
         <figure class="relative mbe-8 aspect-golden overflow-hidden rounded-xl border border-zinc-100 shadow-md inline-full bg-stone-100 dark:bg-stone-800">
-          <AsciiSkeleton
-            class="ars-image size-full text-stone-400"
-            rows={48}
-            variant="dither"
-          />
+          <Skeleton class="size-full rounded-xl" />
         </figure>
 
         {/* Dossier Header */}
         <div class="mbe-8 sm:mbe-12 block border-b border-stone-200 pb-6 sm:pb-8 text-start">
-          <h2 class="text-2xl sm:text-3xl lg:text-4xl 2xl:text-[2.625rem] font-bold tracking-tight text-stone-900 leading-[1.15] text-balance">
-            <AsciiSkeleton
-              class="text-stone-900 font-bold"
-              lines={1}
-              variant="dither"
-              widths={["85%"]}
-            />
-          </h2>
+          <Skeleton class="h-9 sm:h-11 w-4/5" />
         </div>
 
         {/* Quick Specs 4-card Grid matching TourSeoSections.astro */}
         <dl class="m-0 p-0 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-          {[
-            { label: "DURATION", value: "3 Days" },
-            { label: "STARTING", value: "Marrakech" },
-            { label: "ENDING", value: "Fes" },
-            { label: "TOUR TYPE", value: "Private & Shared" },
-          ].map(() => (
+          {[1, 2, 3, 4].map(() => (
             <div class="flex items-center gap-4 rounded-2xl border border-stone-200/90 bg-white px-5 py-3 shadow-2xs min-block-20">
               <span class="size-5 shrink-0 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center font-bold text-xs">
                 •
               </span>
-              <div class="text-start min-w-0 flex-1">
-                <dt class="font-mono text-xs font-semibold tracking-wider text-stone-500 uppercase">
-                  <AsciiSkeleton
-                    class="text-stone-500 font-mono text-[11px]"
-                    lines={1}
-                    variant="dither"
-                    widths={["4rem"]}
-                  />
-                </dt>
-                <dd class="m-0 font-mono text-sm sm:text-base font-bold text-stone-900 truncate">
-                  <AsciiSkeleton
-                    class="text-stone-900 font-mono font-bold text-sm"
-                    lines={1}
-                    variant="dither"
-                    widths={["5.5rem"]}
-                  />
-                </dd>
+              <div class="text-start min-w-0 flex-1 space-y-1.5">
+                <Skeleton class="h-3 w-16" />
+                <Skeleton class="h-4 w-24" />
               </div>
             </div>
           ))}
@@ -85,23 +55,9 @@ const { crumbWidths = ["w-12", "w-14", "w-52"], class: className } = Astro.props
 
         {/* Highlights Section matching HighlightsList.astro */}
         <section class="mbs-8">
-          <hgroup class="mbe-4">
-            <AsciiSkeleton
-              class="font-sans text-xs font-bold tracking-wider text-orange-700 uppercase"
-              lines={1}
-              variant="dither"
-              widths={["8rem"]}
-            />
-            <div class="mbs-1">
-              <h3 class="text-xl font-bold tracking-tight text-stone-900 sm:text-2xl md:text-3xl">
-                <AsciiSkeleton
-                  class="text-stone-900 font-bold"
-                  lines={1}
-                  variant="dither"
-                  widths={["14rem"]}
-                />
-              </h3>
-            </div>
+          <hgroup class="mbe-4 space-y-2">
+            <Skeleton class="h-3.5 w-32" />
+            <Skeleton class="h-8 w-56" />
           </hgroup>
           <div class="rounded-2xl border border-stone-200/90 bg-white p-5 sm:p-6 shadow-2xs">
             <ul class="m-0 p-0 list-none grid gap-x-6 gap-y-3.5 sm:grid-cols-2">
@@ -111,12 +67,7 @@ const { crumbWidths = ["w-12", "w-14", "w-52"], class: className } = Astro.props
                     ✓
                   </span>
                   <div class="flex-1">
-                    <AsciiSkeleton
-                      class="text-sm text-stone-800"
-                      lines={1}
-                      variant="dither"
-                      widths={["90%"]}
-                    />
+                    <Skeleton class="h-4 w-11/12" />
                   </div>
                 </li>
               ))}
@@ -126,31 +77,14 @@ const { crumbWidths = ["w-12", "w-14", "w-52"], class: className } = Astro.props
 
         {/* Route Overview Section */}
         <section class="mbs-8">
-          <hgroup class="mbe-4">
-            <AsciiSkeleton
-              class="font-sans text-xs font-bold tracking-wider text-orange-700 uppercase"
-              lines={1}
-              variant="dither"
-              widths={["8.5rem"]}
-            />
-            <div class="mbs-1">
-              <h3 class="text-xl font-bold tracking-tight text-stone-900 sm:text-2xl md:text-3xl">
-                <AsciiSkeleton
-                  class="text-stone-900 font-bold"
-                  lines={1}
-                  variant="dither"
-                  widths={["15rem"]}
-                />
-              </h3>
-            </div>
+          <hgroup class="mbe-4 space-y-2">
+            <Skeleton class="h-3.5 w-32" />
+            <Skeleton class="h-8 w-60" />
           </hgroup>
           <div class="space-y-2">
-            <AsciiSkeleton
-              class="text-stone-700 text-sm sm:text-base leading-relaxed"
-              lines={3}
-              variant="dither"
-              widths={["100%", "96%", "75%"]}
-            />
+            <Skeleton class="h-4 w-full" />
+            <Skeleton class="h-4 w-11/12" />
+            <Skeleton class="h-4 w-3/4" />
           </div>
         </section>
 
@@ -158,38 +92,16 @@ const { crumbWidths = ["w-12", "w-14", "w-52"], class: className } = Astro.props
         <section class="mbs-8 space-y-4">
           <header class="ms-6 sm:ms-8 w-[calc(100%-1.5rem)] sm:w-[calc(100%-2rem)] bg-white/95 backdrop-blur-md pt-2 pb-4 border-b border-stone-200/80 mbe-8">
             <div class="space-y-3">
-              <hgroup class="space-y-1">
-                <AsciiSkeleton
-                  class="font-sans text-xs font-bold tracking-wider text-orange-700 uppercase"
-                  lines={1}
-                  variant="dither"
-                  widths={["7.5rem"]}
-                />
-                <h3 class="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-stone-950">
-                  <AsciiSkeleton
-                    class="text-stone-950 font-black"
-                    lines={1}
-                    variant="dither"
-                    widths={["12rem"]}
-                  />
-                </h3>
+              <hgroup class="space-y-2">
+                <Skeleton class="h-3.5 w-28" />
+                <Skeleton class="h-10 sm:h-12 w-48" />
               </hgroup>
               <div class="min-h-7 flex items-center justify-between">
                 <div class="inline-flex items-center rounded-full border border-stone-200/90 bg-white px-3.5 py-1">
-                  <AsciiSkeleton
-                    class="text-stone-700 font-mono text-xs"
-                    lines={1}
-                    variant="dither"
-                    widths={["14rem"]}
-                  />
+                  <Skeleton class="h-4 w-52" />
                 </div>
                 <div class="flex items-center gap-3">
-                  <AsciiSkeleton
-                    class="font-mono text-xs font-bold text-stone-500"
-                    lines={1}
-                    variant="dither"
-                    widths={["3.5rem"]}
-                  />
+                  <Skeleton class="h-4 w-14" />
                   <div class="w-24 sm:w-36 h-1.5 bg-stone-200/80 rounded-full overflow-hidden">
                     <div class="h-full w-1/3 bg-orange-600"></div>
                   </div>
@@ -206,13 +118,9 @@ const { crumbWidths = ["w-12", "w-14", "w-52"], class: className } = Astro.props
                 <div class="absolute -left-6 sm:-left-8 top-1.5 size-3 -translate-x-1/2 rounded-full bg-orange-600 ring-4 ring-orange-100"></div>
                 <div class="flex items-start gap-3">
                   <span class="mbs-2 size-1.5 shrink-0 rounded-full bg-orange-600"></span>
-                  <div class="flex-1 space-y-1.5">
-                    <AsciiSkeleton
-                      class="text-stone-700 text-sm sm:text-base leading-relaxed"
-                      lines={2}
-                      variant="dither"
-                      widths={["100%", "85%"]}
-                    />
+                  <div class="flex-1 space-y-2">
+                    <Skeleton class="h-4 w-full" />
+                    <Skeleton class="h-4 w-4/5" />
                   </div>
                 </div>
               </div>
@@ -222,23 +130,9 @@ const { crumbWidths = ["w-12", "w-14", "w-52"], class: className } = Astro.props
 
         {/* TripInfoSections (Included & Excluded) matching TripInfoSections.astro */}
         <section class="mbs-8">
-          <hgroup class="mbe-4">
-            <AsciiSkeleton
-              class="font-sans text-xs font-bold tracking-wider text-orange-700 uppercase"
-              lines={1}
-              variant="dither"
-              widths={["9rem"]}
-            />
-            <div class="mbs-1">
-              <h3 class="text-xl font-bold tracking-tight text-stone-900 sm:text-2xl md:text-3xl">
-                <AsciiSkeleton
-                  class="text-stone-900 font-bold"
-                  lines={1}
-                  variant="dither"
-                  widths={["15rem"]}
-                />
-              </h3>
-            </div>
+          <hgroup class="mbe-4 space-y-2">
+            <Skeleton class="h-3.5 w-36" />
+            <Skeleton class="h-8 w-60" />
           </hgroup>
           <div class="rounded-2xl border border-emerald-500/20 bg-emerald-50/30 p-6 shadow-2xs">
             <ul class="space-y-3 m-0 p-0 list-none">
@@ -247,12 +141,7 @@ const { crumbWidths = ["w-12", "w-14", "w-52"], class: className } = Astro.props
                   <span class="mbs-0.5 size-5 shrink-0 rounded-full bg-emerald-600/15 text-emerald-700 flex items-center justify-center font-bold text-xs">
                     ✓
                   </span>
-                  <AsciiSkeleton
-                    class="text-sm text-stone-800"
-                    lines={1}
-                    variant="dither"
-                    widths={["80%"]}
-                  />
+                  <Skeleton class="h-4 w-4/5" />
                 </li>
               ))}
             </ul>
@@ -263,55 +152,19 @@ const { crumbWidths = ["w-12", "w-14", "w-52"], class: className } = Astro.props
         <section class="rounded-2xl border border-stone-200/90 bg-stone-50/80 p-6 sm:p-8 shadow-xs">
           <div class="space-y-6">
             <div class="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-              <div class="space-y-1">
-                <AsciiSkeleton
-                  class="font-sans text-xs font-bold tracking-wider text-orange-700 uppercase"
-                  lines={1}
-                  variant="dither"
-                  widths={["10rem"]}
-                />
-                <h3 class="text-xl font-bold tracking-tight text-stone-900 sm:text-2xl">
-                  <AsciiSkeleton
-                    class="text-stone-900 font-bold"
-                    lines={1}
-                    variant="dither"
-                    widths={["14rem"]}
-                  />
-                </h3>
+              <div class="space-y-2">
+                <Skeleton class="h-3.5 w-36" />
+                <Skeleton class="h-7 w-56" />
               </div>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div class="rounded-xl border border-stone-200/80 bg-white p-4">
-                <AsciiSkeleton
-                  class="font-mono text-xs uppercase text-orange-600 font-bold"
-                  lines={1}
-                  variant="dither"
-                  widths={["5rem"]}
-                />
-                <div class="mbs-1">
-                  <AsciiSkeleton
-                    class="text-base font-bold text-stone-900"
-                    lines={1}
-                    variant="dither"
-                    widths={["7rem"]}
-                  />
-                </div>
+              <div class="rounded-xl border border-stone-200/80 bg-white p-4 space-y-2">
+                <Skeleton class="h-3.5 w-20" />
+                <Skeleton class="h-6 w-28" />
               </div>
-              <div class="rounded-xl border border-stone-200/80 bg-white p-4">
-                <AsciiSkeleton
-                  class="font-mono text-xs uppercase text-stone-500 font-bold"
-                  lines={1}
-                  variant="dither"
-                  widths={["5rem"]}
-                />
-                <div class="mbs-1">
-                  <AsciiSkeleton
-                    class="text-base font-bold text-stone-900"
-                    lines={1}
-                    variant="dither"
-                    widths={["7rem"]}
-                  />
-                </div>
+              <div class="rounded-xl border border-stone-200/80 bg-white p-4 space-y-2">
+                <Skeleton class="h-3.5 w-20" />
+                <Skeleton class="h-6 w-28" />
               </div>
             </div>
           </div>
@@ -319,11 +172,11 @@ const { crumbWidths = ["w-12", "w-14", "w-52"], class: className } = Astro.props
 
         {/* FAQ Section */}
         <FaqSkeleton
-          categoryWidth="7rem"
+          categoryWidth="w-28"
           count={4}
-          headingWidth="16rem"
+          headingWidth="w-64"
           isListing={false}
-          questionWidths={["92%", "88%", "82%", "70%"]}
+          questionWidths={["w-11/12", "w-4/5", "w-3/4", "w-2/3"]}
         />
       </article>
 
@@ -332,85 +185,43 @@ const { crumbWidths = ["w-12", "w-14", "w-52"], class: className } = Astro.props
         {/* Brand Card: Dark Luxury Container matching DetailsSidebar.astro */}
         <div class="overflow-hidden rounded-2xl bg-slate-950 text-white shadow-xl">
           <div class="p-6 sm:p-8">
-            <hgroup class="text-center">
-              <AsciiSkeleton
-                class="font-mono text-xs font-semibold tracking-[0.16em] text-orange-400 uppercase text-center mx-auto"
-                lines={1}
-                variant="dither"
-                widths={["7rem"]}
-              />
-              <div class="mbs-2">
-                <h3 class="text-xl sm:text-2xl font-bold tracking-tight text-white text-center">
-                  <AsciiSkeleton
-                    class="text-white text-center mx-auto"
-                    lines={1}
-                    variant="dither"
-                    widths={["12rem"]}
-                  />
-                </h3>
-              </div>
+            <hgroup class="text-center space-y-2 flex flex-col items-center">
+              <Skeleton class="h-3.5 w-28 bg-white/20" />
+              <Skeleton class="h-7 w-48 bg-white/20" />
             </hgroup>
             <div
               aria-hidden="true"
               class="my-4 border-t border-slate-800"
             ></div>
             <div class="space-y-2">
-              <AsciiSkeleton
-                class="font-mono text-xs sm:text-sm text-slate-300"
-                lines={2}
-                variant="dither"
-                widths={["100%", "85%"]}
-              />
+              <Skeleton class="h-4 w-full bg-white/10" />
+              <Skeleton class="h-4 w-4/5 bg-white/10" />
             </div>
             <ul
               role="list"
               class="mbs-4 grid gap-3 p-0 list-none"
             >
-              {Array.from({ length: 4 }, (_, idx) => (
+              {[1, 2, 3, 4].map((idx) => (
                 <li class="flex items-start gap-3">
                   <span class="inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-orange-500/20 text-orange-400 font-mono text-xs font-bold">
-                    0{idx + 1}
+                    0{idx}
                   </span>
                   <div class="flex-1">
-                    <AsciiSkeleton
-                      class="font-mono text-xs sm:text-sm text-slate-200"
-                      lines={1}
-                      variant="dither"
-                      widths={["85%"]}
-                    />
+                    <Skeleton class="h-4 w-4/5 bg-white/10" />
                   </div>
                 </li>
               ))}
             </ul>
             <div class="mbs-4">
-              <AsciiSkeleton
-                class="font-mono text-xs text-slate-400"
-                lines={1}
-                variant="dither"
-                widths={["11rem"]}
-              />
+              <Skeleton class="h-3.5 w-44 bg-white/10" />
             </div>
           </div>
         </div>
 
         {/* Dashed CTA Card matching DetailsSidebar.astro */}
-        <div class="rounded-2xl border border-dashed border-stone-200 bg-white p-6 shadow-2xs">
-          <h3 class="text-base font-bold text-stone-900 tracking-tight">
-            <AsciiSkeleton
-              class="text-stone-900 font-bold"
-              lines={1}
-              variant="dither"
-              widths={["9rem"]}
-            />
-          </h3>
-          <div class="mbs-2">
-            <AsciiSkeleton
-              class="font-mono text-xs text-stone-600 leading-relaxed"
-              lines={1}
-              variant="dither"
-              widths={["100%"]}
-            />
-          </div>
+        <div class="rounded-2xl border border-dashed border-stone-200 bg-white p-6 shadow-2xs space-y-3">
+          <Skeleton class="h-5 w-36" />
+          <Skeleton class="h-4 w-full" />
           <ul
             role="list"
             class="m-0 mbs-4 grid list-none gap-3 p-0 font-mono text-xs text-stone-700"
@@ -418,12 +229,7 @@ const { crumbWidths = ["w-12", "w-14", "w-52"], class: className } = Astro.props
             {Array.from({ length: 3 }, () => (
               <li class="flex items-start gap-3">
                 <span class="mbs-1 size-2 shrink-0 rounded-full bg-orange-600"></span>
-                <AsciiSkeleton
-                  class="text-stone-700 font-mono text-xs"
-                  lines={1}
-                  variant="dither"
-                  widths={["10rem"]}
-                />
+                <Skeleton class="h-4 w-40" />
               </li>
             ))}
           </ul>
@@ -439,138 +245,52 @@ const { crumbWidths = ["w-12", "w-14", "w-52"], class: className } = Astro.props
         {/* Left: Booking Form Card */}
         <div class="inline-full">
           <div class="rounded-2xl border border-stone-200/90 bg-white p-6 shadow-2xs block-full sm:p-8">
-            <div class="mbe-6 border-be border-stone-100 pbe-5">
-              <span class="font-mono text-xs font-semibold tracking-[0.14em] text-orange-600 uppercase">
-                <AsciiSkeleton
-                  class="text-orange-600 font-mono text-xs uppercase"
-                  lines={1}
-                  variant="dither"
-                  widths={["7rem"]}
-                />
-              </span>
-              <h3 class="mbs-1 text-xl font-bold tracking-tight text-stone-900 sm:text-2xl">
-                <AsciiSkeleton
-                  class="text-stone-900 font-bold"
-                  lines={1}
-                  variant="dither"
-                  widths={["14rem"]}
-                />
-              </h3>
+            <div class="mbe-6 border-be border-stone-100 pbe-5 space-y-2">
+              <Skeleton class="h-3.5 w-28" />
+              <Skeleton class="h-7 w-56" />
             </div>
 
             <div class="flex flex-col gap-5">
               {/* Row 1: Name & Email */}
               <div class="grid gap-5 md:grid-cols-2">
-                <div>
-                  <div class="mbe-1.5">
-                    <AsciiSkeleton
-                      class="font-sans text-xs font-semibold text-stone-700"
-                      lines={1}
-                      variant="dither"
-                      widths={["5.5rem"]}
-                    />
-                  </div>
-                  <AsciiSkeleton
-                    class="h-12 w-full rounded-xl border border-stone-200/90 bg-stone-50/50 text-stone-400 select-none"
-                    rows={3}
-                    variant="dither"
-                  />
+                <div class="space-y-1.5">
+                  <Skeleton class="h-3.5 w-20" />
+                  <Skeleton class="h-12 w-full rounded-xl" />
                 </div>
-                <div>
-                  <div class="mbe-1.5">
-                    <AsciiSkeleton
-                      class="font-sans text-xs font-semibold text-stone-700"
-                      lines={1}
-                      variant="dither"
-                      widths={["4rem"]}
-                    />
-                  </div>
-                  <AsciiSkeleton
-                    class="h-12 w-full rounded-xl border border-stone-200/90 bg-stone-50/50 text-stone-400 select-none"
-                    rows={3}
-                    variant="dither"
-                  />
+                <div class="space-y-1.5">
+                  <Skeleton class="h-3.5 w-16" />
+                  <Skeleton class="h-12 w-full rounded-xl" />
                 </div>
               </div>
 
               {/* Row 2: Phone */}
-              <div>
-                <div class="mbe-1.5">
-                  <AsciiSkeleton
-                    class="font-sans text-xs font-semibold text-stone-700"
-                    lines={1}
-                    variant="dither"
-                    widths={["6.5rem"]}
-                  />
-                </div>
-                <AsciiSkeleton
-                  class="h-12 w-full rounded-xl border border-stone-200/90 bg-stone-50/50 text-stone-400 select-none"
-                  rows={3}
-                  variant="dither"
-                />
+              <div class="space-y-1.5">
+                <Skeleton class="h-3.5 w-24" />
+                <Skeleton class="h-12 w-full rounded-xl" />
               </div>
 
               {/* Row 3: Persons & Date */}
               <div class="grid gap-5 md:grid-cols-2">
-                <div>
-                  <div class="mbe-1.5">
-                    <AsciiSkeleton
-                      class="font-sans text-xs font-semibold text-stone-700"
-                      lines={1}
-                      variant="dither"
-                      widths={["8rem"]}
-                    />
-                  </div>
-                  <AsciiSkeleton
-                    class="h-12 w-full rounded-xl border border-stone-200/90 bg-stone-50/50 text-stone-400 select-none"
-                    rows={3}
-                    variant="dither"
-                  />
+                <div class="space-y-1.5">
+                  <Skeleton class="h-3.5 w-28" />
+                  <Skeleton class="h-12 w-full rounded-xl" />
                 </div>
-                <div>
-                  <div class="mbe-1.5">
-                    <AsciiSkeleton
-                      class="font-sans text-xs font-semibold text-stone-700"
-                      lines={1}
-                      variant="dither"
-                      widths={["8rem"]}
-                    />
-                  </div>
-                  <AsciiSkeleton
-                    class="h-12 w-full rounded-xl border border-stone-200/90 bg-stone-50/50 text-stone-400 select-none"
-                    rows={3}
-                    variant="dither"
-                  />
+                <div class="space-y-1.5">
+                  <Skeleton class="h-3.5 w-28" />
+                  <Skeleton class="h-12 w-full rounded-xl" />
                 </div>
               </div>
 
               {/* Row 4: Message */}
-              <div>
-                <div class="mbe-1.5">
-                  <AsciiSkeleton
-                    class="font-sans text-xs font-semibold text-stone-700"
-                    lines={1}
-                    variant="dither"
-                    widths={["5rem"]}
-                  />
-                </div>
-                <AsciiSkeleton
-                  class="h-40 min-block-40 w-full rounded-xl border border-stone-200/90 bg-stone-50/50 text-stone-400 select-none"
-                  rows={10}
-                  variant="dither"
-                />
+              <div class="space-y-1.5">
+                <Skeleton class="h-3.5 w-20" />
+                <Skeleton class="h-40 min-block-40 w-full rounded-xl" />
               </div>
 
               {/* Bottom: Captcha + Submit button */}
               <div class="flex flex-col gap-4 pbs-2 sm:flex-row sm:items-center sm:justify-between">
                 <div class="flex justify-center sm:justify-start">
-                  <div class="w-fit origin-center scale-85 rounded-xl border border-dashed border-stone-200 p-2 sm:scale-100">
-                    <AsciiSkeleton
-                      class="h-19.5 w-76 rounded-lg border border-stone-200/80 bg-stone-50/60 text-stone-400 select-none overflow-hidden"
-                      rows={5}
-                      variant="dither"
-                    />
-                  </div>
+                  <Skeleton class="h-16 w-64 rounded-xl" />
                 </div>
                 <ButtonSkeleton
                   size="md"
@@ -588,31 +308,10 @@ const { crumbWidths = ["w-12", "w-14", "w-52"], class: className } = Astro.props
             <div class="flex h-full flex-col justify-between">
               <div class="space-y-4 sm:space-y-6">
                 <hgroup class="flex flex-col items-center gap-2 sm:gap-2.5 text-center">
-                  <AsciiSkeleton
-                    class="font-mono text-xs font-semibold tracking-[0.16em] uppercase text-orange-400 text-center mx-auto"
-                    lines={1}
-                    variant="dither"
-                    widths={["9rem"]}
-                  />
-                  <div class="mbs-1">
-                    <h3 class="font-sans text-2xl font-semibold tracking-tight sm:text-3xl text-white text-center">
-                      <AsciiSkeleton
-                        class="text-white text-center mx-auto"
-                        lines={1}
-                        variant="dither"
-                        widths={["14rem"]}
-                      />
-                    </h3>
-                  </div>
+                  <Skeleton class="h-3.5 w-36 bg-white/20" />
+                  <Skeleton class="h-8 w-56 bg-white/20" />
                   <div class="inline-flex size-24 sm:size-28 lg:size-32 items-center justify-center rounded-full border border-slate-800 bg-slate-900/60 p-3 sm:p-4">
-                    <AsciiSkeleton
-                      circle
-                      width={64}
-                      height={64}
-                      rows={4}
-                      variant="dither"
-                      class="text-stone-400"
-                    />
+                    <Skeleton class="size-16 rounded-full bg-white/10" />
                   </div>
                 </hgroup>
 
@@ -621,40 +320,21 @@ const { crumbWidths = ["w-12", "w-14", "w-52"], class: className } = Astro.props
                     5.0
                   </div>
                   <div class="space-y-1">
-                    <AsciiSkeleton
-                      class="text-xs text-slate-300"
-                      lines={1}
-                      variant="dither"
-                      widths={["6rem"]}
-                    />
-                    <AsciiSkeleton
-                      class="text-xs text-amber-200"
-                      lines={1}
-                      variant="dither"
-                      widths={["5rem"]}
-                    />
+                    <Skeleton class="h-3 w-24 bg-white/10" />
+                    <Skeleton class="h-3 w-20 bg-amber-200/20" />
                   </div>
                 </div>
 
-                <div class="space-y-1">
-                  <AsciiSkeleton
-                    class="text-xs sm:text-sm text-slate-300 leading-relaxed"
-                    lines={2}
-                    variant="dither"
-                    widths={["100%", "85%"]}
-                  />
+                <div class="space-y-2">
+                  <Skeleton class="h-3.5 w-full bg-white/10" />
+                  <Skeleton class="h-3.5 w-4/5 bg-white/10" />
                 </div>
 
                 <ul class="space-y-3 sm:space-y-4 font-sans text-sm m-0 p-0 list-none">
                   {Array.from({ length: 3 }, () => (
                     <li class="flex items-center gap-3">
                       <span class="size-2 rounded-full bg-orange-400 shrink-0"></span>
-                      <AsciiSkeleton
-                        class="text-slate-200 text-sm"
-                        lines={1}
-                        variant="dither"
-                        widths={["85%"]}
-                      />
+                      <Skeleton class="h-4 w-44 bg-white/10" />
                     </li>
                   ))}
                 </ul>

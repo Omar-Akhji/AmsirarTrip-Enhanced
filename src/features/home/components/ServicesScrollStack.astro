@@ -32,19 +32,8 @@ const t = useTranslations(locale);
               { "z-10": index === 0, "z-12": index === 1, "z-14": index >= 2 },
             ]}
           >
-            <article
-              class="group relative flex size-full flex-col items-center rounded-2xl border border-white/10 bg-white/10 p-8 text-center shadow-xs ring-1 ring-black/5 backdrop-blur-xl transition-all duration-300"
-              data-ascii="surface"
-              style="
-
---ascii-glyph: #f4f4f5; --ascii-surface: #09090b;
-
- backdrop-filter: blur(20px);"
-            >
-              <div
-                data-ascii="fade"
-                class="mbe-6 inline-flex size-25 items-center justify-center rounded-full bg-white/5 ring-1 ring-white/10 transition-transform duration-300 pointer-fine:group-hover:scale-105"
-              >
+            <article class="group relative flex size-full flex-col items-center rounded-2xl border border-white/10 bg-white/10 p-8 text-center shadow-xs ring-1 ring-black/5 backdrop-blur-xl transition-all duration-300">
+              <div class="mbe-6 inline-flex size-25 items-center justify-center rounded-full bg-white/5 ring-1 ring-white/10 transition-transform duration-300 pointer-fine:group-hover:scale-105">
                 <Image
                   alt={t(service.altKey)}
                   class="size-15"

@@ -1,5 +1,5 @@
 ---
-import AsciiSkeleton from "./AsciiSkeleton.astro";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface Props {
   class?: string | undefined;
@@ -18,14 +18,10 @@ const { class: className } = Astro.props;
     class="slider sticky top-0 h-screen w-full overflow-hidden bg-[#050505] font-sans"
     id="home-hero-slider-skeleton"
   >
-    {/* Dark Hero Background with atmospheric desert ASCII texture */}
+    {/* Dark Hero Background */}
     <div class="item absolute inset-0 size-full">
       <div class="size-full bg-[#050505]">
-        <AsciiSkeleton
-          class="ars-image ars-hero-bg size-full text-stone-800/40"
-          rows={18}
-          variant="dither"
-        />
+        <Skeleton class="size-full rounded-none bg-zinc-950/80" />
         <div
           class="pointer-events-none absolute inset-0 z-1 bg-[linear-gradient(to_bottom,rgb(0_0_0/55%)_0%,rgb(0_0_0/15%)_18%,transparent_32%),linear-gradient(to_top,rgb(0_0_0/40%)_0%,transparent_32%)]"
           aria-hidden="true"
@@ -34,35 +30,22 @@ const { class: className } = Astro.props;
 
       {/* Slider Details exact position & typography match for Erg Chebbi Dunes slide */}
       <div class="content absolute max-md:top-[calc((100dvh-var(--thumb-bottom)-var(--thumb-height)+3.75rem+env(safe-area-inset-top,0px))/2)] max-md:-translate-y-1/2 left-4 sm:left-8 md:left-[5%] lg:left-[max(7%,calc(50%-570px))] 2xl:left-[max(7%,calc(50%-640px))] 3xl:left-[max(8%,calc(50%-720px))] z-10 box-border max-w-[calc(100vw-2rem)] text-white text-shadow-sm text-shadow-black/40 md:top-[clamp(4.75rem,10.5vh,6.75rem)] lg:top-[clamp(5.25rem,12vh,7.75rem)] xl:top-[clamp(5.75rem,13.5vh,8.5rem)] 2xl:top-[clamp(6.5rem,14.5vh,9.25rem)] 3xl:top-[clamp(7.5rem,15.5vh,10.5rem)]">
-        {/* Title: Erg Chebbi Dunes (17ch) */}
-        <h1 class="title m-0 max-sm:text-balance sm:whitespace-nowrap text-left text-shadow-md text-shadow-black/50 text-[clamp(1.85rem,7.5vw,2.4rem)] xs:text-[clamp(2.1rem,7vw,2.75rem)] font-extrabold uppercase leading-[1.08] tracking-tight sm:text-[clamp(2.4rem,4.8vw,3.2rem)] sm:leading-[1.1] md:text-[clamp(2.6rem,4vw,3.8rem)] md:leading-[1.12] lg:text-[clamp(3rem,4.2vw,4.6rem)] 2xl:text-[clamp(3.5rem,4.2vw,5.2rem)] 3xl:text-[clamp(4rem,4vw,6rem)]">
-          <AsciiSkeleton
-            class="text-stone-300"
-            lines={1}
-            variant="dither"
-            widths={["17ch"]}
-          />
-        </h1>
+        {/* Title: Erg Chebbi Dunes */}
+        <div class="mbe-2">
+          <Skeleton class="h-10 sm:h-14 w-64 sm:w-96 bg-white/20" />
+        </div>
 
-        {/* Type: & Desert Camp Nights (21ch) */}
-        <div class="type m-0 mt-2 xs:mt-2.5 sm:mt-3 md:mt-3.5 max-sm:text-balance sm:whitespace-nowrap text-left text-shadow-md text-shadow-black/45 text-[clamp(1.65rem,6.8vw,2.2rem)] xs:text-[clamp(1.9rem,6.5vw,2.5rem)] font-extrabold uppercase leading-[1.1] tracking-tight text-stone-400 sm:text-[clamp(2.1rem,4.5vw,2.9rem)] md:text-[clamp(2.4rem,3.8vw,3.6rem)] md:leading-[1.12] lg:text-[clamp(2.8rem,4vw,4.4rem)] 2xl:text-[clamp(3.2rem,4vw,5rem)] 3xl:text-[clamp(3.6rem,3.8vw,5.6rem)]">
-          <AsciiSkeleton
-            class="text-stone-400 font-extrabold"
-            lines={1}
-            variant="dither"
-            widths={["21ch"]}
-          />
+        {/* Type: & Desert Camp Nights */}
+        <div class="mbe-4">
+          <Skeleton class="h-8 sm:h-11 w-72 sm:w-md bg-white/15" />
         </div>
 
         {/* Description: 3 lines matching paragraph font-size & line-height */}
-        <p class="description border-s-2 border-orange-600/70 ps-3.5 sm:ps-4 py-0.5 w-full mt-4 xs:mt-5 sm:mt-5 md:mt-6 lg:mt-7 text-left text-shadow-md text-shadow-black/85 text-[clamp(0.875rem,0.8rem+0.42vw,1.1rem)] font-normal leading-relaxed text-pretty text-slate-100/95 max-w-[min(100%,44ch)] sm:max-w-[46ch] sm:leading-[1.62] md:max-w-[min(48ch,calc(100vw-10%))] md:leading-[1.68] lg:max-w-[calc(var(--thumb-left)-max(7%,calc(50%-570px))-3rem)] lg:leading-[1.72] xl:max-w-120 2xl:max-w-136 3xl:max-w-150">
-          <AsciiSkeleton
-            class="text-slate-200/90"
-            lines={3}
-            variant="dither"
-            widths={["100%", "96%", "82%"]}
-          />
-        </p>
+        <div class="border-s-2 border-orange-600/70 ps-3.5 sm:ps-4 py-0.5 w-full mt-4 xs:mt-5 sm:mt-5 md:mt-6 lg:mt-7 space-y-2 max-w-[min(100%,44ch)] sm:max-w-[46ch]">
+          <Skeleton class="h-4 w-full bg-white/15" />
+          <Skeleton class="h-4 w-11/12 bg-white/15" />
+          <Skeleton class="h-4 w-4/5 bg-white/15" />
+        </div>
       </div>
     </div>
 
@@ -73,24 +56,10 @@ const { class: className } = Astro.props;
     >
       {Array.from({ length: 3 }, () => (
         <div class="item relative shrink-0 overflow-hidden shadow-[0_8px_25px_rgb(0_0_0/45%)] w-(--thumb-width) h-(--thumb-height) rounded-(--thumb-radius) bg-slate-950">
-          <AsciiSkeleton
-            class="ars-image size-full rounded-(--thumb-radius) text-stone-600 overflow-hidden"
-            rows={18}
-            variant="dither"
-          />
-          <div class="thumbnail-overlay pointer-events-none absolute inset-x-0 bottom-0 flex flex-col px-2 py-2 sm:px-2.5 sm:py-3 text-white text-shadow-sm text-shadow-black/80 bg-linear-to-t from-black/85 to-transparent">
-            <AsciiSkeleton
-              class="text-stone-400 font-bold"
-              lines={1}
-              variant="dither"
-              widths={["5.5rem"]}
-            />
-            <AsciiSkeleton
-              class="text-stone-400"
-              lines={1}
-              variant="dither"
-              widths={["7rem"]}
-            />
+          <Skeleton class="size-full rounded-(--thumb-radius) bg-zinc-900/80" />
+          <div class="thumbnail-overlay pointer-events-none absolute inset-x-0 bottom-0 flex flex-col gap-1.5 px-2 py-2 sm:px-2.5 sm:py-3 bg-linear-to-t from-black/85 to-transparent">
+            <Skeleton class="h-3 w-20 bg-white/20" />
+            <Skeleton class="h-2.5 w-28 bg-white/15" />
           </div>
         </div>
       ))}

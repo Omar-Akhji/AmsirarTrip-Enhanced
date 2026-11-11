@@ -39,14 +39,10 @@ const subtitle = subtitleMap[locale] ?? subtitleMap["en"] ?? defaultSubtitle;
   aria-labelledby="services-heading"
   class="relative overflow-visible py-12 sm:py-16 lg:py-24 text-orange-200"
   id="services"
-  style="
-
---ascii-glyph: #f4f4f5; --ascii-surface: #09090b;"
 >
   <Image
     alt=""
     class="absolute inset-0 size-full object-cover"
-    data-ascii="skip"
     decoding="async"
     height={1277}
     loading="lazy"
@@ -89,13 +85,9 @@ const subtitle = subtitleMap[locale] ?? subtitleMap["en"] ?? defaultSubtitle;
             { "md:col-span-2 lg:col-span-1": index === 2 },
           ]}
           data-animate="fade-up"
-          data-ascii="surface"
           style={`transition-delay: ${index * 150}ms; -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px);`}
         >
-          <div
-            data-ascii="fade"
-            class="mbe-6 inline-flex size-25 items-center justify-center rounded-full bg-white/5 ring-1 ring-white/10 transition-transform duration-300 pointer-fine:group-hover:scale-105"
-          >
+          <div class="mbe-6 inline-flex size-25 items-center justify-center rounded-full bg-white/5 ring-1 ring-white/10 transition-transform duration-300 pointer-fine:group-hover:scale-105">
             <Image
               alt={t(service.altKey)}
               class="size-15"

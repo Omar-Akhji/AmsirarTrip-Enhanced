@@ -17,9 +17,7 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     const body = rawBody as ValidateChallengeBody;
-    const result = await validateChallenge(secret, body, {
-      consumeNonce: capStore.consumeNonce,
-    });
+    const result = await validateChallenge(secret, body, { consumeNonce: capStore.consumeNonce });
 
     if (!result.success || !result.tokenKey) {
       return new Response(
@@ -27,21 +25,14 @@ export const POST: APIRoute = async ({ request }) => {
           success: false,
           reason: result.success ? "missing_token_key" : result.reason,
         }),
-        {
-          status: 400,
-          headers: { "Content-Type": "application/json" },
-        },
+        { status: 400, headers: { "Content-Type": "application/json" } },
       );
     }
 
     capStore.saveToken(result.tokenKey, result.expires);
 
     return new Response(
-      JSON.stringify({
-        success: true,
-        token: result.token,
-        expires: result.expires,
-      }),
+      JSON.stringify({ success: true, token: result.token, expires: result.expires }),
       {
         status: 200,
         headers: {

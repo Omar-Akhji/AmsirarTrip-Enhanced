@@ -1,5 +1,4 @@
 import type { TransitionBeforePreparationEvent } from "astro:transitions/client";
-import { cleanupAsciiReveals, initAsciiSkeletons, triggerPageReveal } from "./ascii-skeleton";
 
 const SKELETON_DEV_DELAY_MS = 800;
 const PROGRESS_BAR_ID = "page-progress-bar";
@@ -100,16 +99,7 @@ export function resolveSkeletonRoute(pathname: string): string {
   return "default";
 }
 
-let stopActiveSkeleton: (() => void) | null = null;
-
 function showSkeleton(routeKey: string): void {
-  cleanupAsciiReveals();
-
-  if (stopActiveSkeleton) {
-    stopActiveSkeleton();
-    stopActiveSkeleton = null;
-  }
-
   const container = document.querySelector<HTMLElement>("#skeleton-container");
   const content = document.querySelector<HTMLElement>("#page-content");
   if (!container || !content) return;
@@ -133,12 +123,6 @@ function showSkeleton(routeKey: string): void {
   container.style.opacity = "1";
   content.style.opacity = "0";
   content.style.pointerEvents = "none";
-
-  // Force synchronous layout so getBoundingClientRect() calculates real dimensions
-  targetSkeleton.getBoundingClientRect();
-
-  // Animate the ASCII skeleton shimmer on the active skeleton with real dimensions
-  stopActiveSkeleton = initAsciiSkeletons(targetSkeleton, { force: true });
 }
 
 function hideSkeleton(): void {
@@ -146,29 +130,20 @@ function hideSkeleton(): void {
   const content = document.querySelector<HTMLElement>("#page-content");
   if (!container || !content) return;
 
-  // Dispose running skeleton shimmer canvases and frame loops
-  if (stopActiveSkeleton) {
-    stopActiveSkeleton();
-    stopActiveSkeleton = null;
-  }
-
   // Make content visible immediately
   content.classList.remove("hidden");
   content.style.opacity = "1";
   content.style.pointerEvents = "auto";
 
-  // Hide skeleton smoothly and swiftly (90ms) so it doesn't mask the reveal wave
-  container.style.transition = "opacity 90ms cubic-bezier(0.4, 0, 0.2, 1)";
+  // Hide skeleton smoothly
+  container.style.transition = "opacity 150ms cubic-bezier(0.4, 0, 0.2, 1)";
   container.style.opacity = "0";
 
   setTimeout(() => {
     container.classList.add("hidden");
     container.setAttribute("aria-hidden", "true");
     container.style.opacity = "1";
-  }, 100);
-
-  // Trigger dither reveal on loaded page content from current viewport position
-  triggerPageReveal(content, { origin: "center", speed: 2, lazy: false });
+  }, 160);
 }
 
 // Initial page load skeleton with wait
@@ -199,7 +174,6 @@ function handleInitialLoad(): void {
 document.addEventListener("astro:before-preparation", (e: Event) => {
   if (!isPreparationEvent(e)) return;
 
-  cleanupAsciiReveals();
   startProgressBar();
 
   // Scroll to header immediately when navigating to another page without hash

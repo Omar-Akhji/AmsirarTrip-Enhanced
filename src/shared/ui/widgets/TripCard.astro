@@ -50,10 +50,7 @@ const cardTransitionName =
 const categoryText = badge || tagline || "Morocco Tour";
 ---
 
-<article
-  data-ascii="surface"
-  class="group relative flex flex-col justify-between overflow-hidden rounded-[2.5rem] border border-stone-200/90 bg-white p-4 shadow-[0_20px_40px_-14px_rgba(0,0,0,0.12)] transition duration-500 ease-out-expo size-full dark:border-white/10 dark:bg-surface-card/85 dark:shadow-[0_4px_20px_-2px_rgba(0,0,0,0.4)] pointer-fine:hover:-translate-y-1.5 pointer-fine:hover:shadow-[0_28px_50px_-14px_rgba(0,0,0,0.22)] dark:pointer-fine:hover:border-white/20 dark:pointer-fine:hover:bg-surface-hover/95 dark:pointer-fine:hover:shadow-[0_16px_36px_-8px_rgba(0,0,0,0.6)]"
->
+<article class="group relative flex flex-col justify-between overflow-hidden rounded-[2.5rem] border border-stone-200/90 bg-white p-4 shadow-[0_20px_40px_-14px_rgba(0,0,0,0.12)] transition duration-500 ease-out-expo size-full dark:border-white/10 dark:bg-surface-card/85 dark:shadow-[0_4px_20px_-2px_rgba(0,0,0,0.4)] pointer-fine:hover:-translate-y-1.5 pointer-fine:hover:shadow-[0_28px_50px_-14px_rgba(0,0,0,0.22)] dark:pointer-fine:hover:border-white/20 dark:pointer-fine:hover:bg-surface-hover/95 dark:pointer-fine:hover:shadow-[0_16px_36px_-8px_rgba(0,0,0,0.6)]">
   {/* Full-card accessible click target */}
   <a
     class="absolute inset-0 z-30 rounded-[2.5rem] focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-orange-600 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-stone-900"
@@ -67,10 +64,7 @@ const categoryText = badge || tagline || "Morocco Tour";
   {/* Image Thumbnail with Scoop Category Tab & Hover Reveal Stack */}
   <div class="relative aspect-golden w-full shrink-0 overflow-hidden rounded-3xl bg-stone-100 dark:bg-surface-card">
     {/* Inverted Scoop Category Badge at Top-Left */}
-    <div
-      class="absolute top-0 left-0 z-20 pointer-events-none inline-flex items-center px-5 py-2 rounded-ee-2xl bg-white dark:bg-surface-card drop-shadow-[4px_4px_6px_rgba(0,0,0,0.12)] before:content-[''] before:absolute before:top-0 before:left-full before:size-4 before:bg-inherit before:[-webkit-mask-image:radial-gradient(circle_at_100%_100%,transparent_16px,#000_17px)] before:mask-[radial-gradient(circle_at_100%_100%,transparent_16px,#000_17px)] after:content-[''] after:absolute after:top-full after:left-0 after:size-4 after:bg-inherit after:[-webkit-mask-image:radial-gradient(circle_at_100%_100%,transparent_16px,#000_17px)] after:mask-[radial-gradient(circle_at_100%_100%,transparent_16px,#000_17px)]"
-      data-ascii="fade"
-    >
+    <div class="absolute top-0 left-0 z-20 pointer-events-none inline-flex items-center px-5 py-2 rounded-ee-2xl bg-white dark:bg-surface-card drop-shadow-[4px_4px_6px_rgba(0,0,0,0.12)] before:content-[''] before:absolute before:top-0 before:left-full before:size-4 before:bg-inherit before:[-webkit-mask-image:radial-gradient(circle_at_100%_100%,transparent_16px,#000_17px)] before:mask-[radial-gradient(circle_at_100%_100%,transparent_16px,#000_17px)] after:content-[''] after:absolute after:top-full after:left-0 after:size-4 after:bg-inherit after:[-webkit-mask-image:radial-gradient(circle_at_100%_100%,transparent_16px,#000_17px)] after:mask-[radial-gradient(circle_at_100%_100%,transparent_16px,#000_17px)]">
       <span class="font-mono text-[11px] font-bold tracking-[0.08em] uppercase text-orange-600 dark:text-yellow">
         {categoryText}
       </span>
@@ -150,10 +144,7 @@ const categoryText = badge || tagline || "Morocco Tour";
     )}
 
     {/* Action Row: Tour Type Badge (Left) + Signature Reserve-Style Action Button (Right) */}
-    <div
-      class:list={["pt-2 flex items-center justify-between gap-3", !start && "mt-auto"]}
-      data-ascii="fade"
-    >
+    <div class:list={["pt-2 flex items-center justify-between gap-3", !start && "mt-auto"]}>
       {tourTypeBadge && (
         <span class="inline-flex items-center rounded-full border border-stone-200/90 bg-stone-100/90 px-3 py-1.5 font-mono text-[10px] font-semibold tracking-wider text-stone-700 uppercase shadow-xs transition-colors duration-300 group-hover:border-stone-300 group-hover:bg-stone-200/90 dark:border-white/10 dark:bg-white/5 dark:text-mist-200 dark:group-hover:border-white/20 dark:group-hover:bg-white/10">
           {tourTypeBadge}

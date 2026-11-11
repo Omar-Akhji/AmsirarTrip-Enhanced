@@ -127,7 +127,7 @@ const thumbnailCards: SlideCardItem[] = currentSlides.map((slide) => ({
 
 <section
   id="home-hero-slider-section"
-  class="relative isolate w-full h-[300vh] overflow-x-clip bg-black text-white [--ascii-glyph:#d4d4d8] [--ascii-surface:#09090b] [--ascii-accent:#f15d30]"
+  class="relative isolate w-full h-[300vh] overflow-x-clip bg-black text-white"
   aria-roledescription="carousel"
   aria-label="Amsirar Trip Hero Carousel"
 >
@@ -141,7 +141,6 @@ const thumbnailCards: SlideCardItem[] = currentSlides.map((slide) => ({
         <div
           class="item absolute inset-0 size-full"
           data-index={index}
-          {...(index === 0 ? {} : { "data-ascii": "skip" })}
         >
           {typeof slide.image === "string" ?
             <Image
@@ -152,7 +151,6 @@ const thumbnailCards: SlideCardItem[] = currentSlides.map((slide) => ({
               loading="eager"
               width={1920}
               height={1080}
-              data-ascii="skip"
               class="size-full object-cover"
             />
           : <Image
@@ -161,13 +159,11 @@ const thumbnailCards: SlideCardItem[] = currentSlides.map((slide) => ({
               decoding="async"
               fetchpriority={index === 0 ? "high" : "low"}
               loading="eager"
-              data-ascii="skip"
               class="size-full object-cover"
             />
           }
           <div
             class="slide-overlay pointer-events-none absolute inset-0 z-1 bg-[linear-gradient(to_bottom,rgb(0_0_0/55%)_0%,rgb(0_0_0/15%)_18%,transparent_32%),linear-gradient(to_top,rgb(0_0_0/40%)_0%,transparent_32%)]"
-            data-ascii="skip"
             aria-hidden="true"
           />
           <SliderDetails

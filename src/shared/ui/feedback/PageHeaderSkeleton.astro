@@ -1,5 +1,6 @@
 ---
-import AsciiSkeleton from "./AsciiSkeleton.astro";
+import { Skeleton } from "@/components/ui/skeleton";
+import BreadcrumbSkeleton from "./BreadcrumbSkeleton.astro";
 import ButtonSkeleton from "./ButtonSkeleton.astro";
 
 interface Props {
@@ -29,13 +30,9 @@ const {
     className,
   ]}
 >
-  {/* Dark Hero Background with desert ASCII atmosphere spanning 100% edge-to-edge */}
+  {/* Dark Hero Background */}
   <div class="absolute inset-0 -z-30 size-full overflow-hidden bg-zinc-950">
-    <AsciiSkeleton
-      class="ars-image ars-hero-bg size-full text-stone-700/35"
-      rows={32}
-      variant="dither"
-    />
+    <Skeleton class="size-full rounded-none bg-zinc-900/60" />
   </div>
   <div
     aria-hidden="true"
@@ -49,40 +46,24 @@ const {
   <div class="relative z-20 mx-auto my-auto flex flex-col items-center justify-center px-4 text-center inline-full max-inline-7xl">
     <div class="w-full max-w-4xl space-y-6 text-center">
       {hasBreadcrumbs && (
-        <div class="mbe-6 sm:mbe-8 flex items-center justify-center">
-          <AsciiSkeleton
-            class:list={[
-              "h-9 rounded-full overflow-hidden text-white/60",
-              { "w-64 sm:w-72": crumbWidths.length > 2, "w-48 sm:w-56": crumbWidths.length <= 2 },
-            ]}
-            rows={2}
-            variant="dither"
-          />
-        </div>
+        <BreadcrumbSkeleton
+          class="mbe-6 sm:mbe-8"
+          crumbWidths={crumbWidths}
+        />
       )}
 
       <hgroup class="space-y-4 sm:space-y-5">
         {!hasBreadcrumbs && (
           <div class="flex items-center justify-center gap-4">
             <span class="bg-white/20 block-px inline-8"></span>
-            <AsciiSkeleton
-              class="text-white/60"
-              lines={1}
-              variant="dither"
-              widths={["8rem"]}
-            />
+            <Skeleton class="h-4 w-32 bg-white/20" />
             <span class="bg-white/20 block-px inline-8"></span>
           </div>
         )}
 
         {/* Title matching PageHeader text-3xl sm:text-4xl lg:text-5xl */}
         <div class:list={["mx-auto text-center", titleWidth]}>
-          <AsciiSkeleton
-            class="text-3xl sm:text-4xl lg:text-5xl text-white/90 font-bold text-center mx-auto"
-            lines={1}
-            variant="dither"
-            widths={["100%"]}
-          />
+          <Skeleton class="h-10 sm:h-12 w-full mx-auto bg-white/20" />
         </div>
 
         {hasUnderline && (
@@ -90,13 +71,9 @@ const {
         )}
 
         {/* Subtitle matching PageHeader single max-w-[62ch] paragraph — centered broken line */}
-        <div class="mx-auto max-w-[62ch] text-center">
-          <AsciiSkeleton
-            class="text-white/60 font-mono text-sm sm:text-base lg:text-lg text-center mx-auto"
-            lines={2}
-            variant="dither"
-            widths={["100%", "72%"]}
-          />
+        <div class="mx-auto max-w-[62ch] space-y-2 flex flex-col items-center">
+          <Skeleton class="h-4 w-full bg-white/15" />
+          <Skeleton class="h-4 w-3/4 bg-white/15" />
         </div>
       </hgroup>
 
@@ -106,12 +83,12 @@ const {
           <ButtonSkeleton
             size="md"
             variant="primary"
-            class="w-36 text-white/80"
+            class="w-36"
           />
           <ButtonSkeleton
             size="md"
             variant="secondary"
-            class="w-44 text-white/80"
+            class="w-44"
           />
         </div>
       )}

@@ -1,7 +1,6 @@
 {
   "$schema": "https://unpkg.com/knip@6/schema.json",
   "entry": [
-    "src/scripts/ascii-skeleton.ts",
     "src/scripts/cookie-consent.ts",
     "src/scripts/desktop-nav.ts",
     "src/scripts/mobile-nav.ts",

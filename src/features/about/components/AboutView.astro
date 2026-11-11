@@ -135,10 +135,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
               </div>
 
               <!-- Archival Editorial Quote Card -->
-              <figure
-                class="relative overflow-hidden rounded-2xl border border-stone-200/90 bg-stone-50/70 p-gutter dark:border-white/10 dark:bg-surface-card/80"
-                data-ascii="surface"
-              >
+              <figure class="relative overflow-hidden rounded-2xl border border-stone-200/90 bg-stone-50/70 p-gutter dark:border-white/10 dark:bg-surface-card/80">
                 <QuoteIcon
                   aria-hidden="true"
                   class="pointer-events-none absolute top-4 right-4 sm:top-5 sm:right-5 size-5 sm:size-6 text-orange-600/35"
@@ -171,10 +168,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
           class="m-0 p-0 list-none grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-[clamp(1rem,0.8rem+0.5vw,1.5rem)] 2xl:gap-6"
         >
           {[1, 2, 3, 4].map((number_) => (
-            <li
-              class="flex flex-col items-start gap-3 rounded-2xl border border-stone-200/80 bg-stone-50/60 p-[clamp(1.125rem,0.95rem+0.6vw,1.5rem)] shadow-2xs dark:border-white/10 dark:bg-surface-card/60"
-              data-ascii="surface"
-            >
+            <li class="flex flex-col items-start gap-3 rounded-2xl border border-stone-200/80 bg-stone-50/60 p-[clamp(1.125rem,0.95rem+0.6vw,1.5rem)] shadow-2xs dark:border-white/10 dark:bg-surface-card/60">
               <span class="inline-flex size-7 items-center justify-center rounded-lg bg-orange-100/80 dark:bg-orange-950/80 font-mono text-xs font-bold text-orange-700 dark:text-orange-400 tabular-nums shrink-0">
                 0{number_}
               </span>
@@ -222,10 +216,6 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
             <article
               aria-labelledby={`fact-${fact.id}-label`}
               class="group relative flex size-full flex-col justify-between overflow-hidden rounded-2xl border border-slate-900 bg-slate-950 px-8 py-10 text-center text-orange-200 shadow-xl transition-[transform,box-shadow] duration-200 ease-out pointer-fine:hover:-translate-y-1 pointer-fine:hover:shadow-2xl motion-reduce:transform-none"
-              data-ascii="surface"
-              style="
-
---ascii-glyph: #fed7aa; --ascii-surface: #020617;"
             >
               <div class="relative flex flex-col items-center gap-y-6">
                 <figure class="relative inline-flex size-24 shrink-0 items-center justify-center overflow-hidden rounded-full border-2 border-white bg-white/5 p-3 text-white">
@@ -246,7 +236,6 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
                     class="inline-block"
                     data-count-duration={fact.duration}
                     data-count-to={fact.value}
-                    data-ascii-digits
                   >
                     {fact.value.toLocaleString(locale)}
                   </span>

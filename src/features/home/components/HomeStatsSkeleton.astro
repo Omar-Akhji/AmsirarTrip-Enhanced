@@ -1,5 +1,5 @@
 ---
-import AsciiSkeleton from "@/shared/ui/feedback/AsciiSkeleton.astro";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface Props {
   class?: string | undefined;
@@ -20,54 +20,25 @@ const { class: className } = Astro.props;
         {Array.from({ length: 3 }, () => (
           <article class="stat-card relative flex h-55 w-full flex-col justify-between rounded-2xl border border-stone-200/90 bg-stone-50/95 p-5 shadow-xl shadow-stone-900/10">
             <div>
-              <div class="mbe-3 flex items-center justify-between border-b border-stone-200/70 pb-2 text-[11px] font-mono uppercase tracking-wider text-stone-400">
-                <AsciiSkeleton
-                  class="text-stone-500 font-mono text-xs"
-                  lines={1}
-                  variant="dither"
-                  widths={["6rem"]}
-                />
+              <div class="mbe-3 flex items-center justify-between border-b border-stone-200/70 pb-2">
+                <Skeleton class="h-3.5 w-24" />
               </div>
 
               <div class="mbe-2">
-                <AsciiSkeleton
-                  class="text-3xl font-bold text-orange-600"
-                  lines={1}
-                  variant="dither"
-                  widths={["4.5rem"]}
-                />
+                <Skeleton class="h-8 w-20" />
               </div>
 
-              <AsciiSkeleton
-                class="text-base font-semibold text-stone-900"
-                lines={1}
-                variant="dither"
-                widths={["10rem"]}
-              />
+              <Skeleton class="h-5 w-40" />
 
-              <div class="mbs-2">
-                <AsciiSkeleton
-                  class="text-xs text-stone-600"
-                  lines={2}
-                  variant="dither"
-                  widths={["100%", "85%"]}
-                />
+              <div class="mbs-2 space-y-1.5">
+                <Skeleton class="h-3.5 w-full" />
+                <Skeleton class="h-3.5 w-4/5" />
               </div>
             </div>
 
-            <div class="flex items-center justify-between border-t border-stone-200/70 pt-2 text-[11px] font-mono uppercase tracking-wider">
-              <AsciiSkeleton
-                class="text-stone-500 text-[11px]"
-                lines={1}
-                variant="dither"
-                widths={["5rem"]}
-              />
-              <AsciiSkeleton
-                class="text-stone-500 text-[11px]"
-                lines={1}
-                variant="dither"
-                widths={["6rem"]}
-              />
+            <div class="flex items-center justify-between border-t border-stone-200/70 pt-2">
+              <Skeleton class="h-3 w-20" />
+              <Skeleton class="h-3 w-24" />
             </div>
           </article>
         ))}
@@ -81,60 +52,30 @@ const { class: className } = Astro.props;
           <article class="group relative flex h-full w-full flex-col justify-between rounded-2xl border border-stone-200/90 bg-stone-50/80 p-6 sm:p-7 shadow-xs shadow-stone-900/5">
             <div>
               {/* Editorial Bar */}
-              <div class="mbe-5 flex items-center justify-between border-b border-stone-200/60 pb-3 text-[11px] font-mono uppercase tracking-wider text-stone-400">
-                <AsciiSkeleton
-                  class="text-stone-500 font-mono text-xs"
-                  lines={1}
-                  variant="dither"
-                  widths={["6.5rem"]}
-                />
+              <div class="mbe-5 flex items-center justify-between border-b border-stone-200/60 pb-3">
+                <Skeleton class="h-3.5 w-28" />
               </div>
 
               {/* Stat Value */}
               <div class="mbe-3">
-                <AsciiSkeleton
-                  class="text-4xl font-bold tracking-tight text-orange-600"
-                  lines={1}
-                  variant="dither"
-                  widths={["5rem"]}
-                />
+                <Skeleton class="h-10 w-24" />
               </div>
 
               {/* Stat Label */}
-              <h3 class="text-base sm:text-lg font-semibold tracking-tight text-stone-900">
-                <AsciiSkeleton
-                  class="text-stone-900"
-                  lines={1}
-                  variant="dither"
-                  widths={["11rem"]}
-                />
-              </h3>
+              <Skeleton class="h-6 w-44" />
 
               {/* Stat Description */}
-              <div class="mbs-2 space-y-1">
-                <AsciiSkeleton
-                  class="text-stone-600 text-sm leading-relaxed"
-                  lines={3}
-                  variant="dither"
-                  widths={["100%", "92%", "74%"]}
-                />
+              <div class="mbs-3 space-y-2">
+                <Skeleton class="h-3.5 w-full" />
+                <Skeleton class="h-3.5 w-11/12" />
+                <Skeleton class="h-3.5 w-3/4" />
               </div>
             </div>
 
             {/* Footer Metadata */}
-            <div class="mbs-6 flex items-center justify-between border-t border-stone-200/60 pt-3 text-[11px] font-mono text-stone-400 uppercase tracking-wider">
-              <AsciiSkeleton
-                class="text-stone-500 text-[11px]"
-                lines={1}
-                variant="dither"
-                widths={["5.5rem"]}
-              />
-              <AsciiSkeleton
-                class="text-stone-600 text-[11px]"
-                lines={1}
-                variant="dither"
-                widths={["6.5rem"]}
-              />
+            <div class="mbs-6 flex items-center justify-between border-t border-stone-200/60 pt-3">
+              <Skeleton class="h-3 w-20" />
+              <Skeleton class="h-3 w-24" />
             </div>
           </article>
         </div>

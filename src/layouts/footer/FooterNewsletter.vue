@@ -214,165 +214,165 @@ const openModal = () => {
 </template>
 
 <style scoped>
-  .social {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-  }
+.social {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
 
+.social li {
+  position: relative;
+  isolation: isolate;
+  flex: 0 0 2.75rem;
+  width: 2.75rem;
+  height: 2.75rem;
+}
+
+.social-facebook {
+  --bg: #1877f2;
+}
+
+.social-twitter {
+  --bg: #101419;
+}
+
+.social-instagram {
+  --bg: linear-gradient(-45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+}
+
+.social-tiktok {
+  --bg: #010101;
+}
+
+@media (width >= 640px) {
   .social li {
-    position: relative;
-    isolation: isolate;
-    flex: 0 0 2.75rem;
-    width: 2.75rem;
-    height: 2.75rem;
+    flex-basis: 3rem;
+    width: 3rem;
+    height: 3rem;
   }
+}
 
-  .social-facebook {
-    --bg: #1877f2;
-  }
+.social li::after {
+  position: absolute;
+  inset-block-start: -45%;
+  inset-inline-start: 50%;
+  z-index: 0;
+  content: attr(data-tooltip);
+  translate: -50% 0;
+  padding: 0.25rem 0.75rem;
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: #fff;
+  white-space: nowrap;
+  pointer-events: none;
+  visibility: hidden;
+  opacity: 0;
+  background: var(--bg, #070707);
+  border: 1px solid rgb(255 255 255 / 0.15);
+  border-radius: 9999px;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.4);
+  transition:
+    inset 0.4s cubic-bezier(0.47, 2, 0.41, 1.5),
+    visibility 0.3s ease-in-out,
+    opacity 0.2s ease-in-out;
+}
 
-  .social-twitter {
-    --bg: #101419;
-  }
+.social li:has(a:hover, a:focus-visible) {
+  z-index: 20;
+}
 
-  .social-instagram {
-    --bg: linear-gradient(-45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
-  }
+.social li:has(a:hover, a:focus-visible)::after {
+  inset-block-start: -70%;
+  visibility: visible;
+  opacity: 1;
+}
 
-  .social-tiktok {
-    --bg: #010101;
-  }
+.social a {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  color: #cbd5e1;
+  text-decoration: none;
+  background: rgb(255 255 255 / 0.04);
+  border: 1.5px solid rgb(255 255 255 / 0.15);
+  border-radius: 9999px;
+  outline: none;
+  transition:
+    color 0.3s ease-in-out,
+    border-color 0.3s ease-in-out,
+    box-shadow 0.3s ease-in-out;
+}
 
-  @media (width >= 640px) {
-    .social li {
-      flex-basis: 3rem;
-      width: 3rem;
-      height: 3rem;
-    }
-  }
+.social a > svg {
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease-in-out;
+}
 
-  .social li::after {
-    position: absolute;
-    inset-block-start: -45%;
-    inset-inline-start: 50%;
-    z-index: 0;
-    content: attr(data-tooltip);
-    translate: -50% 0;
-    padding: 0.25rem 0.75rem;
-    font-family: inherit;
-    font-size: 0.75rem;
-    font-weight: 600;
-    line-height: 1.25;
-    color: #fff;
-    white-space: nowrap;
-    pointer-events: none;
-    visibility: hidden;
-    opacity: 0;
-    background: var(--bg, #070707);
-    border: 1px solid rgb(255 255 255 / 0.15);
-    border-radius: 9999px;
-    box-shadow: 0 4px 12px rgb(0 0 0 / 0.4);
-    transition:
-      inset 0.4s cubic-bezier(0.47, 2, 0.41, 1.5),
-      visibility 0.3s ease-in-out,
-      opacity 0.2s ease-in-out;
-  }
+.tiktok-hover {
+  display: none;
+}
 
-  .social li:has(a:hover, a:focus-visible) {
-    z-index: 20;
-  }
+.social a:hover .tiktok-default,
+.social a:focus-visible .tiktok-default {
+  display: none;
+}
 
-  .social li:has(a:hover, a:focus-visible)::after {
-    inset-block-start: -70%;
-    visibility: visible;
-    opacity: 1;
-  }
+.social a:hover .tiktok-hover,
+.social a:focus-visible .tiktok-hover {
+  display: block;
+}
 
-  .social a {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    aspect-ratio: 1;
-    overflow: hidden;
-    color: #cbd5e1;
-    text-decoration: none;
-    background: rgb(255 255 255 / 0.04);
-    border: 1.5px solid rgb(255 255 255 / 0.15);
-    border-radius: 9999px;
-    outline: none;
-    transition:
-      color 0.3s ease-in-out,
-      border-color 0.3s ease-in-out,
-      box-shadow 0.3s ease-in-out;
-  }
+.social a::after {
+  position: absolute;
+  content: "";
+  inset: 100% 0 0;
+  pointer-events: none;
+  background: var(--bg, #070707);
+  transition: inset 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
+.social a:hover,
+.social a:focus-visible {
+  color: #fff;
+  border-color: rgb(255 255 255 / 0.3);
+  box-shadow: 0 4px 16px rgb(0 0 0 / 0.4);
+}
+
+.social a:hover > svg,
+.social a:focus-visible > svg {
+  transform: scale(1.1);
+}
+
+.social a:hover::after,
+.social a:focus-visible::after {
+  inset-block-start: 0;
+}
+
+.social a:focus-visible {
+  outline: 2px solid var(--color-orange, #f70);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .social li::after,
+  .social a,
+  .social a::after,
   .social a > svg {
-    position: relative;
-    z-index: 1;
-    transition: transform 0.3s ease-in-out;
+    transition: none;
   }
-
-  .tiktok-hover {
-    display: none;
-  }
-
-  .social a:hover .tiktok-default,
-  .social a:focus-visible .tiktok-default {
-    display: none;
-  }
-
-  .social a:hover .tiktok-hover,
-  .social a:focus-visible .tiktok-hover {
-    display: block;
-  }
-
-  .social a::after {
-    position: absolute;
-    content: "";
-    inset: 100% 0 0;
-    pointer-events: none;
-    background: var(--bg, #070707);
-    transition: inset 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .social a:hover,
-  .social a:focus-visible {
-    color: #fff;
-    border-color: rgb(255 255 255 / 0.3);
-    box-shadow: 0 4px 16px rgb(0 0 0 / 0.4);
-  }
-
-  .social a:hover > svg,
-  .social a:focus-visible > svg {
-    transform: scale(1.1);
-  }
-
-  .social a:hover::after,
-  .social a:focus-visible::after {
-    inset-block-start: 0;
-  }
-
-  .social a:focus-visible {
-    outline: 2px solid var(--color-orange, #f70);
-    outline-offset: 2px;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .social li::after,
-    .social a,
-    .social a::after,
-    .social a > svg {
-      transition: none;
-    }
-  }
+}
 </style>

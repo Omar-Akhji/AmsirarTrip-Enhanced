@@ -1,0 +1,18 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"div"> {
+  class?: string | undefined;
+}
+
+const { class: className, ...props } = Astro.props;
+---
+
+<div
+  aria-hidden="true"
+  class:list={[
+    "animate-pulse rounded-md bg-stone-200/80 dark:bg-stone-800/80 motion-reduce:animate-none",
+    className,
+  ]}
+  {...props}
+/>

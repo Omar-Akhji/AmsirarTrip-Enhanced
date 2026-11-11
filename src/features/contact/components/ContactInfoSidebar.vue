@@ -10,10 +10,10 @@ const { t } = useTranslation();
     <p class="font-mono text-xs font-semibold tracking-wider text-orange-400 uppercase">
       {{ t("contact.form.infoBadge") }}
     </p>
-    <h3 class="text-2xl font-bold tracking-tight text-white sm:text-3xl text-balance">
+    <h3 class="text-2xl font-bold tracking-tight text-balance text-white sm:text-3xl">
       {{ t("contact.form.infoTitle") }}
     </h3>
-    <p class="font-sans text-xs leading-relaxed text-slate-300 sm:text-sm text-pretty">
+    <p class="font-sans text-xs leading-relaxed text-pretty text-slate-300 sm:text-sm">
       {{ t("contact.form.infoCopy") }}
     </p>
   </hgroup>

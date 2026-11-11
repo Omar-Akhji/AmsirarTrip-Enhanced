@@ -131,10 +131,7 @@ const current = entry.data as unknown as LegalCopy;
 
       <div class="mbs-8 grid grid-cols-1 gap-4 xs:grid-cols-2 lg:grid-cols-4 2xl:gap-6">
         {current.summaryCards.map((card, idx) => (
-          <div
-            class="group relative flex flex-col justify-between rounded-2xl border border-stone-200/90 bg-stone-50/60 p-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-orange-500/30 hover:bg-white hover:shadow-lg hover:shadow-orange-500/5 dark:border-white/10 dark:bg-surface-card/75 dark:shadow-[0_4px_20px_-2px_rgba(0,0,0,0.4)] dark:hover:border-white/20 dark:hover:bg-surface-hover/90"
-            data-ascii="surface"
-          >
+          <div class="group relative flex flex-col justify-between rounded-2xl border border-stone-200/90 bg-stone-50/60 p-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-orange-500/30 hover:bg-white hover:shadow-lg hover:shadow-orange-500/5 dark:border-white/10 dark:bg-surface-card/75 dark:shadow-[0_4px_20px_-2px_rgba(0,0,0,0.4)] dark:hover:border-white/20 dark:hover:bg-surface-hover/90">
             <div>
               <div class="flex items-center justify-between">
                 <span class="font-mono text-xs font-bold text-orange-600">0{idx + 1}</span>
@@ -166,7 +163,6 @@ const current = entry.data as unknown as LegalCopy;
           <nav
             aria-label={current.tocTitle}
             class="rounded-2xl border border-stone-200/90 bg-white p-4 sm:p-5 shadow-sm dark:border-white/10 dark:bg-surface-card/85 dark:shadow-[0_4px_20px_-2px_rgba(0,0,0,0.4)]"
-            data-ascii="surface"
           >
             <div class="flex items-center justify-between border-be border-stone-200/80 dark:border-white/10 pbe-3">
               <div class="flex items-center gap-2">
@@ -223,13 +219,7 @@ const current = entry.data as unknown as LegalCopy;
           </nav>
 
           <!-- Direct Agency Credentials & Support Card -->
-          <div
-            class="overflow-hidden rounded-2xl border border-white/10 bg-slate-950 p-5 text-white shadow-xl ring-1 ring-white/10"
-            data-ascii="surface"
-            style="
-
---ascii-glyph: #e2e8f0; --ascii-surface: #020617;"
-          >
+          <div class="overflow-hidden rounded-2xl border border-white/10 bg-slate-950 p-5 text-white shadow-xl ring-1 ring-white/10">
             <div class="flex items-center gap-2">
               <ShieldCheckIcon
                 aria-hidden="true"

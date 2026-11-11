@@ -266,12 +266,6 @@ const eslintConfig = defineConfig(
     },
   },
 
-  // ─── ASCII Skeleton components — safe HTML insertion for internal ASCII wireframes ───
-  {
-    files: ["src/shared/ui/**/AsciiSkeleton.astro"],
-    rules: { "astro/no-set-html-directive": "off" },
-  },
-
   // ─── Logger Service & CLI Scripts — Allows Central Log & Console Dispatches ────
   { files: ["src/services/logger.ts", "scripts/**/*.ts"], rules: { "no-console": "off" } },
 
