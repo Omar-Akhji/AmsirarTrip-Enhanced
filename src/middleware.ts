@@ -11,6 +11,8 @@ const STATIC_PATH_PREFIXES = [
   "/icons/",
   "/fonts/",
   "/images/",
+  "/videos/",
+  "/patterns/",
 ];
 
 const DISCOVERY_PATHS = new Set([
@@ -42,7 +44,7 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
     const newResponse = new Response(response.body, response);
     newResponse.headers.set("X-Content-Type-Options", "nosniff");
     newResponse.headers.set("Cross-Origin-Resource-Policy", "same-origin");
-    if (pathname.startsWith("/_astro/")) {
+    if (pathname.startsWith("/_astro/") || pathname.startsWith("/videos/")) {
       newResponse.headers.set("Cache-Control", "public, max-age=31536000, immutable");
     } else {
       newResponse.headers.set("Cache-Control", "public, max-age=2592000");

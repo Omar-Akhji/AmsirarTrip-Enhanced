@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, useTemplateRef } from "vue";
+import { ref, useTemplateRef } from "vue";
 import { useTranslation } from "@/lib/hooks/use-translation";
 
 interface Props {
@@ -11,35 +11,51 @@ const { fallbackImage, locale } = defineProps<Props>();
 
 const { t } = useTranslation(locale);
 const videoError = ref(false);
-const videoLoaded = ref(false);
+const isBuffering = ref(false);
 const isPlaying = ref(false);
 const videoRef = useTemplateRef<HTMLVideoElement>("videoRef");
 const videoSource = "/videos/Morocco-Video.mp4";
 
-onMounted(() => {
-  if (videoRef.value) {
-    videoRef.value.load();
-  }
-});
-
 const handleVideoError = () => {
   videoError.value = true;
-};
-
-const handleVideoLoad = () => {
-  videoLoaded.value = true;
+  isBuffering.value = false;
 };
 
 const handleVideoEnd = () => {
   isPlaying.value = false;
+  isBuffering.value = false;
 };
 
-const handleVideoClick = () => {
+const handleWaiting = () => {
+  if (isPlaying.value) {
+    isBuffering.value = true;
+  }
+};
+
+const handlePlaying = () => {
+  isBuffering.value = false;
+  isPlaying.value = true;
+};
+
+const handlePause = () => {
+  isPlaying.value = false;
+  isBuffering.value = false;
+};
+
+const handleVideoClick = async () => {
   const video = videoRef.value;
   if (!video) return;
+
   if (video.paused) {
-    void video.play();
-    isPlaying.value = true;
+    isBuffering.value = true;
+    try {
+      await video.play();
+      isPlaying.value = true;
+      isBuffering.value = false;
+    } catch {
+      isBuffering.value = false;
+      handleVideoError();
+    }
   } else {
     video.pause();
     isPlaying.value = false;
@@ -189,9 +205,10 @@ const handleVideoClick = () => {
           v-else
           class="relative size-full"
         >
+          <!-- Buffering indicator during playback -->
           <div
-            v-if="!videoLoaded"
-            class="absolute inset-0 z-10 flex items-center justify-center rounded-xl bg-slate-950/80 backdrop-blur-xs"
+            v-if="isBuffering"
+            class="pointer-events-none absolute inset-0 z-20 flex items-center justify-center rounded-xl bg-slate-950/60 backdrop-blur-xs"
           >
             <div class="space-y-3 text-center font-mono">
               <p class="text-xs font-bold tracking-[0.2em] text-orange-400 uppercase">
@@ -208,11 +225,13 @@ const handleVideoClick = () => {
             loop
             muted
             playsinline
-            preload="metadata"
-            class="size-full rounded-xl object-cover transition-opacity duration-300"
-            :class="[videoLoaded ? 'opacity-100' : 'opacity-0']"
+            preload="none"
+            :poster="fallbackImage"
+            class="size-full rounded-xl object-cover"
             @error="handleVideoError"
-            @loadeddata="handleVideoLoad"
+            @waiting="handleWaiting"
+            @playing="handlePlaying"
+            @pause="handlePause"
             @ended="handleVideoEnd"
           >
             <source
@@ -230,7 +249,6 @@ const handleVideoClick = () => {
           </video>
 
           <button
-            v-if="videoLoaded"
             type="button"
             class="group absolute inset-0 z-10 flex items-center justify-center rounded-xl transition-colors duration-300"
             :class="[
@@ -242,7 +260,7 @@ const handleVideoClick = () => {
             @click="handleVideoClick"
           >
             <div
-              v-if="!isPlaying"
+              v-if="!isPlaying && !isBuffering"
               class="relative flex items-center justify-center"
             >
               <!-- Glowing ambient ripple ring on hover -->

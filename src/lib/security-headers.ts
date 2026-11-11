@@ -33,6 +33,8 @@ export const getSecurityHeaders = (nonce: string, host: string) => {
         "font-src 'self' https://fonts.gstatic.com",
         // Images: self + blob/data (Astro image optimization) + tripadvisor + Google + OpenStreetMap/Carto tiles
         `img-src 'self' blob: data: https://*.tripadvisor.com https://*.tripadvisor.de https://*.google.com https://*.gstatic.com https://*.tile.openstreetmap.org https://*.basemaps.cartocdn.com`,
+        // Media: self + blob + data
+        "media-src 'self' blob: data:",
         // Frames: self + Google reCAPTCHA & Maps
         "frame-src 'self' https://www.google.com https://www.google.com/maps/ https://maps.google.com",
         // Frame ancestors: prevent clickjacking
