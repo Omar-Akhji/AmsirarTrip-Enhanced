@@ -9,6 +9,14 @@ try {
     document.documentElement.classList.remove("dark");
     document.documentElement.style.colorScheme = "light";
   }
+  const colorSchemeMeta = document.querySelector<HTMLMetaElement>('meta[name="color-scheme"]');
+  if (colorSchemeMeta) {
+    colorSchemeMeta.content =
+      stored ?
+        isDark ? "dark"
+        : "light"
+      : "light dark";
+  }
 } catch {
   // localStorage might be unavailable or disabled
 }

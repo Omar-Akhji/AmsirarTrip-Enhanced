@@ -26,6 +26,12 @@ export function applyTheme(theme: Theme): void {
   root.classList.toggle("dark", isDark);
   root.style.colorScheme = theme;
 
+  // Update color-scheme meta tag per Modern Web Guidance
+  const colorSchemeMeta = document.querySelector<HTMLMetaElement>('meta[name="color-scheme"]');
+  if (colorSchemeMeta) {
+    colorSchemeMeta.content = theme;
+  }
+
   // Update theme-color meta tag for mobile browsers and PWA chrome
   const themeColorLight = document.querySelector('meta[name="theme-color"][media*="light"]');
   const themeColorDark = document.querySelector('meta[name="theme-color"][media*="dark"]');
