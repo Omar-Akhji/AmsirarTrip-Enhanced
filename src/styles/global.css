@@ -248,47 +248,6 @@
   navigation: auto;
 }
 
-/* --------------------------------------------------------------------------
-   Lumos Intrinsic Layout & Container Utilities (Tailwind v4 tree-shakeable)
-   -------------------------------------------------------------------------- */
-
-/* Intrinsic auto-fit grid: dynamic columns without breakpoint overrides */
-@utility grid-auto-fit {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--grid-min, 18rem)), 1fr));
-}
-
-/* Intrinsic auto-fill grid: preserves empty track slots */
-@utility grid-auto-fill {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--grid-min, 18rem)), 1fr));
-}
-
-/* Container context for component-level responsive reflow */
-@utility container-inline {
-  container-type: inline-size;
-}
-
-/* Golden Ratio asymmetric 2-column grid (Main 61.8% : Sidebar 38.2%) */
-@utility grid-cols-golden {
-  display: grid;
-  grid-template-columns: minmax(0, 1.618fr) minmax(22.5rem, 1fr);
-}
-
-/* Golden Ratio reversed asymmetric grid (Nav/TOC 38.2% : Content 61.8%) */
-@utility grid-cols-golden-rev {
-  display: grid;
-  grid-template-columns: minmax(16rem, 1fr) minmax(0, 1.618fr);
-}
-
-/* Intrinsic site container wrapper */
-@utility container-site {
-  inline-size: 100%;
-  max-inline-size: 90rem;
-  margin-inline: auto;
-  padding-inline: var(--spacing-site-margin);
-}
-
 /* ==========================================================================
    5. Base
    ========================================================================== */
@@ -338,33 +297,9 @@
      5.3 Forms & controls
      ------------------------------------------------------------------------ */
 
-  textarea {
-    overflow: auto;
-  }
-
   /* Tailwind v4 preflight removed the pointer cursor; restore it deliberately */
   :where(button, [type="button"], [type="reset"], [type="submit"]) {
     cursor: pointer;
-  }
-
-  :is(button, [type="button"], [type="submit"], [type="reset"], [role="button"], .font-mono) {
-    font-family: var(
-      --font-mono,
-      "JetBrains Mono",
-      "JetBrains Mono Variable",
-      ui-monospace,
-      monospace
-    );
-  }
-
-  hgroup p {
-    font-family: var(
-      --font-mono,
-      "JetBrains Mono",
-      "JetBrains Mono Variable",
-      ui-monospace,
-      monospace
-    );
   }
 }
 
