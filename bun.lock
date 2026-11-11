@@ -11,7 +11,7 @@
         "@fontsource/jetbrains-mono": "^5.3.0",
         "astro": "^7.4.10",
         "cap-widget": "^0.1.62",
-        "capjs-core": "^0.1.14",
+        "capjs-core": "0.1.15",
         "lenis": "^1.3.27",
         "nodemailer": "10.5.0",
         "sharp": "^0.35.5",
@@ -765,7 +765,7 @@
 
     "cap-widget": ["cap-widget@0.1.62", "", {}, "sha512-P7iolmc+z2KNZj6WxRE8qaJtOoDOnIxxwEF7WeON0/P6bHZ4B12anyHmRJJtXC4EhnNFYEZFD8klzcCiqL2POQ=="],
 
-    "capjs-core": ["capjs-core@0.1.14", "", { "dependencies": { "esbuild": "^0.28.0" }, "optionalDependencies": { "javascript-obfuscator": "^4.2.2" } }, "sha512-tkKC2qGMyE+DxJ8wiXoDt+/cWmYwm++B+9lvRHQKeG6xOVt1LJPmVdhWJ4zGIXSSrBtksMb8AHWuCRmNjZGUsQ=="],
+    "capjs-core": ["capjs-core@0.1.15", "", { "dependencies": { "esbuild": "^0.28.0" }, "optionalDependencies": { "javascript-obfuscator": "^4.2.2" } }, "sha512-4JqDe8K/Wyd0MrFWVblt09KR2DxemrnQVl2PVZqUMHS9oSGH8uSHA8ciuz5pPvMiM856kD69LLkaTUMVQrA9Ig=="],
 
     "ccount": ["ccount@2.0.1", "", {}, "sha512-eyrF0jiFpY+3drT6383f1qhkbGsLSifNAjA61IUjZjmLCWjItY6LB9ft9YhoDgwfmclB2zhu51Lc7+95b8NRAg=="],
 
