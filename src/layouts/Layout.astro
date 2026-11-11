@@ -345,7 +345,8 @@ const currentOgLocale = OG_LOCALE_MAP[locale] ?? locale;
     <Navbar />
     <main
       id="main-content"
-      class="relative isolate block flex-[1_0_auto] inline-full min-h-screen overflow-x-clip"
+      class="relative isolate block flex-[1_0_auto] inline-full min-h-screen overflow-x-clip focus:outline-hidden"
+      tabindex="-1"
       transition:animate="fade"
     >
       <TransitionSkeletons />

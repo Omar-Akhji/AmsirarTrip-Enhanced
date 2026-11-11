@@ -26,7 +26,7 @@ export const getSecurityHeaders = (nonce: string, host: string) => {
         // Default: self only
         "default-src 'self'",
         // Scripts: nonce + strict-dynamic for Astro view transitions + Cap WASM + Google reCAPTCHA
-        `script-src 'self' 'nonce-${nonce}' 'strict-dynamic' 'wasm-unsafe-eval' https://www.google.com https://www.gstatic.com`,
+        `script-src 'self' 'nonce-${nonce}' 'strict-dynamic' 'unsafe-inline' 'wasm-unsafe-eval' https://www.google.com https://www.gstatic.com`,
         // Styles: self + inline (Tailwind atomic CSS injection) + Google Fonts
         "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
         // Fonts: self + Google Fonts

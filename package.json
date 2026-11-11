@@ -17,6 +17,7 @@
     "lint:style:fix": "stylelint \"src/**/*.{css,astro,vue}\" --fix",
     "preview": "astro preview",
     "start": "node ./dist/server/entry.mjs",
+    "test:cwv": "playwright test tests/core-web-vitals.spec.ts --workers=1",
     "test:e2e": "playwright test",
     "test:lighthouse": "bun run build && bun scripts/lighthouse-test.ts",
     "type-check": "tsc --noEmit"

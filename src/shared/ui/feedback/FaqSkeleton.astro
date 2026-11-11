@@ -45,7 +45,7 @@ const items = Array.from({ length: count }, (_, i) => ({
         )}
       </hgroup>
 
-      <dl
+      <div
         class:list={[
           "overflow-hidden rounded-2xl border border-stone-200/90 bg-white shadow-2xs divide-y divide-stone-200/80",
           maxDlWidth,
@@ -67,7 +67,7 @@ const items = Array.from({ length: count }, (_, i) => ({
             </div>
           </div>
         ))}
-      </dl>
+      </div>
     </div>
   </section>
 : <div>
@@ -84,7 +84,7 @@ const items = Array.from({ length: count }, (_, i) => ({
         )}
       </hgroup>
 
-      <dl
+      <div
         class:list={[
           "overflow-hidden rounded-2xl border border-stone-200/90 bg-white shadow-2xs divide-y divide-stone-200/80",
           maxDlWidth,
@@ -106,7 +106,7 @@ const items = Array.from({ length: count }, (_, i) => ({
             </div>
           </div>
         ))}
-      </dl>
+      </div>
     </section>
   </div>
 }

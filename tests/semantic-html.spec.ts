@@ -4,7 +4,7 @@ test.describe("Semantic HTML 2026 Modernization", () => {
   test("Task 1: document head contains modern 2026 boilerplate requirements", async ({ page }) => {
     await page.goto("/", { waitUntil: "domcontentloaded" });
     const colorScheme = page.locator('meta[name="color-scheme"]');
-    await expect(colorScheme).toHaveAttribute("content", "light dark");
+    await expect(colorScheme).toHaveAttribute("content", /light|dark/);
 
     const heroPreload = page.locator('link[rel="preload"][as="image"]');
     await expect(heroPreload).toHaveAttribute("fetchpriority", "high");

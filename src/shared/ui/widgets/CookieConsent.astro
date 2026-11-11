@@ -175,17 +175,14 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
           <div class="group rounded-xl border border-white/10 bg-white/2 p-4 transition-colors hover:border-white/20 sm:p-5">
             <div class="flex items-start justify-between gap-4">
               <div class="flex-1 min-w-0">
-                <label
-                  class="flex cursor-pointer flex-wrap items-center gap-2"
-                  for="cookie-toggle-analytics"
-                >
+                <div class="flex flex-wrap items-center gap-2">
                   <h3 class="text-sm font-semibold tracking-tight text-white transition-colors group-hover:text-orange-300 sm:text-base font-sans">
                     {t("cookieConsent.analyticsTitle")}
                   </h3>
                   <span class="inline-flex items-center rounded-sm border border-white/10 bg-white/5 px-2 py-1 text-[11px] font-medium text-zinc-400">
                     {t("cookieConsent.optional")}
                   </span>
-                </label>
+                </div>
                 <p class="pbs-2 text-xs leading-relaxed text-zinc-300 sm:text-[13px]">
                   {t("cookieConsent.analyticsDesc")}
                 </p>
@@ -203,17 +200,14 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
           <div class="group rounded-xl border border-white/10 bg-white/2 p-4 transition-colors hover:border-white/20 sm:p-5">
             <div class="flex items-start justify-between gap-4">
               <div class="flex-1 min-w-0">
-                <label
-                  class="flex cursor-pointer flex-wrap items-center gap-2"
-                  for="cookie-toggle-functional"
-                >
+                <div class="flex flex-wrap items-center gap-2">
                   <h3 class="text-sm font-semibold tracking-tight text-white transition-colors group-hover:text-orange-300 sm:text-base font-sans">
                     {t("cookieConsent.functionalTitle")}
                   </h3>
                   <span class="inline-flex items-center rounded-sm border border-white/10 bg-white/5 px-2 py-1 text-[11px] font-medium text-zinc-400">
                     {t("cookieConsent.optional")}
                   </span>
-                </label>
+                </div>
                 <p class="pbs-2 text-xs leading-relaxed text-zinc-300 sm:text-[13px]">
                   {t("cookieConsent.functionalDesc")}
                 </p>
