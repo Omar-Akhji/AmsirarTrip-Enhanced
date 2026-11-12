@@ -6,7 +6,7 @@
 @import "lenis/dist/lenis.css";
 
 /* ==========================================================================
-   2. Fonts
+   2. Fonts (Variable-First Architecture for Zero-CLS & Minimal Requests)
    ========================================================================== */
 
 @font-face {
@@ -27,38 +27,6 @@
 
 @font-face {
   font-family: "JetBrains Mono";
-  src: url("/fonts/JetBrainsMono-Regular.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "JetBrains Mono";
-  src: url("/fonts/JetBrainsMono-Medium.woff2") format("woff2");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "JetBrains Mono";
-  src: url("/fonts/JetBrainsMono-SemiBold.woff2") format("woff2");
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "JetBrains Mono";
-  src: url("/fonts/JetBrainsMono-Bold.woff2") format("woff2");
-  font-weight: 700 800;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "JetBrains Mono Variable";
   src: url("/fonts/JetBrainsMono-Variable.woff2") format("woff2");
   font-weight: 100 800;
   font-style: normal;
@@ -75,7 +43,7 @@
   /* Typography */
   --font-sans:
     "Montserrat", system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", roboto, sans-serif;
-  --font-mono: "JetBrains Mono", "JetBrains Mono Variable", ui-monospace, monospace;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
   --font-brand: "Yellowtail", cursive;
 
   /* Base Neutral & Surface */
@@ -97,8 +65,8 @@
   --color-orange: #f15d30;
   --color-orange-dark: #d94a1f;
 
-  /* Antique Gold (#B58A45) highlight for accents & typography (replaces vibrant yellow) */
-  --color-yellow: #b58a45;
+  /* Antique Gold (#F1B330) highlight for accents & typography (replaces vibrant yellow) */
+  --color-yellow: #f1b330;
   --color-amber-orange: #f78848;
 
   /* United Tailwind Orange scale anchored on #f15d30 for UI consistency */
@@ -126,9 +94,9 @@
   --color-mist-500: oklch(65% 0.02 250deg);
 
   /* Elite Regewelt dark backdrop & elevated card surface tokens */
-  --color-surface-base: oklch(14.1% 0.01 240deg); /* #060a0d ~ #0d0e12 */
-  --color-surface-card: oklch(18% 0.012 245deg); /* #0d1217 */
-  --color-surface-hover: oklch(21% 0.015 245deg); /* #121820 */
+  --color-surface-base: oklch(14.1% 0.01 240deg);
+  --color-surface-card: oklch(18% 0.012 245deg);
+  --color-surface-hover: oklch(21% 0.015 245deg);
 
   /* Dark shades for navigation scroll states & dark button text */
   --color-dark: oklch(10% 0.006 65deg);
@@ -160,27 +128,41 @@
   --breakpoint-2xl: 85rem;
   --breakpoint-3xl: 96rem;
 
-  /* Fluid Spacing */
+  /* Fluid Spacing & Golden Rhythm */
   --spacing-gap: clamp(1rem, 0.75rem + 1.2vw, 2rem);
   --spacing-gap-tight: clamp(0.75rem, 0.6rem + 0.4vw, 1.125rem);
   --spacing-gutter: clamp(1rem, 0.6rem + 1.8vw, 2.5rem);
+  --spacing-section: clamp(3.5rem, 2.5rem + 4.5vw, 7.5rem);
 
-  /* Golden Ratio Aspect Ratios (Tailwind v4 aspect-* scale extension) */
+  /* Golden Ratio Aspect Ratios (Tailwind v4 aspect-* scale extension, φ ≈ 1.618) */
   --aspect-golden: 1.618 / 1;
   --aspect-golden-portrait: 1 / 1.618;
 
-  /* Lumos Fluid Typography Scale (WCAG 1.4.4 rem-anchored clamp) */
+  /* Lumos & Golden Ratio Fluid Typography Scale (WCAG 1.4.4 rem-anchored clamp) */
   /* stylelint-disable custom-property-pattern */
+  --text-micro: 0.6875rem;
+  --text-micro--line-height: 1.35;
+  --text-micro--letter-spacing: 0.12em;
   --text-fluid-sm: clamp(0.8125rem, 0.785rem + 0.11vw, 0.875rem);
   --text-fluid-sm--line-height: 1.5;
   --text-fluid-base: clamp(0.9375rem, 0.91rem + 0.11vw, 1rem);
   --text-fluid-base--line-height: 1.65;
   --text-lead: clamp(1.0625rem, 0.98rem + 0.35vw, 1.25rem);
-  --text-lead--line-height: 1.7;
+  --text-lead--line-height: 1.618;
+  --text-fluid-h3: clamp(1.25rem, 1.1rem + 0.65vw, 1.618rem);
+  --text-fluid-h3--line-height: 1.3;
+  --text-fluid-h3--letter-spacing: -0.015em;
+  --text-fluid-h2: clamp(1.618rem, 1.3rem + 1.4vw, 2.618rem);
+  --text-fluid-h2--line-height: 1.15;
+  --text-fluid-h2--letter-spacing: -0.025em;
+  --text-fluid-h1: clamp(2.125rem, 1.6rem + 2.4vw, 4.236rem);
+  --text-fluid-h1--line-height: 1.08;
+  --text-fluid-h1--letter-spacing: -0.035em;
   /* stylelint-enable custom-property-pattern */
 
-  /* Motion */
+  /* Motion Physics */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-snappy: cubic-bezier(0.22, 1, 0.36, 1);
   --animate-fade-in-scale: fade-in-scale 0.2s var(--ease-out-expo);
 
   @keyframes fade-in-scale {
@@ -211,16 +193,21 @@
    Lumos Intrinsic Layout & Container Utilities (Tailwind v4 tree-shakeable)
    -------------------------------------------------------------------------- */
 
-/* Golden Ratio asymmetric 2-column grid (Main 61.8% : Sidebar 38.2%) */
+/* Golden Ratio asymmetric 2-column grid (Main 61.8% : Sidebar 38.2%, overflow-safe) */
 @utility grid-cols-golden {
   display: grid;
-  grid-template-columns: minmax(0, 1.618fr) minmax(22.5rem, 1fr);
+  grid-template-columns: minmax(0, 1.618fr) minmax(min(22.5rem, 100%), 1fr);
 }
 
-/* Golden Ratio reversed asymmetric grid (Nav/TOC 38.2% : Content 61.8%) */
+/* Golden Ratio reversed asymmetric grid (Nav/TOC 38.2% : Content 61.8%, overflow-safe) */
 @utility grid-cols-golden-rev {
   display: grid;
-  grid-template-columns: minmax(16rem, 1fr) minmax(0, 1.618fr);
+  grid-template-columns: minmax(min(16rem, 100%), 1fr) minmax(0, 1.618fr);
+}
+
+/* Tactile specular card border utility for dark/light elevated surfaces */
+@utility surface-tactile {
+  box-shadow: inset 0 1px 0 0 rgb(255 255 255 / 0.08);
 }
 
 /* ==========================================================================
@@ -237,6 +224,9 @@
     accent-color: var(--color-orange);
     color-scheme: light;
     interpolate-size: allow-keywords;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 
     /* Page backdrop: Moroccan geometric star pattern */
     --pattern-bg-color: #efefef;
@@ -246,13 +236,27 @@
 
   /* Must stay after :root (same specificity, source order decides) */
   .dark {
+    color-scheme: dark;
+
     /* Elite Regewelt deep obsidian canvas backdrop */
     --pattern-bg-color: #0d0e12;
     --pattern-bg-image: url("/patterns/moroccan-geometric-dark.svg");
   }
 
+  /* Branded text selection */
+  ::selection {
+    background-color: rgb(241 93 48 / 0.2);
+    color: inherit;
+  }
+
+  /* Accessible keyboard focus ring (WCAG 2.1 AA) */
+  :focus-visible {
+    outline: 2px solid var(--color-orange);
+    outline-offset: 2px;
+  }
+
   /* ------------------------------------------------------------------------
-     5.2 Typography
+     5.2 Typography & Numeric Discipline
      ------------------------------------------------------------------------ */
 
   /* Always sans, even inside a .font-brand / .font-mono wrapper (preflight only inherits) */
@@ -262,6 +266,7 @@
 
   :is(h1, h2, h3, h4) {
     text-wrap: balance;
+    letter-spacing: -0.025em;
   }
 
   p {
@@ -269,13 +274,12 @@
   }
 
   hgroup p {
-    font-family: var(
-      --font-mono,
-      "JetBrains Mono",
-      "JetBrains Mono Variable",
-      ui-monospace,
-      monospace
-    );
+    font-family: var(--font-mono, "JetBrains Mono", ui-monospace, monospace);
+  }
+
+  /* Enforce vertical digit alignment across prices, tables, timers, and badges */
+  :is(table, time, output, [data-numeric], .tabular-nums) {
+    font-variant-numeric: tabular-nums;
   }
 
   /* ------------------------------------------------------------------------
@@ -295,10 +299,6 @@
 @layer components {
   /* ------------------------------------------------------------------------
      6.1 Scroll reveal
-     The TypeScript orchestrator adds `.scroll-init` to <html>, then toggles
-     `.is-visible` (IntersectionObserver) and `.is-done` (animation end).
-     Without JS nothing is hidden, so content stays crawlable.
-     Stagger with `delay-*` classes; they only set --reveal-delay.
      ------------------------------------------------------------------------ */
 
   @keyframes reveal-fade-up {
@@ -444,8 +444,6 @@
 
   /* ------------------------------------------------------------------------
      6.5 Hero slider: 3D carousel
-     Layout tokens live on the slider root (and its skeleton twin) so the
-     clip-path keyframes can morph a slide to and from its thumbnail frame.
      ------------------------------------------------------------------------ */
 
   #home-hero-slider,
@@ -456,7 +454,7 @@
     --thumb-gap: 10px;
     --thumb-bottom: calc(86px + env(safe-area-inset-bottom, 0px));
     --thumb-radius: var(--radius-sm);
-    --thumb-left: calc(100vw - (2.5 * var(--thumb-width) + 2 * var(--thumb-gap)));
+    --thumb-left: calc(100% - (2.5 * var(--thumb-width) + 2 * var(--thumb-gap)));
     --thumb-clip: inset(
       calc(100% - var(--thumb-bottom) - var(--thumb-height))
         calc(100% - var(--thumb-left) - var(--thumb-width)) var(--thumb-bottom) var(--thumb-left)
@@ -505,7 +503,15 @@
       --thumb-bottom: 26px;
     }
 
-    /* 2xl (1536px+): High-density desktop */
+    /* 2xl (1360px+): Large desktop & QHD tier */
+    @media (width >= 85rem) {
+      --thumb-width: 210px;
+      --thumb-height: 305px;
+      --thumb-gap: 19px;
+      --thumb-bottom: 28px;
+    }
+
+    /* 3xl (1536px+): High-density widescreen desktop */
     @media (width >= 96rem) {
       --thumb-width: 220px;
       --thumb-height: 320px;
@@ -513,7 +519,7 @@
       --thumb-bottom: 30px;
     }
 
-    /* 3xl (1920px+): Ultra-wide & FHD/4K canvas */
+    /* Ultra-wide (1920px+): FHD/4K canvas */
     @media (width >= 120rem) {
       --thumb-width: 240px;
       --thumb-height: 350px;
@@ -738,13 +744,8 @@ html.lenis {
   scroll-behavior: auto;
 }
 
-/* Ensure all buttons, role=button triggers, and mono controls use JetBrains Mono without layer conflict */
+/* Ensure all buttons, role=button triggers, and mono controls use JetBrains Mono + tabular digits */
 :is(button, [type="button"], [type="submit"], [type="reset"], [role="button"], .font-mono) {
-  font-family: var(
-    --font-mono,
-    "JetBrains Mono",
-    "JetBrains Mono Variable",
-    ui-monospace,
-    monospace
-  );
+  font-family: var(--font-mono, "JetBrains Mono", ui-monospace, monospace);
+  font-variant-numeric: tabular-nums;
 }

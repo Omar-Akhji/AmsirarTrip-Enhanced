@@ -151,7 +151,7 @@ const relatedTours = allTours
         class="border-t border-stone-200 bg-white dark:border-white/10 dark:bg-transparent py-12 sm:py-16 lg:py-24"
         data-animate="fade-up"
       >
-        <div class="mx-auto px-2 sm:px-6 lg:px-8 max-inline-7xl">
+        <div class="mx-auto px-2 sm:px-6 lg:px-8 max-inline-7xl 2xl:max-inline-360 3xl:max-inline-420">
           <div class="mbe-8 sm:mbe-12 flex flex-col gap-4 border-b border-stone-200 pb-6 sm:pb-8 dark:border-white/10">
             <hgroup class="max-w-2xl space-y-2">
               <p class="font-sans text-xs font-bold tracking-wider text-orange-700 uppercase dark:text-orange-400">
@@ -159,7 +159,7 @@ const relatedTours = allTours
               </p>
               <h2
                 id="related-tours-heading"
-                class="text-2xl font-bold tracking-tight text-stone-900 sm:text-3xl md:text-4xl text-balance dark:text-mist-100"
+                class="text-2xl font-bold tracking-tight text-stone-900 sm:text-3xl md:text-4xl 2xl:text-[2.625rem] text-balance dark:text-mist-100"
               >
                 {t("tours.relatedTitle", "Explore Companion Desert Itineraries")}
               </h2>
@@ -171,20 +171,22 @@ const relatedTours = allTours
               </p>
             </hgroup>
           </div>
-          <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div class="grid grid-cols-1 gap-6 xs:gap-7 md:grid-cols-2 lg:grid-cols-3 lg:gap-8 2xl:gap-10">
             {relatedTours.map((item) => (
-              <TripCard
-                badge={`${item.duration} Days`}
-                description={t(item.description)}
-                end={t(item.end)}
-                endLabel={t("tours.endLabelShort")}
-                exploreLink={t("tours.exploreLink")}
-                item={{ image: item.image, imageAlt: t(item.title), route: item.route }}
-                start={t(item.start)}
-                startLabel={t("tours.startLabelShort")}
-                title={t(item.title)}
-                tourTypeBadge={t("tours.bothAvailable")}
-              />
+              <div class="flex size-full">
+                <TripCard
+                  badge={`${item.duration} Days`}
+                  description={t(item.description)}
+                  end={t(item.end)}
+                  endLabel={t("tours.endLabelShort")}
+                  exploreLink={t("tours.exploreLink")}
+                  item={{ image: item.image, imageAlt: t(item.title), route: item.route }}
+                  start={t(item.start)}
+                  startLabel={t("tours.startLabelShort")}
+                  title={t(item.title)}
+                  tourTypeBadge={t("tours.bothAvailable")}
+                />
+              </div>
             ))}
           </div>
         </div>
