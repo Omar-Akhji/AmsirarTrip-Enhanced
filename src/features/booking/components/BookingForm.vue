@@ -18,22 +18,20 @@ interface Props {
   fullWidth?: boolean;
 }
 
-const {
-  locale,
-  tourTitle,
-  tourId,
-  tourDuration,
-  excursionTitle,
-  excursionId,
-  fullWidth = false,
-} = defineProps<Props>();
+interface RecaptchaInstance {
+  readonly getValue: () => string;
+  readonly reset: () => void;
+}
+
+const { locale, tourTitle, tourId, tourDuration, excursionTitle, excursionId, fullWidth } =
+  defineProps<Props>();
 
 if (locale) {
   provide("app-locale", locale);
 }
 
 const { t, i18n } = useTranslation(locale);
-const recaptchaRef = useTemplateRef<InstanceType<typeof Recaptcha>>("recaptchaRef");
+const recaptchaRef = useTemplateRef<RecaptchaInstance>("recaptchaRef");
 
 const isMounted = ref(false);
 onMounted(() => {
@@ -59,7 +57,7 @@ const handleExpired = () => {
 const selectedTour = computed(() => {
   return tourTitle && tourDuration != null ?
       `${tourTitle} - Duration: ${tourDuration} Days`
-    : tourTitle || excursionTitle || "";
+    : (tourTitle ?? excursionTitle ?? "");
 });
 
 const computedTourDuration = computed(() => tourDuration ?? null);
@@ -97,7 +95,7 @@ const handleSubmit = async (event: Event) => {
       };
       recaptchaRef.value?.reset();
       captchaToken.value = "";
-    } else if (data) {
+    } else {
       state.value = data;
       if (data.success) {
         buttonText.value = "Your booking request has been sent";

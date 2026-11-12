@@ -21,14 +21,14 @@ class CapMemoryStore {
   }
 
   /** Consume a nonce. Returns true if nonce is fresh, false if already consumed (replay attack). */
-  public consumeNonce = (sigHex: string, ttlMs: number): Promise<boolean> => {
+  public consumeNonce = (sigHex: string, ttlMs: number): boolean => {
     const now = Date.now();
     const existing = this.nonces.get(sigHex);
     if (existing && existing.expires > now) {
-      return Promise.resolve(false);
+      return false;
     }
     this.nonces.set(sigHex, { expires: now + ttlMs });
-    return Promise.resolve(true);
+    return true;
   };
 
   /** Store a validated tokenKey with its expiration timestamp. */

@@ -16,7 +16,7 @@ if (locale) {
 const { t } = useTranslation(locale);
 
 const openModal = () => {
-  const dialog = document.querySelector("#newsletter-dialog") as HTMLDialogElement | null;
+  const dialog = document.querySelector<HTMLDialogElement>("#newsletter-dialog");
   dialog?.showModal();
 };
 </script>

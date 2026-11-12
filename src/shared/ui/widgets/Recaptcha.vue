@@ -24,9 +24,9 @@ const currentToken = ref<string>("");
 const isDevBypassed = ref<boolean>(false);
 
 const onCapSolve = (event: Event) => {
-  const customEvent = event as CustomEvent<{ token: string }>;
-  const token =
-    customEvent.detail?.token || (capWidget.value as unknown as { token?: string })?.token || "";
+  const customEvent = event as CustomEvent<{ token?: string }>;
+  const widget = capWidget.value as unknown as { token?: string } | null;
+  const token = customEvent.detail.token ?? widget?.token ?? "";
   if (!token) return;
   currentToken.value = token;
   isDevBypassed.value = false;
@@ -76,7 +76,7 @@ onUnmounted(() => {
 const getValue = (): string => {
   if (capWidget.value) {
     const widget = capWidget.value as unknown as { token?: string; tokenValue?: string };
-    return widget.token || widget.tokenValue || currentToken.value;
+    return widget.token ?? widget.tokenValue ?? currentToken.value;
   }
   return currentToken.value;
 };
@@ -84,11 +84,16 @@ const getValue = (): string => {
 const reset = () => {
   currentToken.value = "";
   if (capWidget.value) {
-    (capWidget.value as unknown as { reset?: () => void })?.reset?.();
+    (capWidget.value as unknown as { reset?: () => void }).reset?.();
   }
 };
 
-defineExpose({ getValue, reset });
+export interface RecaptchaInstance {
+  readonly getValue: () => string;
+  readonly reset: () => void;
+}
+
+defineExpose<RecaptchaInstance>({ getValue, reset });
 </script>
 
 <template>

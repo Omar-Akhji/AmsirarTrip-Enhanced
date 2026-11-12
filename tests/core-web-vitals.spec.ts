@@ -43,6 +43,40 @@ export interface WebVitalsMetrics {
   clsEntriesCount: number;
 }
 
+interface CwvState {
+  cls: number;
+  lcp: number;
+  fcp: number;
+  inp: number;
+  lcpElement: string;
+  clsEntries: { value: number; startTime: number }[];
+}
+
+interface PerformanceLayoutShift extends PerformanceEntry {
+  readonly hadRecentInput: boolean;
+  readonly value: number;
+}
+
+interface PerformanceLargestContentfulPaint extends PerformanceEntry {
+  readonly renderTime?: number;
+  readonly loadTime?: number;
+  readonly element?: Element | null;
+  readonly url?: string;
+}
+
+interface PerformanceEventTimingEntry extends PerformanceEntry {
+  readonly interactionId?: number;
+  readonly duration: number;
+}
+
+interface EventPerformanceObserverInit extends PerformanceObserverInit {
+  readonly durationThreshold?: number;
+}
+
+declare global {
+  var __cwv: CwvState | undefined;
+}
+
 const GOOGLE_CWV_THRESHOLDS = {
   LCP: 2500, // ms
   CLS: 0.1, // unitless
@@ -68,18 +102,19 @@ async function attachWebVitalsObserver(page: Page): Promise<void> {
       );
     } catch {}
 
-    (globalThis as any).__cwv = { cls: 0, lcp: 0, fcp: 0, inp: 0, lcpElement: "", clsEntries: [] };
+    const cwvState: CwvState = { cls: 0, lcp: 0, fcp: 0, inp: 0, lcpElement: "", clsEntries: [] };
+    Reflect.set(globalThis, "__cwv", cwvState);
 
     // ─────────────────────────────────────────────────────────────────────────
     // 1. Google CLS: Session Window Algorithm (web-vitals LayoutShiftManager)
     // ─────────────────────────────────────────────────────────────────────────
     let maxSessionValue = 0;
     let currentSessionValue = 0;
-    let sessionEntries: any[] = [];
+    let sessionEntries: PerformanceLayoutShift[] = [];
 
     try {
       new PerformanceObserver((entryList) => {
-        for (const entry of entryList.getEntries() as any[]) {
+        for (const entry of entryList.getEntries() as unknown as PerformanceLayoutShift[]) {
           // Google rule: only count layout shifts without recent user input (< 500ms)
           if (entry.hadRecentInput) continue;
 
@@ -106,11 +141,8 @@ async function attachWebVitalsObserver(page: Page): Promise<void> {
             maxSessionValue = currentSessionValue;
           }
 
-          (globalThis as any).__cwv.cls = maxSessionValue;
-          (globalThis as any).__cwv.clsEntries.push({
-            value: entry.value,
-            startTime: entry.startTime,
-          });
+          cwvState.cls = maxSessionValue;
+          cwvState.clsEntries.push({ value: entry.value, startTime: entry.startTime });
         }
       }).observe({ type: "layout-shift", buffered: true });
     } catch {}
@@ -124,13 +156,15 @@ async function attachWebVitalsObserver(page: Page): Promise<void> {
     try {
       lcpObserver = new PerformanceObserver((entryList) => {
         if (isLcpFinalized) return;
-        const entries = entryList.getEntries() as any[];
+        const entries = entryList.getEntries() as unknown as PerformanceLargestContentfulPaint[];
         if (entries.length > 0) {
           const last = entries.at(-1);
-          // Google rule: renderTime || loadTime || startTime
-          (globalThis as any).__cwv.lcp = last.renderTime || last.loadTime || last.startTime;
-          (globalThis as any).__cwv.lcpElement =
-            last.element?.tagName?.toLowerCase() || last.element?.id || last.url || "unknown";
+          if (last) {
+            // Google rule: renderTime || loadTime || startTime
+            cwvState.lcp = last.renderTime ?? last.loadTime ?? last.startTime;
+            cwvState.lcpElement =
+              last.element?.tagName.toLowerCase() ?? last.element?.id ?? last.url ?? "unknown";
+          }
         }
       });
       lcpObserver.observe({ type: "largest-contentful-paint", buffered: true });
@@ -153,13 +187,13 @@ async function attachWebVitalsObserver(page: Page): Promise<void> {
     const interactionMap = new Map<number, number>();
 
     try {
-      new PerformanceObserver((entryList) => {
-        for (const entry of entryList.getEntries() as any[]) {
+      const eventObserver = new PerformanceObserver((entryList) => {
+        for (const entry of entryList.getEntries() as unknown as PerformanceEventTimingEntry[]) {
           const interactionId = entry.interactionId;
           const duration = entry.duration;
 
           if (interactionId) {
-            const existingMax = interactionMap.get(interactionId) || 0;
+            const existingMax = interactionMap.get(interactionId) ?? 0;
             const newMax = Math.max(existingMax, duration);
             interactionMap.set(interactionId, newMax);
           }
@@ -170,9 +204,15 @@ async function attachWebVitalsObserver(page: Page): Promise<void> {
             if (latency > worstInteraction) worstInteraction = latency;
           }
 
-          (globalThis as any).__cwv.inp = worstInteraction || duration;
+          cwvState.inp = worstInteraction || duration;
         }
-      }).observe({ type: "event", durationThreshold: 16, buffered: true } as any);
+      });
+      const eventObserverOptions: EventPerformanceObserverInit & { durationThreshold: number } = {
+        type: "event",
+        durationThreshold: 16,
+        buffered: true,
+      };
+      eventObserver.observe(eventObserverOptions);
     } catch {}
 
     // ─────────────────────────────────────────────────────────────────────────
@@ -182,7 +222,7 @@ async function attachWebVitalsObserver(page: Page): Promise<void> {
       new PerformanceObserver((entryList) => {
         for (const entry of entryList.getEntries()) {
           if (entry.name === "first-contentful-paint") {
-            (globalThis as any).__cwv.fcp = entry.startTime;
+            cwvState.fcp = entry.startTime;
           }
         }
       }).observe({ type: "paint", buffered: true });
@@ -198,7 +238,7 @@ async function collectWebVitals(page: Page): Promise<WebVitalsMetrics> {
     const nav = performance.getEntriesByType("navigation")[0] as
       PerformanceNavigationTiming | undefined;
     const ttfb = nav ? nav.responseStart : 0;
-    const cwv = (globalThis as any).__cwv || {
+    const cwv = globalThis.__cwv ?? {
       cls: 0,
       lcp: 0,
       fcp: 0,
@@ -219,21 +259,27 @@ async function collectWebVitals(page: Page): Promise<WebVitalsMetrics> {
   });
 }
 
-function logVitalsSummary(route: string, vitals: WebVitalsMetrics): void {
-  const status = (val: number, max: number) => (val <= max ? "GOOD" : "NEEDS IMPROVEMENT");
+function getVitalStatus(val: number, max: number): string {
+  return val <= max ? "GOOD" : "NEEDS IMPROVEMENT";
+}
 
+function logVitalsSummary(route: string, vitals: WebVitalsMetrics): void {
   console.info(`\n📊 [Google Core Web Vitals] Route: ${route}`);
   console.info(
-    `   • TTFB : ${vitals.ttfb} ms [${status(vitals.ttfb, GOOGLE_CWV_THRESHOLDS.TTFB)}]`,
-  );
-  console.info(`   • FCP  : ${vitals.fcp} ms [${status(vitals.fcp, GOOGLE_CWV_THRESHOLDS.FCP)}]`);
-  console.info(
-    `   • LCP  : ${vitals.lcp} ms (element: <${vitals.lcpElement}>) [${status(vitals.lcp, GOOGLE_CWV_THRESHOLDS.LCP)}]`,
+    `   • TTFB : ${vitals.ttfb} ms [${getVitalStatus(vitals.ttfb, GOOGLE_CWV_THRESHOLDS.TTFB)}]`,
   );
   console.info(
-    `   • CLS  : ${vitals.cls} (shifts: ${vitals.clsEntriesCount}) [${status(vitals.cls, GOOGLE_CWV_THRESHOLDS.CLS)}]`,
+    `   • FCP  : ${vitals.fcp} ms [${getVitalStatus(vitals.fcp, GOOGLE_CWV_THRESHOLDS.FCP)}]`,
   );
-  console.info(`   • INP  : ${vitals.inp} ms [${status(vitals.inp, GOOGLE_CWV_THRESHOLDS.INP)}]\n`);
+  console.info(
+    `   • LCP  : ${vitals.lcp} ms (element: <${vitals.lcpElement}>) [${getVitalStatus(vitals.lcp, GOOGLE_CWV_THRESHOLDS.LCP)}]`,
+  );
+  console.info(
+    `   • CLS  : ${vitals.cls} (shifts: ${vitals.clsEntriesCount}) [${getVitalStatus(vitals.cls, GOOGLE_CWV_THRESHOLDS.CLS)}]`,
+  );
+  console.info(
+    `   • INP  : ${vitals.inp} ms [${getVitalStatus(vitals.inp, GOOGLE_CWV_THRESHOLDS.INP)}]\n`,
+  );
 }
 
 test.describe("Google Core Web Vitals Suite", () => {

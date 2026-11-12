@@ -19,7 +19,7 @@ server.stderr?.on("data", (data: Buffer | string) => {
 });
 
 // Helper function to run Lighthouse for a specific configuration
-function runLighthouse(args: string[]): Promise<number | null> {
+async function runLighthouse(args: string[]): Promise<number | null> {
   return new Promise((resolve) => {
     console.info(`Running Lighthouse with args: ${args.join(" ")}`);
     const lighthouse = spawn("npx", ["lighthouse", ...args], { shell: true, stdio: "inherit" });
@@ -62,7 +62,7 @@ function parseLighthouseReport(filePath: string): LighthouseResult | null {
   try {
     // eslint-disable-next-line security/detect-non-literal-fs-filename
     const html = fs.readFileSync(filePath, "utf8");
-    const match = html.match(/window\.__LIGHTHOUSE_JSON__\s*=\s*(\{.*?\});/);
+    const match = /window\.__LIGHTHOUSE_JSON__\s*=\s*(\{.*?\});/.exec(html);
     if (!match?.[1]) return null;
 
     const data = JSON.parse(match[1]) as RawLighthouseReport;

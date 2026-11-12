@@ -3,12 +3,12 @@
  * branding, Result patterns, exhaustiveness, and immutability.
  */
 import type { BookingId, Branded, EmailAddress, Result, TourSlug } from "@/lib/types";
-import { assertNever, Err, isNonNullable, Ok } from "@/lib/types";
+import { Err, isNonNullable, Ok } from "@/lib/types";
 
 // Type assertion helpers (Zero runtime cost, compile-time verified)
 export type Expect<T extends true> = T;
 export type Equal<X, Y> =
-  (<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y ? 1 : 2 ? true : false;
+  (<T>(arg: T) => T extends X ? 1 : 2) extends <T>(arg: T) => T extends Y ? 1 : 2 ? true : false;
 export type NotEqual<X, Y> = Equal<X, Y> extends true ? false : true;
 
 // 1. Branded Nominal Type Testing (Section 3.3)
@@ -53,9 +53,6 @@ export function handleMode(mode: AllowedModes): string {
     }
     case "drive": {
       return "driving";
-    }
-    default: {
-      return assertNever(mode);
     }
   }
 }

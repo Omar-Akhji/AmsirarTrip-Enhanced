@@ -7,8 +7,8 @@ const phoneRegex = /^\+?[0-9\s().-]{7,25}$/;
 const RecaptchaSchema = (t: (key: string) => string) =>
   z.object({ recaptchaToken: z.string().min(1, t("recaptchaRequired")) });
 
-export const getContactSchema = (t: (key: string) => string) =>
-  z
+function buildContactSchema(t: (key: string) => string) {
+  return z
     .object({
       name: z
         .string()
@@ -33,9 +33,14 @@ export const getContactSchema = (t: (key: string) => string) =>
         .transform(sanitize),
     })
     .extend(RecaptchaSchema(t).shape);
+}
 
-export const getNewsletterSchema = (t: (key: string) => string) =>
-  z
+export type ContactSchema = ReturnType<typeof buildContactSchema>;
+export const getContactSchema = (t: (key: string) => string): ContactSchema =>
+  buildContactSchema(t);
+
+function buildNewsletterSchema(t: (key: string) => string) {
+  return z
     .object({
       name: z
         .string()
@@ -45,9 +50,14 @@ export const getNewsletterSchema = (t: (key: string) => string) =>
       email: z.email({ message: t("emailInvalid") }).transform(sanitize),
     })
     .extend(RecaptchaSchema(t).shape);
+}
 
-export const getBookingSchema = (t: (key: string) => string) =>
-  z
+export type NewsletterSchema = ReturnType<typeof buildNewsletterSchema>;
+export const getNewsletterSchema = (t: (key: string) => string): NewsletterSchema =>
+  buildNewsletterSchema(t);
+
+function buildBookingSchema(t: (key: string) => string) {
+  return z
     .object({
       reservationType: z
         .string()
@@ -96,3 +106,8 @@ export const getBookingSchema = (t: (key: string) => string) =>
       duration: z.coerce.number().int().min(1).max(30).optional(),
     })
     .extend(RecaptchaSchema(t).shape);
+}
+
+export type BookingSchema = ReturnType<typeof buildBookingSchema>;
+export const getBookingSchema = (t: (key: string) => string): BookingSchema =>
+  buildBookingSchema(t);

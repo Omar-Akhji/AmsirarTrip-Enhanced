@@ -15,8 +15,13 @@ interface Props {
 const { locale } = defineProps<Props>();
 provide("app-locale", locale);
 
+interface RecaptchaInstance {
+  readonly getValue: () => string;
+  readonly reset: () => void;
+}
+
 const { t } = useTranslation(locale);
-const recaptchaRef = useTemplateRef<InstanceType<typeof Recaptcha>>("recaptchaRef");
+const recaptchaRef = useTemplateRef<RecaptchaInstance>("recaptchaRef");
 
 const formKey = ref(0);
 const captchaToken = ref("");
@@ -86,7 +91,7 @@ const handleSubmit = async (event: Event) => {
       };
       recaptchaRef.value?.reset();
       captchaToken.value = "";
-    } else if (data) {
+    } else {
       state.value = data;
       if (data.success) {
         formKey.value += 1;

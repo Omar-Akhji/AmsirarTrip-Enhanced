@@ -71,25 +71,25 @@ function writeToFile(level: LogLevel, line: string) {
 }
 
 export const logger = {
-  debug(message: string, meta?: Record<string, unknown>) {
+  debug(message: string, meta?: Record<string, unknown>): void {
     const line = formatLogEntry("debug", message, meta);
     console.info(line);
     writeToFile("debug", line);
   },
 
-  info(message: string, meta?: Record<string, unknown>) {
+  info(message: string, meta?: Record<string, unknown>): void {
     const line = formatLogEntry("info", message, meta);
     console.info(line);
     writeToFile("info", line);
   },
 
-  warn(message: string, meta?: Record<string, unknown>) {
+  warn(message: string, meta?: Record<string, unknown>): void {
     const line = formatLogEntry("warn", message, meta);
     console.warn(line);
     writeToFile("warn", line);
   },
 
-  error(message: string, error?: unknown, meta?: Record<string, unknown>) {
+  error(message: string, error?: unknown, meta?: Record<string, unknown>): void {
     const errorMeta: Record<string, unknown> = { ...meta };
     if (error instanceof Error) {
       errorMeta["errorName"] = error.name;
@@ -110,7 +110,7 @@ export const logger = {
     writeToFile("error", line);
   },
 
-  security(message: string, meta?: Record<string, unknown>) {
+  security(message: string, meta?: Record<string, unknown>): void {
     const line = formatLogEntry("security", message, meta);
     // Always log to console for security events (so they're visible in production)
     console.warn(`[SECURITY] ${line}`);

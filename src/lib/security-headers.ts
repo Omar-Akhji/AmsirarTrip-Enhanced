@@ -1,6 +1,9 @@
 import { LOCAL_HOSTS, TRUSTED_HOSTS } from "@/lib/constants/hosts";
 
-export const getSecurityHeaders = (nonce: string, host: string) => {
+export const getSecurityHeaders = (
+  nonce: string,
+  host: string,
+): { key: string; value: string }[] => {
   const normalizedHost = host.toLowerCase().replaceAll(/[^a-z0-9.-]/g, "");
   const safeConnectHost = TRUSTED_HOSTS.has(normalizedHost) ? ` https://${normalizedHost}` : "";
   const isLocal = LOCAL_HOSTS.has(normalizedHost);

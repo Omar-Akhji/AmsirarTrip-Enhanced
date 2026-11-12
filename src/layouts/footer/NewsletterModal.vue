@@ -16,7 +16,12 @@ const email = ref("");
 const statusKey = ref("");
 const isSubmitting = ref(false);
 
-const recaptchaRef = useTemplateRef<InstanceType<typeof Recaptcha>>("recaptchaRef");
+interface RecaptchaInstance {
+  readonly getValue: () => string;
+  readonly reset: () => void;
+}
+
+const recaptchaRef = useTemplateRef<RecaptchaInstance>("recaptchaRef");
 const dialogRef = useTemplateRef<HTMLDialogElement>("dialogRef");
 let timer: ReturnType<typeof setTimeout> | null = null;
 
@@ -43,7 +48,7 @@ const handleSubmit = async () => {
 
     if (error) {
       statusKey.value = "footer.newsletterFailure";
-    } else if (data) {
+    } else {
       if (data.ok) {
         name.value = "";
         email.value = "";

@@ -90,17 +90,18 @@ const handleKeyDown = (event: KeyboardEvent) => {
 };
 
 // Sync browser popover state → parent (e.g. on light-dismiss)
-const handleToggle = async (event: Event) => {
+const handleToggle = (event: Event): void => {
   const toggleEvent = event as ToggleEvent;
   const isOpennow = toggleEvent.newState === "open";
   isLocallyOpen.value = isOpennow;
   if (isOpennow !== isOpen) {
     emit("update:isOpen", isOpennow);
   }
-  await nextTick();
-  if (isOpennow) {
-    positionPopover();
-  }
+  void nextTick(() => {
+    if (isOpennow) {
+      positionPopover();
+    }
+  });
 };
 
 // Handle trigger click reliably

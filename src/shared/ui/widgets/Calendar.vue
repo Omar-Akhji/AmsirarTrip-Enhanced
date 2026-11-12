@@ -114,7 +114,7 @@ const days = computed(() => {
       isCurrentMonth: false,
       isToday: isSameDay(d, new Date()),
       isSelected: Boolean(selectedDate.value && isSameDay(d, selectedDate.value)),
-      isDisabled: Boolean(disabled && disabled(d)),
+      isDisabled: Boolean(disabled?.(d)),
     });
   }
 
@@ -126,7 +126,7 @@ const days = computed(() => {
       isCurrentMonth: true,
       isToday: isSameDay(d, new Date()),
       isSelected: Boolean(selectedDate.value && isSameDay(d, selectedDate.value)),
-      isDisabled: Boolean(disabled && disabled(d)),
+      isDisabled: Boolean(disabled?.(d)),
     });
   }
 
@@ -139,7 +139,7 @@ const days = computed(() => {
       isCurrentMonth: false,
       isToday: isSameDay(d, new Date()),
       isSelected: Boolean(selectedDate.value && isSameDay(d, selectedDate.value)),
-      isDisabled: Boolean(disabled && disabled(d)),
+      isDisabled: Boolean(disabled?.(d)),
     });
   }
 
@@ -242,7 +242,7 @@ watch(
                 type="button"
                 :disabled="day.isDisabled"
                 :aria-label="
-                  day.date.toLocaleDateString(activeLocale.value, {
+                  day.date.toLocaleDateString(activeLocale, {
                     month: 'short',
                     day: 'numeric',
                     year: 'numeric',

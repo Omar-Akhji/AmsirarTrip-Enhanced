@@ -7,7 +7,8 @@ let progressTimer: ReturnType<typeof setInterval> | undefined;
 let progressResetTimeout: ReturnType<typeof setTimeout> | undefined;
 let progressValue = 0;
 
-const delay = (ms: number): Promise<void> => new Promise((resolve) => setTimeout(resolve, ms));
+const delay = async (ms: number): Promise<void> =>
+  new Promise((resolve) => setTimeout(resolve, ms));
 
 function isPreparationEvent(event: Event): event is TransitionBeforePreparationEvent {
   return "to" in event && event.to instanceof URL;
