@@ -140,8 +140,8 @@ function setHovered(targetLink: HTMLAnchorElement | null, immediate = false): vo
 
 function setupMobileNav(): void {
   const nav = document.querySelector<HTMLElement>("#mobile-bottom-nav");
-  const indicator = document.querySelector<HTMLElement>("#mobile-nav-indicator");
   if (!nav) return;
+  const indicator = document.querySelector<HTMLElement>("#mobile-nav-indicator");
 
   currentActiveLink = findMatchingLink(nav, globalThis.location.pathname);
 
@@ -157,9 +157,9 @@ function setupMobileNav(): void {
       }
     }
     const alreadySettled =
-      Boolean(indicator)
-      && indicator?.style.visibility === "visible"
-      && indicator?.style.opacity === "1";
+      indicator !== null
+      && indicator.style.visibility === "visible"
+      && indicator.style.opacity === "1";
     setHovered(currentActiveLink, !alreadySettled);
   }
 

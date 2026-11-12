@@ -128,11 +128,7 @@ function initSlider(): void {
     for (const [index, dot] of dotButtons.entries()) {
       const isActive = index === activeIndex;
       dot.classList.toggle("active", isActive);
-      if (isActive) {
-        dot.setAttribute("aria-current", "true");
-      } else {
-        dot.removeAttribute("aria-current");
-      }
+      dot.toggleAttribute("aria-current", isActive);
     }
 
     for (const [lineIndex, lineFill] of lineFills.entries()) {
@@ -469,14 +465,16 @@ function initSlider(): void {
     const activeItem = sliderList.querySelector<HTMLElement>(":scope > .item:first-child");
     const activeIndex = Number(activeItem?.dataset["index"] ?? 0);
 
-    if (targetIndex !== activeIndex) {
-      if (isAnimating) {
-        pendingTargetIndex = targetIndex;
-        return;
-      }
-      stopAutoplay();
-      goToSlide(targetIndex);
+    if (targetIndex === activeIndex) {
+      return;
     }
+
+    if (isAnimating) {
+      pendingTargetIndex = targetIndex;
+      return;
+    }
+    stopAutoplay();
+    goToSlide(targetIndex);
   }
 
   const onScroll = () => {

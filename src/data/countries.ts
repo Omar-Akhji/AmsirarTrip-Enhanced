@@ -11,7 +11,7 @@ export interface CountryCallingCode {
 }
 
 const getFlagEmoji = (iso: string): string =>
-  String.fromCodePoint(...[...iso.toUpperCase()].map((c) => 127_397 + (c.codePointAt(0) ?? 0)));
+  String.fromCodePoint(...Array.from(iso.toUpperCase(), (c) => 127_397 + (c.codePointAt(0) ?? 0)));
 
 const RAW_COUNTRIES: readonly [code: string, name: string, dialCode: string][] = [
   // Primary default & top travel markets

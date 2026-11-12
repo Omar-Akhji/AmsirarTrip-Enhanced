@@ -10,29 +10,26 @@ export const POST: APIRoute = async ({ request }) => {
   try {
     const rawBody = (await request.json()) as unknown;
     if (!rawBody || typeof rawBody !== "object") {
-      return new Response(JSON.stringify({ success: false, reason: "invalid_body" }), {
-        status: 400,
-        headers: { "Content-Type": "application/json" },
-      });
+      return Response.json(
+        { success: false, reason: "invalid_body" },
+        { status: 400, headers: { "Content-Type": "application/json" } },
+      );
     }
 
     const body = rawBody as ValidateChallengeBody;
     const result = await validateChallenge(secret, body, { consumeNonce: capStore.consumeNonce });
 
     if (!result.success || !result.tokenKey) {
-      return new Response(
-        JSON.stringify({
-          success: false,
-          reason: result.success ? "missing_token_key" : result.reason,
-        }),
+      return Response.json(
+        { success: false, reason: result.success ? "missing_token_key" : result.reason },
         { status: 400, headers: { "Content-Type": "application/json" } },
       );
     }
 
     capStore.saveToken(result.tokenKey, result.expires);
 
-    return new Response(
-      JSON.stringify({ success: true, token: result.token, expires: result.expires }),
+    return Response.json(
+      { success: true, token: result.token, expires: result.expires },
       {
         status: 200,
         headers: {
@@ -43,9 +40,9 @@ export const POST: APIRoute = async ({ request }) => {
     );
   } catch (error) {
     console.error("[cap] Failed to redeem challenge:", error);
-    return new Response(JSON.stringify({ success: false, error: "Validation error" }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
-    });
+    return Response.json(
+      { success: false, error: "Validation error" },
+      { status: 500, headers: { "Content-Type": "application/json" } },
+    );
   }
 };

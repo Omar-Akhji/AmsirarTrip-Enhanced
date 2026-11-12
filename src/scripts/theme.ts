@@ -109,7 +109,7 @@ function initThemeListeners(): void {
   document.addEventListener("click", handleToggleClick);
 
   // Sync across tabs
-  window.addEventListener("storage", (e) => {
+  globalThis.addEventListener("storage", (e) => {
     if (e.key === STORAGE_KEY && (e.newValue === "light" || e.newValue === "dark")) {
       applyTheme(e.newValue);
     }
@@ -119,11 +119,13 @@ function initThemeListeners(): void {
 // Preserve theme on incoming document during Astro View Transitions before swap
 document.addEventListener("astro:before-swap", (e: Event) => {
   const swapEvent = e as unknown as { newDocument?: Document };
-  if (swapEvent.newDocument) {
-    const isDark = getPreferredTheme() === "dark";
-    swapEvent.newDocument.documentElement.classList.toggle("dark", isDark);
-    swapEvent.newDocument.documentElement.style.colorScheme = isDark ? "dark" : "light";
+  if (!swapEvent.newDocument) {
+    return;
   }
+
+  const isDark = getPreferredTheme() === "dark";
+  swapEvent.newDocument.documentElement.classList.toggle("dark", isDark);
+  swapEvent.newDocument.documentElement.style.colorScheme = isDark ? "dark" : "light";
 });
 
 // Re-sync theme state after DOM swap

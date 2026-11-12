@@ -15,17 +15,17 @@ const recaptchaResponseSchema = z.object({
 
 interface VerifyOptions {
   readonly token: string;
-  readonly remoteip?: string | undefined;
+  readonly remoteip?: string;
 }
 
 /** Verifies a CAPTCHA token using Cap (trycap.dev) if configured, or Google reCAPTCHA as fallback. */
 export async function verifyRecaptcha({ token, remoteip }: VerifyOptions): Promise<boolean> {
-  const isDev = import.meta.env.DEV || process.env["NODE_ENV"] === "development";
-
   // Guard: invalid token shape
   if (!token || typeof token !== "string" || token.length < 5 || token.length > 4096) {
     return false;
   }
+
+  const isDev = import.meta.env.DEV || process.env["NODE_ENV"] === "development";
 
   // Development bypass token
   if (isDev && token === "cap_dev_token") {

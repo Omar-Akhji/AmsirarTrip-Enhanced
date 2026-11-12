@@ -3,43 +3,63 @@
   "extends": "astro/tsconfigs/strictest",
 
   "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist", "node_modules"],
+  "exclude": [
+    "dist",
+    "node_modules",
+    "public",
+    "scratch",
+    ".agent",
+    ".agents",
+    ".gemini",
+    ".kiro",
+    ".claude",
+    ".github"
+  ],
 
   "compilerOptions": {
+    /* ─── Target & Environment ───────────────────────────────────────────── */
     "target": "ES2025",
-    "lib": ["ES2023", "ES2024", "ES2025", "ESNext", "DOM"],
-    "noEmit": true,
-    "jsx": "preserve",
+    "lib": ["ES2025", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "moduleResolution": "bundler",
     "moduleDetection": "force",
+
+    /* ─── Vue & Astro JSX Support ────────────────────────────────────────── */
+    "jsx": "preserve",
+    "jsxImportSource": "vue",
+    "plugins": [{ "name": "@astrojs/ts-plugin" }],
+
+    /* ─── Emit & Bundler Interop ─────────────────────────────────────────── */
+    "noEmit": true,
+    "allowJs": true,
+    "checkJs": false,
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "strictFunctionTypes": true,
-    "strictBindCallApply": true,
-    "strictPropertyInitialization": true,
-    "noImplicitThis": true,
-    "useUnknownInCatchVariables": true,
-    "alwaysStrict": true,
+    "isolatedModules": true,
+    "erasableSyntaxOnly": true,
+    "resolveJsonModule": true,
+
+    /* ─── Maximal Type Safety (Strictest + Modern Soundness) ─────────────── */
+    "strict": true,
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true,
     "noImplicitOverride": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
     "noPropertyAccessFromIndexSignature": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "useUnknownInCatchVariables": true,
+    "noUncheckedSideEffectImports": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
     "forceConsistentCasingInFileNames": true,
-    "isolatedModules": true,
     "skipLibCheck": true,
-    "erasableSyntaxOnly": true,
-    "noUncheckedSideEffectImports": true,
+
+    /* ─── Linter Delegation (Handled by ESLint with _ pattern support) ──── */
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+
+    /* ─── Paths & Global Types ───────────────────────────────────────────── */
     "types": ["node"],
-    "plugins": [{ "name": "@astrojs/ts-plugin" }],
     "paths": { "@/*": ["./src/*"] }
   }
 }

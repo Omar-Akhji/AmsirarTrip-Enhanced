@@ -1,4 +1,1 @@
-import Skeleton from "./skeleton.astro";
-
-export { Skeleton };
-export default Skeleton;
+export { default as Skeleton, default } from "./skeleton.astro";

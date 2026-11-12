@@ -35,7 +35,7 @@ const items = Array.from({ length: count }, (_, i) => ({
     <div class="mx-auto px-4 sm:px-6 lg:px-8 max-inline-7xl 2xl:max-inline-360 3xl:max-inline-420">
       <hgroup class="mb-8 max-w-2xl space-y-2">
         {hasCategoryKicker && <Skeleton class:list={["h-3.5", categoryWidth]} />}
-        <div class={hasCategoryKicker ? "mt-1" : ""}>
+        <div class:list={{ "mt-1": hasCategoryKicker }}>
           <Skeleton class:list={["h-8 sm:h-9", headingWidth]} />
         </div>
         {hasSubtitle && (
@@ -74,7 +74,7 @@ const items = Array.from({ length: count }, (_, i) => ({
     <section>
       <hgroup class="mbe-4 space-y-2">
         {hasCategoryKicker && <Skeleton class:list={["h-3.5", categoryWidth]} />}
-        <div class={hasCategoryKicker ? "mbs-1" : ""}>
+        <div class:list={{ "mbs-1": hasCategoryKicker }}>
           <Skeleton class:list={["h-7 sm:h-8", headingWidth]} />
         </div>
         {hasSubtitle && (

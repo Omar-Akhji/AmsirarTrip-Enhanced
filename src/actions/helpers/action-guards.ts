@@ -7,7 +7,7 @@ import { verifyRecaptcha } from "../../services/recaptcha";
  * Safely extracts client IP address prioritizing trusted proxy headers (x-vercel-forwarded-for,
  * x-real-ip, or the first hop of x-forwarded-for), falling back to Astro context.clientAddress.
  */
-export function extractClientIp(request: Request, clientAddress?: string | undefined): string {
+export function extractClientIp(request: Request, clientAddress?: string): string {
   const vercelIp = request.headers.get("x-vercel-forwarded-for")?.split(",", 1)[0]?.trim();
   if (vercelIp && isIP(vercelIp) !== 0) {
     return vercelIp;

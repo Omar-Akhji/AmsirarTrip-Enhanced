@@ -41,7 +41,7 @@ function setupTestimonialsSideScroll(element: HTMLElement): (() => void) | null 
     const maxTranslate = Math.max(0, slider.scrollWidth - stage.clientWidth);
     const currentTranslate = progress * maxTranslate;
 
-    const transformStr = `translate3d(${-currentTranslate.toFixed(1)}px, 0px, 0px)`;
+    const transformStr = `translate3d(${(-currentTranslate).toFixed(1)}px, 0px, 0px)`;
     if (lastTransform === transformStr) {
       return;
     }

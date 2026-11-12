@@ -15,20 +15,20 @@ class CapMemoryStore {
 
   constructor() {
     this.cleanupTimer = setInterval(() => this.pruneExpired(), 2 * 60 * 1000);
-    if (this.cleanupTimer && typeof this.cleanupTimer.unref === "function") {
+    if (typeof this.cleanupTimer.unref === "function") {
       this.cleanupTimer.unref();
     }
   }
 
   /** Consume a nonce. Returns true if nonce is fresh, false if already consumed (replay attack). */
-  public consumeNonce = async (sigHex: string, ttlMs: number): Promise<boolean> => {
+  public consumeNonce = (sigHex: string, ttlMs: number): Promise<boolean> => {
     const now = Date.now();
     const existing = this.nonces.get(sigHex);
     if (existing && existing.expires > now) {
-      return false;
+      return Promise.resolve(false);
     }
     this.nonces.set(sigHex, { expires: now + ttlMs });
-    return true;
+    return Promise.resolve(true);
   };
 
   /** Store a validated tokenKey with its expiration timestamp. */
@@ -61,12 +61,12 @@ class CapMemoryStore {
   /** Prune expired tokens and nonces to avoid memory leaks. */
   private pruneExpired(): void {
     const now = Date.now();
-    for (const [key, item] of this.tokens.entries()) {
+    for (const [key, item] of this.tokens) {
       if (item.expires < now) {
         this.tokens.delete(key);
       }
     }
-    for (const [sig, item] of this.nonces.entries()) {
+    for (const [sig, item] of this.nonces) {
       if (item.expires < now) {
         this.nonces.delete(sig);
       }

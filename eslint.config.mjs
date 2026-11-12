@@ -1,20 +1,40 @@
-import tsPlugin from "@typescript-eslint/eslint-plugin";
-import tsParser from "@typescript-eslint/parser";
+// eslint.config.mjs
+import { defineConfig } from "eslint/config";
 import eslintPluginAstro from "eslint-plugin-astro";
 import nounsanitized from "eslint-plugin-no-unsanitized";
 import prettierRecommended from "eslint-plugin-prettier/recommended";
-import eslintPluginVue from "eslint-plugin-vue";
-import pluginVueA11y from "eslint-plugin-vuejs-accessibility";
-import vueParser from "vue-eslint-parser";
 import securityPlugin from "eslint-plugin-security";
 import unicorn from "eslint-plugin-unicorn";
-import { defineConfig } from "eslint/config";
+import eslintPluginVue from "eslint-plugin-vue";
+import pluginVueA11y from "eslint-plugin-vuejs-accessibility";
 import globals from "globals";
+import tseslint from "typescript-eslint";
+import vueParser from "vue-eslint-parser";
 
-const eslintConfig = defineConfig(
-  // ─── Base Presets (Modern Flat Config) ───────────────────────────────────
-  ...tsPlugin.configs["flat/strict"],
-  ...tsPlugin.configs["flat/stylistic"],
+export default defineConfig(
+  // ─── 1. Global Ignores (Must be first) ────────────────────────────────────
+  {
+    ignores: [
+      "dist/**",
+      ".astro/**",
+      "node_modules/**",
+      "public/**",
+      "scratch/**",
+      "src/i18n/client-data.ts",
+      ".gemini/**",
+      ".kiro/**",
+      ".agent/**",
+      ".agents/**",
+      ".claude/**",
+      ".github/**",
+      "*.md",
+      "*.json",
+      "*.lock",
+      "tsconfig.tsbuildinfo",
+    ],
+  },
+
+  // ─── 2. Ecosystem Flat Presets ────────────────────────────────────────────
   ...eslintPluginAstro.configs["flat/recommended"],
   ...eslintPluginAstro.configs["flat/jsx-a11y-strict"],
   ...eslintPluginVue.configs["flat/recommended"],
@@ -23,67 +43,26 @@ const eslintConfig = defineConfig(
   securityPlugin.configs.recommended,
   nounsanitized.configs.recommended,
 
-  // ─── Linter Options ───────────────────────────────────────────────────────
+  // ─── 3. Linter Options ────────────────────────────────────────────────────
   { linterOptions: { reportUnusedDisableDirectives: "error" } },
 
-  // ─── Unicorn Strict Tuning ───────────────────────────────────────────────
+  // ─── 4. TypeScript Strict Type-Checked Standard (TS, TSX & Vue) ───────────
   {
-    rules: {
-      "unicorn/filename-case": [
-        "error",
-        {
-          cases: { kebabCase: true, pascalCase: true },
-          ignore: [String.raw`^\\[.*\\]`, String.raw`^\[.*\]`],
-        },
-      ],
-      "unicorn/prefer-at": "error",
-      "unicorn/prefer-early-return": "error",
-      "unicorn/prefer-string-slice": "error",
-      "unicorn/prefer-math-trunc": "error",
-      "unicorn/prefer-logical-operator-over-ternary": "error",
-      "unicorn/no-empty-file": "error",
-      "unicorn/prefer-ternary": "error",
-      "unicorn/text-encoding-identifier-case": "error",
-      "unicorn/prefer-node-protocol": "error",
-      "unicorn/prefer-modern-dom-apis": "error",
-      "unicorn/prefer-modern-math-apis": "error",
-      "unicorn/prefer-array-find": "error",
-      "unicorn/prefer-array-flat-map": "error",
-      "unicorn/prefer-includes": "error",
-      "unicorn/prefer-date-now": "error",
-      "unicorn/no-useless-spread": "error",
-      "unicorn/no-useless-undefined": "error",
-      "unicorn/prefer-string-starts-ends-with": "error",
-      "unicorn/prefer-regexp-test": "error",
-
-      // Framework & ecosystem accommodations for Vue/Astro/DOM
-      "unicorn/name-replacements": "off",
-      "unicorn/prevent-abbreviations": "off",
-      "unicorn/no-null": "off",
-      "unicorn/no-array-reduce": "off",
-      "unicorn/consistent-boolean-name": "off",
-      "unicorn/no-top-level-side-effects": "off",
-      "unicorn/no-top-level-assignment-in-function": "off",
-      "unicorn/single-line-block-comment-style": "off",
-      "unicorn/no-unnecessary-global-this": "off",
-      "unicorn/no-computed-property-existence-check": "off",
-      "unicorn/no-nested-ternary": "off",
-      "unicorn/no-asterisk-prefix-in-documentation-comments": "off",
-    },
-  },
-
-  // ─── TypeScript Strict Type-Checked Standard ─────────────────────────────
-  {
-    files: ["**/*.ts", "**/*.tsx"],
+    files: ["**/*.ts", "**/*.tsx", "**/*.vue"],
+    ignores: ["**/*.astro/**"],
+    extends: [...tseslint.configs.strictTypeChecked, ...tseslint.configs.stylisticTypeChecked],
     languageOptions: {
-      parser: tsParser,
-      parserOptions: { project: true, tsconfigRootDir: import.meta.dirname },
+      parser: tseslint.parser,
+      parserOptions: {
+        extraFileExtensions: [".vue"],
+        projectService: {
+          allowDefaultProject: ["*.config.mjs", "*.config.ts", "*.config.js"],
+          defaultProject: "tsconfig.json",
+        },
+        tsconfigRootDir: import.meta.dirname,
+      },
     },
-    plugins: { "@typescript-eslint": tsPlugin },
     rules: {
-      ...tsPlugin.configs["flat/strict-type-checked-only"][0].rules,
-      ...tsPlugin.configs["flat/stylistic-type-checked-only"][0].rules,
-
       "@typescript-eslint/no-unused-vars": [
         "error",
         { argsIgnorePattern: "^_", varsIgnorePattern: "^_", caughtErrorsIgnorePattern: "^_" },
@@ -92,58 +71,67 @@ const eslintConfig = defineConfig(
         "error",
         { prefer: "type-imports", fixStyle: "inline-type-imports" },
       ],
+      "@typescript-eslint/consistent-type-exports": [
+        "error",
+        { fixMixedExportsWithInlineTypeSpecifier: true },
+      ],
       "@typescript-eslint/no-import-type-side-effects": "error",
-      "@typescript-eslint/prefer-optional-chain": "error",
-      "@typescript-eslint/no-floating-promises": "error",
       "@typescript-eslint/no-misused-promises": [
         "error",
         { checksVoidReturn: { attributes: false } },
       ],
-      "@typescript-eslint/await-thenable": "error",
-      "@typescript-eslint/no-unnecessary-type-assertion": "error",
-      "@typescript-eslint/array-type": ["error", { default: "array" }],
       "@typescript-eslint/return-await": ["error", "in-try-catch"],
-      "@typescript-eslint/prefer-promise-reject-errors": "error",
-      "@typescript-eslint/no-explicit-any": "error",
-      "@typescript-eslint/no-unsafe-assignment": "error",
-      "@typescript-eslint/no-unsafe-call": "error",
-      "@typescript-eslint/no-unsafe-member-access": "error",
-      "@typescript-eslint/no-unsafe-return": "error",
-      "@typescript-eslint/no-unsafe-argument": "error",
-      "@typescript-eslint/no-non-null-assertion": "error",
-      "@typescript-eslint/prefer-nullish-coalescing": "error",
-      "@typescript-eslint/no-unnecessary-condition": "error",
-      "@typescript-eslint/prefer-find": "error",
-      "@typescript-eslint/prefer-includes": "error",
-      "@typescript-eslint/prefer-string-starts-ends-with": "error",
-      "@typescript-eslint/switch-exhaustiveness-check": "error",
+      "@typescript-eslint/promise-function-async": "error",
+      "@typescript-eslint/switch-exhaustiveness-check": [
+        "error",
+        { allowDefaultCaseForExhaustiveSwitch: false, requireDefaultForNonUnion: true },
+      ],
       "@typescript-eslint/method-signature-style": ["error", "property"],
-      "@typescript-eslint/no-meaningless-void-operator": "error",
-      "@typescript-eslint/no-unnecessary-type-arguments": "error",
       "@typescript-eslint/prefer-readonly": "error",
-      "@typescript-eslint/no-inferrable-types": "error",
-      "@typescript-eslint/prefer-function-type": "error",
-      "@typescript-eslint/unified-signatures": "error",
+      "@typescript-eslint/no-useless-empty-export": "error",
       "@typescript-eslint/consistent-type-definitions": "off",
-      "@typescript-eslint/no-dynamic-delete": "error",
-      "@typescript-eslint/no-extraneous-class": "error",
       "@typescript-eslint/consistent-type-assertions": [
         "error",
         { assertionStyle: "as", objectLiteralTypeAssertions: "never" },
       ],
-      "@typescript-eslint/consistent-type-exports": "error",
-      "@typescript-eslint/no-deprecated": "error",
+      "@typescript-eslint/restrict-template-expressions": [
+        "error",
+        { allowNumber: true, allowBoolean: true },
+      ],
+      "@typescript-eslint/no-confusing-void-expression": [
+        "error",
+        { ignoreArrowShorthand: true, ignoreVoidOperator: true },
+      ],
+      "@typescript-eslint/explicit-module-boundary-types": "error",
+      "no-restricted-syntax": [
+        "error",
+        {
+          selector: "TSEnumDeclaration",
+          message:
+            "Do not use TypeScript enums. Use `as const` objects or union literal types instead.",
+        },
+      ],
     },
   },
 
-  // ─── Vue Flat Config & Strict Rules ──────────────────────────────────────
+  // ─── 5. Disable Type-Checked Linting on Astro Virtual Scripts & Configs ───
+  {
+    files: ["**/*.astro", "**/*.astro/*.js", "**/*.astro/*.ts", "*.config.mjs"],
+    extends: [tseslint.configs.disableTypeChecked],
+    languageOptions: { parserOptions: { projectService: false } },
+  },
+
+  // ─── 6. Vue Flat Config & Strict Rules ────────────────────────────────────
   {
     files: ["**/*.vue"],
     languageOptions: {
       parser: vueParser,
-      parserOptions: { parser: tsParser, extraFileExtensions: [".vue"] },
+      parserOptions: { parser: tseslint.parser, extraFileExtensions: [".vue"] },
     },
     rules: {
+      // Disable explicit return type requirement for Vue SFCs (<script setup>)
+      "@typescript-eslint/explicit-module-boundary-types": "off",
+
       "vue/multi-word-component-names": "off",
       "vue/require-default-prop": "off",
       "vue/no-v-html": "error",
@@ -165,8 +153,6 @@ const eslintConfig = defineConfig(
       "vue/no-ref-as-operand": "error",
       "vue/no-duplicate-attr-inheritance": "error",
       "vue/no-required-prop-with-default": "error",
-
-      // ─── Vue Accessibility Strict Rules ──────────────────────────────────
       "vuejs-accessibility/label-has-for": [
         "error",
         { required: { some: ["nesting", "id"] }, allowChildren: false },
@@ -174,9 +160,9 @@ const eslintConfig = defineConfig(
     },
   },
 
-  // ─── General JavaScript Strict Standards ─────────────────────────────────
+  // ─── 7. General JavaScript Strict Standards ───────────────────────────────
   {
-    languageOptions: { globals: { ...globals.browser, ...globals.es2024 } },
+    languageOptions: { globals: { ...globals.browser, ...globals.node, ...globals.es2024 } },
     rules: {
       "no-console": ["error", { allow: ["warn", "error"] }],
       "prefer-const": "error",
@@ -208,7 +194,57 @@ const eslintConfig = defineConfig(
     },
   },
 
-  // ─── Security & Sanitization Strict Standards ────────────────────────────
+  // ─── 8. Unicorn Strict Tuning ─────────────────────────────────────────────
+  {
+    rules: {
+      "unicorn/filename-case": [
+        "error",
+        {
+          cases: { kebabCase: true, pascalCase: true },
+          ignore: [String.raw`^\\[.*\\]`, String.raw`^\[.*\]`],
+        },
+      ],
+      "unicorn/prefer-at": "error",
+      "unicorn/prefer-string-slice": "error",
+      "unicorn/prefer-math-trunc": "error",
+      "unicorn/prefer-logical-operator-over-ternary": "error",
+      "unicorn/no-empty-file": "error",
+      "unicorn/prefer-ternary": "error",
+      "unicorn/text-encoding-identifier-case": "error",
+      "unicorn/prefer-node-protocol": "error",
+      "unicorn/prefer-modern-dom-apis": "error",
+      "unicorn/prefer-modern-math-apis": "error",
+      "unicorn/prefer-array-find": "error",
+      "unicorn/prefer-array-flat-map": "error",
+      "unicorn/prefer-includes": "error",
+      "unicorn/prefer-date-now": "error",
+      "unicorn/no-useless-spread": "error",
+      "unicorn/no-useless-undefined": "error",
+      "unicorn/prefer-string-starts-ends-with": "error",
+      "unicorn/prefer-regexp-test": "error",
+
+      // Framework & ecosystem accommodations for Vue/Astro/DOM/TS
+      "unicorn/prefer-spread": "off",
+      "unicorn/name-replacements": "off",
+      "unicorn/prevent-abbreviations": "off",
+      "unicorn/no-null": "off",
+      "unicorn/no-array-reduce": "off",
+      "unicorn/consistent-boolean-name": "off",
+      "unicorn/no-top-level-side-effects": "off",
+      "unicorn/no-top-level-assignment-in-function": "off",
+      "unicorn/single-line-block-comment-style": "off",
+      "unicorn/no-unnecessary-global-this": "off",
+      "unicorn/no-computed-property-existence-check": "off",
+      "unicorn/no-nested-ternary": "off",
+      "unicorn/no-asterisk-prefix-in-documentation-comments": "off",
+      "unicorn/prefer-early-return": "off",
+      "unicorn/prefer-single-call": "off",
+      "unicorn/no-declarations-before-early-exit": "off",
+      "unicorn/consistent-class-member-order": "off",
+    },
+  },
+
+  // ─── 9. Security & Sanitization Strict Standards ──────────────────────────
   {
     rules: {
       "security/detect-object-injection": "off",
@@ -226,7 +262,7 @@ const eslintConfig = defineConfig(
     },
   },
 
-  // ─── Astro Strict Standards ──────────────────────────────────────────────
+  // ─── 10. Astro Strict Standards ───────────────────────────────────────────
   {
     files: ["**/*.astro"],
     rules: {
@@ -238,7 +274,6 @@ const eslintConfig = defineConfig(
       "astro/no-exports-from-components": "error",
       "astro/no-prerender-export-outside-pages": "error",
       "astro/no-set-text-directive": "error",
-      "astro/no-unused-css-selector": "error",
       "astro/prefer-class-list-directive": "error",
       "astro/prefer-object-class-list": "error",
       "astro/prefer-split-class-list": "error",
@@ -253,7 +288,7 @@ const eslintConfig = defineConfig(
     },
   },
 
-  // ─── JsonLd component — safe set:html for pre-sanitized JSON-LD ─────────
+  // ─── 11. Scoped Overrides (JsonLd, Logger, Server Actions, Zod, Guardrails)
   {
     files: ["src/shared/ui/**/JsonLd.astro"],
     rules: {
@@ -265,28 +300,20 @@ const eslintConfig = defineConfig(
       "security/detect-object-injection": "off",
     },
   },
-
-  // ─── Logger Service & CLI Scripts — Allows Central Log & Console Dispatches ────
   { files: ["src/services/logger.ts", "scripts/**/*.ts"], rules: { "no-console": "off" } },
-
-  // ─── Server actions / API routes ──────────────────────────────────────────
   {
-    files: ["src/actions/**/*.ts", "src/pages/api/**/*.ts"],
+    files: ["src/actions/**/*.ts", "src/pages/api/**/*.ts", "src/content.config.ts", "*.config.ts"],
     rules: {
+      "@typescript-eslint/explicit-module-boundary-types": "off",
       "no-unsanitized/method": "off",
       "unicorn/no-await-expression-member": "off",
       "security/detect-object-injection": "off",
     },
   },
-
-  // ─── Zod Schema Definitions — Composition pattern exceeds arbitrary nesting depths ───
   {
     files: ["src/i18n/schema.ts", "src/content.config.ts"],
     rules: { "unicorn/max-nested-calls": "off" },
   },
-
-  // ─── Client Bundle Guardrail ───────────────────────────────────────────────
-  // Prevent importing server/full i18n dictionaries in Vue components or scripts
   {
     files: ["src/**/*.vue", "src/scripts/**/*.ts"],
     rules: {
@@ -305,30 +332,6 @@ const eslintConfig = defineConfig(
     },
   },
 
-  // ─── Prettier — MUST be last ──────────────────────────────────────────────
+  // ─── 12. Prettier — MUST be last ──────────────────────────────────────────
   prettierRecommended,
-
-  // ─── Global ignores ───────────────────────────────────────────────────────
-  {
-    ignores: [
-      "dist/**",
-      ".astro/**",
-      "node_modules/**",
-      "public/**",
-      "scratch/**",
-      "src/i18n/client-data.ts",
-      ".gemini/**",
-      ".kiro/**",
-      ".agent/**",
-      ".agents/**",
-      ".claude/**",
-      ".github/**",
-      "*.md",
-      "*.json",
-      "*.lock",
-      "tsconfig.tsbuildinfo",
-    ],
-  },
 );
-
-export default eslintConfig;

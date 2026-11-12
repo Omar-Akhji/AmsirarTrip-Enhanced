@@ -58,7 +58,7 @@ function formatLogEntry(level: LogLevel, message: string, meta?: Record<string, 
   return JSON.stringify(entry);
 }
 
-const isServerless = Boolean(process.env["VERCEL"] || process.env["AWS_LAMBDA_FUNCTION_NAME"]);
+const isServerless = Boolean(process.env["VERCEL"] ?? process.env["AWS_LAMBDA_FUNCTION_NAME"]);
 
 function writeToFile(level: LogLevel, line: string) {
   if (isServerless) return;
@@ -89,14 +89,20 @@ export const logger = {
     writeToFile("warn", line);
   },
 
-  error(message: string, error?: Error | unknown, meta?: Record<string, unknown>) {
+  error(message: string, error?: unknown, meta?: Record<string, unknown>) {
     const errorMeta: Record<string, unknown> = { ...meta };
     if (error instanceof Error) {
       errorMeta["errorName"] = error.name;
       errorMeta["errorMessage"] = error.message;
       errorMeta["stack"] = error.stack;
-    } else if (error) {
+    } else if (
+      typeof error === "string"
+      || typeof error === "number"
+      || typeof error === "boolean"
+    ) {
       errorMeta["error"] = String(error);
+    } else if (error !== null && error !== undefined) {
+      errorMeta["error"] = JSON.stringify(error);
     }
 
     const line = formatLogEntry("error", message, errorMeta);

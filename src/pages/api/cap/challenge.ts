@@ -12,7 +12,7 @@ export const POST: APIRoute = async () => {
       protocols: ["hashwx", "instrumentation"],
     });
 
-    return new Response(JSON.stringify(challenge), {
+    return Response.json(challenge, {
       status: 200,
       headers: {
         "Content-Type": "application/json",
@@ -21,9 +21,9 @@ export const POST: APIRoute = async () => {
     });
   } catch (error) {
     console.error("[cap] Failed to generate challenge:", error);
-    return new Response(JSON.stringify({ error: "Failed to generate challenge" }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
-    });
+    return Response.json(
+      { error: "Failed to generate challenge" },
+      { status: 500, headers: { "Content-Type": "application/json" } },
+    );
   }
 };

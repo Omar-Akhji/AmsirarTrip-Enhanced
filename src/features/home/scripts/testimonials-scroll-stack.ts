@@ -45,7 +45,8 @@ function setupTestimonialsScrollStack(element: HTMLElement): (() => void) | null
     const activeRange = 0.9;
     const step = count > 1 ? activeRange / (count - 1) : 1;
     const cardStepOffset = Math.min(14, Math.floor(96 / count));
-    const cardHeight = cardSlots[0]?.offsetHeight || 420;
+    const rawHeight = cardSlots[0]?.offsetHeight ?? 0;
+    const cardHeight = rawHeight > 0 ? rawHeight : 420;
     const initialY = Math.round(cardHeight * 0.88);
 
     for (let i = 0; i < count; i++) {

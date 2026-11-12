@@ -41,14 +41,14 @@ export const GET: APIRoute = async ({ site }) => {
     lines.push(`- **Price**: ${priceInfo}`);
     lines.push(`- **Overview**: ${tour.data.seo.metaDescription}`);
 
-    if (tour.data.seo.highlights && tour.data.seo.highlights.length > 0) {
+    if (tour.data.seo.highlights.length > 0) {
       lines.push("- **Highlights**:");
       for (const h of tour.data.seo.highlights) {
         lines.push(`  - ${h}`);
       }
     }
 
-    if (tour.data.seo.faqs && tour.data.seo.faqs.length > 0) {
+    if (tour.data.seo.faqs.length > 0) {
       lines.push("- **Frequently Asked Questions**:");
       for (const faq of tour.data.seo.faqs) {
         lines.push(`  - **Q: ${faq.question}**`);
@@ -73,14 +73,14 @@ export const GET: APIRoute = async ({ site }) => {
     lines.push(`- **Price**: ${priceInfo}`);
     lines.push(`- **Overview**: ${excursion.data.jsonLd.description}`);
 
-    if (excursion.data.overview && excursion.data.overview.length > 0) {
+    if (excursion.data.overview.length > 0) {
       lines.push("- **Key Features**:");
       for (const item of excursion.data.overview) {
         lines.push(`  - ${item}`);
       }
     }
 
-    if (excursion.data.seo.faqs && excursion.data.seo.faqs.length > 0) {
+    if (excursion.data.seo.faqs.length > 0) {
       lines.push("- **Frequently Asked Questions**:");
       for (const faq of excursion.data.seo.faqs) {
         lines.push(`  - **Q: ${faq.question}**`);

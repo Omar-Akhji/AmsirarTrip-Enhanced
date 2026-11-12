@@ -43,10 +43,10 @@ function initWebMCPTools() {
           required: ["dark"],
         },
       },
-      async (input) => {
+      (input) => {
         const dark = Boolean(input["dark"]);
         document.documentElement.classList.toggle("dark", dark);
-        return { success: true, currentTheme: dark ? "dark" : "light" };
+        return Promise.resolve({ success: true, currentTheme: dark ? "dark" : "light" });
       },
     );
 
@@ -114,14 +114,14 @@ function initWebMCPTools() {
           "Returns metadata for the current page including route, title, language, and theme",
         inputSchema: { type: "object", properties: {} },
       },
-      async () => {
-        return {
+      () => {
+        return Promise.resolve({
           success: true,
           pathname: globalThis.location.pathname,
           title: document.title,
           locale: document.documentElement.lang || "en",
           theme: document.documentElement.classList.contains("dark") ? "dark" : "light",
-        };
+        });
       },
     );
   } catch (error) {
