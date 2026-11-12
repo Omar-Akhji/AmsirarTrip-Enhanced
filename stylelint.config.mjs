@@ -9,6 +9,7 @@ export default {
     "node_modules/**",
     "public/**",
     "scratch/**",
+    ".vscode/**",
     ".gemini/**",
     ".kiro/**",
     ".agent/**",

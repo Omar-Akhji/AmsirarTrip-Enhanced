@@ -66,6 +66,10 @@ const config = {
     { files: "*.astro", options: { parser: "astro" } },
     { files: "*.vue", options: { parser: "vue" } },
     { files: ["*.json", "*.jsonc"], options: { printWidth: 80 } },
+    {
+      files: [".vscode/*.json", ".vscode/*.code-snippets"],
+      options: { parser: "jsonc", printWidth: 80 },
+    },
     { files: ["*.md", "*.mdx"], options: { proseWrap: "always" } },
   ],
 };

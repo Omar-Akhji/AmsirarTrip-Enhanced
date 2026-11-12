@@ -8,6 +8,7 @@
     "node_modules",
     "public",
     "scratch",
+    ".vscode",
     ".agent",
     ".agents",
     ".gemini",

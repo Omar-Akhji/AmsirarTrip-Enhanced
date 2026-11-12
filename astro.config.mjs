@@ -29,16 +29,8 @@ export default defineConfig({
 
   // ─── 4. Integrations ──────────────────────────────────────────────────────
   integrations: [
-    vue({
-      template: {
-        compilerOptions: {
-          // Support self-hosted Cap (Proof-of-Work CAPTCHA) Web Component
-          isCustomElement: (tag) => tag.startsWith("cap-"),
-        },
-      },
-    }),
+    vue({ template: { compilerOptions: { isCustomElement: (tag) => tag.startsWith("cap-") } } }),
     htmlValidate(),
-    // Compress only static SVGs in build output; Astro Sharp handles raster images
     compress({ CSS: false, HTML: false, Image: false, JavaScript: false, SVG: true }),
   ],
 
@@ -49,7 +41,7 @@ export default defineConfig({
     build: { cssMinify: "lightningcss" },
   },
 
-  // ─── 6. Image Optimization (Sharp) ────────────────────────────────────────
+  // ─── 6. Image Optimization ────────────────────────────────────────────────
   image: { domains: [], remotePatterns: [] },
 
   // ─── 7. Security & Origin Protection ──────────────────────────────────────

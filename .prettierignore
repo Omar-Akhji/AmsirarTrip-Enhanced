@@ -12,3 +12,5 @@ src/i18n/client-data.ts
 .github/
 *.lock
 tsconfig.tsbuildinfo
+playwright-report/
+test-results/
