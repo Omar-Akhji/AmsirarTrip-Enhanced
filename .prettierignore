@@ -1,27 +1,14 @@
-# Dependencies
-node_modules/
-
-# Build and cache outputs
 dist/
 .astro/
-
-# AI and local workspace agents/caches
+node_modules/
+public/
+scratch/
+src/i18n/client-data.ts
 .gemini/
 .kiro/
 .agent/
 .agents/
 .claude/
-.arena/
-.anti-slop/
-.docs/
-
-# Lockfiles and TS build cache
-bun.lock
-bun.lockb
+.github/
+*.lock
 tsconfig.tsbuildinfo
-
-# Static assets and public files
-public/
-
-# Lighthouse reports
-lighthouse-*.html

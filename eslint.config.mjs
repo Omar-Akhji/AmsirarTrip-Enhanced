@@ -56,7 +56,7 @@ export default defineConfig(
       parserOptions: {
         extraFileExtensions: [".vue"],
         projectService: {
-          allowDefaultProject: ["*.config.mjs", "*.config.ts", "*.config.js"],
+          allowDefaultProject: ["*.config.ts", "*.config.js"],
           defaultProject: "tsconfig.json",
         },
         tsconfigRootDir: import.meta.dirname,
@@ -114,7 +114,7 @@ export default defineConfig(
     },
   },
 
-  // ─── 5. Disable Type-Checked Linting on Astro Virtual Scripts & Configs ───
+  // ─── 5. Disable Type-Checked Linting on Astro Templates & MJS Configs ─────
   {
     files: ["**/*.astro", "**/*.astro/*.js", "**/*.astro/*.ts", "*.config.mjs"],
     extends: [tseslint.configs.disableTypeChecked],
@@ -129,9 +129,7 @@ export default defineConfig(
       parserOptions: { parser: tseslint.parser, extraFileExtensions: [".vue"] },
     },
     rules: {
-      // Disable explicit return type requirement for Vue SFCs (<script setup>)
       "@typescript-eslint/explicit-module-boundary-types": "off",
-
       "vue/multi-word-component-names": "off",
       "vue/require-default-prop": "off",
       "vue/no-v-html": "error",
@@ -288,7 +286,8 @@ export default defineConfig(
     },
   },
 
-  // ─── 11. Scoped Overrides (JsonLd, Logger, Server Actions, Zod, Guardrails)
+  // ─── 11. Scoped Overrides (Pages, JsonLd, Logger, Actions, Zod, Tests) ────
+  { files: ["src/pages/**/*.astro"], rules: { "astro/no-exports-from-components": "off" } },
   {
     files: ["src/shared/ui/**/JsonLd.astro"],
     rules: {
@@ -302,7 +301,13 @@ export default defineConfig(
   },
   { files: ["src/services/logger.ts", "scripts/**/*.ts"], rules: { "no-console": "off" } },
   {
-    files: ["src/actions/**/*.ts", "src/pages/api/**/*.ts", "src/content.config.ts", "*.config.ts"],
+    files: [
+      "src/actions/**/*.ts",
+      "src/pages/api/**/*.ts",
+      "src/content.config.ts",
+      "*.config.ts",
+      "*.config.mjs",
+    ],
     rules: {
       "@typescript-eslint/explicit-module-boundary-types": "off",
       "no-unsanitized/method": "off",
@@ -313,6 +318,10 @@ export default defineConfig(
   {
     files: ["src/i18n/schema.ts", "src/content.config.ts"],
     rules: { "unicorn/max-nested-calls": "off" },
+  },
+  {
+    files: ["tests/**/*.ts", "playwright.config.mjs"],
+    rules: { "@typescript-eslint/explicit-module-boundary-types": "off", "no-console": "off" },
   },
   {
     files: ["src/**/*.vue", "src/scripts/**/*.ts"],

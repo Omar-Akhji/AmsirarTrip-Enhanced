@@ -27,49 +27,39 @@ const config = {
   proseWrap: "always",
   embeddedLanguageFormatting: "auto",
 
-  // ─── 3. Modern Prettier 3.x Features ──────────────────────────────────────
+  // ─── 3. Modern Prettier 3.x+ Features ─────────────────────────────────────
   experimentalTernaries: true,
   objectWrap: "collapse",
   experimentalOperatorPosition: "start",
 
-  // ─── 4. Plugins (Order is strictly enforced) ──────────────────────────────
-  // 1. packagejson   — sorts package.json keys
-  // 2. sort-imports  — unifies import order across TS, Vue, and Astro
-  // 3. jsdoc         — formats JSDoc comments cleanly
-  // 4. astro         — parses .astro templates (must precede tailwindcss)
-  // 5. tailwindcss   — MUST BE ABSOLUTE LAST to wrap all previous AST parsers
+  // ─── 4. Plugins (Strict Execution Order) ──────────────────────────────────
   plugins: [
     "prettier-plugin-packagejson",
     "@ianvs/prettier-plugin-sort-imports",
     "prettier-plugin-jsdoc",
     "prettier-plugin-astro",
-    "prettier-plugin-tailwindcss",
+    "prettier-plugin-tailwindcss", // MUST ALWAYS BE LAST
   ],
 
   // ─── 5. Import Sorting (@ianvs/prettier-plugin-sort-imports) ──────────────
   importOrder: [
-    // 1. Node.js built-in modules (enforced as node:* by Unicorn in ESLint)
     "<BUILTIN_MODULES>",
-    // 2. Astro & Vue framework core
     "^(astro:(.*))$|^(astro/(.*))$|^(astro$)",
     "^(vue/(.*))$|^(vue$)",
-    // 3. External npm packages
     "<THIRD_PARTY_MODULES>",
-    // 4. Internal path alias (@/* defined in tsconfig.json)
     "^@/(.*)$",
-    // 5. Relative imports
     "^[./]",
-    // 6. Stylesheets always last
     String.raw`^.+\.(css|scss|postcss)$`,
   ],
   importOrderParserPlugins: ["typescript", "jsx"],
   importOrderTypeScriptVersion: "6.0.0",
   importOrderCaseSensitive: false,
+  importOrderCombineTypeAndValueImports: true,
 
   // ─── 6. Tailwind CSS v4 Integration ───────────────────────────────────────
   tailwindStylesheet: "./src/styles/global.css",
   tailwindFunctions: ["cn", "cva", "clsx", "twMerge"],
-  tailwindAttributes: ["class:list"],
+  tailwindAttributes: ["class:list", "enter-active-class", "leave-active-class"],
 
   // ─── 7. File-Specific Overrides ───────────────────────────────────────────
   overrides: [

@@ -1,4 +1,7 @@
-import { PUBLIC_CAP_API_ENDPOINT, PUBLIC_RECAPTCHA_SITE_KEY } from "astro:env/client";
+import { PUBLIC_CAP_API_ENDPOINT } from "astro:env/client";
+
+const PUBLIC_RECAPTCHA_SITE_KEY = import.meta.env["PUBLIC_RECAPTCHA_SITE_KEY"] as
+  string | undefined;
 
 export const CAP_API_ENDPOINT = PUBLIC_CAP_API_ENDPOINT ?? "/api/cap/";
 export const hasCap = Boolean(CAP_API_ENDPOINT);
