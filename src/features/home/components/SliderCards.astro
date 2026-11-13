@@ -27,7 +27,7 @@ const { items } = Astro.props;
       role="button"
       tabindex="0"
     >
-      {typeof item.image === "string" ? (
+      {typeof item.image === "string" ?
         <Image
           src={item.image}
           alt={item.alt || `${item.title} - ${item.type}`}
@@ -38,8 +38,7 @@ const { items } = Astro.props;
           height={580}
           class="size-full object-cover rounded-(--thumb-radius)"
         />
-      ) : (
-        <Image
+      : <Image
           src={item.image}
           alt={item.alt || `${item.title} - ${item.type}`}
           loading="eager"
@@ -49,7 +48,7 @@ const { items } = Astro.props;
           height={580}
           class="size-full object-cover rounded-(--thumb-radius)"
         />
-      )}
+      }
       <div class="thumbnail-overlay pointer-events-none absolute inset-x-0 bottom-0 flex flex-col px-2 py-2 sm:px-2.5 sm:py-3 text-white text-shadow-sm text-shadow-black/80 bg-linear-to-t from-black/85 to-transparent">
         <span class="thumbnail-type truncate text-[0.7rem] sm:text-xs font-bold uppercase tracking-wider text-orange-400">
           {item.type}

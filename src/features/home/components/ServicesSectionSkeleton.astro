@@ -23,13 +23,15 @@ const serviceCardSkeletons = [
   ]}
 >
   {/* Dark background */}
-  <div class="absolute inset-0 size-full overflow-hidden bg-stone-950">
-    <Skeleton class="size-full rounded-none bg-stone-900/60" />
+  <div class="pointer-events-none absolute inset-0 [clip-path:inset(0)]">
+    <div class="sticky top-0 h-screen w-full md:static md:h-full bg-stone-950">
+      <Skeleton class="size-full rounded-none bg-stone-900/60" />
+      <div
+        aria-hidden="true"
+        class="absolute inset-0 bg-black/45"
+      ></div>
+    </div>
   </div>
-  <div
-    aria-hidden="true"
-    class="absolute inset-0 bg-black/45"
-  ></div>
 
   <div class="relative mx-auto px-4 max-inline-7xl 2xl:max-inline-360 3xl:max-inline-420 sm:px-6 lg:px-8">
     <div class="mbe-8 sm:mbe-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-white/10 pb-6 sm:pb-8">
@@ -45,11 +47,11 @@ const serviceCardSkeletons = [
       </hgroup>
     </div>
 
-    {/* Mobile Mode: Stacked Cards matching ServicesScrollStack */}
-    <div class="block md:hidden w-full">
-      <div class="flex flex-col gap-5 w-full">
-        {serviceCardSkeletons.map((card) => (
-          <article class="flex flex-col items-center rounded-2xl border border-white/10 bg-white/10 p-8 text-center shadow-xs ring-1 ring-black/5 backdrop-blur-xl size-full">
+    {/* Mobile View: Horizontal Slider matching ServicesSideScroll */}
+    <div class="flex md:hidden items-stretch gap-6 overflow-hidden pb-4">
+      {serviceCardSkeletons.map((card) => (
+        <div class="w-full shrink-0 flex flex-col">
+          <article class="flex flex-col items-center rounded-2xl border border-white/10 bg-white/10 p-6 sm:p-8 text-center shadow-xs ring-1 ring-black/5 backdrop-blur-xl size-full">
             <div class="mbe-6 inline-flex size-25 items-center justify-center rounded-full bg-white/5 ring-1 ring-white/10">
               <Skeleton class="size-15 rounded-full bg-white/15" />
             </div>
@@ -62,8 +64,8 @@ const serviceCardSkeletons = [
               <Skeleton class="h-3.5 w-3/4 bg-white/15" />
             </div>
           </article>
-        ))}
-      </div>
+        </div>
+      ))}
     </div>
 
     {/* Desktop & Tablet Mode: 3-column Grid matching ServicesSection.astro */}

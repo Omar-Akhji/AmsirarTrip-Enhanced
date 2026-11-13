@@ -1,5 +1,4 @@
 ---
-import TestimonialsScrollStack from "./TestimonialsScrollStack.astro";
 import TestimonialsSideScroll from "./TestimonialsSideScroll.astro";
 import Button from "@/shared/ui/primitives/Button.astro";
 
@@ -86,16 +85,8 @@ const TRIPADVISOR_URL =
         </Button>
       </div>
     </div>
-    <div class="relative">
-      <!-- Mobile View: Interactive Physical Card Scroll Stack -->
-      <div class="block md:hidden w-full">
-        <TestimonialsScrollStack testimonials={testimonials} />
-      </div>
-
-      <!-- Desktop & Tablet View: Transition From Side On Scroll -->
-      <div class="hidden md:block w-full">
-        <TestimonialsSideScroll testimonials={testimonials} />
-      </div>
+    <div class="relative w-full">
+      <TestimonialsSideScroll testimonials={testimonials} />
     </div>
   </div>
 </section>

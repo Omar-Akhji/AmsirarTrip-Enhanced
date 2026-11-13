@@ -2,7 +2,7 @@
 import servicesBg from "@/assets/images/services-bg.webp";
 import { useTranslations } from "@/i18n/utils";
 import { Image } from "astro:assets";
-import ServicesScrollStack from "./ServicesScrollStack.astro";
+import ServicesSideScroll from "./ServicesSideScroll.astro";
 
 const locale = Astro.currentLocale || "en";
 const t = useTranslations(locale);
@@ -40,19 +40,24 @@ const subtitle = subtitleMap[locale] ?? subtitleMap["en"] ?? defaultSubtitle;
   class="relative overflow-visible py-12 sm:py-16 lg:py-24 text-orange-200"
   id="services"
 >
-  <Image
-    alt=""
-    class="absolute inset-0 size-full object-cover"
-    decoding="async"
-    height={1277}
-    loading="lazy"
-    src={servicesBg}
-    width={1920}
-  />
-  <div
-    aria-hidden="true"
-    class="absolute inset-0 bg-black/45"
-  ></div>
+  {/* Fixed background image: stays motionless in viewport while scrolling through section on mobile */}
+  <div class="pointer-events-none absolute inset-0 [clip-path:inset(0)]">
+    <div class="sticky top-0 h-screen w-full md:static md:h-full">
+      <Image
+        alt=""
+        class="h-screen w-full object-cover md:h-full"
+        decoding="async"
+        height={1080}
+        loading="lazy"
+        src={servicesBg}
+        width={1920}
+      />
+      <div
+        aria-hidden="true"
+        class="absolute inset-0 bg-black/45"
+      ></div>
+    </div>
+  </div>
   <div class="relative mx-auto px-4 max-inline-7xl 2xl:max-inline-360 3xl:max-inline-420 sm:px-6 lg:px-8">
     <div
       class="mbe-8 sm:mbe-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-white/10 pb-6 sm:pb-8"
@@ -71,9 +76,9 @@ const subtitle = subtitleMap[locale] ?? subtitleMap["en"] ?? defaultSubtitle;
       </hgroup>
     </div>
 
-    {/* Mobile Mode: Animated ScrollStack cards without folder */}
+    {/* Mobile Mode: Transition From Side On Scroll */}
     <div class="block md:hidden w-full">
-      <ServicesScrollStack services={services} />
+      <ServicesSideScroll services={services} />
     </div>
 
     {/* Desktop & Tablet Mode: 3-column Grid */}
