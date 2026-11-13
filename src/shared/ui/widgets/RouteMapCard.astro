@@ -50,16 +50,66 @@ const { routeMap, kicker = "Google Maps Route" } = Astro.props;
     </span>
   </header>
 
-  <!-- Google Maps Interactive Embed -->
-  <div class="relative mbe-4 overflow-hidden rounded-xl border border-stone-200/80 bg-stone-100 dark:border-white/10 dark:bg-[#090a0d]">
-    <iframe
-      src={routeMap.googleMapsEmbedUrl}
-      title={routeMap.title}
-      class="h-64 w-full border-0 sm:h-72"
-      loading="lazy"
-      allowfullscreen
-      referrerpolicy="no-referrer-when-downgrade"
-    ></iframe>
+  <!-- Google Maps Interactive Embed (Facade Pattern for Core Web Vitals) -->
+  <div class="route-map-wrapper relative mbe-4 overflow-hidden rounded-xl border border-stone-200/80 bg-stone-100 dark:border-white/10 dark:bg-[#090a0d] h-64 sm:h-72">
+    <!-- Lightweight Facade -->
+    <div class="map-facade absolute inset-0 z-10 flex flex-col items-center justify-center p-5 text-center select-none bg-[radial-gradient(circle_at_center,rgba(249,115,22,0.12),transparent_75%)]">
+      <div class="mbe-2.5 flex size-12 items-center justify-center rounded-full border border-orange-500/20 bg-orange-500/10 text-orange-600 shadow-2xs dark:text-orange-400">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke-width="1.5"
+          class="size-6 text-current"
+          aria-hidden="true"
+        >
+          <path
+            d="M5.5 8.7572C5.5 6.95823 7.067 5.49988 9 5.49988C10.933 5.49988 12.5 6.95823 12.5 8.7572C12.5 10.5421 11.3829 12.6248 9.64003 13.3697C9.23374 13.5433 8.76626 13.5433 8.35997 13.3697C6.61708 12.6248 5.5 10.5421 5.5 8.7572Z"
+            stroke-linecap="round"
+            stroke="currentColor"
+          />
+          <path
+            d="M14.0004 13.9998L20.5004 20.4998M16 12.0003L14.0004 13.9998L6.39453 21.6057M21.6072 6.39307L19 9.00027"
+            stroke-linecap="round"
+            stroke="currentColor"
+          />
+        </svg>
+      </div>
+
+      <p class="font-mono text-xs font-semibold uppercase tracking-wider text-stone-800 dark:text-mist-100 mbe-0.5">
+        {routeMap.startCity} ➔ {routeMap.endCity}
+      </p>
+      <p class="font-mono text-[11px] text-stone-500 dark:text-mist-400 mbe-3.5">
+        Interactive Route Map · {routeMap.waypoints.length} Stops
+      </p>
+
+      <button
+        type="button"
+        class="load-route-map-btn inline-flex min-h-10 items-center gap-2 rounded-full border border-orange-500/50 bg-gradient-to-br from-amber-500 to-orange-600 px-5 py-2 font-mono text-xs font-bold uppercase tracking-wider text-white shadow-md shadow-orange-500/20 transition duration-150 hover:brightness-105 active:scale-95 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
+        data-embed-url={routeMap.googleMapsEmbedUrl}
+        data-map-title={routeMap.title}
+        aria-label={`Load interactive route map: ${routeMap.title}`}
+      >
+        <span>Explore Route Map</span>
+        <svg
+          class="size-3.5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          aria-hidden="true"
+        >
+          <path
+            d="M5 12h14M12 5l7 7-7 7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Live iframe container injected upon user interaction -->
+    <div class="map-iframe-container size-full"></div>
   </div>
 
   <!-- Waypoints Accordion / Stops Schedule -->
@@ -142,3 +192,42 @@ const { routeMap, kicker = "Google Maps Route" } = Astro.props;
     </a>
   </footer>
 </article>
+
+<script>
+  function initRouteMapFacades() {
+    const buttons = document.querySelectorAll<HTMLButtonElement>(
+      ".load-route-map-btn:not([data-facade-ready])",
+    );
+    buttons.forEach((btn) => {
+      btn.setAttribute("data-facade-ready", "true");
+      btn.addEventListener(
+        "click",
+        () => {
+          const url = btn.dataset["embedUrl"];
+          const title = btn.dataset["mapTitle"] ?? "Route Map";
+          const wrapper = btn.closest(".route-map-wrapper");
+          if (!wrapper || !url) return;
+
+          const container = wrapper.querySelector(".map-iframe-container");
+          const facade = wrapper.querySelector(".map-facade");
+          if (!container) return;
+
+          const iframe = document.createElement("iframe");
+          iframe.src = url;
+          iframe.title = title;
+          iframe.className = "size-full border-0";
+          iframe.allowFullscreen = true;
+          iframe.loading = "lazy";
+          iframe.referrerPolicy = "no-referrer-when-downgrade";
+
+          container.appendChild(iframe);
+          facade?.remove();
+        },
+        { once: true },
+      );
+    });
+  }
+
+  initRouteMapFacades();
+  document.addEventListener("astro:page-load", initRouteMapFacades);
+</script>

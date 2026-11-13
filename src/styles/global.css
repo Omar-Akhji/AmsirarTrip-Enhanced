@@ -17,6 +17,16 @@
   font-display: swap;
 }
 
+/* Fallback Font Metric Overrides for Zero-CLS Swap */
+@font-face {
+  font-family: "Montserrat-Fallback";
+  src: local("Arial");
+  ascent-override: 96.8%;
+  descent-override: 25.1%;
+  line-gap-override: 0%;
+  size-adjust: 100%;
+}
+
 @font-face {
   font-family: Yellowtail;
   src: url("/fonts/Yellowtail-Regular.woff2") format("woff2");
@@ -42,7 +52,8 @@
 @theme {
   /* Typography */
   --font-sans:
-    "Montserrat", system-ui, -apple-system, blinkmacsystemfont, "Segoe UI", roboto, sans-serif;
+    "Montserrat", "Montserrat-Fallback", system-ui, -apple-system, blinkmacsystemfont, "Segoe UI",
+    roboto, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
   --font-brand: "Yellowtail", cursive;
 

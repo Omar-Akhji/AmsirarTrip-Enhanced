@@ -196,7 +196,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
           allowfullscreen
           aria-label="Interactive map showing Amsirar Trip agency location in Marrakech"
           class="border-0 block-75 md:block-100 lg:block-125 inline-full"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3399.999!2d-8.0257651!3d31.6259758!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdafef007a3f58d3%3A0xa6485d9ed7022b4c!2sAmsirar+Travel!5e0!3m2!1sen!2sma!4v1699999999999!5m2!1sen!2sma"
+          data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3399.999!2d-8.0257651!3d31.6259758!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdafef007a3f58d3%3A0xa6485d9ed7022b4c!2sAmsirar+Travel!5e0!3m2!1sen!2sma!4v1699999999999!5m2!1sen!2sma"
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
           sandbox="allow-scripts allow-same-origin allow-popups"
@@ -206,3 +206,29 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
     </div>
   </section>
 </div>
+
+<script>
+  function setupContactMapFacade() {
+    const details = document.querySelector<HTMLDetailsElement>(
+      "#location details:not([data-facade-ready])",
+    );
+    if (!details) return;
+    details.setAttribute("data-facade-ready", "true");
+    const iframe = details.querySelector<HTMLIFrameElement>("iframe");
+    if (!iframe) return;
+
+    details.addEventListener(
+      "toggle",
+      () => {
+        const src = iframe.dataset["src"];
+        if (details.open && !iframe.src && src) {
+          iframe.src = src;
+        }
+      },
+      { once: true },
+    );
+  }
+
+  setupContactMapFacade();
+  document.addEventListener("astro:page-load", setupContactMapFacade);
+</script>
