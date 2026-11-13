@@ -39,7 +39,10 @@ const { crumbWidths = ["w-12", "w-14", "w-52"], class: className } = Astro.props
         </div>
 
         {/* Quick Specs 4-card Grid matching TourSeoSections.astro */}
-        <dl class="m-0 p-0 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+        <div
+          role="presentation"
+          class="m-0 p-0 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4"
+        >
           {[1, 2, 3, 4].map(() => (
             <div class="flex items-center gap-4 rounded-2xl border border-stone-200/90 bg-white px-5 py-3 shadow-2xs min-block-20">
               <span class="size-5 shrink-0 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center font-bold text-xs">
@@ -51,7 +54,7 @@ const { crumbWidths = ["w-12", "w-14", "w-52"], class: className } = Astro.props
               </div>
             </div>
           ))}
-        </dl>
+        </div>
 
         {/* Highlights Section matching HighlightsList.astro */}
         <section class="mbs-8">

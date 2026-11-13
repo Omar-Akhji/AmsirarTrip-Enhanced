@@ -213,67 +213,67 @@ const DAY_DELAYS = [
               {(day.accommodation || day.meals || day.activities || day.arrival) && (
                 <dl class="m-0 mbs-4 grid gap-3 p-0 sm:grid-cols-2">
                   {day.accommodation && (
-                    <div class="flex items-center gap-3 rounded-xl border border-stone-200/90 bg-stone-50/70 p-3 shadow-2xs dark:border-white/10 dark:bg-surface-card/85">
-                      <BuildingsIcon
-                        aria-hidden="true"
-                        class="size-4 shrink-0 text-orange-600"
-                      />
-                      <div>
-                        <dt class="font-mono text-[10px] font-semibold tracking-wider text-stone-500 uppercase dark:text-mist-400">
+                    <div class="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3 rounded-xl border border-stone-200/90 bg-stone-50/70 p-3 shadow-2xs dark:border-white/10 dark:bg-surface-card/85">
+                      <dt class="contents">
+                        <BuildingsIcon
+                          aria-hidden="true"
+                          class="col-start-1 row-start-1 row-span-2 size-4 shrink-0 self-center text-orange-600"
+                        />
+                        <span class="col-start-2 row-start-1 font-mono text-[10px] font-semibold tracking-wider text-stone-500 uppercase dark:text-mist-400">
                           {accommodationLabel}
-                        </dt>
-                        <dd class="m-0 font-mono text-xs font-bold text-stone-900 dark:text-mist-100">
-                          {day.accommodation}
-                        </dd>
-                      </div>
+                        </span>
+                      </dt>
+                      <dd class="m-0 col-start-2 row-start-2 font-mono text-xs font-bold text-stone-900 dark:text-mist-100">
+                        {day.accommodation}
+                      </dd>
                     </div>
                   )}
                   {day.meals && (
-                    <div class="flex items-center gap-3 rounded-xl border border-stone-200/90 bg-stone-50/70 p-3 shadow-2xs dark:border-white/10 dark:bg-surface-card/85">
-                      <UtensilsIcon
-                        aria-hidden="true"
-                        class="size-4 shrink-0 text-orange-600"
-                      />
-                      <div>
-                        <dt class="font-mono text-[10px] font-semibold tracking-wider text-stone-500 uppercase dark:text-mist-400">
+                    <div class="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3 rounded-xl border border-stone-200/90 bg-stone-50/70 p-3 shadow-2xs dark:border-white/10 dark:bg-surface-card/85">
+                      <dt class="contents">
+                        <UtensilsIcon
+                          aria-hidden="true"
+                          class="col-start-1 row-start-1 row-span-2 size-4 shrink-0 self-center text-orange-600"
+                        />
+                        <span class="col-start-2 row-start-1 font-mono text-[10px] font-semibold tracking-wider text-stone-500 uppercase dark:text-mist-400">
                           {mealsLabel}
-                        </dt>
-                        <dd class="m-0 font-mono text-xs font-bold text-stone-900 dark:text-mist-100">
-                          {day.meals}
-                        </dd>
-                      </div>
+                        </span>
+                      </dt>
+                      <dd class="m-0 col-start-2 row-start-2 font-mono text-xs font-bold text-stone-900 dark:text-mist-100">
+                        {day.meals}
+                      </dd>
                     </div>
                   )}
                   {day.activities && (
-                    <div class="flex items-center gap-3 rounded-xl border border-stone-200/90 bg-stone-50/70 p-3 shadow-2xs dark:border-white/10 dark:bg-surface-card/85">
-                      <BicyclingIcon
-                        aria-hidden="true"
-                        class="size-4 shrink-0 text-orange-600"
-                      />
-                      <div>
-                        <dt class="font-mono text-[10px] font-semibold tracking-wider text-stone-500 uppercase dark:text-mist-400">
+                    <div class="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3 rounded-xl border border-stone-200/90 bg-stone-50/70 p-3 shadow-2xs dark:border-white/10 dark:bg-surface-card/85">
+                      <dt class="contents">
+                        <BicyclingIcon
+                          aria-hidden="true"
+                          class="col-start-1 row-start-1 row-span-2 size-4 shrink-0 self-center text-orange-600"
+                        />
+                        <span class="col-start-2 row-start-1 font-mono text-[10px] font-semibold tracking-wider text-stone-500 uppercase dark:text-mist-400">
                           {activitiesLabel}
-                        </dt>
-                        <dd class="m-0 font-mono text-xs font-bold text-stone-900 dark:text-mist-100">
-                          {day.activities}
-                        </dd>
-                      </div>
+                        </span>
+                      </dt>
+                      <dd class="m-0 col-start-2 row-start-2 font-mono text-xs font-bold text-stone-900 dark:text-mist-100">
+                        {day.activities}
+                      </dd>
                     </div>
                   )}
                   {day.arrival && (
-                    <div class="flex items-center gap-3 rounded-xl border border-stone-200/90 bg-stone-50/70 p-3 shadow-2xs dark:border-white/10 dark:bg-surface-card/85">
-                      <ClockCircleIcon
-                        aria-hidden="true"
-                        class="size-4 shrink-0 text-orange-600"
-                      />
-                      <div>
-                        <dt class="font-mono text-[10px] font-semibold tracking-wider text-stone-500 uppercase dark:text-mist-400">
+                    <div class="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3 rounded-xl border border-stone-200/90 bg-stone-50/70 p-3 shadow-2xs dark:border-white/10 dark:bg-surface-card/85">
+                      <dt class="contents">
+                        <ClockCircleIcon
+                          aria-hidden="true"
+                          class="col-start-1 row-start-1 row-span-2 size-4 shrink-0 self-center text-orange-600"
+                        />
+                        <span class="col-start-2 row-start-1 font-mono text-[10px] font-semibold tracking-wider text-stone-500 uppercase dark:text-mist-400">
                           {arrivalLabel}
-                        </dt>
-                        <dd class="m-0 font-mono text-xs font-bold text-stone-900 dark:text-mist-100">
-                          {day.arrival}
-                        </dd>
-                      </div>
+                        </span>
+                      </dt>
+                      <dd class="m-0 col-start-2 row-start-2 font-mono text-xs font-bold text-stone-900 dark:text-mist-100">
+                        {day.arrival}
+                      </dd>
                     </div>
                   )}
                 </dl>
