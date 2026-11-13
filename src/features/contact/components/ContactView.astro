@@ -207,28 +207,4 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
   </section>
 </div>
 
-<script>
-  function setupContactMapFacade() {
-    const details = document.querySelector<HTMLDetailsElement>(
-      "#location details:not([data-facade-ready])",
-    );
-    if (!details) return;
-    details.setAttribute("data-facade-ready", "true");
-    const iframe = details.querySelector<HTMLIFrameElement>("iframe");
-    if (!iframe) return;
-
-    details.addEventListener(
-      "toggle",
-      () => {
-        const src = iframe.dataset["src"];
-        if (details.open && !iframe.src && src) {
-          iframe.src = src;
-        }
-      },
-      { once: true },
-    );
-  }
-
-  setupContactMapFacade();
-  document.addEventListener("astro:page-load", setupContactMapFacade);
-</script>
+<script src="../../../scripts/contact-map-facade.ts"></script>

@@ -85,7 +85,7 @@ const { routeMap, kicker = "Google Maps Route" } = Astro.props;
 
       <button
         type="button"
-        class="load-route-map-btn inline-flex min-h-10 items-center gap-2 rounded-full border border-orange-500/50 bg-gradient-to-br from-amber-500 to-orange-600 px-5 py-2 font-mono text-xs font-bold uppercase tracking-wider text-white shadow-md shadow-orange-500/20 transition duration-150 hover:brightness-105 active:scale-95 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
+        class="load-route-map-btn inline-flex min-h-10 items-center gap-2 rounded-full border border-orange-500/50 bg-linear-to-br from-amber-500 to-orange-600 px-5 py-2 font-mono text-xs font-bold uppercase tracking-wider text-white shadow-md shadow-orange-500/20 transition duration-150 hover:brightness-105 active:scale-95 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
         data-embed-url={routeMap.googleMapsEmbedUrl}
         data-map-title={routeMap.title}
         aria-label={`Load interactive route map: ${routeMap.title}`}
@@ -193,41 +193,4 @@ const { routeMap, kicker = "Google Maps Route" } = Astro.props;
   </footer>
 </article>
 
-<script>
-  function initRouteMapFacades() {
-    const buttons = document.querySelectorAll<HTMLButtonElement>(
-      ".load-route-map-btn:not([data-facade-ready])",
-    );
-    buttons.forEach((btn) => {
-      btn.setAttribute("data-facade-ready", "true");
-      btn.addEventListener(
-        "click",
-        () => {
-          const url = btn.dataset["embedUrl"];
-          const title = btn.dataset["mapTitle"] ?? "Route Map";
-          const wrapper = btn.closest(".route-map-wrapper");
-          if (!wrapper || !url) return;
-
-          const container = wrapper.querySelector(".map-iframe-container");
-          const facade = wrapper.querySelector(".map-facade");
-          if (!container) return;
-
-          const iframe = document.createElement("iframe");
-          iframe.src = url;
-          iframe.title = title;
-          iframe.className = "size-full border-0";
-          iframe.allowFullscreen = true;
-          iframe.loading = "lazy";
-          iframe.referrerPolicy = "no-referrer-when-downgrade";
-
-          container.appendChild(iframe);
-          facade?.remove();
-        },
-        { once: true },
-      );
-    });
-  }
-
-  initRouteMapFacades();
-  document.addEventListener("astro:page-load", initRouteMapFacades);
-</script>
+<script src="../../../scripts/route-map-facade.ts"></script>

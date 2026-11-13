@@ -19,7 +19,7 @@
 
 /* Fallback Font Metric Overrides for Zero-CLS Swap */
 @font-face {
-  font-family: "Montserrat-Fallback";
+  font-family: Montserrat-Fallback;
   src: local("Arial");
   ascent-override: 96.8%;
   descent-override: 25.1%;
