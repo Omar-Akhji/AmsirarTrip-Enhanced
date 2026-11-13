@@ -111,17 +111,17 @@ onMounted(() => {
             autocomplete="off"
             min="1"
             max="50"
-            :aria-invalid="state?.errors?.persons ? 'true' : 'false'"
-            :aria-describedby="state?.errors?.persons ? 'numberOfPeople-error' : undefined"
+            :aria-invalid="state?.errors?.['persons'] ? 'true' : 'false'"
+            :aria-describedby="state?.errors?.['persons'] ? 'numberOfPeople-error' : undefined"
             required
           />
         </div>
         <p
-          v-if="state?.errors?.persons"
+          v-if="state?.errors?.['persons']"
           id="numberOfPeople-error"
           class="mbs-1 font-sans text-xs text-red-600"
         >
-          {{ state.errors.persons }}
+          {{ state.errors["persons"] }}
         </p>
       </div>
 
@@ -149,9 +149,9 @@ onMounted(() => {
                 reservationDate ?
                   'text-stone-900 dark:text-mist-100'
                 : 'text-stone-400 dark:text-mist-500',
-                state?.errors?.date && 'border-red-300',
+                state?.errors?.['date'] && 'border-red-300',
               ]"
-              :aria-describedby="state?.errors?.date ? 'reservationDate-error' : undefined"
+              :aria-describedby="state?.errors?.['date'] ? 'reservationDate-error' : undefined"
             >
               <svg
                 class="me-2.5 size-4.5 shrink-0 text-stone-400 transition-colors group-hover:text-orange-500 group-focus-visible:text-orange-500 dark:text-mist-400"
@@ -227,11 +227,11 @@ onMounted(() => {
           :value="reservationDate ? formatIsoDate(reservationDate) : ''"
         />
         <p
-          v-if="state?.errors?.date"
+          v-if="state?.errors?.['date']"
           id="reservationDate-error"
           class="mbs-1 font-sans text-xs text-red-600"
         >
-          {{ state.errors.date }}
+          {{ state.errors["date"] }}
         </p>
       </div>
     </div>
@@ -284,16 +284,16 @@ onMounted(() => {
           toolparamdescription="Any custom requests, message, or notes from the guest regarding the booking"
           autocomplete="off"
           :rows="4"
-          :aria-invalid="state?.errors?.message ? 'true' : 'false'"
-          :aria-describedby="state?.errors?.message ? 'message-error' : undefined"
+          :aria-invalid="state?.errors?.['message'] ? 'true' : 'false'"
+          :aria-describedby="state?.errors?.['message'] ? 'message-error' : undefined"
         />
       </div>
       <p
-        v-if="state?.errors?.message"
+        v-if="state?.errors?.['message']"
         id="message-error"
         class="mbs-1 font-sans text-xs text-red-600"
       >
-        {{ state.errors.message }}
+        {{ state.errors["message"] }}
       </p>
     </div>
   </fieldset>
