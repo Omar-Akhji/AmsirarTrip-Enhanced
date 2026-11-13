@@ -85,10 +85,12 @@ const videoJsonLd = generateVideoObjectJsonLd({
     <FeaturedTours />
     <ServicesSection />
     <TestimonialsSection />
-    <VideoSection
-      client:visible
-      fallbackImage={bg1.src}
-      locale={locale}
-    />
+    <div data-animate="fade-up">
+      <VideoSection
+        client:visible
+        fallbackImage={bg1.src}
+        locale={locale}
+      />
+    </div>
   </div>
 </Layout>

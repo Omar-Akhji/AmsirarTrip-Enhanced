@@ -71,7 +71,6 @@ const handleVideoClick = async () => {
   >
     <div class="mx-auto px-4 max-inline-7xl sm:px-6 lg:px-8 2xl:max-inline-360 3xl:max-inline-420">
       <div
-        data-animate="fade-up"
         data-scroll-cinematic
         class="relative overflow-hidden rounded-2xl border border-slate-900 bg-slate-950 p-2 shadow-2xl will-change-transform block-[50dvh] inline-full motion-reduce:transform-none motion-reduce:transition-none xs:block-[55dvh] sm:p-3 sm:block-[65dvh] lg:block-[75dvh] xl:block-[82dvh] 2xl:block-[85dvh] 3xl:max-block-240"
       >

@@ -29,7 +29,9 @@ export const getSecurityHeaders = (
         // Default: self only
         "default-src 'self'",
         // Scripts: nonce + strict-dynamic for Astro view transitions + Cap WASM + Google reCAPTCHA
-        `script-src 'self' 'nonce-${nonce}' 'strict-dynamic' 'unsafe-inline' 'wasm-unsafe-eval' https://www.google.com https://www.gstatic.com`,
+        isLocal ?
+          "script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://www.google.com https://www.gstatic.com https://cdn.jsdelivr.net"
+        : `script-src 'self' 'nonce-${nonce}' 'strict-dynamic' 'unsafe-inline' 'wasm-unsafe-eval' https://www.google.com https://www.gstatic.com`,
         // Styles: self + inline (Tailwind atomic CSS injection) + Google Fonts
         "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
         // Fonts: self + Google Fonts
@@ -42,8 +44,8 @@ export const getSecurityHeaders = (
         "frame-src 'self' https://www.google.com https://www.google.com/maps/ https://maps.google.com",
         // Frame ancestors: prevent clickjacking
         "frame-ancestors 'self'",
-        // Connections: self + own host + Google (reCAPTCHA verification calls) + map tile hosts
-        `connect-src 'self'${safeConnectHost} https://www.google.com https://*.tile.openstreetmap.org https://*.basemaps.cartocdn.com`,
+        // Connections: self + own host + Google (reCAPTCHA verification calls) + map tile hosts + Cap WASM CDN
+        `connect-src 'self'${safeConnectHost} https://cdn.jsdelivr.net https://www.google.com https://*.tile.openstreetmap.org https://*.basemaps.cartocdn.com${isLocal ? " ws://localhost:* ws://127.0.0.1:* http://localhost:* http://127.0.0.1:*" : ""}`,
         // Workers: self + blob for Cap WebAssembly workers
         "worker-src 'self' blob:",
         // Web app manifest: self only

@@ -136,7 +136,9 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
         </hgroup>
       </div>
 
-      <slot />
+      <div data-animate="fade-up">
+        <slot />
+      </div>
     </div>
   </section>
 
@@ -199,7 +201,6 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
           data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3399.999!2d-8.0257651!3d31.6259758!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdafef007a3f58d3%3A0xa6485d9ed7022b4c!2sAmsirar+Travel!5e0!3m2!1sen!2sma!4v1699999999999!5m2!1sen!2sma"
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
-          sandbox="allow-scripts allow-same-origin allow-popups"
           title="Amsirar Trip Agency Location - Marrakech, Morocco"
         ></iframe>
       </details>

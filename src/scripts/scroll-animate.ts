@@ -96,24 +96,26 @@ function animateCounter(el: HTMLElement) {
 
 function convertDelays() {
   const elements = document.querySelectorAll<HTMLElement>("[data-animate]");
-  elements.forEach((el) => {
+  for (const el of elements) {
+    if (el.closest("astro-island")) continue;
+
     const dataDelay = el.dataset["delay"];
     if (dataDelay) {
       el.style.animationDelay = `${dataDelay}ms`;
-      return;
+      continue;
     }
 
     const inlineTd = el.style.transitionDelay;
     if (inlineTd && inlineTd !== "0s") {
       el.style.animationDelay = inlineTd;
-      return;
+      continue;
     }
 
     const computedTd = globalThis.getComputedStyle(el).transitionDelay;
     if (computedTd && computedTd !== "0s" && computedTd !== "0ms") {
       el.style.animationDelay = computedTd;
     }
-  });
+  }
 }
 
 function getReducedMotionPreference(): boolean {
@@ -136,7 +138,11 @@ function init() {
   if (!reducedMotion) {
     revealObserver = createRevealObserver();
     const revealElements = document.querySelectorAll<HTMLElement>("[data-animate]");
-    revealElements.forEach((el) => revealObserver?.observe(el));
+    for (const el of revealElements) {
+      if (!el.closest("astro-island")) {
+        revealObserver.observe(el);
+      }
+    }
   }
 
   counterObserver = new IntersectionObserver(
@@ -155,7 +161,9 @@ function init() {
   const counterElements = document.querySelectorAll<HTMLElement>(
     "[data-scroll-counter], [data-count-to]",
   );
-  counterElements.forEach((el) => counterObserver?.observe(el));
+  for (const el of counterElements) {
+    counterObserver.observe(el);
+  }
 }
 
 function cleanup() {

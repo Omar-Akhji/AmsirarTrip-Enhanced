@@ -129,10 +129,7 @@ onUnmounted(() => {
 <template>
   <div class="grid grid-cols-1 items-stretch gap-8 lg:grid-cols-golden lg:gap-6 xl:gap-8">
     <!-- Left: Form Card -->
-    <div
-      class="inline-full"
-      data-animate="creative-slide-right"
-    >
+    <div class="inline-full">
       <div
         class="rounded-2xl border border-stone-200/90 bg-white p-6 shadow-xs shadow-stone-900/5 block-full sm:p-8 dark:border-white/10 dark:bg-surface-card/90 dark:shadow-[0_16px_40px_rgba(0,0,0,0.5)]"
       >
@@ -385,8 +382,6 @@ onUnmounted(() => {
     <aside
       aria-label="Contact Information"
       class="block-full inline-full"
-      data-animate="creative-slide-left"
-      data-delay="150"
     >
       <div
         class="flex flex-col justify-between rounded-2xl border border-slate-900 bg-slate-950 p-6 text-white shadow-xl block-full sm:p-8"

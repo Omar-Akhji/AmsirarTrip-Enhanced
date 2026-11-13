@@ -22,10 +22,7 @@ const openModal = () => {
 </script>
 
 <template>
-  <div
-    class="delay-300 md:col-span-2 lg:col-span-1"
-    data-animate="fade-up"
-  >
+  <div class="inline-full">
     <div class="mbe-2 flex h-9 items-center">
       <h3 class="text-sm font-semibold tracking-wider text-white uppercase">
         {{ t("footer.newsletter") }}

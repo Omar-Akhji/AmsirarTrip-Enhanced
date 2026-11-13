@@ -25,10 +25,15 @@ const locale = Astro.currentLocale || "en";
           aria-hidden="true"
         ></div>
 
-        <FooterNewsletter
-          client:visible
-          locale={locale}
-        />
+        <div
+          class="delay-300 md:col-span-2 lg:col-span-1"
+          data-animate="fade-up"
+        >
+          <FooterNewsletter
+            client:visible
+            locale={locale}
+          />
+        </div>
       </div>
     </div>
 
