@@ -368,7 +368,6 @@ const NAV_ITEMS: readonly {
               aria-label={label}
               title={label}
               class="group/link desktop-nav-link relative z-10 inline-flex items-center justify-center whitespace-nowrap shrink-0 rounded-full px-3 py-2.5 text-xs font-semibold select-none transition-colors duration-200 text-white/75 hover:text-white group-data-scrolled:text-dark-grey group-data-scrolled:hover:text-dark group-data-scrolled:dark:text-stone-300 group-data-scrolled:dark:hover:text-white data-indicator:text-white group-data-scrolled:data-indicator:text-white lg:px-5 lg:py-2 lg:text-sm"
-              data-active={active ? "true" : undefined}
               data-indicator={active ? "true" : undefined}
               href={localize(item.to)}
             >
@@ -405,4 +404,3 @@ const NAV_ITEMS: readonly {
 
 <script src="../scripts/navbar-scroll.ts"></script>
 <script src="../scripts/desktop-nav.ts"></script>
-<script src="../scripts/mobile-nav.ts"></script>

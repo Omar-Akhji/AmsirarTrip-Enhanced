@@ -276,20 +276,24 @@ export function initCookieConsent(): void {
   }
 
   // Modal backdrop click & native dialog close handling
+  // `closedby="any"` makes backdrop/Esc dismissal native; the geometry math below is the fallback
+  // for browsers that do not support the attribute yet.
   const modal = getModalElement();
   if (!modal) return;
 
-  modal.addEventListener("click", (event) => {
-    const rect = modal.getBoundingClientRect();
-    const isInDialog =
-      rect.top <= event.clientY
-      && event.clientY <= rect.top + rect.height
-      && rect.left <= event.clientX
-      && event.clientX <= rect.left + rect.width;
-    if (!isInDialog) {
-      closePreferencesModal();
-    }
-  });
+  if (!("closedBy" in HTMLDialogElement.prototype)) {
+    modal.addEventListener("click", (event) => {
+      const rect = modal.getBoundingClientRect();
+      const isInDialog =
+        rect.top <= event.clientY
+        && event.clientY <= rect.top + rect.height
+        && rect.left <= event.clientX
+        && event.clientX <= rect.left + rect.width;
+      if (!isInDialog) {
+        closePreferencesModal();
+      }
+    });
+  }
 
   modal.addEventListener("close", () => {
     const consent = getCookieConsent();

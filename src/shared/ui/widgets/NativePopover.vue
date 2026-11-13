@@ -28,7 +28,13 @@ const isPopoverOpen = (el: HTMLElement) => {
   }
 };
 
+const isAnchorSupported = () =>
+  typeof CSS !== "undefined" && typeof CSS.supports === "function" && CSS.supports("top", "anchor(bottom)");
+
 const positionPopover = () => {
+  // If CSS anchor positioning is natively supported, let CSS handle layout
+  if (isAnchorSupported()) return;
+
   const popover = popoverRef.value;
   if (!popover) return;
   if (typeof popover.matches === "function" && !isPopoverOpen(popover)) return;
@@ -165,9 +171,11 @@ watch(
         const first = target.querySelector<HTMLElement>(focusableSelector);
         first?.focus();
       }, 50);
-      window.addEventListener("resize", positionPopover, { passive: true });
-      window.addEventListener("scroll", positionPopover, { capture: true, passive: true });
-    } else {
+      if (!isAnchorSupported()) {
+        window.addEventListener("resize", positionPopover, { passive: true });
+        window.addEventListener("scroll", positionPopover, { capture: true, passive: true });
+      }
+    } else if (!isAnchorSupported()) {
       window.removeEventListener("resize", positionPopover);
       window.removeEventListener("scroll", positionPopover, { capture: true });
     }
@@ -185,8 +193,10 @@ onUnmounted(() => {
   }
   popoverRef.value?.removeEventListener("toggle", handleToggle);
   popoverRef.value?.removeEventListener("keydown", handleKeyDown);
-  window.removeEventListener("resize", positionPopover);
-  window.removeEventListener("scroll", positionPopover, { capture: true });
+  if (!isAnchorSupported()) {
+    window.removeEventListener("resize", positionPopover);
+    window.removeEventListener("scroll", positionPopover, { capture: true });
+  }
 });
 </script>
 
@@ -197,6 +207,7 @@ onUnmounted(() => {
       :popovertarget="popoverId"
       popovertargetaction="toggle"
       class="group block cursor-pointer rounded-xl border-none bg-transparent p-0 text-start inline-full focus:outline-hidden focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2"
+      :style="{ anchorName: `--popover-trigger-${popoverId}` }"
       :aria-expanded="isOpen || isLocallyOpen"
       :aria-controls="popoverId"
       :aria-label="ariaLabel"
@@ -211,7 +222,8 @@ onUnmounted(() => {
       popover="auto"
       aria-modal="true"
       :aria-label="ariaLabel || 'Popover dialog'"
-      class="fixed inset-auto m-0 border-none bg-transparent p-0 outline-hidden backdrop:bg-black/20"
+      class="fixed inset-auto m-0 border-none bg-transparent p-0 outline-hidden backdrop:bg-black/20 supports-[top:anchor(bottom)]:top-[calc(anchor(bottom)+8px)] supports-[top:anchor(bottom)]:left-[anchor(left)] supports-[top:anchor(bottom)]:m-0"
+      :style="{ positionAnchor: `--popover-trigger-${popoverId}` }"
       :class="[className]"
     >
       <div

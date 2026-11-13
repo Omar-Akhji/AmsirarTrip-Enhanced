@@ -27,7 +27,6 @@ function onScroll(): void {
   if (ticking) {
     return;
   }
-
   globalThis.requestAnimationFrame(updateProgress);
   ticking = true;
 }
@@ -64,6 +63,5 @@ function setupScrollProgress(): void {
   }
 }
 
-// Astro View Transitions lifecycle hooks
 document.addEventListener("astro:page-load", setupScrollProgress);
 setupScrollProgress();

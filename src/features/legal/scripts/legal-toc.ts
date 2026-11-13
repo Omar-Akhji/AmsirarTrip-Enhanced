@@ -1,5 +1,7 @@
-export function setupTermsInteractive(): void {
-  const tocLinks = document.querySelectorAll<HTMLAnchorElement>("#terms-toc-list a");
+export function setupLegalTOC(): void {
+  const tocLinks = document.querySelectorAll<HTMLAnchorElement>(
+    "#privacy-toc-list a, #terms-toc-list a",
+  );
   const sections = document.querySelectorAll<HTMLElement>("article section[id]");
 
   if (sections.length > 0 && tocLinks.length > 0) {
@@ -28,13 +30,17 @@ export function setupTermsInteractive(): void {
     }
   }
 
-  const printBtn = document.querySelector<HTMLButtonElement>("#terms-print-btn");
-  if (printBtn) {
+  const printBtns = document.querySelectorAll<HTMLButtonElement>(
+    "#privacy-print-btn, #terms-print-btn",
+  );
+  for (const printBtn of printBtns) {
+    if (printBtn.dataset["bound"]) continue;
+    printBtn.dataset["bound"] = "true";
     printBtn.addEventListener("click", () => {
       globalThis.print();
     });
   }
 }
 
-setupTermsInteractive();
-document.addEventListener("astro:page-load", setupTermsInteractive);
+setupLegalTOC();
+document.addEventListener("astro:page-load", setupLegalTOC);

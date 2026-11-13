@@ -1,5 +1,3 @@
-document.documentElement.classList.remove("no-js");
-
 // Enforce manual scroll restoration so the browser does not restore stale scroll on reload
 if ("scrollRestoration" in history) {
   history.scrollRestoration = "manual";

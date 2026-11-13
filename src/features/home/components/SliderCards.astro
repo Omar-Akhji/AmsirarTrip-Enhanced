@@ -23,11 +23,11 @@ const { items } = Astro.props;
   aria-label="Slider destination previews"
 >
   {items.map((item, index) => (
-    <div
-      class="item group relative shrink-0 cursor-pointer overflow-hidden shadow-[0_8px_25px_rgb(0_0_0/45%)] w-(--thumb-width) h-(--thumb-height) rounded-(--thumb-radius)"
+    <button
+      type="button"
+      class="item group relative shrink-0 cursor-pointer overflow-hidden text-start shadow-[0_8px_25px_rgb(0_0_0/45%)] w-(--thumb-width) h-(--thumb-height) rounded-(--thumb-radius)"
       data-index={index}
-      role="button"
-      tabindex="0"
+      aria-label={`Go to slide ${index + 1}: ${item.thumbTitle || item.title}`}
     >
       {typeof item.image === "string" ?
         <Image
@@ -59,6 +59,6 @@ const { items } = Astro.props;
           {item.thumbTitle || item.title}
         </span>
       </div>
-    </div>
+    </button>
   ))}
 </div>

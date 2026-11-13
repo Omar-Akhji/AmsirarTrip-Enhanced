@@ -740,6 +740,32 @@
       --hero-fade-duration: 1ms;
     }
   }
+
+  /* ------------------------------------------------------------------------
+      7.x Departure filter (pure CSS, driven by the native radio group)
+      ------------------------------------------------------------------------ */
+
+  #tours-grid:has(input[value="marrakech"]:checked) .tour-card-item:not([data-departure="marrakech"]),
+  #tours-grid:has(input[value="fes"]:checked) .tour-card-item:not([data-departure="fes"]),
+  #tours-grid:has(input[value="casablanca"]:checked) .tour-card-item:not([data-departure="casablanca"]),
+  #tours-grid:has(input[value="tangier"]:checked) .tour-card-item:not([data-departure="tangier"]) {
+    display: none;
+  }
+
+
+
+  /* ------------------------------------------------------------------------
+      7.y No-script fallback: reveal animation tokens are hidden by JS, so make
+          them visible when scripting is unavailable.
+      ------------------------------------------------------------------------ */
+
+  @media (scripting: none) {
+    .blur-token {
+      opacity: 1;
+      transform: none;
+      filter: none;
+    }
+  }
 }
 
 /* ==========================================================================

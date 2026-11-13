@@ -392,22 +392,7 @@ function initSlider(): void {
     goToSlide(idx);
   };
 
-  const onThumbnailKeyDown = (e: KeyboardEvent) => {
-    if (!(e.key === "Enter" || e.key === " ")) {
-      return;
-    }
-
-    const target = (e.target as HTMLElement).closest<HTMLElement>(".item");
-    if (!target) {
-      return;
-    }
-
-    e.preventDefault();
-    target.dispatchEvent(new MouseEvent("click", { bubbles: true }));
-  };
-
   thumbnail.addEventListener("click", onThumbnailClick);
-  thumbnail.addEventListener("keydown", onThumbnailKeyDown);
 
   // Keyboard navigation
   const onKeyDown = (e: KeyboardEvent) => {
@@ -478,7 +463,6 @@ function initSlider(): void {
       dot.removeEventListener("click", onDotClick);
     }
     thumbnail.removeEventListener("click", onThumbnailClick);
-    thumbnail.removeEventListener("keydown", onThumbnailKeyDown);
     globalThis.removeEventListener("keydown", onKeyDown);
     slider.removeEventListener("touchstart", onTouchStart);
     slider.removeEventListener("touchend", onTouchEnd);

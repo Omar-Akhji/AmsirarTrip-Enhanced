@@ -11,38 +11,21 @@ function isTabletMode(): boolean {
   return typeof window !== "undefined" && window.innerWidth < 1024;
 }
 
-function findMatchingLink(nav: HTMLElement, currentPath: string): HTMLAnchorElement | null {
-  const cleanPath = currentPath === "/" ? "/" : currentPath.replace(/\/$/, "");
-  const links = [...nav.querySelectorAll<HTMLAnchorElement>("a.desktop-nav-link")];
-
-  // Pass 1: Exact match (highest priority, avoids false prefix matching)
-  for (const link of links) {
-    const href = link.getAttribute("href") ?? "";
-    const cleanHref = href === "/" ? "/" : href.replace(/\/$/, "");
-    if (cleanPath === cleanHref) {
-      return link;
-    }
-  }
-
-  // Pass 2: Nested routes (e.g. /tours/desert-safari matches /tours)
-  for (const link of links) {
-    const href = link.getAttribute("href") ?? "";
-    const cleanHref = href === "/" ? "/" : href.replace(/\/$/, "");
-    const isRootOrLocaleHome = cleanHref === "/" || /^\/[a-z]{2}$/.test(cleanHref);
-    if (!isRootOrLocaleHome && cleanPath.startsWith(`${cleanHref}/`)) {
-      return link;
-    }
-  }
-
-  return null;
+/** Reads the active link rendered server-side by Navbar.astro. */
+function getActiveLink(nav: HTMLElement): HTMLAnchorElement | null {
+  return nav.querySelector<HTMLAnchorElement>('a.desktop-nav-link[aria-current="page"]');
 }
 
+/**
+ * Measures the label's natural content width. Cached per element so a transient 0 reading during a
+ * transition can never shrink the sliding indicator.
+ */
+const labelWidths = new WeakMap<HTMLElement, number>();
+
 function getLabelWidth(label: HTMLElement): number {
-  const current = (label as HTMLElement & { _naturalWidth?: number })._naturalWidth ?? 0;
-  const measured = label.scrollWidth;
-  const width = Math.max(current, measured);
+  const width = Math.max(labelWidths.get(label) ?? 0, label.scrollWidth);
   if (width > 0) {
-    (label as HTMLElement & { _naturalWidth?: number })._naturalWidth = width;
+    labelWidths.set(label, width);
   }
   return width;
 }
@@ -129,8 +112,8 @@ function setIndicator(targetLink: HTMLAnchorElement | null, immediate = false): 
           immediate || prefersReducedMotion ? "none" : (
             `width 220ms ${EASE_OUT}, opacity 220ms ${EASE_OUT}, margin-left 220ms ${EASE_OUT}`
           );
-        const targetLabelWidth = getLabelWidth(label);
-        label.style.width = `${targetLabelWidth}px`;
+        // `width: auto` interpolates from 0 thanks to `interpolate-size: allow-keywords`
+        label.style.width = "auto";
         label.style.opacity = "1";
         label.style.marginLeft = "8px";
       } else {
@@ -197,29 +180,11 @@ function setIndicator(targetLink: HTMLAnchorElement | null, immediate = false): 
   lastIndicatorVisible = true;
 }
 
-function syncActiveLink(nav: HTMLElement): HTMLAnchorElement | null {
-  const currentPath = globalThis.location.pathname;
-  const activeLink = findMatchingLink(nav, currentPath);
-  const links = [...nav.querySelectorAll<HTMLAnchorElement>("a.desktop-nav-link")];
-
-  for (const link of links) {
-    if (activeLink && link === activeLink) {
-      link.setAttribute("aria-current", "page");
-      link.dataset["active"] = "true";
-    } else {
-      link.removeAttribute("aria-current");
-      delete link.dataset["active"];
-    }
-  }
-
-  return activeLink;
-}
-
 function setupDesktopNav(): void {
   const nav = document.querySelector<HTMLElement>("#desktop-nav");
   if (!nav?.offsetParent) return;
 
-  currentActiveLink = syncActiveLink(nav);
+  currentActiveLink = getActiveLink(nav);
 
   setIndicator(currentActiveLink, true);
 
@@ -256,13 +221,7 @@ function setupDesktopNav(): void {
       currentActiveLink = link;
       currentHoveredLink = link;
       for (const other of links) {
-        if (other === link) {
-          other.setAttribute("aria-current", "page");
-          other.dataset["active"] = "true";
-        } else {
-          other.removeAttribute("aria-current");
-          delete other.dataset["active"];
-        }
+        other.toggleAttribute("aria-current", other === link);
       }
       setIndicator(link, false);
     });
