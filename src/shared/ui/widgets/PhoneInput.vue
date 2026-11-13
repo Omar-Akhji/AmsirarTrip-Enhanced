@@ -294,7 +294,7 @@ watch(
               </span>
             </div>
             <div class="flex shrink-0 items-center">
-              <span class="font-sans text-xs font-medium text-stone-500 dark:text-mist-400">
+              <span class="font-sans text-xs font-medium text-stone-600 dark:text-mist-300">
                 {{ country.dialCode }}
               </span>
             </div>
@@ -303,7 +303,7 @@ watch(
           <!-- Empty search state -->
           <div
             v-if="filteredCountries.length === 0"
-            class="px-3 py-6 text-center font-sans text-xs text-stone-500 dark:text-mist-400"
+            class="px-3 py-6 text-center font-sans text-xs text-stone-600 dark:text-mist-300"
           >
             No countries found
           </div>

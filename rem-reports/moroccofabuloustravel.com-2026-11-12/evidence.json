@@ -1,0 +1,933 @@
+{
+  "tool": {
+    "name": "reverse-engineer-marketing",
+    "version": "0.1.0"
+  },
+  "harness": {
+    "version": "3",
+    "sha": "8a625cb8f5e7"
+  },
+  "target": {
+    "input": "moroccofabuloustravel.com",
+    "kind": "website",
+    "url": "https://moroccofabuloustravel.com",
+    "domain": "moroccofabuloustravel.com",
+    "brand": "Morocco Fabulous Travel"
+  },
+  "generatedAt": "2026-11-12T23:54:20.687Z",
+  "brand": "Morocco Fabulous Travel",
+  "discovered": {
+    "socials": {
+      "instagram": "moroccofabuloustravel",
+      "facebook": "moroccofabuloustravel",
+      "youtube": "@moroccofabuloustravel",
+      "tiktok": "moroccofabuloustravel",
+      "x": "FabulousMorocco"
+    },
+    "people": [
+      "https://www.linkedin.com/in/morocco-fabulous-travel"
+    ],
+    "appStoreIds": [],
+    "playIds": [],
+    "logos": [
+      {
+        "url": "https://moroccofabuloustravel.com/wp-content/uploads/2019/07/cropped-MOROCCO-fabulousTRAVEL.png",
+        "source": "jsonld"
+      },
+      {
+        "url": "https://moroccofabuloustravel.com/wp-content/uploads/2020/12/cropped-Morocco-Fabulous-Travel-site-icon-32x32.jpg",
+        "source": "icon",
+        "size": 32
+      },
+      {
+        "url": "https://moroccofabuloustravel.com/wp-content/uploads/2020/12/cropped-Morocco-Fabulous-Travel-site-icon-192x192.jpg",
+        "source": "icon",
+        "size": 192
+      },
+      {
+        "url": "https://moroccofabuloustravel.com/wp-content/uploads/2020/12/cropped-Morocco-Fabulous-Travel-site-icon-180x180.jpg",
+        "source": "apple-touch-icon",
+        "size": 180
+      }
+    ],
+    "founderHints": [
+      {
+        "name": "Morocco Fabulous",
+        "source": "site_link",
+        "linkedin": "https://www.linkedin.com/in/morocco-fabulous-travel",
+        "url": "https://moroccofabuloustravel.com"
+      }
+    ],
+    "brandName": "Morocco Fabulous Travel"
+  },
+  "scorecard": [
+    {
+      "channel": "paid_meta",
+      "status": "unknown",
+      "strength": 0,
+      "signal": "SCRAPECREATORS_API_KEY not set",
+      "evidence": [
+        "E3"
+      ]
+    },
+    {
+      "channel": "paid_google",
+      "status": "unknown",
+      "strength": 0,
+      "signal": "SCRAPECREATORS_API_KEY not set",
+      "evidence": [
+        "E3"
+      ]
+    },
+    {
+      "channel": "paid_linkedin",
+      "status": "unknown",
+      "strength": 0,
+      "signal": "SCRAPECREATORS_API_KEY not set",
+      "evidence": [
+        "E3"
+      ]
+    },
+    {
+      "channel": "paid_reddit",
+      "status": "unknown",
+      "strength": 0,
+      "signal": "Reddit's ad library was shut down; Reddit pixel presence (tracking) is the only signal",
+      "evidence": [
+        "E3"
+      ]
+    },
+    {
+      "channel": "paid_tiktok",
+      "status": "unknown",
+      "strength": 0,
+      "signal": "TikTok has no global ad library API; check the EU library / Creative Center by hand (TikTok pixel presence is reported under tracking)",
+      "evidence": [
+        "E3"
+      ]
+    },
+    {
+      "channel": "paid_apple",
+      "status": "unknown",
+      "strength": 0,
+      "signal": "No iOS app found for this company, so Apple Search Ads were not checked",
+      "evidence": [
+        "E3"
+      ]
+    },
+    {
+      "channel": "organic_tiktok",
+      "status": "unknown",
+      "strength": 0,
+      "signal": "Account found but SCRAPECREATORS_API_KEY not set — no stats",
+      "evidence": []
+    },
+    {
+      "channel": "organic_instagram",
+      "status": "unknown",
+      "strength": 0,
+      "signal": "Account found but SCRAPECREATORS_API_KEY not set — no stats",
+      "evidence": []
+    },
+    {
+      "channel": "organic_youtube",
+      "status": "unknown",
+      "strength": 0,
+      "signal": "Account found but SCRAPECREATORS_API_KEY not set — no stats",
+      "evidence": []
+    },
+    {
+      "channel": "organic_x",
+      "status": "unknown",
+      "strength": 0,
+      "signal": "Account found but SCRAPECREATORS_API_KEY not set — no stats",
+      "evidence": []
+    },
+    {
+      "channel": "organic_linkedin",
+      "status": "unknown",
+      "strength": 0,
+      "signal": "No account linked from the site",
+      "evidence": []
+    },
+    {
+      "channel": "seo",
+      "status": "active",
+      "strength": 2,
+      "signal": "509 indexed URLs, 1 programmatic families, 0 content updates/90d",
+      "evidence": [
+        "E10"
+      ]
+    },
+    {
+      "channel": "geo",
+      "status": "none",
+      "strength": 0,
+      "signal": "no llms.txt",
+      "evidence": [
+        "E11"
+      ]
+    },
+    {
+      "channel": "founder_led",
+      "status": "unknown",
+      "strength": 0,
+      "signal": "Founders: Morocco Fabulous (audience not checked)",
+      "evidence": [
+        "E8"
+      ]
+    },
+    {
+      "channel": "reddit_marketing",
+      "status": "unknown",
+      "strength": 0,
+      "signal": "SCRAPECREATORS_API_KEY not set — Reddit not checked",
+      "evidence": [
+        "E3"
+      ]
+    },
+    {
+      "channel": "community",
+      "status": "unknown",
+      "strength": 0,
+      "signal": "SCRAPECREATORS_API_KEY not set — Reddit/Product Hunt skipped",
+      "evidence": []
+    },
+    {
+      "channel": "launches",
+      "status": "none",
+      "strength": 0,
+      "signal": "No Hacker News submissions of the domain",
+      "evidence": [
+        "E9"
+      ]
+    },
+    {
+      "channel": "app_store",
+      "status": "none",
+      "strength": 0,
+      "signal": "No App Store / Play app found",
+      "evidence": []
+    },
+    {
+      "channel": "lifecycle",
+      "status": "unknown",
+      "strength": 0,
+      "signal": "No email tool visible client-side (most run server-side)",
+      "evidence": [
+        "E4"
+      ]
+    },
+    {
+      "channel": "affiliate",
+      "status": "none",
+      "strength": 0,
+      "signal": "No affiliate program found",
+      "evidence": [
+        "E4"
+      ]
+    },
+    {
+      "channel": "sales_led",
+      "status": "none",
+      "strength": 0,
+      "signal": "Self-serve only",
+      "evidence": [
+        "E7",
+        "E4"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E1",
+      "observedAt": "2026-11-12T23:54:14.860Z",
+      "source": "website",
+      "kind": "observation",
+      "title": "Homepage positioning: \"Morocco Fabulous Travel\"",
+      "url": "https://moroccofabuloustravel.com",
+      "data": {
+        "title": "Morocco Fabulous Travel – Morocco Tours & Desert Trips",
+        "metaDescription": "Book your Morocco desert tours & other private Morocco tours with Morocco Fabulous Travel and enjoy an amazing trip around Morocco. Your Morocco tour is here.",
+        "h1": [
+          "Morocco Fabulous Travel"
+        ],
+        "h2": [
+          "What our custmers say",
+          "Best selling Morocco Desert Tours",
+          "Small shared group tours",
+          "Private Morocco Tours",
+          "Morocco itinerary 7 days",
+          "Morocco itinerary 9 days",
+          "Morocco itinerary 10 days",
+          "Morocco itinerary 12 days",
+          "Morocco itinerary 2 weeks",
+          "Who we are?"
+        ],
+        "ctas": [
+          "More reviews",
+          "Marrakech desert tour 3 days Best seller",
+          "Explore"
+        ],
+        "lang": "en-US",
+        "wordCount": 1678,
+        "socialProof": [],
+        "jsonLdTypes": [
+          "Place",
+          "PostalAddress",
+          "TravelAgency",
+          "Organization",
+          "ImageObject",
+          "WebSite",
+          "SearchAction",
+          "WebPage"
+        ]
+      }
+    },
+    {
+      "id": "E2",
+      "observedAt": "2026-11-12T23:54:14.860Z",
+      "source": "website",
+      "kind": "observation",
+      "title": "Linked channels: instagram, facebook, youtube, tiktok, x",
+      "url": "https://moroccofabuloustravel.com",
+      "data": {
+        "socials": {
+          "instagram": "moroccofabuloustravel",
+          "facebook": "moroccofabuloustravel",
+          "youtube": "@moroccofabuloustravel",
+          "tiktok": "moroccofabuloustravel",
+          "x": "FabulousMorocco"
+        },
+        "people": [
+          "https://www.linkedin.com/in/morocco-fabulous-travel"
+        ],
+        "appStoreIds": [],
+        "playIds": []
+      }
+    },
+    {
+      "id": "E3",
+      "observedAt": "2026-11-12T23:54:14.895Z",
+      "source": "tracking",
+      "kind": "observation",
+      "title": "No ad pixels detected on homepage (or loaded server-side)",
+      "url": "https://moroccofabuloustravel.com",
+      "data": {
+        "pixels": [],
+        "gtmContainersScanned": []
+      }
+    },
+    {
+      "id": "E4",
+      "observedAt": "2026-11-12T23:54:14.895Z",
+      "source": "tracking",
+      "kind": "observation",
+      "title": "Marketing stack: Google Analytics 4, WordPress",
+      "url": "https://moroccofabuloustravel.com",
+      "data": {
+        "byCategory": {
+          "analytics": [
+            "Google Analytics 4 (G-J00YGHQD4H)"
+          ],
+          "site_builder": [
+            "WordPress"
+          ]
+        },
+        "tags": [
+          {
+            "id": "ga4",
+            "name": "Google Analytics 4",
+            "category": "analytics",
+            "ids": [
+              "G-J00YGHQD4H"
+            ],
+            "foundIn": [
+              "page"
+            ]
+          },
+          {
+            "id": "wordpress",
+            "name": "WordPress",
+            "category": "site_builder",
+            "ids": [],
+            "foundIn": [
+              "page"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "E5",
+      "observedAt": "2026-11-12T23:54:14.896Z",
+      "source": "website",
+      "kind": "observation",
+      "title": "Key pages found: about",
+      "url": "https://moroccofabuloustravel.com",
+      "data": {
+        "about": "https://moroccofabuloustravel.com/about-us"
+      }
+    },
+    {
+      "id": "E6",
+      "observedAt": "2026-11-12T23:54:15.341Z",
+      "source": "website",
+      "kind": "observation",
+      "title": "About/team page",
+      "url": "https://moroccofabuloustravel.com/about-us",
+      "data": {
+        "h1": [
+          "who we are"
+        ],
+        "h2": [
+          "Welcome to Morocco Fabulous Travel",
+          "Our story begins",
+          "Our promise",
+          "Best rates",
+          "Quality & Experiences",
+          "Our core values",
+          "We'd love to hear from you",
+          "Who we are?",
+          "Why book with MFT?",
+          "Popular desert tours"
+        ],
+        "excerpt": "Skip to content +212668662320 info@moroccofabuloustravel.com Instagram Facebook-f Tripadvisor Youtube Tiktok TOUR PACKAGES MOROCCO ITINERARIES MARRAKECH DESERT TOURS FES DESERT TOURS CASABLANCA TOURS TANGIER TOURS OUARZAZATE TOURS ERRACHIDIA DESERT TOURS CUSTOM TOURS STUDENT TRIPS ABOUT US CONTACT US TOUR PACKAGES MOROCCO ITINERARIES MARRAKECH DESERT TOURS FES DESERT TOURS CASABLANCA TOURS TANGIER TOURS OUARZAZATE TOURS ERRACHIDIA DESERT TOURS CUSTOM TOURS STUDENT TRIPS ABOUT US CONTACT US What you need to know about us who we are Welcome to Morocco Fabulous Travel Morocco Fabulous Travel is a specialist Moroccan tour operator running by a Berber family from the Sahara desert. No one turns Morocco’s dream trips into reality with more expertise and affordability than Morocco Fabulous Travel.Our care for details and personal approaches will make your Morocco trip unique. We offer our customers the best – the lowest prices possible for Morocco tours with the highest levels of quality. Our services and tours are tailored to meet any budget – varying from inexpensive tours for budget travelers to luxury travels.Our friendly and experienced guides/drivers will make you feel at home thro…",
+        "linkedinPeople": [
+          "https://www.linkedin.com/in/morocco-fabulous-travel"
+        ]
+      }
+    },
+    {
+      "id": "E7",
+      "observedAt": "2026-11-12T23:54:15.342Z",
+      "source": "website",
+      "kind": "derivation",
+      "title": "Monetization: no public pricing found",
+      "url": "https://moroccofabuloustravel.com",
+      "data": {
+        "prices": [],
+        "freePlan": false,
+        "freeTrial": false,
+        "moneyBack": false,
+        "contactSales": false,
+        "perSeat": false,
+        "annualDiscount": false,
+        "lifetimeDeal": false,
+        "usageBased": false,
+        "pricingPageFound": false
+      }
+    },
+    {
+      "id": "E8",
+      "observedAt": "2026-11-12T23:54:15.807Z",
+      "source": "founders",
+      "kind": "observation",
+      "title": "Founders/leaders: Morocco Fabulous [weak match]",
+      "url": "https://www.google.com/search?q=%22Morocco%20Fabulous%20Travel%22%20founder",
+      "data": [
+        {
+          "name": "Morocco Fabulous",
+          "confidence": "low",
+          "score": 1,
+          "sources": [
+            "site_link"
+          ],
+          "evidenceUrls": [
+            "https://moroccofabuloustravel.com"
+          ],
+          "linkedin": "https://www.linkedin.com/in/morocco-fabulous-travel"
+        }
+      ]
+    },
+    {
+      "id": "E9",
+      "observedAt": "2026-11-12T23:54:17.004Z",
+      "source": "hackernews",
+      "kind": "observation",
+      "title": "No Hacker News submissions of the domain",
+      "url": "https://hn.algolia.com/?query=moroccofabuloustravel.com",
+      "data": []
+    },
+    {
+      "id": "E10",
+      "observedAt": "2026-11-12T23:54:18.577Z",
+      "source": "seo",
+      "kind": "derivation",
+      "title": "Sitemap: 509 URLs, 1 programmatic page families, 0 content updates in 90d",
+      "url": "https://moroccofabuloustravel.com/sitemap_index.xml",
+      "data": {
+        "totalUrls": 509,
+        "sections": [
+          {
+            "path": "/(root pages)",
+            "count": 95,
+            "examples": [
+              "/morocco-student-tours",
+              "/semester-at-sea-custom-morocco-itinerary",
+              "/fes-to-marrakech-desert-tour-4-days",
+              "/morocco-itinerary-12-days"
+            ],
+            "programmatic": true,
+            "freshLast90d": 26
+          },
+          {
+            "path": "/semester-at-sea-custom-morocco-itinerary",
+            "count": 29,
+            "examples": [
+              "/semester-at-sea-custom-morocco-itinerary/semester-at-sea-fall-2026",
+              "/semester-at-sea-custom-morocco-itinerary/video-thumbnail-semester-at-sea-136-morocco-tour-the-most-unforgettable-desert-group-trip-in-morocco",
+              "/semester-at-sea-custom-morocco-itinerary/study-abroad-semester-at-sea-morocco-trip",
+              "/semester-at-sea-custom-morocco-itinerary/semester-at-sea-in-chefchaouen"
+            ],
+            "programmatic": false,
+            "freshLast90d": 0
+          },
+          {
+            "path": "/desert-tours-from-marrakech",
+            "count": 20,
+            "examples": [
+              "/desert-tours-from-marrakech/marrakech-to-chefchaouen-desert-trip-2",
+              "/desert-tours-from-marrakech/5-days-marrakech-desert-tour-itinerary",
+              "/desert-tours-from-marrakech/desert-tour-from-marrakech-to-fes-5-days",
+              "/desert-tours-from-marrakech/best-desert-tour-from-marrakech-to-merzouga"
+            ],
+            "programmatic": false,
+            "freshLast90d": 0
+          },
+          {
+            "path": "/home",
+            "count": 19,
+            "examples": [
+              "/home/shared-morocco-desert-tour-from-fes-to-marrakech",
+              "/home/morocco-fabulous-travel",
+              "/home/moroccan-tour-itinerary-2-weeks",
+              "/home/moroccan-tour-itinerary-12-days"
+            ],
+            "programmatic": false,
+            "freshLast90d": 0
+          },
+          {
+            "path": "/morocco-desert-tours-from-casablanca",
+            "count": 15,
+            "examples": [
+              "/morocco-desert-tours-from-casablanca/luxury-desert-tours-from-casablanca",
+              "/morocco-desert-tours-from-casablanca/4-days-morocco-itinerary-from-casablanca",
+              "/morocco-desert-tours-from-casablanca/5-days-morocco-itinerary-from-casablanca",
+              "/morocco-desert-tours-from-casablanca/6-days-morocco-itinerary-from-casablanca"
+            ],
+            "programmatic": false,
+            "freshLast90d": 0
+          },
+          {
+            "path": "/",
+            "count": 13,
+            "examples": [
+              "/",
+              "/",
+              "/",
+              "/"
+            ],
+            "programmatic": false,
+            "freshLast90d": 0
+          },
+          {
+            "path": "/fes-desert-tours",
+            "count": 13,
+            "examples": [
+              "/fes-desert-tours/5-days-desert-tours-from-fes-to-marrakech",
+              "/fes-desert-tours/group-fes-to-marrakech-4-days",
+              "/fes-desert-tours/desert-tours-from-fes-to-marrakech-3-days",
+              "/fes-desert-tours/fes-desert-tours-4-days"
+            ],
+            "programmatic": false,
+            "freshLast90d": 0
+          },
+          {
+            "path": "/morocco-student-tours",
+            "count": 11,
+            "examples": [
+              "/morocco-student-tours/morocco-student-tours",
+              "/morocco-student-tours/study-abroad-morocco-tours",
+              "/morocco-student-tours/study-abroad-tours-in-morocco",
+              "/morocco-student-tours/students-traveling-morocco"
+            ],
+            "programmatic": false,
+            "freshLast90d": 0
+          },
+          {
+            "path": "/3-day-desert-tour-fes-to-marrakech",
+            "count": 11,
+            "examples": [
+              "/3-day-desert-tour-fes-to-marrakech/sahara-adventure-review-fes-to-marrakech-desert-experience",
+              "/3-day-desert-tour-fes-to-marrakech/authentic-desert-journey-fes-to-marrakech-tour-feedback",
+              "/3-day-desert-tour-fes-to-marrakech/traveler-testimonial-on-3-day-fes-to-marrakech-desert-tour",
+              "/3-day-desert-tour-fes-to-marrakech/video-thumbnail-ultimate-fes-to-marrakech-desert-tour-explore-the-sahara-in-3-days"
+            ],
+            "programmatic": false,
+            "freshLast90d": 0
+          },
+          {
+            "path": "/top-things-to-do-in-merzouga-desert",
+            "count": 10,
+            "examples": [
+              "/top-things-to-do-in-merzouga-desert/camel-trekking-in-merzouga-desert",
+              "/top-things-to-do-in-merzouga-desert/buggy-driving-experience-in-merzouga",
+              "/top-things-to-do-in-merzouga-desert/overnight-camel-trek-in-merzouga-sahara-desert",
+              "/top-things-to-do-in-merzouga-desert/camel-ride-for-sunrise-in-merzouga-desert"
+            ],
+            "programmatic": false,
+            "freshLast90d": 0
+          },
+          {
+            "path": "/private-tours-of-morocco",
+            "count": 9,
+            "examples": [
+              "/private-tours-of-morocco/8-day-private-tour-of-morocco",
+              "/private-tours-of-morocco/9-day-morocco-custom-tour",
+              "/private-tours-of-morocco/10-day-tour-of-morocco",
+              "/private-tours-of-morocco/custom-12-day-morocco-tour"
+            ],
+            "programmatic": false,
+            "freshLast90d": 0
+          },
+          {
+            "path": "/marrakech-desert-tour-3-days",
+            "count": 8,
+            "examples": [
+              "/marrakech-desert-tour-3-days/video-thumbnail-marrakech-desert-tour-3-days-best-3-days-desert-tour-from-marrakech-to-merzouga",
+              "/marrakech-desert-tour-3-days/marrakech-desert-tour-3-days-2",
+              "/marrakech-desert-tour-3-days/marrakech-desert-tour-3-day",
+              "/marrakech-desert-tour-3-days/3-day-desert-tour-from-marrakech"
+            ],
+            "programmatic": false,
+            "freshLast90d": 0
+          },
+          {
+            "path": "/fes-to-marrakech-shared-desert-tour",
+            "count": 8,
+            "examples": [
+              "/fes-to-marrakech-shared-desert-tour/fes-to-marrakech-shared-desert-tour-2",
+              "/fes-to-marrakech-shared-desert-tour/group-3-days-fes-to-marrakech-desert-tour",
+              "/fes-to-marrakech-shared-desert-tour/shared-fes-to-marrakech-tour",
+              "/fes-to-marrakech-shared-desert-tour/group-fes-to-marrakech-desert-tour"
+            ],
+            "programmatic": false,
+            "freshLast90d": 0
+          },
+          {
+            "path": "/8-days-tour-from-tangier-to-marrakech",
+            "count": 7,
+            "examples": [
+              "/8-days-tour-from-tangier-to-marrakech/tangier-to-marrakech-8-days-tour",
+              "/8-days-tour-from-tangier-to-marrakech/8-days-tangier-to-marrakech-desert-tour",
+              "/8-days-tour-from-tangier-to-marrakech/8-day-desert-tour-from-tangier-to-marrakech",
+              "/8-days-tour-from-tangier-to-marrakech/8-days-desert-tour-from-tangier-to-marrakech"
+            ],
+            "programmatic": false,
+            "freshLast90d": 0
+          },
+          {
+            "path": "/marrakech-to-chefchaouen-desert-tour",
+            "count": 7,
+            "examples": [
+              "/marrakech-to-chefchaouen-desert-tour/marrakech-to-chefchaouen-desert-tour2",
+              "/marrakech-to-chefchaouen-desert-tour/chefchaouen-tour-from-marrakech",
+              "/marrakech-to-chefchaouen-desert-tour/5-day-tour-to-chefchaouen-from-marrakech",
+              "/marrakech-to-chefchaouen-desert-tour/5-days-marrakech-to-chefchaouen-desert-tour"
+            ],
+            "programmatic": false,
+            "freshLast90d": 0
+          }
+        ],
+        "locales": [],
+        "patterns": {
+          "comparison": 0,
+          "alternatives": 0,
+          "integrations": 0,
+          "templates": 0,
+          "tools": 0,
+          "glossary": 0,
+          "useCases": 0,
+          "locations": 1,
+          "howTo": 0,
+          "listicles": 29
+        },
+        "blogPostsLast30d": 0,
+        "blogPostsLast90d": 0,
+        "sitemapsRead": [
+          "https://moroccofabuloustravel.com/sitemap_index.xml",
+          "https://moroccofabuloustravel.com/page-sitemap.xml",
+          "https://moroccofabuloustravel.com/attachment-sitemap1.xml",
+          "https://moroccofabuloustravel.com/attachment-sitemap2.xml",
+          "https://moroccofabuloustravel.com/attachment-sitemap3.xml",
+          "https://moroccofabuloustravel.com/local-sitemap.xml"
+        ]
+      }
+    },
+    {
+      "id": "E11",
+      "observedAt": "2026-11-12T23:54:18.577Z",
+      "source": "seo",
+      "kind": "observation",
+      "title": "AI-search stance: no llms.txt; no AI bots blocked",
+      "url": "https://moroccofabuloustravel.com/robots.txt",
+      "data": {
+        "robots": {
+          "sitemaps": [
+            "https://moroccofabuloustravel.com/sitemap_index.xml"
+          ],
+          "aiBots": {
+            "GPTBot": "unspecified",
+            "OAI-SearchBot": "unspecified",
+            "ChatGPT-User": "unspecified",
+            "ClaudeBot": "unspecified",
+            "Claude-SearchBot": "unspecified",
+            "PerplexityBot": "unspecified",
+            "Google-Extended": "unspecified",
+            "CCBot": "unspecified",
+            "Applebot-Extended": "unspecified",
+            "Bytespider": "unspecified"
+          },
+          "disallowCount": 1
+        },
+        "llmsTxt": null
+      }
+    },
+    {
+      "id": "E12",
+      "observedAt": "2026-11-12T23:54:20.678Z",
+      "source": "wayback",
+      "kind": "observation",
+      "title": "Homepage history: first archived 2020-11-01, 27 monthly snapshots",
+      "url": "https://web.archive.org/web/*/moroccofabuloustravel.com",
+      "data": {
+        "firstSeen": "20201101032148",
+        "monthlySnapshots": 27,
+        "history": [
+          {
+            "date": "2020-11-01",
+            "title": "Morocco Fabulous Travel > Top Morocco Tours 2020/2021 & Day Trips.",
+            "h1": "WELCOME TO MOROCCO FABULOUS TRAVEL",
+            "description": "Morocco travel tours from Marrakech, Fes, Casablanca and Tangier. Morocco desert trips, Morocco desert tours. Marrakech desert tours, Sahara desert.",
+            "ctas": [
+              "Menu",
+              "MORE DETAILS",
+              "Book Today",
+              "Book Package"
+            ]
+          },
+          {
+            "date": "2024-11-14",
+            "title": "Morocco Fabulous Travel – Morocco Tours & Desert Trips",
+            "h1": "Morocco Fabulous Travel",
+            "description": "Book your Morocco desert tours & other private Morocco tours with Morocco Fabulous Travel and enjoy an amazing trip around Morocco. Your Morocco tour is here.",
+            "ctas": [
+              "More reviews",
+              "Marrakech desert tour 3 days Best seller",
+              "Explore"
+            ]
+          },
+          {
+            "date": "2025-12-28",
+            "title": "Morocco Fabulous Travel – Morocco Tours & Desert Trips",
+            "h1": "Morocco Fabulous Travel",
+            "description": "Book your Morocco desert tours & other private Morocco tours with Morocco Fabulous Travel and enjoy an amazing trip around Morocco. Your Morocco tour is here.",
+            "ctas": [
+              "More reviews",
+              "Marrakech desert tour 3 days Best seller",
+              "Explore"
+            ]
+          },
+          {
+            "date": "2026-05-25",
+            "title": "Morocco Fabulous Travel – Morocco Tours & Desert Trips",
+            "h1": "Morocco Fabulous Travel",
+            "description": "Book your Morocco desert tours & other private Morocco tours with Morocco Fabulous Travel and enjoy an amazing trip around Morocco. Your Morocco tour is here.",
+            "ctas": [
+              "More reviews",
+              "Marrakech desert tour 3 days Best seller",
+              "Explore"
+            ]
+          },
+          {
+            "date": "2026-11-04",
+            "title": "Morocco Fabulous Travel – Morocco Tours & Desert Trips",
+            "h1": "Morocco Fabulous Travel",
+            "description": "Book your Morocco desert tours & other private Morocco tours with Morocco Fabulous Travel and enjoy an amazing trip around Morocco. Your Morocco tour is here.",
+            "ctas": [
+              "More reviews",
+              "Marrakech desert tour 3 days Best seller",
+              "Explore"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "unknowns": [
+    {
+      "channel": "paid_tiktok",
+      "reason": "TikTok has no global ad library API; check the EU library / Creative Center by hand (TikTok pixel presence is reported under tracking)",
+      "manualCheck": "https://library.tiktok.com/ads?region=all&adv_name=Morocco%20Fabulous%20Travel"
+    },
+    {
+      "channel": "paid_reddit",
+      "reason": "Reddit's ad library was shut down; Reddit pixel presence (tracking) is the only signal",
+      "manualCheck": "https://www.reddit.com/search/?q=Morocco%20Fabulous%20Travel"
+    },
+    {
+      "channel": "paid_meta",
+      "reason": "SCRAPECREATORS_API_KEY not set",
+      "manualCheck": "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=ALL&q=Morocco%20Fabulous%20Travel&search_type=keyword_unordered"
+    },
+    {
+      "channel": "paid_google",
+      "reason": "SCRAPECREATORS_API_KEY not set",
+      "manualCheck": "https://adstransparency.google.com/?region=anywhere&domain=moroccofabuloustravel.com"
+    },
+    {
+      "channel": "paid_linkedin",
+      "reason": "SCRAPECREATORS_API_KEY not set",
+      "manualCheck": "https://www.linkedin.com/ad-library/search?accountOwner=Morocco%20Fabulous%20Travel"
+    },
+    {
+      "channel": "organic_tiktok",
+      "reason": "Account found but SCRAPECREATORS_API_KEY not set — no stats",
+      "manualCheck": "https://www.tiktok.com/@moroccofabuloustravel"
+    },
+    {
+      "channel": "organic_instagram",
+      "reason": "Account found but SCRAPECREATORS_API_KEY not set — no stats",
+      "manualCheck": "https://www.instagram.com/moroccofabuloustravel/"
+    },
+    {
+      "channel": "organic_youtube",
+      "reason": "Account found but SCRAPECREATORS_API_KEY not set — no stats",
+      "manualCheck": "https://www.youtube.com/@moroccofabuloustravel"
+    },
+    {
+      "channel": "organic_x",
+      "reason": "Account found but SCRAPECREATORS_API_KEY not set — no stats",
+      "manualCheck": "https://x.com/FabulousMorocco"
+    },
+    {
+      "channel": "organic_linkedin",
+      "reason": "No account linked from the site"
+    },
+    {
+      "channel": "community",
+      "reason": "SCRAPECREATORS_API_KEY not set — Reddit/Product Hunt skipped",
+      "manualCheck": "https://www.reddit.com/search/?q=moroccofabuloustravel.com"
+    },
+    {
+      "channel": "reddit_marketing",
+      "reason": "SCRAPECREATORS_API_KEY not set — Reddit not checked",
+      "manualCheck": "https://www.reddit.com/search/?q=Morocco%20Fabulous%20Travel"
+    },
+    {
+      "channel": "founder_led",
+      "reason": "SCRAPECREATORS_API_KEY not set — founder names from free sources only; audience/posting not checked",
+      "manualCheck": "https://www.google.com/search?q=%22Morocco%20Fabulous%20Travel%22%20founder%20site%3Alinkedin.com%2Fin"
+    },
+    {
+      "channel": "paid_apple",
+      "reason": "No iOS app found for this company, so Apple Search Ads were not checked",
+      "manualCheck": "https://adrepository.apple.com/"
+    }
+  ],
+  "sources": [
+    {
+      "source": "website",
+      "status": "ok",
+      "ms": 2200
+    },
+    {
+      "source": "paid",
+      "status": "ok",
+      "ms": 7
+    },
+    {
+      "source": "social",
+      "status": "ok",
+      "ms": 5
+    },
+    {
+      "source": "community",
+      "status": "ok",
+      "ms": 1
+    },
+    {
+      "source": "founders",
+      "status": "ok",
+      "ms": 459
+    },
+    {
+      "source": "appstore",
+      "status": "ok",
+      "ms": 1165
+    },
+    {
+      "source": "apple_ads",
+      "status": "ok",
+      "ms": 2
+    },
+    {
+      "source": "hackernews",
+      "status": "ok",
+      "ms": 493
+    },
+    {
+      "source": "seo",
+      "status": "ok",
+      "ms": 3234
+    },
+    {
+      "source": "wayback",
+      "status": "ok",
+      "ms": 5334
+    }
+  ],
+  "credits": {
+    "scrapecreators": null
+  },
+  "content": [],
+  "identity": {
+    "logo": "https://moroccofabuloustravel.com/wp-content/uploads/2020/12/cropped-Morocco-Fabulous-Travel-site-icon-180x180.jpg",
+    "logos": [
+      {
+        "url": "https://moroccofabuloustravel.com/wp-content/uploads/2020/12/cropped-Morocco-Fabulous-Travel-site-icon-180x180.jpg",
+        "source": "apple-touch-icon",
+        "size": 180
+      },
+      {
+        "url": "https://moroccofabuloustravel.com/wp-content/uploads/2019/07/cropped-MOROCCO-fabulousTRAVEL.png",
+        "source": "jsonld"
+      },
+      {
+        "url": "https://moroccofabuloustravel.com/wp-content/uploads/2020/12/cropped-Morocco-Fabulous-Travel-site-icon-192x192.jpg",
+        "source": "icon",
+        "size": 192
+      },
+      {
+        "url": "https://www.google.com/s2/favicons?sz=128&domain=moroccofabuloustravel.com",
+        "source": "favicon",
+        "size": 128
+      }
+    ],
+    "founders": [
+      {
+        "name": "Morocco Fabulous",
+        "confidence": "low",
+        "score": 1,
+        "sources": [
+          "site_link"
+        ],
+        "evidenceUrls": [
+          "https://moroccofabuloustravel.com"
+        ],
+        "linkedin": "https://www.linkedin.com/in/morocco-fabulous-travel"
+      }
+    ]
+  }
+}

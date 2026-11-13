@@ -76,11 +76,11 @@
   --color-orange-300: oklch(82% 0.13 36.9deg);
   --color-orange-400: oklch(74% 0.17 36.9deg);
   --color-orange-500: #f15d30;
-  --color-orange-600: #f15d30;
-  --color-orange-700: #f15d30;
-  --color-orange-800: #d94a1f;
-  --color-orange-900: #b53812;
-  --color-orange-950: #782106;
+  --color-orange-600: #d94a1f;
+  --color-orange-700: #c2410c;
+  --color-orange-800: #9a3412;
+  --color-orange-900: #7c2d12;
+  --color-orange-950: #431407;
 
   /* External brands */
   --color-whatsapp: oklch(76% 0.18 153deg);

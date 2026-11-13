@@ -1,0 +1,456 @@
+{
+  "tool": {
+    "name": "reverse-engineer-marketing",
+    "version": "0.1.0"
+  },
+  "harness": {
+    "version": "3",
+    "sha": "8a625cb8f5e7"
+  },
+  "target": {
+    "input": "moroccotoursagency.com",
+    "kind": "website",
+    "url": "https://moroccotoursagency.com",
+    "domain": "moroccotoursagency.com",
+    "brand": "Moroccotoursagency"
+  },
+  "generatedAt": "2026-11-12T23:55:22.687Z",
+  "brand": "Moroccotoursagency",
+  "discovered": {
+    "socials": {},
+    "people": [],
+    "appStoreIds": [],
+    "playIds": [],
+    "logos": [],
+    "founderHints": []
+  },
+  "scorecard": [
+    {
+      "channel": "paid_meta",
+      "status": "unknown",
+      "strength": 0,
+      "signal": "SCRAPECREATORS_API_KEY not set",
+      "evidence": []
+    },
+    {
+      "channel": "paid_google",
+      "status": "unknown",
+      "strength": 0,
+      "signal": "SCRAPECREATORS_API_KEY not set",
+      "evidence": []
+    },
+    {
+      "channel": "paid_linkedin",
+      "status": "unknown",
+      "strength": 0,
+      "signal": "SCRAPECREATORS_API_KEY not set",
+      "evidence": []
+    },
+    {
+      "channel": "paid_reddit",
+      "status": "unknown",
+      "strength": 0,
+      "signal": "Reddit's ad library was shut down; Reddit pixel presence (tracking) is the only signal",
+      "evidence": []
+    },
+    {
+      "channel": "paid_tiktok",
+      "status": "unknown",
+      "strength": 0,
+      "signal": "TikTok has no global ad library API; check the EU library / Creative Center by hand (TikTok pixel presence is reported under tracking)",
+      "evidence": []
+    },
+    {
+      "channel": "paid_apple",
+      "status": "unknown",
+      "strength": 0,
+      "signal": "No iOS app found for this company, so Apple Search Ads were not checked",
+      "evidence": []
+    },
+    {
+      "channel": "organic_tiktok",
+      "status": "unknown",
+      "strength": 0,
+      "signal": "No account linked from the site",
+      "evidence": []
+    },
+    {
+      "channel": "organic_instagram",
+      "status": "unknown",
+      "strength": 0,
+      "signal": "No account linked from the site",
+      "evidence": []
+    },
+    {
+      "channel": "organic_youtube",
+      "status": "unknown",
+      "strength": 0,
+      "signal": "No account linked from the site",
+      "evidence": []
+    },
+    {
+      "channel": "organic_x",
+      "status": "unknown",
+      "strength": 0,
+      "signal": "No account linked from the site",
+      "evidence": []
+    },
+    {
+      "channel": "organic_linkedin",
+      "status": "unknown",
+      "strength": 0,
+      "signal": "No account linked from the site",
+      "evidence": []
+    },
+    {
+      "channel": "seo",
+      "status": "none",
+      "strength": 0,
+      "signal": "0 indexed URLs, 0 programmatic families, 0 content updates/90d",
+      "evidence": [
+        "E3"
+      ]
+    },
+    {
+      "channel": "geo",
+      "status": "none",
+      "strength": 0,
+      "signal": "no llms.txt",
+      "evidence": [
+        "E4"
+      ]
+    },
+    {
+      "channel": "founder_led",
+      "status": "unknown",
+      "strength": 0,
+      "signal": "No founder names found",
+      "evidence": [
+        "E2"
+      ]
+    },
+    {
+      "channel": "reddit_marketing",
+      "status": "unknown",
+      "strength": 0,
+      "signal": "SCRAPECREATORS_API_KEY not set — Reddit not checked",
+      "evidence": []
+    },
+    {
+      "channel": "community",
+      "status": "unknown",
+      "strength": 0,
+      "signal": "SCRAPECREATORS_API_KEY not set — Reddit/Product Hunt skipped",
+      "evidence": []
+    },
+    {
+      "channel": "launches",
+      "status": "none",
+      "strength": 0,
+      "signal": "No Hacker News submissions of the domain",
+      "evidence": [
+        "E1"
+      ]
+    },
+    {
+      "channel": "app_store",
+      "status": "none",
+      "strength": 0,
+      "signal": "No App Store / Play app found",
+      "evidence": []
+    },
+    {
+      "channel": "lifecycle",
+      "status": "unknown",
+      "strength": 0,
+      "signal": "No email tool visible client-side (most run server-side)",
+      "evidence": []
+    },
+    {
+      "channel": "affiliate",
+      "status": "none",
+      "strength": 0,
+      "signal": "No affiliate program found",
+      "evidence": []
+    },
+    {
+      "channel": "sales_led",
+      "status": "none",
+      "strength": 0,
+      "signal": "Self-serve only",
+      "evidence": []
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E1",
+      "observedAt": "2026-11-12T23:55:13.212Z",
+      "source": "hackernews",
+      "kind": "observation",
+      "title": "No Hacker News submissions of the domain",
+      "url": "https://hn.algolia.com/?query=moroccotoursagency.com",
+      "data": []
+    },
+    {
+      "id": "E2",
+      "observedAt": "2026-11-12T23:55:13.302Z",
+      "source": "founders",
+      "kind": "observation",
+      "title": "No founder names found",
+      "url": "https://www.google.com/search?q=%22Moroccotoursagency%22%20founder",
+      "data": []
+    },
+    {
+      "id": "E3",
+      "observedAt": "2026-11-12T23:55:13.965Z",
+      "source": "seo",
+      "kind": "derivation",
+      "title": "No readable sitemap found",
+      "url": "https://moroccotoursagency.com/sitemap.xml",
+      "data": {
+        "totalUrls": 0,
+        "sections": [],
+        "locales": [],
+        "patterns": {
+          "comparison": 0,
+          "alternatives": 0,
+          "integrations": 0,
+          "templates": 0,
+          "tools": 0,
+          "glossary": 0,
+          "useCases": 0,
+          "locations": 0,
+          "howTo": 0,
+          "listicles": 0
+        },
+        "blogPostsLast30d": 0,
+        "blogPostsLast90d": 0,
+        "sitemapsRead": [
+          "https://moroccotoursagency.com/sitemap.xml",
+          "https://moroccotoursagency.com/sitemap_index.xml",
+          "https://moroccotoursagency.com/sitemap-index.xml"
+        ]
+      }
+    },
+    {
+      "id": "E4",
+      "observedAt": "2026-11-12T23:55:13.965Z",
+      "source": "seo",
+      "kind": "observation",
+      "title": "AI-search stance: no llms.txt; robots.txt missing",
+      "url": "https://moroccotoursagency.com/robots.txt",
+      "data": {
+        "robots": null,
+        "llmsTxt": null
+      }
+    },
+    {
+      "id": "E5",
+      "observedAt": "2026-11-12T23:55:22.677Z",
+      "source": "wayback",
+      "kind": "observation",
+      "title": "Homepage history: first archived 2017-09-01, 71 monthly snapshots",
+      "url": "https://web.archive.org/web/*/moroccotoursagency.com",
+      "data": {
+        "firstSeen": "20170901072900",
+        "monthlySnapshots": 71,
+        "history": [
+          {
+            "date": "2017-09-01",
+            "title": "Morocco tours, Tours from Marrakech, Fes Morocco tours, tours to Merzouga, Casablanca tours, Tangier tours, 4 Days desert tours, Morocco ex…",
+            "h1": "Morocco tours, Tours from Marrakech, Fes Morocco tours, tours to Merzouga, Casablanca tours, Tangier tours, 4 Days desert tours, Morocco excursions, day tours …",
+            "description": "Morocco tours, Tours from Marrakech, Fes Morocco tours, tours to Merzouga, Casablanca tours, Tangier tours, 4 Days desert tours, Morocco excursions, day tours Morocco, Camel Morocco tours, Desert trips",
+            "ctas": [
+              "Read more…",
+              "Read More",
+              "More excursions…"
+            ]
+          },
+          {
+            "date": "2024-11-02",
+            "title": "Best Morocco Tours (2024), Local Travel Agency, All-in Tours",
+            "h1": "Morocco Tours",
+            "description": "Morocco Tours are organized tours and excursions in Morocco, characterized by being previously planned by Morocco Tours Agency local professionals. We have",
+            "ctas": [
+              "Start Your Morocco Tour",
+              "Choose Your Tour Destination",
+              "Pick Your Desert Activity Today",
+              "Visit Our Travel Blog"
+            ]
+          },
+          {
+            "date": "2026-03-06",
+            "title": "Morocco Tours Agency: Morocco Trips By Locals (2026)",
+            "h1": "Morocco Tours Agency",
+            "description": "We offer the best morocco tour packages, day trips, desert activities to help you explore the authentic Morocco, all offers are crafed by local experts.",
+            "ctas": [
+              "Book Your Adenture",
+              "Explore Offers",
+              "See Itinerary",
+              "Book Now"
+            ]
+          },
+          {
+            "date": "2026-05-20",
+            "title": "Morocco Tours Agency: Morocco Trips By Locals (2026)",
+            "h1": "Morocco Tours Agency",
+            "description": "We offer the best morocco tour packages, day trips, desert activities to help you explore the authentic Morocco, all offers are crafed by local experts.",
+            "ctas": [
+              "Book Your Adenture",
+              "Explore Offers",
+              "See Itinerary",
+              "Book Now"
+            ]
+          },
+          {
+            "date": "2026-06-08",
+            "title": "Morocco Tours Agency: Morocco Trips By Locals (2026)",
+            "h1": "Morocco Tours Agency",
+            "description": "We offer the best morocco tour packages, day trips, desert activities to help you explore the authentic Morocco, all offers are crafed by local experts.",
+            "ctas": [
+              "Book Your Adenture",
+              "Explore Offers",
+              "See Itinerary",
+              "Book Now"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "unknowns": [
+    {
+      "channel": "paid_tiktok",
+      "reason": "TikTok has no global ad library API; check the EU library / Creative Center by hand (TikTok pixel presence is reported under tracking)",
+      "manualCheck": "https://library.tiktok.com/ads?region=all&adv_name=Moroccotoursagency"
+    },
+    {
+      "channel": "paid_reddit",
+      "reason": "Reddit's ad library was shut down; Reddit pixel presence (tracking) is the only signal",
+      "manualCheck": "https://www.reddit.com/search/?q=Moroccotoursagency"
+    },
+    {
+      "channel": "paid_meta",
+      "reason": "SCRAPECREATORS_API_KEY not set",
+      "manualCheck": "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=ALL&q=Moroccotoursagency&search_type=keyword_unordered"
+    },
+    {
+      "channel": "paid_google",
+      "reason": "SCRAPECREATORS_API_KEY not set",
+      "manualCheck": "https://adstransparency.google.com/?region=anywhere&domain=moroccotoursagency.com"
+    },
+    {
+      "channel": "paid_linkedin",
+      "reason": "SCRAPECREATORS_API_KEY not set",
+      "manualCheck": "https://www.linkedin.com/ad-library/search?accountOwner=Moroccotoursagency"
+    },
+    {
+      "channel": "organic_tiktok",
+      "reason": "No account linked from the site"
+    },
+    {
+      "channel": "organic_instagram",
+      "reason": "No account linked from the site"
+    },
+    {
+      "channel": "organic_youtube",
+      "reason": "No account linked from the site"
+    },
+    {
+      "channel": "organic_x",
+      "reason": "No account linked from the site"
+    },
+    {
+      "channel": "organic_linkedin",
+      "reason": "No account linked from the site"
+    },
+    {
+      "channel": "community",
+      "reason": "SCRAPECREATORS_API_KEY not set — Reddit/Product Hunt skipped",
+      "manualCheck": "https://www.reddit.com/search/?q=moroccotoursagency.com"
+    },
+    {
+      "channel": "reddit_marketing",
+      "reason": "SCRAPECREATORS_API_KEY not set — Reddit not checked",
+      "manualCheck": "https://www.reddit.com/search/?q=Moroccotoursagency"
+    },
+    {
+      "channel": "paid_apple",
+      "reason": "No iOS app found for this company, so Apple Search Ads were not checked",
+      "manualCheck": "https://adrepository.apple.com/"
+    },
+    {
+      "channel": "founder_led",
+      "reason": "SCRAPECREATORS_API_KEY not set — founder names from free sources only; audience/posting not checked",
+      "manualCheck": "https://www.google.com/search?q=%22Moroccotoursagency%22%20founder%20site%3Alinkedin.com%2Fin"
+    }
+  ],
+  "sources": [
+    {
+      "source": "website",
+      "status": "error",
+      "reason": "homepage returned HTTP 403",
+      "ms": 502
+    },
+    {
+      "source": "paid",
+      "status": "ok",
+      "ms": 8
+    },
+    {
+      "source": "social",
+      "status": "ok",
+      "ms": 8
+    },
+    {
+      "source": "appstore",
+      "status": "ok",
+      "ms": 9
+    },
+    {
+      "source": "community",
+      "status": "ok",
+      "ms": 3
+    },
+    {
+      "source": "apple_ads",
+      "status": "ok",
+      "ms": 1
+    },
+    {
+      "source": "hackernews",
+      "status": "ok",
+      "ms": 410
+    },
+    {
+      "source": "founders",
+      "status": "ok",
+      "ms": 508
+    },
+    {
+      "source": "seo",
+      "status": "ok",
+      "ms": 1175
+    },
+    {
+      "source": "wayback",
+      "status": "ok",
+      "ms": 9886
+    }
+  ],
+  "credits": {
+    "scrapecreators": null
+  },
+  "content": [],
+  "identity": {
+    "logo": "https://www.google.com/s2/favicons?sz=128&domain=moroccotoursagency.com",
+    "logos": [
+      {
+        "url": "https://www.google.com/s2/favicons?sz=128&domain=moroccotoursagency.com",
+        "source": "favicon",
+        "size": 128
+      }
+    ],
+    "founders": []
+  }
+}
