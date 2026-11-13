@@ -10,12 +10,15 @@ const { class: className } = Astro.props;
 
 <section
   id="home-hero-slider-section-skeleton"
-  class:list={["relative isolate w-full h-[300vh] overflow-x-clip bg-black text-white", className]}
+  class:list={[
+    "relative isolate w-full h-dvh min-h-160 overflow-hidden bg-black text-white",
+    className,
+  ]}
   aria-busy="true"
   aria-label="Loading Amsirar Trip Hero Carousel"
 >
   <div
-    class="slider sticky top-0 h-screen w-full overflow-hidden bg-[#050505] font-sans"
+    class="slider relative h-full w-full overflow-hidden bg-[#050505] font-sans"
     id="home-hero-slider-skeleton"
   >
     {/* Dark Hero Background */}

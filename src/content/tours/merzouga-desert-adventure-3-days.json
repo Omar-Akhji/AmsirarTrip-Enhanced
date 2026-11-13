@@ -23,7 +23,7 @@
   "seo": {
     "title": "3-Day Desert Tour from Marrakech to Merzouga | Erg Chebbi (2026)",
     "metaDescription": "From €295 pp. 3-day desert tour from Marrakech to Merzouga (private 4x4 or shared). Includes Erg Chebbi camel trek, Sahara luxury camp, Ait Ben Haddou & local guide.",
-    "lead": "A 3-day private desert tour from Marrakech crossing the High Atlas via the Tizi n'Tichka pass. The route stops at Kasbah Ait Ben Haddou and Todra Gorges before a sunset camel trek and an overnight stay in the Erg Chebbi dunes.",
+    "lead": "This three-day trip connects Marrakech to the high orange dunes of Erg Chebbi in Merzouga. You travel in a private, air-conditioned vehicle across the High Atlas Mountains via the Tizi n'Tichka pass (2,260m), stopping at the earthen ksar of Ait Ben Haddou and Ouarzazate before spending the first night in the Dades Valley. On Day 2, the road passes through Tinghir to reach Todra Gorges before continuing to Merzouga for a sunset camel ride and desert camp overnight. Day 3 returns to Marrakech via Alnif, the Draa Valley, and the High Atlas.",
     "primaryKeyword": "3 day desert tour from Marrakech to Merzouga",
     "secondaryKeywords": [
       "Marrakech to Merzouga tour",
@@ -33,41 +33,37 @@
     ],
     "price": {
       "label": "From EUR 295 per person",
-      "note": "Price includes private A/C transport, licensed driver-guide, accommodations (Night 1 Riad, Night 2 Desert Bivouac), dinners, breakfasts, and camel trek. Custom luxury camp upgrades available on request."
+      "note": "Includes private A/C transport, licensed driver-guide, 1 night in a Dades Valley riad/hotel, 1 night in a desert camp, dinners, daily breakfasts starting Day 2, and camel rides. Luxury camp upgrades with private bathrooms are available on request."
     },
     "imageAlt": "Camel caravan trekking across golden Erg Chebbi sand dunes at sunset on a 3-day Merzouga desert tour from Marrakech",
     "highlights": [
       "Cross the High Atlas Mountains via the Tizi n'Tichka pass (2,260m)",
-      "Guided visit of UNESCO World Heritage Kasbah Ait Ben Haddou & Ouarzazate studios",
-      "Walk through the 300-meter canyon walls of Todra Gorges",
-      "Sunset & sunrise camel trek across the golden Erg Chebbi dunes in Merzouga",
-      "Overnight in private desert camp with traditional Berber dinner, campfire & live music",
-      "Comfortable air-conditioned 4x4 or minivan with experienced licensed driver"
+      "Walk through the UNESCO-listed Kasbah Ait Ben Haddou and stop in Ouarzazate",
+      "Explore the 300-meter canyon walls of Todra Gorges",
+      "Ride camels across the Erg Chebbi dunes at sunset and sunrise",
+      "Spend a night in a Sahara camp with dinner, campfire music, and stargazing",
+      "Travel in a modern A/C 4x4 or minivan with a local licensed driver"
     ],
     "faqs": [
       {
-        "question": "Is the 3-day Marrakech to Merzouga desert tour private or shared?",
-        "answer": "We specialize in private VIP tours tailored to your group, offering complete flexibility to stop for photos, refreshments, and sightseeing at your own pace. Small-group departures are also available on select dates."
+        "question": "Is this tour private or shared?",
+        "answer": "Most guests book this as a private tour, which lets you stop whenever you like for photos, coffee, or rest breaks. We also run small-group shared departures on select dates."
       },
       {
-        "question": "What is the driving distance and travel time between Marrakech and Merzouga?",
-        "answer": "The distance is approximately 560 km (350 miles) each way. To ensure maximum comfort, the route is split across 3 days: Day 1 covers ~310 km with stops at Tizi n'Tichka pass and Ait Ben Haddou before resting in Dades Valley. Day 2 covers ~250 km through Todra Gorges, arriving in Merzouga before the sunset camel trek. Day 3 returns via the scenic Draa Valley."
+        "question": "How much driving is involved between Marrakech and Merzouga?",
+        "answer": "The round trip is roughly 1,120 km. Splitting it over three days keeps the pace manageable: Day 1 covers about 310 km to Dades Valley, Day 2 covers 250 km to Merzouga, and Day 3 returns via the Draa Valley and Ouarzazate."
       },
       {
-        "question": "What is included in the Erg Chebbi desert camp experience?",
-        "answer": "Your desert overnight includes private tent accommodation (standard or luxury with private ensuite hot shower and flush toilet), authentic Moroccan tagine dinner, breakfast, sunset and sunrise camel trek (or 4x4 transfer upon request), and Berber drum music around the campfire under starry desert skies."
+        "question": "What are the desert camps like?",
+        "answer": "Standard camps offer private tents with real beds and shared bathrooms. Luxury camps provide larger private tents with en-suite hot showers, flush toilets, and power outlets. Both include dinner, breakfast, and evening music around the fire."
       },
       {
-        "question": "Can this tour end in Fes instead of returning to Marrakech?",
-        "answer": "Yes! The Marrakech to Fes desert tour follows the same itinerary for Days 1 and 2. On Day 3, instead of returning to Marrakech, you travel north through the scenic Ziz Valley, Midelt, and the Azrou cedar forest, arriving in Fes by early evening."
+        "question": "Can we finish the tour in Fes instead of returning to Marrakech?",
+        "answer": "Yes. Days 1 and 2 stay the same. On Day 3, instead of turning west toward Ouarzazate, your driver heads north through the Ziz Valley, Midelt, and the Azrou cedar forest, dropping you in Fes by early evening."
       },
       {
-        "question": "What should I pack for the 3-day desert tour?",
-        "answer": "We recommend comfortable walking shoes, sunglasses, SPF sun protection, a scarf or turban for wind protection, a portable power bank, and warm clothing layers. Between October and April, nighttime temperatures in the Sahara drop significantly."
-      },
-      {
-        "question": "Are vegetarian, vegan, or gluten-free diets accommodated?",
-        "answer": "Yes, vegetarian, vegan, and gluten-free dietary needs are gladly accommodated throughout the riads and desert camps with fresh Moroccan salads, vegetable tagines, and couscous. Please mention your preferences during booking."
+        "question": "Do you accommodate vegetarian, vegan, or gluten-free diets?",
+        "answer": "Yes. Riads and desert camps regularly prepare vegetable tagines, couscous, and fresh salads. Let us know your dietary needs when booking so we can inform the kitchens ahead of time."
       }
     ]
   },

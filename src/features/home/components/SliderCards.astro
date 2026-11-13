@@ -7,6 +7,8 @@ export interface SlideCardItem {
   title: string;
   type: string;
   alt?: string;
+  thumbTitle?: string;
+  thumbType?: string;
 }
 
 interface Props {
@@ -30,7 +32,7 @@ const { items } = Astro.props;
       {typeof item.image === "string" ?
         <Image
           src={item.image}
-          alt={item.alt || `${item.title} - ${item.type}`}
+          alt={item.alt || `${item.thumbTitle || item.title} - ${item.thumbType || item.type}`}
           loading="eager"
           decoding="async"
           fetchpriority={index <= 1 ? "high" : "low"}
@@ -40,7 +42,7 @@ const { items } = Astro.props;
         />
       : <Image
           src={item.image}
-          alt={item.alt || `${item.title} - ${item.type}`}
+          alt={item.alt || `${item.thumbTitle || item.title} - ${item.thumbType || item.type}`}
           loading="eager"
           decoding="async"
           fetchpriority={index <= 1 ? "high" : "low"}
@@ -51,10 +53,10 @@ const { items } = Astro.props;
       }
       <div class="thumbnail-overlay pointer-events-none absolute inset-x-0 bottom-0 flex flex-col px-2 py-2 sm:px-2.5 sm:py-3 text-white text-shadow-sm text-shadow-black/80 bg-linear-to-t from-black/85 to-transparent">
         <span class="thumbnail-type truncate text-[0.7rem] sm:text-xs font-bold uppercase tracking-wider text-orange-400">
-          {item.type}
+          {item.thumbType || item.type}
         </span>
         <span class="thumbnail-title truncate text-[0.7rem] sm:text-xs text-slate-200">
-          {item.title}
+          {item.thumbTitle || item.title}
         </span>
       </div>
     </div>

@@ -88,11 +88,9 @@ function initSlider(): void {
   const dotButtons = slider.querySelectorAll<HTMLButtonElement>(".hero-dot-btn");
   const lineFills = slider.querySelectorAll<HTMLElement>(".hero-dot-line-fill");
   const paginationNav = slider.querySelector<HTMLElement>("#pagination");
-  const section = document.querySelector<HTMLElement>("#home-hero-slider-section");
   const totalSlides = sliderList.querySelectorAll<HTMLElement>(":scope > .item").length || 3;
 
   let pendingTargetIndex: number | null = null;
-  let isScrollSyncing = false;
 
   function positionPagination(): void {
     if (!paginationNav) return;
@@ -267,8 +265,14 @@ function initSlider(): void {
     }
   }
 
+  const AUTOPLAY_INTERVAL = 6000;
+
   function startAutoplay(): void {
     stopAutoplay();
+    if (globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    autoplayTimer = setInterval(() => {
+      moveSlider("next");
+    }, AUTOPLAY_INTERVAL);
   }
 
   function stopAutoplay(): void {
@@ -355,22 +359,6 @@ function initSlider(): void {
     startAutoplay();
   }
 
-  function scrollToSlide(targetIndex: number): void {
-    if (!section) return;
-    const maxScroll = section.offsetHeight - globalThis.innerHeight;
-    if (maxScroll <= 0) return;
-    const targetScroll = Math.round(
-      section.offsetTop + (targetIndex / (totalSlides - 1)) * maxScroll,
-    );
-    const lenis = (globalThis as unknown as { __lenis?: { scrollTo: (y: number) => void } })
-      .__lenis;
-    if (lenis) {
-      lenis.scrollTo(targetScroll);
-    } else {
-      globalThis.scrollTo({ top: targetScroll, behavior: "smooth" });
-    }
-  }
-
   // Vertical dot buttons navigation
   const onDotClick = (e: MouseEvent) => {
     e.preventDefault();
@@ -379,7 +367,6 @@ function initSlider(): void {
     const targetIndexStr = btn.dataset["index"];
     if (targetIndexStr !== undefined) {
       const idx = Number(targetIndexStr);
-      scrollToSlide(idx);
       goToSlide(idx);
     }
   };
@@ -402,7 +389,6 @@ function initSlider(): void {
     }
 
     const idx = Number(targetIndexStr);
-    scrollToSlide(idx);
     goToSlide(idx);
   };
 
@@ -440,69 +426,6 @@ function initSlider(): void {
   };
 
   globalThis.addEventListener("keydown", onKeyDown);
-
-  // Scroll runway interaction: scrolling through the sticky section switches slides until the final image, then naturally unpins to subsequent sections
-  function syncScrollToSlide(): void {
-    if (!section) return;
-    const sectionRect = section.getBoundingClientRect();
-    const maxScroll = section.offsetHeight - globalThis.innerHeight;
-    if (maxScroll <= 0) return;
-
-    const scrolled = -sectionRect.top;
-    if (scrolled < 0) return;
-
-    const progress = Math.max(0, Math.min(1, scrolled / maxScroll));
-
-    let targetIndex = 0;
-    if (progress >= 0.65) {
-      targetIndex = 2;
-    } else if (progress >= 0.3) {
-      targetIndex = 1;
-    } else {
-      targetIndex = 0;
-    }
-
-    const activeItem = sliderList.querySelector<HTMLElement>(":scope > .item:first-child");
-    const activeIndex = Number(activeItem?.dataset["index"] ?? 0);
-
-    if (targetIndex === activeIndex) {
-      return;
-    }
-
-    if (isAnimating) {
-      pendingTargetIndex = targetIndex;
-      return;
-    }
-    stopAutoplay();
-    goToSlide(targetIndex);
-  }
-
-  const onScroll = () => {
-    if (globalThis.scrollY > 20) {
-      stopAutoplay();
-    }
-    if (isScrollSyncing) return;
-    isScrollSyncing = true;
-    requestAnimationFrame(() => {
-      syncScrollToSlide();
-      isScrollSyncing = false;
-    });
-  };
-
-  const lenis = (
-    globalThis as unknown as {
-      __lenis?: {
-        on: (event: string, fn: () => void) => void;
-        off: (event: string, fn: () => void) => void;
-      };
-    }
-  ).__lenis;
-
-  if (lenis) {
-    lenis.on("scroll", onScroll);
-  }
-  globalThis.addEventListener("scroll", onScroll, { passive: true });
-  syncScrollToSlide();
 
   // Touch swipe support
   let touchStartX = 0;
@@ -549,10 +472,6 @@ function initSlider(): void {
     delete slider.dataset["sliderInitialized"];
     stopAutoplay();
     globalThis.removeEventListener("resize", positionPagination);
-    if (lenis) {
-      lenis.off("scroll", onScroll);
-    }
-    globalThis.removeEventListener("scroll", onScroll);
     nextBtn?.removeEventListener("click", onNextClick);
     prevBtn?.removeEventListener("click", onPrevClick);
     for (const dot of dotButtons) {

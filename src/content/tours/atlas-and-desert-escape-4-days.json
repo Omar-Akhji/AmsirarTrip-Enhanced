@@ -19,7 +19,7 @@
   "seo": {
     "title": "4-Day Desert Tour from Marrakech to Merzouga | Erg Chebbi & Dades (2026)",
     "metaDescription": "From €360 pp. Relaxed 4-day Marrakech desert tour to Merzouga (private VIP or shared). Includes Erg Chebbi dunes, camel ride, luxury camp & High Atlas mountains.",
-    "lead": "A 4-day private desert expedition from Marrakech crossing the High Atlas Mountains via the Tizi n'Tichka pass (2,260m). The circuit explores Kasbah Ait Ben Haddou, the dramatic canyons of Dades and Todra Gorges, and includes a sunset camel trek to an overnight luxury bivouac in the golden Erg Chebbi dunes before returning via Ouarzazate.",
+    "lead": "This four-day route gives you the full Marrakech-to-Merzouga desert experience at a much calmer pace than the standard three-day trip. Spreading the 1,100 km round trip across four days keeps daily driving legs between 4 and 6 hours, leaving more time to walk through Berber villages, visit kasbahs, and relax at your riads.",
     "primaryKeyword": "4 day desert tour from Marrakech to Merzouga",
     "secondaryKeywords": [
       "4 day Marrakech desert tour",
@@ -29,37 +29,33 @@
     ],
     "price": {
       "label": "From EUR 360 per person",
-      "note": "Price includes private air-conditioned 4x4 or minivan transport, licensed driver-guide, 2 nights in boutique riads/hotels (Dades Valley & Ouarzazate), 1 night in Erg Chebbi desert bivouac, camel trek, dinners, and daily breakfasts."
+      "note": "Includes private A/C 4x4 or minivan transport, licensed driver-guide, 2 nights in boutique riads/hotels (Dades Valley and Ouarzazate), 1 night in an Erg Chebbi desert camp, camel rides, dinners, and daily breakfasts from Day 2."
     },
     "imageAlt": "Camel caravan trekking across golden Erg Chebbi dunes at sunrise during a 4-day Marrakech to Merzouga desert tour",
     "highlights": [
-      "Cross the High Atlas Mountains via the dramatic Tizi n'Tichka pass at 2,260 meters elevation",
-      "Guided walk through the UNESCO World Heritage earthen citadel of Kasbah Ait Ben Haddou",
-      "Marvel at the towering 300-meter sheer limestone canyon walls of Todra Gorges",
-      "Sunset and sunrise camel trek across the sweeping orange dunes of Erg Chebbi in Merzouga",
-      "Overnight in a traditional desert camp with freshly prepared tagines, campfire, and Berber drums",
-      "Relaxed 4-day pacing with dedicated stops in the Valley of Roses, Skoura Palm Grove, and Ouarzazate"
+      "Cross the High Atlas Mountains via the Tizi n'Tichka pass (2,260m)",
+      "Guided walk through the UNESCO-listed Kasbah Ait Ben Haddou",
+      "Walk along the canyon floor of the 300-meter-high Todra Gorges",
+      "Sunset and sunrise camel rides across the Erg Chebbi dunes in Merzouga",
+      "Overnight in a Sahara camp with dinner, campfire music, and stargazing",
+      "Unhurried 4-day pacing with an overnight stop in Ouarzazate on the return leg"
     ],
     "faqs": [
       {
-        "question": "Why choose a 4-day desert tour over a 3-day itinerary?",
-        "answer": "The 4-day route covers roughly 1,100 km round-trip with shorter daily driving legs (4 to 5 hours instead of 7 to 8 hours). You enjoy dedicated leisure time in Dades Valley and Ouarzazate, avoiding long hurried stretches across the High Atlas."
+        "question": "Why choose the 4-day tour instead of the 3-day option?",
+        "answer": "The 3-day itinerary requires a 9-to-10-hour drive on the final day from Merzouga back to Marrakech. Adding a fourth day breaks up that return leg with an overnight stay in Ouarzazate, keeping daily drives comfortable and giving you time to enjoy the Draa Valley."
       },
       {
-        "question": "What is the accommodation standard during the 4-day desert expedition?",
-        "answer": "You stay two nights in characterful boutique riads or hotels (Night 1 in Dades Valley, Night 3 in Ouarzazate) and one night in a desert camp in the Erg Chebbi dunes. Luxury tent upgrades with private ensuite hot showers and flush toilets are readily available."
+        "question": "What accommodations are included?",
+        "answer": "You spend Night 1 in a riad or hotel in the Dades Valley, Night 2 in an Erg Chebbi desert camp, and Night 3 in a boutique riad or hotel in Ouarzazate. Luxury desert tents with private en-suite bathrooms are available on request."
       },
       {
-        "question": "Can this 4-day tour end in Fes instead of returning to Marrakech?",
-        "answer": "Yes. On Day 3, instead of looping toward Ouarzazate, you can travel north through the Ziz Valley, Midelt, and the cedar forests of Azrou to conclude in Fes by early evening."
+        "question": "Can this 4-day trip end in Fes instead of Marrakech?",
+        "answer": "Yes. On Day 3, instead of driving west toward Ouarzazate, your driver can head north through the Ziz Valley, Midelt, and the Azrou cedar forest to drop you in Fes by early evening."
       },
       {
-        "question": "What meals are included during the tour?",
-        "answer": "All breakfasts and traditional evening dinners (Moroccan tagines, couscous, fresh seasonal fruits) at your riads and desert bivouac are fully included. Lunches and personal beverages are purchased independently at scenic local stops."
-      },
-      {
-        "question": "What clothing and essentials should I pack for the Sahara?",
-        "answer": "Bring comfortable walking shoes, polarized sunglasses, high-SPF sunscreen, a turban or scarf for desert breeze, and warm evening layers. Nighttime temperatures in the Sahara drop substantially between November and April."
+        "question": "Which meals are included?",
+        "answer": "All breakfasts (from Day 2) and all three evening dinners at your riads and desert camp are included. Lunches and drinks are at your own expense at scenic stops along the route."
       }
     ]
   },

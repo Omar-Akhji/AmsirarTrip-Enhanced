@@ -5,6 +5,7 @@ import BookingForm from "../../../features/booking/components/BookingForm.vue";
 import BookingSidebar from "../../../features/booking/components/BookingSidebar.astro";
 import TourLayout from "../../../features/tours/components/TourLayout.astro";
 import { getToursData } from "../../../features/tours/data/tours-data";
+import { getTourLocalizedSeo } from "../../../features/tours/data/tour-localized-seo";
 import { useTranslations } from "../../../i18n/utils";
 import Layout from "../../../layouts/Layout.astro";
 import {
@@ -31,13 +32,12 @@ const tour = tourEntry.data;
 const t = useTranslations(locale);
 const isEnglish = locale === "en";
 
-const localizedTitle = t(`${tour.tourKey}.title`);
-const title = isEnglish ? tour.seo.title : localizedTitle;
-
-const description =
-  isEnglish ?
-    tour.seo.metaDescription
-  : `${t(`tours.${tour.tourKey}.description`)} ${t(`${tour.tourKey}.overview`)}`;
+const seoMeta = getTourLocalizedSeo(tour.tourKey, locale, {
+  title: tour.seo.title,
+  metaDescription: tour.seo.metaDescription,
+});
+const title = seoMeta.title;
+const description = seoMeta.metaDescription;
 
 const dayLabel = t("tours.day");
 const itinerary = Array.from({ length: tour.durationDays }, (_, index) => {

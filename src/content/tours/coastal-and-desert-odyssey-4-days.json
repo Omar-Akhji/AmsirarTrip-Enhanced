@@ -19,7 +19,7 @@
   "seo": {
     "title": "4-Day Desert Tour from Agadir to Marrakech | Merzouga & Taroudant (2026)",
     "metaDescription": "From €395 pp. 4-day private desert tour from Agadir to Marrakech. Anti-Atlas scenic drive, Taroudant, Erg Chebbi camel trek, Sahara camp & Ait Ben Haddou.",
-    "lead": "A 4-day private desert and cultural route from the Atlantic beach city of Agadir to Marrakech. The itinerary crosses the saffron fields of Taliouine and the Anti-Atlas range to Ouarzazate, ventures deep into the Sahara for a sunset camel trek across the Erg Chebbi dunes in Merzouga, and crosses the High Atlas via Tizi n'Tichka into Marrakech.",
+    "lead": "This four-day overland route connects the Atlantic coast of Agadir and Taghazout to the Sahara dunes of Merzouga and finishes in Marrakech. It is an ideal option if you are wrapping up a beach stay on the coast and want to experience the desert without flying or backtracking.",
     "primaryKeyword": "4 day desert tour from Agadir to Marrakech",
     "secondaryKeywords": [
       "Agadir to Marrakech desert tour",
@@ -29,37 +29,33 @@
     ],
     "price": {
       "label": "From EUR 395 per person",
-      "note": "Price includes private air-conditioned transport from Agadir, licensed driver-guide, 2 nights in authentic boutique riads/hotels (Dades Valley & Ouarzazate/Taroudant), 1 night in Erg Chebbi desert bivouac, sunset camel trek, dinners, and daily breakfasts."
+      "note": "Includes private A/C transport from Agadir to Marrakech, licensed driver-guide, 2 nights in boutique riads/hotels (Dades Valley and Ouarzazate), 1 night in an Erg Chebbi desert camp, camel rides, dinners, and daily breakfasts from Day 2."
     },
     "imageAlt": "Camel trekking in the golden dunes of Merzouga on a 4-day desert expedition from Agadir to Marrakech",
     "highlights": [
-      "Depart from Agadir and explore the ancient ramparts and silver markets of Taroudant ('Little Marrakech')",
-      "Drive through the rugged Anti-Atlas mountains and the Berber saffron capital of Taliouine",
-      "Trek by camel across the golden Erg Chebbi dunes for sunset and panoramic Sahara views",
-      "Spend a memorable night in a private desert camp with Berber folk music and stargazing by the campfire",
-      "Walk between the towering 300-meter sheer cliffs of the breathtaking Todra Gorges",
-      "Tour the legendary UNESCO World Heritage Kasbah Ait Ben Haddou before descending into Marrakech"
+      "Depart from Agadir or Taghazout and see the ancient ramparts of Taroudant (\"Little Marrakech\")",
+      "Cross the Anti-Atlas Mountains and the saffron capital of Taliouine",
+      "Walk between the 300-meter limestone canyon walls of Todra Gorges",
+      "Sunset and sunrise camel rides in the Erg Chebbi dunes of Merzouga",
+      "Overnight in a Sahara camp with Berber music, dinner, and stargazing",
+      "Visit UNESCO-listed Kasbah Ait Ben Haddou before crossing the High Atlas to Marrakech"
     ],
     "faqs": [
       {
-        "question": "Can this tour collect us from our hotel or resort in Agadir or Taghazout?",
-        "answer": "Yes. Your private driver-guide picks you up directly from your beach resort, hotel, or private villa in Agadir, Taghazout, or Tamraght at approximately 08:00 AM on Day 1."
+        "question": "Can you pick us up from our surf camp or hotel in Taghazout?",
+        "answer": "Yes. Your private driver will pick you up directly from your hotel, resort, or villa in Agadir, Taghazout, or Tamraght at around 7:30 AM on Day 1."
       },
       {
-        "question": "Is this itinerary a good way to travel from Agadir to Marrakech without flying?",
-        "answer": "Yes. Instead of a direct highway transfer or domestic flight, this 4-day route transforms your transfer into an unforgettable expedition through Taroudant, the Anti-Atlas, the Sahara dunes, and the High Atlas Mountains."
+        "question": "Is this a practical way to travel from Agadir to Marrakech?",
+        "answer": "Yes. Rather than taking a direct highway transfer or domestic flight, this route turns your transfer into a full southern Morocco road trip through Taroudant, the Anti-Atlas, the Sahara, and the High Atlas."
       },
       {
-        "question": "What is the driving terrain and road quality between Agadir and Merzouga?",
-        "answer": "The roads are fully paved and well-maintained throughout the route. Our modern air-conditioned 4x4s and minivans provide smooth comfort across the mountain passes and desert plateaus with frequent scenic refreshment stops."
+        "question": "How are the road conditions between Agadir and Merzouga?",
+        "answer": "The entire route follows well-maintained paved roads. Our modern air-conditioned 4x4s and minivans ensure a smooth ride across mountain passes and desert plains with regular rest stops."
       },
       {
-        "question": "What desert camp amenities are included at Erg Chebbi?",
-        "answer": "Your Sahara stay includes private comfortable bedding, authentic Moroccan dinner, and breakfast. Luxury camp options with private ensuite bathrooms, hot showers, and electrical outlets are available on request."
-      },
-      {
-        "question": "Where does the tour conclude in Marrakech?",
-        "answer": "On Day 4, you arrive in Marrakech by early evening (around 18:00 to 19:00). Your driver delivers you directly to your medina riad, hotel, or Marrakech Menara Airport (RAK)."
+        "question": "Where do you drop us off in Marrakech?",
+        "answer": "We drop you directly at your Marrakech hotel, as close as vehicles can reach to your medina riad, or at Marrakech Menara Airport (RAK) by late afternoon on Day 4."
       }
     ]
   },
