@@ -260,7 +260,25 @@ export function buildBookingEmail(data: BookingEmailInput): PreparedEmail {
   const safeReplyTo = sanitizeHeaderValue(data.email, 254);
   const langName = getLanguageName(data.language);
   const cleanedType = cleanReservationType(data.reservationType);
-  const durationText = data.duration ? `${data.duration} days` : "Not specified";
+
+  // Resolve duration intelligently with fallback to title inference
+  let resolvedDuration = data.duration;
+  if (!resolvedDuration && data.reservationType) {
+    const match = data.reservationType.match(/(\d+)\s*[- ]*(?:Days?|Day|Jours?|Días?|Tage?)/i);
+    const parsedDays = match?.[1] ? Number.parseInt(match[1], 10) : undefined;
+    if (parsedDays && !Number.isNaN(parsedDays)) {
+      resolvedDuration = parsedDays;
+    }
+  }
+
+  const durationText =
+    resolvedDuration ?
+      Number(resolvedDuration) === 1 ?
+        "1 day (Day trip)"
+      : `${resolvedDuration} days`
+    : /excursion|day trip|discovery|sunset/i.test(data.reservationType) ?
+      "1 day (Day trip)"
+    : "Not specified";
 
   // WhatsApp link with friendly prefilled greeting
   const waDigits = toWhatsAppDigits(data.phone);
@@ -298,76 +316,39 @@ export function buildBookingEmail(data: BookingEmailInput): PreparedEmail {
   ];
 
   const contentHtml = `
-    <!-- Key Reservation Details Table (Structured & Compact) -->
+    <!-- Key Reservation Details (Stacked with Divider Lines) -->
+    <div style="font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #a8a29e; margin-bottom: 8px;">
+      Reservation Details
+    </div>
     <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #fafaf9; border: 1px solid #e7e5e4; border-radius: 12px; margin-bottom: 20px; overflow: hidden;">
       <tr>
-        <td style="padding: 12px 16px; border-bottom: 1px solid #f0eeeb;">
-          <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
-            <tr>
-              <td width="38%" style="font-size: 11.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #78716c; padding: 2px 0;">
-                Tour / Experience
-              </td>
-              <td width="62%" style="font-size: 13.5px; font-weight: 700; color: #ea580c; text-align: right; padding: 2px 0;">
-                ${escapeHtml(cleanedType)}
-              </td>
-            </tr>
-          </table>
+        <td style="padding: 12px 16px; border-bottom: 1px solid #e7e5e4;">
+          <div style="font-size: 11px; font-weight: 600; color: #78716c; text-transform: uppercase; letter-spacing: 0.5px;">Tour / Experience</div>
+          <div style="font-size: 14.5px; font-weight: 700; color: #ea580c; margin-top: 4px; line-height: 1.35;">${escapeHtml(cleanedType)}</div>
         </td>
       </tr>
       <tr>
-        <td style="padding: 10px 16px; border-bottom: 1px solid #f0eeeb;">
-          <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
-            <tr>
-              <td width="38%" style="font-size: 11.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #78716c; padding: 2px 0;">
-                Travel Date
-              </td>
-              <td width="62%" style="font-size: 13.5px; font-weight: 600; color: #1c1917; text-align: right; padding: 2px 0;">
-                ${escapeHtml(data.date)}
-              </td>
-            </tr>
-          </table>
+        <td style="padding: 11px 16px; border-bottom: 1px solid #e7e5e4;">
+          <div style="font-size: 11px; font-weight: 600; color: #78716c; text-transform: uppercase; letter-spacing: 0.5px;">Travel Date</div>
+          <div style="font-size: 13.5px; font-weight: 600; color: #1c1917; margin-top: 3px;">${escapeHtml(data.date)}</div>
         </td>
       </tr>
       <tr>
-        <td style="padding: 10px 16px; border-bottom: 1px solid #f0eeeb;">
-          <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
-            <tr>
-              <td width="38%" style="font-size: 11.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #78716c; padding: 2px 0;">
-                Guests
-              </td>
-              <td width="62%" style="font-size: 13.5px; font-weight: 600; color: #1c1917; text-align: right; padding: 2px 0;">
-                ${escapeHtml(String(data.persons))} ${data.persons === 1 ? "person" : "people"}
-              </td>
-            </tr>
-          </table>
+        <td style="padding: 11px 16px; border-bottom: 1px solid #e7e5e4;">
+          <div style="font-size: 11px; font-weight: 600; color: #78716c; text-transform: uppercase; letter-spacing: 0.5px;">Guests</div>
+          <div style="font-size: 13.5px; font-weight: 600; color: #1c1917; margin-top: 3px;">${escapeHtml(String(data.persons))} ${data.persons === 1 ? "person" : "people"}</div>
         </td>
       </tr>
       <tr>
-        <td style="padding: 10px 16px; border-bottom: 1px solid #f0eeeb;">
-          <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
-            <tr>
-              <td width="38%" style="font-size: 11.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #78716c; padding: 2px 0;">
-                Duration
-              </td>
-              <td width="62%" style="font-size: 13.5px; font-weight: 600; color: #1c1917; text-align: right; padding: 2px 0;">
-                ${escapeHtml(durationText)}
-              </td>
-            </tr>
-          </table>
+        <td style="padding: 11px 16px; border-bottom: 1px solid #e7e5e4;">
+          <div style="font-size: 11px; font-weight: 600; color: #78716c; text-transform: uppercase; letter-spacing: 0.5px;">Duration</div>
+          <div style="font-size: 13.5px; font-weight: 600; color: #1c1917; margin-top: 3px;">${escapeHtml(durationText)}</div>
         </td>
       </tr>
       <tr>
-        <td style="padding: 10px 16px;">
-          <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
-            <tr>
-              <td width="38%" style="font-size: 11.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #78716c; padding: 2px 0;">
-                Site Language
-              </td>
-              <td width="62%" style="font-size: 13.5px; font-weight: 600; color: #1c1917; text-align: right; padding: 2px 0;">
-                ${escapeHtml(langName)}
-              </td>
-            </tr>
-          </table>
+        <td style="padding: 11px 16px;">
+          <div style="font-size: 11px; font-weight: 600; color: #78716c; text-transform: uppercase; letter-spacing: 0.5px;">Site Language</div>
+          <div style="font-size: 13.5px; font-weight: 600; color: #1c1917; margin-top: 3px;">${escapeHtml(langName)}</div>
         </td>
       </tr>
     </table>
@@ -378,23 +359,23 @@ export function buildBookingEmail(data: BookingEmailInput): PreparedEmail {
     </div>
     <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #fafaf9; border: 1px solid #e7e5e4; border-radius: 12px; margin-bottom: 20px; overflow: hidden;">
       <tr>
-        <td style="padding: 10px 16px; border-bottom: 1px solid #f0eeeb;">
+        <td style="padding: 11px 16px; border-bottom: 1px solid #e7e5e4;">
           <div style="font-size: 11px; font-weight: 600; color: #78716c; text-transform: uppercase; letter-spacing: 0.5px;">Full Name</div>
-          <div style="font-size: 13.5px; font-weight: 600; color: #1c1917; margin-top: 2px;">${escapeHtml(data.fullName)}</div>
+          <div style="font-size: 13.5px; font-weight: 600; color: #1c1917; margin-top: 3px;">${escapeHtml(data.fullName)}</div>
         </td>
       </tr>
       <tr>
-        <td style="padding: 10px 16px; border-bottom: 1px solid #f0eeeb;">
+        <td style="padding: 11px 16px; border-bottom: 1px solid #e7e5e4;">
           <div style="font-size: 11px; font-weight: 600; color: #78716c; text-transform: uppercase; letter-spacing: 0.5px;">Email Address</div>
-          <div style="font-size: 13.5px; font-weight: 600; color: #1c1917; margin-top: 2px;">
+          <div style="font-size: 13.5px; font-weight: 600; color: #1c1917; margin-top: 3px;">
             <a href="mailto:${safeReplyTo}" style="color: #ea580c; text-decoration: none;">${escapeHtml(data.email)}</a>
           </div>
         </td>
       </tr>
       <tr>
-        <td style="padding: 10px 16px;">
+        <td style="padding: 11px 16px;">
           <div style="font-size: 11px; font-weight: 600; color: #78716c; text-transform: uppercase; letter-spacing: 0.5px;">Phone / WhatsApp</div>
-          <div style="font-size: 13.5px; font-weight: 600; color: #1c1917; margin-top: 2px;">
+          <div style="font-size: 13.5px; font-weight: 600; color: #1c1917; margin-top: 3px;">
             <a href="tel:${data.phone.replaceAll(/\s+/g, "")}" style="color: #1c1917; text-decoration: none;">${escapeHtml(data.phone)}</a>
           </div>
         </td>

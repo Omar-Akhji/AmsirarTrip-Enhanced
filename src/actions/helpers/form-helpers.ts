@@ -10,7 +10,10 @@ export function getLanguageName(code = ""): string {
 }
 
 export function cleanReservationType(type = ""): string {
-  return type.replace(/^Tour\d+\s/, "");
+  return type
+    .replace(/^Tour\d+\s*/i, "")
+    .replace(/\s*-\s*Duration:\s*\d+\s*Days?/i, "")
+    .trim();
 }
 
 export function sanitizeHeaderValue(value = "", maxLength = 120): string {

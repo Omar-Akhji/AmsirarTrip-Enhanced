@@ -55,9 +55,7 @@ const handleExpired = () => {
 };
 
 const selectedTour = computed(() => {
-  return tourTitle && tourDuration != null ?
-      `${tourTitle} - Duration: ${tourDuration} Days`
-    : (tourTitle ?? excursionTitle ?? "");
+  return tourTitle ?? excursionTitle ?? "";
 });
 
 const computedTourDuration = computed(() => tourDuration ?? null);
