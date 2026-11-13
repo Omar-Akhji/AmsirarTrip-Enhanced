@@ -4,12 +4,13 @@ import { env } from "@/lib/env";
 
 export const prerender = false;
 
-export const POST: APIRoute = async () => {
+export const POST: APIRoute = async ({ url }) => {
   const secret = env.CAP_SECRET_KEY || "amsirar-default-dev-cap-secret-key-32b";
   try {
+    const isWasmDisabled = url.searchParams.get("wasm") === "0";
     const challenge = await generateChallenge(secret, {
       format: 2,
-      protocols: ["hashwx", "instrumentation"],
+      protocols: isWasmDisabled ? ["sha256-pow"] : ["hashwx"],
     });
 
     return Response.json(challenge, {

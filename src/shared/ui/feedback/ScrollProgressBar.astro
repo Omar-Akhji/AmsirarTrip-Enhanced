@@ -11,12 +11,11 @@ const { class: className = "", width = "w-1 sm:w-1.5" } = Astro.props;
 <div
   aria-hidden="true"
   class:list={[
-    "scroll-progress-container fixed inset-y-0 inset-e-0 z-40 bg-black/5 backdrop-blur-[1px] transition-opacity duration-300 pointer-events-auto cursor-pointer select-none",
+    "scroll-progress-container fixed inset-y-0 inset-e-0 z-30 bg-black/5 backdrop-blur-[1px] transition-opacity duration-300 pointer-events-auto cursor-pointer select-none",
     width,
     className,
   ]}
   id="scrollProgressBarContainer"
-  title="Scroll position"
   transition:persist="scroll-progress-container"
 >
   <!-- Scroll Progress Indicator -->

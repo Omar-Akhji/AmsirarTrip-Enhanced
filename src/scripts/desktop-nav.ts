@@ -34,7 +34,7 @@ function findMatchingLink(nav: HTMLElement, currentPath: string): HTMLAnchorElem
     }
   }
 
-  return links[0] ?? null;
+  return null;
 }
 
 function getLabelWidth(label: HTMLElement): number {
@@ -247,9 +247,7 @@ function setupDesktopNav(): void {
     if (leaveTimer !== null) clearTimeout(leaveTimer);
     leaveTimer = globalThis.setTimeout(() => {
       currentHoveredLink = null;
-      if (currentActiveLink) {
-        setIndicator(currentActiveLink, false);
-      }
+      setIndicator(currentActiveLink, false);
     }, 120);
   });
 

@@ -13,6 +13,7 @@ const STATIC_PATH_PREFIXES = [
   "/images/",
   "/videos/",
   "/patterns/",
+  "/cap/",
 ];
 
 const DISCOVERY_PATHS = new Set([

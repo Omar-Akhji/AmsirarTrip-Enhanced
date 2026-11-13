@@ -322,6 +322,10 @@ const currentOgLocale = OG_LOCALE_MAP[locale] ?? locale;
       data={generateWebsiteJsonLd()}
       id="website-jsonld"
     />
+    <script is:inline define:vars={{ cspNonce: Astro.locals.cspNonce || "" }}>
+      window.CAP_SCRIPT_NONCE = cspNonce;
+      window.CAP_CUSTOM_HASHWX_URL = "/cap/hashwx.wasm";
+    </script>
   </head>
 
   <body class="flex flex-col inline-full min-block-full overflow-x-clip font-sans text-base leading-[1.6] text-ink bg-(--pattern-bg-color) bg-(image:--pattern-bg-image) bg-repeat bg-size-(--pattern-bg-size) antialiased font-features-['kern'_1,'liga'_1] selection:bg-[color-mix(in_oklch,var(--color-orange)_20%,transparent)] selection:text-inherit [&::-webkit-scrollbar]:hidden [&::-webkit-scrollbar]:size-0 [&::-webkit-scrollbar]:bg-transparent">
@@ -351,8 +355,8 @@ const currentOgLocale = OG_LOCALE_MAP[locale] ?? locale;
       </div>
     </main>
     <Footer />
-    <CookieConsent />
     <ScrollProgressBar />
+    <CookieConsent />
 
     <!-- WhatsApp Side Tape (Right Edge) -->
     <a
