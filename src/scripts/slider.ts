@@ -265,7 +265,7 @@ function initSlider(): void {
     }
   }
 
-  const AUTOPLAY_INTERVAL = 6000;
+  const AUTOPLAY_INTERVAL = 2000;
 
   function startAutoplay(): void {
     stopAutoplay();
