@@ -168,9 +168,9 @@ export const clientUi = {
     },
     "contact": {
       "form": {
-        "badge": "Plan with locals",
-        "title": "Design Your Custom Morocco Tour & Private Itinerary",
-        "subtitle": "Share your travel dates, party size, and preferred pace. Our Marrakech team prepares a detailed proposal and transparent quote within 24 hours.",
+        "badge": "24h reply",
+        "title": "Request a Quote or Custom Route",
+        "subtitle": "We handle bookings, route questions, and custom trip requests—replies within 24 hours.",
         "cta": "Send message",
         "sending": "Sending…",
         "success": "Message sent! We will reply within 24 hours.",
@@ -189,32 +189,32 @@ export const clientUi = {
           "name": "Full name",
           "email": "Email",
           "phone": "Phone number",
-          "topic": "Trip focus (optional)",
-          "message": "Tell us when, where, and how you want to travel"
+          "topic": "What is your enquiry about?",
+          "message": "Message"
         },
-        "infoBadge": "Need details?",
-        "infoTitle": "Plan handcrafted experiences",
-        "infoCopy": "Our Marrakech team answers every message personally and can help with custom itineraries, desert camps, or last-minute transfers.",
+        "infoBadge": "Direct contact",
+        "infoTitle": "Direct Marrakech Contact",
+        "infoCopy": "Prefer email or WhatsApp? Reach our Marrakech team directly for bookings, route questions, or transfers.",
         "info": {
           "address": "Visit",
           "phone": "Call",
           "email": "Email"
         },
-        "infoFooter": "Available every day from 09:00 to 21:00 GMT+1",
+        "infoFooter": "Daily 09:00–21:00 GMT+1",
         "details": "Contact Details",
         "placeholders": {
           "name": "Enter your full name",
           "email": "Enter your email address",
           "phone": "Enter your phone number",
-          "topic": "Enter trip focus (e.g. Sahara, Atlas, Custom)",
-          "message": "Enter your message or travel request..."
+          "topic": "Select an enquiry type",
+          "message": "Share your travel dates, group size, or question..."
         },
         "topics": {
-          "desert": "Sahara Desert Expedition",
-          "atlas": "High Atlas Mountain Trek",
-          "imperial": "Imperial Cities & Cultural Heritage",
-          "coastal": "Atlantic Coast & Essaouira Excursion",
-          "custom": "Tailored Private Morocco Itinerary"
+          "desert": "I want to book a tour or excursion",
+          "atlas": "Question about an existing booking",
+          "imperial": "Airport transfer or private driver quote",
+          "coastal": "Press or partnership enquiry",
+          "custom": "I want to plan a custom route"
         }
       }
     },
@@ -436,9 +436,9 @@ export const clientUi = {
     },
     "contact": {
       "form": {
-        "badge": "Planifiez avec les locaux",
-        "title": "Concevez Votre Circuit Personnalisé au Maroc & Itinéraire Privé",
-        "subtitle": "Indiquez-nous vos souhaits de voyage et nous vous préparons une proposition d'itinéraire détaillée.",
+        "badge": "Réponse sous 24h",
+        "title": "Demander un devis ou un circuit sur mesure",
+        "subtitle": "Nous gérons les réservations, questions d'itinéraire et devis de transport — réponse sous 24 heures.",
         "cta": "Envoyer le message",
         "sending": "Envoi en cours…",
         "success": "Message envoyé ! Nous répondrons dans les 24 heures.",
@@ -457,32 +457,32 @@ export const clientUi = {
           "name": "Nom complet",
           "email": "E-mail",
           "phone": "Numéro de téléphone",
-          "topic": "Focus du voyage (optionnel)",
-          "message": "Dites-nous quand, où et comment vous voulez voyager"
+          "topic": "Quel est l'objet de votre demande ?",
+          "message": "Message"
         },
-        "infoBadge": "Besoin de détails?",
-        "infoTitle": "Planifiez des expériences sur mesure",
-        "infoCopy": "Notre équipe de Marrakech répond personnellement à chaque message et peut vous aider avec des itinéraires personnalisés, des camps dans le désert ou des transferts de dernière minute.",
+        "infoBadge": "Contact direct",
+        "infoTitle": "Contact direct à Marrakech",
+        "infoCopy": "Vous préférez l'e-mail ou WhatsApp ? Contactez directement notre équipe à Marrakech pour vos réservations, questions ou transferts.",
         "info": {
           "address": "Visite",
           "phone": "Appel",
           "email": "E-mail"
         },
-        "infoFooter": "Disponible tous les jours de 09h00 à 21h00 GMT+1",
+        "infoFooter": "Tous les jours de 09h00 à 21h00 GMT+1",
         "details": "Coordonnées de contact",
         "placeholders": {
           "name": "Entrez votre nom complet",
           "email": "Entrez votre adresse email",
           "phone": "Entrez votre numéro de téléphone",
-          "topic": "Thème du voyage (ex. Sahara, Atlas, Sur mesure)",
-          "message": "Entrez votre message ou demande de voyage..."
+          "topic": "Sélectionnez un sujet",
+          "message": "Indiquez vos dates, le nombre de personnes ou votre question..."
         },
         "topics": {
-          "desert": "Expédition dans le désert du Sahara",
-          "atlas": "Trek dans le Haut Atlas",
-          "imperial": "Villes impériales et patrimoine culturel",
-          "coastal": "Côte atlantique et excursion à Essaouira",
-          "custom": "Itinéraire privé sur mesure au Maroc"
+          "desert": "Je souhaite réserver un circuit ou une excursion",
+          "atlas": "Question sur une réservation existante",
+          "imperial": "Devis transfert aéroport ou chauffeur privé",
+          "coastal": "Demande presse ou partenariat",
+          "custom": "Je souhaite créer un itinéraire sur mesure"
         }
       }
     },
@@ -704,9 +704,9 @@ export const clientUi = {
     },
     "contact": {
       "form": {
-        "badge": "Planen Sie mit Einheimischen",
-        "title": "Entwerfen Sie Ihre Individuelle Marokko-Reise & Privaten Reiseplan",
-        "subtitle": "Teilen Sie uns Ihre Reisedaten mit und wir erstellen einen maßgeschneiderten Routenvorschlag für Sie.",
+        "badge": "Antwort in 24h",
+        "title": "Angebot oder Wunschroute anfragen",
+        "subtitle": "Wir bearbeiten Buchungen, Routenfragen und Transportangebote – Antwort innerhalb von 24 Stunden.",
         "cta": "Nachricht senden",
         "sending": "Wird gesendet…",
         "success": "Nachricht gesendet! Wir antworten innerhalb von 24 Stunden.",
@@ -725,32 +725,32 @@ export const clientUi = {
           "name": "Vollständiger Name",
           "email": "E-Mail",
           "phone": "Telefonnummer",
-          "topic": "Reisefokus (optional)",
-          "message": "Sagen Sie uns, wann, wo und wie Sie reisen möchten"
+          "topic": "Worum geht es bei Ihrer Anfrage?",
+          "message": "Nachricht"
         },
-        "infoBadge": "Details benötigt?",
-        "infoTitle": "Planen Sie handgefertigte Erlebnisse",
-        "infoCopy": "Unser Team in Marrakesch beantwortet jede Nachricht persönlich und kann bei individuellen Reiseplänen, Wüstencamps oder Last-Minute-Transfers helfen.",
+        "infoBadge": "Direktkontakt",
+        "infoTitle": "Direktkontakt in Marrakesch",
+        "infoCopy": "Lieber per E-Mail oder WhatsApp? Erreichen Sie unser Team in Marrakesch direkt für Buchungen, Routenfragen oder Transfers.",
         "info": {
           "address": "Besuchen",
           "phone": "Anrufen",
           "email": "E-Mail"
         },
-        "infoFooter": "Täglich von 09:00 bis 21:00 Uhr GMT+1 verfügbar",
+        "infoFooter": "Täglich 09:00–21:00 GMT+1",
         "details": "Kontaktdaten",
         "placeholders": {
           "name": "Geben Sie Ihren vollständigen Namen ein",
           "email": "Geben Sie Ihre E-Mail-Adresse ein",
           "phone": "Geben Sie Ihre Telefonnummer ein",
-          "topic": "Reisefokus eingeben (z. B. Sahara, Atlas, Individuell)",
-          "message": "Geben Sie Ihre Nachricht oder Reiseanfrage ein..."
+          "topic": "Anfrageart auswählen",
+          "message": "Nennen Sie Ihre Reisedaten, Gruppengröße oder Frage..."
         },
         "topics": {
-          "desert": "Sahara-Wüstenexpedition",
-          "atlas": "Wanderung im Hohen Atlas",
-          "imperial": "Königsstädte & Kulturerbe",
-          "coastal": "Atlantikküste & Essaouira-Ausflug",
-          "custom": "Maßgeschneiderte private Marokko-Reiseroute"
+          "desert": "Ich möchte eine Tour oder einen Ausflug buchen",
+          "atlas": "Frage zu einer bestehenden Buchung",
+          "imperial": "Angebot für Flughafentransfer oder Privatfahrer",
+          "coastal": "Presse- oder Kooperationsanfrage",
+          "custom": "Ich möchte eine individuelle Route planen"
         }
       }
     },
@@ -972,9 +972,9 @@ export const clientUi = {
     },
     "contact": {
       "form": {
-        "badge": "Planifica con locales",
-        "title": "Diseña Tu Tour Personalizado a Marruecos & Itinerario Privado",
-        "subtitle": "Comparta sus detalles de viaje y le prepararemos una propuesta de ruta adaptada a sus fechas.",
+        "badge": "Respuesta en 24h",
+        "title": "Solicitar presupuesto o ruta a medida",
+        "subtitle": "Gestionamos reservas, dudas de ruta y presupuestos de transporte — respuesta en menos de 24 horas.",
         "cta": "Enviar mensaje",
         "sending": "Enviando…",
         "success": "¡Mensaje enviado! Responderemos en 24 horas.",
@@ -993,32 +993,32 @@ export const clientUi = {
           "name": "Nombre completo",
           "email": "Correo electrónico",
           "phone": "Número de teléfono",
-          "topic": "Enfoque del viaje (opcional)",
-          "message": "Dinos cuándo, dónde y cómo quieres viajar"
+          "topic": "¿Sobre qué es tu consulta?",
+          "message": "Mensaje"
         },
-        "infoBadge": "¿Necesitas detalles?",
-        "infoTitle": "Planifica experiencias artesanales",
-        "infoCopy": "Nuestro equipo de Marrakech responde cada mensaje personalmente y puede ayudar con itinerarios personalizados, campamentos en el desierto o traslados de última hora.",
+        "infoBadge": "Contacto directo",
+        "infoTitle": "Contacto directo en Marrakech",
+        "infoCopy": "¿Prefieres correo o WhatsApp? Contacta directamente con nuestro equipo en Marrakech para reservas, rutas o traslados.",
         "info": {
           "address": "Visitar",
           "phone": "Llamar",
           "email": "Correo"
         },
-        "infoFooter": "Disponible todos los días de 09:00 a 21:00 GMT+1",
+        "infoFooter": "Todos los días de 09:00 a 21:00 GMT+1",
         "details": "Detalles de contacto",
         "placeholders": {
           "name": "Ingrese su nombre completo",
           "email": "Ingrese su correo electrónico",
           "phone": "Ingrese su número de teléfono",
-          "topic": "Tipo de viaje (ej. Sahara, Atlas, Personalizado)",
-          "message": "Ingrese su mensaje o consulta de viaje..."
+          "topic": "Selecciona un tipo de consulta",
+          "message": "Comparte tus fechas de viaje, tamaño del grupo o duda..."
         },
         "topics": {
-          "desert": "Expedición al Desierto del Sahara",
-          "atlas": "Ruta de montaña por el Alto Atlas",
-          "imperial": "Ciudades Imperiales y Patrimonio Cultural",
-          "coastal": "Costa Atlántica y Excursión a Essaouira",
-          "custom": "Itinerario privado a medida en Marruecos"
+          "desert": "Quiero reservar un tour o excursión",
+          "atlas": "Consulta sobre una reserva existente",
+          "imperial": "Presupuesto de traslado o conductor privado",
+          "coastal": "Consulta de prensa o colaboración",
+          "custom": "Quiero planificar una ruta a medida"
         }
       }
     },

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from "vue";
 import type { FormState } from "@/lib/form-types";
 import { useTranslation } from "@/lib/hooks/use-translation";
 import PhoneInput from "@/shared/ui/widgets/PhoneInput.vue";
@@ -11,8 +10,6 @@ interface Props {
 const { state } = defineProps<Props>();
 
 const { t } = useTranslation();
-
-const isTopicExpanded = ref(false);
 </script>
 
 <template>
@@ -187,30 +184,32 @@ const isTopicExpanded = ref(false);
               stroke-linecap="round"
             />
           </svg>
-          <input
+          <select
             id="contact-topic"
             name="topic"
-            type="text"
-            list="contact-topics"
-            aria-autocomplete="list"
-            :aria-expanded="isTopicExpanded"
-            aria-controls="contact-topics"
-            class="peer h-12 rounded-xl border border-stone-200/90 bg-stone-50/50 ps-10.5 pe-4 font-sans text-sm text-stone-900 transition-colors inline-full placeholder:text-stone-400 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden dark:border-white/10 dark:bg-white/5 dark:text-mist-100 dark:placeholder:text-mist-500 dark:focus:border-orange-500 dark:focus:bg-white/10"
-            :placeholder="t('contact.form.placeholders.topic')"
-            toolparamdescription="The specific focus or interest of the trip, e.g., Sahara desert, imperial cities, custom trek"
-            autocomplete="off"
-            @focus="isTopicExpanded = true"
-            @blur="isTopicExpanded = false"
-            @input="isTopicExpanded = true"
-          />
+            class="peer h-12 appearance-none rounded-xl border border-stone-200/90 bg-stone-50/50 ps-10.5 pe-9 font-sans text-sm text-stone-900 transition-colors inline-full focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden dark:border-white/10 dark:bg-white/5 dark:text-mist-100 dark:focus:border-orange-500 dark:focus:bg-white/10"
+            toolparamdescription="The specific enquiry type, e.g., book a tour, plan a custom route, existing booking"
+          >
+            <option value="">
+              {{ t("contact.form.placeholders.topic") }}
+            </option>
+            <option :value="t('contact.form.topics.desert')">
+              {{ t("contact.form.topics.desert") }}
+            </option>
+            <option :value="t('contact.form.topics.custom')">
+              {{ t("contact.form.topics.custom") }}
+            </option>
+            <option :value="t('contact.form.topics.atlas')">
+              {{ t("contact.form.topics.atlas") }}
+            </option>
+            <option :value="t('contact.form.topics.imperial')">
+              {{ t("contact.form.topics.imperial") }}
+            </option>
+            <option :value="t('contact.form.topics.coastal')">
+              {{ t("contact.form.topics.coastal") }}
+            </option>
+          </select>
         </div>
-        <datalist id="contact-topics">
-          <option :value="t('contact.form.topics.desert')" />
-          <option :value="t('contact.form.topics.atlas')" />
-          <option :value="t('contact.form.topics.imperial')" />
-          <option :value="t('contact.form.topics.coastal')" />
-          <option :value="t('contact.form.topics.custom')" />
-        </datalist>
       </div>
     </div>
 

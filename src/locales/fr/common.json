@@ -57,7 +57,9 @@
       "care": "Service client",
       "satisfaction": "Satisfaction client"
     },
-    "featured": { "title": "Circuits et expéditions dans le désert en vedette" }
+    "featured": {
+      "title": "Circuits et expéditions dans le désert en vedette"
+    }
   },
   "tours": {
     "meta": {
@@ -71,7 +73,9 @@
     "activitiesLabel": "Activités",
     "arrivalLabel": "Heure d'arrivée",
     "featured": "En vedette",
-    "category": { "departures": "Départs" },
+    "category": {
+      "departures": "Départs"
+    },
     "cities": {
       "marrakech": "Marrakech",
       "casablanca": "Casablanca",
@@ -114,14 +118,14 @@
       "ctaPoint02": "Itinéraires flexibles adaptés à vos besoins",
       "ctaPoint03": "Assistance 24h/24 durant votre séjour au Maroc"
     },
-    "headerSubtitle": "Nos Tours et forfaits",
+    "headerSubtitle": "Circuits privés et partagés de plusieurs jours au départ de Marrakech, Fès, Casablanca et Tanger avec chauffeurs locaux agréés.",
     "stats": {
       "routes": "Itinéraires phare",
-      "routesDesc": "Circuits de plusieurs jours reliant villes impériales, dunes du désert et cols de l'Atlas.",
+      "routesDesc": "Itinéraires de 3 à 10 jours à travers le Sahara, le Haut Atlas et les villes impériales.",
       "comfort": "Flotte confortable",
-      "comfortDesc": "4x4 modernes et minicoachs avec chauffeurs-guides expérimentés.",
+      "comfortDesc": "4x4 et minibus privés climatisés avec chauffeurs-guides locaux agréés.",
       "support": "Assistance 24/7",
-      "supportDesc": "Coordination en cours de route pour hôtels et demandes spécifiques."
+      "supportDesc": "Coordination directe sur WhatsApp pour les hôtels, repas et ajustements."
     },
     "tour": {
       "smTitle": "Circuits privés et partagés de plusieurs jours",
@@ -141,7 +145,7 @@
     },
     "detailsTitle": "Détails des circuits",
     "breadcrumb": "Détails du circuit",
-    "detailsSubtitle": "Histoires, conseils et inspirations de nos aventures",
+    "detailsSubtitle": "Circuits privés et partagés à travers les villes impériales du Maroc, les cols du Haut Atlas et le désert du Sahara.",
     "exploreThisTour": "Explorer ce circuit",
     "overview": "Aperçu",
     "departure": "Départ de {city}",
@@ -162,7 +166,7 @@
     "faqTitle": "Questions fréquentes",
     "startLabelShort": "Départ",
     "endLabelShort": "Arrivée",
-    "sectionSubtitle": "Choisissez votre aventure marocaine parfaite",
+    "sectionSubtitle": "Filtrez par ville de départ ci-dessous. Chaque itinéraire existe en formule privée ou partagée.",
     "recentBlog": "Articles récents",
     "reservation": {
       "title": "Réserver",
@@ -235,15 +239,15 @@
     "sharedOptionDesc": "Rejoignez un petit groupe programmé de 8 à 14 voyageurs avec départs garantis.",
     "faq": {
       "title": "Questions fréquentes sur nos circuits au Maroc",
-      "subtitle": "Tout ce dont vous avez besoin pour préparer votre voyage dans le désert.",
+      "subtitle": "Réponses rapides sur l'agrément, les saisons et la taille des groupes.",
       "q1": "Quels types d'excursions et circuits dans le désert sont disponibles depuis Marrakech ?",
-      "a1": "Amsirar Trip propose des circuits au Maroc de 3 à 14 jours. Nos formules comprennent des randonnées chamelières dans les dunes de l'Erg Chebbi à Merzouga, la traversée du Haut Atlas via le col de Tizi n'Tichka et des circuits dans les villes impériales. Tous nos départs se font en 4x4 privé climatisé avec guide agréé.",
+      "a1": "Nos circuits durent de 3 à 14 jours au départ de Marrakech, Fès, Casablanca, Agadir et Tanger en 4x4 privé avec chauffeurs-guides marocains agréés.",
       "q2": "Amsirar Trip est-elle une agence de voyage agréée au Maroc ?",
-      "a2": "Oui. Amsirar Trip opère sous licence officielle de tourisme numéro 24/TT/RAK, délivrée par le Ministère du Tourisme. Basés à Marrakech, nous respectons scrupuleusement la réglementation touristique marocaine.",
+      "a2": "Oui. Amsirar Trip est basé à Marrakech sous la licence touristique marocaine 24/TT/RAK.",
       "q3": "Quelle est la meilleure période pour un circuit dans le désert au départ de Marrakech ?",
-      "a3": "La période idéale s'étend d'octobre à avril, avec des températures diurnes agréables entre 18°C et 28°C dans l'Erg Chebbi. En été, les températures désertiques dépassent 40°C mais restent tempérées dans l'Atlas. Nous opérons toute l'année.",
+      "a3": "D'octobre à avril, les journées à Erg Chebbi oscillent entre 18°C et 28°C. Nous opérons toute l'année, mais l'été dépasse 40°C dans le désert.",
       "q4": "Les circuits sont-ils privés ou en groupe partagé ?",
-      "a4": "Nous proposons des départs privés VIP ainsi que des petits groupes partagés de 8 à 14 personnes à tarifs avantageux sur les circuits les plus populaires."
+      "a4": "Les deux. Les circuits privés utilisent un 4x4 ou minibus dédié avec arrêts flexibles ; les départs partagés regroupent 8 à 14 voyageurs à dates fixes."
     },
     "kickerAbout": "À propos de ce circuit",
     "kickerSchedule": "Programme quotidien",
@@ -261,7 +265,7 @@
       "description": "Meilleures excursions d'une journée depuis Marrakech : coucher de soleil à Agafay, cascades d'Ouzoud, vallée de l'Ourika et Essaouira avec chauffeur privé."
     },
     "title": "Nos excursions",
-    "sectionSubtitle": "Excursions d'une journée au départ de Marrakech vers les vallées de l'Atlas, la côte atlantique et le désert.",
+    "sectionSubtitle": "Les tarifs par personne varient selon la taille du groupe ; option 4x4 privé disponible sur chaque trajet.",
     "detailsTitle": "Détails de l'excursion",
     "breadcrumb": "Détails de l'excursion",
     "detailsSubtitle": "Explorez les trésors cachés du Maroc",
@@ -285,13 +289,15 @@
     },
     "stats": {
       "routes": "Excursions signatures",
-      "routesDesc": "Excursions d'une journée choisies, des cascades aux couchers de soleil du désert.",
+      "routesDesc": "6 excursions d'une journée depuis Marrakech : vallées de l'Atlas, cascades, côte et Agafay.",
       "local": "Expertise locale",
-      "localDesc": "Guidé par des conteurs et chauffeurs basés à Marrakech.",
+      "localDesc": "Chauffeurs et guides locaux agréés basés à Marrakech.",
       "support": "Assistance en voyage",
-      "supportDesc": "Départs flexibles et planification de type conciergerie."
+      "supportDesc": "Prise en charge et retour directs à votre hôtel ou riad à Marrakech."
     },
-    "card": { "category": "Journée complète" },
+    "card": {
+      "category": "Journée complète"
+    },
     "exploreLink": "Voir les détails",
     "sidebar": {
       "alt": "Véhicule de transfert aéroportuaire Amsirar",
@@ -317,63 +323,63 @@
       "ouzoud": {
         "title": "Excursion aux cascades d'Ouzoud",
         "alt": "Vue sur les cascades d'Ouzoud",
-        "description": "Découvrez les plus hautes cascades du Maroc, observez les macaques joueurs et rafraîchissez-vous près des chutes.",
+        "description": "Parcourez les sentiers autour des cascades de 110 m, les plus hautes du Maroc, et observez les macaques de Barbarie. Inclut le trajet direct depuis Marrakech et une pause déjeuner au bord de l'eau sans horaire de groupe imposé. Idéal pour une sortie nature accessible.",
         "tagline": "Une escapade rafraîchissante dans le Moyen Atlas.",
         "duration": "Journée complète"
       },
       "essaouira": {
         "title": "Escapade côtière à Essaouira",
         "alt": "Vagues le long des remparts d'Essaouira",
-        "description": "Flânez dans la médina fortifiée, observez les barques bleues du port et savourez des fruits de mer frais.",
+        "description": "Passez la journée sur la côte atlantique entre remparts portugais du XVIIIe siècle, médina et port de pêche. Voyagez en véhicule privé climatisé à votre rythme plutôt qu'en grand bus touristique. Parfait pour les couples et familles en quête d'air marin.",
         "tagline": "Brises atlantiques et ambiance artistique.",
         "duration": "Journée complète"
       },
       "imlil": {
         "title": "Randonnée Imlil & Toubkal",
         "alt": "Randonneur surplombant la vallée d'Imlil",
-        "description": "Parcourez des villages en terrasses, partagez un thé à la menthe avec les habitants et admirez le mont Toubkal.",
+        "description": "Randonnez dans les contreforts du Haut Atlas sous le mont Toubkal (4 167 m) à travers des villages berbères en pierre. Inclut un déjeuner chez l'habitant à Aroumd plutôt qu'une halte touristique en bord de route. Conçu pour les marcheurs cherchant la montagne près de Marrakech.",
         "tagline": "Paysages du Haut Atlas à portée de main.",
         "duration": "Journée complète"
       },
       "ourika": {
         "title": "Découverte de la vallée de l'Ourika",
         "alt": "Berges de la rivière Ourika",
-        "description": "Explorez des villages berbères, visitez une coopérative d'argan et randonnez vers les cascades de Setti Fatma.",
+        "description": "Rejoignez la vallée de l'Ourika pour visiter une coopérative féminine d'argan, des hameaux berbères et les cascades de Setti Fatma. Départ de Marrakech en véhicule privé avec un chauffeur local qui adapte les arrêts à votre groupe. Idéal pour les familles et marcheurs.",
         "tagline": "Vallées verdoyantes et air de montagne.",
         "duration": "Journée complète"
       },
       "agafay": {
         "title": "Coucher de soleil dans le désert d'Agafay",
         "alt": "Campement dans le désert d'Agafay au coucher du soleil",
-        "description": "Parcourez les dunes rocailleuses à dos de dromadaire ou en quad, puis dînez sous les étoiles avec musique live.",
+        "description": "Balade à dos de dromadaire d'une heure sur les collines pierreuses d'Agafay au coucher du soleil, suivie d'un dîner marocain trois plats et de musique au coin du feu. À seulement 45 minutes de Marrakech, sans long trajet vers le Sahara. Parfait si vous manquez de temps.",
         "tagline": "Aventure et dîner sous le ciel du désert.",
         "duration": "Journée complète"
       },
       "balloon": {
         "title": "Vol en montgolfière au lever du soleil",
         "alt": "Montgolfière flottant au lever du soleil",
-        "description": "Décollez à l'aube pour des vues panoramiques sur Marrakech, puis savourez un petit-déjeuner berbère après l'atterrissage.",
+        "description": "Survolez la plaine du Haouz et le Haut Atlas à 1 000 mètres d'altitude au lever du soleil, puis prenez un petit-déjeuner sous tente berbère. Inclut la prise en charge matinale à Marrakech en nacelle partagée ou privée. Idéal pour les lève-tôt et occasions spéciales.",
         "tagline": "Un vol paisible au-dessus des contreforts de l'Atlas.",
         "duration": "Journée complète"
       }
     },
-    "headerSubtitle": "Nos excursions et forfaits",
+    "headerSubtitle": "Excursions privées et en petit groupe depuis votre hôtel ou riad à Marrakech avec chauffeurs locaux agréés — sans grands bus.",
     "blog": {
       "smTitle": "lisez ces excursions pour en savoir plus",
-      "lgTitle": "Excursions de Marrakech"
+      "lgTitle": "Excursions au départ de Marrakech"
     },
     "readMore": "En savoir plus",
     "faq": {
       "title": "Questions fréquentes sur les excursions d'une journée",
-      "subtitle": "Organisez votre excursion idéale au départ de Marrakech.",
+      "subtitle": "Réponses rapides sur les distances, langues et prises en charge.",
       "q1": "Quelles excursions d'une journée peut-on faire depuis Marrakech ?",
-      "a1": "Vous pouvez réserver des excursions vers les cascades d'Ouzoud (110 m de haut), le désert d'Agafay à 40 km, la vallée de l'Ourika et la kasbah d'Aït Benhaddou. Toutes partent le matin et rentrent le soir.",
+      "a1": "Excursions à la journée vers les cascades d'Ouzoud (110 m), le désert d'Agafay (à 40 km), la vallée de l'Ourika, Essaouira, Imlil et Aït Ben Haddou. Départ le matin de Marrakech et retour le soir même.",
       "q2": "À quelle distance se trouve le désert d'Agafay de Marrakech ?",
-      "a2": "Agafay se situe à environ 40 km au sud-ouest de Marrakech, soit 45 minutes de route. Ce plateau aride offre balades à dos de chameau, couchers de soleil et dîners sous les étoiles.",
+      "a2": "À environ 40 km au sud-ouest de Marrakech, soit 45 minutes de route. C'est un plateau rocheux et non des dunes de sable, avec balade à dromadaire au coucher du soleil et dîner en option.",
       "q3": "Les excursions sont-elles accompagnées de guides francophones ?",
-      "a3": "Oui. Toutes nos excursions incluent un chauffeur-guide professionnel francophone, le transport privé en 4x4 climatisé et la prise en charge à votre hôtel à Marrakech.",
+      "a3": "Oui — guidées en français (et en anglais, espagnol ou allemand sur demande), avec transport en 4x4 climatisé et prise en charge à votre hôtel à Marrakech.",
       "q4": "Peut-on combiner une excursion d'une journée avec un circuit dans le Sahara ?",
-      "a4": "Oui. Nous pouvons combiner une excursion à la journée avec un circuit de plusieurs jours dans le Sahara pour composer un itinéraire sur mesure."
+      "a4": "Oui. Vous pouvez associer n'importe quelle excursion, comme Ouzoud ou Agafay, à un circuit de plusieurs jours dans le Sahara à Merzouga."
     }
   },
   "about": {
@@ -382,24 +388,24 @@
       "description": "Découvrez l'équipe d'Amsirar Trip, agence de tourisme réceptif agréée à Marrakech avec plus de 20 ans d'expérience dans les voyages sur mesure au Maroc."
     },
     "title": "À propos de nous",
-    "headerSubtitle": "Circuits privés dans le désert et transports dans le Haut Atlas depuis Marrakech",
+    "headerSubtitle": "Agence de voyage agréée à Marrakech (Licence 24/TT/RAK), circuits privés au Maroc depuis 2006.",
     "smTitle": "Présentation de notre agence",
     "ourStory": "Notre Histoire",
-    "experienceTitle": "20 ans d'expérience",
+    "experienceTitle": "Agence et transport touristique basés à Marrakech, en activité depuis 2006.",
     "whyTrustTitle": "Comment nous organisons vos voyages au Maroc :",
     "whyTrust": {
-      "point1": "Coordination directe avec des chauffeurs-guides agréés",
-      "point2": "Véhicules 4x4 et minivans climatisés entretenus pour la montagne",
-      "point3": "Itinéraires personnalisés selon votre rythme et vos souhaits",
-      "point4": "Tarification transparente sans arrêts commerciaux forcés"
+      "point1": "Chauffeurs-guides locaux agréés originaires du désert et des montagnes du Maroc.",
+      "point2": "Flotte propre de 4x4 Toyota Prado et minibus Mercedes-Benz climatisés.",
+      "point3": "Rythme privé au quotidien avec arrêts photos, villages et repas.",
+      "point4": "Tarifs directs transparents avec riads et bivouacs vérifiés."
     },
-    "experienceText1": "Depuis 2006, notre équipe basée à Marrakech accompagne les voyageurs à travers le sud du Maroc, des cols du Haut Atlas aux dunes de Merzouga et Chegaga. Nous coordonnons transports, étapes de montagne et séjours en riad directement avec des chauffeurs locaux.",
-    "experienceText2": "Nos circuits associent la traversée du col du Tizi n'Tichka à des arrêts à pied dans les villages de vallée et des nuits dans des bivouacs désertiques bien établis.",
-    "experienceText3": "Nos chauffeurs connaissent les routes locales, les points de vue panoramiques et les étapes de restauration fiables. Nous adaptons chaque trajet à vos dates et à votre groupe.",
-    "conclusionText": "Que vous prépariez une escapade de 3 jours dans le désert ou un circuit complet de 10 jours dans les villes impériales, nous organisons votre voyage selon votre calendrier.",
+    "experienceText1": "Nous avons créé Amsirar Trip à Marrakech en 2006 pour proposer des circuits privés dans le désert et l'Atlas sans les longs trajets précipités ni les arrêts forcés dans les boutiques à commission des grands bus.",
+    "experienceText2": "Vous voyagez dans nos propres 4x4 Toyota Prado ou minibus Mercedes-Benz climatisés avec un chauffeur-guide agréé, en franchissant le Tizi n'Tichka (2 260 m) vers Erg Chebbi, Erg Chegaga ou les villes impériales à votre rythme.",
+    "experienceText3": "Indiquez-nous vos dates et la taille de votre groupe : notre bureau de Marrakech vous envoie un itinéraire jour par jour et un tarif direct.",
+    "conclusionText": "Des escapades de 3 jours dans le Sahara aux circuits de 10 jours, chaque étape suit votre programme.",
     "imageCaption": "Chauffeur-guide au pied du Haut Atlas",
     "facts": {
-      "smTitle": "Repères de l'agence",
+      "smTitle": "Circuits et voyageurs enregistrés depuis 2006.",
       "lgTitle": "Chiffres clés",
       "photos": "Voyageurs accompagnés",
       "beaches": "Bivouacs au désert",
@@ -413,21 +419,21 @@
       "description": "Contactez nos experts locaux pour organiser votre circuit privé au Maroc. Devis gratuit et personnalisé sous 24h et assistance WhatsApp disponible."
     },
     "title": "Nous contacter",
-    "headerSubtitle": "Organisez votre circuit privé, vos transferts ou votre itinéraire sur mesure avec notre équipe à Marrakech.",
-    "smTitle": "Contactez-Nous",
+    "headerSubtitle": "Envoyez-nous un message : notre équipe à Marrakech répond sous 24 heures avec des conseils d'itinéraire ou un devis.",
+    "smTitle": "Réponse sous 24h",
     "lgTitle": "Nous Contacter",
     "card": {
-      "phoneTitle": "Contactez notre bureau à Marrakech",
-      "phoneSeo": "Notre équipe répond à vos questions sur les réservations, les disponibilités et les ajustements d'itinéraires tous les jours de 09h00 à 21h00 GMT+1.",
-      "emailTitle": "Envoyez-nous vos dates et projets de voyage",
-      "emailSeo": "Indiquez-nous vos dates, vos étapes souhaitées et la taille de votre groupe. Nous vous préparons un programme détaillé avec devis clair.",
-      "visitTitle": "Passez à notre bureau de Marrakech",
-      "visitSeo": "Rencontrez notre équipe à Marrakech pour préparer vos circuits privés, organiser vos transferts ou affiner votre itinéraire dans le désert."
+      "phoneTitle": "Téléphone & WhatsApp",
+      "phoneSeo": "WhatsApp ou appel au +212 668-072045 (09h00–21h00 GMT+1).",
+      "emailTitle": "Devis & Itinéraires",
+      "emailSeo": "Envoyez vos dates et le nombre de voyageurs ; réponse sous 24 heures.",
+      "visitTitle": "Bureau à Marrakech",
+      "visitSeo": "Agence à Marrakech (Licence 24/TT/RAK) pour planifier sur place."
     },
     "form": {
-      "badge": "Planifiez avec les locaux",
-      "title": "Concevez Votre Circuit Personnalisé au Maroc & Itinéraire Privé",
-      "subtitle": "Indiquez-nous vos souhaits de voyage et nous vous préparons une proposition d'itinéraire détaillée.",
+      "badge": "Réponse sous 24h",
+      "title": "Demander un devis ou un circuit sur mesure",
+      "subtitle": "Nous gérons les réservations, questions d'itinéraire et devis de transport — réponse sous 24 heures.",
       "cta": "Envoyer le message",
       "sending": "Envoi en cours…",
       "success": "Message envoyé ! Nous répondrons dans les 24 heures.",
@@ -446,28 +452,32 @@
         "name": "Nom complet",
         "email": "E-mail",
         "phone": "Numéro de téléphone",
-        "topic": "Focus du voyage (optionnel)",
-        "message": "Dites-nous quand, où et comment vous voulez voyager"
+        "topic": "Quel est l'objet de votre demande ?",
+        "message": "Message"
       },
-      "infoBadge": "Besoin de détails?",
-      "infoTitle": "Planifiez des expériences sur mesure",
-      "infoCopy": "Notre équipe de Marrakech répond personnellement à chaque message et peut vous aider avec des itinéraires personnalisés, des camps dans le désert ou des transferts de dernière minute.",
-      "info": { "address": "Visite", "phone": "Appel", "email": "E-mail" },
-      "infoFooter": "Disponible tous les jours de 09h00 à 21h00 GMT+1",
+      "infoBadge": "Contact direct",
+      "infoTitle": "Contact direct à Marrakech",
+      "infoCopy": "Vous préférez l'e-mail ou WhatsApp ? Contactez directement notre équipe à Marrakech pour vos réservations, questions ou transferts.",
+      "info": {
+        "address": "Visite",
+        "phone": "Appel",
+        "email": "E-mail"
+      },
+      "infoFooter": "Tous les jours de 09h00 à 21h00 GMT+1",
       "details": "Coordonnées de contact",
       "placeholders": {
         "name": "Entrez votre nom complet",
         "email": "Entrez votre adresse email",
         "phone": "Entrez votre numéro de téléphone",
-        "topic": "Thème du voyage (ex. Sahara, Atlas, Sur mesure)",
-        "message": "Entrez votre message ou demande de voyage..."
+        "topic": "Sélectionnez un sujet",
+        "message": "Indiquez vos dates, le nombre de personnes ou votre question..."
       },
       "topics": {
-        "desert": "Expédition dans le désert du Sahara",
-        "atlas": "Trek dans le Haut Atlas",
-        "imperial": "Villes impériales et patrimoine culturel",
-        "coastal": "Côte atlantique et excursion à Essaouira",
-        "custom": "Itinéraire privé sur mesure au Maroc"
+        "desert": "Je souhaite réserver un circuit ou une excursion",
+        "atlas": "Question sur une réservation existante",
+        "imperial": "Devis transfert aéroport ou chauffeur privé",
+        "coastal": "Demande presse ou partenariat",
+        "custom": "Je souhaite créer un itinéraire sur mesure"
       }
     },
     "info": {
@@ -476,11 +486,16 @@
       "address": "Adresse",
       "message": "Message"
     },
-    "location": { "smTitle": "Nous Trouver", "lgTitle": "Notre Emplacement" },
-    "methods": { "title": "Canaux de communication directe" },
+    "location": {
+      "smTitle": "Bureau de Marrakech pour préparer votre trajet sur place.",
+      "lgTitle": "Notre Emplacement"
+    },
+    "methods": {
+      "title": "Canaux de communication directe"
+    },
     "map": {
       "placeholderTitle": "Afficher la carte interactive",
-      "placeholderDesc": "Découvrez l'emplacement exact de nos bureaux à Marrakech et ses environs.",
+      "placeholderDesc": "Voir notre agence à Marrakech sur Google Maps.",
       "loadBtn": "Charger la carte"
     }
   },
@@ -1187,18 +1202,18 @@
     "lgTitle": "Nos services",
     "cards": {
       "handcrafted": {
-        "title": "Expériences artisanales",
-        "text": "Découvrez le meilleur du Maroc avec nos circuits sur mesure, conçus pour mettre en valeur sa riche culture et ses paysages grandioses.",
-        "alt": "Icône expériences artisanales"
+        "title": "Itinéraires privés à votre rythme",
+        "text": "Circuits adaptés à vos dates en 4x4 ou minibus privé climatisé.",
+        "alt": "Icône de planification de circuit privé"
       },
       "guide": {
         "title": "Guide touristique",
-        "text": "Visiter le Maroc avec un guide expérimenté enrichit le voyage grâce à des éclairages sur la culture et l'histoire locales.",
+        "text": "Chauffeurs et guides locaux agréés qui connaissent chaque col, village et point de vue.",
         "alt": "Icône guide touristique"
       },
       "price": {
         "title": "Prix adaptés",
-        "text": "Tarifs transparents sur tous nos circuits, incluant transport privé, hébergements et guidage sans frais imprévus.",
+        "text": "Tarifs directs incluant transport, carburant, hôtels et petits-déjeuners — sans arrêts commerciaux forcés.",
         "alt": "Icône meilleur prix"
       }
     }
@@ -1356,7 +1371,9 @@
         "accommodation": "Camp du Désert à Merzouga",
         "meals": "Petit-déjeuner & Dîner inclus"
       },
-      "day6": { "meals": "Petit-déjeuner inclus" }
+      "day6": {
+        "meals": "Petit-déjeuner inclus"
+      }
     },
     "tour3": {
       "day1": {
@@ -1390,15 +1407,21 @@
         "accommodation": "Riad/Hôtel à Fès",
         "meals": "Petit-déjeuner inclus"
       },
-      "day5": { "meals": "Petit-déjeuner inclus" }
+      "day5": {
+        "meals": "Petit-déjeuner inclus"
+      }
     },
     "tour5": {
-      "day1": { "accommodation": "Riad/Hôtel à Marrakech" },
+      "day1": {
+        "accommodation": "Riad/Hôtel à Marrakech"
+      },
       "day2": {
         "accommodation": "Riad/Hôtel à Marrakech",
         "meals": "Petit-déjeuner inclus"
       },
-      "day3": { "accommodation": "Hôtel/Riad dans la Vallée de Dades" },
+      "day3": {
+        "accommodation": "Hôtel/Riad dans la Vallée de Dades"
+      },
       "day4": {
         "accommodation": "Camp du Désert (standard ou luxe)",
         "meals": "Petit-déjeuner et dîner inclus"
@@ -1423,7 +1446,9 @@
         "accommodation": "Hôtel à Casablanca",
         "meals": "Petit-déjeuner inclus"
       },
-      "day10": { "meals": "Petit-déjeuner inclus" }
+      "day10": {
+        "meals": "Petit-déjeuner inclus"
+      }
     },
     "tour6": {
       "day1": {
@@ -1445,7 +1470,9 @@
       }
     },
     "sending": "Envoi en cours...",
-    "errors": { "captcha": "La vérification Recaptcha est requise" },
+    "errors": {
+      "captcha": "La vérification Recaptcha est requise"
+    },
     "personalDetails": "Coordonnées des voyageurs",
     "tripDetails": "Détails du voyage",
     "placeholders": {

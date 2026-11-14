@@ -57,7 +57,9 @@
       "care": "Kundenbetreuung",
       "satisfaction": "Kundenzufriedenheit"
     },
-    "featured": { "title": "Empfohlene Wüstentouren & Expeditionen" }
+    "featured": {
+      "title": "Empfohlene Wüstentouren & Expeditionen"
+    }
   },
   "tours": {
     "meta": {
@@ -71,7 +73,9 @@
     "activitiesLabel": "Aktivitäten",
     "arrivalLabel": "Ankunftszeit",
     "featured": "Empfohlen",
-    "category": { "departures": "Abfahrten" },
+    "category": {
+      "departures": "Abfahrten"
+    },
     "cities": {
       "marrakech": "Marrakesch",
       "casablanca": "Casablanca",
@@ -114,14 +118,14 @@
       "ctaPoint02": "Flexible Reiserouten auf Sie zugeschnitten",
       "ctaPoint03": "Betreuung rund um die Uhr während Ihrer Marokkoreise"
     },
-    "headerSubtitle": "Unsere Touren und Pakete",
+    "headerSubtitle": "Mehrtägige Privat- und Kleingruppenrouten ab Marrakesch, Fès, Casablanca und Tanger mit lizenzierten lokalen Fahrern.",
     "stats": {
       "routes": "Signatur-Routen",
-      "routesDesc": "Mehrtägige Routen durch Königsstädte, Wüstendünen und Atlaspässe.",
+      "routesDesc": "3- bis 10-tägige Routen durch die Sahara, den Hohen Atlas und die Königsstädte.",
       "comfort": "Komfort-Flotte",
-      "comfortDesc": "Moderne 4x4s und Minibusse mit erfahrenen Fahrer-Guides auf jeder Route.",
+      "comfortDesc": "Klimatisierte private 4x4-Geländewagen und Minivans mit lizenzierten lokalen Fahrer-Guides.",
       "support": "24/7 Unterstützung",
-      "supportDesc": "Unterstützung unterwegs für Hotels, Ernährungswünsche und Planungsänderungen."
+      "supportDesc": "Direkte WhatsApp-Koordination für Hotels, Verpflegungswünsche und Ablaufänderungen."
     },
     "tour": {
       "smTitle": "Private & geteilte Mehrtagestouren",
@@ -141,7 +145,7 @@
     },
     "detailsTitle": "Tour‑Details",
     "breadcrumb": "Tour‑Details",
-    "detailsSubtitle": "Geschichten, Tipps und Einblicke aus unseren Abenteuern",
+    "detailsSubtitle": "Privat- und Kleingruppenrouten durch Marokkos Königsstädte, Pässe des Hohen Atlas und die Sahara.",
     "exploreThisTour": "Diese Tour entdecken",
     "overview": "Überblick",
     "departure": "Abfahrt von {city}",
@@ -162,7 +166,7 @@
     "faqTitle": "Häufige Fragen",
     "startLabelShort": "Start",
     "endLabelShort": "Ende",
-    "sectionSubtitle": "Wählen Sie Ihr perfektes Marokko-Abenteuer",
+    "sectionSubtitle": "Unten nach Abfahrtsort filtern. Jede Route ist privat oder als Kleingruppe buchbar.",
     "recentBlog": "Aktuelle Beiträge",
     "reservation": {
       "title": "Reservierung",
@@ -235,15 +239,15 @@
     "sharedOptionDesc": "Schließen Sie sich einer kleinen Reisegruppe von 8–14 Personen mit garantierten Abfahrten an.",
     "faq": {
       "title": "Häufige Fragen zu unseren Marokko-Touren",
-      "subtitle": "Alles, was Sie für die Planung Ihrer Wüstenreise wissen müssen.",
+      "subtitle": "Kurze Antworten zu Lizenzierung, Reisezeit und Gruppengrößen.",
       "q1": "Welche Arten von Wüstentouren ab Marrakesch werden angeboten?",
-      "a1": "Amsirar Trip bietet 3- bis 14-tägige Marokko-Reisen an: Kameltouren in den Erg Chebbi Dünen von Merzouga, Überquerung des Hohen Atlas über den Tizi n'Tichka-Pass und Königsstädte-Rundreisen. Alle Touren starten in Marrakesch mit privaten 4x4-Fahrzeugen und lizenzierten Guides.",
+      "a1": "Die Touren dauern 3 bis 14 Tage ab Marrakesch, Fès, Casablanca, Agadir und Tanger im privaten 4x4 mit lizenzierten marokkanischen Fahrer-Guides.",
       "q2": "Ist Amsirar Trip ein lizenzierter Reiseveranstalter in Marokko?",
-      "a2": "Ja. Amsirar Trip besitzt die offizielle Tourismuslizenz 24/TT/RAK des marokkanischen Tourismusministeriums mit Sitz in Marrakesch.",
+      "a2": "Ja. Amsirar Trip hat seinen Sitz in Marrakesch unter der marokkanischen Tourismuslizenz 24/TT/RAK.",
       "q3": "Wann ist die beste Reisezeit für eine Wüstentour ab Marrakesch?",
-      "a3": "Die beste Reisezeit ist von Oktober bis April mit angenehmen Tagestemperaturen zwischen 18°C und 28°C. Im Hochsommer kann es in der Sahara über 40°C heiß werden.",
+      "a3": "Von Oktober bis April liegen die Tagestemperaturen in Erg Chebbi bei 18°C–28°C. Wir fahren ganzjährig, im Sommer wird es in der Wüste über 40°C heiß.",
       "q4": "Werden die Touren privat oder in Gruppen durchgeführt?",
-      "a4": "Wir bieten sowohl exklusive private VIP-Reisen als auch preisgünstige Kleingruppenreisen mit 8 bis 14 Personen an."
+      "a4": "Beides. Privattouren nutzen einen eigenen 4x4 oder Minibus mit flexiblen Stopps; geteilte Abfahrten fahren mit 8–14 Reisenden zu festen Terminen."
     },
     "kickerAbout": "Über diese Route",
     "kickerSchedule": "Tagesprogramm",
@@ -261,7 +265,7 @@
       "description": "Die besten Tagesausflüge ab Marrakesch: Agafay-Wüste mit Sonnenuntergang & Dinner, Ourika-Tal, Ouzoud-Wasserfälle und Essaouira im privaten Fahrzeug."
     },
     "title": "Unsere Ausflüge",
-    "sectionSubtitle": "Tagestouren ab Marrakesch in die Atlas-Täler, an die Atlantikküste und in die Wüstenplateaus.",
+    "sectionSubtitle": "Die Preise pro Person richten sich nach der Gruppengröße; private 4x4-Optionen gibt es auf jeder Route.",
     "detailsTitle": "Ausflugsdetails",
     "breadcrumb": "Ausflugsdetails",
     "detailsSubtitle": "Entdecken Sie Marokkos verborgene Schätze",
@@ -285,13 +289,15 @@
     },
     "stats": {
       "routes": "Signature-Ausflüge",
-      "routesDesc": "Ausgewählte Tagesausflüge von Wasserfällen bis zu Wüstensonnenuntergängen.",
+      "routesDesc": "6 Tagestouren ab Marrakesch: Atlas-Täler, Wasserfälle, Küste und Agafay.",
       "local": "Lokale Expertise",
-      "localDesc": "Geführt von in Marrakesch ansässigen Erzählern und Fahrern.",
+      "localDesc": "Lizenzierte Fahrer und lokale Guides mit Sitz in Marrakesch.",
       "support": "Unterstützung unterwegs",
-      "supportDesc": "Flexible Abfahrten und Concierge-Planung."
+      "supportDesc": "Direkte Abholung und Rückbringung an Ihrem Hotel oder Riad in Marrakesch."
     },
-    "card": { "category": "Ganztägig" },
+    "card": {
+      "category": "Ganztägig"
+    },
     "exploreLink": "Details ansehen",
     "sidebar": {
       "alt": "Amsirar Flughafentransfer-Fahrzeug",
@@ -317,63 +323,63 @@
       "ouzoud": {
         "title": "Tagesausflug zu den Ouzoud-Wasserfällen",
         "alt": "Blick auf die Ouzoud-Wasserfälle",
-        "description": "Entdecken Sie Marokkos höchste Wasserfälle, beobachten Sie verspielte Makaken und erfrischen Sie sich an den Kaskaden.",
+        "description": "Wandern Sie entlang von Marokkos höchsten Wasserfällen (110 m) und beobachten Sie wilde Berberaffen. Inklusive direkter Abholung in Marrakesch und Mittagspause am Fluss ohne gehetzten Gruppenzeitplan. Ideal für einen entspannten Naturtag.",
         "tagline": "Ein erfrischender Ausflug in den Mittleren Atlas.",
         "duration": "Ganztägig"
       },
       "essaouira": {
         "title": "Küstenausflug nach Essaouira",
         "alt": "Wellen an den Stadtmauern von Essaouira",
-        "description": "Spazieren Sie durch die befestigte Medina, beobachten Sie blaue Fischerboote im Hafen und genießen Sie frische Meeresfrüchte.",
+        "description": "Verbringen Sie einen ganzen Tag an der Atlantikküste zwischen Festungsmauern aus dem 18. Jahrhundert, Medina und Fischereihafen. Sie reisen im klimatisierten Privatfahrzeug nach eigenem Zeitplan statt im Reisebus. Ideal für Paare und Familien.",
         "tagline": "Atlantikbrise und kreative Atmosphäre.",
         "duration": "Ganztägig"
       },
       "imlil": {
         "title": "Imlil & Toubkal Trekking",
         "alt": "Wanderer mit Blick auf das Imlil-Tal",
-        "description": "Wandern Sie durch Terrassendörfer, teilen Sie Minztee mit Einheimischen und bewundern Sie den Djebel Toubkal.",
+        "description": "Wandern Sie in den Ausläufern des Hohen Atlas unterhalb des Toubkal (4.167 m) durch steinerne Berberdörfer. Inklusive hausgemachtem Mittagessen in Aroumd statt eines Touristenstopps an der Straße. Für aktive Reisende nahe Marrakesch.",
         "tagline": "Hochatlas-Panoramen zum Greifen nah.",
         "duration": "Ganztägig"
       },
       "ourika": {
         "title": "Entdeckung des Ourika-Tals",
         "alt": "Ufer des Ourika-Flusses",
-        "description": "Besuchen Sie Berberdörfer, eine Argan-Kooperative und wandern Sie zu den Setti-Fatma-Wasserfällen.",
+        "description": "Fahren Sie ins Ourika-Tal zu einer Frauen-Argan-Kooperative, Berberdörfern und den Wasserfällen von Setti Fatma. Abfahrt ab Marrakesch im Privatfahrzeug mit lokalem Fahrer, der die Stopps an Ihre Gruppe anpasst. Ideal für Familien.",
         "tagline": "Grüne Täler und kühle Bergluft.",
         "duration": "Ganztägig"
       },
       "agafay": {
         "title": "Sonnenuntergang in der Agafay-Wüste",
         "alt": "Camp in der Agafay-Wüste bei Sonnenuntergang",
-        "description": "Reiten Sie per Kamel oder Quad über steinige Dünen und speisen Sie unter Sternen mit Live-Musik.",
+        "description": "Reiten Sie bei Sonnenuntergang eine Stunde auf dem Kamel über die Steinhügel von Agafay, gefolgt von einem dreigängigen marokkanischen Abendessen mit Livemusik am Feuer. Nur 45 Minuten ab Marrakesch – ideal bei wenig Zeit.",
         "tagline": "Abenteuer und Dinner unter Wüstenhimmel.",
         "duration": "Ganztägig"
       },
       "balloon": {
         "title": "Sonnenaufgangs-Ballonfahrt",
         "alt": "Heißluftballon bei Sonnenaufgang",
-        "description": "Starten Sie im Morgengrauen, schweben Sie über Marrakesch und genießen Sie danach ein Berberfrühstück.",
+        "description": "Fahren Sie bei Sonnenaufgang 1.000 Meter über der Haouz-Ebene und dem Hohen Atlas und frühstücken Sie anschließend im Berberzelt. Mit früher Abholung in Marrakesch sowie geteiltem oder privatem Korb. Ideal für Frühaufsteher.",
         "tagline": "Ein ruhiger Flug über den Ausläufern des Atlas.",
         "duration": "Ganztägig"
       }
     },
-    "headerSubtitle": "Unsere Ausflüge und Pakete",
+    "headerSubtitle": "Privat- und Kleingruppen-Tagestouren direkt ab Ihrem Hotel oder Riad in Marrakesch mit lizenzierten lokalen Fahrern – keine großen Busse.",
     "blog": {
       "smTitle": "lesen Sie diese Ausflüge für Informationen",
-      "lgTitle": "Ausflüge von Marrakech"
+      "lgTitle": "Tagestouren ab Marrakesch"
     },
     "readMore": "Mehr erfahren",
     "faq": {
       "title": "Häufige Fragen zu unseren Tagesausflügen ab Marrakesch",
-      "subtitle": "Planen Sie Ihren perfekten Tagesausflug von Marrakesch.",
+      "subtitle": "Kurze Antworten zu Entfernungen, Sprachen und Abholung.",
       "q1": "Welche Tagesausflüge ab Marrakesch sind möglich?",
-      "a1": "Beliebte Tagesausflüge führen zu den Ouzoud-Wasserfällen, in die Agafay-Steinwüste, ins Ourika-Tal oder zur UNESCO-Kasbah Ait Benhaddou. Abfahrt am Morgen, Rückkehr am Abend.",
+      "a1": "Tagestouren führen zu den Ouzoud-Wasserfällen (110 m), in die Steinwüste Agafay (40 km entfernt), ins Ourika-Tal, nach Essaouira, Imlil und Ait Ben Haddou. Abfahrt morgens in Marrakesch, Rückkehr am Abend.",
       "q2": "Wie weit ist die Agafay-Wüste von Marrakesch entfernt?",
-      "a2": "Die Agafay-Wüste liegt etwa 40 km südwestlich von Marrakesch (ca. 45 Minuten Fahrzeit). Sie bietet Kamelritte, wunderschöne Sonnenuntergänge und Abendessen im Camp.",
+      "a2": "Etwa 40 km südwestlich von Marrakesch, rund 45 Autominuten. Es ist eine felsige Hochebene statt Sanddünen, mit Kamelritt zum Sonnenuntergang und optionalem Abendessen.",
       "q3": "Sind die Ausflüge geführt und mehrsprachig?",
-      "a3": "Ja. Alle Ausflüge werden von lizenzierten Guides begleitet, inklusive privatem klimatisiertem Transfer und Abholung vom Hotel in Marrakesch.",
+      "a3": "Ja – geführt auf Deutsch, Englisch, Französisch oder Spanisch auf Anfrage, im klimatisierten 4x4 inklusive Hotelabholung in Marrakesch.",
       "q4": "Kann man einen Tagesausflug mit einer Sahara-Rundreise kombinieren?",
-      "a4": "Ja, wir stellen Ihnen gerne eine individuelle Kombination aus Tagesausflügen und Mehrtages-Wüstentouren zusammen."
+      "a4": "Ja. Sie können jeden Tagesausflug – etwa Ouzoud oder Agafay – mit einer mehrtägigen Sahara-Tour nach Merzouga kombinieren."
     }
   },
   "about": {
@@ -382,24 +388,24 @@
       "description": "Lernen Sie Amsirar Trip kennen: Ihr lizenzierter marokkanischer Reiseveranstalter in Marrakesch mit 20+ Jahren Erfahrung in authentischen Wüstenexpeditionen."
     },
     "title": "Über uns",
-    "headerSubtitle": "Private Wüstenreisen und Hoher Atlas-Transport ab Marrakesch",
+    "headerSubtitle": "Lizenzierter Reiseveranstalter in Marrakesch (Lizenz 24/TT/RAK), private Marokko-Routen seit 2006.",
     "smTitle": "Über unsere Agentur",
     "ourStory": "Unsere Geschichte",
-    "experienceTitle": "20 Jahre Erfahrung",
+    "experienceTitle": "Reiseveranstalter und Touristik-Transportunternehmen mit Sitz in Marrakesch seit 2006.",
     "whyTrustTitle": "Wie wir private Marokko-Reisen organisieren:",
     "whyTrust": {
-      "point1": "Direkte Absprache mit lizenzierten lokalen Fahrern",
-      "point2": "Moderne, klimatisierte 4x4-Fahrzeuge und Minibusse für Gebirgsstrecken",
-      "point3": "Flexible Routenplanung angepasst an Ihren Zeitplan",
-      "point4": "Klare Festpreise ohne ungeplante Verkaufsstopps"
+      "point1": "Lizenzierte lokale Fahrer-Guides aus Marokkos Wüsten- und Bergregionen.",
+      "point2": "Eigene Flotte aus klimatisierten Toyota Prado 4x4 und Mercedes-Benz Minivans.",
+      "point3": "Privates Tagestempo mit Stopps für Fotos, Dörfer und Mahlzeiten.",
+      "point4": "Direkte Preise ohne Aufschläge mit geprüften Riads und Wüstencamps."
     },
-    "experienceText1": "Seit 2006 begleitet unser Team in Marrakesch Reisende durch den Süden Marokkos, von den Pässen des Hohen Atlas bis zu den Sanddünen von Erg Chebbi und Erg Chegaga. Wir organisieren Fahrzeuge, Gebirgsstrecken und Riad-Aufenthalte direkt mit einheimischen Fahrern.",
-    "experienceText2": "Unsere Touren verbinden Gebirgsfahrten über den Tizi n'Tichka-Pass mit ruhigen Aufenthalten in Taldörfern und Übernachtungen in bewährten Wüstencamps.",
-    "experienceText3": "Unsere Fahrer kennen die regionalen Straßenverhältnisse, verlässliche Rastplätze und gute Aussichtspunkte. Wir richten jede Fahrt nach Ihren Reisedaten aus.",
-    "conclusionText": "Ob Sie eine 3-tägige Wüstentour planen oder eine 10-tägige Rundreise durch die Königsstädte: Wir stimmen jede Etappe auf Ihre Reisedaten ab.",
+    "experienceText1": "Wir haben Amsirar Trip 2006 in Marrakesch gegründet, um private Wüsten- und Bergtouren ohne gehetzte Autobahnetappen oder erzwungene Verkaufsstopps großer Busgruppen anzubieten.",
+    "experienceText2": "Sie reisen in unseren eigenen klimatisierten Toyota Prado 4x4 oder Mercedes-Benz Minivans mit lizenziertem Fahrer-Guide über den Tizi n'Tichka (2.260 m) nach Erg Chebbi, Erg Chegaga oder in die Königsstädte.",
+    "experienceText3": "Nennen Sie uns Ihre Reisedaten und Gruppengröße – unser Büro in Marrakesch sendet Ihnen eine Tagesroute und ein direktes Angebot.",
+    "conclusionText": "Von 3-tägigen Sahara-Trips bis zu 10-tägigen Rundreisen richtet sich jeder Stopp nach Ihrem Zeitplan.",
     "imageCaption": "Fahrer im Hohen Atlas",
     "facts": {
-      "smTitle": "Agentur-Überblick",
+      "smTitle": "Erfasste Reisen und Gäste seit 2006.",
       "lgTitle": "Wichtige Kennzahlen",
       "photos": "Begleitete Reisende",
       "beaches": "Wüstencamps",
@@ -413,21 +419,21 @@
       "description": "Kontaktieren Sie unsere lokalen Marokko-Reiseberater in Marrakesch. Individuelle Reiseplanung, unverbindliche Angebote und WhatsApp-Support rund um die Uhr."
     },
     "title": "Kontakt",
-    "headerSubtitle": "Planen Sie Ihre private Wüstenreise, Transfers oder maßgeschneiderte Reiseroute mit unserem Team in Marrakesch.",
-    "smTitle": "Kontaktieren Sie Uns",
+    "headerSubtitle": "Schreiben Sie uns – unser Team in Marrakesch antwortet innerhalb von 24 Stunden mit Routenvorschlägen oder einem Angebot.",
+    "smTitle": "Antwort in 24 Std.",
     "lgTitle": "Kontakt",
     "card": {
-      "phoneTitle": "Rufen Sie uns an oder schreiben Sie per WhatsApp",
-      "phoneSeo": "Unser Team beantwortet Buchungsanfragen, Routenfragen und Verfügbarkeiten täglich von 09:00 bis 21:00 Uhr GMT+1.",
-      "emailTitle": "Senden Sie uns Reisedaten und Routenwünsche",
-      "emailSeo": "Teilen Sie uns Ihre Reisedaten, Reiseziele und Gruppengröße mit. Wir erstellen einen detaillierten Reiseplan mit transparentem Angebot.",
-      "visitTitle": "Besuchen Sie unser Büro in Marrakesch",
-      "visitSeo": "Besuchen Sie uns in Marrakesch zur persönlichen Reiseplanung, für Flughafentransfers oder zur Abstimmung von Wüstenrouten."
+      "phoneTitle": "Telefon & WhatsApp",
+      "phoneSeo": "WhatsApp oder Anruf unter +212 668-072045 (09:00–21:00 GMT+1).",
+      "emailTitle": "Routen & Angebote",
+      "emailSeo": "Senden Sie Reisedaten und Gruppengröße; Antwort binnen 24 Stunden.",
+      "visitTitle": "Büro in Marrakesch",
+      "visitSeo": "Büro in Marrakesch (Lizenz 24/TT/RAK) für persönliche Planung."
     },
     "form": {
-      "badge": "Planen Sie mit Einheimischen",
-      "title": "Entwerfen Sie Ihre Individuelle Marokko-Reise & Privaten Reiseplan",
-      "subtitle": "Teilen Sie uns Ihre Reisedaten mit und wir erstellen einen maßgeschneiderten Routenvorschlag für Sie.",
+      "badge": "Antwort in 24h",
+      "title": "Angebot oder Wunschroute anfragen",
+      "subtitle": "Wir bearbeiten Buchungen, Routenfragen und Transportangebote – Antwort innerhalb von 24 Stunden.",
       "cta": "Nachricht senden",
       "sending": "Wird gesendet…",
       "success": "Nachricht gesendet! Wir antworten innerhalb von 24 Stunden.",
@@ -446,28 +452,32 @@
         "name": "Vollständiger Name",
         "email": "E-Mail",
         "phone": "Telefonnummer",
-        "topic": "Reisefokus (optional)",
-        "message": "Sagen Sie uns, wann, wo und wie Sie reisen möchten"
+        "topic": "Worum geht es bei Ihrer Anfrage?",
+        "message": "Nachricht"
       },
-      "infoBadge": "Details benötigt?",
-      "infoTitle": "Planen Sie handgefertigte Erlebnisse",
-      "infoCopy": "Unser Team in Marrakesch beantwortet jede Nachricht persönlich und kann bei individuellen Reiseplänen, Wüstencamps oder Last-Minute-Transfers helfen.",
-      "info": { "address": "Besuchen", "phone": "Anrufen", "email": "E-Mail" },
-      "infoFooter": "Täglich von 09:00 bis 21:00 Uhr GMT+1 verfügbar",
+      "infoBadge": "Direktkontakt",
+      "infoTitle": "Direktkontakt in Marrakesch",
+      "infoCopy": "Lieber per E-Mail oder WhatsApp? Erreichen Sie unser Team in Marrakesch direkt für Buchungen, Routenfragen oder Transfers.",
+      "info": {
+        "address": "Besuchen",
+        "phone": "Anrufen",
+        "email": "E-Mail"
+      },
+      "infoFooter": "Täglich 09:00–21:00 GMT+1",
       "details": "Kontaktdaten",
       "placeholders": {
         "name": "Geben Sie Ihren vollständigen Namen ein",
         "email": "Geben Sie Ihre E-Mail-Adresse ein",
         "phone": "Geben Sie Ihre Telefonnummer ein",
-        "topic": "Reisefokus eingeben (z. B. Sahara, Atlas, Individuell)",
-        "message": "Geben Sie Ihre Nachricht oder Reiseanfrage ein..."
+        "topic": "Anfrageart auswählen",
+        "message": "Nennen Sie Ihre Reisedaten, Gruppengröße oder Frage..."
       },
       "topics": {
-        "desert": "Sahara-Wüstenexpedition",
-        "atlas": "Wanderung im Hohen Atlas",
-        "imperial": "Königsstädte & Kulturerbe",
-        "coastal": "Atlantikküste & Essaouira-Ausflug",
-        "custom": "Maßgeschneiderte private Marokko-Reiseroute"
+        "desert": "Ich möchte eine Tour oder einen Ausflug buchen",
+        "atlas": "Frage zu einer bestehenden Buchung",
+        "imperial": "Angebot für Flughafentransfer oder Privatfahrer",
+        "coastal": "Presse- oder Kooperationsanfrage",
+        "custom": "Ich möchte eine individuelle Route planen"
       }
     },
     "info": {
@@ -476,11 +486,16 @@
       "address": "Adresse",
       "message": "Nachricht"
     },
-    "location": { "smTitle": "Finden Sie Uns", "lgTitle": "Unser Standort" },
-    "methods": { "title": "Direkte Kommunikationskanäle" },
+    "location": {
+      "smTitle": "Büro in Marrakesch für persönliche Routenplanung.",
+      "lgTitle": "Unser Standort"
+    },
+    "methods": {
+      "title": "Direkte Kommunikationskanäle"
+    },
     "map": {
       "placeholderTitle": "Interaktive Karte anzeigen",
-      "placeholderDesc": "Erkunden Sie unseren genauen Bürostandort in Marrakesch und Sehenswürdigkeiten in der Nähe.",
+      "placeholderDesc": "Unser Büro in Marrakesch auf Google Maps ansehen.",
       "loadBtn": "Karte laden"
     }
   },
@@ -1187,18 +1202,18 @@
     "lgTitle": "Unsere Leistungen",
     "cards": {
       "handcrafted": {
-        "title": "Handgefertigte Erlebnisse",
-        "text": "Erleben Sie das Beste von Marokko mit unseren maßgeschneiderten Touren, die Kultur und Landschaft eindrucksvoll zeigen.",
-        "alt": "Symbol für handgefertigte Erlebnisse"
+        "title": "Private Routen, Ihr Tempo",
+        "text": "Individuelle Routen nach Ihren Reisedaten im privaten klimatisierten 4x4 oder Minivan.",
+        "alt": "Symbol für private Routenplanung"
       },
       "guide": {
         "title": "Reiseführer",
-        "text": "Mit einem erfahrenen Guide gewinnen Sie wertvolle Einblicke in Kultur und Geschichte des Landes.",
+        "text": "Lizenzierte lokale Fahrer und Guides, die jeden Pass, jedes Dorf und jeden Aussichtspunkt kennen.",
         "alt": "Symbol für Reiseführer"
       },
       "price": {
         "title": "Passender Preis",
-        "text": "Klare Festpreise für alle Touren inklusive privatem Transport, Unterkünften und Guide ohne versteckte Zusatzkosten.",
+        "text": "Direkte Agenturpreise inklusive Transport, Kraftstoff, Hotels und Frühstück – ohne erzwungene Verkaufsstopps.",
         "alt": "Symbol für besten Preis"
       }
     }
@@ -1356,7 +1371,9 @@
         "accommodation": "Wüstencamp in Merzouga",
         "meals": "Frühstück & Abendessen inbegriffen"
       },
-      "day6": { "meals": "Frühstück inbegriffen" }
+      "day6": {
+        "meals": "Frühstück inbegriffen"
+      }
     },
     "tour3": {
       "day1": {
@@ -1390,15 +1407,21 @@
         "accommodation": "Riad/Hotel in Fès",
         "meals": "Frühstück inbegriffen"
       },
-      "day5": { "meals": "Frühstück inbegriffen" }
+      "day5": {
+        "meals": "Frühstück inbegriffen"
+      }
     },
     "tour5": {
-      "day1": { "accommodation": "Riad/Hotel in Marrakech" },
+      "day1": {
+        "accommodation": "Riad/Hotel in Marrakech"
+      },
       "day2": {
         "accommodation": "Riad/Hotel in Marrakech",
         "meals": "Frühstück inbegriffen"
       },
-      "day3": { "accommodation": "Hotel/Riad im Dades-Tal" },
+      "day3": {
+        "accommodation": "Hotel/Riad im Dades-Tal"
+      },
       "day4": {
         "accommodation": "Wüstencamp (Standard oder Luxus)",
         "meals": "Frühstück und Abendessen inbegriffen"
@@ -1423,7 +1446,9 @@
         "accommodation": "Hotel in Casablanca",
         "meals": "Frühstück inbegriffen"
       },
-      "day10": { "meals": "Frühstück inbegriffen" }
+      "day10": {
+        "meals": "Frühstück inbegriffen"
+      }
     },
     "tour6": {
       "day1": {
@@ -1445,7 +1470,9 @@
       }
     },
     "sending": "Wird gesendet...",
-    "errors": { "captcha": "Recaptcha-Überprüfung ist erforderlich" },
+    "errors": {
+      "captcha": "Recaptcha-Überprüfung ist erforderlich"
+    },
     "personalDetails": "Angaben zu den Gästen",
     "tripDetails": "Reisedetails",
     "placeholders": {

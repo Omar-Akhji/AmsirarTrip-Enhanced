@@ -9,6 +9,7 @@ export interface ExcursionItem {
   readonly description: string;
   readonly tagline: string;
   readonly duration: string;
+  readonly price?: number | undefined;
   readonly route: string;
 }
 
@@ -21,7 +22,7 @@ export async function getExcursionsData(): Promise<ExcursionItem[]> {
 
   return entries
     .map((entry) => {
-      const { bookingId, image, i18nKeyPrefix } = entry.data;
+      const { bookingId, image, i18nKeyPrefix, jsonLd } = entry.data;
       return {
         id: bookingId,
         image,
@@ -30,6 +31,7 @@ export async function getExcursionsData(): Promise<ExcursionItem[]> {
         description: `excursion.list.${i18nKeyPrefix}.description`,
         tagline: `excursion.list.${i18nKeyPrefix}.tagline`,
         duration: `excursion.list.${i18nKeyPrefix}.duration`,
+        price: jsonLd.price,
         route: `/excursions/${entry.id}`,
       } satisfies ExcursionItem;
     })
