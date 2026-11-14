@@ -57,9 +57,7 @@
       "care": "Service client",
       "satisfaction": "Satisfaction client"
     },
-    "featured": {
-      "title": "Circuits et expéditions dans le désert en vedette"
-    }
+    "featured": { "title": "Circuits et expéditions dans le désert en vedette" }
   },
   "tours": {
     "meta": {
@@ -73,9 +71,7 @@
     "activitiesLabel": "Activités",
     "arrivalLabel": "Heure d'arrivée",
     "featured": "En vedette",
-    "category": {
-      "departures": "Départs"
-    },
+    "category": { "departures": "Départs" },
     "cities": {
       "marrakech": "Marrakech",
       "casablanca": "Casablanca",
@@ -295,9 +291,7 @@
       "support": "Assistance en voyage",
       "supportDesc": "Prise en charge et retour directs à votre hôtel ou riad à Marrakech."
     },
-    "card": {
-      "category": "Journée complète"
-    },
+    "card": { "category": "Journée complète" },
     "exploreLink": "Voir les détails",
     "sidebar": {
       "alt": "Véhicule de transfert aéroportuaire Amsirar",
@@ -458,11 +452,7 @@
       "infoBadge": "Contact direct",
       "infoTitle": "Contact direct à Marrakech",
       "infoCopy": "Vous préférez l'e-mail ou WhatsApp ? Contactez directement notre équipe à Marrakech pour vos réservations, questions ou transferts.",
-      "info": {
-        "address": "Visite",
-        "phone": "Appel",
-        "email": "E-mail"
-      },
+      "info": { "address": "Visite", "phone": "Appel", "email": "E-mail" },
       "infoFooter": "Tous les jours de 09h00 à 21h00 GMT+1",
       "details": "Coordonnées de contact",
       "placeholders": {
@@ -492,9 +482,7 @@
       "smTitle": "Bureau de Marrakech pour préparer votre trajet sur place.",
       "lgTitle": "Notre Emplacement"
     },
-    "methods": {
-      "title": "Canaux de communication directe"
-    },
+    "methods": { "title": "Canaux de communication directe" },
     "map": {
       "placeholderTitle": "Afficher la carte interactive",
       "placeholderDesc": "Voir notre agence à Marrakech sur Google Maps.",
@@ -1373,9 +1361,7 @@
         "accommodation": "Camp du Désert à Merzouga",
         "meals": "Petit-déjeuner & Dîner inclus"
       },
-      "day6": {
-        "meals": "Petit-déjeuner inclus"
-      }
+      "day6": { "meals": "Petit-déjeuner inclus" }
     },
     "tour3": {
       "day1": {
@@ -1409,21 +1395,15 @@
         "accommodation": "Riad/Hôtel à Fès",
         "meals": "Petit-déjeuner inclus"
       },
-      "day5": {
-        "meals": "Petit-déjeuner inclus"
-      }
+      "day5": { "meals": "Petit-déjeuner inclus" }
     },
     "tour5": {
-      "day1": {
-        "accommodation": "Riad/Hôtel à Marrakech"
-      },
+      "day1": { "accommodation": "Riad/Hôtel à Marrakech" },
       "day2": {
         "accommodation": "Riad/Hôtel à Marrakech",
         "meals": "Petit-déjeuner inclus"
       },
-      "day3": {
-        "accommodation": "Hôtel/Riad dans la Vallée de Dades"
-      },
+      "day3": { "accommodation": "Hôtel/Riad dans la Vallée de Dades" },
       "day4": {
         "accommodation": "Camp du Désert (standard ou luxe)",
         "meals": "Petit-déjeuner et dîner inclus"
@@ -1448,9 +1428,7 @@
         "accommodation": "Hôtel à Casablanca",
         "meals": "Petit-déjeuner inclus"
       },
-      "day10": {
-        "meals": "Petit-déjeuner inclus"
-      }
+      "day10": { "meals": "Petit-déjeuner inclus" }
     },
     "tour6": {
       "day1": {
@@ -1472,9 +1450,7 @@
       }
     },
     "sending": "Envoi en cours...",
-    "errors": {
-      "captcha": "La vérification Recaptcha est requise"
-    },
+    "errors": { "captcha": "La vérification Recaptcha est requise" },
     "personalDetails": "Coordonnées des voyageurs",
     "tripDetails": "Détails du voyage",
     "placeholders": {
