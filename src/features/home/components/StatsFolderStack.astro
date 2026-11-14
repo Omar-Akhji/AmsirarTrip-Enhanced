@@ -7,7 +7,6 @@ interface StatItem {
   description: string;
   footerLeft: string;
   footerRight: string;
-  icon: (_props: Record<string, unknown>) => unknown;
 }
 
 interface Props {
@@ -34,7 +33,7 @@ const { stats } = Astro.props;
 
       <!-- Layer 2: The Cards Stack (z-index: 10, between folder back and front pocket) -->
       <div class="cards-stack-layer static h-auto flex flex-col gap-5 motion-safe:block motion-safe:absolute motion-safe:inset-x-0 motion-safe:top-2 motion-safe:h-85 motion-safe:will-change-transform motion-safe:z-10 motion-safe:perspective-distant">
-        {stats.map(({ icon: Icon, ...stat }, index) => (
+        {stats.map((stat, index) => (
           <div
             data-stack-card={index}
             class:list={[
@@ -46,13 +45,6 @@ const { stats } = Astro.props;
               <div>
                 <div class="mbe-3 flex items-center justify-between border-b border-stone-200/70 pb-2 text-[11px] font-mono uppercase tracking-wider text-stone-400 dark:border-white/10 dark:text-mist-400">
                   <span class="font-semibold text-stone-600 dark:text-mist-200">{stat.code}</span>
-                  <div class="flex items-center gap-2 text-stone-400 dark:text-mist-400">
-                    <Icon
-                      aria-hidden="true"
-                      class="size-4"
-                      stroke-width="2"
-                    />
-                  </div>
                 </div>
 
                 <div class="mbe-1.5">

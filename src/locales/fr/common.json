@@ -470,6 +470,7 @@
         "email": "Entrez votre adresse email",
         "phone": "Entrez votre numéro de téléphone",
         "topic": "Sélectionnez un sujet",
+        "customTopic": "Précisez l'objet de votre demande...",
         "message": "Indiquez vos dates, le nombre de personnes ou votre question..."
       },
       "topics": {
@@ -477,7 +478,8 @@
         "atlas": "Question sur une réservation existante",
         "imperial": "Devis transfert aéroport ou chauffeur privé",
         "coastal": "Demande presse ou partenariat",
-        "custom": "Je souhaite créer un itinéraire sur mesure"
+        "custom": "Je souhaite créer un itinéraire sur mesure",
+        "other": "Autre"
       }
     },
     "info": {

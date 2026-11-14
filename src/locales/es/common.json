@@ -470,6 +470,7 @@
         "email": "Ingrese su correo electrónico",
         "phone": "Ingrese su número de teléfono",
         "topic": "Selecciona un tipo de consulta",
+        "customTopic": "Escribe el motivo de tu consulta...",
         "message": "Comparte tus fechas de viaje, tamaño del grupo o duda..."
       },
       "topics": {
@@ -477,7 +478,8 @@
         "atlas": "Consulta sobre una reserva existente",
         "imperial": "Presupuesto de traslado o conductor privado",
         "coastal": "Consulta de prensa o colaboración",
-        "custom": "Quiero planificar una ruta a medida"
+        "custom": "Quiero planificar una ruta a medida",
+        "other": "Otro"
       }
     },
     "info": {

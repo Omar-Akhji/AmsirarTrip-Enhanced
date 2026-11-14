@@ -460,6 +460,7 @@
         "email": "Enter your email address",
         "phone": "Enter your phone number",
         "topic": "Select an enquiry type",
+        "customTopic": "Write your enquiry topic...",
         "message": "Share your travel dates, group size, or question..."
       },
       "topics": {
@@ -467,7 +468,8 @@
         "atlas": "Question about an existing booking",
         "imperial": "Airport transfer or private driver quote",
         "coastal": "Press or partnership enquiry",
-        "custom": "I want to plan a custom route"
+        "custom": "I want to plan a custom route",
+        "other": "Other"
       }
     },
     "info": {

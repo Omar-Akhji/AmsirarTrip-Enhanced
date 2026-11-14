@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed, nextTick, ref, useId, useTemplateRef } from "vue";
 import type { FormState } from "@/lib/form-types";
 import { useTranslation } from "@/lib/hooks/use-translation";
 import PhoneInput from "@/shared/ui/widgets/PhoneInput.vue";
@@ -10,6 +11,40 @@ interface Props {
 const { state } = defineProps<Props>();
 
 const { t } = useTranslation();
+
+const topicDropdownId = `topic-dropdown-${useId().replaceAll(":", "")}`;
+const topicDropdownRef = useTemplateRef<HTMLElement>("topicDropdownRef");
+const customTopicInputRef = useTemplateRef<HTMLInputElement>("customTopicInputRef");
+const isTopicOpen = ref(false);
+const selectedTopic = ref("");
+const customTopic = ref("");
+
+const topicOptions = computed(() => [
+  t("contact.form.topics.desert"),
+  t("contact.form.topics.custom"),
+  t("contact.form.topics.atlas"),
+  t("contact.form.topics.imperial"),
+  t("contact.form.topics.coastal"),
+  t("contact.form.topics.other"),
+]);
+
+const isOtherSelected = computed(() => selectedTopic.value === t("contact.form.topics.other"));
+
+const submittedTopic = computed(() =>
+  isOtherSelected.value ? customTopic.value.trim() || selectedTopic.value : selectedTopic.value,
+);
+
+function handleTopicToggle(event: ToggleEvent) {
+  isTopicOpen.value = event.newState === "open";
+}
+
+function selectTopic(topic: string) {
+  selectedTopic.value = topic;
+  topicDropdownRef.value?.hidePopover();
+  if (topic === t("contact.form.topics.other")) {
+    void nextTick(() => customTopicInputRef.value?.focus());
+  }
+}
 </script>
 
 <template>
@@ -61,16 +96,16 @@ const { t } = useTranslation();
             toolparamdescription="The full name of the contact person"
             autocomplete="name"
             required
-            :aria-invalid="state?.errors?.name ? 'true' : 'false'"
-            :aria-describedby="state?.errors?.name ? 'name-error' : undefined"
+            :aria-invalid="state?.errors?.['name'] ? 'true' : 'false'"
+            :aria-describedby="state?.errors?.['name'] ? 'name-error' : undefined"
           />
         </div>
         <p
-          v-if="state?.errors?.name"
+          v-if="state?.errors?.['name']"
           id="name-error"
           class="mbs-1 font-sans text-xs text-red-600"
         >
-          {{ state.errors.name }}
+          {{ state.errors["name"] }}
         </p>
       </div>
       <div>
@@ -114,16 +149,16 @@ const { t } = useTranslation();
             toolparamdescription="The email address of the contact person"
             autocomplete="email"
             required
-            :aria-invalid="state?.errors?.email ? 'true' : 'false'"
-            :aria-describedby="state?.errors?.email ? 'email-error' : undefined"
+            :aria-invalid="state?.errors?.['email'] ? 'true' : 'false'"
+            :aria-describedby="state?.errors?.['email'] ? 'email-error' : undefined"
           />
         </div>
         <p
-          v-if="state?.errors?.email"
+          v-if="state?.errors?.['email']"
           id="email-error"
           class="mbs-1 font-sans text-xs text-red-600"
         >
-          {{ state.errors.email }}
+          {{ state.errors["email"] }}
         </p>
       </div>
     </div>
@@ -146,16 +181,16 @@ const { t } = useTranslation();
           name="phone"
           :placeholder="t('contact.form.placeholders.phone')"
           toolparamdescription="The phone/WhatsApp number of the contact person"
-          :aria-invalid="state?.errors?.phone ? 'true' : 'false'"
-          :aria-describedby="state?.errors?.phone ? 'phone-error' : undefined"
+          :aria-invalid="state?.errors?.['phone'] ? 'true' : 'false'"
+          :aria-describedby="state?.errors?.['phone'] ? 'phone-error' : undefined"
           required
         />
         <p
-          v-if="state?.errors?.phone"
+          v-if="state?.errors?.['phone']"
           id="phone-error"
           class="mbs-1 font-sans text-xs text-red-600"
         >
-          {{ state.errors.phone }}
+          {{ state.errors["phone"] }}
         </p>
       </div>
       <div>
@@ -167,7 +202,7 @@ const { t } = useTranslation();
         </label>
         <div class="relative">
           <svg
-            class="pointer-events-none absolute inset-s-3.5 top-1/2 size-4.5 -translate-y-1/2 text-stone-400 transition-colors peer-focus:text-orange-500 dark:text-stone-500"
+            class="pointer-events-none absolute inset-s-3.5 top-1/2 z-10 size-4.5 -translate-y-1/2 text-stone-400 transition-colors dark:text-stone-500"
             viewBox="0 0 24 24"
             fill="none"
             aria-hidden="true"
@@ -184,32 +219,112 @@ const { t } = useTranslation();
               stroke-linecap="round"
             />
           </svg>
-          <select
-            id="contact-topic"
+          <input
+            type="hidden"
             name="topic"
-            class="peer h-12 appearance-none rounded-xl border border-stone-200/90 bg-stone-50/50 ps-10.5 pe-9 font-sans text-sm text-stone-900 transition-colors inline-full focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden dark:border-white/10 dark:bg-white/5 dark:text-mist-100 dark:focus:border-orange-500 dark:focus:bg-white/10"
+            :value="submittedTopic"
             toolparamdescription="The specific enquiry type, e.g., book a tour, plan a custom route, existing booking"
+          />
+          <button
+            id="contact-topic"
+            type="button"
+            :popovertarget="topicDropdownId"
+            popovertargetaction="toggle"
+            :aria-expanded="isTopicOpen"
+            :aria-controls="topicDropdownId"
+            aria-haspopup="listbox"
+            :style="{ anchorName: `--topic-anchor-${topicDropdownId}` }"
+            class="flex h-12 w-full cursor-pointer items-center justify-between gap-2 rounded-xl border border-stone-200/90 bg-stone-50/50 ps-10.5 pe-3.5 text-start font-sans text-sm transition-colors hover:bg-stone-100/70 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden dark:border-white/10 dark:bg-white/5 dark:hover:bg-white/10 dark:focus:border-orange-500 dark:focus:bg-white/10"
+            :class="
+              selectedTopic ?
+                'text-stone-900 dark:text-mist-100'
+              : 'text-stone-400 dark:text-stone-500'
+            "
           >
-            <option value="">
-              {{ t("contact.form.placeholders.topic") }}
-            </option>
-            <option :value="t('contact.form.topics.desert')">
-              {{ t("contact.form.topics.desert") }}
-            </option>
-            <option :value="t('contact.form.topics.custom')">
-              {{ t("contact.form.topics.custom") }}
-            </option>
-            <option :value="t('contact.form.topics.atlas')">
-              {{ t("contact.form.topics.atlas") }}
-            </option>
-            <option :value="t('contact.form.topics.imperial')">
-              {{ t("contact.form.topics.imperial") }}
-            </option>
-            <option :value="t('contact.form.topics.coastal')">
-              {{ t("contact.form.topics.coastal") }}
-            </option>
-          </select>
+            <span class="truncate">
+              {{ selectedTopic || t("contact.form.placeholders.topic") }}
+            </span>
+            <svg
+              class="size-3.5 shrink-0 text-stone-400 transition-colors dark:text-mist-400"
+              :class="{ 'text-stone-700 dark:text-mist-200': isTopicOpen }"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.75"
+              aria-hidden="true"
+            >
+              <path
+                d="M13.5 19.5L12 21L6 15"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M16.5 16.5L18 15"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M13.5 4.5L12 3L6 9"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M16.5 7.5L18 9"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+          <div
+            :id="topicDropdownId"
+            ref="topicDropdownRef"
+            popover="auto"
+            role="listbox"
+            :aria-label="t('contact.form.fields.topic')"
+            class="fixed inset-0 z-50 m-auto w-[min(24rem,calc(100vw-2rem))] overflow-hidden rounded-xl border border-stone-200/90 bg-white p-0 text-stone-900 shadow-xl shadow-stone-900/10 backdrop:bg-black/20 supports-[top:anchor(bottom)]:inset-auto supports-[top:anchor(bottom)]:top-[calc(anchor(bottom)+6px)] supports-[top:anchor(bottom)]:left-[anchor(left)] supports-[top:anchor(bottom)]:m-0 supports-[top:anchor(bottom)]:w-[anchor-size(width)] supports-[top:anchor(bottom)]:[position-try-fallbacks:flip-block] supports-[top:anchor(bottom)]:backdrop:bg-transparent dark:border-white/10 dark:bg-surface-card dark:text-mist-100 dark:shadow-[0_16px_40px_rgba(0,0,0,0.65)]"
+            :style="{ positionAnchor: `--topic-anchor-${topicDropdownId}` }"
+            @toggle="handleTopicToggle"
+          >
+            <div v-if="isTopicOpen">
+              <div class="flex flex-col p-1.5">
+                <div
+                  class="divide-y divide-stone-100/60 overflow-hidden rounded-[6px] dark:divide-white/5"
+                  tabindex="-1"
+                >
+                  <button
+                    v-for="option in topicOptions"
+                    :key="option"
+                    type="button"
+                    role="option"
+                    :aria-selected="selectedTopic === option"
+                    class="flex w-full cursor-pointer items-center justify-between gap-2 rounded-none px-3 py-2 text-start transition-colors hover:bg-stone-100 focus:bg-stone-100 focus:outline-hidden active:bg-stone-200/70 dark:hover:bg-white/5 dark:focus:bg-white/5"
+                    :class="{
+                      'bg-stone-100 font-medium text-stone-900 dark:bg-white/10 dark:text-mist-100':
+                        selectedTopic === option,
+                    }"
+                    @click="selectTopic(option)"
+                  >
+                    <span
+                      class="block truncate font-sans text-xs text-stone-800 dark:text-mist-200"
+                    >
+                      {{ option }}
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+        <input
+          v-if="isOtherSelected"
+          ref="customTopicInputRef"
+          v-model="customTopic"
+          type="text"
+          maxlength="120"
+          :placeholder="t('contact.form.placeholders.customTopic')"
+          :aria-label="t('contact.form.placeholders.customTopic')"
+          class="mt-2.5 h-12 w-full rounded-xl border border-stone-200/90 bg-stone-50/50 px-4 font-sans text-sm text-stone-900 transition-colors placeholder:text-stone-400 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden dark:border-white/10 dark:bg-white/5 dark:text-mist-100 dark:placeholder:text-mist-500 dark:focus:border-orange-500 dark:focus:bg-white/10"
+        />
       </div>
     </div>
 
@@ -266,16 +381,16 @@ const { t } = useTranslation();
           toolparamdescription="The detailed message or description of the custom Morocco itinerary/dream tour request"
           autocomplete="off"
           required
-          :aria-invalid="state?.errors?.message ? 'true' : 'false'"
-          :aria-describedby="state?.errors?.message ? 'message-error' : undefined"
+          :aria-invalid="state?.errors?.['message'] ? 'true' : 'false'"
+          :aria-describedby="state?.errors?.['message'] ? 'message-error' : undefined"
         />
       </div>
       <p
-        v-if="state?.errors?.message"
+        v-if="state?.errors?.['message']"
         id="message-error"
         class="mbs-1 font-sans text-xs text-red-600"
       >
-        {{ state.errors.message }}
+        {{ state.errors["message"] }}
       </p>
     </div>
   </fieldset>

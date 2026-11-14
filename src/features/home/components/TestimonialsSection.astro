@@ -1,5 +1,6 @@
 ---
 import TestimonialsSideScroll from "./TestimonialsSideScroll.astro";
+import SquareTopDownIcon from "@/shared/ui/icons/SquareTopDownIcon.astro";
 import Button from "@/shared/ui/primitives/Button.astro";
 
 const locale = Astro.currentLocale || "en";
@@ -69,16 +70,10 @@ const TRIPADVISOR_URL =
         >
           <span class="inline-block size-2 rounded-full bg-emerald-500"></span>
           <span>TripAdvisor</span>
-          <svg
-            class="size-3.5 text-stone-400"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
+          <SquareTopDownIcon
             aria-hidden="true"
-          >
-            <path d="M7 17L17 7M17 7H7M17 7V17" />
-          </svg>
+            class="size-3.5 text-stone-400"
+          />
         </Button>
       </div>
     </div>

@@ -207,6 +207,7 @@ export const clientUi = {
           "email": "Enter your email address",
           "phone": "Enter your phone number",
           "topic": "Select an enquiry type",
+          "customTopic": "Write your enquiry topic...",
           "message": "Share your travel dates, group size, or question..."
         },
         "topics": {
@@ -214,7 +215,8 @@ export const clientUi = {
           "atlas": "Question about an existing booking",
           "imperial": "Airport transfer or private driver quote",
           "coastal": "Press or partnership enquiry",
-          "custom": "I want to plan a custom route"
+          "custom": "I want to plan a custom route",
+          "other": "Other"
         }
       }
     },
@@ -475,6 +477,7 @@ export const clientUi = {
           "email": "Entrez votre adresse email",
           "phone": "Entrez votre numéro de téléphone",
           "topic": "Sélectionnez un sujet",
+          "customTopic": "Précisez l'objet de votre demande...",
           "message": "Indiquez vos dates, le nombre de personnes ou votre question..."
         },
         "topics": {
@@ -482,7 +485,8 @@ export const clientUi = {
           "atlas": "Question sur une réservation existante",
           "imperial": "Devis transfert aéroport ou chauffeur privé",
           "coastal": "Demande presse ou partenariat",
-          "custom": "Je souhaite créer un itinéraire sur mesure"
+          "custom": "Je souhaite créer un itinéraire sur mesure",
+          "other": "Autre"
         }
       }
     },
@@ -743,6 +747,7 @@ export const clientUi = {
           "email": "Geben Sie Ihre E-Mail-Adresse ein",
           "phone": "Geben Sie Ihre Telefonnummer ein",
           "topic": "Anfrageart auswählen",
+          "customTopic": "Geben Sie Ihr Anliegen ein...",
           "message": "Nennen Sie Ihre Reisedaten, Gruppengröße oder Frage..."
         },
         "topics": {
@@ -750,7 +755,8 @@ export const clientUi = {
           "atlas": "Frage zu einer bestehenden Buchung",
           "imperial": "Angebot für Flughafentransfer oder Privatfahrer",
           "coastal": "Presse- oder Kooperationsanfrage",
-          "custom": "Ich möchte eine individuelle Route planen"
+          "custom": "Ich möchte eine individuelle Route planen",
+          "other": "Sonstiges"
         }
       }
     },
@@ -1011,6 +1017,7 @@ export const clientUi = {
           "email": "Ingrese su correo electrónico",
           "phone": "Ingrese su número de teléfono",
           "topic": "Selecciona un tipo de consulta",
+          "customTopic": "Escribe el motivo de tu consulta...",
           "message": "Comparte tus fechas de viaje, tamaño del grupo o duda..."
         },
         "topics": {
@@ -1018,7 +1025,8 @@ export const clientUi = {
           "atlas": "Consulta sobre una reserva existente",
           "imperial": "Presupuesto de traslado o conductor privado",
           "coastal": "Consulta de prensa o colaboración",
-          "custom": "Quiero planificar una ruta a medida"
+          "custom": "Quiero planificar una ruta a medida",
+          "other": "Otro"
         }
       }
     },

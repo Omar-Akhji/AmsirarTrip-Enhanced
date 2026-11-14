@@ -470,6 +470,7 @@
         "email": "Geben Sie Ihre E-Mail-Adresse ein",
         "phone": "Geben Sie Ihre Telefonnummer ein",
         "topic": "Anfrageart auswählen",
+        "customTopic": "Geben Sie Ihr Anliegen ein...",
         "message": "Nennen Sie Ihre Reisedaten, Gruppengröße oder Frage..."
       },
       "topics": {
@@ -477,7 +478,8 @@
         "atlas": "Frage zu einer bestehenden Buchung",
         "imperial": "Angebot für Flughafentransfer oder Privatfahrer",
         "coastal": "Presse- oder Kooperationsanfrage",
-        "custom": "Ich möchte eine individuelle Route planen"
+        "custom": "Ich möchte eine individuelle Route planen",
+        "other": "Sonstiges"
       }
     },
     "info": {

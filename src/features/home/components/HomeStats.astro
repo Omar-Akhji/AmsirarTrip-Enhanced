@@ -1,8 +1,5 @@
 ---
 import { useTranslations } from "@/i18n/utils";
-import CompassIcon from "@/shared/ui/icons/CompassIcon.astro";
-import PointOnMapIcon from "@/shared/ui/icons/PointOnMapIcon.astro";
-import ShieldCheckIcon from "@/shared/ui/icons/ShieldCheckIcon.astro";
 import StatsFolderStack from "./StatsFolderStack.astro";
 
 const locale = Astro.locals.locale;
@@ -74,7 +71,6 @@ const statHighlights = [
     description: copy.experience,
     footerLeft: "Est. 2006",
     footerRight: "Marrakech HQ",
-    icon: CompassIcon,
   },
   {
     id: "routes",
@@ -84,7 +80,6 @@ const statHighlights = [
     description: copy.routes,
     footerLeft: "All 12 Regions",
     footerRight: "Bespoke Routes",
-    icon: PointOnMapIcon,
   },
   {
     id: "care",
@@ -94,7 +89,6 @@ const statHighlights = [
     description: copy.care,
     footerLeft: "Real-Time",
     footerRight: "Direct WhatsApp",
-    icon: ShieldCheckIcon,
   },
 ];
 
@@ -120,7 +114,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
 
     {/* Desktop & Tablet Mode: 3-column Grid */}
     <div class="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 2xl:gap-8 items-stretch">
-      {statHighlights.map(({ icon: Icon, ...stat }, index) => (
+      {statHighlights.map((stat, index) => (
         <div
           class:list={[
             "flex size-full",
@@ -133,13 +127,6 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
             <div>
               <div class="mbe-5 flex items-center justify-between border-b border-stone-200/60 pb-3 text-[11px] font-mono uppercase tracking-wider text-stone-400 dark:border-white/10 dark:text-mist-400">
                 <span class="font-semibold text-stone-600 dark:text-mist-200">{stat.code}</span>
-                <div class="flex items-center gap-2 text-stone-400 transition-colors group-hover:text-stone-700 dark:text-mist-400 dark:group-hover:text-mist-200">
-                  <Icon
-                    aria-hidden="true"
-                    class="size-4"
-                    stroke-width="2"
-                  />
-                </div>
               </div>
 
               <div class="mbe-3">

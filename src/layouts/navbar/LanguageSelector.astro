@@ -77,18 +77,8 @@ const menuId = `${id}-popover`;
     ]}
     role="menu"
   >
-    {/* Subtle Header */}
-    <div class="px-3 pt-2 pb-1.5 text-[10px] font-mono uppercase tracking-widest text-zinc-400 group-data-scrolled:text-stone-500 select-none font-semibold">
-      {t("language")}
-    </div>
-
-    <div
-      class="my-1 mx-1.5 h-px bg-white/10 group-data-scrolled:bg-stone-200/70"
-      role="separator"
-    ></div>
-
     {/* Language List */}
-    <div class="flex flex-col gap-0.5">
+    <div class="flex flex-col gap-0.5 overflow-hidden rounded-[10px]">
       {LANGUAGES.map((lang) => {
         const isCurrent = lang.code === currentLanguage.code;
         return (
@@ -98,7 +88,7 @@ const menuId = `${id}-popover`;
             hreflang={lang.code}
             lang={lang.code}
             class:list={[
-              "group/item relative flex items-center gap-2.5 px-2.5 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all duration-150 inline-full select-none cursor-pointer",
+              "group/item relative flex items-center gap-2.5 px-3 py-2 rounded-[10px] text-xs sm:text-sm font-medium transition-all duration-150 inline-full select-none cursor-pointer",
               "outline-none focus-visible:ring-2 focus-visible:ring-orange/80 focus-visible:ring-offset-1 focus-visible:ring-offset-slate-950",
               {
                 "bg-white/15 text-white font-semibold group-data-scrolled:bg-orange/10 group-data-scrolled:text-orange-950 group-data-scrolled:dark:bg-orange/20 group-data-scrolled:dark:text-orange-400 shadow-xs":
@@ -110,18 +100,6 @@ const menuId = `${id}-popover`;
             href={getLocalizedHref(lang.code)}
             role="menuitemradio"
           >
-            <span
-              class:list={[
-                "flex h-5.5 w-7 items-center justify-center rounded-md font-mono text-[10px] font-bold tracking-wider uppercase transition-colors shrink-0",
-                {
-                  "bg-orange text-white shadow-xs": isCurrent,
-                  "bg-white/10 text-zinc-300 group-hover/item:bg-white/20 group-hover/item:text-white group-data-scrolled:bg-stone-200/80 group-data-scrolled:text-stone-700 group-data-scrolled:group-hover/item:bg-stone-300/80":
-                    !isCurrent,
-                },
-              ]}
-            >
-              {lang.shortName}
-            </span>
             <span class="truncate text-[13px]">{lang.name}</span>
           </a>
         );
