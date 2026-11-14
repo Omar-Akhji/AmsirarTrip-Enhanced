@@ -1,16 +1,3 @@
-/**
- * Scroll Animation Orchestrator
- *
- * Lightweight TypeScript that triggers CSS @keyframes animations via IntersectionObserver. The
- * actual animations run on the compositor thread via CSS — this script only toggles classes.
- *
- * Also handles:
- *
- * - Counter count-up animations (DOM text manipulation)
- * - Stagger delay conversion (transition-delay → animation-delay)
- * - Astro View Transition lifecycle hooks
- */
-
 const REVEAL_CLEANUP_TIMEOUT_MS = 2500;
 
 let revealObserver: IntersectionObserver | undefined;
