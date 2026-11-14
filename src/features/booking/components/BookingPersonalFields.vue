@@ -60,17 +60,17 @@ const { t } = useTranslation();
             name="fullName"
             toolparamdescription="The full name of the guest booking the reservation"
             autocomplete="name"
-            :aria-invalid="state?.errors?.fullName ? 'true' : 'false'"
-            :aria-describedby="state?.errors?.fullName ? 'fullName-error' : undefined"
+            :aria-invalid="state?.errors?.['fullName'] ? 'true' : 'false'"
+            :aria-describedby="state?.errors?.['fullName'] ? 'fullName-error' : undefined"
             required
           />
         </div>
         <p
-          v-if="state?.errors?.fullName"
+          v-if="state?.errors?.['fullName']"
           id="fullName-error"
           class="mbs-1 font-sans text-xs text-red-600"
         >
-          {{ state.errors.fullName }}
+          {{ state.errors['fullName'] }}
         </p>
       </div>
 
@@ -114,17 +114,17 @@ const { t } = useTranslation();
             name="email"
             toolparamdescription="The email address of the guest"
             autocomplete="email"
-            :aria-invalid="state?.errors?.email ? 'true' : 'false'"
-            :aria-describedby="state?.errors?.email ? 'email-error' : undefined"
+            :aria-invalid="state?.errors?.['email'] ? 'true' : 'false'"
+            :aria-describedby="state?.errors?.['email'] ? 'email-error' : undefined"
             required
           />
         </div>
         <p
-          v-if="state?.errors?.email"
+          v-if="state?.errors?.['email']"
           id="email-error"
           class="mbs-1 font-sans text-xs text-red-600"
         >
-          {{ state.errors.email }}
+          {{ state.errors['email'] }}
         </p>
       </div>
     </div>
@@ -146,16 +146,16 @@ const { t } = useTranslation();
         name="phone"
         :placeholder="t('booking.placeholders.phone')"
         toolparamdescription="The contact phone/WhatsApp number of the guest"
-        :aria-invalid="state?.errors?.phone ? 'true' : 'false'"
-        :aria-describedby="state?.errors?.phone ? 'phone-error' : undefined"
+        :aria-invalid="state?.errors?.['phone'] ? 'true' : 'false'"
+        :aria-describedby="state?.errors?.['phone'] ? 'phone-error' : undefined"
         required
       />
       <p
-        v-if="state?.errors?.phone"
+        v-if="state?.errors?.['phone']"
         id="phone-error"
         class="mbs-1 font-sans text-xs text-red-600"
       >
-        {{ state.errors.phone }}
+        {{ state.errors['phone'] }}
       </p>
     </div>
   </fieldset>
