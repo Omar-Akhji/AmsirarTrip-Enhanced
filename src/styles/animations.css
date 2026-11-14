@@ -288,18 +288,6 @@
      5. Hero slider: 3D carousel
      ------------------------------------------------------------------------ */
 
-  .slider .list .item:first-child .description {
-    anchor-name: --hero-active-desc;
-  }
-
-  @supports (top: anchor(bottom)) {
-    #pagination {
-      position-anchor: --hero-active-desc;
-      top: calc(anchor(bottom) + 16px);
-      transition: top 250ms var(--ease-out-expo);
-    }
-  }
-
   #home-hero-slider,
   #home-hero-slider-skeleton {
     /* Base (< 480px): Compact mobile */
