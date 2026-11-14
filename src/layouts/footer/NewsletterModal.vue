@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, useTemplateRef } from "vue";
+import { computed, ref, onMounted, onUnmounted, useTemplateRef } from "vue";
 import { actions } from "astro:actions";
 import { hasCaptcha } from "@/lib/client-env";
 import { useTranslation } from "@/lib/hooks/use-translation";
@@ -15,6 +15,7 @@ const name = ref("");
 const email = ref("");
 const statusKey = ref("");
 const isSubmitting = ref(false);
+const isSuccess = computed(() => statusKey.value === "footer.newsletterSuccess");
 
 interface RecaptchaInstance {
   readonly getValue: () => string;
@@ -53,10 +54,12 @@ const handleSubmit = async () => {
         name.value = "";
         email.value = "";
         recaptchaRef.value?.reset();
+        if (timer) clearTimeout(timer);
         timer = setTimeout(() => {
           timer = null;
+          statusKey.value = "";
           handleClose();
-        }, 2000);
+        }, 4000);
       }
       statusKey.value = data.statusKey;
     }
@@ -268,38 +271,81 @@ onUnmounted(() => {
           </fieldset>
 
           <label
-            v-if="statusKey"
+            v-if="statusKey && !isSuccess"
             for="newsletter-status"
             class="sr-only"
           >
             {{ t("footer.newsletterStatus") }}
           </label>
           <output
-            v-if="statusKey"
+            v-if="statusKey && !isSuccess"
             id="newsletter-status"
             for="newsletter-name newsletter-email"
             aria-live="polite"
-            class="mbs-4 block text-center font-mono text-xs font-medium"
-            :class="[statusKey.includes('Success') ? 'text-emerald-400' : 'text-red-400']"
+            class="mbs-4 block text-center font-mono text-xs font-medium text-red-400"
           >
             {{ t(statusKey) }}
           </output>
 
           <button
             type="submit"
-            :disabled="isSubmitting"
+            :disabled="isSubmitting || isSuccess"
             :aria-busy="isSubmitting"
-            class="group mbs-5 inline-flex min-h-12 cursor-pointer items-center rounded-full border border-stone-200/80 bg-white py-1.5 ps-4 pe-1.5 font-mono text-xs font-semibold tracking-wider text-dark-surface uppercase shadow-lg shadow-black/25 transition-colors duration-200 select-none inline-full hover:border-stone-300 hover:bg-white hover:shadow-xl focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 focus-visible:outline-hidden active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
+            class="group mbs-5 inline-flex min-h-12 cursor-pointer items-center rounded-full border py-1.5 ps-4 pe-1.5 font-mono text-xs font-semibold tracking-wider uppercase shadow-lg shadow-black/25 transition-colors duration-200 select-none inline-full focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 focus-visible:outline-hidden active:scale-[0.98] disabled:cursor-not-allowed"
+            :class="
+              isSuccess
+                ? 'border-emerald-500/40 bg-emerald-500/15 text-emerald-300'
+                : 'border-stone-200/80 bg-white text-dark-surface hover:border-stone-300 hover:bg-white hover:shadow-xl disabled:opacity-50'
+            "
           >
-            <span class="flex-1 truncate px-2 text-center">
-              {{ t(isSubmitting ? "contact.form.sending" : "footer.newsletterSubscribe") }}
+            <span
+              class="flex-1 px-2 text-center"
+              :class="isSuccess ? 'leading-tight normal-case tracking-normal' : 'truncate'"
+            >
+              {{
+                isSubmitting
+                  ? t("contact.form.sending")
+                  : isSuccess
+                    ? t("footer.newsletterSuccess")
+                    : t("footer.newsletterSubscribe")
+              }}
             </span>
             <span
-              class="relative flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-full bg-linear-to-br from-amber-orange to-orange text-white shadow-xs shadow-orange/40 transition-transform duration-300 ease-out group-hover:scale-105 group-active:scale-95"
+              class="relative flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-full text-white shadow-xs transition-transform duration-300 ease-out"
+              :class="
+                isSuccess
+                  ? 'bg-emerald-500 shadow-emerald-500/40'
+                  : 'bg-linear-to-br from-amber-orange to-orange shadow-orange/40 group-hover:scale-105 group-active:scale-95'
+              "
             >
+              <!-- Success state: Solar Check Broken icon -->
+              <svg
+                v-if="isSuccess"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke-width="1.5"
+                class="solar solar-check-broken size-4.5"
+                aria-hidden="true"
+              >
+                <path
+                  d="M14 12L9 17L5 13"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke="currentColor"
+                />
+                <path
+                  d="M16.5 9.5L19 7"
+                  stroke-linecap="round"
+                  stroke="currentColor"
+                />
+              </svg>
+
               <!-- Loading state: Solar Refresh Broken spinning icon -->
               <svg
-                v-if="isSubmitting"
+                v-else-if="isSubmitting"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="none"
