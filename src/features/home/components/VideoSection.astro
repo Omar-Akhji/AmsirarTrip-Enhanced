@@ -12,65 +12,50 @@ const videoSource = "/videos/Morocco-Video.mp4";
 ---
 
 <section
-  id="video"
-  aria-label={t("video.sectionLabel")}
-  class="relative overflow-clip py-8 text-white inline-full sm:py-12 lg:py-16"
+  aria-label={t("video.sectionLabel")}   class="relative overflow-clip py-8 text-white inline-full sm:py-12 lg:py-16"   id="video"
 >
   <div class="mx-auto px-4 max-inline-7xl sm:px-6 lg:px-8 2xl:max-inline-360 3xl:max-inline-420">
     <div
-      data-scroll-cinematic
-      class="relative overflow-hidden rounded-2xl border border-slate-900 bg-slate-950 p-2 shadow-2xl will-change-transform block-[50dvh] inline-full motion-reduce:transform-none motion-reduce:transition-none xs:block-[55dvh] sm:p-3 sm:block-[65dvh] lg:block-[75dvh] xl:block-[82dvh] 2xl:block-[85dvh] 3xl:max-block-240"
+      class="relative overflow-hidden rounded-2xl border border-slate-900 bg-slate-950 p-2 shadow-2xl will-change-transform block-[50dvh] inline-full motion-reduce:transform-none motion-reduce:transition-none xs:block-[55dvh] sm:p-3 sm:block-[65dvh] lg:block-[75dvh] xl:block-[82dvh] 2xl:block-[85dvh] 3xl:max-block-240"       data-scroll-cinematic
     >
       <video-showcase
-        data-state="idle"
-        class="group/video relative block size-full"
+        class="group/video relative block size-full"         data-state="idle"
       >
         <!-- Top Telemetry Badge -->
         <div class="pointer-events-none absolute inset-s-6 top-6 z-20 flex items-center gap-2 font-mono text-xs">
           <span class="inline-flex items-center gap-2 rounded-md border border-white/20 bg-slate-950/80 px-3 py-1 font-bold tracking-wider text-orange-400 uppercase shadow-xs backdrop-blur-xs">
             <svg
-              class="size-4 shrink-0 text-orange-400"
-              viewBox="0 0 24 24"
-              fill="none"
-              aria-hidden="true"
+              aria-hidden="true"               class="size-4 shrink-0 text-orange-400"               fill="none"               viewBox="0 0 24 24"
             >
               <path
                 d="M17 3.5V20.5"
                 stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
+                stroke-linecap="round"                 stroke-width="1.5"
               ></path>
               <path
                 d="M12 2V22"
                 stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-dasharray="3 3"
+                stroke-dasharray="3 3"                 stroke-linecap="round"                 stroke-width="1.5"
               ></path>
               <path
                 d="M7 3.5V20.5"
                 stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
+                stroke-linecap="round"                 stroke-width="1.5"
               ></path>
               <path
                 d="M3 8.5L7 8.5M21 8.5H17"
                 stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
+                stroke-linecap="round"                 stroke-width="1.5"
               ></path>
               <path
                 d="M3 15.5L5.75 15.5L7 15.5M21 15.5L17 15.5"
                 stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
+                stroke-linecap="round"                 stroke-width="1.5"
               ></path>
               <path
                 d="M14.5 3.00293C17.2939 3.02331 18.8237 3.16641 19.8284 4.17112C20.8916 5.23426 20.99 6.8854 20.9991 10M14.5 20.9962C17.2939 20.9758 18.8237 20.8327 19.8284 19.828C20.8916 18.7648 20.99 17.1137 20.9991 13.9991M9.49991 20.9962C6.70609 20.9758 5.17627 20.8327 4.17157 19.828C3 18.6564 3 16.7708 3 12.9995V10.9995C3 7.22831 3 5.34269 4.17157 4.17112C5.17627 3.16642 6.70609 3.02331 9.49991 3.00293"
                 stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                stroke-linecap="round"                 stroke-linejoin="round"                 stroke-width="1.5"
               ></path>
             </svg>
             Morocco Travel Film
@@ -85,48 +70,37 @@ const videoSource = "/videos/Morocco-Video.mp4";
           <div class="max-w-lg rounded-2xl border border-white/15 bg-slate-950/90 p-8 shadow-2xl backdrop-blur-md">
             <div class="mbe-3 inline-flex items-center gap-2 font-mono text-xs text-orange-400">
               <svg
-                class="size-4 shrink-0 text-orange-400"
-                viewBox="0 0 24 24"
-                fill="none"
-                aria-hidden="true"
+                aria-hidden="true"                 class="size-4 shrink-0 text-orange-400"                 fill="none"                 viewBox="0 0 24 24"
               >
                 <path
                   d="M17 3.5V20.5"
                   stroke="currentColor"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
+                  stroke-linecap="round"                   stroke-width="1.5"
                 ></path>
                 <path
                   d="M12 2V22"
                   stroke="currentColor"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-dasharray="3 3"
+                  stroke-dasharray="3 3"                   stroke-linecap="round"                   stroke-width="1.5"
                 ></path>
                 <path
                   d="M7 3.5V20.5"
                   stroke="currentColor"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
+                  stroke-linecap="round"                   stroke-width="1.5"
                 ></path>
                 <path
                   d="M3 8.5L7 8.5M21 8.5H17"
                   stroke="currentColor"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
+                  stroke-linecap="round"                   stroke-width="1.5"
                 ></path>
                 <path
                   d="M3 15.5L5.75 15.5L7 15.5M21 15.5L17 15.5"
                   stroke="currentColor"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
+                  stroke-linecap="round"                   stroke-width="1.5"
                 ></path>
                 <path
                   d="M14.5 3.00293C17.2939 3.02331 18.8237 3.16641 19.8284 4.17112C20.8916 5.23426 20.99 6.8854 20.9991 10M14.5 20.9962C17.2939 20.9758 18.8237 20.8327 19.8284 19.828C20.8916 18.7648 20.99 17.1137 20.9991 13.9991M9.49991 20.9962C6.70609 20.9758 5.17627 20.8327 4.17157 19.828C3 18.6564 3 16.7708 3 12.9995V10.9995C3 7.22831 3 5.34269 4.17157 4.17112C5.17627 3.16642 6.70609 3.02331 9.49991 3.00293"
                   stroke="currentColor"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  stroke-linecap="round"                   stroke-linejoin="round"                   stroke-width="1.5"
                 ></path>
               </svg>
               <span>Featured Video</span>
@@ -134,7 +108,7 @@ const videoSource = "/videos/Morocco-Video.mp4";
             <h3 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">
               {t("video.fallback.title")}
             </h3>
-            <p class="mbs-2 text-sm leading-relaxed text-stone-300">
+            <p class="mbs-2 text-sm/relaxed  text-stone-300">
               {t("video.fallback.subtitle")}
             </p>
             <div class="mbs-6 border-t border-white/10 pt-4 font-mono text-xs font-bold tracking-wider text-orange-400 uppercase">
@@ -156,55 +130,36 @@ const videoSource = "/videos/Morocco-Video.mp4";
           </div>
 
           <video
-            loop
-            muted
-            playsinline
-            preload="none"
-            poster={fallbackImage}
-            class="size-full rounded-xl object-cover"
+            class="size-full rounded-xl object-cover"             loop             muted             playsinline             poster={fallbackImage}             preload="none"
           >
             <source
               src={videoSource}
               type="video/mp4"
             />
             <track
-              kind="captions"
-              src="/videos/captions.vtt"
-              srclang="en"
-              label="English"
-              default
+              default               kind="captions"               label="English"               src="/videos/captions.vtt"               srclang="en"
             />
             {t("video.unsupported")}
           </video>
 
           <button
-            type="button"
-            data-video-toggle
-            data-label-play={t("video.playAria")}
-            data-label-pause={t("video.pause")}
-            aria-label={t("video.playAria")}
-            class="group/btn absolute inset-0 z-10 flex cursor-pointer items-center justify-center rounded-xl bg-black/30 transition-colors duration-300 group-data-[state=playing]/video:bg-black/0 pointer-fine:hover:bg-black/45 pointer-fine:group-data-[state=playing]/video:hover:bg-black/15"
+            aria-label={t("video.playAria")}             class="group/btn absolute inset-0 z-10 flex cursor-pointer items-center justify-center rounded-xl bg-black/30 transition-colors duration-300 group-data-[state=playing]/video:bg-black/0 pointer-fine:hover:bg-black/45 pointer-fine:group-data-[state=playing]/video:hover:bg-black/15"             data-label-pause={t("video.pause")}             data-label-play={t("video.playAria")}             data-video-toggle             type="button"
           >
             <div class="relative flex items-center justify-center group-data-[state=buffering]/video:hidden group-data-[state=playing]/video:hidden">
               <!-- Glowing ambient ripple ring on hover -->
               <span
-                class="absolute size-20 rounded-full border border-orange/40 transition-all duration-500 group-hover/btn:scale-135 group-hover/btn:border-orange/60 group-hover/btn:opacity-0 sm:size-24"
-                aria-hidden="true"
+                aria-hidden="true"                 class="absolute size-20 rounded-full border border-orange/40 transition-all duration-500 group-hover/btn:scale-135 group-hover/btn:border-orange/60 group-hover/btn:opacity-0 sm:size-24"
               ></span>
 
               <!-- Radiant Moroccan terracotta & amber-orange gradient button -->
               <div class="flex size-18 items-center justify-center rounded-full border-2 border-white bg-linear-to-br from-amber-orange to-orange text-white shadow-xl shadow-orange/35 backdrop-blur-md transition-all duration-300 group-hover/btn:scale-108 group-hover/btn:border-white/60 group-hover/btn:shadow-2xl group-hover/btn:shadow-orange/50 group-hover/btn:brightness-110 group-active/btn:scale-95 sm:size-20">
                 <svg
-                  class="size-8 translate-x-0.5 text-white drop-shadow-sm transition-transform duration-300 group-hover/btn:scale-110"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  aria-hidden="true"
+                  aria-hidden="true"                   class="size-8 translate-x-0.5 text-white drop-shadow-sm transition-transform duration-300 group-hover/btn:scale-110"                   fill="none"                   viewBox="0 0 24 24"
                 >
                   <path
                     d="M3 12L3 18.9671C3 21.2763 5.53435 22.736 7.59662 21.6145L10.7996 19.8727M3 8L3 5.0329C3 2.72368 5.53435 1.26402 7.59661 2.38548L20.4086 9.35258C22.5305 10.5065 22.5305 13.4935 20.4086 14.6474L14.0026 18.131"
                     stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
+                    stroke-linecap="round"                     stroke-width="2"
                   ></path>
                 </svg>
               </div>

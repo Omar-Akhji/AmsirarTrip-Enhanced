@@ -2,15 +2,15 @@ import type { ImageMetadata } from "astro";
 import { getCollection } from "astro:content";
 
 export interface ExcursionItem {
-  readonly id: number;
-  readonly image: ImageMetadata;
-  readonly title: string;
   readonly alt: string;
   readonly description: string;
-  readonly tagline: string;
   readonly duration: string;
+  readonly id: number;
+  readonly image: ImageMetadata;
   readonly price?: number | undefined;
   readonly route: string;
+  readonly tagline: string;
+  readonly title: string;
 }
 
 /**

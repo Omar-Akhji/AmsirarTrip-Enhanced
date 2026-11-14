@@ -10,9 +10,9 @@ const { class: className } = Astro.props;
 ---
 
 <div
-  class:list={["about-skeleton", className]}
   aria-busy="true"
   aria-label="Loading About Us"
+  class:list={["about-skeleton", className]}
 >
   <PageHeaderSkeleton
     crumbWidths={["w-12", "w-18"]}
@@ -95,8 +95,8 @@ const { class: className } = Astro.props;
                   </div>
                   <div class="mbs-3 flex items-center gap-2">
                     <span
-                      class="size-1.5 rounded-full bg-stone-400"
                       aria-hidden="true"
+                      class="size-1.5 rounded-full bg-stone-400"
                     ></span>
                     <Skeleton class="h-3.5 w-44" />
                   </div>
@@ -111,10 +111,7 @@ const { class: className } = Astro.props;
           <div class="mbe-[clamp(1.25rem,1rem+0.75vw,1.75rem)] max-w-2xl">
             <Skeleton class="h-6 w-80" />
           </div>
-          <ul
-            role="list"
-            class="m-0 p-0 list-none grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-[clamp(1rem,0.8rem+0.5vw,1.5rem)] 2xl:gap-6"
-          >
+          <ul class="m-0 p-0 list-none grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-[clamp(1rem,0.8rem+0.5vw,1.5rem)] 2xl:gap-6">
             {[1, 2, 3, 4].map((index) => (
               <li class="flex flex-col items-start gap-3 rounded-2xl border border-stone-200/80 bg-stone-50/60 p-[clamp(1.125rem,0.95rem+0.6vw,1.5rem)] shadow-2xs">
                 <span class="inline-flex size-7 items-center justify-center rounded-lg bg-stone-200/80 font-mono text-xs font-bold text-stone-600 tabular-nums shrink-0">

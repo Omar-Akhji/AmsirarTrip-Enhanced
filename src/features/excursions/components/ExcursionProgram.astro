@@ -2,16 +2,16 @@
 import PointOnMapPerspectiveIcon from "@/shared/ui/icons/PointOnMapPerspectiveIcon.astro";
 
 interface Stage {
+  readonly description: string;
+  readonly location: string;
   readonly time: string;
   readonly title: string;
-  readonly location: string;
-  readonly description: string;
 }
 
 interface Props {
+  readonly kicker?: string | undefined;
   readonly program: readonly Stage[];
   readonly programTitle?: string | undefined;
-  readonly kicker?: string | undefined;
 }
 
 const { program, programTitle = "Day Trip Schedule", kicker = "Schedule & Stops" } = Astro.props;
@@ -39,17 +39,13 @@ const STAGE_DELAYS = [
       {kicker}
     </p>
     <h3
-      id="excursion-itinerary-heading"
-      class="mbs-1 text-xl font-bold tracking-tight text-stone-900 sm:text-2xl md:text-3xl dark:text-mist-100"
+      class="mbs-1 text-xl font-bold tracking-tight text-stone-900 sm:text-2xl md:text-3xl dark:text-mist-100"       id="excursion-itinerary-heading"
     >
       {programTitle}
     </h3>
   </hgroup>
 
-  <ol
-    role="list"
-    class="itinerary-stages-list m-0 list-none p-0 space-y-8"
-  >
+  <ol class="itinerary-stages-list m-0 list-none p-0 space-y-8" role="list">
     {program.map((stage, index) => (
       <li
         class:list={[STAGE_DELAYS[index] || "animate-delay-0"]}
@@ -74,7 +70,7 @@ const STAGE_DELAYS = [
             <h4 class="text-base sm:text-lg font-bold text-stone-900 tracking-tight dark:text-mist-100">
               {stage.title}
             </h4>
-            <p class="text-sm sm:text-base leading-relaxed text-stone-700 font-normal dark:text-mist-200">
+            <p class="text-sm/relaxed sm:text-base  text-stone-700 font-normal dark:text-mist-200">
               {stage.description}
             </p>
           </div>

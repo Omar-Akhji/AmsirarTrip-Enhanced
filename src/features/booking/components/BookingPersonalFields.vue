@@ -70,7 +70,7 @@ const { t } = useTranslation();
           id="fullName-error"
           class="mbs-1 font-sans text-xs text-red-600"
         >
-          {{ state.errors['fullName'] }}
+          {{ state.errors["fullName"] }}
         </p>
       </div>
 
@@ -124,7 +124,7 @@ const { t } = useTranslation();
           id="email-error"
           class="mbs-1 font-sans text-xs text-red-600"
         >
-          {{ state.errors['email'] }}
+          {{ state.errors["email"] }}
         </p>
       </div>
     </div>
@@ -155,7 +155,7 @@ const { t } = useTranslation();
         id="phone-error"
         class="mbs-1 font-sans text-xs text-red-600"
       >
-        {{ state.errors['phone'] }}
+        {{ state.errors["phone"] }}
       </p>
     </div>
   </fieldset>

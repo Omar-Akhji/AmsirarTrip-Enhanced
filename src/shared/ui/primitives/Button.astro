@@ -6,10 +6,10 @@ type ButtonTag = "button" | "a" | "div" | "span";
 
 interface BaseProps {
   as?: ButtonTag | undefined;
-  variant?: ButtonVariant | undefined;
-  size?: ButtonSize | undefined;
   class?: string | undefined;
+  size?: ButtonSize | undefined;
   type?: "button" | "submit" | "reset" | string | undefined;
+  variant?: ButtonVariant | undefined;
 }
 
 type AnchorProps = HTMLAttributes<"a"> & { href: string; as?: "a" | undefined };

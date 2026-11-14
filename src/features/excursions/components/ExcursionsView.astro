@@ -14,14 +14,18 @@ const excursions = await getExcursionsData();
 
 const formatExcursionPrice = (price: number): string => {
   switch (locale) {
-    case "fr":
+    case "fr": {
       return `À partir de ${price} € / pers.`;
-    case "es":
+    }
+    case "es": {
       return `Desde ${price} € / pers.`;
-    case "de":
+    }
+    case "de": {
       return `Ab ${price} € / Pers.`;
-    default:
+    }
+    default: {
       return `From €${price} / person`;
+    }
   }
 };
 
@@ -109,7 +113,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
               <span class="text-orange">{excursionsGridTitle.accent}</span>
             )}
           </h2>
-          <p class="border-s-2 border-orange-600 ps-4 py-0.5 text-sm sm:text-base text-stone-600 leading-relaxed max-w-[62ch] text-pretty dark:text-mist-300">
+          <p class="border-s-2 border-orange-600 ps-4 py-0.5 text-sm/relaxed sm:text-base text-stone-600  max-w-[62ch] text-pretty dark:text-mist-300">
             {t("excursion.sectionSubtitle")}
           </p>
         </hgroup>
@@ -123,12 +127,11 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
           >
             <TripCard
               badge={t("excursion.card.category")}
-              tourTypeBadge={t("tours.bothAvailable")}
-              description={t(excursion.description)}
-              exploreLink={t("excursion.exploreLink")}
-              item={{ image: excursion.image, imageAlt: t(excursion.alt), route: excursion.route }}
-              tagline={excursion.price !== undefined ? formatExcursionPrice(excursion.price) : t(excursion.tagline)}
-              title={t(excursion.title)}
+              description={t(excursion.description)}               exploreLink={t("excursion.exploreLink")}               item={{ image: excursion.image, imageAlt: t(excursion.alt), route: excursion.route }}               tagline={
+                excursion.price === undefined ?
+                  t(excursion.tagline)
+                : formatExcursionPrice(excursion.price)
+              }               title={t(excursion.title)}               tourTypeBadge={t("tours.bothAvailable")}
             />
           </div>
         ))}
@@ -154,7 +157,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
             <span class="text-orange">{excursionsFaqTitle.accent}</span>
           )}
         </h2>
-        <p class="mt-2 border-s-2 border-orange-600 ps-4 py-0.5 text-sm sm:text-base text-stone-600 leading-relaxed max-w-[62ch] text-pretty dark:text-mist-300">
+        <p class="mt-2 border-s-2 border-orange-600 ps-4 py-0.5 text-sm/relaxed sm:text-base text-stone-600  max-w-[62ch] text-pretty dark:text-mist-300">
           {t("excursion.faq.subtitle")}
         </p>
       </hgroup>
@@ -194,7 +197,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
                 </span>
               </summary>
               <div
-                class="mt-4 pt-3.5 border-t border-stone-100 dark:border-white/10 text-sm leading-relaxed text-stone-600 dark:text-mist-300 prose prose-sm max-w-none"
+                class="mt-4 pt-3.5 border-t border-stone-100 dark:border-white/10 text-sm/relaxed  text-stone-600 dark:text-mist-300 prose prose-sm max-w-none"
                 itemprop="acceptedAnswer"
                 itemscope
                 itemtype="https://schema.org/Answer"

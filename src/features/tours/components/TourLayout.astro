@@ -10,10 +10,9 @@ import TourItinerary from "./TourItinerary.astro";
 import TourSeoSections from "./TourSeoSections.astro";
 
 interface Props {
-  readonly tour?: CollectionEntry<"tours">["data"] | undefined;
-  readonly tourKey: string;
   readonly bookingId?: number | undefined;
   readonly imageSrc: ImageMetadata;
+  readonly locale: string;
   readonly seo: {
     readonly title: string;
     readonly metaDescription: string;
@@ -23,8 +22,9 @@ interface Props {
     readonly price?: { readonly label: string; readonly note: string } | undefined;
     readonly imageAlt?: string | undefined;
   };
-  readonly locale: string;
   readonly slug?: string | undefined;
+  readonly tour?: CollectionEntry<"tours">["data"] | undefined;
+  readonly tourKey: string;
 }
 
 const { tour, tourKey, imageSrc, seo, locale, slug = "" } = Astro.props;
@@ -175,13 +175,12 @@ const routeMap = getTourRouteMap(tourKey, startCity, endCity, dossierTitle);
           {t("tours.kickerAbout")}
         </p>
         <h3
-          id="tour-overview-heading"
-          class="mbs-1 mbe-4 text-xl font-bold tracking-tight text-stone-900 sm:text-2xl md:text-3xl dark:text-mist-100"
+          class="mbs-1 mbe-4 text-xl font-bold tracking-tight text-stone-900 sm:text-2xl md:text-3xl dark:text-mist-100"           id="tour-overview-heading"
         >
           {t("tours.overview")}
         </h3>
       </hgroup>
-      <p class="font-sans text-sm sm:text-base leading-relaxed whitespace-pre-line text-stone-700 dark:text-mist-200">
+      <p class="font-sans text-sm/relaxed sm:text-base  whitespace-pre-line text-stone-700 dark:text-mist-200">
         {overview}
       </p>
     </section>
@@ -203,35 +202,19 @@ const routeMap = getTourRouteMap(tourKey, startCity, endCity, dossierTitle);
     </section>
 
     <TripInfoSections
-      idPrefix="tour"
-      excludedTitle={t("tours.excluded")}
-      excludes={excludes}
-      goodToKnow={goodToKnow}
-      goodToKnowTitle={t("tours.goodToKnow")}
+      excludedTitle={t("tours.excluded")}       excludes={excludes}       goodToKnow={goodToKnow}       goodToKnowTitle={t("tours.goodToKnow")}       idPrefix="tour"
       includedTitle={t("tours.included")}
       includes={includes}
     />
 
     <PricingCard
-      idPrefix="tour"
-      pricingTitle={pricingTitle}
-      priceLabel={priceLabel}
-      price={seo.price ?? { label: priceLabel, note: t("tours.priceNote") }}
-      reserveNow={reserveNow}
-      formatComparisonTitle={t("tours.formatComparisonTitle")}
-      privateOption={t("tours.privateOption")}
-      privateBadge={t("tours.privateOptionBadge")}
-      privateDesc={t("tours.privateOptionDesc")}
-      sharedOption={t("tours.sharedOption")}
-      sharedBadge={t("tours.sharedOptionBadge")}
-      sharedDesc={t("tours.sharedOptionDesc")}
+      formatComparisonTitle={t("tours.formatComparisonTitle")}       idPrefix="tour"       price={seo.price ?? { label: priceLabel, note: t("tours.priceNote") }}       priceLabel={priceLabel}       pricingTitle={pricingTitle}       privateBadge={t("tours.privateOptionBadge")}       privateDesc={t("tours.privateOptionDesc")}       privateOption={t("tours.privateOption")}       reserveNow={reserveNow}
+      sharedBadge={t("tours.sharedOptionBadge")}       sharedDesc={t("tours.sharedOptionDesc")}       sharedOption={t("tours.sharedOption")}
     />
 
     {seo.faqs && seo.faqs.length > 0 && (
       <FaqAccordion
-        idPrefix="tour"
-        faqTitle={faqTitle}
-        faqs={seo.faqs}
+        faqs={seo.faqs}         faqTitle={faqTitle}         idPrefix="tour"
       />
     )}
   </Fragment>

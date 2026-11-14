@@ -9,44 +9,44 @@ import {
 import { cleanReservationType, getLanguageName, sanitizeHeaderValue } from "./form-helpers";
 
 export interface BookingEmailInput {
-  fullName: string;
+  date: string;
+  duration?: number | string | undefined;
   email: string;
+  fullName: string;
+  language?: string | undefined;
+  message?: string | undefined;
+  persons: number;
   phone: string;
   reservationType: string;
-  duration?: number | string | undefined;
-  date: string;
-  persons: number;
-  message?: string | undefined;
-  language?: string | undefined;
 }
 
 export interface ContactEmailInput {
-  name: string;
   email: string;
+  message: string;
+  name: string;
   phone: string;
   topic?: string | undefined;
-  message: string;
 }
 
 export interface NewsletterEmailInput {
-  name: string;
   email: string;
+  name: string;
 }
 
 export interface PreparedEmail {
-  subject: string;
-  replyTo: string;
-  text: string;
-  html: string;
   attachments?: readonly InlineCidAttachment[];
+  html: string;
+  replyTo: string;
+  subject: string;
+  text: string;
 }
 
 interface ActionButton {
-  label: string;
-  href: string;
   borderColor: string;
   color: string;
+  href: string;
   iconSrc: string;
+  label: string;
 }
 
 /** Sanitize phone to pure international digits for direct WhatsApp wa.me links */
@@ -264,7 +264,7 @@ export function buildBookingEmail(data: BookingEmailInput): PreparedEmail {
   // Resolve duration intelligently with fallback to title inference
   let resolvedDuration = data.duration;
   if (!resolvedDuration && data.reservationType) {
-    const match = /(\d+)\s*[- ]*(?:Days?|Day|Jours?|Días?|Tage?)/i.exec(data.reservationType);
+    const match = /(\d+)[\s-]*(?:Days?|Jours?|Días?|Tage?)/i.exec(data.reservationType);
     const parsedDays = match?.[1] ? Number(match[1]) : undefined;
     if (parsedDays && !Number.isNaN(parsedDays)) {
       resolvedDuration = parsedDays;

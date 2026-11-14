@@ -21,8 +21,8 @@ export function lookupKey(tree: unknown, key: string): unknown {
 
 export interface TranslationFunction {
   (key: MessageKey | (string & {}), values?: string | Record<string, string | number>): string;
-  raw: (key: string) => unknown;
   has: (key: string) => boolean;
+  raw: (key: string) => unknown;
 }
 
 export function createTranslationHelper(

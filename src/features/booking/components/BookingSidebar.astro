@@ -47,7 +47,7 @@ const perks = [
         </div>
       </div>
 
-      <p class="font-sans text-xs sm:text-sm leading-relaxed text-slate-300 text-pretty text-center sm:text-start">
+      <p class="font-sans text-xs/relaxed sm:text-sm  text-slate-300 text-pretty text-center sm:text-start">
         {t("booking.checkCopy")}
       </p>
 
@@ -58,7 +58,7 @@ const perks = [
               <span class="inline-flex size-7 sm:size-8 shrink-0 items-center justify-center rounded-full bg-white/10 text-orange-300 font-mono text-xs font-bold tabular-nums border border-white/5">
                 0{index + 1}
               </span>
-              <span class="font-mono text-xs leading-relaxed text-slate-200 sm:text-sm">
+              <span class="font-mono text-xs/relaxed  text-slate-200 sm:text-sm">
                 {perk.text}
               </span>
             </li>
@@ -70,17 +70,12 @@ const perks = [
     <!-- Bottom Action Row: baseline aligned with Booking Form submit row -->
     <div class="mbs-6 flex flex-col items-center justify-center gap-3 sm:flex-row sm:items-center min-h-12.25">
       <a
-        href="https://www.tripadvisor.com/Attraction_Review-g293734-d32584739-Reviews-Amsirar_Travel-Marrakech_Marrakech_Safi.html"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="group/btn inline-flex min-h-12 cursor-pointer items-center justify-between gap-3 rounded-full border border-stone-200/90 bg-white py-1.5 ps-5 pe-1.5 font-mono text-xs font-semibold tracking-wider text-black uppercase shadow-md shadow-black/10 transition-colors duration-200 hover:border-stone-300 hover:bg-white active:scale-[0.98] sm:gap-4 sm:ps-6 sm:pe-2 dark:border-white/10 dark:bg-white/5 dark:text-mist-100 dark:hover:bg-white/10"
-        aria-label={t("booking.tripadvisorCtaAria")}
+        aria-label={t("booking.tripadvisorCtaAria")}         class="group/btn inline-flex min-h-12 cursor-pointer items-center justify-between gap-3 rounded-full border border-stone-200/90 bg-white py-1.5 ps-5 pe-1.5 font-mono text-xs font-semibold tracking-wider text-black uppercase shadow-md shadow-black/10 transition-colors duration-200 hover:border-stone-300 hover:bg-white active:scale-[0.98] sm:gap-4 sm:ps-6 sm:pe-2 dark:border-white/10 dark:bg-white/5 dark:text-mist-100 dark:hover:bg-white/10"         href="https://www.tripadvisor.com/Attraction_Review-g293734-d32584739-Reviews-Amsirar_Travel-Marrakech_Marrakech_Safi.html"         rel="noopener noreferrer"         target="_blank"
       >
         <span class="truncate">{t("booking.checkCta")}</span>
         <span class="relative flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-full bg-linear-to-br from-emerald-400 to-emerald-600 text-white shadow-xs shadow-emerald-500/30">
           <SquareTopDownIcon
-            class="size-4 text-white"
-            aria-hidden="true"
+            aria-hidden="true"             class="size-4 text-white"
           />
         </span>
       </a>

@@ -3,13 +3,13 @@ import { getLocalizedPath } from "@/i18n/core";
 import { isLocale } from "@/i18n/locales";
 
 interface ToolDefinition {
-  name: string;
   description: string;
   inputSchema: {
     type: "object";
     properties: Record<string, { type: string; description?: string; enum?: string[] }>;
     required?: string[];
   };
+  name: string;
 }
 
 declare global {

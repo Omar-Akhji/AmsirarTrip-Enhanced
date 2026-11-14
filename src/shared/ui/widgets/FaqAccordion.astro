@@ -2,10 +2,10 @@
 import QuestionCircleIcon from "@/shared/ui/icons/QuestionCircleIcon.astro";
 
 interface Props {
-  readonly idPrefix?: string | undefined;
-  readonly faqTitle: string;
-  readonly faqs: readonly { readonly question: string; readonly answer: string }[];
   readonly categoryLabel?: string | undefined;
+  readonly faqs: readonly { readonly question: string; readonly answer: string }[];
+  readonly faqTitle: string;
+  readonly idPrefix?: string | undefined;
 }
 
 const { idPrefix = "trip", faqTitle, faqs, categoryLabel = "Common Questions" } = Astro.props;
@@ -58,7 +58,7 @@ const { idPrefix = "trip", faqTitle, faqs, categoryLabel = "Common Questions" } 
               </span>
             </summary>
             <div
-              class="mt-4 pt-3.5 border-t border-stone-100 text-sm leading-relaxed text-stone-600 prose prose-sm max-w-none dark:border-white/10 dark:text-mist-200 dark:prose-invert"
+              class="mt-4 pt-3.5 border-t border-stone-100 text-sm/relaxed  text-stone-600 prose prose-sm max-w-none dark:border-white/10 dark:text-mist-200 dark:prose-invert"
               itemprop="acceptedAnswer"
               itemscope
               itemtype="https://schema.org/Answer"

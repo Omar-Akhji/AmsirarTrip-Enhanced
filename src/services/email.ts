@@ -44,16 +44,16 @@ export async function verifyMailer(): Promise<boolean> {
 }
 
 export interface TransactionalEmailOptions {
+  readonly attachments?:
+    readonly NonNullable<SendMailOptions["attachments"]>[number][] | SendMailOptions["attachments"];
+  readonly bcc?: string | string[];
   readonly category: string;
+  readonly cc?: string | string[];
+  readonly headers?: Record<string, string>;
+  readonly html: string;
   readonly replyTo: string;
   readonly subject: string;
   readonly text: string;
-  readonly html: string;
-  readonly cc?: string | string[];
-  readonly bcc?: string | string[];
-  readonly attachments?:
-    readonly NonNullable<SendMailOptions["attachments"]>[number][] | SendMailOptions["attachments"];
-  readonly headers?: Record<string, string>;
 }
 
 /**

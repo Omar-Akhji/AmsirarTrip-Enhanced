@@ -148,6 +148,7 @@ export default defineConfig(
       "better-tailwindcss/enforce-consistent-line-wrapping": "off",
       "better-tailwindcss/no-unnecessary-whitespace": "off",
       "better-tailwindcss/no-conflicting-classes": "error",
+      "astro/jsx-a11y/no-redundant-roles": ["error", { ul: ["list"], ol: ["list"] }],
       "better-tailwindcss/no-unknown-classes": [
         "warn",
         {

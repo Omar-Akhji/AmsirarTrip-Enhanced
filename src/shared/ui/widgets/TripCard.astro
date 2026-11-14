@@ -3,24 +3,24 @@ import { Image } from "astro:assets";
 import { getRelativeLocaleUrl } from "astro:i18n";
 
 interface Props {
+  readonly badge?: string | undefined;
+  readonly description: string;
+  readonly end?: string | undefined;
+  readonly endLabel?: string | undefined;
+  readonly exploreLink?: string | undefined;
   readonly item: {
     readonly image: ImageMetadata | string;
     readonly route: string;
     readonly imageAlt?: string | undefined;
     readonly alt?: string | undefined;
   };
-  readonly title: string;
-  readonly description: string;
-  readonly exploreLink?: string | undefined;
-  readonly badge?: string | undefined;
   readonly priority?: boolean | undefined;
-  readonly tagline?: string | undefined;
   readonly start?: string | undefined;
-  readonly end?: string | undefined;
   readonly startLabel?: string | undefined;
-  readonly endLabel?: string | undefined;
-  readonly transitionName?: string | undefined;
+  readonly tagline?: string | undefined;
+  readonly title: string;
   readonly tourTypeBadge?: string | undefined;
+  readonly transitionName?: string | undefined;
 }
 
 const {
@@ -44,7 +44,7 @@ const locale = Astro.currentLocale || "en";
 const cardTransitionName =
   transitionName
   || (item.route.length > 0 ?
-    `trip-image-${item.route.replace(/^\/+/, "").replaceAll(/[^a-zA-Z0-9_-]/g, "-")}`
+    `trip-image-${item.route.replace(/^\/+/, "").replaceAll(/[^\p{L}\p{N}_-]/gu, "-")}`
   : undefined);
 
 const categoryText = badge || tagline || "Morocco Tour";
@@ -121,7 +121,7 @@ const categoryText = badge || tagline || "Morocco Tour";
     </div>
 
     {/* Description */}
-    <p class="mbe-3 line-clamp-3 text-sm leading-relaxed text-stone-600 dark:text-mist-300">
+    <p class="mbe-3 line-clamp-3 text-sm/relaxed text-stone-600 dark:text-mist-300">
       {description}
     </p>
 
@@ -155,28 +155,28 @@ const categoryText = badge || tagline || "Morocco Tour";
         <span class="relative flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-full bg-linear-to-br from-amber-orange to-orange text-white shadow-xs shadow-orange/40 transition-transform duration-300 ease-out group-hover:scale-105">
           <span class="relative flex size-full items-center justify-center">
             <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
+              aria-hidden="true"
+              class="absolute size-4.5 transition-all duration-300 ease-out group-hover:translate-x-3 group-hover:-translate-y-3 group-hover:opacity-0 rtl:-scale-x-100 rtl:group-hover:-translate-x-3"
               fill="none"
               stroke="currentColor"
-              stroke-width="1.8"
               stroke-linecap="round"
               stroke-linejoin="round"
-              class="absolute size-4.5 transition-all duration-300 ease-out group-hover:translate-x-3 group-hover:-translate-y-3 group-hover:opacity-0 rtl:-scale-x-100 rtl:group-hover:-translate-x-3"
-              aria-hidden="true"
+              stroke-width="1.8"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
             >
               <path d="M18 15V6H9M18 6L11.5 12.5M6 18L8.5 15.5" />
             </svg>
             <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
+              aria-hidden="true"
+              class="absolute size-4.5 -translate-x-3 translate-y-2 opacity-0 transition-all duration-300 ease-out group-hover:translate-0 group-hover:opacity-100 rtl:translate-x-3 rtl:-scale-x-100 rtl:group-hover:translate-x-0"
               fill="none"
               stroke="currentColor"
-              stroke-width="1.8"
               stroke-linecap="round"
               stroke-linejoin="round"
-              class="absolute size-4.5 -translate-x-3 translate-y-2 opacity-0 transition-all duration-300 ease-out group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 rtl:translate-x-3 rtl:-scale-x-100 rtl:group-hover:translate-x-0"
-              aria-hidden="true"
+              stroke-width="1.8"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
             >
               <path d="M14 18L20 12L14 6M20 12H9.5M4 12H6.5" />
             </svg>

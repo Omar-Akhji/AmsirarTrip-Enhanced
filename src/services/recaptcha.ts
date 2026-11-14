@@ -14,8 +14,8 @@ const recaptchaResponseSchema = z.object({
 });
 
 interface VerifyOptions {
-  readonly token: string;
   readonly remoteip?: string;
+  readonly token: string;
 }
 
 /** Verifies a CAPTCHA token using Cap (trycap.dev) if configured, or Google reCAPTCHA as fallback. */

@@ -3,12 +3,12 @@ import { Skeleton } from "@/components/ui/skeleton";
 import type { ButtonSize, ButtonVariant } from "../primitives/button-variants";
 
 interface Props {
-  size?: ButtonSize | undefined;
-  variant?: ButtonVariant | undefined;
   class?: string | undefined;
-  width?: string | number | undefined;
   rows?: number | undefined;
   seed?: number | undefined;
+  size?: ButtonSize | undefined;
+  variant?: ButtonVariant | undefined;
+  width?: string | number | undefined;
 }
 
 const { size = "md", variant = "primary", class: className, width } = Astro.props;

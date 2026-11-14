@@ -3,9 +3,9 @@ import { ref, computed, watch } from "vue";
 import { useTranslation, getResolvedLocale } from "@/lib/hooks/use-translation";
 
 interface Props {
-  initialDate?: Date;
-  disabled?: (date: Date) => boolean;
   className?: string;
+  disabled?: (date: Date) => boolean;
+  initialDate?: Date;
   locale?: string;
 }
 

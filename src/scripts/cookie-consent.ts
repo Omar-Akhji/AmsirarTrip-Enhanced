@@ -12,9 +12,9 @@
  */
 
 export interface CookiePreferences {
-  readonly necessary: true;
   readonly analytics: boolean;
   readonly functional: boolean;
+  readonly necessary: true;
   readonly timestamp: string;
   readonly version: number;
 }

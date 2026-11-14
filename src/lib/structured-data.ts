@@ -1,17 +1,6 @@
 import agencyProfile from "@/data/agency-profile.json";
 
 interface AgencyProfileData {
-  readonly name: string;
-  readonly legalName?: string | undefined;
-  readonly licenseNumber?: string | undefined;
-  readonly ice?: string | undefined;
-  readonly if?: string | undefined;
-  readonly patente?: string | undefined;
-  readonly rc?: string | undefined;
-  readonly rcNumber?: string | undefined;
-  readonly foundingDate: string;
-  readonly priceRange?: string | undefined;
-  readonly employeeRange: { readonly min: number; readonly max: number };
   readonly address: {
     readonly fullAddress: string;
     readonly streetAddress: string;
@@ -20,19 +9,30 @@ interface AgencyProfileData {
     readonly postalCode: string;
     readonly addressCountry: string;
   };
-  readonly geo: { readonly latitude: number; readonly longitude: number };
   readonly contact: {
     readonly phones: readonly { readonly display: string; readonly value: string }[];
     readonly emails: readonly string[];
     readonly workingHours: string;
   };
-  readonly socials: readonly string[];
+  readonly employeeRange: { readonly min: number; readonly max: number };
+  readonly foundingDate: string;
+  readonly geo: { readonly latitude: number; readonly longitude: number };
+  readonly ice?: string | undefined;
+  readonly if?: string | undefined;
+  readonly legalName?: string | undefined;
+  readonly licenseNumber?: string | undefined;
+  readonly name: string;
+  readonly patente?: string | undefined;
+  readonly priceRange?: string | undefined;
+  readonly rc?: string | undefined;
+  readonly rcNumber?: string | undefined;
   readonly reviews: readonly {
     readonly author: string;
     readonly datePublished: string;
     readonly rating: number;
     readonly body: string;
   }[];
+  readonly socials: readonly string[];
 }
 
 const agency: AgencyProfileData = agencyProfile;

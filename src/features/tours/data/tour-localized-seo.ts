@@ -1,6 +1,6 @@
 export interface TourSeoMeta {
-  readonly title: string;
   readonly metaDescription: string;
+  readonly title: string;
 }
 
 export const TOUR_LOCALIZED_SEO: Record<string, Record<string, TourSeoMeta>> = {

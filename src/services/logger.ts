@@ -17,10 +17,10 @@ const disk = { exists: existsSync, mkdir: mkdirSync, createStream: createWriteSt
 type LogLevel = "debug" | "info" | "warn" | "error" | "security";
 
 interface LogEntry {
-  timestamp: string;
+  [key: string]: unknown;
   level: LogLevel;
   message: string;
-  [key: string]: unknown;
+  timestamp: string;
 }
 
 const LOG_DIR = process.env["LOG_DIR"] ?? "./logs";

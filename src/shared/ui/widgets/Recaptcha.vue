@@ -4,8 +4,8 @@ import { CAP_API_ENDPOINT } from "@/lib/client-env";
 
 interface Props {
   endpoint?: string;
-  theme?: "light" | "dark";
   size?: "normal" | "compact";
+  theme?: "light" | "dark";
 }
 
 const props = withDefaults(defineProps<Props>(), {

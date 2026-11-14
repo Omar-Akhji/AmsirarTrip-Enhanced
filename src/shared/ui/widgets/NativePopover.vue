@@ -2,10 +2,10 @@
 import { ref, watch, useId, nextTick, useTemplateRef } from "vue";
 
 interface Props {
-  isOpen: boolean;
+  ariaLabel?: string;
   className?: string;
   id?: string;
-  ariaLabel?: string;
+  isOpen: boolean;
 }
 
 const { isOpen, className = "", id = "", ariaLabel } = defineProps<Props>();

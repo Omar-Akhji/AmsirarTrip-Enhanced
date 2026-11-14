@@ -1,11 +1,11 @@
 ---
 interface Props {
+  readonly cardBg?: string;
   readonly stats: readonly {
     readonly value: string;
     readonly label: string;
     readonly description: string;
   }[];
-  readonly cardBg?: string;
 }
 
 import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
@@ -37,11 +37,11 @@ const {
           <div class="cards-stack-layer static h-auto flex flex-col gap-5 motion-safe:block motion-safe:absolute motion-safe:inset-x-0 motion-safe:top-2 motion-safe:h-85 motion-safe:will-change-transform motion-safe:z-10 motion-safe:perspective-distant">
             {stats.map((stat, index) => (
               <div
-                data-stack-card={index}
                 class:list={[
                   "stat-card-slot static inset-auto opacity-100 transform-none w-full origin-top motion-safe:absolute motion-safe:inset-x-0 motion-safe:top-0 motion-safe:will-change-transform",
                   { "z-10": index === 0, "z-12": index === 1, "z-14": index >= 2 },
                 ]}
+                data-stack-card={index}
               >
                 <article
                   class:list={[
@@ -56,15 +56,15 @@ const {
                       <span class="text-stone-600 dark:text-mist-300">Verified</span>
                     </div>
                     <data
-                      value={stat.value}
                       class="text-4xl font-bold tracking-tight text-orange-700 dark:text-orange-400 block tabular-nums"
+                      value={stat.value}
                     >
                       {stat.value}
                     </data>
                     <h3 class="mbs-2.5 text-base font-semibold tracking-tight text-stone-900 dark:text-mist-100">
                       {stat.label}
                     </h3>
-                    <p class="mbs-1.5 text-xs leading-relaxed text-stone-600 dark:text-mist-300 line-clamp-2">
+                    <p class="mbs-1.5 text-xs/relaxed text-stone-600 dark:text-mist-300 line-clamp-2">
                       {stat.description}
                     </p>
                   </div>
@@ -99,7 +99,7 @@ const {
       >
         <article
           class:list={[
-            "group relative flex h-full w-full flex-col justify-between rounded-2xl border border-stone-200/90",
+            "group relative flex size-full  flex-col justify-between rounded-2xl border border-stone-200/90",
             cardBg,
             "p-6 sm:p-7 shadow-xs shadow-stone-900/5 transition-all duration-300 hover:-translate-y-1 hover:border-stone-300 hover:shadow-md",
           ]}
@@ -110,15 +110,15 @@ const {
               <span class="text-stone-600 dark:text-mist-300">Verified</span>
             </div>
             <data
-              value={stat.value}
               class="text-4xl font-bold tracking-tight text-orange-700 dark:text-orange-400 block"
+              value={stat.value}
             >
               {stat.value}
             </data>
             <h3 class="mbs-3 text-base sm:text-lg font-semibold tracking-tight text-stone-900 dark:text-mist-100">
               {stat.label}
             </h3>
-            <p class="mbs-2 text-sm leading-relaxed text-stone-600 dark:text-mist-300 text-pretty">
+            <p class="mbs-2 text-sm/relaxed text-stone-600 dark:text-mist-300 text-pretty">
               {stat.description}
             </p>
           </div>

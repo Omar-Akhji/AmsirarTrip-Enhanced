@@ -4,16 +4,16 @@ import BookingPersonalFields from "./BookingPersonalFields.vue";
 import BookingTripDetails from "./BookingTripDetails.vue";
 
 interface Props {
-  state: FormState | null;
-  selectedTour: string;
-  tourTitle?: string;
-  tourId?: string;
-  tourDuration: number | null;
-  excursionTitle?: string;
-  excursionId?: string;
-  locale: string;
   calendarOpen: boolean;
+  excursionId?: string;
+  excursionTitle?: string;
+  locale: string;
   reservationDate: Date | null;
+  selectedTour: string;
+  state: FormState | null;
+  tourDuration: number | null;
+  tourId?: string;
+  tourTitle?: string;
 }
 
 const { state, selectedTour, tourDuration, excursionTitle, locale, calendarOpen, reservationDate } =

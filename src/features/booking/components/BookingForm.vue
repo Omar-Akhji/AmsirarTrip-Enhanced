@@ -9,13 +9,13 @@ import Recaptcha from "@/shared/ui/widgets/Recaptcha.vue";
 import BookingFormFields from "./BookingFormFields.vue";
 
 interface Props {
-  locale?: string;
-  tourTitle?: string;
-  tourId?: string;
-  tourDuration?: number | null;
-  excursionTitle?: string;
   excursionId?: string;
+  excursionTitle?: string;
   fullWidth?: boolean;
+  locale?: string;
+  tourDuration?: number | null;
+  tourId?: string;
+  tourTitle?: string;
 }
 
 interface RecaptchaInstance {
@@ -370,7 +370,7 @@ const handleSubmit = async (event: Event) => {
                           stroke-width="1.8"
                           stroke-linecap="round"
                           stroke-linejoin="round"
-                          class="absolute size-4.5 -translate-x-3 translate-y-2 opacity-0 transition-all duration-300 ease-out group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 rtl:translate-x-3 rtl:-scale-x-100 rtl:group-hover:translate-x-0"
+                          class="absolute size-4.5 -translate-x-3 translate-y-2 opacity-0 transition-all duration-300 ease-out group-hover:translate-0  group-hover:opacity-100 rtl:translate-x-3 rtl:-scale-x-100 rtl:group-hover:translate-x-0"
                           aria-hidden="true"
                         >
                           <path d="M14 18L20 12L14 6M20 12H9.5M4 12H6.5" />

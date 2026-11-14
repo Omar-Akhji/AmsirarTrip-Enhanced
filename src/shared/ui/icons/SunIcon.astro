@@ -1,7 +1,7 @@
 ---
 interface Props {
-  class?: string;
   [key: string]: unknown;
+  class?: string;
 }
 
 const { class: className = "size-5", ...rest } = Astro.props;
@@ -11,11 +11,7 @@ const { class: className = "size-5", ...rest } = Astro.props;
   aria-hidden="true"
   class:list={className}
   fill="none"
-  viewBox="0 0 24 24"
-  stroke="currentColor"
-  stroke-width="1.5"
-  stroke-linecap="round"
-  stroke-linejoin="round"
+  stroke="currentColor"   stroke-linecap="round"   stroke-linejoin="round"   stroke-width="1.5"   viewBox="0 0 24 24"
   {...rest}
 >
   <path d="M7.28451 10.3333C7.10026 10.8546 7 11.4156 7 12C7 14.7614 9.23858 17 12 17C14.7614 17 17 14.7614 17 12C17 9.23858 14.7614 7 12 7C11.4156 7 10.8546 7.10026 10.3333 7.28451"></path>

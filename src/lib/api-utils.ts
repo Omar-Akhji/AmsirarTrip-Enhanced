@@ -14,8 +14,8 @@ function enforceMapCapacity<K, V>(map: Map<K, V>): void {
 
 export interface RateLimitResult {
   allowed: boolean;
-  remaining: number;
   blocked?: boolean;
+  remaining: number;
 }
 
 export function checkRateLimit(

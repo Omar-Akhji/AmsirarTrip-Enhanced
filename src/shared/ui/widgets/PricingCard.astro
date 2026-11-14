@@ -1,19 +1,19 @@
 ---
 interface Props {
-  readonly idPrefix?: string | undefined;
-  readonly pricingTitle: string;
-  readonly priceLabel: string;
-  readonly price: { readonly label: string; readonly note: string };
-  readonly reserveNow?: string | undefined;
-  readonly reserveHref?: string | undefined;
-  readonly kicker?: string | undefined;
   readonly formatComparisonTitle?: string | undefined;
-  readonly privateOption?: string | undefined;
+  readonly idPrefix?: string | undefined;
+  readonly kicker?: string | undefined;
+  readonly price: { readonly label: string; readonly note: string };
+  readonly priceLabel: string;
+  readonly pricingTitle: string;
   readonly privateBadge?: string | undefined;
   readonly privateDesc?: string | undefined;
-  readonly sharedOption?: string | undefined;
+  readonly privateOption?: string | undefined;
+  readonly reserveHref?: string | undefined;
+  readonly reserveNow?: string | undefined;
   readonly sharedBadge?: string | undefined;
   readonly sharedDesc?: string | undefined;
+  readonly sharedOption?: string | undefined;
 }
 
 const {
@@ -64,9 +64,7 @@ const {
               </p>
             </>
           )}
-          <p class="font-sans text-xs text-stone-600 leading-relaxed dark:text-mist-300">
-            {price.note}
-          </p>
+          <p class="font-sans text-xs/relaxed text-stone-600 dark:text-mist-300">{price.note}</p>
         </div>
       </div>
 
@@ -90,7 +88,7 @@ const {
                     </span>
                   )}
                 </div>
-                <p class="pt-2.5 font-sans text-xs leading-relaxed text-stone-600 dark:text-mist-300">
+                <p class="pt-2.5 font-sans text-xs/relaxed text-stone-600 dark:text-mist-300">
                   {privateDesc}
                 </p>
               </div>
@@ -116,7 +114,7 @@ const {
                       </span>
                     )}
                   </div>
-                  <p class="pt-2.5 font-sans text-xs leading-relaxed text-stone-600 dark:text-mist-300">
+                  <p class="pt-2.5 font-sans text-xs/relaxed text-stone-600 dark:text-mist-300">
                     {sharedDesc}
                   </p>
                 </div>

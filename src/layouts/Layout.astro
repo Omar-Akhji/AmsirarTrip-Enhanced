@@ -14,12 +14,12 @@ import TransitionSkeletons from "./components/TransitionSkeletons.astro";
 import WhatsappIcon from "../shared/ui/icons/WhatsappIcon.astro";
 
 interface Props {
-  title?: string | undefined;
   description?: string | undefined;
-  noindex?: boolean | undefined;
   image?: string | undefined;
   imageAlt?: string | undefined;
+  noindex?: boolean | undefined;
   preloadImage?: boolean | undefined;
+  title?: string | undefined;
 }
 
 const {
@@ -337,8 +337,7 @@ const currentOgLocale = OG_LOCALE_MAP[locale] ?? locale;
     <script src="../scripts/webmcp-tools.ts"></script>
     <Navbar />
     <main
-      id="main-content"
-      class="relative isolate block flex-[1_0_auto] inline-full min-h-screen overflow-x-clip focus:outline-hidden"
+      class="relative isolate block flex-[1_0_auto] inline-full min-h-screen overflow-x-clip focus:outline-hidden"       id="main-content"
       tabindex="-1"
       transition:animate="fade"
     >

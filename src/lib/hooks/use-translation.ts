@@ -29,8 +29,8 @@ export function getResolvedLocale(explicitLocale?: string): Locale {
 }
 
 export interface UseTranslationReturn {
-  t: TranslationFunction;
   i18n: { language: Locale };
+  t: TranslationFunction;
 }
 
 export function useTranslation(explicitLocale?: string): UseTranslationReturn {

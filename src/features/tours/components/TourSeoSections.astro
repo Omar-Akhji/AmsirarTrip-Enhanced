@@ -6,15 +6,15 @@ import SparklesIcon from "@/shared/ui/icons/SparklesIcon.astro";
 import HighlightsList from "@/shared/ui/widgets/HighlightsList.astro";
 
 interface Props {
+  readonly daysLabel: string;
   readonly duration?: number | undefined;
   readonly durationLabel: string;
-  readonly daysLabel: string;
-  readonly startLabel: string;
-  readonly startCity: string;
-  readonly endLabel: string;
   readonly endCity: string;
-  readonly highlightsTitle: string;
+  readonly endLabel: string;
   readonly highlights: readonly string[];
+  readonly highlightsTitle: string;
+  readonly startCity: string;
+  readonly startLabel: string;
   readonly tourTypeLabel?: string | undefined;
   readonly tourTypeValue?: string | undefined;
 }
@@ -109,7 +109,5 @@ const {
 </div>
 
 <HighlightsList
-  idPrefix="tour"
-  highlightsTitle={highlightsTitle}
-  highlights={highlights}
+  highlights={highlights}   highlightsTitle={highlightsTitle}   idPrefix="tour"
 />

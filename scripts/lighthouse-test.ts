@@ -31,12 +31,12 @@ async function runLighthouse(args: string[]): Promise<number | null> {
 }
 
 interface LighthouseMetrics {
-  fcp: string;
-  lcp: string;
-  tbt: string;
   cls: string;
-  speedIndex: string;
+  fcp: string;
   interactive: string;
+  lcp: string;
+  speedIndex: string;
+  tbt: string;
 }
 
 interface LighthouseResult {
@@ -53,8 +53,8 @@ interface RawLighthouseAudit {
 }
 
 interface RawLighthouseReport {
-  categories: Record<string, RawLighthouseCategory>;
   audits: Record<string, RawLighthouseAudit>;
+  categories: Record<string, RawLighthouseCategory>;
 }
 
 // Helper to extract category scores and metrics from HTML report

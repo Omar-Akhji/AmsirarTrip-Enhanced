@@ -1,9 +1,9 @@
 ---
 interface Props {
-  readonly variant: "front" | "back";
-  readonly id?: string;
-  readonly class?: string;
   readonly borderColor?: string;
+  readonly class?: string;
+  readonly id?: string;
+  readonly variant: "front" | "back";
 }
 
 const { variant, id = "default", class: className = "", borderColor = "#6b7280" } = Astro.props;

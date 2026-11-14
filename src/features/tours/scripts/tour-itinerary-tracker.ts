@@ -5,10 +5,10 @@
 
 interface StageMetadata {
   readonly element: HTMLElement;
-  readonly stageNumber: number;
   readonly ordinalLabel: string;
-  readonly title: string;
   readonly route: string;
+  readonly stageNumber: number;
+  readonly title: string;
 }
 
 interface LenisGlobal {

@@ -5,14 +5,14 @@ import { Image } from "astro:assets";
 import { getRelativeLocaleUrl } from "astro:i18n";
 
 interface Props {
-  title: string;
-  subtitle?: string;
-  smTitle?: string;
-  headingId?: string;
-  gradientPosition?: "top" | "top-right" | "center";
   bgImage?: string | ImageMetadata;
   breadcrumbs?: { label: string; href?: string }[];
+  gradientPosition?: "top" | "top-right" | "center";
   hasUnderline?: boolean;
+  headingId?: string;
+  smTitle?: string;
+  subtitle?: string;
+  title: string;
 }
 
 const {
@@ -72,17 +72,14 @@ if (gradientPosition === "top-right") {
     class="absolute inset-0 bg-linear-to-b from-black/40 via-black/20 to-black/45"
   ></div>
 
-  <div class="relative mx-auto my-auto flex flex-col items-center justify-center px-4 text-center inline-full max-inline-7xl">
+  <div class="relative m-auto  flex flex-col items-center justify-center px-4 text-center inline-full max-inline-7xl">
     <div class="w-full max-w-4xl space-y-6 text-center">
       {breadcrumbs && breadcrumbs.length > 0 ?
         <nav
           aria-label="Breadcrumb"
           class="mbe-6 sm:mbe-8 flex items-center justify-center gap-3"
         >
-          <ol
-            role="list"
-            class="flex list-none flex-wrap items-center gap-2 rounded-full border-[1.5px] border-white/10 bg-white/10 px-6 py-2 shadow-xs ring-1 ring-black/5 backdrop-blur-[20px]"
-          >
+          <ol class="flex list-none flex-wrap items-center gap-2 rounded-full border-[1.5px] border-white/10 bg-white/10 px-6 py-2 shadow-xs ring-1 ring-black/5 backdrop-blur-[20px]">
             {breadcrumbs.map((crumb, index) => (
               <li class="flex items-center gap-2">
                 {crumb.href ?
@@ -137,7 +134,7 @@ if (gradientPosition === "top-right") {
         : null}
 
         {subtitle ?
-          <p class="mx-auto max-w-[62ch] font-mono text-sm leading-relaxed text-zinc-200 sm:text-base lg:text-lg">
+          <p class="mx-auto max-w-[62ch] font-mono text-sm/relaxed  text-zinc-200 sm:text-base lg:text-lg">
             {subtitle}
           </p>
         : null}

@@ -4,8 +4,8 @@ import ButtonSkeleton from "./ButtonSkeleton.astro";
 
 interface Props {
   class?: string | undefined;
-  hasItinerary?: boolean | undefined;
   hasBadge?: boolean | undefined;
+  hasItinerary?: boolean | undefined;
 }
 
 const { class: className, hasItinerary = true, hasBadge = true } = Astro.props;
@@ -64,8 +64,7 @@ const { class: className, hasItinerary = true, hasBadge = true } = Astro.props;
     {/* Start / End Itinerary Box matching TripCard.astro */}
     {hasItinerary && (
       <div
-        role="presentation"
-        class="mt-auto mbe-3 m-0 grid grid-cols-2 gap-3 rounded-xl border border-stone-200/80 bg-stone-50/80 px-3.5 py-2.5 dark:border-stone-800 dark:bg-stone-800/40"
+        class="mt-auto mbe-3 m-0 grid grid-cols-2 gap-3 rounded-xl border border-stone-200/80 bg-stone-50/80 px-3.5 py-2.5 dark:border-stone-800 dark:bg-stone-800/40"         role="presentation"
       >
         <div class="flex flex-col gap-1.5">
           <Skeleton class="h-3 w-10" />

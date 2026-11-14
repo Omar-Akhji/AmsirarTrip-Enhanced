@@ -9,16 +9,16 @@ const { class: className } = Astro.props;
 ---
 
 <section
-  id="home-hero-slider-section-skeleton"
+  aria-busy="true"
+  aria-label="Loading Amsirar Trip Hero Carousel"
   class:list={[
     "relative isolate w-full h-screen max-h-screen overflow-hidden bg-black text-white",
     className,
   ]}
-  aria-busy="true"
-  aria-label="Loading Amsirar Trip Hero Carousel"
+  id="home-hero-slider-section-skeleton"
 >
   <div
-    class="slider relative h-full w-full overflow-hidden bg-[#050505] font-sans"
+    class="slider relative size-full overflow-hidden bg-[#050505] font-sans"
     id="home-hero-slider-skeleton"
   >
     {/* Dark Hero Background */}
@@ -26,8 +26,8 @@ const { class: className } = Astro.props;
       <div class="size-full bg-[#050505]">
         <Skeleton class="size-full rounded-none bg-zinc-950/80" />
         <div
-          class="pointer-events-none absolute inset-0 z-1 bg-[linear-gradient(to_bottom,rgb(0_0_0/55%)_0%,rgb(0_0_0/15%)_18%,transparent_32%),linear-gradient(to_top,rgb(0_0_0/40%)_0%,transparent_32%)]"
           aria-hidden="true"
+          class="pointer-events-none absolute inset-0 z-1 bg-[linear-gradient(to_bottom,rgb(0_0_0/55%)_0%,rgb(0_0_0/15%)_18%,transparent_32%),linear-gradient(to_top,rgb(0_0_0/40%)_0%,transparent_32%)]"
         ></div>
       </div>
 
@@ -54,13 +54,13 @@ const { class: className } = Astro.props;
 
     {/* Thumbnail Carousel Cards matching SliderCards.astro position & dimensions */}
     <div
-      class="thumbnail absolute z-100 flex w-max gap-(--thumb-gap) bottom-(--thumb-bottom) left-(--thumb-left)"
       aria-hidden="true"
+      class="thumbnail absolute z-100 flex w-max gap-(--thumb-gap) bottom-(--thumb-bottom) left-(--thumb-left)"
     >
       {Array.from({ length: 3 }, () => (
         <div class="item relative shrink-0 overflow-hidden shadow-[0_8px_25px_rgb(0_0_0/45%)] w-(--thumb-width) h-(--thumb-height) rounded-(--thumb-radius) bg-slate-950">
           <Skeleton class="size-full rounded-(--thumb-radius) bg-zinc-900/80" />
-          <div class="thumbnail-overlay pointer-events-none absolute inset-x-0 bottom-0 flex flex-col gap-1.5 px-2 py-2 sm:px-2.5 sm:py-3 bg-linear-to-t from-black/85 to-transparent">
+          <div class="thumbnail-overlay pointer-events-none absolute inset-x-0 bottom-0 flex flex-col gap-1.5 p-2 sm:px-2.5 sm:py-3 bg-linear-to-t from-black/85 to-transparent">
             <Skeleton class="h-3 w-20 bg-white/20" />
             <Skeleton class="h-2.5 w-28 bg-white/15" />
           </div>
@@ -70,8 +70,8 @@ const { class: className } = Astro.props;
 
     {/* Vertical Dots Navigation Skeleton positioned directly below the orange line and along the same vertical line */}
     <div
-      class="hero-dots-nav pagination absolute z-100 flex flex-col items-center -translate-x-1/2 left-4 sm:left-8 md:left-[5%] lg:left-[max(7%,calc(50%-570px))] 2xl:left-[max(7%,calc(50%-640px))] 3xl:left-[max(8%,calc(50%-720px))]"
       aria-hidden="true"
+      class="hero-dots-nav pagination absolute z-100 flex flex-col items-center -translate-x-1/2 left-4 sm:left-8 md:left-[5%] lg:left-[max(7%,calc(50%-570px))] 2xl:left-[max(7%,calc(50%-640px))] 3xl:left-[max(8%,calc(50%-720px))]"
     >
       <div class="relative flex flex-col items-center">
         {Array.from({ length: 3 }, (_, index) => (

@@ -4,12 +4,12 @@ import BreadcrumbSkeleton from "./BreadcrumbSkeleton.astro";
 import ButtonSkeleton from "./ButtonSkeleton.astro";
 
 interface Props {
+  class?: string | undefined;
+  crumbWidths?: string[] | undefined;
   hasBreadcrumbs?: boolean | undefined;
   hasButtons?: boolean | undefined;
   hasUnderline?: boolean | undefined;
-  crumbWidths?: string[] | undefined;
   titleWidth?: string | undefined;
-  class?: string | undefined;
 }
 
 const {
@@ -43,7 +43,7 @@ const {
     class="pointer-events-none absolute inset-0 bg-linear-to-b from-black/40 via-black/20 to-black/45"
   ></div>
 
-  <div class="relative z-20 mx-auto my-auto flex flex-col items-center justify-center px-4 text-center inline-full max-inline-7xl">
+  <div class="relative z-20 m-auto flex flex-col items-center justify-center px-4 text-center inline-full max-inline-7xl">
     <div class="w-full max-w-4xl space-y-6 text-center">
       {hasBreadcrumbs && (
         <BreadcrumbSkeleton
@@ -81,14 +81,14 @@ const {
       {hasButtons && (
         <div class="flex flex-wrap items-center justify-center gap-4 pbs-2">
           <ButtonSkeleton
+            class="w-36"
             size="md"
             variant="primary"
-            class="w-36"
           />
           <ButtonSkeleton
+            class="w-44"
             size="md"
             variant="secondary"
-            class="w-44"
           />
         </div>
       )}

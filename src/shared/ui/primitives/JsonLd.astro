@@ -13,7 +13,7 @@ const json = JSON.stringify(data)
   .replaceAll("\u{2028}", String.raw`\u2028`)
   .replaceAll("\u{2029}", String.raw`\u2029`);
 // Escape id to prevent XSS via unescaped template literal injection
-const safeId = id?.replaceAll(/[^a-zA-Z0-9_-]/g, "");
+const safeId = id?.replaceAll(/[^\p{L}\p{N}_-]/gu, "");
 ---
 
 <script

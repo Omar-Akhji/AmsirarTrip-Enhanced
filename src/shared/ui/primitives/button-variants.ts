@@ -32,9 +32,9 @@ const buttonVariantStyles: Record<ButtonVariant, string> = {
 };
 
 export interface ButtonStylesOptions {
-  readonly variant?: ButtonVariant | undefined;
-  readonly size?: ButtonSize | undefined;
   readonly className?: string | undefined;
+  readonly size?: ButtonSize | undefined;
+  readonly variant?: ButtonVariant | undefined;
 }
 
 export function buttonStyles({

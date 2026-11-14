@@ -1,16 +1,16 @@
 ---
 export interface Props {
-  text: string;
-  as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "div" | "p" | "span";
-  class?: string;
-  style?: string;
   animateBy?: "words" | "letters";
-  direction?: "top" | "bottom";
-  delay?: number;
-  stepDuration?: number;
+  as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "div" | "p" | "span";
   blur?: number;
+  class?: string;
+  delay?: number;
+  direction?: "top" | "bottom";
   distance?: number;
   stagger?: number;
+  stepDuration?: number;
+  style?: string;
+  text: string;
 }
 
 const {

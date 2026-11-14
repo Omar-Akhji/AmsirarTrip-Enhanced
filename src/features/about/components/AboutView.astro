@@ -62,7 +62,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
             {storyTitle.main}{" "}
             {storyTitle.accent && <span class="text-orange">{storyTitle.accent}</span>}
           </h2>
-          <p class="border-s-2 border-orange-600 ps-4 py-0.5 text-sm sm:text-base text-stone-600 dark:text-mist-300 leading-relaxed max-w-[62ch] text-pretty">
+          <p class="border-s-2 border-orange-600 ps-4 py-0.5 text-sm/relaxed sm:text-base text-stone-600 dark:text-mist-300 max-w-[62ch] text-pretty">
             {t("about.experienceTitle")}
           </p>
         </hgroup>
@@ -126,10 +126,10 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
                 <p class="font-normal text-stone-800 dark:text-mist-100 text-lead text-pretty">
                   {t("about.experienceText1")}
                 </p>
-                <p class="text-stone-600 dark:text-mist-300 text-fluid-base leading-relaxed text-pretty">
+                <p class="text-stone-600 dark:text-mist-300 text-fluid-base/relaxed text-pretty">
                   {t("about.experienceText2")}
                 </p>
-                <p class="text-stone-600 dark:text-mist-300 text-fluid-base leading-relaxed text-pretty">
+                <p class="text-stone-600 dark:text-mist-300 text-fluid-base/relaxed text-pretty">
                   {t("about.experienceText3")}
                 </p>
               </div>
@@ -163,10 +163,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
             {t("about.whyTrustTitle")}
           </h3>
         </hgroup>
-        <ul
-          role="list"
-          class="m-0 p-0 list-none grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-[clamp(1rem,0.8rem+0.5vw,1.5rem)] 2xl:gap-6"
-        >
+        <ul class="m-0 p-0 list-none grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-[clamp(1rem,0.8rem+0.5vw,1.5rem)] 2xl:gap-6" role="list">
           {[1, 2, 3, 4].map((number_) => (
             <li class="flex flex-col items-start gap-3 rounded-2xl border border-stone-200/80 bg-stone-50/60 p-[clamp(1.125rem,0.95rem+0.6vw,1.5rem)] shadow-2xs dark:border-white/10 dark:bg-surface-card/60">
               <span class="inline-flex size-7 items-center justify-center rounded-lg bg-orange-100/80 dark:bg-orange-950/80 font-mono text-xs font-bold text-orange-700 dark:text-orange-400 tabular-nums shrink-0">
@@ -201,7 +198,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
             {factsTitle.main}{" "}
             {factsTitle.accent && <span class="text-orange">{factsTitle.accent}</span>}
           </h2>
-          <p class="border-s-2 border-orange-600 ps-4 py-0.5 text-sm sm:text-base text-stone-600 dark:text-mist-300 leading-relaxed max-w-[62ch] text-pretty">
+          <p class="border-s-2 border-orange-600 ps-4 py-0.5 text-sm/relaxed sm:text-base text-stone-600 dark:text-mist-300 max-w-[62ch] text-pretty">
             {t("about.facts.smTitle")}
           </p>
         </hgroup>

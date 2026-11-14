@@ -34,22 +34,22 @@ import { expect, test, type Page } from "@playwright/test";
  */
 
 export interface WebVitalsMetrics {
-  ttfb: number;
-  fcp: number;
-  lcp: number;
   cls: number;
-  inp: number;
-  lcpElement?: string;
   clsEntriesCount: number;
+  fcp: number;
+  inp: number;
+  lcp: number;
+  lcpElement?: string;
+  ttfb: number;
 }
 
 interface CwvState {
   cls: number;
-  lcp: number;
+  clsEntries: { value: number; startTime: number }[];
   fcp: number;
   inp: number;
+  lcp: number;
   lcpElement: string;
-  clsEntries: { value: number; startTime: number }[];
 }
 
 interface PerformanceLayoutShift extends PerformanceEntry {
@@ -58,15 +58,15 @@ interface PerformanceLayoutShift extends PerformanceEntry {
 }
 
 interface PerformanceLargestContentfulPaint extends PerformanceEntry {
-  readonly renderTime?: number;
-  readonly loadTime?: number;
   readonly element?: Element | null;
+  readonly loadTime?: number;
+  readonly renderTime?: number;
   readonly url?: string;
 }
 
 interface PerformanceEventTimingEntry extends PerformanceEntry {
-  readonly interactionId?: number;
   readonly duration: number;
+  readonly interactionId?: number;
 }
 
 interface EventPerformanceObserverInit extends PerformanceObserverInit {
@@ -100,7 +100,9 @@ async function attachWebVitalsObserver(page: Page): Promise<void> {
           version: 1,
         }),
       );
-    } catch {}
+    } catch (error) {
+      console.debug(error);
+    }
 
     const cwvState: CwvState = { cls: 0, lcp: 0, fcp: 0, inp: 0, lcpElement: "", clsEntries: [] };
     Reflect.set(globalThis, "__cwv", cwvState);
@@ -145,7 +147,9 @@ async function attachWebVitalsObserver(page: Page): Promise<void> {
           cwvState.clsEntries.push({ value: entry.value, startTime: entry.startTime });
         }
       }).observe({ type: "layout-shift", buffered: true });
-    } catch {}
+    } catch (error) {
+      console.debug(error);
+    }
 
     // ─────────────────────────────────────────────────────────────────────────
     // 2. Google LCP: Largest Contentful Paint with Finalization on Interaction
@@ -179,7 +183,9 @@ async function attachWebVitalsObserver(page: Page): Promise<void> {
       for (const event of ["keydown", "click", "pointerdown", "touchstart"]) {
         globalThis.addEventListener(event, finalizeLcp, { once: true, capture: true });
       }
-    } catch {}
+    } catch (error) {
+      console.debug(error);
+    }
 
     // ─────────────────────────────────────────────────────────────────────────
     // 3. Google INP: Interaction to Next Paint (Grouped by interactionId)
@@ -213,7 +219,9 @@ async function attachWebVitalsObserver(page: Page): Promise<void> {
         buffered: true,
       };
       eventObserver.observe(eventObserverOptions);
-    } catch {}
+    } catch (error) {
+      console.debug(error);
+    }
 
     // ─────────────────────────────────────────────────────────────────────────
     // 4. Google FCP: First Contentful Paint
@@ -226,7 +234,9 @@ async function attachWebVitalsObserver(page: Page): Promise<void> {
           }
         }
       }).observe({ type: "paint", buffered: true });
-    } catch {}
+    } catch (error) {
+      console.debug(error);
+    }
   });
 }
 

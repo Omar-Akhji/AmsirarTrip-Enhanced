@@ -1,11 +1,11 @@
 import type Lenis from "lenis";
 
 export interface FolderStackConfig {
-  readonly trackSelector: string;
-  readonly stageSelector: string;
-  readonly cardCardSelector: string;
   readonly card1TargetY?: number;
   readonly card2TargetY?: number;
+  readonly cardCardSelector: string;
+  readonly stageSelector: string;
+  readonly trackSelector: string;
 }
 
 function clamp01(value: number): number {

@@ -5,11 +5,11 @@
  */
 
 export interface InlineCidAttachment {
-  readonly filename: string;
-  readonly content: Buffer;
   readonly cid: string;
-  readonly contentType: "image/png";
+  readonly content: Buffer;
   readonly contentDisposition: "inline";
+  readonly contentType: "image/png";
+  readonly filename: string;
 }
 
 export const EMAIL_CID = {

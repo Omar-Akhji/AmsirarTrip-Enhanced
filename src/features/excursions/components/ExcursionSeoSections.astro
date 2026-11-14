@@ -6,14 +6,14 @@ import RouteIcon from "@/shared/ui/icons/RouteIcon.astro";
 import HighlightsList from "@/shared/ui/widgets/HighlightsList.astro";
 
 interface Props {
+  readonly highlights: readonly string[];
+  readonly highlightsTitle: string;
   readonly metrics: {
     readonly distance: string;
     readonly duration: string;
     readonly pickup: string;
     readonly elevation: string;
   };
-  readonly highlights: readonly string[];
-  readonly highlightsTitle: string;
 }
 
 const { metrics, highlights, highlightsTitle } = Astro.props;
@@ -34,7 +34,7 @@ const { metrics, highlights, highlightsTitle } = Astro.props;
           Distance
         </span>
       </dt>
-      <dd class="m-0 col-start-2 row-start-2 font-mono text-xs sm:text-sm font-bold text-stone-900 leading-snug dark:text-mist-100">
+      <dd class="m-0 col-start-2 row-start-2 font-mono text-xs/snug sm:text-sm font-bold text-stone-900  dark:text-mist-100">
         {metrics.distance}
       </dd>
     </div>
@@ -49,7 +49,7 @@ const { metrics, highlights, highlightsTitle } = Astro.props;
           Duration
         </span>
       </dt>
-      <dd class="m-0 col-start-2 row-start-2 font-mono text-xs sm:text-sm font-bold text-stone-900 leading-snug dark:text-mist-100">
+      <dd class="m-0 col-start-2 row-start-2 font-mono text-xs/snug sm:text-sm font-bold text-stone-900  dark:text-mist-100">
         {metrics.duration}
       </dd>
     </div>
@@ -64,7 +64,7 @@ const { metrics, highlights, highlightsTitle } = Astro.props;
           Pickup Window
         </span>
       </dt>
-      <dd class="m-0 col-start-2 row-start-2 font-mono text-xs sm:text-sm font-bold text-stone-900 leading-snug dark:text-mist-100">
+      <dd class="m-0 col-start-2 row-start-2 font-mono text-xs/snug sm:text-sm font-bold text-stone-900  dark:text-mist-100">
         {metrics.pickup}
       </dd>
     </div>
@@ -79,7 +79,7 @@ const { metrics, highlights, highlightsTitle } = Astro.props;
           Elevation / Setting
         </span>
       </dt>
-      <dd class="m-0 col-start-2 row-start-2 font-mono text-xs sm:text-sm font-bold text-stone-900 leading-snug dark:text-mist-100">
+      <dd class="m-0 col-start-2 row-start-2 font-mono text-xs/snug sm:text-sm font-bold text-stone-900  dark:text-mist-100">
         {metrics.elevation}
       </dd>
     </div>
@@ -87,7 +87,5 @@ const { metrics, highlights, highlightsTitle } = Astro.props;
 </div>
 
 <HighlightsList
-  idPrefix="excursion"
-  highlightsTitle={highlightsTitle}
-  highlights={highlights}
+  highlights={highlights}   highlightsTitle={highlightsTitle}   idPrefix="excursion"
 />

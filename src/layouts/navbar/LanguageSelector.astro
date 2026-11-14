@@ -6,10 +6,10 @@ import ChevronsUpDownBrokenIcon from "@/shared/ui/icons/ChevronsUpDownBrokenIcon
 import { LANGUAGES } from "./constants";
 
 interface Props {
-  placement?: "left" | "right";
-  size?: "sm" | "md";
   class?: string;
   id?: string;
+  placement?: "left" | "right";
+  size?: "sm" | "md";
 }
 
 const {
@@ -39,10 +39,7 @@ const menuId = `${id}-popover`;
 
 <div class:list={["group/lang-root relative inline-block", className]}>
   <button
-    popovertarget={menuId}
-    aria-haspopup="menu"
-    aria-label={`${t("language")}: ${currentLanguage.name}`}
-    class:list={[
+    aria-haspopup="menu"     aria-label={`${t("language")}: ${currentLanguage.name}`}     class:list={[
       "[anchor-name:--lang-selector-btn] group/lang-btn relative inline-flex items-center rounded-full font-medium transition-all duration-200 cursor-pointer select-none active:scale-[0.98]",
       "border border-white/20 bg-black/30 backdrop-blur-md text-white shadow-xs hover:border-white/40 hover:bg-white/15 hover:shadow-md",
       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange/80 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950",
@@ -52,7 +49,7 @@ const menuId = `${id}-popover`;
         "h-9.5 px-3.5 gap-2 text-xs sm:text-sm": size === "sm",
         "h-11 px-4 gap-2.5 text-sm": size === "md",
       },
-    ]}
+    ]}     popovertarget={menuId}
     type="button"
   >
     <TranslateIcon class="size-4 shrink-0 text-white/90 transition-colors group-hover/lang-btn:text-white group-data-scrolled:text-white" />
@@ -63,10 +60,7 @@ const menuId = `${id}-popover`;
   </button>
 
   <div
-    id={menuId}
-    popover="auto"
-    aria-orientation="vertical"
-    class:list={[
+    aria-orientation="vertical"     class:list={[
       "fixed top-18 m-0 min-w-50 sm:min-w-55 overflow-hidden border border-white/12 bg-slate-950/95 text-white shadow-[0_20px_45px_-12px_rgba(0,0,0,0.7),0_0_0_1px_rgba(255,255,255,0.06)] backdrop-blur-2xl ring-1 ring-white/10 rounded-2xl p-1.5 opacity-0 -translate-y-2 scale-96 origin-top-right transition-[opacity,transform,display,overlay] duration-250 ease-out-expo transition-discrete motion-reduce:duration-[1ms] open:opacity-100 open:translate-y-0 open:scale-100 starting:open:opacity-0 starting:open:-translate-y-2 starting:open:scale-96 supports-[top:anchor(bottom)]:[position-anchor:--lang-selector-btn] supports-[top:anchor(bottom)]:top-[calc(anchor(bottom)+18px)] supports-[top:anchor(bottom)]:right-[anchor(right)] supports-[top:anchor(bottom)]:left-auto supports-[top:anchor(bottom)]:bottom-auto supports-[top:anchor(bottom)]:inset-s-auto supports-[top:anchor(bottom)]:inset-e-auto supports-[top:anchor(bottom)]:m-0",
       "group-data-scrolled:border-stone-200/90 group-data-scrolled:bg-white/98 group-data-scrolled:text-slate-800 group-data-scrolled:shadow-[0_20px_45px_-10px_rgba(0,0,0,0.18),0_0_0_1px_rgba(0,0,0,0.04)]",
       "group-data-scrolled:dark:border-white/10 group-data-scrolled:dark:bg-[oklch(18%_0.012_245deg/98%)] group-data-scrolled:dark:text-mist-100",
@@ -74,7 +68,7 @@ const menuId = `${id}-popover`;
         "inset-s-[max(1rem,calc((100vw-min(1100px,100vw-2rem))/2+1rem))]": placement === "left",
         "inset-e-[max(1rem,calc((100vw-min(1100px,100vw-2rem))/2+1rem))]": placement === "right",
       },
-    ]}
+    ]}     id={menuId}     popover="auto"
     role="menu"
   >
     {/* Language List */}
@@ -85,8 +79,6 @@ const menuId = `${id}-popover`;
           <a
             aria-checked={isCurrent}
             aria-label={lang.name}
-            hreflang={lang.code}
-            lang={lang.code}
             class:list={[
               "group/item relative flex items-center gap-2.5 px-3 py-2 rounded-[10px] text-xs sm:text-sm font-medium transition-all duration-150 inline-full select-none cursor-pointer",
               "outline-none focus-visible:ring-2 focus-visible:ring-orange/80 focus-visible:ring-offset-1 focus-visible:ring-offset-slate-950",
@@ -96,8 +88,7 @@ const menuId = `${id}-popover`;
                 "text-zinc-300 hover:bg-white/10 hover:text-white group-data-scrolled:text-stone-600 group-data-scrolled:hover:bg-stone-100 group-data-scrolled:hover:text-stone-900 group-data-scrolled:dark:text-stone-400 group-data-scrolled:dark:hover:bg-stone-800 group-data-scrolled:dark:hover:text-stone-100":
                   !isCurrent,
               },
-            ]}
-            href={getLocalizedHref(lang.code)}
+            ]}             href={getLocalizedHref(lang.code)}             hreflang={lang.code}             lang={lang.code}
             role="menuitemradio"
           >
             <span class="truncate text-[13px]">{lang.name}</span>

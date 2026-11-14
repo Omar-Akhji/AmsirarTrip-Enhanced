@@ -23,10 +23,10 @@ const isActive = (to: string): boolean =>
   normalizedPath === to || (to !== "/" && normalizedPath.startsWith(`${to}/`));
 
 interface NavDockItem {
-  readonly to: string;
-  readonly labelKey: string;
   readonly defaultLabel: string;
   readonly icon: NavIconName;
+  readonly labelKey: string;
+  readonly to: string;
 }
 
 const NAV_ITEMS: readonly NavDockItem[] = [
@@ -74,8 +74,7 @@ const NAV_ITEMS: readonly NavDockItem[] = [
           />
         )}
         <NavIcon
-          name={item.icon}
-          class="relative z-10 size-5 shrink-0 transition-transform duration-200 group-hover/link:scale-110 motion-reduce:transform-none"
+          class="relative z-10 size-5 shrink-0 transition-transform duration-200 group-hover/link:scale-110 motion-reduce:transform-none"           name={item.icon}
         />
         {active && (
           <span class="relative z-10 ml-1.5 inline-block whitespace-nowrap text-xs font-semibold tracking-tight motion-reduce:transition-none">

@@ -5,9 +5,9 @@
 
 export interface CountryCallingCode {
   readonly code: string;
-  readonly name: string;
   readonly dialCode: string;
   readonly flag: string;
+  readonly name: string;
 }
 
 const getFlagEmoji = (iso: string): string =>

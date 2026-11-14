@@ -83,7 +83,7 @@ function scanFiles(dir: string): string[] {
     const stat = statSync(fullPath);
     if (stat.isDirectory()) {
       results.push(...scanFiles(fullPath));
-    } else if (/\.(astro|vue|ts)$/.test(entry)) {
+    } else if (/\.(?:astro|vue|ts)$/.test(entry)) {
       results.push(fullPath);
     }
   }
@@ -98,7 +98,7 @@ for (const fullPath of codeFiles) {
   const content = readFileSync(fullPath, "utf8");
 
   // Matches t("key") or t('key') or t.raw("key") or t.raw('key')
-  const matches = content.matchAll(/\bt(?:\.raw)?\(\s*["']([a-zA-Z0-9_.]+)["']/g);
+  const matches = content.matchAll(/\bt(?:\.raw)?\(\s*["']([\w.]+)["']/g);
   for (const m of matches) {
     const key = m[1];
     if (key && !usedKeys.has(key)) {

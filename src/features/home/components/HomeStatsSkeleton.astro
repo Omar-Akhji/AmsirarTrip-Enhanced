@@ -49,7 +49,7 @@ const { class: className } = Astro.props;
     <div class="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 2xl:gap-8 items-stretch">
       {Array.from({ length: 3 }, (_, index) => (
         <div class:list={["flex size-full", { "md:col-span-2 lg:col-span-1": index === 2 }]}>
-          <article class="group relative flex h-full w-full flex-col justify-between rounded-2xl border border-stone-200/90 bg-stone-50/80 p-6 sm:p-7 shadow-xs shadow-stone-900/5">
+          <article class="group relative flex size-full  flex-col justify-between rounded-2xl border border-stone-200/90 bg-stone-50/80 p-6 sm:p-7 shadow-xs shadow-stone-900/5">
             <div>
               {/* Editorial Bar */}
               <div class="mbe-5 flex items-center justify-between border-b border-stone-200/60 pb-3">

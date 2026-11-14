@@ -98,7 +98,7 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
     // Match <script followed by whitespace OR '>' (bare <script> tags from
     // is:inline directives and <astro-island> hydration scripts).
     const processed = html.replaceAll(
-      /<script(?![^>]*\bnonce=)(\s|>)/g,
+      /<script(?![^>]+\bnonce=)(\s|>)/g,
       (_match, space) => `<script ${nonceAttr}${space}`,
     );
     const customHeaders = new Headers(response.headers);

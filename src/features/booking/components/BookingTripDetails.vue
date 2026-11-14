@@ -6,10 +6,10 @@ import EnhancedCalendar from "@/shared/ui/widgets/Calendar.vue";
 import NativePopover from "@/shared/ui/widgets/NativePopover.vue";
 
 interface Props {
-  state: FormState | null;
-  locale: string;
   calendarOpen: boolean;
+  locale: string;
   reservationDate: Date | null;
+  state: FormState | null;
 }
 
 const { state, locale, calendarOpen, reservationDate } = defineProps<Props>();

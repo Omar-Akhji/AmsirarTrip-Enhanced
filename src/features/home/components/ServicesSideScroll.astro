@@ -2,8 +2,8 @@
 import { useTranslations } from "@/i18n/utils";
 
 interface ServiceItem {
-  key: string;
   icon: (_props: Record<string, unknown>) => unknown;
+  key: string;
 }
 
 interface Props {
@@ -34,7 +34,7 @@ const t = useTranslations(locale);
               <h3 class="text-xl font-semibold text-white">
                 {t(`services.cards.${service.key}.title`)}
               </h3>
-              <p class="mbs-3 text-sm text-zinc-200 leading-relaxed">
+              <p class="mbs-3 text-sm/relaxed text-zinc-200 ">
                 {t(`services.cards.${service.key}.text`)}
               </p>
             </article>

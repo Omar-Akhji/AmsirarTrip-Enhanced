@@ -1,7 +1,7 @@
 ---
 interface Props {
-  class?: string;
   [key: string]: unknown;
+  class?: string;
 }
 
 const { class: className = "size-6", ...rest } = Astro.props;

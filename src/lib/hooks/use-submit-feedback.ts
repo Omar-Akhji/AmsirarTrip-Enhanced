@@ -7,13 +7,13 @@ export interface SubmitFeedback {
 }
 
 export interface UseSubmitFeedbackReturn {
+  readonly clearFeedback: () => void;
   readonly feedback: Ref<SubmitFeedback | null>;
   readonly showFeedback: (
     kind: "success" | "error",
     message: string,
     afterClear?: () => void,
   ) => void;
-  readonly clearFeedback: () => void;
 }
 
 const FEEDBACK_DURATION_MS = 4000;

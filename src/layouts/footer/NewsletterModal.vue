@@ -113,7 +113,7 @@ onUnmounted(() => {
             >
               {{ t("footer.newsletter") }}
             </h2>
-            <p class="mbs-1.5 text-sm leading-relaxed text-slate-300">
+            <p class="mbs-1.5 text-sm/relaxed  text-slate-300">
               {{ t("footer.newsletterDescription") }}
             </p>
           </div>
@@ -293,29 +293,27 @@ onUnmounted(() => {
             :aria-busy="isSubmitting"
             class="group mbs-5 inline-flex min-h-12 cursor-pointer items-center rounded-full border py-1.5 ps-4 pe-1.5 font-mono text-xs font-semibold tracking-wider uppercase shadow-lg shadow-black/25 transition-colors duration-200 select-none inline-full focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 focus-visible:outline-hidden active:scale-[0.98] disabled:cursor-not-allowed"
             :class="
-              isSuccess
-                ? 'border-emerald-500/40 bg-emerald-500/15 text-emerald-300'
-                : 'border-stone-200/80 bg-white text-dark-surface hover:border-stone-300 hover:bg-white hover:shadow-xl disabled:opacity-50'
+              isSuccess ?
+                'border-emerald-500/40 bg-emerald-500/15 text-emerald-300'
+              : 'border-stone-200/80 bg-white text-dark-surface hover:border-stone-300 hover:bg-white hover:shadow-xl disabled:opacity-50'
             "
           >
             <span
               class="flex-1 px-2 text-center"
-              :class="isSuccess ? 'leading-tight normal-case tracking-normal' : 'truncate'"
+              :class="isSuccess ? 'leading-tight tracking-normal normal-case' : 'truncate'"
             >
               {{
-                isSubmitting
-                  ? t("contact.form.sending")
-                  : isSuccess
-                    ? t("footer.newsletterSuccess")
-                    : t("footer.newsletterSubscribe")
+                isSubmitting ? t("contact.form.sending")
+                : isSuccess ? t("footer.newsletterSuccess")
+                : t("footer.newsletterSubscribe")
               }}
             </span>
             <span
               class="relative flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-full text-white shadow-xs transition-transform duration-300 ease-out"
               :class="
-                isSuccess
-                  ? 'bg-emerald-500 shadow-emerald-500/40'
-                  : 'bg-linear-to-br from-amber-orange to-orange shadow-orange/40 group-hover:scale-105 group-active:scale-95'
+                isSuccess ?
+                  'bg-emerald-500 shadow-emerald-500/40'
+                : 'bg-linear-to-br from-amber-orange to-orange shadow-orange/40 group-hover:scale-105 group-active:scale-95'
               "
             >
               <!-- Success state: Solar Check Broken icon -->
@@ -391,7 +389,7 @@ onUnmounted(() => {
                     stroke-width="1.8"
                     stroke-linecap="round"
                     stroke-linejoin="round"
-                    class="absolute size-4.5 -translate-x-3 translate-y-2 opacity-0 transition-all duration-300 ease-out group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 rtl:translate-x-3 rtl:-scale-x-100 rtl:group-hover:translate-x-0"
+                    class="absolute size-4.5 -translate-x-3 translate-y-2 opacity-0 transition-all duration-300 ease-out group-hover:translate-0  group-hover:opacity-100 rtl:translate-x-3 rtl:-scale-x-100 rtl:group-hover:translate-x-0"
                     aria-hidden="true"
                   >
                     <path d="M14 18L20 12L14 6M20 12H9.5M4 12H6.5" />

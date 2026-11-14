@@ -17,12 +17,12 @@ function escapeXml(unsafe: string): string {
 }
 
 interface RouteEntry {
-  route: string;
-  lastmod: string;
+  hasVideo?: boolean;
+  imageCaption?: string;
   imageLoc?: string;
   imageTitle?: string;
-  imageCaption?: string;
-  hasVideo?: boolean;
+  lastmod: string;
+  route: string;
 }
 
 export const GET: APIRoute = async ({ site }) => {

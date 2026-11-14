@@ -3,13 +3,13 @@ import { computed, nextTick, ref, useId, useTemplateRef, watch } from "vue";
 import { ALL_COUNTRIES, DEFAULT_COUNTRY, type CountryCallingCode } from "@/data/countries";
 
 interface Props {
-  id?: string;
-  name?: string;
-  required?: boolean;
-  placeholder?: string;
-  ariaInvalid?: "true" | "false" | boolean;
   ariaDescribedby?: string | undefined;
+  ariaInvalid?: "true" | "false" | boolean;
+  id?: string;
   initialValue?: string;
+  name?: string;
+  placeholder?: string;
+  required?: boolean;
   toolparamdescription?: string;
 }
 
@@ -180,7 +180,7 @@ watch(
           :required="required"
           :aria-invalid="ariaInvalid"
           :aria-describedby="ariaDescribedby"
-          class="peer h-full w-full bg-transparent ps-10.5 pe-4 font-sans text-sm text-stone-900 placeholder:text-stone-400 focus:outline-hidden dark:text-mist-100 dark:placeholder:text-mist-500"
+          class="peer size-full bg-transparent ps-10.5 pe-4 font-sans text-sm text-stone-900 placeholder:text-stone-400 focus:outline-hidden dark:text-mist-100 dark:placeholder:text-mist-500"
           @input="handleInput"
         />
         <svg
