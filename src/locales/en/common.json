@@ -911,8 +911,7 @@
     },
     "includes": "Private transport in a modern A/C 4x4 or minibus\nEnglish or French-speaking driver-guide\n9 nights accommodation (riads, hotels, and desert camp)\nSunset and sunrise camel rides in Merzouga\nLicensed local guides in both Marrakech and Fes\nBreakfasts and dinners as listed in the itinerary\nAirport transfers in Marrakech and Casablanca",
     "excludes": "Lunches and drinks\nMonument entrance fees (carry cash in MAD)\nTips and personal expenses",
-    "goodToKnow": "Start: Marrakech (airport or hotel)\nEnd: Casablanca (airport or hotel)\nDuration: 10 Days / 9 Nights\nDriving Pace: Longer travel days are on Days 3, 5, 7, and 9 (4 to 7 hours), balanced with 2-night stays in Marrakech, Fes, and Chefchaouen.\nAvailability: Daily departures year-round\nFlexibility: You can add coastal days in Essaouira or an extra night in the desert.",
-    "title": "Grand Moroccan Circuit"
+    "goodToKnow": "Start: Marrakech (airport or hotel)\nEnd: Casablanca (airport or hotel)\nDuration: 10 Days / 9 Nights\nDriving Pace: Longer travel days are on Days 3, 5, 7, and 9 (4 to 7 hours), balanced with 2-night stays in Marrakech, Fes, and Chefchaouen.\nAvailability: Daily departures year-round\nFlexibility: You can add coastal days in Essaouira or an extra night in the desert."
   },
   "tour6": {
     "title": "Atlas & Desert Escape",
@@ -1203,18 +1202,18 @@
     "lgTitle": "Travel Standards You Can Count On",
     "cards": {
       "handcrafted": {
-        "title": "Handcrafted Private Routes",
-        "text": "Every itinerary is custom-built around your travel dates, preferred pace, and accommodation level in private air-conditioned 4x4 or minivan transport.",
-        "alt": "Handcrafted tour experiences icon"
+        "title": "Private Routes, Your Pace",
+        "text": "Custom itineraries built around your dates in a private A/C 4x4 or minivan.",
+        "alt": "Private route planning icon"
       },
       "guide": {
         "title": "Licensed Driver-Guides",
-        "text": "Travel with seasoned drivers and certified local historians who share authentic regional culture, ancestral folklore, and hidden scenic viewpoints.",
+        "text": "Certified local drivers and guides who know every pass, village, and viewpoint.",
         "alt": "Professional travel guide icon"
       },
       "price": {
         "title": "Transparent Direct Pricing",
-        "text": "Direct agency rates with clear inclusions: private transport, fuel, tolls, accommodations, and breakfasts. No tourist-trap commission shops or forced detours.",
+        "text": "Direct agency rates covering transport, fuel, hotels, and breakfasts—no commission-shop detours.",
         "alt": "Best price guarantee icon"
       }
     }

@@ -21,15 +21,15 @@ const titleMap: Record<string, { main: string; accent: string }> = {
 };
 
 const subtitleMap: Record<string, string> = {
-  fr: "Amsirar Transport Touristique assure tous vos déplacements avec des véhicules agréés, confortables et conduits par des professionnels locaux.",
-  es: "Amsirar Transport Touristique garantiza sus traslados con vehículos autorizados, modernos y conducidos por profesionales locales.",
-  de: "Amsirar Transport Touristique garantiert lückenlose Mobilität mit zugelassenen, modernen Fahrzeugen und erfahrenen Chauffeuren.",
-  en: "Licensed tourist transport across all Moroccan regions. Certified late-model vehicles, professional driver-guides, and door-to-door comfort.",
+  fr: "Véhicules agréés et chauffeurs professionnels basés à Marrakech.",
+  es: "Vehículos autorizados y conductores locales con base en Marrakech.",
+  de: "Zugelassene Fahrzeuge und erfahrene Fahrer mit Sitz in Marrakesch.",
+  en: "Licensed Marrakech tourist transport—modern 4x4s, minivans, and local driver-guides.",
 };
 
 const defaultHeading = { main: "Private Fleet and", accent: "Expedition Transport" };
 const defaultSubtitle =
-  "Licensed tourist transport across all Moroccan regions. Certified late-model vehicles, professional driver-guides, and door-to-door comfort.";
+  "Licensed Marrakech tourist transport—modern 4x4s, minivans, and local driver-guides.";
 
 const heading = titleMap[locale] ?? titleMap["en"] ?? defaultHeading;
 const subtitle = subtitleMap[locale] ?? subtitleMap["en"] ?? defaultSubtitle;
