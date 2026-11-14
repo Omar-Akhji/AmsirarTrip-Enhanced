@@ -13,28 +13,30 @@ const currentYear = new Date().getFullYear();
   data-animate="curtain-up"
 >
   <div class="mx-auto px-4 pbs-6 pbe-24 sm:px-6 lg:py-6 lg:px-8 max-inline-7xl 2xl:max-inline-360 3xl:max-inline-420">
-    <div class="flex flex-col items-center justify-between gap-6 sm:flex-row">
-      <div class="order-2 text-center sm:order-1 sm:text-start">
-        <p class="text-sm font-medium text-zinc-500">
-          &copy; <time datetime={currentYear.toString()}>{currentYear}</time>
-          <span class="mx-1.5 opacity-20">&bull;</span>
-          <span class="text-zinc-400">{agencyProfile.legalName}</span>
-          <span class="mx-1.5 opacity-20">&bull;</span>
-          {t("footer.copyright")}
+    <div class="flex flex-col items-center justify-between gap-4 md:flex-row md:gap-6">
+      <div class="text-center md:text-start">
+        <p class="flex flex-wrap items-center justify-center gap-x-1.5 gap-y-1 text-sm font-medium text-zinc-500 md:justify-start">
+          <span class="whitespace-nowrap">
+            &copy; <time datetime={currentYear.toString()}>{currentYear}</time>
+          </span>
+          <span class="opacity-20" aria-hidden="true">&bull;</span>
+          <span class="whitespace-nowrap text-zinc-400">{agencyProfile.legalName}</span>
+          <span class="opacity-20" aria-hidden="true">&bull;</span>
+          <span class="whitespace-nowrap">{t("footer.copyright")}</span>
         </p>
       </div>
 
       <nav
         aria-label="Privacy and Terms"
-        class="order-1 sm:order-2"
+        class="shrink-0"
       >
         <ul
-          class="flex flex-wrap items-center justify-center gap-6 sm:gap-8"
+          class="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 sm:gap-x-6"
           role="list"
         >
           <li>
             <a
-              class="text-sm font-medium text-zinc-500 transition-colors duration-200 pointer-fine:hover:text-white"
+              class="whitespace-nowrap text-sm font-medium text-zinc-500 transition-colors duration-200 pointer-fine:hover:text-white"
               href={getRelativeLocaleUrl(locale, "/privacy-policy")}
             >
               {t("legal.footer.privacyPolicy")}
@@ -46,7 +48,7 @@ const currentYear = new Date().getFullYear();
           ></li>
           <li>
             <a
-              class="text-sm font-medium text-zinc-500 transition-colors duration-200 pointer-fine:hover:text-white"
+              class="whitespace-nowrap text-sm font-medium text-zinc-500 transition-colors duration-200 pointer-fine:hover:text-white"
               href={getRelativeLocaleUrl(locale, "/terms-of-service")}
             >
               {t("legal.footer.termsOfService")}
