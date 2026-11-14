@@ -135,7 +135,7 @@ const handleSubmit = async (event: Event) => {
   <section
     id="booking"
     aria-labelledby="booking-heading"
-    class="relative isolate border-bs border-stone-200 bg-stone-50 py-12 sm:py-16 lg:py-24 dark:border-white/10 dark:bg-surface-base"
+    class="relative isolate overflow-x-clip border-bs border-stone-200 bg-stone-50 py-12 sm:py-16 lg:py-24 dark:border-white/10 dark:bg-surface-base"
     :class="[fullWidth ? 'booking-form-fullwidth' : '']"
   >
     <div
@@ -143,7 +143,10 @@ const handleSubmit = async (event: Event) => {
     >
       <div class="grid grid-cols-1 items-stretch gap-8 lg:grid-cols-golden lg:gap-6 xl:gap-8">
         <!-- Left: Form Card -->
-        <div class="inline-full">
+        <div
+          class="inline-full"
+          data-scroll-split="start"
+        >
           <div
             class="rounded-2xl border border-stone-200/90 bg-white p-6 shadow-2xs block-full sm:p-8 dark:border-white/10 dark:bg-surface-card/90 dark:shadow-[0_16px_40px_rgba(0,0,0,0.5)]"
           >
@@ -377,7 +380,10 @@ const handleSubmit = async (event: Event) => {
           </div>
         </div>
 
-        <div class="inline-full lg:block-full">
+        <div
+          class="inline-full lg:block-full"
+          data-scroll-split="booking-aside"
+        >
           <slot name="sidebar" />
         </div>
       </div>

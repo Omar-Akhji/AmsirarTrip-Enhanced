@@ -8,12 +8,15 @@ const t = useTranslations(locale);
 
 <div
   class="lg:col-span-1 animate-delay-150"
-  data-animate="fade-up"
+  data-animate="pillar-rise"
 >
   <div class="mbe-2 flex h-9 items-center">
     <h3 class="text-sm font-semibold tracking-wider text-white uppercase">{t("footer.office")}</h3>
   </div>
-  <span class="mbe-6 block bg-orange block-1 inline-12"></span>
+  <span
+    class="mbe-6 block bg-orange block-1 inline-12"
+    data-scroll-wipe
+  ></span>
   <address class="not-italic">
     <ul
       role="list"

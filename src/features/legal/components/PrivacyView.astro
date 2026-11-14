@@ -325,6 +325,7 @@ const current = entry.data as unknown as PrivacyCopy;
           <section
             aria-labelledby={`heading-${sec.id}`}
             class="relative rounded-2xl border border-stone-200/90 bg-white p-6 sm:p-8 shadow-sm transition-all duration-200 hover:border-stone-300 print:border-none print:shadow-none print:break-inside-avoid"
+            data-animate={idx % 2 === 0 ? "glide-tilt" : "curtain-up"}
             id={sec.id}
           >
             <!-- Section Header -->

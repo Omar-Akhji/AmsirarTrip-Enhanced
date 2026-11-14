@@ -106,18 +106,20 @@ const breadcrumbJsonLd = generateBreadcrumbJsonLd([
     locale={locale}
     slug={slug}
   >
-    <BookingForm
-      client:visible
-      excursionId={String(excursion.bookingId)}
-      excursionTitle={excursionTitleClean}
-      fullWidth
-      locale={locale}
-      tourDuration={1}
-    >
-      <BookingSidebar
-        slot="sidebar"
+    <div data-animate="step-unfold">
+      <BookingForm
+        client:visible
+        excursionId={String(excursion.bookingId)}
+        excursionTitle={excursionTitleClean}
+        fullWidth
         locale={locale}
-      />
-    </BookingForm>
+        tourDuration={1}
+      >
+        <BookingSidebar
+          slot="sidebar"
+          locale={locale}
+        />
+      </BookingForm>
+    </div>
   </ExcursionLayout>
 </Layout>

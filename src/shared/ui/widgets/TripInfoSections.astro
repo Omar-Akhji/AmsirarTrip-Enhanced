@@ -47,7 +47,7 @@ const goodToKnowList = normalizeList(goodToKnow);
 ---
 
 {includeList.length > 0 && (
-  <div data-animate="fade-up">
+  <div data-animate="creative-slide-right">
     <section aria-labelledby={`${idPrefix}-included-heading`}>
       <hgroup class="mbe-4 space-y-1">
         <p class="font-sans text-xs font-bold tracking-wider text-orange-900 uppercase dark:text-orange-400">
@@ -83,7 +83,7 @@ const goodToKnowList = normalizeList(goodToKnow);
 )}
 
 {excludeList.length > 0 && (
-  <div data-animate="fade-up">
+  <div data-animate="glide-tilt">
     <section
       aria-labelledby={`${idPrefix}-excluded-heading`}
       class="mbs-8"
@@ -122,7 +122,7 @@ const goodToKnowList = normalizeList(goodToKnow);
 )}
 
 {goodToKnowList.length > 0 && (
-  <div data-animate="fade-up">
+  <div data-animate="pillar-rise">
     <section
       aria-labelledby={`${idPrefix}-advisories-heading`}
       class="mbs-8"
