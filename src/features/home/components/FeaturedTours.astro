@@ -19,12 +19,12 @@ const cities = destinationEntries
   .map((entry) => entry.data);
 
 const DELAY_CLASSES = [
-  "delay-0",
-  "delay-[120ms]",
-  "delay-[240ms]",
-  "delay-[360ms]",
-  "delay-[480ms]",
-  "delay-[600ms]",
+  "animate-delay-0",
+  "animate-delay-120",
+  "animate-delay-240",
+  "animate-delay-360",
+  "animate-delay-480",
+  "animate-delay-600",
 ] as const;
 ---
 
@@ -185,14 +185,14 @@ const DELAY_CLASSES = [
 
         return (
           <div
-            class:list={[DELAY_CLASSES[index] || "delay-0"]}
+            class:list={[DELAY_CLASSES[index] || "animate-delay-0"]}
             data-animate="fade-up"
           >
             <article class="group relative block aspect-4/3 w-full select-none">
               <!-- Inner Image Card (Rounded image surface with dark luxury background) -->
               <div
                 data-scroll-parallax
-                class="relative size-full overflow-hidden rounded-2xl border-2 border-stone-200/80 bg-slate-950 shadow-xs transition-shadow duration-700 ease-out-expo pointer-fine:group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)]"
+                class="relative size-full overflow-clip rounded-2xl border-2 border-stone-200/80 bg-slate-950 shadow-xs transition-shadow duration-700 ease-out-expo pointer-fine:group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)]"
               >
                 <div class="parallax-media pointer-events-none absolute -inset-y-5 inset-x-0 size-[calc(100%+40px)]">
                   <Image

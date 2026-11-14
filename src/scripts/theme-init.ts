@@ -1,3 +1,9 @@
+const cspNonce = document.documentElement.dataset["cspNonce"] ?? "";
+Object.defineProperties(globalThis, {
+  CAP_SCRIPT_NONCE: { configurable: true, value: cspNonce, writable: true },
+  CAP_CUSTOM_HASHWX_URL: { configurable: true, value: "/cap/hashwx.wasm", writable: true },
+});
+
 try {
   const stored = localStorage.getItem("amsirar-theme");
   const isDark =

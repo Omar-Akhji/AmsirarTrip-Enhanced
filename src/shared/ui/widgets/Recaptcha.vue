@@ -24,7 +24,7 @@ const currentToken = ref<string>("");
 const isDevBypassed = ref<boolean>(false);
 
 const onCapSolve = (event: Event) => {
-  const customEvent = event as CustomEvent<{ token?: string }>;
+  const customEvent = event as CustomEvent<{ token?: string } | null | undefined>;
   const widget = capWidget.value as unknown as { token?: string } | null;
   const token = customEvent.detail?.token ?? widget?.token ?? "";
   if (!token) return;

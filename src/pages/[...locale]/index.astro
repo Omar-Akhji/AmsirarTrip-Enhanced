@@ -10,7 +10,7 @@ import HomeHero from "../../features/home/components/HomeHero.astro";
 import HomeStats from "../../features/home/components/HomeStats.astro";
 import ServicesSection from "../../features/home/components/ServicesSection.astro";
 import TestimonialsSection from "../../features/home/components/TestimonialsSection.astro";
-import VideoSection from "../../features/home/components/VideoSection.vue";
+import VideoSection from "../../features/home/components/VideoSection.astro";
 import { useTranslations } from "../../i18n/utils";
 import Layout from "../../layouts/Layout.astro";
 import {
@@ -87,7 +87,6 @@ const videoJsonLd = generateVideoObjectJsonLd({
     <TestimonialsSection />
     <div data-animate="fade-up">
       <VideoSection
-        client:visible
         fallbackImage={bg1.src}
         locale={locale}
       />

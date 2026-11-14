@@ -89,9 +89,9 @@ const subtitle = subtitleMap[locale] ?? subtitleMap["en"] ?? defaultSubtitle;
             "group relative flex size-full flex-col items-center rounded-2xl border border-white/10 bg-white/10 p-8 text-center shadow-xs ring-1 ring-black/5 backdrop-blur-xl transition-all duration-300 pointer-fine:hover:-translate-y-1 pointer-fine:hover:shadow-[0_12px_36px_rgba(0,0,0,0.35)]",
             {
               "md:col-span-2 lg:col-span-1": index === 2,
-              "delay-150": index === 1,
-              "delay-300": index !== 1,
-              "delay-0": index !== 1,
+              "animate-delay-0": index === 0,
+              "animate-delay-150": index === 1,
+              "animate-delay-300": index === 2,
             },
           ]}
           data-animate="fade-up"

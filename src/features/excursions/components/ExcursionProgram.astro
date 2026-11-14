@@ -16,22 +16,22 @@ interface Props {
 
 const { program, programTitle = "Day Trip Schedule", kicker = "Schedule & Stops" } = Astro.props;
 const STAGE_DELAYS = [
-  "delay-0",
-  "delay-[80ms]",
-  "delay-[160ms]",
-  "delay-[240ms]",
-  "delay-[320ms]",
-  "delay-[400ms]",
-  "delay-[480ms]",
-  "delay-[560ms]",
-  "delay-[640ms]",
-  "delay-[720ms]",
+  "animate-delay-0",
+  "animate-delay-80",
+  "animate-delay-160",
+  "animate-delay-240",
+  "animate-delay-320",
+  "animate-delay-400",
+  "animate-delay-480",
+  "animate-delay-560",
+  "animate-delay-640",
+  "animate-delay-720",
 ] as const;
 ---
 
 <section
   aria-labelledby="excursion-itinerary-heading"
-  class="delay-450"
+  class="animate-delay-450"
   data-animate="fade-up"
 >
   <hgroup class="mbe-8">
@@ -52,7 +52,7 @@ const STAGE_DELAYS = [
   >
     {program.map((stage, index) => (
       <li
-        class:list={[STAGE_DELAYS[index] || "delay-0"]}
+        class:list={[STAGE_DELAYS[index] || "animate-delay-0"]}
         data-animate="fade-up"
       >
         <div class="group relative">

@@ -2,7 +2,7 @@
 import FooterBottomBar from "./footer/FooterBottomBar.astro";
 import FooterBrand from "./footer/FooterBrand.astro";
 import FooterContactInfo from "./footer/FooterContactInfo.astro";
-import FooterNewsletter from "./footer/FooterNewsletter.vue";
+import FooterNewsletter from "./footer/FooterNewsletter.astro";
 
 const locale = Astro.currentLocale || "en";
 ---
@@ -26,13 +26,10 @@ const locale = Astro.currentLocale || "en";
         ></div>
 
         <div
-          class="delay-300 md:col-span-2 lg:col-span-1"
+          class="animate-delay-300 md:col-span-2 lg:col-span-1"
           data-animate="fade-up"
         >
-          <FooterNewsletter
-            client:visible
-            locale={locale}
-          />
+          <FooterNewsletter locale={locale} />
         </div>
       </div>
     </div>

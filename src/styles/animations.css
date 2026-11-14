@@ -1,0 +1,799 @@
+/* ==========================================================================
+   Animations & Transitions
+   All keyframes, view transitions, scroll reveals, hero slider choreography,
+   and navigation micro-interactions live here. Imported by global.css.
+   ========================================================================== */
+
+/* Opt-in cross-document view transitions (Astro) */
+@view-transition {
+  navigation: auto;
+}
+
+@layer components {
+  /* ------------------------------------------------------------------------
+     1. Utility Keyframes (@theme --animate-* targets)
+     ------------------------------------------------------------------------ */
+
+  @keyframes fade-in-scale {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* ------------------------------------------------------------------------
+     2. Scroll reveal (hybrid CSS + TS IntersectionObserver in scroll-animate.ts)
+     ------------------------------------------------------------------------ */
+
+  @keyframes reveal-fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(28px);
+    }
+
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes reveal-zoom-in {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes reveal-creative-slide-right {
+    from {
+      opacity: 0;
+      transform: translateX(-28px);
+    }
+
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes reveal-creative-slide-left {
+    from {
+      opacity: 0;
+      transform: translateX(28px);
+    }
+
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  .scroll-init [data-animate] {
+    opacity: 0;
+
+    &.is-visible {
+      animation-duration: 750ms;
+      animation-timing-function: var(--ease-out-expo);
+      animation-fill-mode: both;
+
+      &:not(.is-done) {
+        will-change: transform, opacity;
+      }
+    }
+
+    &[data-animate="fade-up"].is-visible {
+      animation-name: reveal-fade-up;
+    }
+
+    &[data-animate="zoom-in"].is-visible {
+      animation-name: reveal-zoom-in;
+    }
+
+    &[data-animate="creative-slide-right"].is-visible {
+      animation-name: reveal-creative-slide-right;
+    }
+
+    &[data-animate="creative-slide-left"].is-visible {
+      animation-name: reveal-creative-slide-left;
+    }
+
+    /* Release the composite layer once finished (must follow the rules above) */
+    &.is-done {
+      opacity: 1;
+      animation: none;
+      will-change: auto;
+    }
+  }
+
+  /* ------------------------------------------------------------------------
+     3. Page transitions (Astro view transitions)
+     ------------------------------------------------------------------------ */
+
+  @keyframes astro-page-fade-out {
+    from {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    to {
+      opacity: 0;
+      transform: translateY(-4px) scale(0.995);
+    }
+  }
+
+  @keyframes astro-page-fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(4px) scale(0.995);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 360ms;
+    animation-timing-function: var(--ease-out-expo);
+    mix-blend-mode: normal;
+  }
+
+  ::view-transition-old(root) {
+    animation-name: astro-page-fade-out;
+  }
+
+  ::view-transition-new(root) {
+    animation-name: astro-page-fade-in;
+  }
+
+  /* Shared-element morphing */
+  ::view-transition-group(*) {
+    animation-duration: 320ms;
+    animation-timing-function: var(--ease-out-expo);
+  }
+
+  /* Persistent chrome: quick, no jump */
+  ::view-transition-group(main-navbar),
+  ::view-transition-group(mobile-bottom-nav) {
+    animation-duration: 200ms;
+    animation-timing-function: ease-out;
+  }
+
+  /* ------------------------------------------------------------------------
+     4. Hero blur text reveal
+     ------------------------------------------------------------------------ */
+
+  @keyframes blurTokenReveal {
+    from {
+      opacity: 0;
+      transform: translateY(var(--blur-y, 20px));
+      filter: blur(var(--blur-radius, 4px));
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .slider .list .item:is(:first-child, .is-incoming) .blur-token {
+      animation: blurTokenReveal var(--blur-duration, 0.65s) var(--ease-out-expo)
+        var(--token-delay, 0ms) both;
+    }
+  }
+
+  /* ------------------------------------------------------------------------
+     5. Hero slider: 3D carousel
+     ------------------------------------------------------------------------ */
+
+  .slider .list .item:first-child .description {
+    anchor-name: --hero-active-desc;
+  }
+
+  @supports (top: anchor(bottom)) {
+    #pagination {
+      position-anchor: --hero-active-desc;
+      top: calc(anchor(bottom) + 16px);
+      transition: top 250ms var(--ease-out-expo);
+    }
+  }
+
+  #home-hero-slider,
+  #home-hero-slider-skeleton {
+    /* Base (< 480px): Compact mobile */
+    --thumb-width: 105px;
+    --thumb-height: 155px;
+    --thumb-gap: 10px;
+    --thumb-bottom: calc(86px + env(safe-area-inset-bottom, 0px));
+    --thumb-radius: var(--radius-sm);
+    --thumb-left: calc(100% - (2.5 * var(--thumb-width) + 2 * var(--thumb-gap)));
+    --thumb-clip: inset(
+      calc(100% - var(--thumb-bottom) - var(--thumb-height))
+        calc(100% - var(--thumb-left) - var(--thumb-width)) var(--thumb-bottom) var(--thumb-left)
+        round var(--thumb-radius)
+    );
+
+    /* xs (480px+): Phablet / large phone */
+    @media (width >= 30rem) {
+      --thumb-width: 120px;
+      --thumb-height: 175px;
+      --thumb-gap: 11px;
+      --thumb-bottom: calc(88px + env(safe-area-inset-bottom, 0px));
+      --thumb-radius: var(--radius-md);
+    }
+
+    /* sm (640px+): Mobile landscape */
+    @media (width >= 40rem) {
+      --thumb-width: 135px;
+      --thumb-height: 195px;
+      --thumb-gap: 12px;
+    }
+
+    /* md (768px+): Tablet portrait (bottom dock hidden, top nav active) */
+    @media (width >= 48rem) {
+      --thumb-width: 165px;
+      --thumb-height: 245px;
+      --thumb-gap: 14px;
+      --thumb-bottom: 20px;
+      --thumb-radius: var(--radius-md);
+    }
+
+    /* lg (1024px+): Tablet landscape / compact laptop */
+    @media (width >= 64rem) {
+      --thumb-width: 185px;
+      --thumb-height: 270px;
+      --thumb-gap: 16px;
+      --thumb-bottom: 24px;
+      --thumb-radius: var(--radius-lg);
+    }
+
+    /* xl (1280px+): Standard desktop */
+    @media (width >= 80rem) {
+      --thumb-width: 200px;
+      --thumb-height: 290px;
+      --thumb-gap: 18px;
+      --thumb-bottom: 26px;
+    }
+
+    /* 2xl (1360px+): Large desktop & QHD tier */
+    @media (width >= 85rem) {
+      --thumb-width: 210px;
+      --thumb-height: 305px;
+      --thumb-gap: 19px;
+      --thumb-bottom: 28px;
+    }
+
+    /* 3xl (1536px+): High-density widescreen desktop */
+    @media (width >= 96rem) {
+      --thumb-width: 220px;
+      --thumb-height: 320px;
+      --thumb-gap: 20px;
+      --thumb-bottom: 30px;
+    }
+
+    /* Ultra-wide (1920px+): FHD/4K canvas */
+    @media (width >= 120rem) {
+      --thumb-width: 240px;
+      --thumb-height: 350px;
+      --thumb-gap: 22px;
+      --thumb-bottom: 34px;
+    }
+  }
+
+  .slider {
+    --hero-duration: 750ms;
+    --hero-exit-duration: 350ms;
+    --hero-fade-duration: 400ms;
+
+    /* Resting state: only the first slide is visible and interactive */
+    & .list .item {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    & .list .item:first-child {
+      opacity: 1;
+      pointer-events: auto;
+      z-index: 1;
+    }
+
+    & .list .item .content {
+      display: none;
+      pointer-events: none;
+    }
+
+    & .list .item:first-child .content {
+      display: block;
+      pointer-events: auto;
+    }
+
+    /* Both directions */
+    &:is(.is-next, .is-prev) {
+      & .hero-dots-nav button {
+        pointer-events: none;
+      }
+
+      & .list .item.is-outgoing .content {
+        animation: heroContentExit var(--hero-exit-duration) var(--ease-out-expo) forwards;
+      }
+
+      & .list .item.is-incoming .content {
+        display: block;
+        pointer-events: auto;
+      }
+    }
+
+    /* Next: the incoming slide grows out of its thumbnail over the outgoing one */
+    &.is-next {
+      & .list .item.is-outgoing {
+        opacity: 1;
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      & .list .item.is-outgoing img {
+        animation: heroOutgoingImage var(--hero-duration) var(--ease-out-expo) forwards;
+        will-change: transform, filter;
+      }
+
+      & .list .item.is-incoming {
+        opacity: 1;
+        z-index: 10;
+        pointer-events: auto;
+      }
+
+      & .list .item.is-incoming img {
+        animation: heroShowImageClip var(--hero-duration) var(--ease-out-expo) forwards;
+        will-change: clip-path, transform;
+      }
+
+      & .thumbnail {
+        animation: heroThumbTrackNext var(--hero-duration) var(--ease-out-expo) forwards;
+        will-change: transform;
+      }
+
+      & .thumbnail .item.is-expanding {
+        animation: heroThumbFadeOut var(--hero-fade-duration) var(--ease-out-expo) forwards;
+      }
+    }
+
+    /* Prev: the outgoing slide shrinks back into its thumbnail */
+    &.is-prev {
+      & .list .item.is-incoming {
+        opacity: 1;
+        z-index: 1;
+        pointer-events: auto;
+      }
+
+      & .list .item.is-outgoing {
+        opacity: 1;
+        z-index: 10;
+        pointer-events: none;
+      }
+
+      & .list .item.is-outgoing img {
+        animation: heroHideImageClip var(--hero-duration) var(--ease-out-expo) forwards;
+        will-change: clip-path, transform;
+      }
+
+      & .thumbnail {
+        animation: heroThumbTrackPrev var(--hero-duration) var(--ease-out-expo) forwards;
+        will-change: transform;
+      }
+    }
+  }
+
+  /* Keyframe names are camelCase on purpose: keep them if your JS reads animationName */
+
+  @keyframes heroOutgoingImage {
+    to {
+      transform: scale(1.04);
+      filter: brightness(0.8);
+    }
+  }
+
+  @keyframes heroContentExit {
+    to {
+      transform: translateY(-24px);
+      opacity: 0;
+      filter: blur(4px);
+    }
+  }
+
+  @keyframes heroShowImageClip {
+    from {
+      clip-path: var(--thumb-clip);
+    }
+
+    to {
+      clip-path: inset(0 0 0 0 round 0);
+    }
+  }
+
+  @keyframes heroHideImageClip {
+    from {
+      clip-path: inset(0 0 0 0 round 0);
+    }
+
+    to {
+      clip-path: var(--thumb-clip);
+    }
+  }
+
+  @keyframes heroThumbTrackNext {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(calc(-1 * (var(--thumb-width) + var(--thumb-gap))));
+    }
+  }
+
+  @keyframes heroThumbTrackPrev {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(calc(var(--thumb-width) + var(--thumb-gap)));
+    }
+  }
+
+  @keyframes heroThumbFadeOut {
+    to {
+      opacity: 0;
+      transform: scale(0.92);
+    }
+  }
+
+  /* ------------------------------------------------------------------------
+     6. Scroll progress & scroll-driven parallax / showcase (CSS Scroll-Driven)
+     ------------------------------------------------------------------------ */
+
+  @supports (animation-timeline: scroll()) {
+    @keyframes scroll-progress-fill {
+      0% {
+        transform: scaleY(0);
+        opacity: 0;
+      }
+
+      0.5% {
+        opacity: 1;
+      }
+
+      100% {
+        transform: scaleY(1);
+        opacity: 1;
+      }
+    }
+
+    .scroll-progress-bar {
+      transform-origin: top center;
+      animation: scroll-progress-fill linear both;
+      animation-timeline: scroll(root block);
+    }
+  }
+
+  @supports (animation-timeline: view()) {
+    @keyframes scroll-parallax-y {
+      from {
+        transform: translate3d(0, -6%, 0);
+      }
+
+      to {
+        transform: translate3d(0, 6%, 0);
+      }
+    }
+
+    @keyframes scroll-cinematic-enter {
+      from {
+        transform: translate3d(0, 24px, 0) scale(0.95);
+      }
+
+      to {
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+    }
+
+    [data-scroll-parallax] > .parallax-media,
+    [data-scroll-parallax]:not(:has(> .parallax-media)) > img {
+      animation: scroll-parallax-y linear both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 100%;
+    }
+
+    [data-scroll-cinematic] {
+      animation: scroll-cinematic-enter cubic-bezier(0.33, 1, 0.67, 1) both;
+      animation-timeline: view(35dvh 8dvh);
+      animation-range: entry-crossing 0% exit-crossing 0%;
+    }
+  }
+
+  /* ------------------------------------------------------------------------
+     7. Desktop & tablet navigation indicator (native CSS + fallback)
+     ------------------------------------------------------------------------ */
+
+  .desktop-nav-link {
+    color: rgb(250 250 250 / 0.78);
+  }
+
+  :where([data-scrolled]) .desktop-nav-link {
+    color: var(--color-dark-grey);
+  }
+
+  :where(.dark [data-scrolled]) .desktop-nav-link {
+    color: var(--color-stone-300);
+  }
+
+  .desktop-nav-link:where([aria-current="page"], :focus-visible) {
+    color: var(--color-white);
+  }
+
+  .desktop-nav-link:focus-visible {
+    outline: 2px solid var(--color-white);
+    outline-offset: -3px;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .desktop-nav-link:hover {
+      color: var(--color-white);
+    }
+
+    .desktop-nav:has(.desktop-nav-link:where(:hover, :focus-visible))
+      .desktop-nav-link:where([aria-current="page"]:not(:hover, :focus-visible)) {
+      color: rgb(250 250 250 / 0.78);
+    }
+
+    :where([data-scrolled])
+      .desktop-nav:has(.desktop-nav-link:where(:hover, :focus-visible))
+      .desktop-nav-link:where([aria-current="page"]:not(:hover, :focus-visible)) {
+      color: var(--color-dark-grey);
+    }
+
+    :where(.dark [data-scrolled])
+      .desktop-nav:has(.desktop-nav-link:where(:hover, :focus-visible))
+      .desktop-nav-link:where([aria-current="page"]:not(:hover, :focus-visible)) {
+      color: var(--color-stone-300);
+    }
+  }
+
+  /* Tablet: smooth CSS Grid 0fr -> 1fr label expansion + self-contained pill */
+  @media (width >= 48rem) and (width < 64rem) {
+    .desktop-nav-indicator {
+      display: none;
+    }
+
+    .desktop-nav-link {
+      display: inline-grid;
+      grid-template-columns: auto 0fr;
+      align-items: center;
+    }
+
+    .desktop-nav-label {
+      min-inline-size: 0;
+      margin-inline-start: 0;
+      opacity: 0;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .desktop-nav-link {
+        transition:
+          grid-template-columns 200ms var(--ease-snappy),
+          color 200ms ease,
+          background-color 200ms ease;
+      }
+
+      .desktop-nav-label {
+        transition:
+          opacity 180ms var(--ease-snappy),
+          margin-inline-start 200ms var(--ease-snappy);
+      }
+    }
+
+    .desktop-nav-link:where([aria-current="page"], :focus-visible) {
+      grid-template-columns: auto 1fr;
+      background-image: linear-gradient(
+        to bottom right,
+        var(--color-amber-orange),
+        var(--color-orange)
+      );
+      box-shadow: 0 10px 15px -3px rgb(241 93 48 / 0.3);
+    }
+
+    .desktop-nav-link:where([aria-current="page"], :focus-visible) .desktop-nav-label {
+      margin-inline-start: 0.5rem;
+      opacity: 1;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .desktop-nav-link:hover {
+        grid-template-columns: auto 1fr;
+        background-image: linear-gradient(
+          to bottom right,
+          var(--color-amber-orange),
+          var(--color-orange)
+        );
+        box-shadow: 0 10px 15px -3px rgb(241 93 48 / 0.3);
+      }
+
+      .desktop-nav-link:hover .desktop-nav-label {
+        margin-inline-start: 0.5rem;
+        opacity: 1;
+      }
+
+      .desktop-nav:has(.desktop-nav-link:where(:hover, :focus-visible))
+        .desktop-nav-link:where([aria-current="page"]:not(:hover, :focus-visible)) {
+        grid-template-columns: auto 0fr;
+        background-image: none;
+        box-shadow: none;
+      }
+
+      .desktop-nav:has(.desktop-nav-link:where(:hover, :focus-visible))
+        .desktop-nav-link:where([aria-current="page"]:not(:hover, :focus-visible))
+        .desktop-nav-label {
+        margin-inline-start: 0;
+        opacity: 0;
+      }
+    }
+  }
+
+  /* Desktop: CSS Anchor Positioning sliding indicator (0 JS in supporting browsers) */
+  @media (width >= 64rem) {
+    @supports (left: anchor(left)) and (selector(:has(*))) {
+      .desktop-nav {
+        anchor-scope: --nav-target;
+      }
+
+      .desktop-nav-link::after {
+        content: "";
+        position: absolute;
+        inset-block: 0;
+        inset-inline: -0.1875rem;
+        z-index: -1;
+      }
+
+      .desktop-nav-indicator {
+        inset-block: 0.375rem;
+        left: anchor(--nav-target left);
+        width: anchor-size(--nav-target width);
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .desktop-nav:has(.desktop-nav-link:where([aria-current="page"], :hover, :focus-visible))
+        .desktop-nav-indicator {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        .desktop-nav:has(.desktop-nav-link:where([aria-current="page"], :hover, :focus-visible))
+          .desktop-nav-indicator {
+          transition:
+            left 180ms var(--ease-snappy),
+            width 180ms var(--ease-snappy),
+            opacity 160ms var(--ease-snappy);
+        }
+
+        @starting-style {
+          .desktop-nav:has(.desktop-nav-link:where([aria-current="page"], :hover, :focus-visible))
+            .desktop-nav-indicator {
+            opacity: 0;
+          }
+        }
+      }
+
+      .desktop-nav-link:where([aria-current="page"], :focus-visible) {
+        anchor-name: --nav-target;
+      }
+
+      @media (hover: hover) and (pointer: fine) {
+        .desktop-nav-link:hover {
+          anchor-name: --nav-target;
+        }
+
+        .desktop-nav:has(.desktop-nav-link:where(:hover, :focus-visible))
+          .desktop-nav-link:where([aria-current="page"]:not(:hover, :focus-visible)) {
+          anchor-name: none;
+        }
+      }
+    }
+
+    @supports not (left: anchor(left)) {
+      .desktop-nav-indicator {
+        left: 0;
+        width: var(--indicator-w, 0);
+        opacity: 0;
+        visibility: hidden;
+        transform: translate3d(var(--indicator-x, 0), 0, 0);
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        .desktop-nav-indicator {
+          transition:
+            transform 180ms var(--ease-snappy),
+            width 180ms var(--ease-snappy),
+            opacity 180ms var(--ease-snappy),
+            visibility 180ms var(--ease-snappy);
+        }
+      }
+
+      .desktop-nav-indicator[data-visible="true"] {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .desktop-nav-indicator[data-immediate] {
+        transition: none;
+      }
+
+      .desktop-nav-link[data-indicator="true"] {
+        color: var(--color-white);
+      }
+    }
+  }
+
+  /* ------------------------------------------------------------------------
+     8. Reduced motion & no-script fallbacks
+     ------------------------------------------------------------------------ */
+
+  @media (prefers-reduced-motion: reduce) {
+    /* Scroll reveal: show content immediately */
+    .scroll-init [data-animate],
+    .scroll-init [data-animate].is-visible {
+      opacity: 1;
+      animation: none;
+      transform: none;
+      will-change: auto;
+    }
+
+    [data-scroll-parallax] > .parallax-media,
+    [data-scroll-parallax]:not(:has(> .parallax-media)) > img,
+    [data-scroll-cinematic] {
+      animation: none;
+      transform: none;
+    }
+
+    /* Page transitions */
+    ::view-transition-old(root),
+    ::view-transition-new(root),
+    ::view-transition-group(*) {
+      animation: none;
+    }
+
+    /* Hero slider: collapse to 1ms instead of `animation: none`, so
+       animationend still fires and the slider's state classes get cleaned up */
+    .slider {
+      --hero-duration: 1ms;
+      --hero-exit-duration: 1ms;
+      --hero-fade-duration: 1ms;
+    }
+  }
+
+  @media (scripting: none) {
+    .blur-token {
+      opacity: 1;
+      transform: none;
+      filter: none;
+    }
+  }
+}

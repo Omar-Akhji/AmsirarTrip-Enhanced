@@ -264,8 +264,8 @@ export function buildBookingEmail(data: BookingEmailInput): PreparedEmail {
   // Resolve duration intelligently with fallback to title inference
   let resolvedDuration = data.duration;
   if (!resolvedDuration && data.reservationType) {
-    const match = data.reservationType.match(/(\d+)\s*[- ]*(?:Days?|Day|Jours?|Días?|Tage?)/i);
-    const parsedDays = match?.[1] ? Number.parseInt(match[1], 10) : undefined;
+    const match = /(\d+)\s*[- ]*(?:Days?|Day|Jours?|Días?|Tage?)/i.exec(data.reservationType);
+    const parsedDays = match?.[1] ? Number(match[1]) : undefined;
     if (parsedDays && !Number.isNaN(parsedDays)) {
       resolvedDuration = parsedDays;
     }
@@ -276,8 +276,7 @@ export function buildBookingEmail(data: BookingEmailInput): PreparedEmail {
       Number(resolvedDuration) === 1 ?
         "1 day (Day trip)"
       : `${resolvedDuration} days`
-    : /excursion|day trip|discovery|sunset/i.test(data.reservationType) ?
-      "1 day (Day trip)"
+    : /excursion|day trip|discovery|sunset/i.test(data.reservationType) ? "1 day (Day trip)"
     : "Not specified";
 
   // WhatsApp link with friendly prefilled greeting

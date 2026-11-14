@@ -23,8 +23,15 @@ interface RecaptchaInstance {
   readonly reset: () => void;
 }
 
-const { locale, tourTitle, tourId, tourDuration, excursionTitle, excursionId, fullWidth } =
-  defineProps<Props>();
+const {
+  locale,
+  tourTitle,
+  tourId,
+  tourDuration = null,
+  excursionTitle,
+  excursionId,
+  fullWidth,
+} = defineProps<Props>();
 
 if (locale) {
   provide("app-locale", locale);
@@ -58,7 +65,7 @@ const selectedTour = computed(() => {
   return tourTitle ?? excursionTitle ?? "";
 });
 
-const computedTourDuration = computed(() => tourDuration ?? null);
+const computedTourDuration = computed(() => tourDuration);
 
 const handleSubmit = async (event: Event) => {
   const form = event.target as HTMLFormElement;

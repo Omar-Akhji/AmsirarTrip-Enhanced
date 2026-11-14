@@ -46,10 +46,6 @@ export function setupFolderStack(
       for (const slot of cardSlots) {
         slot.style.transform = "";
         slot.style.opacity = "";
-        const card = slot.querySelector<HTMLElement>(config.cardCardSelector);
-        if (!card) continue;
-        card.style.transform = "";
-        card.style.removeProperty("--card-dim");
       }
       folderBack.style.transform = "";
       folderBack.style.opacity = "";
@@ -141,20 +137,10 @@ export function setupFolderStack(
 
       const opStr = cardData.opacity.toFixed(3);
       const opCacheKey = `op${index}`;
-      if (cache.get(opCacheKey) !== opStr) {
-        cache.set(opCacheKey, opStr);
-        slot.style.opacity = opStr;
-      }
+      if (cache.get(opCacheKey) === opStr) continue;
 
-      const card = slot.querySelector<HTMLElement>(config.cardCardSelector);
-      if (!card) continue;
-
-      const dimStr = cardData.dim.toFixed(3);
-      const dimCacheKey = `dim${index}`;
-      if (cache.get(dimCacheKey) === dimStr) continue;
-
-      cache.set(dimCacheKey, dimStr);
-      card.style.setProperty("--card-dim", dimStr);
+      cache.set(opCacheKey, opStr);
+      slot.style.opacity = opStr;
     }
   };
 

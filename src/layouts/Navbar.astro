@@ -351,11 +351,11 @@ const NAV_ITEMS: readonly {
 
       <nav
         aria-label={t("nav.mainAria")}
-        class="absolute inset-s-1/2 z-10 hidden -translate-x-1/2 items-center gap-1 overflow-hidden rounded-full border-2 border-white/10 bg-white/5 p-1.5 shadow-[0_8px_32px_rgba(0,0,0,0.12)] transition-colors duration-200 group-data-scrolled:border-stone-200/90 group-data-scrolled:bg-stone-100/70 group-data-scrolled:dark:border-white/10 group-data-scrolled:dark:bg-[oklch(18%_0.012_245deg/75%)] md:inline-flex lg:gap-1.5 max-w-fit"
+        class="desktop-nav absolute inset-s-1/2 z-10 hidden -translate-x-1/2 items-center gap-1 overflow-hidden rounded-full border-2 border-white/10 bg-white/5 p-1.5 shadow-[0_8px_32px_rgba(0,0,0,0.12)] transition-colors duration-200 group-data-scrolled:border-stone-200/90 group-data-scrolled:bg-stone-100/70 group-data-scrolled:dark:border-white/10 group-data-scrolled:dark:bg-[oklch(18%_0.012_245deg/75%)] md:inline-flex lg:gap-1.5 max-w-fit"
         id="desktop-nav"
       >
         <div
-          class="pointer-events-none absolute inset-y-1.5 left-0 z-0 rounded-full bg-linear-to-br from-amber-orange to-orange opacity-0 shadow-lg shadow-orange/30 will-change-transform"
+          class="desktop-nav-indicator pointer-events-none absolute inset-y-1.5 z-0 rounded-full bg-linear-to-br from-amber-orange to-orange shadow-lg shadow-orange/30"
           id="desktop-nav-indicator"
         ></div>
 
@@ -367,21 +367,14 @@ const NAV_ITEMS: readonly {
               aria-current={active ? "page" : undefined}
               aria-label={label}
               title={label}
-              class="group/link desktop-nav-link relative z-10 inline-flex items-center justify-center whitespace-nowrap shrink-0 rounded-full px-3 py-2.5 text-xs font-semibold select-none transition-colors duration-200 text-white/75 hover:text-white group-data-scrolled:text-dark-grey group-data-scrolled:hover:text-dark group-data-scrolled:dark:text-stone-300 group-data-scrolled:dark:hover:text-white data-indicator:text-white group-data-scrolled:data-indicator:text-white lg:px-5 lg:py-2 lg:text-sm"
-              data-indicator={active ? "true" : undefined}
+              class="group/link desktop-nav-link relative z-10 items-center justify-center whitespace-nowrap shrink-0 rounded-full px-3 py-2.5 text-xs font-semibold select-none transition-colors duration-200 lg:inline-flex lg:px-5 lg:py-2 lg:text-sm"
               href={localize(item.to)}
             >
               <NavIcon
                 name={item.icon}
                 class="size-5 shrink-0 transition-transform duration-200 group-hover/link:scale-110 lg:hidden motion-reduce:transform-none"
               />
-              <span
-                class:list={[
-                  "desktop-nav-label inline-block overflow-hidden whitespace-nowrap text-xs font-semibold tracking-tight motion-reduce:transition-none lg:text-sm lg:overflow-visible lg:w-auto lg:opacity-100 lg:ml-0",
-                  { "ml-2": active, "w-0 opacity-0 ml-0": !active },
-                ]}
-                data-expanded={active ? "true" : undefined}
-              >
+              <span class="desktop-nav-label inline-block overflow-hidden whitespace-nowrap text-xs font-semibold tracking-tight motion-reduce:transition-none lg:text-sm lg:overflow-visible">
                 {label}
               </span>
             </a>

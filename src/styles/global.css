@@ -4,6 +4,7 @@
 
 @import "tailwindcss";
 @import "lenis/dist/lenis.css";
+@import "./animations.css";
 
 /* ==========================================================================
    2. Fonts (Variable-First Architecture for Zero-CLS & Minimal Requests)
@@ -44,7 +45,7 @@
 }
 
 /* ==========================================================================
-   3. Theme tokens
+   3. Theme tokens (Tailwind CSS v4 configuration)
    Everything here becomes a Tailwind utility (bg-canvas, text-ink, rounded-md…).
    Warm-tinted OKLCH: hue 65 = sandy neutrals, hue 33 = terracotta.
    ========================================================================== */
@@ -175,30 +176,13 @@
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-snappy: cubic-bezier(0.22, 1, 0.36, 1);
   --animate-fade-in-scale: fade-in-scale 0.2s var(--ease-out-expo);
-
-  @keyframes fade-in-scale {
-    from {
-      opacity: 0;
-      transform: scale(0.95);
-    }
-
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
 }
 
 /* ==========================================================================
-   4. Variants, utilities & at-rules
+   4. Variants & custom utilities
    ========================================================================== */
 
 @custom-variant dark (&:where(.dark, .dark *));
-
-/* Opt-in cross-document view transitions (Astro) */
-@view-transition {
-  navigation: auto;
-}
 
 /* --------------------------------------------------------------------------
    Lumos Intrinsic Layout & Container Utilities (Tailwind v4 tree-shakeable)
@@ -219,6 +203,11 @@
 /* Tactile specular card border utility for dark/light elevated surfaces */
 @utility surface-tactile {
   box-shadow: inset 0 1px 0 0 rgb(255 255 255 / 0.08);
+}
+
+/* Compositor stagger delay utility for CSS reveal keyframes */
+@utility animate-delay-* {
+  animation-delay: calc(--value(integer) * 1ms);
 }
 
 /* ==========================================================================
@@ -304,474 +293,29 @@
 }
 
 /* ==========================================================================
-   6. Components
+   6. Structural components
    ========================================================================== */
 
 @layer components {
-  /* ------------------------------------------------------------------------
-     6.1 Scroll reveal
-     ------------------------------------------------------------------------ */
-
-  @keyframes reveal-fade-up {
-    from {
-      opacity: 0;
-      transform: translateY(28px);
-    }
-
-    to {
-      opacity: 1;
-      transform: none;
-    }
-  }
-
-  @keyframes reveal-zoom-in {
-    from {
-      opacity: 0;
-      transform: scale(0.95);
-    }
-
-    to {
-      opacity: 1;
-      transform: none;
-    }
-  }
-
-  @keyframes reveal-creative-slide-right {
-    from {
-      opacity: 0;
-      transform: translateX(-28px);
-    }
-
-    to {
-      opacity: 1;
-      transform: none;
-    }
-  }
-
-  @keyframes reveal-creative-slide-left {
-    from {
-      opacity: 0;
-      transform: translateX(28px);
-    }
-
-    to {
-      opacity: 1;
-      transform: none;
-    }
-  }
-
-  .scroll-init [data-animate] {
-    opacity: 0;
-
-    &.is-visible {
-      animation-duration: 750ms;
-      animation-timing-function: var(--ease-out-expo);
-      animation-fill-mode: both;
-
-      &:not(.is-done) {
-        will-change: transform, opacity;
-      }
-    }
-
-    &[data-animate="fade-up"].is-visible {
-      animation-name: reveal-fade-up;
-    }
-
-    &[data-animate="zoom-in"].is-visible {
-      animation-name: reveal-zoom-in;
-    }
-
-    &[data-animate="creative-slide-right"].is-visible {
-      animation-name: reveal-creative-slide-right;
-    }
-
-    &[data-animate="creative-slide-left"].is-visible {
-      animation-name: reveal-creative-slide-left;
-    }
-
-    /* Release the composite layer once finished (must follow the rules above) */
-    &.is-done {
-      opacity: 1;
-      animation: none;
-      will-change: auto;
-    }
-  }
-
-  /* ------------------------------------------------------------------------
-     6.2 Page transitions (Astro view transitions)
-     ------------------------------------------------------------------------ */
-
-  @keyframes astro-page-fade-out {
-    from {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-
-    to {
-      opacity: 0;
-      transform: translateY(-4px) scale(0.995);
-    }
-  }
-
-  @keyframes astro-page-fade-in {
-    from {
-      opacity: 0;
-      transform: translateY(4px) scale(0.995);
-    }
-
-    to {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-  }
-
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
-    animation-duration: 360ms;
-    animation-timing-function: var(--ease-out-expo);
-    mix-blend-mode: normal;
-  }
-
-  ::view-transition-old(root) {
-    animation-name: astro-page-fade-out;
-  }
-
-  ::view-transition-new(root) {
-    animation-name: astro-page-fade-in;
-  }
-
-  /* Shared-element morphing */
-  ::view-transition-group(*) {
-    animation-duration: 320ms;
-    animation-timing-function: var(--ease-out-expo);
-  }
-
-  /* Persistent chrome: quick, no jump */
-  ::view-transition-group(main-navbar),
-  ::view-transition-group(mobile-bottom-nav) {
-    animation-duration: 200ms;
-    animation-timing-function: ease-out;
-  }
-
-  /* ------------------------------------------------------------------------
-     6.5 Hero slider: 3D carousel
-     ------------------------------------------------------------------------ */
-
-  #home-hero-slider,
-  #home-hero-slider-skeleton {
-    /* Base (< 480px): Compact mobile */
-    --thumb-width: 105px;
-    --thumb-height: 155px;
-    --thumb-gap: 10px;
-    --thumb-bottom: calc(86px + env(safe-area-inset-bottom, 0px));
-    --thumb-radius: var(--radius-sm);
-    --thumb-left: calc(100% - (2.5 * var(--thumb-width) + 2 * var(--thumb-gap)));
-    --thumb-clip: inset(
-      calc(100% - var(--thumb-bottom) - var(--thumb-height))
-        calc(100% - var(--thumb-left) - var(--thumb-width)) var(--thumb-bottom) var(--thumb-left)
-        round var(--thumb-radius)
-    );
-
-    /* xs (480px+): Phablet / large phone */
-    @media (width >= 30rem) {
-      --thumb-width: 120px;
-      --thumb-height: 175px;
-      --thumb-gap: 11px;
-      --thumb-bottom: calc(88px + env(safe-area-inset-bottom, 0px));
-      --thumb-radius: var(--radius-md);
-    }
-
-    /* sm (640px+): Mobile landscape */
-    @media (width >= 40rem) {
-      --thumb-width: 135px;
-      --thumb-height: 195px;
-      --thumb-gap: 12px;
-    }
-
-    /* md (768px+): Tablet portrait (bottom dock hidden, top nav active) */
-    @media (width >= 48rem) {
-      --thumb-width: 165px;
-      --thumb-height: 245px;
-      --thumb-gap: 14px;
-      --thumb-bottom: 20px;
-      --thumb-radius: var(--radius-md);
-    }
-
-    /* lg (1024px+): Tablet landscape / compact laptop */
-    @media (width >= 64rem) {
-      --thumb-width: 185px;
-      --thumb-height: 270px;
-      --thumb-gap: 16px;
-      --thumb-bottom: 24px;
-      --thumb-radius: var(--radius-lg);
-    }
-
-    /* xl (1280px+): Standard desktop */
-    @media (width >= 80rem) {
-      --thumb-width: 200px;
-      --thumb-height: 290px;
-      --thumb-gap: 18px;
-      --thumb-bottom: 26px;
-    }
-
-    /* 2xl (1360px+): Large desktop & QHD tier */
-    @media (width >= 85rem) {
-      --thumb-width: 210px;
-      --thumb-height: 305px;
-      --thumb-gap: 19px;
-      --thumb-bottom: 28px;
-    }
-
-    /* 3xl (1536px+): High-density widescreen desktop */
-    @media (width >= 96rem) {
-      --thumb-width: 220px;
-      --thumb-height: 320px;
-      --thumb-gap: 20px;
-      --thumb-bottom: 30px;
-    }
-
-    /* Ultra-wide (1920px+): FHD/4K canvas */
-    @media (width >= 120rem) {
-      --thumb-width: 240px;
-      --thumb-height: 350px;
-      --thumb-gap: 22px;
-      --thumb-bottom: 34px;
-    }
-  }
-
-  .slider {
-    --hero-duration: 750ms;
-    --hero-exit-duration: 350ms;
-    --hero-fade-duration: 400ms;
-
-    /* Resting state: only the first slide is visible and interactive */
-    & .list .item {
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      pointer-events: none;
-      z-index: 0;
-      overflow: hidden;
-    }
-
-    & .list .item:first-child {
-      opacity: 1;
-      pointer-events: auto;
-      z-index: 1;
-    }
-
-    & .list .item .content {
-      display: none;
-      pointer-events: none;
-    }
-
-    & .list .item:first-child .content {
-      display: block;
-      pointer-events: auto;
-    }
-
-    /* Both directions */
-    &:is(.is-next, .is-prev) {
-      & .hero-dots-nav button {
-        pointer-events: none;
-      }
-
-      & .list .item.is-outgoing .content {
-        animation: heroContentExit var(--hero-exit-duration) var(--ease-out-expo) forwards;
-      }
-
-      & .list .item.is-incoming .content {
-        display: block;
-        pointer-events: auto;
-      }
-    }
-
-    /* Next: the incoming slide grows out of its thumbnail over the outgoing one */
-    &.is-next {
-      & .list .item.is-outgoing {
-        opacity: 1;
-        z-index: 1;
-        pointer-events: none;
-      }
-
-      & .list .item.is-outgoing img {
-        animation: heroOutgoingImage var(--hero-duration) var(--ease-out-expo) forwards;
-        will-change: transform, filter;
-      }
-
-      & .list .item.is-incoming {
-        opacity: 1;
-        z-index: 10;
-        pointer-events: auto;
-      }
-
-      & .list .item.is-incoming img {
-        animation: heroShowImageClip var(--hero-duration) var(--ease-out-expo) forwards;
-        will-change: clip-path, transform;
-      }
-
-      & .thumbnail {
-        animation: heroThumbTrackNext var(--hero-duration) var(--ease-out-expo) forwards;
-        will-change: transform;
-      }
-
-      & .thumbnail .item.is-expanding {
-        animation: heroThumbFadeOut var(--hero-fade-duration) var(--ease-out-expo) forwards;
-      }
-    }
-
-    /* Prev: the outgoing slide shrinks back into its thumbnail */
-    &.is-prev {
-      & .list .item.is-incoming {
-        opacity: 1;
-        z-index: 1;
-        pointer-events: auto;
-      }
-
-      & .list .item.is-outgoing {
-        opacity: 1;
-        z-index: 10;
-        pointer-events: none;
-      }
-
-      & .list .item.is-outgoing img {
-        animation: heroHideImageClip var(--hero-duration) var(--ease-out-expo) forwards;
-        will-change: clip-path, transform;
-      }
-
-      & .thumbnail {
-        animation: heroThumbTrackPrev var(--hero-duration) var(--ease-out-expo) forwards;
-        will-change: transform;
-      }
-    }
-  }
-
-  /* Keyframe names are camelCase on purpose: keep them if your JS reads animationName */
-
-  @keyframes heroOutgoingImage {
-    to {
-      transform: scale(1.04);
-      filter: brightness(0.8);
-    }
-  }
-
-  @keyframes heroContentExit {
-    to {
-      transform: translateY(-24px);
-      opacity: 0;
-      filter: blur(4px);
-    }
-  }
-
-  @keyframes heroShowImageClip {
-    from {
-      clip-path: var(--thumb-clip);
-    }
-
-    to {
-      clip-path: inset(0 0 0 0 round 0);
-    }
-  }
-
-  @keyframes heroHideImageClip {
-    from {
-      clip-path: inset(0 0 0 0 round 0);
-    }
-
-    to {
-      clip-path: var(--thumb-clip);
-    }
-  }
-
-  @keyframes heroThumbTrackNext {
-    from {
-      transform: translateX(0);
-    }
-
-    to {
-      transform: translateX(calc(-1 * (var(--thumb-width) + var(--thumb-gap))));
-    }
-  }
-
-  @keyframes heroThumbTrackPrev {
-    from {
-      transform: translateX(0);
-    }
-
-    to {
-      transform: translateX(calc(var(--thumb-width) + var(--thumb-gap)));
-    }
-  }
-
-  @keyframes heroThumbFadeOut {
-    to {
-      opacity: 0;
-      transform: scale(0.92);
-    }
-  }
-
-  /* ==========================================================================
-     7. Reduced motion
-     One place for every opt-out. Keep it last in this layer.
-     ========================================================================== */
-
-  @media (prefers-reduced-motion: reduce) {
-    /* Scroll reveal: show content immediately */
-    .scroll-init [data-animate],
-    .scroll-init [data-animate].is-visible {
-      opacity: 1;
-      animation: none;
-      transform: none;
-      will-change: auto;
-    }
-
-    /* Page transitions */
-    ::view-transition-old(root),
-    ::view-transition-new(root),
-    ::view-transition-group(*) {
-      animation: none;
-    }
-
-    /* Hero slider: collapse to 1ms instead of `animation: none`, so
-       animationend still fires and the slider's state classes get cleaned up */
-    .slider {
-      --hero-duration: 1ms;
-      --hero-exit-duration: 1ms;
-      --hero-fade-duration: 1ms;
-    }
-  }
-
-  /* ------------------------------------------------------------------------
-      7.x Departure filter (pure CSS, driven by the native radio group)
-      ------------------------------------------------------------------------ */
-
-  #tours-grid:has(input[value="marrakech"]:checked) .tour-card-item:not([data-departure="marrakech"]),
+  /* Departure filter (pure CSS, driven by the native radio group) */
+  #tours-grid:has(input[value="marrakech"]:checked)
+    .tour-card-item:not([data-departure="marrakech"]),
   #tours-grid:has(input[value="fes"]:checked) .tour-card-item:not([data-departure="fes"]),
-  #tours-grid:has(input[value="casablanca"]:checked) .tour-card-item:not([data-departure="casablanca"]),
+  #tours-grid:has(input[value="casablanca"]:checked)
+    .tour-card-item:not([data-departure="casablanca"]),
   #tours-grid:has(input[value="tangier"]:checked) .tour-card-item:not([data-departure="tangier"]) {
     display: none;
-  }
-
-
-
-  /* ------------------------------------------------------------------------
-      7.y No-script fallback: reveal animation tokens are hidden by JS, so make
-          them visible when scripting is unavailable.
-      ------------------------------------------------------------------------ */
-
-  @media (scripting: none) {
-    .blur-token {
-      opacity: 1;
-      transform: none;
-      filter: none;
-    }
   }
 }
 
 /* ==========================================================================
-   8. Unlayered runtime overrides
+   7. Unlayered runtime overrides
    Placed outside @layer so they naturally beat @layer utilities without !important.
    ========================================================================== */
+
+html:has(dialog[open]) {
+  overflow: hidden;
+}
 
 html.lenis {
   overflow-y: auto;

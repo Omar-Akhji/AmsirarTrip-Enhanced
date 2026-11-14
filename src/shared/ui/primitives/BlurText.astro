@@ -28,26 +28,28 @@ const {
 } = Astro.props;
 
 const tokens: string[] = animateBy === "letters" ? [...text] : text.split(" ");
+const initialY = direction === "top" ? -distance : distance;
+const rootStyle = [
+  styleProp,
+  `--blur-radius:${blur}px;--blur-y:${initialY}px;--blur-duration:${stepDuration}s`,
+]
+  .filter(Boolean)
+  .join(";");
 ---
 
 <Tag
   class:list={["blur-text-root", className]}
-  style={styleProp}
-  data-animate-by={animateBy}
-  data-blur={blur}
-  data-blur-text
-  data-delay={delay}
-  data-direction={direction}
-  data-distance={distance}
-  data-stagger={stagger}
-  data-step-duration={stepDuration}
+  style={rootStyle}
 >
   <span
     aria-hidden="true"
     class="blur-text-tokens inline"
   >
     {tokens.map((token: string, idx: number) => (
-      <span class="blur-token inline-block will-change-[transform,filter,opacity]">
+      <span
+        class="blur-token inline-block"
+        style={`--token-delay:${delay + Math.round(idx * stagger * 1000)}ms`}
+      >
         {token === " " ? "\u{A0}" : token}
         {animateBy === "words" && idx < tokens.length - 1 ? "\u{A0}" : ""}
       </span>

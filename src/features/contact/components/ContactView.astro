@@ -60,7 +60,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
             class:list={[
               "flex size-full",
               { "md:col-span-2 lg:col-span-1": index === 2 },
-              DELAY_CLASSES[index] || "delay-0",
+              DELAY_CLASSES[index] || "animate-delay-0",
             ]}
             data-animate="fade-up"
           >
@@ -184,12 +184,41 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
               {t("contact.map.placeholderDesc")}
             </p>
             <div class="pt-2">
-              <span class="inline-flex min-h-11 items-center gap-2 rounded-full border border-orange-500/50 bg-linear-to-br from-amber-orange to-orange px-8 py-3 font-mono text-xs font-bold uppercase tracking-wider text-white shadow-md shadow-orange/20 transition-[filter,box-shadow,transform] duration-160 ease-out pointer-fine:hover:brightness-105 pointer-fine:hover:shadow-lg pointer-fine:hover:shadow-orange/30 active:scale-[0.98] motion-reduce:transform-none">
-                <span>{t("contact.map.loadBtn")}</span>
-                <AltArrowRightIcon
-                  aria-hidden="true"
-                  class="size-4"
-                />
+              <span class="group/btn inline-flex min-h-12 cursor-pointer items-center rounded-full border border-stone-200/80 bg-white py-1.5 ps-5 pe-1.5 font-mono text-xs font-semibold tracking-wider text-dark-surface uppercase shadow-lg shadow-black/25 transition-all duration-200 group-hover/summary:border-stone-300 group-hover/summary:bg-white group-hover/summary:shadow-xl group-hover/btn:border-stone-300 group-hover/btn:bg-white group-hover/btn:shadow-xl active:scale-[0.98]">
+                <span class="flex-1 text-center truncate px-3">{t("contact.map.loadBtn")}</span>
+                <span class="relative flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-full bg-linear-to-br from-amber-orange to-orange text-white shadow-xs shadow-orange/40 transition-transform duration-300 ease-out group-hover/summary:scale-105 group-hover/btn:scale-105 group-active/summary:scale-95 group-active/btn:scale-95">
+                  <div class="relative flex size-full items-center justify-center">
+                    <!-- Default state: Solar Arrow Right-Up Broken -->
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="absolute size-4.5 transition-all duration-300 ease-out group-hover/summary:translate-x-3 group-hover/summary:-translate-y-3 group-hover/summary:opacity-0 group-hover/btn:translate-x-3 group-hover/btn:-translate-y-3 group-hover/btn:opacity-0 rtl:-scale-x-100 rtl:group-hover/summary:-translate-x-3 rtl:group-hover/btn:-translate-x-3"
+                      aria-hidden="true"
+                    >
+                      <path d="M18 15V6H9M18 6L11.5 12.5M6 18L8.5 15.5" />
+                    </svg>
+
+                    <!-- Hover state: Solar Arrow Right Broken -->
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="absolute size-4.5 -translate-x-3 translate-y-2 opacity-0 transition-all duration-300 ease-out group-hover/summary:translate-x-0 group-hover/summary:translate-y-0 group-hover/summary:opacity-100 group-hover/btn:translate-x-0 group-hover/btn:translate-y-0 group-hover/btn:opacity-100 rtl:translate-x-3 rtl:-scale-x-100 rtl:group-hover/summary:translate-x-0 rtl:group-hover/btn:translate-x-0"
+                      aria-hidden="true"
+                    >
+                      <path d="M14 18L20 12L14 6M20 12H9.5M4 12H6.5" />
+                    </svg>
+                  </div>
+                </span>
               </span>
             </div>
           </div>

@@ -58,10 +58,11 @@ const NAV_ITEMS: readonly NavDockItem[] = [
         aria-current={active ? "page" : undefined}
         aria-label={label}
         class:list={[
-          "group/link relative z-10 inline-flex min-h-11 h-11 items-center justify-center whitespace-nowrap shrink-0 rounded-full px-3 py-2 text-xs font-semibold select-none active:scale-95 transition-transform duration-150",
-          active
-            ? "text-white"
-            : "text-dark-grey hover:text-dark dark:text-stone-300 dark:hover:text-white",
+          "group/link relative z-10 inline-flex h-11 min-h-11 shrink-0 items-center justify-center rounded-full px-3 py-2 text-xs font-semibold whitespace-nowrap transition-transform duration-150 select-none active:scale-95",
+          {
+            "text-white": active,
+            "text-dark-grey hover:text-dark dark:text-stone-300 dark:hover:text-white": !active,
+          },
         ]}
         href={localize(item.to)}
         title={label}

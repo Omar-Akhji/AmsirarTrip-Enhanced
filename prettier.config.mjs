@@ -54,7 +54,6 @@ const config = {
   importOrderParserPlugins: ["typescript", "jsx"],
   importOrderTypeScriptVersion: "6.0.0",
   importOrderCaseSensitive: false,
-  importOrderCombineTypeAndValueImports: true,
 
   // ─── 6. Tailwind CSS v4 Integration ───────────────────────────────────────
   tailwindStylesheet: "./src/styles/global.css",

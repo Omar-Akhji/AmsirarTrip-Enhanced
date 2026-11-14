@@ -11,6 +11,8 @@
  * - Astro View Transition lifecycle hooks
  */
 
+const REVEAL_CLEANUP_TIMEOUT_MS = 2500;
+
 let revealObserver: IntersectionObserver | undefined;
 let counterObserver: IntersectionObserver | undefined;
 
@@ -23,20 +25,9 @@ function createRevealObserver(): IntersectionObserver {
         const el = entry.target;
         el.classList.add("is-visible");
 
-        // Compute element's delay + duration to ensure safety cleanup never prematurely cuts off animation
-        const computedStyle = globalThis.getComputedStyle(el);
-        // eslint-disable-next-line unicorn/prefer-number-coercion -- CSS time values contain units like 's' or 'ms' which Number() parses as NaN
-        const delaySec = Number.parseFloat(computedStyle.animationDelay) || 0;
-        // eslint-disable-next-line unicorn/prefer-number-coercion -- CSS time values contain units like 's' or 'ms' which Number() parses as NaN
-        const durSec = Number.parseFloat(computedStyle.animationDuration) || 0.75;
-        const totalMs = Math.round((delaySec + durSec) * 1000) + 400;
-
-        const cleanupTimer = globalThis.setTimeout(
-          () => {
-            el.classList.add("is-done");
-          },
-          Math.max(totalMs, 2500),
-        );
+        const cleanupTimer = globalThis.setTimeout(() => {
+          el.classList.add("is-done");
+        }, REVEAL_CLEANUP_TIMEOUT_MS);
 
         // Clean up will-change after animation completes
         el.addEventListener(
@@ -94,30 +85,6 @@ function animateCounter(el: HTMLElement) {
   requestAnimationFrame(tick);
 }
 
-function convertDelays() {
-  const elements = document.querySelectorAll<HTMLElement>("[data-animate]");
-  for (const el of elements) {
-    if (el.closest("astro-island")) continue;
-
-    const dataDelay = el.dataset["delay"];
-    if (dataDelay) {
-      el.style.animationDelay = `${dataDelay}ms`;
-      continue;
-    }
-
-    const inlineTd = el.style.transitionDelay;
-    if (inlineTd && inlineTd !== "0s") {
-      el.style.animationDelay = inlineTd;
-      continue;
-    }
-
-    const computedTd = globalThis.getComputedStyle(el).transitionDelay;
-    if (computedTd && computedTd !== "0s" && computedTd !== "0ms") {
-      el.style.animationDelay = computedTd;
-    }
-  }
-}
-
 function getReducedMotionPreference(): boolean {
   return (
     typeof window !== "undefined"
@@ -132,8 +99,6 @@ function init() {
 
   // Mark system as active (enables opacity: 0 initial state in CSS)
   document.documentElement.classList.add("scroll-init");
-
-  convertDelays();
 
   if (!reducedMotion) {
     revealObserver = createRevealObserver();

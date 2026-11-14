@@ -105,7 +105,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
       <div class="grid grid-cols-1 gap-6 xs:gap-7 md:grid-cols-2 lg:grid-cols-3 lg:gap-8 2xl:gap-10">
         {excursions.map((excursion, index) => (
           <div
-            class:list={["flex size-full", DELAY_CLASSES[index] || "delay-0"]}
+            class:list={["flex size-full", DELAY_CLASSES[index] || "animate-delay-0"]}
             data-animate="fade-up"
           >
             <TripCard

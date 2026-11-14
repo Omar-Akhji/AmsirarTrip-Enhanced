@@ -47,17 +47,17 @@ const initialDayTitle =
   initialDay ? `${getOrdinalSuffix(initialDay.number).toUpperCase()} DAY` : defaultTitle;
 
 const DAY_DELAYS = [
-  "delay-0",
-  "delay-100",
-  "delay-200",
-  "delay-300",
-  "delay-[400ms]",
-  "delay-500",
-  "delay-[600ms]",
-  "delay-700",
-  "delay-[800ms]",
-  "delay-[900ms]",
-  "delay-1000",
+  "animate-delay-0",
+  "animate-delay-100",
+  "animate-delay-200",
+  "animate-delay-300",
+  "animate-delay-400",
+  "animate-delay-500",
+  "animate-delay-600",
+  "animate-delay-700",
+  "animate-delay-800",
+  "animate-delay-900",
+  "animate-delay-1000",
 ] as const;
 ---
 
@@ -169,7 +169,7 @@ const DAY_DELAYS = [
             class:list={[
               "itinerary-stage-item group/stage relative pl-6 sm:pl-8 transition-all duration-300",
               { "pt-8 sm:pt-10": index > 0 },
-              DAY_DELAYS[index] || "delay-0",
+              DAY_DELAYS[index] || "animate-delay-0",
             ]}
             data-animate="fade-up"
             data-itinerary-stage

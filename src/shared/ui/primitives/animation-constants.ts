@@ -3,14 +3,14 @@
  * stats sections.
  */
 export const DELAY_CLASSES = [
-  "delay-0",
-  "delay-150",
-  "delay-300",
-  "delay-[450ms]",
-  "delay-[600ms]",
-  "delay-[750ms]",
-  "delay-[900ms]",
-  "delay-[1050ms]",
+  "animate-delay-0",
+  "animate-delay-150",
+  "animate-delay-300",
+  "animate-delay-450",
+  "animate-delay-600",
+  "animate-delay-750",
+  "animate-delay-900",
+  "animate-delay-1050",
 ] as const;
 
 export type DelayClass = (typeof DELAY_CLASSES)[number];

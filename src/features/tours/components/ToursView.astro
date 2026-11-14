@@ -135,7 +135,10 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
       >
         {tours.map((tour, index) => (
           <div
-            class:list={["tour-card-item flex size-full", DELAY_CLASSES[index] || "delay-0"]}
+            class:list={[
+              "tour-card-item flex size-full",
+              DELAY_CLASSES[index] || "animate-delay-0",
+            ]}
             data-animate="fade-up"
             data-departure={tour.startLocation}
           >

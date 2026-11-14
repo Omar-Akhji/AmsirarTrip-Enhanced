@@ -6,7 +6,6 @@ import type { FormState } from "@/lib/form-types";
 import { useTranslation } from "@/lib/hooks/use-translation";
 import Recaptcha from "@/shared/ui/widgets/Recaptcha.vue";
 import ContactFormFields from "./ContactFormFields.vue";
-import ContactInfoSidebar from "./ContactInfoSidebar.vue";
 
 interface Props {
   locale?: string;
@@ -386,7 +385,7 @@ onUnmounted(() => {
       <div
         class="flex flex-col justify-between rounded-2xl border border-slate-900 bg-slate-950 p-6 text-white shadow-xl block-full sm:p-8"
       >
-        <ContactInfoSidebar />
+        <slot name="sidebar" />
       </div>
     </aside>
   </div>

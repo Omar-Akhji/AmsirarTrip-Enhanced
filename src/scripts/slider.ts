@@ -1,65 +1,8 @@
 /**
  * Interactive Slider Controller Inspired by Lun Dev Magic 3D Carousel Slider Implements fluid
  * thumbnail expansion, bidirectional animation, touch gestures, keyboard controls, and accessible
- * lifecycle management with Web Animations API BlurText word animation.
+ * lifecycle management.
  */
-
-function animateBlurText(slideItem: HTMLElement | null): void {
-  if (!slideItem) return;
-  const blurContainers = slideItem.querySelectorAll<HTMLElement>("[data-blur-text]");
-  if (blurContainers.length === 0) return;
-
-  if (globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    const allTokens = slideItem.querySelectorAll<HTMLElement>(".blur-token");
-    for (const token of allTokens) {
-      for (const anim of token.getAnimations()) anim.cancel();
-      token.style.opacity = "1";
-      token.style.transform = "";
-      token.style.filter = "";
-    }
-    return;
-  }
-
-  for (const container of blurContainers) {
-    const tokens = container.querySelectorAll<HTMLElement>(".blur-token");
-    if (tokens.length === 0) continue;
-
-    const direction = container.dataset["direction"] ?? "bottom";
-    const delayMs = Number(container.dataset["delay"] ?? 200);
-    const durationMs = Number(container.dataset["stepDuration"] ?? 0.65) * 1000;
-    const blur = Number(container.dataset["blur"] ?? 4);
-    const distance = Number(container.dataset["distance"] ?? 20);
-    const staggerMs = Number(container.dataset["stagger"] ?? 0.02) * 1000;
-
-    const initialY = direction === "top" ? -distance : distance;
-
-    for (const [index, token] of tokens.entries()) {
-      for (const anim of token.getAnimations()) anim.cancel();
-      token.style.willChange = "transform, filter, opacity";
-
-      const anim = token.animate(
-        [
-          { opacity: 0, transform: `translateY(${initialY}px)`, filter: `blur(${blur}px)` },
-          { opacity: 1, transform: "translateY(0px)", filter: "blur(0px)" },
-        ],
-        {
-          duration: durationMs,
-          delay: delayMs + index * staggerMs,
-          easing: "cubic-bezier(0.16, 1, 0.3, 1)",
-          fill: "both",
-        },
-      );
-
-      anim.onfinish = () => {
-        token.style.opacity = "1";
-        token.style.transform = "";
-        token.style.filter = "";
-        token.style.willChange = "";
-        anim.cancel();
-      };
-    }
-  }
-}
 
 function initSlider(): void {
   const rootSlider = document.querySelector<HTMLElement>("#home-hero-slider");
@@ -87,22 +30,9 @@ function initSlider(): void {
   const numberItems = slider.querySelectorAll<HTMLElement>(":scope .slide-numbers .number-item");
   const dotButtons = slider.querySelectorAll<HTMLButtonElement>(".hero-dot-btn");
   const lineFills = slider.querySelectorAll<HTMLElement>(".hero-dot-line-fill");
-  const paginationNav = slider.querySelector<HTMLElement>("#pagination");
   const totalSlides = sliderList.querySelectorAll<HTMLElement>(":scope > .item").length || 3;
 
   let pendingTargetIndex: number | null = null;
-
-  function positionPagination(): void {
-    if (!paginationNav) return;
-    const activeDesc = sliderList.querySelector<HTMLElement>(
-      ":scope > .item:first-child .description",
-    );
-    if (!activeDesc) return;
-    const descRect = activeDesc.getBoundingClientRect();
-    const sliderRect = slider.getBoundingClientRect();
-    const relativeTop = Math.round(descRect.bottom - sliderRect.top + 16);
-    paginationNav.style.top = `${relativeTop}px`;
-  }
 
   function updatePagination(forcedIndex?: number): void {
     let activeIndex: number;
@@ -136,8 +66,6 @@ function initSlider(): void {
         lineFill.style.height = "0%";
       }
     }
-
-    positionPagination();
   }
 
   // Re-order initial thumbnail by 1 step so that thumbnail list displays the upcoming slide first
@@ -185,7 +113,6 @@ function initSlider(): void {
 
       const nextIndex = Number(incomingSlide.dataset["index"] ?? 0);
       updatePagination(nextIndex);
-      animateBlurText(incomingSlide);
 
       let cleanedUp = false;
       const finalizeNext = () => {
@@ -201,7 +128,6 @@ function initSlider(): void {
         slider.classList.remove("is-next");
 
         isAnimating = false;
-        positionPagination();
 
         if (pendingTargetIndex !== null) {
           const nextTarget = pendingTargetIndex;
@@ -233,7 +159,6 @@ function initSlider(): void {
 
       const prevIndex = Number(lastSlide.dataset["index"] ?? 0);
       updatePagination(prevIndex);
-      animateBlurText(lastSlide);
 
       let cleanedUp = false;
       const finalizePrev = () => {
@@ -248,7 +173,6 @@ function initSlider(): void {
         slider.classList.remove("is-prev");
 
         isAnimating = false;
-        positionPagination();
 
         if (pendingTargetIndex !== null) {
           const nextTarget = pendingTargetIndex;
@@ -448,7 +372,6 @@ function initSlider(): void {
   slider.addEventListener("mouseleave", startAutoplay);
   slider.addEventListener("focusin", stopAutoplay);
   slider.addEventListener("focusout", startAutoplay);
-  globalThis.addEventListener("resize", positionPagination);
 
   startAutoplay();
 
@@ -456,7 +379,6 @@ function initSlider(): void {
   const cleanup = () => {
     delete slider.dataset["sliderInitialized"];
     stopAutoplay();
-    globalThis.removeEventListener("resize", positionPagination);
     nextBtn?.removeEventListener("click", onNextClick);
     prevBtn?.removeEventListener("click", onPrevClick);
     for (const dot of dotButtons) {

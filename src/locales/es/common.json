@@ -57,9 +57,7 @@
       "care": "Atención al cliente",
       "satisfaction": "Satisfacción del cliente"
     },
-    "featured": {
-      "title": "Tours y expediciones destacados por el desierto"
-    }
+    "featured": { "title": "Tours y expediciones destacados por el desierto" }
   },
   "tours": {
     "meta": {
@@ -73,9 +71,7 @@
     "activitiesLabel": "Actividades",
     "arrivalLabel": "Hora de llegada",
     "featured": "Destacado",
-    "category": {
-      "departures": "Salidas"
-    },
+    "category": { "departures": "Salidas" },
     "cities": {
       "marrakech": "Marrakech",
       "casablanca": "Casablanca",
@@ -295,9 +291,7 @@
       "support": "Soporte durante el viaje",
       "supportDesc": "Salidas flexibles y planificación tipo conserjería."
     },
-    "card": {
-      "category": "Día completo"
-    },
+    "card": { "category": "Día completo" },
     "exploreLink": "Ver detalles",
     "sidebar": {
       "alt": "Vehículo de traslado al aeropuerto de Amsirar",
@@ -458,11 +452,7 @@
       "infoBadge": "¿Necesitas detalles?",
       "infoTitle": "Planifica experiencias artesanales",
       "infoCopy": "Nuestro equipo de Marrakech responde cada mensaje personalmente y puede ayudar con itinerarios personalizados, campamentos en el desierto o traslados de última hora.",
-      "info": {
-        "address": "Visitar",
-        "phone": "Llamar",
-        "email": "Correo"
-      },
+      "info": { "address": "Visitar", "phone": "Llamar", "email": "Correo" },
       "infoFooter": "Disponible todos los días de 09:00 a 21:00 GMT+1",
       "details": "Detalles de contacto",
       "placeholders": {
@@ -486,13 +476,8 @@
       "address": "Dirección",
       "message": "Mensaje"
     },
-    "location": {
-      "smTitle": "Encuéntranos",
-      "lgTitle": "Nuestra Ubicación"
-    },
-    "methods": {
-      "title": "Canales de comunicación directa"
-    },
+    "location": { "smTitle": "Encuéntranos", "lgTitle": "Nuestra Ubicación" },
+    "methods": { "title": "Canales de comunicación directa" },
     "map": {
       "placeholderTitle": "Mostrar mapa interactivo",
       "placeholderDesc": "Explore la ubicación exacta de nuestra oficina en Marrakech y lugares de interés cercanos.",
@@ -1355,14 +1340,8 @@
         "accommodation": "Riad/Hotel en Chefchaouen",
         "meals": "Desayuno incluido"
       },
-      "day2": {
-        "accommodation": "Riad en Fez",
-        "meals": "Desayuno incluido"
-      },
-      "day3": {
-        "accommodation": "Riad en Fez",
-        "meals": "Desayuno incluido"
-      },
+      "day2": { "accommodation": "Riad en Fez", "meals": "Desayuno incluido" },
+      "day3": { "accommodation": "Riad en Fez", "meals": "Desayuno incluido" },
       "day4": {
         "accommodation": "Hotel en Midelt",
         "meals": "Desayuno incluido"
@@ -1371,9 +1350,7 @@
         "accommodation": "Campamento del Desierto en Merzouga",
         "meals": "Desayuno & Cena incluidos"
       },
-      "day6": {
-        "meals": "Desayuno incluido"
-      }
+      "day6": { "meals": "Desayuno incluido" }
     },
     "tour3": {
       "day1": {
@@ -1407,33 +1384,21 @@
         "accommodation": "Riad/Hotel en Fez",
         "meals": "Desayuno incluido"
       },
-      "day5": {
-        "meals": "Desayuno incluido"
-      }
+      "day5": { "meals": "Desayuno incluido" }
     },
     "tour5": {
-      "day1": {
-        "accommodation": "Riad/Hotel en Marrakech"
-      },
+      "day1": { "accommodation": "Riad/Hotel en Marrakech" },
       "day2": {
         "accommodation": "Riad/Hotel en Marrakech",
         "meals": "Desayuno incluido"
       },
-      "day3": {
-        "accommodation": "Hotel/Riad en el Valle de Dades"
-      },
+      "day3": { "accommodation": "Hotel/Riad en el Valle de Dades" },
       "day4": {
         "accommodation": "Campamento del Desierto (estándar o lujo)",
         "meals": "Desayuno y cena incluidos"
       },
-      "day5": {
-        "accommodation": "Riad en Fez",
-        "meals": "Desayuno incluido"
-      },
-      "day6": {
-        "accommodation": "Riad en Fez",
-        "meals": "Desayuno incluido"
-      },
+      "day5": { "accommodation": "Riad en Fez", "meals": "Desayuno incluido" },
+      "day6": { "accommodation": "Riad en Fez", "meals": "Desayuno incluido" },
       "day7": {
         "accommodation": "Riad/Hotel en Chefchaouen",
         "meals": "Desayuno incluido"
@@ -1446,9 +1411,7 @@
         "accommodation": "Hotel en Casablanca",
         "meals": "Desayuno incluido"
       },
-      "day10": {
-        "meals": "Desayuno incluido"
-      }
+      "day10": { "meals": "Desayuno incluido" }
     },
     "tour6": {
       "day1": {
@@ -1470,9 +1433,7 @@
       }
     },
     "sending": "Enviando...",
-    "errors": {
-      "captcha": "Se requiere verificación Recaptcha"
-    },
+    "errors": { "captcha": "Se requiere verificación Recaptcha" },
     "personalDetails": "Datos de los pasajeros",
     "tripDetails": "Detalles del viaje",
     "placeholders": {

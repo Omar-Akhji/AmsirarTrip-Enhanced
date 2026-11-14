@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, nextTick, onMounted, onUnmounted, ref, watch } from "vue";
+import { computed, nextTick, ref, useId, useTemplateRef, watch } from "vue";
 import { ALL_COUNTRIES, DEFAULT_COUNTRY, type CountryCallingCode } from "@/data/countries";
 
 interface Props {
@@ -23,8 +23,9 @@ const props = withDefaults(defineProps<Props>(), {
   toolparamdescription: "International phone or WhatsApp number including country code",
 });
 
-const containerRef = ref<HTMLElement | null>(null);
-const searchInputRef = ref<HTMLInputElement | null>(null);
+const dropdownId = `phone-dropdown-${useId().replaceAll(":", "")}`;
+const dropdownRef = useTemplateRef<HTMLElement>("dropdownRef");
+const searchInputRef = useTemplateRef<HTMLInputElement>("searchInputRef");
 
 const isOpen = ref(false);
 const searchQuery = ref("");
@@ -60,9 +61,10 @@ const filteredCountries = computed(() => {
   );
 });
 
-function toggleDropdown() {
-  isOpen.value = !isOpen.value;
-  if (!isOpen.value) return;
+function handleToggle(event: Event) {
+  const open = (event as ToggleEvent).newState === "open";
+  isOpen.value = open;
+  if (!open) return;
 
   searchQuery.value = "";
   void nextTick(() => {
@@ -72,8 +74,8 @@ function toggleDropdown() {
 
 function selectCountry(country: CountryCallingCode) {
   selectedCountry.value = country;
-  isOpen.value = false;
   searchQuery.value = "";
+  dropdownRef.value?.hidePopover();
 }
 
 // Detect country code if user pastes a number with international prefix (e.g. +33... or +1...)
@@ -92,28 +94,6 @@ function handleInput(event: Event) {
 
   nationalNumber.value = raw;
 }
-
-function handleClickOutside(event: MouseEvent) {
-  if (containerRef.value && !containerRef.value.contains(event.target as Node)) {
-    isOpen.value = false;
-  }
-}
-
-function handleKeydown(event: KeyboardEvent) {
-  if (event.key === "Escape" && isOpen.value) {
-    isOpen.value = false;
-  }
-}
-
-onMounted(() => {
-  document.addEventListener("click", handleClickOutside);
-  document.addEventListener("keydown", handleKeydown);
-});
-
-onUnmounted(() => {
-  document.removeEventListener("click", handleClickOutside);
-  document.removeEventListener("keydown", handleKeydown);
-});
 
 // Watch initial value
 watch(
@@ -135,22 +115,22 @@ watch(
 </script>
 
 <template>
-  <div
-    ref="containerRef"
-    class="relative w-full"
-  >
+  <div class="relative w-full">
     <div
       class="group flex h-12 w-full items-center rounded-xl border border-stone-200/90 bg-stone-50/50 transition-colors focus-within:border-orange-500 focus-within:bg-white focus-within:ring-2 focus-within:ring-orange-500/20 dark:border-white/10 dark:bg-white/5 dark:focus-within:border-orange-500 dark:focus-within:bg-white/10"
       :class="{ 'border-red-400 bg-red-50/20': ariaInvalid === 'true' || ariaInvalid === true }"
+      :style="{ anchorName: `--phone-anchor-${dropdownId}` }"
     >
       <!-- Country Code Trigger Button (Clean Dial Code only, no MA/FR ISO letters) -->
       <button
         type="button"
+        :popovertarget="dropdownId"
+        popovertargetaction="toggle"
         class="flex h-full shrink-0 cursor-pointer items-center gap-1.5 rounded-s-xl border-e border-stone-200/80 px-3.5 transition-colors hover:bg-stone-100/70 focus:bg-stone-100 focus:outline-hidden dark:border-white/10 dark:hover:bg-white/10 dark:focus:bg-white/10"
         :aria-expanded="isOpen"
+        :aria-controls="dropdownId"
         aria-haspopup="listbox"
         :aria-label="`Selected country dial code: ${selectedCountry.name} (${selectedCountry.dialCode}). Click to change.`"
-        @click="toggleDropdown"
       >
         <span class="font-sans text-xs font-semibold text-stone-800 dark:text-mist-100">
           {{ selectedCountry.dialCode }}
@@ -232,80 +212,86 @@ watch(
       />
     </div>
 
-    <!-- Custom Designed Dropdown Menu (full width matching input field & rounded-xl) -->
+    <!-- Custom Designed Dropdown Menu (Top Layer Popover + CSS Anchor Positioning) -->
     <div
-      v-if="isOpen"
-      class="absolute inset-x-0 top-full z-50 mbs-1.5 w-full overflow-hidden rounded-xl border border-stone-200/90 bg-white shadow-xl shadow-stone-900/10 dark:border-white/10 dark:bg-surface-card dark:shadow-[0_16px_40px_rgba(0,0,0,0.65)]"
+      :id="dropdownId"
+      ref="dropdownRef"
+      popover="auto"
       role="listbox"
       :aria-label="`Select country phone code. Currently selected: ${selectedCountry.name}`"
+      class="fixed inset-0 z-50 m-auto w-[min(24rem,calc(100vw-2rem))] overflow-hidden rounded-xl border border-stone-200/90 bg-white p-0 text-stone-900 shadow-xl shadow-stone-900/10 backdrop:bg-black/20 supports-[top:anchor(bottom)]:inset-auto supports-[top:anchor(bottom)]:top-[calc(anchor(bottom)+6px)] supports-[top:anchor(bottom)]:left-[anchor(left)] supports-[top:anchor(bottom)]:m-0 supports-[top:anchor(bottom)]:w-[anchor-size(width)] supports-[top:anchor(bottom)]:[position-try-fallbacks:flip-block] supports-[top:anchor(bottom)]:backdrop:bg-transparent dark:border-white/10 dark:bg-surface-card dark:text-mist-100 dark:shadow-[0_16px_40px_rgba(0,0,0,0.65)]"
+      :style="{ positionAnchor: `--phone-anchor-${dropdownId}` }"
+      @toggle="handleToggle"
     >
-      <!-- Search Input Header -->
-      <div
-        class="relative border-b border-stone-100 bg-stone-50/70 p-2 dark:border-white/10 dark:bg-white/5"
-      >
-        <svg
-          class="pointer-events-none absolute inset-s-4.5 top-1/2 size-3.5 -translate-y-1/2 text-stone-400 dark:text-mist-400"
-          viewBox="0 0 20 20"
-          fill="currentColor"
-          aria-hidden="true"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M9 3.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11ZM2 9a7 7 0 1 1 12.452 4.391l3.328 3.329a.75.75 0 1 1-1.06 1.06l-3.329-3.328A7 7 0 0 1 2 9Z"
-            clip-rule="evenodd"
-          />
-        </svg>
-        <input
-          ref="searchInputRef"
-          v-model="searchQuery"
-          type="text"
-          aria-label="Search country or code"
-          placeholder="Search country or code..."
-          class="h-8.5 w-full rounded-lg border border-stone-200/80 bg-white ps-8 pe-3 font-sans text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-400 focus:ring-1 focus:ring-stone-400/20 focus:outline-hidden dark:border-white/10 dark:bg-surface-base dark:text-mist-100 dark:placeholder:text-mist-500"
-          @keydown.stop
-        />
-      </div>
-
-      <!-- Scrollable Country List with Symmetrically Floating Scrollbar -->
-      <div
-        class="flex flex-col px-(--scrollbar-space) py-1 [--scrollbar-space:8px] [--scrollbar-theme:hsl(0deg_0%_75%)]"
-      >
+      <div v-if="isOpen">
+        <!-- Search Input Header -->
         <div
-          class="max-h-60 divide-y divide-stone-100/60 overflow-x-hidden overflow-y-auto overscroll-y-contain pe-(--scrollbar-space) supports-[-moz-appearance:none]:scrollbar-thin supports-[-moz-appearance:none]:[scrollbar-color:color-mix(in_sRGB,var(--scrollbar-theme,hsl(0deg_0%_75%)),transparent_28%)_transparent] dark:divide-white/5 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-button]:hidden [&::-webkit-scrollbar-button]:size-0 [&::-webkit-scrollbar-thumb]:rounded-[1000px] [&::-webkit-scrollbar-thumb]:bg-[color-mix(in_sRGB,var(--scrollbar-theme,hsl(0deg_0%_75%)),transparent_28%)] [&::-webkit-scrollbar-thumb:hover]:bg-[color-mix(in_sRGB,var(--scrollbar-theme,hsl(0deg_0%_75%)),transparent_12%)] [&::-webkit-scrollbar-track]:my-2.5 [&::-webkit-scrollbar-track]:rounded-[1000px] [&::-webkit-scrollbar-track]:bg-[color-mix(in_sRGB,var(--scrollbar-theme,hsl(0deg_0%_75%)),transparent_82%)] [&::-webkit-scrollbar-track]:bg-clip-padding"
-          tabindex="-1"
-          data-lenis-prevent
+          class="relative border-b border-stone-100 bg-stone-50/70 p-2 dark:border-white/10 dark:bg-white/5"
         >
-          <button
-            v-for="country in filteredCountries"
-            :key="country.code"
-            type="button"
-            role="option"
-            :aria-selected="country.code === selectedCountry.code"
-            class="flex w-full cursor-pointer items-center justify-between gap-2 rounded-none px-3 py-2 text-start transition-colors hover:bg-stone-100 focus:bg-stone-100 focus:outline-hidden active:bg-stone-200/70 dark:hover:bg-white/5 dark:focus:bg-white/5"
-            :class="{
-              'bg-stone-100 font-medium text-stone-900 dark:bg-white/10 dark:text-mist-100':
-                country.code === selectedCountry.code,
-            }"
-            @click="selectCountry(country)"
+          <svg
+            class="pointer-events-none absolute inset-s-4.5 top-1/2 size-3.5 -translate-y-1/2 text-stone-400 dark:text-mist-400"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            aria-hidden="true"
           >
-            <div class="min-w-0 flex-1">
-              <span class="block truncate font-sans text-xs text-stone-800 dark:text-mist-200">
-                {{ country.name }}
-              </span>
-            </div>
-            <div class="flex shrink-0 items-center">
-              <span class="font-sans text-xs font-medium text-stone-600 dark:text-mist-300">
-                {{ country.dialCode }}
-              </span>
-            </div>
-          </button>
+            <path
+              fill-rule="evenodd"
+              d="M9 3.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11ZM2 9a7 7 0 1 1 12.452 4.391l3.328 3.329a.75.75 0 1 1-1.06 1.06l-3.329-3.328A7 7 0 0 1 2 9Z"
+              clip-rule="evenodd"
+            />
+          </svg>
+          <input
+            ref="searchInputRef"
+            v-model="searchQuery"
+            type="text"
+            aria-label="Search country or code"
+            placeholder="Search country or code..."
+            class="h-8.5 w-full rounded-lg border border-stone-200/80 bg-white ps-8 pe-3 font-sans text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-400 focus:ring-1 focus:ring-stone-400/20 focus:outline-hidden dark:border-white/10 dark:bg-surface-base dark:text-mist-100 dark:placeholder:text-mist-500"
+            @keydown.stop
+          />
+        </div>
 
-          <!-- Empty search state -->
+        <!-- Scrollable Country List with Symmetrically Floating Scrollbar -->
+        <div
+          class="flex flex-col px-(--scrollbar-space) py-1 [--scrollbar-space:8px] [--scrollbar-theme:hsl(0deg_0%_75%)]"
+        >
           <div
-            v-if="filteredCountries.length === 0"
-            class="px-3 py-6 text-center font-sans text-xs text-stone-600 dark:text-mist-300"
+            class="max-h-60 divide-y divide-stone-100/60 overflow-x-hidden overflow-y-auto overscroll-y-contain pe-(--scrollbar-space) supports-[-moz-appearance:none]:scrollbar-thin supports-[-moz-appearance:none]:[scrollbar-color:color-mix(in_sRGB,var(--scrollbar-theme,hsl(0deg_0%_75%)),transparent_28%)_transparent] dark:divide-white/5 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-button]:hidden [&::-webkit-scrollbar-button]:size-0 [&::-webkit-scrollbar-thumb]:rounded-[1000px] [&::-webkit-scrollbar-thumb]:bg-[color-mix(in_sRGB,var(--scrollbar-theme,hsl(0deg_0%_75%)),transparent_28%)] [&::-webkit-scrollbar-thumb:hover]:bg-[color-mix(in_sRGB,var(--scrollbar-theme,hsl(0deg_0%_75%)),transparent_12%)] [&::-webkit-scrollbar-track]:my-2.5 [&::-webkit-scrollbar-track]:rounded-[1000px] [&::-webkit-scrollbar-track]:bg-[color-mix(in_sRGB,var(--scrollbar-theme,hsl(0deg_0%_75%)),transparent_82%)] [&::-webkit-scrollbar-track]:bg-clip-padding"
+            tabindex="-1"
+            data-lenis-prevent
           >
-            No countries found
+            <button
+              v-for="country in filteredCountries"
+              :key="country.code"
+              type="button"
+              role="option"
+              :aria-selected="country.code === selectedCountry.code"
+              class="flex w-full cursor-pointer items-center justify-between gap-2 rounded-none px-3 py-2 text-start transition-colors hover:bg-stone-100 focus:bg-stone-100 focus:outline-hidden active:bg-stone-200/70 dark:hover:bg-white/5 dark:focus:bg-white/5"
+              :class="{
+                'bg-stone-100 font-medium text-stone-900 dark:bg-white/10 dark:text-mist-100':
+                  country.code === selectedCountry.code,
+              }"
+              @click="selectCountry(country)"
+            >
+              <div class="min-w-0 flex-1">
+                <span class="block truncate font-sans text-xs text-stone-800 dark:text-mist-200">
+                  {{ country.name }}
+                </span>
+              </div>
+              <div class="flex shrink-0 items-center">
+                <span class="font-sans text-xs font-medium text-stone-600 dark:text-mist-300">
+                  {{ country.dialCode }}
+                </span>
+              </div>
+            </button>
+
+            <!-- Empty search state -->
+            <div
+              v-if="filteredCountries.length === 0"
+              class="px-3 py-6 text-center font-sans text-xs text-stone-600 dark:text-mist-300"
+            >
+              No countries found
+            </div>
           </div>
         </div>
       </div>

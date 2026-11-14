@@ -46,7 +46,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
   <!-- HERITAGE & MISSION -->
   <section
     aria-labelledby="our-story-heading"
-    class="relative isolate overflow-hidden py-12 sm:py-16 lg:py-24 text-stone-900 dark:text-mist-100"
+    class="relative isolate overflow-clip py-12 sm:py-16 lg:py-24 text-stone-900 dark:text-mist-100"
     id="about"
   >
     <div class="mx-auto px-4 sm:px-6 lg:px-8 max-inline-7xl 2xl:max-inline-360 3xl:max-inline-420">
@@ -72,7 +72,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
         <!-- Left Column: 3 Images Collage (order-1 on Mobile & Tablet, Left on Desktop) -->
         <div class="order-1 lg:order-1">
           <div
-            class="delay-200 flex flex-col gap-gap-tight"
+            class="animate-delay-200 flex flex-col gap-gap-tight"
             data-animate="zoom-in"
           >
             <!-- Top Landscape Image -->
@@ -185,7 +185,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
   <!-- EXPEDITION METRICS -->
   <section
     aria-labelledby="facts-heading"
-    class="relative isolate overflow-hidden border-t border-stone-200/90 bg-stone-50/60 py-12 sm:py-16 lg:py-24 text-stone-900 dark:border-white/10 dark:bg-surface-base dark:text-mist-100"
+    class="relative isolate overflow-clip border-t border-stone-200/90 bg-stone-50/60 py-12 sm:py-16 lg:py-24 text-stone-900 dark:border-white/10 dark:bg-surface-base dark:text-mist-100"
     id="facts"
   >
     <div class="mx-auto px-4 sm:px-6 lg:px-8 max-inline-7xl 2xl:max-inline-360 3xl:max-inline-420">
@@ -210,7 +210,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
       <div class="mbs-16 grid gap-6 xs:grid-cols-2 sm:gap-8 lg:grid-cols-4 2xl:gap-10">
         {factStats.map((fact, index) => (
           <div
-            class:list={["flex size-full", DELAY_CLASSES[index] || "delay-0"]}
+            class:list={["flex size-full", DELAY_CLASSES[index] || "animate-delay-0"]}
             data-animate="fade-up"
           >
             <article
