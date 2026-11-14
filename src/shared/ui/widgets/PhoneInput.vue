@@ -229,15 +229,22 @@ watch(
           class="relative border-b border-stone-100 bg-stone-50/70 p-2 dark:border-white/10 dark:bg-white/5"
         >
           <svg
-            class="pointer-events-none absolute inset-s-4.5 top-1/2 size-3.5 -translate-y-1/2 text-stone-400 dark:text-mist-400"
-            viewBox="0 0 20 20"
-            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+            class="solar solar-minimalistic-magnifier-broken pointer-events-none absolute inset-s-4.5 top-1/2 size-3.5 -translate-y-1/2 text-stone-400 dark:text-mist-400"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke-width="1.5"
             aria-hidden="true"
           >
             <path
-              fill-rule="evenodd"
-              d="M9 3.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11ZM2 9a7 7 0 1 1 12.452 4.391l3.328 3.329a.75.75 0 1 1-1.06 1.06l-3.329-3.328A7 7 0 0 1 2 9Z"
-              clip-rule="evenodd"
+              d="M20 20L22 22"
+              stroke-linecap="round"
+              stroke="currentColor"
+            />
+            <path
+              d="M6.75 3.27093C8.14732 2.46262 9.76964 2 11.5 2C16.7467 2 21 6.25329 21 11.5C21 16.7467 16.7467 21 11.5 21C6.25329 21 2 16.7467 2 11.5C2 9.76964 2.46262 8.14732 3.27093 6.75"
+              stroke-linecap="round"
+              stroke="currentColor"
             />
           </svg>
           <input

@@ -4,9 +4,9 @@ import { actions } from "astro:actions";
 import { hasCaptcha } from "@/lib/client-env";
 import type { FormState } from "@/lib/form-types";
 import { useTranslation } from "@/lib/hooks/use-translation";
+import { getFormErrorMessage, useSubmitFeedback } from "@/lib/hooks/use-submit-feedback";
 import Recaptcha from "@/shared/ui/widgets/Recaptcha.vue";
 import BookingFormFields from "./BookingFormFields.vue";
-import FormStatusMessages from "./FormStatusMessages.vue";
 
 interface Props {
   locale?: string;
@@ -49,9 +49,9 @@ const formKey = ref(0);
 const calendarOpen = ref(false);
 const reservationDate = ref<Date | null>(null);
 const captchaToken = ref("");
-const buttonText = ref("booking.checkAvailability");
 const state = ref<FormState | null>(null);
 const isSubmitting = ref(false);
+const { feedback, showFeedback, clearFeedback } = useSubmitFeedback();
 
 const handleVerify = (token: string) => {
   captchaToken.value = token;
@@ -68,24 +68,39 @@ const selectedTour = computed(() => {
 const computedTourDuration = computed(() => tourDuration);
 
 const handleSubmit = async (event: Event) => {
+  if (isSubmitting.value) return;
+
   const form = event.target as HTMLFormElement;
   const formData = new FormData(form);
-  const fullName = formData.get("fullName") as string;
-  const email = formData.get("email") as string;
+  const fullName = formData.get("fullName");
+  const email = formData.get("email");
 
-  if (!fullName.trim() || !email.trim() || isSubmitting.value) return;
+  if (
+    typeof fullName !== "string"
+    || typeof email !== "string"
+    || !fullName.trim()
+    || !email.trim()
+  ) {
+    const message = t("contact.form.errors.validation");
+    state.value = { success: false, message, errors: {} };
+    showFeedback("error", message, () => {
+      state.value = null;
+    });
+    return;
+  }
 
   const recaptchaToken = recaptchaRef.value?.getValue() ?? "";
   if (!recaptchaToken) {
-    state.value = {
-      success: false,
-      message: t("booking.errors.captcha"),
-      errors: { recaptchaToken: t("booking.errors.captcha") },
-    };
+    const message = t("booking.errors.captcha");
+    state.value = { success: false, message, errors: { recaptchaToken: message } };
+    showFeedback("error", message, () => {
+      state.value = null;
+    });
     return;
   }
   formData.set("recaptchaToken", recaptchaToken);
 
+  clearFeedback();
   isSubmitting.value = true;
   state.value = null;
 
@@ -93,25 +108,24 @@ const handleSubmit = async (event: Event) => {
     const { data, error } = await actions.booking(formData);
 
     if (error) {
-      state.value = {
-        success: false,
-        message: error.message || "Booking submission failed",
-        errors: {},
-      };
+      const message = error.message || "Booking submission failed";
+      state.value = { success: false, message, errors: {} };
+      showFeedback("error", message, () => {
+        state.value = null;
+      });
       recaptchaRef.value?.reset();
       captchaToken.value = "";
     } else {
       state.value = data;
       if (data.success) {
-        buttonText.value = "Your booking request has been sent";
         reservationDate.value = null;
         captchaToken.value = "";
-
-        setTimeout(() => {
+        showFeedback("success", t("contact.form.success"), () => {
           formKey.value += 1;
-          buttonText.value = "booking.checkAvailability";
-        }, 4000);
+          state.value = null;
+        });
       } else {
+        showFeedback("error", getFormErrorMessage(data, "Booking submission failed"));
         recaptchaRef.value?.reset();
         captchaToken.value = "";
         setTimeout(() => {
@@ -123,6 +137,9 @@ const handleSubmit = async (event: Event) => {
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : "Booking submission failed";
     state.value = { success: false, message, errors: {} };
+    showFeedback("error", message, () => {
+      state.value = null;
+    });
     recaptchaRef.value?.reset();
     captchaToken.value = "";
   } finally {
@@ -174,70 +191,6 @@ const handleSubmit = async (event: Event) => {
               tooldescription="Submits a booking reservation request for a specific tour or excursion"
               @submit.prevent="handleSubmit"
             >
-              <FormStatusMessages
-                v-bind="{
-                  ...(state?.errors?.['submit'] ? { submitError: state.errors['submit'] } : {}),
-                  ...(state?.success !== undefined ? { success: state.success } : {}),
-                  ...(state?.message ? { successMessage: state.message } : {}),
-                }"
-              />
-
-              <div
-                v-if="
-                  state?.errors
-                  && Object.entries(state.errors).some(
-                    ([k]) => k !== 'submit' && k !== 'recaptchaToken',
-                  )
-                "
-                class="rounded-2xl border border-orange-200/80 bg-orange-50/60 p-4"
-                role="alert"
-              >
-                <p
-                  class="mbe-2 font-mono text-xs font-bold tracking-wider text-orange-900 uppercase"
-                >
-                  {{ t("contact.form.errors.title") }}
-                </p>
-                <ul class="flex flex-col gap-1 font-mono text-xs text-orange-800">
-                  <li
-                    v-for="[field, error] in Object.entries(state.errors).filter(
-                      ([k]) => k !== 'submit' && k !== 'recaptchaToken',
-                    )"
-                    :key="field"
-                    class="flex items-start gap-2"
-                  >
-                    <svg
-                      class="mbs-0.5 size-4 shrink-0 text-orange-600"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      aria-hidden="true"
-                    >
-                      <circle
-                        cx="12"
-                        cy="12"
-                        r="10"
-                      />
-                      <line
-                        x1="12"
-                        x2="12"
-                        y1="8"
-                        y2="12"
-                      />
-                      <line
-                        x1="12"
-                        x2="12.01"
-                        y1="16"
-                        y2="16"
-                      />
-                    </svg>
-                    <span>{{ error }}</span>
-                  </li>
-                </ul>
-              </div>
-
               <!-- Honeypot (hidden from layout, screen readers, and browser autofill) -->
               <div
                 aria-hidden="true"
@@ -292,31 +245,40 @@ const handleSubmit = async (event: Event) => {
                       CAPTCHA not configured
                     </div>
                   </div>
-
-                  <p
-                    v-if="state?.errors?.['recaptchaToken']"
-                    id="recaptchaToken-error"
-                    class="font-mono text-xs text-red-600 dark:text-red-400"
-                  >
-                    {{ state.errors["recaptchaToken"] }}
-                  </p>
                 </div>
 
                 <button
                   type="submit"
-                  class="group inline-flex min-h-12 cursor-pointer items-center justify-between gap-3 rounded-full border border-white/10 bg-slate-950 py-1.5 ps-5 pe-1.5 font-mono text-xs font-semibold tracking-wider text-white uppercase shadow-lg shadow-black/25 transition-colors duration-200 hover:border-white/20 hover:bg-black hover:shadow-xl active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 sm:gap-4 sm:ps-6 sm:pe-2 dark:border-stone-300 dark:bg-white dark:text-dark-surface dark:hover:bg-white"
+                  class="group inline-flex min-h-12 cursor-pointer items-center justify-between gap-3 rounded-full border py-1.5 ps-5 pe-1.5 font-mono text-xs font-semibold tracking-wider uppercase shadow-lg shadow-black/25 transition-colors duration-200 hover:shadow-xl active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 sm:gap-4 sm:ps-6 sm:pe-2"
+                  :class="
+                    feedback?.kind === 'success' ?
+                      'border-emerald-500/40 bg-emerald-950 text-emerald-50 hover:bg-emerald-900 dark:border-emerald-600/40 dark:bg-emerald-50 dark:text-emerald-950 dark:hover:bg-emerald-100'
+                    : feedback?.kind === 'error' ?
+                      'border-red-500/40 bg-red-950 text-red-50 hover:bg-red-900 dark:border-red-600/40 dark:bg-red-50 dark:text-red-950 dark:hover:bg-red-100'
+                    : 'border-white/10 bg-slate-950 text-white hover:border-white/20 hover:bg-black dark:border-stone-300 dark:bg-white dark:text-dark-surface dark:hover:bg-white'
+                  "
                   :disabled="isSubmitting"
                   :aria-busy="isSubmitting"
                 >
-                  <span class="truncate">
+                  <span
+                    aria-live="polite"
+                    :class="feedback ? 'text-start leading-snug whitespace-normal' : 'truncate'"
+                  >
                     {{
                       isSubmitting ? t("booking.sending")
-                      : buttonText === "booking.checkAvailability" ? t(buttonText)
-                      : buttonText
+                      : feedback ? feedback.message
+                      : t("booking.checkAvailability")
                     }}
                   </span>
                   <span
-                    class="relative flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-full bg-linear-to-br from-amber-orange to-orange text-white shadow-xs shadow-orange/40 transition-transform duration-300 ease-out group-hover:scale-105 group-active:scale-95"
+                    class="relative flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-full text-white shadow-xs transition-transform duration-300 ease-out group-hover:scale-105 group-active:scale-95"
+                    :class="
+                      feedback?.kind === 'success' ?
+                        'bg-linear-to-br from-emerald-500 to-emerald-600 shadow-emerald-500/40'
+                      : feedback?.kind === 'error' ?
+                        'bg-linear-to-br from-red-500 to-red-600 shadow-red-500/40'
+                      : 'bg-linear-to-br from-amber-orange to-orange shadow-orange/40'
+                    "
                   >
                     <!-- Loading state: Solar Refresh Broken spinning icon -->
                     <svg
@@ -336,6 +298,48 @@ const handleSubmit = async (event: Event) => {
                       />
                       <path
                         d="M20.3137 11V12.6667C20.3137 17.269 16.5389 21 11.8825 21C11.7543 21 11.6268 20.9972 11.5 20.9916M21.9999 12.6667L20.3137 11L18.6274 12.6667M4.67944 17C5.38086 18.1366 6.34989 19.0942 7.5 19.7872"
+                      />
+                    </svg>
+
+                    <svg
+                      v-else-if="feedback?.kind === 'success'"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="size-4.5"
+                      aria-hidden="true"
+                    >
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+
+                    <svg
+                      v-else-if="feedback?.kind === 'error'"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke-width="1.5"
+                      class="solar solar-danger-circle-broken size-4.5"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M12 7V13"
+                        stroke-linecap="round"
+                        stroke="currentColor"
+                      />
+                      <path
+                        d="M7 3.33782C8.47087 2.48697 10.1786 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 10.1786 2.48697 8.47087 3.33782 7"
+                        stroke-linecap="round"
+                        stroke="currentColor"
+                      />
+                      <path
+                        d="M12 16H12.0001"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke="currentColor"
                       />
                     </svg>
 

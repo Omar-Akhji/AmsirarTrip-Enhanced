@@ -66,7 +66,6 @@
   --color-stone-100: #e6e6e1;
   --color-stone-200: #d8d8d1;
   --color-neutral-50: #f0f0ed;
-  --color-neutral-100: #e6e6e1;
   --color-zinc-50: #f0f0ed;
   --color-zinc-100: #e6e6e1;
 
@@ -120,9 +119,6 @@
   --radius-md: 12px;
   --radius-lg: 16px;
 
-  /* Layout */
-  --spacing-navbar: 4rem;
-
   /* Responsive Breakpoints (Senior UI/UX 7-Tier System)
      - xs  (30rem / 480px):   Compact mobile / phablet reflow
      - sm  (40rem / 640px):   Mobile landscape / standard phablet
@@ -144,7 +140,6 @@
   --spacing-gap: clamp(1rem, 0.75rem + 1.2vw, 2rem);
   --spacing-gap-tight: clamp(0.75rem, 0.6rem + 0.4vw, 1.125rem);
   --spacing-gutter: clamp(1rem, 0.6rem + 1.8vw, 2.5rem);
-  --spacing-section: clamp(3.5rem, 2.5rem + 4.5vw, 7.5rem);
 
   /* Golden Ratio Aspect Ratios (Tailwind v4 aspect-* scale extension, φ ≈ 1.618) */
   --aspect-golden: 1.618 / 1;
@@ -152,24 +147,12 @@
 
   /* Lumos & Golden Ratio Fluid Typography Scale (WCAG 1.4.4 rem-anchored clamp) */
   /* stylelint-disable custom-property-pattern */
-  --text-micro: 0.6875rem;
-  --text-micro--line-height: 1.35;
-  --text-micro--letter-spacing: 0.12em;
   --text-fluid-sm: clamp(0.8125rem, 0.785rem + 0.11vw, 0.875rem);
   --text-fluid-sm--line-height: 1.5;
   --text-fluid-base: clamp(0.9375rem, 0.91rem + 0.11vw, 1rem);
   --text-fluid-base--line-height: 1.65;
   --text-lead: clamp(1.0625rem, 0.98rem + 0.35vw, 1.25rem);
   --text-lead--line-height: 1.618;
-  --text-fluid-h3: clamp(1.25rem, 1.1rem + 0.65vw, 1.618rem);
-  --text-fluid-h3--line-height: 1.3;
-  --text-fluid-h3--letter-spacing: -0.015em;
-  --text-fluid-h2: clamp(1.618rem, 1.3rem + 1.4vw, 2.618rem);
-  --text-fluid-h2--line-height: 1.15;
-  --text-fluid-h2--letter-spacing: -0.025em;
-  --text-fluid-h1: clamp(2.125rem, 1.6rem + 2.4vw, 4.236rem);
-  --text-fluid-h1--line-height: 1.08;
-  --text-fluid-h1--letter-spacing: -0.035em;
   /* stylelint-enable custom-property-pattern */
 
   /* Motion Physics */
@@ -198,11 +181,6 @@
 @utility grid-cols-golden-rev {
   display: grid;
   grid-template-columns: minmax(min(16rem, 100%), 1fr) minmax(0, 1.618fr);
-}
-
-/* Tactile specular card border utility for dark/light elevated surfaces */
-@utility surface-tactile {
-  box-shadow: inset 0 1px 0 0 rgb(255 255 255 / 0.08);
 }
 
 /* Compositor stagger delay utility for CSS reveal keyframes */
@@ -278,7 +256,7 @@
   }
 
   /* Enforce vertical digit alignment across prices, tables, timers, and badges */
-  :is(table, time, output, [data-numeric], .tabular-nums) {
+  :is(table, time, output, .tabular-nums) {
     font-variant-numeric: tabular-nums;
   }
 

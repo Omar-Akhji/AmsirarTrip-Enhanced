@@ -1,7 +1,8 @@
 ---
 import type { Language, Locale } from "@/i18n/locales";
 import { getLocalizedPath, useTranslations } from "@/i18n/utils";
-import GlobalIcon from "@/shared/ui/icons/GlobalIcon.astro";
+import TranslateIcon from "@/shared/ui/icons/TranslateIcon.astro";
+import ChevronsUpDownBrokenIcon from "@/shared/ui/icons/ChevronsUpDownBrokenIcon.astro";
 import { LANGUAGES } from "./constants";
 
 interface Props {
@@ -54,22 +55,11 @@ const menuId = `${id}-popover`;
     ]}
     type="button"
   >
-    <GlobalIcon class="size-4 shrink-0 text-white/90 transition-colors group-hover/lang-btn:text-white group-data-scrolled:text-white" />
+    <TranslateIcon class="size-4 shrink-0 text-white/90 transition-colors group-hover/lang-btn:text-white group-data-scrolled:text-white" />
     <span class="font-mono font-semibold tracking-wider uppercase text-[11px] sm:text-xs">
       {currentLanguage.shortName}
     </span>
-    <svg
-      aria-hidden="true"
-      class="size-3.5 shrink-0 text-white/70 transition-transform duration-250 ease-out group-hover/lang-btn:text-white group-data-scrolled:text-white/90 group-has-[:popover-open]/lang-root:rotate-180"
-      fill="none"
-      stroke="currentColor"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      stroke-width="2"
-      viewBox="0 0 24 24"
-    >
-      <path d="m6 9 6 6 6-6"></path>
-    </svg>
+    <ChevronsUpDownBrokenIcon class="size-3.5 shrink-0 text-white/70 transition-transform duration-250 ease-out group-hover/lang-btn:text-white group-data-scrolled:text-white/90 group-has-[:popover-open]/lang-root:rotate-180" />
   </button>
 
   <div

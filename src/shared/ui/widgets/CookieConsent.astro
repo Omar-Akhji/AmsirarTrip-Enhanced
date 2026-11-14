@@ -292,23 +292,10 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
   title={t("cookieConsent.customize")}
   type="button"
 >
-  <svg
+  <CookieIcon
     aria-hidden="true"
     class="size-6 shrink-0 text-orange-400 transition-transform duration-200 ease-out pointer-fine:group-hover:scale-110 motion-reduce:transform-none"
-    fill="none"
-    stroke="currentColor"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    stroke-width="1.75"
-    viewBox="0 0 24 24"
-  >
-    <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5" />
-    <path d="M8.5 8.5v.01" />
-    <path d="M16 15.5v.01" />
-    <path d="M12 12v.01" />
-    <path d="M11 17v.01" />
-    <path d="M7 14v.01" />
-  </svg>
+  />
 </button>
 
 <script src="../../../scripts/cookie-consent.ts"></script>

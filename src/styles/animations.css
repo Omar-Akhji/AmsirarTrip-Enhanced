@@ -30,18 +30,6 @@
      2. Scroll reveal (hybrid CSS + TS IntersectionObserver in scroll-animate.ts)
      ------------------------------------------------------------------------ */
 
-  @keyframes reveal-fade-up {
-    from {
-      opacity: 0;
-      transform: translateY(28px);
-    }
-
-    to {
-      opacity: 1;
-      transform: none;
-    }
-  }
-
   @keyframes reveal-zoom-in {
     from {
       opacity: 0;
@@ -169,10 +157,6 @@
       &:not(.is-done) {
         will-change: transform, opacity;
       }
-    }
-
-    &[data-animate="fade-up"].is-visible {
-      animation-name: reveal-fade-up;
     }
 
     &[data-animate="zoom-in"].is-visible {
