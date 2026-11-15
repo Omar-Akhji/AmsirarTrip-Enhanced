@@ -82,6 +82,7 @@ function initLenis(): Lenis | undefined {
 /** Resets scroll position to the page header / top (unless targeting an anchor hash). */
 function resetScrollToTop() {
   if (globalThis.location.hash) return;
+  if (globalThis.scrollX === 0 && globalThis.scrollY === 0) return;
 
   if (lenis) {
     lenis.scrollTo(0, { immediate: true });

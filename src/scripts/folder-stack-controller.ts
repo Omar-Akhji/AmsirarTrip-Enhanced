@@ -38,6 +38,9 @@ export function setupFolderStack(
 
   const cache = new Map<string, string | number>();
   let rafId: number | null = null;
+  let needsMeasure = true;
+  let stageHeight = 0;
+  let trackHeight = 0;
 
   const updateTransforms = () => {
     rafId = null;
@@ -55,8 +58,11 @@ export function setupFolderStack(
     }
 
     const trackRect = track.getBoundingClientRect();
-    const stageHeight = stage.offsetHeight;
-    const trackHeight = track.offsetHeight;
+    if (needsMeasure) {
+      stageHeight = stage.offsetHeight;
+      trackHeight = track.offsetHeight;
+      needsMeasure = false;
+    }
     const maxScroll = Math.max(1, trackHeight - stageHeight);
     const scrolled = 72 - trackRect.top;
     const progress = clamp01(scrolled / maxScroll);
@@ -148,18 +154,23 @@ export function setupFolderStack(
     rafId ??= globalThis.requestAnimationFrame(updateTransforms);
   };
 
+  const onResize = () => {
+    needsMeasure = true;
+    schedule();
+  };
+
   const lenis = (globalThis as unknown as { __lenis?: Lenis }).__lenis;
   if (lenis) {
     lenis.on("scroll", schedule);
   }
   globalThis.addEventListener("scroll", schedule, { passive: true });
-  globalThis.addEventListener("resize", schedule, { passive: true });
+  globalThis.addEventListener("resize", onResize, { passive: true });
 
-  const resizeObserver = new ResizeObserver(schedule);
+  const resizeObserver = new ResizeObserver(onResize);
   resizeObserver.observe(element);
   resizeObserver.observe(track);
 
-  updateTransforms();
+  schedule();
 
   return () => {
     if (rafId !== null) {
@@ -167,7 +178,7 @@ export function setupFolderStack(
     }
     resizeObserver.disconnect();
     globalThis.removeEventListener("scroll", schedule);
-    globalThis.removeEventListener("resize", schedule);
+    globalThis.removeEventListener("resize", onResize);
     if (lenis) {
       lenis.off("scroll", schedule);
     }
