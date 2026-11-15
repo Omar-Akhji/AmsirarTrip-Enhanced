@@ -57,6 +57,14 @@ onMounted(async () => {
       capWidget.value.addEventListener("solve", onCapSolve);
       capWidget.value.addEventListener("reset", onCapReset);
       capWidget.value.addEventListener("error", onCapError);
+
+      const troubleshootLink = capWidget.value.shadowRoot?.querySelector("a.cap-troubleshoot-link");
+      if (troubleshootLink && !troubleshootLink.hasAttribute("href")) {
+        troubleshootLink.setAttribute(
+          "href",
+          "https://trycap.dev/guide/troubleshooting/instrumentation.html",
+        );
+      }
     }
   } catch (error) {
     console.error("[cap] Failed to load cap-widget:", error);
