@@ -11,7 +11,6 @@ export const GET: APIRoute = ({ site }) => {
 Allow: /
 Disallow: /_actions/
 Disallow: /api/
-Content-Signal: search=yes, ai-input=yes, ai-train=yes
 
 User-agent: Googlebot
 Allow: /
