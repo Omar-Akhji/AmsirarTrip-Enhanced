@@ -88,6 +88,7 @@ export default defineConfig(
       "better-tailwindcss": {
         entryPoint: "src/styles/global.css",
         callees: ["cn", "cva", "clsx", "twMerge"],
+        detectComponentClasses: true,
       },
     },
     rules: {
