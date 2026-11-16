@@ -61,7 +61,7 @@ const NAV_ITEMS: readonly NavDockItem[] = [
           "group/link relative z-10 inline-flex h-11 min-h-11 shrink-0 items-center justify-center rounded-full px-3 py-2 text-xs font-semibold whitespace-nowrap transition-transform duration-150 select-none active:scale-95",
           {
             "text-white": active,
-            "text-dark-grey hover:text-dark dark:text-stone-300 dark:hover:text-white": !active,
+            "text-dark-grey hover:text-dark active:text-dark dark:text-stone-300 dark:hover:text-white dark:active:text-white": !active,
           },
         ]}
         href={localize(item.to)}
@@ -74,7 +74,7 @@ const NAV_ITEMS: readonly NavDockItem[] = [
           />
         )}
         <NavIcon
-          class="relative z-10 size-5 shrink-0 transition-transform duration-200 group-hover/link:scale-110 motion-reduce:transform-none"
+          class="relative z-10 size-5 shrink-0 transition-transform duration-200 group-hover/link:scale-110 group-active/link:scale-110 motion-reduce:transform-none"
           name={item.icon}
         />
         {active && (

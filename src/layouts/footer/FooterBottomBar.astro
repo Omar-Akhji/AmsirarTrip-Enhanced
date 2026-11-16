@@ -43,7 +43,7 @@ const currentYear = new Date().getFullYear();
         <ul class="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 sm:gap-x-6">
           <li>
             <a
-              class="whitespace-nowrap text-sm font-medium text-zinc-500 transition-colors duration-200 pointer-fine:hover:text-white"
+              class="whitespace-nowrap text-sm font-medium text-zinc-500 transition-colors duration-200 pointer-fine:hover:text-white active:text-white"
               href={getRelativeLocaleUrl(locale, "/privacy-policy")}
             >
               {t("legal.footer.privacyPolicy")}
@@ -55,7 +55,7 @@ const currentYear = new Date().getFullYear();
           ></li>
           <li>
             <a
-              class="whitespace-nowrap text-sm font-medium text-zinc-500 transition-colors duration-200 pointer-fine:hover:text-white"
+              class="whitespace-nowrap text-sm font-medium text-zinc-500 transition-colors duration-200 pointer-fine:hover:text-white active:text-white"
               href={getRelativeLocaleUrl(locale, "/terms-of-service")}
             >
               {t("legal.footer.termsOfService")}

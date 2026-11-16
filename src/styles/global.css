@@ -295,10 +295,6 @@ html:has(dialog[open]) {
   overflow: hidden;
 }
 
-html.lenis {
-  overflow-y: auto;
-}
-
 .lenis.lenis-smooth {
   scroll-behavior: auto;
 }
@@ -326,20 +322,11 @@ html.lenis {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  html.theme-fade {
+  html.theme-fade,
+  html.theme-fade :where(body, main, header, footer) {
     transition:
-      color 350ms ease,
-      background-color 350ms ease,
-      scrollbar-color 350ms ease;
-  }
-
-  html.theme-fade :where(:not([data-theme-toggle] *)) {
-    transition:
-      color 350ms ease,
-      background-color 350ms ease,
-      border-color 350ms ease,
-      fill 350ms ease,
-      stroke 350ms ease,
-      opacity 350ms ease;
+      color 280ms ease,
+      background-color 280ms ease,
+      border-color 280ms ease;
   }
 }

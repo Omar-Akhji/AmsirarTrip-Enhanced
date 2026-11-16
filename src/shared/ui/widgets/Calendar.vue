@@ -169,7 +169,7 @@ watch(
       >
         <button
           type="button"
-          class="flex size-8 items-center justify-center rounded-lg text-stone-600 transition-colors focus:ring-0 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-1 dark:text-mist-400 pointer-fine:hover:bg-stone-100 pointer-fine:hover:text-stone-900 dark:pointer-fine:hover:bg-white/10 dark:pointer-fine:hover:text-mist-100"
+          class="flex size-8 items-center justify-center rounded-lg text-stone-600 transition-colors focus:ring-0 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-1 dark:text-mist-400 pointer-fine:hover:bg-stone-100 pointer-fine:hover:text-stone-900 active:bg-stone-100 active:text-stone-900 dark:pointer-fine:hover:bg-white/10 dark:pointer-fine:hover:text-mist-100 dark:active:bg-white/10 dark:active:text-mist-100"
           :aria-label="t('calendar.prevMonth')"
           @click="navigateMonth('prev')"
         >
@@ -199,7 +199,7 @@ watch(
 
         <button
           type="button"
-          class="flex size-8 items-center justify-center rounded-lg text-stone-600 transition-colors focus:ring-0 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-1 dark:text-mist-400 pointer-fine:hover:bg-stone-100 pointer-fine:hover:text-stone-900 dark:pointer-fine:hover:bg-white/10 dark:pointer-fine:hover:text-mist-100"
+          class="flex size-8 items-center justify-center rounded-lg text-stone-600 transition-colors focus:ring-0 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-1 dark:text-mist-400 pointer-fine:hover:bg-stone-100 pointer-fine:hover:text-stone-900 active:bg-stone-100 active:text-stone-900 dark:pointer-fine:hover:bg-white/10 dark:pointer-fine:hover:text-mist-100 dark:active:bg-white/10 dark:active:text-mist-100"
           :aria-label="t('calendar.nextMonth')"
           @click="navigateMonth('next')"
         >

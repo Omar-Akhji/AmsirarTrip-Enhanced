@@ -23,7 +23,7 @@ function updateProgress(): void {
 
   bar.style.transformOrigin = "top center";
   bar.style.transform = `scaleY(${progress})`;
-  bar.style.opacity = progress > 0.005 ? "1" : "0";
+  bar.style.opacity = progress > 0.001 ? "1" : "0";
   ticking = false;
 }
 

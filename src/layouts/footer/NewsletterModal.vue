@@ -122,7 +122,7 @@ onUnmounted(() => {
             command="close"
             commandfor="newsletter-dialog"
             :aria-label="t('footer.newsletterCloseAria')"
-            class="-me-1 -mbs-1 flex size-9 shrink-0 cursor-pointer items-center justify-center rounded-full border border-white/10 bg-white/5 text-zinc-400 transition-colors focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:outline-hidden pointer-fine:hover:bg-white/10 pointer-fine:hover:text-white"
+            class="-me-1 -mbs-1 flex size-9 shrink-0 cursor-pointer items-center justify-center rounded-full border border-white/10 bg-white/5 text-zinc-400 transition-colors focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:outline-hidden pointer-fine:hover:bg-white/10 pointer-fine:hover:text-white active:bg-white/10 active:text-white"
             @click="handleClose"
           >
             <svg

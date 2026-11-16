@@ -51,7 +51,7 @@ const currentOgLocale = OG_LOCALE_MAP[locale] ?? locale;
 
 <!doctype html>
 <html
-  class="inline-full min-block-full overflow-x-clip overflow-y-auto scrollbar-none [-ms-overflow-style:none] bg-(--pattern-bg-color) bg-(image:--pattern-bg-image) bg-repeat bg-size-(--pattern-bg-size) [&::-webkit-scrollbar]:hidden [&::-webkit-scrollbar]:size-0 [&::-webkit-scrollbar]:bg-transparent"
+  class="inline-full min-block-full overflow-x-clip scrollbar-none [-ms-overflow-style:none] bg-(--pattern-bg-color) bg-(image:--pattern-bg-image) bg-repeat bg-size-(--pattern-bg-size) [&::-webkit-scrollbar]:hidden [&::-webkit-scrollbar]:size-0 [&::-webkit-scrollbar]:bg-transparent"
   data-csp-nonce={Astro.locals.cspNonce || ""}
   itemscope
   itemtype="https://schema.org/WebPage"
@@ -364,7 +364,7 @@ const currentOgLocale = OG_LOCALE_MAP[locale] ?? locale;
     <!-- WhatsApp Side Tape (Right Edge) -->
     <a
       aria-label="Contact us on WhatsApp"
-      class="group fixed inset-e-0 inset-be-33 z-40 flex size-11 items-center justify-center overflow-hidden rounded-s-md border-[1.5px] border-e-0 border-emerald-500/50 bg-slate-950/95 text-emerald-400 shadow-xl backdrop-blur-md transition-[transform,background-color,border-color,color,box-shadow] duration-200 ease-out pointer-fine:hover:-translate-x-1.5 pointer-fine:hover:border-emerald-400 pointer-fine:hover:bg-slate-900 pointer-fine:hover:text-emerald-300 pointer-fine:hover:shadow-2xl pointer-fine:hover:shadow-emerald-950/40 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-2 motion-reduce:transform-none print:hidden"
+      class="group fixed inset-e-0 inset-be-33 z-40 flex size-11 items-center justify-center overflow-hidden rounded-s-md border-[1.5px] border-e-0 border-emerald-500/50 bg-slate-950/95 text-emerald-400 shadow-xl backdrop-blur-md transition-[transform,background-color,border-color,color,box-shadow] duration-200 ease-out pointer-fine:hover:-translate-x-1.5 pointer-fine:hover:border-emerald-400 pointer-fine:hover:bg-slate-900 pointer-fine:hover:text-emerald-300 pointer-fine:hover:shadow-2xl pointer-fine:hover:shadow-emerald-950/40 active:-translate-x-1.5 active:border-emerald-400 active:bg-slate-900 active:text-emerald-300 active:shadow-2xl active:shadow-emerald-950/40 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-2 motion-reduce:transform-none print:hidden"
       href={WHATSAPP_LINK}
       rel="noopener noreferrer"
       target="_blank"
@@ -376,7 +376,7 @@ const currentOgLocale = OG_LOCALE_MAP[locale] ?? locale;
           aria-hidden="true"
           class="absolute inset-0 -z-10 animate-ping rounded-full bg-emerald-400 opacity-25 duration-1000 motion-reduce:hidden"
         ></span>
-        <WhatsappIcon class="size-6 shrink-0 transition-transform duration-200 ease-out pointer-fine:group-hover:scale-110 motion-reduce:transform-none" />
+        <WhatsappIcon class="size-6 shrink-0 transition-transform duration-200 ease-out pointer-fine:group-hover:scale-110 group-active:scale-110 motion-reduce:transform-none" />
       </span>
     </a>
   </body>

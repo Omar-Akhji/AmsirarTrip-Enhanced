@@ -37,6 +37,13 @@ function setupBodyObserver(instance: Lenis) {
   bodyObserver.observe(document.body, { attributes: true, attributeFilter: ["class", "style"] });
 }
 
+/** Re-applies Lenis classes onto the root element after Astro swaps `<html>` attributes. */
+function syncLenisClasses(instance: Lenis) {
+  for (const cls of instance.className.split(" ")) {
+    if (cls) instance.rootElement.classList.add(cls);
+  }
+}
+
 /**
  * Initializes or re-synchronizes the Lenis smooth-scrolling engine. Matches https://lenis.dev/
  * signature physics:
@@ -57,6 +64,8 @@ function initLenis(): Lenis | undefined {
   }
 
   if (lenis) {
+    syncLenisClasses(lenis);
+    setupBodyObserver(lenis);
     lenis.resize();
     return lenis;
   }
@@ -68,7 +77,6 @@ function initLenis(): Lenis | undefined {
     syncTouch: false, // Keep native 120Hz touch scrolling on mobile and precision trackpads
     autoRaf: true,
     autoResize: true,
-    autoToggle: true,
     anchors: { offset: -72 },
     prevent: (node: Element) =>
       (node instanceof HTMLElement && Boolean(node.dataset["lenisPrevent"]))
@@ -152,6 +160,10 @@ function onBeforePreparation(e: Event) {
 
 /** View transition swap hook to ensure new page starts at header. */
 function onAfterSwap() {
+  if (lenis) {
+    syncLenisClasses(lenis);
+    setupBodyObserver(lenis);
+  }
   if (!globalThis.location.hash) {
     resetScrollToTop();
   }

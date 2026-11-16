@@ -43,10 +43,10 @@ const menuId = `${id}-popover`;
     aria-label={`${t("language")}: ${currentLanguage.name}`}
     class:list={[
       "[anchor-name:--lang-selector-btn] group/lang-btn relative inline-flex items-center rounded-full font-medium transition-all duration-200 cursor-pointer select-none active:scale-[0.98]",
-      "border border-white/20 bg-black/30 backdrop-blur-md text-white shadow-xs hover:border-white/40 hover:bg-white/15 hover:shadow-md",
+      "border border-white/20 bg-black/30 backdrop-blur-md text-white shadow-xs hover:border-white/40 hover:bg-white/15 hover:shadow-md active:border-white/40 active:bg-white/15 active:shadow-md",
       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange/80 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950",
       "group-has-[:popover-open]/lang-root:border-white/45 group-has-[:popover-open]/lang-root:bg-white/20 group-has-[:popover-open]/lang-root:shadow-[0_4px_16px_rgb(0_0_0/0.25)]",
-      "group-data-scrolled:border-transparent group-data-scrolled:bg-orange group-data-scrolled:text-white group-data-scrolled:shadow-[0_4px_14px_rgba(241,93,48,0.35)] group-data-scrolled:hover:bg-orange-600 group-data-scrolled:group-has-[:popover-open]/lang-root:bg-orange-dark",
+      "group-data-scrolled:border-transparent group-data-scrolled:bg-orange group-data-scrolled:text-white group-data-scrolled:shadow-[0_4px_14px_rgba(241,93,48,0.35)] group-data-scrolled:hover:bg-orange-600 group-data-scrolled:active:bg-orange-600 group-data-scrolled:group-has-[:popover-open]/lang-root:bg-orange-dark",
       {
         "h-9.5 px-3.5 gap-2 text-xs sm:text-sm": size === "sm",
         "h-11 px-4 gap-2.5 text-sm": size === "md",
@@ -55,11 +55,11 @@ const menuId = `${id}-popover`;
     popovertarget={menuId}
     type="button"
   >
-    <TranslateIcon class="size-4 shrink-0 text-white/90 transition-colors group-hover/lang-btn:text-white group-data-scrolled:text-white" />
+    <TranslateIcon class="size-4 shrink-0 text-white/90 transition-colors group-hover/lang-btn:text-white group-active/lang-btn:text-white group-data-scrolled:text-white" />
     <span class="font-mono font-semibold tracking-wider uppercase text-[11px] sm:text-xs">
       {currentLanguage.shortName}
     </span>
-    <ChevronsUpDownBrokenIcon class="size-3.5 shrink-0 text-white/70 transition-transform duration-250 ease-out group-hover/lang-btn:text-white group-data-scrolled:text-white/90 group-has-[:popover-open]/lang-root:rotate-180" />
+    <ChevronsUpDownBrokenIcon class="size-3.5 shrink-0 text-white/70 transition-transform duration-250 ease-out group-hover/lang-btn:text-white group-active/lang-btn:text-white group-data-scrolled:text-white/90 group-has-[:popover-open]/lang-root:rotate-180" />
   </button>
 
   <div

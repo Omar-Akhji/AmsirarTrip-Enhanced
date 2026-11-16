@@ -284,7 +284,7 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
 <!-- Cookie Settings Trigger -->
 <button
   aria-label={t("cookieConsent.modalTitle")}
-  class="group fixed inset-e-0 inset-be-20 z-40 flex size-11 cursor-pointer items-center justify-start ps-2.5 rounded-s-md border-[1.5px] border-e-0 border-white/15 bg-slate-950/95 text-zinc-300 shadow-md backdrop-blur-md transition-[transform,background-color,border-color,color,box-shadow] duration-200 ease-out pointer-fine:hover:-translate-x-1.5 pointer-fine:hover:border-orange-400/50 pointer-fine:hover:bg-slate-900 pointer-fine:hover:text-white pointer-fine:hover:shadow-xl focus-visible:outline-2 focus-visible:outline-orange-400 motion-reduce:transform-none print:hidden"
+  class="group fixed inset-e-0 inset-be-20 z-40 flex size-11 cursor-pointer items-center justify-start ps-2.5 rounded-s-md border-[1.5px] border-e-0 border-white/15 bg-slate-950/95 text-zinc-300 shadow-md backdrop-blur-md transition-[transform,background-color,border-color,color,box-shadow] duration-200 ease-out pointer-fine:hover:-translate-x-1.5 pointer-fine:hover:border-orange-400/50 pointer-fine:hover:bg-slate-900 pointer-fine:hover:text-white pointer-fine:hover:shadow-xl active:-translate-x-1.5 active:border-orange-400/50 active:bg-slate-900 active:text-white active:shadow-xl focus-visible:outline-2 focus-visible:outline-orange-400 motion-reduce:transform-none print:hidden"
   command="show-modal"
   commandfor="cookie-preferences-modal"
   data-cookie-open-preferences
@@ -294,7 +294,7 @@ const privacyPolicyHref = getRelativeLocaleUrl(locale, "/privacy-policy");
 >
   <CookieIcon
     aria-hidden="true"
-    class="size-6 shrink-0 text-orange-400 transition-transform duration-200 ease-out pointer-fine:group-hover:scale-110 motion-reduce:transform-none"
+    class="size-6 shrink-0 text-orange-400 transition-transform duration-200 ease-out pointer-fine:group-hover:scale-110 group-active:scale-110 motion-reduce:transform-none"
   />
 </button>
 
