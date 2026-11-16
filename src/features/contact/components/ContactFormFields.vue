@@ -53,7 +53,7 @@ function selectTopic(topic: string) {
       {{ t("contact.form.details") }}
     </legend>
     <div class="grid gap-5 md:grid-cols-2">
-      <div>
+      <div class="min-w-0">
         <label
           for="contact-name"
           class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700 dark:text-stone-300"
@@ -108,7 +108,7 @@ function selectTopic(topic: string) {
           {{ state.errors["name"] }}
         </p>
       </div>
-      <div>
+      <div class="min-w-0">
         <label
           for="contact-email"
           class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700 dark:text-stone-300"
@@ -164,7 +164,7 @@ function selectTopic(topic: string) {
     </div>
 
     <div class="grid gap-5 md:grid-cols-2">
-      <div>
+      <div class="min-w-0">
         <label
           for="contact-phone"
           class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700 dark:text-stone-300"
@@ -193,7 +193,7 @@ function selectTopic(topic: string) {
           {{ state.errors["phone"] }}
         </p>
       </div>
-      <div>
+      <div class="min-w-0">
         <label
           for="contact-topic"
           class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700 dark:text-stone-300"
@@ -281,7 +281,7 @@ function selectTopic(topic: string) {
             popover="auto"
             role="listbox"
             :aria-label="t('contact.form.fields.topic')"
-            class="fixed inset-0 z-50 m-auto w-[min(24rem,calc(100vw-2rem))] overflow-hidden rounded-xl border border-stone-200/90 bg-white p-0 text-stone-900 shadow-xl shadow-stone-900/10 backdrop:bg-black/20 supports-[top:anchor(bottom)]:inset-auto supports-[top:anchor(bottom)]:top-[calc(anchor(bottom)+6px)] supports-[top:anchor(bottom)]:left-[anchor(left)] supports-[top:anchor(bottom)]:m-0 supports-[top:anchor(bottom)]:w-[anchor-size(width)] supports-[top:anchor(bottom)]:[position-try-fallbacks:flip-block] supports-[top:anchor(bottom)]:backdrop:bg-transparent dark:border-white/10 dark:bg-surface-card dark:text-mist-100 dark:shadow-[0_16px_40px_rgba(0,0,0,0.65)]"
+            class="fixed inset-0 z-50 m-auto max-h-[min(22rem,calc(50dvh-2.5rem))] w-[min(24rem,calc(100vw-2rem))] max-w-[calc(100vw-2rem)] overflow-x-hidden overflow-y-auto rounded-xl border border-stone-200/90 bg-white p-0 text-stone-900 shadow-xl shadow-stone-900/10 backdrop:bg-black/20 supports-[top:anchor(bottom)]:inset-auto supports-[top:anchor(bottom)]:top-[calc(anchor(bottom)+6px)] supports-[top:anchor(bottom)]:left-[anchor(left)] supports-[top:anchor(bottom)]:m-0 supports-[top:anchor(bottom)]:[position-try-fallbacks:flip-block,flip-inline] supports-[top:anchor(bottom)]:backdrop:bg-transparent supports-[width:anchor-size(width)]:w-[anchor-size(width)] dark:border-white/10 dark:bg-surface-card dark:text-mist-100 dark:shadow-[0_16px_40px_rgba(0,0,0,0.65)]"
             :style="{ positionAnchor: `--topic-anchor-${topicDropdownId}` }"
             @toggle="handleTopicToggle"
           >
@@ -297,7 +297,7 @@ function selectTopic(topic: string) {
                     type="button"
                     role="option"
                     :aria-selected="selectedTopic === option"
-                    class="flex w-full cursor-pointer items-center justify-between gap-2 rounded-none px-3 py-2 text-start transition-colors hover:bg-stone-100 focus:bg-stone-100 focus:outline-hidden active:bg-stone-200/70 dark:hover:bg-white/5 dark:focus:bg-white/5"
+                    class="flex min-h-11 w-full cursor-pointer items-center justify-between gap-2 rounded-none px-3 py-2.5 text-start transition-colors hover:bg-stone-100 focus:bg-stone-100 focus:outline-hidden active:bg-stone-200/70 dark:hover:bg-white/5 dark:focus:bg-white/5"
                     :class="{
                       'bg-stone-100 font-medium text-stone-900 dark:bg-white/10 dark:text-mist-100':
                         selectedTopic === option,
@@ -305,7 +305,7 @@ function selectTopic(topic: string) {
                     @click="selectTopic(option)"
                   >
                     <span
-                      class="block truncate font-sans text-xs text-stone-800 dark:text-mist-200"
+                      class="block text-start font-sans text-xs/snug wrap-break-word text-stone-800 dark:text-mist-200"
                     >
                       {{ option }}
                     </span>
