@@ -73,11 +73,6 @@ function linkProgram(gl: WebGL2RenderingContext): WebGLProgram | null {
     return null;
   }
   const program = gl.createProgram();
-  if (!program) {
-    gl.deleteShader(vert);
-    gl.deleteShader(frag);
-    return null;
-  }
   gl.attachShader(program, vert);
   gl.attachShader(program, frag);
   gl.linkProgram(program);
@@ -127,12 +122,8 @@ export class InkRenderer {
       return null;
     }
 
-    const state = InkRenderer.initState(gl);
-    if (!state) {
-      return null;
-    }
-
-    return new InkRenderer(canvas, gl, state);
+    const state = this.initState(gl);
+    return state ? new InkRenderer(canvas, gl, state) : null;
   }
 
   private static initState(gl: WebGL2RenderingContext): GLState | null {
@@ -142,10 +133,10 @@ export class InkRenderer {
     const program = linkProgram(gl);
     const noiseTex = createNoiseTexture(gl);
     const vao = gl.createVertexArray();
-    if (!program || !noiseTex || !vao) {
+    if (!program || !noiseTex) {
       if (program) gl.deleteProgram(program);
       if (noiseTex) gl.deleteTexture(noiseTex);
-      if (vao) gl.deleteVertexArray(vao);
+      gl.deleteVertexArray(vao);
       return null;
     }
 
@@ -221,10 +212,9 @@ export class InkRenderer {
 
   public hasValid(theme: Theme, key: string, scrollY: number): boolean {
     const snapshot = this.snapshots.get(theme);
-    if (!snapshot || this.isLost) {
-      return false;
-    }
-    return snapshot.key === key && Math.abs(snapshot.scrollY - scrollY) <= 2;
+    return Boolean(
+      snapshot && !this.isLost && snapshot.key === key && Math.abs(snapshot.scrollY - scrollY) <= 2,
+    );
   }
 
   public resize(scale: number): void {
@@ -251,16 +241,14 @@ export class InkRenderer {
 
     // Invalidate opposite theme if layout or scroll changed so stale textures never persist.
     for (const [cachedTheme, cached] of this.snapshots) {
-      if (cached.key !== key || Math.abs(cached.scrollY - scrollY) > 2) {
-        gl.deleteTexture(cached.tex);
-        this.snapshots.delete(cachedTheme);
+      if (cached.key === key && Math.abs(cached.scrollY - scrollY) <= 2) {
+        continue;
       }
+      gl.deleteTexture(cached.tex);
+      this.snapshots.delete(cachedTheme);
     }
 
     const tex = gl.createTexture();
-    if (!tex) {
-      return false;
-    }
 
     gl.bindTexture(gl.TEXTURE_2D, tex);
     gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 0);

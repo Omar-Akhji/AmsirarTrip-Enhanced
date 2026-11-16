@@ -46,10 +46,9 @@ const excursionName =
   isEnglish && excursion.seo?.title ? excursion.seo.title
   : t.has(`${keyPrefix}.title`) ? t(`${keyPrefix}.title`)
   : excursion.jsonLd.name;
+const fallbackDescription = excursion.seo?.lead ?? excursion.jsonLd.description;
 const excursionDescription =
-  isEnglish ? (excursion.seo?.lead ?? excursion.jsonLd.description)
-  : t.has(`${keyPrefix}.overview`) ? t(`${keyPrefix}.overview`)
-  : (excursion.seo?.lead ?? excursion.jsonLd.description);
+  !isEnglish && t.has(`${keyPrefix}.overview`) ? t(`${keyPrefix}.overview`) : fallbackDescription;
 
 const excursionJsonLd = generateExcursionJsonLd({
   name: excursionName,

@@ -87,9 +87,6 @@ export function createNoiseTexture(gl: WebGL2RenderingContext): WebGLTexture | n
   }
 
   const texture = gl.createTexture();
-  if (!texture) {
-    return null;
-  }
 
   gl.bindTexture(gl.TEXTURE_2D, texture);
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);

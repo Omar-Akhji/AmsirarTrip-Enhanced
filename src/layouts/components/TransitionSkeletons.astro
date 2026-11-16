@@ -16,8 +16,10 @@ import PageHeaderSkeleton from "@/shared/ui/feedback/PageHeaderSkeleton.astro";
 import TourDetailSkeleton from "@/shared/ui/feedback/TourDetailSkeleton.astro";
 import TripCardSkeleton from "@/shared/ui/feedback/TripCardSkeleton.astro";
 
-const toursCount = (await getToursData()).length;
-const excursionsCount = (await getExcursionsData()).length;
+const toursData = await getToursData();
+const excursionsData = await getExcursionsData();
+const toursCount = toursData.length;
+const excursionsCount = excursionsData.length;
 ---
 
 {/* Skeleton container: hidden by default, shown as an overlay during page transitions */}

@@ -65,13 +65,12 @@ const itinerary = Array.from({ length: tour.durationDays }, (_, index) => {
 });
 
 const tourName =
-  isEnglish ? tour.jsonLd.name
-  : t.has(`${tour.tourKey}.title`) ? t(`${tour.tourKey}.title`)
-  : tour.jsonLd.name;
+  !isEnglish && t.has(`${tour.tourKey}.title`) ? t(`${tour.tourKey}.title`) : tour.jsonLd.name;
+const fallbackDescription = tour.seo.lead || tour.jsonLd.description;
 const tourDescription =
-  isEnglish ? tour.seo.lead || tour.jsonLd.description
-  : t.has(`${tour.tourKey}.overview`) ? t(`${tour.tourKey}.overview`)
-  : tour.seo.lead || tour.jsonLd.description;
+  !isEnglish && t.has(`${tour.tourKey}.overview`) ?
+    t(`${tour.tourKey}.overview`)
+  : fallbackDescription;
 
 const tourJsonLd = generateTourJsonLd({
   name: tourName,

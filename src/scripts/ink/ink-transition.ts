@@ -10,12 +10,9 @@ export interface Point {
 
 const SPREAD = { cleanupFrom: 0.45, cleanupPow: 2, cleanupReach: 0.4, growth: 0.7 } as const;
 
-const CSS_FADE_MS = 350;
+const CSS_FADE_MS = 280;
 const FADE_OUT_MS = 150;
-const ON_DEMAND_TIMEOUT_MS = 900;
-const RESIZE_DEBOUNCE_MS = 250;
-const SCROLL_DEBOUNCE_MS = 180;
-const POST_SWITCH_CAPTURE_MS = 0;
+const ON_DEMAND_TIMEOUT_MS = 1200;
 
 interface InFlightCapture {
   readonly key: string;
@@ -29,6 +26,7 @@ interface ActiveRun {
   readonly centerY: number;
   readonly from: Theme;
   readonly maxDist: number;
+  readonly scrollY: number;
   readonly seedAngle: number;
   readonly seedX: number;
   readonly seedY: number;
@@ -68,11 +66,9 @@ function farthestCorner(x: number, y: number, vw: number, vh: number): number {
 export class InkTransition {
   private active: ActiveRun | null = null;
   private captureEpoch = 0;
-  private captureTimer = 0;
   private committing = false;
-  private cssFadeTimer = 0;
-  private fadeTimer = 0;
-  private idleId = 0;
+  private cssFadeTimer: ReturnType<typeof setTimeout> | undefined;
+  private fadeTimer: ReturnType<typeof setTimeout> | undefined;
   private inFlight: InFlightCapture | null = null;
   private lastTheme: Theme = resolveCurrentTheme();
   private rafId = 0;
@@ -92,21 +88,13 @@ export class InkTransition {
           this.cancelActive();
         },
         () => {
-          this.scheduleCapture(0, false);
+          this.captureEpoch += 1;
         },
       );
-      if (isSkeletonHidden()) {
-        this.scheduleCaptureAfterFonts(50);
-      }
     }
   }
 
-  public toggle(
-    from: Theme,
-    to: Theme,
-    commitTheme: (theme: Theme) => void,
-    origin?: Point | undefined,
-  ): void {
+  public toggle(from: Theme, to: Theme, commitTheme: (theme: Theme) => void, origin?: Point): void {
     const myToggle = ++this.toggleEpoch;
 
     if (this.reducedMotion.matches) {
@@ -130,7 +118,7 @@ export class InkTransition {
       }
     }
 
-    if (this.fadeTimer !== 0) {
+    if (this.fadeTimer !== undefined) {
       this.cancelActive();
     }
 
@@ -150,25 +138,25 @@ export class InkTransition {
   }
 
   public warm(): void {
-    if (!this.renderer || this.renderer.isLost || this.reducedMotion.matches) {
-      return;
-    }
-    if (this.active !== null || this.inFlight !== null || !isSkeletonHidden()) {
+    if (
+      !this.renderer
+      || this.renderer.isLost
+      || this.reducedMotion.matches
+      || this.active !== null
+      || this.inFlight !== null
+      || !isSkeletonHidden()
+    ) {
       return;
     }
     const scale = renderScale();
     const key = viewportKey(scale);
     const theme = resolveCurrentTheme();
     if (!this.renderer.hasValid(theme, key, globalThis.scrollY)) {
-      this.scheduleCapture(0, false);
+      void this.captureCurrent();
     }
   }
 
   private bindLifecycle(): void {
-    globalThis.addEventListener("amsirar:page-ready", () => {
-      this.scheduleCaptureAfterFonts(50);
-    });
-
     document.addEventListener("astro:before-preparation", () => {
       this.captureEpoch += 1;
       this.cancelActive();
@@ -180,15 +168,17 @@ export class InkTransition {
       "scroll",
       () => {
         this.captureEpoch += 1;
-        this.scheduleCapture(SCROLL_DEBOUNCE_MS);
+        if (this.active !== null && Math.abs(globalThis.scrollY - this.active.scrollY) > 12) {
+          this.cancelActive();
+        }
       },
       { passive: true },
     );
 
     globalThis.addEventListener("resize", () => {
       this.captureEpoch += 1;
+      this.cancelActive();
       this.renderer?.resize(renderScale());
-      this.scheduleCapture(RESIZE_DEBOUNCE_MS);
     });
 
     globalThis.addEventListener("theme-change", () => {
@@ -199,7 +189,6 @@ export class InkTransition {
       this.lastTheme = nextTheme;
       this.captureEpoch += 1;
       this.cancelActive();
-      this.scheduleCapture(POST_SWITCH_CAPTURE_MS, false);
     });
 
     this.reducedMotion.addEventListener("change", () => {
@@ -207,13 +196,12 @@ export class InkTransition {
         this.captureEpoch += 1;
         this.cancelActive();
         this.renderer?.clearSnapshots();
-      } else if (isSkeletonHidden()) {
-        this.scheduleCaptureAfterFonts(50);
       }
     });
 
-    document.addEventListener("pointerenter", this.handleToggleHover, true);
-    document.addEventListener("focusin", this.handleToggleHover, true);
+    document.addEventListener("pointerenter", this.handleToggleHover, { capture: true });
+    document.addEventListener("pointerdown", this.handleToggleHover, { capture: true });
+    document.addEventListener("focusin", this.handleToggleHover, { capture: true });
   }
 
   private buildFrame(run: ActiveRun, elapsedMs: number): InkFrame {
@@ -244,9 +232,9 @@ export class InkTransition {
       cancelAnimationFrame(this.rafId);
       this.rafId = 0;
     }
-    if (this.fadeTimer !== 0) {
-      window.clearTimeout(this.fadeTimer);
-      this.fadeTimer = 0;
+    if (this.fadeTimer !== undefined) {
+      globalThis.clearTimeout(this.fadeTimer);
+      this.fadeTimer = undefined;
     }
     this.active = null;
     if (this.renderer) {
@@ -254,28 +242,17 @@ export class InkTransition {
     }
   }
 
-  private cancelScheduledCapture(): void {
-    if (this.captureTimer !== 0) {
-      window.clearTimeout(this.captureTimer);
-      this.captureTimer = 0;
-    }
-    if (this.idleId !== 0 && typeof globalThis.cancelIdleCallback === "function") {
-      globalThis.cancelIdleCallback(this.idleId);
-      this.idleId = 0;
-    }
-  }
-
-  private captureCurrent(): Promise<boolean> {
+  private async captureCurrent(): Promise<boolean> {
     const renderer = this.renderer;
-    if (!renderer || renderer.isLost || this.reducedMotion.matches) {
-      return Promise.resolve(false);
-    }
     if (
-      this.active !== null
+      !renderer
+      || renderer.isLost
+      || this.reducedMotion.matches
+      || this.active !== null
       || !isSkeletonHidden()
       || document.documentElement.classList.contains("theme-fade")
     ) {
-      return Promise.resolve(false);
+      return false;
     }
 
     const theme = resolveCurrentTheme();
@@ -283,7 +260,7 @@ export class InkTransition {
     const key = viewportKey(scale);
     const scrollY = globalThis.scrollY;
     if (renderer.hasValid(theme, key, scrollY)) {
-      return Promise.resolve(true);
+      return true;
     }
 
     if (this.inFlight) {
@@ -291,25 +268,28 @@ export class InkTransition {
         this.inFlight.theme === theme
         && this.inFlight.key === key
         && Math.abs(this.inFlight.scrollY - scrollY) <= 2;
-      return sameTarget ? this.inFlight.promise : Promise.resolve(false);
+      return sameTarget ? this.inFlight.promise : false;
     }
 
     const epoch = this.captureEpoch;
-    let capturePromise: Promise<boolean> | null = null;
-    capturePromise = (async (): Promise<boolean> => {
+    const capturePromise = (async (): Promise<boolean> => {
       try {
         const snap = await captureViewport(theme, scale, renderer.maxTextureSize);
-        if (epoch !== this.captureEpoch || this.active !== null || renderer.isLost) {
-          return false;
-        }
-        if (resolveCurrentTheme() !== theme || Math.abs(globalThis.scrollY - snap.scrollY) > 2) {
-          return false;
-        }
-        return renderer.upload(snap.canvas, theme, key, snap.scrollY);
+        const isCurrent =
+          epoch === this.captureEpoch
+          && this.active === null
+          && !renderer.isLost
+          && resolveCurrentTheme() === theme
+          && Math.abs(globalThis.scrollY - snap.scrollY) <= 2;
+        return isCurrent && renderer.upload(snap.canvas, theme, key, snap.scrollY);
       } catch {
         return false;
       } finally {
-        if (capturePromise !== null && this.inFlight?.promise === capturePromise) {
+        if (
+          this.inFlight?.theme === theme
+          && this.inFlight.key === key
+          && this.inFlight.scrollY === scrollY
+        ) {
           this.inFlight = null;
         }
       }
@@ -325,11 +305,11 @@ export class InkTransition {
     from: Theme,
     to: Theme,
     commitTheme: (theme: Theme) => void,
-    origin?: Point | undefined,
+    origin?: Point,
   ): Promise<void> {
     const capturePromise = this.captureCurrent();
     const timeoutPromise = new Promise<boolean>((resolve) => {
-      window.setTimeout(() => resolve(false), ON_DEMAND_TIMEOUT_MS);
+      globalThis.setTimeout(() => resolve(false), ON_DEMAND_TIMEOUT_MS);
     });
     await Promise.race([capturePromise, timeoutPromise]);
 
@@ -359,7 +339,7 @@ export class InkTransition {
     to: Theme,
     scale: number,
     commitTheme: (theme: Theme) => void,
-    origin?: Point | undefined,
+    origin?: Point,
   ): void {
     renderer.resize(scale);
     const pt = origin ?? defaultOrigin();
@@ -371,6 +351,7 @@ export class InkTransition {
       centerY: pt.y,
       from,
       maxDist: Math.max(1, farthestCorner(pt.x, pt.y, vw, vh)),
+      scrollY: globalThis.scrollY,
       seedAngle: Math.random() * Math.PI * 2,
       seedX: Math.random() * 20,
       seedY: Math.random() * 20,
@@ -405,11 +386,10 @@ export class InkTransition {
     root.classList.add("theme-fade");
     this.commit(to, commitTheme);
 
-    window.clearTimeout(this.cssFadeTimer);
-    this.cssFadeTimer = window.setTimeout(() => {
+    globalThis.clearTimeout(this.cssFadeTimer);
+    this.cssFadeTimer = globalThis.setTimeout(() => {
       root.classList.remove("theme-fade");
-      this.cssFadeTimer = 0;
-      this.scheduleCapture(0, false);
+      this.cssFadeTimer = undefined;
     }, CSS_FADE_MS + 40);
   }
 
@@ -419,10 +399,9 @@ export class InkTransition {
     if (this.renderer) {
       delete this.renderer.canvas.dataset["active"];
     }
-    this.scheduleCapture(POST_SWITCH_CAPTURE_MS, false);
-    window.clearTimeout(this.fadeTimer);
-    this.fadeTimer = window.setTimeout(() => {
-      this.fadeTimer = 0;
+    globalThis.clearTimeout(this.fadeTimer);
+    this.fadeTimer = globalThis.setTimeout(() => {
+      this.fadeTimer = undefined;
     }, FADE_OUT_MS + 20);
   }
 
@@ -438,45 +417,13 @@ export class InkTransition {
       cancelAnimationFrame(this.rafId);
       this.rafId = 0;
     }
-    window.clearTimeout(this.fadeTimer);
+    globalThis.clearTimeout(this.fadeTimer);
     this.active = null;
     if (this.renderer) {
       delete this.renderer.canvas.dataset["active"];
     }
-    this.fadeTimer = 0;
+    this.fadeTimer = undefined;
     this.crossFade(to, commitTheme);
-  }
-
-  private scheduleCapture(delayMs: number, preferIdle = true): void {
-    this.cancelScheduledCapture();
-    if (!this.renderer || this.reducedMotion.matches) {
-      return;
-    }
-    const run = (): void => {
-      this.captureTimer = 0;
-      if (preferIdle && typeof globalThis.requestIdleCallback === "function") {
-        this.idleId = globalThis.requestIdleCallback(
-          () => {
-            this.idleId = 0;
-            void this.captureCurrent();
-          },
-          { timeout: 600 },
-        );
-        return;
-      }
-      void this.captureCurrent();
-    };
-    if (delayMs <= 0) {
-      run();
-    } else {
-      this.captureTimer = window.setTimeout(run, delayMs);
-    }
-  }
-
-  private scheduleCaptureAfterFonts(delayMs: number): void {
-    void document.fonts.ready.then(() => {
-      this.scheduleCapture(delayMs, false);
-    });
   }
 
   private readonly tick = (now: number): void => {

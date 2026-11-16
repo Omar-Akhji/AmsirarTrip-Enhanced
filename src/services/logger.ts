@@ -89,8 +89,8 @@ export const logger = {
     writeToFile("warn", line);
   },
 
-  error(message: string, error?: unknown, meta?: Record<string, unknown>): void {
-    const errorMeta: Record<string, unknown> = { ...meta };
+  error(message: string, error?: unknown): void {
+    const errorMeta: Record<string, unknown> = {};
     if (error instanceof Error) {
       errorMeta["errorName"] = error.name;
       errorMeta["errorMessage"] = error.message;

@@ -25,7 +25,7 @@ export function resetCaptureCache(): void {
 }
 
 export function renderScale(): number {
-  const cap = globalThis.matchMedia("(pointer: coarse)").matches ? 1.5 : 2;
+  const cap = globalThis.matchMedia("(pointer: coarse)").matches ? 1 : 2;
   return Math.min(globalThis.devicePixelRatio || 1, cap);
 }
 
@@ -89,6 +89,10 @@ async function getResolvedCss(): Promise<string> {
   for (const sheet of document.styleSheets) {
     try {
       for (const rule of sheet.cssRules) {
+        // Skip @font-face so large .woff2 binaries aren't base64-inlined into SVG snapshots.
+        if (rule instanceof CSSFontFaceRule) {
+          continue;
+        }
         parts.push(rule.cssText);
       }
     } catch {
@@ -106,7 +110,7 @@ async function getResolvedCss(): Promise<string> {
     }
   }
 
-  await Promise.all([...urls].map((u) => fetchAsDataUrl(u)));
+  await Promise.all([...urls].map(async (u) => fetchAsDataUrl(u)));
 
   URL_FUNC_RE.lastIndex = 0;
   cachedCss = rawCss.replaceAll(URL_FUNC_RE, (_, raw: string) => {
@@ -159,7 +163,7 @@ function cloneSubtree(
   node: Node,
   vh: number,
   stickyPins: Map<Element, StickyPin>,
-  imageJobs: Array<{ cloned: HTMLImageElement; src: string }>,
+  imageJobs: { cloned: HTMLImageElement; src: string }[],
 ): Node | null {
   if (node.nodeType === Node.TEXT_NODE) {
     return node.cloneNode(false);
@@ -172,7 +176,7 @@ function cloneSubtree(
   if (
     SKIP_TAGS.has(tag)
     || node.id === "skeleton-container"
-    || node.hasAttribute("data-ink-ignore")
+    || (node instanceof HTMLElement && Object.hasOwn(node.dataset, "inkIgnore"))
   ) {
     return null;
   }
@@ -250,7 +254,7 @@ export async function captureViewport(
   const stickyPins = collectStickyPins(scrollY, vh);
 
   const cssPromise = getResolvedCss();
-  const imageJobs: Array<{ cloned: HTMLImageElement; src: string }> = [];
+  const imageJobs: { cloned: HTMLImageElement; src: string }[] = [];
   const bodyClone = cloneSubtree(document.body, vh, stickyPins, imageJobs);
   if (!(bodyClone instanceof HTMLElement)) {
     throw new TypeError("Failed to clone viewport body");

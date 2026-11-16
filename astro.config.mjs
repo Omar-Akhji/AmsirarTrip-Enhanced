@@ -38,7 +38,7 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
     resolve: { alias: { "@": srcDir } },
-    build: { cssMinify: "lightningcss" },
+    build: { cssMinify: "esbuild" },
   },
 
   // ─── 6. Image Optimization ────────────────────────────────────────────────
