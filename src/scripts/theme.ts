@@ -3,9 +3,25 @@
  * preference sync, Astro View Transitions, and theme-color meta tag updates.
  */
 
+import { InkTransition, type Point } from "./ink/ink-transition";
+
 const STORAGE_KEY = "amsirar-theme";
 
 export type Theme = "light" | "dark";
+
+let inkTransition: InkTransition | null = null;
+
+function getInkTransition(): InkTransition | null {
+  if (inkTransition) {
+    return inkTransition;
+  }
+  const canvas = document.querySelector<HTMLCanvasElement>("#ink-canvas");
+  if (!canvas) {
+    return null;
+  }
+  inkTransition = new InkTransition(canvas);
+  return inkTransition;
+}
 
 export function getPreferredTheme(): Theme {
   try {
@@ -65,10 +81,16 @@ export function setTheme(theme: Theme): void {
   applyTheme(theme);
 }
 
-export function toggleTheme(): Theme {
+export function toggleTheme(origin?: Point): Theme {
   const current = document.documentElement.classList.contains("dark") ? "dark" : "light";
   const next: Theme = current === "dark" ? "light" : "dark";
-  setTheme(next);
+  const transition = getInkTransition();
+
+  if (transition) {
+    transition.toggle(current, next, setTheme, origin);
+  } else {
+    setTheme(next);
+  }
   return next;
 }
 
@@ -90,7 +112,16 @@ const handleToggleClick = (e: MouseEvent): void => {
   }
 
   e.preventDefault();
-  toggleTheme();
+  let origin: Point | undefined;
+  if (e.detail === 0) {
+    const rect = target.getBoundingClientRect();
+    if (rect.width > 0 && rect.height > 0) {
+      origin = { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+    }
+  } else {
+    origin = { x: e.clientX, y: e.clientY };
+  }
+  toggleTheme(origin);
 };
 
 let listenersInitialized = false;
@@ -137,8 +168,10 @@ document.addEventListener("astro:after-swap", () => {
 document.addEventListener("astro:page-load", () => {
   applyTheme(getPreferredTheme());
   initThemeListeners();
+  getInkTransition();
 });
 
 // Immediately initialize on first script run
 applyTheme(getPreferredTheme());
 initThemeListeners();
+getInkTransition();

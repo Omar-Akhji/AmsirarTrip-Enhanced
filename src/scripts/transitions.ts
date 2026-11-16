@@ -144,6 +144,7 @@ function hideSkeleton(): void {
     container.classList.add("hidden");
     container.setAttribute("aria-hidden", "true");
     container.style.opacity = "1";
+    globalThis.dispatchEvent(new CustomEvent("amsirar:page-ready"));
   }, 160);
 }
 

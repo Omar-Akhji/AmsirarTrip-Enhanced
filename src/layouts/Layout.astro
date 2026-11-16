@@ -331,13 +331,21 @@ const currentOgLocale = OG_LOCALE_MAP[locale] ?? locale;
       id="page-progress-bar"
       transition:persist="page-progress-bar"
     ></div>
+    <canvas
+      aria-hidden="true"
+      class="ink-canvas"
+      data-ink-ignore
+      id="ink-canvas"
+      transition:persist="ink-canvas"
+    ></canvas>
     <script src="../scripts/transitions.ts"></script>
     <script src="../scripts/smooth-scroll.ts"></script>
     <script src="../scripts/scroll-animate.ts"></script>
     <script src="../scripts/webmcp-tools.ts"></script>
     <Navbar />
     <main
-      class="relative isolate block flex-[1_0_auto] inline-full min-h-screen overflow-x-clip focus:outline-hidden"       id="main-content"
+      class="relative isolate block flex-[1_0_auto] inline-full min-h-screen overflow-x-clip focus:outline-hidden"
+      id="main-content"
       tabindex="-1"
       transition:animate="fade"
     >

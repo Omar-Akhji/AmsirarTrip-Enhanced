@@ -308,3 +308,38 @@ html.lenis {
   font-family: var(--font-mono, "JetBrains Mono", ui-monospace, monospace);
   font-variant-numeric: tabular-nums;
 }
+
+.ink-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  inline-size: 100%;
+  block-size: 100%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 150ms ease;
+}
+
+.ink-canvas[data-active="true"] {
+  opacity: 1;
+  transition: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html.theme-fade {
+    transition:
+      color 350ms ease,
+      background-color 350ms ease,
+      scrollbar-color 350ms ease;
+  }
+
+  html.theme-fade :where(:not([data-theme-toggle] *)) {
+    transition:
+      color 350ms ease,
+      background-color 350ms ease,
+      border-color 350ms ease,
+      fill 350ms ease,
+      stroke 350ms ease,
+      opacity 350ms ease;
+  }
+}
