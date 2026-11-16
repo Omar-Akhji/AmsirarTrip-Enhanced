@@ -1,7 +1,10 @@
+import { isSkeletonActive } from "./transitions";
+
 const REVEAL_CLEANUP_TIMEOUT_MS = 2500;
 
 let revealObserver: IntersectionObserver | undefined;
 let counterObserver: IntersectionObserver | undefined;
+let pendingReadyHandler: (() => void) | undefined;
 
 function createRevealObserver(): IntersectionObserver {
   return new IntersectionObserver(
@@ -79,13 +82,8 @@ function getReducedMotionPreference(): boolean {
   );
 }
 
-function init() {
-  cleanup();
-
+function startObserving() {
   const reducedMotion = getReducedMotionPreference();
-
-  // Mark system as active (enables opacity: 0 initial state in CSS)
-  document.documentElement.classList.add("scroll-init");
 
   if (!reducedMotion) {
     revealObserver = createRevealObserver();
@@ -118,7 +116,29 @@ function init() {
   }
 }
 
+function init() {
+  cleanup();
+
+  // Mark system as active (enables opacity: 0 initial state in CSS)
+  document.documentElement.classList.add("scroll-init");
+
+  if (isSkeletonActive()) {
+    pendingReadyHandler = () => {
+      pendingReadyHandler = undefined;
+      startObserving();
+    };
+    globalThis.addEventListener("amsirar:page-ready", pendingReadyHandler, { once: true });
+    return;
+  }
+
+  startObserving();
+}
+
 function cleanup() {
+  if (pendingReadyHandler) {
+    globalThis.removeEventListener("amsirar:page-ready", pendingReadyHandler);
+    pendingReadyHandler = undefined;
+  }
   revealObserver?.disconnect();
   revealObserver = undefined;
   counterObserver?.disconnect();

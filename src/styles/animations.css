@@ -278,7 +278,12 @@
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    .slider .list .item:is(:first-child, .is-incoming) .blur-token {
+    html.skeleton-active .slider .list .item:first-child .blur-token {
+      opacity: 0;
+      animation: none;
+    }
+
+    html:not(.skeleton-active) .slider .list .item:is(:first-child, .is-incoming) .blur-token {
       animation: blurTokenReveal var(--blur-duration, 0.65s) var(--ease-out-expo)
         var(--token-delay, 0ms) both;
     }

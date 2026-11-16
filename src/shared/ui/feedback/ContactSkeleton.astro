@@ -10,42 +10,70 @@ interface Props {
 const { class: className } = Astro.props;
 ---
 
-<div
-  aria-busy="true"
-  aria-label="Loading contact view"
-  class:list={["size-full bg-white text-stone-900", className]}
->
-  <PageHeaderSkeleton
-    crumbWidths={["w-12", "w-20"]}
-    hasButtons={false}
-    hasUnderline={true}
-  />
+<PageHeaderSkeleton
+  class={className}
+  crumbWidths={["w-12", "w-20"]}
+  hasButtons={false}
+  hasUnderline={true}
+/>
 
+<div class="bg-white text-stone-900">
   {/* DIRECT CHANNELS SKELETON */}
-  <section class="relative isolate bg-white py-12 sm:py-16 lg:py-24">
+  <section
+    aria-busy="true"
+    aria-label="Loading contact methods"
+    class="relative isolate bg-white py-12 sm:py-16 lg:py-24"
+  >
     <div class="mx-auto px-4 sm:px-6 lg:px-8 max-inline-7xl 2xl:max-inline-360 3xl:max-inline-420">
-      {/* Mobile Mode: Card Stack matching ContactFolderStack */}
+      {/* Mobile Mode: Match ContactFolderStack 220vh runway */}
       <div class="block md:hidden w-full">
-        <div class="flex flex-col gap-5 w-full">
-          {Array.from({ length: 3 }, () => (
-            <article class="contact-info-card group flex h-auto w-full flex-col rounded-2xl border border-stone-200/90 bg-stone-50/95 p-5 sm:p-6 shadow-xl shadow-stone-900/10">
-              <div>
-                <div class="mbe-2.5 border-b border-stone-200/80 pb-2.5">
-                  <Skeleton class="h-6 w-48" />
-                </div>
-                <div class="space-y-2">
-                  <Skeleton class="h-4 w-full" />
-                  <Skeleton class="h-4 w-4/5" />
-                </div>
+        <div class="relative w-full overflow-x-clip">
+          <div class="relative w-full h-auto motion-safe:h-[220vh]">
+            <div class="static h-auto motion-safe:sticky motion-safe:top-18 motion-safe:h-102.5 w-full mx-auto">
+              <div class="flex flex-col gap-5 w-full motion-safe:hidden">
+                {Array.from({ length: 3 }, () => (
+                  <article class="contact-info-card relative flex h-55 w-full flex-col justify-between rounded-2xl border border-stone-200/90 bg-stone-50/95 p-5 shadow-xl shadow-stone-900/10">
+                    <div>
+                      <div class="mbe-2.5 border-b border-stone-200/80 pb-2.5">
+                        <Skeleton class="h-6 w-48" />
+                      </div>
+                      <div class="space-y-2">
+                        <Skeleton class="h-4 w-full" />
+                        <Skeleton class="h-4 w-4/5" />
+                      </div>
+                    </div>
+                    <div class="mbs-2 border-t border-stone-200/60 pbs-2.5">
+                      <ButtonSkeleton
+                        class="w-full"
+                        size="md"
+                        variant="outline"
+                      />
+                    </div>
+                  </article>
+                ))}
               </div>
-
-              <div class="mbs-3.5 border-t border-stone-200/60 pbs-3.5">
-                <ButtonSkeleton
-                  class="w-full"                   size="md"                   variant="outline"
-                />
+              <div class="hidden motion-safe:block relative top-2 h-85 w-full">
+                <article class="contact-info-card relative flex h-55 w-full flex-col justify-between rounded-2xl border border-stone-200/90 bg-stone-50/95 p-5 shadow-xl shadow-stone-900/10">
+                  <div>
+                    <div class="mbe-2.5 border-b border-stone-200/80 pb-2.5">
+                      <Skeleton class="h-6 w-48" />
+                    </div>
+                    <div class="space-y-2">
+                      <Skeleton class="h-4 w-full" />
+                      <Skeleton class="h-4 w-4/5" />
+                    </div>
+                  </div>
+                  <div class="mbs-2 border-t border-stone-200/60 pbs-2.5">
+                    <ButtonSkeleton
+                      class="w-full"
+                      size="md"
+                      variant="outline"
+                    />
+                  </div>
+                </article>
               </div>
-            </article>
-          ))}
+            </div>
+          </div>
         </div>
       </div>
 
@@ -68,7 +96,9 @@ const { class: className } = Astro.props;
               {/* Action Button */}
               <div class="mbs-6 border-t border-stone-200/60 pbs-4">
                 <ButtonSkeleton
-                  class="w-full"                   size="md"                   variant="outline"
+                  class="w-full"
+                  size="md"
+                  variant="outline"
                 />
               </div>
             </article>
@@ -81,15 +111,17 @@ const { class: className } = Astro.props;
   {/* EXPEDITION INQUIRY SKELETON */}
   <section
     class="relative isolate border-t border-stone-200 bg-stone-50 py-12 sm:py-16 lg:py-24"
-    id="contact-form-section"
+    id="contact-form-section-skeleton"
   >
     <div class="mx-auto px-4 sm:px-6 lg:px-8 max-inline-7xl 2xl:max-inline-360 3xl:max-inline-420">
       <div class="mbe-8 sm:mbe-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-stone-200 pb-6 sm:pb-8">
-        <hgroup class="max-w-2xl space-y-3">
-          <Skeleton class="h-9 w-64" />
-          <div class="border-s-2 border-orange-600 ps-4 py-0.5 max-w-[62ch] space-y-2">
-            <Skeleton class="h-4 w-full" />
-            <Skeleton class="h-4 w-3/4" />
+        <hgroup class="max-w-2xl space-y-2">
+          <div class="text-3xl sm:text-4xl font-bold leading-tight">
+            <Skeleton class="h-[1.15em] w-64 sm:w-80 max-w-full" />
+          </div>
+          <div class="border-s-2 border-orange-600 ps-4 py-0.5 text-sm/relaxed sm:text-base max-w-[62ch] space-y-1.5">
+            <Skeleton class="h-4 sm:h-5 w-full" />
+            <Skeleton class="h-4 w-3/4 sm:hidden" />
           </div>
         </hgroup>
       </div>
@@ -99,24 +131,24 @@ const { class: className } = Astro.props;
         <div class="inline-full">
           <div class="rounded-2xl border border-stone-200/90 bg-white p-6 shadow-xs shadow-stone-900/5 block-full sm:p-8">
             <div class="mbe-6 border-b border-stone-100 pbe-5">
-              <Skeleton class="h-3.5 w-32 mb-2" />
+              <Skeleton class="h-4 w-32 mb-2" />
               <div class="mbs-1">
                 <Skeleton class="h-7 w-56" />
               </div>
             </div>
 
-            <div class="flex flex-col gap-5">
+            <div class="flex flex-col gap-6">
               {/* Row 1: Name & Email */}
               <div class="grid gap-5 md:grid-cols-2">
                 <div>
                   <div class="mbe-1.5">
-                    <Skeleton class="h-3.5 w-20" />
+                    <Skeleton class="h-4 w-20" />
                   </div>
                   <Skeleton class="h-12 w-full rounded-xl" />
                 </div>
                 <div>
                   <div class="mbe-1.5">
-                    <Skeleton class="h-3.5 w-16" />
+                    <Skeleton class="h-4 w-16" />
                   </div>
                   <Skeleton class="h-12 w-full rounded-xl" />
                 </div>
@@ -126,13 +158,13 @@ const { class: className } = Astro.props;
               <div class="grid gap-5 md:grid-cols-2">
                 <div>
                   <div class="mbe-1.5">
-                    <Skeleton class="h-3.5 w-24" />
+                    <Skeleton class="h-4 w-24" />
                   </div>
                   <Skeleton class="h-12 w-full rounded-xl" />
                 </div>
                 <div>
                   <div class="mbe-1.5">
-                    <Skeleton class="h-3.5 w-28" />
+                    <Skeleton class="h-4 w-28" />
                   </div>
                   <Skeleton class="h-12 w-full rounded-xl" />
                 </div>
@@ -141,18 +173,20 @@ const { class: className } = Astro.props;
               {/* Row 3: Message */}
               <div>
                 <div class="mbe-1.5">
-                  <Skeleton class="h-3.5 w-20" />
+                  <Skeleton class="h-4 w-20" />
                 </div>
-                <Skeleton class="h-40 min-block-40 w-full rounded-xl" />
+                <Skeleton class="h-44 min-block-44 w-full rounded-xl" />
               </div>
 
               {/* Bottom: Captcha + Submit button */}
               <div class="flex flex-col gap-4 pbs-2 sm:flex-row sm:items-center sm:justify-between">
                 <div class="flex justify-center sm:justify-start">
-                  <Skeleton class="h-16 w-64 rounded-xl" />
+                  <Skeleton class="h-18 w-64 rounded-xl" />
                 </div>
                 <ButtonSkeleton
-                  class="w-48"                   size="md"                   variant="card"
+                  class="w-48"
+                  size="md"
+                  variant="card"
                 />
               </div>
             </div>
@@ -177,7 +211,6 @@ const { class: className } = Astro.props;
               </header>
 
               <div class="mbs-8 space-y-6 text-sm">
-                <!-- Item 1: Visit -->
                 <div class="grid grid-cols-[48px_1fr] items-start gap-4">
                   <Skeleton class="size-12 rounded-full bg-white/15" />
                   <div class="self-start space-y-2">
@@ -186,8 +219,6 @@ const { class: className } = Astro.props;
                     <Skeleton class="h-3.5 w-3/4 bg-white/10" />
                   </div>
                 </div>
-
-                <!-- Item 2: Call -->
                 <div class="grid grid-cols-[48px_1fr] items-start gap-4">
                   <Skeleton class="size-12 rounded-full bg-white/15" />
                   <div class="self-start space-y-2">
@@ -195,8 +226,6 @@ const { class: className } = Astro.props;
                     <Skeleton class="h-3.5 w-40 bg-white/10" />
                   </div>
                 </div>
-
-                <!-- Item 3: Email -->
                 <div class="grid grid-cols-[48px_1fr] items-start gap-4">
                   <Skeleton class="size-12 rounded-full bg-white/15" />
                   <div class="self-start space-y-2">
@@ -223,10 +252,12 @@ const { class: className } = Astro.props;
   >
     <div class="mx-auto px-4 sm:px-6 lg:px-8 max-inline-7xl 2xl:max-inline-360 3xl:max-inline-420">
       <div class="mbe-8 sm:mbe-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-stone-200 pb-6 sm:pb-8">
-        <hgroup class="max-w-2xl space-y-3">
-          <Skeleton class="h-9 w-64" />
-          <div class="border-s-2 border-orange-600 ps-4 py-0.5 max-w-[62ch]">
-            <Skeleton class="h-4 w-full" />
+        <hgroup class="max-w-2xl space-y-2">
+          <div class="text-3xl sm:text-4xl font-bold leading-tight">
+            <Skeleton class="h-[1.15em] w-64 sm:w-80 max-w-full" />
+          </div>
+          <div class="border-s-2 border-orange-600 ps-4 py-0.5 text-sm/relaxed sm:text-base max-w-[62ch]">
+            <Skeleton class="h-5 sm:h-6 w-full" />
           </div>
         </hgroup>
       </div>
@@ -242,22 +273,17 @@ const { class: className } = Astro.props;
           ></div>
 
           <div class="relative z-10 text-center space-y-4 px-6 max-w-lg mx-auto flex flex-col items-center">
-            {/* Centered Map icon skeleton */}
             <Skeleton class="size-14 rounded-full bg-white/15" />
-
-            {/* Title */}
             <Skeleton class="h-7 w-60 bg-white/20" />
-
-            {/* Description */}
             <div class="space-y-2 w-full flex flex-col items-center">
               <Skeleton class="h-4 w-full bg-white/10" />
               <Skeleton class="h-4 w-2/3 bg-white/10" />
             </div>
-
-            {/* Centered Load Map CTA Button skeleton */}
             <div class="pt-2 flex justify-center">
               <ButtonSkeleton
-                class="w-40"                 size="md"                 variant="primary"
+                class="w-40"
+                size="md"
+                variant="primary"
               />
             </div>
           </div>

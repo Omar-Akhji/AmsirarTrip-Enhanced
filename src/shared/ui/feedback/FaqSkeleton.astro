@@ -33,14 +33,20 @@ const items = Array.from({ length: count }, (_, i) => ({
 {isListing ?
   <section class="border-t border-zinc-200 bg-white py-12 sm:py-16 lg:py-20">
     <div class="mx-auto px-4 sm:px-6 lg:px-8 max-inline-7xl 2xl:max-inline-360 3xl:max-inline-420">
-      <hgroup class="mb-8 max-w-2xl space-y-2">
-        {hasCategoryKicker && <Skeleton class:list={["h-3.5", categoryWidth]} />}
-        <div class:list={{ "mt-1": hasCategoryKicker }}>
-          <Skeleton class:list={["h-8 sm:h-9", headingWidth]} />
+      <hgroup class="mb-8 max-w-2xl">
+        {hasCategoryKicker && <Skeleton class:list={["h-4", categoryWidth]} />}
+        <div
+          class:list={[
+            { "mt-1": hasCategoryKicker },
+            "text-2xl sm:text-3xl font-bold leading-tight",
+          ]}
+        >
+          <Skeleton class:list={["h-[1.2em] max-w-full", headingWidth]} />
         </div>
         {hasSubtitle && (
-          <div class="mt-2 border-s-2 border-orange-600 ps-4 py-0.5">
-            <Skeleton class:list={["h-4", subtitleWidth]} />
+          <div class="mt-2 border-s-2 border-orange-600 ps-4 py-0.5 text-sm/relaxed sm:text-base space-y-1.5 max-w-[62ch]">
+            <Skeleton class:list={["h-5 sm:h-6 max-w-full", subtitleWidth]} />
+            <Skeleton class="h-5 w-2/3 sm:hidden" />
           </div>
         )}
       </hgroup>
@@ -56,7 +62,7 @@ const items = Array.from({ length: count }, (_, i) => ({
             <div class="flex items-start justify-between gap-4 text-base font-semibold text-stone-900">
               <div class="flex items-center gap-2.5 min-w-0 flex-1">
                 <Skeleton class="size-5 shrink-0 rounded-full" />
-                <Skeleton class:list={["h-5 flex-1", item.width]} />
+                <Skeleton class:list={["h-6 flex-1", item.width]} />
               </div>
               <span
                 aria-hidden="true"
@@ -72,14 +78,19 @@ const items = Array.from({ length: count }, (_, i) => ({
   </section>
 : <div>
     <section>
-      <hgroup class="mbe-4 space-y-2">
-        {hasCategoryKicker && <Skeleton class:list={["h-3.5", categoryWidth]} />}
-        <div class:list={{ "mbs-1": hasCategoryKicker }}>
-          <Skeleton class:list={["h-7 sm:h-8", headingWidth]} />
+      <hgroup class="mbe-4 space-y-1">
+        {hasCategoryKicker && <Skeleton class:list={["h-4", categoryWidth]} />}
+        <div
+          class:list={[
+            { "mbs-1": hasCategoryKicker },
+            "text-xl sm:text-2xl md:text-3xl font-bold leading-tight",
+          ]}
+        >
+          <Skeleton class:list={["h-[1.25em] max-w-full", headingWidth]} />
         </div>
         {hasSubtitle && (
-          <div class="mt-2 border-s-2 border-orange-600 ps-4 py-0.5">
-            <Skeleton class:list={["h-4", subtitleWidth]} />
+          <div class="mt-2 border-s-2 border-orange-600 ps-4 py-0.5 text-sm/relaxed sm:text-base">
+            <Skeleton class:list={["h-5 sm:h-6 max-w-full", subtitleWidth]} />
           </div>
         )}
       </hgroup>
@@ -95,7 +106,7 @@ const items = Array.from({ length: count }, (_, i) => ({
             <div class="flex items-start justify-between gap-4 text-base font-semibold text-stone-900">
               <div class="flex items-center gap-2.5 min-w-0 flex-1">
                 <Skeleton class="size-5 shrink-0 rounded-full" />
-                <Skeleton class:list={["h-5 flex-1", item.width]} />
+                <Skeleton class:list={["h-6 flex-1", item.width]} />
               </div>
               <span
                 aria-hidden="true"

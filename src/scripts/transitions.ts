@@ -2,10 +2,60 @@ import type { TransitionBeforePreparationEvent } from "astro:transitions/client"
 
 const SKELETON_DEV_DELAY_MS = 800;
 const PROGRESS_BAR_ID = "page-progress-bar";
+const SCROLL_KEYS = new Set([" ", "ArrowDown", "ArrowUp", "End", "Home", "PageDown", "PageUp"]);
 
 let progressTimer: ReturnType<typeof setInterval> | undefined;
 let progressResetTimeout: ReturnType<typeof setTimeout> | undefined;
 let progressValue = 0;
+let hideTimer: ReturnType<typeof setTimeout> | undefined;
+let scrollLocked = false;
+
+function preventScrollEvent(event: Event): void {
+  if (event.cancelable) {
+    event.preventDefault();
+  }
+}
+
+function preventScrollKey(event: KeyboardEvent): void {
+  if (!SCROLL_KEYS.has(event.key)) return;
+  const target = event.target;
+  if (
+    target instanceof HTMLInputElement
+    || target instanceof HTMLTextAreaElement
+    || target instanceof HTMLSelectElement
+    || (target instanceof HTMLElement && target.isContentEditable)
+  ) {
+    return;
+  }
+  event.preventDefault();
+}
+
+function lockScrollWhileSkeletonVisible(): void {
+  globalThis.__lenis?.stop();
+  if (scrollLocked) return;
+  scrollLocked = true;
+  globalThis.addEventListener("wheel", preventScrollEvent, { passive: false });
+  globalThis.addEventListener("touchmove", preventScrollEvent, { passive: false });
+  globalThis.addEventListener("keydown", preventScrollKey);
+}
+
+function unlockScrollAfterSkeleton(): void {
+  if (scrollLocked) {
+    scrollLocked = false;
+    globalThis.removeEventListener("wheel", preventScrollEvent);
+    globalThis.removeEventListener("touchmove", preventScrollEvent);
+    globalThis.removeEventListener("keydown", preventScrollKey);
+  }
+  globalThis.__lenis?.start();
+}
+
+export function isSkeletonActive(): boolean {
+  if (document.documentElement.classList.contains("skeleton-active")) {
+    return true;
+  }
+  const container = document.querySelector<HTMLElement>("#skeleton-container");
+  return Boolean(container && !container.classList.contains("hidden"));
+}
 
 const delay = async (ms: number): Promise<void> =>
   new Promise((resolve) => setTimeout(resolve, ms));
@@ -101,6 +151,7 @@ export function resolveSkeletonRoute(pathname: string): string {
 }
 
 function showSkeleton(routeKey: string): void {
+  clearTimeout(hideTimer);
   const container = document.querySelector<HTMLElement>("#skeleton-container");
   const content = document.querySelector<HTMLElement>("#page-content");
   if (!container || !content) return;
@@ -116,6 +167,10 @@ function showSkeleton(routeKey: string): void {
   container.querySelectorAll("[data-skeleton]").forEach((el) => {
     el.classList.add("hidden");
   });
+
+  document.documentElement.classList.add("skeleton-active");
+  document.documentElement.classList.remove("page-ready");
+  lockScrollWhileSkeletonVisible();
 
   // Reveal targeted skeleton
   targetSkeleton.classList.remove("hidden");
@@ -140,10 +195,14 @@ function hideSkeleton(): void {
   container.style.transition = "opacity 150ms cubic-bezier(0.4, 0, 0.2, 1)";
   container.style.opacity = "0";
 
-  setTimeout(() => {
+  clearTimeout(hideTimer);
+  hideTimer = setTimeout(() => {
     container.classList.add("hidden");
     container.setAttribute("aria-hidden", "true");
     container.style.opacity = "1";
+    document.documentElement.classList.remove("skeleton-active");
+    document.documentElement.classList.add("page-ready");
+    unlockScrollAfterSkeleton();
     globalThis.dispatchEvent(new CustomEvent("amsirar:page-ready"));
   }, 160);
 }

@@ -1,4 +1,5 @@
 import Lenis from "lenis";
+import { isSkeletonActive } from "./transitions";
 
 declare global {
   var __lenis: Lenis | undefined;
@@ -6,6 +7,7 @@ declare global {
 
 let lenis: Lenis | undefined;
 let bodyObserver: MutationObserver | undefined;
+let pendingReadyHandler: (() => void) | undefined;
 
 /** Checks if user prefers reduced motion. */
 function prefersReducedMotion(): boolean {
@@ -92,9 +94,8 @@ function resetScrollToTop() {
   document.body.scrollTop = 0;
 }
 
-/** Full page load orchestrator. */
-function onPageLoad() {
-  const instance = initLenis();
+function activateScrollForPage(instance: Lenis | undefined) {
+  instance?.start();
 
   // If page is loaded directly with an anchor hash in URL, smooth scroll to it
   if (globalThis.location.hash) {
@@ -103,21 +104,46 @@ function onPageLoad() {
       if (targetEl) {
         globalThis.setTimeout(() => {
           instance.scrollTo(targetEl, { offset: -72, immediate: false });
-        }, 150);
+        }, 50);
       }
     }
   } else {
     resetScrollToTop();
   }
 
-  // Small delay to allow layout recalculation after transition skeletons vanish
   globalThis.setTimeout(() => {
     instance?.resize();
   }, 100);
 }
 
+/** Full page load orchestrator. */
+function onPageLoad() {
+  if (pendingReadyHandler) {
+    globalThis.removeEventListener("amsirar:page-ready", pendingReadyHandler);
+    pendingReadyHandler = undefined;
+  }
+
+  const instance = initLenis();
+
+  if (isSkeletonActive()) {
+    instance?.stop();
+    pendingReadyHandler = () => {
+      pendingReadyHandler = undefined;
+      activateScrollForPage(instance);
+    };
+    globalThis.addEventListener("amsirar:page-ready", pendingReadyHandler, { once: true });
+    return;
+  }
+
+  activateScrollForPage(instance);
+}
+
 /** View transition preparation hook. */
 function onBeforePreparation(e: Event) {
+  if (pendingReadyHandler) {
+    globalThis.removeEventListener("amsirar:page-ready", pendingReadyHandler);
+    pendingReadyHandler = undefined;
+  }
   const hasHash = Boolean("to" in e && (e as { to: URL }).to.hash);
   if (!hasHash) {
     resetScrollToTop();

@@ -4,6 +4,8 @@
  * lifecycle management.
  */
 
+import { isSkeletonActive } from "./transitions";
+
 function initSlider(): void {
   const rootSlider = document.querySelector<HTMLElement>("#home-hero-slider");
   if (
@@ -373,10 +375,23 @@ function initSlider(): void {
   slider.addEventListener("focusin", stopAutoplay);
   slider.addEventListener("focusout", startAutoplay);
 
-  startAutoplay();
+  let pendingReadyStart: (() => void) | undefined;
+  if (isSkeletonActive()) {
+    pendingReadyStart = () => {
+      pendingReadyStart = undefined;
+      startAutoplay();
+    };
+    globalThis.addEventListener("amsirar:page-ready", pendingReadyStart, { once: true });
+  } else {
+    startAutoplay();
+  }
 
   // Clean up on Astro page transition
   const cleanup = () => {
+    if (pendingReadyStart) {
+      globalThis.removeEventListener("amsirar:page-ready", pendingReadyStart);
+      pendingReadyStart = undefined;
+    }
     delete slider.dataset["sliderInitialized"];
     stopAutoplay();
     nextBtn?.removeEventListener("click", onNextClick);
