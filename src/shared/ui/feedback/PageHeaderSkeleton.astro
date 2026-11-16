@@ -68,7 +68,7 @@ const {
         {/* Title matching PageHeader text-3xl sm:text-4xl lg:text-5xl */}
         <div
           class:list={[
-            "mx-auto text-center text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight space-y-2 flex flex-col items-center",
+            "mx-auto text-center text-3xl/tight sm:text-4xl lg:text-5xl font-bold  space-y-2 flex flex-col items-center",
             titleWidth,
           ]}
         >
@@ -76,7 +76,7 @@ const {
             <Skeleton
               class:list={[
                 "h-[1.15em] bg-white/20",
-                i === titleLines - 1 && titleLines > 1 ? "w-3/4" : "w-full",
+                {"w-3/4": i === titleLines - 1 && titleLines > 1, "w-full": !(i === titleLines - 1 && titleLines > 1)},
               ]}
             />
           ))}
@@ -92,7 +92,7 @@ const {
             <Skeleton
               class:list={[
                 "h-[1.25em] bg-white/15",
-                i === subtitleLines - 1 && subtitleLines > 1 ? "w-3/4" : "w-full",
+                {"w-3/4": i === subtitleLines - 1 && subtitleLines > 1, "w-full": !(i === subtitleLines - 1 && subtitleLines > 1)},
               ]}
             />
           ))}
