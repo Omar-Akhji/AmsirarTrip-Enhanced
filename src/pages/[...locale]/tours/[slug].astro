@@ -126,7 +126,12 @@ const relatedTours = allTours
     id={`${tour.tourKey}-breadcrumb-jsonld`}
   />
   <TourLayout
-    bookingId={tour.bookingId}     imageSrc={tour.image}     locale={locale}     seo={tour.seo}     slug={slug}     tour={tour}
+    bookingId={tour.bookingId}
+    imageSrc={tour.image}
+    locale={locale}
+    seo={tour.seo}
+    slug={slug}
+    tour={tour}
     tourKey={tour.tourKey}
   >
     <div data-animate="card-fan-rise">
@@ -139,7 +144,8 @@ const relatedTours = allTours
         tourTitle={tourTitleClean}
       >
         <BookingSidebar
-          locale={locale}           slot="sidebar"
+          locale={locale}
+          slot="sidebar"
         />
       </BookingForm>
     </div>
@@ -157,11 +163,12 @@ const relatedTours = allTours
                 {t("tours.relatedTagline", "Alternative Morocco Circuits")}
               </p>
               <h2
-                class="text-2xl font-bold tracking-tight text-stone-900 sm:text-3xl md:text-4xl 2xl:text-[2.625rem] text-balance dark:text-mist-100"                 id="related-tours-heading"
+                class="text-2xl font-bold tracking-tight text-stone-900 sm:text-3xl md:text-4xl 2xl:text-[2.625rem] text-balance dark:text-mist-100"
+                id="related-tours-heading"
               >
                 {t("tours.relatedTitle", "Explore Companion Desert Itineraries")}
               </h2>
-              <p class="border-s-2 border-orange-600 ps-4 py-0.5 text-sm/relaxed sm:text-base text-stone-600  max-w-[62ch] text-pretty dark:text-mist-200">
+              <p class="border-s-2 border-orange-600 ps-4 py-0.5 text-sm/relaxed sm:text-base text-stone-600 max-w-[62ch] text-pretty dark:text-mist-200">
                 {t(
                   "tours.relatedSubtitle",
                   "Discover alternative durations and route variations crafted with private 4x4 transport and luxury desert camps.",

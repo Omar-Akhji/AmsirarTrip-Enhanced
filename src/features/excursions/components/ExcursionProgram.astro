@@ -39,13 +39,17 @@ const STAGE_DELAYS = [
       {kicker}
     </p>
     <h3
-      class="mbs-1 text-xl font-bold tracking-tight text-stone-900 sm:text-2xl md:text-3xl dark:text-mist-100"       id="excursion-itinerary-heading"
+      class="mbs-1 text-xl font-bold tracking-tight text-stone-900 sm:text-2xl md:text-3xl dark:text-mist-100"
+      id="excursion-itinerary-heading"
     >
       {programTitle}
     </h3>
   </hgroup>
 
-  <ol class="itinerary-stages-list m-0 list-none p-0 space-y-8" role="list">
+  <ol
+    class="itinerary-stages-list m-0 list-none p-0 space-y-8"
+    role="list"
+  >
     {program.map((stage, index) => (
       <li
         class:list={[STAGE_DELAYS[index] || "animate-delay-0"]}
@@ -70,7 +74,7 @@ const STAGE_DELAYS = [
             <h4 class="text-base sm:text-lg font-bold text-stone-900 tracking-tight dark:text-mist-100">
               {stage.title}
             </h4>
-            <p class="text-sm/relaxed sm:text-base  text-stone-700 font-normal dark:text-mist-200">
+            <p class="text-sm/relaxed sm:text-base text-stone-700 font-normal dark:text-mist-200">
               {stage.description}
             </p>
           </div>

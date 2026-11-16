@@ -50,9 +50,8 @@ const { class: className, hasItinerary = true, hasBadge = true } = Astro.props;
     )}
 
     {/* Title matching TripCard text-xl font-bold */}
-    <div class="mbe-2 space-y-1.5">
-      <Skeleton class="h-6 w-4/5" />
-      {hasItinerary && <Skeleton class="h-6 w-3/5 lg:hidden xl:block" />}
+    <div class="mbe-2">
+      <Skeleton class="h-7 w-4/5" />
     </div>
 
     {/* Description matching TripCard line-clamp-3 text-sm/relaxed */}

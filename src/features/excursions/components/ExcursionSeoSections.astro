@@ -34,7 +34,7 @@ const { metrics, highlights, highlightsTitle } = Astro.props;
           Distance
         </span>
       </dt>
-      <dd class="m-0 col-start-2 row-start-2 font-mono text-xs/snug sm:text-sm font-bold text-stone-900  dark:text-mist-100">
+      <dd class="m-0 col-start-2 row-start-2 font-mono text-xs/snug sm:text-sm font-bold text-stone-900 dark:text-mist-100">
         {metrics.distance}
       </dd>
     </div>
@@ -49,7 +49,7 @@ const { metrics, highlights, highlightsTitle } = Astro.props;
           Duration
         </span>
       </dt>
-      <dd class="m-0 col-start-2 row-start-2 font-mono text-xs/snug sm:text-sm font-bold text-stone-900  dark:text-mist-100">
+      <dd class="m-0 col-start-2 row-start-2 font-mono text-xs/snug sm:text-sm font-bold text-stone-900 dark:text-mist-100">
         {metrics.duration}
       </dd>
     </div>
@@ -64,7 +64,7 @@ const { metrics, highlights, highlightsTitle } = Astro.props;
           Pickup Window
         </span>
       </dt>
-      <dd class="m-0 col-start-2 row-start-2 font-mono text-xs/snug sm:text-sm font-bold text-stone-900  dark:text-mist-100">
+      <dd class="m-0 col-start-2 row-start-2 font-mono text-xs/snug sm:text-sm font-bold text-stone-900 dark:text-mist-100">
         {metrics.pickup}
       </dd>
     </div>
@@ -79,7 +79,7 @@ const { metrics, highlights, highlightsTitle } = Astro.props;
           Elevation / Setting
         </span>
       </dt>
-      <dd class="m-0 col-start-2 row-start-2 font-mono text-xs/snug sm:text-sm font-bold text-stone-900  dark:text-mist-100">
+      <dd class="m-0 col-start-2 row-start-2 font-mono text-xs/snug sm:text-sm font-bold text-stone-900 dark:text-mist-100">
         {metrics.elevation}
       </dd>
     </div>
@@ -87,5 +87,7 @@ const { metrics, highlights, highlightsTitle } = Astro.props;
 </div>
 
 <HighlightsList
-  highlights={highlights}   highlightsTitle={highlightsTitle}   idPrefix="excursion"
+  highlights={highlights}
+  highlightsTitle={highlightsTitle}
+  idPrefix="excursion"
 />

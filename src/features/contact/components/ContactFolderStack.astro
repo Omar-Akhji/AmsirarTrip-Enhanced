@@ -35,17 +35,18 @@ const { methods } = Astro.props;
             class:list={[
               "contact-card-slot static inset-auto opacity-100 transform-none w-full origin-top motion-safe:absolute motion-safe:inset-x-0 motion-safe:top-0 motion-safe:will-change-transform",
               { "z-10": index === 0, "z-12": index === 1, "z-14": index >= 2 },
-            ]}             data-stack-card={index}
+            ]}
+            data-stack-card={index}
           >
             <article
               aria-label={typeof method.title === "string" ? method.title : undefined}
               class="contact-info-card group relative flex h-55 w-full flex-col justify-between rounded-2xl border border-stone-200/90 bg-stone-50/95 p-5 shadow-xl shadow-stone-900/10 backdrop-blur-xs transition-shadow duration-300 dark:border-white/10 dark:bg-surface-card/90 dark:shadow-[0_12px_28px_rgba(0,0,0,0.6)]"
             >
               <div>
-                <h3 class="mbe-2.5 border-b border-stone-200/80 pb-2.5 text-base/snug sm:text-lg font-bold  tracking-tight text-stone-950 dark:text-mist-100 transition-colors duration-200 group-hover:text-orange-600 dark:border-white/10">
+                <h3 class="mbe-2.5 border-b border-stone-200/80 pb-2.5 text-base/snug sm:text-lg font-bold tracking-tight text-stone-950 dark:text-mist-100 transition-colors duration-200 group-hover:text-orange-600 dark:border-white/10">
                   {method.title}
                 </h3>
-                <p class="text-sm/relaxed  text-stone-600 dark:text-mist-200">
+                <p class="text-sm/relaxed text-stone-600 dark:text-mist-200">
                   {method.description}
                 </p>
               </div>
@@ -59,7 +60,10 @@ const { methods } = Astro.props;
                     : method.id === "email" ?
                       "#contact-form-section"
                     : "#location"
-                  }                   rel={method.id === "phone" ? "noopener noreferrer" : undefined}                   target={method.id === "phone" ? "_blank" : undefined}                   variant="outline"
+                  }
+                  rel={method.id === "phone" ? "noopener noreferrer" : undefined}
+                  target={method.id === "phone" ? "_blank" : undefined}
+                  variant="outline"
                 >
                   <span class="uppercase tracking-wider">
                     {method.id === "phone" ?

@@ -467,9 +467,9 @@ const excursionsCount = (await getExcursionsData()).length;
             </div>
           </aside>
 
-          {/* CONTENT SECTIONS matching PrivacyView 10 articles */}
+          {/* CONTENT SECTIONS matching PrivacyView 11 sections + Cookie Inventory Table */}
           <div class="space-y-6">
-            {Array.from({ length: 10 }, (_, idx) => (
+            {Array.from({ length: 11 }, (_, idx) => (
               <section class="relative rounded-2xl border border-stone-200/90 bg-white p-6 sm:p-8 shadow-sm">
                 <div class="border-be border-stone-200/80 pbe-4 flex items-center gap-3">
                   <span class="flex shrink-0 items-center justify-center rounded-full bg-orange-500/10 px-2 py-1 font-mono text-xs font-bold text-orange-600">
@@ -488,6 +488,14 @@ const excursionsCount = (await getExcursionsData()).length;
                     <Skeleton class="h-4 w-11/12" />
                     <Skeleton class="h-4 w-3/4" />
                   </div>
+                  {idx === 3 && (
+                    <div class="mbs-2 rounded-xl border border-stone-200 bg-stone-50/70 p-4 space-y-3">
+                      <Skeleton class="h-5 w-48" />
+                      {Array.from({ length: 5 }, () => (
+                        <Skeleton class="h-10 w-full rounded-lg" />
+                      ))}
+                    </div>
+                  )}
                 </div>
               </section>
             ))}

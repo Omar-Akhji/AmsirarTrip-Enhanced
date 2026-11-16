@@ -43,12 +43,23 @@ const resolvedClass = [className, propClass].filter(Boolean).join(" ");
     },
     resolvedClass,
   ]}
-  data-base-scale={baseScale}   data-blur-amount={blurAmount}   data-dim-amount={dimAmount}   data-hold-distance={holdDistance}   data-item-distance={itemDistance}   data-item-scale={itemScale}   data-item-stack-distance={itemStackDistance}   data-rotation-amount={rotationAmount}   data-stack-position={stackPosition}   data-tilt-amount={tiltAmount}   data-window-scroll={useWindowScroll ? "true" : "false"}
+  data-base-scale={baseScale}
+  data-blur-amount={blurAmount}
+  data-dim-amount={dimAmount}
+  data-hold-distance={holdDistance}
+  data-item-distance={itemDistance}
+  data-item-scale={itemScale}
+  data-item-stack-distance={itemStackDistance}
+  data-rotation-amount={rotationAmount}
+  data-stack-position={stackPosition}
+  data-tilt-amount={tiltAmount}
+  data-window-scroll={useWindowScroll ? "true" : "false"}
 >
   <div class="scroll-stack-inner relative w-full px-1 sm:px-4">
     <slot />
     <div
-      aria-hidden="true"       class="scroll-stack-end"
+      aria-hidden="true"
+      class="scroll-stack-end"
     />
   </div>
 </scroll-stack>

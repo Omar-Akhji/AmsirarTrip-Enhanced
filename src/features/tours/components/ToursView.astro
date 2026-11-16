@@ -94,7 +94,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
             {toursGridTitle.main}{" "}
             {toursGridTitle.accent && <span class="text-orange">{toursGridTitle.accent}</span>}
           </h2>
-          <p class="border-s-2 border-orange-600 ps-4 py-0.5 text-sm/relaxed sm:text-base text-stone-600  max-w-[62ch] text-pretty dark:text-mist-300">
+          <p class="border-s-2 border-orange-600 ps-4 py-0.5 text-sm/relaxed sm:text-base text-stone-600 max-w-[62ch] text-pretty dark:text-mist-300">
             {t("tours.sectionSubtitle")}
           </p>
         </hgroup>
@@ -144,7 +144,15 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
           >
             <TripCard
               badge={`${tour.duration} Days`}
-              description={t(tour.description)}               end={t(tour.end)}               endLabel={t("tours.endLabelShort")}               exploreLink={t("tours.exploreLink")}               item={{ image: tour.image, imageAlt: t(tour.title), route: tour.route }}               start={t(tour.start)}               startLabel={t("tours.startLabelShort")}               title={t(tour.title)}               tourTypeBadge={t("tours.bothAvailable")}
+              description={t(tour.description)}
+              end={t(tour.end)}
+              endLabel={t("tours.endLabelShort")}
+              exploreLink={t("tours.exploreLink")}
+              item={{ image: tour.image, imageAlt: t(tour.title), route: tour.route }}
+              start={t(tour.start)}
+              startLabel={t("tours.startLabelShort")}
+              title={t(tour.title)}
+              tourTypeBadge={t("tours.bothAvailable")}
             />
           </div>
         ))}
@@ -168,7 +176,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
           {toursFaqTitle.main}{" "}
           {toursFaqTitle.accent && <span class="text-orange">{toursFaqTitle.accent}</span>}
         </h2>
-        <p class="mt-2 border-s-2 border-orange-600 ps-4 py-0.5 text-sm/relaxed sm:text-base text-stone-600  max-w-[62ch] text-pretty dark:text-mist-300">
+        <p class="mt-2 border-s-2 border-orange-600 ps-4 py-0.5 text-sm/relaxed sm:text-base text-stone-600 max-w-[62ch] text-pretty dark:text-mist-300">
           {t("tours.faq.subtitle")}
         </p>
       </hgroup>
@@ -208,7 +216,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
                 </span>
               </summary>
               <div
-                class="mt-4 pt-3.5 border-t border-stone-100 dark:border-white/10 text-sm/relaxed  text-stone-600 dark:text-mist-300 prose prose-sm max-w-none"
+                class="mt-4 pt-3.5 border-t border-stone-100 dark:border-white/10 text-sm/relaxed text-stone-600 dark:text-mist-300 prose prose-sm max-w-none"
                 itemprop="acceptedAnswer"
                 itemscope
                 itemtype="https://schema.org/Answer"

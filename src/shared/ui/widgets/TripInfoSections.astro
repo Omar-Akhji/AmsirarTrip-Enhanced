@@ -61,14 +61,17 @@ const goodToKnowList = normalizeList(goodToKnow);
         </h3>
       </hgroup>
       <div class="rounded-2xl border border-emerald-500/20 bg-emerald-50/30 p-6 shadow-2xs dark:border-emerald-500/20 dark:bg-emerald-950/20">
-        <ul class="space-y-3 m-0 p-0 list-none" role="list">
+        <ul
+          class="space-y-3 m-0 p-0 list-none"
+          role="list"
+        >
           {includeList.map((item) => (
             <li class="flex items-start gap-3">
               <CheckCircleIcon
                 aria-hidden="true"
                 class="mbs-0.5 size-5 shrink-0 text-emerald-600 dark:text-emerald-400"
               />
-              <span class="flex-1 text-start font-sans text-sm/relaxed text-stone-800  dark:text-mist-200">
+              <span class="flex-1 text-start font-sans text-sm/relaxed text-stone-800 dark:text-mist-200">
                 {item}
               </span>
             </li>
@@ -97,14 +100,17 @@ const goodToKnowList = normalizeList(goodToKnow);
         </h3>
       </hgroup>
       <div class="rounded-2xl border border-stone-200/90 bg-stone-50/60 p-6 shadow-2xs dark:border-white/10 dark:bg-surface-card/85">
-        <ul class="space-y-3 m-0 p-0 list-none" role="list">
+        <ul
+          class="space-y-3 m-0 p-0 list-none"
+          role="list"
+        >
           {excludeList.map((item) => (
             <li class="flex items-start gap-3">
               <CloseCircleIcon
                 aria-hidden="true"
                 class="mbs-0.5 size-5 shrink-0 text-stone-400 dark:text-mist-400"
               />
-              <span class="flex-1 text-start font-sans text-sm/relaxed text-stone-600  dark:text-mist-300">
+              <span class="flex-1 text-start font-sans text-sm/relaxed text-stone-600 dark:text-mist-300">
                 {item}
               </span>
             </li>
@@ -133,14 +139,17 @@ const goodToKnowList = normalizeList(goodToKnow);
         </h3>
       </hgroup>
       <div class="rounded-2xl border border-orange-500/20 bg-orange-50/30 p-6 shadow-2xs dark:border-orange-500/20 dark:bg-orange-950/20">
-        <ul class="space-y-3 m-0 p-0 list-none" role="list">
+        <ul
+          class="space-y-3 m-0 p-0 list-none"
+          role="list"
+        >
           {goodToKnowList.map((item) => (
             <li class="flex items-start gap-3">
               <DangerCircleIcon
                 aria-hidden="true"
                 class="mbs-0.5 size-5 shrink-0 text-orange-600 dark:text-orange-400"
               />
-              <span class="flex-1 text-start font-sans text-sm/relaxed text-stone-800  dark:text-mist-200">
+              <span class="flex-1 text-start font-sans text-sm/relaxed text-stone-800 dark:text-mist-200">
                 {item}
               </span>
             </li>

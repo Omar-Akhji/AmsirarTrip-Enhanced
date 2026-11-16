@@ -19,18 +19,36 @@ const { items } = Astro.props;
 ---
 
 <div
-  aria-label="Slider destination previews"   class="thumbnail absolute z-100 flex w-max gap-(--thumb-gap) bottom-(--thumb-bottom) left-(--thumb-left)"
+  aria-label="Slider destination previews"
+  class="thumbnail absolute z-100 flex w-max gap-(--thumb-gap) bottom-(--thumb-bottom) left-(--thumb-left)"
 >
   {items.map((item, index) => (
     <button
-      aria-label={`Go to slide ${index + 1}: ${item.thumbTitle || item.title}`}       class="item group relative shrink-0 cursor-pointer overflow-hidden text-start shadow-[0_8px_25px_rgb(0_0_0/45%)] w-(--thumb-width) h-(--thumb-height) rounded-(--thumb-radius)"       data-index={index}       type="button"
+      aria-label={`Go to slide ${index + 1}: ${item.thumbTitle || item.title}`}
+      class="item group relative shrink-0 cursor-pointer overflow-hidden text-start shadow-[0_8px_25px_rgb(0_0_0/45%)] w-(--thumb-width) h-(--thumb-height) rounded-(--thumb-radius)"
+      data-index={index}
+      type="button"
     >
       {typeof item.image === "string" ?
         <Image
-          alt={item.alt || `${item.thumbTitle || item.title} - ${item.thumbType || item.type}`}           class="size-full object-cover rounded-(--thumb-radius)"           decoding="async"           fetchpriority={index <= 1 ? "high" : "low"}           height={580}           loading="eager"           src={item.image}           width={400}
+          alt={item.alt || `${item.thumbTitle || item.title} - ${item.thumbType || item.type}`}
+          class="size-full object-cover rounded-(--thumb-radius)"
+          decoding="async"
+          fetchpriority={index <= 1 ? "high" : "low"}
+          height={580}
+          loading="eager"
+          src={item.image}
+          width={400}
         />
       : <Image
-          alt={item.alt || `${item.thumbTitle || item.title} - ${item.thumbType || item.type}`}           class="size-full object-cover rounded-(--thumb-radius)"           decoding="async"           fetchpriority={index <= 1 ? "high" : "low"}           height={580}           loading="eager"           src={item.image}           width={400}
+          alt={item.alt || `${item.thumbTitle || item.title} - ${item.thumbType || item.type}`}
+          class="size-full object-cover rounded-(--thumb-radius)"
+          decoding="async"
+          fetchpriority={index <= 1 ? "high" : "low"}
+          height={580}
+          loading="eager"
+          src={item.image}
+          width={400}
         />
       }
       <div class="thumbnail-overlay pointer-events-none absolute inset-x-0 bottom-0 flex flex-col px-2 py-1.5 sm:px-2.5 sm:py-2 text-white text-shadow-sm text-shadow-black/80 bg-linear-to-t from-black/85 to-transparent">

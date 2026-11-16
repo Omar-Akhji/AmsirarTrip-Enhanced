@@ -47,7 +47,7 @@ const TRIPADVISOR_URL =
             </>
           }
         </h2>
-        <p class="border-s-2 border-orange-600 ps-4 py-0.5 text-sm/relaxed sm:text-base text-stone-600 dark:text-mist-300  max-w-[62ch]">
+        <p class="border-s-2 border-orange-600 ps-4 py-0.5 text-sm/relaxed sm:text-base text-stone-600 dark:text-mist-300 max-w-[62ch]">
           {locale === "fr" ?
             "Avis authentiques vérifiés sur TripAdvisor après leurs circuits dans le désert, l'Atlas et les villes impériales."
           : locale === "es" ?
@@ -60,7 +60,13 @@ const TRIPADVISOR_URL =
       </hgroup>
       <div class="flex items-center">
         <Button
-          aria-label="View our reviews on TripAdvisor"           class="gap-2 text-xs font-semibold text-stone-700"           href={TRIPADVISOR_URL}           rel="noopener noreferrer"           size="sm"           target="_blank"           variant="outline"
+          aria-label="View our reviews on TripAdvisor"
+          class="gap-2 text-xs font-semibold text-stone-700"
+          href={TRIPADVISOR_URL}
+          rel="noopener noreferrer"
+          size="sm"
+          target="_blank"
+          variant="outline"
         >
           <span class="inline-block size-2 rounded-full bg-emerald-500"></span>
           <span>TripAdvisor</span>

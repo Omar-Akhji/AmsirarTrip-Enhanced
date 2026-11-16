@@ -71,19 +71,22 @@ const points =
           aria-hidden="true"
           class="my-4 border-t border-slate-800"
         ></div>
-        <p class="mbs-2 font-mono text-xs/relaxed sm:text-sm  text-slate-300">{intro}</p>
-        <p class="mbs-4 font-mono text-xs/relaxed sm:text-sm  text-slate-300">{details}</p>
-        <ul class="mbs-4 grid gap-3" role="list">
+        <p class="mbs-2 font-mono text-xs/relaxed sm:text-sm text-slate-300">{intro}</p>
+        <p class="mbs-4 font-mono text-xs/relaxed sm:text-sm text-slate-300">{details}</p>
+        <ul
+          class="mbs-4 grid gap-3"
+          role="list"
+        >
           {sidebarItems.map((item, index) => (
             <li class="flex items-start gap-3">
               <span class="inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-orange-500/20 text-orange-400 font-mono text-xs font-bold">
                 {index + 1}
               </span>
-              <p class="font-mono text-xs/relaxed sm:text-sm  text-slate-200">{item}</p>
+              <p class="font-mono text-xs/relaxed sm:text-sm text-slate-200">{item}</p>
             </li>
           ))}
         </ul>
-        <p class="mbs-4 font-mono text-xs/relaxed text-slate-400 ">{conclusion}</p>
+        <p class="mbs-4 font-mono text-xs/relaxed text-slate-400">{conclusion}</p>
       </div>
     </div>
   </div>
@@ -96,10 +99,13 @@ const points =
       <h3 class="text-base font-bold text-stone-900 tracking-tight dark:text-mist-100">
         {ctaTitle}
       </h3>
-      <p class="mbs-2 font-mono text-xs/relaxed text-stone-600  dark:text-mist-300">
+      <p class="mbs-2 font-mono text-xs/relaxed text-stone-600 dark:text-mist-300">
         {ctaDescription}
       </p>
-      <ul class="m-0 mbs-4 grid list-none gap-3 p-0 font-mono text-xs text-stone-700 dark:text-mist-200" role="list">
+      <ul
+        class="m-0 mbs-4 grid list-none gap-3 p-0 font-mono text-xs text-stone-700 dark:text-mist-200"
+        role="list"
+      >
         {points.map((point) => (
           <li class="flex items-start gap-3">
             <span class="mbs-1 size-2 shrink-0 rounded-full bg-orange-600"></span>

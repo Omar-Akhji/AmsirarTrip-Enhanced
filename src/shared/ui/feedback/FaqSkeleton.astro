@@ -45,8 +45,8 @@ const items = Array.from({ length: count }, (_, i) => ({
         </div>
         {hasSubtitle && (
           <div class="mt-2 border-s-2 border-orange-600 ps-4 py-0.5 text-sm/relaxed sm:text-base space-y-1.5 max-w-[62ch]">
-            <Skeleton class:list={["h-5 sm:h-6 max-w-full", subtitleWidth]} />
-            <Skeleton class="h-5 w-2/3 sm:hidden" />
+            <Skeleton class:list={["h-6 max-w-full", subtitleWidth]} />
+            <Skeleton class="h-6 w-3/4 md:hidden" />
           </div>
         )}
       </hgroup>
@@ -57,12 +57,15 @@ const items = Array.from({ length: count }, (_, i) => ({
           maxDlWidth,
         ]}
       >
-        {items.map((item) => (
+        {items.map((item, idx) => (
           <div class="px-4 py-3.5 sm:px-5 sm:py-4">
             <div class="flex items-start justify-between gap-4 text-base font-semibold text-stone-900">
-              <div class="flex items-center gap-2.5 min-w-0 flex-1">
-                <Skeleton class="size-5 shrink-0 rounded-full" />
-                <Skeleton class:list={["h-6 flex-1", item.width]} />
+              <div class="flex items-start gap-2.5 min-w-0 flex-1">
+                <Skeleton class="mbs-0.5 size-5 shrink-0 rounded-full" />
+                <div class="flex-1 space-y-1.5">
+                  <Skeleton class:list={["h-6", item.width]} />
+                  {idx % 2 === 0 && <Skeleton class="h-6 w-1/2" />}
+                </div>
               </div>
               <span
                 aria-hidden="true"

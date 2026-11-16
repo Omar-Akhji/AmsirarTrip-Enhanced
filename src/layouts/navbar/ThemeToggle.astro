@@ -11,7 +11,8 @@ const { class: className = "", id = "theme-toggle" } = Astro.props;
 ---
 
 <button
-  aria-label="Toggle dark mode"   class:list={[
+  aria-label="Toggle dark mode"
+  class:list={[
     "group/theme relative inline-flex items-center justify-center size-9 sm:size-10 rounded-full cursor-pointer select-none overflow-hidden transition-all duration-300 active:scale-90",
     "border border-white/20 bg-black/30 backdrop-blur-md text-white shadow-xs hover:border-white/40 hover:bg-white/15 hover:shadow-md",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange/80 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950",
@@ -19,17 +20,21 @@ const { class: className = "", id = "theme-toggle" } = Astro.props;
     "dark:border-white/10 dark:bg-[oklch(18%_0.012_245deg/75%)] dark:text-mist-100 dark:hover:border-yellow/35 dark:hover:bg-white/10",
     "group-data-scrolled:dark:border-white/10 group-data-scrolled:dark:bg-[oklch(18%_0.012_245deg/85%)] group-data-scrolled:dark:text-mist-100 group-data-scrolled:dark:hover:border-yellow/35 group-data-scrolled:dark:hover:bg-white/10",
     className,
-  ]}   data-theme-toggle   id={id}   title="Toggle dark mode"   type="button"
+  ]}
+  data-theme-toggle
+  id={id}
+  title="Toggle dark mode"
+  type="button"
 >
   <span class="relative size-4.5 sm:size-5 flex items-center justify-center pointer-events-none">
     <!-- Sun (Daytime): Rises high in Light mode, sinks below horizon in Dark mode -->
-    <span class="absolute inset-0 flex items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.34,1.4,0.64,1)] motion-reduce:transition-none translate-0  rotate-0 scale-100 opacity-100 dark:translate-x-3 dark:translate-y-7 dark:rotate-45 dark:scale-40 dark:opacity-0">
+    <span class="absolute inset-0 flex items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.34,1.4,0.64,1)] motion-reduce:transition-none translate-0 rotate-0 scale-100 opacity-100 dark:translate-x-3 dark:translate-y-7 dark:rotate-45 dark:scale-40 dark:opacity-0">
       <SunIcon class="size-full transition-transform duration-500 ease-out group-hover/theme:rotate-45" />
       <span class="sr-only">Switch to dark mode</span>
     </span>
 
     <!-- Moon (Nighttime): Sunk below horizon in Light mode, rises gracefully in Dark mode -->
-    <span class="absolute inset-0 flex items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.34,1.4,0.64,1)] motion-reduce:transition-none -translate-x-3 translate-y-7 -rotate-45 scale-40 opacity-0 dark:translate-0  dark:rotate-0 dark:scale-100 dark:opacity-100">
+    <span class="absolute inset-0 flex items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.34,1.4,0.64,1)] motion-reduce:transition-none -translate-x-3 translate-y-7 -rotate-45 scale-40 opacity-0 dark:translate-0 dark:rotate-0 dark:scale-100 dark:opacity-100">
       <MoonIcon class="size-full transition-transform duration-500 ease-out group-hover/theme:-rotate-12" />
       <span class="sr-only">Switch to light mode</span>
     </span>

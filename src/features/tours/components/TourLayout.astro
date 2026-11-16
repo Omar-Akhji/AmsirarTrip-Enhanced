@@ -175,12 +175,13 @@ const routeMap = getTourRouteMap(tourKey, startCity, endCity, dossierTitle);
           {t("tours.kickerAbout")}
         </p>
         <h3
-          class="mbs-1 mbe-4 text-xl font-bold tracking-tight text-stone-900 sm:text-2xl md:text-3xl dark:text-mist-100"           id="tour-overview-heading"
+          class="mbs-1 mbe-4 text-xl font-bold tracking-tight text-stone-900 sm:text-2xl md:text-3xl dark:text-mist-100"
+          id="tour-overview-heading"
         >
           {t("tours.overview")}
         </h3>
       </hgroup>
-      <p class="font-sans text-sm/relaxed sm:text-base  whitespace-pre-line text-stone-700 dark:text-mist-200">
+      <p class="font-sans text-sm/relaxed sm:text-base whitespace-pre-line text-stone-700 dark:text-mist-200">
         {overview}
       </p>
     </section>
@@ -202,19 +203,35 @@ const routeMap = getTourRouteMap(tourKey, startCity, endCity, dossierTitle);
     </section>
 
     <TripInfoSections
-      excludedTitle={t("tours.excluded")}       excludes={excludes}       goodToKnow={goodToKnow}       goodToKnowTitle={t("tours.goodToKnow")}       idPrefix="tour"
+      excludedTitle={t("tours.excluded")}
+      excludes={excludes}
+      goodToKnow={goodToKnow}
+      goodToKnowTitle={t("tours.goodToKnow")}
+      idPrefix="tour"
       includedTitle={t("tours.included")}
       includes={includes}
     />
 
     <PricingCard
-      formatComparisonTitle={t("tours.formatComparisonTitle")}       idPrefix="tour"       price={seo.price ?? { label: priceLabel, note: t("tours.priceNote") }}       priceLabel={priceLabel}       pricingTitle={pricingTitle}       privateBadge={t("tours.privateOptionBadge")}       privateDesc={t("tours.privateOptionDesc")}       privateOption={t("tours.privateOption")}       reserveNow={reserveNow}
-      sharedBadge={t("tours.sharedOptionBadge")}       sharedDesc={t("tours.sharedOptionDesc")}       sharedOption={t("tours.sharedOption")}
+      formatComparisonTitle={t("tours.formatComparisonTitle")}
+      idPrefix="tour"
+      price={seo.price ?? { label: priceLabel, note: t("tours.priceNote") }}
+      priceLabel={priceLabel}
+      pricingTitle={pricingTitle}
+      privateBadge={t("tours.privateOptionBadge")}
+      privateDesc={t("tours.privateOptionDesc")}
+      privateOption={t("tours.privateOption")}
+      reserveNow={reserveNow}
+      sharedBadge={t("tours.sharedOptionBadge")}
+      sharedDesc={t("tours.sharedOptionDesc")}
+      sharedOption={t("tours.sharedOption")}
     />
 
     {seo.faqs && seo.faqs.length > 0 && (
       <FaqAccordion
-        faqs={seo.faqs}         faqTitle={faqTitle}         idPrefix="tour"
+        faqs={seo.faqs}
+        faqTitle={faqTitle}
+        idPrefix="tour"
       />
     )}
   </Fragment>

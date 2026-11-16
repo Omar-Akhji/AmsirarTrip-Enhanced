@@ -64,7 +64,7 @@ const DELAY_CLASSES = [
             </>
           }
         </h2>
-        <p class="border-s-2 border-orange-600 ps-4 py-0.5 text-sm/relaxed sm:text-base text-stone-600 dark:text-mist-300  max-w-[62ch]">
+        <p class="border-s-2 border-orange-600 ps-4 py-0.5 text-sm/relaxed sm:text-base text-stone-600 dark:text-mist-300 max-w-[62ch]">
           {locale === "fr" ?
             "Des ruelles ocres de Marrakech aux crêtes dorées de l'Erg Chebbi et gorges spectaculaires de l'Atlas."
           : locale === "es" ?
@@ -77,14 +77,16 @@ const DELAY_CLASSES = [
       </hgroup>
     </div>
     <svg
-      aria-hidden="true"       class="sr-only"
+      aria-hidden="true"
+      class="sr-only"
       focusable="false"
     >
       <defs>
         <linearGradient
           id="royal-yellow-gradient"
           x1="0%"
-          x2="100%"           y1="0%"
+          x2="100%"
+          y1="0%"
           y2="100%"
         >
           <stop
@@ -106,7 +108,17 @@ const DELAY_CLASSES = [
     {/* Mobile Mode: Animated GSAP & Lenis ScrollStack (https://reactbits.dev/components/scroll-stack) */}
     <div class="block md:hidden w-full">
       <ScrollStack
-        baseScale={0.8}         blurAmount={0.8}         dimAmount={0.2}         holdDistance={180}         itemDistance={100}         itemScale={0.045}         itemStackDistance={24}         rotationAmount={1.5}         stackPosition="88px"         tiltAmount={2}         useWindowScroll={true}
+        baseScale={0.8}
+        blurAmount={0.8}
+        dimAmount={0.2}
+        holdDistance={180}
+        itemDistance={100}
+        itemScale={0.045}
+        itemStackDistance={24}
+        rotationAmount={1.5}
+        stackPosition="88px"
+        tiltAmount={2}
+        useWindowScroll={true}
       >
         {cities.map((city) => {
           const regionKey = city.titleKey.replace(".title", ".region");
@@ -145,7 +157,7 @@ const DELAY_CLASSES = [
                         {cityTitle}
                       </h3>
                     </hgroup>
-                    <p class="text-xs/relaxed text-stone-200/95  line-clamp-3 drop-shadow-xs">
+                    <p class="text-xs/relaxed text-stone-200/95 line-clamp-3 drop-shadow-xs">
                       {cityDesc}
                     </p>
                   </div>
@@ -179,7 +191,8 @@ const DELAY_CLASSES = [
             <article class="group relative block aspect-4/3 w-full select-none">
               <!-- Inner Image Card (Rounded image surface with dark luxury background) -->
               <div
-                class="relative size-full overflow-clip rounded-2xl border-2 border-stone-200/80 bg-slate-950 shadow-xs transition-shadow duration-700 ease-out-expo pointer-fine:group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)]"                 data-scroll-parallax
+                class="relative size-full overflow-clip rounded-2xl border-2 border-stone-200/80 bg-slate-950 shadow-xs transition-shadow duration-700 ease-out-expo pointer-fine:group-hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)]"
+                data-scroll-parallax
               >
                 <div class="parallax-media pointer-events-none absolute -inset-y-5 inset-x-0 size-[calc(100%+40px)]">
                   <Image
@@ -214,7 +227,7 @@ const DELAY_CLASSES = [
                     <!-- Full Text Animated Drawer (Opens smoothly on hover) -->
                     <div class="grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity,margin-block-start] duration-500 ease-out-expo motion-reduce:transition-none pointer-fine:group-hover:grid-rows-[1fr] pointer-fine:group-hover:opacity-100 pointer-fine:group-hover:mbs-2 pointer-coarse:grid-rows-[1fr] pointer-coarse:opacity-100 pointer-coarse:mbs-2">
                       <div class="overflow-hidden">
-                        <p class="text-xs/relaxed sm:text-sm text-stone-200/95  drop-shadow-xs transition-transform duration-500 ease-out-expo motion-reduce:transition-none translate-y-2 pointer-fine:group-hover:translate-y-0 pointer-coarse:translate-y-0">
+                        <p class="text-xs/relaxed sm:text-sm text-stone-200/95 drop-shadow-xs transition-transform duration-500 ease-out-expo motion-reduce:transition-none translate-y-2 pointer-fine:group-hover:translate-y-0 pointer-coarse:translate-y-0">
                           {cityDesc}
                         </p>
                       </div>

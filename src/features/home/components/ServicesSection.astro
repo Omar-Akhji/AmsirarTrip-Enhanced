@@ -73,7 +73,7 @@ const subtitle = subtitleMap[locale] ?? subtitleMap["en"] ?? defaultSubtitle;
         >
           {heading.main} <span class="text-yellow text-shadow-sm">{heading.accent}</span>
         </h2>
-        <p class="border-s-2 border-yellow ps-4 py-0.5 text-sm/relaxed sm:text-base text-zinc-100/90  max-w-[62ch] text-shadow-sm">
+        <p class="border-s-2 border-yellow ps-4 py-0.5 text-sm/relaxed sm:text-base text-zinc-100/90 max-w-[62ch] text-shadow-sm">
           {subtitle}
         </p>
       </hgroup>
@@ -108,7 +108,7 @@ const subtitle = subtitleMap[locale] ?? subtitleMap["en"] ?? defaultSubtitle;
           <h3 class="text-xl font-semibold text-white">
             {t(`services.cards.${service.key}.title`)}
           </h3>
-          <p class="mbs-3 text-sm/relaxed text-zinc-200 ">
+          <p class="mbs-3 text-sm/relaxed text-zinc-200">
             {t(`services.cards.${service.key}.text`)}
           </p>
         </article>

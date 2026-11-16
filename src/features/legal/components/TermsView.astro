@@ -130,7 +130,7 @@ const current = entry.data as unknown as LegalCopy;
         >
           {current.summaryTitle}
         </h2>
-        <p class="mbs-2 text-sm/relaxed text-slate-600 dark:text-mist-300 sm:text-base ">
+        <p class="mbs-2 text-sm/relaxed text-slate-600 dark:text-mist-300 sm:text-base">
           {current.summarySubtitle}
         </p>
       </div>
@@ -145,7 +145,7 @@ const current = entry.data as unknown as LegalCopy;
               <h3 class="mbs-3 text-base font-bold text-slate-900 dark:text-mist-100 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">
                 {card.title}
               </h3>
-              <p class="mbs-2 text-xs/relaxed  text-slate-600 dark:text-mist-300 sm:text-sm">
+              <p class="mbs-2 text-xs/relaxed text-slate-600 dark:text-mist-300 sm:text-sm">
                 {card.description}
               </p>
             </div>
@@ -209,7 +209,11 @@ const current = entry.data as unknown as LegalCopy;
 
             <div class="mbs-3 pbs-3 border-bs border-stone-200/80 dark:border-white/10">
               <Button
-                class="w-full bg-stone-50 text-slate-700 hover:bg-stone-100 dark:bg-white/5 dark:text-mist-200 dark:hover:bg-white/10 dark:border-white/10"                 id="terms-print-btn"                 size="sm"                 type="button"                 variant="outline"
+                class="w-full bg-stone-50 text-slate-700 hover:bg-stone-100 dark:bg-white/5 dark:text-mist-200 dark:hover:bg-white/10 dark:border-white/10"
+                id="terms-print-btn"
+                size="sm"
+                type="button"
+                variant="outline"
               >
                 <PrinterIcon
                   aria-hidden="true"
@@ -328,7 +332,7 @@ const current = entry.data as unknown as LegalCopy;
             </div>
 
             <!-- Paragraphs -->
-            <div class="mbs-6 flex flex-col gap-4 text-sm/relaxed  text-slate-700 dark:text-mist-300 sm:text-base">
+            <div class="mbs-6 flex flex-col gap-4 text-sm/relaxed text-slate-700 dark:text-mist-300 sm:text-base">
               {sec.paragraphs.map((p) => (
                 <p>{p}</p>
               ))}
@@ -366,7 +370,7 @@ const current = entry.data as unknown as LegalCopy;
                             {tier.badge}
                           </span>
                         </div>
-                        <p class="mbs-3 text-xs/relaxed  text-slate-600 dark:text-mist-300">
+                        <p class="mbs-3 text-xs/relaxed text-slate-600 dark:text-mist-300">
                           {tier.desc}
                         </p>
                       </div>
@@ -387,7 +391,7 @@ const current = entry.data as unknown as LegalCopy;
                       <h4 class="text-sm font-bold text-slate-900 dark:text-mist-100">
                         {current.cancellationMatrix.insuranceTitle}
                       </h4>
-                      <p class="mbs-1 text-xs/relaxed sm:text-sm text-slate-700 dark:text-mist-300 ">
+                      <p class="mbs-1 text-xs/relaxed sm:text-sm text-slate-700 dark:text-mist-300">
                         {current.cancellationMatrix.insuranceDesc}
                       </p>
                     </div>
@@ -410,7 +414,7 @@ const current = entry.data as unknown as LegalCopy;
                     <h4 class="text-sm font-bold text-slate-900 dark:text-mist-100">
                       {sec.callout.title}
                     </h4>
-                    <p class="mbs-1 text-xs/relaxed sm:text-sm text-slate-700 dark:text-mist-300 ">
+                    <p class="mbs-1 text-xs/relaxed sm:text-sm text-slate-700 dark:text-mist-300">
                       {sec.callout.desc}
                     </p>
                   </div>
@@ -498,7 +502,7 @@ const current = entry.data as unknown as LegalCopy;
           <h3 class="mt-3 text-lg font-bold text-slate-900 dark:text-mist-100">
             Ready to Explore the Wonders of Morocco?
           </h3>
-          <p class="mx-auto mt-2 max-w-xl text-sm/relaxed text-slate-600 dark:text-mist-300 ">
+          <p class="mx-auto mt-2 max-w-xl text-sm/relaxed text-slate-600 dark:text-mist-300">
             From the dunes of Erg Chebbi to the imperial alleys of Fes and Marrakech, our expert
             team is ready to design your journey with complete peace of mind.
           </p>
