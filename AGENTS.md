@@ -137,3 +137,20 @@ The **Elephant & Goldfish Methodology (EGM)** is an active default protocol for 
   English.
 
 <!-- egm:end -->
+
+<!-- css-units:start -->
+
+## 7. CSS Unit Rules (Strict)
+
+- **`px` for borders**: Use `px` for all border widths and hairline strokes (e.g., `1px`,
+  `border-[1.5px]`).
+- **`rem` for text**: Use `rem` (or `rem`-anchored `clamp()`) for all typography and font sizes
+  (e.g., `text-sm`, `text-[0.6875rem]`). Never use `px` for `font-size` or `text-[...px]` in web UI
+  (email HTML templates are exempt).
+- **`%` for layout**: Use `%` (or fractional/percentage utilities like `w-full`, `50%`) for
+  container and layout proportions.
+- **`vh` / `vw` (or `dvh` for mobile-safe full-screen height) for full-screen sections**: Use
+  viewport units (`100vh`, `100dvh`, `100vw`, `h-screen`) for full-screen hero and viewport-filling
+  sections.
+
+<!-- css-units:end -->

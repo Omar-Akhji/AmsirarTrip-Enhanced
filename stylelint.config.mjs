@@ -155,6 +155,13 @@ export default {
     "import-notation": "string",
     "font-family-no-missing-generic-family-keyword": true,
     "unit-no-unknown": true,
+    "declaration-property-unit-allowed-list": [
+      {
+        "/^border(-(top|right|bottom|left|block|inline)(-start|-end)?(-width)?|-width)?$/": ["px"],
+        "font-size": ["rem"],
+      },
+      { ignore: ["inside-function"] },
+    ],
     "keyframe-declaration-no-important": true,
     "named-grid-areas-no-invalid": true,
 

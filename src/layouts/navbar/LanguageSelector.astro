@@ -56,7 +56,7 @@ const menuId = `${id}-popover`;
     type="button"
   >
     <TranslateIcon class="size-4 shrink-0 text-white/90 transition-colors group-hover/lang-btn:text-white group-active/lang-btn:text-white group-data-scrolled:text-white" />
-    <span class="font-mono font-semibold tracking-wider uppercase text-[11px] sm:text-xs">
+    <span class="font-mono font-semibold tracking-wider uppercase text-[0.6875rem] sm:text-xs">
       {currentLanguage.shortName}
     </span>
     <ChevronsUpDownBrokenIcon class="size-3.5 shrink-0 text-white/70 transition-transform duration-250 ease-out group-hover/lang-btn:text-white group-active/lang-btn:text-white group-data-scrolled:text-white/90 group-has-[:popover-open]/lang-root:rotate-180" />
@@ -100,7 +100,7 @@ const menuId = `${id}-popover`;
             lang={lang.code}
             role="menuitemradio"
           >
-            <span class="truncate text-[13px]">{lang.name}</span>
+            <span class="truncate text-[0.8125rem]">{lang.name}</span>
           </a>
         );
       })}

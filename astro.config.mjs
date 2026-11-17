@@ -1,16 +1,13 @@
 // astro.config.mjs
-import process from "node:process";
 import { fileURLToPath } from "node:url";
 import { defineConfig, envField, memoryCache } from "astro/config";
 import node from "@astrojs/node";
-import vercel from "@astrojs/vercel";
 import vue from "@astrojs/vue";
 import compress from "@playform/compress";
 import tailwindcss from "@tailwindcss/vite";
 import htmlValidate from "astro-html-validate";
 import { DEFAULT_LOCALE, LOCALES } from "./src/i18n/locales.ts";
 
-const isVercel = Boolean(process.env["VERCEL"] || process.env["VERCEL_ENV"]);
 const srcDir = fileURLToPath(new URL("src", import.meta.url));
 
 export default defineConfig({
@@ -24,8 +21,7 @@ export default defineConfig({
 
   // ─── 3. Output & Runtime Adapter ──────────────────────────────────────────
   output: "server",
-  adapter:
-    isVercel ? vercel({ maxDuration: 30, imageService: true }) : node({ mode: "standalone" }),
+  adapter: node({ mode: "standalone" }),
 
   // ─── 4. Integrations ──────────────────────────────────────────────────────
   integrations: [
@@ -50,7 +46,7 @@ export default defineConfig({
     allowedDomains: [
       { hostname: "amsirartrip.com", protocol: "https" },
       { hostname: "*.amsirartrip.com", protocol: "https" },
-      { hostname: "*.vercel.app", protocol: "https" },
+      { hostname: "*.hostingersite.com", protocol: "https" },
     ],
     actionBodySizeLimit: 65_536,
   },

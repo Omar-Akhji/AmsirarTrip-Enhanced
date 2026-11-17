@@ -328,7 +328,7 @@ watch(
           </div>
           <div class="flex-1 min-inline-0">
             <p
-              class="font-mono text-[11px] font-medium tracking-wider text-stone-500 uppercase dark:text-mist-400"
+              class="font-mono text-[0.6875rem] font-medium tracking-wider text-stone-500 uppercase dark:text-mist-400"
             >
               {{
                 t(

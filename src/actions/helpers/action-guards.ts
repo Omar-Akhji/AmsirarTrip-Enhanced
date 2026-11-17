@@ -4,13 +4,13 @@ import { logSecurityEvent } from "../../lib/server-utils";
 import { verifyRecaptcha } from "../../services/recaptcha";
 
 /**
- * Safely extracts client IP address prioritizing trusted proxy headers (x-vercel-forwarded-for,
+ * Safely extracts client IP address prioritizing trusted proxy headers (cf-connecting-ip,
  * x-real-ip, or the first hop of x-forwarded-for), falling back to Astro context.clientAddress.
  */
 export function extractClientIp(request: Request, clientAddress?: string): string {
-  const vercelIp = request.headers.get("x-vercel-forwarded-for")?.split(",", 1)[0]?.trim();
-  if (vercelIp && isIP(vercelIp) !== 0) {
-    return vercelIp;
+  const cfIp = request.headers.get("cf-connecting-ip")?.trim();
+  if (cfIp && isIP(cfIp) !== 0) {
+    return cfIp;
   }
   const realIp = request.headers.get("x-real-ip")?.trim();
   if (realIp && isIP(realIp) !== 0) {

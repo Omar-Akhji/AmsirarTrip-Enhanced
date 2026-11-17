@@ -134,7 +134,7 @@ const { routeMap, kicker = "Google Maps Route" } = Astro.props;
       {routeMap.waypoints.map((wp, index) => (
         <li class="flex items-start gap-2.5 text-xs">
           <span
-            class="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full font-mono text-[11px] font-bold"
+            class="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full font-mono text-[0.6875rem] font-bold"
             class:list={[
               wp.type === "start" && "bg-emerald-600 text-white",
               wp.type === "end" && "bg-rose-600 text-white",
@@ -149,13 +149,13 @@ const { routeMap, kicker = "Google Maps Route" } = Astro.props;
             <div class="flex items-baseline justify-between gap-2">
               <span class="font-semibold text-stone-900 dark:text-mist-100">{wp.name}</span>
               {wp.dayOrTime && (
-                <span class="font-mono text-[10px] text-stone-400 shrink-0 dark:text-mist-400">
+                <span class="font-mono text-[0.625rem] text-stone-400 shrink-0 dark:text-mist-400">
                   {wp.dayOrTime}
                 </span>
               )}
             </div>
             {wp.description && (
-              <p class="font-mono text-[11px] leading-relaxed text-stone-500 dark:text-mist-300">
+              <p class="font-mono text-[0.6875rem] leading-relaxed text-stone-500 dark:text-mist-300">
                 {wp.description}
               </p>
             )}
@@ -166,7 +166,7 @@ const { routeMap, kicker = "Google Maps Route" } = Astro.props;
   </details>
 
   <!-- External Google Maps Link -->
-  <footer class="mbs-3 flex items-center justify-end gap-2 pt-2 text-[11px]">
+  <footer class="mbs-3 flex items-center justify-end gap-2 pt-2 text-[0.6875rem]">
     <a
       class="inline-flex items-center gap-1.5 font-mono font-medium text-orange-700 hover:text-orange-800 hover:underline dark:text-orange-400 dark:hover:text-orange-300"
       href={routeMap.googleMapsAppUrl}

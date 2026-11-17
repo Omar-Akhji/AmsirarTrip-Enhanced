@@ -1,7 +1,6 @@
 # ─── Build output ──────────────────────────────────────────
 dist/
 dist-*
-.vercel/
 
 # ─── Generated types & caches ─────────────────────────────
 .astro/

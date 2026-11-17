@@ -44,7 +44,7 @@ flowchart TD
     Disc --> H3[Content-Type: text/plain or text/markdown; charset=utf-8]
     Disc --> H4[Cache-Control: public, max-age=86400, s-maxage=604800]
 
-    Disc --> Edge[Vercel Edge CDN / Static Public Delivery]
+    Disc --> Edge[Hostinger CDN / Static Public Delivery]
 ```
 
 ### Component Architecture Changes
