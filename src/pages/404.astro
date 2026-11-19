@@ -9,6 +9,7 @@ const firstSegment = Astro.url.pathname.split("/", 2)[1];
 const locale = firstSegment && isLocale(firstSegment) ? firstSegment : DEFAULT_LOCALE;
 Astro.locals.locale = locale;
 const t = useTranslations(locale);
+Astro.cache.set(false);
 Astro.response.status = 404;
 ---
 

@@ -3,7 +3,7 @@ import { computed, ref, onMounted, onUnmounted, useTemplateRef } from "vue";
 import { actions } from "astro:actions";
 import { hasCaptcha } from "@/lib/client-env";
 import { useTranslation } from "@/lib/hooks/use-translation";
-import Recaptcha from "@/shared/ui/widgets/Recaptcha.vue";
+import Turnstile from "@/shared/ui/widgets/Turnstile.vue";
 
 interface Props {
   locale?: string;
@@ -49,6 +49,7 @@ const handleSubmit = async () => {
 
     if (error) {
       statusKey.value = "footer.newsletterFailure";
+      recaptchaRef.value?.reset();
     } else {
       if (data.ok) {
         name.value = "";
@@ -60,11 +61,14 @@ const handleSubmit = async () => {
           statusKey.value = "";
           handleClose();
         }, 4000);
+      } else {
+        recaptchaRef.value?.reset();
       }
       statusKey.value = data.statusKey;
     }
   } catch {
     statusKey.value = "footer.newsletterFailure";
+    recaptchaRef.value?.reset();
   } finally {
     isSubmitting.value = false;
   }
@@ -122,7 +126,7 @@ onUnmounted(() => {
             command="close"
             commandfor="newsletter-dialog"
             :aria-label="t('footer.newsletterCloseAria')"
-            class="-me-1 -mbs-1 flex size-9 shrink-0 cursor-pointer items-center justify-center rounded-full border border-white/10 bg-white/5 text-zinc-400 transition-colors focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:outline-hidden pointer-fine:hover:bg-white/10 pointer-fine:hover:text-white active:bg-white/10 active:text-white"
+            class="-me-1 -mbs-1 flex size-9 shrink-0 cursor-pointer items-center justify-center rounded-full border border-white/10 bg-white/5 text-zinc-400 transition-colors focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:outline-hidden active:bg-white/10 active:text-white pointer-fine:hover:bg-white/10 pointer-fine:hover:text-white"
             @click="handleClose"
           >
             <svg
@@ -254,9 +258,11 @@ onUnmounted(() => {
                   : 'border-white/15 bg-white/2',
                 ]"
               >
-                <Recaptcha
+                <Turnstile
                   v-if="hasCaptcha"
                   ref="recaptchaRef"
+                  action="newsletter"
+                  :language="locale ?? 'en'"
                   theme="dark"
                   size="normal"
                 />

@@ -1,12 +1,13 @@
-import { PUBLIC_CAP_API_ENDPOINT } from "astro:env/client";
+import { PUBLIC_TURNSTILE_SITE_KEY } from "astro:env/client";
 
-const PUBLIC_RECAPTCHA_SITE_KEY = import.meta.env["PUBLIC_RECAPTCHA_SITE_KEY"] as
-  string | undefined;
+/** Cloudflare Turnstile official always-passes test site key (development only). */
+const DEV_TEST_SITE_KEY = "1x00000000000000000000AA";
 
-export const CAP_API_ENDPOINT = PUBLIC_CAP_API_ENDPOINT ?? "/api/cap/";
-export const hasCap = Boolean(CAP_API_ENDPOINT);
+const configuredSiteKey = PUBLIC_TURNSTILE_SITE_KEY?.trim() ?? "";
 
-export const RECAPTCHA_V2_SITE_KEY = PUBLIC_RECAPTCHA_SITE_KEY ?? "";
-export const hasRecaptchaV2 = Boolean(RECAPTCHA_V2_SITE_KEY);
+export const TURNSTILE_SITE_KEY =
+  configuredSiteKey.length > 0 ? configuredSiteKey
+  : import.meta.env.DEV ? DEV_TEST_SITE_KEY
+  : "";
 
-export const hasCaptcha = Boolean(CAP_API_ENDPOINT || hasRecaptchaV2 || import.meta.env.DEV);
+export const hasCaptcha = Boolean(TURNSTILE_SITE_KEY);

@@ -5,7 +5,7 @@ import { hasCaptcha } from "@/lib/client-env";
 import type { FormState } from "@/lib/form-types";
 import { useTranslation } from "@/lib/hooks/use-translation";
 import { getFormErrorMessage, useSubmitFeedback } from "@/lib/hooks/use-submit-feedback";
-import Recaptcha from "@/shared/ui/widgets/Recaptcha.vue";
+import Turnstile from "@/shared/ui/widgets/Turnstile.vue";
 import BookingFormFields from "./BookingFormFields.vue";
 
 interface Props {
@@ -232,9 +232,11 @@ const handleSubmit = async (event: Event) => {
                       : 'border-stone-300 bg-stone-50/40 dark:border-white/15 dark:bg-white/2',
                     ]"
                   >
-                    <Recaptcha
+                    <Turnstile
                       v-if="hasCaptcha"
                       ref="recaptchaRef"
+                      action="booking"
+                      :language="i18n.language"
                       @verify="handleVerify"
                       @expired="handleExpired"
                     />

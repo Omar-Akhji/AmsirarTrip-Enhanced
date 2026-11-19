@@ -23,14 +23,18 @@ export const server = {
     accept: "form",
     handler: async (formData: FormData, context: ActionAPIContext): Promise<FormState> => {
       try {
-        const ip = extractClientIp(context.request, context.clientAddress);
-
-        if (isHoneypotTriggered(getFormString(formData, "website"), ip, "booking-action")) {
-          return { success: true, message: "Booking request sent!" };
-        }
+        const ip = extractClientIp(
+          context.request,
+          context.clientAddress,
+          context.locals.isCloudflareVerified,
+        );
 
         if (!enforceRateLimit(`booking:${ip}`, ip, "booking-action", 10).allowed) {
           return { success: false, message: "Too many requests. Please try again later." };
+        }
+
+        if (isHoneypotTriggered(getFormString(formData, "website"), ip, "booking-action")) {
+          return { success: true, message: "Booking request sent!" };
         }
 
         const formLang = getOptionalFormString(formData, "language");
@@ -61,7 +65,7 @@ export const server = {
 
         const data = validationResult.data;
 
-        if (!(await verifyCaptcha(data.recaptchaToken, ip, "booking-action"))) {
+        if (!(await verifyCaptcha(data.recaptchaToken, ip, "booking"))) {
           return { success: false, message: "Security verification failed. Please try again." };
         }
 
@@ -79,14 +83,18 @@ export const server = {
     accept: "form",
     handler: async (formData: FormData, context: ActionAPIContext): Promise<FormState> => {
       try {
-        const ip = extractClientIp(context.request, context.clientAddress);
-
-        if (isHoneypotTriggered(getFormString(formData, "website"), ip, "contact-action")) {
-          return { success: true, message: "Message sent!" };
-        }
+        const ip = extractClientIp(
+          context.request,
+          context.clientAddress,
+          context.locals.isCloudflareVerified,
+        );
 
         if (!enforceRateLimit(`contact:${ip}`, ip, "contact-action", 10).allowed) {
           return { success: false, message: "Too many requests. Please try again later." };
+        }
+
+        if (isHoneypotTriggered(getFormString(formData, "website"), ip, "contact-action")) {
+          return { success: true, message: "Message sent!" };
         }
 
         const language = context.currentLocale ?? "en";
@@ -112,7 +120,7 @@ export const server = {
 
         const data = validationResult.data;
 
-        if (!(await verifyCaptcha(data.recaptchaToken, ip, "contact-action"))) {
+        if (!(await verifyCaptcha(data.recaptchaToken, ip, "contact"))) {
           return { success: false, message: "Security verification failed. Please try again." };
         }
 
@@ -128,13 +136,21 @@ export const server = {
 
   newsletter: defineAction({
     accept: "json",
-    input: z.object({ name: z.string(), email: z.email(), recaptchaToken: z.string() }),
+    input: z.object({
+      email: z.email().max(254),
+      name: z.string().trim().min(2).max(100),
+      recaptchaToken: z.string().trim().min(1).max(2048),
+    }),
     handler: async (
       input,
       context: ActionAPIContext,
     ): Promise<{ ok: boolean; statusKey: string }> => {
       try {
-        const ip = extractClientIp(context.request, context.clientAddress);
+        const ip = extractClientIp(
+          context.request,
+          context.clientAddress,
+          context.locals.isCloudflareVerified,
+        );
 
         if (!enforceRateLimit(`newsletter:${ip}`, ip, "newsletter-action", 5).allowed) {
           return { ok: false, statusKey: "footer.newsletterNetwork" };
@@ -150,7 +166,7 @@ export const server = {
 
         const data = validationResult.data;
 
-        if (!(await verifyCaptcha(data.recaptchaToken, ip, "newsletter-action"))) {
+        if (!(await verifyCaptcha(data.recaptchaToken, ip, "newsletter"))) {
           return { ok: false, statusKey: "footer.newsletterCaptchaError" };
         }
 

@@ -3,10 +3,11 @@ import { checkRateLimit } from "@/lib/api-utils";
 import type { APIRoute } from "astro";
 import { getCollection } from "astro:content";
 
-export const GET: APIRoute = async ({ clientAddress, request }) => {
-  const ip = extractClientIp(request, clientAddress);
+export const GET: APIRoute = async ({ cache, clientAddress, locals, request }) => {
+  const ip = extractClientIp(request, clientAddress, locals.isCloudflareVerified);
   const rateLimit = checkRateLimit(`api:${ip}`, 60, 60_000);
   if (!rateLimit.allowed) {
+    cache.set(false);
     return Response.json(
       { error: "Too many requests" },
       {

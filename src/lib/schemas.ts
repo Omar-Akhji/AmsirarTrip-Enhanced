@@ -1,36 +1,38 @@
 import { z } from "astro/zod";
-
-const sanitize = (value: string) => value.trim();
+import { LOCALES } from "@/i18n/locales";
 
 const phoneRegex = /^\+?[0-9\s().-]{7,25}$/;
+const hasMinimumDigits = (value: string): boolean => value.replaceAll(/\D/g, "").length >= 7;
 
 const RecaptchaSchema = (t: (key: string) => string) =>
-  z.object({ recaptchaToken: z.string().min(1, t("recaptchaRequired")) });
+  z.object({ recaptchaToken: z.string().trim().min(1, t("recaptchaRequired")).max(2048) });
 
 function buildContactSchema(t: (key: string) => string) {
   return z
     .object({
       name: z
         .string()
+        .trim()
         .min(2, { message: t("nameMin") })
-        .max(100, { message: t("nameTooLong") })
-        .transform(sanitize),
-      email: z.email({ message: t("emailInvalid") }).transform(sanitize),
+        .max(100, { message: t("nameTooLong") }),
+      email: z.email({ message: t("emailInvalid") }).max(254, { message: t("emailInvalid") }),
       phone: z
         .string()
-        .regex(phoneRegex, { message: t("phoneInvalid") })
+        .trim()
         .max(25, { message: t("phoneTooLong") })
-        .transform(sanitize),
+        .regex(phoneRegex, { message: t("phoneInvalid") })
+        .refine(hasMinimumDigits, { message: t("phoneInvalid") }),
       topic: z
         .string()
+        .trim()
         .max(200, { message: t("topicTooLong") })
         .optional()
-        .transform((v) => (v ? sanitize(v) : undefined)),
+        .transform((v) => (v && v.length > 0 ? v : undefined)),
       message: z
         .string()
+        .trim()
         .min(10, { message: t("messageMin") })
-        .max(1000, { message: t("messageTooLong") })
-        .transform(sanitize),
+        .max(1000, { message: t("messageTooLong") }),
     })
     .extend(RecaptchaSchema(t).shape);
 }
@@ -44,10 +46,10 @@ function buildNewsletterSchema(t: (key: string) => string) {
     .object({
       name: z
         .string()
+        .trim()
         .min(2, { message: t("nameMin") })
-        .max(100, { message: t("nameTooLong") })
-        .transform(sanitize),
-      email: z.email({ message: t("emailInvalid") }).transform(sanitize),
+        .max(100, { message: t("nameTooLong") }),
+      email: z.email({ message: t("emailInvalid") }).max(254, { message: t("emailInvalid") }),
     })
     .extend(RecaptchaSchema(t).shape);
 }
@@ -61,20 +63,21 @@ function buildBookingSchema(t: (key: string) => string) {
     .object({
       reservationType: z
         .string()
+        .trim()
         .min(1, { message: t("reservationRequired") })
-        .max(100, { message: t("reservationRequired") })
-        .transform(sanitize),
+        .max(100, { message: t("reservationRequired") }),
       fullName: z
         .string()
+        .trim()
         .min(2, { message: t("nameMin") })
-        .max(100, { message: t("nameTooLong") })
-        .transform(sanitize),
-      email: z.email({ message: t("emailInvalid") }).transform(sanitize),
+        .max(100, { message: t("nameTooLong") }),
+      email: z.email({ message: t("emailInvalid") }).max(254, { message: t("emailInvalid") }),
       phone: z
         .string()
-        .regex(phoneRegex, { message: t("phoneInvalid") })
+        .trim()
         .max(25, { message: t("phoneTooLong") })
-        .transform(sanitize),
+        .regex(phoneRegex, { message: t("phoneInvalid") })
+        .refine(hasMinimumDigits, { message: t("phoneInvalid") }),
       persons: z.coerce
         .number()
         .int()
@@ -82,6 +85,7 @@ function buildBookingSchema(t: (key: string) => string) {
         .max(50, { message: t("personsMax") }),
       date: z
         .string()
+        .trim()
         .max(50, { message: t("invalidDate") })
         .refine((value) => !Number.isNaN(Date.parse(value)), { message: t("invalidDate") })
         .refine(
@@ -95,14 +99,11 @@ function buildBookingSchema(t: (key: string) => string) {
         ),
       message: z
         .string()
+        .trim()
         .max(1000, { message: t("messageTooLong") })
         .optional()
-        .transform((value) => (value ? sanitize(value) : undefined)),
-      language: z
-        .string()
-        .max(10)
-        .optional()
-        .transform((value) => (value ? sanitize(value) : undefined)),
+        .transform((value) => (value && value.length > 0 ? value : undefined)),
+      language: z.enum(LOCALES).optional(),
       duration: z.coerce.number().int().min(1).max(30).optional(),
     })
     .extend(RecaptchaSchema(t).shape);

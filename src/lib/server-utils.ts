@@ -1,13 +1,5 @@
 /** Server utilities — re-exports from services and HTML escape utility. */
 
+export { escapeHtml } from "@/actions/helpers/form-helpers";
 export { getMailer, sendTransactionalEmail, verifyMailer } from "@/services/email";
 export { logger, logSecurityEvent } from "@/services/logger";
-
-export function escapeHtml(string_ = ""): string {
-  return string_
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-}

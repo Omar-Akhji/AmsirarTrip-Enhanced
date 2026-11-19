@@ -13,7 +13,7 @@ declare module "*.vue" {
 
 declare namespace App {
   interface Locals {
-    cspNonce: string;
+    isCloudflareVerified: boolean;
     locale: "en" | "fr" | "de" | "es";
   }
 }

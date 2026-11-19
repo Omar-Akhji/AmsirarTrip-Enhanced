@@ -23,6 +23,7 @@ const tourEntry =
   slug ? await getEntry({ collection: "tours", id: slug.toLowerCase() }) : undefined;
 
 if (!tourEntry) {
+  Astro.cache.set(false);
   Astro.response.status = 404;
   return Astro.rewrite(locale === "en" ? "/404" : `/${locale}/404`);
 }

@@ -1,4 +1,3 @@
-import { escapeHtml } from "../../lib/server-utils";
 import {
   BOOKING_EMAIL_ATTACHMENTS,
   CONTACT_EMAIL_ATTACHMENTS,
@@ -6,7 +5,12 @@ import {
   NEWSLETTER_EMAIL_ATTACHMENTS,
   type InlineCidAttachment,
 } from "./email-assets";
-import { cleanReservationType, getLanguageName, sanitizeHeaderValue } from "./form-helpers";
+import {
+  cleanReservationType,
+  escapeHtml,
+  getLanguageName,
+  sanitizeHeaderValue,
+} from "./form-helpers";
 
 export interface BookingEmailInput {
   date: string;
@@ -92,7 +96,7 @@ function wrapEmailLayout({
                   .map(
                     (btn) => `
                   <td align="center" class="btn-stack-cell" style="padding: 4px 4px;">
-                    <a href="${escapeHtml(btn.href)}" target="_blank" class="btn-responsive" style="display: block; background-color: transparent; border: 1.5px solid ${btn.borderColor}; color: ${btn.color}; font-family: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; font-weight: 600; text-decoration: none; padding: 11px 14px; border-radius: 8px; line-height: 1.2; text-align: center;">
+                    <a href="${escapeHtml(btn.href)}" target="_blank" rel="noopener noreferrer" class="btn-responsive" style="display: block; background-color: transparent; border: 1.5px solid ${btn.borderColor}; color: ${btn.color}; font-family: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; font-weight: 600; text-decoration: none; padding: 11px 14px; border-radius: 8px; line-height: 1.2; text-align: center;">
                       <img src="${escapeHtml(btn.iconSrc)}" width="15" height="15" alt="" style="vertical-align: -2px; margin-right: 6px; display: inline-block; border: 0;" />
                       <span>${escapeHtml(btn.label)}</span>
                     </a>
@@ -179,7 +183,7 @@ function wrapEmailLayout({
                 <tr>
                   <td align="center">
                     <!-- High-Res Brand Logo embedded directly via MIME CID -->
-                    <a href="https://amsirartrip.com" target="_blank" style="text-decoration: none; display: inline-block;">
+                    <a href="https://amsirartrip.com" target="_blank" rel="noopener noreferrer" style="text-decoration: none; display: inline-block;">
                       <img
                         src="cid:${EMAIL_CID.logo}"
                         alt="AMSIRAR TRIP"
@@ -367,7 +371,7 @@ export function buildBookingEmail(data: BookingEmailInput): PreparedEmail {
         <td style="padding: 11px 16px; border-bottom: 1px solid #e7e5e4;">
           <div style="font-size: 11px; font-weight: 600; color: #78716c; text-transform: uppercase; letter-spacing: 0.5px;">Email Address</div>
           <div style="font-size: 13.5px; font-weight: 600; color: #1c1917; margin-top: 3px;">
-            <a href="mailto:${safeReplyTo}" style="color: #ea580c; text-decoration: none;">${escapeHtml(data.email)}</a>
+            <a href="mailto:${escapeHtml(safeReplyTo)}" style="color: #ea580c; text-decoration: none;">${escapeHtml(data.email)}</a>
           </div>
         </td>
       </tr>
@@ -375,7 +379,7 @@ export function buildBookingEmail(data: BookingEmailInput): PreparedEmail {
         <td style="padding: 11px 16px;">
           <div style="font-size: 11px; font-weight: 600; color: #78716c; text-transform: uppercase; letter-spacing: 0.5px;">Phone / WhatsApp</div>
           <div style="font-size: 13.5px; font-weight: 600; color: #1c1917; margin-top: 3px;">
-            <a href="tel:${data.phone.replaceAll(/\s+/g, "")}" style="color: #1c1917; text-decoration: none;">${escapeHtml(data.phone)}</a>
+            <a href="tel:${escapeHtml(data.phone.replaceAll(/\s+/g, ""))}" style="color: #1c1917; text-decoration: none;">${escapeHtml(data.phone)}</a>
           </div>
         </td>
       </tr>
@@ -405,7 +409,7 @@ export function buildBookingEmail(data: BookingEmailInput): PreparedEmail {
     headline: `Booking Request: ${safeFullName}`,
     contentHtml,
     actionButtons,
-    footerNote: `Amsirar Trip Booking Notification &bull; Language: ${langName}`,
+    footerNote: `Amsirar Trip Booking Notification • Language: ${langName}`,
   });
 
   const text = `================================================
@@ -493,7 +497,7 @@ export function buildContactEmail(data: ContactEmailInput): PreparedEmail {
         <td style="padding: 10px 16px; border-bottom: 1px solid #f0eeeb;">
           <div style="font-size: 11px; font-weight: 600; color: #78716c; text-transform: uppercase; letter-spacing: 0.5px;">Email</div>
           <div style="font-size: 13.5px; font-weight: 600; color: #1c1917; margin-top: 2px;">
-            <a href="mailto:${safeReplyTo}" style="color: #ea580c; text-decoration: none;">${escapeHtml(data.email)}</a>
+            <a href="mailto:${escapeHtml(safeReplyTo)}" style="color: #ea580c; text-decoration: none;">${escapeHtml(data.email)}</a>
           </div>
         </td>
       </tr>
@@ -501,7 +505,7 @@ export function buildContactEmail(data: ContactEmailInput): PreparedEmail {
         <td style="padding: 10px 16px; ${safeTopic ? "border-bottom: 1px solid #f0eeeb;" : ""}">
           <div style="font-size: 11px; font-weight: 600; color: #78716c; text-transform: uppercase; letter-spacing: 0.5px;">Phone / WhatsApp</div>
           <div style="font-size: 13.5px; font-weight: 600; color: #1c1917; margin-top: 2px;">
-            <a href="tel:${data.phone.replaceAll(/\s+/g, "")}" style="color: #1c1917; text-decoration: none;">${escapeHtml(data.phone)}</a>
+            <a href="tel:${escapeHtml(data.phone.replaceAll(/\s+/g, ""))}" style="color: #1c1917; text-decoration: none;">${escapeHtml(data.phone)}</a>
           </div>
         </td>
       </tr>
@@ -590,7 +594,7 @@ export function buildNewsletterEmail(data: NewsletterEmailInput): PreparedEmail 
         <td style="padding: 12px 16px;">
           <div style="font-size: 11px; font-weight: 600; color: #78716c; text-transform: uppercase; letter-spacing: 0.5px;">Email Address</div>
           <div style="font-size: 13.5px; font-weight: 600; color: #1c1917; margin-top: 2px;">
-            <a href="mailto:${safeReplyTo}" style="color: #ea580c; text-decoration: none;">${escapeHtml(data.email)}</a>
+            <a href="mailto:${escapeHtml(safeReplyTo)}" style="color: #ea580c; text-decoration: none;">${escapeHtml(data.email)}</a>
           </div>
         </td>
       </tr>

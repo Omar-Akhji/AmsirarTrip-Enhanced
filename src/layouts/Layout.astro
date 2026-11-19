@@ -52,7 +52,6 @@ const currentOgLocale = OG_LOCALE_MAP[locale] ?? locale;
 <!doctype html>
 <html
   class="inline-full min-block-full overflow-x-clip scrollbar-none [-ms-overflow-style:none] bg-(--pattern-bg-color) bg-(image:--pattern-bg-image) bg-repeat bg-size-(--pattern-bg-size) [&::-webkit-scrollbar]:hidden [&::-webkit-scrollbar]:size-0 [&::-webkit-scrollbar]:bg-transparent"
-  data-csp-nonce={Astro.locals.cspNonce || ""}
   itemscope
   itemtype="https://schema.org/WebPage"
   lang={locale}
@@ -62,8 +61,8 @@ const currentOgLocale = OG_LOCALE_MAP[locale] ?? locale;
     <script src="../scripts/theme-init.ts"></script>
     <script src="../scripts/theme.ts"></script>
     <!--
-      ClientRouter (View Transitions) generates inline scripts handled
-      by 'strict-dynamic' in CSP.
+      ClientRouter (View Transitions) inline scripts are automatically hashed
+      by Astro 7's native SHA-256 `security.csp` configuration.
     -->
     <ClientRouter fallback="animate" />
 
@@ -99,10 +98,6 @@ const currentOgLocale = OG_LOCALE_MAP[locale] ?? locale;
     <meta
       content="light dark"
       name="color-scheme"
-    />
-    <meta
-      content={Astro.generator}
-      name="generator"
     />
     <meta
       content="#fafaf9"

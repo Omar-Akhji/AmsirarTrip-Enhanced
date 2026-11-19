@@ -1,16 +1,8 @@
 /**
  * Server-side logging service with file output. Logs security events and errors to structured log
  * files.
- *
- * Features:
- *
- * - Structured JSON logging for easy parsing
- * - Separate log files for different log levels
- * - Automatic log rotation by date
- * - Configurable log directory
  */
-import { existsSync, mkdirSync } from "node:fs";
-import { createWriteStream, type WriteStream } from "node:fs";
+import { createWriteStream, existsSync, mkdirSync, type WriteStream } from "node:fs";
 
 const disk = { exists: existsSync, mkdir: mkdirSync, createStream: createWriteStream };
 
@@ -26,7 +18,7 @@ interface LogEntry {
 const LOG_DIR = process.env["LOG_DIR"] ?? "./logs";
 
 let activeDate = "";
-const streams: Partial<Record<LogLevel, WriteStream>> = {};
+const streams = new Map<LogLevel, WriteStream>();
 
 function ensureLogDir() {
   if (!disk.exists(LOG_DIR)) {
@@ -38,23 +30,34 @@ function ensureLogDir() {
   }
 }
 
-// Get or create a write stream for the given level, rotating when the date changes
+// Get or create a write stream for the given level, rotating cleanly when the UTC date changes
 function getStream(level: LogLevel): WriteStream {
   const today = new Date().toISOString().split("T", 1)[0] ?? "";
   if (today !== activeDate) {
-    // Close stale streams from a previous day
-    for (const s of Object.values(streams)) s.end();
+    for (const stream of streams.values()) {
+      stream.end();
+    }
+    streams.clear();
     activeDate = today;
   }
-  if (!streams[level]) {
-    const filePath = `${LOG_DIR}/${today}-${level}.log`;
-    streams[level] = disk.createStream(filePath, { flags: "a" });
+  const existing = streams.get(level);
+  if (existing) {
+    return existing;
   }
-  return streams[level];
+  const filePath = `${LOG_DIR}/${today}-${level}.log`;
+  const stream = disk.createStream(filePath, { flags: "a" });
+  stream.on("error", (error) => {
+    console.error(`[Logger] Stream error for ${level}:`, error);
+    if (streams.get(level) === stream) {
+      streams.delete(level);
+    }
+  });
+  streams.set(level, stream);
+  return stream;
 }
 
 function formatLogEntry(level: LogLevel, message: string, meta?: Record<string, unknown>): string {
-  const entry: LogEntry = { timestamp: new Date().toISOString(), level, message, ...meta };
+  const entry: LogEntry = { ...meta, timestamp: new Date().toISOString(), level, message };
   return JSON.stringify(entry);
 }
 
@@ -132,10 +135,10 @@ export function logSecurityEvent(
   extra?: Record<string, unknown>,
 ): void {
   logger.security(`Security event: ${type}`, {
+    ...extra,
     ip: sanitizeLogString(ip, 64),
     type,
     details: sanitizeLogString(details, 512),
     userAgent: sanitizeLogString(extra?.["userAgent"], 512),
-    ...extra,
   });
 }

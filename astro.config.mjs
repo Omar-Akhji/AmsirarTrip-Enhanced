@@ -21,21 +21,17 @@ export default defineConfig({
 
   // ─── 3. Output & Runtime Adapter ──────────────────────────────────────────
   output: "server",
-  adapter: node({ mode: "standalone" }),
+  adapter: node({ mode: "standalone", bodySizeLimit: 65_536, staticHeaders: true }),
 
   // ─── 4. Integrations ──────────────────────────────────────────────────────
   integrations: [
-    vue({ template: { compilerOptions: { isCustomElement: (tag) => tag.startsWith("cap-") } } }),
+    vue(),
     htmlValidate(),
     compress({ CSS: false, HTML: false, Image: false, JavaScript: false, SVG: true }),
   ],
 
   // ─── 5. Vite & Tailwind CSS v4 ────────────────────────────────────────────
-  vite: {
-    plugins: [tailwindcss()],
-    resolve: { alias: { "@": srcDir } },
-    build: { cssMinify: "esbuild" },
-  },
+  vite: { plugins: [tailwindcss()], resolve: { alias: { "@": srcDir } } },
 
   // ─── 6. Image Optimization ────────────────────────────────────────────────
   image: { domains: [], remotePatterns: [] },
@@ -45,14 +41,32 @@ export default defineConfig({
     checkOrigin: true,
     allowedDomains: [
       { hostname: "amsirartrip.com", protocol: "https" },
-      { hostname: "*.amsirartrip.com", protocol: "https" },
-      { hostname: "*.hostingersite.com", protocol: "https" },
+      { hostname: "www.amsirartrip.com", protocol: "https" },
     ],
     actionBodySizeLimit: 65_536,
+    csp: {
+      algorithm: "SHA-256",
+      directives: [
+        "default-src 'self'",
+        "font-src 'self'",
+        "img-src 'self' blob: data:",
+        "media-src 'self' blob: data:",
+        "frame-src 'self' https://challenges.cloudflare.com https://www.google.com/maps https://www.google.com/maps/ https://maps.google.com",
+        "frame-ancestors 'self'",
+        "connect-src 'self' https://challenges.cloudflare.com",
+        "manifest-src 'self'",
+        "object-src 'none'",
+        "base-uri 'self'",
+        "form-action 'self'",
+        "upgrade-insecure-requests",
+      ],
+      scriptDirective: { resources: ["'self'", "https://challenges.cloudflare.com"] },
+      styleDirective: { resources: ["'self'", "'unsafe-inline'"] },
+    },
   },
 
   // ─── 8. Cache & Route Rules (Astro 7+) ────────────────────────────────────
-  cache: { provider: memoryCache() },
+  cache: { provider: memoryCache({ query: { include: [] } }) },
 
   routeRules: {
     "/": { maxAge: 600, swr: 3600 },
@@ -70,7 +84,6 @@ export default defineConfig({
     "/robots.txt": { maxAge: 3600, swr: 86_400 },
     "/sitemap.xml": { maxAge: 3600, swr: 86_400 },
     "/sitemap-index.xml": { maxAge: 3600, swr: 86_400 },
-    "/api/cap/[...path]": { maxAge: 0 },
     "/api/[...path]": { maxAge: 900, swr: 3600 },
     "/_actions/[...path]": { maxAge: 0 },
   },
@@ -91,8 +104,17 @@ export default defineConfig({
       GMAIL_USER: envField.string({ context: "server", access: "secret", optional: true }),
       GMAIL_PASS: envField.string({ context: "server", access: "secret", optional: true }),
       MAIL_TO: envField.string({ context: "server", access: "secret", optional: true }),
-      CAP_SECRET_KEY: envField.string({ context: "server", access: "secret", optional: true }),
-      PUBLIC_CAP_API_ENDPOINT: envField.string({
+      ORIGIN_VERIFY_SECRET: envField.string({
+        context: "server",
+        access: "secret",
+        optional: true,
+      }),
+      TURNSTILE_SECRET_KEY: envField.string({
+        context: "server",
+        access: "secret",
+        optional: true,
+      }),
+      PUBLIC_TURNSTILE_SITE_KEY: envField.string({
         context: "client",
         access: "public",
         optional: true,

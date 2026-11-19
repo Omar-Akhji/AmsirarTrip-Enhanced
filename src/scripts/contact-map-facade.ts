@@ -1,3 +1,16 @@
+function isTrustedGoogleMapsEmbedUrl(rawUrl: string): boolean {
+  try {
+    const parsed = new URL(rawUrl);
+    return (
+      parsed.protocol === "https:"
+      && parsed.hostname === "www.google.com"
+      && (parsed.pathname === "/maps" || parsed.pathname.startsWith("/maps/embed"))
+    );
+  } catch {
+    return false;
+  }
+}
+
 function setupContactMapFacade(): void {
   const details = document.querySelector<HTMLDetailsElement>(
     "#location details:not([data-facade-ready])",
@@ -11,7 +24,7 @@ function setupContactMapFacade(): void {
     "toggle",
     () => {
       const src = iframe.dataset["src"];
-      if (src && !iframe.src && details.open) {
+      if (src && !iframe.src && details.open && isTrustedGoogleMapsEmbedUrl(src)) {
         iframe.src = src;
       }
     },

@@ -6,7 +6,7 @@ const LANGUAGE_NAMES: Record<string, string> = {
 };
 
 export function getLanguageName(code = ""): string {
-  return LANGUAGE_NAMES[code] ?? code;
+  return Object.hasOwn(LANGUAGE_NAMES, code) ? (LANGUAGE_NAMES[code] ?? code) : code;
 }
 
 export function cleanReservationType(type = ""): string {
@@ -14,6 +14,15 @@ export function cleanReservationType(type = ""): string {
     .replace(/^Tour\d+\s*/i, "")
     .replace(/\s*-\s*Duration:\s*\d+\s*Days?/i, "")
     .trim();
+}
+
+export function escapeHtml(string_ = ""): string {
+  return string_
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 }
 
 export function sanitizeHeaderValue(value = "", maxLength = 120): string {

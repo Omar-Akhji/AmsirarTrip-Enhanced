@@ -4,11 +4,31 @@ const MAX_TRACKED_KEYS = 10_000;
 const rateLimitMap = new Map<string, { count: number; resetAt: number; violations: number }>();
 const blockedIPs = new Map<string, number>();
 
-function enforceMapCapacity<K, V>(map: Map<K, V>): void {
-  if (map.size < MAX_TRACKED_KEYS) return;
-  const oldestKey = map.keys().next().value;
-  if (oldestKey !== undefined) {
-    map.delete(oldestKey);
+function enforceRateLimitCapacity(now: number): void {
+  if (rateLimitMap.size < MAX_TRACKED_KEYS) return;
+  for (const [key, value] of rateLimitMap) {
+    if (now > value.resetAt) {
+      rateLimitMap.delete(key);
+    }
+  }
+  while (rateLimitMap.size >= MAX_TRACKED_KEYS) {
+    const oldestKey = rateLimitMap.keys().next().value;
+    if (oldestKey === undefined) break;
+    rateLimitMap.delete(oldestKey);
+  }
+}
+
+function enforceBlockedCapacity(now: number): void {
+  if (blockedIPs.size < MAX_TRACKED_KEYS) return;
+  for (const [key, expiry] of blockedIPs) {
+    if (now > expiry) {
+      blockedIPs.delete(key);
+    }
+  }
+  while (blockedIPs.size >= MAX_TRACKED_KEYS) {
+    const oldestKey = blockedIPs.keys().next().value;
+    if (oldestKey === undefined) break;
+    blockedIPs.delete(oldestKey);
   }
 }
 
@@ -36,7 +56,7 @@ export function checkRateLimit(
   const record = rateLimitMap.get(identifier);
 
   if (!record || now > record.resetAt) {
-    enforceMapCapacity(rateLimitMap);
+    enforceRateLimitCapacity(now);
     rateLimitMap.set(identifier, {
       count: 1,
       resetAt: now + windowMs,
@@ -49,7 +69,7 @@ export function checkRateLimit(
     record.violations++;
 
     if (record.violations >= 3) {
-      enforceMapCapacity(blockedIPs);
+      enforceBlockedCapacity(now);
       blockedIPs.set(identifier, now + 3_600_000);
       logSecurityEvent(
         "BLOCKED_IP",

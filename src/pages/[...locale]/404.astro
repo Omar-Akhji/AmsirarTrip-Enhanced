@@ -6,6 +6,7 @@ import Button from "../../shared/ui/primitives/Button.astro";
 
 const locale = Astro.locals.locale;
 const t = useTranslations(locale);
+Astro.cache.set(false);
 Astro.response.status = 404;
 ---
 

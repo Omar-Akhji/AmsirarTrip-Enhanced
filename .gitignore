@@ -10,6 +10,7 @@ dist-*
 .vite/
 .github/
 .eslintcache
+.stylelintcache
 *.tsbuildinfo
 
 # ─── Documentation & plans ────────────────────────────────
