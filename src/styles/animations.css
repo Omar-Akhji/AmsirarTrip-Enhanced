@@ -408,10 +408,6 @@
 
     /* Both directions */
     &:is(.is-next, .is-prev) {
-      & .hero-dots-nav button {
-        pointer-events: none;
-      }
-
       & .list .item.is-outgoing .content {
         animation: heroContentExit var(--hero-exit-duration) var(--ease-out-expo) forwards;
       }

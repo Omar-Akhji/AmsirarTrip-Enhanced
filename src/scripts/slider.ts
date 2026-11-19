@@ -30,8 +30,6 @@ function initSlider(): void {
   const prevBtn = slider.querySelector<HTMLButtonElement>(".prev");
   const progressBar = slider.querySelector<HTMLElement>("#slider-progress-bar");
   const numberItems = slider.querySelectorAll<HTMLElement>(":scope .slide-numbers .number-item");
-  const dotButtons = slider.querySelectorAll<HTMLButtonElement>(".hero-dot-btn");
-  const lineFills = slider.querySelectorAll<HTMLElement>(".hero-dot-line-fill");
   const totalSlides = sliderList.querySelectorAll<HTMLElement>(":scope > .item").length || 3;
 
   let pendingTargetIndex: number | null = null;
@@ -53,20 +51,6 @@ function initSlider(): void {
 
     for (const [index, el] of numberItems.entries()) {
       el.classList.toggle("active", index === activeIndex);
-    }
-
-    for (const [index, dot] of dotButtons.entries()) {
-      const isActive = index === activeIndex;
-      dot.classList.toggle("active", isActive);
-      dot.toggleAttribute("aria-current", isActive);
-    }
-
-    for (const [lineIndex, lineFill] of lineFills.entries()) {
-      if (lineIndex < activeIndex) {
-        lineFill.style.height = "100%";
-      } else {
-        lineFill.style.height = "0%";
-      }
     }
   }
 
@@ -285,22 +269,6 @@ function initSlider(): void {
     startAutoplay();
   }
 
-  // Vertical dot buttons navigation
-  const onDotClick = (e: MouseEvent) => {
-    e.preventDefault();
-    const btn = (e.currentTarget as HTMLElement).closest<HTMLButtonElement>(".hero-dot-btn");
-    if (!btn || isAnimating) return;
-    const targetIndexStr = btn.dataset["index"];
-    if (targetIndexStr !== undefined) {
-      const idx = Number(targetIndexStr);
-      goToSlide(idx);
-    }
-  };
-
-  for (const dot of dotButtons) {
-    dot.addEventListener("click", onDotClick);
-  }
-
   // Thumbnail direct click & multi-slide navigation
   const onThumbnailClick = (e: MouseEvent) => {
     const target = (e.target as HTMLElement).closest<HTMLElement>(".item");
@@ -396,9 +364,6 @@ function initSlider(): void {
     stopAutoplay();
     nextBtn?.removeEventListener("click", onNextClick);
     prevBtn?.removeEventListener("click", onPrevClick);
-    for (const dot of dotButtons) {
-      dot.removeEventListener("click", onDotClick);
-    }
     thumbnail.removeEventListener("click", onThumbnailClick);
     globalThis.removeEventListener("keydown", onKeyDown);
     slider.removeEventListener("touchstart", onTouchStart);

@@ -203,47 +203,6 @@ const thumbnailCards: SlideCardItem[] = currentSlides.map((slide) => ({
 
     <!-- Thumbnail Carousel Cards -->
     <SliderCards items={thumbnailCards} />
-
-    <!-- Vertical Dots Navigation directly below the orange line and along the same vertical axis -->
-    <nav
-      aria-label="Slider vertical dots navigation"
-      class="hero-dots-nav pagination absolute z-100 flex flex-col items-center -translate-x-1/2 left-4 sm:left-8 md:left-[5%] lg:left-[max(7%,calc(50%-570px))] 2xl:left-[max(7%,calc(50%-640px))] 3xl:left-[max(8%,calc(50%-720px))] top-[clamp(19.5rem,56vh,23.5rem)] md:top-[clamp(21rem,44vh,25rem)] lg:top-[clamp(22rem,45vh,26.5rem)] xl:top-[clamp(23rem,46vh,28rem)]"
-      id="pagination"
-    >
-      <div class="relative flex flex-col items-center">
-        {currentSlides.map((slide, index) => (
-          <div
-            class="relative flex flex-col items-center"
-            data-dot-wrapper={index}
-          >
-            <button
-              aria-current={index === 0 ? "true" : undefined}
-              aria-label={`Go to slide ${index + 1}: ${slide.title}`}
-              class:list={[
-                "hero-dot-btn group relative flex size-7 sm:size-8 items-center justify-center cursor-pointer rounded-full transition-transform duration-200 active:scale-90 focus-visible:outline-2 focus-visible:outline-[#ecad29] focus-visible:outline-offset-2 motion-reduce:transform-none",
-                { active: index === 0 },
-              ]}
-              data-index={index}
-              type="button"
-            >
-              <span class="hero-dot-indicator relative grid size-3.5 sm:size-4 place-items-center rounded-full border border-white/35 bg-black/40 backdrop-blur-xs transition-all duration-300 group-[.active]:border-[#ecad29]/90 group-[.active]:bg-[#ecad29]/25 group-[.active]:shadow-[0_0_10px_rgb(236_173_41/50%)] group-[.active]:scale-115 group-[&:not(.active):hover]:border-white/80 group-[&:not(.active):hover]:bg-white/20 group-[&:not(.active):hover]:scale-110 motion-reduce:transition-none">
-                <span class="hero-dot-core size-1.5 sm:size-2 rounded-full transition-all duration-300 bg-white/55 scale-75 group-[.active]:bg-[#ecad29] group-[.active]:shadow-[0_0_8px_rgb(236_173_41/90%)] group-[.active]:scale-100 group-[&:not(.active):hover]:bg-white/95 group-[&:not(.active):hover]:scale-90 motion-reduce:transition-none" />
-              </span>
-            </button>
-
-            {index < currentSlides.length - 1 && (
-              <div
-                aria-hidden="true"
-                class="hero-dot-line relative h-6 sm:h-7 w-0.5 bg-white/20 overflow-hidden my-0.5 rounded-full transition-colors duration-300"
-                data-line-index={index}
-              >
-                <div class="hero-dot-line-fill absolute inset-x-0 top-0 h-0 w-full bg-linear-to-b from-[#ecad29] to-orange-500 shadow-[0_0_6px_rgb(236_173_41/60%)] transition-[height] duration-500 ease-out motion-reduce:transition-none" />
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-    </nav>
   </div>
 </section>
 

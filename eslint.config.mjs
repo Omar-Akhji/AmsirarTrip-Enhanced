@@ -167,7 +167,6 @@ export default defineConfig(
             "item",
             "content",
             "thumbnail",
-            "hero-dots-nav",
             "lenis",
             "lenis-smooth",
             "dark",
