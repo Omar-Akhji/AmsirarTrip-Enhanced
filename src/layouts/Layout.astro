@@ -346,13 +346,9 @@ const t = useTranslations(locale);
     <main
       class="relative isolate block flex-[1_0_auto] inline-full min-h-dvh overflow-x-clip focus:outline-hidden"
       id="main-content"
-      tabindex="-1"
       transition:animate="fade"
     >
-      <div
-        id="page-content"
-        tabindex="-1"
-      >
+      <div id="page-content">
         <slot />
       </div>
     </main>
