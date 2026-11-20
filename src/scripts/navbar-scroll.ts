@@ -1,24 +1,28 @@
-let scrollListener: (() => void) | undefined;
+let activeObserver: IntersectionObserver | null = null;
 
-function updateScrolled(nav: HTMLElement) {
-  nav.toggleAttribute("data-scrolled", window.scrollY > 0);
-}
+function initNavbarScroll(): void {
+  activeObserver?.disconnect();
+  activeObserver = null;
 
-function init() {
   const nav = document.querySelector<HTMLElement>("#main-navbar");
   if (!nav) return;
 
-  updateScrolled(nav);
+  const sentinel = document.querySelector<HTMLElement>("[data-nav-sentinel]");
+  nav.toggleAttribute("data-scrolled", window.scrollY > 0);
 
-  if (scrollListener) {
-    window.removeEventListener("scroll", scrollListener);
-  }
-  scrollListener = () => updateScrolled(nav);
-  window.addEventListener("scroll", scrollListener, { passive: true });
+  if (!sentinel || typeof IntersectionObserver === "undefined") return;
+
+  activeObserver = new IntersectionObserver(
+    (entries) => {
+      const entry = entries[0];
+      if (!entry) return;
+      nav.toggleAttribute("data-scrolled", !entry.isIntersecting);
+    },
+    { threshold: 0 },
+  );
+  activeObserver.observe(sentinel);
 }
 
-document.addEventListener("astro:page-load", init);
-document.addEventListener("astro:after-swap", () => {
-  const nav = document.querySelector<HTMLElement>("#main-navbar");
-  if (nav) updateScrolled(nav);
-});
+initNavbarScroll();
+document.addEventListener("astro:page-load", initNavbarScroll);
+document.addEventListener("astro:after-swap", initNavbarScroll);

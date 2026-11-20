@@ -25,7 +25,6 @@ export default defineConfig(
       ".eslintcache",
       "public/**",
       "scratch/**",
-      "src/i18n/client-data.ts",
       ".vscode/**",
       ".gemini/**",
       ".kiro/**",
@@ -167,8 +166,6 @@ export default defineConfig(
             "item",
             "content",
             "thumbnail",
-            "lenis",
-            "lenis-smooth",
             "dark",
           ],
         },
@@ -379,10 +376,7 @@ export default defineConfig(
       "unicorn/no-await-expression-member": "off",
     },
   },
-  {
-    files: ["src/i18n/schema.ts", "src/content.config.ts"],
-    rules: { "unicorn/max-nested-calls": "off" },
-  },
+  { files: ["src/content.config.ts"], rules: { "unicorn/max-nested-calls": "off" } },
   {
     files: ["tests/**/*.ts", "playwright.config.mjs"],
     rules: { "@typescript-eslint/explicit-module-boundary-types": "off", "no-console": "off" },
@@ -397,7 +391,7 @@ export default defineConfig(
             {
               group: ["@/i18n/ui", "@/i18n/utils", "**/locales/**"],
               message:
-                "Do not import full locale dictionaries into client components or client scripts. Use @/lib/hooks/use-translation instead.",
+                "Pass server translations as props instead of importing dictionaries into client components or client scripts.",
             },
           ],
         },

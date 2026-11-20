@@ -13,27 +13,38 @@ export interface ExcursionItem {
   readonly title: string;
 }
 
-/**
- * Derives UI-ready excursion data from Astro Content Collections. Single source of truth matching
- * getToursData().
- */
-export async function getExcursionsData(): Promise<ExcursionItem[]> {
-  const entries = await getCollection("excursions");
+let cachedExcursionsPromise: Promise<ExcursionItem[]> | undefined;
 
-  return entries
-    .map((entry) => {
-      const { bookingId, image, i18nKeyPrefix, jsonLd } = entry.data;
-      return {
-        id: bookingId,
-        image,
-        title: `excursion.list.${i18nKeyPrefix}.title`,
-        alt: `excursion.list.${i18nKeyPrefix}.alt`,
-        description: `excursion.list.${i18nKeyPrefix}.description`,
-        tagline: `excursion.list.${i18nKeyPrefix}.tagline`,
-        duration: `excursion.list.${i18nKeyPrefix}.duration`,
-        price: jsonLd.price,
-        route: `/excursions/${entry.id}`,
-      } satisfies ExcursionItem;
-    })
-    .toSorted((a, b) => a.id - b.id);
+async function loadExcursions(): Promise<ExcursionItem[]> {
+  try {
+    const entries = await getCollection("excursions");
+    return entries
+      .map((entry) => {
+        const { bookingId, image, i18nKeyPrefix, jsonLd } = entry.data;
+        return {
+          id: bookingId,
+          image,
+          title: `excursion.list.${i18nKeyPrefix}.title`,
+          alt: `excursion.list.${i18nKeyPrefix}.alt`,
+          description: `excursion.list.${i18nKeyPrefix}.description`,
+          tagline: `excursion.list.${i18nKeyPrefix}.tagline`,
+          duration: `excursion.list.${i18nKeyPrefix}.duration`,
+          price: jsonLd.price,
+          route: `/excursions/${entry.id}`,
+        } satisfies ExcursionItem;
+      })
+      .toSorted((a, b) => a.id - b.id);
+  } catch (error: unknown) {
+    cachedExcursionsPromise = undefined;
+    throw error;
+  }
+}
+
+/** Derives UI-ready excursion data from Astro Content Collections (memoized in production). */
+export async function getExcursionsData(): Promise<ExcursionItem[]> {
+  if (!import.meta.env.PROD) {
+    return loadExcursions();
+  }
+  cachedExcursionsPromise ??= loadExcursions();
+  return cachedExcursionsPromise;
 }

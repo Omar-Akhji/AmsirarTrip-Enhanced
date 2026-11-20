@@ -1,17 +1,11 @@
-/**
- * Comprehensive international country calling codes (ITU-T E.164). Includes flag emoji, country
- * name, ISO 3166-1 alpha-2 code, and dial code.
- */
+/** International country calling codes (ITU-T E.164). */
 
 export interface CountryCallingCode {
   readonly code: string;
   readonly dialCode: string;
-  readonly flag: string;
   readonly name: string;
+  readonly searchText: string;
 }
-
-const getFlagEmoji = (iso: string): string =>
-  String.fromCodePoint(...Array.from(iso.toUpperCase(), (c) => 127_397 + (c.codePointAt(0) ?? 0)));
 
 const RAW_COUNTRIES: readonly [code: string, name: string, dialCode: string][] = [
   // Primary default & top travel markets
@@ -257,21 +251,22 @@ const RAW_COUNTRIES: readonly [code: string, name: string, dialCode: string][] =
 ];
 
 export const ALL_COUNTRIES: readonly CountryCallingCode[] = RAW_COUNTRIES.map(
-  ([code, name, dialCode]) => ({ code, name, dialCode, flag: getFlagEmoji(code) }),
+  ([code, name, dialCode]) => ({
+    code,
+    name,
+    dialCode,
+    searchText: `${name.toLowerCase()} ${dialCode}`,
+  }),
+);
+
+// Longest dial code first so 4-digit NANP prefixes (+1242, +1876, ...) match before +1 (US).
+export const COUNTRIES_BY_DIAL_CODE_LENGTH: readonly CountryCallingCode[] = ALL_COUNTRIES.toSorted(
+  (a, b) => b.dialCode.length - a.dialCode.length,
 );
 
 export const DEFAULT_COUNTRY: CountryCallingCode = ALL_COUNTRIES[0] ?? {
   code: "US",
   name: "United States",
   dialCode: "+1",
-  flag: "🇺🇸",
+  searchText: "united states +1",
 };
-
-/** Finds a country calling code definition by ISO code or dial code */
-export function findCountry(query: string): CountryCallingCode | undefined {
-  const normalized = query.trim().toUpperCase();
-  return (
-    ALL_COUNTRIES.find((c) => c.code === normalized)
-    ?? ALL_COUNTRIES.find((c) => c.dialCode === query.trim())
-  );
-}

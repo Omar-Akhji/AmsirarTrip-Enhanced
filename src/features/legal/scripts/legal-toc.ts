@@ -1,16 +1,19 @@
+let activeObserver: IntersectionObserver | null = null;
+
 export function setupLegalTOC(): void {
+  activeObserver?.disconnect();
+  activeObserver = null;
+
   const tocLinks = document.querySelectorAll<HTMLAnchorElement>(
-    "#privacy-toc-list a, #terms-toc-list a",
+    "#privacy-toc-list a, #terms-toc-list a, #legal-toc-list a",
   );
   const sections = document.querySelectorAll<HTMLElement>("article section[id]");
 
   if (sections.length > 0 && tocLinks.length > 0) {
-    const observer = new IntersectionObserver(
+    activeObserver = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          if (!entry.isIntersecting) {
-            continue;
-          }
+          if (!entry.isIntersecting) continue;
 
           const currentId = entry.target.getAttribute("id");
           for (const link of tocLinks) {
@@ -26,12 +29,12 @@ export function setupLegalTOC(): void {
     );
 
     for (const section of sections) {
-      observer.observe(section);
+      activeObserver.observe(section);
     }
   }
 
   const printBtns = document.querySelectorAll<HTMLButtonElement>(
-    "#privacy-print-btn, #terms-print-btn",
+    "#privacy-print-btn, #terms-print-btn, #legal-print-btn",
   );
   for (const printBtn of printBtns) {
     if (printBtn.dataset["bound"]) continue;
@@ -42,5 +45,10 @@ export function setupLegalTOC(): void {
   }
 }
 
-setupLegalTOC();
-document.addEventListener("astro:page-load", setupLegalTOC);
+if (typeof document !== "undefined") {
+  document.addEventListener("astro:page-load", setupLegalTOC);
+  document.addEventListener("astro:before-swap", () => {
+    activeObserver?.disconnect();
+    activeObserver = null;
+  });
+}

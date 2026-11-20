@@ -3,7 +3,6 @@
    ========================================================================== */
 
 @import "tailwindcss";
-@import "lenis/dist/lenis.css";
 @import "./animations.css";
 
 /* ==========================================================================
@@ -207,7 +206,7 @@
     -moz-osx-font-smoothing: grayscale;
 
     /* Page backdrop: Moroccan geometric star pattern */
-    --pattern-bg-color: #efefef;
+    --pattern-bg-color: light-dark(#efefef, #0d0e12);
     --pattern-bg-image: url("/patterns/moroccan-geometric.svg");
     --pattern-bg-size: 350px 350px;
   }
@@ -216,9 +215,17 @@
   .dark {
     color-scheme: dark;
 
-    /* Elite Regewelt deep obsidian canvas backdrop */
-    --pattern-bg-color: #0d0e12;
     --pattern-bg-image: url("/patterns/moroccan-geometric-dark.svg");
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  [id] {
+    scroll-margin-top: 5.5rem;
   }
 
   /* Branded text selection */
@@ -281,6 +288,7 @@
   #tours-grid:has(input[value="fes"]:checked) .tour-card-item:not([data-departure="fes"]),
   #tours-grid:has(input[value="casablanca"]:checked)
     .tour-card-item:not([data-departure="casablanca"]),
+  #tours-grid:has(input[value="agadir"]:checked) .tour-card-item:not([data-departure="agadir"]),
   #tours-grid:has(input[value="tangier"]:checked) .tour-card-item:not([data-departure="tangier"]) {
     display: none;
   }
@@ -291,34 +299,14 @@
    Placed outside @layer so they naturally beat @layer utilities without !important.
    ========================================================================== */
 
-html:has(dialog[open]) {
+html:has(dialog:modal) {
   overflow: hidden;
-}
-
-.lenis.lenis-smooth {
-  scroll-behavior: auto;
 }
 
 /* Ensure all buttons, role=button triggers, and mono controls use JetBrains Mono + tabular digits */
 :is(button, [type="button"], [type="submit"], [type="reset"], [role="button"], .font-mono) {
   font-family: var(--font-mono, "JetBrains Mono", ui-monospace, monospace);
   font-variant-numeric: tabular-nums;
-}
-
-.ink-canvas {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  inline-size: 100%;
-  block-size: 100%;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 150ms ease;
-}
-
-.ink-canvas[data-active="true"] {
-  opacity: 1;
-  transition: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -329,4 +317,26 @@ html:has(dialog[open]) {
       background-color 280ms ease,
       border-color 280ms ease;
   }
+}
+
+html.theme-transition::view-transition-old(root),
+html.theme-transition::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+html.theme-transition::view-transition-old(root) {
+  z-index: 1;
+}
+
+html.theme-transition::view-transition-new(root) {
+  z-index: 9999;
+}
+
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after,
+html.theme-transition [data-astro-transition-scope] {
+  view-transition-name: none;
+  transition: none;
 }

@@ -3,7 +3,7 @@ import type { Language, Locale } from "@/i18n/locales";
 import { getLocalizedPath, useTranslations } from "@/i18n/utils";
 import TranslateIcon from "@/shared/ui/icons/TranslateIcon.astro";
 import ChevronsUpDownBrokenIcon from "@/shared/ui/icons/ChevronsUpDownBrokenIcon.astro";
-import { LANGUAGES } from "./constants";
+import { LANGUAGES } from "@/i18n/locales";
 
 interface Props {
   class?: string;
@@ -35,14 +35,15 @@ const getLocalizedHref = (code: Locale) => {
 };
 
 const menuId = `${id}-popover`;
+const anchorName = `--lang-btn-${id}`;
 ---
 
 <div class:list={["group/lang-root relative inline-block", className]}>
   <button
     aria-haspopup="menu"
-    aria-label={`${t("language")}: ${currentLanguage.name}`}
+    aria-label={`${currentLanguage.shortName} — ${t("language")}: ${currentLanguage.name}`}
     class:list={[
-      "[anchor-name:--lang-selector-btn] group/lang-btn relative inline-flex items-center rounded-full font-medium transition-all duration-200 cursor-pointer select-none active:scale-[0.98]",
+      "group/lang-btn relative inline-flex items-center rounded-full font-medium transition-all duration-200 cursor-pointer select-none active:scale-[0.98]",
       "border border-white/20 bg-black/30 backdrop-blur-md text-white shadow-xs hover:border-white/40 hover:bg-white/15 hover:shadow-md active:border-white/40 active:bg-white/15 active:shadow-md",
       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange/80 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950",
       "group-has-[:popover-open]/lang-root:border-white/45 group-has-[:popover-open]/lang-root:bg-white/20 group-has-[:popover-open]/lang-root:shadow-[0_4px_16px_rgb(0_0_0/0.25)]",
@@ -53,6 +54,7 @@ const menuId = `${id}-popover`;
       },
     ]}
     popovertarget={menuId}
+    style={`anchor-name: ${anchorName};`}
     type="button"
   >
     <TranslateIcon class="size-4 shrink-0 text-white/90 transition-colors group-hover/lang-btn:text-white group-active/lang-btn:text-white group-data-scrolled:text-white" />
@@ -65,17 +67,20 @@ const menuId = `${id}-popover`;
   <div
     aria-orientation="vertical"
     class:list={[
-      "fixed top-18 m-0 min-w-50 sm:min-w-55 overflow-hidden border border-white/12 bg-slate-950/95 text-white shadow-[0_20px_45px_-12px_rgba(0,0,0,0.7),0_0_0_1px_rgba(255,255,255,0.06)] backdrop-blur-2xl ring-1 ring-white/10 rounded-2xl p-1.5 opacity-0 -translate-y-2 scale-96 origin-top-right transition-[opacity,transform,display,overlay] duration-250 ease-out-expo transition-discrete motion-reduce:duration-[1ms] open:opacity-100 open:translate-y-0 open:scale-100 starting:open:opacity-0 starting:open:-translate-y-2 starting:open:scale-96 supports-[top:anchor(bottom)]:[position-anchor:--lang-selector-btn] supports-[top:anchor(bottom)]:top-[calc(anchor(bottom)+18px)] supports-[top:anchor(bottom)]:right-[anchor(right)] supports-[top:anchor(bottom)]:left-auto supports-[top:anchor(bottom)]:bottom-auto supports-[top:anchor(bottom)]:inset-s-auto supports-[top:anchor(bottom)]:inset-e-auto supports-[top:anchor(bottom)]:m-0",
+      "fixed top-18 m-0 min-w-50 sm:min-w-55 overflow-hidden border border-white/12 bg-slate-950/95 text-white shadow-[0_20px_45px_-12px_rgba(0,0,0,0.7),0_0_0_1px_rgba(255,255,255,0.06)] backdrop-blur-2xl ring-1 ring-white/10 rounded-2xl p-1.5 opacity-0 -translate-y-2 scale-96 transition-[opacity,transform,display,overlay] duration-250 ease-out-expo transition-discrete motion-reduce:duration-[1ms] open:opacity-100 open:translate-y-0 open:scale-100 starting:open:opacity-0 starting:open:-translate-y-2 starting:open:scale-96 supports-[top:anchor(bottom)]:top-[calc(anchor(bottom)+1.125rem)] supports-[top:anchor(bottom)]:bottom-auto supports-[top:anchor(bottom)]:inset-s-auto supports-[top:anchor(bottom)]:inset-e-auto supports-[top:anchor(bottom)]:m-0 supports-[top:anchor(bottom)]:[position-try-fallbacks:flip-block,flip-inline]",
       "group-data-scrolled:border-stone-200/90 group-data-scrolled:bg-white/98 group-data-scrolled:text-slate-800 group-data-scrolled:shadow-[0_20px_45px_-10px_rgba(0,0,0,0.18),0_0_0_1px_rgba(0,0,0,0.04)]",
       "group-data-scrolled:dark:border-white/10 group-data-scrolled:dark:bg-[oklch(18%_0.012_245deg/98%)] group-data-scrolled:dark:text-mist-100",
       {
-        "inset-s-[max(1rem,calc((100vw-min(1100px,100vw-2rem))/2+1rem))]": placement === "left",
-        "inset-e-[max(1rem,calc((100vw-min(1100px,100vw-2rem))/2+1rem))]": placement === "right",
+        "origin-top-left inset-s-[max(1rem,calc((100vw-min(68.75rem,100vw-2rem))/2+1rem))] supports-[top:anchor(bottom)]:left-[anchor(left)] supports-[top:anchor(bottom)]:right-auto":
+          placement === "left",
+        "origin-top-right inset-e-[max(1rem,calc((100vw-min(68.75rem,100vw-2rem))/2+1rem))] supports-[top:anchor(bottom)]:right-[anchor(right)] supports-[top:anchor(bottom)]:left-auto":
+          placement === "right",
       },
     ]}
     id={menuId}
     popover="auto"
     role="menu"
+    style={`position-anchor: ${anchorName};`}
   >
     {/* Language List */}
     <div class="flex flex-col gap-0.5 overflow-hidden rounded-[10px]">

@@ -1,64 +1,12 @@
 import type { TransitionBeforePreparationEvent } from "astro:transitions/client";
 
-const SKELETON_DEV_DELAY_MS = 800;
 const PROGRESS_BAR_ID = "page-progress-bar";
-const SCROLL_KEYS = new Set([" ", "ArrowDown", "ArrowUp", "End", "Home", "PageDown", "PageUp"]);
+const PROGRESS_SHOW_DELAY_MS = 150;
 
+let progressDelayTimer: ReturnType<typeof setTimeout> | undefined;
 let progressTimer: ReturnType<typeof setInterval> | undefined;
 let progressResetTimeout: ReturnType<typeof setTimeout> | undefined;
 let progressValue = 0;
-let hideTimer: ReturnType<typeof setTimeout> | undefined;
-let scrollLocked = false;
-
-function preventScrollEvent(event: Event): void {
-  if (event.cancelable) {
-    event.preventDefault();
-  }
-}
-
-function preventScrollKey(event: KeyboardEvent): void {
-  if (!SCROLL_KEYS.has(event.key)) return;
-  const target = event.target;
-  if (
-    target instanceof HTMLInputElement
-    || target instanceof HTMLTextAreaElement
-    || target instanceof HTMLSelectElement
-    || (target instanceof HTMLElement && target.isContentEditable)
-  ) {
-    return;
-  }
-  event.preventDefault();
-}
-
-function lockScrollWhileSkeletonVisible(): void {
-  globalThis.__lenis?.stop();
-  if (scrollLocked) return;
-  scrollLocked = true;
-  globalThis.addEventListener("wheel", preventScrollEvent, { passive: false });
-  globalThis.addEventListener("touchmove", preventScrollEvent, { passive: false });
-  globalThis.addEventListener("keydown", preventScrollKey);
-}
-
-function unlockScrollAfterSkeleton(): void {
-  if (scrollLocked) {
-    scrollLocked = false;
-    globalThis.removeEventListener("wheel", preventScrollEvent);
-    globalThis.removeEventListener("touchmove", preventScrollEvent);
-    globalThis.removeEventListener("keydown", preventScrollKey);
-  }
-  globalThis.__lenis?.start();
-}
-
-export function isSkeletonActive(): boolean {
-  if (document.documentElement.classList.contains("skeleton-active")) {
-    return true;
-  }
-  const container = document.querySelector<HTMLElement>("#skeleton-container");
-  return Boolean(container && !container.classList.contains("hidden"));
-}
-
-const delay = async (ms: number): Promise<void> =>
-  new Promise((resolve) => setTimeout(resolve, ms));
 
 function isPreparationEvent(event: Event): event is TransitionBeforePreparationEvent {
   return "to" in event && event.to instanceof URL;
@@ -72,31 +20,39 @@ function startProgressBar(): void {
   const bar = getProgressBar();
   if (!bar) return;
 
+  clearTimeout(progressDelayTimer);
   clearTimeout(progressResetTimeout);
   clearInterval(progressTimer);
 
-  progressValue = 25;
-  bar.style.opacity = "1";
-  bar.style.scale = "0.25 1";
-  bar.style.transform = "";
-  bar.style.transition = "scale 250ms cubic-bezier(0.23, 1, 0.32, 1), opacity 150ms ease";
+  progressDelayTimer = setTimeout(() => {
+    progressValue = 25;
+    bar.style.opacity = "1";
+    bar.style.scale = "0.25 1";
+    bar.style.transition = "scale 250ms cubic-bezier(0.23, 1, 0.32, 1), opacity 150ms ease";
 
-  progressTimer = setInterval(() => {
-    if (progressValue >= 85) return;
-    progressValue += Math.random() * 12 + 4;
-    const scale = Math.min(progressValue, 85) / 100;
-    bar.style.scale = `${scale.toFixed(3)} 1`;
-  }, 180);
+    progressTimer = setInterval(() => {
+      if (progressValue >= 85) return;
+      progressValue += Math.random() * 12 + 4;
+      const scale = Math.min(progressValue, 85) / 100;
+      bar.style.scale = `${scale.toFixed(3)} 1`;
+    }, 180);
+  }, PROGRESS_SHOW_DELAY_MS);
 }
 
 function finishProgressBar(): void {
+  clearTimeout(progressDelayTimer);
+  clearInterval(progressTimer);
+
   const bar = getProgressBar();
   if (!bar) return;
 
-  clearInterval(progressTimer);
+  if (bar.style.opacity !== "1") {
+    progressValue = 0;
+    return;
+  }
+
   progressValue = 100;
   bar.style.scale = "1 1";
-  bar.style.transform = "";
   bar.style.transition = "scale 180ms cubic-bezier(0.23, 1, 0.32, 1), opacity 200ms ease 120ms";
   bar.style.opacity = "0";
 
@@ -107,170 +63,19 @@ function finishProgressBar(): void {
   }, 350);
 }
 
-/**
- * Resolves any localized pathname to its skeleton route identifier. Pure function for testing and
- * predictability.
- */
-export function resolveSkeletonRoute(pathname: string): string {
-  // Normalize and strip leading / trailing slashes
-  const clean = pathname.replace(/^\/+/, "").replace(/\/+$/, "");
-
-  // Strip supported locale prefixes (en, fr, es, de)
-  const segments = clean.split("/").filter(Boolean);
-  if (segments[0] && ["en", "fr", "es", "de"].includes(segments[0].toLowerCase())) {
-    segments.shift();
-  }
-
-  const routePath = segments.join("/").toLowerCase();
-
-  if (!routePath) {
-    return "home";
-  }
-
-  if (routePath.startsWith("tours")) {
-    return segments.length >= 2 ? "tour-detail" : "tours";
-  }
-
-  if (routePath.startsWith("excursions")) {
-    return segments.length >= 2 ? "excursion-detail" : "excursions";
-  }
-
-  if (routePath.startsWith("contact")) {
-    return "contact";
-  }
-
-  if (routePath.startsWith("about")) {
-    return "about";
-  }
-
-  if (routePath.startsWith("privacy-policy") || routePath.startsWith("terms-of-service")) {
-    return "legal";
-  }
-
-  return "default";
+function resetScrollIfNoHash(url: URL | Location): void {
+  if (url.hash) return;
+  if (globalThis.scrollX === 0 && globalThis.scrollY === 0) return;
+  globalThis.scrollTo({ left: 0, top: 0, behavior: "instant" });
 }
 
-function showSkeleton(routeKey: string): void {
-  clearTimeout(hideTimer);
-  const container = document.querySelector<HTMLElement>("#skeleton-container");
-  const content = document.querySelector<HTMLElement>("#page-content");
-  if (!container || !content) return;
-
-  let targetSkeleton = container.querySelector<HTMLElement>(
-    `[data-skeleton="${CSS.escape(routeKey)}"]`,
-  );
-  targetSkeleton ??= container.querySelector<HTMLElement>('[data-skeleton="default"]');
-
-  if (!targetSkeleton) return;
-
-  // Hide all inner skeletons first
-  container.querySelectorAll("[data-skeleton]").forEach((el) => {
-    el.classList.add("hidden");
-  });
-
-  document.documentElement.classList.add("skeleton-active");
-  document.documentElement.classList.remove("page-ready");
-  lockScrollWhileSkeletonVisible();
-
-  // Reveal targeted skeleton
-  targetSkeleton.classList.remove("hidden");
-  container.classList.remove("hidden");
-  container.removeAttribute("aria-hidden");
-  container.style.opacity = "1";
-  content.style.opacity = "0";
-  content.style.pointerEvents = "none";
-}
-
-function hideSkeleton(): void {
-  const container = document.querySelector<HTMLElement>("#skeleton-container");
-  const content = document.querySelector<HTMLElement>("#page-content");
-  if (!container || !content) return;
-
-  // Make content visible immediately
-  content.classList.remove("hidden");
-  content.style.opacity = "1";
-  content.style.pointerEvents = "auto";
-
-  // Hide skeleton smoothly
-  container.style.transition = "opacity 150ms cubic-bezier(0.4, 0, 0.2, 1)";
-  container.style.opacity = "0";
-
-  clearTimeout(hideTimer);
-  hideTimer = setTimeout(() => {
-    container.classList.add("hidden");
-    container.setAttribute("aria-hidden", "true");
-    container.style.opacity = "1";
-    document.documentElement.classList.remove("skeleton-active");
-    document.documentElement.classList.add("page-ready");
-    unlockScrollAfterSkeleton();
-    globalThis.dispatchEvent(new CustomEvent("amsirar:page-ready"));
-  }, 160);
-}
-
-// Initial page load skeleton with wait
-let initialLoadShown = false;
-let isInitialPageLoad = true;
-function handleInitialLoad(): void {
-  if (initialLoadShown) return;
-  initialLoadShown = true;
-
-  if (!globalThis.location.hash) {
-    window.scrollTo({ left: 0, top: 0, behavior: "instant" });
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
-  }
-
-  const routeKey = resolveSkeletonRoute(globalThis.location.pathname);
-  showSkeleton(routeKey);
-
-  // Keep skeleton visible for SKELETON_DEV_DELAY_MS, then reveal content cleanly
-  setTimeout(() => {
-    isInitialPageLoad = false;
-    hideSkeleton();
-    finishProgressBar();
-  }, SKELETON_DEV_DELAY_MS);
-}
-
-// Client-side router navigation hooks (astro:before-preparation & astro:after-swap)
-document.addEventListener("astro:before-preparation", (e: Event) => {
-  if (!isPreparationEvent(e)) return;
-
+document.addEventListener("astro:before-preparation", (event: Event) => {
+  if (!isPreparationEvent(event)) return;
   startProgressBar();
-
-  // Scroll to header immediately when navigating to another page without hash
-  if (!e.to.hash) {
-    window.scrollTo({ left: 0, top: 0, behavior: "instant" });
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
-  }
-
-  // In development mode (or on client nav), delay page loader so skeleton transition is visible
-  const originalLoader = e.loader;
-  e.loader = async (): Promise<void> => {
-    await Promise.all([originalLoader(), delay(SKELETON_DEV_DELAY_MS)]);
-  };
-
-  const toPath = e.to.pathname;
-  const routeKey = resolveSkeletonRoute(toPath);
-  showSkeleton(routeKey);
 });
 
 document.addEventListener("astro:after-swap", () => {
-  if (globalThis.location.hash) return;
-  window.scrollTo({ left: 0, top: 0, behavior: "instant" });
-  document.documentElement.scrollTop = 0;
-  document.body.scrollTop = 0;
+  resetScrollIfNoHash(globalThis.location);
 });
 
-document.addEventListener("astro:page-load", () => {
-  if (isInitialPageLoad) return;
-  hideSkeleton();
-  finishProgressBar();
-});
-
-// Run initial load skeleton on first script execution
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", handleInitialLoad, { once: true });
-} else {
-  handleInitialLoad();
-}
+document.addEventListener("astro:page-load", finishProgressBar);

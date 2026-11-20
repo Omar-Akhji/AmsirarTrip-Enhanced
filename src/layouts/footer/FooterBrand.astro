@@ -2,7 +2,7 @@
 import { useTranslations } from "@/i18n/utils";
 import { getRelativeLocaleUrl } from "astro:i18n";
 
-const locale = Astro.currentLocale || "en";
+const locale = Astro.locals.locale;
 const t = useTranslations(locale);
 ---
 

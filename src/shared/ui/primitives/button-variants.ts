@@ -1,7 +1,6 @@
 import { cn } from "@/lib/utils";
 
-export type ButtonVariant =
-  "primary" | "secondary" | "outline" | "ghost" | "tripadvisor" | "whatsapp" | "danger" | "card";
+export type ButtonVariant = "primary" | "secondary" | "outline" | "card";
 
 export type ButtonSize = "sm" | "md" | "lg";
 
@@ -21,13 +20,6 @@ const buttonVariantStyles: Record<ButtonVariant, string> = {
     "border-[1.5px] border-white/30 bg-white/5 text-white backdrop-blur-xs hover:bg-white/15 hover:border-white/50 focus-visible:ring-offset-black",
   outline:
     "border-[1.5px] border-stone-300 bg-white text-stone-800 hover:border-stone-400 hover:bg-stone-50 shadow-2xs dark:border-white/15 dark:bg-white/5 dark:text-mist-100 dark:hover:border-white/30 dark:hover:bg-white/10",
-  ghost:
-    "bg-white/10 text-white backdrop-blur transition hover:bg-white/20 focus-visible:ring-offset-black",
-  tripadvisor:
-    "bg-linear-to-br from-emerald-400 to-emerald-600 text-white shadow-md shadow-emerald-500/25 hover:shadow-lg hover:shadow-emerald-500/35 hover:brightness-105 active:scale-[0.98] focus-visible:ring-emerald-500 focus-visible:ring-offset-black",
-  whatsapp:
-    "border-[1.5px] border-emerald-500/50 bg-slate-950/95 text-emerald-400 hover:bg-slate-900 hover:text-emerald-300 hover:border-emerald-400 focus-visible:ring-emerald-500",
-  danger: "bg-red-600 text-white hover:bg-red-500 focus-visible:ring-red-500",
   card: "w-full bg-slate-950 text-white tracking-wider transition-all duration-300 hover:bg-linear-to-br hover:from-amber-orange hover:to-orange hover:text-white hover:shadow-lg hover:shadow-orange/30 group-hover:bg-linear-to-br group-hover:from-amber-orange group-hover:to-orange group-hover:text-white group-hover:shadow-lg group-hover:shadow-orange/30 dark:bg-black dark:text-white dark:hover:text-white dark:group-hover:text-white",
 };
 

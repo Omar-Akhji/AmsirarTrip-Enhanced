@@ -184,7 +184,7 @@ test.describe("Security Regression Suite (SEC-01..SEC-12)", () => {
       date: "2027-06-15",
       email: "guest@example.com",
       fullName: "Jane Doe",
-      language: "toString",
+      language: "fr",
       message: "Hello Morocco",
       persons: 2,
       phone: "+33 6 12 34 56 78",

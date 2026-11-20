@@ -26,7 +26,7 @@ const {
   hasUnderline = true,
 } = Astro.props;
 
-const locale = Astro.currentLocale || "en";
+const locale = Astro.locals.locale;
 
 let gradientValue =
   "bg-[radial-gradient(circle_at_top,color-mix(in_oklch,var(--color-orange)_15%,transparent),transparent_70%)]";

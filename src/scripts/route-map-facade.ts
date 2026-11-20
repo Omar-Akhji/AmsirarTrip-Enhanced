@@ -1,15 +1,4 @@
-function isTrustedGoogleMapsEmbedUrl(rawUrl: string): boolean {
-  try {
-    const parsed = new URL(rawUrl);
-    return (
-      parsed.protocol === "https:"
-      && parsed.hostname === "www.google.com"
-      && (parsed.pathname === "/maps" || parsed.pathname.startsWith("/maps/embed"))
-    );
-  } catch {
-    return false;
-  }
-}
+import { isTrustedGoogleMapsEmbedUrl } from "@/lib/maps";
 
 function initRouteMapFacades(): void {
   const buttons = document.querySelectorAll<HTMLButtonElement>(

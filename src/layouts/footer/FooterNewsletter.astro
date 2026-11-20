@@ -1,12 +1,13 @@
 ---
 import { useTranslations } from "@/i18n/utils";
-import NewsletterModal from "./NewsletterModal.vue";
+import ActionPill from "@/shared/ui/primitives/ActionPill.astro";
+import NewsletterModal from "./NewsletterModal.astro";
 
 interface Props {
   locale?: string;
 }
 
-const { locale = Astro.currentLocale || "en" } = Astro.props;
+const { locale = Astro.locals.locale } = Astro.props;
 const t = useTranslations(locale);
 ---
 
@@ -19,49 +20,16 @@ const t = useTranslations(locale);
   <span class="mbe-6 block bg-orange-600 block-1 inline-12"></span>
   <div class="rounded-2xl border border-white/10 bg-linear-to-br from-white/5 to-white/2 p-4 backdrop-blur-sm">
     <p class="mbe-4 text-sm/relaxed text-zinc-400">{t("footer.newsletterDescription")}</p>
-    <button
+    <ActionPill
       aria-label={t("footer.newsletterButtonAria")}
-      class="group inline-flex min-h-12 cursor-pointer items-center rounded-full border border-stone-200/80 bg-white py-1.5 ps-4 pe-1.5 font-mono text-xs font-semibold tracking-wider text-dark-surface uppercase shadow-lg shadow-black/25 transition-colors duration-200 select-none inline-full hover:border-stone-300 hover:bg-white hover:shadow-xl focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 focus-visible:outline-hidden active:scale-[0.98]"
+      as="button"
       command="show-modal"
       commandfor="newsletter-dialog"
       data-newsletter-open
-      type="button"
-    >
-      <span class="flex-1 text-center truncate px-2">{t("footer.newsletterSubscribe")}</span>
-      <span class="relative flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-full bg-linear-to-br from-amber-orange to-orange text-white shadow-xs shadow-orange/40 transition-transform duration-300 ease-out group-hover:scale-105 group-active:scale-95">
-        <div class="relative flex size-full items-center justify-center">
-          <!-- Default state: Solar Arrow Right-Up Broken (slides up-right & fades out on hover) -->
-          <svg
-            aria-hidden="true"
-            class="absolute size-4.5 transition-all duration-300 ease-out group-hover:translate-x-3 group-hover:-translate-y-3 group-hover:opacity-0 rtl:-scale-x-100 rtl:group-hover:-translate-x-3"
-            fill="none"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="1.8"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M18 15V6H9M18 6L11.5 12.5M6 18L8.5 15.5" />
-          </svg>
-
-          <!-- Hover state: Solar Arrow Right Broken (slides in from left & settles centered) -->
-          <svg
-            aria-hidden="true"
-            class="absolute size-4.5 -translate-x-3 translate-y-2 opacity-0 transition-all duration-300 ease-out group-hover:translate-0 group-hover:opacity-100 rtl:translate-x-3 rtl:-scale-x-100 rtl:group-hover:translate-x-0"
-            fill="none"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="1.8"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M14 18L20 12L14 6M20 12H9.5M4 12H6.5" />
-          </svg>
-        </div>
-      </span>
-    </button>
+      fullWidth={true}
+      label={t("footer.newsletterSubscribe")}
+      variant="light"
+    />
 
     <!-- FooterSocialLinks -->
     <nav
@@ -199,8 +167,5 @@ const t = useTranslations(locale);
   </div>
 
   <!-- Newsletter dialog (always in DOM, shown natively via command="show-modal") -->
-  <NewsletterModal
-    client:idle
-    locale={locale}
-  />
+  <NewsletterModal locale={locale} />
 </div>

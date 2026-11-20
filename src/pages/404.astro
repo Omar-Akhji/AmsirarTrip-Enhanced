@@ -4,9 +4,13 @@ import { getRelativeLocaleUrl } from "astro:i18n";
 import { DEFAULT_LOCALE, isLocale } from "../i18n/locales";
 import { useTranslations } from "../i18n/utils";
 import Layout from "../layouts/Layout.astro";
+import ActionPill from "../shared/ui/primitives/ActionPill.astro";
 
 const firstSegment = Astro.url.pathname.split("/", 2)[1];
-const locale = firstSegment && isLocale(firstSegment) ? firstSegment : DEFAULT_LOCALE;
+const locale =
+  firstSegment && isLocale(firstSegment) ? firstSegment
+  : isLocale(Astro.locals.locale) ? Astro.locals.locale
+  : DEFAULT_LOCALE;
 Astro.locals.locale = locale;
 const t = useTranslations(locale);
 Astro.cache.set(false);
@@ -41,42 +45,12 @@ Astro.response.status = 404;
       <div class="relative z-10 flex flex-col items-center gap-6">
         <h1 class="text-6xl font-bold text-orange-600 sm:text-7xl">404</h1>
         <p class="max-w-md font-mono text-base text-zinc-300 sm:text-lg">{t("404.message")}</p>
-        <a
-          class="group inline-flex min-h-12 items-center gap-3 rounded-full border border-stone-200/80 bg-white py-1.5 ps-5 pe-1.5 font-mono text-xs font-semibold tracking-wider text-dark-surface uppercase shadow-lg shadow-black/25 transition-colors duration-200 select-none hover:border-stone-300 hover:bg-white hover:shadow-xl focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 focus-visible:outline-hidden active:scale-[0.98]"
+        <ActionPill
+          as="a"
           href={getRelativeLocaleUrl(locale, "/")}
-        >
-          <span class="truncate px-1">{t("404.cta")}</span>
-          <span class="relative flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-full bg-linear-to-br from-amber-orange to-orange text-white shadow-xs shadow-orange/40 transition-transform duration-300 ease-out group-hover:scale-105 group-active:scale-95">
-            <span class="relative flex size-full items-center justify-center">
-              <svg
-                aria-hidden="true"
-                class="absolute size-4.5 transition-all duration-300 ease-out group-hover:translate-x-3 group-hover:-translate-y-3 group-hover:opacity-0 rtl:-scale-x-100 rtl:group-hover:-translate-x-3"
-                fill="none"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="1.8"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M18 15V6H9M18 6L11.5 12.5M6 18L8.5 15.5" />
-              </svg>
-              <svg
-                aria-hidden="true"
-                class="absolute size-4.5 -translate-x-3 translate-y-2 opacity-0 transition-all duration-300 ease-out group-hover:translate-0 group-hover:opacity-100 rtl:translate-x-3 rtl:-scale-x-100 rtl:group-hover:translate-x-0"
-                fill="none"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="1.8"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M14 18L20 12L14 6M20 12H9.5M4 12H6.5" />
-              </svg>
-            </span>
-          </span>
-        </a>
+          label={t("404.cta")}
+          variant="light"
+        />
       </div>
     </section>
   </div>

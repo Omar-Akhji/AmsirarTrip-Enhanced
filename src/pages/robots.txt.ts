@@ -2,70 +2,35 @@ import type { APIRoute } from "astro";
 
 export const prerender = true;
 
+const AI_AND_SEARCH_AGENTS = [
+  "*",
+  "Googlebot",
+  "Google-Extended",
+  "Bingbot",
+  "Applebot",
+  "Applebot-Extended",
+  "OAI-SearchBot",
+  "ChatGPT-User",
+  "GPTBot",
+  "Claude-SearchBot",
+  "Claude-User",
+  "ClaudeBot",
+  "PerplexityBot",
+  "Perplexity-User",
+  "FacebookBot",
+  "CCBot",
+] as const;
+
 export const GET: APIRoute = ({ site }) => {
   const baseUrl = site ?? new URL("https://amsirartrip.com");
   const sitemapIndexUrl = new URL("sitemap-index.xml", baseUrl);
   const sitemapUrl = new URL("sitemap.xml", baseUrl);
 
-  const robotsTxt = `User-agent: *
-Allow: /
-Disallow: /_actions/
-Disallow: /api/
+  const agentRules = AI_AND_SEARCH_AGENTS.map(
+    (agent) => `User-agent: ${agent}\nAllow: /\nDisallow: /_actions/\nDisallow: /api/`,
+  ).join("\n\n");
 
-User-agent: Googlebot
-Allow: /
-Disallow: /_actions/
-Disallow: /api/
-
-User-agent: Google-Extended
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-Disallow: /_actions/
-Disallow: /api/
-
-User-agent: Applebot
-Allow: /
-Disallow: /_actions/
-Disallow: /api/
-
-User-agent: Applebot-Extended
-Allow: /
-
-User-agent: OAI-SearchBot
-Allow: /
-
-User-agent: ChatGPT-User
-Allow: /
-
-User-agent: GPTBot
-Allow: /
-
-User-agent: Claude-SearchBot
-Allow: /
-
-User-agent: Claude-User
-Allow: /
-
-User-agent: ClaudeBot
-Allow: /
-
-User-agent: PerplexityBot
-Allow: /
-
-User-agent: Perplexity-User
-Allow: /
-
-User-agent: FacebookBot
-Allow: /
-
-User-agent: CCBot
-Allow: /
-
-Sitemap: ${sitemapIndexUrl.href}
-Sitemap: ${sitemapUrl.href}
-`;
+  const robotsTxt = `${agentRules}\n\nSitemap: ${sitemapIndexUrl.href}\nSitemap: ${sitemapUrl.href}\n`;
 
   return new Response(robotsTxt, {
     headers: {

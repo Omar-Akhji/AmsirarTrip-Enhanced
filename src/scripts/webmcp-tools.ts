@@ -131,6 +131,6 @@ function initWebMCPTools() {
   }
 }
 
-if (typeof navigator !== "undefined" && Object.hasOwn(navigator, "modelContext")) {
+if (typeof navigator !== "undefined" && "modelContext" in navigator) {
   initWebMCPTools();
 }

@@ -1,6 +1,8 @@
 ---
-import SquareTopDownIcon from "@/shared/ui/icons/SquareTopDownIcon.astro";
 import type { RouteMapData } from "@/features/maps/types";
+import { useTranslations } from "@/i18n/utils";
+import SquareTopDownIcon from "@/shared/ui/icons/SquareTopDownIcon.astro";
+import ActionPill from "@/shared/ui/primitives/ActionPill.astro";
 
 interface Props {
   readonly kicker?: string | undefined;
@@ -8,6 +10,7 @@ interface Props {
 }
 
 const { routeMap, kicker = "Google Maps Route" } = Astro.props;
+const t = useTranslations(Astro.locals.locale);
 ---
 
 <article
@@ -58,48 +61,18 @@ const { routeMap, kicker = "Google Maps Route" } = Astro.props;
       </div>
 
       <p class="font-mono text-xs text-stone-500 dark:text-mist-400 mbe-3.5">
-        Interactive Route Map · {routeMap.waypoints.length} Stops
+        {t("routeMap.interactiveMap")} · {routeMap.waypoints.length} {t("routeMap.stops")}
       </p>
 
-      <button
-        aria-label={`Load interactive route map: ${routeMap.title}`}
-        class="load-route-map-btn group inline-flex min-h-11 cursor-pointer items-center justify-between gap-3 rounded-full border border-white/10 bg-slate-950 py-1.5 ps-5 pe-1.5 font-mono text-xs font-semibold tracking-wider text-white uppercase shadow-lg shadow-black/25 transition-colors duration-200 hover:border-white/20 hover:bg-black hover:shadow-xl active:scale-[0.98] sm:gap-4 sm:ps-6 sm:pe-2 dark:border-stone-300 dark:bg-white dark:text-dark-surface dark:hover:bg-white"
+      <ActionPill
+        aria-label={`${t("routeMap.loadAriaPrefix")} ${routeMap.title}`}
+        as="button"
+        class="load-route-map-btn min-h-11"
         data-embed-url={routeMap.googleMapsEmbedUrl}
         data-map-title={routeMap.title}
-        type="button"
-      >
-        <span class="truncate">Explore Route Map</span>
-        <span class="relative flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-full bg-linear-to-br from-amber-orange to-orange text-white shadow-xs shadow-orange/40 transition-transform duration-300 ease-out group-hover:scale-105">
-          <span class="relative flex size-full items-center justify-center">
-            <svg
-              aria-hidden="true"
-              class="absolute size-4 transition-all duration-300 ease-out group-hover:translate-x-3 group-hover:-translate-y-3 group-hover:opacity-0 rtl:-scale-x-100 rtl:group-hover:-translate-x-3"
-              fill="none"
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="1.8"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M18 15V6H9M18 6L11.5 12.5M6 18L8.5 15.5" />
-            </svg>
-            <svg
-              aria-hidden="true"
-              class="absolute size-4 -translate-x-3 translate-y-2 opacity-0 transition-all duration-300 ease-out group-hover:translate-0 group-hover:opacity-100 rtl:translate-x-3 rtl:-scale-x-100 rtl:group-hover:translate-x-0"
-              fill="none"
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="1.8"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M14 18L20 12L14 6M20 12H9.5M4 12H6.5" />
-            </svg>
-          </span>
-        </span>
-      </button>
+        label={t("routeMap.exploreBtn")}
+        variant="adaptive"
+      />
     </div>
 
     <!-- Live iframe container injected upon user interaction -->
@@ -124,7 +97,7 @@ const { routeMap, kicker = "Google Maps Route" } = Astro.props;
           ></circle>
           <path d="M12 2v3m0 14v3M2 12h3m14 0h3"></path>
         </svg>
-        View {routeMap.waypoints.length} Route Stops & Schedule
+        {t("routeMap.viewStopsPrefix")} {routeMap.waypoints.length} {t("routeMap.viewStopsSuffix")}
       </span>
       <span class="font-mono text-xs text-stone-400 transition-transform duration-200 motion-reduce:transition-none group-open:rotate-180 dark:text-mist-400">
         ▼
@@ -173,7 +146,7 @@ const { routeMap, kicker = "Google Maps Route" } = Astro.props;
       rel="noreferrer noopener"
       target="_blank"
     >
-      Open in Google Maps
+      {t("routeMap.openGoogleMaps")}
       <SquareTopDownIcon
         aria-hidden="true"
         class="size-3.5"

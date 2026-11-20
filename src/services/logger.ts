@@ -1,10 +1,6 @@
-/**
- * Server-side logging service with file output. Logs security events and errors to structured log
- * files.
- */
+/** Server-side structured logger with daily UTC log file rotation. */
 import { createWriteStream, existsSync, mkdirSync, type WriteStream } from "node:fs";
-
-const disk = { exists: existsSync, mkdir: mkdirSync, createStream: createWriteStream };
+import { inspect } from "node:util";
 
 type LogLevel = "debug" | "info" | "warn" | "error" | "security";
 
@@ -15,23 +11,35 @@ interface LogEntry {
   timestamp: string;
 }
 
-const LOG_DIR = process.env["LOG_DIR"] ?? "./logs";
-
-let activeDate = "";
-const streams = new Map<LogLevel, WriteStream>();
-
-function ensureLogDir() {
-  if (!disk.exists(LOG_DIR)) {
-    try {
-      disk.mkdir(LOG_DIR, { recursive: true });
-    } catch (error) {
-      console.error("[Logger] Failed to create log directory:", error);
-    }
-  }
+function isDevEnv(env: { readonly DEV?: boolean } | undefined): boolean {
+  return Boolean(env?.DEV);
 }
 
-// Get or create a write stream for the given level, rotating cleanly when the UTC date changes
-function getStream(level: LogLevel): WriteStream {
+const isDevEnvironment = isDevEnv(import.meta.env);
+
+let activeDate = "";
+let ensuredDir: string | null = null;
+const streams = new Map<LogLevel, WriteStream>();
+
+function getLogDir(): string {
+  const configured = process.env["LOG_DIR"]?.trim();
+  return configured && configured.length > 0 ? configured : "./logs";
+}
+
+function ensureLogDir(logDir: string): void {
+  if (ensuredDir === logDir) return;
+  if (!existsSync(logDir)) {
+    try {
+      mkdirSync(logDir, { recursive: true });
+    } catch (error) {
+      console.error("[Logger] Failed to create log directory:", error);
+      return;
+    }
+  }
+  ensuredDir = logDir;
+}
+
+function getStream(level: LogLevel, logDir: string): WriteStream {
   const today = new Date().toISOString().split("T", 1)[0] ?? "";
   if (today !== activeDate) {
     for (const stream of streams.values()) {
@@ -41,13 +49,13 @@ function getStream(level: LogLevel): WriteStream {
     activeDate = today;
   }
   const existing = streams.get(level);
-  if (existing) {
-    return existing;
-  }
-  const filePath = `${LOG_DIR}/${today}-${level}.log`;
-  const stream = disk.createStream(filePath, { flags: "a" });
+  if (existing) return existing;
+
+  const filePath = `${logDir}/${today}-${level}.log`;
+  const stream = createWriteStream(filePath, { flags: "a" });
   stream.on("error", (error) => {
     console.error(`[Logger] Stream error for ${level}:`, error);
+    ensuredDir = null;
     if (streams.get(level) === stream) {
       streams.delete(level);
     }
@@ -56,22 +64,60 @@ function getStream(level: LogLevel): WriteStream {
   return stream;
 }
 
-function formatLogEntry(level: LogLevel, message: string, meta?: Record<string, unknown>): string {
-  const entry: LogEntry = { ...meta, timestamp: new Date().toISOString(), level, message };
-  return JSON.stringify(entry);
+function safeJsonStringify(value: unknown): string {
+  try {
+    return JSON.stringify(value);
+  } catch {
+    return JSON.stringify(inspect(value, { depth: 3, breakLength: Infinity }));
+  }
 }
 
-function writeToFile(level: LogLevel, line: string) {
+function formatLogEntry(level: LogLevel, message: string, meta?: Record<string, unknown>): string {
+  const entry: LogEntry = { ...meta, timestamp: new Date().toISOString(), level, message };
+  return safeJsonStringify(entry);
+}
+
+function writeToFile(level: LogLevel, line: string): void {
   try {
-    ensureLogDir();
-    getStream(level).write(`${line}\n`);
+    const logDir = getLogDir();
+    ensureLogDir(logDir);
+    getStream(level, logDir).write(`${line}\n`);
   } catch (error) {
     console.error("[Logger] Failed to write to log file:", error);
   }
 }
 
+function serializeError(error: unknown): Record<string, unknown> {
+  if (error instanceof Error) {
+    const details: Record<string, unknown> = {
+      errorName: error.name,
+      errorMessage: error.message,
+      stack: error.stack,
+    };
+    if (error.cause !== undefined) {
+      details["cause"] = error.cause instanceof Error ? error.cause.message : inspect(error.cause);
+    }
+    const extra = error as Error & { code?: unknown; responseCode?: unknown; command?: unknown };
+    if (extra.code !== undefined) details["errorCode"] = extra.code;
+    if (extra.responseCode !== undefined) details["responseCode"] = extra.responseCode;
+    if (extra.command !== undefined) details["command"] = extra.command;
+    return details;
+  }
+
+  if (typeof error === "string" || typeof error === "number" || typeof error === "boolean") {
+    return { error: String(error) };
+  }
+
+  if (error !== null && error !== undefined) {
+    return { error: safeJsonStringify(error) };
+  }
+
+  return {};
+}
+
 export const logger = {
   debug(message: string, meta?: Record<string, unknown>): void {
+    if (!isDevEnvironment) return;
     const line = formatLogEntry("debug", message, meta);
     console.info(line);
     writeToFile("debug", line);
@@ -90,35 +136,19 @@ export const logger = {
   },
 
   error(message: string, error?: unknown): void {
-    const errorMeta: Record<string, unknown> = {};
-    if (error instanceof Error) {
-      errorMeta["errorName"] = error.name;
-      errorMeta["errorMessage"] = error.message;
-      errorMeta["stack"] = error.stack;
-    } else if (
-      typeof error === "string"
-      || typeof error === "number"
-      || typeof error === "boolean"
-    ) {
-      errorMeta["error"] = String(error);
-    } else if (error !== null && error !== undefined) {
-      errorMeta["error"] = JSON.stringify(error);
-    }
-
-    const line = formatLogEntry("error", message, errorMeta);
+    const line = formatLogEntry("error", message, serializeError(error));
     console.error(line);
     writeToFile("error", line);
   },
 
   security(message: string, meta?: Record<string, unknown>): void {
     const line = formatLogEntry("security", message, meta);
-    // Always log to console for security events (so they're visible in production)
     console.warn(`[SECURITY] ${line}`);
     writeToFile("security", line);
   },
 };
 
-function sanitizeLogString(value: unknown, maxLength = 512): string {
+export function sanitizeLogString(value: unknown, maxLength = 512): string {
   return typeof value === "string" ?
       value
         .replaceAll(/[\r\n\0\v\f]+/g, " ")
@@ -127,7 +157,6 @@ function sanitizeLogString(value: unknown, maxLength = 512): string {
     : "";
 }
 
-/** Log a security event (rate limit violations, suspicious activity, etc.) */
 export function logSecurityEvent(
   type: "RATE_LIMIT" | "BLOCKED_IP" | "HONEYPOT" | "CAPTCHA_FAILED" | "SUSPICIOUS",
   ip: string,

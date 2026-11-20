@@ -1,4 +1,6 @@
 ---
+import FolderStack from "@/shared/ui/widgets/FolderStack.astro";
+
 interface StatItem {
   code: string;
   description: string;
@@ -13,79 +15,44 @@ interface Props {
   stats: StatItem[];
 }
 
-import FolderShape from "@/shared/ui/primitives/FolderShape.astro";
-
 const { stats } = Astro.props;
 ---
 
-<stats-folder-stack class="block relative w-full overflow-x-clip">
-  <!-- Scroll runway: Gives the user comfortable scroll distance to stack cards and see them slide into the folder -->
-  <div class="stats-folder-track relative w-full h-auto motion-safe:h-[220vh]">
-    <!-- Pinned Stage: Stays sticky in the viewport, using full container width -->
-    <div class="stats-folder-stage static h-auto top-auto select-auto motion-safe:sticky motion-safe:top-18 motion-safe:h-102.5 motion-safe:select-none w-full mx-auto overflow-visible">
-      <!-- Layer 1: Folder Back Plate (z-index: 2, behind the cards) -->
-      <div class="folder-back-plate hidden motion-safe:block absolute inset-x-0 bottom-4 h-66.25 overflow-visible pointer-events-none will-change-transform z-2 opacity-0 drop-shadow-[0_12px_24px_rgba(0,0,0,0.5)]">
-        <FolderShape
-          id="stats-back"
-          variant="back"
-        />
-      </div>
+<FolderStack idPrefix="stats">
+  {stats.map((stat, index) => (
+    <article
+      class="stat-card relative flex h-55 w-full flex-col justify-between rounded-2xl border border-stone-200/90 bg-stone-50/95 p-5 shadow-xl shadow-stone-900/10 backdrop-blur-xs transition-shadow duration-300 dark:border-white/10 dark:bg-surface-card/90 dark:shadow-[0_12px_28px_rgba(0,0,0,0.6)]"
+      slot={`card-${index}`}
+    >
+      <div>
+        <div class="mbe-3 flex items-center justify-between border-b border-stone-200/70 pb-2 text-[0.6875rem] font-mono uppercase tracking-wider text-stone-400 dark:border-white/10 dark:text-mist-400">
+          <span class="font-semibold text-stone-600 dark:text-mist-200">{stat.code}</span>
+        </div>
 
-      <!-- Layer 2: The Cards Stack (z-index: 10, between folder back and front pocket) -->
-      <div class="cards-stack-layer static h-auto flex flex-col gap-5 motion-safe:block motion-safe:absolute motion-safe:inset-x-0 motion-safe:top-2 motion-safe:h-85 motion-safe:will-change-transform motion-safe:z-10 motion-safe:perspective-distant">
-        {stats.map((stat, index) => (
-          <div
-            class:list={[
-              "stat-card-slot static inset-auto opacity-100 transform-none w-full origin-top motion-safe:absolute motion-safe:inset-x-0 motion-safe:top-0 motion-safe:will-change-transform",
-              { "z-10": index === 0, "z-12": index === 1, "z-14": index >= 2 },
-            ]}
-            data-stack-card={index}
+        <div class="mbe-1.5">
+          <data
+            class="text-4xl font-bold tracking-tight text-orange-700 dark:text-orange-400 tabular-nums block"
+            value={stat.value}
           >
-            <article class="stat-card relative flex h-55 w-full flex-col justify-between rounded-2xl border border-stone-200/90 bg-stone-50/95 p-5 shadow-xl shadow-stone-900/10 backdrop-blur-xs transition-shadow duration-300 dark:border-white/10 dark:bg-surface-card/90 dark:shadow-[0_12px_28px_rgba(0,0,0,0.6)]">
-              <div>
-                <div class="mbe-3 flex items-center justify-between border-b border-stone-200/70 pb-2 text-[0.6875rem] font-mono uppercase tracking-wider text-stone-400 dark:border-white/10 dark:text-mist-400">
-                  <span class="font-semibold text-stone-600 dark:text-mist-200">{stat.code}</span>
-                </div>
+            {stat.value}
+          </data>
+        </div>
 
-                <div class="mbe-1.5">
-                  <data
-                    class="text-4xl font-bold tracking-tight text-orange-700 dark:text-orange-400 tabular-nums block"
-                    value={stat.value}
-                  >
-                    {stat.value}
-                  </data>
-                </div>
+        <h3 class="text-base font-semibold tracking-tight text-stone-900 dark:text-mist-100">
+          {stat.label}
+        </h3>
 
-                <h3 class="text-base font-semibold tracking-tight text-stone-900 dark:text-mist-100">
-                  {stat.label}
-                </h3>
-
-                <p class="mbs-1 text-xs/relaxed text-stone-600 dark:text-mist-200 line-clamp-2">
-                  {stat.description}
-                </p>
-              </div>
-
-              <div class="mbs-2 flex items-center justify-between border-t border-stone-200/60 pt-2 text-[0.6875rem] font-mono text-stone-400 uppercase tracking-wider dark:border-white/10 dark:text-mist-400">
-                <span class="text-stone-600 dark:text-mist-200">{stat.footerLeft}</span>
-                <span class="inline-flex items-center gap-1 text-stone-600 dark:text-mist-200">
-                  {stat.footerRight}
-                </span>
-              </div>
-            </article>
-          </div>
-        ))}
+        <p class="mbs-1 text-xs/relaxed text-stone-600 dark:text-mist-200 line-clamp-2">
+          {stat.description}
+        </p>
       </div>
 
-      <!-- Layer 3: Folder Front Pocket (z-index: 25, in front of the cards) -->
-      <!-- Matches reference folder silhouette: tabbed folder with smooth shoulder, no texts, original obsidian palette -->
-      <div class="folder-front-pocket hidden motion-safe:block absolute inset-x-0 bottom-4 h-58.75 overflow-visible pointer-events-none will-change-transform z-25 opacity-0 origin-bottom drop-shadow-[0_-12px_28px_rgba(0,0,0,0.65)]">
-        <FolderShape
-          id="stats-front"
-          variant="front"
-        />
+      <div class="mbs-2 flex items-center justify-between border-t border-stone-200/60 pt-2 text-[0.6875rem] font-mono text-stone-400 uppercase tracking-wider dark:border-white/10 dark:text-mist-400">
+        <span class="text-stone-600 dark:text-mist-200">{stat.footerLeft}</span>
+        <span class="inline-flex items-center gap-1 text-stone-600 dark:text-mist-200">
+          {stat.footerRight}
+        </span>
       </div>
-    </div>
-  </div>
-</stats-folder-stack>
-
-<script src="../scripts/stats-folder-stack.ts"></script>
+    </article>
+  ))}
+</FolderStack>

@@ -24,7 +24,7 @@ const { items } = Astro.props;
 >
   {items.map((item, index) => (
     <button
-      aria-label={`Go to slide ${index + 1}: ${item.thumbTitle || item.title}`}
+      aria-label={`${item.thumbType || item.type} ${item.thumbTitle || item.title} — Go to slide ${index + 1}`}
       class="item group relative shrink-0 cursor-pointer overflow-hidden text-start shadow-[0_8px_25px_rgb(0_0_0/45%)] w-(--thumb-width) h-(--thumb-height) rounded-(--thumb-radius)"
       data-index={index}
       type="button"
@@ -51,14 +51,14 @@ const { items } = Astro.props;
           width={400}
         />
       }
-      <div class="thumbnail-overlay pointer-events-none absolute inset-x-0 bottom-0 flex flex-col px-2 py-1.5 sm:px-2.5 sm:py-2 text-white text-shadow-sm text-shadow-black/80 bg-linear-to-t from-black/85 to-transparent">
+      <span class="thumbnail-overlay pointer-events-none absolute inset-x-0 bottom-0 flex flex-col px-2 py-1.5 sm:px-2.5 sm:py-2 text-white text-shadow-sm text-shadow-black/80 bg-linear-to-t from-black/85 to-transparent">
         <span class="thumbnail-type truncate text-[0.65rem] sm:text-[0.7rem] font-bold uppercase tracking-wider text-orange-400">
           {item.thumbType || item.type}
         </span>
         <span class="thumbnail-title truncate text-[0.65rem] sm:text-[0.7rem] text-slate-200">
           {item.thumbTitle || item.title}
         </span>
-      </div>
+      </span>
     </button>
   ))}
 </div>

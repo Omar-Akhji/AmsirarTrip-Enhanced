@@ -1,47 +1,156 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { computed, onMounted, ref, useId, useTemplateRef } from "vue";
+import type { BookingFormCopy } from "@/lib/form-copy";
 import type { FormState } from "@/lib/form-types";
-import { useTranslation } from "@/lib/hooks/use-translation";
-import EnhancedCalendar from "@/shared/ui/widgets/Calendar.vue";
-import NativePopover from "@/shared/ui/widgets/NativePopover.vue";
 
 interface Props {
-  calendarOpen: boolean;
+  copy: BookingFormCopy;
   locale: string;
-  reservationDate: Date | null;
   state: FormState | null;
 }
 
-const { state, locale, calendarOpen, reservationDate } = defineProps<Props>();
+const props = defineProps<Props>();
 
-const emit = defineEmits<{
-  "update:calendarOpen": [open: boolean];
-  "update:reservationDate": [date: Date | null];
-}>();
+const calendarPopoverId = `booking-calendar-${useId().replaceAll(":", "")}`;
+const calendarAnchorName = `--calendar-anchor-${calendarPopoverId}`;
+const calendarPopoverRef = useTemplateRef<HTMLElement>("calendarPopoverRef");
 
-const formatIsoDate = (date: Date): string =>
-  `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+const now = new Date();
+const viewYear = ref(now.getFullYear());
+const viewMonth = ref(now.getMonth());
+const todayIso = ref("");
+const committedIso = ref("");
+const draftIso = ref("");
+const initialIsoOnOpen = ref("");
 
-const { t } = useTranslation(locale);
-const minimumReservationDate = ref<Date | null>(null);
+function toIsoDate(date: Date): string {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
 
-const getStartOfToday = () => {
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  return today;
-};
+function parseIsoDate(iso: string): Date | null {
+  const [yearStr, monthStr, dayStr] = iso.split("-", 3);
+  const year = Number(yearStr);
+  const month = Number(monthStr);
+  const day = Number(dayStr);
+  return year && month && day ? new Date(year, month - 1, day) : null;
+}
 
 onMounted(() => {
-  queueMicrotask(() => {
-    minimumReservationDate.value = getStartOfToday();
+  const current = new Date();
+  todayIso.value = toIsoDate(current);
+  viewYear.value = current.getFullYear();
+  viewMonth.value = current.getMonth();
+});
+
+const resolvedLocale = computed(() => props.locale || "en");
+
+const monthHeaderLabel = computed(() =>
+  new Intl.DateTimeFormat(resolvedLocale.value, { month: "long", year: "numeric" }).format(
+    new Date(viewYear.value, viewMonth.value, 1),
+  ),
+);
+
+const weekdayHeaders = computed(() => {
+  const formatter = new Intl.DateTimeFormat(resolvedLocale.value, { weekday: "short" });
+  return Array.from({ length: 7 }, (_, idx) => formatter.format(new Date(1970, 0, 4 + idx)));
+});
+
+const triggerDateLabel = computed(() => {
+  const parsed = parseIsoDate(committedIso.value);
+  if (!parsed) return "";
+  return new Intl.DateTimeFormat(resolvedLocale.value, {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  }).format(parsed);
+});
+
+const draftDateSummary = computed(() => {
+  const parsed = parseIsoDate(draftIso.value);
+  if (!parsed) return "";
+  return new Intl.DateTimeFormat(resolvedLocale.value, {
+    day: "numeric",
+    month: "short",
+    weekday: "short",
+    year: "numeric",
+  }).format(parsed);
+});
+
+const calendarCells = computed(() => {
+  const year = viewYear.value;
+  const month = viewMonth.value;
+  const startOffset = new Date(year, month, 1).getDay();
+  const ariaFormatter = new Intl.DateTimeFormat(resolvedLocale.value, {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+
+  return Array.from({ length: 42 }, (_, idx) => {
+    const cellDate = new Date(year, month, 1 - startOffset + idx);
+    const iso = toIsoDate(cellDate);
+    return {
+      ariaLabel: ariaFormatter.format(cellDate),
+      dayNumber: cellDate.getDate(),
+      inMonth: cellDate.getMonth() === month,
+      isDisabled: todayIso.value !== "" && iso < todayIso.value,
+      isSelected: draftIso.value === iso,
+      isToday: todayIso.value === iso,
+      iso,
+    };
   });
 });
+
+function shiftMonth(delta: -1 | 1): void {
+  const next = new Date(viewYear.value, viewMonth.value + delta, 1);
+  viewYear.value = next.getFullYear();
+  viewMonth.value = next.getMonth();
+}
+
+function handlePopoverToggle(event: ToggleEvent): void {
+  if (event.newState !== "open") return;
+  initialIsoOnOpen.value = committedIso.value;
+  draftIso.value = committedIso.value;
+  const anchorDate = parseIsoDate(committedIso.value) ?? new Date();
+  viewYear.value = anchorDate.getFullYear();
+  viewMonth.value = anchorDate.getMonth();
+}
+
+function selectDay(iso: string): void {
+  draftIso.value = iso;
+  committedIso.value = iso;
+}
+
+function cancelSelection(): void {
+  draftIso.value = initialIsoOnOpen.value;
+  committedIso.value = initialIsoOnOpen.value;
+  calendarPopoverRef.value?.hidePopover();
+}
+
+function selectToday(): void {
+  const current = new Date();
+  const iso = toIsoDate(current);
+  draftIso.value = iso;
+  committedIso.value = iso;
+  viewYear.value = current.getFullYear();
+  viewMonth.value = current.getMonth();
+  calendarPopoverRef.value?.hidePopover();
+}
+
+function applyDraftDate(): void {
+  if (!draftIso.value) return;
+  committedIso.value = draftIso.value;
+  calendarPopoverRef.value?.hidePopover();
+}
 </script>
 
 <template>
   <fieldset class="m-0 flex flex-col gap-5 border-0 p-0">
     <legend class="sr-only">
-      {{ t("booking.tripDetails") }}
+      {{ copy.tripDetails }}
     </legend>
     <div class="grid items-start gap-5 md:grid-cols-2">
       <div>
@@ -49,68 +158,63 @@ onMounted(() => {
           for="numberOfPeople"
           class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700 dark:text-mist-200"
         >
-          {{ t("booking.numberOfPeople") }}
+          {{ copy.numberOfPeople }}
           <span
             class="text-orange-600"
             aria-hidden="true"
             >*</span
           >
         </label>
-        <div class="relative">
+        <div class="group relative">
           <svg
-            class="pointer-events-none absolute inset-s-3.5 top-1/2 size-4.5 -translate-y-1/2 text-stone-400 transition-colors peer-focus:text-orange-500 dark:text-mist-400"
+            class="pointer-events-none absolute inset-s-3.5 top-1/2 size-4.5 -translate-y-1/2 text-stone-400 transition-colors group-focus-within:text-orange-500 dark:text-mist-400"
             viewBox="0 0 24 24"
             fill="none"
             aria-hidden="true"
           >
             <circle
-              cx="12"
+              cx="9"
               cy="6"
               r="4"
               stroke="currentColor"
               stroke-width="1.5"
             />
             <path
-              d="M18 9C19.6569 9 21 7.88071 21 6.5C21 5.11929 19.6569 4 18 4"
+              d="M15 9C16.6569 9 18 7.65685 18 6C18 4.34315 16.6569 3 15 3"
               stroke="currentColor"
               stroke-width="1.5"
               stroke-linecap="round"
             />
-            <path
-              d="M6 9C4.34315 9 3 7.88071 3 6.5C3 5.11929 4.34315 4 6 4"
+            <circle
+              cx="17"
+              cy="18"
+              r="4"
               stroke="currentColor"
               stroke-width="1.5"
-              stroke-linecap="round"
             />
             <path
-              d="M17.1973 15C17.7078 15.5883 18 16.2714 18 17C18 19.2091 15.3137 21 12 21C8.68629 21 6 19.2091 6 17C6 14.7909 8.68629 13 12 13C12.3407 13 12.6748 13.0189 13 13.0553"
+              d="M17 16.6667V18L18 19"
               stroke="currentColor"
               stroke-width="1.5"
               stroke-linecap="round"
+              stroke-linejoin="round"
             />
             <path
-              d="M20 19C21.7542 18.6153 23 17.6411 23 16.5C23 15.3589 21.7542 14.3847 20 14"
+              d="M11 20.8923C10.3677 20.9622 9.70132 21 9 21C5.13401 21 2 19.2091 2 17C2 14.7909 5.13401 13 9 13C10.7482 13 12.3469 13.3662 13.5735 13.972"
               stroke="currentColor"
               stroke-width="1.5"
-              stroke-linecap="round"
-            />
-            <path
-              d="M4 19C2.24575 18.6153 1 17.6411 1 16.5C1 15.3589 2.24575 14.3847 4 14"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-linecap="round"
             />
           </svg>
           <input
             id="numberOfPeople"
-            class="peer h-12 rounded-xl border border-stone-200/90 bg-stone-50/50 ps-10.5 pe-4 font-sans text-sm text-stone-900 transition-colors inline-full placeholder:text-stone-400 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden dark:border-white/10 dark:bg-white/5 dark:text-mist-100 dark:placeholder:text-mist-500 dark:focus:border-orange-500 dark:focus:bg-white/10"
-            :placeholder="t('booking.placeholders.numberOfPeople')"
+            class="h-12 rounded-xl border border-stone-200/90 bg-stone-50/50 ps-10.5 pe-4 font-sans text-sm text-stone-900 transition-colors inline-full placeholder:text-stone-400 user-invalid:border-red-400 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden user-invalid:focus:ring-red-400/20 dark:border-white/10 dark:bg-white/5 dark:text-mist-100 dark:placeholder:text-mist-500 dark:focus:border-orange-500 dark:focus:bg-white/10"
+            :placeholder="copy.numberOfPeoplePlaceholder"
             type="number"
             name="numberOfPeople"
             toolparamdescription="The total number of people participating in the tour"
             autocomplete="off"
-            min="1"
-            max="50"
+            :min="1"
+            :max="50"
             :aria-invalid="state?.errors?.['persons'] ? 'true' : 'false'"
             :aria-describedby="state?.errors?.['persons'] ? 'numberOfPeople-error' : undefined"
             required
@@ -127,104 +231,271 @@ onMounted(() => {
 
       <div>
         <label
-          for="reservationDate"
+          for="reservationDate-trigger"
           class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700 dark:text-mist-200"
         >
-          {{ t("booking.reservationDate") }}
+          {{ copy.reservationDate }}
           <span
             class="text-orange-600"
             aria-hidden="true"
             >*</span
           >
         </label>
-        <NativePopover
-          :is-open="calendarOpen"
-          :aria-label="t('booking.reservationDate')"
-          @update:is-open="emit('update:calendarOpen', $event)"
-        >
-          <template #trigger>
-            <span
-              class="flex h-12 cursor-pointer items-center justify-start rounded-xl border border-stone-200/90 bg-stone-50/50 px-4 text-start font-sans text-sm transition-colors inline-full group-focus-visible:border-orange-500 group-focus-visible:bg-white group-focus-visible:ring-2 group-focus-visible:ring-orange-500/20 dark:border-white/10 dark:bg-white/5 dark:group-focus-visible:border-orange-500 dark:group-focus-visible:bg-white/10 pointer-fine:group-hover:border-stone-300 pointer-fine:group-hover:bg-white dark:pointer-fine:group-hover:border-white/20 dark:pointer-fine:group-hover:bg-white/10"
-              :class="[
-                reservationDate ?
-                  'text-stone-900 dark:text-mist-100'
-                : 'text-stone-400 dark:text-mist-500',
-                state?.errors?.['date'] && 'border-red-300',
-              ]"
-              :aria-describedby="state?.errors?.['date'] ? 'reservationDate-error' : undefined"
-            >
-              <svg
-                class="me-2.5 size-4.5 shrink-0 text-stone-400 transition-colors group-hover:text-orange-500 group-focus-visible:text-orange-500 dark:text-mist-400"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke-width="1.5"
-                aria-hidden="true"
-              >
-                <path
-                  d="M7 4V2.5"
-                  stroke-linecap="round"
-                  stroke="currentColor"
-                />
-                <path
-                  d="M17 4V2.5"
-                  stroke-linecap="round"
-                  stroke="currentColor"
-                />
-                <circle
-                  cx="16.5"
-                  cy="16.5"
-                  r="1.5"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                />
-                <path
-                  d="M21.5 9H16.625H10.75M5.875 9H2"
-                  stroke-linecap="round"
-                  stroke="currentColor"
-                />
-                <path
-                  d="M14 22H10C6.22876 22 4.34315 22 3.17157 20.8284C2 19.6569 2 17.7712 2 14V12C2 8.22876 2 6.34315 3.17157 5.17157C4.34315 4 6.22876 4 10 4H14C17.7712 4 19.6569 4 20.8284 5.17157C22 6.34315 22 8.22876 22 12V14C22 17.7712 22 19.6569 20.8284 20.8284C20.1752 21.4816 19.3001 21.7706 18 21.8985"
-                  stroke-linecap="round"
-                  stroke="currentColor"
-                />
-              </svg>
-              <span v-if="reservationDate">
-                {{
-                  reservationDate.toLocaleDateString(locale || "en", {
-                    day: "numeric",
-                    month: "short",
-                    year: "numeric",
-                  })
-                }}
-              </span>
-              <span v-else>{{ t("booking.reservationDate") }}</span>
-            </span>
-          </template>
 
-          <div class="z-50 outline-hidden inline-auto">
-            <EnhancedCalendar
-              :key="
-                reservationDate ?
-                  `${reservationDate.getTime()}-${calendarOpen}`
-                : `none-${calendarOpen}`
-              "
-              v-bind="reservationDate ? { initialDate: reservationDate } : {}"
-              :locale="locale"
-              :disabled="
-                (date: Date) => (minimumReservationDate ? date < minimumReservationDate : false)
-              "
-              @select="emit('update:reservationDate', $event ?? null)"
-              @close="emit('update:calendarOpen', false)"
-            />
+        <div class="group relative block inline-full">
+          <button
+            id="reservationDate-trigger"
+            type="button"
+            :popovertarget="calendarPopoverId"
+            popovertargetaction="toggle"
+            :aria-controls="calendarPopoverId"
+            aria-haspopup="dialog"
+            :aria-describedby="state?.errors?.['date'] ? 'reservationDate-error' : undefined"
+            :style="{ anchorName: calendarAnchorName }"
+            class="flex h-12 cursor-pointer items-center justify-start rounded-xl border border-stone-200/90 bg-stone-50/50 px-4 text-start font-sans text-sm transition-colors inline-full group-has-[:popover-open]:border-orange-500 group-has-[:popover-open]:bg-white group-has-[:popover-open]:ring-2 group-has-[:popover-open]:ring-orange-500/20 focus:outline-hidden focus-visible:border-orange-500 focus-visible:bg-white focus-visible:ring-2 focus-visible:ring-orange-500/20 dark:border-white/10 dark:bg-white/5 dark:group-has-[:popover-open]:border-orange-500 dark:group-has-[:popover-open]:bg-white/10 dark:focus-visible:border-orange-500 dark:focus-visible:bg-white/10 pointer-fine:hover:border-stone-300 pointer-fine:hover:bg-white dark:pointer-fine:hover:border-white/20 dark:pointer-fine:hover:bg-white/10"
+            :class="[
+              committedIso ?
+                'text-stone-900 dark:text-mist-100'
+              : 'text-stone-600 dark:text-mist-300',
+              state?.errors?.['date'] && 'border-red-300',
+            ]"
+          >
+            <svg
+              class="me-2.5 size-4.5 shrink-0 text-stone-400 transition-colors group-focus-within:text-orange-500 group-hover:text-orange-500 group-has-[:popover-open]:text-orange-500 dark:text-mist-400"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke-width="1.5"
+              aria-hidden="true"
+            >
+              <path
+                d="M7 4V2.5M17 4V2.5M21.5 9H16.625H10.75M5.875 9H2M14 22H10C6.22876 22 4.34315 22 3.17157 20.8284C2 19.6569 2 17.7712 2 14V12C2 8.22876 2 6.34315 3.17157 5.17157C4.34315 4 6.22876 4 10 4H14C17.7712 4 19.6569 4 20.8284 5.17157C22 6.34315 22 8.22876 22 12V14C22 17.7712 22 19.6569 20.8284 20.8284C20.1752 21.4816 19.3001 21.7706 18 21.8985"
+                stroke-linecap="round"
+                stroke="currentColor"
+              />
+              <circle
+                cx="16.5"
+                cy="16.5"
+                r="1.5"
+                stroke="currentColor"
+                stroke-linecap="round"
+              />
+            </svg>
+            <span>{{ triggerDateLabel || copy.reservationDate }}</span>
+          </button>
+
+          <div
+            :id="calendarPopoverId"
+            ref="calendarPopoverRef"
+            popover="auto"
+            role="dialog"
+            :aria-label="copy.reservationDate"
+            :style="{ positionAnchor: calendarAnchorName }"
+            class="fixed inset-0 z-50 m-auto border-none bg-transparent p-0 opacity-0 outline-hidden transition-[opacity,transform,display,overlay] transition-discrete duration-200 max-inline-[calc(100vw-2rem)] backdrop:bg-black/20 open:opacity-100 supports-[top:anchor(bottom)]:inset-auto supports-[top:anchor(bottom)]:top-[calc(anchor(bottom)+8px)] supports-[top:anchor(bottom)]:left-[anchor(left)] supports-[top:anchor(bottom)]:m-0 supports-[top:anchor(bottom)]:[position-try-fallbacks:flip-block,flip-inline] supports-[top:anchor(bottom)]:backdrop:bg-transparent starting:open:opacity-0"
+            @toggle="handlePopoverToggle"
+          >
+            <div
+              class="overflow-hidden rounded-2xl border border-stone-200/90 bg-white p-4 shadow-xl ring-1 ring-stone-900/5 dark:border-white/10 dark:bg-surface-card dark:shadow-[0_16px_40px_rgba(0,0,0,0.65)] dark:ring-white/5"
+            >
+              <div
+                class="mbe-4 flex items-center justify-between border-b border-stone-100 pbe-3 dark:border-white/10"
+              >
+                <button
+                  type="button"
+                  class="flex size-8 items-center justify-center rounded-lg text-stone-600 transition-colors focus:ring-0 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-1 active:bg-stone-100 active:text-stone-900 dark:text-mist-400 dark:active:bg-white/10 dark:active:text-mist-100 pointer-fine:hover:bg-stone-100 pointer-fine:hover:text-stone-900 dark:pointer-fine:hover:bg-white/10 dark:pointer-fine:hover:text-mist-100"
+                  :aria-label="copy.calendarLabels.prevMonth"
+                  @click="shiftMonth(-1)"
+                >
+                  <svg
+                    class="size-4.5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M15 19L9 12L10.5 10.25M15 5L13 7.33333"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </button>
+
+                <span
+                  class="font-mono text-sm font-semibold text-stone-900 capitalize dark:text-mist-100"
+                >
+                  {{ monthHeaderLabel }}
+                </span>
+
+                <button
+                  type="button"
+                  class="flex size-8 items-center justify-center rounded-lg text-stone-600 transition-colors focus:ring-0 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-1 active:bg-stone-100 active:text-stone-900 dark:text-mist-400 dark:active:bg-white/10 dark:active:text-mist-100 pointer-fine:hover:bg-stone-100 pointer-fine:hover:text-stone-900 dark:pointer-fine:hover:bg-white/10 dark:pointer-fine:hover:text-mist-100"
+                  :aria-label="copy.calendarLabels.nextMonth"
+                  @click="shiftMonth(1)"
+                >
+                  <svg
+                    class="size-4.5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M9 5L11 7.33333M9 19L15 12L13.5 10.25"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </button>
+              </div>
+
+              <div class="bg-transparent p-1 inline-fit">
+                <div class="flex flex-col gap-3">
+                  <div class="flex justify-between">
+                    <span
+                      v-for="wd in weekdayHeaders"
+                      :key="wd"
+                      class="w-9 text-center font-mono text-xs font-medium text-stone-500 capitalize dark:text-mist-400"
+                    >
+                      {{ wd }}
+                    </span>
+                  </div>
+
+                  <div class="grid grid-cols-7 justify-items-center gap-1">
+                    <div
+                      v-for="cell in calendarCells"
+                      :key="cell.iso"
+                      class="relative flex aspect-square items-center justify-center p-0 text-center"
+                    >
+                      <button
+                        type="button"
+                        :disabled="cell.isDisabled"
+                        :aria-label="cell.ariaLabel"
+                        :aria-current="cell.isToday ? 'date' : undefined"
+                        :aria-pressed="cell.isSelected"
+                        class="relative flex size-9 flex-col items-center justify-center rounded-full p-0 font-mono text-xs transition-colors duration-150 focus:ring-0 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-1"
+                        :class="[
+                          cell.isSelected ?
+                            'bg-linear-to-br from-amber-orange to-orange font-bold text-white shadow-2xs shadow-orange/30'
+                          : [
+                              'text-stone-700 dark:text-mist-200',
+                              !cell.isDisabled
+                                && 'pointer-fine:hover:bg-stone-100 pointer-fine:hover:text-stone-900 dark:pointer-fine:hover:bg-white/10 dark:pointer-fine:hover:text-mist-100',
+                            ],
+                          cell.isDisabled
+                            && 'cursor-not-allowed text-stone-300 opacity-40 dark:text-mist-500',
+                          !cell.inMonth && !cell.isSelected && 'text-stone-300 dark:text-mist-500',
+                          cell.isToday
+                            && !cell.isSelected
+                            && 'font-semibold text-orange-700 dark:text-orange-400',
+                        ]"
+                        @click="selectDay(cell.iso)"
+                      >
+                        <span :class="cell.isToday ? '-mbs-0.5 leading-none' : 'leading-none'">
+                          {{ cell.dayNumber }}
+                        </span>
+                        <span
+                          v-if="cell.isToday"
+                          aria-hidden="true"
+                          class="absolute bottom-1 size-1 rounded-full"
+                          :class="cell.isSelected ? 'bg-white' : 'bg-orange-600'"
+                        />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                v-if="draftIso"
+                class="mbs-4 border-t border-stone-100 pbs-3 dark:border-white/10"
+              >
+                <div
+                  class="flex items-center gap-3 rounded-lg border border-stone-200/80 bg-stone-50/80 px-4 py-3 dark:border-white/10 dark:bg-white/5"
+                >
+                  <div class="shrink-0 text-orange-600 dark:text-orange-500">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="size-5"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke-width="1.5"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M7 4V2.5M17 4V2.5M21.5 9H16.625H10.75M5.875 9H2M14 22H10C6.22876 22 4.34315 22 3.17157 20.8284C2 19.6569 2 17.7712 2 14V12C2 8.22876 2 6.34315 3.17157 5.17157C4.34315 4 6.22876 4 10 4H14C17.7712 4 19.6569 4 20.8284 5.17157C22 6.34315 22 8.22876 22 12V14C22 17.7712 22 19.6569 20.8284 20.8284C20.1752 21.4816 19.3001 21.7706 18 21.8985"
+                        stroke-linecap="round"
+                        stroke="currentColor"
+                      />
+                      <circle
+                        cx="16.5"
+                        cy="16.5"
+                        r="1.5"
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                      />
+                    </svg>
+                  </div>
+                  <div class="flex-1 min-inline-0">
+                    <p
+                      class="font-mono text-[0.6875rem] font-medium tracking-wider text-stone-600 uppercase dark:text-mist-300"
+                    >
+                      {{
+                        initialIsoOnOpen && draftIso === initialIsoOnOpen ?
+                          copy.calendarLabels.currentDate
+                        : copy.calendarLabels.selectedDate
+                      }}
+                    </p>
+                    <p
+                      class="truncate font-mono text-xs font-semibold text-stone-900 capitalize dark:text-mist-100"
+                    >
+                      {{ draftDateSummary }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="mbs-4 flex items-center justify-between gap-2 border-t border-stone-100 pbs-3 dark:border-white/10"
+              >
+                <button
+                  type="button"
+                  data-calendar-today
+                  class="rounded-lg border border-stone-200/90 bg-stone-50 px-3 py-2 font-mono text-xs font-semibold text-stone-700 transition-colors focus:ring-0 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-1 dark:border-white/10 dark:bg-white/5 dark:text-mist-200 pointer-fine:hover:border-stone-300 pointer-fine:hover:bg-stone-100 dark:pointer-fine:hover:bg-white/10"
+                  @click="selectToday"
+                >
+                  {{ copy.calendarLabels.today }}
+                </button>
+
+                <div class="flex gap-2">
+                  <button
+                    type="button"
+                    class="rounded-lg border border-stone-200/90 bg-white px-4 py-2 font-mono text-xs font-semibold text-stone-700 transition-colors duration-150 focus:ring-0 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-1 dark:border-white/10 dark:bg-white/5 dark:text-mist-200 pointer-fine:hover:border-stone-300 pointer-fine:hover:bg-stone-50 dark:pointer-fine:hover:bg-white/10"
+                    @click="cancelSelection"
+                  >
+                    {{ copy.calendarLabels.cancel }}
+                  </button>
+                  <button
+                    :disabled="!draftIso"
+                    type="button"
+                    class="rounded-lg bg-linear-to-br from-amber-orange to-orange px-4 py-2 font-mono text-xs font-semibold text-white shadow-2xs shadow-orange/20 transition-all duration-150 focus:ring-0 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-40 pointer-fine:hover:shadow-sm pointer-fine:hover:shadow-orange/30 pointer-fine:hover:brightness-105"
+                    @click="applyDraftDate"
+                  >
+                    {{ copy.calendarLabels.apply }}
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
-        </NativePopover>
+        </div>
 
         <input
           id="reservationDate"
           type="hidden"
           name="reservationDate"
           toolparamdescription="The selected start date for the reservation in YYYY-MM-DD format"
-          :value="reservationDate ? formatIsoDate(reservationDate) : ''"
+          :value="committedIso"
         />
         <p
           v-if="state?.errors?.['date']"
@@ -236,16 +507,16 @@ onMounted(() => {
       </div>
     </div>
 
-    <div class="inline-full">
+    <div>
       <label
         for="message"
         class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700 dark:text-mist-200"
       >
-        {{ t("booking.message") }}
+        {{ copy.message }}
       </label>
-      <div class="relative">
+      <div class="group relative">
         <svg
-          class="pointer-events-none absolute inset-s-3.5 top-3.5 size-4.5 text-stone-400 transition-colors peer-focus:text-orange-500 dark:text-mist-400"
+          class="pointer-events-none absolute inset-s-3.5 top-3.5 size-4.5 text-stone-400 transition-colors group-focus-within:text-orange-500 dark:text-mist-400"
           viewBox="0 0 24 24"
           fill="none"
           aria-hidden="true"
@@ -278,12 +549,11 @@ onMounted(() => {
         <textarea
           id="message"
           name="message"
-          class="peer overflow-auto rounded-xl border border-stone-200/90 bg-stone-50/50 py-3 ps-10.5 pe-4 font-sans text-sm text-stone-900 transition-colors inline-full min-block-40 placeholder:text-stone-400 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden dark:border-white/10 dark:bg-white/5 dark:text-mist-100 dark:placeholder:text-mist-500 dark:focus:border-orange-500 dark:focus:bg-white/10"
-          :placeholder="t('booking.placeholders.message')"
+          class="field-sizing-content overflow-auto rounded-xl border border-stone-200/90 bg-stone-50/50 py-3 ps-10.5 pe-4 font-sans text-sm text-stone-900 transition-colors inline-full max-block-80 min-block-40 placeholder:text-stone-400 user-invalid:border-red-400 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden user-invalid:focus:ring-red-400/20 dark:border-white/10 dark:bg-white/5 dark:text-mist-100 dark:placeholder:text-mist-500 dark:focus:border-orange-500 dark:focus:bg-white/10"
+          :placeholder="copy.messagePlaceholder"
           :maxlength="1000"
           toolparamdescription="Any custom requests, message, or notes from the guest regarding the booking"
           autocomplete="off"
-          :rows="4"
           :aria-invalid="state?.errors?.['message'] ? 'true' : 'false'"
           :aria-describedby="state?.errors?.['message'] ? 'message-error' : undefined"
         />

@@ -1,14 +1,6 @@
 /**
  * Amsirar Trip - Cookie Consent & Privacy Manager Compliant with GDPR, ePrivacy Directive, and
  * Moroccan Law 09-08 (CNDP).
- *
- * Provides:
- *
- * - Persistent consent tracking (Cookie & LocalStorage)
- * - Granular categories: Strictly Necessary, Analytics & Performance, Functional & Experience
- * - Dynamic custom events: "amsirar:consent-changed"
- * - Full Astro View Transitions compatibility
- * - Keyboard accessible modal & focus management
  */
 
 export interface CookiePreferences {
@@ -64,10 +56,7 @@ export function getCookieConsent(): CookiePreferences | null {
   return null;
 }
 
-/**
- * Stores cookie preferences in both document.cookie and localStorage, and notifies the document
- * with a custom event.
- */
+/** Stores cookie preferences in both document.cookie and localStorage, and notifies the document. */
 export function setCookieConsent(preferences: {
   analytics: boolean;
   functional: boolean;
@@ -90,7 +79,6 @@ export function setCookieConsent(preferences: {
     console.warn("[Amsirar Privacy] Error saving cookie preferences:", error);
   }
 
-  // Dispatch custom event for analytics/maps scripts
   globalThis.dispatchEvent(
     new CustomEvent("amsirar:consent-changed", { detail: consent, bubbles: true }),
   );
@@ -99,6 +87,7 @@ export function setCookieConsent(preferences: {
 }
 
 let lastFocusedElement: HTMLElement | null = null;
+let showBannerTimer: ReturnType<typeof setTimeout> | null = null;
 
 function getBannerElement(): HTMLElement | null {
   return document.querySelector<HTMLElement>("#cookie-banner");
@@ -115,39 +104,16 @@ function getBadgeButton(): HTMLElement | null {
 export function showBanner(): void {
   const banner = getBannerElement();
   if (!banner) return;
-  banner.classList.remove("hidden");
-  requestAnimationFrame(() => {
-    banner.classList.remove("opacity-0", "translate-y-3");
-    banner.classList.add("opacity-100", "translate-y-0");
-  });
+  banner.dataset["open"] = "true";
 }
 
 export function hideBanner(): void {
   const banner = getBannerElement();
   if (!banner) return;
-  banner.classList.add("opacity-0", "translate-y-3");
-  banner.classList.remove("opacity-100", "translate-y-0");
-  setTimeout(() => {
-    banner.classList.add("hidden");
-  }, 300);
+  banner.dataset["open"] = "false";
 }
 
-export function openPreferencesModal(triggerElement?: HTMLElement): void {
-  const modal = getModalElement();
-  if (!modal) return;
-
-  const banner = getBannerElement();
-  if (banner && !banner.classList.contains("hidden")) {
-    banner.classList.add("hidden", "opacity-0", "translate-y-3");
-    banner.classList.remove("opacity-100", "translate-y-0");
-  }
-
-  if (triggerElement) {
-    lastFocusedElement = triggerElement;
-  } else if (document.activeElement instanceof HTMLElement) {
-    lastFocusedElement = document.activeElement;
-  }
-
+function syncModalCheckboxes(): void {
   const current = getCookieConsent();
   const analyticsInput = document.querySelector<HTMLInputElement>("#cookie-toggle-analytics");
   const functionalInput = document.querySelector<HTMLInputElement>("#cookie-toggle-functional");
@@ -158,7 +124,22 @@ export function openPreferencesModal(triggerElement?: HTMLElement): void {
   if (functionalInput) {
     functionalInput.checked = Boolean(current?.functional);
   }
+}
 
+function preparePreferencesModalOpen(triggerElement?: HTMLElement): void {
+  hideBanner();
+  if (triggerElement) {
+    lastFocusedElement = triggerElement;
+  } else if (document.activeElement instanceof HTMLElement) {
+    lastFocusedElement = document.activeElement;
+  }
+  syncModalCheckboxes();
+}
+
+export function openPreferencesModal(triggerElement?: HTMLElement): void {
+  const modal = getModalElement();
+  if (!modal) return;
+  preparePreferencesModalOpen(triggerElement);
   if (!modal.open) {
     modal.showModal();
   }
@@ -166,39 +147,18 @@ export function openPreferencesModal(triggerElement?: HTMLElement): void {
 
 export function closePreferencesModal(): void {
   const modal = getModalElement();
-  if (!modal?.open) return;
-
-  modal.close();
-
-  const consent = getCookieConsent();
-  if (!consent) {
-    showBanner();
-  }
-
-  if (lastFocusedElement && document.contains(lastFocusedElement)) {
-    lastFocusedElement.focus();
+  if (modal?.open) {
+    modal.close();
   }
 }
 
-function handleAcceptAll(): void {
+function handleConsentSaved(analytics: boolean, functional: boolean): void {
   const analyticsInput = document.querySelector<HTMLInputElement>("#cookie-toggle-analytics");
   const functionalInput = document.querySelector<HTMLInputElement>("#cookie-toggle-functional");
-  if (analyticsInput) analyticsInput.checked = true;
-  if (functionalInput) functionalInput.checked = true;
+  if (analyticsInput) analyticsInput.checked = analytics;
+  if (functionalInput) functionalInput.checked = functional;
 
-  setCookieConsent({ analytics: true, functional: true });
-  hideBanner();
-  closePreferencesModal();
-  updateBadgeVisibility();
-}
-
-function handleRejectAll(): void {
-  const analyticsInput = document.querySelector<HTMLInputElement>("#cookie-toggle-analytics");
-  const functionalInput = document.querySelector<HTMLInputElement>("#cookie-toggle-functional");
-  if (analyticsInput) analyticsInput.checked = false;
-  if (functionalInput) functionalInput.checked = false;
-
-  setCookieConsent({ analytics: false, functional: false });
+  setCookieConsent({ analytics, functional });
   hideBanner();
   closePreferencesModal();
   updateBadgeVisibility();
@@ -207,15 +167,7 @@ function handleRejectAll(): void {
 function handleSavePreferences(): void {
   const analyticsInput = document.querySelector<HTMLInputElement>("#cookie-toggle-analytics");
   const functionalInput = document.querySelector<HTMLInputElement>("#cookie-toggle-functional");
-
-  setCookieConsent({
-    analytics: Boolean(analyticsInput?.checked),
-    functional: Boolean(functionalInput?.checked),
-  });
-
-  hideBanner();
-  closePreferencesModal();
-  updateBadgeVisibility();
+  handleConsentSaved(Boolean(analyticsInput?.checked), Boolean(functionalInput?.checked));
 }
 
 function updateBadgeVisibility(): void {
@@ -227,90 +179,112 @@ function updateBadgeVisibility(): void {
 
 /** Initializes listeners on current page load (and on Astro View Transitions). */
 export function initCookieConsent(): void {
-  const consent = getCookieConsent();
+  const banner = getBannerElement();
+  const modal = getModalElement();
+  if (!banner || !modal || banner.dataset["cookieInit"] === "true") return;
+  banner.dataset["cookieInit"] = "true";
 
+  if (showBannerTimer !== null) {
+    clearTimeout(showBannerTimer);
+    showBannerTimer = null;
+  }
+
+  const consent = getCookieConsent();
   if (consent) {
     hideBanner();
   } else {
-    setTimeout(showBanner, 600);
+    showBannerTimer = globalThis.setTimeout(() => {
+      showBannerTimer = null;
+      if (!getCookieConsent() && !modal.open) {
+        showBanner();
+      }
+    }, 600);
   }
 
   updateBadgeVisibility();
 
-  const acceptButtons = document.querySelectorAll<HTMLElement>("[data-cookie-accept-all]");
-  for (const btn of acceptButtons) {
-    btn.addEventListener("click", handleAcceptAll);
+  const controller = new AbortController();
+  const { signal } = controller;
+
+  for (const btn of document.querySelectorAll<HTMLElement>("[data-cookie-accept-all]")) {
+    btn.addEventListener("click", () => handleConsentSaved(true, true), { signal });
   }
 
-  const rejectButtons = document.querySelectorAll<HTMLElement>("[data-cookie-reject-all]");
-  for (const btn of rejectButtons) {
-    btn.addEventListener("click", handleRejectAll);
+  for (const btn of document.querySelectorAll<HTMLElement>("[data-cookie-reject-all]")) {
+    btn.addEventListener("click", () => handleConsentSaved(false, false), { signal });
   }
 
-  const openPrefButtons = document.querySelectorAll<HTMLElement>("[data-cookie-open-preferences]");
-  for (const btn of openPrefButtons) {
-    btn.addEventListener("click", () => {
-      openPreferencesModal(btn);
-    });
+  for (const btn of document.querySelectorAll<HTMLElement>("[data-cookie-open-preferences]")) {
+    btn.addEventListener(
+      "click",
+      () => {
+        preparePreferencesModalOpen(btn);
+        if (!("commandForElement" in HTMLButtonElement.prototype) && !modal.open) {
+          modal.showModal();
+        }
+      },
+      { signal },
+    );
   }
 
-  const closePrefButtons = document.querySelectorAll<HTMLElement>(
-    "[data-cookie-close-preferences]",
-  );
-  for (const btn of closePrefButtons) {
-    btn.addEventListener("click", closePreferencesModal);
+  for (const btn of document.querySelectorAll<HTMLElement>("[data-cookie-save-preferences]")) {
+    btn.addEventListener("click", handleSavePreferences, { signal });
   }
 
-  const savePrefButtons = document.querySelectorAll<HTMLElement>("[data-cookie-save-preferences]");
-  for (const btn of savePrefButtons) {
-    btn.addEventListener("click", handleSavePreferences);
+  for (const trigger of document.querySelectorAll<HTMLElement>("[data-open-cookie-settings]")) {
+    trigger.addEventListener(
+      "click",
+      (event) => {
+        event.preventDefault();
+        openPreferencesModal(trigger);
+      },
+      { signal },
+    );
   }
 
-  // Any button in the entire app with `data-open-cookie-settings`
-  const globalOpenTriggers = document.querySelectorAll<HTMLElement>("[data-open-cookie-settings]");
-  for (const trigger of globalOpenTriggers) {
-    trigger.addEventListener("click", (e) => {
-      e.preventDefault();
-      openPreferencesModal(trigger);
-    });
-  }
-
-  // Modal backdrop click & native dialog close handling
-  // `closedby="any"` makes backdrop/Esc dismissal native; the geometry math below is the fallback
-  // for browsers that do not support the attribute yet.
-  const modal = getModalElement();
-  if (!modal) return;
-
+  // Fallback for browsers without native closedby="any" light dismiss (Safari < 26.2)
   if (!("closedBy" in HTMLDialogElement.prototype)) {
-    modal.addEventListener("click", (event) => {
-      const rect = modal.getBoundingClientRect();
-      const isInDialog =
-        rect.top <= event.clientY
-        && event.clientY <= rect.top + rect.height
-        && rect.left <= event.clientX
-        && event.clientX <= rect.left + rect.width;
-      if (!isInDialog) {
-        closePreferencesModal();
-      }
-    });
+    modal.addEventListener(
+      "click",
+      (event) => {
+        if (event.target === modal) {
+          closePreferencesModal();
+        }
+      },
+      { signal },
+    );
   }
 
-  modal.addEventListener("close", () => {
-    const consent = getCookieConsent();
-    if (!consent) {
-      showBanner();
-    }
-    if (lastFocusedElement && document.contains(lastFocusedElement)) {
-      lastFocusedElement.focus();
-    }
-  });
+  modal.addEventListener(
+    "close",
+    () => {
+      if (!getCookieConsent()) {
+        showBanner();
+      }
+      if (lastFocusedElement && document.contains(lastFocusedElement)) {
+        lastFocusedElement.focus();
+      }
+    },
+    { signal },
+  );
+
+  document.addEventListener(
+    "astro:before-swap",
+    () => {
+      if (showBannerTimer !== null) {
+        clearTimeout(showBannerTimer);
+        showBannerTimer = null;
+      }
+      controller.abort();
+      delete banner.dataset["cookieInit"];
+    },
+    { once: true },
+  );
 }
 
 if (typeof window !== "undefined") {
-  // Re-run setup on View Transitions page swap
   document.addEventListener("astro:page-load", initCookieConsent);
 
-  // Expose global controller on window for debug/manual invocation
   Object.assign(globalThis, {
     __amsirarCookieConsent: {
       get: getCookieConsent,

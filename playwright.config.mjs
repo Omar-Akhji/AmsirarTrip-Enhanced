@@ -3,11 +3,12 @@ import process from "node:process";
 import { defineConfig, devices } from "@playwright/test";
 
 const isCI = Boolean(process.env["CI"]);
-const PORT = 4321;
+const PORT = 4325;
 const BASE_URL = `http://localhost:${PORT}`;
 
 export default defineConfig({
   testDir: "./tests",
+  testIgnore: ["**/unit/**"],
   fullyParallel: true,
   forbidOnly: isCI,
   retries: isCI ? 2 : 0,
@@ -22,7 +23,7 @@ export default defineConfig({
     baseURL: BASE_URL,
     trace: "on-first-retry",
     screenshot: "only-on-failure",
-    video: "retain-on-failure",
+    video: "on-first-retry",
     actionTimeout: 10_000,
     navigationTimeout: 15_000,
     locale: "en-US",
@@ -30,14 +31,15 @@ export default defineConfig({
   },
 
   projects: [
-    { name: "desktop-chromium", use: { ...devices["Desktop Chrome"] } },
-    { name: "mobile-chromium", use: { ...devices["Pixel 7"] } },
+    { name: "desktop-chromium", use: { ...devices["Desktop Chrome"], channel: "chrome" } },
+    { name: "mobile-chromium", use: { ...devices["Pixel 7"], channel: "chrome" } },
   ],
 
   webServer: {
-    command: isCI ? "bun run build && bun run preview" : "bun run preview",
+    command: isCI ? "bun run build && bun run start" : "bun run start",
+    env: { PORT: String(PORT) },
     url: BASE_URL,
-    reuseExistingServer: !isCI,
+    reuseExistingServer: false,
     timeout: 120_000,
     stdout: "ignore",
     stderr: "pipe",

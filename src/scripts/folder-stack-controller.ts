@@ -1,23 +1,13 @@
-import type Lenis from "lenis";
-
-export interface FolderStackConfig {
-  readonly card1TargetY?: number;
-  readonly card2TargetY?: number;
-  readonly cardCardSelector: string;
-  readonly stageSelector: string;
-  readonly trackSelector: string;
-}
-
 function clamp01(value: number): number {
   return Math.min(Math.max(value, 0), 1);
 }
 
-export function setupFolderStack(
-  element: HTMLElement,
-  config: FolderStackConfig,
-): (() => void) | null {
-  const track = element.querySelector<HTMLElement>(config.trackSelector);
-  const stage = element.querySelector<HTMLElement>(config.stageSelector);
+const CARD_1_TARGET_Y = 40;
+const CARD_2_TARGET_Y = 56;
+
+export function setupFolderStack(element: HTMLElement): (() => void) | null {
+  const track = element.querySelector<HTMLElement>("[data-folder-track]");
+  const stage = element.querySelector<HTMLElement>("[data-folder-stage]");
   const card0 = element.querySelector<HTMLElement>('[data-stack-card="0"]');
   const card1 = element.querySelector<HTMLElement>('[data-stack-card="1"]');
   const card2 = element.querySelector<HTMLElement>('[data-stack-card="2"]');
@@ -29,12 +19,26 @@ export function setupFolderStack(
   }
 
   const cardSlots = [card0, card1, card2];
-  const target1Y = config.card1TargetY ?? 40;
-  const target2Y = config.card2TargetY ?? 56;
 
   const prefersReduced =
     typeof window !== "undefined"
     && globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const supportsCssTimeline =
+    typeof CSS !== "undefined"
+    && CSS.supports("animation-timeline", "view()")
+    && CSS.supports("timeline-scope", "--a");
+
+  if (prefersReduced || supportsCssTimeline) {
+    for (const slot of cardSlots) {
+      slot.style.transform = "";
+      slot.style.opacity = "";
+    }
+    folderBack.style.transform = "";
+    folderBack.style.opacity = "";
+    folderFront.style.transform = "";
+    folderFront.style.opacity = "";
+    return null;
+  }
 
   const cache = new Map<string, string | number>();
   let rafId: number | null = null;
@@ -44,18 +48,6 @@ export function setupFolderStack(
 
   const updateTransforms = () => {
     rafId = null;
-
-    if (prefersReduced) {
-      for (const slot of cardSlots) {
-        slot.style.transform = "";
-        slot.style.opacity = "";
-      }
-      folderBack.style.transform = "";
-      folderBack.style.opacity = "";
-      folderFront.style.transform = "";
-      folderFront.style.opacity = "";
-      return;
-    }
 
     const trackRect = track.getBoundingClientRect();
     if (needsMeasure) {
@@ -70,10 +62,10 @@ export function setupFolderStack(
     const pCard1 = clamp01(progress / 0.22);
     const pCard2 = clamp01((progress - 0.22) / 0.23);
 
-    const card1Y = 340 - pCard1 * (340 - target1Y);
+    const card1Y = 340 - pCard1 * (340 - CARD_1_TARGET_Y);
     const card1Opacity = clamp01(pCard1 * 2.2);
 
-    const card2Y = 340 - pCard2 * (340 - target2Y);
+    const card2Y = 340 - pCard2 * (340 - CARD_2_TARGET_Y);
     const card2Opacity = clamp01(pCard2 * 2.2);
 
     const pFolderRise = clamp01((progress - 0.45) / 0.25);
@@ -108,24 +100,20 @@ export function setupFolderStack(
       folderFront.style.opacity = folderOpStr;
     }
 
-    const tilt0 = -3.5 * pCard1 - 3.5 * pCard2;
-    const scale0 = (1 - 0.05 * pCard1 - 0.05 * pCard2) * snugScale;
-    const y0 = 24 + pCardInsert * 119;
-    const dim0 = Math.min(1, 0.15 * pCard1 + 0.13 * pCard2);
-
-    const tilt1 = -3.5 * pCard2;
-    const scale1 = (1 - 0.05 * pCard2) * snugScale;
-    const y1 = card1Y + pCardInsert * 107;
-    const dim1 = Math.min(1, 0.15 * pCard2);
-
-    const scale2 = snugScale;
-    const y2 = card2Y + pCardInsert * 95;
-    const dim2 = 0;
-
     const cardsData = [
-      { y: y0, tilt: tilt0, scale: scale0, opacity: 1, dim: dim0 },
-      { y: y1, tilt: tilt1, scale: scale1, opacity: card1Opacity, dim: dim1 },
-      { y: y2, tilt: 0, scale: scale2, opacity: card2Opacity, dim: dim2 },
+      {
+        y: 24 + pCardInsert * 119,
+        tilt: -3.5 * pCard1 - 3.5 * pCard2,
+        scale: (1 - 0.05 * pCard1 - 0.05 * pCard2) * snugScale,
+        opacity: 1,
+      },
+      {
+        y: card1Y + pCardInsert * 107,
+        tilt: -3.5 * pCard2,
+        scale: (1 - 0.05 * pCard2) * snugScale,
+        opacity: card1Opacity,
+      },
+      { y: card2Y + pCardInsert * 95, tilt: 0, scale: snugScale, opacity: card2Opacity },
     ];
 
     for (const [index, slot] of cardSlots.entries()) {
@@ -159,10 +147,6 @@ export function setupFolderStack(
     schedule();
   };
 
-  const lenis = (globalThis as unknown as { __lenis?: Lenis }).__lenis;
-  if (lenis) {
-    lenis.on("scroll", schedule);
-  }
   globalThis.addEventListener("scroll", schedule, { passive: true });
   globalThis.addEventListener("resize", onResize, { passive: true });
 
@@ -179,30 +163,23 @@ export function setupFolderStack(
     resizeObserver.disconnect();
     globalThis.removeEventListener("scroll", schedule);
     globalThis.removeEventListener("resize", onResize);
-    if (lenis) {
-      lenis.off("scroll", schedule);
-    }
   };
 }
 
-export function registerFolderStackElement(tagName: string, config: FolderStackConfig): void {
-  if (typeof customElements === "undefined" || customElements.get(tagName)) {
-    return;
+class FolderStackElement extends HTMLElement {
+  private cleanupFn: (() => void) | null = null;
+
+  connectedCallback() {
+    this.cleanupFn?.();
+    this.cleanupFn = setupFolderStack(this);
   }
 
-  class FolderStackCustomElement extends HTMLElement {
-    private cleanupFn: (() => void) | null = null;
-
-    connectedCallback() {
-      this.cleanupFn?.();
-      this.cleanupFn = setupFolderStack(this, config);
-    }
-
-    disconnectedCallback() {
-      this.cleanupFn?.();
-      this.cleanupFn = null;
-    }
+  disconnectedCallback() {
+    this.cleanupFn?.();
+    this.cleanupFn = null;
   }
+}
 
-  customElements.define(tagName, FolderStackCustomElement);
+if (typeof customElements !== "undefined" && !customElements.get("folder-stack")) {
+  customElements.define("folder-stack", FolderStackElement);
 }

@@ -1,30 +1,41 @@
-/* eslint-disable unicorn/no-process-exit, unicorn/import-style, unicorn/prefer-iterator-to-array, unicorn/no-useless-else, @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument, security/detect-non-literal-fs-filename */
-import { readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
+import { readdirSync, readFileSync, statSync } from "node:fs";
+import path from "node:path";
 
 const root = process.cwd();
 const LOCALES = ["en", "fr", "de", "es"] as const;
 type Locale = (typeof LOCALES)[number];
 
-const dictionaries: Record<Locale, any> = {} as any;
-for (const loc of LOCALES) {
+type JsonObject = Record<string, unknown>;
+type LeafType = "string" | "array" | "other";
+
+function isJsonObject(value: unknown): value is JsonObject {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+function readLocaleFile(loc: Locale): JsonObject | null {
   try {
-    const raw = readFileSync(`${root}/src/locales/${loc}/common.json`, "utf8");
-    dictionaries[loc] = JSON.parse(raw);
+    // eslint-disable-next-line security/detect-non-literal-fs-filename -- locale is a fixed tuple literal
+    const raw = readFileSync(path.join(root, "src", "locales", loc, "common.json"), "utf8");
+    const parsed: unknown = JSON.parse(raw);
+    if (!isJsonObject(parsed)) {
+      console.error(`Locale file for "${loc}" must contain a JSON object.`);
+      return null;
+    }
+    return parsed;
   } catch (error) {
     console.error(`Failed to read/parse locale file for "${loc}":`, error);
-    process.exit(1);
+    return null;
   }
 }
 
-// Flatten leaf keys
-function getLeaves(obj: any, prefix = ""): Map<string, "string" | "array" | "other"> {
-  const map = new Map<string, "string" | "array" | "other">();
+function getLeaves(obj: JsonObject, prefix = ""): Map<string, LeafType> {
+  const map = new Map<string, LeafType>();
   for (const [key, value] of Object.entries(obj)) {
     const fullKey = prefix ? `${prefix}.${key}` : key;
-    if (value && typeof value === "object" && !Array.isArray(value)) {
-      const nested = getLeaves(value, fullKey);
-      for (const [k, v] of nested) map.set(k, v);
+    if (isJsonObject(value)) {
+      for (const [nestedKey, nestedType] of getLeaves(value, fullKey)) {
+        map.set(nestedKey, nestedType);
+      }
     } else if (Array.isArray(value)) {
       map.set(fullKey, "array");
     } else if (typeof value === "string") {
@@ -36,50 +47,13 @@ function getLeaves(obj: any, prefix = ""): Map<string, "string" | "array" | "oth
   return map;
 }
 
-const enLeaves = getLeaves(dictionaries.en);
-let hasError = false;
-
-console.log(`[i18n-check] Verifying parity against EN (${enLeaves.size} keys)...`);
-
-for (const loc of LOCALES) {
-  if (loc === "en") continue;
-  const targetLeaves = getLeaves(dictionaries[loc]);
-
-  const missing = [...enLeaves.keys()].filter((k) => !targetLeaves.has(k));
-  const extra = [...targetLeaves.keys()].filter((k) => !enLeaves.has(k));
-
-  if (missing.length > 0) {
-    hasError = true;
-    console.error(`\n❌ [${loc}] Missing ${missing.length} keys present in EN:`);
-    for (const m of missing.slice(0, 20)) console.error(`  - ${m}`);
-    if (missing.length > 20) console.error(`  ... and ${missing.length - 20} more`);
-  }
-
-  if (extra.length > 0) {
-    hasError = true;
-    console.error(`\n⚠️  [${loc}] Has ${extra.length} extra keys not present in EN:`);
-    for (const e of extra) console.error(`  + ${e}`);
-  }
-
-  // Type mismatch check
-  for (const [k, type] of enLeaves) {
-    if (!targetLeaves.has(k) || targetLeaves.get(k) === type) continue;
-    hasError = true;
-    console.error(
-      `\n❌ [${loc}] Type mismatch on key "${k}": expected ${type}, got ${targetLeaves.get(k)}`,
-    );
-  }
-}
-
-// 2. Scan code for static t() and t.raw() key usage
-console.log(`[i18n-check] Scanning codebase for translation key usage...`);
-const usedKeys = new Map<string, string>(); // key -> file
-
 function scanFiles(dir: string): string[] {
   const results: string[] = [];
+  // eslint-disable-next-line security/detect-non-literal-fs-filename -- bounded traversal within src/
   const entries = readdirSync(dir);
   for (const entry of entries) {
-    const fullPath = join(dir, entry);
+    const fullPath = path.join(dir, entry);
+    // eslint-disable-next-line security/detect-non-literal-fs-filename -- bounded traversal within src/
     const stat = statSync(fullPath);
     if (stat.isDirectory()) {
       results.push(...scanFiles(fullPath));
@@ -90,93 +64,110 @@ function scanFiles(dir: string): string[] {
   return results;
 }
 
-const codeFiles = scanFiles(join(root, "src"));
-for (const fullPath of codeFiles) {
-  const normFile = fullPath.replaceAll("\\", "/");
-  if (normFile.includes("/src/i18n/") || normFile.includes("/src/locales/")) continue;
+function main(): void {
+  const loaded = new Map<Locale, JsonObject>();
 
-  const content = readFileSync(fullPath, "utf8");
+  for (const loc of LOCALES) {
+    const data = readLocaleFile(loc);
+    if (!data) {
+      process.exitCode = 1;
+      return;
+    }
+    loaded.set(loc, data);
+  }
 
-  // Matches t("key") or t('key') or t.raw("key") or t.raw('key')
-  const matches = content.matchAll(/\bt(?:\.raw)?\(\s*["']([\w.]+)["']/g);
-  for (const m of matches) {
-    const key = m[1];
-    if (key && !usedKeys.has(key)) {
-      usedKeys.set(key, normFile);
+  const enDict = loaded.get("en");
+  if (!enDict) {
+    process.exitCode = 1;
+    return;
+  }
+
+  const enLeaves = getLeaves(enDict);
+  let hasError = false;
+
+  console.log(`[i18n-check] Verifying parity against EN (${enLeaves.size} keys)...`);
+
+  for (const loc of LOCALES) {
+    if (loc === "en") continue;
+    const dict = loaded.get(loc);
+    if (!dict) continue;
+    const targetLeaves = getLeaves(dict);
+
+    const missing = enLeaves
+      .keys()
+      .filter((k) => !targetLeaves.has(k))
+      .toArray();
+    const extra = targetLeaves
+      .keys()
+      .filter((k) => !enLeaves.has(k))
+      .toArray();
+
+    if (missing.length > 0) {
+      hasError = true;
+      console.error(`\n❌ [${loc}] Missing ${missing.length} keys present in EN:`);
+      for (const m of missing.slice(0, 20)) console.error(`  - ${m}`);
+      if (missing.length > 20) console.error(`  ... and ${missing.length - 20} more`);
+    }
+
+    if (extra.length > 0) {
+      hasError = true;
+      console.error(`\n⚠️  [${loc}] Has ${extra.length} extra keys not present in EN:`);
+      for (const e of extra) console.error(`  + ${e}`);
+    }
+
+    for (const [k, type] of enLeaves) {
+      if (!targetLeaves.has(k) || targetLeaves.get(k) === type) continue;
+      hasError = true;
+      console.error(
+        `\n❌ [${loc}] Type mismatch on key "${k}": expected ${type}, got ${targetLeaves.get(k)}`,
+      );
     }
   }
-}
 
-console.log(`[i18n-check] Found ${usedKeys.size} distinct static translation keys in code.`);
+  console.log("[i18n-check] Scanning codebase for translation key usage...");
+  const usedKeys = new Map<string, string>();
+  const codeFiles = scanFiles(path.join(root, "src"));
 
-const missingInEn: { key: string; file: string }[] = [];
+  for (const fullPath of codeFiles) {
+    const normFile = fullPath.replaceAll("\\", "/");
+    if (normFile.includes("/src/i18n/") || normFile.includes("/src/locales/")) continue;
 
-for (const [key, file] of usedKeys) {
-  // Allow validations.* shorthand if looked up via helper in schemas.ts
-  const isPresent =
-    enLeaves.has(key) || (file.includes("schemas.ts") && enLeaves.has(`validations.${key}`));
-  if (!isPresent) {
-    missingInEn.push({ key, file });
+    // eslint-disable-next-line security/detect-non-literal-fs-filename -- bounded traversal within src/
+    const content = readFileSync(fullPath, "utf8");
+    for (const match of content.matchAll(/\bt(?:\.raw)?\(\s*["']([\w.]+)["']/g)) {
+      const key = match[1];
+      if (key && !usedKeys.has(key)) {
+        usedKeys.set(key, normFile);
+      }
+    }
   }
-}
 
-if (missingInEn.length > 0) {
-  hasError = true;
-  console.error(
-    `\n❌ Found ${missingInEn.length} translation keys used in code but missing from EN dictionary:`,
-  );
-  for (const { key, file } of missingInEn) {
-    console.error(`  • ${key} (in ${file})`);
+  console.log(`[i18n-check] Found ${usedKeys.size} distinct static translation keys in code.`);
+
+  const missingInEn: { key: string; file: string }[] = [];
+  for (const [key, file] of usedKeys) {
+    if (!enLeaves.has(key)) {
+      missingInEn.push({ key, file });
+    }
   }
-}
 
-if (hasError) {
-  console.error("\n❌ [i18n-check] FAILED. Please fix missing or extra keys.");
-  process.exit(1);
-} else {
-  // Regenerate client-data.ts automatically to ensure sync
-  try {
-    const pick = (d: any) => ({
-      booking: d.booking,
-      calendar: d.calendar,
-      contact: { form: d.contact?.form },
-      footer: {
-        newsletter: d.footer?.newsletter,
-        newsletterDescription: d.footer?.newsletterDescription,
-        newsletterCloseAria: d.footer?.newsletterCloseAria,
-        newsletterAria: d.footer?.newsletterAria,
-        newsletterNameLabel: d.footer?.newsletterNameLabel,
-        newsletterNamePlaceholder: d.footer?.newsletterNamePlaceholder,
-        newsletterInputAria: d.footer?.newsletterInputAria,
-        newsletterPlaceholder: d.footer?.newsletterPlaceholder,
-        newsletterStatus: d.footer?.newsletterStatus,
-        newsletterSubscribe: d.footer?.newsletterSubscribe,
-        newsletterButtonAria: d.footer?.newsletterButtonAria,
-        newsletterSuccess: d.footer?.newsletterSuccess,
-        newsletterFailure: d.footer?.newsletterFailure,
-        newsletterCaptchaError: d.footer?.newsletterCaptchaError,
-        newsletterNetwork: d.footer?.newsletterNetwork,
-        social: d.footer?.social,
-        socialAria: d.footer?.socialAria,
-      },
-      video: d.video,
-      validations: d.validations,
-    });
-    const clientData = {
-      en: pick(dictionaries.en),
-      fr: pick(dictionaries.fr),
-      de: pick(dictionaries.de),
-      es: pick(dictionaries.es),
-    };
-    writeFileSync(
-      join(root, "src/i18n/client-data.ts"),
-      `export const clientUi = ${JSON.stringify(clientData, null, 2)} as const;\n`,
-      "utf8",
+  if (missingInEn.length > 0) {
+    hasError = true;
+    console.error(
+      `\n❌ Found ${missingInEn.length} translation keys used in code but missing from EN dictionary:`,
     );
-    console.log("⚡ [i18n-check] Synced src/i18n/client-data.ts with latest locale keys.");
-  } catch (error) {
-    console.warn("⚠️ [i18n-check] Could not auto-sync client-data.ts:", error);
+    for (const { key, file } of missingInEn) {
+      console.error(`  • ${key} (in ${file})`);
+    }
+  }
+
+  if (hasError) {
+    console.error("\n❌ [i18n-check] FAILED. Please fix missing or extra keys.");
+    process.exitCode = 1;
+    return;
   }
 
   console.log("\n✅ [i18n-check] All keys in sync and verified.");
 }
+
+main();

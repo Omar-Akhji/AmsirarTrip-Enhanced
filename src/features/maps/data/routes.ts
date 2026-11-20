@@ -658,7 +658,7 @@ const EXCURSIONS_CONFIG: Record<string, TourRouteConfig> = {
       {
         key: "marrakech",
         name: "Marrakech",
-        dayOrTime: "18:30 PM",
+        dayOrTime: "06:30 PM",
         description: "Return drop-off in Marrakech",
         type: "end",
       },
@@ -692,7 +692,7 @@ const EXCURSIONS_CONFIG: Record<string, TourRouteConfig> = {
       {
         key: "marrakech",
         name: "Marrakech",
-        dayOrTime: "19:00 PM",
+        dayOrTime: "07:00 PM",
         description: "Return transfer to your accommodation",
         type: "end",
       },
@@ -706,7 +706,7 @@ const EXCURSIONS_CONFIG: Record<string, TourRouteConfig> = {
         key: "marrakech",
         name: "Marrakech",
         dayOrTime: "08:00 AM",
-        description: "Morning pickup towards High Atlas Mountains",
+        description: "Pickup heading south towards the High Atlas Mountains",
         type: "start",
       },
       {
@@ -733,7 +733,7 @@ const EXCURSIONS_CONFIG: Record<string, TourRouteConfig> = {
       {
         key: "marrakech",
         name: "Marrakech",
-        dayOrTime: "17:00 PM",
+        dayOrTime: "05:00 PM",
         description: "Descent and return to Marrakech",
         type: "end",
       },
@@ -767,7 +767,7 @@ const EXCURSIONS_CONFIG: Record<string, TourRouteConfig> = {
       {
         key: "marrakech",
         name: "Marrakech",
-        dayOrTime: "16:30 PM",
+        dayOrTime: "04:30 PM",
         description: "Relaxed afternoon return to Marrakech",
         type: "end",
       },
@@ -780,28 +780,28 @@ const EXCURSIONS_CONFIG: Record<string, TourRouteConfig> = {
       {
         key: "marrakech",
         name: "Marrakech",
-        dayOrTime: "15:30 PM",
+        dayOrTime: "03:30 PM",
         description: "Afternoon hotel pickup in 4x4 or private van",
         type: "start",
       },
       {
         key: "lallatakerkoust",
         name: "Lalla Takerkoust Lake",
-        dayOrTime: "16:15 PM",
+        dayOrTime: "04:15 PM",
         description: "Scenic reservoir view against Atlas backdrop",
         type: "waypoint",
       },
       {
         key: "agafay",
         name: "Agafay Desert Camp",
-        dayOrTime: "17:00 PM",
+        dayOrTime: "05:00 PM",
         description: "Sunset camel ride, candlelit dinner & campfire music",
         type: "highlight",
       },
       {
         key: "marrakech",
         name: "Marrakech",
-        dayOrTime: "22:00 PM",
+        dayOrTime: "10:00 PM",
         description: "Comfortable night transfer back to Marrakech",
         type: "end",
       },
@@ -845,33 +845,49 @@ const EXCURSIONS_CONFIG: Record<string, TourRouteConfig> = {
 
 const MARRAKECH_DEFAULT: [number, number] = [31.6295, -7.9811];
 
-function buildGoogleMapsUrls(waypoints: readonly RouteWaypoint[]): {
+const MOROCCO_ROUTABLE_PLACES: Record<string, string> = {
+  alnif: "Alnif, Morocco",
+  benimellal: "Beni Mellal, Morocco",
+  chegaga: "Mhamid, Morocco",
+  essaouira: "Essaouira, Morocco",
+  foumzguid: "Foum Zguid, Morocco",
+  ifrane: "Ifrane, Morocco",
+  imlil: "Imlil, Morocco",
+  merzouga: "Merzouga, Morocco",
+  mhamid: "Mhamid, Morocco",
+  palmeraie: "Palmeraie, Marrakech, Morocco",
+  volubilis: "Volubilis, Morocco",
+};
+
+function buildGoogleMapsUrls(configWaypoints: TourRouteConfig["waypoints"]): {
   embedUrl: string;
   appUrl: string;
 } {
-  const firstWp = waypoints.at(0);
-  if (!firstWp) {
+  const stops = configWaypoints
+    .map((w) => MOROCCO_ROUTABLE_PLACES[w.key] ?? `${w.name}, Morocco`)
+    .filter((place, i, arr) => i === 0 || place !== arr[i - 1]);
+
+  const firstStop = stops.at(0);
+  if (!firstStop) {
     return {
       embedUrl: "https://www.google.com/maps?q=Marrakech,Morocco&output=embed",
       appUrl: "https://www.google.com/maps",
     };
   }
 
-  const originName = `${firstWp.name}, Morocco`;
-  const saddr = encodeURIComponent(originName);
+  const saddr = encodeURIComponent(firstStop);
 
-  if (waypoints.length === 1) {
+  if (stops.length === 1) {
     return {
       embedUrl: `https://www.google.com/maps?q=${saddr}&output=embed`,
       appUrl: `https://www.google.com/maps/search/?api=1&query=${saddr}`,
     };
   }
 
-  const destinationWaypoints = waypoints.slice(1).map((w) => `${w.name}, Morocco`);
-  const daddr = encodeURIComponent(destinationWaypoints.join(" to: "));
-  const embedUrl = `https://www.google.com/maps?saddr=${saddr}&daddr=${daddr}&output=embed`;
+  const daddr = encodeURIComponent(stops.slice(1).join(" to: "));
+  const embedUrl = `https://www.google.com/maps?saddr=${saddr}&daddr=${daddr}&dirflg=d&output=embed`;
 
-  const appWaypointsPath = waypoints.map((w) => encodeURIComponent(`${w.name}, Morocco`)).join("/");
+  const appWaypointsPath = stops.map((stop) => encodeURIComponent(stop)).join("/");
   const appUrl = `https://www.google.com/maps/dir/${appWaypointsPath}`;
 
   return { embedUrl, appUrl };
@@ -884,7 +900,7 @@ function buildRouteMap(
   cities: Pick<RouteMapData, "startCity" | "endCity">,
   waypoints: RouteWaypoint[],
 ): RouteMapData {
-  const { embedUrl, appUrl } = buildGoogleMapsUrls(waypoints);
+  const { embedUrl, appUrl } = buildGoogleMapsUrls(config.waypoints);
   return {
     id: `map-${normalizedKey}`,
     title: `${title} - Route Map`,

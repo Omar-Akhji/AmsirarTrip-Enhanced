@@ -1,16 +1,11 @@
-import type Lenis from "lenis";
-
-function toLength(value: string | number): string {
-  return typeof value === "number" ? `${value}px` : value;
-}
-
 function resolveOffset(value: string | number, size: number): number {
   if (typeof value === "number") return value;
   const text = value.trim();
   if (text.endsWith("%")) {
     return (Number(text.slice(0, -1)) / 100) * size;
   }
-  const parsed = Number(text);
+  const normalized = text.endsWith("px") ? text.slice(0, -2) : text;
+  const parsed = Number(normalized);
   return Number.isNaN(parsed) ? 0 : parsed;
 }
 
@@ -18,14 +13,12 @@ function setupScrollStack(element: HTMLElement): (() => void) | null {
   const inner = element.querySelector<HTMLElement>(".scroll-stack-inner");
   if (!inner) return null;
 
-  const end = element.querySelector<HTMLElement>(".scroll-stack-end");
   const slots = [...inner.querySelectorAll<HTMLElement>(":scope > [data-stack-slot]")];
   if (slots.length === 0) return null;
 
   const windowed = element.dataset["windowScroll"] !== "false";
   const target: EventTarget = windowed ? globalThis : element;
 
-  const itemDistance = Number(element.dataset["itemDistance"] ?? "100");
   const itemStackDistance = Number(element.dataset["itemStackDistance"] ?? "24");
   const stackPosition = element.dataset["stackPosition"] ?? "84px";
   const itemScale = Number(element.dataset["itemScale"] ?? "0.045");
@@ -34,27 +27,10 @@ function setupScrollStack(element: HTMLElement): (() => void) | null {
   const blurAmount = Number(element.dataset["blurAmount"] ?? "0.8");
   const tiltAmount = Number(element.dataset["tiltAmount"] ?? "2");
   const rotationAmount = Number(element.dataset["rotationAmount"] ?? "1.5");
-  const holdDistance = Number(element.dataset["holdDistance"] ?? "200");
 
   const prefersReduced =
     typeof window !== "undefined"
     && globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  const total = slots.length;
-  for (const [index, slot] of slots.entries()) {
-    slot.style.position = "sticky";
-    slot.style.top = `calc(${toLength(stackPosition)} + ${index * itemStackDistance}px)`;
-    slot.style.marginBottom = `${(total - 1 - index) * itemStackDistance}px`;
-    slot.style.zIndex = String(index + 1);
-    if (index === 0) continue;
-
-    const gap = itemDistance - (total - index) * itemStackDistance;
-    slot.style.marginTop = `${Math.max(16, gap)}px`;
-  }
-
-  if (end) {
-    end.style.height = `${holdDistance}px`;
-  }
 
   const cache = new Map<string, string | number>();
   let rafId: number | null = null;
@@ -130,10 +106,6 @@ function setupScrollStack(element: HTMLElement): (() => void) | null {
     rafId ??= globalThis.requestAnimationFrame(updateCardTransforms);
   };
 
-  const lenis = (globalThis as unknown as { __lenis?: Lenis }).__lenis;
-  if (lenis) {
-    lenis.on("scroll", schedule);
-  }
   target.addEventListener("scroll", schedule, { passive: true });
   globalThis.addEventListener("resize", schedule, { passive: true });
 
@@ -150,9 +122,6 @@ function setupScrollStack(element: HTMLElement): (() => void) | null {
     resizeObserver.disconnect();
     target.removeEventListener("scroll", schedule);
     globalThis.removeEventListener("resize", schedule);
-    if (lenis) {
-      lenis.off("scroll", schedule);
-    }
   };
 }
 

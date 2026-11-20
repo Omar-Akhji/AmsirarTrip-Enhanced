@@ -12,11 +12,11 @@ interface BaseProps {
   variant?: ButtonVariant | undefined;
 }
 
-type AnchorProps = HTMLAttributes<"a"> & { href: string; as?: "a" | undefined };
-type NativeButtonProps = HTMLAttributes<"button"> & { href?: never; as?: "button" | undefined };
+type AnchorProps = HTMLAttributes<"a"> & { as?: "a" | undefined; href: string };
+type NativeButtonProps = HTMLAttributes<"button"> & { as?: "button" | undefined; href?: never };
 type ElementProps = HTMLAttributes<"div"> & { as: "div" | "span"; href?: string | undefined };
 
-type Props = BaseProps & (AnchorProps | NativeButtonProps | ElementProps | Record<string, unknown>);
+type Props = BaseProps & (AnchorProps | NativeButtonProps | ElementProps);
 
 const {
   as,
@@ -25,10 +25,9 @@ const {
   class: className,
   type: explicitType,
   ...props
-} = Astro.props as Props;
+} = Astro.props;
 
-const rawProps = props as Record<string, unknown>;
-const isLink = typeof rawProps["href"] === "string" && !as;
+const isLink = "href" in props && typeof props.href === "string" && !as;
 const Tag = as || (isLink ? "a" : "button");
 const classes = buttonStyles({ variant, size, className });
 

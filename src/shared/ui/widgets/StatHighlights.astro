@@ -8,82 +8,53 @@ interface Props {
   }[];
 }
 
+import { useTranslations } from "@/i18n/utils";
 import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
-import FolderShape from "@/shared/ui/primitives/FolderShape.astro";
+import FolderStack from "@/shared/ui/widgets/FolderStack.astro";
 
 const {
   stats,
   cardBg = "bg-stone-50/80 dark:bg-surface-card/75 dark:border-white/10 dark:shadow-[0_4px_20px_-2px_rgba(0,0,0,0.4)] dark:hover:border-white/20 dark:hover:bg-surface-hover/90",
 } = Astro.props;
+const t = useTranslations(Astro.locals.locale);
 ---
 
 <div class="w-full">
   <!-- Mobile Mode: Folder Stack (matches Home page experience) -->
   <div class="block md:hidden w-full">
-    <stat-highlights-stack class="block relative w-full overflow-x-clip">
-      <!-- Scroll runway -->
-      <div class="stat-highlights-track relative w-full h-auto motion-safe:h-[220vh]">
-        <!-- Pinned Stage -->
-        <div class="stat-highlights-stage static h-auto top-auto select-auto motion-safe:sticky motion-safe:top-18 motion-safe:h-102.5 motion-safe:select-none w-full mx-auto overflow-visible">
-          <!-- Layer 1: Folder Back Plate (z-index: 2, behind the cards) -->
-          <div class="folder-back-plate hidden motion-safe:block absolute inset-x-0 bottom-4 h-66.25 overflow-visible pointer-events-none will-change-transform z-2 opacity-0 drop-shadow-[0_12px_24px_rgba(0,0,0,0.5)]">
-            <FolderShape
-              id="highlights-back"
-              variant="back"
-            />
+    <FolderStack idPrefix="highlights">
+      {stats.map((stat, index) => (
+        <article
+          class:list={[
+            "stat-card relative flex h-55 w-full flex-col justify-between rounded-2xl border border-stone-200/90",
+            cardBg,
+            "p-5 sm:p-6 shadow-xl shadow-stone-900/10 backdrop-blur-xs transition-shadow duration-300",
+          ]}
+          slot={`card-${index}`}
+        >
+          <div>
+            <div class="mbe-3.5 flex items-center justify-between border-b border-stone-100 pb-2.5 text-[0.6875rem] font-mono uppercase tracking-wider text-stone-400 dark:border-white/10 dark:text-mist-400">
+              <span class="font-semibold text-stone-600 dark:text-mist-200">
+                {t("statsMeta.standard")}
+              </span>
+              <span class="text-stone-600 dark:text-mist-300">{t("statsMeta.verified")}</span>
+            </div>
+            <data
+              class="text-4xl font-bold tracking-tight text-orange-700 dark:text-orange-400 block tabular-nums"
+              value={stat.value}
+            >
+              {stat.value}
+            </data>
+            <h3 class="mbs-2.5 text-base font-semibold tracking-tight text-stone-900 dark:text-mist-100">
+              {stat.label}
+            </h3>
+            <p class="mbs-1.5 text-xs/relaxed text-stone-600 dark:text-mist-300 line-clamp-2">
+              {stat.description}
+            </p>
           </div>
-
-          <!-- Layer 2: The Cards Stack (z-index: 10, between folder back and front pocket) -->
-          <div class="cards-stack-layer static h-auto flex flex-col gap-5 motion-safe:block motion-safe:absolute motion-safe:inset-x-0 motion-safe:top-2 motion-safe:h-85 motion-safe:will-change-transform motion-safe:z-10 motion-safe:perspective-distant">
-            {stats.map((stat, index) => (
-              <div
-                class:list={[
-                  "stat-card-slot static inset-auto opacity-100 transform-none w-full origin-top motion-safe:absolute motion-safe:inset-x-0 motion-safe:top-0 motion-safe:will-change-transform",
-                  { "z-10": index === 0, "z-12": index === 1, "z-14": index >= 2 },
-                ]}
-                data-stack-card={index}
-              >
-                <article
-                  class:list={[
-                    "stat-card relative flex h-55 w-full flex-col justify-between rounded-2xl border border-stone-200/90",
-                    cardBg,
-                    "p-5 sm:p-6 shadow-xl shadow-stone-900/10 backdrop-blur-xs transition-shadow duration-300",
-                  ]}
-                >
-                  <div>
-                    <div class="mbe-3.5 flex items-center justify-between border-b border-stone-100 pb-2.5 text-[0.6875rem] font-mono uppercase tracking-wider text-stone-400 dark:border-white/10 dark:text-mist-400">
-                      <span class="font-semibold text-stone-600 dark:text-mist-200">Standard</span>
-                      <span class="text-stone-600 dark:text-mist-300">Verified</span>
-                    </div>
-                    <data
-                      class="text-4xl font-bold tracking-tight text-orange-700 dark:text-orange-400 block tabular-nums"
-                      value={stat.value}
-                    >
-                      {stat.value}
-                    </data>
-                    <h3 class="mbs-2.5 text-base font-semibold tracking-tight text-stone-900 dark:text-mist-100">
-                      {stat.label}
-                    </h3>
-                    <p class="mbs-1.5 text-xs/relaxed text-stone-600 dark:text-mist-300 line-clamp-2">
-                      {stat.description}
-                    </p>
-                  </div>
-                </article>
-              </div>
-            ))}
-          </div>
-
-          <!-- Layer 3: Folder Front Pocket (z-index: 25, in front of the cards) -->
-          <!-- Matches reference folder silhouette: tabbed folder with smooth shoulder, no texts, original obsidian palette -->
-          <div class="folder-front-pocket hidden motion-safe:block absolute inset-x-0 bottom-4 h-58.75 overflow-visible pointer-events-none will-change-transform z-25 opacity-0 origin-bottom drop-shadow-[0_-12px_28px_rgba(0,0,0,0.65)]">
-            <FolderShape
-              id="highlights-front"
-              variant="front"
-            />
-          </div>
-        </div>
-      </div>
-    </stat-highlights-stack>
+        </article>
+      ))}
+    </FolderStack>
   </div>
 
   <!-- Desktop & Tablet Mode: Responsive Multi-Column Grid -->
@@ -106,8 +77,10 @@ const {
         >
           <div>
             <div class="mbe-5 flex items-center justify-between border-b border-stone-100 pb-3 text-[0.6875rem] font-mono uppercase tracking-wider text-stone-400 dark:border-white/10 dark:text-mist-400">
-              <span class="font-semibold text-stone-600 dark:text-mist-200">Standard</span>
-              <span class="text-stone-600 dark:text-mist-300">Verified</span>
+              <span class="font-semibold text-stone-600 dark:text-mist-200">
+                {t("statsMeta.standard")}
+              </span>
+              <span class="text-stone-600 dark:text-mist-300">{t("statsMeta.verified")}</span>
             </div>
             <data
               class="text-4xl font-bold tracking-tight text-orange-700 dark:text-orange-400 block"
@@ -127,5 +100,3 @@ const {
     ))}
   </div>
 </div>
-
-<script src="../../../scripts/stat-highlights-stack.ts"></script>

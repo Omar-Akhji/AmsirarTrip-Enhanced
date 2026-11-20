@@ -5,10 +5,7 @@ console.info("Starting production server on port 4322...");
 
 // Start the server
 process.env["PORT"] = "4322";
-const server: ChildProcess = spawn("node", ["./dist/server/entry.mjs"], {
-  env: process.env,
-  shell: true,
-});
+const server: ChildProcess = spawn("node", ["./dist/server/entry.mjs"], { env: process.env });
 
 server.stdout?.on("data", (data: Buffer | string) => {
   console.info(`[Server]: ${data.toString().trim()}`);
@@ -22,7 +19,7 @@ server.stderr?.on("data", (data: Buffer | string) => {
 async function runLighthouse(args: string[]): Promise<number | null> {
   return new Promise((resolve) => {
     console.info(`Running Lighthouse with args: ${args.join(" ")}`);
-    const lighthouse = spawn("npx", ["lighthouse", ...args], { shell: true, stdio: "inherit" });
+    const lighthouse = spawn("bunx", ["lighthouse", ...args], { stdio: "inherit" });
 
     lighthouse.on("close", (code) => {
       resolve(code);

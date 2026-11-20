@@ -8,6 +8,7 @@ import { getToursData } from "../../../features/tours/data/tours-data";
 import { getTourLocalizedSeo } from "../../../features/tours/data/tour-localized-seo";
 import { useTranslations } from "../../../i18n/utils";
 import Layout from "../../../layouts/Layout.astro";
+import { getBookingFormCopy } from "../../../lib/form-copy";
 import {
   generateBreadcrumbJsonLd,
   generateFaqJsonLd,
@@ -25,7 +26,7 @@ const tourEntry =
 if (!tourEntry) {
   Astro.cache.set(false);
   Astro.response.status = 404;
-  return Astro.rewrite(locale === "en" ? "/404" : `/${locale}/404`);
+  return Astro.rewrite("/404");
 }
 
 const tour = tourEntry.data;
@@ -137,6 +138,7 @@ const relatedTours = allTours
     <div data-animate="card-fan-rise">
       <BookingForm
         client:visible
+        copy={getBookingFormCopy(t)}
         fullWidth
         locale={locale}
         tourDuration={tour.durationDays}
@@ -180,7 +182,7 @@ const relatedTours = allTours
             {relatedTours.map((item) => (
               <div class="flex size-full">
                 <TripCard
-                  badge={`${item.duration} Days`}
+                  badge={`${item.duration} ${t("tours.days")}`}
                   description={t(item.description)}
                   end={t(item.end)}
                   endLabel={t("tours.endLabelShort")}

@@ -1,43 +1,43 @@
 import type { Tour } from "../types";
 import { getCollection } from "astro:content";
 
-/**
- * Derives UI-ready tour data from Astro Content Collections. Replaces the old hardcoded TOURS_DATA
- * array — single source of truth.
- *
- * Usage in .astro files (top-level await is fine): const tours = await getToursData();
- *
- * Usage in .vue files (use inside async setup() or fetch on mount): const tours = await
- * getToursData();
- */
+let cachedToursPromise: Promise<Tour[]> | undefined;
+
+async function loadTours(): Promise<Tour[]> {
+  try {
+    const entries = await getCollection("tours");
+    return entries
+      .map((entry) => {
+        const { bookingId, tourKey, image, durationDays, startLocation, endLocation } = entry.data;
+        const start = startLocation.toLowerCase();
+        const end = endLocation.toLowerCase();
+
+        return {
+          id: bookingId,
+          image,
+          title: `${tourKey}.title`,
+          author: `tours.cities.${start}`,
+          category: "tours",
+          description: `tours.${tourKey}.description`,
+          duration: durationDays,
+          start: `tours.cities.${start}`,
+          startLocation: start,
+          route: `/tours/${entry.id}`,
+          end: `tours.cities.${end}`,
+        } satisfies Tour;
+      })
+      .toSorted((a, b) => a.id - b.id);
+  } catch (error: unknown) {
+    cachedToursPromise = undefined;
+    throw error;
+  }
+}
+
+/** Derives UI-ready tour data from Astro Content Collections (memoized in production). */
 export async function getToursData(): Promise<Tour[]> {
-  const entries = await getCollection("tours");
-
-  return entries
-    .map((entry) => {
-      const { bookingId, tourKey, image, durationDays, startLocation, endLocation } = entry.data;
-
-      // i18n keys matching the locale JSON structure: tours.tour1.title, tours.tour1.description
-      const titleKey = `${tourKey}.title`;
-      const descriptionKey = `tours.${tourKey}.description`;
-      // Author = start city shown in card
-      const authorKey = `tours.cities.${startLocation.toLowerCase()}`;
-      const startKey = `tours.cities.${startLocation.toLowerCase()}`;
-      const endKey = `tours.cities.${endLocation.toLowerCase()}`;
-
-      return {
-        id: bookingId,
-        image,
-        title: titleKey,
-        author: authorKey,
-        category: "tours",
-        description: descriptionKey,
-        duration: durationDays,
-        start: startKey,
-        startLocation: startLocation.toLowerCase(),
-        route: `/tours/${entry.id}`,
-        end: endKey,
-      } satisfies Tour;
-    })
-    .toSorted((a, b) => a.id - b.id);
+  if (!import.meta.env.PROD) {
+    return loadTours();
+  }
+  cachedToursPromise ??= loadTours();
+  return cachedToursPromise;
 }

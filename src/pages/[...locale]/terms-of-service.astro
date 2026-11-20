@@ -1,6 +1,6 @@
 ---
 import { getRelativeLocaleUrl } from "astro:i18n";
-import TermsView from "../../features/legal/components/TermsView.astro";
+import LegalDocumentView from "../../features/legal/components/LegalDocumentView.astro";
 import { useTranslations } from "../../i18n/utils";
 import Layout from "../../layouts/Layout.astro";
 import { generateBreadcrumbJsonLd } from "../../lib/structured-data";
@@ -26,5 +26,5 @@ const breadcrumbJsonLd = generateBreadcrumbJsonLd([
     data={breadcrumbJsonLd}
     id="terms-breadcrumb-jsonld"
   />
-  <TermsView />
+  <LegalDocumentView doc="terms-of-service" />
 </Layout>

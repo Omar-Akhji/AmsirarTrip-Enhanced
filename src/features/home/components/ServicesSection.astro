@@ -7,7 +7,7 @@ import StreetsNavigationIcon from "@/shared/ui/icons/StreetsNavigationIcon.astro
 import { Image } from "astro:assets";
 import ServicesSideScroll from "./ServicesSideScroll.astro";
 
-const locale = Astro.currentLocale || "en";
+const locale = Astro.locals.locale;
 const t = useTranslations(locale);
 
 const services = [
@@ -45,10 +45,10 @@ const subtitle = subtitleMap[locale] ?? subtitleMap["en"] ?? defaultSubtitle;
 >
   {/* Fixed background image: stays motionless in viewport while scrolling through section on mobile */}
   <div class="pointer-events-none absolute inset-0 [clip-path:inset(0)]">
-    <div class="sticky top-0 h-screen w-full md:static md:h-full">
+    <div class="sticky top-0 h-dvh w-full md:static md:h-full">
       <Image
         alt=""
-        class="h-screen w-full object-cover md:h-full"
+        class="h-dvh w-full object-cover md:h-full"
         decoding="async"
         height={1080}
         loading="lazy"

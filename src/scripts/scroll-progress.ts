@@ -44,12 +44,7 @@ function setupScrollProgress(): void {
       const doc = document.documentElement;
       const targetScroll = ratio * (doc.scrollHeight - window.innerHeight);
       const prefersReduced = globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-      if (globalThis.__lenis) {
-        globalThis.__lenis.scrollTo(targetScroll);
-      } else {
-        window.scrollTo({ top: targetScroll, behavior: prefersReduced ? "auto" : "smooth" });
-      }
+      window.scrollTo({ top: targetScroll, behavior: prefersReduced ? "auto" : "smooth" });
     });
   }
 
@@ -62,9 +57,6 @@ function setupScrollProgress(): void {
 
   window.removeEventListener("resize", onScroll);
   window.addEventListener("resize", onScroll, { passive: true });
-
-  globalThis.__lenis?.off("scroll", onScroll);
-  globalThis.__lenis?.on("scroll", onScroll);
 }
 
 document.addEventListener("astro:page-load", setupScrollProgress);

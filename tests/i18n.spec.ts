@@ -50,4 +50,12 @@ test.describe("i18n routing & document standards", () => {
     // English sentinels should not appear
     expect(content).not.toContain("Alternative Morocco Circuits");
   });
+
+  test("localized missing tour slug preserves locale on 404 rewrite", async ({ page }) => {
+    const response = await page.goto("/fr/tours/non-existent-slug", {
+      waitUntil: "domcontentloaded",
+    });
+    expect(response?.status()).toBe(404);
+    expect(await page.locator("html").getAttribute("lang")).toBe("fr");
+  });
 });

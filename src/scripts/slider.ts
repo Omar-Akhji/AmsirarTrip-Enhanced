@@ -1,18 +1,22 @@
-/**
- * Interactive Slider Controller Inspired by Lun Dev Magic 3D Carousel Slider Implements fluid
- * thumbnail expansion, bidirectional animation, touch gestures, keyboard controls, and accessible
- * lifecycle management.
- */
+/** Interactive Hero 3D Clip-Path Carousel Controller. */
 
-import { isSkeletonActive } from "./transitions";
+function parseCssDurationMs(element: HTMLElement, property: string, fallbackMs: number): number {
+  const raw = getComputedStyle(element).getPropertyValue(property).trim();
+  if (!raw) return fallbackMs;
+  if (raw.endsWith("ms")) {
+    const parsed = Number(raw.slice(0, -2));
+    return Number.isNaN(parsed) ? fallbackMs : parsed;
+  }
+  if (raw.endsWith("s")) {
+    const parsed = Number(raw.slice(0, -1)) * 1000;
+    return Number.isNaN(parsed) ? fallbackMs : parsed;
+  }
+  return fallbackMs;
+}
 
 function initSlider(): void {
   const rootSlider = document.querySelector<HTMLElement>("#home-hero-slider");
-  if (
-    !rootSlider
-    || rootSlider.id === "home-hero-slider-skeleton"
-    || rootSlider.dataset["sliderInitialized"] === "true"
-  ) {
+  if (!rootSlider || rootSlider.dataset["sliderInitialized"] === "true") {
     return;
   }
 
@@ -22,39 +26,13 @@ function initSlider(): void {
   if (!rootList || !rootThumb) return;
   rootSlider.dataset["sliderInitialized"] = "true";
 
-  const slider: HTMLElement = rootSlider;
-  const sliderList: HTMLElement = rootList;
-  const thumbnail: HTMLElement = rootThumb;
-
-  const nextBtn = slider.querySelector<HTMLButtonElement>(".next");
-  const prevBtn = slider.querySelector<HTMLButtonElement>(".prev");
-  const progressBar = slider.querySelector<HTMLElement>("#slider-progress-bar");
-  const numberItems = slider.querySelectorAll<HTMLElement>(":scope .slide-numbers .number-item");
-  const totalSlides = sliderList.querySelectorAll<HTMLElement>(":scope > .item").length || 3;
+  const slider = rootSlider;
+  const sliderList = rootList;
+  const thumbnail = rootThumb;
 
   let pendingTargetIndex: number | null = null;
 
-  function updatePagination(forcedIndex?: number): void {
-    let activeIndex: number;
-    if (typeof forcedIndex === "number") {
-      activeIndex = forcedIndex;
-    } else {
-      const activeItem = sliderList.querySelector<HTMLElement>(":scope > .item:first-child");
-      const activeIndexStr = activeItem?.dataset["index"];
-      activeIndex = activeIndexStr ? Number(activeIndexStr) : 0;
-    }
-
-    if (progressBar) {
-      const percentage = ((activeIndex + 1) / totalSlides) * 100;
-      progressBar.style.width = `${percentage}%`;
-    }
-
-    for (const [index, el] of numberItems.entries()) {
-      el.classList.toggle("active", index === activeIndex);
-    }
-  }
-
-  // Re-order initial thumbnail by 1 step so that thumbnail list displays the upcoming slide first
+  // Offset thumbnail list by 1 so the upcoming slide appears first.
   const initialThumbnails = thumbnail.querySelectorAll<HTMLElement>(":scope > .item");
   if (initialThumbnails.length > 0 && !slider.dataset["offsetApplied"]) {
     const firstThumb = initialThumbnails[0];
@@ -64,10 +42,45 @@ function initSlider(): void {
     }
   }
 
-  updatePagination();
-
   let isAnimating = false;
   let autoplayTimer: ReturnType<typeof setInterval> | undefined;
+  let activeSafetyTimer: ReturnType<typeof setTimeout> | undefined;
+
+  function scheduleCompletion(
+    animatedImg: HTMLImageElement | null,
+    expectedAnimation: string,
+    onDone: () => void,
+  ): void {
+    let completed = false;
+    const finish = () => {
+      if (completed) return;
+      completed = true;
+      clearTimeout(activeSafetyTimer);
+      animatedImg?.removeEventListener("animationend", onAnimationEnd);
+      onDone();
+    };
+
+    const onAnimationEnd = (event: AnimationEvent) => {
+      if (event.animationName === expectedAnimation) {
+        finish();
+      }
+    };
+
+    animatedImg?.addEventListener("animationend", onAnimationEnd);
+    const durationMs = parseCssDurationMs(slider, "--hero-duration", 750);
+    activeSafetyTimer = setTimeout(finish, durationMs + 50);
+  }
+
+  function flushPendingTarget(): void {
+    if (pendingTargetIndex === null) return;
+    const nextTarget = pendingTargetIndex;
+    pendingTargetIndex = null;
+    const currentActive = sliderList.querySelector<HTMLElement>(":scope > .item:first-child");
+    const currentIndex = Number(currentActive?.dataset["index"] ?? 0);
+    if (nextTarget !== currentIndex) {
+      goToSlide(nextTarget);
+    }
+  }
 
   function moveSlider(direction: "next" | "prev"): void {
     if (isAnimating) return;
@@ -97,14 +110,8 @@ function initSlider(): void {
       firstThumb.classList.add("is-expanding");
       slider.classList.add("is-next");
 
-      const nextIndex = Number(incomingSlide.dataset["index"] ?? 0);
-      updatePagination(nextIndex);
-
-      let cleanedUp = false;
-      const finalizeNext = () => {
-        if (cleanedUp) return;
-        cleanedUp = true;
-
+      const animatedImg = incomingSlide.querySelector<HTMLImageElement>("img");
+      scheduleCompletion(animatedImg, "heroShowImageClip", () => {
         sliderList.append(activeSlide);
         thumbnail.append(firstThumb);
 
@@ -114,19 +121,8 @@ function initSlider(): void {
         slider.classList.remove("is-next");
 
         isAnimating = false;
-
-        if (pendingTargetIndex !== null) {
-          const nextTarget = pendingTargetIndex;
-          pendingTargetIndex = null;
-          const currentActive = sliderList.querySelector<HTMLElement>(":scope > .item:first-child");
-          const currentIndex = Number(currentActive?.dataset["index"] ?? 0);
-          if (nextTarget !== currentIndex) {
-            goToSlide(nextTarget);
-          }
-        }
-      };
-
-      setTimeout(finalizeNext, 760);
+        flushPendingTarget();
+      });
     } else {
       const lastSlide = currentSliderItems[currentSliderItems.length - 1];
       const lastThumb = currentThumbnailItems[currentThumbnailItems.length - 1];
@@ -143,14 +139,8 @@ function initSlider(): void {
       lastSlide.classList.add("is-incoming");
       slider.classList.add("is-prev");
 
-      const prevIndex = Number(lastSlide.dataset["index"] ?? 0);
-      updatePagination(prevIndex);
-
-      let cleanedUp = false;
-      const finalizePrev = () => {
-        if (cleanedUp) return;
-        cleanedUp = true;
-
+      const animatedImg = activeSlide.querySelector<HTMLImageElement>("img");
+      scheduleCompletion(animatedImg, "heroHideImageClip", () => {
         thumbnail.prepend(lastThumb);
         lastThumb.style.opacity = "";
 
@@ -159,19 +149,8 @@ function initSlider(): void {
         slider.classList.remove("is-prev");
 
         isAnimating = false;
-
-        if (pendingTargetIndex !== null) {
-          const nextTarget = pendingTargetIndex;
-          pendingTargetIndex = null;
-          const currentActive = sliderList.querySelector<HTMLElement>(":scope > .item:first-child");
-          const currentIndex = Number(currentActive?.dataset["index"] ?? 0);
-          if (nextTarget !== currentIndex) {
-            goToSlide(nextTarget);
-          }
-        }
-      };
-
-      setTimeout(finalizePrev, 760);
+        flushPendingTarget();
+      });
     }
   }
 
@@ -190,24 +169,6 @@ function initSlider(): void {
     clearInterval(autoplayTimer);
     autoplayTimer = undefined;
   }
-
-  // Button clicks
-  const onNextClick = (e: MouseEvent) => {
-    e.preventDefault();
-    stopAutoplay();
-    moveSlider("next");
-    startAutoplay();
-  };
-
-  const onPrevClick = (e: MouseEvent) => {
-    e.preventDefault();
-    stopAutoplay();
-    moveSlider("prev");
-    startAutoplay();
-  };
-
-  nextBtn?.addEventListener("click", onNextClick);
-  prevBtn?.addEventListener("click", onPrevClick);
 
   function goToSlide(targetIndex: number): void {
     if (isAnimating) return;
@@ -228,48 +189,33 @@ function initSlider(): void {
 
     if (targetIndex > activeIndex) {
       const steps = targetIndex - activeIndex;
-      if (steps === 1) {
-        moveSlider("next");
-      } else {
-        // Multi-step forward: bring target slide right behind active slide
+      if (steps > 1) {
         for (let i = 0; i < steps - 1; i++) {
           const intermediateSlide = sliderList.querySelector<HTMLElement>(
             ":scope > .item:nth-child(2)",
           );
           const firstThumb = thumbnail.querySelector<HTMLElement>(":scope > .item");
-          if (intermediateSlide) {
-            sliderList.append(intermediateSlide);
-          }
-          if (firstThumb) {
-            thumbnail.append(firstThumb);
-          }
+          if (intermediateSlide) sliderList.append(intermediateSlide);
+          if (firstThumb) thumbnail.append(firstThumb);
         }
-        moveSlider("next");
       }
+      moveSlider("next");
     } else {
       const steps = activeIndex - targetIndex;
-      if (steps === 1) {
-        moveSlider("prev");
-      } else {
-        // Multi-step backward: bring target slide to the end so moveSlider("prev") prepends it
+      if (steps > 1) {
         for (let i = 0; i < steps - 1; i++) {
           const lastSlide = sliderList.querySelector<HTMLElement>(":scope > .item:last-child");
           const lastThumb = thumbnail.querySelector<HTMLElement>(":scope > .item:last-child");
-          if (lastSlide) {
-            sliderList.prepend(lastSlide);
-          }
-          if (lastThumb) {
-            thumbnail.prepend(lastThumb);
-          }
+          if (lastSlide) sliderList.prepend(lastSlide);
+          if (lastThumb) thumbnail.prepend(lastThumb);
         }
-        moveSlider("prev");
       }
+      moveSlider("prev");
     }
 
     startAutoplay();
   }
 
-  // Thumbnail direct click & multi-slide navigation
   const onThumbnailClick = (e: MouseEvent) => {
     const target = (e.target as HTMLElement).closest<HTMLElement>(".item");
     if (!target || isAnimating) return;
@@ -282,13 +228,11 @@ function initSlider(): void {
       return;
     }
 
-    const idx = Number(targetIndexStr);
-    goToSlide(idx);
+    goToSlide(Number(targetIndexStr));
   };
 
   thumbnail.addEventListener("click", onThumbnailClick);
 
-  // Keyboard navigation
   const onKeyDown = (e: KeyboardEvent) => {
     if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) {
       return;
@@ -306,14 +250,12 @@ function initSlider(): void {
 
   globalThis.addEventListener("keydown", onKeyDown);
 
-  // Touch swipe support
   let touchStartX = 0;
   let touchStartY = 0;
 
   const onTouchStart = (e: TouchEvent) => {
     const touch = e.changedTouches[0];
     if (!touch) return;
-
     touchStartX = touch.screenX;
     touchStartY = touch.screenY;
   };
@@ -336,34 +278,17 @@ function initSlider(): void {
 
   slider.addEventListener("touchstart", onTouchStart, { passive: true });
   slider.addEventListener("touchend", onTouchEnd, { passive: true });
-
-  // Autoplay pause on hover / focus
   slider.addEventListener("mouseenter", stopAutoplay);
   slider.addEventListener("mouseleave", startAutoplay);
   slider.addEventListener("focusin", stopAutoplay);
   slider.addEventListener("focusout", startAutoplay);
 
-  let pendingReadyStart: (() => void) | undefined;
-  if (isSkeletonActive()) {
-    pendingReadyStart = () => {
-      pendingReadyStart = undefined;
-      startAutoplay();
-    };
-    globalThis.addEventListener("amsirar:page-ready", pendingReadyStart, { once: true });
-  } else {
-    startAutoplay();
-  }
+  startAutoplay();
 
-  // Clean up on Astro page transition
   const cleanup = () => {
-    if (pendingReadyStart) {
-      globalThis.removeEventListener("amsirar:page-ready", pendingReadyStart);
-      pendingReadyStart = undefined;
-    }
+    clearTimeout(activeSafetyTimer);
     delete slider.dataset["sliderInitialized"];
     stopAutoplay();
-    nextBtn?.removeEventListener("click", onNextClick);
-    prevBtn?.removeEventListener("click", onPrevClick);
     thumbnail.removeEventListener("click", onThumbnailClick);
     globalThis.removeEventListener("keydown", onKeyDown);
     slider.removeEventListener("touchstart", onTouchStart);
@@ -378,7 +303,6 @@ function initSlider(): void {
   document.addEventListener("astro:before-swap", cleanup, { once: true });
 }
 
-// Support initial load and Astro client-side navigation
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initSlider);
 } else {

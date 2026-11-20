@@ -1,26 +1,14 @@
 /**
- * Theme Manager for Amsirar Trip Handles light/dark mode with localStorage persistence, system
- * preference sync, Astro View Transitions, and theme-color meta tag updates.
+ * Theme Manager for Amsirar Trip: light/dark persistence, system preference sync, Astro View
+ * Transitions state preservation, and native circular View Transition reveal.
  */
-
-import { InkTransition, type Point } from "./ink/ink-transition";
 
 const STORAGE_KEY = "amsirar-theme";
 
 export type Theme = "light" | "dark";
-
-let inkTransition: InkTransition | null = null;
-
-function getInkTransition(): InkTransition | null {
-  if (inkTransition) {
-    return inkTransition;
-  }
-  const canvas = document.querySelector<HTMLCanvasElement>("#ink-canvas");
-  if (!canvas) {
-    return null;
-  }
-  inkTransition = new InkTransition(canvas);
-  return inkTransition;
+export interface Point {
+  readonly x: number;
+  readonly y: number;
 }
 
 export function getPreferredTheme(): Theme {
@@ -30,7 +18,7 @@ export function getPreferredTheme(): Theme {
       return stored;
     }
   } catch {
-    // localStorage might be unavailable or disabled
+    // localStorage might be unavailable
   }
   return globalThis.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
@@ -42,33 +30,28 @@ export function applyTheme(theme: Theme): void {
   root.classList.toggle("dark", isDark);
   root.style.colorScheme = theme;
 
-  // Update color-scheme meta tag per Modern Web Guidance
   const colorSchemeMeta = document.querySelector<HTMLMetaElement>('meta[name="color-scheme"]');
   if (colorSchemeMeta) {
     colorSchemeMeta.content = theme;
   }
 
-  // Update theme-color meta tag for mobile browsers and PWA chrome
-  const themeColorLight = document.querySelector('meta[name="theme-color"][media*="light"]');
-  const themeColorDark = document.querySelector('meta[name="theme-color"][media*="dark"]');
   const genericThemeColor = document.querySelector('meta[name="theme-color"]:not([media])');
-
   if (genericThemeColor) {
     genericThemeColor.setAttribute("content", isDark ? "#09090b" : "#efefef");
-  } else if (themeColorLight && themeColorDark) {
-    // Both specific tags exist, so mobile browser automatically matches the root color-scheme
   }
 
-  // Update toggle buttons aria-label and state across the page
   const toggles = document.querySelectorAll<HTMLButtonElement>("[data-theme-toggle]");
-  toggles.forEach((btn) => {
+  for (const btn of toggles) {
+    const label =
+      isDark ?
+        (btn.dataset["labelLight"] ?? "Switch to light mode")
+      : (btn.dataset["labelDark"] ?? "Switch to dark mode");
     btn.setAttribute("aria-pressed", isDark ? "true" : "false");
-    btn.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
-    btn.setAttribute("title", isDark ? "Switch to light mode" : "Switch to dark mode");
+    btn.setAttribute("aria-label", label);
+    btn.setAttribute("title", label);
     btn.dataset["theme"] = theme;
-  });
+  }
 
-  // Dispatch custom event for components/canvas/maps that need to react
   globalThis.dispatchEvent(new CustomEvent("theme-change", { detail: { theme } }));
 }
 
@@ -76,21 +59,67 @@ export function setTheme(theme: Theme): void {
   try {
     localStorage.setItem(STORAGE_KEY, theme);
   } catch {
-    // ignore
+    // ignore storage restriction
   }
   applyTheme(theme);
+}
+
+function applyCrossfadeFallback(next: Theme): void {
+  const root = document.documentElement;
+  root.classList.add("theme-fade");
+  setTheme(next);
+  globalThis.setTimeout(() => {
+    root.classList.remove("theme-fade");
+  }, 300);
 }
 
 export function toggleTheme(origin?: Point): Theme {
   const current = document.documentElement.classList.contains("dark") ? "dark" : "light";
   const next: Theme = current === "dark" ? "light" : "dark";
-  const transition = getInkTransition();
+  const reducedMotion = globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  if (transition) {
-    transition.toggle(current, next, setTheme, origin);
-  } else {
-    setTheme(next);
+  if (reducedMotion || typeof document.startViewTransition !== "function") {
+    if (reducedMotion) {
+      setTheme(next);
+    } else {
+      applyCrossfadeFallback(next);
+    }
+    return next;
   }
+
+  const x = origin?.x ?? globalThis.innerWidth / 2;
+  const y = origin?.y ?? globalThis.innerHeight / 2;
+  const maxRadius = Math.hypot(
+    Math.max(x, globalThis.innerWidth - x),
+    Math.max(y, globalThis.innerHeight - y),
+  );
+
+  const root = document.documentElement;
+  root.classList.add("theme-transition");
+
+  const transition = document.startViewTransition(() => {
+    setTheme(next);
+  });
+
+  void transition.ready
+    .then(() => {
+      root.animate(
+        { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${maxRadius}px at ${x}px ${y}px)`] },
+        {
+          duration: 480,
+          easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+          pseudoElement: "::view-transition-new(root)",
+        },
+      );
+    })
+    .catch(() => {
+      // Transition skipped or aborted; theme state is already applied.
+    });
+
+  void transition.finished.finally(() => {
+    root.classList.remove("theme-transition");
+  });
+
   return next;
 }
 
@@ -106,10 +135,9 @@ const handleMediaChange = (e: MediaQueryListEvent): void => {
 };
 
 const handleToggleClick = (e: MouseEvent): void => {
-  const target = (e.target as Element | null)?.closest<HTMLButtonElement>("[data-theme-toggle]");
-  if (!target) {
-    return;
-  }
+  const target =
+    e.target instanceof Element ? e.target.closest<HTMLButtonElement>("[data-theme-toggle]") : null;
+  if (!target) return;
 
   e.preventDefault();
   let origin: Point | undefined;
@@ -127,19 +155,13 @@ const handleToggleClick = (e: MouseEvent): void => {
 let listenersInitialized = false;
 
 function initThemeListeners(): void {
-  if (listenersInitialized) {
-    return;
-  }
+  if (listenersInitialized) return;
   listenersInitialized = true;
 
-  // Listen to OS system preference changes (only applies if user hasn't explicitly set a preference)
-  const mediaQuery = globalThis.matchMedia("(prefers-color-scheme: dark)");
-  mediaQuery.addEventListener("change", handleMediaChange);
-
-  // Bind delegated click handler to document once
+  globalThis
+    .matchMedia("(prefers-color-scheme: dark)")
+    .addEventListener("change", handleMediaChange);
   document.addEventListener("click", handleToggleClick);
-
-  // Sync across tabs
   globalThis.addEventListener("storage", (e) => {
     if (e.key === STORAGE_KEY && (e.newValue === "light" || e.newValue === "dark")) {
       applyTheme(e.newValue);
@@ -147,31 +169,22 @@ function initThemeListeners(): void {
   });
 }
 
-// Preserve theme on incoming document during Astro View Transitions before swap
 document.addEventListener("astro:before-swap", (e: Event) => {
-  const swapEvent = e as unknown as { newDocument?: Document };
-  if (!swapEvent.newDocument) {
-    return;
-  }
+  if (!("newDocument" in e) || !(e.newDocument instanceof Document)) return;
 
   const isDark = getPreferredTheme() === "dark";
-  swapEvent.newDocument.documentElement.classList.toggle("dark", isDark);
-  swapEvent.newDocument.documentElement.style.colorScheme = isDark ? "dark" : "light";
+  e.newDocument.documentElement.classList.toggle("dark", isDark);
+  e.newDocument.documentElement.style.colorScheme = isDark ? "dark" : "light";
 });
 
-// Re-sync theme state after DOM swap
 document.addEventListener("astro:after-swap", () => {
   applyTheme(getPreferredTheme());
 });
 
-// Setup on page load (initial and client-side view transition navigations)
 document.addEventListener("astro:page-load", () => {
   applyTheme(getPreferredTheme());
   initThemeListeners();
-  getInkTransition();
 });
 
-// Immediately initialize on first script run
 applyTheme(getPreferredTheme());
 initThemeListeners();
-getInkTransition();

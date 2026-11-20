@@ -31,7 +31,12 @@
     "about": "Über uns",
     "contact": "Kontakt",
     "toggleMenu": "Navigationsmenü umschalten",
-    "mainAria": "Hauptnavigation"
+    "mainAria": "Hauptnavigation",
+    "skipToContent": "Zum Hauptinhalt springen",
+    "whatsappCta": "Kontaktieren Sie uns über WhatsApp",
+    "themeToggle": "Farbschema wechseln",
+    "switchToDark": "Zum dunklen Modus wechseln",
+    "switchToLight": "Zum hellen Modus wechseln"
   },
   "language": "Sprache",
   "selectLanguage": "Sprache auswählen",
@@ -247,7 +252,17 @@
     },
     "kickerAbout": "Über diese Route",
     "kickerSchedule": "Tagesprogramm",
-    "priceNote": "Privater Transport und lizensierte Guides inbegriffen"
+    "priceNote": "Privater Transport und lizensierte Guides inbegriffen",
+    "filter": {
+      "legend": "Touren nach Abfahrtsort filtern",
+      "label": "Abfahrt:",
+      "allCities": "Alle Städte",
+      "fromMarrakech": "Ab Marrakesch",
+      "fromFes": "Ab Fès",
+      "fromCasablanca": "Ab Casablanca",
+      "fromAgadir": "Ab Agadir",
+      "fromTangier": "Ab Tanger"
+    }
   },
   "excursion": {
     "404": {
@@ -487,6 +502,11 @@
       "placeholderTitle": "Interaktive Karte anzeigen",
       "placeholderDesc": "Unser Büro in Marrakesch auf Google Maps ansehen.",
       "loadBtn": "Karte laden"
+    },
+    "actions": {
+      "chatWhatsapp": "Auf WhatsApp chatten",
+      "sendMessage": "Nachricht senden",
+      "viewOffice": "Bürostandort ansehen"
     }
   },
   "excursion1": {
@@ -1260,7 +1280,8 @@
         "alt": "Melina O. TripAdvisor Bewertung",
         "quote": "So ein wundervolles Erlebnis! Wahnsinnig viele Eindrücke. Ein super Tourguide hat uns viel gezeigt und ständig für Fotos und Aussichtspunkte angehalten."
       }
-    }
+    },
+    "badge": "TRIPADVISOR-BEWERTUNG"
   },
   "footer": {
     "office": "Büro",
@@ -1275,6 +1296,7 @@
     "newsletterCloseAria": "Newsletter-Dialog schließen",
     "newsletterSuccess": "Anmeldung bestätigt. Sie erhalten unsere Reiseinformationen.",
     "newsletterFailure": "Anmeldung fehlgeschlagen. Bitte versuchen Sie es erneut.",
+    "newsletterRateLimited": "Zu viele Anfragen. Bitte versuchen Sie es in ein paar Minuten erneut.",
     "newsletterNetwork": "Netzwerkfehler. Bitte überprüfen Sie Ihre Verbindung.",
     "copyright": "Alle Rechte vorbehalten.",
     "description": "Amsirar Trip ist eine lizenzierte Reiseagentur in Marrakesch (Lizenz Nr. 24/TT/RAK). Wir organisieren private Sahara-Expeditionen, Bergtouren im Atlas und individuelle Marokkoreisen.",
@@ -1288,13 +1310,19 @@
       "instagram": "Instagram",
       "tiktok": "TikTok"
     },
-    "newsletterStatus": "Abonnementstatus"
+    "newsletterStatus": "Abonnementstatus",
+    "captchaNotConfigured": "CAPTCHA nicht konfiguriert"
   },
   "button": "Schaltfläche",
   "locale": "Gebietsschema",
   "script": "Skript",
+  "phoneInput": {
+    "triggerAriaPrefix": "Ausgewählte Ländervorwahl",
+    "listboxAriaPrefix": "Ländervorwahl auswählen",
+    "searchPlaceholder": "Land oder Vorwahl suchen…",
+    "emptySearch": "Keine Länder gefunden"
+  },
   "calendar": {
-    "chooseYear": "Jahr wählen",
     "prevMonth": "Vorheriger Monat",
     "nextMonth": "Nächster Monat",
     "currentDate": "Aktuelles Datum",
@@ -1315,7 +1343,9 @@
     "pause": "Video pausieren",
     "playAria": "Video abspielen",
     "name": "Marokko Sahara-Wüstentouren & Kulturexpeditionen - Amsirar Trip",
-    "description": "Erleben Sie authentische Marokkoreisen: Erg Chebbi-Dünen, Kameltouren zum Sonnenuntergang, Pässe des Hohen Atlas und Königsstädte mit Amsirar Trip."
+    "description": "Erleben Sie authentische Marokkoreisen: Erg Chebbi-Dünen, Kameltouren zum Sonnenuntergang, Pässe des Hohen Atlas und Königsstädte mit Amsirar Trip.",
+    "badge": "Marokko-Reisefilm",
+    "featured": "Empfohlenes Video"
   },
   "booking": {
     "makeReservation": "Buchen Sie Ihre Reservierung",
@@ -1450,7 +1480,11 @@
       }
     },
     "sending": "Wird gesendet...",
-    "errors": { "captcha": "Recaptcha-Überprüfung ist erforderlich" },
+    "success": "Ihre Buchungsanfrage wurde erfolgreich gesendet!",
+    "errors": {
+      "captcha": "Recaptcha-Überprüfung ist erforderlich",
+      "generic": "Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es erneut."
+    },
     "personalDetails": "Angaben zu den Gästen",
     "tripDetails": "Reisedetails",
     "placeholders": {
@@ -1549,6 +1583,21 @@
       "privacyPolicy": "Datenschutzerklärung",
       "termsOfService": "AGB",
       "cookieSettings": "Cookie-Einstellungen"
+    },
+    "ui": {
+      "verifiedPolicy": "Geprüfte Richtlinie",
+      "mobile": "Mobil",
+      "fax": "Fax",
+      "telephone": "Telefon",
+      "emailUs": "E-Mail senden",
+      "chatNow": "Jetzt chatten",
+      "exploreTours": "Marokko-Touren entdecken",
+      "contactTeam": "Unser Team kontaktieren",
+      "cookieTableCaption": "Übersicht der verwendeten Cookies",
+      "privacyBannerTitle": "Marokko mit absolutem Vertrauen entdecken",
+      "privacyBannerDesc": "Von den Dünen von Merzouga bis zu den lebendigen Souks von Marrakesch schützt unser lizenziertes Team Ihre Privatsphäre auf jeder Etappe Ihrer Reise.",
+      "termsBannerTitle": "Bereit, die Wunder Marokkos zu entdecken?",
+      "termsBannerDesc": "Von den Dünen des Erg Chebbi bis in die Königsstädte Fès und Marrakesch plant unser Expertenteam Ihre Reise mit voller Verlässlichkeit."
     }
   },
   "notFound": {
@@ -1594,5 +1643,15 @@
     "optional": "Optional",
     "privacyPolicyLink": "Unsere Datenschutzerklärung lesen",
     "close": "Schließen"
+  },
+  "statsMeta": { "standard": "Standard", "verified": "Geprüft" },
+  "routeMap": {
+    "interactiveMap": "Interaktive Routenkarte",
+    "stops": "Stationen",
+    "exploreBtn": "Routenkarte öffnen",
+    "loadAriaPrefix": "Interaktive Routenkarte laden:",
+    "viewStopsPrefix": "Route ansehen:",
+    "viewStopsSuffix": "Stationen & Zeitplan",
+    "openGoogleMaps": "In Google Maps öffnen"
   }
 }

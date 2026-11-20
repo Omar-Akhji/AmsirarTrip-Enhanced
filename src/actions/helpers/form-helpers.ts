@@ -1,3 +1,6 @@
+import type { FormState } from "@/lib/form-types";
+import { logger } from "@/services/logger";
+
 const LANGUAGE_NAMES: Record<string, string> = {
   en: "English",
   fr: "Français",
@@ -39,7 +42,9 @@ export function getFormString(formData: FormData, key: string): string {
 
 export function getOptionalFormString(formData: FormData, key: string): string | undefined {
   const value = formData.get(key);
-  return typeof value === "string" && value.length > 0 ? value : undefined;
+  if (typeof value !== "string") return undefined;
+  const trimmed = value.trim();
+  return trimmed.length > 0 ? trimmed : undefined;
 }
 
 export function extractZodErrors(
@@ -56,4 +61,13 @@ export function extractZodErrors(
     }
   }
   return errors;
+}
+
+export function createErrorResponse(
+  error: unknown,
+  context: string,
+  genericMessage = "An unexpected error occurred. Please try again.",
+): FormState {
+  logger.error(`${context} error`, error);
+  return { success: false, message: genericMessage };
 }

@@ -31,7 +31,12 @@
     "about": "About",
     "contact": "Contact",
     "toggleMenu": "Toggle navigation menu",
-    "mainAria": "Main Navigation"
+    "mainAria": "Main Navigation",
+    "skipToContent": "Skip to main content",
+    "whatsappCta": "Contact us on WhatsApp",
+    "themeToggle": "Toggle dark mode",
+    "switchToDark": "Switch to dark mode",
+    "switchToLight": "Switch to light mode"
   },
   "language": "Language",
   "selectLanguage": "Select language",
@@ -247,7 +252,17 @@
     "sharedOptionDesc": "Join a small scheduled group of 8-14 travelers with guaranteed departures.",
     "kickerAbout": "About This Route",
     "kickerSchedule": "Daily Schedule",
-    "priceNote": "Private transport and licensed guides included"
+    "priceNote": "Private transport and licensed guides included",
+    "filter": {
+      "legend": "Filter tours by departure city",
+      "label": "Departure:",
+      "allCities": "All Cities",
+      "fromMarrakech": "From Marrakech",
+      "fromFes": "From Fes",
+      "fromCasablanca": "From Casablanca",
+      "fromAgadir": "From Agadir",
+      "fromTangier": "From Tangier"
+    }
   },
   "excursion": {
     "404": {
@@ -487,6 +502,11 @@
       "placeholderTitle": "Show Interactive Map",
       "placeholderDesc": "View our Marrakech office on Google Maps.",
       "loadBtn": "Load Map"
+    },
+    "actions": {
+      "chatWhatsapp": "Chat on WhatsApp",
+      "sendMessage": "Send Us a Message",
+      "viewOffice": "View Office Location"
     }
   },
   "excursion1": {
@@ -1272,7 +1292,8 @@
         "alt": "Melina O. TripAdvisor review",
         "quote": "Such a wonderful experience! An incredible amount of impressions in just a few days. Our tour guide was fantastic, showed us so much along the way, and was always ready to stop for great photos and scenic viewpoints."
       }
-    }
+    },
+    "badge": "TRIPADVISOR REVIEW"
   },
   "footer": {
     "office": "Office",
@@ -1287,6 +1308,7 @@
     "newsletterCloseAria": "Close newsletter dialog",
     "newsletterSuccess": "Subscription confirmed. You will receive our travel guides and special offers.",
     "newsletterFailure": "Failed to subscribe. Please try again.",
+    "newsletterRateLimited": "Too many requests. Please try again in a few minutes.",
     "newsletterNetwork": "Network error. Please check your connection.",
     "copyright": "All rights reserved.",
     "description": "Amsirar Trip is an officially licensed travel agency in Marrakech (License No. 24/TT/RAK). We specialize in private Sahara expeditions, High Atlas treks, and custom routes across Morocco.",
@@ -1300,7 +1322,17 @@
       "instagram": "Instagram",
       "tiktok": "TikTok"
     },
-    "newsletterStatus": "Subscription status"
+    "newsletterStatus": "Subscription status",
+    "captchaNotConfigured": "CAPTCHA not configured"
+  },
+  "calendar": {
+    "prevMonth": "Previous month",
+    "nextMonth": "Next month",
+    "currentDate": "Current Date",
+    "selectedDate": "Selected Date",
+    "today": "Today",
+    "cancel": "Cancel",
+    "apply": "Apply"
   },
   "video": {
     "loading": "Loading video...",
@@ -1314,20 +1346,18 @@
     "pause": "Pause video",
     "playAria": "Play video",
     "name": "Morocco Sahara Desert Tours & Cultural Expeditions - Amsirar Trip",
-    "description": "Discover authentic Morocco travel experiences: Erg Chebbi dunes, camel treks at sunset, High Atlas mountain passes, and historic imperial cities with Amsirar Trip."
+    "description": "Discover authentic Morocco travel experiences: Erg Chebbi dunes, camel treks at sunset, High Atlas mountain passes, and historic imperial cities with Amsirar Trip.",
+    "badge": "Morocco Travel Film",
+    "featured": "Featured Video"
   },
   "button": "Button",
   "locale": "Locale",
   "script": "Script",
-  "calendar": {
-    "chooseYear": "Choose year",
-    "prevMonth": "Previous month",
-    "nextMonth": "Next month",
-    "currentDate": "Current Date",
-    "selectedDate": "Selected Date",
-    "today": "Today",
-    "cancel": "Cancel",
-    "apply": "Apply"
+  "phoneInput": {
+    "triggerAriaPrefix": "Selected country dial code",
+    "listboxAriaPrefix": "Select country phone code",
+    "searchPlaceholder": "Search country or code...",
+    "emptySearch": "No countries found"
   },
   "booking": {
     "makeReservation": "Request a Reservation",
@@ -1450,7 +1480,11 @@
       }
     },
     "sending": "Sending...",
-    "errors": { "captcha": "Recaptcha verification is required" },
+    "success": "Your booking request has been sent successfully!",
+    "errors": {
+      "captcha": "Recaptcha verification is required",
+      "generic": "An unexpected error occurred. Please try again."
+    },
     "personalDetails": "Guest Details",
     "tripDetails": "Trip Details",
     "placeholders": {
@@ -1549,6 +1583,21 @@
       "privacyPolicy": "Privacy Policy",
       "termsOfService": "Terms of Service",
       "cookieSettings": "Cookie Settings"
+    },
+    "ui": {
+      "verifiedPolicy": "Verified Policy",
+      "mobile": "Mobile",
+      "fax": "Fax",
+      "telephone": "Telephone",
+      "emailUs": "Email Us",
+      "chatNow": "Chat Now",
+      "exploreTours": "Explore Morocco Tours",
+      "contactTeam": "Contact Our Team",
+      "cookieTableCaption": "Cookie and tracking technologies inventory",
+      "privacyBannerTitle": "Explore Morocco with Absolute Trust",
+      "privacyBannerDesc": "From the dunes of Merzouga to the vibrant souks of Marrakech, our accredited team is committed to safeguarding your privacy at every stage of your travel adventure.",
+      "termsBannerTitle": "Ready to Explore the Wonders of Morocco?",
+      "termsBannerDesc": "From the dunes of Erg Chebbi to the imperial alleys of Fes and Marrakech, our expert team is ready to design your journey with complete peace of mind."
     }
   },
   "notFound": {
@@ -1594,5 +1643,15 @@
     "optional": "Optional",
     "privacyPolicyLink": "Read our Privacy Policy",
     "close": "Close"
+  },
+  "statsMeta": { "standard": "Standard", "verified": "Verified" },
+  "routeMap": {
+    "interactiveMap": "Interactive Route Map",
+    "stops": "Stops",
+    "exploreBtn": "Explore Route Map",
+    "loadAriaPrefix": "Load interactive route map:",
+    "viewStopsPrefix": "View",
+    "viewStopsSuffix": "Route Stops & Schedule",
+    "openGoogleMaps": "Open in Google Maps"
   }
 }

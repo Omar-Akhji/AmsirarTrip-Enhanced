@@ -4,7 +4,7 @@ import { defineCollection, type SchemaContext } from "astro:content";
 import { z } from "astro/zod";
 
 // Sub-schemas to keep function nesting depth <= 3 (violates unicorn/max-nested-calls otherwise)
-const faqSchema = z.object({ question: z.string(), answer: z.string() });
+const faqSchema = z.object({ question: z.string().min(1), answer: z.string().min(1) });
 
 const priceSchema = z.object({ label: z.string(), note: z.string() });
 
@@ -38,14 +38,14 @@ const excursionMetricsSchema = z.object({
 const jsonLdSchema = z.object({
   name: z.string(),
   description: z.string(),
-  price: z.number().optional(),
+  price: z.number().positive().optional(),
   currency: z.string().optional(),
 });
 
 // Base Trip Schema
 const baseTripSchema = ({ image }: SchemaContext) =>
   z.object({
-    bookingId: z.number(),
+    bookingId: z.number().int().positive(),
     image: image(), // Zod schema function provided by Astro to validate and optimize local images
     duration: z.string(),
     keywords: z.array(z.string()),
@@ -56,7 +56,7 @@ const toursCollection = defineCollection({
   schema: (context) =>
     baseTripSchema(context).extend({
       tourKey: z.string(),
-      durationDays: z.number(),
+      durationDays: z.number().int().positive(),
       startLocation: z.string(),
       endLocation: z.string(),
       seo: seoSchema,
@@ -87,8 +87,8 @@ const destinationsCollection = defineCollection({
   schema: ({ image }) =>
     z.object({
       image: image(),
-      width: z.number(),
-      height: z.number(),
+      width: z.number().int().positive(),
+      height: z.number().int().positive(),
       titleKey: z.string(),
       descriptionKey: z.string(),
       altKey: z.string(),
@@ -161,14 +161,14 @@ const legalCollection = defineCollection({
     badgeJurisdiction: z.string(),
     summaryTitle: z.string(),
     summarySubtitle: z.string(),
-    summaryCards: z.array(legalSummaryCardSchema),
+    summaryCards: z.array(legalSummaryCardSchema).min(1),
     tocTitle: z.string(),
     printLabel: z.string(),
     agencyCard: legalAgencyCardSchema,
     cookieCta: legalCalloutSchema.extend({ buttonLabel: z.string() }).optional(),
     cookieTable: cookieTableSchema.optional(),
     cancellationMatrix: cancellationMatrixSchema.optional(),
-    sections: z.array(legalSectionSchema),
+    sections: z.array(legalSectionSchema).min(1),
   }),
 });
 

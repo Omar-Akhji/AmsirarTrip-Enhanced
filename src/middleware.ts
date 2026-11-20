@@ -41,9 +41,20 @@ function isValidOriginSecret(provided: string | null, expected: string): boolean
   return a.length === b.length && timingSafeEqual(a, b);
 }
 
+function createMissingAssetResponse(): Response {
+  const notFoundHeaders = new Headers({
+    "Cache-Control": "no-store, max-age=0, must-revalidate",
+    "Content-Type": "text/plain; charset=utf-8",
+  });
+  applyHeaders(notFoundHeaders, getSecurityHeaders());
+  return new Response("Not Found", { status: 404, headers: notFoundHeaders });
+}
+
 export const onRequest: MiddlewareHandler = async (context, next) => {
-  // Enforce Cloudflare origin shared secret in production when configured
-  const configuredOriginSecret = env.ORIGIN_VERIFY_SECRET.trim();
+  // Note: In @astrojs/node standalone mode, static assets and Astro memoryCache hits execute
+  // before middleware. Production origin isolation must therefore also be enforced at ingress
+  // (Cloudflare Tunnel / IP firewall) or a pre-static server wrapper.
+  const configuredOriginSecret = env.ORIGIN_VERIFY_SECRET;
   if (import.meta.env.PROD && configuredOriginSecret.length > 0) {
     const providedSecret = context.request.headers.get("x-origin-verify");
     if (!isValidOriginSecret(providedSecret, configuredOriginSecret)) {
@@ -64,6 +75,13 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
     DISCOVERY_PATHS.has(pathname)
     || (pathname.startsWith("/sitemap-") && pathname.endsWith(".xml"));
 
+  // In production, any static asset that missed @astrojs/node's static handler does not exist;
+  // short-circuit immediately instead of letting [...locale]/index.astro render a full SSR page.
+  if (isStaticAsset && import.meta.env.PROD) {
+    context.cache.set(false);
+    return createMissingAssetResponse();
+  }
+
   if (isDiscoveryAsset || isStaticAsset) {
     context.locals.locale = DEFAULT_LOCALE;
     const response = await next();
@@ -72,12 +90,7 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
 
     if (isMissingAssetFallback) {
       context.cache.set(false);
-      const notFoundHeaders = new Headers({
-        "Cache-Control": "no-store, max-age=0, must-revalidate",
-        "Content-Type": "text/plain; charset=utf-8",
-      });
-      applyHeaders(notFoundHeaders, getSecurityHeaders());
-      return new Response("Not Found", { status: 404, headers: notFoundHeaders });
+      return createMissingAssetResponse();
     }
 
     const newResponse = new Response(response.body, response);
@@ -102,10 +115,11 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
     return newResponse;
   }
 
-  // Handle i18n routing validation & locale resolution
   const localeParam = context.params["locale"];
   if (localeParam === undefined) {
-    context.locals.locale = DEFAULT_LOCALE;
+    if (!isLocale(context.locals.locale)) {
+      context.locals.locale = DEFAULT_LOCALE;
+    }
   } else if (localeParam === DEFAULT_LOCALE) {
     context.cache.set(false);
     const canonicalPath = getLocalizedPath(pathname, DEFAULT_LOCALE);
@@ -121,13 +135,7 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
   }
 
   const response = await next();
-  const headers = getSecurityHeaders();
-
-  for (const { key, value } of headers) {
-    response.headers.set(key, value);
-  }
-
-  // Set standard Content-Language response header
+  applyHeaders(response.headers, getSecurityHeaders());
   response.headers.set("Content-Language", context.locals.locale);
 
   return response;

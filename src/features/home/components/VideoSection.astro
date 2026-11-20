@@ -73,7 +73,7 @@ const videoSource = "/videos/Morocco-Video.mp4";
                 stroke-width="1.5"
               ></path>
             </svg>
-            Morocco Travel Film
+            {t("video.badge")}
           </span>
         </div>
 
@@ -129,7 +129,7 @@ const videoSource = "/videos/Morocco-Video.mp4";
                   stroke-width="1.5"
                 ></path>
               </svg>
-              <span>Featured Video</span>
+              <span>{t("video.featured")}</span>
             </div>
             <h3 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">
               {t("video.fallback.title")}
@@ -183,7 +183,7 @@ const videoSource = "/videos/Morocco-Video.mp4";
             data-video-toggle
             type="button"
           >
-            <div class="relative flex items-center justify-center group-data-[state=buffering]/video:hidden group-data-[state=playing]/video:hidden">
+            <span class="relative flex items-center justify-center group-data-[state=buffering]/video:hidden group-data-[state=playing]/video:hidden">
               <!-- Glowing ambient ripple ring on hover -->
               <span
                 aria-hidden="true"
@@ -191,7 +191,7 @@ const videoSource = "/videos/Morocco-Video.mp4";
               ></span>
 
               <!-- Radiant Moroccan terracotta & amber-orange gradient button -->
-              <div class="flex size-18 items-center justify-center rounded-full border-2 border-white bg-linear-to-br from-amber-orange to-orange text-white shadow-xl shadow-orange/35 backdrop-blur-md transition-all duration-300 group-hover/btn:scale-108 group-hover/btn:border-white/60 group-hover/btn:shadow-2xl group-hover/btn:shadow-orange/50 group-hover/btn:brightness-110 group-active/btn:scale-95 sm:size-20">
+              <span class="flex size-18 items-center justify-center rounded-full border-2 border-white bg-linear-to-br from-amber-orange to-orange text-white shadow-xl shadow-orange/35 backdrop-blur-md transition-all duration-300 group-hover/btn:scale-108 group-hover/btn:border-white/60 group-hover/btn:shadow-2xl group-hover/btn:shadow-orange/50 group-hover/btn:brightness-110 group-active/btn:scale-95 sm:size-20">
                 <svg
                   aria-hidden="true"
                   class="size-8 translate-x-0.5 text-white drop-shadow-sm transition-transform duration-300 group-hover/btn:scale-110"
@@ -205,8 +205,8 @@ const videoSource = "/videos/Morocco-Video.mp4";
                     stroke-width="2"
                   ></path>
                 </svg>
-              </div>
-            </div>
+              </span>
+            </span>
           </button>
         </div>
       </video-showcase>

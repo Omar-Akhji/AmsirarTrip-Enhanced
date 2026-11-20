@@ -1,0 +1,110 @@
+---
+type ElementTag = "a" | "button" | "span";
+type ActionPillVariant = "light" | "adaptive";
+type GroupHoverTarget = "self" | "summary" | "parent";
+
+interface Props {
+  readonly "aria-label"?: string | undefined;
+  readonly as?: ElementTag | undefined;
+  readonly class?: string | undefined;
+  readonly command?: "show-modal" | "close" | "request-close" | string | undefined;
+  readonly commandfor?: string | undefined;
+  readonly fullWidth?: boolean | undefined;
+  readonly groupHoverTarget?: GroupHoverTarget | undefined;
+  readonly href?: string | undefined;
+  readonly label: string;
+  readonly [key: `data-${string}`]: string | number | boolean | undefined;
+  readonly type?: "button" | "submit" | "reset" | undefined;
+  readonly variant?: ActionPillVariant | undefined;
+}
+
+const {
+  as,
+  href,
+  label,
+  variant = "light",
+  fullWidth = false,
+  groupHoverTarget = "self",
+  class: className,
+  type = "button",
+  ...rest
+} = Astro.props;
+
+const Tag: ElementTag = as ?? (typeof href === "string" ? "a" : "button");
+
+const VARIANT_CLASSES: Record<ActionPillVariant, string> = {
+  light:
+    "border-stone-200/80 bg-white text-dark-surface shadow-lg shadow-black/25 hover:border-stone-300 hover:bg-white hover:shadow-xl focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 focus-visible:outline-hidden",
+  adaptive:
+    "border-white/10 bg-slate-950 text-white shadow-lg shadow-black/25 hover:border-white/20 hover:bg-black hover:shadow-xl focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 focus-visible:outline-hidden sm:gap-4 sm:ps-6 sm:pe-2 dark:border-stone-300 dark:bg-white dark:text-dark-surface dark:hover:bg-white",
+};
+
+const CIRCLE_CLASSES =
+  groupHoverTarget === "summary" ?
+    "group-hover/summary:scale-105 group-active/summary:scale-95"
+  : "group-hover:scale-105 group-active:scale-95";
+
+const DEFAULT_ARROW_CLASSES =
+  groupHoverTarget === "summary" ?
+    "group-hover/summary:translate-x-3 group-hover/summary:-translate-y-3 group-hover/summary:opacity-0 rtl:-scale-x-100 rtl:group-hover/summary:-translate-x-3"
+  : "group-hover:translate-x-3 group-hover:-translate-y-3 group-hover:opacity-0 rtl:-scale-x-100 rtl:group-hover:-translate-x-3";
+
+const HOVER_ARROW_CLASSES =
+  groupHoverTarget === "summary" ?
+    "-translate-x-3 translate-y-2 opacity-0 group-hover/summary:translate-0 group-hover/summary:opacity-100 rtl:translate-x-3 rtl:-scale-x-100 rtl:group-hover/summary:translate-x-0"
+  : "-translate-x-3 translate-y-2 opacity-0 group-hover:translate-0 group-hover:opacity-100 rtl:translate-x-3 rtl:-scale-x-100 rtl:group-hover:translate-x-0";
+---
+
+<Tag
+  class:list={[
+    groupHoverTarget === "self" && "group",
+    "inline-flex min-h-12 items-center justify-between gap-3 rounded-full border py-1.5 ps-5 pe-1.5 font-mono text-xs font-semibold tracking-wider uppercase transition-colors duration-200 select-none active:scale-[0.98]",
+    Tag !== "span" && "cursor-pointer",
+    fullWidth && "inline-full",
+    VARIANT_CLASSES[variant],
+    className,
+  ]}
+  href={Tag === "a" ? href : undefined}
+  type={Tag === "button" ? type : undefined}
+  {...rest}
+>
+  <span class:list={["truncate px-1", fullWidth && "flex-1 text-center"]}>{label}</span>
+  <span
+    class:list={[
+      "relative flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-full bg-linear-to-br from-amber-orange to-orange text-white shadow-xs shadow-orange/40 transition-transform duration-300 ease-out",
+      CIRCLE_CLASSES,
+    ]}
+  >
+    <span class="relative flex size-full items-center justify-center">
+      <svg
+        aria-hidden="true"
+        class:list={[
+          "absolute size-4.5 transition-all duration-300 ease-out",
+          DEFAULT_ARROW_CLASSES,
+        ]}
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="1.8"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path d="M18 15V6H9M18 6L11.5 12.5M6 18L8.5 15.5"></path>
+      </svg>
+      <svg
+        aria-hidden="true"
+        class:list={["absolute size-4.5 transition-all duration-300 ease-out", HOVER_ARROW_CLASSES]}
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="1.8"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path d="M14 18L20 12L14 6M20 12H9.5M4 12H6.5"></path>
+      </svg>
+    </span>
+  </span>
+</Tag>

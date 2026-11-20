@@ -9,8 +9,7 @@ import ScrollProgressBar from "../shared/ui/feedback/ScrollProgressBar.astro";
 import JsonLd from "../shared/ui/primitives/JsonLd.astro";
 import { WHATSAPP_LINK } from "../lib/constants/contact";
 import { LOCALES, DEFAULT_LOCALE, OG_LOCALE_MAP, isLocale, type Locale } from "../i18n/locales";
-import { getLocalizedPath, stripLocaleFromPath } from "../i18n/utils";
-import TransitionSkeletons from "./components/TransitionSkeletons.astro";
+import { getLocalizedPath, stripLocaleFromPath, useTranslations } from "../i18n/utils";
 import WhatsappIcon from "../shared/ui/icons/WhatsappIcon.astro";
 
 interface Props {
@@ -47,6 +46,7 @@ const shouldPreload = Boolean(preloadImage);
 const defaultOgImage = new URL(preloadImageHref, site).href;
 const resolvedImageAlt = imageAlt ?? pageTitle;
 const currentOgLocale = OG_LOCALE_MAP[locale] ?? locale;
+const t = useTranslations(locale);
 ---
 
 <!doctype html>
@@ -58,7 +58,20 @@ const currentOgLocale = OG_LOCALE_MAP[locale] ?? locale;
 >
   <head>
     <meta charset="utf-8" />
-    <script src="../scripts/theme-init.ts"></script>
+    {/* Inline render-blocking theme init to prevent dark-mode FOUC; Astro 7 hashes this via SHA-256 CSP. */}
+    {/* eslint-disable astro/no-unsafe-inline-scripts */}
+    <script is:inline>
+      try {
+        const stored = localStorage.getItem("amsirar-theme");
+        const isDark =
+          stored ? stored === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+        document.documentElement.classList.toggle("dark", isDark);
+        document.documentElement.style.colorScheme = isDark ? "dark" : "light";
+      } catch {
+        // localStorage unavailable
+      }
+    </script>
+    {/* eslint-enable astro/no-unsafe-inline-scripts */}
     <script src="../scripts/theme.ts"></script>
     <!--
       ClientRouter (View Transitions) inline scripts are automatically hashed
@@ -326,25 +339,16 @@ const currentOgLocale = OG_LOCALE_MAP[locale] ?? locale;
       id="page-progress-bar"
       transition:persist="page-progress-bar"
     ></div>
-    <canvas
-      aria-hidden="true"
-      class="ink-canvas"
-      data-ink-ignore
-      id="ink-canvas"
-      transition:persist="ink-canvas"
-    ></canvas>
     <script src="../scripts/transitions.ts"></script>
-    <script src="../scripts/smooth-scroll.ts"></script>
     <script src="../scripts/scroll-animate.ts"></script>
     <script src="../scripts/webmcp-tools.ts"></script>
     <Navbar />
     <main
-      class="relative isolate block flex-[1_0_auto] inline-full min-h-screen overflow-x-clip focus:outline-hidden"
+      class="relative isolate block flex-[1_0_auto] inline-full min-h-dvh overflow-x-clip focus:outline-hidden"
       id="main-content"
       tabindex="-1"
       transition:animate="fade"
     >
-      <TransitionSkeletons />
       <div
         id="page-content"
         tabindex="-1"
@@ -358,12 +362,12 @@ const currentOgLocale = OG_LOCALE_MAP[locale] ?? locale;
 
     <!-- WhatsApp Side Tape (Right Edge) -->
     <a
-      aria-label="Contact us on WhatsApp"
+      aria-label={t("nav.whatsappCta")}
       class="group fixed inset-e-0 inset-be-33 z-40 flex size-11 items-center justify-center overflow-hidden rounded-s-md border-[1.5px] border-e-0 border-emerald-500/50 bg-slate-950/95 text-emerald-400 shadow-xl backdrop-blur-md transition-[transform,background-color,border-color,color,box-shadow] duration-200 ease-out pointer-fine:hover:-translate-x-1.5 pointer-fine:hover:border-emerald-400 pointer-fine:hover:bg-slate-900 pointer-fine:hover:text-emerald-300 pointer-fine:hover:shadow-2xl pointer-fine:hover:shadow-emerald-950/40 active:-translate-x-1.5 active:border-emerald-400 active:bg-slate-900 active:text-emerald-300 active:shadow-2xl active:shadow-emerald-950/40 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-2 motion-reduce:transform-none print:hidden"
       href={WHATSAPP_LINK}
       rel="noopener noreferrer"
       target="_blank"
-      title="Contact us on WhatsApp"
+      title={t("nav.whatsappCta")}
       transition:persist="whatsapp-cta"
     >
       <span class="relative flex size-6 shrink-0 items-center justify-center">

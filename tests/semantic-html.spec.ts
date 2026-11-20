@@ -1,4 +1,5 @@
-import { test, expect } from "@playwright/test";
+import { expect, test } from "@playwright/test";
+import { expectAccessible } from "./utils/a11y";
 
 test.describe("Semantic HTML 2026 Modernization", () => {
   test("Task 1: document head contains modern 2026 boilerplate requirements", async ({ page }) => {
@@ -29,7 +30,7 @@ test.describe("Semantic HTML 2026 Modernization", () => {
     await page.goto("/en/privacy-policy", { waitUntil: "domcontentloaded" });
     await expect(page.locator("main")).toHaveCount(1);
 
-    await page.goto("/en/terms", { waitUntil: "domcontentloaded" });
+    await page.goto("/en/terms-of-service", { waitUntil: "domcontentloaded" });
     await expect(page.locator("main")).toHaveCount(1);
   });
 
@@ -88,7 +89,7 @@ test.describe("Semantic HTML 2026 Modernization", () => {
     await expect(servicesH2).toHaveCount(1);
     const servicesH4 = page.locator("section#services h4");
     await expect(servicesH4).toHaveCount(0); // Pillars should be h3, not h4
-    const servicesH3 = page.locator("section#services h3");
+    const servicesH3 = page.locator("section#services h3:visible");
     expect(await servicesH3.count()).toBe(3); // 3 service cards
 
     // 2. TourInfo sections on tour page
@@ -147,5 +148,13 @@ test.describe("Semantic HTML 2026 Modernization", () => {
     // Cookie banner should be an aside element
     const cookieAside = page.locator("aside#cookie-banner");
     await expect(cookieAside).toHaveCount(1);
+  });
+
+  test("Task 9: key routes pass WCAG 2.1 AA axe-core accessibility audits", async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    for (const route of ["/", "/tours", "/contact", "/privacy-policy"]) {
+      await page.goto(route, { waitUntil: "domcontentloaded" });
+      await expectAccessible(page);
+    }
   });
 });

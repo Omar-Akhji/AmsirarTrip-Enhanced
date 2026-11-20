@@ -15,6 +15,7 @@ export default defineConfig({
   site: "https://amsirartrip.com",
   trailingSlash: "never",
   compressHTML: true,
+  markdown: { syntaxHighlight: false },
 
   // ─── 2. Build Options ─────────────────────────────────────────────────────
   build: { inlineStylesheets: "always", format: "directory" },
@@ -31,7 +32,11 @@ export default defineConfig({
   ],
 
   // ─── 5. Vite & Tailwind CSS v4 ────────────────────────────────────────────
-  vite: { plugins: [tailwindcss()], resolve: { alias: { "@": srcDir } } },
+  vite: {
+    build: { cssMinify: false },
+    plugins: [tailwindcss({ optimize: { minify: true } })],
+    resolve: { alias: { "@": srcDir } },
+  },
 
   // ─── 6. Image Optimization ────────────────────────────────────────────────
   image: { domains: [], remotePatterns: [] },
@@ -60,17 +65,27 @@ export default defineConfig({
         "form-action 'self'",
         "upgrade-insecure-requests",
       ],
-      scriptDirective: { resources: ["'self'", "https://challenges.cloudflare.com"] },
+      scriptDirective: {
+        hashes: [
+          "sha256-8cJwFQ/hMKYK67ogjGJzARUT7SMEv2Xn64nZOc7RE6I=",
+          "sha256-0O7iB6zr9x0r6X6eWYITC9V5q+yWCGAoFvcysBGbY9Q=",
+          "sha256-2mkrkPfKG5HdF6qWOVbV6XM8cT+fSqsoBXayDHqg3hg=",
+          "sha256-IU3B3AEAItf6Fb2EWGXsdXMld1XIzaKnQSqlrM/orqM=",
+        ],
+        resources: ["'self'", "https://challenges.cloudflare.com"],
+      },
       styleDirective: { resources: ["'self'", "'unsafe-inline'"] },
     },
   },
 
   // ─── 8. Cache & Route Rules (Astro 7+) ────────────────────────────────────
-  cache: { provider: memoryCache({ query: { include: [] } }) },
+  cache: { provider: memoryCache() },
 
   routeRules: {
     "/": { maxAge: 600, swr: 3600 },
-    "/[...locale]": { maxAge: 600, swr: 3600 },
+    "/de": { maxAge: 600, swr: 3600 },
+    "/es": { maxAge: 600, swr: 3600 },
+    "/fr": { maxAge: 600, swr: 3600 },
     "/[...locale]/about": { maxAge: 1800, swr: 86_400 },
     "/[...locale]/contact": { maxAge: 300, swr: 1800 },
     "/[...locale]/excursions": { maxAge: 900, swr: 3600 },
@@ -79,13 +94,9 @@ export default defineConfig({
     "/[...locale]/terms-of-service": { maxAge: 86_400, swr: 604_800 },
     "/[...locale]/tours": { maxAge: 900, swr: 3600 },
     "/[...locale]/tours/[slug]": { maxAge: 1800, swr: 86_400 },
-    "/llms.txt": { maxAge: 3600, swr: 86_400 },
-    "/llms-full.txt": { maxAge: 3600, swr: 86_400 },
-    "/robots.txt": { maxAge: 3600, swr: 86_400 },
-    "/sitemap.xml": { maxAge: 3600, swr: 86_400 },
-    "/sitemap-index.xml": { maxAge: 3600, swr: 86_400 },
     "/api/[...path]": { maxAge: 900, swr: 3600 },
     "/_actions/[...path]": { maxAge: 0 },
+    "/_image": { maxAge: 0 },
   },
 
   // ─── 9. Development Server ────────────────────────────────────────────────
@@ -103,6 +114,7 @@ export default defineConfig({
     schema: {
       GMAIL_USER: envField.string({ context: "server", access: "secret", optional: true }),
       GMAIL_PASS: envField.string({ context: "server", access: "secret", optional: true }),
+      LOG_DIR: envField.string({ context: "server", access: "secret", optional: true }),
       MAIL_TO: envField.string({ context: "server", access: "secret", optional: true }),
       ORIGIN_VERIFY_SECRET: envField.string({
         context: "server",

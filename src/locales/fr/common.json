@@ -31,7 +31,12 @@
     "about": "À propos",
     "contact": "Contact",
     "toggleMenu": "Basculer le menu de navigation",
-    "mainAria": "Navigation principale"
+    "mainAria": "Navigation principale",
+    "skipToContent": "Aller au contenu principal",
+    "whatsappCta": "Contactez-nous sur WhatsApp",
+    "themeToggle": "Changer le thème",
+    "switchToDark": "Passer en mode sombre",
+    "switchToLight": "Passer en mode clair"
   },
   "language": "Langue",
   "selectLanguage": "Sélectionner la langue",
@@ -247,7 +252,17 @@
     },
     "kickerAbout": "À propos de ce circuit",
     "kickerSchedule": "Programme quotidien",
-    "priceNote": "Transport privé et guides agréés inclus"
+    "priceNote": "Transport privé et guides agréés inclus",
+    "filter": {
+      "legend": "Filtrer les circuits par ville de départ",
+      "label": "Départ :",
+      "allCities": "Toutes les villes",
+      "fromMarrakech": "Depuis Marrakech",
+      "fromFes": "Depuis Fès",
+      "fromCasablanca": "Depuis Casablanca",
+      "fromAgadir": "Depuis Agadir",
+      "fromTangier": "Depuis Tanger"
+    }
   },
   "excursion": {
     "404": {
@@ -487,6 +502,11 @@
       "placeholderTitle": "Afficher la carte interactive",
       "placeholderDesc": "Voir notre agence à Marrakech sur Google Maps.",
       "loadBtn": "Charger la carte"
+    },
+    "actions": {
+      "chatWhatsapp": "Discuter sur WhatsApp",
+      "sendMessage": "Nous envoyer un message",
+      "viewOffice": "Voir l'emplacement du bureau"
     }
   },
   "excursion1": {
@@ -1260,7 +1280,8 @@
         "alt": "Témoignage TripAdvisor de Melina O.",
         "quote": "Une expérience merveilleuse ! Tellement d'émotions et d'images gravées dans nos mémoires. Notre guide était super, il nous a fait découvrir de superbes endroits et s'arrêtait constamment pour nous laisser prendre de belles photos."
       }
-    }
+    },
+    "badge": "AVIS TRIPADVISOR"
   },
   "footer": {
     "office": "Bureau",
@@ -1275,6 +1296,7 @@
     "newsletterCloseAria": "Fermer le dialogue newsletter",
     "newsletterSuccess": "Inscription confirmée. Vous recevrez nos actualités de voyage.",
     "newsletterFailure": "Échec de l'inscription. Veuillez réessayer.",
+    "newsletterRateLimited": "Trop de demandes. Veuillez réessayer dans quelques minutes.",
     "newsletterNetwork": "Erreur réseau. Vérifiez votre connexion.",
     "copyright": "Tous droits réservés.",
     "description": "Amsirar Trip est une agence de voyages réceptive agréée à Marrakech (Agrément N° 24/TT/RAK). Nous organisons des circuits privés dans le Sahara, des randonnées dans l'Atlas et des voyages sur mesure au Maroc.",
@@ -1288,13 +1310,19 @@
       "instagram": "Instagram",
       "tiktok": "TikTok"
     },
-    "newsletterStatus": "Statut de l'inscription"
+    "newsletterStatus": "Statut de l'inscription",
+    "captchaNotConfigured": "CAPTCHA non configuré"
   },
   "button": "Bouton",
   "locale": "Locale",
   "script": "Script",
+  "phoneInput": {
+    "triggerAriaPrefix": "Indicatif téléphonique sélectionné",
+    "listboxAriaPrefix": "Sélectionner l'indicatif du pays",
+    "searchPlaceholder": "Rechercher un pays ou indicatif…",
+    "emptySearch": "Aucun pays trouvé"
+  },
   "calendar": {
-    "chooseYear": "Choisir l'année",
     "prevMonth": "Mois précédent",
     "nextMonth": "Mois suivant",
     "currentDate": "Date actuelle",
@@ -1315,7 +1343,9 @@
     "pause": "Mettre la vidéo en pause",
     "playAria": "Lire la vidéo",
     "name": "Circuits désert du Sahara et voyages culturels au Maroc - Amsirar Trip",
-    "description": "Découvrez des expériences authentiques au Maroc : dunes de l'Erg Chebbi, méharées au coucher du soleil, cols du Haut Atlas et villes impériales avec Amsirar Trip."
+    "description": "Découvrez des expériences authentiques au Maroc : dunes de l'Erg Chebbi, méharées au coucher du soleil, cols du Haut Atlas et villes impériales avec Amsirar Trip.",
+    "badge": "Film de voyage au Maroc",
+    "featured": "Vidéo à la une"
   },
   "booking": {
     "makeReservation": "Faites votre réservation",
@@ -1450,7 +1480,11 @@
       }
     },
     "sending": "Envoi en cours...",
-    "errors": { "captcha": "La vérification Recaptcha est requise" },
+    "success": "Votre demande de réservation a été envoyée avec succès !",
+    "errors": {
+      "captcha": "La vérification Recaptcha est requise",
+      "generic": "Une erreur inattendue est survenue. Veuillez réessayer."
+    },
     "personalDetails": "Coordonnées des voyageurs",
     "tripDetails": "Détails du voyage",
     "placeholders": {
@@ -1549,6 +1583,21 @@
       "privacyPolicy": "Politique de confidentialité",
       "termsOfService": "Conditions d'utilisation",
       "cookieSettings": "Paramètres des cookies"
+    },
+    "ui": {
+      "verifiedPolicy": "Politique vérifiée",
+      "mobile": "Mobile",
+      "fax": "Fax",
+      "telephone": "Téléphone",
+      "emailUs": "Nous écrire",
+      "chatNow": "Discuter maintenant",
+      "exploreTours": "Découvrir nos circuits",
+      "contactTeam": "Contacter notre équipe",
+      "cookieTableCaption": "Inventaire des cookies et traceurs utilisés",
+      "privacyBannerTitle": "Explorez le Maroc en toute confiance",
+      "privacyBannerDesc": "Des dunes de Merzouga aux souks animés de Marrakech, notre équipe agréée s'engage à protéger votre vie privée à chaque étape de votre voyage.",
+      "termsBannerTitle": "Prêt à découvrir les merveilles du Maroc ?",
+      "termsBannerDesc": "Des dunes de l'Erg Chebbi aux ruelles impériales de Fès et Marrakech, notre équipe experte prépare votre voyage en toute sérénité."
     }
   },
   "notFound": {
@@ -1594,5 +1643,15 @@
     "optional": "Optionnel",
     "privacyPolicyLink": "Consulter notre politique de confidentialité",
     "close": "Fermer"
+  },
+  "statsMeta": { "standard": "Standard", "verified": "Vérifié" },
+  "routeMap": {
+    "interactiveMap": "Carte d'itinéraire interactive",
+    "stops": "Étapes",
+    "exploreBtn": "Explorer la carte",
+    "loadAriaPrefix": "Charger la carte d'itinéraire interactive :",
+    "viewStopsPrefix": "Voir les",
+    "viewStopsSuffix": "étapes et horaires",
+    "openGoogleMaps": "Ouvrir dans Google Maps"
   }
 }

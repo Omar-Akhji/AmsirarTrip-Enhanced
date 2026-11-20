@@ -1,7 +1,6 @@
 ---
 import { getCollection } from "astro:content";
 import { getRelativeLocaleUrl } from "astro:i18n";
-import bg4 from "../../assets/images/Excursions/Agafay.webp";
 import bg1 from "../../assets/images/Header/header-1.webp";
 import bg2 from "../../assets/images/Header/header-2.webp";
 import bg3 from "../../assets/images/Header/header-3.webp";
@@ -25,7 +24,7 @@ const t = useTranslations(locale);
 
 const title = t("home.meta.title");
 const description = t("home.meta.description");
-const heroImages = [bg1, bg2, bg3, bg4];
+const heroImages = [bg1, bg2, bg3];
 
 const toursEntries = await getCollection("tours");
 const sortedTours = [...toursEntries]

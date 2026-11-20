@@ -6,6 +6,7 @@ import BookingSidebar from "../../../features/booking/components/BookingSidebar.
 import ExcursionLayout from "../../../features/excursions/components/ExcursionLayout.astro";
 import { useTranslations } from "../../../i18n/utils";
 import Layout from "../../../layouts/Layout.astro";
+import { getBookingFormCopy } from "../../../lib/form-copy";
 import {
   generateBreadcrumbJsonLd,
   generateExcursionJsonLd,
@@ -22,7 +23,7 @@ const excursionEntry =
 if (!excursionEntry) {
   Astro.cache.set(false);
   Astro.response.status = 404;
-  return Astro.rewrite(locale === "en" ? "/404" : `/${locale}/404`);
+  return Astro.rewrite("/404");
 }
 
 const excursion = excursionEntry.data;
@@ -109,6 +110,7 @@ const breadcrumbJsonLd = generateBreadcrumbJsonLd([
     <div data-animate="step-unfold">
       <BookingForm
         client:visible
+        copy={getBookingFormCopy(t)}
         excursionId={String(excursion.bookingId)}
         excursionTitle={excursionTitleClean}
         fullWidth

@@ -3,7 +3,7 @@ import TestimonialsSideScroll from "./TestimonialsSideScroll.astro";
 import SquareTopDownIcon from "@/shared/ui/icons/SquareTopDownIcon.astro";
 import Button from "@/shared/ui/primitives/Button.astro";
 
-const locale = Astro.currentLocale || "en";
+const locale = Astro.locals.locale;
 const testimonials = [
   { key: "chrissy" },
   { key: "bianca" },
@@ -32,18 +32,20 @@ const TRIPADVISOR_URL =
         >
           {locale === "fr" ?
             <>
-              Avis de <span class="text-orange">Nos Voyageurs</span>
+              Avis de <span class="text-orange-700 dark:text-orange-400">Nos Voyageurs</span>
             </>
           : locale === "es" ?
             <>
-              Experiencias de <span class="text-orange">Nuestros Viajeros</span>
+              Experiencias de{" "}
+              <span class="text-orange-700 dark:text-orange-400">Nuestros Viajeros</span>
             </>
           : locale === "de" ?
             <>
-              Erfahrungen <span class="text-orange">Unserer Reisenden</span>
+              Erfahrungen{" "}
+              <span class="text-orange-700 dark:text-orange-400">Unserer Reisenden</span>
             </>
           : <>
-              What Our <span class="text-orange">Guests Say</span>
+              What Our <span class="text-orange-700 dark:text-orange-400">Guests Say</span>
             </>
           }
         </h2>

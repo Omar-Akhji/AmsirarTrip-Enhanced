@@ -1,10 +1,7 @@
-import { isSkeletonActive } from "./transitions";
-
 const REVEAL_CLEANUP_TIMEOUT_MS = 2500;
 
 let revealObserver: IntersectionObserver | undefined;
 let counterObserver: IntersectionObserver | undefined;
-let pendingReadyHandler: (() => void) | undefined;
 
 function createRevealObserver(): IntersectionObserver {
   return new IntersectionObserver(
@@ -19,7 +16,6 @@ function createRevealObserver(): IntersectionObserver {
           el.classList.add("is-done");
         }, REVEAL_CLEANUP_TIMEOUT_MS);
 
-        // Clean up will-change after animation completes
         el.addEventListener(
           "animationend",
           () => {
@@ -29,7 +25,6 @@ function createRevealObserver(): IntersectionObserver {
           { once: true },
         );
 
-        // Once revealed, stop observing (one-shot reveal)
         revealObserver?.unobserve(el);
       }
     },
@@ -37,31 +32,27 @@ function createRevealObserver(): IntersectionObserver {
   );
 }
 
-function animateCounter(el: HTMLElement) {
+function animateCounter(el: HTMLElement): void {
   const countToAttr = el.dataset["countTo"];
   const text = el.textContent;
   const numberMatches = text ? text.matchAll(/\d+/g).toArray() : [];
   if (!countToAttr && numberMatches.length !== 1) return;
 
   const match = numberMatches[0];
-  if (!match) return;
-  const targetVal = Number(countToAttr ?? match[0]);
+  const targetVal = Number(countToAttr ?? match?.[0]);
   if (Number.isNaN(targetVal)) return;
 
-  const prefix = countToAttr ? "" : text.slice(0, match.index);
-  const suffix = countToAttr ? "" : text.slice(match.index + match[0].length);
+  const prefix = countToAttr || !match ? "" : text.slice(0, match.index);
+  const suffix = countToAttr || !match ? "" : text.slice(match.index + match[0].length);
 
   const durationAttr = el.dataset["countDuration"];
   const duration = durationAttr === undefined ? 1800 : Number(durationAttr);
-
   const startTime = performance.now();
   const docLang = typeof document === "undefined" ? "en" : document.documentElement.lang || "en";
 
-  function tick(now: number) {
+  function tick(now: number): void {
     const elapsed = now - startTime;
     const progress = Math.min(elapsed / duration, 1);
-
-    // Ease-out cubic for a natural feel
     const eased = 1 - (1 - progress) ** 3;
     const current = Math.round(eased * targetVal);
 
@@ -82,16 +73,14 @@ function getReducedMotionPreference(): boolean {
   );
 }
 
-function startObserving() {
-  const reducedMotion = getReducedMotionPreference();
+function startObserving(): void {
+  if (getReducedMotionPreference()) return;
 
-  if (!reducedMotion) {
-    revealObserver = createRevealObserver();
-    const revealElements = document.querySelectorAll<HTMLElement>("[data-animate]");
-    for (const el of revealElements) {
-      if (!el.closest("astro-island")) {
-        revealObserver.observe(el);
-      }
+  revealObserver = createRevealObserver();
+  const revealElements = document.querySelectorAll<HTMLElement>("[data-animate]");
+  for (const el of revealElements) {
+    if (!el.closest("astro-island")) {
+      revealObserver.observe(el);
     }
   }
 
@@ -116,29 +105,13 @@ function startObserving() {
   }
 }
 
-function init() {
+function init(): void {
   cleanup();
-
-  // Mark system as active (enables opacity: 0 initial state in CSS)
   document.documentElement.classList.add("scroll-init");
-
-  if (isSkeletonActive()) {
-    pendingReadyHandler = () => {
-      pendingReadyHandler = undefined;
-      startObserving();
-    };
-    globalThis.addEventListener("amsirar:page-ready", pendingReadyHandler, { once: true });
-    return;
-  }
-
   startObserving();
 }
 
-function cleanup() {
-  if (pendingReadyHandler) {
-    globalThis.removeEventListener("amsirar:page-ready", pendingReadyHandler);
-    pendingReadyHandler = undefined;
-  }
+function cleanup(): void {
   revealObserver?.disconnect();
   revealObserver = undefined;
   counterObserver?.disconnect();
@@ -146,6 +119,5 @@ function cleanup() {
   document.documentElement.classList.remove("scroll-init");
 }
 
-// Wire up Astro View Transition lifecycle hooks
 document.addEventListener("astro:page-load", init);
 document.addEventListener("astro:before-preparation", cleanup);

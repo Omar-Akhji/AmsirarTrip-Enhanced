@@ -1,8 +1,9 @@
 ---
-import AltArrowRightIcon from "@/shared/ui/icons/AltArrowRightIcon.astro";
+import { useTranslations } from "@/i18n/utils";
 import { WHATSAPP_LINK } from "@/lib/constants/contact";
+import AltArrowRightIcon from "@/shared/ui/icons/AltArrowRightIcon.astro";
 import Button from "@/shared/ui/primitives/Button.astro";
-import FolderShape from "@/shared/ui/primitives/FolderShape.astro";
+import FolderStack from "@/shared/ui/widgets/FolderStack.astro";
 
 interface ContactMethod {
   description: string;
@@ -15,84 +16,50 @@ interface Props {
 }
 
 const { methods } = Astro.props;
+const locale = Astro.locals.locale;
+const t = useTranslations(locale);
+const actionLabels: Readonly<Record<string, string>> = {
+  phone: t("contact.actions.chatWhatsapp"),
+  email: t("contact.actions.sendMessage"),
+};
 ---
 
-<contact-folder-stack class="block relative w-full overflow-x-clip">
-  <div class="contact-folder-track relative w-full h-auto motion-safe:h-[220vh]">
-    <div class="contact-folder-stage static h-auto top-auto select-auto motion-safe:sticky motion-safe:top-18 motion-safe:h-102.5 motion-safe:select-none w-full mx-auto overflow-visible">
-      <!-- Layer 1: Folder Back Plate (z-index: 2, behind cards) -->
-      <div class="folder-back-plate hidden motion-safe:block absolute inset-x-0 bottom-4 h-66.25 overflow-visible pointer-events-none will-change-transform z-2 opacity-0 drop-shadow-[0_12px_24px_rgba(0,0,0,0.5)]">
-        <FolderShape
-          id="contact-back"
-          variant="back"
-        />
+<FolderStack idPrefix="contact">
+  {methods.map((method, index) => (
+    <article
+      aria-label={typeof method.title === "string" ? method.title : undefined}
+      class="contact-info-card group relative flex h-55 w-full flex-col justify-between rounded-2xl border border-stone-200/90 bg-stone-50/95 p-5 shadow-xl shadow-stone-900/10 backdrop-blur-xs transition-shadow duration-300 dark:border-white/10 dark:bg-surface-card/90 dark:shadow-[0_12px_28px_rgba(0,0,0,0.6)]"
+      slot={`card-${index}`}
+    >
+      <div>
+        <h3 class="mbe-2.5 border-b border-stone-200/80 pb-2.5 text-base/snug sm:text-lg font-bold tracking-tight text-stone-950 dark:text-mist-100 transition-colors duration-200 group-hover:text-orange-600 dark:border-white/10">
+          {method.title}
+        </h3>
+        <p class="text-sm/relaxed text-stone-600 dark:text-mist-200">{method.description}</p>
       </div>
 
-      <!-- Layer 2: The Cards Stack (z-index: 10, between folder back and front pocket) -->
-      <div class="cards-stack-layer static h-auto flex flex-col gap-5 motion-safe:block motion-safe:absolute motion-safe:inset-x-0 motion-safe:top-2 motion-safe:h-85 motion-safe:will-change-transform motion-safe:z-10 motion-safe:perspective-distant">
-        {methods.map((method, index) => (
-          <div
-            class:list={[
-              "contact-card-slot static inset-auto opacity-100 transform-none w-full origin-top motion-safe:absolute motion-safe:inset-x-0 motion-safe:top-0 motion-safe:will-change-transform",
-              { "z-10": index === 0, "z-12": index === 1, "z-14": index >= 2 },
-            ]}
-            data-stack-card={index}
-          >
-            <article
-              aria-label={typeof method.title === "string" ? method.title : undefined}
-              class="contact-info-card group relative flex h-55 w-full flex-col justify-between rounded-2xl border border-stone-200/90 bg-stone-50/95 p-5 shadow-xl shadow-stone-900/10 backdrop-blur-xs transition-shadow duration-300 dark:border-white/10 dark:bg-surface-card/90 dark:shadow-[0_12px_28px_rgba(0,0,0,0.6)]"
-            >
-              <div>
-                <h3 class="mbe-2.5 border-b border-stone-200/80 pb-2.5 text-base/snug sm:text-lg font-bold tracking-tight text-stone-950 dark:text-mist-100 transition-colors duration-200 group-hover:text-orange-600 dark:border-white/10">
-                  {method.title}
-                </h3>
-                <p class="text-sm/relaxed text-stone-600 dark:text-mist-200">
-                  {method.description}
-                </p>
-              </div>
-
-              <!-- Tactile Action Link -->
-              <div class="mbs-2 border-t border-stone-200/60 dark:border-white/10 pbs-2.5">
-                <Button
-                  class="flex w-full min-h-11 items-center justify-between border-stone-200 bg-white px-6 py-3 text-xs font-bold text-stone-800 transition hover:border-transparent pointer-fine:hover:border-transparent hover:bg-linear-to-br hover:from-amber-orange hover:to-orange hover:text-white hover:shadow-md hover:shadow-orange/20 active:border-transparent active:bg-linear-to-br active:from-amber-orange active:to-orange active:text-white active:shadow-md active:shadow-orange/20 dark:border-white/10 dark:bg-white/5 dark:text-mist-100 dark:hover:border-transparent dark:hover:bg-linear-to-br dark:hover:from-amber-orange dark:hover:to-orange dark:hover:text-white dark:hover:shadow-md dark:hover:shadow-orange/30 dark:active:border-transparent dark:active:bg-linear-to-br dark:active:from-amber-orange dark:active:to-orange dark:active:text-white dark:active:shadow-md dark:active:shadow-orange/30"
-                  href={
-                    method.id === "phone" ? WHATSAPP_LINK
-                    : method.id === "email" ?
-                      "#contact-form-section"
-                    : "#location"
-                  }
-                  rel={method.id === "phone" ? "noopener noreferrer" : undefined}
-                  target={method.id === "phone" ? "_blank" : undefined}
-                  variant="outline"
-                >
-                  <span class="uppercase tracking-wider">
-                    {method.id === "phone" ?
-                      "Chat on WhatsApp"
-                    : method.id === "email" ?
-                      "Send Us a Message"
-                    : "View Office Location"}
-                  </span>
-                  <AltArrowRightIcon
-                    aria-hidden="true"
-                    class="size-4"
-                  />
-                </Button>
-              </div>
-            </article>
-          </div>
-        ))}
+      <div class="mbs-2 border-t border-stone-200/60 dark:border-white/10 pbs-2.5">
+        <Button
+          class="flex w-full min-h-11 items-center justify-between border-stone-200 bg-white px-6 py-3 text-xs font-bold text-stone-800 transition hover:border-transparent pointer-fine:hover:border-transparent hover:bg-linear-to-br hover:from-amber-orange hover:to-orange hover:text-white hover:shadow-md hover:shadow-orange/20 active:border-transparent active:bg-linear-to-br active:from-amber-orange active:to-orange active:text-white active:shadow-md active:shadow-orange/20 dark:border-white/10 dark:bg-white/5 dark:text-mist-100 dark:hover:border-transparent dark:hover:bg-linear-to-br dark:hover:from-amber-orange dark:hover:to-orange dark:hover:text-white dark:hover:shadow-md dark:hover:shadow-orange/30 dark:active:border-transparent dark:active:bg-linear-to-br dark:active:from-amber-orange dark:active:to-orange dark:active:text-white dark:active:shadow-md dark:active:shadow-orange/30"
+          href={
+            method.id === "phone" ? WHATSAPP_LINK
+            : method.id === "email" ?
+              "#contact-form-section"
+            : "#location"
+          }
+          rel={method.id === "phone" ? "noopener noreferrer" : undefined}
+          target={method.id === "phone" ? "_blank" : undefined}
+          variant="outline"
+        >
+          <span class="uppercase tracking-wider">
+            {actionLabels[method.id] ?? t("contact.actions.viewOffice")}
+          </span>
+          <AltArrowRightIcon
+            aria-hidden="true"
+            class="size-4"
+          />
+        </Button>
       </div>
-
-      <!-- Layer 3: Folder Front Pocket (z-index: 25, in front of the cards) -->
-      <!-- Matches reference folder silhouette: tabbed folder with smooth shoulder, no texts, original obsidian palette -->
-      <div class="folder-front-pocket hidden motion-safe:block absolute inset-x-0 bottom-4 h-58.75 overflow-visible pointer-events-none will-change-transform z-25 opacity-0 origin-bottom drop-shadow-[0_-12px_28px_rgba(0,0,0,0.65)]">
-        <FolderShape
-          id="contact-front"
-          variant="front"
-        />
-      </div>
-    </div>
-  </div>
-</contact-folder-stack>
-
-<script src="../scripts/contact-folder-stack.ts"></script>
+    </article>
+  ))}
+</FolderStack>

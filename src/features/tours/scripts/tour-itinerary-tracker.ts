@@ -1,28 +1,18 @@
 /**
- * Tour Itinerary Scroll Tracker Syncs the sticky "Expedition Itinerary" header and travelling
- * timeline dot with the active Day-by-Day schedule.
+ * Tour Itinerary Scroll Tracker: syncs the sticky day heading/progress bar and stage dots using
+ * IntersectionObserver aligned to the sticky header trigger line, while CSS scroll-driven
+ * animations (`view-timeline` + `exit-crossing`) drive the vertical fill line with a scroll
+ * fallback only when CSS scroll-driven animations are unsupported.
  */
 
 interface StageMetadata {
   readonly element: HTMLElement;
+  readonly node: HTMLElement;
   readonly ordinalLabel: string;
   readonly route: string;
   readonly stageNumber: number;
   readonly title: string;
 }
-
-interface LenisGlobal {
-  __lenis?: {
-    stop: () => void;
-    start: () => void;
-    isLocked?: boolean;
-    scrollTo: (target: number | HTMLElement, options?: { immediate?: boolean }) => void;
-  };
-}
-
-const getLenis = (): LenisGlobal["__lenis"] => {
-  return (globalThis as unknown as LenisGlobal).__lenis;
-};
 
 const NOOP = (): void => undefined;
 
@@ -50,113 +40,44 @@ export function initTourItineraryTracker(): () => void {
     const ordinalLabel = el.dataset["stageOrdinal"] ?? `Day ${stageNumber}`;
     const title = el.dataset["stageTitle"] ?? "";
     const route = el.dataset["stageRoute"] ?? title;
+    const node = el.querySelector<HTMLElement>(".stage-node") ?? el;
 
-    return { element: el, stageNumber, ordinalLabel, title, route };
+    return { element: el, node, stageNumber, ordinalLabel, title, route };
   });
 
   let activeIndex = -1;
-  let isTicking = false;
-  let isScrollPaused = false;
-  let canResumeScroll = false;
-  let pauseCooldownTimer: ReturnType<typeof setTimeout> | undefined;
-  let lastPausedStageIndex = -1;
-  let currentStickyOffset = 0;
 
-  const getTriggerLine = (): number => {
-    return stickyHeader ? stickyHeader.getBoundingClientRect().bottom : 80;
+  const getStickyTriggerOffset = (): number => {
+    if (!stickyHeader) return 160;
+    const stickyTop = Number(globalThis.getComputedStyle(stickyHeader).top.replace("px", "")) || 80;
+    return Math.round(stickyTop + stickyHeader.offsetHeight);
   };
 
-  const getStageNodeCenterY = (stageEl: HTMLElement, trackTop: number): number => {
-    const node = stageEl.querySelector<HTMLElement>(".stage-node");
-    if (node) {
-      const nodeRect = node.getBoundingClientRect();
-      return nodeRect.top + nodeRect.height / 2 - trackTop;
-    }
-    return stageEl.getBoundingClientRect().top - trackTop;
-  };
-
-  const getStageNodeViewportY = (stageEl: HTMLElement): number => {
-    const node = stageEl.querySelector<HTMLElement>(".stage-node");
-    if (node) {
-      const nodeRect = node.getBoundingClientRect();
-      return nodeRect.top + nodeRect.height / 2;
-    }
-    return stageEl.getBoundingClientRect().top;
-  };
-
-  const resumeScroll = (): void => {
-    if (!isScrollPaused) return;
-    isScrollPaused = false;
-    canResumeScroll = false;
-    clearTimeout(pauseCooldownTimer);
-
-    const lenis = getLenis();
-    if (lenis) {
-      lenis.isLocked = false;
-    }
-  };
-
-  const pauseAtStage = (stageIndex: number): void => {
-    if (stageIndex === lastPausedStageIndex || stageIndex <= 0) return;
-    lastPausedStageIndex = stageIndex;
-
-    const stage = stages[stageIndex];
-    if (!stage) return;
-
-    // Align directly with triggerLine so the sticky bar line is exactly on the stage line
-    const triggerLine = getTriggerLine();
-    const separator = stage.element.querySelector<HTMLElement>(".stage-separator");
-    const nodeViewportY =
-      separator && stageIndex === totalStages - 1 ?
-        separator.getBoundingClientRect().bottom
-      : getStageNodeViewportY(stage.element);
-    const snapDelta = nodeViewportY - triggerLine;
-
-    const lenis = getLenis();
-    if (Math.abs(snapDelta) > 1) {
-      const targetScroll = globalThis.scrollY + snapDelta;
-      if (lenis) {
-        lenis.scrollTo(targetScroll, { immediate: true });
-      } else {
-        globalThis.scrollTo({ top: targetScroll, behavior: "instant" });
-      }
-    }
-
-    // Stop scrolling at this exact position until pause duration elapses or user initiates next gesture
-    isScrollPaused = true;
-    canResumeScroll = false;
-
-    if (lenis) {
-      lenis.isLocked = true;
-    }
-
-    clearTimeout(pauseCooldownTimer);
-    pauseCooldownTimer = setTimeout(() => {
-      canResumeScroll = true;
-      resumeScroll();
-    }, 450);
-  };
+  const getTriggerLine = (): number =>
+    stickyHeader ? stickyHeader.getBoundingClientRect().bottom : 160;
 
   const syncActiveStage = (index: number): void => {
     const activeStage = stages[index];
     if (!activeStage) return;
 
-    for (const [i, s] of stages.entries()) {
+    for (const [i, stage] of stages.entries()) {
       if (i === index) {
-        s.element.dataset["active"] = "true";
-        delete s.element.dataset["passed"];
+        stage.element.dataset["active"] = "true";
+        delete stage.element.dataset["passed"];
       } else if (i < index) {
-        delete s.element.dataset["active"];
-        s.element.dataset["passed"] = "true";
+        delete stage.element.dataset["active"];
+        stage.element.dataset["passed"] = "true";
       } else {
-        delete s.element.dataset["active"];
-        delete s.element.dataset["passed"];
+        delete stage.element.dataset["active"];
+        delete stage.element.dataset["passed"];
       }
     }
 
     for (const [i, group] of routeGroups.entries()) {
       group.classList.toggle("hidden", i !== index);
     }
+
+    container.style.setProperty("--itinerary-trigger-offset", `${getStickyTriggerOffset()}px`);
 
     if (stickyHeading) {
       stickyHeading.textContent = activeStage.ordinalLabel.toUpperCase();
@@ -166,157 +87,125 @@ export function initTourItineraryTracker(): () => void {
       stickyCounterCurrent.textContent = String(activeStage.stageNumber).padStart(2, "0");
     }
 
-    if (!stickyProgress) return;
-    const percentage = (activeStage.stageNumber / totalStages) * 100;
-    stickyProgress.style.width = `${percentage}%`;
+    if (stickyProgress) {
+      stickyProgress.style.width = `${(activeStage.stageNumber / totalStages) * 100}%`;
+    }
   };
 
-  const update = (): void => {
-    // End stickiness when reaching final stage: lock sticky bar directly to final stage line
-    const lastStage = stages.at(-1);
-    if (lastStage && stickyHeader) {
-      const separator = lastStage.element.querySelector<HTMLElement>(".stage-separator");
-      const targetElement =
-        separator ?? lastStage.element.querySelector<HTMLElement>(".stage-node");
-      if (targetElement) {
-        const untranslatedBottom =
-          stickyHeader.getBoundingClientRect().bottom + currentStickyOffset;
-        const targetBottom = targetElement.getBoundingClientRect().bottom;
-        const overflow = untranslatedBottom - targetBottom;
+  const evaluateActiveStage = (): number => {
+    const triggerLine = getTriggerLine();
+    let nextActiveIndex = 0;
 
-        currentStickyOffset = Math.max(0, overflow);
+    for (const [i, stage] of stages.entries()) {
+      const rect = stage.node.getBoundingClientRect();
+      if (rect.top + rect.height / 2 <= triggerLine + 4) {
+        nextActiveIndex = i;
+      } else {
+        break;
       }
-    } else {
-      currentStickyOffset = 0;
     }
 
-    if (stickyHeader) {
-      stickyHeader.style.transform =
-        currentStickyOffset > 0 ? `translate3d(0, -${currentStickyOffset}px, 0)` : "";
+    if (nextActiveIndex !== activeIndex) {
+      activeIndex = nextActiveIndex;
+      syncActiveStage(nextActiveIndex);
     }
+
+    return nextActiveIndex;
+  };
+
+  let observer: IntersectionObserver | null = null;
+
+  const bindObserver = (): void => {
+    observer?.disconnect();
+    const triggerOffset = getStickyTriggerOffset();
+    container.style.setProperty("--itinerary-trigger-offset", `${triggerOffset}px`);
+
+    if (typeof IntersectionObserver === "undefined") return;
+    observer = new IntersectionObserver(
+      () => {
+        evaluateActiveStage();
+      },
+      { rootMargin: `-${triggerOffset}px 0px 0px 0px`, threshold: [0, 0.5, 1] },
+    );
+    for (const stage of stages) {
+      observer.observe(stage.node);
+    }
+  };
+
+  bindObserver();
+  evaluateActiveStage();
+
+  const prefersReduced =
+    typeof window !== "undefined"
+    && globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const supportsCssTimeline =
+    typeof CSS !== "undefined" && CSS.supports("animation-timeline", "view()");
+
+  if (prefersReduced || supportsCssTimeline) {
+    const handleResize = (): void => {
+      bindObserver();
+      evaluateActiveStage();
+    };
+    globalThis.addEventListener("resize", handleResize, { passive: true });
+    return () => {
+      observer?.disconnect();
+      globalThis.removeEventListener("resize", handleResize);
+    };
+  }
+
+  let rafId: number | null = null;
+  const updateFallbackFill = (): void => {
+    rafId = null;
+    const currentIdx = evaluateActiveStage();
+    if (!timelineTrack || !timelineFill || timelineTrack.offsetHeight <= 0) return;
 
     const triggerLine = getTriggerLine();
-
-    let newActiveIndex = 0;
-    if (isScrollPaused && activeIndex >= 0) {
-      newActiveIndex = activeIndex;
-    } else {
-      for (const [i, stage] of stages.entries()) {
-        const nodeViewportY = getStageNodeViewportY(stage.element);
-        // 2px buffer prevents subpixel rounding jitter on the boundary
-        if (nodeViewportY <= triggerLine + 2) {
-          newActiveIndex = i;
-        } else {
-          break;
-        }
-      }
-    }
-
-    // User is scrolling upwards towards previous days -> allow re-snapping when scrolling down again
-    if (newActiveIndex < activeIndex && lastPausedStageIndex > newActiveIndex) {
-      lastPausedStageIndex = newActiveIndex;
-    }
-
-    if (newActiveIndex !== activeIndex) {
-      const previousIndex = activeIndex;
-      activeIndex = newActiveIndex;
-      syncActiveStage(newActiveIndex);
-
-      if (previousIndex >= 0 && newActiveIndex > previousIndex) {
-        pauseAtStage(newActiveIndex);
-      }
-    }
-
-    if (!timelineTrack) return;
     const trackRect = timelineTrack.getBoundingClientRect();
-
     let fillOffset = 0;
-    if (newActiveIndex >= totalStages - 1) {
-      const lastStage = stages.at(-1);
-      if (lastStage) {
-        fillOffset = getStageNodeCenterY(lastStage.element, trackRect.top);
+
+    if (currentIdx >= totalStages - 1) {
+      const last = stages.at(-1);
+      if (last) {
+        const rect = last.node.getBoundingClientRect();
+        fillOffset = rect.top + rect.height / 2 - trackRect.top;
       }
     } else {
-      const currentStage = stages[newActiveIndex];
-      const nextStage = stages[newActiveIndex + 1];
+      const currentStage = stages[currentIdx];
+      const nextStage = stages[currentIdx + 1];
       if (currentStage && nextStage) {
-        const currentY = getStageNodeCenterY(currentStage.element, trackRect.top);
-        const nextY = getStageNodeCenterY(nextStage.element, trackRect.top);
-
-        const currentViewportY = getStageNodeViewportY(currentStage.element);
-        const nextViewportY = getStageNodeViewportY(nextStage.element);
-        const stageDistance = nextViewportY - currentViewportY;
-
-        let t = 0;
-        if (stageDistance > 0) {
-          const scrollDistance = triggerLine - currentViewportY;
-          t = Math.max(0, Math.min(1, scrollDistance / stageDistance));
-        }
-
+        const curRect = currentStage.node.getBoundingClientRect();
+        const nextRect = nextStage.node.getBoundingClientRect();
+        const currentY = curRect.top + curRect.height / 2 - trackRect.top;
+        const nextY = nextRect.top + nextRect.height / 2 - trackRect.top;
+        const currentViewportY = curRect.top + curRect.height / 2;
+        const stageDistance = nextRect.top + nextRect.height / 2 - currentViewportY;
+        const t =
+          stageDistance > 0 ?
+            Math.max(0, Math.min(1, (triggerLine - currentViewportY) / stageDistance))
+          : 0;
         fillOffset = currentY + t * (nextY - currentY);
       }
     }
 
-    if (!timelineFill) return;
-    const fillPercentage = (fillOffset / trackRect.height) * 100;
-    timelineFill.style.height = `${fillPercentage}%`;
+    const ratio = Math.max(0, Math.min(1, fillOffset / trackRect.height));
+    timelineFill.style.scale = `1 ${ratio.toFixed(4)}`;
   };
 
-  const requestTick = (): void => {
-    if (isTicking) return;
-    isTicking = true;
-    requestAnimationFrame(() => {
-      update();
-      isTicking = false;
-    });
+  const scheduleFallback = (): void => {
+    rafId ??= globalThis.requestAnimationFrame(updateFallbackFill);
   };
 
-  const handleUserScrollInput = (e: Event): void => {
-    if (!isScrollPaused) return;
-    if (!canResumeScroll) {
-      if (e.cancelable) e.preventDefault();
-      return;
-    }
-    // The user initiated another scroll gesture after the pause window -> unlock and allow movement
-    resumeScroll();
-  };
-
-  const handleKeyDown = (e: KeyboardEvent): void => {
-    if (
-      !isScrollPaused
-      || !["ArrowDown", "ArrowUp", "PageDown", "PageUp", "Space"].includes(e.code)
-    ) {
-      return;
-    }
-
-    if (!canResumeScroll) {
-      if (e.cancelable) e.preventDefault();
-      return;
-    }
-    resumeScroll();
-  };
-
-  globalThis.addEventListener("scroll", requestTick, { passive: true });
-  globalThis.addEventListener("resize", requestTick, { passive: true });
-  globalThis.addEventListener("wheel", handleUserScrollInput, { passive: false, capture: true });
-  globalThis.addEventListener("touchmove", handleUserScrollInput, {
-    passive: false,
-    capture: true,
-  });
-  globalThis.addEventListener("keydown", handleKeyDown, { capture: true });
-
-  update();
+  globalThis.addEventListener("scroll", scheduleFallback, { passive: true });
+  globalThis.addEventListener("resize", scheduleFallback, { passive: true });
+  scheduleFallback();
 
   return () => {
-    globalThis.removeEventListener("scroll", requestTick);
-    globalThis.removeEventListener("resize", requestTick);
-    globalThis.removeEventListener("wheel", handleUserScrollInput, { capture: true });
-    globalThis.removeEventListener("touchmove", handleUserScrollInput, { capture: true });
-    globalThis.removeEventListener("keydown", handleKeyDown, { capture: true });
-    if (stickyHeader) {
-      stickyHeader.style.transform = "";
+    observer?.disconnect();
+    if (rafId !== null) {
+      globalThis.cancelAnimationFrame(rafId);
     }
-    resumeScroll();
+    globalThis.removeEventListener("scroll", scheduleFallback);
+    globalThis.removeEventListener("resize", scheduleFallback);
   };
 }
 

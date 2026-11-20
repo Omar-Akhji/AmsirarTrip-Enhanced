@@ -278,12 +278,7 @@
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    html.skeleton-active .slider .list .item:first-child .blur-token {
-      opacity: 0;
-      animation: none;
-    }
-
-    html:not(.skeleton-active) .slider .list .item:is(:first-child, .is-incoming) .blur-token {
+    .slider .list .item:is(:first-child, .is-incoming) .blur-token {
       animation: blurTokenReveal var(--blur-duration, 0.65s) var(--ease-out-expo)
         var(--token-delay, 0ms) both;
     }
@@ -293,8 +288,7 @@
      5. Hero slider: 3D carousel
      ------------------------------------------------------------------------ */
 
-  #home-hero-slider,
-  #home-hero-slider-skeleton {
+  #home-hero-slider {
     /* Base (< 480px): Compact mobile */
     --thumb-width: 105px;
     --thumb-height: 155px;
@@ -676,6 +670,210 @@
     }
   }
 
+  @keyframes scale-y-fill {
+    from {
+      scale: 1 0;
+    }
+
+    to {
+      scale: 1 1;
+    }
+  }
+
+  @keyframes side-scroll-slide {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+
+    to {
+      transform: translate3d(calc(var(--side-dir, -1) * (100% - 100cqi)), 0, 0);
+    }
+  }
+
+  @keyframes folder-plate-rise {
+    0%,
+    45% {
+      opacity: 0;
+      transform: translateY(340px);
+    }
+
+    52.1% {
+      opacity: 1;
+    }
+
+    70%,
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes folder-front-rise {
+    0%,
+    45% {
+      opacity: 0;
+      transform: perspective(1000px) translateY(340px) rotateX(-24deg);
+    }
+
+    52.1% {
+      opacity: 1;
+    }
+
+    70%,
+    100% {
+      opacity: 1;
+      transform: perspective(1000px) translateY(0) rotateX(0deg);
+    }
+  }
+
+  @keyframes folder-card-0 {
+    0% {
+      opacity: 1;
+      transform: perspective(1200px) translateY(24px) rotateX(0deg) scale(1);
+    }
+
+    22% {
+      opacity: 1;
+      transform: perspective(1200px) translateY(24px) rotateX(-3.5deg) scale(0.95);
+    }
+
+    45%,
+    70% {
+      opacity: 1;
+      transform: perspective(1200px) translateY(24px) rotateX(-7deg) scale(0.9);
+    }
+
+    100% {
+      opacity: 1;
+      transform: perspective(1200px) translateY(143px) rotateX(-7deg) scale(0.8685);
+    }
+  }
+
+  @keyframes folder-card-1 {
+    0% {
+      opacity: 0;
+      transform: perspective(1200px) translateY(340px) rotateX(0deg) scale(1);
+    }
+
+    10% {
+      opacity: 1;
+    }
+
+    22% {
+      opacity: 1;
+      transform: perspective(1200px) translateY(40px) rotateX(0deg) scale(1);
+    }
+
+    45%,
+    70% {
+      opacity: 1;
+      transform: perspective(1200px) translateY(40px) rotateX(-3.5deg) scale(0.95);
+    }
+
+    100% {
+      opacity: 1;
+      transform: perspective(1200px) translateY(147px) rotateX(-3.5deg) scale(0.9168);
+    }
+  }
+
+  @keyframes folder-card-2 {
+    0%,
+    22% {
+      opacity: 0;
+      transform: perspective(1200px) translateY(340px) rotateX(0deg) scale(1);
+    }
+
+    32.5% {
+      opacity: 1;
+    }
+
+    45%,
+    70% {
+      opacity: 1;
+      transform: perspective(1200px) translateY(56px) rotateX(0deg) scale(1);
+    }
+
+    100% {
+      opacity: 1;
+      transform: perspective(1200px) translateY(151px) rotateX(0deg) scale(0.965);
+    }
+  }
+
+  @supports (animation-timeline: view()) {
+    [data-timeline-track] {
+      view-timeline: --itinerary-track block;
+      view-timeline-inset: var(--itinerary-trigger-offset, 10rem) 0;
+    }
+
+    [data-timeline-progress-fill] {
+      animation: scale-y-fill linear both;
+      animation-timeline: --itinerary-track;
+      animation-range: exit-crossing 0% exit-crossing 100%;
+    }
+  }
+
+  @supports (animation-timeline: view()) and (timeline-scope: --a) {
+    side-scroll {
+      timeline-scope: --side-scroll-tl;
+    }
+
+    [data-side-track] {
+      view-timeline: --side-scroll-tl block;
+    }
+
+    [data-side-slider] {
+      animation: side-scroll-slide linear both;
+      animation-timeline: --side-scroll-tl;
+      animation-range: contain 0% contain 100%;
+    }
+
+    [data-side-slider]:dir(rtl) {
+      --side-dir: 1;
+    }
+
+    folder-stack {
+      timeline-scope: --folder-tl;
+    }
+
+    [data-folder-track] {
+      view-timeline: --folder-tl block;
+    }
+
+    [data-folder-stage] .folder-back-plate {
+      animation: folder-plate-rise linear both;
+      animation-timeline: --folder-tl;
+      animation-range: contain 0% contain 100%;
+    }
+
+    [data-folder-stage] .folder-front-pocket {
+      transform-origin: bottom center;
+      animation: folder-front-rise linear both;
+      animation-timeline: --folder-tl;
+      animation-range: contain 0% contain 100%;
+    }
+
+    [data-folder-stage] [data-stack-card="0"] {
+      transform-origin: top center;
+      animation: folder-card-0 linear both;
+      animation-timeline: --folder-tl;
+      animation-range: contain 0% contain 100%;
+    }
+
+    [data-folder-stage] [data-stack-card="1"] {
+      transform-origin: top center;
+      animation: folder-card-1 linear both;
+      animation-timeline: --folder-tl;
+      animation-range: contain 0% contain 100%;
+    }
+
+    [data-folder-stage] [data-stack-card="2"] {
+      transform-origin: top center;
+      animation: folder-card-2 linear both;
+      animation-timeline: --folder-tl;
+      animation-range: contain 0% contain 100%;
+    }
+  }
+
   /* ------------------------------------------------------------------------
      7. Desktop & tablet navigation indicator (native CSS + fallback)
      ------------------------------------------------------------------------ */
@@ -918,9 +1116,18 @@
     [data-scroll-parallax]:not(:has(> .parallax-media)) > img,
     [data-scroll-cinematic],
     [data-scroll-wipe],
-    [data-scroll-split] {
+    [data-scroll-split],
+    [data-side-slider],
+    [data-folder-stage] .folder-back-plate,
+    [data-folder-stage] .folder-front-pocket,
+    [data-folder-stage] [data-stack-card] {
       animation: none;
       transform: none;
+    }
+
+    [data-timeline-progress-fill] {
+      animation: none;
+      scale: 1 1;
     }
 
     /* Page transitions */

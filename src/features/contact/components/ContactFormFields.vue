@@ -1,48 +1,71 @@
 <script setup lang="ts">
-import { computed, nextTick, ref, useId, useTemplateRef } from "vue";
+import { computed, nextTick, useId, useTemplateRef, ref } from "vue";
+import type { ContactFormCopy, ContactTopicOption } from "@/lib/form-copy";
 import type { FormState } from "@/lib/form-types";
-import { useTranslation } from "@/lib/hooks/use-translation";
 import PhoneInput from "@/shared/ui/widgets/PhoneInput.vue";
 
 interface Props {
+  copy: ContactFormCopy;
   state: FormState | null;
 }
 
-const { state } = defineProps<Props>();
+const { copy, state } = defineProps<Props>();
 
-const { t } = useTranslation();
-
-const topicDropdownId = `topic-dropdown-${useId().replaceAll(":", "")}`;
-const topicDropdownRef = useTemplateRef<HTMLElement>("topicDropdownRef");
+const topicPopoverId = `topic-popover-${useId().replaceAll(":", "")}`;
+const topicAnchorName = `--topic-anchor-${topicPopoverId}`;
+const topicPopoverRef = useTemplateRef<HTMLElement>("topicPopoverRef");
 const customTopicInputRef = useTemplateRef<HTMLInputElement>("customTopicInputRef");
-const isTopicOpen = ref(false);
+
 const selectedTopic = ref("");
 const customTopic = ref("");
 
-const topicOptions = computed(() => [
-  t("contact.form.topics.desert"),
-  t("contact.form.topics.custom"),
-  t("contact.form.topics.atlas"),
-  t("contact.form.topics.imperial"),
-  t("contact.form.topics.coastal"),
-  t("contact.form.topics.other"),
-]);
-
-const isOtherSelected = computed(() => selectedTopic.value === t("contact.form.topics.other"));
+const isOtherSelected = computed(() =>
+  copy.topics.some((topic) => Boolean(topic.isOther) && topic.label === selectedTopic.value),
+);
 
 const submittedTopic = computed(() =>
   isOtherSelected.value ? customTopic.value.trim() || selectedTopic.value : selectedTopic.value,
 );
 
-function handleTopicToggle(event: ToggleEvent) {
-  isTopicOpen.value = event.newState === "open";
+function chooseTopic(option: ContactTopicOption): void {
+  selectedTopic.value = option.label;
+  topicPopoverRef.value?.hidePopover();
+  if (option.isOther) {
+    void nextTick(() => customTopicInputRef.value?.focus());
+  }
 }
 
-function selectTopic(topic: string) {
-  selectedTopic.value = topic;
-  topicDropdownRef.value?.hidePopover();
-  if (topic === t("contact.form.topics.other")) {
-    void nextTick(() => customTopicInputRef.value?.focus());
+function handleListboxKeydown(event: KeyboardEvent): void {
+  const buttons = [
+    ...(topicPopoverRef.value?.querySelectorAll<HTMLButtonElement>('[role="option"]') ?? []),
+  ];
+  if (buttons.length === 0) return;
+
+  const activeIdx = buttons.indexOf(document.activeElement as HTMLButtonElement);
+  switch (event.key) {
+    case "ArrowDown": {
+      event.preventDefault();
+      buttons[(activeIdx + 1) % buttons.length]?.focus();
+      break;
+    }
+    case "ArrowUp": {
+      event.preventDefault();
+      buttons[(activeIdx - 1 + buttons.length) % buttons.length]?.focus();
+      break;
+    }
+    case "End": {
+      event.preventDefault();
+      buttons.at(-1)?.focus();
+      break;
+    }
+    case "Home": {
+      event.preventDefault();
+      buttons[0]?.focus();
+      break;
+    }
+    default: {
+      break;
+    }
   }
 }
 </script>
@@ -50,7 +73,7 @@ function selectTopic(topic: string) {
 <template>
   <fieldset class="m-0 flex flex-col gap-5 border-0 p-0">
     <legend class="sr-only">
-      {{ t("contact.form.details") }}
+      {{ copy.details }}
     </legend>
     <div class="grid gap-5 md:grid-cols-2">
       <div class="min-w-0">
@@ -58,16 +81,16 @@ function selectTopic(topic: string) {
           for="contact-name"
           class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700 dark:text-stone-300"
         >
-          {{ t("contact.form.fields.name") }}
+          {{ copy.name }}
           <span
             class="text-orange-600"
             aria-hidden="true"
             >*</span
           >
         </label>
-        <div class="relative">
+        <div class="group relative">
           <svg
-            class="pointer-events-none absolute inset-s-3.5 top-1/2 size-4.5 -translate-y-1/2 text-stone-400 transition-colors peer-focus:text-orange-500 dark:text-stone-500"
+            class="pointer-events-none absolute inset-s-3.5 top-1/2 size-4.5 -translate-y-1/2 text-stone-400 transition-colors group-focus-within:text-orange-500 dark:text-stone-500"
             viewBox="0 0 24 24"
             fill="none"
             aria-hidden="true"
@@ -90,8 +113,9 @@ function selectTopic(topic: string) {
             id="contact-name"
             name="name"
             type="text"
-            class="peer h-12 rounded-xl border border-stone-200/90 bg-stone-50/50 ps-10.5 pe-4 font-sans text-sm text-stone-900 transition-colors inline-full placeholder:text-stone-400 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden dark:border-white/10 dark:bg-white/5 dark:text-mist-100 dark:placeholder:text-mist-500 dark:focus:border-orange-500 dark:focus:bg-white/10"
-            :placeholder="t('contact.form.placeholders.name')"
+            class="h-12 rounded-xl border border-stone-200/90 bg-stone-50/50 ps-10.5 pe-4 font-sans text-sm text-stone-900 transition-colors inline-full placeholder:text-stone-400 user-invalid:border-red-400 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden user-invalid:focus:ring-red-400/20 dark:border-white/10 dark:bg-white/5 dark:text-mist-100 dark:placeholder:text-mist-500 dark:focus:border-orange-500 dark:focus:bg-white/10"
+            :placeholder="copy.namePlaceholder"
+            :minlength="2"
             :maxlength="100"
             toolparamdescription="The full name of the contact person"
             autocomplete="name"
@@ -108,21 +132,22 @@ function selectTopic(topic: string) {
           {{ state.errors["name"] }}
         </p>
       </div>
+
       <div class="min-w-0">
         <label
           for="contact-email"
           class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700 dark:text-stone-300"
         >
-          {{ t("contact.form.fields.email") }}
+          {{ copy.email }}
           <span
             class="text-orange-600"
             aria-hidden="true"
             >*</span
           >
         </label>
-        <div class="relative">
+        <div class="group relative">
           <svg
-            class="pointer-events-none absolute inset-s-3.5 top-1/2 size-4.5 -translate-y-1/2 text-stone-400 transition-colors peer-focus:text-orange-500 dark:text-stone-500"
+            class="pointer-events-none absolute inset-s-3.5 top-1/2 size-4.5 -translate-y-1/2 text-stone-400 transition-colors group-focus-within:text-orange-500 dark:text-stone-500"
             viewBox="0 0 24 24"
             fill="none"
             aria-hidden="true"
@@ -144,8 +169,9 @@ function selectTopic(topic: string) {
             id="contact-email"
             name="email"
             type="email"
-            class="peer h-12 rounded-xl border border-stone-200/90 bg-stone-50/50 ps-10.5 pe-4 font-sans text-sm text-stone-900 transition-colors inline-full placeholder:text-stone-400 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden dark:border-white/10 dark:bg-white/5 dark:text-mist-100 dark:placeholder:text-mist-500 dark:focus:border-orange-500 dark:focus:bg-white/10"
-            :placeholder="t('contact.form.placeholders.email')"
+            class="h-12 rounded-xl border border-stone-200/90 bg-stone-50/50 ps-10.5 pe-4 font-sans text-sm text-stone-900 transition-colors inline-full placeholder:text-stone-400 user-invalid:border-red-400 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden user-invalid:focus:ring-red-400/20 dark:border-white/10 dark:bg-white/5 dark:text-mist-100 dark:placeholder:text-mist-500 dark:focus:border-orange-500 dark:focus:bg-white/10"
+            :placeholder="copy.emailPlaceholder"
+            :maxlength="254"
             toolparamdescription="The email address of the contact person"
             autocomplete="email"
             required
@@ -169,7 +195,7 @@ function selectTopic(topic: string) {
           for="contact-phone"
           class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700 dark:text-stone-300"
         >
-          {{ t("contact.form.fields.phone") }}
+          {{ copy.phone }}
           <span
             class="text-orange-600"
             aria-hidden="true"
@@ -179,7 +205,8 @@ function selectTopic(topic: string) {
         <PhoneInput
           id="contact-phone"
           name="phone"
-          :placeholder="t('contact.form.placeholders.phone')"
+          :labels="copy.phoneLabels"
+          :placeholder="copy.phonePlaceholder"
           toolparamdescription="The phone/WhatsApp number of the contact person"
           :aria-invalid="state?.errors?.['phone'] ? 'true' : 'false'"
           :aria-describedby="state?.errors?.['phone'] ? 'phone-error' : undefined"
@@ -193,16 +220,17 @@ function selectTopic(topic: string) {
           {{ state.errors["phone"] }}
         </p>
       </div>
+
       <div class="min-w-0">
         <label
           for="contact-topic"
           class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700 dark:text-stone-300"
         >
-          {{ t("contact.form.fields.topic") }}
+          {{ copy.topic }}
         </label>
-        <div class="relative">
+        <div class="group relative">
           <svg
-            class="pointer-events-none absolute inset-s-3.5 top-1/2 z-10 size-4.5 -translate-y-1/2 text-stone-400 transition-colors dark:text-stone-500"
+            class="pointer-events-none absolute inset-s-3.5 top-1/2 z-10 size-4.5 -translate-y-1/2 text-stone-400 transition-colors group-focus-within:text-orange-500 group-has-[:popover-open]:text-orange-500 dark:text-stone-500"
             viewBox="0 0 24 24"
             fill="none"
             aria-hidden="true"
@@ -219,34 +247,34 @@ function selectTopic(topic: string) {
               stroke-linecap="round"
             />
           </svg>
+
           <input
             type="hidden"
             name="topic"
             :value="submittedTopic"
             toolparamdescription="The specific enquiry type, e.g., book a tour, plan a custom route, existing booking"
           />
+
           <button
             id="contact-topic"
             type="button"
-            :popovertarget="topicDropdownId"
+            :popovertarget="topicPopoverId"
             popovertargetaction="toggle"
-            :aria-expanded="isTopicOpen"
-            :aria-controls="topicDropdownId"
+            :aria-controls="topicPopoverId"
             aria-haspopup="listbox"
-            :style="{ anchorName: `--topic-anchor-${topicDropdownId}` }"
-            class="flex h-12 w-full cursor-pointer items-center justify-between gap-2 rounded-xl border border-stone-200/90 bg-stone-50/50 ps-10.5 pe-3.5 text-start font-sans text-sm transition-colors hover:bg-stone-100/70 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden dark:border-white/10 dark:bg-white/5 dark:hover:bg-white/10 dark:focus:border-orange-500 dark:focus:bg-white/10"
+            :style="{ anchorName: topicAnchorName }"
+            class="flex h-12 w-full cursor-pointer items-center justify-between gap-2 rounded-xl border border-stone-200/90 bg-stone-50/50 ps-10.5 pe-3.5 text-start font-sans text-sm transition-colors group-has-[:popover-open]:border-orange-500 group-has-[:popover-open]:bg-white group-has-[:popover-open]:ring-2 group-has-[:popover-open]:ring-orange-500/20 hover:bg-stone-100/70 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden dark:border-white/10 dark:bg-white/5 dark:group-has-[:popover-open]:border-orange-500 dark:group-has-[:popover-open]:bg-white/10 dark:hover:bg-white/10 dark:focus:border-orange-500 dark:focus:bg-white/10"
             :class="
               selectedTopic ?
                 'text-stone-900 dark:text-mist-100'
-              : 'text-stone-400 dark:text-stone-500'
+              : 'text-stone-600 dark:text-mist-300'
             "
           >
             <span class="truncate">
-              {{ selectedTopic || t("contact.form.placeholders.topic") }}
+              {{ selectedTopic || copy.topicPlaceholder }}
             </span>
             <svg
-              class="size-3.5 shrink-0 text-stone-400 transition-colors dark:text-mist-400"
-              :class="{ 'text-stone-700 dark:text-mist-200': isTopicOpen }"
+              class="size-3.5 shrink-0 text-stone-400 transition-colors group-has-[:popover-open]:text-stone-700 dark:text-mist-400 dark:group-has-[:popover-open]:text-mist-200"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -254,76 +282,55 @@ function selectTopic(topic: string) {
               aria-hidden="true"
             >
               <path
-                d="M13.5 19.5L12 21L6 15"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M16.5 16.5L18 15"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M13.5 4.5L12 3L6 9"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M16.5 7.5L18 9"
+                d="M13.5 19.5L12 21L6 15M16.5 16.5L18 15M13.5 4.5L12 3L6 9M16.5 7.5L18 9"
                 stroke-linecap="round"
                 stroke-linejoin="round"
               />
             </svg>
           </button>
+
           <div
-            :id="topicDropdownId"
-            ref="topicDropdownRef"
+            :id="topicPopoverId"
+            ref="topicPopoverRef"
             popover="auto"
-            role="listbox"
-            :aria-label="t('contact.form.fields.topic')"
-            class="fixed inset-0 z-50 m-auto max-h-[min(22rem,calc(50dvh-2.5rem))] w-[min(24rem,calc(100vw-2rem))] max-w-[calc(100vw-2rem)] overflow-x-hidden overflow-y-auto rounded-xl border border-stone-200/90 bg-white p-0 text-stone-900 shadow-xl shadow-stone-900/10 backdrop:bg-black/20 supports-[top:anchor(bottom)]:inset-auto supports-[top:anchor(bottom)]:top-[calc(anchor(bottom)+6px)] supports-[top:anchor(bottom)]:left-[anchor(left)] supports-[top:anchor(bottom)]:m-0 supports-[top:anchor(bottom)]:[position-try-fallbacks:flip-block,flip-inline] supports-[top:anchor(bottom)]:backdrop:bg-transparent supports-[width:anchor-size(width)]:w-[anchor-size(width)] dark:border-white/10 dark:bg-surface-card dark:text-mist-100 dark:shadow-[0_16px_40px_rgba(0,0,0,0.65)]"
-            :style="{ positionAnchor: `--topic-anchor-${topicDropdownId}` }"
-            @toggle="handleTopicToggle"
+            :style="{ positionAnchor: topicAnchorName }"
+            class="fixed inset-0 z-50 m-auto w-[min(24rem,calc(100vw-2rem))] max-w-[calc(100vw-2rem)] overflow-hidden rounded-xl border border-stone-200/90 bg-white p-0 text-stone-900 opacity-0 shadow-xl shadow-stone-900/10 transition-[opacity,transform,display,overlay] transition-discrete duration-200 backdrop:bg-black/20 open:opacity-100 supports-[top:anchor(bottom)]:inset-auto supports-[top:anchor(bottom)]:top-[calc(anchor(bottom)+6px)] supports-[top:anchor(bottom)]:left-[anchor(left)] supports-[top:anchor(bottom)]:m-0 supports-[top:anchor(bottom)]:[position-try-fallbacks:flip-block,flip-inline] supports-[top:anchor(bottom)]:backdrop:bg-transparent supports-[width:anchor-size(width)]:w-[anchor-size(width)] dark:border-white/10 dark:bg-surface-card dark:text-mist-100 dark:shadow-[0_16px_40px_rgba(0,0,0,0.65)] starting:open:opacity-0"
           >
-            <div v-if="isTopicOpen">
-              <div class="flex flex-col p-1.5">
-                <div
-                  class="divide-y divide-stone-100/60 overflow-hidden rounded-[6px] dark:divide-white/5"
-                  tabindex="-1"
+            <div
+              class="flex flex-col px-(--scrollbar-space) py-1 [--scrollbar-space:8px] [--scrollbar-theme:hsl(0deg_0%_75%)]"
+            >
+              <div
+                role="listbox"
+                tabindex="-1"
+                :aria-label="copy.topic"
+                class="max-h-48 divide-y divide-stone-100/60 overflow-x-hidden overflow-y-auto overscroll-y-contain pe-(--scrollbar-space) supports-[-moz-appearance:none]:scrollbar-thin supports-[-moz-appearance:none]:[scrollbar-color:color-mix(in_sRGB,var(--scrollbar-theme,hsl(0deg_0%_75%)),transparent_28%)_transparent] dark:divide-white/5 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-button]:hidden [&::-webkit-scrollbar-button]:size-0 [&::-webkit-scrollbar-thumb]:rounded-[1000px] [&::-webkit-scrollbar-thumb]:bg-[color-mix(in_sRGB,var(--scrollbar-theme,hsl(0deg_0%_75%)),transparent_28%)] [&::-webkit-scrollbar-thumb:hover]:bg-[color-mix(in_sRGB,var(--scrollbar-theme,hsl(0deg_0%_75%)),transparent_12%)] [&::-webkit-scrollbar-track]:my-2.5 [&::-webkit-scrollbar-track]:rounded-[1000px] [&::-webkit-scrollbar-track]:bg-[color-mix(in_sRGB,var(--scrollbar-theme,hsl(0deg_0%_75%)),transparent_82%)] [&::-webkit-scrollbar-track]:bg-clip-padding"
+                @keydown="handleListboxKeydown"
+              >
+                <button
+                  v-for="option in copy.topics"
+                  :key="option.label"
+                  type="button"
+                  role="option"
+                  :aria-selected="selectedTopic === option.label"
+                  class="flex min-h-11 w-full cursor-pointer items-center justify-between gap-2 rounded-none px-3 py-2.5 text-start font-sans text-xs/snug wrap-break-word text-stone-800 transition-colors hover:bg-stone-100 focus:bg-stone-100 focus:outline-hidden active:bg-stone-200/70 aria-selected:bg-stone-100 aria-selected:font-medium aria-selected:text-stone-900 dark:text-mist-200 dark:hover:bg-white/5 dark:focus:bg-white/5 dark:aria-selected:bg-white/10 dark:aria-selected:text-mist-100"
+                  @click="chooseTopic(option)"
                 >
-                  <button
-                    v-for="option in topicOptions"
-                    :key="option"
-                    type="button"
-                    role="option"
-                    :aria-selected="selectedTopic === option"
-                    class="flex min-h-11 w-full cursor-pointer items-center justify-between gap-2 rounded-none px-3 py-2.5 text-start transition-colors hover:bg-stone-100 focus:bg-stone-100 focus:outline-hidden active:bg-stone-200/70 dark:hover:bg-white/5 dark:focus:bg-white/5"
-                    :class="{
-                      'bg-stone-100 font-medium text-stone-900 dark:bg-white/10 dark:text-mist-100':
-                        selectedTopic === option,
-                    }"
-                    @click="selectTopic(option)"
-                  >
-                    <span
-                      class="block text-start font-sans text-xs/snug wrap-break-word text-stone-800 dark:text-mist-200"
-                    >
-                      {{ option }}
-                    </span>
-                  </button>
-                </div>
+                  <span>{{ option.label }}</span>
+                </button>
               </div>
             </div>
           </div>
         </div>
+
         <input
           v-if="isOtherSelected"
           ref="customTopicInputRef"
           v-model="customTopic"
           type="text"
-          maxlength="120"
-          :placeholder="t('contact.form.placeholders.customTopic')"
-          :aria-label="t('contact.form.placeholders.customTopic')"
-          class="mt-2.5 h-12 w-full rounded-xl border border-stone-200/90 bg-stone-50/50 px-4 font-sans text-sm text-stone-900 transition-colors placeholder:text-stone-400 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden dark:border-white/10 dark:bg-white/5 dark:text-mist-100 dark:placeholder:text-mist-500 dark:focus:border-orange-500 dark:focus:bg-white/10"
+          :maxlength="120"
+          :placeholder="copy.customTopicPlaceholder"
+          :aria-label="copy.customTopicPlaceholder"
+          class="mbs-2.5 h-12 w-full rounded-xl border border-stone-200/90 bg-stone-50/50 px-4 font-sans text-sm text-stone-900 transition-colors placeholder:text-stone-400 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden dark:border-white/10 dark:bg-white/5 dark:text-mist-100 dark:placeholder:text-mist-500 dark:focus:border-orange-500 dark:focus:bg-white/10"
         />
       </div>
     </div>
@@ -333,16 +340,16 @@ function selectTopic(topic: string) {
         for="contact-message"
         class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700 dark:text-stone-300"
       >
-        {{ t("contact.form.fields.message") }}
+        {{ copy.message }}
         <span
           class="text-orange-600"
           aria-hidden="true"
           >*</span
         >
       </label>
-      <div class="relative">
+      <div class="group relative">
         <svg
-          class="pointer-events-none absolute inset-s-3.5 top-3.5 size-4.5 text-stone-400 transition-colors peer-focus:text-orange-500 dark:text-stone-500"
+          class="pointer-events-none absolute inset-s-3.5 top-3.5 size-4.5 text-stone-400 transition-colors group-focus-within:text-orange-500 dark:text-stone-500"
           viewBox="0 0 24 24"
           fill="none"
           aria-hidden="true"
@@ -375,8 +382,9 @@ function selectTopic(topic: string) {
         <textarea
           id="contact-message"
           name="message"
-          class="peer overflow-auto rounded-xl border border-stone-200/90 bg-stone-50/50 py-3 ps-10.5 pe-4 font-sans text-sm text-stone-900 transition-colors inline-full min-block-40 placeholder:text-stone-400 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden dark:border-white/10 dark:bg-white/5 dark:text-mist-100 dark:placeholder:text-mist-500 dark:focus:border-orange-500 dark:focus:bg-white/10"
-          :placeholder="t('contact.form.placeholders.message')"
+          class="field-sizing-content overflow-auto rounded-xl border border-stone-200/90 bg-stone-50/50 py-3 ps-10.5 pe-4 font-sans text-sm text-stone-900 transition-colors inline-full max-block-80 min-block-40 placeholder:text-stone-400 user-invalid:border-red-400 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden user-invalid:focus:ring-red-400/20 dark:border-white/10 dark:bg-white/5 dark:text-mist-100 dark:placeholder:text-mist-500 dark:focus:border-orange-500 dark:focus:bg-white/10"
+          :placeholder="copy.messagePlaceholder"
+          :minlength="10"
           :maxlength="1000"
           toolparamdescription="The detailed message or description of the custom Morocco itinerary/dream tour request"
           autocomplete="off"

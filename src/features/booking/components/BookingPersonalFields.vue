@@ -1,21 +1,20 @@
 <script setup lang="ts">
+import type { BookingFormCopy } from "@/lib/form-copy";
 import type { FormState } from "@/lib/form-types";
-import { useTranslation } from "@/lib/hooks/use-translation";
 import PhoneInput from "@/shared/ui/widgets/PhoneInput.vue";
 
 interface Props {
+  copy: BookingFormCopy;
   state: FormState | null;
 }
 
-const { state } = defineProps<Props>();
-
-const { t } = useTranslation();
+defineProps<Props>();
 </script>
 
 <template>
   <fieldset class="m-0 flex flex-col gap-5 border-0 p-0">
     <legend class="sr-only">
-      {{ t("booking.personalDetails") }}
+      {{ copy.personalDetails }}
     </legend>
     <div class="grid items-start gap-5 md:grid-cols-2">
       <div>
@@ -23,16 +22,16 @@ const { t } = useTranslation();
           for="fullName"
           class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700 dark:text-mist-200"
         >
-          {{ t("booking.fullName") }}
+          {{ copy.fullName }}
           <span
             class="text-orange-600"
             aria-hidden="true"
             >*</span
           >
         </label>
-        <div class="relative">
+        <div class="group relative">
           <svg
-            class="pointer-events-none absolute inset-s-3.5 top-1/2 size-4.5 -translate-y-1/2 text-stone-400 transition-colors peer-focus:text-orange-500 dark:text-mist-400"
+            class="pointer-events-none absolute inset-s-3.5 top-1/2 size-4.5 -translate-y-1/2 text-stone-400 transition-colors group-focus-within:text-orange-500 dark:text-mist-400"
             viewBox="0 0 24 24"
             fill="none"
             aria-hidden="true"
@@ -53,8 +52,9 @@ const { t } = useTranslation();
           </svg>
           <input
             id="fullName"
-            class="peer h-12 rounded-xl border border-stone-200/90 bg-stone-50/50 ps-10.5 pe-4 font-sans text-sm text-stone-900 transition-colors inline-full placeholder:text-stone-400 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden dark:border-white/10 dark:bg-white/5 dark:text-mist-100 dark:placeholder:text-mist-500 dark:focus:border-orange-500 dark:focus:bg-white/10"
-            :placeholder="t('booking.placeholders.fullName')"
+            class="h-12 rounded-xl border border-stone-200/90 bg-stone-50/50 ps-10.5 pe-4 font-sans text-sm text-stone-900 transition-colors inline-full placeholder:text-stone-400 user-invalid:border-red-400 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden user-invalid:focus:ring-red-400/20 dark:border-white/10 dark:bg-white/5 dark:text-mist-100 dark:placeholder:text-mist-500 dark:focus:border-orange-500 dark:focus:bg-white/10"
+            :placeholder="copy.fullNamePlaceholder"
+            :minlength="2"
             :maxlength="100"
             type="text"
             name="fullName"
@@ -79,16 +79,16 @@ const { t } = useTranslation();
           for="email"
           class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700 dark:text-mist-200"
         >
-          {{ t("booking.email") }}
+          {{ copy.email }}
           <span
             class="text-orange-600"
             aria-hidden="true"
             >*</span
           >
         </label>
-        <div class="relative">
+        <div class="group relative">
           <svg
-            class="pointer-events-none absolute inset-s-3.5 top-1/2 size-4.5 -translate-y-1/2 text-stone-400 transition-colors peer-focus:text-orange-500 dark:text-mist-400"
+            class="pointer-events-none absolute inset-s-3.5 top-1/2 size-4.5 -translate-y-1/2 text-stone-400 transition-colors group-focus-within:text-orange-500 dark:text-mist-400"
             viewBox="0 0 24 24"
             fill="none"
             aria-hidden="true"
@@ -108,8 +108,9 @@ const { t } = useTranslation();
           </svg>
           <input
             id="email"
-            class="peer h-12 rounded-xl border border-stone-200/90 bg-stone-50/50 ps-10.5 pe-4 font-sans text-sm text-stone-900 transition-colors inline-full placeholder:text-stone-400 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden dark:border-white/10 dark:bg-white/5 dark:text-mist-100 dark:placeholder:text-mist-500 dark:focus:border-orange-500 dark:focus:bg-white/10"
-            :placeholder="t('booking.placeholders.email')"
+            class="h-12 rounded-xl border border-stone-200/90 bg-stone-50/50 ps-10.5 pe-4 font-sans text-sm text-stone-900 transition-colors inline-full placeholder:text-stone-400 user-invalid:border-red-400 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden user-invalid:focus:ring-red-400/20 dark:border-white/10 dark:bg-white/5 dark:text-mist-100 dark:placeholder:text-mist-500 dark:focus:border-orange-500 dark:focus:bg-white/10"
+            :placeholder="copy.emailPlaceholder"
+            :maxlength="254"
             type="email"
             name="email"
             toolparamdescription="The email address of the guest"
@@ -134,7 +135,7 @@ const { t } = useTranslation();
         for="booking-phone"
         class="mbe-1.5 block font-sans text-xs font-semibold tracking-wide text-stone-700 dark:text-mist-200"
       >
-        {{ t("booking.phone") }}
+        {{ copy.phone }}
         <span
           class="text-orange-600"
           aria-hidden="true"
@@ -144,7 +145,8 @@ const { t } = useTranslation();
       <PhoneInput
         id="booking-phone"
         name="phone"
-        :placeholder="t('booking.placeholders.phone')"
+        :labels="copy.phoneLabels"
+        :placeholder="copy.phonePlaceholder"
         toolparamdescription="The contact phone/WhatsApp number of the guest"
         :aria-invalid="state?.errors?.['phone'] ? 'true' : 'false'"
         :aria-describedby="state?.errors?.['phone'] ? 'phone-error' : undefined"

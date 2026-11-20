@@ -5,6 +5,7 @@ import ContactInfoSidebar from "../../features/contact/components/ContactInfoSid
 import ContactView from "../../features/contact/components/ContactView.astro";
 import { useTranslations } from "../../i18n/utils";
 import Layout from "../../layouts/Layout.astro";
+import { getContactFormCopy } from "../../lib/form-copy";
 import { generateBreadcrumbJsonLd, generateContactPageJsonLd } from "../../lib/structured-data";
 import JsonLd from "../../shared/ui/primitives/JsonLd.astro";
 
@@ -41,6 +42,7 @@ const contactPageJsonLd = generateContactPageJsonLd({
   <ContactView>
     <ContactForm
       client:visible
+      copy={getContactFormCopy(t)}
       locale={locale}
     >
       <ContactInfoSidebar slot="sidebar" />

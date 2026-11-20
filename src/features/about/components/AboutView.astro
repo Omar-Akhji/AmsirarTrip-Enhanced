@@ -10,7 +10,7 @@ import { splitTitleAccent } from "@/lib/utils";
 import { Image } from "astro:assets";
 import QuoteIcon from "@/shared/ui/icons/QuoteIcon.astro";
 
-const locale = Astro.currentLocale || "en";
+const locale = Astro.locals.locale;
 const t = useTranslations(locale);
 
 const storyTitle = splitTitleAccent(t("about.ourStory"));

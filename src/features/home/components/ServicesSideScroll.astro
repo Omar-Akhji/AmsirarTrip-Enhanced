@@ -11,19 +11,25 @@ interface Props {
 }
 
 const { services } = Astro.props;
-const locale = Astro.currentLocale || "en";
+const locale = Astro.locals.locale;
 const t = useTranslations(locale);
 ---
 
-<services-side-scroll class="block relative w-full overflow-visible">
-  <!-- Scroll runway: comfortable vertical scroll distance to smoothly transition all service cards from side -->
-  <div class="services-side-track relative w-full h-auto motion-safe:h-[200vh]">
-    <!-- Pinned Stage: Stays sticky in the viewport, using full container width -->
-    <div class="services-side-stage static motion-safe:sticky motion-safe:top-20 w-full overflow-x-auto motion-safe:overflow-hidden py-4">
-      <!-- Horizontal Slider: translates horizontally on scroll with natural equal card heights -->
-      <div class="services-side-slider flex items-stretch gap-6 will-change-transform overflow-x-auto snap-x motion-safe:overflow-visible motion-safe:snap-none pb-4">
+<side-scroll class="block relative w-full overflow-visible">
+  <div
+    class="services-side-track relative w-full h-auto motion-safe:h-[200vh]"
+    data-side-track
+  >
+    <div
+      class="services-side-stage static motion-safe:sticky motion-safe:top-20 w-full @container overflow-hidden py-4"
+      data-side-stage
+    >
+      <div
+        class="services-side-slider flex w-full flex-col items-stretch gap-6 will-change-transform motion-safe:w-max motion-safe:flex-row pb-4"
+        data-side-slider
+      >
         {services.map(({ icon: Icon, ...service }) => (
-          <div class="w-full shrink-0 flex flex-col snap-start motion-safe:snap-none">
+          <div class="w-[100cqi] shrink-0 flex flex-col snap-start motion-safe:snap-none">
             <article class="group relative flex size-full flex-col items-center rounded-2xl border border-white/10 bg-white/10 p-6 sm:p-8 text-center shadow-xs ring-1 ring-black/5 backdrop-blur-xl transition-all duration-300 pointer-fine:hover:-translate-y-1 pointer-fine:hover:shadow-[0_12px_36px_rgba(0,0,0,0.35)]">
               <div class="mbe-6 inline-flex size-25 items-center justify-center rounded-full bg-white/5 ring-1 ring-white/10 transition-transform duration-300 pointer-fine:group-hover:scale-105">
                 <Icon
@@ -43,6 +49,6 @@ const t = useTranslations(locale);
       </div>
     </div>
   </div>
-</services-side-scroll>
+</side-scroll>
 
-<script src="../scripts/services-side-scroll.ts"></script>
+<script src="@/scripts/side-scroll.ts"></script>

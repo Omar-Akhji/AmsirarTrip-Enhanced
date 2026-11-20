@@ -97,7 +97,7 @@ function setupDesktopNav(): void {
       currentActiveLink = link;
       currentHoveredLink = link;
       for (const other of links) {
-        other.toggleAttribute("aria-current", other === link);
+        other.ariaCurrent = other === link ? "page" : null;
       }
       setIndicator(link, false);
     });

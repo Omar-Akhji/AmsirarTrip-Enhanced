@@ -334,7 +334,7 @@ test.describe("Google Core Web Vitals Suite", () => {
     });
     await page.waitForTimeout(200);
 
-    const filterBtn = page.locator("button[data-city-filter]").first();
+    const filterBtn = page.locator("label.hub-filter-btn").nth(1);
     if (await filterBtn.isVisible()) {
       await filterBtn.click();
       await page.waitForTimeout(100);
@@ -360,6 +360,8 @@ test.describe("Google Core Web Vitals Suite", () => {
 
     const faqSummary = page.locator("details summary").first();
     if (await faqSummary.isVisible()) {
+      await faqSummary.scrollIntoViewIfNeeded();
+      await page.waitForTimeout(200);
       await faqSummary.click();
       await page.waitForTimeout(100);
     }
@@ -380,6 +382,8 @@ test.describe("Google Core Web Vitals Suite", () => {
 
     const nameInput = page.locator("input#contact-name, input[name='name']").first();
     if (await nameInput.isVisible()) {
+      await nameInput.scrollIntoViewIfNeeded();
+      await page.waitForTimeout(200);
       await nameInput.click();
       await nameInput.fill("Omar");
     }

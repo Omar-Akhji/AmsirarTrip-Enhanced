@@ -1,3 +1,5 @@
+import type { z } from "astro/zod";
+import type { BookingSchema, ContactSchema, NewsletterSchema } from "@/lib/schemas";
 import {
   BOOKING_EMAIL_ATTACHMENTS,
   CONTACT_EMAIL_ATTACHMENTS,
@@ -12,30 +14,9 @@ import {
   sanitizeHeaderValue,
 } from "./form-helpers";
 
-export interface BookingEmailInput {
-  date: string;
-  duration?: number | string | undefined;
-  email: string;
-  fullName: string;
-  language?: string | undefined;
-  message?: string | undefined;
-  persons: number;
-  phone: string;
-  reservationType: string;
-}
-
-export interface ContactEmailInput {
-  email: string;
-  message: string;
-  name: string;
-  phone: string;
-  topic?: string | undefined;
-}
-
-export interface NewsletterEmailInput {
-  email: string;
-  name: string;
-}
+export type BookingEmailInput = Omit<z.output<BookingSchema>, "recaptchaToken">;
+export type ContactEmailInput = Omit<z.output<ContactSchema>, "recaptchaToken">;
+export type NewsletterEmailInput = Omit<z.output<NewsletterSchema>, "recaptchaToken">;
 
 export interface PreparedEmail {
   attachments?: readonly InlineCidAttachment[];
@@ -53,16 +34,95 @@ interface ActionButton {
   label: string;
 }
 
-/** Sanitize phone to pure international digits for direct WhatsApp wa.me links */
-function toWhatsAppDigits(phone: string): string {
-  const digits = phone.replaceAll(/\D/g, "");
-  return digits.startsWith("0") ? digits.slice(1) : digits;
+interface DetailRow {
+  href?: string;
+  isAccent?: boolean;
+  label: string;
+  linkColor?: string;
+  value: string;
 }
 
-/**
- * Seamless, full-width responsive email layout for Amsirar Trip. Zero outer card-in-card margins on
- * mobile for maximum screen real estate.
- */
+/** Strip non-digits and leading international trunk zeros (e.g. 00212... -> 212...) for wa.me */
+function toWhatsAppDigits(phone: string): string {
+  return phone.replaceAll(/\D/g, "").replace(/^0+/, "");
+}
+
+function buildContactActionButtons(
+  safeReplyTo: string,
+  phone: string,
+  subject: string,
+  waMessage: string,
+): ActionButton[] {
+  const waDigits = toWhatsAppDigits(phone);
+  const waUrl = waDigits ? `https://wa.me/${waDigits}?text=${encodeURIComponent(waMessage)}` : "";
+
+  return [
+    {
+      label: "Reply by Email",
+      href: `mailto:${safeReplyTo}?subject=${encodeURIComponent(subject)}`,
+      borderColor: "#ea580c",
+      color: "#ea580c",
+      iconSrc: `cid:${EMAIL_CID.emailIcon}`,
+    },
+    ...(waUrl ?
+      [
+        {
+          label: "Chat on WhatsApp",
+          href: waUrl,
+          borderColor: "#16a34a",
+          color: "#16a34a",
+          iconSrc: `cid:${EMAIL_CID.whatsappIcon}`,
+        },
+      ]
+    : []),
+    {
+      label: "Call Phone",
+      href: `tel:${phone.replaceAll(/\s+/g, "")}`,
+      borderColor: "#292524",
+      color: "#292524",
+      iconSrc: `cid:${EMAIL_CID.phoneIcon}`,
+    },
+  ];
+}
+
+function renderDetailTable(rows: readonly DetailRow[]): string {
+  const rowsHtml = rows
+    .map((row, index) => {
+      const borderStyle = index < rows.length - 1 ? " border-bottom: 1px solid #e7e5e4;" : "";
+      const valueColor = row.isAccent ? "#ea580c" : "#1c1917";
+      const valueWeight = row.isAccent ? "700" : "600";
+      const valueFontSize = row.isAccent ? "14.5px" : "13.5px";
+      const escapedValue = escapeHtml(row.value);
+      const renderedValue =
+        row.href ?
+          `<a href="${escapeHtml(row.href)}" style="color: ${row.linkColor ?? "#ea580c"}; text-decoration: none;">${escapedValue}</a>`
+        : escapedValue;
+
+      return `
+      <tr>
+        <td style="padding: 11px 16px;${borderStyle}">
+          <div style="font-size: 11px; font-weight: 600; color: #78716c; text-transform: uppercase; letter-spacing: 0.5px;">${escapeHtml(row.label)}</div>
+          <div style="font-size: ${valueFontSize}; font-weight: ${valueWeight}; color: ${valueColor}; margin-top: 3px; line-height: 1.35;">${renderedValue}</div>
+        </td>
+      </tr>`;
+    })
+    .join("");
+
+  return `<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #fafaf9; border: 1px solid #e7e5e4; border-radius: 12px; margin-bottom: 20px; overflow: hidden;">${rowsHtml}</table>`;
+}
+
+function renderSectionLabel(label: string): string {
+  return `<div style="font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #a8a29e; margin-bottom: 8px;">${escapeHtml(label)}</div>`;
+}
+
+function renderMessageBox(label: string, message: string): string {
+  return `
+    ${renderSectionLabel(label)}
+    <div style="background-color: #fafaf9; border: 1px solid #e7e5e4; border-radius: 12px; padding: 12px 16px; margin-bottom: 20px;">
+      <p style="margin: 0; padding: 0; font-size: 13.5px; line-height: 1.55; color: #292524; white-space: pre-line;">${escapeHtml(message)}</p>
+    </div>`;
+}
+
 function wrapEmailLayout({
   badgeText,
   badgeBg,
@@ -121,7 +181,6 @@ function wrapEmailLayout({
   <meta name="color-scheme" content="light" />
   <meta name="supported-color-schemes" content="light" />
   <title>${escapeHtml(headline ?? badgeText)}</title>
-  <!-- Montserrat font matching the website -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Yellowtail&display=swap" rel="stylesheet" />
@@ -130,67 +189,31 @@ function wrapEmailLayout({
       font-family: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
     @media only screen and (max-width: 600px) {
-      .email-main-table {
-        width: 100%;
-        max-width: 100%;
-      }
-      .email-header-cell {
-        padding: 22px 14px 18px 14px;
-      }
-      .email-content-cell {
-        padding: 22px 14px 18px 14px;
-      }
-      .email-footer-cell {
-        padding: 16px 14px 22px 14px;
-      }
-      .btn-stack-table tr {
-        display: block;
-        width: 100%;
-      }
-      .btn-stack-cell {
-        display: block;
-        width: 100%;
-        padding: 5px 0;
-        box-sizing: border-box;
-      }
-      .btn-responsive {
-        width: 100%;
-        box-sizing: border-box;
-        padding: 12px 14px;
-        font-size: 13.5px;
-      }
+      .email-main-table { width: 100%; max-width: 100%; }
+      .email-header-cell { padding: 22px 14px 18px 14px; }
+      .email-content-cell { padding: 22px 14px 18px 14px; }
+      .email-footer-cell { padding: 16px 14px 22px 14px; }
+      .btn-stack-table tr { display: block; width: 100%; }
+      .btn-stack-cell { display: block; width: 100%; padding: 5px 0; box-sizing: border-box; }
+      .btn-responsive { width: 100%; box-sizing: border-box; padding: 12px 14px; font-size: 13.5px; }
     }
   </style>
 </head>
 <body style="margin: 0; padding: 0; background-color: #FAFAFA; font-family: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; -webkit-font-smoothing: antialiased; word-break: break-word;">
-  <!-- Preheader text -->
   <div style="display: none; font-size: 1px; color: #FAFAFA; line-height: 1px; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden;">
     ${escapeHtml(headline ?? badgeText)} &bull; Amsirar Trip Morocco
   </div>
-
-  <!-- Seamless, edge-to-edge canvas (no card-in-background padding on mobile) -->
   <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #FAFAFA; margin: 0; padding: 0; table-layout: fixed;">
     <tr>
       <td align="center" style="padding: 0; margin: 0;">
-
-        <!-- Main Email Container (Max 580px centered on desktop, 100% full width on mobile) -->
         <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" class="email-main-table" style="max-width: 580px; margin: 0 auto; background-color: #FAFAFA;">
-
-          <!-- Brand Header Banner (Matching Slate-950 Footer Color #020617) -->
           <tr>
             <td class="email-header-cell" style="background-color: #020617; padding: 24px 20px 20px 20px; text-align: center; border-bottom: 3px solid #ea580c;">
               <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
                 <tr>
                   <td align="center">
-                    <!-- High-Res Brand Logo embedded directly via MIME CID -->
                     <a href="https://amsirartrip.com" target="_blank" rel="noopener noreferrer" style="text-decoration: none; display: inline-block;">
-                      <img
-                        src="cid:${EMAIL_CID.logo}"
-                        alt="AMSIRAR TRIP"
-                        width="165"
-                        height="70"
-                        style="display: block; margin: 0 auto; width: 165px; max-width: 100%; height: auto; border: 0;"
-                      />
+                      <img src="cid:${EMAIL_CID.logo}" alt="AMSIRAR TRIP" width="165" height="70" style="display: block; margin: 0 auto; width: 165px; max-width: 100%; height: auto; border: 0;" />
                     </a>
                     <div style="font-size: 10.5px; letter-spacing: 1.2px; color: #a8a29e; text-transform: uppercase; margin-top: 6px; font-weight: 500;">
                       Morocco Tours, Travels &amp; Desert Adventures
@@ -210,45 +233,26 @@ function wrapEmailLayout({
               </table>
             </td>
           </tr>
-
-          <!-- Main Body Content (Seamless full width, zero double-padding) -->
           <tr>
             <td class="email-content-cell" style="padding: 24px 20px 18px 20px; background-color: #FAFAFA;">
               ${
                 headline ?
-                  `
-              <h1 style="margin: 0 0 16px 0; font-size: 19px; font-weight: 700; color: #1c1917; line-height: 1.3;">
-                ${escapeHtml(headline)}
-              </h1>`
+                  `<h1 style="margin: 0 0 16px 0; font-size: 19px; font-weight: 700; color: #1c1917; line-height: 1.3;">${escapeHtml(headline)}</h1>`
                 : ""
               }
-
               ${contentHtml}
-
-              <!-- Direct Responsive Action Buttons -->
               ${buttonsHtml}
             </td>
           </tr>
-
-          <!-- Subtle Divider -->
           <tr>
-            <td style="padding: 0 20px;">
-              <div style="border-top: 1px solid #f0eeeb;"></div>
-            </td>
+            <td style="padding: 0 20px;"><div style="border-top: 1px solid #f0eeeb;"></div></td>
           </tr>
-
-          <!-- Brand Footer -->
           <tr>
             <td class="email-footer-cell" style="padding: 16px 20px 24px 20px; background-color: #fafaf9; text-align: center;">
-              <p style="margin: 0 0 4px 0; font-size: 11.5px; font-weight: 500; color: #78716c;">
-                ${escapeHtml(footerNote)}
-              </p>
-              <p style="margin: 0; font-size: 11.5px; color: #a8a29e;">
-                &copy; ${new Date().getFullYear()} Amsirar Trip. All rights reserved.
-              </p>
+              <p style="margin: 0 0 4px 0; font-size: 11.5px; font-weight: 500; color: #78716c;">${escapeHtml(footerNote)}</p>
+              <p style="margin: 0; font-size: 11.5px; color: #a8a29e;">&copy; ${new Date().getFullYear()} Amsirar Trip. All rights reserved.</p>
             </td>
           </tr>
-
         </table>
       </td>
     </tr>
@@ -257,15 +261,13 @@ function wrapEmailLayout({
 </html>`;
 }
 
-/** Builds a beautifully formatted email for new booking requests. */
 export function buildBookingEmail(data: BookingEmailInput): PreparedEmail {
   const safeFullName = sanitizeHeaderValue(data.fullName, 100);
-  const safeReservationType = sanitizeHeaderValue(cleanReservationType(data.reservationType), 100);
+  const cleanedType = cleanReservationType(data.reservationType);
+  const safeReservationType = sanitizeHeaderValue(cleanedType, 100);
   const safeReplyTo = sanitizeHeaderValue(data.email, 254);
   const langName = getLanguageName(data.language);
-  const cleanedType = cleanReservationType(data.reservationType);
 
-  // Resolve duration intelligently with fallback to title inference
   let resolvedDuration = data.duration;
   if (!resolvedDuration && data.reservationType) {
     const match = /(\d+)[\s-]*(?:Days?|Jours?|Días?|Tage?)/i.exec(data.reservationType);
@@ -277,127 +279,40 @@ export function buildBookingEmail(data: BookingEmailInput): PreparedEmail {
 
   const durationText =
     resolvedDuration ?
-      Number(resolvedDuration) === 1 ?
+      resolvedDuration === 1 ?
         "1 day (Day trip)"
       : `${resolvedDuration} days`
     : /excursion|day trip|discovery|sunset/i.test(data.reservationType) ? "1 day (Day trip)"
     : "Not specified";
 
-  // WhatsApp link with friendly prefilled greeting
   const waDigits = toWhatsAppDigits(data.phone);
-  const waGreeting = encodeURIComponent(
-    `Hello ${data.fullName}, thank you for your booking request with Amsirar Trip regarding ${cleanedType}!`,
+  const waGreeting = `Hello ${data.fullName}, thank you for your booking request with Amsirar Trip regarding ${cleanedType}!`;
+  const waUrl = waDigits ? `https://wa.me/${waDigits}?text=${encodeURIComponent(waGreeting)}` : "";
+
+  const actionButtons = buildContactActionButtons(
+    safeReplyTo,
+    data.phone,
+    `Re: Your Amsirar Trip Booking - ${cleanedType}`,
+    waGreeting,
   );
-  const waUrl = waDigits ? `https://wa.me/${waDigits}?text=${waGreeting}` : "";
 
-  const actionButtons: ActionButton[] = [
-    {
-      label: "Reply by Email",
-      href: `mailto:${safeReplyTo}?subject=${encodeURIComponent(`Re: Your Amsirar Trip Booking - ${cleanedType}`)}`,
-      borderColor: "#ea580c",
-      color: "#ea580c",
-      iconSrc: `cid:${EMAIL_CID.emailIcon}`,
-    },
-    ...(waUrl ?
-      [
-        {
-          label: "Chat on WhatsApp",
-          href: waUrl,
-          borderColor: "#16a34a",
-          color: "#16a34a",
-          iconSrc: `cid:${EMAIL_CID.whatsappIcon}`,
-        },
-      ]
-    : []),
-    {
-      label: "Call Phone",
-      href: `tel:${data.phone.replaceAll(/\s+/g, "")}`,
-      borderColor: "#292524",
-      color: "#292524",
-      iconSrc: `cid:${EMAIL_CID.phoneIcon}`,
-    },
-  ];
-
+  const phoneHref = `tel:${data.phone.replaceAll(/\s+/g, "")}`;
   const contentHtml = `
-    <!-- Key Reservation Details (Stacked with Divider Lines) -->
-    <div style="font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #a8a29e; margin-bottom: 8px;">
-      Reservation Details
-    </div>
-    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #fafaf9; border: 1px solid #e7e5e4; border-radius: 12px; margin-bottom: 20px; overflow: hidden;">
-      <tr>
-        <td style="padding: 12px 16px; border-bottom: 1px solid #e7e5e4;">
-          <div style="font-size: 11px; font-weight: 600; color: #78716c; text-transform: uppercase; letter-spacing: 0.5px;">Tour / Experience</div>
-          <div style="font-size: 14.5px; font-weight: 700; color: #ea580c; margin-top: 4px; line-height: 1.35;">${escapeHtml(cleanedType)}</div>
-        </td>
-      </tr>
-      <tr>
-        <td style="padding: 11px 16px; border-bottom: 1px solid #e7e5e4;">
-          <div style="font-size: 11px; font-weight: 600; color: #78716c; text-transform: uppercase; letter-spacing: 0.5px;">Travel Date</div>
-          <div style="font-size: 13.5px; font-weight: 600; color: #1c1917; margin-top: 3px;">${escapeHtml(data.date)}</div>
-        </td>
-      </tr>
-      <tr>
-        <td style="padding: 11px 16px; border-bottom: 1px solid #e7e5e4;">
-          <div style="font-size: 11px; font-weight: 600; color: #78716c; text-transform: uppercase; letter-spacing: 0.5px;">Guests</div>
-          <div style="font-size: 13.5px; font-weight: 600; color: #1c1917; margin-top: 3px;">${escapeHtml(String(data.persons))} ${data.persons === 1 ? "person" : "people"}</div>
-        </td>
-      </tr>
-      <tr>
-        <td style="padding: 11px 16px; border-bottom: 1px solid #e7e5e4;">
-          <div style="font-size: 11px; font-weight: 600; color: #78716c; text-transform: uppercase; letter-spacing: 0.5px;">Duration</div>
-          <div style="font-size: 13.5px; font-weight: 600; color: #1c1917; margin-top: 3px;">${escapeHtml(durationText)}</div>
-        </td>
-      </tr>
-      <tr>
-        <td style="padding: 11px 16px;">
-          <div style="font-size: 11px; font-weight: 600; color: #78716c; text-transform: uppercase; letter-spacing: 0.5px;">Site Language</div>
-          <div style="font-size: 13.5px; font-weight: 600; color: #1c1917; margin-top: 3px;">${escapeHtml(langName)}</div>
-        </td>
-      </tr>
-    </table>
-
-    <!-- Guest Information Section -->
-    <div style="font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #a8a29e; margin-bottom: 8px;">
-      Guest Contact Details
-    </div>
-    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #fafaf9; border: 1px solid #e7e5e4; border-radius: 12px; margin-bottom: 20px; overflow: hidden;">
-      <tr>
-        <td style="padding: 11px 16px; border-bottom: 1px solid #e7e5e4;">
-          <div style="font-size: 11px; font-weight: 600; color: #78716c; text-transform: uppercase; letter-spacing: 0.5px;">Full Name</div>
-          <div style="font-size: 13.5px; font-weight: 600; color: #1c1917; margin-top: 3px;">${escapeHtml(data.fullName)}</div>
-        </td>
-      </tr>
-      <tr>
-        <td style="padding: 11px 16px; border-bottom: 1px solid #e7e5e4;">
-          <div style="font-size: 11px; font-weight: 600; color: #78716c; text-transform: uppercase; letter-spacing: 0.5px;">Email Address</div>
-          <div style="font-size: 13.5px; font-weight: 600; color: #1c1917; margin-top: 3px;">
-            <a href="mailto:${escapeHtml(safeReplyTo)}" style="color: #ea580c; text-decoration: none;">${escapeHtml(data.email)}</a>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td style="padding: 11px 16px;">
-          <div style="font-size: 11px; font-weight: 600; color: #78716c; text-transform: uppercase; letter-spacing: 0.5px;">Phone / WhatsApp</div>
-          <div style="font-size: 13.5px; font-weight: 600; color: #1c1917; margin-top: 3px;">
-            <a href="tel:${escapeHtml(data.phone.replaceAll(/\s+/g, ""))}" style="color: #1c1917; text-decoration: none;">${escapeHtml(data.phone)}</a>
-          </div>
-        </td>
-      </tr>
-    </table>
-
-    ${
-      data.message && data.message.trim().length > 0 ?
-        `
-      <!-- Special Requests / Guest Message Box (Clean Rounded Box, NO orange line, NO top blank space) -->
-      <div style="font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #a8a29e; margin-bottom: 8px;">
-        Special Requests &amp; Notes
-      </div>
-      <div style="background-color: #fafaf9; border: 1px solid #e7e5e4; border-radius: 12px; padding: 12px 16px; margin-bottom: 20px;">
-        <p style="margin: 0; padding: 0; font-size: 13.5px; line-height: 1.55; color: #292524; white-space: pre-line;">${escapeHtml(data.message.trim())}</p>
-      </div>
-    `
-      : ""
-    }
+    ${renderSectionLabel("Reservation Details")}
+    ${renderDetailTable([
+      { label: "Tour / Experience", value: cleanedType, isAccent: true },
+      { label: "Travel Date", value: data.date },
+      { label: "Guests", value: `${data.persons} ${data.persons === 1 ? "person" : "people"}` },
+      { label: "Duration", value: durationText },
+      { label: "Site Language", value: langName },
+    ])}
+    ${renderSectionLabel("Guest Contact Details")}
+    ${renderDetailTable([
+      { label: "Full Name", value: data.fullName },
+      { label: "Email Address", value: data.email, href: `mailto:${safeReplyTo}` },
+      { label: "Phone / WhatsApp", value: data.phone, href: phoneHref, linkColor: "#1c1917" },
+    ])}
+    ${data.message ? renderMessageBox("Special Requests & Notes", data.message) : ""}
   `;
 
   const html = wrapEmailLayout({
@@ -440,96 +355,38 @@ Reply directly to this email or message on WhatsApp: ${waUrl || data.phone}`;
   };
 }
 
-/** Builds a beautifully formatted email for new contact form inquiries. */
 export function buildContactEmail(data: ContactEmailInput): PreparedEmail {
   const safeContactName = sanitizeHeaderValue(data.name, 100);
   const safeReplyTo = sanitizeHeaderValue(data.email, 254);
   const safeTopic = data.topic ? sanitizeHeaderValue(data.topic, 100) : "";
 
-  // WhatsApp link with friendly prefilled greeting
   const waDigits = toWhatsAppDigits(data.phone);
-  const waGreeting = encodeURIComponent(
-    `Hello ${data.name}, thank you for reaching out to Amsirar Trip!`,
-  );
-  const waUrl = waDigits ? `https://wa.me/${waDigits}?text=${waGreeting}` : "";
+  const waGreeting = `Hello ${data.name}, thank you for reaching out to Amsirar Trip!`;
+  const waUrl = waDigits ? `https://wa.me/${waDigits}?text=${encodeURIComponent(waGreeting)}` : "";
 
-  const actionButtons: ActionButton[] = [
+  const actionButtons = buildContactActionButtons(
+    safeReplyTo,
+    data.phone,
+    `Re: Your inquiry to Amsirar Trip${safeTopic ? ` - ${safeTopic}` : ""}`,
+    waGreeting,
+  );
+
+  const senderRows: DetailRow[] = [
+    { label: "Name", value: data.name },
+    { label: "Email", value: data.email, href: `mailto:${safeReplyTo}` },
     {
-      label: "Reply by Email",
-      href: `mailto:${safeReplyTo}?subject=${encodeURIComponent(`Re: Your inquiry to Amsirar Trip${safeTopic ? ` - ${safeTopic}` : ""}`)}`,
-      borderColor: "#ea580c",
-      color: "#ea580c",
-      iconSrc: `cid:${EMAIL_CID.emailIcon}`,
-    },
-    ...(waUrl ?
-      [
-        {
-          label: "Chat on WhatsApp",
-          href: waUrl,
-          borderColor: "#16a34a",
-          color: "#16a34a",
-          iconSrc: `cid:${EMAIL_CID.whatsappIcon}`,
-        },
-      ]
-    : []),
-    {
-      label: "Call Phone",
+      label: "Phone / WhatsApp",
+      value: data.phone,
       href: `tel:${data.phone.replaceAll(/\s+/g, "")}`,
-      borderColor: "#292524",
-      color: "#292524",
-      iconSrc: `cid:${EMAIL_CID.phoneIcon}`,
+      linkColor: "#1c1917",
     },
+    ...(safeTopic ? [{ label: "Subject / Topic", value: safeTopic, isAccent: true }] : []),
   ];
 
   const contentHtml = `
-    <!-- Sender Information Card (Structured & Compact) -->
-    <div style="font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #a8a29e; margin-bottom: 8px;">
-      Sender Details
-    </div>
-    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #fafaf9; border: 1px solid #e7e5e4; border-radius: 12px; margin-bottom: 20px; overflow: hidden;">
-      <tr>
-        <td style="padding: 10px 16px; border-bottom: 1px solid #f0eeeb;">
-          <div style="font-size: 11px; font-weight: 600; color: #78716c; text-transform: uppercase; letter-spacing: 0.5px;">Name</div>
-          <div style="font-size: 13.5px; font-weight: 600; color: #1c1917; margin-top: 2px;">${escapeHtml(data.name)}</div>
-        </td>
-      </tr>
-      <tr>
-        <td style="padding: 10px 16px; border-bottom: 1px solid #f0eeeb;">
-          <div style="font-size: 11px; font-weight: 600; color: #78716c; text-transform: uppercase; letter-spacing: 0.5px;">Email</div>
-          <div style="font-size: 13.5px; font-weight: 600; color: #1c1917; margin-top: 2px;">
-            <a href="mailto:${escapeHtml(safeReplyTo)}" style="color: #ea580c; text-decoration: none;">${escapeHtml(data.email)}</a>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td style="padding: 10px 16px; ${safeTopic ? "border-bottom: 1px solid #f0eeeb;" : ""}">
-          <div style="font-size: 11px; font-weight: 600; color: #78716c; text-transform: uppercase; letter-spacing: 0.5px;">Phone / WhatsApp</div>
-          <div style="font-size: 13.5px; font-weight: 600; color: #1c1917; margin-top: 2px;">
-            <a href="tel:${escapeHtml(data.phone.replaceAll(/\s+/g, ""))}" style="color: #1c1917; text-decoration: none;">${escapeHtml(data.phone)}</a>
-          </div>
-        </td>
-      </tr>
-      ${
-        safeTopic ?
-          `
-        <tr>
-          <td style="padding: 10px 16px;">
-            <div style="font-size: 11px; font-weight: 600; color: #78716c; text-transform: uppercase; letter-spacing: 0.5px;">Subject / Topic</div>
-            <div style="font-size: 13.5px; font-weight: 600; color: #ea580c; margin-top: 2px;">${escapeHtml(safeTopic)}</div>
-          </td>
-        </tr>
-      `
-        : ""
-      }
-    </table>
-
-    <!-- Message Content Box (Clean Rounded Box, NO orange line, NO top blank space) -->
-    <div style="font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #a8a29e; margin-bottom: 8px;">
-      Message
-    </div>
-    <div style="background-color: #fafaf9; border: 1px solid #e7e5e4; border-radius: 12px; padding: 12px 16px; margin-bottom: 20px;">
-      <p style="margin: 0; padding: 0; font-size: 13.5px; line-height: 1.55; color: #292524; white-space: pre-line;">${escapeHtml(data.message.trim())}</p>
-    </div>
+    ${renderSectionLabel("Sender Details")}
+    ${renderDetailTable(senderRows)}
+    ${renderMessageBox("Message", data.message)}
   `;
 
   const html = wrapEmailLayout({
@@ -567,7 +424,6 @@ Reply directly to this email or message on WhatsApp: ${waUrl || data.phone}`;
   };
 }
 
-/** Builds an email notification for newsletter subscribers. */
 export function buildNewsletterEmail(data: NewsletterEmailInput): PreparedEmail {
   const safeName = sanitizeHeaderValue(data.name.replaceAll(/[^\p{L}\p{N}\s]/gu, ""), 100);
   const safeReplyTo = sanitizeHeaderValue(data.email, 254);
@@ -582,24 +438,10 @@ export function buildNewsletterEmail(data: NewsletterEmailInput): PreparedEmail 
     },
   ];
 
-  const contentHtml = `
-    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #fafaf9; border: 1px solid #e7e5e4; border-radius: 12px; margin-bottom: 20px; overflow: hidden;">
-      <tr>
-        <td style="padding: 12px 16px; border-bottom: 1px solid #f0eeeb;">
-          <div style="font-size: 11px; font-weight: 600; color: #78716c; text-transform: uppercase; letter-spacing: 0.5px;">Subscriber Name</div>
-          <div style="font-size: 13.5px; font-weight: 600; color: #1c1917; margin-top: 2px;">${escapeHtml(data.name)}</div>
-        </td>
-      </tr>
-      <tr>
-        <td style="padding: 12px 16px;">
-          <div style="font-size: 11px; font-weight: 600; color: #78716c; text-transform: uppercase; letter-spacing: 0.5px;">Email Address</div>
-          <div style="font-size: 13.5px; font-weight: 600; color: #1c1917; margin-top: 2px;">
-            <a href="mailto:${escapeHtml(safeReplyTo)}" style="color: #ea580c; text-decoration: none;">${escapeHtml(data.email)}</a>
-          </div>
-        </td>
-      </tr>
-    </table>
-  `;
+  const contentHtml = renderDetailTable([
+    { label: "Subscriber Name", value: data.name },
+    { label: "Email Address", value: data.email, href: `mailto:${safeReplyTo}` },
+  ]);
 
   const html = wrapEmailLayout({
     badgeText: "New Subscriber",

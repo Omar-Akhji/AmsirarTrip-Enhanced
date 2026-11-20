@@ -1,0 +1,58 @@
+---
+import FolderShape from "@/shared/ui/primitives/FolderShape.astro";
+
+interface Props {
+  idPrefix: string;
+}
+
+const { idPrefix } = Astro.props;
+---
+
+<folder-stack class="block relative w-full overflow-x-clip">
+  <div
+    class="relative w-full h-auto motion-safe:h-[220vh]"
+    data-folder-track
+  >
+    <div
+      class="static h-auto top-auto select-auto motion-safe:sticky motion-safe:top-18 motion-safe:h-102.5 motion-safe:select-none w-full mx-auto overflow-visible"
+      data-folder-stage
+    >
+      <div class="folder-back-plate hidden motion-safe:block absolute inset-x-0 bottom-4 h-66.25 overflow-visible pointer-events-none will-change-transform z-2 opacity-0 drop-shadow-[0_12px_24px_rgba(0,0,0,0.5)]">
+        <FolderShape
+          id={`${idPrefix}-back`}
+          variant="back"
+        />
+      </div>
+
+      <div class="cards-stack-layer static h-auto flex flex-col gap-5 motion-safe:block motion-safe:absolute motion-safe:inset-x-0 motion-safe:top-2 motion-safe:h-85 motion-safe:will-change-transform motion-safe:z-10 motion-safe:perspective-distant">
+        <div
+          class="static inset-auto opacity-100 transform-none w-full origin-top motion-safe:absolute motion-safe:inset-x-0 motion-safe:top-0 motion-safe:will-change-transform z-10"
+          data-stack-card="0"
+        >
+          <slot name="card-0" />
+        </div>
+        <div
+          class="static inset-auto opacity-100 transform-none w-full origin-top motion-safe:absolute motion-safe:inset-x-0 motion-safe:top-0 motion-safe:will-change-transform z-12"
+          data-stack-card="1"
+        >
+          <slot name="card-1" />
+        </div>
+        <div
+          class="static inset-auto opacity-100 transform-none w-full origin-top motion-safe:absolute motion-safe:inset-x-0 motion-safe:top-0 motion-safe:will-change-transform z-14"
+          data-stack-card="2"
+        >
+          <slot name="card-2" />
+        </div>
+      </div>
+
+      <div class="folder-front-pocket hidden motion-safe:block absolute inset-x-0 bottom-4 h-58.75 overflow-visible pointer-events-none will-change-transform z-25 opacity-0 origin-bottom drop-shadow-[0_-12px_28px_rgba(0,0,0,0.65)]">
+        <FolderShape
+          id={`${idPrefix}-front`}
+          variant="front"
+        />
+      </div>
+    </div>
+  </div>
+</folder-stack>
+
+<script src="@/scripts/folder-stack-controller.ts"></script>

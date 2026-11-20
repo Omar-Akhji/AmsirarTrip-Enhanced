@@ -11,6 +11,17 @@ declare module "*.vue" {
   export default component;
 }
 
+declare namespace astroHTML.JSX {
+  interface FormHTMLAttributes {
+    tooldescription?: string;
+    toolname?: string;
+  }
+
+  interface InputHTMLAttributes {
+    toolparamdescription?: string;
+  }
+}
+
 declare namespace App {
   interface Locals {
     isCloudflareVerified: boolean;

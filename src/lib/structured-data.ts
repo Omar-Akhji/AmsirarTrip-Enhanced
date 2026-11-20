@@ -11,6 +11,8 @@ interface AgencyProfileData {
   };
   readonly contact: {
     readonly phones: readonly { readonly display: string; readonly value: string }[];
+    readonly mobile?: string | undefined;
+    readonly fax?: string | undefined;
     readonly emails: readonly string[];
     readonly workingHours: string;
   };
@@ -131,6 +133,37 @@ function buildTripJsonLd<TLocation>(
   };
 }
 
+function buildProviderExtras(): Record<string, unknown> {
+  return {
+    logo: `${BASE_URL}/favicon.svg`,
+    legalName: agency.legalName ?? agency.name,
+    license: agency.licenseNumber,
+    identifier: agency.rc,
+    taxID: agency.if ?? agency.patente,
+    vatID: agency.ice,
+    priceRange: agency.priceRange ?? "€€",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: agency.address.streetAddress,
+      addressLocality: agency.address.addressLocality,
+      addressRegion: agency.address.addressRegion,
+      postalCode: agency.address.postalCode,
+      addressCountry: agency.address.addressCountry,
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: agency.geo.latitude,
+      longitude: agency.geo.longitude,
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: agency.contact.mobile ?? agency.contact.phones[0]?.value,
+      contactType: "Customer Service",
+      availableLanguage: ["English", "French", "Spanish", "German"],
+    },
+  };
+}
+
 export function generateTourJsonLd(data: TourStructuredData): Record<string, unknown> {
   return buildTripJsonLd(
     data,
@@ -139,34 +172,7 @@ export function generateTourJsonLd(data: TourStructuredData): Record<string, unk
       { "@type": "TouristDestination", name: data.location.end },
     ],
     ["Adventure", "Cultural", "Nature"],
-    {
-      logo: `${BASE_URL}/favicon.svg`,
-      legalName: agency.legalName ?? agency.name,
-      license: agency.licenseNumber,
-      identifier: agency.rc,
-      taxID: agency.if ?? agency.patente,
-      vatID: agency.ice,
-      priceRange: agency.priceRange ?? "€€",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: agency.address.streetAddress,
-        addressLocality: agency.address.addressLocality,
-        addressRegion: agency.address.addressRegion,
-        postalCode: agency.address.postalCode,
-        addressCountry: agency.address.addressCountry,
-      },
-      geo: {
-        "@type": "GeoCoordinates",
-        latitude: agency.geo.latitude,
-        longitude: agency.geo.longitude,
-      },
-      contactPoint: {
-        "@type": "ContactPoint",
-        telephone: "+212-661-172-393",
-        contactType: "Customer Service",
-        availableLanguage: ["English", "French", "Spanish", "German"],
-      },
-    },
+    buildProviderExtras(),
   );
 }
 
@@ -189,34 +195,7 @@ export function generateExcursionJsonLd(data: ExcursionStructuredData): Record<s
     data,
     [{ "@type": "TouristDestination", name: data.location.point }],
     ["Day Trip", "Cultural Experience"],
-    {
-      logo: `${BASE_URL}/favicon.svg`,
-      legalName: agency.legalName ?? agency.name,
-      license: agency.licenseNumber,
-      identifier: agency.rc,
-      taxID: agency.if ?? agency.patente,
-      vatID: agency.ice,
-      priceRange: agency.priceRange ?? "€€",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: agency.address.streetAddress,
-        addressLocality: agency.address.addressLocality,
-        addressRegion: agency.address.addressRegion,
-        postalCode: agency.address.postalCode,
-        addressCountry: agency.address.addressCountry,
-      },
-      geo: {
-        "@type": "GeoCoordinates",
-        latitude: agency.geo.latitude,
-        longitude: agency.geo.longitude,
-      },
-      contactPoint: {
-        "@type": "ContactPoint",
-        telephone: "+212-661-172-393",
-        contactType: "Customer Service",
-        availableLanguage: ["English", "French", "Spanish", "German"],
-      },
-    },
+    buildProviderExtras(),
   );
 }
 
@@ -257,9 +236,9 @@ export function generateOrganizationJsonLd(): Record<string, unknown> {
     "@id": `${BASE_URL}/#organization`,
     name: agency.name,
     alternateName: ["Amsirar", "AmsirarTrip", "amsirartrip", "Amsirar Tours", "Amsirar Morocco"],
-    url: "https://amsirartrip.com",
+    url: BASE_URL,
     logo: `${BASE_URL}/favicon.svg`,
-    image: "https://amsirartrip.com/images/hero/marrakech-medina.webp",
+    image: `${BASE_URL}/images/hero/marrakech-medina.webp`,
     description:
       "Amsirar Trip is a specialist Morocco travel agency offering authentic Sahara desert tours, imperial city excursions, Atlas Mountains treks, and cultural experiences. Book your Morocco adventure with local experts.",
     legalName: agency.legalName ?? agency.name,
@@ -267,8 +246,8 @@ export function generateOrganizationJsonLd(): Record<string, unknown> {
     taxID: agency.if ?? agency.patente,
     vatID: agency.ice,
     foundingDate: agency.foundingDate,
-    telephone: "+212-661-172-393",
-    faxNumber: "+212-524-434-409",
+    telephone: agency.contact.mobile ?? agency.contact.phones[0]?.value,
+    faxNumber: agency.contact.fax ?? agency.contact.phones[1]?.value,
     email: agency.contact.emails[0] ?? "contact@amsirartrip.com",
     hasMap: `https://www.google.com/maps?q=${agency.geo.latitude},${agency.geo.longitude}`,
     numberOfEmployees: {
@@ -324,8 +303,8 @@ export function generateOrganizationJsonLd(): Record<string, unknown> {
     },
     contactPoint: {
       "@type": "ContactPoint",
-      telephone: "+212661172393",
-      faxNumber: "+212524434409",
+      telephone: agency.contact.mobile ?? agency.contact.phones[0]?.value,
+      faxNumber: agency.contact.fax ?? agency.contact.phones[1]?.value,
       contactType: "Customer Service",
       areaServed: "MA",
       availableLanguage: ["English", "French", "Spanish", "German"],
@@ -370,6 +349,8 @@ export function generateBreadcrumbJsonLd(
   };
 }
 
+const SEARCH_ACTION_PATH = "/tours?search={search_term_string}";
+
 export function generateWebsiteJsonLd(): Record<string, unknown> {
   return {
     "@context": "https://schema.org",
@@ -383,10 +364,7 @@ export function generateWebsiteJsonLd(): Record<string, unknown> {
     publisher: { "@id": `${BASE_URL}/#organization` },
     potentialAction: {
       "@type": "SearchAction",
-      target: {
-        "@type": "EntryPoint",
-        urlTemplate: "https://amsirartrip.com/tours?search={search_term_string}",
-      },
+      target: { "@type": "EntryPoint", urlTemplate: `${BASE_URL}${SEARCH_ACTION_PATH}` },
       "query-input": "required name=search_term_string",
     },
     inLanguage: ["en", "fr", "de", "es"],

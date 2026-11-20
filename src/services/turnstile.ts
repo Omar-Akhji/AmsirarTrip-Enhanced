@@ -1,6 +1,7 @@
 import { z } from "astro/zod";
 import { TRUSTED_HOSTS } from "@/lib/constants/hosts";
 import { env } from "@/lib/env";
+import { logger, sanitizeLogString } from "./logger";
 
 /** Cloudflare Turnstile official testing secret key (development only). */
 const DEV_TEST_SECRET_KEY = "1x0000000000000000000000000000000AA";
@@ -19,6 +20,7 @@ export type TurnstileAction = "booking" | "contact" | "newsletter";
 
 export interface VerifyTurnstileOptions {
   readonly expectedAction: TurnstileAction;
+  readonly fetchImpl?: typeof fetch;
   readonly remoteip?: string;
   readonly token: string;
 }
@@ -29,6 +31,7 @@ export interface VerifyTurnstileOptions {
  */
 export async function verifyTurnstile({
   expectedAction,
+  fetchImpl = fetch,
   remoteip,
   token,
 }: VerifyTurnstileOptions): Promise<boolean> {
@@ -36,10 +39,9 @@ export async function verifyTurnstile({
     return false;
   }
 
-  const configuredSecret = env.TURNSTILE_SECRET_KEY.trim();
-  const secret = configuredSecret || (import.meta.env.DEV ? DEV_TEST_SECRET_KEY : "");
+  const secret = env.TURNSTILE_SECRET_KEY || (import.meta.env.DEV ? DEV_TEST_SECRET_KEY : "");
   if (!secret) {
-    console.error("[turnstile] TURNSTILE_SECRET_KEY not configured — rejecting in production");
+    logger.error("[turnstile] TURNSTILE_SECRET_KEY not configured — rejecting in production");
     return false;
   }
 
@@ -53,7 +55,7 @@ export async function verifyTurnstile({
   }
 
   try {
-    const response = await fetch(TURNSTILE_VERIFY_URL, {
+    const response = await fetchImpl(TURNSTILE_VERIFY_URL, {
       body: JSON.stringify(payload),
       cache: "no-store",
       headers: { "Content-Type": "application/json" },
@@ -62,21 +64,21 @@ export async function verifyTurnstile({
     });
 
     if (!response.ok) {
-      console.error("[turnstile] siteverify returned non-OK status:", response.status);
+      logger.error("[turnstile] siteverify returned non-OK status", { status: response.status });
       return false;
     }
 
     const rawJson: unknown = await response.json();
     const parseResult = turnstileResponseSchema.safeParse(rawJson);
     if (!parseResult.success) {
-      console.error("[turnstile] siteverify returned invalid schema:", parseResult.error);
+      logger.error("[turnstile] siteverify returned invalid schema", parseResult.error);
       return false;
     }
 
     const data = parseResult.data;
     if (!data.success) {
       if (data["error-codes"] && data["error-codes"].length > 0) {
-        console.warn("[turnstile] verification failed:", data["error-codes"]);
+        logger.warn("[turnstile] verification failed", { errorCodes: data["error-codes"] });
       }
       return false;
     }
@@ -85,32 +87,35 @@ export async function verifyTurnstile({
     // domains or across different forms (e.g., newsletter token reused on booking).
     if (!import.meta.env.DEV) {
       if (!data.hostname || !TRUSTED_HOSTS.has(data.hostname.toLowerCase())) {
-        console.warn(`[turnstile] untrusted or missing hostname: ${data.hostname ?? "none"}`);
+        logger.warn("[turnstile] untrusted or missing hostname", {
+          hostname: sanitizeLogString(data.hostname ?? "none", 128),
+        });
         return false;
       }
       if (data.action !== expectedAction) {
-        console.warn(
-          `[turnstile] action mismatch: expected=${expectedAction} actual=${data.action ?? "none"}`,
-        );
+        logger.warn("[turnstile] action mismatch", {
+          expected: expectedAction,
+          actual: sanitizeLogString(data.action ?? "none", 64),
+        });
         return false;
       }
     }
 
     if (!data.challenge_ts) {
-      console.warn("[turnstile] missing challenge_ts");
+      logger.warn("[turnstile] missing challenge_ts");
       return false;
     }
 
     const challengeTime = Date.parse(data.challenge_ts);
     const ageMs = Date.now() - challengeTime;
     if (Number.isNaN(challengeTime) || ageMs < -60_000 || ageMs > MAX_TOKEN_AGE_MS) {
-      console.warn("[turnstile] token is stale or invalid challenge_ts");
+      logger.warn("[turnstile] token is stale or invalid challenge_ts");
       return false;
     }
 
     return true;
   } catch (error) {
-    console.error("[turnstile] verification error:", error);
+    logger.error("[turnstile] verification error", error);
     return false;
   }
 }
