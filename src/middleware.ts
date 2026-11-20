@@ -50,6 +50,8 @@ function createMissingAssetResponse(): Response {
   return new Response("Not Found", { status: 404, headers: notFoundHeaders });
 }
 
+let localhostCachePurged = false;
+
 export const onRequest: MiddlewareHandler = async (context, next) => {
   // Note: In @astrojs/node standalone mode, static assets and Astro memoryCache hits execute
   // before middleware. Production origin isolation must therefore also be enforced at ingress
@@ -137,6 +139,11 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
   const response = await next();
   applyHeaders(response.headers, getSecurityHeaders());
   response.headers.set("Content-Language", context.locals.locale);
+
+  if (!localhostCachePurged && pathname !== "/_image" && requestUrl.hostname === "localhost") {
+    localhostCachePurged = true;
+    response.headers.set("Clear-Site-Data", '"cache"');
+  }
 
   return response;
 };
