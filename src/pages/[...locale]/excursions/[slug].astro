@@ -4,6 +4,7 @@ import { getRelativeLocaleUrl } from "astro:i18n";
 import BookingForm from "../../../features/booking/components/BookingForm.vue";
 import BookingSidebar from "../../../features/booking/components/BookingSidebar.astro";
 import ExcursionLayout from "../../../features/excursions/components/ExcursionLayout.astro";
+import { getLocalizedExcursionContent } from "../../../features/excursions/data/excursions-data";
 import { useTranslations } from "../../../i18n/utils";
 import Layout from "../../../layouts/Layout.astro";
 import { getBookingFormCopy } from "../../../lib/form-copy";
@@ -31,26 +32,19 @@ const excursion = excursionEntry.data;
 const t = useTranslations(locale);
 const isEnglish = locale === "en";
 const keyPrefix = `excursion.list.${excursion.i18nKeyPrefix}`;
+const localized = getLocalizedExcursionContent(excursion, locale);
 
-const title = isEnglish && excursion.seo?.title ? excursion.seo.title : t(`${keyPrefix}.title`);
-const description =
-  isEnglish && excursion.seo?.metaDescription ?
-    excursion.seo.metaDescription
-  : `${t(`${keyPrefix}.description`)} ${t(`${keyPrefix}.tagline`)}`;
+const title = localized.seo.title;
+const description = localized.seo.metaDescription;
 
-const itinerary = excursion.program.map((stage, index) => ({
+const itinerary = localized.program.map((stage, index) => ({
   position: index + 1,
   name: `${stage.time} : ${stage.title} (${stage.location})`,
   description: stage.description,
 }));
 
-const excursionName =
-  isEnglish && excursion.seo?.title ? excursion.seo.title
-  : t.has(`${keyPrefix}.title`) ? t(`${keyPrefix}.title`)
-  : excursion.jsonLd.name;
-const fallbackDescription = excursion.seo?.lead ?? excursion.jsonLd.description;
-const excursionDescription =
-  !isEnglish && t.has(`${keyPrefix}.overview`) ? t(`${keyPrefix}.overview`) : fallbackDescription;
+const excursionName = localized.jsonLd.name;
+const excursionDescription = localized.seo.lead || localized.jsonLd.description;
 
 const excursionJsonLd = generateExcursionJsonLd({
   name: excursionName,
@@ -60,18 +54,15 @@ const excursionJsonLd = generateExcursionJsonLd({
   price: excursion.jsonLd.price,
   currency: excursion.jsonLd.currency,
   duration: excursion.duration,
-  location: { point: excursion.location },
+  location: { point: localized.location },
   url: new URL(Astro.url.pathname, Astro.site ?? "https://amsirartrip.com").href,
   itinerary,
 });
 
 const faqJsonLd =
-  excursion.seo?.faqs && excursion.seo.faqs.length > 0 ?
-    generateFaqJsonLd(excursion.seo.faqs)
-  : undefined;
+  localized.seo.faqs.length > 0 ? generateFaqJsonLd([...localized.seo.faqs]) : undefined;
 
-const excursionTitleClean =
-  isEnglish && excursion.seo?.title ? excursion.seo.title : t(`${keyPrefix}.title`);
+const excursionTitleClean = isEnglish ? localized.seo.title : t(`${keyPrefix}.title`);
 
 const breadcrumbJsonLd = generateBreadcrumbJsonLd([
   { name: t("nav.home"), url: getRelativeLocaleUrl(locale, "/") },
@@ -83,7 +74,7 @@ const breadcrumbJsonLd = generateBreadcrumbJsonLd([
 <Layout
   description={description}
   image={excursion.image.src}
-  imageAlt={excursion.seo?.imageAlt ?? t(`${excursion.excursionKey}.alt`)}
+  imageAlt={localized.seo.imageAlt}
   title={title}
 >
   <JsonLd

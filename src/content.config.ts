@@ -20,6 +20,16 @@ const seoSchema = z.object({
   faqs: z.array(faqSchema),
 });
 
+const localizedSeoSchema = z.object({
+  title: z.string(),
+  metaDescription: z.string(),
+  lead: z.string(),
+  price: priceSchema,
+  imageAlt: z.string().min(1),
+  highlights: z.array(z.string()).min(1),
+  faqs: z.array(faqSchema).min(1),
+});
+
 // One timed stop on an excursion's day program. Rendered as the timeline and as TouristTrip itinerary JSON-LD.
 const programStageSchema = z.object({
   time: z.string(),
@@ -42,6 +52,18 @@ const jsonLdSchema = z.object({
   currency: z.string().optional(),
 });
 
+const excursionLocaleContentSchema = z.object({
+  location: z.string(),
+  metrics: excursionMetricsSchema,
+  overview: z.array(z.string()).min(1),
+  program: z.array(programStageSchema).min(1),
+  includes: z.array(z.string()).min(1),
+  excludes: z.array(z.string()).min(1),
+  goodToKnow: z.array(z.string()).min(1),
+  seo: localizedSeoSchema,
+  jsonLd: z.object({ name: z.string(), description: z.string() }),
+});
+
 // Base Trip Schema
 const baseTripSchema = ({ image }: SchemaContext) =>
   z.object({
@@ -61,6 +83,11 @@ const toursCollection = defineCollection({
       endLocation: z.string(),
       seo: seoSchema,
       jsonLd: jsonLdSchema,
+      translations: z.object({
+        fr: localizedSeoSchema,
+        de: localizedSeoSchema,
+        es: localizedSeoSchema,
+      }),
     }),
 });
 
@@ -79,6 +106,11 @@ const excursionsCollection = defineCollection({
       goodToKnow: z.array(z.string()),
       seo: seoSchema,
       jsonLd: jsonLdSchema,
+      translations: z.object({
+        fr: excursionLocaleContentSchema,
+        de: excursionLocaleContentSchema,
+        es: excursionLocaleContentSchema,
+      }),
     }),
 });
 

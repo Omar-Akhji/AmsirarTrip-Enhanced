@@ -4,8 +4,7 @@ import { getRelativeLocaleUrl } from "astro:i18n";
 import BookingForm from "../../../features/booking/components/BookingForm.vue";
 import BookingSidebar from "../../../features/booking/components/BookingSidebar.astro";
 import TourLayout from "../../../features/tours/components/TourLayout.astro";
-import { getToursData } from "../../../features/tours/data/tours-data";
-import { getTourLocalizedSeo } from "../../../features/tours/data/tour-localized-seo";
+import { getLocalizedTourSeo, getToursData } from "../../../features/tours/data/tours-data";
 import { useTranslations } from "../../../i18n/utils";
 import Layout from "../../../layouts/Layout.astro";
 import { getBookingFormCopy } from "../../../lib/form-copy";
@@ -34,12 +33,9 @@ const tour = tourEntry.data;
 const t = useTranslations(locale);
 const isEnglish = locale === "en";
 
-const seoMeta = getTourLocalizedSeo(tour.tourKey, locale, {
-  title: tour.seo.title,
-  metaDescription: tour.seo.metaDescription,
-});
-const title = seoMeta.title;
-const description = seoMeta.metaDescription;
+const localizedSeo = getLocalizedTourSeo(tour, locale);
+const title = localizedSeo.title;
+const description = localizedSeo.metaDescription;
 
 const dayLabel = t("tours.day");
 const itinerary = Array.from({ length: tour.durationDays }, (_, index) => {
@@ -82,13 +78,16 @@ const tourJsonLd = generateTourJsonLd({
   price: tour.jsonLd.price,
   currency: tour.jsonLd.currency,
   duration: tour.duration,
-  location: { start: tour.startLocation, end: tour.endLocation },
+  location: {
+    start: t(`tours.cities.${tour.startLocation.toLowerCase()}`),
+    end: t(`tours.cities.${tour.endLocation.toLowerCase()}`),
+  },
   url: new URL(Astro.url.pathname, Astro.site ?? "https://amsirartrip.com").href,
   itinerary,
 });
 
-const faqJsonLd = generateFaqJsonLd(tour.seo.faqs);
-const tourTitleClean = isEnglish ? tour.seo.title : t(`${tour.tourKey}.title`);
+const faqJsonLd = generateFaqJsonLd([...localizedSeo.faqs]);
+const tourTitleClean = isEnglish ? localizedSeo.title : t(`${tour.tourKey}.title`);
 
 const breadcrumbJsonLd = generateBreadcrumbJsonLd([
   { name: t("nav.home"), url: getRelativeLocaleUrl(locale, "/") },
@@ -111,7 +110,7 @@ const relatedTours = allTours
 <Layout
   description={description}
   image={tour.image.src}
-  imageAlt={tour.seo.imageAlt}
+  imageAlt={localizedSeo.imageAlt}
   title={title}
 >
   <JsonLd
@@ -130,7 +129,7 @@ const relatedTours = allTours
     bookingId={tour.bookingId}
     imageSrc={tour.image}
     locale={locale}
-    seo={tour.seo}
+    seo={localizedSeo}
     slug={slug}
     tour={tour}
     tourKey={tour.tourKey}

@@ -64,5 +64,115 @@
     "description": "Escape to the Atlas Mountains and Sahara Desert on this perfectly balanced 4-day adventure from Marrakech through Dades Valley, Todra Gorges, and Erg Chebbi.",
     "price": 360,
     "currency": "EUR"
+  },
+  "translations": {
+    "fr": {
+      "title": "Circuit Désert Marrakech Merzouga 4 Jours | Erg Chebbi & Dadès (2026)",
+      "metaDescription": "Dès 360€ par pers. Circuit désert de 4 jours de Marrakech à Merzouga à un rythme serein. Kasbah Aït Ben Haddou, gorges du Todra, vallée du Drâa et bivouac.",
+      "lead": "Ce circuit de quatre jours offre toute l'expérience du désert de Marrakech à Merzouga à un rythme bien plus apaisé que la formule classique de trois jours. Répartir les 1 100 km aller-retour sur quatre jours limite les trajets quotidiens à 4 à 6 heures, laissant davantage de temps pour marcher dans les villages berbères, visiter les kasbahs et profiter de vos riads.",
+      "price": {
+        "label": "À partir de 360 € par personne",
+        "note": "Inclut le transport privé climatisé en 4x4 ou minibus, le chauffeur-guide agréé, 2 nuits en riads/hôtels de charme (vallée du Dadès et Ouarzazate), 1 nuit en bivouac à l'Erg Chebbi, les balades à dromadaire, les dîners et les petits-déjeuners dès le jour 2."
+      },
+      "imageAlt": "Caravane de dromadaires sur les dunes de l'Erg Chebbi au lever du soleil pendant un circuit de 4 jours depuis Marrakech",
+      "highlights": [
+        "Traversée du Haut Atlas par le col du Tizi n'Tichka (2 260 m)",
+        "Visite à pied de la Kasbah Aït Ben Haddou, classée à l'UNESCO",
+        "Marche au fond du canyon de 300 mètres des gorges du Todra",
+        "Balades à dromadaire au coucher et au lever du soleil à l'Erg Chebbi",
+        "Nuit en bivouac saharien avec dîner, musique au feu de camp et observation des étoiles",
+        "Rythme serein sur 4 jours avec une étape de nuit à Ouarzazate au retour"
+      ],
+      "faqs": [
+        {
+          "question": "Pourquoi choisir le circuit de 4 jours plutôt que celui de 3 jours ?",
+          "answer": "L'itinéraire de 3 jours impose 9 à 10 heures de route le dernier jour entre Merzouga et Marrakech. Ajouter une quatrième journée coupe ce retour par une nuit à Ouarzazate, rendant la route agréable tout en profitant de la vallée du Drâa."
+        },
+        {
+          "question": "Quels hébergements sont inclus ?",
+          "answer": "Vous passez la nuit 1 en riad ou hôtel dans la vallée du Dadès, la nuit 2 en bivouac dans le désert à l'Erg Chebbi et la nuit 3 en riad ou hôtel à Ouarzazate. Des tentes de luxe avec salle de bain privative sont proposées sur demande."
+        },
+        {
+          "question": "Ce voyage de 4 jours peut-il se terminer à Fès au lieu de Marrakech ?",
+          "answer": "Oui. Le jour 3, au lieu de partir à l'ouest vers Ouarzazate, votre chauffeur peut remonter au nord par la vallée du Ziz, Midelt et la forêt de cèdres d'Azrou pour vous déposer à Fès en début de soirée."
+        },
+        {
+          "question": "Quels repas sont compris ?",
+          "answer": "Tous les petits-déjeuners (à partir du jour 2) et les trois dîners dans vos riads et au bivouac sont inclus. Les déjeuners et boissons restent à votre charge lors des haltes sur la route."
+        }
+      ]
+    },
+    "de": {
+      "title": "4-Tage Wüstentour von Marrakesch nach Merzouga | Dades & Erg Chebbi (2026)",
+      "metaDescription": "Ab 360€ p.P. 4-tägige entspannte Sahara-Tour ab Marrakesch nach Merzouga. Ait Ben Haddou, Dades-Tal, Todra-Schlucht und Wüstencamp unter Sternen.",
+      "lead": "Diese viertägige Route bietet das komplette Wüstenerlebnis von Marrakesch nach Merzouga in deutlich ruhigerem Tempo als die klassische 3-Tage-Tour. Durch die Aufteilung der 1.100 km langen Rundstrecke auf vier Tage liegen die täglichen Fahretappen bei 4 bis 6 Stunden, sodass mehr Zeit für Berberdörfer, Kasbahs und entspannte Abende im Riad bleibt.",
+      "price": {
+        "label": "Ab 360 € pro Person",
+        "note": "Inklusive privatem, klimatisiertem 4x4 oder Minivan, lizenziertem Fahrer-Guide, 2 Nächten in Boutique-Riads/Hotels (Dades-Tal und Ouarzazate), 1 Nacht im Erg-Chebbi-Wüstencamp, Kamelritten, Abendessen sowie Frühstück ab Tag 2."
+      },
+      "imageAlt": "Kamelkarawane bei Sonnenaufgang in den Dünen von Erg Chebbi während einer 4-tägigen Wüstentour ab Marrakesch",
+      "highlights": [
+        "Überquerung des Hohen Atlas am Tizi-n'Tichka-Pass (2.260 m)",
+        "Geführter Rundgang durch das UNESCO-Weltkulturerbe Kasbah Ait Ben Haddou",
+        "Spaziergang durch die 300 Meter tiefe Felsschlucht der Todra-Schlucht",
+        "Kamelritte bei Sonnenuntergang und Sonnenaufgang in den Dünen von Erg Chebbi",
+        "Übernachtung im Saharacamp mit Abendessen, Musik am Lagerfeuer und Sternenhimmel",
+        "Entspanntes 4-Tage-Tempo dank Zwischenübernachtung in Ouarzazate auf dem Rückweg"
+      ],
+      "faqs": [
+        {
+          "question": "Warum die 4-Tage-Tour statt der 3-Tage-Variante wählen?",
+          "answer": "Bei der 3-Tage-Tour steht am letzten Tag eine 9- bis 10-stündige Rückfahrt von Merzouga nach Marrakesch an. Ein vierter Tag teilt diesen Abschnitt mit einer Übernachtung in Ouarzazate, hält die Tagesetappen angenehm und lässt Zeit für das Draa-Tal."
+        },
+        {
+          "question": "Welche Unterkünfte sind enthalten?",
+          "answer": "Sie verbringen Nacht 1 im Riad oder Hotel im Dades-Tal, Nacht 2 im Wüstencamp am Erg Chebbi und Nacht 3 in einem Boutique-Riad oder Hotel in Ouarzazate. Luxuszelte mit eigenem Bad sind auf Anfrage buchbar."
+        },
+        {
+          "question": "Kann diese 4-tägige Reise in Fès statt in Marrakesch enden?",
+          "answer": "Ja. An Tag 3 kann Ihr Fahrer statt Richtung Westen nach Ouarzazate nordwärts durch das Ziz-Tal, Midelt und den Zedernwald von Azrou fahren und Sie am frühen Abend in Fès absetzen."
+        },
+        {
+          "question": "Welche Mahlzeiten sind inbegriffen?",
+          "answer": "Alle Frühstücke (ab Tag 2) sowie alle drei Abendessen in den Riads und im Wüstencamp sind enthalten. Mittagessen und Getränke zahlen Sie unterwegs flexibel selbst."
+        }
+      ]
+    },
+    "es": {
+      "title": "Tour al Desierto Marrakech a Merzouga 4 Días | Dades y Erg Chebbi (2026)",
+      "metaDescription": "Desde 360€ por pers. Tour relajado de 4 días al desierto de Marrakech a Merzouga. Ait Ben Haddou, gargantas del Todra, valle del Draa y dunas de Merzouga.",
+      "lead": "Esta ruta de cuatro días ofrece la experiencia completa del desierto entre Marrakech y Merzouga a un ritmo mucho más tranquilo que el viaje estándar de tres días. Repartir los 1.100 km de ida y vuelta en cuatro jornadas mantiene la conducción diaria entre 4 y 6 horas, dejando más tiempo para pasear por aldeas bereberes, visitar alcazabas y descansar en tus riads.",
+      "price": {
+        "label": "Desde 360 € por persona",
+        "note": "Incluye transporte privado con aire acondicionado en 4x4 o monovolumen, conductor-guía titulado, 2 noches en riads/hoteles con encanto (valle del Dadès y Ouarzazate), 1 noche en campamento de Erg Chebbi, paseos en dromedario, cenas y desayunos desde el día 2."
+      },
+      "imageAlt": "Caravana de dromedarios al amanecer en Erg Chebbi durante un tour de 4 días desde Marrakech a Merzouga",
+      "highlights": [
+        "Cruce del Alto Atlas por el puerto de Tizi n'Tichka (2.260 m)",
+        "Recorrido guiado por la Kasbah Ait Ben Haddou, Patrimonio de la UNESCO",
+        "Caminata por el fondo del cañón de 300 metros de las gargantas del Todra",
+        "Paseos en dromedario al atardecer y al amanecer en Erg Chebbi, Merzouga",
+        "Noche en campamento del Sáhara con cena, música junto al fuego y cielo estrellado",
+        "Ritmo pausado de 4 días con noche intermedia en Ouarzazate al regreso"
+      ],
+      "faqs": [
+        {
+          "question": "¿Por qué elegir el tour de 4 días en lugar de la opción de 3 días?",
+          "answer": "El itinerario de 3 días exige de 9 a 10 horas de carretera el último día desde Merzouga hasta Marrakech. Añadir un cuarto día divide el regreso con una noche en Ouarzazate, haciendo los trayectos cómodos y permitiendo disfrutar del valle del Draa."
+        },
+        {
+          "question": "¿Qué alojamientos están incluidos?",
+          "answer": "Pasas la noche 1 en un riad u hotel en el valle del Dadès, la noche 2 en un campamento en Erg Chebbi y la noche 3 en un riad u hotel boutique en Ouarzazate. Hay jaimas de lujo con baño privado disponibles bajo petición."
+        },
+        {
+          "question": "¿Este viaje de 4 días puede terminar en Fez en vez de Marrakech?",
+          "answer": "Sí. El día 3, en lugar de viajar al oeste hacia Ouarzazate, tu chófer puede dirigirse al norte por el valle del Ziz, Midelt y el bosque de cedros de Azrou para dejarte en Fez al caer la tarde."
+        },
+        {
+          "question": "¿Qué comidas están incluidas?",
+          "answer": "Están incluidos todos los desayunos (desde el día 2) y las tres cenas en riads y en el campamento. Los almuerzos y bebidas corren por tu cuenta en las paradas en ruta."
+        }
+      ]
+    }
   }
 }

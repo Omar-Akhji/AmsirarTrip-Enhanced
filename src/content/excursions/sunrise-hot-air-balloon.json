@@ -128,5 +128,337 @@
     "description": "Sunrise hot air balloon flight of about one hour over the countryside north of Marrakech, with hotel pickup, a Berber breakfast and a flight certificate.",
     "price": 160,
     "currency": "EUR"
+  },
+  "translations": {
+    "fr": {
+      "location": "Marrakech, Maroc",
+      "metrics": {
+        "distance": "~30 à 40 min de Marrakech",
+        "duration": "Environ 5 heures",
+        "pickup": "05:00 à 06:30 (selon saison)",
+        "elevation": "Vol jusqu'à ~1 000 m"
+      },
+      "overview": [
+        "Les montgolfières décollent de la campagne dégagée au nord de Marrakech, à 30 ou 40 minutes en voiture, au lever du soleil lorsque l'air est le plus calme. Depuis la nacelle, vous dominez les palmeraies, les collines des Jbilet, de petits villages agricoles et, par temps clair, les sommets enneigés du Haut Atlas au sud.",
+        "La prise en charge se fait avant l'aube, à une heure qui varie selon la saison. Sur la zone de décollage, vous prenez un thé et une petite collation pendant le gonflage des ballons, puis le pilote présente les consignes de sécurité. Le vol dure environ une heure et monte jusqu'à environ 1 000 mètres selon le vent.",
+        "Après l'atterrissage, vous partagez un petit-déjeuner berbère avec pain frais, msemen, miel, huile d'olive, œufs et thé à la menthe, et recevez un certificat de vol. Vous rentrez à votre hôtel en fin de matinée avec le reste de la journée libre."
+      ],
+      "program": [
+        {
+          "time": "05:00 à 06:30",
+          "title": "Prise en charge avant l'aube à Marrakech",
+          "location": "Votre hôtel ou riad",
+          "description": "Votre chauffeur vous récupère à votre hôtel ou à la porte carrossable la plus proche. Le départ est plus tôt en été et plus tard en hiver afin d'arriver avant le lever du jour."
+        },
+        {
+          "time": "Avant le lever du soleil",
+          "title": "Thé et gonflage du ballon",
+          "location": "Site de décollage au nord de Marrakech",
+          "description": "Thé, café et collation légère pendant que l'équipe prépare et gonfle les enveloppes. Le pilote donne un bref briefing de sécurité, notamment la posture d'atterrissage."
+        },
+        {
+          "time": "Lever du soleil (~1 h)",
+          "title": "Vol en montgolfière",
+          "location": "Au-dessus de la campagne au nord de Marrakech",
+          "description": "Décollage au lever du jour au gré du vent au-dessus des palmeraies, villages et collines des Jbilet, avec le Haut Atlas en toile de fond par ciel clair. L'altitude varie de la cime des palmiers à environ 1 000 mètres."
+        },
+        {
+          "time": "Après l'atterrissage",
+          "title": "Petit-déjeuner berbère",
+          "location": "Tente ou maison de village près de l'atterrissage",
+          "description": "Petit-déjeuner composé de pain chaud, msemen, miel, huile d'olive, œufs, fromage et thé à la menthe, avec remise de votre certificat de vol."
+        },
+        {
+          "time": "09:30 à 11:00",
+          "title": "Retour à Marrakech",
+          "location": "Du site d'atterrissage à Marrakech",
+          "description": "Trajet retour vers Marrakech avec dépose à votre hébergement en fin de matinée."
+        }
+      ],
+      "includes": [
+        "Prise en charge et retour à votre hôtel ou riad à Marrakech",
+        "Transport aller-retour vers le site d'envol",
+        "Thé, café et collation avant le décollage",
+        "Vol en montgolfière d'environ 1 heure en nacelle partagée avec pilote breveté",
+        "Petit-déjeuner berbère après l'atterrissage",
+        "Certificat de vol"
+      ],
+      "excludes": [
+        "Option nacelle privée (disponible sur demande)",
+        "Photos et vidéos proposées par l'équipage",
+        "Pourboires pour l'équipage et le chauffeur"
+      ],
+      "goodToKnow": [
+        "Les vols dépendent de la météo. Si le vent ou la visibilité empêchent de voler en sécurité, le vol est reporté à un autre matin ou intégralement remboursé.",
+        "Réservez pour l'un de vos premiers matins à Marrakech afin de garder une marge en cas de report météo.",
+        "Habillez-vous en plusieurs couches : il fait frais avant l'aube, même en été, puis la température monte vite après l'atterrissage.",
+        "Portez des chaussures fermées pour le terrain d'atterrissage parfois irrégulier.",
+        "Ce vol est déconseillé aux femmes enceintes, aux enfants de moins de 6 ans et aux personnes souffrant de graves problèmes de dos ou cardiaques. Contactez-nous en cas de doute."
+      ],
+      "seo": {
+        "title": "Vol en montgolfière à Marrakech au lever du soleil | Vol & Petit-déjeuner berbère",
+        "metaDescription": "Vol en montgolfière à Marrakech au lever du soleil : ~1 h au-dessus des palmeraies et des collines des Jbilet, petit-déjeuner berbère, certificat et transfert hôtel. 160 €.",
+        "lead": "Un vol en montgolfière d'environ une heure au lever du soleil au-dessus de la campagne au nord de Marrakech face au Haut Atlas, suivi d'un petit-déjeuner berbère et d'un retour à l'hôtel en fin de matinée.",
+        "price": {
+          "label": "À partir de 160 € par personne",
+          "note": "Inclut la prise en charge et le retour à l'hôtel, le thé avant le vol, environ une heure de vol en nacelle partagée, le petit-déjeuner berbère et le certificat de vol. Nacelle privée sur demande."
+        },
+        "imageAlt": "Montgolfière s'élevant au lever du soleil au-dessus des palmeraies et terres agricoles au nord de Marrakech",
+        "highlights": [
+          "Vol d'environ une heure au lever du jour au nord de Marrakech",
+          "Vue sur les palmeraies, les collines des Jbilet et, par temps clair, le Haut Atlas",
+          "Préparation et gonflage des ballons au sol avant le décollage",
+          "Petit-déjeuner berbère avec pain frais, msemen et thé à la menthe après l'atterrissage",
+          "Certificat de vol nominatif à emporter",
+          "Retour à votre hôtel en fin de matinée avec le reste de la journée libre"
+        ],
+        "faqs": [
+          {
+            "question": "À quelle heure commence le vol en montgolfière à Marrakech ?",
+            "answer": "La prise en charge a lieu entre 05:00 et 06:30 selon la saison afin de décoller au lever du soleil. L'heure exacte est confirmée la veille."
+          },
+          {
+            "question": "Combien de temps dure le vol en montgolfière ?",
+            "answer": "Le vol lui-même dure environ une heure. Avec le transport, la préparation et le petit-déjeuner, l'expérience dure environ 5 heures et vous rentrez à Marrakech en fin de matinée."
+          },
+          {
+            "question": "Que se passe-t-il si le vol est annulé à cause de la météo ?",
+            "answer": "Le pilote prend la décision de sécurité le matin même. Si le décollage est impossible, vous pouvez reporter sur un autre matin ou recevoir un remboursement intégral."
+          },
+          {
+            "question": "Le vol en montgolfière est-il partagé ou privé ?",
+            "answer": "La formule standard se fait en nacelle partagée. Une nacelle privée pour les couples, familles ou occasions spéciales peut être réservée à l'avance à tarif supérieur."
+          },
+          {
+            "question": "Le vol en montgolfière est-il sûr ?",
+            "answer": "Les vols sont assurés par des pilotes qualifiés et uniquement lorsque les conditions météo sont favorables. Vous suivez un briefing de sécurité avant le décollage, incluant la position d'atterrissage."
+          }
+        ]
+      },
+      "jsonLd": {
+        "name": "Vol en montgolfière au lever du soleil à Marrakech",
+        "description": "Vol en montgolfière d'environ une heure au lever du soleil au-dessus de la campagne au nord de Marrakech, avec prise en charge à l'hôtel, petit-déjeuner berbère et certificat de vol."
+      }
+    },
+    "de": {
+      "location": "Marrakesch, Marokko",
+      "metrics": {
+        "distance": "~30–40 Min. Fahrt ab Marrakesch",
+        "duration": "Etwa 5 Stunden",
+        "pickup": "05:00–06:30 (je nach Saison)",
+        "elevation": "Flughöhe bis ca. 1.000 m"
+      },
+      "overview": [
+        "Die Heißluftballons starten aus dem offenen Umland nördlich von Marrakesch, rund 30 bis 40 Autominuten entfernt, bei Sonnenaufgang in besonders ruhiger Morgenluft. Vom Korb aus überblicken Sie Palmenhaine, die Jbilet-Hügel, kleine Bauerndörfer und bei klarer Sicht im Süden die schneebedeckten Gipfel des Hohen Atlas.",
+        "Sie werden vor Morgengrauen abgeholt – die Uhrzeit richtet sich nach der Jahreszeit. Am Startplatz gibt es Tee und einen kleinen Imbiss, während die Crew die Ballons aufrüstet, gefolgt von einer kurzen Sicherheitseinweisung durch den Piloten. Die Fahrt dauert rund eine Stunde und erreicht je nach Wind bis zu 1.000 Meter Höhe.",
+        "Nach der Landung genießen Sie ein Berberfrühstück mit frischem Brot, Msemen, Honig, Olivenöl, Eiern und Minztee und erhalten ein Flugzertifikat. Am späten Vormittag sind Sie zurück im Hotel und haben den Rest des Tages frei."
+      ],
+      "program": [
+        {
+          "time": "05:00–06:30",
+          "title": "Abholung vor Morgengrauen in Marrakesch",
+          "location": "Ihr Hotel oder Riad",
+          "description": "Ihr Fahrer holt Sie am Hotel oder am nächstgelegenen befahrbaren Stadttor ab. Im Sommer erfolgt die Abholung früher, im Winter später, damit Sie rechtzeitig vor Sonnenaufgang eintreffen."
+        },
+        {
+          "time": "Vor Sonnenaufgang",
+          "title": "Tee und Ballonstart-Vorbereitung",
+          "location": "Startplatz nördlich von Marrakesch",
+          "description": "Tee, Kaffee und kleines Gebäck, während die Crew die Ballons ausbreitet und füllt. Der Pilot gibt eine kurze Sicherheitseinweisung inklusive Landehaltung."
+        },
+        {
+          "time": "Sonnenaufgang (ca. 1 Std.)",
+          "title": "Ballonfahrt",
+          "location": "Über der Landschaft nördlich von Marrakesch",
+          "description": "Abheben bei Sonnenaufgang und ruhiges Gleiten mit dem Wind über Palmenhaine, Dörfer und Jbilet-Hügel, bei klarer Sicht mit Blick auf den Hohen Atlas. Die Höhe reicht von Baumwipfeln bis auf rund 1.000 Meter."
+        },
+        {
+          "time": "Nach der Landung",
+          "title": "Berberfrühstück",
+          "location": "Zelt oder Dorfhaus nahe dem Landeplatz",
+          "description": "Frühstück mit frischem Brot, Msemen, Honig, Olivenöl, Eiern, Käse und Minztee sowie Übergabe Ihres Flugzertifikats."
+        },
+        {
+          "time": "09:30–11:00",
+          "title": "Rückfahrt nach Marrakesch",
+          "location": "Landeplatz nach Marrakesch",
+          "description": "Rückfahrt nach Marrakesch und Absetzen an Ihrer Unterkunft am späten Vormittag."
+        }
+      ],
+      "includes": [
+        "Abholung und Rückbringung an Ihrem Hotel oder Riad in Marrakesch",
+        "Hin- und Rücktransfer zum Startplatz",
+        "Tee, Kaffee und leichter Snack vor dem Start",
+        "Rund einstündige Ballonfahrt im geteilten Korb mit lizenziertem Piloten",
+        "Berberfrühstück nach der Landung",
+        "Flugzertifikat"
+      ],
+      "excludes": [
+        "Upgrade auf einen privaten Korb (auf Anfrage verfügbar)",
+        "Fotos und Videos der Balloncrew",
+        "Trinkgelder für Crew und Fahrer"
+      ],
+      "goodToKnow": [
+        "Ballonfahrten sind wetterabhängig. Machen Wind oder Sicht einen sicheren Start unmöglich, wird die Fahrt auf einen anderen Morgen verlegt oder voll erstattet.",
+        "Buchen Sie am besten für einen Ihrer ersten Morgen in Marrakesch, damit bei einer Verschiebung noch Spielraum bleibt.",
+        "Ziehen Sie sich im Zwiebellook an: Vor Sonnenaufgang ist es selbst im Sommer kühl, nach der Landung wird es rasch warm.",
+        "Tragen Sie geschlossene Schuhe für das mitunter unebene Landefeld.",
+        "Die Fahrt ist nicht geeignet während der Schwangerschaft, für Kinder unter 6 Jahren oder bei schweren Rücken- bzw. Herzbeschwerden. Fragen Sie uns im Zweifel vorab."
+      ],
+      "seo": {
+        "title": "Heißluftballon Marrakesch bei Sonnenaufgang | Fahrt & Berberfrühstück",
+        "metaDescription": "Sonnenaufgangs-Ballonfahrt in Marrakesch: ca. 1 Stunde über Palmenhainen und Jbilet-Hügeln, Berberfrühstück, Flugzertifikat und Hotelabholung. 160 €.",
+        "lead": "Eine einstündige Heißluftballonfahrt zum Sonnenaufgang über der Landschaft nördlich von Marrakesch mit Blick auf den Hohen Atlas, gefolgt von einem Berberfrühstück und Rückkehr am späten Vormittag.",
+        "price": {
+          "label": "Ab 160 € pro Person",
+          "note": "Inklusive Hotelabholung und -rückbringung, Tee vor dem Start, rund einer Stunde Fahrt im geteilten Korb, Berberfrühstück und Flugzertifikat. Private Körbe auf Anfrage."
+        },
+        "imageAlt": "Heißluftballon steigt bei Sonnenaufgang über Palmenhainen und Feldern nördlich von Marrakesch auf",
+        "highlights": [
+          "Rund einstündige Ballonfahrt bei Sonnenaufgang nördlich von Marrakesch",
+          "Blick über Palmenhaine, die Jbilet-Hügel und bei klarer Sicht den Hohen Atlas",
+          "Live verfolgen, wie die Crew die Heißluftballons vor dem Start aufrüstet",
+          "Berberfrühstück mit frischem Brot, Msemen und Minztee nach der Landung",
+          "Persönliches Flugzertifikat als Erinnerung",
+          "Bereits am späten Vormittag zurück im Hotel – der Rest des Tages bleibt frei"
+        ],
+        "faqs": [
+          {
+            "question": "Wann beginnt die Ballonfahrt in Marrakesch?",
+            "answer": "Die Abholung erfolgt je nach Jahreszeit zwischen 05:00 und 06:30, damit der Ballon zum Sonnenaufgang abhebt. Die genaue Zeit bestätigen wir am Vortag."
+          },
+          {
+            "question": "Wie lange dauert die Fahrt im Heißluftballon?",
+            "answer": "Die reine Flugzeit beträgt rund eine Stunde. Mit Transfers, Vorbereitung und Frühstück dauert das gesamte Erlebnis etwa 5 Stunden; am späten Vormittag sind Sie zurück in Marrakesch."
+          },
+          {
+            "question": "Was geschieht, wenn der Flug wetterbedingt ausfällt?",
+            "answer": "Die Sicherheitsentscheidung trifft der Pilot am Morgen des Fluges. Kann der Ballon nicht starten, verschieben wir auf einen anderen Morgen oder erstatten den vollen Preis."
+          },
+          {
+            "question": "Ist die Ballonfahrt geteilt oder privat?",
+            "answer": "Die Standardfahrt findet in einem geteilten Korb mit anderen Gästen statt. Ein privater Korb für Paare, Familien oder besondere Anlässe ist gegen Aufpreis im Voraus buchbar."
+          },
+          {
+            "question": "Ist die Ballonfahrt sicher?",
+            "answer": "Die Fahrten werden von lizenzierten Piloten und ausschließlich bei geeignetem Wetter durchgeführt. Vor dem Start erhalten Sie eine Sicherheitseinweisung inklusive Landehaltung."
+          }
+        ]
+      },
+      "jsonLd": {
+        "name": "Sonnenaufgangs-Ballonfahrt in Marrakesch",
+        "description": "Etwa einstündige Heißluftballonfahrt zum Sonnenaufgang über der Landschaft nördlich von Marrakesch mit Hotelabholung, Berberfrühstück und Flugzertifikat."
+      }
+    },
+    "es": {
+      "location": "Marrakech, Marruecos",
+      "metrics": {
+        "distance": "~30 a 40 min en coche desde Marrakech",
+        "duration": "Unas 5 horas",
+        "pickup": "05:00 a 06:30 (según temporada)",
+        "elevation": "Vuelo hasta ~1.000 m"
+      },
+      "overview": [
+        "Los globos despegan desde el campo abierto al norte de Marrakech, a unos 30 o 40 minutos en coche, y vuelan al amanecer cuando el aire está más en calma. Desde la barquilla ves los palmerales, las colinas de Jbilet, pequeñas aldeas agrícolas y, en mañanas despejadas, las cumbres nevadas del Alto Atlas al sur.",
+        "La recogida tiene lugar antes del alba, a una hora que varía según la época del año. En la zona de despegue tomas un té y un aperitivo ligero mientras el equipo infla los globos, y el piloto da una breve charla de seguridad. El vuelo dura aproximadamente una hora y asciende hasta unos 1.000 metros según el viento.",
+        "Tras el aterrizaje disfrutas de un desayuno bereber con pan recién hecho, msemen, miel, aceite de oliva, huevos y té de menta, y recibes un certificado de vuelo. Regresas a tu hotel a media mañana, con el resto del día libre."
+      ],
+      "program": [
+        {
+          "time": "05:00 a 06:30",
+          "title": "Recogida antes del amanecer en Marrakech",
+          "location": "Tu hotel o riad",
+          "description": "Tu conductor te recoge en el hotel o en la puerta accesible más cercana. En verano se sale más temprano y en invierno un poco más tarde para llegar antes de que salga el sol."
+        },
+        {
+          "time": "Antes del amanecer",
+          "title": "Té e inflado del globo",
+          "location": "Campo de despegue al norte de Marrakech",
+          "description": "Té, café y tentempié ligero mientras el equipo prepara e infla los globos. El piloto ofrece unas indicaciones breves de seguridad, incluida la posición de aterrizaje."
+        },
+        {
+          "time": "Amanecer (~1 hora)",
+          "title": "Vuelo en globo",
+          "location": "Sobre el campo al norte de Marrakech",
+          "description": "Despegue con las primeras luces y travesía suave siguiendo el viento sobre palmerales, aldeas y colinas de Jbilet, con el Alto Atlas visible al sur en días claros. La altura oscila desde las copas de las palmeras hasta unos 1.000 metros."
+        },
+        {
+          "time": "Tras aterrizar",
+          "title": "Desayuno bereber",
+          "location": "Haima o casa local junto al aterrizaje",
+          "description": "Desayuno de pan caliente, msemen, miel, aceite de oliva, huevos, queso y té de menta, junto con la entrega de tu diploma de vuelo."
+        },
+        {
+          "time": "09:30 a 11:00",
+          "title": "Regreso a Marrakech",
+          "location": "Del punto de aterrizaje a Marrakech",
+          "description": "Traslado de vuelta a Marrakech hasta tu alojamiento a media mañana."
+        }
+      ],
+      "includes": [
+        "Recogida y regreso a tu hotel o riad en Marrakech",
+        "Transporte ida y vuelta al campo de despegue",
+        "Té, café y aperitivo antes del vuelo",
+        "Vuelo en globo de aproximadamente 1 hora en cesta compartida con piloto titulado",
+        "Desayuno bereber tras el aterrizaje",
+        "Certificado de vuelo"
+      ],
+      "excludes": [
+        "Mejora a cesta privada (disponible bajo petición)",
+        "Fotos y vídeos ofrecidos por el equipo del globo",
+        "Propinas para la tripulación y el conductor"
+      ],
+      "goodToKnow": [
+        "Los vuelos dependen del tiempo. Si el viento o la visibilidad impiden volar con seguridad, el vuelo se pospone a otra mañana o se reembolsa íntegramente.",
+        "Reserva para una de tus primeras mañanas en Marrakech para tener margen de cambio si la meteorología obligara a reprogramar.",
+        "Vístete por capas: hace fresco antes de amanecer incluso en verano, y la temperatura sube rápido después de aterrizar.",
+        "Lleva calzado cerrado adecuado para el campo de aterrizaje, que puede ser irregular.",
+        "El vuelo no está indicado durante el embarazo, para menores de 6 años ni para personas con problemas graves de espalda o corazón. Consúltanos si tienes dudas."
+      ],
+      "seo": {
+        "title": "Globo aerostático en Marrakech al amanecer | Vuelo y desayuno bereber",
+        "metaDescription": "Vuelo en globo al amanecer en Marrakech: ~1 hora sobre palmerales y las colinas de Jbilet, desayuno bereber, diploma de vuelo y recogida en hotel. 160 €.",
+        "lead": "Un vuelo en globo aerostático de aproximadamente una hora al amanecer sobre el entorno rural al norte de Marrakech con vistas al Alto Atlas, seguido de un desayuno bereber y vuelta a tu hotel a media mañana.",
+        "price": {
+          "label": "Desde 160 € por persona",
+          "note": "Incluye recogida y regreso al hotel, té antes del despegue, vuelo de alrededor de una hora en cesta compartida, desayuno bereber y certificado de vuelo. Cesta privada bajo petición."
+        },
+        "imageAlt": "Globo aerostático ascendiendo al amanecer sobre palmerales y cultivos al norte de Marrakech",
+        "highlights": [
+          "Vuela durante alrededor de una hora al amanecer sobre el norte de Marrakech",
+          "Vistas de palmerales, colinas de Jbilet y, en días claros, el Alto Atlas",
+          "Observa al equipo inflar los globos antes del despegue",
+          "Desayuno bereber con pan recién horneado, msemen y té de menta al aterrizar",
+          "Diploma de vuelo personalizado para llevarte de recuerdo",
+          "De vuelta en tu hotel a media mañana con el resto del día libre"
+        ],
+        "faqs": [
+          {
+            "question": "¿A qué hora empieza el vuelo en globo en Marrakech?",
+            "answer": "La recogida es entre las 05:00 y las 06:30 según la temporada para despegar con la salida del sol. Confirmamos la hora exacta el día anterior."
+          },
+          {
+            "question": "¿Cuánto dura el paseo en globo aerostático?",
+            "answer": "El vuelo dura alrededor de una hora. Con traslados, preparación y desayuno, toda la experiencia lleva unas 5 horas y regresas a Marrakech a media mañana."
+          },
+          {
+            "question": "¿Qué ocurre si se cancela el vuelo por mal tiempo?",
+            "answer": "El piloto toma la decisión de seguridad la misma mañana. Si no es seguro despegar, puedes cambiarlo a otro día o recibir el reembolso completo."
+          },
+          {
+            "question": "¿El vuelo en globo es compartido o privado?",
+            "answer": "La tarifa estándar corresponde a cesta compartida con otros viajeros. Se puede reservar cesta privada con antelación para parejas, familias u ocasiones especiales."
+          },
+          {
+            "question": "¿Es seguro volar en globo?",
+            "answer": "Los vuelos los operan pilotos titulados y solo se realizan con meteorología favorable. Antes de despegar recibirás indicaciones de seguridad, incluida la postura para el aterrizaje."
+          }
+        ]
+      },
+      "jsonLd": {
+        "name": "Vuelo en globo aerostático al amanecer en Marrakech",
+        "description": "Vuelo en globo de aproximadamente una hora al amanecer al norte de Marrakech con recogida en hotel, desayuno bereber y certificado de vuelo."
+      }
+    }
   }
 }

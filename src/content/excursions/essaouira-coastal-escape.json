@@ -140,5 +140,373 @@
     "description": "Full-day trip from Marrakech to Essaouira with hotel pickup, an argan oil cooperative stop and about four hours in the port town and its UNESCO-listed medina.",
     "price": 35,
     "currency": "EUR"
+  },
+  "translations": {
+    "fr": {
+      "location": "Essaouira, Maroc",
+      "metrics": {
+        "distance": "~190 km de Marrakech",
+        "duration": "Environ 11 heures",
+        "pickup": "07:30 à 08:00",
+        "elevation": "Côte atlantique, niveau de la mer"
+      },
+      "overview": [
+        "Essaouira est une ville portuaire fortifiée sur l'Atlantique, à environ 190 km à l'ouest de Marrakech. Sa médina est inscrite au patrimoine mondial de l'UNESCO depuis 2001, et les remparts face à l'océan, le port de pêche actif et la grande plage se visitent tous facilement à pied.",
+        "La route vers l'ouest traverse les plaines de Chichaoua puis une forêt d'arganiers, où vous faites halte dans une coopérative féminine pour découvrir l'extraction manuelle de l'huile d'argan. Sur ce tronçon, on aperçoit parfois des chèvres perchées dans les arganiers : certaines y sont installées par des bergers qui demandent un pourboire pour les photos, et votre chauffeur vous l'indiquera.",
+        "Vous arrivez à Essaouira en fin de matinée avec environ quatre heures de temps libre. Le plus agréable est de commencer par le port où débarquent les barques bleues et où l'on grille du poisson frais aux étals, de poursuivre par les remparts de la Skala et la médina, puis de marcher ou prendre un thé à la menthe face à la plage. Départ à 16:00 pour un retour à Marrakech en début de soirée."
+      ],
+      "program": [
+        {
+          "time": "07:30 à 08:00",
+          "title": "Prise en charge à Marrakech",
+          "location": "Votre hôtel ou riad",
+          "description": "Votre chauffeur vous retrouve à votre hôtel ou à la porte accessible en voiture la plus proche si vous logez dans la médina, puis prend la route vers l'ouest."
+        },
+        {
+          "time": "09:00 à 09:20",
+          "title": "Pause café près de Chichaoua",
+          "location": "Café en bord de route",
+          "description": "Courte pause pour un café et les toilettes après environ une heure de trajet."
+        },
+        {
+          "time": "10:15 à 10:45",
+          "title": "Coopérative d'huile d'argan",
+          "location": "Arganeraie sur la route d'Essaouira",
+          "description": "Visite d'une coopérative tenue par des femmes locales : concassage et pressage manuel des noix d'argan, différence entre huile culinaire et cosmétique, et dégustation d'amlou (mélange d'argan, amandes et miel). Aucun achat obligatoire."
+        },
+        {
+          "time": "11:45 à 13:30",
+          "title": "Port de pêche et déjeuner de poissons",
+          "location": "Port d'Essaouira",
+          "description": "Votre chauffeur vous dépose aux abords des remparts, la médina étant piétonne. Descendez au port observer l'arrivée des barques bleues et choisissez votre poisson aux étals pour le faire griller sur place."
+        },
+        {
+          "time": "13:30 à 15:00",
+          "title": "Remparts de la Skala et médina",
+          "location": "Skala de la Ville et médina",
+          "description": "Promenade sur la Skala de la Ville et ses vieux canons en bronze face aux vagues, puis flânerie dans les ruelles entre ateliers de marqueterie en thuya, galeries et échoppes d'épices."
+        },
+        {
+          "time": "15:00 à 16:00",
+          "title": "Temps libre sur la plage",
+          "location": "Plage d'Essaouira",
+          "description": "Balade sur la grande plage au sud de la médina ou pause café face à la baie avant de retrouver votre chauffeur."
+        },
+        {
+          "time": "16:00 à 19:00",
+          "title": "Trajet retour vers Marrakech",
+          "location": "D'Essaouira à Marrakech",
+          "description": "Rendez-vous au point convenu hors des remparts pour la route du retour. Dépose à votre hébergement à Marrakech vers 19:00."
+        }
+      ],
+      "includes": [
+        "Prise en charge et retour à votre hôtel ou riad à Marrakech",
+        "Transport aller-retour en véhicule climatisé",
+        "Chauffeur parlant français, anglais, espagnol ou allemand",
+        "Arrêt dans une coopérative d'huile d'argan",
+        "Eau en bouteille à bord du véhicule"
+      ],
+      "excludes": [
+        "Déjeuner et boissons",
+        "Guide local à Essaouira (disponible sur demande moyennant un supplément)",
+        "Pourboires pour les photos avec les chèvres dans les arganiers",
+        "Pourboires pour votre chauffeur"
+      ],
+      "goodToKnow": [
+        "Emportez un coupe-vent ou une veste : Essaouira est très venteuse et il y fait souvent plusieurs degrés de moins qu'à Marrakech.",
+        "Aux étals du port, fixez toujours le prix au kilo et le coût de la cuisson avant de faire griller votre poisson.",
+        "La médina est entièrement plate et se parcourt aisément à pied ; des chaussures confortables suffisent.",
+        "Prévoyez des dirhams en espèces pour le déjeuner et les petites boutiques. Les commerces plus importants acceptent la carte.",
+        "Cette journée représente environ 6 heures de route aller-retour : elle convient aux voyageurs qui veulent découvrir la côte sans y passer la nuit."
+      ],
+      "seo": {
+        "title": "Excursion à Essaouira depuis Marrakech | Port, Médina & Coopérative d'Argan",
+        "metaDescription": "Excursion à Essaouira depuis Marrakech avec prise en charge à l'hôtel, arrêt dans une coopérative d'argan, port de pêche, remparts de la Skala et 4 heures libres en médina. Dès 35 €.",
+        "lead": "Une journée complète de Marrakech au port atlantique d'Essaouira, avec visite d'une coopérative d'argan, environ quatre heures pour découvrir le port, les remparts et la médina classée à l'UNESCO, et retour en début de soirée.",
+        "price": {
+          "label": "À partir de 35 € par personne",
+          "note": "Inclut la prise en charge et le retour à l'hôtel, le transport aller-retour climatisé, l'arrêt à la coopérative d'argan et l'eau en bouteille. Déjeuner à régler sur place."
+        },
+        "imageAlt": "Barques de pêche bleues amarrées dans le port d'Essaouira au pied des anciens remparts",
+        "highlights": [
+          "Environ quatre heures de temps libre dans la médina d'Essaouira (UNESCO)",
+          "Arrivée des barques bleues et poisson grillé directement au port",
+          "Promenade sur les remparts de la Skala de la Ville et ses canons historiques",
+          "Découverte du pressage manuel de l'huile d'argan en coopérative féminine",
+          "Traversée de l'arganeraie où les chèvres grimpent aux branches",
+          "Prise en charge à votre hôtel à Marrakech et trajet climatisé aller-retour"
+        ],
+        "faqs": [
+          {
+            "question": "À quelle distance se trouve Essaouira de Marrakech ?",
+            "answer": "Essaouira est à environ 190 km à l'ouest de Marrakech. Le trajet dure environ 3 heures par sens avec les arrêts, pour une journée d'environ 11 heures au total."
+          },
+          {
+            "question": "De combien de temps dispose-t-on sur place à Essaouira ?",
+            "answer": "Vous arrivez vers 11:45 et repartez à 16:00, ce qui laisse environ quatre heures pour le port, les remparts, la médina et le déjeuner."
+          },
+          {
+            "question": "Les chèvres dans les arganiers sont-elles naturelles ?",
+            "answer": "Les chèvres grimpent effectivement dans les arganiers pour manger leurs fruits, surtout en fin d'été et en automne. Près de la route principale, certaines y sont placées par des bergers qui demandent un pourboire pour les photos ; votre chauffeur vous expliquera la différence."
+          },
+          {
+            "question": "Essaouira vaut-elle l'excursion d'une journée depuis Marrakech ?",
+            "answer": "Oui, si vous cherchez une pause fraîcheur loin de la chaleur et de l'animation de Marrakech. La ville est calme, piétonne et ouverte sur l'océan. Si vous souhaitez voir le coucher du soleil sur l'Atlantique, envisagez plutôt d'y passer une nuit."
+          },
+          {
+            "question": "Ai-je besoin d'un guide à Essaouira ?",
+            "answer": "La plupart des visiteurs se promènent seuls, car la médina est petite et facile à arpenter. Un guide local peut être ajouté sur demande si vous voulez approfondir l'histoire de la ville et de son ancien mellah."
+          }
+        ]
+      },
+      "jsonLd": {
+        "name": "Excursion d'une journée à Essaouira depuis Marrakech",
+        "description": "Excursion d'une journée de Marrakech à Essaouira avec prise en charge à l'hôtel, arrêt dans une coopérative d'huile d'argan et environ quatre heures de visite dans le port et sa médina classée à l'UNESCO."
+      }
+    },
+    "de": {
+      "location": "Essaouira, Marokko",
+      "metrics": {
+        "distance": "~190 km ab Marrakesch",
+        "duration": "Etwa 11 Stunden",
+        "pickup": "07:30–08:00",
+        "elevation": "Atlantikküste, Meereshöhe"
+      },
+      "overview": [
+        "Essaouira ist eine ummauerte Hafenstadt am Atlantik, rund 190 km westlich von Marrakesch. Ihre Medina gehört seit 2001 zum UNESCO-Weltkulturerbe; Seemauern, der geschäftige Fischereihafen und der breite Sandstrand liegen alle bequem zu Fuß beieinander.",
+        "Die Fahrt Richtung Westen führt durch die Ebene von Chichaoua und dann durch Arganwälder, wo Sie an einer Frauenkooperative halten und sehen, wie Arganöl von Hand gepresst wird. Entlang der Straße sieht man mitunter Ziegen in den Arganbäumen – manche werden dort von Hirten für Fotos platziert, Ihr Fahrer weist Sie ehrlich darauf hin.",
+        "Sie erreichen Essaouira am späten Vormittag und haben etwa vier Stunden zur freien Verfügung. Ideal ist es, am Hafen zu beginnen, wo die blauen Holzboote anlanden und fangfrischer Fisch direkt gegrillt wird, dann über die Festungsmauern der Skala durch die Medina zu bummeln und am Strand einen Minztee zu trinken. Rückfahrt ist um 16:00, Ankunft in Marrakesch am frühen Abend."
+      ],
+      "program": [
+        {
+          "time": "07:30–08:00",
+          "title": "Abholung in Marrakesch",
+          "location": "Ihr Hotel oder Riad",
+          "description": "Ihr Fahrer holt Sie am Hotel oder – bei Unterkünften innerhalb der Medina – am nächstgelegenen befahrbaren Stadttor ab. Sie fahren von Marrakesch aus westwärts."
+        },
+        {
+          "time": "09:00–09:20",
+          "title": "Kaffeepause bei Chichaoua",
+          "location": "Straßencafé",
+          "description": "Eine kurze Rast für Kaffee und Toiletten nach etwa einer Stunde Fahrt."
+        },
+        {
+          "time": "10:15–10:45",
+          "title": "Arganöl-Kooperative",
+          "location": "Arganwald an der Straße nach Essaouira",
+          "description": "Besuch einer von Frauen geführten Kooperative. Sie sehen, wie Argannüsse von Hand geknackt und gemahlen werden, erfahren den Unterschied zwischen Speise- und Kosmetiköl und können Amlou (Aufstrich aus Arganöl, Mandeln und Honig) probieren. Kein Kaufzwang."
+        },
+        {
+          "time": "11:45–13:30",
+          "title": "Fischereihafen & Fisch-Mittagessen",
+          "location": "Hafen von Essaouira",
+          "description": "Ihr Fahrer setzt Sie vor der Stadtmauer ab, da die Altstadt autofrei ist. Spazieren Sie zum Hafen, beobachten Sie das Einlaufen der blauen Boote und lassen Sie sich an den Ständen fangfrischen Fisch direkt grillen."
+        },
+        {
+          "time": "13:30–15:00",
+          "title": "Skala-Festungsmauer & Medina",
+          "location": "Skala de la Ville und Medina",
+          "description": "Gehen Sie über die Skala de la Ville mit ihren alten Bronzekanonen und schlendern Sie anschließend durch die Gassen der Medina vorbei an Thujaholz-Schnitzern, Galerien und Gewürzläden."
+        },
+        {
+          "time": "15:00–16:00",
+          "title": "Freie Zeit am Strand",
+          "location": "Strand von Essaouira",
+          "description": "Spazieren Sie am breiten Strand südlich der Medina entlang oder setzen Sie sich mit Blick auf die Bucht in ein Café, bevor Sie Ihren Fahrer wieder treffen."
+        },
+        {
+          "time": "16:00–19:00",
+          "title": "Rückfahrt nach Marrakesch",
+          "location": "Essaouira nach Marrakesch",
+          "description": "Treffpunkt am vereinbarten Tor außerhalb der Mauern zur Rückfahrt. Gegen 19:00 werden Sie an Ihrer Unterkunft in Marrakesch abgesetzt."
+        }
+      ],
+      "includes": [
+        "Abholung und Rückbringung an Ihrem Hotel oder Riad in Marrakesch",
+        "Hin- und Rückfahrt im klimatisierten Fahrzeug",
+        "Fahrer mit Deutsch-, Englisch-, Französisch- oder Spanischkenntnissen",
+        "Stopp bei einer Arganöl-Kooperative",
+        "Flaschenwasser im Fahrzeug"
+      ],
+      "excludes": [
+        "Mittagessen und Getränke",
+        "Lokaler Stadtführer in Essaouira (auf Anfrage gegen Aufpreis möglich)",
+        "Trinkgeld für Fotos mit Ziegen in den Arganbäumen",
+        "Trinkgeld für Ihren Fahrer"
+      ],
+      "goodToKnow": [
+        "Packen Sie eine winddichte Jacke ein: In Essaouira weht meist starker Atlantikwind, und es ist oft deutlich kühler als in Marrakesch.",
+        "Vereinbaren Sie an den Fischständen am Hafen den Kilopreis und die Grillgebühr vor dem Zubereiten.",
+        "Die Medina ist flach und vollständig zu Fuß erkundbar; bequeme Schuhe genügen.",
+        "Nehmen Sie Dirham in bar für das Mittagessen und kleinere Läden mit; größere Geschäfte akzeptieren Karten.",
+        "Insgesamt verbringen Sie etwa 6 Stunden im Auto – ideal, um die Küste an einem Tag ohne Übernachtung zu erleben."
+      ],
+      "seo": {
+        "title": "Tagesausflug nach Essaouira ab Marrakesch | Hafen, Medina & Arganstopp",
+        "metaDescription": "Tagesausflug nach Essaouira ab Marrakesch mit Hotelabholung, Besuch einer Arganöl-Kooperative, Fischereihafen, Skala-Stadtmauer und vier Stunden Zeit in der Medina. Ab 35 €.",
+        "lead": "Ein ganzer Tag von Marrakesch an den Atlantikhafen Essaouira mit Stopp bei einer Arganöl-Kooperative, rund vier Stunden Zeit für Hafen, Festungsmauern und UNESCO-Medina sowie Rückkehr am frühen Abend.",
+        "price": {
+          "label": "Ab 35 € pro Person",
+          "note": "Inklusive Hotelabholung und -rückbringung, klimatisiertem Hin- und Rücktransfer, Stopp an der Argankooperative und Flaschenwasser. Mittagessen vor Ort zahlbar."
+        },
+        "imageAlt": "Blaue Fischerboote im Hafen von Essaouira unterhalb der historischen Seefestung",
+        "highlights": [
+          "Rund vier Stunden freie Zeit in der UNESCO-geschützten Medina von Essaouira",
+          "Blaue Fischerboote beim Entladen beobachten und frisch gegrillten Fisch genießen",
+          "Spaziergang über die Skala de la Ville entlang alter Schiffskanonen",
+          "Handgepresstes Arganöl in einer Frauenkooperative kennenlernen",
+          "Fahrt durch die Arganwälder mit kletternden Ziegen in den Bäumen",
+          "Hotelabholung in Marrakesch und klimatisierter Transfer hin und zurück"
+        ],
+        "faqs": [
+          {
+            "question": "Wie weit liegt Essaouira von Marrakesch entfernt?",
+            "answer": "Essaouira liegt etwa 190 km westlich von Marrakesch. Mit kurzen Pausen dauert die Fahrt rund 3 Stunden pro Strecke, sodass der gesamte Tag etwa 11 Stunden in Anspruch nimmt."
+          },
+          {
+            "question": "Wie viel Zeit bleibt vor Ort in Essaouira?",
+            "answer": "Sie treffen gegen 11:45 ein und fahren um 16:00 zurück – Sie haben also gut vier Stunden für Hafen, Stadtmauern, Medina und Mittagessen."
+          },
+          {
+            "question": "Klettern die Ziegen wirklich selbst in die Arganbäume?",
+            "answer": "Ja, Ziegen klettern vor allem im Spätsommer und Herbst auf Arganbäume, um die Früchte zu fressen. Direkt an der Hauptstraße setzen Hirten jedoch mitunter Ziegen für Trinkgeld-Fotos in die Äste. Ihr Fahrer zeigt Ihnen auf Wunsch echte Herden und weist auf den Unterschied hin."
+          },
+          {
+            "question": "Lohnt sich Essaouira als Tagesausflug ab Marrakesch?",
+            "answer": "Ja, besonders wenn Sie eine Pause von Hitze und Trubel in Marrakesch suchen. Die Stadt ist ruhig, überschaubar und liegt direkt am Meer. Wenn Sie den Sonnenuntergang über dem Atlantik erleben möchten, empfiehlt sich eine Übernachtung."
+          },
+          {
+            "question": "Brauche ich in Essaouira einen Stadtführer?",
+            "answer": "Die meisten Reisenden erkunden die kleine, übersichtliche Medina auf eigene Faust. Ein lokaler Guide kann auf Wunsch hinzugebucht werden, wenn Sie die Stadtgeschichte und das historische jüdische Viertel erklärt bekommen möchten."
+          }
+        ]
+      },
+      "jsonLd": {
+        "name": "Tagesausflug nach Essaouira ab Marrakesch",
+        "description": "Ganztägiger Ausflug ab Marrakesch nach Essaouira mit Hotelabholung, Stopp an einer Arganöl-Kooperative und rund vier Stunden Aufenthalt am Hafen und in der UNESCO-Medina."
+      }
+    },
+    "es": {
+      "location": "Essaouira, Marruecos",
+      "metrics": {
+        "distance": "~190 km desde Marrakech",
+        "duration": "Unas 11 horas",
+        "pickup": "07:30 a 08:00",
+        "elevation": "Costa atlántica, nivel del mar"
+      },
+      "overview": [
+        "Essaouira es una ciudad portuaria amurallada en el Atlántico, a unos 190 km al oeste de Marrakech. Su medina es Patrimonio de la Humanidad por la UNESCO desde 2001, y sus murallas frente al mar, el puerto pesquero y la amplia playa están todos a poca distancia a pie entre sí.",
+        "La carretera hacia el oeste cruza las llanuras de Chichaoua y atraviesa bosques de argán, donde paramos en una cooperativa femenina para ver la elaboración artesanal del aceite. En esta ruta también es frecuente ver cabras subidas a los árboles de argán; algunas son colocadas por pastores que piden propina por las fotos, algo de lo que tu chófer te informará.",
+        "Llegas a Essaouira a media mañana con unas cuatro horas libres. Un buen plan es empezar por el puerto viendo descargar las barcas azules y comer pescado a la brasa en los puestos, seguir por las murallas de la Skala y la medina, y terminar paseando o tomando un té frente a la playa. Salida a las 16:00 para regresar a Marrakech al anochecer."
+      ],
+      "program": [
+        {
+          "time": "07:30 a 08:00",
+          "title": "Recogida en Marrakech",
+          "location": "Tu hotel o riad",
+          "description": "Tu conductor te recoge en el hotel o en la puerta accesible más cercana si te alojas en la medina, y toma la carretera hacia el oeste."
+        },
+        {
+          "time": "09:00 a 09:20",
+          "title": "Parada para café cerca de Chichaoua",
+          "location": "Cafetería de carretera",
+          "description": "Breve descanso para tomar un café e ir al baño tras aproximadamente una hora de camino."
+        },
+        {
+          "time": "10:15 a 10:45",
+          "title": "Cooperativa de aceite de argán",
+          "location": "Bosque de argán en la ruta a Essaouira",
+          "description": "Visita a una cooperativa dirigida por mujeres locales. Verás cómo parten y muelen las nueces a mano, aprenderás la diferencia entre aceite culinario y cosmético y podrás probar el amlou (crema de argán, almendras y miel). Sin obligación de compra."
+        },
+        {
+          "time": "11:45 a 13:30",
+          "title": "Puerto pesquero y almuerzo de marisco",
+          "location": "Puerto de Essaouira",
+          "description": "El chófer te deja junto a las murallas, ya que los coches no entran en la ciudad antigua. Camina hasta el puerto para ver llegar las barcas azules y elige pescado fresco en los puestos para que te lo hagan a la brasa al momento."
+        },
+        {
+          "time": "13:30 a 15:00",
+          "title": "Murallas de la Skala y medina",
+          "location": "Skala de la Ville y medina",
+          "description": "Pasea por la Skala de la Ville, el baluarte marino alineado con antiguos cañones de bronce, y adéntrate en las callejuelas de artesanos de madera de tuya, galerías y tiendas de especias."
+        },
+        {
+          "time": "15:00 a 16:00",
+          "title": "Tiempo libre junto a la playa",
+          "location": "Playa de Essaouira",
+          "description": "Camina por la amplia playa al sur de la medina o tómate algo en una cafetería frente a la bahía antes de reunirte con el chófer."
+        },
+        {
+          "time": "16:00 a 19:00",
+          "title": "Viaje de vuelta a Marrakech",
+          "location": "De Essaouira a Marrakech",
+          "description": "Encuentro en el punto acordado fuera de las murallas para volver por carretera. Regreso a tu alojamiento en Marrakech sobre las 19:00."
+        }
+      ],
+      "includes": [
+        "Recogida y regreso a tu hotel o riad en Marrakech",
+        "Transporte ida y vuelta en vehículo con aire acondicionado",
+        "Conductor que habla español, inglés, francés o alemán",
+        "Parada en una cooperativa de aceite de argán",
+        "Agua embotellada en el vehículo"
+      ],
+      "excludes": [
+        "Almuerzo y bebidas",
+        "Guía local en Essaouira (disponible bajo petición con coste adicional)",
+        "Propinas por fotos con cabras en los árboles de argán",
+        "Propinas para tu conductor"
+      ],
+      "goodToKnow": [
+        "Lleva una chaqueta cortavientos: Essaouira es famosa por el viento del Atlántico y suele hacer varios grados menos que en Marrakech.",
+        "En los puestos de pescado del puerto, acuerda el precio por kilo y el coste de la parrilla antes de que cocinen tu plato.",
+        "La medina es llana y totalmente transitable a pie; basta con calzado cómodo.",
+        "Lleva dírhams en efectivo para comer y compras pequeñas; las tiendas más grandes aceptan tarjeta.",
+        "Es una jornada larga con unas 6 horas de conducción en total, ideal para conocer la costa en un día sin pernoctar."
+      ],
+      "seo": {
+        "title": "Excursión a Essaouira desde Marrakech | Puerto, Medina y Cooperativa de Argán",
+        "metaDescription": "Excursión a Essaouira desde Marrakech con recogida en hotel, parada en cooperativa de argán, puerto pesquero, murallas de la Skala y cuatro horas en la medina. Desde 35 €.",
+        "lead": "Un día completo desde Marrakech al puerto atlántico de Essaouira, con parada en una cooperativa de aceite de argán, unas cuatro horas para recorrer el puerto, las murallas y su medina UNESCO, y regreso al atardecer.",
+        "price": {
+          "label": "Desde 35 € por persona",
+          "note": "Incluye recogida y regreso al hotel, transporte ida y vuelta con aire acondicionado, parada en la cooperativa de argán y agua embotellada. El almuerzo se paga allí."
+        },
+        "imageAlt": "Barcas de pesca azules en el puerto de Essaouira bajo las antiguas murallas frente al mar",
+        "highlights": [
+          "Unas cuatro horas de tiempo libre en Essaouira, medina declarada por la UNESCO",
+          "Ver llegar las barcas azules y comer pescado a la brasa en el puerto",
+          "Recorrer las murallas de la Skala de la Ville y su hilera de antiguos cañones",
+          "Conocer la elaboración artesanal del aceite de argán en cooperativa femenina",
+          "Cruzar el bosque de arganes donde trepan las cabras",
+          "Recogida en hotel de Marrakech y transporte ida y vuelta con aire acondicionado"
+        ],
+        "faqs": [
+          {
+            "question": "¿A qué distancia está Essaouira de Marrakech?",
+            "answer": "Essaouira está a unos 190 km al oeste de Marrakech. El trayecto dura unas 3 horas por sentido con paradas, por lo que la jornada completa es de unas 11 horas."
+          },
+          {
+            "question": "¿Cuánto tiempo libre tengo en Essaouira?",
+            "answer": "Llegas sobre las 11:45 y sales a las 16:00, lo que te da unas cuatro horas para ver el puerto, las murallas, la medina y almorzar."
+          },
+          {
+            "question": "¿Son reales las cabras subidas a los árboles de argán?",
+            "answer": "Las cabras trepan de forma natural a los arganes para comer su fruto, sobre todo a finales de verano y otoño. Cerca de la carretera principal algunas son colocadas por pastores que piden propina por foto; tu chófer te avisará cuál es cuál."
+          },
+          {
+            "question": "¿Merece la pena visitar Essaouira en un día desde Marrakech?",
+            "answer": "Sí, si buscas un respiro frente al calor y el ritmo de Marrakech. Es tranquila, peatonal y abierta al mar. Si quieres ver la puesta de sol sobre el océano, considera pasar una noche."
+          },
+          {
+            "question": "¿Necesito un guía en Essaouira?",
+            "answer": "La mayoría de viajeros la recorren por su cuenta, ya que la medina es pequeña y fácil de orientarse. Podemos añadir un guía local bajo petición si quieres conocer la historia de la ciudad y su antiguo barrio judío."
+          }
+        ]
+      },
+      "jsonLd": {
+        "name": "Excursión de un día a Essaouira desde Marrakech",
+        "description": "Excursión de día completo desde Marrakech a Essaouira con recogida en hotel, parada en cooperativa de aceite de argán y unas cuatro horas en el puerto y su medina UNESCO."
+      }
+    }
   }
 }

@@ -68,5 +68,127 @@
     "description": "Discover northern Morocco on this 5-day private route from Casablanca to Fes via Rabat, Chefchaouen, Volubilis, and Meknes.",
     "price": 490,
     "currency": "EUR"
+  },
+  "translations": {
+    "fr": {
+      "title": "Circuit Villes Impériales Maroc 5 Jours | Casablanca, Chefchaouen & Fès (2026)",
+      "metaDescription": "Dès 490€ par pers. Circuit culturel de 5 jours de Casablanca à Fès. Mosquée Hassan II, ville bleue de Chefchaouen, ruines de Volubilis et médina de Fès.",
+      "lead": "Cet itinéraire de cinq jours met l'accent sur l'histoire, l'architecture et les villes côtières du Maroc sans longs trajets dans le désert. Au départ de Casablanca à la mosquée Hassan II, vous longez l'Atlantique jusqu'à Rabat pour visiter la kasbah des Oudayas et la tour Hassan du XIIe siècle avant de rejoindre Chefchaouen, Volubilis, Meknès et Fès.",
+      "price": {
+        "label": "À partir de 490 € par personne",
+        "note": "Inclut un véhicule privé climatisé avec chauffeur-guide, 4 nuits en riads/hôtels de charme (Casablanca, Chefchaouen et 2 nuits à Fès), un guide agréé à la journée à Fès, les transferts aéroport et les petits-déjeuners à partir du jour 2."
+      },
+      "imageAlt": "Escaliers et portes peints en bleu de la médina de Chefchaouen lors d'un circuit impérial de 5 jours depuis Casablanca",
+      "highlights": [
+        "Visite de la mosquée Hassan II face à l'océan à Casablanca",
+        "Découverte de la kasbah des Oudayas et du mausolée Mohammed V à Rabat",
+        "Promenade dans la médina bleue et les panoramas de Chefchaouen",
+        "Visite des mosaïques romaines et de l'arc de triomphe de Volubilis (UNESCO)",
+        "Découverte de la porte monumentale Bab Mansour du XVIIIe siècle à Meknès",
+        "Visite guidée à pied d'une journée dans la médina médiévale de Fès"
+      ],
+      "faqs": [
+        {
+          "question": "Ce voyage est-il surtout axé sur l'histoire et la culture ?",
+          "answer": "Oui. Il s'adresse aux voyageurs qui souhaitent découvrir les cités impériales du Maroc, le patrimoine romain et les métiers d'art sans passer de longues journées sur la route vers le Sahara."
+        },
+        {
+          "question": "Pouvons-nous rentrer à Casablanca le jour 5 au lieu de repartir de Fès ?",
+          "answer": "Oui. Le cinquième jour, votre chauffeur peut vous ramener directement à Casablanca ou à l'aéroport Mohammed V par l'autoroute (environ 3 h 30 de trajet)."
+        },
+        {
+          "question": "Combien de temps passons-nous à Chefchaouen ?",
+          "answer": "Vous arrivez dans l'après-midi du jour 2 et passez la nuit sur place, ce qui permet de profiter du calme du soir et de la lumière matinale avant l'arrivée des excursions à la journée."
+        },
+        {
+          "question": "Un guide local est-il prévu pour Fès ?",
+          "answer": "Oui. Un guide agréé conduit votre visite à pied de Fès el-Bali à travers les médersas, l'université, les tanneries et les souks historiques."
+        },
+        {
+          "question": "Les transferts aéroport sont-ils inclus ?",
+          "answer": "Oui. Nous assurons la prise en charge à l'aéroport de Casablanca (CMN) ou à votre hôtel le jour 1, et la dépose à l'aéroport de Fès (FEZ) ou de Casablanca le jour 5."
+        }
+      ]
+    },
+    "de": {
+      "title": "5-Tage Marokko Königsstädte Rundreise ab Casablanca (2026)",
+      "metaDescription": "Ab 490€ p.P. 5-tägige Kulturreise von Casablanca nach Fès. Hassan-II.-Moschee, Chefchaouen, römische Ruinen von Volubilis und UNESCO-Altstadt Fès.",
+      "lead": "Diese fünftägige Route konzentriert sich auf Marokkos Geschichte, Architektur und Küstenstädte ohne lange Wüstenfahrten. Nach dem Auftakt an der Hassan-II.-Moschee in Casablanca folgen Sie der Atlantikküste bis Rabat, um die Kasbah des Oudaias und den Hassan-Turm aus dem 12. Jahrhundert zu besichtigen, bevor es weiter nach Chefchaouen, Volubilis, Meknès und Fès geht.",
+      "price": {
+        "label": "Ab 490 € pro Person",
+        "note": "Inklusive privatem, klimatisiertem Fahrzeug mit Fahrer-Guide, 4 Nächten in Boutique-Riads/Hotels (Casablanca, Chefchaouen und 2 Nächte Fès), lizenziertem Tagesguide in Fès, Flughafentransfers und Frühstück ab Tag 2."
+      },
+      "imageAlt": "Blau gestrichene Stufen und Türen in der Medina von Chefchaouen auf der 5-tägigen Königsstädte-Tour ab Casablanca",
+      "highlights": [
+        "Besichtigung der direkt am Atlantik gelegenen Hassan-II.-Moschee in Casablanca",
+        "Erkundung der Kasbah des Oudaias und des Mohammed-V.-Mausoleums in Rabat",
+        "Spaziergang durch die blauen Gassen und Bergblicke von Chefchaouen",
+        "Besuch der römischen Mosaike und des Triumphbogens im UNESCO-Welterbe Volubilis",
+        "Besichtigung des Stadttores Bab Mansour aus dem 18. Jahrhundert in Meknès",
+        "Ganztägige geführte Besichtigung der mittelalterlichen Medina von Fès"
+      ],
+      "faqs": [
+        {
+          "question": "Liegt der Schwerpunkt dieser Reise auf Geschichte und Kultur?",
+          "answer": "Ja. Sie richtet sich an Reisende, die Marokkos Königsstädte, römisches Erbe und traditionelles Handwerk ohne lange Fahrtage in die Sahara erleben möchten."
+        },
+        {
+          "question": "Können wir an Tag 5 nach Casablanca zurückfahren statt ab Fès zu fliegen?",
+          "answer": "Ja. An Tag 5 fährt Sie Ihr Fahrer über die Autobahn direkt zurück ins Zentrum von Casablanca oder zum Flughafen Mohammed V (etwa 3,5 Stunden)."
+        },
+        {
+          "question": "Wie viel Zeit haben wir in Chefchaouen?",
+          "answer": "Sie erreichen Chefchaouen am Nachmittag des zweiten Tages und übernachten dort, sodass Sie die ruhigen Abend- und frühen Morgenstunden vor den Tagesausflüglern genießen."
+        },
+        {
+          "question": "Ist ein lokaler Stadtführer für Fès inbegriffen?",
+          "answer": "Ja. Ein lizenzierter Guide führt Sie zu Fuß durch Fès el-Bali zu den Medresen, der Universität, den Gerbereien und den historischen Souks."
+        },
+        {
+          "question": "Sind Flughafentransfers inklusive?",
+          "answer": "Ja. Wir holen Sie an Tag 1 am Flughafen Casablanca (CMN) oder im Hotel ab und bringen Sie an Tag 5 zum Flughafen Fès (FEZ) oder zurück nach Casablanca."
+        }
+      ]
+    },
+    "es": {
+      "title": "Tour Ciudades Imperiales de Marruecos 5 Días | Casablanca, Chefchaouen y Fez (2026)",
+      "metaDescription": "Desde 490€ por pers. Tour cultural privado de 5 días de Casablanca a Fez. Mezquita Hassan II, Chefchaouen, ruinas de Volúbilis y medina de Fez.",
+      "lead": "Este itinerario de cinco días se centra en la historia, la arquitectura y las ciudades costeras de Marruecos sin largos trayectos por el desierto. Partiendo de Casablanca junto a la mezquita Hassan II, sigues la costa atlántica hasta Rabat para conocer la alcazaba de los Udayas y la torre Hassan del siglo XII, antes de continuar hacia Chefchaouen, Volúbilis, Meknes y Fez.",
+      "price": {
+        "label": "Desde 490 € por persona",
+        "note": "Incluye vehículo privado con aire acondicionado y chófer-guía, 4 noches en riads/hoteles con encanto (Casablanca, Chefchaouen y 2 noches en Fez), guía oficial de día completo en Fez, traslados al aeropuerto y desayunos desde el día 2."
+      },
+      "imageAlt": "Escaleras y puertas pintadas de azul en la medina de Chefchaouen durante el tour de 5 días por ciudades imperiales",
+      "highlights": [
+        "Visita a la mezquita Hassan II frente al océano en Casablanca",
+        "Recorrido por la alcazaba de los Udayas y el mausoleo de Mohammed V en Rabat",
+        "Paseo por la medina azul y miradores de montaña de Chefchaouen",
+        "Visita a los mosaicos romanos y el arco del triunfo de Volúbilis (UNESCO)",
+        "Parada ante la puerta monumental Bab Mansour del siglo XVIII en Meknes",
+        "Visita guiada a pie de día completo por la medina medieval de Fez"
+      ],
+      "faqs": [
+        {
+          "question": "¿Este viaje está orientado sobre todo a la historia y la cultura?",
+          "answer": "Sí. Está pensado para viajeros que desean conocer las ciudades imperiales, el legado romano y la artesanía marroquí sin dedicar jornadas enteras de carretera hacia el Sáhara."
+        },
+        {
+          "question": "¿Podemos volver a Casablanca el día 5 en vez de volar desde Fez?",
+          "answer": "Sí. El día 5 tu chófer puede llevarte directamente de vuelta a la ciudad de Casablanca o al aeropuerto Mohammed V por autopista (aproximadamente 3,5 horas)."
+        },
+        {
+          "question": "¿Cuánto tiempo pasamos en Chefchaouen?",
+          "answer": "Llegas por la tarde del día 2 y haces noche allí, disfrutando tanto de las horas tranquilas del anochecer como de la mañana temprana antes de los autobuses turísticos."
+        },
+        {
+          "question": "¿Incluye guía local en Fez?",
+          "answer": "Sí. Un guía oficial local dirige tu recorrido a pie por Fez el-Bali visitando las madrazas, la universidad, las curtidurías y los zocos tradicionales."
+        },
+        {
+          "question": "¿Están incluidos los traslados al aeropuerto?",
+          "answer": "Sí. Te recogemos en el aeropuerto de Casablanca (CMN) o en tu hotel el día 1 y te llevamos al aeropuerto de Fez (FEZ) o al de Casablanca el día 5."
+        }
+      ]
+    }
   }
 }

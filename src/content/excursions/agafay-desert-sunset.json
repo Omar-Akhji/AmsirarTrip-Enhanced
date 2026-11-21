@@ -135,5 +135,358 @@
     "description": "Afternoon and evening excursion from Marrakech to the Agafay stone desert with a sunset camel ride, a Moroccan dinner at a desert camp and live music.",
     "price": 55,
     "currency": "EUR"
+  },
+  "translations": {
+    "fr": {
+      "location": "Désert d'Agafay, Maroc",
+      "metrics": {
+        "distance": "~40 km de Marrakech",
+        "duration": "Environ 6 heures",
+        "pickup": "15:00 à 17:00 (selon saison)",
+        "elevation": "Plateau de désert minéral"
+      },
+      "overview": [
+        "Le désert d'Agafay est un désert de pierre situé à environ 40 km au sud-ouest de Marrakech, soit environ 45 minutes de route. Il n'y a pas de dunes de sable : c'est un relief de collines claires et arides, face aux sommets du Haut Atlas visibles au sud par temps clair.",
+        "On vient vous chercher dans l'après-midi à une heure adaptée à la saison, pour rejoindre le campement environ une heure avant le coucher du soleil. Après un thé à la menthe, vous partez à dos de dromadaire pendant environ une heure à travers les collines, en portant un chèche et une djellaba si vous le souhaitez, jusqu'à un point haut pour voir le soleil descendre sur l'Atlas.",
+        "De retour au camp, le dîner est servi sous les tentes ou en plein air : soupe, salades, tajine et fruits, suivis de musique autour du feu. Retour à Marrakech entre 21:30 et 22:30. C'est l'option la plus courte pour profiter d'un paysage désertique sans avoir les 3 jours nécessaires pour aller au Sahara."
+      ],
+      "program": [
+        {
+          "time": "15:00 à 17:00",
+          "title": "Prise en charge l'après-midi à Marrakech",
+          "location": "Votre hôtel ou riad",
+          "description": "Votre chauffeur vous récupère à votre hôtel ou à la porte carrossable la plus proche. L'heure est plus matinale en hiver et plus tardive en été pour arriver avant le coucher du soleil, en longeant le lac de Lalla Takerkoust."
+        },
+        {
+          "time": "À l'arrivée",
+          "title": "Accueil au campement",
+          "location": "Camp d'Agafay",
+          "description": "Thé à la menthe au camp après environ 45 minutes de trajet. Possibilité d'emprunter un chèche et une tunique pour la balade à dromadaire."
+        },
+        {
+          "time": "~1 h avant le coucher du soleil",
+          "title": "Balade à dromadaire au coucher du soleil",
+          "location": "Collines d'Agafay",
+          "description": "Promenade d'environ une heure sur les collines minérales jusqu'à un point de vue sur le coucher du soleil au-dessus du Haut Atlas. Du quad peut remplacer ou compléter la balade avec supplément."
+        },
+        {
+          "time": "Après le coucher du soleil",
+          "title": "Dîner sous les étoiles",
+          "location": "Camp d'Agafay",
+          "description": "Dîner marocain composé de soupe harira, salades, tajine au poulet ou au bœuf et fruits de saison, servi sous tente ou en extérieur près du feu."
+        },
+        {
+          "time": "Pendant le dîner",
+          "title": "Musique autour du feu",
+          "location": "Camp d'Agafay",
+          "description": "Des musiciens locaux interprètent des chants berbères et gnawas autour du feu de camp après le repas."
+        },
+        {
+          "time": "21:30 à 22:30",
+          "title": "Retour à Marrakech",
+          "location": "D'Agafay à Marrakech",
+          "description": "Trajet retour d'environ 45 minutes jusqu'à votre hébergement à Marrakech."
+        }
+      ],
+      "includes": [
+        "Prise en charge et retour à votre hôtel ou riad à Marrakech",
+        "Transport aller-retour en véhicule climatisé",
+        "Thé à la menthe de bienvenue à l'arrivée",
+        "Balade à dromadaire au coucher du soleil d'environ 1 heure, avec prêt de chèche et tunique",
+        "Dîner marocain en trois plats",
+        "Musique en direct au coin du feu",
+        "Eau en bouteille"
+      ],
+      "excludes": [
+        "Quad ou buggy (en option avec supplément)",
+        "Boissons alcoolisées et sodas en dehors de l'eau et du thé",
+        "Pourboires pour votre chauffeur et l'équipe du camp"
+      ],
+      "goodToKnow": [
+        "Apportez un vêtement chaud : le désert fraîchit vite dès le coucher du soleil, même en été, et les soirées d'hiver sont froides.",
+        "Portez des chaussures fermées : le sol est caillouteux.",
+        "L'heure de prise en charge évolue au fil de l'année avec l'heure du coucher du soleil ; nous confirmons l'horaire exact la veille.",
+        "Des menus végétariens, véganes ou adaptés peuvent être préparés si vous le précisez lors de la réservation.",
+        "Agafay est un désert de pierre sans dunes de sable. Si vous recherchez de grandes dunes dorées, consultez nos circuits désert à Merzouga."
+      ],
+      "seo": {
+        "title": "Coucher de soleil à Agafay : Dromadaire & Dîner depuis Marrakech",
+        "metaDescription": "Excursion au coucher du soleil dans le désert d'Agafay depuis Marrakech : balade d'1 h à dromadaire, vue sur l'Atlas, dîner marocain et musique autour du feu. Prise en charge hôtel, dès 55 €.",
+        "lead": "Un après-midi et une soirée dans le désert minéral d'Agafay, à 45 minutes de Marrakech : balade à dromadaire au coucher du soleil face à l'Atlas, puis dîner et musique autour du feu dans un campement.",
+        "price": {
+          "label": "À partir de 55 € par personne",
+          "note": "Inclut la prise en charge et le retour à l'hôtel, le transport climatisé, le thé à la menthe, la balade à dromadaire au coucher du soleil, le dîner trois plats, la musique live et l'eau en bouteille."
+        },
+        "imageAlt": "Dromadaires traversant les collines pierreuses claires du désert d'Agafay au coucher du soleil face au Haut Atlas",
+        "highlights": [
+          "Balade à dromadaire d'environ 1 heure au coucher du soleil sur les collines d'Agafay",
+          "Coucher de soleil avec le Haut Atlas en toile de fond",
+          "Dîner marocain en trois plats dans un campement du désert",
+          "Musique berbère et gnawa autour du feu après le dîner",
+          "À seulement 45 minutes de Marrakech, avec prise en charge à l'hôtel",
+          "Option quad disponible avant le coucher du soleil"
+        ],
+        "faqs": [
+          {
+            "question": "À quelle distance se trouve le désert d'Agafay de Marrakech ?",
+            "answer": "Le désert d'Agafay est à environ 40 km au sud-ouest de Marrakech, soit 45 minutes de voiture. L'excursion complète dure environ 6 heures."
+          },
+          {
+            "question": "Y a-t-il des dunes de sable à Agafay ?",
+            "answer": "Non. Agafay est un désert de pierre fait de collines pâles et arides. Il n'a pas les dunes dorées du Sahara, qui demandent 9 à 10 heures de route vers Merzouga. Agafay offre en une soirée le silence, le relief désertique et le coucher du soleil."
+          },
+          {
+            "question": "À quelle heure commence et se termine la soirée à Agafay ?",
+            "answer": "La prise en charge a lieu entre 15:00 et 17:00 selon la saison afin d'arriver au camp avant le coucher du soleil. Le retour à Marrakech se fait entre 21:30 et 22:30."
+          },
+          {
+            "question": "Peut-on ajouter du quad à l'excursion à Agafay ?",
+            "answer": "Oui. Une sortie en quad ou en buggy peut être ajoutée avant le coucher du soleil moyennant un supplément. Prévenez-nous à la réservation pour caler l'horaire."
+          },
+          {
+            "question": "La soirée à Agafay est-elle adaptée aux enfants ?",
+            "answer": "Oui. Les enfants peuvent monter à dromadaire sous la surveillance d'un adulte, et le dîner s'adapte facilement aux plus jeunes. La durée de la soirée convient à la plupart des familles."
+          }
+        ]
+      },
+      "jsonLd": {
+        "name": "Coucher de soleil à Agafay : balade à dromadaire et dîner depuis Marrakech",
+        "description": "Excursion d'après-midi et de soirée depuis Marrakech vers le désert pierreux d'Agafay avec balade à dromadaire au coucher du soleil, dîner marocain au campement et musique en direct."
+      }
+    },
+    "de": {
+      "location": "Agafay-Wüste, Marokko",
+      "metrics": {
+        "distance": "~40 km ab Marrakesch",
+        "duration": "Etwa 6 Stunden",
+        "pickup": "15:00–17:00 (je nach Saison)",
+        "elevation": "Steinwüsten-Plateau"
+      },
+      "overview": [
+        "Die Agafay-Wüste ist eine Steinwüste rund 40 km südwestlich von Marrakesch, etwa 45 Autominuten entfernt. Hier gibt es keine Sanddünen, sondern karge, helle Hügel, vor denen sich an klaren Abenden die Gipfel des Hohen Atlas am südlichen Horizont abzeichnen.",
+        "Sie werden am Nachmittag je nach Jahreszeit so abgeholt, dass Sie rund eine Stunde vor Sonnenuntergang das Camp erreichen. Nach einem Minztee reiten Sie etwa eine Stunde lang auf dem Kamel durch die Hügel – auf Wunsch mit Tuch und traditionellem Gewand – bis zu einem Aussichtspunkt für den Sonnenuntergang über dem Atlas.",
+        "Zurück im Camp wird das Abendessen im Zelt oder unter freiem Himmel serviert: Suppe, Salate, Tajine und Obst, gefolgt von Musik am Lagerfeuer. Zwischen 21:30 und 22:30 kehren Sie nach Marrakesch zurück. Es ist die kürzeste Möglichkeit, Wüstenlandschaft zu erleben, wenn Ihnen die 3 Tage für die Sahara fehlen."
+      ],
+      "program": [
+        {
+          "time": "15:00–17:00",
+          "title": "Abholung am Nachmittag in Marrakesch",
+          "location": "Ihr Hotel oder Riad",
+          "description": "Ihr Fahrer holt Sie am Hotel oder am nächstgelegenen befahrbaren Tor ab. Im Winter erfolgt die Abholung früher, im Sommer später, sodass Sie vor Sonnenuntergang am Stausee Lalla Takerkoust vorbei die Wüste erreichen."
+        },
+        {
+          "time": "Ankunft",
+          "title": "Empfang im Wüstencamp",
+          "location": "Agafay-Camp",
+          "description": "Minztee im Camp nach rund 45 Minuten Fahrt. Für den Kamelritt können Sie sich ein Kopftuch und eine Djellaba leihen."
+        },
+        {
+          "time": "Ca. 1 Std. vor Sonnenuntergang",
+          "title": "Kamelritt zum Sonnenuntergang",
+          "location": "Hügel von Agafay",
+          "description": "Etwa einstündiger Ritt über die Steinhügel zu einem Aussichtspunkt mit Blick auf den Sonnenuntergang über dem Hohen Atlas. Gegen Aufpreis ist alternativ oder ergänzend eine Quad-Fahrt möglich."
+        },
+        {
+          "time": "Nach Sonnenuntergang",
+          "title": "Abendessen unter Sternen",
+          "location": "Agafay-Camp",
+          "description": "Marokkanisches Abendessen aus Harira-Suppe, Salaten, Hähnchen- oder Rinder-Tajine und saisonalem Obst, serviert in Zelten oder draußen am Feuer."
+        },
+        {
+          "time": "Während des Abendessens",
+          "title": "Musik am Lagerfeuer",
+          "location": "Agafay-Camp",
+          "description": "Lokale Musiker spielen nach dem Essen Berber- und Gnawa-Musik am Lagerfeuer."
+        },
+        {
+          "time": "21:30–22:30",
+          "title": "Rückfahrt nach Marrakesch",
+          "location": "Agafay nach Marrakesch",
+          "description": "Etwa 45-minütige Rückfahrt bis direkt an Ihre Unterkunft in Marrakesch."
+        }
+      ],
+      "includes": [
+        "Abholung und Rückbringung an Ihrem Hotel oder Riad in Marrakesch",
+        "Hin- und Rückfahrt im klimatisierten Fahrzeug",
+        "Minztee zur Begrüßung bei Ankunft",
+        "Rund einstündiger Kamelritt zum Sonnenuntergang mit Leih-Tuch und Gewand",
+        "Dreigängiges marokkanisches Abendessen",
+        "Livemusik am Lagerfeuer",
+        "Flaschenwasser"
+      ],
+      "excludes": [
+        "Quad- oder Buggyfahrt (optional gegen Aufpreis)",
+        "Alkoholische Getränke und Softdrinks außer Wasser und Tee",
+        "Trinkgelder für Fahrer und Camp-Team"
+      ],
+      "goodToKnow": [
+        "Bringen Sie eine warme Jacke mit: Nach Sonnenuntergang kühlt die Wüste selbst im Sommer rasch ab, und Winterabende können kalt sein.",
+        "Tragen Sie geschlossene Schuhe – der Untergrund ist steinig.",
+        "Die Abholzeit verschiebt sich im Jahresverlauf mit dem Sonnenuntergang; wir bestätigen die genaue Uhrzeit am Vortag.",
+        "Vegetarische, vegane oder sonstige Ernährungswünsche lassen sich einrichten, wenn Sie uns bei der Buchung Bescheid geben.",
+        "Agafay ist eine Steinwüste ohne Sanddünen. Wenn Ihnen hohe goldene Dünen wichtig sind, schauen Sie sich unsere Merzouga-Sahara-Touren an."
+      ],
+      "seo": {
+        "title": "Agafay-Wüste bei Sonnenuntergang ab Marrakesch | Kamelritt & Abendessen",
+        "metaDescription": "Sonnenuntergangstour in der Agafay-Wüste ab Marrakesch: 1-stündiger Kamelritt, Atlasblick bei Sonnenuntergang, marokkanisches Dinner und Livemusik am Feuer. Hotelabholung, ab 55 €.",
+        "lead": "Ein Nachmittag und Abend in der Steinwüste Agafay, 45 Minuten vor Marrakesch: Kamelritt zum Sonnenuntergang mit dem Hohen Atlas am Horizont, danach Abendessen und Musik am Lagerfeuer im Wüstencamp.",
+        "price": {
+          "label": "Ab 55 € pro Person",
+          "note": "Inklusive Hotelabholung und -rückbringung, klimatisiertem Transfer, Minztee, Kamelritt zum Sonnenuntergang, Drei-Gänge-Abendessen, Livemusik und Flaschenwasser."
+        },
+        "imageAlt": "Kamele auf den hellen Steinhügeln der Agafay-Wüste bei Sonnenuntergang vor dem Hohen Atlas",
+        "highlights": [
+          "Rund einstündiger Kamelritt bei Sonnenuntergang über die Hügel von Agafay",
+          "Sonnenuntergang mit dem Hohen Atlas am Horizont beobachten",
+          "Dreigängiges marokkanisches Abendessen in einem Wüstencamp",
+          "Berber- und Gnawa-Musik am Lagerfeuer nach dem Essen",
+          "Nur 45 Minuten ab Marrakesch, inklusive Hotelabholung",
+          "Optionale Quad-Tour vor Sonnenuntergang zubuchbar"
+        ],
+        "faqs": [
+          {
+            "question": "Wie weit ist die Agafay-Wüste von Marrakesch entfernt?",
+            "answer": "Die Agafay-Wüste liegt rund 40 km südwestlich von Marrakesch, etwa 45 Autominuten entfernt. Der gesamte Ausflug dauert rund 6 Stunden."
+          },
+          {
+            "question": "Gibt es in Agafay Sanddünen?",
+            "answer": "Nein. Agafay ist eine Steinwüste aus hellen, kargen Hügeln und hat keine goldenen Sanddünen wie die Sahara in Merzouga (9–10 Stunden Fahrt). Sie bietet jedoch Wüstenlandschaft, Stille und Sonnenuntergang an einem einzigen Abend."
+          },
+          {
+            "question": "Wann beginnt und endet die Agafay-Sonnenuntergangstour?",
+            "answer": "Die Abholung liegt je nach Saison zwischen 15:00 und 17:00, sodass Sie vor Sonnenuntergang im Camp eintreffen. Zwischen 21:30 und 22:30 sind Sie zurück in Marrakesch."
+          },
+          {
+            "question": "Kann man eine Quad-Fahrt zur Agafay-Tour hinzufügen?",
+            "answer": "Ja. Gegen Aufpreis lässt sich vor Sonnenuntergang eine Quad- oder Buggyfahrt ergänzen. Geben Sie uns bei der Buchung Bescheid, damit der Zeitplan abgestimmt wird."
+          },
+          {
+            "question": "Ist die Agafay-Tour für Kinder geeignet?",
+            "answer": "Ja. Kinder können in Begleitung Erwachsener auf dem Kamel mitreiten, und das Abendessen lässt sich für jüngere Gäste anpassen. Die Dauer passt gut für Familien."
+          }
+        ]
+      },
+      "jsonLd": {
+        "name": "Agafay-Wüste bei Sonnenuntergang: Kamelritt und Abendessen ab Marrakesch",
+        "description": "Nachmittags- und Abendausflug von Marrakesch in die Steinwüste Agafay mit Kamelritt zum Sonnenuntergang, marokkanischem Abendessen im Camp und Livemusik."
+      }
+    },
+    "es": {
+      "location": "Desierto de Agafay, Marruecos",
+      "metrics": {
+        "distance": "~40 km desde Marrakech",
+        "duration": "Unas 6 horas",
+        "pickup": "15:00 a 17:00 (según temporada)",
+        "elevation": "Meseta de desierto de piedra"
+      },
+      "overview": [
+        "El desierto de Agafay es un desierto de piedra a unos 40 km al suroeste de Marrakech, a unos 45 minutos en coche. No tiene dunas de arena, sino un paisaje de colinas áridas y claras con las cumbres del Alto Atlas al fondo en las tardes despejadas.",
+        "Te recogen por la tarde a la hora correspondiente a la estación para llegar al campamento alrededor de una hora antes de la puesta de sol. Tras un té de menta, das un paseo en camello de una hora por las colinas, vestido con pañuelo y túnica si te apetece, hasta un alto para ver caer el sol sobre el Atlas.",
+        "De vuelta al campamento se sirve la cena bajo jaimas o al aire libre: sopa, ensaladas, tajín y fruta, seguida de música alrededor de la hoguera. Regresas a Marrakech entre las 21:30 y las 22:30. Es la escapada más corta para vivir un paisaje desértico si no dispones de 3 días para ir al Sáhara."
+      ],
+      "program": [
+        {
+          "time": "15:00 a 17:00",
+          "title": "Recogida por la tarde en Marrakech",
+          "location": "Tu hotel o riad",
+          "description": "Tu conductor te recoge en el hotel o en la puerta accesible más cercana. En invierno la recogida es más temprana y en verano más tardía para llegar antes del atardecer, pasando junto al embalse de Lalla Takerkoust."
+        },
+        {
+          "time": "Llegada",
+          "title": "Bienvenida en el campamento",
+          "location": "Campamento de Agafay",
+          "description": "Té de menta de bienvenida tras unos 45 minutos de camino. Puedes tomar prestado un pañuelo y una túnica para el paseo en camello."
+        },
+        {
+          "time": "~1 h antes del atardecer",
+          "title": "Paseo en camello al atardecer",
+          "location": "Colinas de Agafay",
+          "description": "Paseo de aproximadamente una hora entre colinas de piedra hasta un mirador donde ver la puesta de sol sobre el Alto Atlas. Opcionalmente puede sustituirse o combinarse con quad por un suplemento."
+        },
+        {
+          "time": "Tras la puesta de sol",
+          "title": "Cena bajo las estrellas",
+          "location": "Campamento de Agafay",
+          "description": "Cena marroquí de sopa harira, ensaladas, tajín de pollo o ternera y fruta de temporada, servida en jaimas o fuera junto al fuego."
+        },
+        {
+          "time": "Durante la cena",
+          "title": "Música junto al fuego",
+          "location": "Campamento de Agafay",
+          "description": "Músicos locales tocan repertorio bereber y gnawa alrededor de la hoguera tras la cena."
+        },
+        {
+          "time": "21:30 a 22:30",
+          "title": "Regreso a Marrakech",
+          "location": "De Agafay a Marrakech",
+          "description": "Trayecto de vuelta de unos 45 minutos hasta tu alojamiento en Marrakech."
+        }
+      ],
+      "includes": [
+        "Recogida y regreso a tu hotel o riad en Marrakech",
+        "Transporte ida y vuelta en vehículo con aire acondicionado",
+        "Té de menta a la llegada",
+        "Paseo en camello al atardecer de aproximadamente 1 hora, con préstamo de pañuelo y túnica",
+        "Cena marroquí de tres platos",
+        "Música en vivo junto a la hoguera",
+        "Agua embotellada"
+      ],
+      "excludes": [
+        "Paseo en quad o buggy (opcional, tarifa extra)",
+        "Bebidas alcohólicas y refrescos aparte del agua y el té",
+        "Propinas para el conductor y el personal del campamento"
+      ],
+      "goodToKnow": [
+        "Lleva una prenda de abrigo: el desierto refresca rápido tras la puesta de sol, incluso en verano, y en invierno hace frío por la noche.",
+        "Usa calzado cerrado porque el terreno es pedregoso.",
+        "La hora de recogida varía durante el año según la puesta de sol; confirmamos el horario exacto el día anterior.",
+        "Preparamos menús vegetarianos, veganos o adaptados si nos avisas al hacer la reserva.",
+        "Agafay es un desierto de piedra sin dunas de arena. Si buscas dunas doradas, echa un vistazo a nuestros tours al desierto de Merzouga."
+      ],
+      "seo": {
+        "title": "Atardecer en el desierto de Agafay desde Marrakech | Camello y cena",
+        "metaDescription": "Excursión al atardecer en el desierto de Agafay desde Marrakech: paseo en camello de 1 hora, vistas del Atlas, cena marroquí y música junto al fuego. Recogida en hotel, desde 55 €.",
+        "lead": "Una tarde y noche en el desierto de piedra de Agafay, a 45 minutos de Marrakech: paseo en camello al atardecer con el Atlas en el horizonte, seguido de cena y música junto a la hoguera.",
+        "price": {
+          "label": "Desde 55 € por persona",
+          "note": "Incluye recogida y regreso al hotel, transporte con aire acondicionado, té de menta, paseo en camello al atardecer, cena de tres platos, música en vivo y agua embotellada."
+        },
+        "imageAlt": "Camellos cruzando las colinas claras de piedra del desierto de Agafay al atardecer con el Alto Atlas al fondo",
+        "highlights": [
+          "Paseo en camello de alrededor de una hora por las colinas de Agafay al atardecer",
+          "Contempla la puesta de sol con el Alto Atlas en el horizonte",
+          "Cena marroquí de tres platos en un campamento del desierto",
+          "Música bereber y gnawa alrededor del fuego tras cenar",
+          "A solo 45 minutos de Marrakech, con recogida en tu hotel",
+          "Opción de quad antes del atardecer"
+        ],
+        "faqs": [
+          {
+            "question": "¿A qué distancia está el desierto de Agafay de Marrakech?",
+            "answer": "El desierto de Agafay está a unos 40 km al suroeste de Marrakech, unos 45 minutos en coche. La excursión completa dura unas 6 horas."
+          },
+          {
+            "question": "¿Hay dunas de arena en Agafay?",
+            "answer": "No. Agafay es un desierto de piedra formado por colinas claras y áridas. No tiene las dunas doradas del Sáhara, que quedan a unas 9 o 10 horas en Merzouga. Agafay te ofrece paisaje desértico, silencio y atardecer en una sola tarde."
+          },
+          {
+            "question": "¿A qué hora empieza y acaba el tour al atardecer en Agafay?",
+            "answer": "La recogida es entre las 15:00 y las 17:00 según la época del año para llegar antes de la puesta de sol. Estás de regreso en Marrakech entre las 21:30 y las 22:30."
+          },
+          {
+            "question": "¿Puedo añadir una ruta en quad a la excursión de Agafay?",
+            "answer": "Sí. Se puede añadir quad o buggy antes del atardecer por un suplemento. Avísanos al reservar para cuadrar los horarios."
+          },
+          {
+            "question": "¿Es adecuada la excursión a Agafay para niños?",
+            "answer": "Sí. Los niños pueden montar en camello acompañados por un adulto y la cena se adapta fácilmente a los más pequeños. Es una velada cómoda para la mayoría de familias."
+          }
+        ]
+      },
+      "jsonLd": {
+        "name": "Paseo en camello y cena al atardecer en el desierto de Agafay desde Marrakech",
+        "description": "Excursión de tarde y noche desde Marrakech al desierto de piedra de Agafay con paseo en camello al atardecer, cena marroquí en campamento y música en directo."
+      }
+    }
   }
 }

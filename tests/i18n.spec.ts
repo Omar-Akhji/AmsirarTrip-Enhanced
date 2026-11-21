@@ -58,4 +58,62 @@ test.describe("i18n routing & document standards", () => {
     expect(response?.status()).toBe(404);
     expect(await page.locator("html").getAttribute("lang")).toBe("fr");
   });
+
+  test("localized tour detail (/fr/tours/merzouga-desert-adventure-3-days) renders French content without English UI sentinels", async ({
+    page,
+  }) => {
+    const response = await page.goto("/fr/tours/merzouga-desert-adventure-3-days", {
+      waitUntil: "domcontentloaded",
+    });
+    expect(response?.status()).toBe(200);
+    expect(await page.locator("html").getAttribute("lang")).toBe("fr");
+
+    const content = await page.content();
+    const bodyText = await page.locator("body").innerText();
+    expect(content).toContain("Aventure dans le désert de Merzouga");
+    expect(content).toContain("JOUR 1");
+
+    for (const sentinel of [
+      "1ST DAY",
+      "Trip Highlights",
+      "Included Services",
+      "Out-of-Pocket Costs",
+      "Practical Travel Advice",
+      "Rates & Reservations",
+      "Personal Driver & 4x4",
+      "Inquire via WhatsApp",
+      "Google Maps Route",
+      "Common Questions",
+    ]) {
+      expect(bodyText).not.toContain(sentinel);
+    }
+  });
+
+  test("localized excursion detail (/fr/excursions/agafay-desert-sunset) renders French content without English UI sentinels", async ({
+    page,
+  }) => {
+    const response = await page.goto("/fr/excursions/agafay-desert-sunset", {
+      waitUntil: "domcontentloaded",
+    });
+    expect(response?.status()).toBe(200);
+    expect(await page.locator("html").getAttribute("lang")).toBe("fr");
+
+    const content = await page.content();
+    const bodyText = await page.locator("body").innerText();
+    expect(content).toContain("Coucher de soleil à Agafay");
+
+    for (const sentinel of [
+      "Pickup Window",
+      "Elevation / Setting",
+      "Trip Highlights",
+      "Included Services",
+      "Out-of-Pocket Costs",
+      "Practical Travel Advice",
+      "Rates & Reservations",
+      "Google Maps Route",
+      "Common Questions",
+    ]) {
+      expect(bodyText).not.toContain(sentinel);
+    }
+  });
 });

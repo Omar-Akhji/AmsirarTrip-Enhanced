@@ -113,7 +113,7 @@
         "Tarifs fixes et transparents"
       ],
       "conclusion": "Transferts aéroport privés et transports interurbains au Maroc.",
-      "ctaTitle": "Prêt à explorer le Maroc?",
+      "ctaTitle": "Prêt à explorer le Maroc ?",
       "ctaDescription": "Réservez votre circuit de plusieurs jours en toute confiance",
       "ctaPoint01": "Guides experts et transport confortable",
       "ctaPoint02": "Itinéraires flexibles adaptés à vos besoins",
@@ -130,7 +130,7 @@
     },
     "tour": {
       "smTitle": "Circuits privés et partagés de plusieurs jours",
-      "lgTitle": "tours récents"
+      "lgTitle": "Explorez nos circuits au Maroc"
     },
     "readMore": "En savoir plus",
     "comments": {
@@ -192,7 +192,7 @@
       "description": "Circuit de six jours reliant Casablanca, Chefchaouen, la médina de Fès et les dunes du Sahara avec chauffeur privé."
     },
     "tour3": {
-      "description": "Visite guidée de la médina de Marrakech, des palais historiques, des souks artisanaux et des jardins."
+      "description": "Circuit désert de trois jours de Fès à Marrakech à travers les forêts de cèdres du Moyen Atlas, les dunes de l'Erg Chebbi, les gorges du Todra et Aït Ben Haddou."
     },
     "tour4": {
       "description": "Itinéraire de cinq jours dans le Nord couvrant Casablanca, Rabat, Chefchaouen et Fès."
@@ -262,7 +262,16 @@
       "fromCasablanca": "Depuis Casablanca",
       "fromAgadir": "Depuis Agadir",
       "fromTangier": "Depuis Tanger"
-    }
+    },
+    "kickerHighlights": "Points forts du circuit",
+    "kickerIncluded": "Services inclus",
+    "kickerExcluded": "Frais non inclus",
+    "kickerGoodToKnow": "Conseils pratiques",
+    "kickerPricing": "Tarifs et réservations",
+    "kickerFaq": "Questions courantes",
+    "privateVehicleLabel": "Chauffeur privé & 4x4",
+    "sharedDeparturesLabel": "Départs en groupe",
+    "sharedCtaLabel": "Demander sur WhatsApp"
   },
   "excursion": {
     "404": {
@@ -279,7 +288,7 @@
     "sectionSubtitle": "Les tarifs par personne varient selon la taille du groupe ; option 4x4 privé disponible sur chaque trajet.",
     "detailsTitle": "Détails de l'excursion",
     "breadcrumb": "Détails de l'excursion",
-    "detailsSubtitle": "Explorez les trésors cachés du Maroc",
+    "detailsSubtitle": "Départs à la journée depuis Marrakech vers les vallées du Haut Atlas, la côte atlantique et les plateaux désertiques.",
     "exploreThisExcursion": "Découvrez cette excursion",
     "common": {
       "distance": "Distance: {value}",
@@ -296,7 +305,15 @@
       "priceLabel": "Prix de départ",
       "faqTitle": "Questions fréquemment posées",
       "kickerAbout": "À propos de cette excursion",
-      "kickerSchedule": "Horaires et arrêts"
+      "kickerSchedule": "Horaires et arrêts",
+      "pickupLabel": "Prise en charge",
+      "elevationLabel": "Altitude / Cadre",
+      "kickerHighlights": "Points forts",
+      "kickerIncluded": "Services inclus",
+      "kickerExcluded": "Frais non inclus",
+      "kickerGoodToKnow": "Conseils pratiques",
+      "kickerPricing": "Tarifs et réservations",
+      "kickerFaq": "Questions courantes"
     },
     "stats": {
       "routes": "Excursions signatures",
@@ -306,7 +323,10 @@
       "support": "Assistance en voyage",
       "supportDesc": "Prise en charge et retour directs à votre hôtel ou riad à Marrakech."
     },
-    "card": { "category": "Journée complète" },
+    "card": {
+      "category": "Journée complète",
+      "priceFrom": "À partir de {price} € / pers."
+    },
     "exploreLink": "Voir les détails",
     "sidebar": {
       "alt": "Véhicule de transfert aéroportuaire Amsirar",
@@ -322,7 +342,7 @@
         "Tarifs fixes et transparents"
       ],
       "conclusion": "Transferts aéroport privés et transports interurbains au Maroc.",
-      "ctaTitle": "Prêt à personnaliser?",
+      "ctaTitle": "Prêt à personnaliser ?",
       "ctaDescription": "Partagez vos préférences et nous créerons un itinéraire adapté à votre rythme, votre style et vos dates de voyage.",
       "ctaPoint01": "Chauffeur privé et véhicule moderne",
       "ctaPoint02": "Départs flexibles depuis Marrakech",
@@ -374,7 +394,7 @@
     },
     "headerSubtitle": "Excursions privées et en petit groupe depuis votre hôtel ou riad à Marrakech avec chauffeurs locaux agréés — sans grands bus.",
     "blog": {
-      "smTitle": "lisez ces excursions pour en savoir plus",
+      "smTitle": "Excursions à la journée",
       "lgTitle": "Excursions au départ de Marrakech"
     },
     "readMore": "En savoir plus",
@@ -515,10 +535,12 @@
     "distanceValue": "~150 km de Marrakech",
     "durationLabel": "Excursion d'une journée",
     "highlights": [
-      "Admirez les cascades de 110 mètres depuis plusieurs points de vue.",
-      "Suivez un sentier guidé à travers les oliveraies et villages berbères.",
-      "Observez les macaques berbères joueurs le long du canyon.",
-      "Option : balade en bateau au pied des chutes."
+      "Descente à pied jusqu'aux cascades d'Ouzoud (110 m) avec un guide local",
+      "Observation de macaques de Barbarie sauvages dans les oliveraies des gorges",
+      "Passage devant les anciens moulins à eau toujours en place sur le sentier",
+      "Balade en barque en bois au plus près des embruns de la cascade principale",
+      "Déjeuner sur une terrasse ombragée face aux chutes",
+      "Prise en charge à votre hôtel à Marrakech et transport aller-retour climatisé"
     ],
     "overview": "Évadez-vous de Marrakech pour une journée rafraîchissante aux cascades d'Ouzoud. Voyagez avec un guide local, multipliez les points de vue, rencontrez les macaques résidents et profitez d'une balade en bateau optionnelle avant un déjeuner au bord de la rivière.",
     "bookingTitle": "Réservez votre journée aux cascades d'Ouzoud"
@@ -529,10 +551,12 @@
     "distanceValue": "~191 km de Marrakech",
     "durationLabel": "Excursion d'une journée",
     "highlights": [
-      "Flânez dans la médina classée à l'UNESCO et ses ruelles bleues et blanches.",
-      "Observez les barques bleues décharger la pêche du jour au port.",
-      "Détendez-vous sur la grande plage balayée par la brise atlantique.",
-      "Dégustez des fruits de mer frais dans un restaurant local de confiance."
+      "Environ quatre heures de temps libre dans la médina d'Essaouira (UNESCO)",
+      "Arrivée des barques bleues et poisson grillé directement au port",
+      "Promenade sur les remparts de la Skala de la Ville et ses canons historiques",
+      "Découverte du pressage manuel de l'huile d'argan en coopérative féminine",
+      "Traversée de l'arganeraie où les chèvres grimpent aux branches",
+      "Prise en charge à votre hôtel à Marrakech et trajet climatisé aller-retour"
     ],
     "overview": "Découvrez le charme décontracté d'Essaouira. Parcourez ses souks d'artisans, explorez les remparts, profitez de la plage et savourez un festin de fruits de mer avant le retour au coucher du soleil.",
     "bookingTitle": "Réservez votre journée à Essaouira"
@@ -543,10 +567,12 @@
     "distanceValue": "~65 km de Marrakech",
     "durationLabel": "Randonnée d'une journée en montagne",
     "highlights": [
-      "Traversez les villages du Haut Atlas avec un guide local.",
-      "Profitez de panoramas sur le mont Toubkal depuis les sentiers.",
-      "Partagez un thé à la menthe avec une famille berbère et découvrez leur quotidien.",
-      "Choisissez entre une randonnée douce ou une balade à dos de mule selon votre rythme."
+      "Randonnée avec un guide local d'Imlil au village perché d'Aroumd",
+      "Vues dégagées dans la vallée vers le mont Toubkal, plus haut sommet d'Afrique du Nord",
+      "Déjeuner de tajine maison chez une famille berbère ou sur une terrasse face aux sommets",
+      "Traversée des falaises rouges des gorges de Moulay Brahim",
+      "Marche facile d'environ 3 heures, avec option mule pour la montée",
+      "Prise en charge à votre hôtel à Marrakech et transfert climatisé aller-retour"
     ],
     "overview": "Plongez dans le Haut Atlas lors d'une journée à Imlil et au mont Toubkal. Suivez des sentiers panoramiques, rencontrez des hôtes berbères et dégustez un déjeuner maison face aux terrasses.",
     "bookingTitle": "Réservez votre aventure Imlil & Toubkal"
@@ -557,10 +583,12 @@
     "distanceValue": "~45 km de Marrakech",
     "durationLabel": "Escapade nature d'une journée",
     "highlights": [
-      "Visitez des villages berbères et leurs souks hebdomadaires animés.",
-      "Arrêtez-vous dans une coopérative d'argan gérée par des femmes.",
-      "Randonnez avec un guide jusqu'aux cascades de Setti Fatma.",
-      "Savourez un tajine au bord de la rivière face aux montagnes."
+      "Randonnée avec un guide local jusqu'aux cascades de Setti Fatma",
+      "Déjeuner au bord de l'eau sur des tables installées au ras de la rivière",
+      "Fabrication artisanale d'huile d'argan dans une coopérative de femmes",
+      "Arrêt au souk hebdomadaire de Tnine Ourika pour les départs du lundi",
+      "Panoramas sur les cultures en terrasses et villages berbères en pisé",
+      "À environ 1 heure de route seulement de Marrakech"
     ],
     "overview": "Échangez l'agitation de la ville pour la verdoyante vallée de l'Ourika. Parcourez les contreforts de l'Atlas, découvrez les traditions berbères, randonnez vers les cascades et détendez-vous au bord de l'eau autour d'un tajine.",
     "bookingTitle": "Réservez votre escapade dans la vallée de l'Ourika"
@@ -571,10 +599,12 @@
     "distanceValue": "~30 km de Marrakech",
     "durationLabel": "Après-midi et soirée",
     "highlights": [
-      "Traversez les dunes rocailleuses d'Agafay en dromadaire ou en quad.",
-      "Admirez un coucher de soleil spectaculaire sur les collines désertiques.",
-      "Savourez un dîner marocain à la bougie sous les étoiles.",
-      "Profitez d'un spectacle de musique gnawa autour du feu."
+      "Balade à dromadaire d'environ 1 heure au coucher du soleil sur les collines d'Agafay",
+      "Coucher de soleil avec le Haut Atlas en toile de fond",
+      "Dîner marocain en trois plats dans un campement du désert",
+      "Musique berbère et gnawa autour du feu après le dîner",
+      "À seulement 45 minutes de Marrakech, avec prise en charge à l'hôtel",
+      "Option quad disponible avant le coucher du soleil"
     ],
     "overview": "Découvrez la beauté minérale du désert d'Agafay. Alliez sensations, coucher de soleil doré, dîner festif et musique traditionnelle dans un camp intime.",
     "bookingTitle": "Réservez votre soirée dans le désert d'Agafay"
@@ -585,567 +615,569 @@
     "distanceValue": "~30 min de Marrakech",
     "durationLabel": "Demi-journée au lever du soleil",
     "highlights": [
-      "Survolez palmeraies, villages et contreforts de l'Atlas.",
-      "Immortalisez le lever de soleil depuis la nacelle.",
-      "Savourez un petit-déjeuner berbère sous tente après l'atterrissage.",
-      "Profitez des transferts partagés et recevez un certificat de vol."
+      "Vol d'environ une heure au lever du jour au nord de Marrakech",
+      "Vue sur les palmeraies, les collines des Jbilet et, par temps clair, le Haut Atlas",
+      "Préparation et gonflage des ballons au sol avant le décollage",
+      "Petit-déjeuner berbère avec pain frais, msemen et thé à la menthe après l'atterrissage",
+      "Certificat de vol nominatif à emporter",
+      "Retour à votre hôtel en fin de matinée avec le reste de la journée libre"
     ],
     "overview": "Envolez-vous avant l'aube pour un vol en montgolfière au lever du soleil au-dessus de Marrakech. Admirez le paysage qui s'illumine, partagez un thé à la menthe et dégustez un petit-déjeuner berbère après l'atterrissage.",
     "bookingTitle": "Réservez votre vol en montgolfière au lever du soleil"
   },
   "tour1": {
-    "title": "Merzouga Desert Adventure",
+    "title": "Aventure dans le désert de Merzouga",
     "day1": {
-      "title": "Marrakech ➜ Ait Ben Haddou ➜ Ouarzazate ➜ Dades Valley",
+      "title": "Marrakech ➜ Aït Ben Haddou ➜ Ouarzazate ➜ Vallée du Dadès",
       "text": [
-        "Leave Marrakech early in the morning and cross the High Atlas Mountains over the Tizi n’Tichka Pass (2,260m).",
-        "Stop at Kasbah Ait Ben Haddou, a historic fortified village featured in Gladiator and Game of Thrones.",
-        "Continue to Ouarzazate, known for its film studios and historic kasbahs.",
-        "Drive through the Skoura palm oasis and the Valley of Roses to reach Dades Valley.",
-        "Dinner and overnight stay at a local riad or hotel in the valley."
+        "Départ de Marrakech tôt le matin pour traverser le Haut Atlas par le col du Tizi n'Tichka (2 260 m).",
+        "Arrêt à la Kasbah Aït Ben Haddou, village fortifié historique apparu dans Gladiator et Game of Thrones.",
+        "Continuation vers Ouarzazate, connue pour ses studios de cinéma et ses anciennes kasbahs.",
+        "Route à travers la palmeraie de Skoura et la vallée des Roses pour rejoindre la vallée du Dadès.",
+        "Dîner et nuit dans un riad ou hôtel local de la vallée."
       ],
-      "accommodation": "Hotel or Riad in Dades Valley",
-      "meals": "Dinner"
+      "accommodation": "Hôtel ou Riad dans la vallée du Dadès",
+      "meals": "Dîner"
     },
     "day2": {
-      "title": "Dades Valley ➜ Todra Gorges ➜ Merzouga",
+      "title": "Vallée du Dadès ➜ Gorges du Todra ➜ Merzouga",
       "text": [
-        "After breakfast, head toward Todra Gorges to walk along the riverbed beneath 300-meter cliffs.",
-        "Continue through Tinejdad and Erfoud, a town known for fossil workshops and date markets.",
-        "Reach Merzouga in the late afternoon, where your camels wait at the edge of the sand.",
-        "Ride into the Erg Chebbi dunes in time for sunset.",
-        "Settle into your desert camp for a Moroccan dinner, Berber drumming by the fire, and an overnight stay."
+        "Après le petit-déjeuner, route vers les gorges du Todra pour marcher le long de la rivière sous des falaises de 300 mètres.",
+        "Continuation par Tinejdad et Erfoud, réputée pour ses ateliers de fossiles et ses marchés aux dattes.",
+        "Arrivée à Merzouga en fin d'après-midi, où vos dromadaires vous attendent à l'orée des dunes.",
+        "Départ à dos de dromadaire dans les dunes de l'Erg Chebbi pour le coucher du soleil.",
+        "Installation au bivouac pour un dîner marocain, percussions berbères autour du feu et nuit sous tente."
       ],
-      "accommodation": "Desert Camp in Merzouga (Standard or Luxury)",
-      "meals": "Breakfast & Dinner",
-      "activities": "Sunset Camel Ride & Campfire Music"
+      "accommodation": "Bivouac dans le désert à Merzouga (Standard ou Luxe)",
+      "meals": "Petit-déjeuner et Dîner",
+      "activities": "Balade à dromadaire au coucher du soleil & Musique au feu de camp"
     },
     "day3": {
-      "title": "Merzouga ➜ Alnif ➜ Draa Valley ➜ Ouarzazate ➜ Marrakech",
+      "title": "Merzouga ➜ Alnif ➜ Vallée du Drâa ➜ Ouarzazate ➜ Marrakech",
       "text": [
-        "Wake early to watch the sunrise from the dunes near your camp.",
-        "Ride camels (or take a 4x4 transfer) back to Merzouga village for breakfast and a shower.",
-        "Drive back via Alnif and Tazzarine, joining the Draa Valley—a long river oasis lined with date palms and old mud-brick kasbahs.",
-        "Stop in Ouarzazate for lunch, with optional time to visit Atlas Film Studios or Taourirt Kasbah.",
-        "Cross the High Atlas Mountains via Tizi n'Tichka Pass (2,260m) and arrive back in Marrakech in the evening."
+        "Réveil matinal pour admirer le lever du soleil depuis les dunes près du campement.",
+        "Retour au village de Merzouga à dos de dromadaire (ou en transfert 4x4) pour le petit-déjeuner et une douche.",
+        "Route retour par Alnif et Tazzarine jusqu'à la vallée du Drâa, longue oasis bordée de palmiers dattiers et de kasbahs en pisé.",
+        "Pause déjeuner à Ouarzazate avec visite optionnelle des studios de cinéma Atlas ou de la kasbah de Taourirt.",
+        "Traversée du Haut Atlas par le col du Tizi n'Tichka (2 260 m) et arrivée à Marrakech en soirée."
       ],
-      "meals": "Breakfast",
-      "arrival": "Between 7:00 PM and 8:00 PM"
+      "meals": "Petit-déjeuner",
+      "arrival": "Entre 19:00 et 20:00"
     },
-    "overview": "This three-day trip connects Marrakech to the high orange dunes of Erg Chebbi in Merzouga. You travel in a private, air-conditioned vehicle across the High Atlas Mountains via the Tizi n'Tichka pass (2,260m), stopping at the earthen ksar of Ait Ben Haddou and Ouarzazate before spending the first night in the Dades Valley.\n\nOn the second day, the road passes through Tinghir to reach the 300-meter limestone walls of Todra Gorges. From there, you continue past Erfoud and the Tafilalet palm groves to Merzouga. Late in the afternoon, you ride camels into the dunes for sunset and arrive at your desert camp for dinner, local music around the fire, and a quiet night under the stars.\n\nAfter watching the sunrise over the sand and having breakfast, you drive back to Marrakech through Alnif, the palm-lined Draa Valley, and Ouarzazate, crossing the High Atlas again to arrive by early evening.",
-    "includes": "Private transport in a modern A/C 4x4 or minibus\nEnglish, French, or Spanish-speaking driver-guide\n1 night in Dades Valley (hotel or riad)\n1 night in a Merzouga desert camp (standard or luxury)\nSunset and sunrise camel rides in Erg Chebbi\nBreakfasts and dinners as listed in the itinerary\nOptional sandboarding at the camp",
-    "excludes": "Lunches and drinks\nMonument entrance fees (carry cash in MAD)\nTips and personal expenses",
-    "goodToKnow": "Departure: 7:00 AM from your hotel or riad in Marrakech\nReturn: Evening of Day 3\nLuggage: Large suitcases stay locked in your vehicle (or go to the camp by 4x4). Pack a small backpack with just what you need for one night in the desert.\nWhat to Pack: Sunglasses, a hat, sunscreen, a scarf for wind/sand, and warm layers—desert nights get cold between October and April."
+    "overview": "Ce circuit de trois jours relie Marrakech aux hautes dunes orangées de l'Erg Chebbi à Merzouga. Vous voyagez en véhicule privé climatisé à travers le Haut Atlas par le col du Tizi n'Tichka (2 260 m), avec haltes au ksar en terre d'Aït Ben Haddou et à Ouarzazate avant de passer la première nuit dans la vallée du Dadès.\n\nLe deuxième jour, la route traverse Tinghir jusqu'aux parois calcaires de 300 mètres des gorges du Todra. Vous poursuivez ensuite par Erfoud et la palmeraie du Tafilalet vers Merzouga. En fin d'après-midi, vous partez à dos de dromadaire dans les dunes pour le coucher du soleil avant de rejoindre votre bivouac pour le dîner, la musique locale autour du feu et une nuit paisible sous les étoiles.\n\nAprès le lever du soleil sur le sable et le petit-déjeuner, le retour vers Marrakech passe par Alnif, la vallée verdoyante du Drâa et Ouarzazate, avant de franchir de nouveau le Haut Atlas pour une arrivée en début de soirée.",
+    "includes": "Transport privé en 4x4 ou minibus moderne climatisé\nChauffeur-guide parlant français, anglais ou espagnol\n1 nuit dans la vallée du Dadès (hôtel ou riad)\n1 nuit en bivouac dans le désert à Merzouga (standard ou luxe)\nBalades à dromadaire au coucher et au lever du soleil à l'Erg Chebbi\nPetits-déjeuners et dîners selon le programme\nSandboard en option au campement",
+    "excludes": "Déjeuners et boissons\nDroits d'entrée aux monuments (prévoir des espèces en MAD)\nPourboires et dépenses personnelles",
+    "goodToKnow": "Départ : 7 h 00 depuis votre hôtel ou riad à Marrakech\nRetour : Soirée du jour 3\nBagages : Les grandes valises restent fermées dans votre véhicule (ou sont acheminées au camp en 4x4). Préparez un petit sac à dos pour votre nuit dans le désert.\nÀ emporter : Lunettes de soleil, chapeau, crème solaire, foulard contre le vent et le sable, et vêtements chauds — les nuits dans le désert sont fraîches d'octobre à avril."
   },
   "tour2": {
-    "title": "Coast & Cities Explorer",
-    "overview": "This six-day route connects Morocco's Atlantic coast, the Rif Mountains, two imperial capitals, and the Sahara Desert. Starting in Casablanca with a stop at the oceanfront Hassan II Mosque, you head north through Rabat before climbing into the blue-washed streets of Chefchaouen.\n\nFrom the mountains, the road leads past the Roman ruins of Volubilis and the monumental gates of Meknes into Fes. You spend a full day walking the medieval alleys of Fes el-Bali with a licensed local guide, visiting historic madrasas, Al-Qarawiyyin University, and the Chouara leather tanneries.\n\nThe second half of the trip crosses the Middle Atlas cedar forests and the Ziz Valley down to the sand dunes of Merzouga. After a camel ride and a night in a Sahara camp, you travel west through Todra Gorges, the Dades Valley, and Kasbah Ait Ben Haddou, finishing in Marrakech.",
+    "title": "Exploration côte atlantique & cités impériales",
+    "overview": "Ce circuit de six jours relie la côte atlantique du Maroc, les montagnes du Rif, deux capitales impériales et le désert du Sahara. Au départ de Casablanca avec un arrêt à la mosquée Hassan II face à l'océan, vous remontez au nord par Rabat avant de rejoindre les ruelles bleues de Chefchaouen.\n\nDepuis les montagnes, la route passe par les ruines romaines de Volubilis et les portes monumentales de Meknès jusqu'à Fès. Vous consacrez une journée entière à parcourir les ruelles médiévales de Fès el-Bali avec un guide local agréé, entre médersas historiques, université Al-Qarawiyyin et tanneries Chouara.\n\nLa seconde moitié du voyage traverse les forêts de cèdres du Moyen Atlas et la vallée du Ziz jusqu'aux dunes de Merzouga. Après une balade à dromadaire et une nuit en bivouac saharien, vous reprenez la route à l'ouest par les gorges du Todra, la vallée du Dadès et la Kasbah Aït Ben Haddou jusqu'à Marrakech.",
     "day1": {
       "title": "Casablanca ➜ Rabat ➜ Chefchaouen",
       "text": [
-        "Morning pick-up from your Casablanca hotel or Mohammed V Airport.",
-        "Visit the Hassan II Mosque, built right over the Atlantic Ocean.",
-        "Drive north to Rabat to see the Hassan Tower, Mohammed V Mausoleum, and the Kasbah of the Udayas.",
-        "Continue into the Rif Mountains to reach Chefchaouen by late afternoon.",
-        "Free evening to wander the blue-painted medina at your own pace."
+        "Prise en charge le matin à votre hôtel de Casablanca ou à l'aéroport Mohammed V.",
+        "Visite de la mosquée Hassan II, édifiée directement au-dessus de l'océan Atlantique.",
+        "Route vers le nord jusqu'à Rabat pour voir la tour Hassan, le mausolée Mohammed V et la kasbah des Oudayas.",
+        "Poursuite dans les montagnes du Rif pour atteindre Chefchaouen en fin d'après-midi.",
+        "Soirée libre pour flâner à votre rythme dans la médina bleue."
       ],
-      "accommodation": "Hotel or Riad in Chefchaouen",
-      "meals": "None"
+      "accommodation": "Hôtel ou Riad à Chefchaouen",
+      "meals": "Aucun"
     },
     "day2": {
-      "title": "Chefchaouen ➜ Volubilis ➜ Meknes ➜ Fes",
+      "title": "Chefchaouen ➜ Volubilis ➜ Meknès ➜ Fès",
       "text": [
-        "Enjoy a relaxed morning in Chefchaouen for photos and quiet walks before the day-trippers arrive.",
-        "Drive south to Volubilis to explore the preserved Roman ruins and floor mosaics.",
-        "Stop in Meknes to see the Bab Mansour gate and El Hedim Square.",
-        "Continue to Fes and check into your riad in the medina."
+        "Profitez d'une matinée calme à Chefchaouen pour les photos et promenades avant l'arrivée des visiteurs d'un jour.",
+        "Trajet vers le sud jusqu'à Volubilis pour explorer les vestiges romains et leurs mosaïques préservées.",
+        "Arrêt à Meknès devant la porte Bab Mansour et la place El Hedim.",
+        "Continuation vers Fès et installation dans votre riad en médina."
       ],
-      "accommodation": "Riad in Fes Medina",
-      "meals": "Breakfast"
+      "accommodation": "Riad dans la médina de Fès",
+      "meals": "Petit-déjeuner"
     },
     "day3": {
-      "title": "Full-Day Guided Tour of Fes",
+      "title": "Visite guidée d'une journée à Fès",
       "text": [
-        "Meet your licensed local guide after breakfast for a walking tour of Fes el-Bali.",
-        "Visit Al-Qarawiyyin University, Bou Inania Madrasa, Nejjarine Fountain, and the Chouara Tanneries.",
-        "Walk through the artisan quarters where weavers, coppersmiths, and potters still work by hand.",
-        "Optional drive up to the Merenid Tombs for a panoramic view over the city before returning to your riad."
+        "Rencontre avec votre guide local agréé après le petit-déjeuner pour une visite à pied de Fès el-Bali.",
+        "Visite de l'université Al-Qarawiyyin, de la médersa Bou Inania, de la fontaine Nejjarine et des tanneries Chouara.",
+        "Balade dans les quartiers artisanaux où tisserands, dinandiers et potiers travaillent encore à la main.",
+        "Montée optionnelle aux tombeaux des Mérinides pour une vue panoramique avant le retour au riad."
       ],
-      "accommodation": "Riad in Fes Medina",
-      "meals": "Breakfast"
+      "accommodation": "Riad dans la médina de Fès",
+      "meals": "Petit-déjeuner"
     },
     "day4": {
-      "title": "Fes ➜ Midelt ➜ Ziz Valley ➜ Merzouga Desert",
+      "title": "Fès ➜ Midelt ➜ Vallée du Ziz ➜ Désert de Merzouga",
       "text": [
-        "Leave early for the drive south across the Middle Atlas Mountains, passing Ifrane and the Azrou cedar forest (home to wild Barbary macaques).",
-        "Stop in Midelt for lunch, then follow the Ziz River gorge lined with thousands of date palms.",
-        "Arrive in Merzouga at the edge of the Erg Chebbi dunes in the late afternoon.",
-        "Ride camels across the dunes to watch the sunset and spend the night at your desert camp."
+        "Départ matinal vers le sud à travers le Moyen Atlas, via Ifrane et la forêt de cèdres d'Azrou peuplée de macaques sauvages.",
+        "Halte déjeuner à Midelt puis descente le long des gorges du Ziz bordées de milliers de palmiers dattiers.",
+        "Arrivée à Merzouga en fin d'après-midi face aux dunes de l'Erg Chebbi.",
+        "Traversée des dunes à dos de dromadaire pour le coucher du soleil et nuit au campement."
       ],
-      "accommodation": "Desert Camp in Merzouga (Standard or Luxury)",
-      "meals": "Dinner & Breakfast",
-      "activities": "Camel Ride, Sandboarding, Berber Music"
+      "accommodation": "Bivouac dans le désert à Merzouga (Standard ou Luxe)",
+      "meals": "Dîner et Petit-déjeuner",
+      "activities": "Balade à dromadaire, Sandboard, Musique berbère"
     },
     "day5": {
-      "title": "Merzouga ➜ Todra Gorges ➜ Dades Valley",
+      "title": "Merzouga ➜ Gorges du Todra ➜ Vallée du Dadès",
       "text": [
-        "Wake early for sunrise over the sand dunes, then ride back to Merzouga village for breakfast and a shower.",
-        "Drive to Todra Gorges and walk between its 300-meter vertical canyon walls.",
-        "Continue to the Dades Valley, stopping to see the \"Monkey Fingers\" rock formations.",
-        "Dinner and overnight stay at a hotel or riad overlooking the valley."
+        "Réveil matinal pour le lever du soleil sur les dunes, puis retour à dos de dromadaire au village de Merzouga pour le petit-déjeuner et une douche.",
+        "Route vers les gorges du Todra et promenade entre leurs falaises verticales de 300 mètres.",
+        "Continuation vers la vallée du Dadès avec arrêt aux formations rocheuses des « Doigts de Singe ».",
+        "Dîner et nuit en hôtel ou riad surplombant la vallée."
       ],
-      "accommodation": "Hotel or Riad in Dades Valley",
-      "meals": "Dinner & Breakfast"
+      "accommodation": "Hôtel ou Riad dans la vallée du Dadès",
+      "meals": "Dîner et Petit-déjeuner"
     },
     "day6": {
-      "title": "Dades Valley ➜ Ouarzazate ➜ Ait Ben Haddou ➜ Marrakech",
+      "title": "Vallée du Dadès ➜ Ouarzazate ➜ Aït Ben Haddou ➜ Marrakech",
       "text": [
-        "After breakfast, pass through Kalaat M’gouna (Valley of Roses) and the Skoura palm oasis.",
-        "Stop at Kasbah Ait Ben Haddou for a walk through this famous earthen citadel.",
-        "Cross the High Atlas Mountains via the Tizi n’Tichka Pass (2,260m).",
-        "Arrive in Marrakech in the early evening with drop-off at your riad or hotel."
+        "Après le petit-déjeuner, traversée de Kelaat M'Gouna (vallée des Roses) et de la palmeraie de Skoura.",
+        "Arrêt à la Kasbah Aït Ben Haddou pour une promenade dans cette célèbre citadelle en pisé.",
+        "Passage du Haut Atlas par le col du Tizi n'Tichka (2 260 m).",
+        "Arrivée à Marrakech en début de soirée et dépose à votre riad ou hôtel."
       ],
-      "meals": "Breakfast"
+      "meals": "Petit-déjeuner"
     },
-    "includes": "Private transport in an A/C 4x4 or minibus\nEnglish or French-speaking driver-guide\n5 nights accommodation (riads, hotels, and desert camp)\nOfficial local guide for the full-day Fes tour\nSunset and sunrise camel rides in Merzouga\nBreakfasts and dinners as listed in the itinerary\nOptional sandboarding at the desert camp",
-    "excludes": "Lunches and drinks\nMonument entrance fees (carry cash in MAD)\nTips and personal expenses",
-    "goodToKnow": "Start: Casablanca (airport or hotel)\nEnd: Marrakech (hotel, riad, or airport)\nDuration: 6 Days / 5 Nights\nAvailability: Daily departures year-round\nFlexibility: You can upgrade to a luxury desert camp or add extra nights in Chefchaouen, Fes, or Marrakech."
+    "includes": "Transport privé en 4x4 ou minibus climatisé\nChauffeur-guide parlant français ou anglais\n5 nuits d'hébergement (riads, hôtels et bivouac dans le désert)\nGuide local officiel pour la visite complète de Fès\nBalades à dromadaire au coucher et au lever du soleil à Merzouga\nPetits-déjeuners et dîners selon le programme\nSandboard en option au campement",
+    "excludes": "Déjeuners et boissons\nDroits d'entrée aux monuments (prévoir des espèces en MAD)\nPourboires et dépenses personnelles",
+    "goodToKnow": "Départ : Casablanca (aéroport ou hôtel)\nArrivée : Marrakech (hôtel, riad ou aéroport)\nDurée : 6 Jours / 5 Nuits\nDisponibilité : Départs quotidiens toute l'année\nFlexibilité : Possibilité d'opter pour un bivouac de luxe ou d'ajouter des nuits à Chefchaouen, Fès ou Marrakech."
   },
   "tour3": {
-    "title": "Caravan & Kasbah Experience",
-    "overview": "This three-day point-to-point route connects Fes to Marrakech via the Sahara Desert, saving you from having to backtrack across the country. Leaving Fes in the morning, you cross the Middle Atlas Mountains through alpine Ifrane and the cedar forests of Azrou before descending the palm-filled Ziz Valley to Merzouga.\n\nIn Merzouga, you ride camels into the Erg Chebbi dunes for sunset and spend the night at a desert camp with dinner and local Berber music around the fire.\n\nOn the final two days, the journey turns west through the 300-meter cliffs of Todra Gorges, the Dades Valley, and the UNESCO-listed Kasbah Ait Ben Haddou, finishing over the High Atlas Mountains in Marrakech.",
+    "title": "Caravane et Kasbahs de Fès à Marrakech",
+    "overview": "Cet itinéraire direct de trois jours relie Fès à Marrakech à travers le désert du Sahara, vous évitant de rebrousser chemin à travers le pays. Au départ de Fès le matin, vous traversez le Moyen Atlas par Ifrane et les forêts de cèdres d'Azrou avant de descendre la vallée du Ziz bordée de palmiers jusqu'à Merzouga.\n\nÀ Merzouga, vous partez à dos de dromadaire dans les dunes de l'Erg Chebbi pour le coucher du soleil et passez la nuit en bivouac avec dîner et musique berbère autour du feu.\n\nLes deux derniers jours mettent le cap à l'ouest à travers les falaises de 300 mètres des gorges du Todra, la vallée du Dadès et la Kasbah Aït Ben Haddou (UNESCO), pour finir au-delà du Haut Atlas à Marrakech.",
     "day1": {
-      "title": "Fes ➜ Ifrane ➜ Azrou ➜ Midelt ➜ Ziz Valley ➜ Merzouga",
+      "title": "Fès ➜ Ifrane ➜ Azrou ➜ Midelt ➜ Vallée du Ziz ➜ Merzouga",
       "text": [
-        "Pick-up from your Fes riad or hotel around 7:30 AM.",
-        "Head into the Middle Atlas Mountains, stopping in Ifrane, known for its clean streets and chalet-style architecture.",
-        "Stop at the Azrou Cedar Forest to see the wild Barbary macaques.",
-        "Continue to Midelt for lunch with views of the Ayachi mountain range.",
-        "Drive through Errachidia and along the Ziz Valley gorge, lined with dense date palm groves.",
-        "Arrive in Merzouga in the late afternoon and ride camels across the Erg Chebbi dunes to your camp for sunset and dinner."
+        "Prise en charge à votre riad ou hôtel à Fès vers 7 h 30.",
+        "Entrée dans le Moyen Atlas avec halte à Ifrane, connue pour son urbanisme montagnard et ses allées arborées.",
+        "Arrêt dans la forêt de cèdres d'Azrou pour observer les macaques de Barbarie en liberté.",
+        "Continuation vers Midelt pour le déjeuner face à la chaîne du Jbel Ayachi.",
+        "Passage par Errachidia et la vallée du Ziz bordée de denses palmeraies.",
+        "Arrivée à Merzouga en fin d'après-midi et traversée des dunes de l'Erg Chebbi à dos de dromadaire jusqu'au camp pour le coucher du soleil et le dîner."
       ],
-      "accommodation": "Desert Camp in Merzouga (Standard or Luxury)",
-      "meals": "Dinner",
-      "activities": "Sunset Camel Ride, Berber Music, Sandboarding"
+      "accommodation": "Bivouac dans le désert à Merzouga (Standard ou Luxe)",
+      "meals": "Dîner",
+      "activities": "Balade à dromadaire au coucher du soleil, Musique berbère, Sandboard"
     },
     "day2": {
-      "title": "Merzouga ➜ Erfoud ➜ Todra Gorges ➜ Dades Valley",
+      "title": "Merzouga ➜ Erfoud ➜ Gorges du Todra ➜ Vallée du Dadès",
       "text": [
-        "Wake early to watch the sunrise over the dunes, then ride camels back to Merzouga village for breakfast and a shower.",
-        "Pass through Erfoud, famous for its fossil workshops and dates.",
-        "Reach Tinghir and walk along the floor of Todra Gorges beneath 300-meter limestone walls.",
-        "Continue to the Dades Valley to see the \"Monkey Fingers\" rock formations.",
-        "Dinner and overnight stay at a hotel or riad overlooking the Dades Gorges."
+        "Réveil matinal pour voir le lever du soleil sur les dunes, puis retour à dos de dromadaire à Merzouga pour le petit-déjeuner et une douche.",
+        "Passage par Erfoud, connue pour ses ateliers de fossiles et ses dattes.",
+        "Arrivée à Tinghir et balade dans le lit des gorges du Todra sous des parois calcaires de 300 mètres.",
+        "Continuation vers la vallée du Dadès et ses formations rocheuses des « Doigts de Singe ».",
+        "Dîner et nuit en hôtel ou riad dominant les gorges du Dadès."
       ],
-      "accommodation": "Hotel or Riad in Dades Valley",
-      "meals": "Dinner & Breakfast"
+      "accommodation": "Hôtel ou Riad dans la vallée du Dadès",
+      "meals": "Dîner et Petit-déjeuner"
     },
     "day3": {
-      "title": "Dades Valley ➜ Roses Valley ➜ Ouarzazate ➜ Ait Ben Haddou ➜ Marrakech",
+      "title": "Vallée du Dadès ➜ Vallée des Roses ➜ Ouarzazate ➜ Aït Ben Haddou ➜ Marrakech",
       "text": [
-        "After breakfast, drive through Kalaat M'gouna (Valley of Roses) and the Skoura palm oasis.",
-        "Pass through Ouarzazate, with an optional stop at the Atlas Film Studios.",
-        "Visit Kasbah Ait Ben Haddou, the famous fortified mud-brick village used in Lawrence of Arabia and Game of Thrones.",
-        "Cross the High Atlas Mountains via the Tizi n'Tichka Pass (2,260m) with photo stops along the way.",
-        "Arrive in Marrakech in the evening with drop-off at your accommodation."
+        "Après le petit-déjeuner, route par Kelaat M'Gouna (vallée des Roses) et la palmeraie de Skoura.",
+        "Passage à Ouarzazate avec arrêt optionnel aux studios de cinéma Atlas.",
+        "Visite de la Kasbah Aït Ben Haddou, célèbre village fortifié en terre utilisé dans Lawrence d'Arabie et Game of Thrones.",
+        "Traversée du Haut Atlas par le col du Tizi n'Tichka (2 260 m) avec arrêts panoramiques.",
+        "Arrivée à Marrakech en soirée et dépose à votre hébergement."
       ],
-      "meals": "Breakfast",
-      "arrival": "Between 7:00 PM and 8:00 PM"
+      "meals": "Petit-déjeuner",
+      "arrival": "Entre 19:00 et 20:00"
     },
-    "includes": "Pick-up in Fes and one-way drop-off in Marrakech\nPrivate transport in an A/C 4x4 or minibus\nEnglish, French, or Spanish-speaking driver-guide\n1 night in a Merzouga desert camp (standard or luxury)\n1 night in Dades Valley (hotel or riad)\nCamel rides in the Merzouga dunes\nBreakfasts and dinners as listed in the itinerary\nOptional sandboarding",
-    "excludes": "Lunches and drinks\nMonument entrance fees (carry cash in MAD)\nTips and personal expenses",
-    "goodToKnow": "Departure: 7:30 AM from Fes\nEnd: Marrakech (evening of Day 3)\nDriving Times: Day 1 ~470 km (7.5–8 hrs), Day 2 ~300 km (5 hrs), Day 3 ~350 km (6 hrs)\nLuggage: Heavy suitcases stay locked in your vehicle (or go to the camp by 4x4). Pack a small daypack for your night in the dunes.\nWhat to Pack: Sunglasses, sunscreen, a hat, and warm clothes for chilly desert evenings."
+    "includes": "Prise en charge à Fès et dépose aller simple à Marrakech\nTransport privé en 4x4 ou minibus climatisé\nChauffeur-guide parlant français, anglais ou espagnol\n1 nuit en bivouac à Merzouga (standard ou luxe)\n1 nuit dans la vallée du Dadès (hôtel ou riad)\nBalades à dromadaire dans les dunes de Merzouga\nPetits-déjeuners et dîners selon le programme\nSandboard en option",
+    "excludes": "Déjeuners et boissons\nDroits d'entrée aux monuments (prévoir des espèces en MAD)\nPourboires et dépenses personnelles",
+    "goodToKnow": "Départ : 7 h 30 depuis Fès\nArrivée : Marrakech (soirée du jour 3)\nTemps de route : Jour 1 ~470 km (7 h 30–8 h), Jour 2 ~300 km (5 h), Jour 3 ~350 km (6 h)\nBagages : Les valises encombrantes restent dans votre véhicule (ou vont au camp en 4x4). Emportez un petit sac pour la nuit dans les dunes.\nÀ emporter : Lunettes de soleil, crème solaire, chapeau et vêtements chauds pour les nuits fraîches du désert."
   },
   "tour4": {
-    "title": "Imperial Cities & Coastline",
-    "overview": "This five-day itinerary focuses on Morocco's history, architecture, and coastal cities without long desert drives. Starting in Casablanca at the Hassan II Mosque, you follow the Atlantic coast to Rabat to explore the Kasbah of the Udayas and the 12th-century Hassan Tower.\n\nHeading north into the Rif Mountains, you spend a night in Chefchaouen, famous for its blue-washed alleys and relaxed mountain atmosphere. From there, you visit the 2,000-year-old Roman ruins of Volubilis and the grand gates of imperial Meknes.\n\nThe trip concludes in Fes with a full-day guided walking tour through Fes el-Bali, exploring historic madrasas, artisan workshops, leather tanneries, and Al-Qarawiyyin University.",
+    "title": "Villes impériales & côte atlantique",
+    "overview": "Cet itinéraire de cinq jours met l'accent sur l'histoire, l'architecture et les villes côtières du Maroc sans longs trajets sahariens. En partant de Casablanca à la mosquée Hassan II, vous longez l'Atlantique jusqu'à Rabat pour visiter la kasbah des Oudayas et la tour Hassan du XIIe siècle.\n\nCap au nord ensuite dans les montagnes du Rif pour une nuit à Chefchaouen, réputée pour ses ruelles bleues et son atmosphère paisible. De là, vous découvrez les vestiges romains bimillénaires de Volubilis et les grandes portes de la ville impériale de Meknès.\n\nLe voyage s'achève à Fès avec une journée complète de visite guidée à pied dans Fès el-Bali, entre médersas historiques, ateliers d'artisans, tanneries et université Al-Qarawiyyin.",
     "day1": {
-      "title": "Arrival in Casablanca",
+      "title": "Arrivée à Casablanca",
       "text": [
-        "Pick-up from Casablanca Mohammed V Airport (CMN) or your city hotel.",
-        "Visit the Hassan II Mosque, featuring a 210-meter minaret overlooking the Atlantic Ocean.",
-        "Drive along the Ain Diab Corniche and pass through Casablanca's 1930s Art Deco district.",
-        "Free evening to relax or try a local seafood restaurant."
+        "Accueil à l'aéroport Mohammed V de Casablanca (CMN) ou à votre hôtel en ville.",
+        "Visite de la mosquée Hassan II, dotée d'un minaret de 210 mètres face à l'océan Atlantique.",
+        "Parcours le long de la corniche d'Aïn Diab et découverte du quartier Art déco des années 1930.",
+        "Soirée libre pour vous détendre ou dîner dans un restaurant de poissons."
       ],
-      "accommodation": "Hotel in Casablanca",
-      "meals": "None"
+      "accommodation": "Hôtel à Casablanca",
+      "meals": "Aucun"
     },
     "day2": {
       "title": "Casablanca ➜ Rabat ➜ Chefchaouen",
       "text": [
-        "After breakfast, drive up the coast to Rabat, Morocco’s capital.",
-        "Visit the Hassan Tower, Mohammed V Mausoleum, and the blue-and-white streets of the Kasbah of the Udayas.",
-        "Continue north into the Rif Mountains to reach Chefchaouen (~4 hours drive from Rabat).",
-        "Evening free to stroll the blue alleys and main square."
+        "Après le petit-déjeuner, route côtière vers Rabat, capitale du Maroc.",
+        "Visite de la tour Hassan, du mausolée Mohammed V et des ruelles bleues et blanches de la kasbah des Oudayas.",
+        "Poursuite au nord dans les montagnes du Rif jusqu'à Chefchaouen (~4 heures de route depuis Rabat).",
+        "Soirée libre pour déambuler dans les ruelles bleues et sur la place principale."
       ],
-      "accommodation": "Riad or Hotel in Chefchaouen",
-      "meals": "Breakfast"
+      "accommodation": "Riad ou Hôtel à Chefchaouen",
+      "meals": "Petit-déjeuner"
     },
     "day3": {
-      "title": "Chefchaouen ➜ Volubilis ➜ Meknes ➜ Fes",
+      "title": "Chefchaouen ➜ Volubilis ➜ Meknès ➜ Fès",
       "text": [
-        "Morning free in Chefchaouen—optional walk up to the Spanish Mosque for views over the town.",
-        "Depart for Volubilis to explore the preserved Roman ruins and intricate floor mosaics.",
-        "Continue to Meknes to visit Bab Mansour Gate, El Hedim Square, and the Moulay Ismail Mausoleum.",
-        "Arrive in Fes by early evening (~1 hour drive from Meknes)."
+        "Matinée libre à Chefchaouen, avec montée optionnelle vers la mosquée Espagnole pour le panorama sur la ville.",
+        "Départ pour Volubilis afin de découvrir les ruines romaines et leurs mosaïques au sol.",
+        "Continuation vers Meknès pour voir la porte Bab Mansour, la place El Hedim et le mausolée Moulay Ismaïl.",
+        "Arrivée à Fès en début de soirée (~1 heure de route depuis Meknès)."
       ],
-      "accommodation": "Riad or Hotel in Fes",
-      "meals": "Breakfast"
+      "accommodation": "Riad ou Hôtel à Fès",
+      "meals": "Petit-déjeuner"
     },
     "day4": {
-      "title": "Full-Day Guided Tour of Fes",
+      "title": "Visite guidée d'une journée à Fès",
       "text": [
-        "Meet your licensed local guide after breakfast to explore Fes el-Bali.",
-        "Visit Al-Qarawiyyin University (founded in 859 CE) and the Bou Inania Madrasa.",
-        "See the Nejjarine Fountain and watch workers at the centuries-old Chouara Tanneries.",
-        "Walk through the traditional souks selling brassware, ceramics, and leather goods.",
-        "Free evening at your riad."
+        "Rencontre avec votre guide local agréé après le petit-déjeuner pour explorer Fès el-Bali.",
+        "Visite de l'université Al-Qarawiyyin (fondée en 859) et de la médersa Bou Inania.",
+        "Découverte de la fontaine Nejjarine et des tanneries traditionnelles de Chouara.",
+        "Parcours dans les souks historiques dédiés à la dinanderie, la céramique et le cuir.",
+        "Soirée libre à votre riad."
       ],
-      "accommodation": "Riad or Hotel in Fes",
-      "meals": "Breakfast"
+      "accommodation": "Riad ou Hôtel à Fès",
+      "meals": "Petit-déjeuner"
     },
     "day5": {
-      "title": "Fes ➜ Departure Transfer",
+      "title": "Fès ➜ Transfert de départ",
       "text": [
-        "Breakfast at your riad and free morning for last-minute shopping.",
-        "Private transfer to Fes Saïss Airport (20 mins) or back to Casablanca Airport (~3.5 hours via highway) depending on your flight."
+        "Petit-déjeuner au riad et matinée libre pour vos derniers achats.",
+        "Transfert privé vers l'aéroport Fès-Saïss (20 min) ou retour à l'aéroport de Casablanca (~3 h 30 par l'autoroute) selon votre vol."
       ],
-      "meals": "Breakfast"
+      "meals": "Petit-déjeuner"
     },
-    "includes": "Private transport in an A/C 4x4 or minibus\nEnglish or French-speaking driver-guide\n4 nights accommodation (hotels and riads)\nFull-day licensed local guide in Fes\nDaily breakfasts from Day 2\nAirport transfers (Casablanca arrival & Fes or Casablanca departure)",
-    "excludes": "Lunches and dinners\nMonument entrance fees (carry cash in MAD)\nTips and personal expenses",
-    "goodToKnow": "- Start: Casablanca (airport or hotel)\n- End: Fes Airport or Casablanca Airport\n- Duration: 5 Days / 4 Nights\n- Driving Times: Day 2 ~5 hours total, Day 3 ~4 hours total\n- Availability: Daily departures year-round\n- Flexibility: You can add extra nights or extend the trip south to the Sahara Desert and Marrakech."
+    "includes": "Transport privé en 4x4 ou minibus climatisé\nChauffeur-guide parlant français ou anglais\n4 nuits d'hébergement (hôtels et riads)\nGuide local agréé pour la journée complète à Fès\nPetits-déjeuners quotidiens dès le jour 2\nTransferts aéroport (arrivée à Casablanca et départ de Fès ou Casablanca)",
+    "excludes": "Déjeuners et dîners\nDroits d'entrée aux monuments (prévoir des espèces en MAD)\nPourboires et dépenses personnelles",
+    "goodToKnow": "- Départ : Casablanca (aéroport ou hôtel)\n- Arrivée : Aéroport de Fès ou aéroport de Casablanca\n- Durée : 5 Jours / 4 Nuits\n- Temps de route : Jour 2 ~5 heures au total, Jour 3 ~4 heures au total\n- Disponibilité : Départs quotidiens toute l'année\n- Flexibilité : Possibilité d'ajouter des nuits supplémentaires ou de prolonger vers le Sahara et Marrakech."
   },
   "tour5": {
-    "title": "Grand Moroccan Circuit",
-    "overview": "This ten-day route links Morocco's High Atlas Mountains, the Sahara Desert, all four imperial cities (Marrakech, Fes, Meknes, and Rabat), the blue mountain town of Chefchaouen, and the Atlantic coast in one continuous trip.\n\nStarting in Marrakech, you cross the Tizi n'Tichka pass to visit Kasbah Ait Ben Haddou and the Dades Valley before reaching the Erg Chebbi dunes in Merzouga for a camel ride and a night in a desert camp. From the Sahara, you drive north through the Middle Atlas cedar forests to Fes for a full-day walking tour of its old medina.\n\nThe final stretch takes you through the Roman ruins of Volubilis, imperial Meknes, and the blue-washed streets of Chefchaouen. You then head down to the coast to explore Rabat's historic monuments before concluding in Casablanca.",
+    "title": "Grand Circuit du Maroc",
+    "overview": "Ce circuit de dix jours réunit en un seul voyage continu le Haut Atlas, le désert du Sahara, les quatre villes impériales (Marrakech, Fès, Meknès et Rabat), la ville bleue de Chefchaouen et la côte atlantique.\n\nAu départ de Marrakech, vous franchissez le col du Tizi n'Tichka vers Aït Ben Haddou et la vallée du Dadès avant de rejoindre les dunes de l'Erg Chebbi à Merzouga pour une balade à dromadaire et une nuit au bivouac. Depuis le Sahara, vous remontez au nord par les forêts de cèdres du Moyen Atlas jusqu'à Fès pour une journée complète de visite à pied de sa médina.\n\nLa dernière partie vous mène aux ruines romaines de Volubilis, à Meknès et dans les ruelles bleues de Chefchaouen, avant de redescendre sur la côte atlantique visiter les monuments de Rabat et terminer à Casablanca.",
     "day1": {
-      "title": "Arrival in Marrakech",
+      "title": "Arrivée à Marrakech",
       "text": [
-        "Pick-up from Marrakech Menara Airport (RAK) and transfer to your riad or hotel in the Medina.",
-        "Free time to explore Jemaa el-Fna square and the surrounding markets as street performers and food stalls set up at sunset.",
-        "Optional dinner at a traditional Moroccan restaurant."
+        "Accueil à l'aéroport Marrakech-Ménara (RAK) et transfert vers votre riad ou hôtel dans la médina.",
+        "Temps libre autour de la place Jemaa el-Fna et des souks voisins lorsque s'animent les stands au coucher du soleil.",
+        "Dîner optionnel dans un restaurant marocain traditionnel."
       ],
-      "accommodation": "Riad or Hotel in Marrakech",
-      "meals": "None"
+      "accommodation": "Riad ou Hôtel à Marrakech",
+      "meals": "Aucun"
     },
     "day2": {
-      "title": "Marrakech: Guided City Tour",
+      "title": "Marrakech : Visite guidée de la ville",
       "text": [
-        "Meet your licensed local guide after breakfast for a walking tour of Marrakech's landmarks: Koutoubia Mosque (exterior), Bahia Palace, and the Saadian Tombs.",
-        "Walk through the historic souks selling spices, leatherwork, and brass lanterns. Optional afternoon visit to Majorelle Garden.",
-        "Free afternoon to relax at your riad, visit a traditional hammam, or enjoy a rooftop café."
+        "Rencontre avec votre guide local agréé après le petit-déjeuner pour une visite à pied de Marrakech : mosquée Koutoubia (extérieur), palais de la Bahia et tombeaux Saadiens.",
+        "Découverte des souks historiques aux épices, cuirs et lanternes. Visite optionnelle du jardin Majorelle l'après-midi.",
+        "Après-midi libre pour profiter du riad, d'un hammam traditionnel ou d'une terrasse panoramique."
       ],
-      "accommodation": "Riad or Hotel in Marrakech",
-      "meals": "Breakfast"
+      "accommodation": "Riad ou Hôtel à Marrakech",
+      "meals": "Petit-déjeuner"
     },
     "day3": {
-      "title": "Marrakech ➜ Ait Ben Haddou ➜ Ouarzazate ➜ Dades Valley",
+      "title": "Marrakech ➜ Aït Ben Haddou ➜ Ouarzazate ➜ Vallée du Dadès",
       "text": [
-        "Leave Marrakech in the morning and cross the High Atlas Mountains over the Tizi n’Tichka Pass (2,260m).",
-        "Stop at Kasbah Ait Ben Haddou, a UNESCO-listed fortified village made of rammed earth.",
-        "Continue to Ouarzazate, with an optional stop at the Atlas Film Studios.",
-        "Drive through the Skoura palm oasis and the Valley of Roses to reach the Dades Valley."
+        "Départ de Marrakech le matin par le col du Tizi n'Tichka (2 260 m) dans le Haut Atlas.",
+        "Halte à la Kasbah Aït Ben Haddou, village fortifié en pisé inscrit à l'UNESCO.",
+        "Passage par Ouarzazate avec arrêt optionnel aux studios de cinéma Atlas.",
+        "Route à travers la palmeraie de Skoura et la vallée des Roses jusqu'à la vallée du Dadès."
       ],
-      "accommodation": "Hotel or Riad in Dades Valley",
-      "meals": "Dinner & Breakfast"
+      "accommodation": "Hôtel ou Riad dans la vallée du Dadès",
+      "meals": "Dîner et Petit-déjeuner"
     },
     "day4": {
-      "title": "Dades Valley ➜ Todra Gorges ➜ Merzouga Desert",
+      "title": "Vallée du Dadès ➜ Gorges du Todra ➜ Désert de Merzouga",
       "text": [
-        "After breakfast, head to Todra Gorges to walk between 300-meter vertical canyon walls.",
-        "Continue via Tinejdad and Erfoud, known for fossils and date palms.",
-        "Reach Merzouga in the late afternoon and ride camels across the Erg Chebbi dunes for sunset, dinner, and an overnight stay at your camp."
+        "Après le petit-déjeuner, route vers les gorges du Todra pour marcher entre des falaises verticales de 300 mètres.",
+        "Continuation par Tinejdad et Erfoud, connue pour ses fossiles et ses palmeraies.",
+        "Arrivée à Merzouga en fin d'après-midi et départ à dos de dromadaire dans les dunes de l'Erg Chebbi pour le coucher du soleil, le dîner et la nuit au bivouac."
       ],
-      "accommodation": "Desert Camp in Merzouga (Standard or Luxury)",
-      "meals": "Dinner & Breakfast",
-      "activities": "Sunset Camel Ride, Sandboarding, Campfire Music"
+      "accommodation": "Bivouac dans le désert à Merzouga (Standard ou Luxe)",
+      "meals": "Dîner et Petit-déjeuner",
+      "activities": "Balade à dromadaire au coucher du soleil, Sandboard, Musique au feu de camp"
     },
     "day5": {
-      "title": "Merzouga ➜ Ziz Valley ➜ Midelt ➜ Fes",
+      "title": "Merzouga ➜ Vallée du Ziz ➜ Midelt ➜ Fès",
       "text": [
-        "Wake before dawn to watch the sunrise over the dunes, then return to Merzouga village for breakfast and a shower.",
-        "Drive north past Rissani and through the date-palm oasis of the Ziz Valley.",
-        "Cross the Middle Atlas Mountains, stopping in Midelt for lunch, the Azrou cedar forest to see wild Barbary macaques, and alpine Ifrane.",
-        "Arrive in Fes by early evening (~7 hours total driving)."
+        "Réveil avant l'aube pour le lever du soleil sur les dunes, puis retour à Merzouga pour le petit-déjeuner et une douche.",
+        "Départ vers le nord par Rissani et l'oasis de la vallée du Ziz.",
+        "Traversée du Moyen Atlas avec déjeuner à Midelt, halte dans la forêt de cèdres d'Azrou auprès des macaques sauvages et passage par Ifrane.",
+        "Arrivée à Fès en début de soirée (~7 heures de route au total)."
       ],
-      "accommodation": "Riad in Fes",
-      "meals": "Breakfast"
+      "accommodation": "Riad à Fès",
+      "meals": "Petit-déjeuner"
     },
     "day6": {
-      "title": "Guided Tour of Fes",
+      "title": "Visite guidée de Fès",
       "text": [
-        "Meet your licensed local guide for a full-day walking tour of Fes el-Bali, the oldest walled part of the city.",
-        "Visit Al-Qarawiyyin University, Bou Inania Madrasa, Nejjarine Fountain, and the Chouara Tanneries.",
-        "Explore the artisan quarters and bustling medina markets."
+        "Rencontre avec votre guide local agréé pour une visite à pied d'une journée dans Fès el-Bali, la plus ancienne partie fortifiée de la ville.",
+        "Visite de l'université Al-Qarawiyyin, de la médersa Bou Inania, de la fontaine Nejjarine et des tanneries Chouara.",
+        "Découverte des quartiers d'artisans et des marchés animés de la médina."
       ],
-      "accommodation": "Riad in Fes",
-      "meals": "Breakfast"
+      "accommodation": "Riad à Fès",
+      "meals": "Petit-déjeuner"
     },
     "day7": {
-      "title": "Fes ➜ Meknes ➜ Volubilis ➜ Chefchaouen",
+      "title": "Fès ➜ Meknès ➜ Volubilis ➜ Chefchaouen",
       "text": [
-        "Depart for Meknes to see the monumental Bab Mansour Gate and El Hedim Square.",
-        "Continue to the Roman ruins of Volubilis to walk among preserved mosaics and stone arches.",
-        "Drive north into the Rif Mountains to reach Chefchaouen (~4 hours from Volubilis)."
+        "Départ pour Meknès devant la porte monumentale Bab Mansour et la place El Hedim.",
+        "Continuation vers les ruines romaines de Volubilis et leurs mosaïques et arcs en pierre préservés.",
+        "Montée au nord dans les montagnes du Rif vers Chefchaouen (~4 heures depuis Volubilis)."
       ],
-      "accommodation": "Riad or Hotel in Chefchaouen",
-      "meals": "Breakfast"
+      "accommodation": "Riad ou Hôtel à Chefchaouen",
+      "meals": "Petit-déjeuner"
     },
     "day8": {
-      "title": "Chefchaouen: Free Day",
+      "title": "Chefchaouen : Journée libre",
       "text": [
-        "A full free day to enjoy Chefchaouen at your own pace.",
-        "Walk the blue-painted alleys, browse local weaving shops, or hike up to the Spanish Mosque for sunset views over the town."
+        "Une journée entièrement libre pour profiter de Chefchaouen à votre rythme.",
+        "Balade dans les ruelles peintes en bleu, boutiques de tissage local ou montée à pied vers la mosquée Espagnole pour le coucher du soleil."
       ],
-      "accommodation": "Riad or Hotel in Chefchaouen",
-      "meals": "Breakfast"
+      "accommodation": "Riad ou Hôtel à Chefchaouen",
+      "meals": "Petit-déjeuner"
     },
     "day9": {
       "title": "Chefchaouen ➜ Rabat ➜ Casablanca",
       "text": [
-        "After breakfast, drive down from the mountains to Rabat, Morocco’s capital.",
-        "Visit the Hassan Tower, Mohammed V Mausoleum, and the Kasbah of the Udayas overlooking the ocean.",
-        "Continue south along the highway to Casablanca."
+        "Après le petit-déjeuner, descente des montagnes vers Rabat, capitale du Maroc.",
+        "Visite de la tour Hassan, du mausolée Mohammed V et de la kasbah des Oudayas face à l'océan.",
+        "Continuation vers le sud par l'autoroute jusqu'à Casablanca."
       ],
-      "accommodation": "Hotel in Casablanca",
-      "meals": "Breakfast"
+      "accommodation": "Hôtel à Casablanca",
+      "meals": "Petit-déjeuner"
     },
     "day10": {
-      "title": "Casablanca: Departure",
+      "title": "Casablanca : Départ",
       "text": [
-        "Breakfast at your hotel, with an optional morning visit to the Hassan II Mosque (depending on your flight time).",
-        "Private transfer to Casablanca Mohammed V Airport (CMN) for your flight home."
+        "Petit-déjeuner à l'hôtel avec visite matinale optionnelle de la mosquée Hassan II selon l'horaire de votre vol.",
+        "Transfert privé à l'aéroport Mohammed V de Casablanca (CMN) pour votre vol retour."
       ],
-      "meals": "Breakfast"
+      "meals": "Petit-déjeuner"
     },
-    "includes": "Private transport in a modern A/C 4x4 or minibus\nEnglish or French-speaking driver-guide\n9 nights accommodation (riads, hotels, and desert camp)\nSunset and sunrise camel rides in Merzouga\nLicensed local guides in both Marrakech and Fes\nBreakfasts and dinners as listed in the itinerary\nAirport transfers in Marrakech and Casablanca",
-    "excludes": "Lunches and drinks\nMonument entrance fees (carry cash in MAD)\nTips and personal expenses",
-    "goodToKnow": "Start: Marrakech (airport or hotel)\nEnd: Casablanca (airport or hotel)\nDuration: 10 Days / 9 Nights\nDriving Pace: Longer travel days are on Days 3, 5, 7, and 9 (4 to 7 hours), balanced with 2-night stays in Marrakech, Fes, and Chefchaouen.\nAvailability: Daily departures year-round\nFlexibility: You can add coastal days in Essaouira or an extra night in the desert."
+    "includes": "Transport privé en 4x4 ou minibus moderne climatisé\nChauffeur-guide parlant français ou anglais\n9 nuits d'hébergement (riads, hôtels et bivouac dans le désert)\nBalades à dromadaire au coucher et au lever du soleil à Merzouga\nGuides locaux agréés à Marrakech et à Fès\nPetits-déjeuners et dîners selon le programme\nTransferts aéroport à Marrakech et Casablanca",
+    "excludes": "Déjeuners et boissons\nDroits d'entrée aux monuments (prévoir des espèces en MAD)\nPourboires et dépenses personnelles",
+    "goodToKnow": "Départ : Marrakech (aéroport ou hôtel)\nArrivée : Casablanca (aéroport ou hôtel)\nDurée : 10 Jours / 9 Nuits\nRythme : Les journées de route les plus longues sont les jours 3, 5, 7 et 9 (4 à 7 heures), équilibrées par des séjours de 2 nuits à Marrakech, Fès et Chefchaouen.\nDisponibilité : Départs quotidiens toute l'année\nFlexibilité : Possibilité d'ajouter des jours sur la côte à Essaouira ou une nuit supplémentaire dans le désert."
   },
   "tour6": {
-    "title": "Atlas & Desert Escape",
-    "overview": "This four-day route gives you the full Marrakech-to-Merzouga desert experience at a much calmer pace than the standard three-day trip. Spreading the 1,100 km round trip across four days keeps daily driving legs between 4 and 6 hours, leaving more time to walk through Berber villages, visit kasbahs, and relax at your riads.\n\nCrossing the High Atlas via the Tizi n'Tichka pass, you visit Kasbah Ait Ben Haddou before spending Night 1 in the Dades Valley. Day 2 takes you through the 300-meter cliffs of Todra Gorges to Merzouga for a sunset camel ride and an overnight stay in the Erg Chebbi dunes.\n\nInstead of rushing straight back to Marrakech on Day 3, you drive through the Draa Valley palm groves to spend the night in Ouarzazate, leaving a relaxed, scenic drive over the High Atlas for Day 4.",
+    "title": "Évasion Atlas & Désert",
+    "overview": "Ce circuit de quatre jours offre toute l'expérience du désert entre Marrakech et Merzouga à un rythme bien plus serein que l'itinéraire classique de trois jours. Étaler les 1 100 km aller-retour sur quatre jours limite les étapes à 4 à 6 heures par jour, laissant le temps de marcher dans les villages berbères, de visiter les kasbahs et de profiter de vos riads.\n\nEn franchissant le Haut Atlas par le Tizi n'Tichka, vous visitez la Kasbah Aït Ben Haddou avant la nuit 1 dans la vallée du Dadès. Le jour 2 passe par les falaises de 300 mètres des gorges du Todra jusqu'à Merzouga pour une balade à dromadaire au coucher du soleil et une nuit dans l'Erg Chebbi.\n\nPlutôt que de rentrer d'une traite à Marrakech le jour 3, vous traversez la palmeraie de la vallée du Drâa pour passer la nuit à Ouarzazate, gardant une traversée paisible et panoramique du Haut Atlas pour le jour 4.",
     "day1": {
-      "title": "Marrakech ➜ Ait Ben Haddou ➜ Ouarzazate ➜ Dades Valley",
+      "title": "Marrakech ➜ Aït Ben Haddou ➜ Ouarzazate ➜ Vallée du Dadès",
       "text": [
-        "Leave Marrakech around 7:30 AM and cross the High Atlas Mountains via the Tizi n’Tichka Pass (2,260m), stopping at panoramic viewpoints.",
-        "Explore Kasbah Ait Ben Haddou, the famous earthen citadel featured in Gladiator and Game of Thrones.",
-        "Pass through Ouarzazate (optional visit to Atlas Film Studios), the Skoura palm oasis, and Kalaat M'gouna (Valley of Roses).",
-        "Arrive in the Dades Valley to see the \"Monkey Fingers\" rock formations before dinner and overnight at your riad or hotel."
+        "Départ de Marrakech vers 7 h 30 pour franchir le Haut Atlas par le col du Tizi n'Tichka (2 260 m) avec arrêts panoramiques.",
+        "Visite de la Kasbah Aït Ben Haddou, célèbre citadelle en pisé apparue dans Gladiator et Game of Thrones.",
+        "Passage par Ouarzazate (arrêt optionnel aux studios Atlas), la palmeraie de Skoura et Kelaat M'Gouna (vallée des Roses).",
+        "Arrivée dans la vallée du Dadès et découverte des rochers dits « Doigts de Singe » avant le dîner et la nuit en riad ou hôtel."
       ],
-      "accommodation": "Hotel or Riad in Dades Valley",
-      "meals": "Dinner"
+      "accommodation": "Hôtel ou Riad dans la vallée du Dadès",
+      "meals": "Dîner"
     },
     "day2": {
-      "title": "Dades Valley ➜ Todra Gorges ➜ Merzouga Desert",
+      "title": "Vallée du Dadès ➜ Gorges du Todra ➜ Désert de Merzouga",
       "text": [
-        "After breakfast, drive to Todra Gorges to walk between its sheer 300-meter limestone walls.",
-        "Continue through Tinejdad and Erfoud, known for fossil workshops and date groves.",
-        "Arrive in Merzouga in the late afternoon, meet your camel caravan, and ride into the Erg Chebbi dunes for sunset.",
-        "Enjoy a traditional Moroccan dinner, Berber drumming around the campfire, and a night under the desert sky."
+        "Après le petit-déjeuner, trajet jusqu'aux gorges du Todra pour marcher entre leurs parois calcaires verticales de 300 mètres.",
+        "Continuation par Tinejdad et Erfoud, connue pour ses fossiles et ses palmeraies.",
+        "Arrivée à Merzouga en fin d'après-midi, rencontre avec la caravane de dromadaires et entrée dans les dunes de l'Erg Chebbi au coucher du soleil.",
+        "Dîner marocain traditionnel, percussions berbères autour du feu et nuit sous les étoiles du désert."
       ],
-      "accommodation": "Desert Camp in Merzouga (Standard or Luxury)",
-      "meals": "Dinner & Breakfast",
-      "activities": "Sunset Camel Ride, Sandboarding, Campfire Music"
+      "accommodation": "Bivouac dans le désert à Merzouga (Standard ou Luxe)",
+      "meals": "Dîner et Petit-déjeuner",
+      "activities": "Balade à dromadaire au coucher du soleil, Sandboard, Musique au feu de camp"
     },
     "day3": {
-      "title": "Merzouga ➜ Alnif ➜ Draa Valley ➜ Ouarzazate",
+      "title": "Merzouga ➜ Alnif ➜ Vallée du Drâa ➜ Ouarzazate",
       "text": [
-        "Wake early to watch the sunrise over the dunes, then ride camels (or take a 4x4) back to Merzouga village for breakfast and a shower.",
-        "Drive west through Alnif and Tazzarine, joining the Draa Valley—Morocco’s longest river oasis, lined with date palms and ancient mud-brick kasbahs.",
-        "Arrive in Ouarzazate in the late afternoon for dinner and overnight at a local riad or hotel."
+        "Réveil matinal pour voir le lever du soleil sur les dunes, puis retour à Merzouga à dos de dromadaire (ou en 4x4) pour le petit-déjeuner et une douche.",
+        "Route vers l'ouest par Alnif et Tazzarine jusqu'à la vallée du Drâa, plus longue oasis du Maroc jalonnée de palmiers dattiers et d'anciennes kasbahs.",
+        "Arrivée à Ouarzazate en fin d'après-midi pour le dîner et la nuit en riad ou hôtel local."
       ],
-      "accommodation": "Hotel or Riad in Ouarzazate",
-      "meals": "Dinner & Breakfast"
+      "accommodation": "Hôtel ou Riad à Ouarzazate",
+      "meals": "Dîner et Petit-déjeuner"
     },
     "day4": {
-      "title": "Ouarzazate ➜ High Atlas Mountains ➜ Marrakech",
+      "title": "Ouarzazate ➜ Haut Atlas ➜ Marrakech",
       "text": [
-        "After breakfast, visit the historic Taourirt Kasbah or Atlas Film Studios in Ouarzazate (optional).",
-        "Optional brief photo stop near Ait Ben Haddou before ascending the High Atlas Mountains via the Tizi n'Tichka Pass (2,260m).",
-        "Arrive back in Marrakech by late afternoon (~4.5 hours driving)."
+        "Après le petit-déjeuner, visite optionnelle de la kasbah de Taourirt ou des studios de cinéma Atlas à Ouarzazate.",
+        "Arrêt photo optionnel près d'Aït Ben Haddou avant de remonter le Haut Atlas par le col du Tizi n'Tichka (2 260 m).",
+        "Retour à Marrakech en fin d'après-midi (~4 h 30 de route)."
       ],
-      "meals": "Breakfast",
-      "arrival": "Between 5:00 PM and 6:00 PM"
+      "meals": "Petit-déjeuner",
+      "arrival": "Entre 17:00 et 18:00"
     },
-    "includes": "Pick-up and drop-off at your Marrakech accommodation\nPrivate transport in an A/C 4x4 or minibus\nEnglish or French-speaking driver-guide\n2 nights in traditional riads/hotels (Dades Valley and Ouarzazate)\n1 night in a Merzouga desert camp (standard or luxury)\nSunset and sunrise camel rides in Erg Chebbi\nBreakfasts and dinners as listed in the itinerary\nOptional sandboarding",
-    "excludes": "Lunches and drinks\nMonument entrance fees (carry cash in MAD)\nTips and personal expenses",
-    "goodToKnow": "Departure: 7:30 AM from Marrakech\nReturn: Late afternoon on Day 4\nDriving Times: Day 1 ~350 km (5–6 hrs), Day 2 ~300 km (5 hrs), Day 3 ~380 km (6 hrs), Day 4 ~200 km (4.5 hrs)\nLuggage: Heavy suitcases remain in your vehicle; bring a small daypack for your desert camp night.\nWhat to Pack: Sunglasses, hat, sunscreen, and warm clothing for desert nights (especially November to April)."
+    "includes": "Prise en charge et retour à votre hébergement à Marrakech\nTransport privé en 4x4 ou minibus climatisé\nChauffeur-guide parlant français ou anglais\n2 nuits en riads/hôtels traditionnels (vallée du Dadès et Ouarzazate)\n1 nuit en bivouac à Merzouga (standard ou luxe)\nBalades à dromadaire au coucher et au lever du soleil à l'Erg Chebbi\nPetits-déjeuners et dîners selon le programme\nSandboard en option",
+    "excludes": "Déjeuners et boissons\nDroits d'entrée aux monuments (prévoir des espèces en MAD)\nPourboires et dépenses personnelles",
+    "goodToKnow": "Départ : 7 h 30 depuis Marrakech\nRetour : Fin d'après-midi du jour 4\nTemps de route : Jour 1 ~350 km (5–6 h), Jour 2 ~300 km (5 h), Jour 3 ~380 km (6 h), Jour 4 ~200 km (4 h 30)\nBagages : Les grosses valises restent dans le véhicule ; emportez un petit sac pour la nuit au camp.\nÀ emporter : Lunettes de soleil, chapeau, crème solaire et vêtements chauds pour les nuits dans le désert (surtout de novembre à avril)."
   },
   "tour7": {
-    "title": "Coastal & Desert Odyssey",
-    "overview": "This four-day overland route connects the Atlantic coast of Agadir and Taghazout to the Sahara dunes of Merzouga and finishes in Marrakech. It is an ideal option if you are wrapping up a beach stay on the coast and want to experience the desert without flying or backtracking.\n\nLeaving Agadir, you travel east past the red-walled market town of Taroudant and across the Anti-Atlas Mountains and saffron-growing plains of Taliouine. Passing Ouarzazate and the Valley of Roses, you spend Night 1 in the Dades Valley before visiting Todra Gorges and riding camels into the Erg Chebbi dunes on Day 2.\n\nOn the return leg, you drive through the palm groves of the Draa Valley to Ouarzazate for Night 3, then visit Kasbah Ait Ben Haddou and cross the High Atlas Mountains into Marrakech on Day 4.",
-    "description": "4 Days Tour from Agadir to Marrakech via Merzouga Desert",
+    "title": "Odyssée côte atlantique & désert",
+    "overview": "Ce circuit terrestre de quatre jours relie la côte atlantique d'Agadir et Taghazout aux dunes de Merzouga avant de s'achever à Marrakech. C'est l'option idéale si vous terminez un séjour balnéaire sur la côte et souhaitez découvrir le Sahara sans prendre l'avion ni revenir en arrière.\n\nEn quittant Agadir, vous roulez vers l'est par les remparts de Taroudant puis à travers l'Anti-Atlas et les plaines de safran de Taliouine. Après Ouarzazate et la vallée des Roses, vous passez la nuit 1 dans la vallée du Dadès avant de visiter les gorges du Todra et de partir à dromadaire dans l'Erg Chebbi le jour 2.\n\nSur la route du retour, vous longez les palmeraies de la vallée du Drâa jusqu'à Ouarzazate pour la nuit 3, puis visitez la Kasbah Aït Ben Haddou et traversez le Haut Atlas jusqu'à Marrakech le jour 4.",
+    "description": "Circuit 4 Jours d'Agadir à Marrakech via le désert de Merzouga",
     "day1": {
-      "title": "Agadir ➜ Taroudant ➜ Ouarzazate ➜ Dades Valley",
+      "title": "Agadir ➜ Taroudant ➜ Ouarzazate ➜ Vallée du Dadès",
       "text": [
-        "Early morning pick-up from your hotel or resort in Agadir or Taghazout (around 7:30 AM).",
-        "Pass by Taroudant, known as \"Little Marrakech\" for its mud-brick ramparts and lively souks.",
-        "Drive across the Anti-Atlas Mountains and Taliouine toward Ouarzazate.",
-        "Continue through the Skoura palm oasis and Kalaat M'gouna (Valley of Roses) to reach the Dades Valley and its \"Monkey Fingers\" rock formations (~7 to 8 hours total driving).",
-        "Dinner and overnight at a traditional riad or hotel in the Dades Valley."
+        "Prise en charge matinale à votre hôtel ou resort à Agadir ou Taghazout (vers 7 h 30).",
+        "Passage par Taroudant, surnommée la « Petite Marrakech » pour ses remparts en pisé et ses souks animés.",
+        "Traversée de l'Anti-Atlas et de Taliouine en direction d'Ouarzazate.",
+        "Poursuite par la palmeraie de Skoura et Kelaat M'Gouna (vallée des Roses) jusqu'à la vallée du Dadès et ses formations des « Doigts de Singe » (~7 à 8 heures de route au total).",
+        "Dîner et nuit en riad ou hôtel traditionnel dans la vallée du Dadès."
       ],
-      "accommodation": "Hotel or Riad in Dades Valley",
-      "meals": "Dinner"
+      "accommodation": "Hôtel ou Riad dans la vallée du Dadès",
+      "meals": "Dîner"
     },
     "day2": {
-      "title": "Dades Valley ➜ Todra Gorges ➜ Merzouga Desert",
+      "title": "Vallée du Dadès ➜ Gorges du Todra ➜ Désert de Merzouga",
       "text": [
-        "After breakfast, visit Todra Gorges to walk beneath its towering 300-meter canyon cliffs.",
-        "Continue east via Tinejdad and Erfoud, known for fossils and dates.",
-        "Arrive in Merzouga in the late afternoon and ride camels into the Erg Chebbi dunes for sunset.",
-        "Enjoy a traditional Moroccan dinner around the campfire with live Berber drumming and a night under the stars."
+        "Après le petit-déjeuner, visite des gorges du Todra et marche au pied des falaises de 300 mètres.",
+        "Continuation vers l'est par Tinejdad et Erfoud, connue pour ses fossiles et ses dattes.",
+        "Arrivée à Merzouga en fin d'après-midi et balade à dromadaire dans les dunes de l'Erg Chebbi au coucher du soleil.",
+        "Dîner marocain traditionnel autour du feu de camp avec percussions berbères et nuit sous les étoiles."
       ],
-      "accommodation": "Desert Camp in Merzouga (Standard or Luxury)",
-      "meals": "Dinner & Breakfast",
-      "activities": "Sunset Camel Ride, Sandboarding, Campfire Music"
+      "accommodation": "Bivouac dans le désert à Merzouga (Standard ou Luxe)",
+      "meals": "Dîner et Petit-déjeuner",
+      "activities": "Balade à dromadaire au coucher du soleil, Sandboard, Musique au feu de camp"
     },
     "day3": {
-      "title": "Merzouga ➜ Alnif ➜ Draa Valley ➜ Ouarzazate",
+      "title": "Merzouga ➜ Alnif ➜ Vallée du Drâa ➜ Ouarzazate",
       "text": [
-        "Wake early to watch the sunrise over the sand dunes, then ride camels (or take a 4x4) back to Merzouga village for breakfast and a shower.",
-        "Drive through Alnif and Tazzarine, following the Draa Valley—lined with dense palm groves and old kasbahs.",
-        "Arrive in Ouarzazate in the late afternoon, with an optional visit to Atlas Film Studios or Taourirt Kasbah.",
-        "Dinner and overnight at a traditional riad or hotel in Ouarzazate."
+        "Réveil matinal pour voir le lever du soleil sur les dunes, puis retour au village de Merzouga à dromadaire (ou en 4x4) pour le petit-déjeuner et une douche.",
+        "Route par Alnif et Tazzarine en suivant la vallée du Drâa, bordée de palmeraies et de vieilles kasbahs.",
+        "Arrivée à Ouarzazate en fin d'après-midi avec visite optionnelle des studios Atlas ou de la kasbah de Taourirt.",
+        "Dîner et nuit en riad ou hôtel traditionnel à Ouarzazate."
       ],
-      "accommodation": "Hotel or Riad in Ouarzazate",
-      "meals": "Dinner & Breakfast"
+      "accommodation": "Hôtel ou Riad à Ouarzazate",
+      "meals": "Dîner et Petit-déjeuner"
     },
     "day4": {
-      "title": "Ouarzazate ➜ Ait Ben Haddou ➜ High Atlas Mountains ➜ Marrakech",
+      "title": "Ouarzazate ➜ Aït Ben Haddou ➜ Haut Atlas ➜ Marrakech",
       "text": [
-        "After breakfast in Ouarzazate, visit the famous UNESCO World Heritage Kasbah of Ait Ben Haddou.",
-        "Cross the High Atlas Mountains via the Tizi n'Tichka Pass (2,260m) with scenic photo stops along the way.",
-        "Arrive in Marrakech in the late afternoon (~4.5 hours driving), with drop-off at your riad, hotel, or the airport."
+        "Après le petit-déjeuner à Ouarzazate, visite de la célèbre Kasbah Aït Ben Haddou, classée à l'UNESCO.",
+        "Traversée du Haut Atlas par le col du Tizi n'Tichka (2 260 m) avec arrêts panoramiques.",
+        "Arrivée à Marrakech en fin d'après-midi (~4 h 30 de route), avec dépose à votre riad, hôtel ou à l'aéroport."
       ],
-      "meals": "Breakfast",
-      "arrival": "Between 5:00 PM and 6:00 PM"
+      "meals": "Petit-déjeuner",
+      "arrival": "Entre 17:00 et 18:00"
     },
-    "includes": "Pick-up in Agadir/Taghazout and drop-off in Marrakech\nPrivate A/C 4x4 or minibus transport\nEnglish or French-speaking driver-guide\n2 nights in boutique riads/hotels (Dades Valley and Ouarzazate)\n1 night in a Merzouga desert camp (standard or luxury)\nSunset and sunrise camel rides in Erg Chebbi\nBreakfasts and dinners as listed in the itinerary\nOptional sandboarding",
-    "excludes": "Lunches and drinks\nMonument entrance fees (carry cash in MAD)\nTips and personal expenses",
-    "goodToKnow": "Departure: 7:00 to 7:30 AM from Agadir, Taghazout, or Tamraght\nDuration: 4 Days / 3 Nights\nDriving Times: Day 1 ~470 km (7–8 hrs), Day 2 ~300 km (5 hrs), Day 3 ~380 km (6 hrs), Day 4 ~200 km (4.5 hrs)\nLuggage: Heavy suitcases remain safely in your vehicle; bring a small daypack for your desert camp stay.\nWhat to Pack: Sunglasses, hat, sunscreen, camera, and warm layers for desert nights."
+    "includes": "Prise en charge à Agadir/Taghazout et dépose à Marrakech\nTransport privé en 4x4 ou minibus climatisé\nChauffeur-guide parlant français ou anglais\n2 nuits en riads/hôtels de charme (vallée du Dadès et Ouarzazate)\n1 nuit en bivouac à Merzouga (standard ou luxe)\nBalades à dromadaire au coucher et au lever du soleil à l'Erg Chebbi\nPetits-déjeuners et dîners selon le programme\nSandboard en option",
+    "excludes": "Déjeuners et boissons\nDroits d'entrée aux monuments (prévoir des espèces en MAD)\nPourboires et dépenses personnelles",
+    "goodToKnow": "Départ : 7 h 00 à 7 h 30 depuis Agadir, Taghazout ou Tamraght\nDurée : 4 Jours / 3 Nuits\nTemps de route : Jour 1 ~470 km (7–8 h), Jour 2 ~300 km (5 h), Jour 3 ~380 km (6 h), Jour 4 ~200 km (4 h 30)\nBagages : Les valises lourdes restent en sécurité dans le véhicule ; préparez un petit sac pour la nuit au campement.\nÀ emporter : Lunettes de soleil, chapeau, crème solaire, appareil photo et vêtements chauds pour les nuits dans le désert."
   },
   "tour8": {
-    "title": "Chegaga Wilderness Expedition",
-    "overview": "This three-day expedition takes you far off the paved tourist trail into Erg Chegaga, Morocco's largest and wildest dune system. Unlike Merzouga, which sits right beside a paved road, Erg Chegaga lies 60 km across open desert tracks and can only be reached by 4x4.\n\nLeaving Marrakech, you cross the High Atlas via Tizi n'Tichka and follow the entire length of the Draa Valley—a massive oasis lined with over a million date palms and crumbling kasbahs—to spend Night 1 in Zagora. On Day 2, you drive past M'Hamid El Ghizlane, where the asphalt ends, navigating rocky plateaus and dry riverbeds by 4x4 into the 300-meter dunes of Erg Chegaga.\n\nAfter a sunset camel ride and a quiet night in a remote desert bivouac far from other camps, you complete a scenic loop back to Marrakech across the dry salt flats of Lake Iriqui, Foum Zguid, and the carpet-weaving town of Taznakht.",
-    "description": "3 Days Marrakech to Chegaga Desert Tour",
+    "title": "Expédition sauvage à Erg Chegaga",
+    "overview": "Cette expédition de trois jours vous emmène loin des axes goudronnés jusqu'à l'Erg Chegaga, le plus vaste et le plus sauvage massif dunaire du Maroc. Contrairement à Merzouga, bordé par la route asphaltée, Erg Chegaga se trouve à 60 km de pistes désertiques et n'est accessible qu'en 4x4.\n\nEn quittant Marrakech, vous traversez le Haut Atlas par le Tizi n'Tichka et longez toute la vallée du Drâa — une immense oasis bordée de palmiers dattiers et d'anciennes kasbahs — jusqu'à Zagora pour la première nuit. Le jour 2, vous passez M'Hamid El Ghizlane là où s'arrête l'asphalte et empruntez les pistes caillouteuses et oueds secs en 4x4 vers les dunes de 300 mètres de l'Erg Chegaga.\n\nAprès une balade à dromadaire au coucher du soleil et une nuit calme dans un bivouac isolé, vous bouclez le retour vers Marrakech par le lac asséché Iriqui, Foum Zguid et la ville des tapis de Taznakht.",
+    "description": "Circuit 3 Jours de Marrakech au désert d'Erg Chegaga en 4x4",
     "day1": {
-      "title": "Marrakech ➜ Ait Ben Haddou ➜ Ouarzazate ➜ Zagora",
+      "title": "Marrakech ➜ Aït Ben Haddou ➜ Ouarzazate ➜ Zagora",
       "text": [
-        "Leave Marrakech early in the morning (around 7:30 AM) and cross the High Atlas Mountains via the Tizi n'Tichka Pass (2,260m).",
-        "Stop at Kasbah Ait Ben Haddou, the famous UNESCO-listed earthen village.",
-        "Continue past Ouarzazate and follow the Draa Valley—Morocco's longest river oasis—south to Zagora (~7 hours total driving).",
-        "Dinner and overnight at a traditional riad or hotel in Zagora."
+        "Départ de Marrakech tôt le matin (vers 7 h 30) pour traverser le Haut Atlas par le col du Tizi n'Tichka (2 260 m).",
+        "Arrêt à la Kasbah Aït Ben Haddou, célèbre village fortifié en terre classé à l'UNESCO.",
+        "Continuation après Ouarzazate le long de la vallée du Drâa — plus longue oasis du Maroc — vers le sud jusqu'à Zagora (~7 heures de route au total).",
+        "Dîner et nuit en riad ou hôtel traditionnel à Zagora."
       ],
-      "accommodation": "Hotel or Riad in Zagora",
-      "meals": "Dinner"
+      "accommodation": "Hôtel ou Riad à Zagora",
+      "meals": "Dîner"
     },
     "day2": {
-      "title": "Zagora ➜ M'Hamid ➜ Erg Chegaga Desert",
+      "title": "Zagora ➜ M'Hamid ➜ Désert de l'Erg Chegaga",
       "text": [
-        "After breakfast, head south through Tamgroute (known for its green pottery and historic Quranic library) to M'Hamid, the last village before the open desert.",
-        "Leave the paved road behind for a 60 km off-road 4x4 drive across sand flats and stony desert (reg) to reach the tall dunes of Erg Chegaga.",
-        "Ride camels into the dunes for sunset before returning to camp for a traditional dinner around the fire, nomad drumming, and stargazing under pitch-black skies."
+        "Après le petit-déjeuner, route au sud par Tamegroute (connue pour ses poteries vertes et son ancienne bibliothèque coranique) jusqu'à M'Hamid, dernier village avant le grand désert.",
+        "Fin du goudron pour 60 km de piste hors-route en 4x4 entre regs caillouteux et étendues de sable jusqu'aux grandes dunes de l'Erg Chegaga.",
+        "Balade à dromadaire dans les dunes au coucher du soleil, puis retour au camp pour un dîner traditionnel autour du feu, percussions nomades et observation d'un ciel nocturne pur."
       ],
-      "accommodation": "Desert Camp in Erg Chegaga",
-      "meals": "Dinner & Breakfast",
-      "activities": "Off-Road 4x4 Track, Sunset Camel Ride, Campfire Music, Stargazing"
+      "accommodation": "Bivouac dans le désert à Erg Chegaga",
+      "meals": "Dîner et Petit-déjeuner",
+      "activities": "Piste 4x4 hors-route, Balade à dromadaire au coucher du soleil, Musique au feu, Ciel étoilé"
     },
     "day3": {
-      "title": "Erg Chegaga ➜ Lake Iriqui ➜ Foum Zguid ➜ Taznakht ➜ Marrakech",
+      "title": "Erg Chegaga ➜ Lac Iriqui ➜ Foum Zguid ➜ Taznakht ➜ Marrakech",
       "text": [
-        "Wake early to watch the sunrise over the dunes, followed by breakfast at the camp.",
-        "Depart off-road by 4x4 across the flat, dry lakebed of Lake Iriqui and fossil-rich plains toward Foum Zguid.",
-        "Rejoin the paved road and continue through Taznakht, famous for hand-woven Berber rugs, where you can stop for lunch.",
-        "Cross the High Atlas Mountains again via Tizi n'Tichka Pass (2,260m) to arrive back in Marrakech in the evening (~8 hours total driving)."
+        "Réveil matinal pour admirer le lever du soleil sur les dunes, suivi du petit-déjeuner au bivouac.",
+        "Départ en 4x4 hors-piste à travers le lac salé asséché d'Iriqui et les plaines à fossiles en direction de Foum Zguid.",
+        "Reprise de la route goudronnée vers Taznakht, célèbre pour ses tapis berbères tissés à la main, avec halte possible pour le déjeuner.",
+        "Nouveau passage du Haut Atlas par le col du Tizi n'Tichka (2 260 m) pour arriver à Marrakech en soirée (~8 heures de route au total)."
       ],
-      "meals": "Breakfast",
-      "arrival": "Late afternoon / early evening in Marrakech"
+      "meals": "Petit-déjeuner",
+      "arrival": "Fin d'après-midi / début de soirée à Marrakech"
     },
-    "includes": "Pick-up and drop-off at your Marrakech accommodation\nPrivate air-conditioned 4x4 vehicle (Toyota Land Cruiser or similar)\nEnglish or French-speaking experienced desert driver-guide\n1 night in a Zagora hotel or riad\n1 night in an Erg Chegaga desert camp\nSunset camel trek in the Chegaga dunes\nBreakfasts and dinners as listed in the itinerary",
-    "excludes": "Lunches and drinks\nMonument entrance fees (carry cash in MAD)\nTips and personal expenses",
-    "goodToKnow": "Departure: 7:00 to 7:30 AM from Marrakech\nDuration: 3 Days / 2 Nights\nDriving Times: Day 1 ~360 km (7 hrs), Day 2 ~150 km (3.5 hrs including off-road tracks), Day 3 ~400 km (8 hrs)\nWhat to Pack: Warm layers for chilly desert nights, sunglasses, hat, sunscreen, and a camera.\nWhy Chegaga?: Erg Chegaga is far more remote and less commercialized than Merzouga, ideal if you want genuine solitude."
+    "includes": "Prise en charge et retour à votre hébergement à Marrakech\nVéhicule 4x4 privé climatisé (Toyota Land Cruiser ou équivalent)\nChauffeur-guide expérimenté du désert parlant français ou anglais\n1 nuit en hôtel ou riad à Zagora\n1 nuit en bivouac dans le désert à Erg Chegaga\nBalade à dromadaire au coucher du soleil dans les dunes de Chegaga\nPetits-déjeuners et dîners selon le programme",
+    "excludes": "Déjeuners et boissons\nDroits d'entrée aux monuments (prévoir des espèces en MAD)\nPourboires et dépenses personnelles",
+    "goodToKnow": "Départ : 7 h 00 à 7 h 30 depuis Marrakech\nDurée : 3 Jours / 2 Nuits\nTemps de route : Jour 1 ~360 km (7 h), Jour 2 ~150 km (3 h 30 piste comprise), Jour 3 ~400 km (8 h)\nÀ emporter : Vêtements chauds pour les nuits fraîches du désert, lunettes de soleil, chapeau, crème solaire et appareil photo.\nPourquoi Chegaga ? : Erg Chegaga est beaucoup plus reculé et moins fréquenté que Merzouga, idéal si vous recherchez la tranquillité."
   },
   "tour9": {
-    "title": "Northern Heritage Trail",
-    "overview": "This seven-day overland journey is built for travelers arriving in Tangier—whether by ferry from Spain or by air—who want to travel all the way south to Marrakech. Starting where the Atlantic meets the Mediterranean at Cap Spartel, you explore Tangier's old medina before heading into the Rif Mountains via Tetouan to spend a night in the blue-painted town of Chefchaouen.\n\nFrom the mountains, you visit the Roman ruins of Volubilis and the royal stables of imperial Meknes on your way to Fes, where you spend two nights and take a full-day guided walking tour through its 1,200-year-old medina.\n\nThe final stretch takes you south across the Middle Atlas cedar forests, stopping to see wild Barbary macaques in Azrou before descending into Marrakech for two nights and a private guided tour of the Red City.",
-    "description": "7 Days North Morocco Tour from Tangier to Marrakech",
+    "title": "Piste du patrimoine du Nord",
+    "overview": "Ce voyage terrestre de sept jours est pensé pour les voyageurs qui arrivent à Tanger — en ferry depuis l'Espagne ou en avion — et veulent rejoindre Marrakech par le sud. Depuis le cap Spartel où l'Atlantique rencontre la Méditerranée, vous explorez la médina de Tanger avant d'entrer dans le Rif par Tétouan pour dormir dans la ville bleue de Chefchaouen.\n\nDepuis les montagnes, vous découvrez les vestiges romains de Volubilis et les écuries royales de Meknès sur la route de Fès, où vous passez deux nuits avec une visite guidée à pied d'une journée dans sa médina millénaire.\n\nLa dernière étape descend vers le sud par les forêts de cèdres du Moyen Atlas, avec une halte auprès des macaques de Barbarie à Azrou avant d'arriver à Marrakech pour deux nuits et une visite guidée privée de la Ville Rouge.",
+    "description": "Circuit 7 Jours au Nord du Maroc de Tanger à Marrakech",
     "day1": {
-      "title": "Arrival in Tangier: City Highlights",
+      "title": "Arrivée à Tanger : Découverte de la ville",
       "text": [
-        "Pick-up from Tangier Ibn Battouta Airport (TNG), Tangier City Port (ferries from Tarifa), or Tanger Med Port.",
-        "Visit Cap Spartel, where the Atlantic Ocean meets the Mediterranean Sea, and explore the Caves of Hercules.",
-        "Walk through Tangier's historic Kasbah, the winding old medina, and the lively Petit Socco square.",
-        "Stroll along the beach promenade before checking into your hotel or riad."
+        "Accueil à l'aéroport Tanger-Ibn Battouta (TNG), au port de Tanger-Ville (ferries de Tarifa) ou au port Tanger Med.",
+        "Visite du cap Spartel, où l'océan Atlantique rejoint la mer Méditerranée, et découverte des grottes d'Hercule.",
+        "Promenade dans la kasbah historique de Tanger, les ruelles de la vieille médina et la place animée du Petit Socco.",
+        "Balade sur la corniche avant l'installation à votre hôtel ou riad."
       ],
-      "accommodation": "Hotel or Riad in Tangier",
-      "meals": "None"
+      "accommodation": "Hôtel ou Riad à Tanger",
+      "meals": "Aucun"
     },
     "day2": {
-      "title": "Tangier ➜ Tetouan ➜ Chefchaouen",
+      "title": "Tanger ➜ Tétouan ➜ Chefchaouen",
       "text": [
-        "After breakfast, drive through the Rif foothills to Tetouan (\"The White Dove\") to walk through its Andalusian-influenced old medina.",
-        "Continue into the mountains to Chefchaouen, Morocco's famous blue city.",
-        "Spend the afternoon exploring Outa El Hammam square, Ras El Ma stream, and local artisan shops, followed by a sunset walk up to the Spanish Mosque viewpoint."
+        "Après le petit-déjeuner, route à travers les contreforts du Rif vers Tétouan (« la Colombe Blanche ») et promenade dans sa médina d'influence andalouse.",
+        "Montée dans les montagnes jusqu'à Chefchaouen, la célèbre ville bleue du Maroc.",
+        "Après-midi pour flâner sur la place Outa El Hammam, au bord de la source Ras El Ma et dans les boutiques d'artisans, puis montée au coucher du soleil vers le belvédère de la mosquée Espagnole."
       ],
-      "accommodation": "Hotel or Riad in Chefchaouen",
-      "meals": "Breakfast"
+      "accommodation": "Hôtel ou Riad à Chefchaouen",
+      "meals": "Petit-déjeuner"
     },
     "day3": {
-      "title": "Chefchaouen ➜ Volubilis ➜ Meknes ➜ Fes",
+      "title": "Chefchaouen ➜ Volubilis ➜ Meknès ➜ Fès",
       "text": [
-        "Enjoy a quiet morning in Chefchaouen before departing south.",
-        "Stop at Volubilis (~2.5 hours drive) to explore Morocco's best-preserved Roman ruins and floor mosaics.",
-        "Continue to Meknes to see the Bab Mansour Gate, Sahrij Swani (Royal Stables), and the old medina.",
-        "Arrive in Fes by early evening."
+        "Matinée calme à Chefchaouen avant de partir vers le sud.",
+        "Arrêt à Volubilis (~2 h 30 de route) pour explorer les ruines romaines les mieux préservées du Maroc et leurs mosaïques.",
+        "Continuation vers Meknès pour voir la porte Bab Mansour, Sahrij Swani (les greniers et écuries royales) et l'ancienne médina.",
+        "Arrivée à Fès en début de soirée."
       ],
-      "accommodation": "Hotel or Riad in Fes",
-      "meals": "Breakfast"
+      "accommodation": "Hôtel ou Riad à Fès",
+      "meals": "Petit-déjeuner"
     },
     "day4": {
-      "title": "Fes: Full-Day Medina Tour",
+      "title": "Fès : Visite complète de la médina",
       "text": [
-        "Meet your licensed local guide after breakfast for a full-day walking tour of Fes el-Bali.",
-        "Visit Al-Qarawiyyin University (founded in 859 CE), Bou Inania Madrasa, Attarine Madrasa, and the Nejjarine Wooden Arts Museum.",
-        "Watch the leather dyers at work from a terrace overlooking the Chouara Tanneries and visit traditional pottery and zellige tile workshops.",
-        "Free evening to relax at your riad or enjoy a traditional dinner."
+        "Rencontre avec votre guide local agréé après le petit-déjeuner pour une visite d'une journée dans Fès el-Bali.",
+        "Visite de l'université Al-Qarawiyyin (fondée en 859), des médersas Bou Inania et Attarine, et du musée Nejjarine des arts du bois.",
+        "Observation des tanneurs depuis une terrasse au-dessus de Chouara et visite d'ateliers de poterie et de zellige.",
+        "Soirée libre pour vous reposer au riad ou dîner en médina."
       ],
-      "accommodation": "Hotel or Riad in Fes",
-      "meals": "Breakfast"
+      "accommodation": "Hôtel ou Riad à Fès",
+      "meals": "Petit-déjeuner"
     },
     "day5": {
-      "title": "Fes ➜ Ifrane ➜ Azrou ➜ Beni Mellal ➜ Marrakech",
+      "title": "Fès ➜ Ifrane ➜ Azrou ➜ Béni Mellal ➜ Marrakech",
       "text": [
-        "Leave Fes and drive into the Middle Atlas Mountains, stopping in alpine Ifrane.",
-        "Stop at the Azrou Cedar Forest to observe wild Barbary macaques in the trees.",
-        "Continue south through the Tadla plains and Beni Mellal (~7 hours total driving).",
-        "Arrive in Marrakech in the early evening and check into your riad in the Medina."
+        "Départ de Fès vers le Moyen Atlas avec halte dans la station alpine d'Ifrane.",
+        "Arrêt dans la forêt de cèdres d'Azrou pour observer les macaques de Barbarie dans les arbres.",
+        "Poursuite vers le sud par les plaines du Tadla et Béni Mellal (~7 heures de route au total).",
+        "Arrivée à Marrakech en début de soirée et installation dans votre riad en médina."
       ],
-      "accommodation": "Hotel or Riad in Marrakech",
-      "meals": "Breakfast"
+      "accommodation": "Hôtel ou Riad à Marrakech",
+      "meals": "Petit-déjeuner"
     },
     "day6": {
-      "title": "Full Day Exploring Marrakech",
+      "title": "Journée complète à Marrakech",
       "text": [
-        "Meet your licensed local guide for a walking tour of Marrakech: Koutoubia Mosque (exterior), Bahia Palace, and the Saadian Tombs.",
-        "Walk through the historic Mellah (Jewish Quarter), the Medina alleys, and the colorful souks leading to Jemaa el-Fna square.",
-        "Optional afternoon visit to Majorelle Garden and the Yves Saint Laurent Museum."
+        "Rencontre avec votre guide local agréé pour une visite à pied de Marrakech : mosquée Koutoubia (extérieur), palais de la Bahia et tombeaux Saadiens.",
+        "Promenade dans l'ancien Mellah (quartier juif), les ruelles de la médina et les souks colorés jusqu'à la place Jemaa el-Fna.",
+        "Visite optionnelle du jardin Majorelle et du musée Yves Saint Laurent l'après-midi."
       ],
-      "accommodation": "Hotel or Riad in Marrakech",
-      "meals": "Breakfast"
+      "accommodation": "Hôtel ou Riad à Marrakech",
+      "meals": "Petit-déjeuner"
     },
     "day7": {
-      "title": "Marrakech: Departure",
+      "title": "Marrakech : Départ",
       "text": [
-        "Breakfast at your riad and free time depending on your flight schedule.",
-        "Private transfer to Marrakech Menara Airport (RAK) for your departure flight."
+        "Petit-déjeuner au riad et temps libre selon l'horaire de votre vol.",
+        "Transfert privé à l'aéroport Marrakech-Ménara (RAK) pour votre vol retour."
       ],
-      "meals": "Breakfast"
+      "meals": "Petit-déjeuner"
     },
-    "includes": "Private transport in a modern A/C vehicle\nEnglish, French, or Spanish-speaking driver-guide\n6 nights accommodation (hotels and riads)\nDaily breakfasts from Day 2\nTangier airport or ferry port pick-up\nMarrakech airport drop-off\nLicensed local guides in both Fes and Marrakech\nAll fuel, tolls, and parking fees",
-    "excludes": "Lunches and dinners\nMonument entrance fees (carry cash in MAD)\nTips for driver and local guides\nPersonal expenses",
-    "goodToKnow": "- Medina Access: Cars cannot enter the narrow pedestrian alleys of Chefchaouen, Fes, or Marrakech; your driver will park at the nearest gate and arrange assistance with your luggage to your riad.\n- Footwear: Bring comfortable walking shoes—Chefchaouen and Fes have steep, cobbled alleys.\n- Weather: Northern Morocco and the Middle Atlas are noticeably cooler than Marrakech, especially between November and March.\n- Flexibility: We can add a night in the Sahara Desert (Merzouga) between Fes and Marrakech if you extend the trip to 8 or 9 days."
+    "includes": "Transport privé en véhicule moderne climatisé\nChauffeur-guide parlant français, anglais ou espagnol\n6 nuits d'hébergement (hôtels et riads)\nPetits-déjeuners quotidiens dès le jour 2\nPrise en charge à l'aéroport ou au port de Tanger\nDépose à l'aéroport de Marrakech\nGuides locaux agréés à Fès et à Marrakech\nCarburant, péages et frais de stationnement inclus",
+    "excludes": "Déjeuners et dîners\nDroits d'entrée aux monuments (prévoir des espèces en MAD)\nPourboires pour le chauffeur et les guides locaux\nDépenses personnelles",
+    "goodToKnow": "- Accès en médina : Les voitures ne peuvent pas entrer dans les ruelles piétonnes étroites de Chefchaouen, Fès ou Marrakech ; votre chauffeur se gare à la porte la plus proche et organise l'aide pour les bagages jusqu'au riad.\n- Chaussures : Apportez de bonnes chaussures de marche — Chefchaouen et Fès comportent de nombreuses ruelles pavées en pente.\n- Météo : Le nord du Maroc et le Moyen Atlas sont nettement plus frais que Marrakech, surtout de novembre à mars.\n- Flexibilité : Nous pouvons ajouter une nuit dans le désert à Merzouga entre Fès et Marrakech en étendant le séjour à 8 ou 9 jours."
   },
   "featured": {
     "smTitle": "Destinations Emblématiques",
@@ -1362,7 +1394,7 @@
     "perkLocalExperts": "Chauffeurs et guides locaux agréés",
     "perkFlexible": "Départs flexibles depuis Marrakech",
     "perkSupport": "Réponses rapides sous 24 heures",
-    "checkBadge": "Consultez-nous",
+    "checkBadge": "Avis clients",
     "checkTitle": "Retrouvez-nous sur TripAdvisor",
     "checkCta": "Consulter les avis et réserver",
     "tripadvisorAlt": "Icône TripAdvisor",
@@ -1652,6 +1684,8 @@
     "loadAriaPrefix": "Charger la carte d'itinéraire interactive :",
     "viewStopsPrefix": "Voir les",
     "viewStopsSuffix": "étapes et horaires",
-    "openGoogleMaps": "Ouvrir dans Google Maps"
+    "openGoogleMaps": "Ouvrir dans Google Maps",
+    "kicker": "Itinéraire Google Maps",
+    "titleSuffix": "Carte d'itinéraire"
   }
 }

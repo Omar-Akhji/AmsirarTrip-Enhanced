@@ -1,5 +1,49 @@
 import type { ImageMetadata } from "astro";
-import { getCollection } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
+import type { LocalizedTourSeo } from "@/features/tours/data/tours-data";
+import { isNonDefaultLocale } from "@/i18n/locales";
+
+export interface LocalizedExcursionContent {
+  readonly excludes: readonly string[];
+  readonly goodToKnow: readonly string[];
+  readonly includes: readonly string[];
+  readonly jsonLd: { readonly description: string; readonly name: string };
+  readonly location: string;
+  readonly metrics: {
+    readonly distance: string;
+    readonly duration: string;
+    readonly elevation: string;
+    readonly pickup: string;
+  };
+  readonly overview: readonly string[];
+  readonly program: readonly {
+    readonly description: string;
+    readonly location: string;
+    readonly time: string;
+    readonly title: string;
+  }[];
+  readonly seo: LocalizedTourSeo;
+}
+
+export function getLocalizedExcursionContent(
+  excursion: CollectionEntry<"excursions">["data"],
+  locale: string,
+): LocalizedExcursionContent {
+  if (isNonDefaultLocale(locale)) {
+    return excursion.translations[locale];
+  }
+  return {
+    location: excursion.location,
+    metrics: excursion.metrics,
+    overview: excursion.overview,
+    program: excursion.program,
+    includes: excursion.includes,
+    excludes: excursion.excludes,
+    goodToKnow: excursion.goodToKnow,
+    seo: { ...excursion.seo, imageAlt: excursion.seo.imageAlt ?? excursion.seo.title },
+    jsonLd: { name: excursion.jsonLd.name, description: excursion.jsonLd.description },
+  };
+}
 
 export interface ExcursionItem {
   readonly alt: string;

@@ -140,5 +140,373 @@
     "description": "Full-day trip from Marrakech to Imlil in Toubkal National Park, with a guided walk to Aroumd village, a home-cooked lunch and hotel pickup.",
     "price": 40,
     "currency": "EUR"
+  },
+  "translations": {
+    "fr": {
+      "location": "Imlil, Parc National du Toubkal, Maroc",
+      "metrics": {
+        "distance": "~65 km de Marrakech",
+        "duration": "Environ 9 heures",
+        "pickup": "08:00 à 08:30",
+        "elevation": "Jusqu'à ~1 900 m"
+      },
+      "overview": [
+        "Imlil est un village de montagne perché à environ 1 740 mètres d'altitude, à 65 km au sud de Marrakech, là où s'arrête la route goudronnée et où commencent les sentiers du Parc National du Toubkal. Le mont Toubkal, plus haut sommet d'Afrique du Nord avec 4 167 mètres, domine le fond de la vallée. Son ascension demande deux jours ; cette excursion propose une belle journée de marche dans la vallée en contrebas.",
+        "La route prend environ 1 h 30 en passant par les gorges de Moulay Brahim et la bourgade d'Asni, connue pour son grand souk hebdomadaire du samedi. À Imlil, vous retrouvez un guide local de montagne pour monter à pied à travers les vergers de noyers et de pommiers jusqu'à Aroumd, un village de pierre accroché à une crête avec une vue dégagée vers les hauts sommets.",
+        "Pour le déjeuner, un tajine fait maison vous attend chez une famille berbère ou sur la terrasse d'une maison d'hôtes. La marche dure environ 3 heures au total à rythme accessible, avec possibilité de louer une mule pour les passages en montée. Retour à Marrakech en fin d'après-midi."
+      ],
+      "program": [
+        {
+          "time": "08:00 à 08:30",
+          "title": "Prise en charge à Marrakech",
+          "location": "Votre hôtel ou riad",
+          "description": "Votre chauffeur vous retrouve à votre hôtel ou à l'accès carrossable le plus proche en médina, puis prend la direction du sud vers le Haut Atlas."
+        },
+        {
+          "time": "09:00 à 09:45",
+          "title": "Gorges de Moulay Brahim et Asni",
+          "location": "Asni, ~1 150 m",
+          "description": "La route grimpe à travers les falaises rouges de Moulay Brahim avec des arrêts photos aux points de vue, puis traverse Asni. Le samedi, brève halte possible au marché hebdomadaire."
+        },
+        {
+          "time": "10:00 à 10:30",
+          "title": "Arrivée à Imlil et rencontre avec votre guide",
+          "location": "Imlil, ~1 740 m",
+          "description": "Thé à la menthe sur une terrasse à Imlil en compagnie de votre guide de montagne local, qui marche avec vous pour le reste de la journée."
+        },
+        {
+          "time": "10:30 à 12:30",
+          "title": "Montée à pied vers Aroumd",
+          "location": "Aroumd, ~1 900 m",
+          "description": "Sentiers muletiers à travers noyers, pommiers et canaux d'irrigation jusqu'au village d'Aroumd, face au massif du Toubkal. Une mule peut être réservée sur place pour la montée."
+        },
+        {
+          "time": "12:30 à 14:00",
+          "title": "Déjeuner dans la vallée",
+          "location": "Maison familiale berbère ou gîte",
+          "description": "Déjeuner maison composé de salades, tajine, fruits de saison et thé à la menthe, chez l'habitant ou sur une terrasse face aux montagnes."
+        },
+        {
+          "time": "14:00 à 15:30",
+          "title": "Descente vers Imlil",
+          "location": "Vallée d'Imlil",
+          "description": "Retour vers Imlil par un autre sentier à travers les hameaux inférieurs et les vergers, avec un moment pour découvrir les petites échoppes d'artisanat du village."
+        },
+        {
+          "time": "15:30 à 17:00",
+          "title": "Route retour vers Marrakech",
+          "location": "D'Imlil à Marrakech",
+          "description": "Descente de la vallée jusqu'à Marrakech, avec dépose à votre hébergement vers 17:00."
+        }
+      ],
+      "includes": [
+        "Prise en charge et retour à votre hôtel ou riad à Marrakech",
+        "Transport aller-retour en véhicule climatisé",
+        "Chauffeur parlant français, anglais, espagnol ou allemand",
+        "Guide local de montagne à Imlil",
+        "Déjeuner fait maison avec thé à la menthe",
+        "Eau en bouteille à bord du véhicule"
+      ],
+      "excludes": [
+        "Balade à dos de mule (optionnelle, payable sur place)",
+        "Boissons autres que l'eau et le thé à la menthe",
+        "Pourboires pour votre guide et votre chauffeur"
+      ],
+      "goodToKnow": [
+        "Portez des chaussures de marche ou de trail à bonne adhérence : les sentiers sont pierreux et parfois glissants.",
+        "Imlil se situe environ 1 300 mètres plus haut que Marrakech et reste nettement plus frais. Prévoyez une polaire ou une veste légère toute l'année, et des vêtements chauds de novembre à mars lorsque la neige couvre les sommets.",
+        "La randonnée dure environ 3 heures au total à rythme tranquille avec des pauses ; aucune expérience technique n'est requise.",
+        "Emportez des dirhams en espèces pour la mule optionnelle, les pourboires et les petits achats.",
+        "Cette excursion à la journée ne monte pas au sommet du Toubkal ; contactez-nous pour notre trek de 2 jours si vous souhaitez faire l'ascension."
+      ],
+      "seo": {
+        "title": "Excursion à Imlil depuis Marrakech | Randonnée dans l'Atlas à Aroumd & Déjeuner",
+        "metaDescription": "Excursion à Imlil depuis Marrakech : marche guidée de 3 h jusqu'à Aroumd dans le Parc du Toubkal, déjeuner berbère maison et prise en charge à l'hôtel. Dès 40 €.",
+        "lead": "Une journée dans le Haut Atlas depuis Marrakech : route jusqu'à Imlil aux portes du Parc National du Toubkal, montée guidée jusqu'au village d'Aroumd et déjeuner maison dans la vallée.",
+        "price": {
+          "label": "À partir de 40 € par personne",
+          "note": "Inclut la prise en charge et le retour à l'hôtel, le transport aller-retour climatisé, un guide de montagne local, le déjeuner maison et l'eau en bouteille. La mule optionnelle se règle sur place."
+        },
+        "imageAlt": "Maisons en pierre du village d'Imlil dans une vallée verdoyante du Haut Atlas avec le massif du Toubkal en arrière-plan",
+        "highlights": [
+          "Randonnée avec un guide local d'Imlil au village perché d'Aroumd",
+          "Vues dégagées dans la vallée vers le mont Toubkal, plus haut sommet d'Afrique du Nord",
+          "Déjeuner de tajine maison chez une famille berbère ou sur une terrasse face aux sommets",
+          "Traversée des falaises rouges des gorges de Moulay Brahim",
+          "Marche facile d'environ 3 heures, avec option mule pour la montée",
+          "Prise en charge à votre hôtel à Marrakech et transfert climatisé aller-retour"
+        ],
+        "faqs": [
+          {
+            "question": "À quelle distance se trouve Imlil de Marrakech ?",
+            "answer": "Imlil se situe à environ 65 km au sud de Marrakech, soit 1 h 30 de trajet par sens. La journée complète dure environ 9 heures."
+          },
+          {
+            "question": "Peut-on gravir le mont Toubkal en une journée depuis Marrakech ?",
+            "answer": "Non. Le sommet culmine à 4 167 mètres et son ascension demande normalement deux jours avec une nuit en refuge. Cette excursion explore la vallée au pied du massif jusqu'à Aroumd, à environ 1 900 mètres."
+          },
+          {
+            "question": "Quel niveau physique faut-il pour la randonnée à Imlil ?",
+            "answer": "L'itinéraire convient à toute personne capable de marcher environ 3 heures avec pauses sur des sentiers irréguliers (environ 2 h de montée douce et 1 h 30 de descente). Une mule peut porter en montée si besoin."
+          },
+          {
+            "question": "Quel temps fait-il à Imlil ?",
+            "answer": "Il y fait nettement plus frais qu'à Marrakech. Les journées d'été sont agréables et, de novembre à mars, il peut faire froid avec de la neige sur les crêtes et parfois au village. Prévoyez des couches chaudes en hiver."
+          },
+          {
+            "question": "Le déjeuner est-il inclus dans l'excursion à Imlil ?",
+            "answer": "Oui. Un déjeuner maison avec salade, tajine, fruits et thé à la menthe est compris. Signalez-nous tout régime végétarien ou allergie lors de la réservation."
+          }
+        ]
+      },
+      "jsonLd": {
+        "name": "Excursion d'une journée à Imlil et dans le Haut Atlas depuis Marrakech",
+        "description": "Excursion d'une journée de Marrakech à Imlil dans le Parc National du Toubkal, avec marche guidée jusqu'au village d'Aroumd, déjeuner maison et prise en charge à l'hôtel."
+      }
+    },
+    "de": {
+      "location": "Imlil, Toubkal-Nationalpark, Marokko",
+      "metrics": {
+        "distance": "~65 km ab Marrakesch",
+        "duration": "Etwa 9 Stunden",
+        "pickup": "08:00–08:30",
+        "elevation": "Bis ca. 1.900 m"
+      },
+      "overview": [
+        "Imlil ist ein Bergdorf auf etwa 1.740 Metern Höhe, 65 km südlich von Marrakesch, wo die Asphaltstraße endet und die Wanderwege in den Toubkal-Nationalpark beginnen. Der Jbel Toubkal, mit 4.167 Metern Nordafrikas höchster Gipfel, erhebt sich am Ende des Tals. Eine Gipfelbesteigung dauert zwei Tage; dieser Ausflug führt Sie auf eine Tagestour durch das Tal unterhalb des Massivs.",
+        "Die Fahrt dauert etwa 1,5 Stunden durch die Moulay-Brahim-Schlucht und den Marktort Asni (samstags mit großem Wochenmarkt). In Imlil treffen Sie einen lokalen Bergführer und wandern durch Walnuss- und Apfelgärten hinauf nach Aroumd, einem Steindorf auf einer Geländekante mit freiem Blick auf die hohen Gipfel.",
+        "Zum Mittagessen erwartet Sie eine hausgemachte Tajine bei einer Berberfamilie oder auf der Terrasse einer Pension. Die Wanderung dauert insgesamt rund 3 Stunden in entspanntem Tempo; bergauf kann bei Bedarf ein Maultier organisiert werden. Am späten Nachmittag kehren Sie nach Marrakesch zurück."
+      ],
+      "program": [
+        {
+          "time": "08:00–08:30",
+          "title": "Abholung in Marrakesch",
+          "location": "Ihr Hotel oder Riad",
+          "description": "Ihr Fahrer holt Sie am Hotel oder – bei Riads in der Medina – am nächstgelegenen befahrbaren Stadttor ab und fährt südwärts Richtung Hoher Atlas."
+        },
+        {
+          "time": "09:00–09:45",
+          "title": "Moulay-Brahim-Schlucht und Asni",
+          "location": "Asni, ca. 1.150 m",
+          "description": "Die Straße windet sich durch die roten Felsen der Moulay-Brahim-Schlucht mit Fotostopps an Aussichtspunkten bis nach Asni. Samstags ist ein kurzer Stopp auf dem Wochenmarkt möglich."
+        },
+        {
+          "time": "10:00–10:30",
+          "title": "Ankunft in Imlil & Begrüßung durch den Bergführer",
+          "location": "Imlil, ca. 1.740 m",
+          "description": "Minztee auf einer Terrasse in Imlil, während Sie Ihren lokalen Bergführer kennenlernen, der Sie den restlichen Tag begleitet."
+        },
+        {
+          "time": "10:30–12:30",
+          "title": "Wanderung hinauf nach Aroumd",
+          "location": "Aroumd, ca. 1.900 m",
+          "description": "Auf Maultierpfaden durch Walnuss- und Apfelgärten entlang von Bewässerungskanälen bis nach Aroumd mit weitem Blick hinauf zum Toubkal-Massiv. Für den Anstieg lässt sich vor Ort ein Maultier buchen."
+        },
+        {
+          "time": "12:30–14:00",
+          "title": "Mittagessen im Tal",
+          "location": "Berber-Familienhaus oder Gästehaus",
+          "description": "Hausgemachtes Mittagessen aus Salat, Tajine, frischem Obst und Minztee im Wohnhaus einer Familie oder auf einer Bergterrasse."
+        },
+        {
+          "time": "14:00–15:30",
+          "title": "Abstieg zurück nach Imlil",
+          "location": "Imlil-Tal",
+          "description": "Rückweg nach Imlil über einen anderen Pfad durch die tiefer gelegenen Weiler und Obstgärten, mit Zeit für einen Blick in die kleinen Handwerksläden des Dorfes."
+        },
+        {
+          "time": "15:30–17:00",
+          "title": "Rückfahrt nach Marrakesch",
+          "location": "Imlil nach Marrakesch",
+          "description": "Fahrt zurück aus dem Tal. Gegen 17:00 erreichen Sie wieder Ihre Unterkunft in Marrakesch."
+        }
+      ],
+      "includes": [
+        "Abholung und Rückbringung an Ihrem Hotel oder Riad in Marrakesch",
+        "Hin- und Rückfahrt im klimatisierten Fahrzeug",
+        "Fahrer mit Deutsch-, Englisch-, Französisch- oder Spanischkenntnissen",
+        "Lokaler Bergführer in Imlil",
+        "Hausgemachtes Mittagessen mit Minztee",
+        "Flaschenwasser im Fahrzeug"
+      ],
+      "excludes": [
+        "Maultierritt (optional, Zahlung vor Ort)",
+        "Weitere Getränke außer Wasser und Minztee",
+        "Trinkgelder für Bergführer und Fahrer"
+      ],
+      "goodToKnow": [
+        "Tragen Sie Wanderschuhe oder feste Sportschuhe mit Profil: Die Pfade sind steinig und stellenweise locker.",
+        "Imlil liegt rund 1.300 Meter höher als Marrakesch und ist spürbar kühler. Nehmen Sie ganzjährig ein Fleece oder eine leichte Jacke mit, und von November bis März warme Kleidung wegen Schnee auf den Gipfeln.",
+        "Die Gehzeit beträgt insgesamt rund 3 Stunden in gemütlichem Tempo mit Pausen; Wandererfahrung ist nicht nötig.",
+        "Bringen Sie Dirham in bar für ein optionales Maultier, Trinkgelder und kleine Einkäufe mit.",
+        "Diese Tagestour führt nicht auf den Toubkal-Gipfel; fragen Sie uns gerne nach unserer 2-Tage-Toubkal-Besteigung."
+      ],
+      "seo": {
+        "title": "Tagesausflug nach Imlil ab Marrakesch | Atlas-Wanderung nach Aroumd & Mittagessen",
+        "metaDescription": "Tagesausflug nach Imlil ab Marrakesch: geführte 3-stündige Wanderung nach Aroumd im Toubkal-Nationalpark, hausgemachtes Berber-Mittagessen und Hotelabholung. Ab 40 €.",
+        "lead": "Ein Tag im Hohen Atlas ab Marrakesch: Fahrt nach Imlil am Rand des Toubkal-Nationalparks, geführte Wanderung hinauf zum Dorf Aroumd und ein hausgemachtes Mittagessen im Tal.",
+        "price": {
+          "label": "Ab 40 € pro Person",
+          "note": "Inklusive Hotelabholung und -rückbringung, klimatisiertem Transfer, lokalem Bergführer, hausgemachtem Mittagessen und Flaschenwasser. Ein optionales Maultier wird vor Ort bezahlt."
+        },
+        "imageAlt": "Steinhäuser des Dorfes Imlil in einem grünen Tal des Hohen Atlas mit dem Toubkal-Massiv dahinter",
+        "highlights": [
+          "Geführte Wanderung von Imlil hinauf zum Bergdorf Aroumd",
+          "Panoramablick durch das Tal auf den Jbel Toubkal, Nordafrikas höchsten Gipfel",
+          "Hausgemachte Tajine bei einer Berberfamilie oder auf einer Bergterrasse",
+          "Fahrt durch die roten Felswände der Moulay-Brahim-Schlucht",
+          "Leichte 3-stündige Wanderung, optional mit Maultier für den Aufstieg",
+          "Hotelabholung in Marrakesch und klimatisierter Transfer hin und zurück"
+        ],
+        "faqs": [
+          {
+            "question": "Wie weit ist Imlil von Marrakesch entfernt?",
+            "answer": "Imlil liegt rund 65 km südlich von Marrakesch, etwa 1,5 Stunden Fahrt pro Strecke. Der gesamte Tagesausflug dauert rund 9 Stunden."
+          },
+          {
+            "question": "Kann ich den Jbel Toubkal an einem Tag ab Marrakesch besteigen?",
+            "answer": "Nein. Der Gipfel liegt auf 4.167 Metern und erfordert in der Regel zwei Tage mit einer Übernachtung in der Schutzhütte. Dieser Ausflug führt im Tal unterhalb des Berges bis Aroumd auf rund 1.900 Meter."
+          },
+          {
+            "question": "Wie fit muss man für die Wanderung in Imlil sein?",
+            "answer": "Der Weg eignet sich für alle, die 3 Stunden mit Pausen auf unebenen Bergpfaden gehen können (ca. 2 Stunden bergauf, 1,5 Stunden bergab). Für den Anstieg kann bei Bedarf ein Maultier gemietet werden."
+          },
+          {
+            "question": "Wie ist das Wetter in Imlil?",
+            "answer": "In Imlil ist es deutlich kühler als in Marrakesch. Sommertage sind angenehm; von November bis März wird es kalt mit Schnee auf den Gipfeln und gelegentlich im Dorf. Im Winter warme Kleidung einpacken."
+          },
+          {
+            "question": "Ist das Mittagessen beim Ausflug nach Imlil inklusive?",
+            "answer": "Ja. Ein hausgemachtes Mittagessen aus Salat, Tajine, Obst und Minztee ist inbegriffen. Bitte teilen Sie uns vegetarische oder andere Ernährungswünsche bei der Buchung mit."
+          }
+        ]
+      },
+      "jsonLd": {
+        "name": "Tagesausflug nach Imlil und in den Hohen Atlas ab Marrakesch",
+        "description": "Ganztägiger Ausflug von Marrakesch nach Imlil im Toubkal-Nationalpark mit geführter Wanderung nach Aroumd, hausgemachtem Mittagessen und Hotelabholung."
+      }
+    },
+    "es": {
+      "location": "Imlil, Parque Nacional del Toubkal, Marruecos",
+      "metrics": {
+        "distance": "~65 km desde Marrakech",
+        "duration": "Unas 9 horas",
+        "pickup": "08:00 a 08:30",
+        "elevation": "Hasta ~1.900 m"
+      },
+      "overview": [
+        "Imlil es una aldea de montaña a unos 1.740 metros de altitud, 65 km al sur de Marrakech, donde termina el asfalto y empiezan los senderos hacia el Parque Nacional del Toubkal. El monte Toubkal, con 4.167 metros el pico más alto del norte de África, se alza al fondo del valle. Subir a la cima lleva dos días, así que esta excursión propone una jornada caminando por el valle bajo la montaña.",
+        "El trayecto dura alrededor de 1,5 horas atravesando las gargantas de Moulay Brahim y Asni, que celebra su mercado semanal los sábados. En Imlil conoces a un guía local de montaña para subir caminando entre nogales y manzanos hasta Aroumd, un pueblo de piedra en un espolón rocoso con vistas directas a las cumbres.",
+        "El almuerzo es un tajín casero en casa de una familia bereber o en la terraza de un albergue del valle. La caminata total dura unas 3 horas a ritmo suave, con opción de alquilar una mula para el tramo en subida. Regreso a Marrakech a última hora de la tarde."
+      ],
+      "program": [
+        {
+          "time": "08:00 a 08:30",
+          "title": "Recogida en Marrakech",
+          "location": "Tu hotel o riad",
+          "description": "Tu conductor te recoge en tu hotel o en el acceso rodado más cercano si te alojas en la medina, y pone rumbo al sur hacia el Alto Atlas."
+        },
+        {
+          "time": "09:00 a 09:45",
+          "title": "Garganta de Moulay Brahim y Asni",
+          "location": "Asni, ~1.150 m",
+          "description": "La carretera asciende entre las paredes rojizas de Moulay Brahim, con paradas en miradores, y atraviesa Asni. Los sábados es posible detenerse brevemente en su mercado semanal."
+        },
+        {
+          "time": "10:00 a 10:30",
+          "title": "Llegada a Imlil y encuentro con el guía",
+          "location": "Imlil, ~1.740 m",
+          "description": "Té de menta en una terraza de Imlil mientras conoces a tu guía local de montaña, quien te acompañará el resto de la jornada."
+        },
+        {
+          "time": "10:30 a 12:30",
+          "title": "Subida caminando a Aroumd",
+          "location": "Aroumd, ~1.900 m",
+          "description": "Sigue caminos de herradura entre nogales, manzanos y acequias hasta Aroumd, con vistas del macizo del Toubkal. Si lo deseas, puedes contratar una mula para este ascenso."
+        },
+        {
+          "time": "12:30 a 14:00",
+          "title": "Almuerzo en el valle",
+          "location": "Casa familiar bereber o albergue",
+          "description": "Comida casera de ensalada, tajín, fruta y té de menta en un hogar local o en una terraza frente a las cumbres."
+        },
+        {
+          "time": "14:00 a 15:30",
+          "title": "Regreso a pie a Imlil",
+          "location": "Valle de Imlil",
+          "description": "Vuelve a Imlil por otro sendero atravesando las aldeas bajas y los huertos, con tiempo para ver las pequeñas tiendas de artesanía del pueblo."
+        },
+        {
+          "time": "15:30 a 17:00",
+          "title": "Regreso por carretera a Marrakech",
+          "location": "De Imlil a Marrakech",
+          "description": "Descenso por el valle de vuelta a Marrakech, con llegada a tu alojamiento sobre las 17:00."
+        }
+      ],
+      "includes": [
+        "Recogida y regreso a tu hotel o riad en Marrakech",
+        "Transporte ida y vuelta en vehículo con aire acondicionado",
+        "Conductor que habla español, inglés, francés o alemán",
+        "Guía local de montaña en Imlil",
+        "Almuerzo casero con té de menta",
+        "Agua embotellada en el vehículo"
+      ],
+      "excludes": [
+        "Paseo en mula (opcional, pago directo en el lugar)",
+        "Bebidas aparte del agua y el té de menta",
+        "Propinas para el guía y el conductor"
+      ],
+      "goodToKnow": [
+        "Lleva calzado de senderismo o zapatillas con buen agarre: los senderos son pedregosos y pueden resbalar.",
+        "Imlil está unos 1.300 metros más alto que Marrakech y es bastante más fresco. Lleva forro polar o chaqueta ligera en cualquier época, y ropa de abrigo de noviembre a marzo, cuando suele nevar en las cumbres.",
+        "La caminata dura unas 3 horas en total a ritmo pausado con paradas. No hace falta experiencia previa en montaña.",
+        "Lleva dírhams en efectivo para la mula opcional, propinas y pequeñas compras.",
+        "Esta excursión de un día no llega a la cumbre del Toubkal; consúltanos sobre el trekking de 2 días si deseas coronar la cima."
+      ],
+      "seo": {
+        "title": "Excursión a Imlil desde Marrakech | Ruta por el Atlas a Aroumd y almuerzo",
+        "metaDescription": "Excursión a Imlil desde Marrakech: caminata guiada de 3 h hasta Aroumd en el Parque Nacional del Toubkal, almuerzo bereber casero y recogida en hotel. Desde 40 €.",
+        "lead": "Un día en el Alto Atlas desde Marrakech: viaja a Imlil a las puertas del Parque Nacional del Toubkal, sube caminando con guía local a la aldea de Aroumd y comparte un almuerzo casero en el valle.",
+        "price": {
+          "label": "Desde 40 € por persona",
+          "note": "Incluye recogida y regreso al hotel, transporte ida y vuelta con aire acondicionado, guía local de montaña, almuerzo casero y agua embotellada. La mula opcional se abona allí."
+        },
+        "imageAlt": "Casas de piedra de la aldea de Imlil en un valle verde del Alto Atlas con el macizo del Toubkal al fondo",
+        "highlights": [
+          "Caminata con guía local desde Imlil hasta la aldea alta de Aroumd",
+          "Vistas panorámicas hacia el monte Toubkal, el techo del norte de África",
+          "Almuerzo de tajín casero con una familia bereber o en terraza de montaña",
+          "Ruta entre los acantilados rojizos de las gargantas de Moulay Brahim",
+          "Paseo sencillo de 3 horas con mula opcional para el tramo en subida",
+          "Recogida en hotel de Marrakech y transporte ida y vuelta con aire acondicionado"
+        ],
+        "faqs": [
+          {
+            "question": "¿A qué distancia está Imlil de Marrakech?",
+            "answer": "Imlil está a unos 65 km al sur de Marrakech, a 1,5 horas de coche por trayecto. La jornada completa dura alrededor de 9 horas."
+          },
+          {
+            "question": "¿Se puede subir al monte Toubkal en un día desde Marrakech?",
+            "answer": "No. La cumbre alcanza los 4.167 metros y requiere normalmente dos días con noche en refugio. Esta excursión recorre el valle bajo la montaña hasta Aroumd, a unos 1.900 metros."
+          },
+          {
+            "question": "¿Qué forma física necesito para la ruta en Imlil?",
+            "answer": "Es apta para cualquiera que pueda caminar unas 3 horas con descansos por senderos irregulares (unas 2 h en subida suave y 1,5 h de bajada). Puedes contratar una mula para subir si lo necesitas."
+          },
+          {
+            "question": "¿Qué tiempo hace en Imlil?",
+            "answer": "Hace bastante más fresco que en Marrakech. Los días de verano son agradables y de noviembre a marzo hace frío, con nieve en los picos y a veces en el pueblo. Lleva ropa de abrigo en invierno."
+          },
+          {
+            "question": "¿Incluye el almuerzo la excursión a Imlil?",
+            "answer": "Sí. Incluye un almuerzo casero con ensalada, tajín, fruta y té de menta. Avísanos al reservar si necesitas opción vegetariana o tienes alergias."
+          }
+        ]
+      },
+      "jsonLd": {
+        "name": "Excursión de un día a Imlil y al Alto Atlas desde Marrakech",
+        "description": "Excursión de día completo desde Marrakech a Imlil en el Parque Nacional del Toubkal, con ruta guiada a pie hasta la aldea de Aroumd, almuerzo casero y recogida en hotel."
+      }
+    }
   }
 }

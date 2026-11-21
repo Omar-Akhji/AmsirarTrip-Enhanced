@@ -71,5 +71,124 @@
     "description": "Three-day private 4x4 desert tour from Marrakech to the Erg Chegaga dunes via Zagora, M'Hamid, and Lake Iriqui.",
     "price": 340,
     "currency": "EUR"
+  },
+  "translations": {
+    "fr": {
+      "title": "Circuit Désert Erg Chegaga 3 Jours depuis Marrakech en 4x4 (2026)",
+      "metaDescription": "Dès 340€ par pers. Expédition 3 jours dans le désert sauvage d'Erg Chegaga en 4x4. Vallée du Drâa, Zagora, lac asséché d'Iriqui et dunes géantes.",
+      "lead": "Cette expédition de trois jours vous emmène loin des axes goudronnés jusqu'à l'Erg Chegaga, le plus vaste et le plus sauvage ensemble dunaire du Maroc. Contrairement à Merzouga, bordé par une route asphaltée, Erg Chegaga se trouve à 60 km de pistes en plein désert et n'est accessible qu'en 4x4.",
+      "price": {
+        "label": "À partir de 340 € par personne",
+        "note": "Inclut le transport privé en 4x4 Land Cruiser avec chauffeur-guide expérimenté du désert, 1 nuit en hôtel/riad à Zagora, 1 nuit en bivouac à Chegaga, les balades à dromadaire, les dîners et les petits-déjeuners dès le jour 2. Bivouac de luxe sur devis."
+      },
+      "imageAlt": "Lumière du soir sculptant les dunes sauvages de l'Erg Chegaga lors d'une expédition 4x4 de 3 jours depuis Marrakech",
+      "highlights": [
+        "Traversée du Haut Atlas par le Tizi n'Tichka et visite de la Kasbah Aït Ben Haddou",
+        "Descente intégrale de la vallée du Drâa bordée de palmeraies jusqu'à Zagora",
+        "60 km de piste hors-route en 4x4 sur plateaux caillouteux et sables vers l'Erg Chegaga",
+        "Balade à dromadaire au coucher du soleil et nuit dans un campement isolé sans foule",
+        "Traversée des étendues salées du lac asséché Iriqui et halte à Taznakht au retour"
+      ],
+      "faqs": [
+        {
+          "question": "Quelle est la différence entre l'Erg Chegaga et Merzouga (Erg Chebbi) ?",
+          "answer": "Merzouga est directement accessible par route goudronnée et compte de nombreux hôtels au pied des dunes. Erg Chegaga est plus étendu, plus sauvage et exige 60 km de piste en 4x4 à travers le désert, offrant nettement moins de fréquentation et un vrai sentiment d'immensité."
+        },
+        {
+          "question": "Un véhicule 4x4 est-il garanti pour cette excursion ?",
+          "answer": "Oui. Les minibus ne peuvent pas traverser les pistes de sable et de cailloux entre M'Hamid, l'Erg Chegaga et le lac Iriqui. Toutes les expéditions à Chegaga se font exclusivement en 4x4 Toyota Land Cruiser (ou équivalent) climatisé avec chauffeur agréé du désert."
+        },
+        {
+          "question": "À quoi ressemble l'itinéraire de retour le jour 3 ?",
+          "answer": "Au lieu de revenir par Zagora, vous roulez vers l'ouest sur le lit asséché du lac Iriqui jusqu'à Foum Zguid, puis remontez au nord par Taznakht et le Haut Atlas pour former une boucle complète."
+        },
+        {
+          "question": "Quels équipements trouve-t-on au bivouac de Chegaga ?",
+          "answer": "Les campements standard proposent des tentes nomades privées avec vrais lits, linge propre et sanitaires partagés. Les camps de luxe incluent douche chaude privative, toilettes et prises alimentées par énergie solaire."
+        },
+        {
+          "question": "Quelle est la meilleure saison pour aller à l'Erg Chegaga ?",
+          "answer": "D'octobre à mai, le climat est très agréable, avec des journées ensoleillées de 20°C à 28°C et des nuits fraîches. Juillet et août sont extrêmement chauds au cœur du désert."
+        }
+      ]
+    },
+    "de": {
+      "title": "3-Tage Erg Chegaga Wüstentour ab Marrakesch im 4x4 (2026)",
+      "metaDescription": "Ab 340€ p.P. 3-tägige 4x4-Wüstenexpedition ab Marrakesch zu den unberührten Dünen von Erg Chegaga über das Draa-Tal und den Iriqui-See.",
+      "lead": "Diese dreitägige Expedition führt weit abseits befestigter Straßen nach Erg Chegaga, das größte und unberührteste Dünengebiet Marokkos. Anders als Merzouga, das direkt an einer Asphaltstraße liegt, erreicht man Erg Chegaga erst nach 60 km Wüstenpiste ausschließlich mit dem 4x4-Geländewagen.",
+      "price": {
+        "label": "Ab 340 € pro Person",
+        "note": "Inklusive privatem 4x4 Toyota Land Cruiser mit erfahrenem Wüstenfahrer-Guide, 1 Nacht im Hotel/Riad in Zagora, 1 Nacht im Wüstencamp in Chegaga, Kamelritten, Abendessen und Frühstück ab Tag 2. Luxuscamp-Upgrades auf Anfrage."
+      },
+      "imageAlt": "Dramatisches Licht über den abgelegenen Sanddünen von Erg Chegaga auf der 3-tägigen Wüstenexpedition ab Marrakesch",
+      "highlights": [
+        "Überquerung des Hohen Atlas am Tizi-n'Tichka-Pass und Besuch von Kasbah Ait Ben Haddou",
+        "Fahrt durch das gesamte palmenreiche Draa-Tal bis nach Zagora",
+        "60 km Offroad-Strecke im 4x4 über Steinwüste und Sandpisten bis Erg Chegaga",
+        "Kamelritt zum Sonnenuntergang und Übernachtung in einem ruhigen, abgelegenen Camp",
+        "Querung des ausgetrockneten Salzsees Iriqui und Stopp in Taznakht auf der Rückfahrt"
+      ],
+      "faqs": [
+        {
+          "question": "Worin liegt der Unterschied zwischen Erg Chegaga und Merzouga (Erg Chebbi)?",
+          "answer": "Merzouga liegt direkt an einer Asphaltstraße mit vielen Hotels und Camps am Dünenrand. Erg Chegaga ist weitläufiger, wilder und erfordert eine 60 km lange 4x4-Piste quer durch die Wüste, was deutlich weniger Besucher und echte Abgeschiedenheit bietet."
+        },
+        {
+          "question": "Ist für diese Tour ein 4x4-Geländewagen garantiert?",
+          "answer": "Ja. Kleinbusse können die Sand- und Geröllpisten zwischen M'Hamid, Erg Chegaga und dem Iriqui-See nicht befahren. Alle Chegaga-Touren finden ausschließlich in klimatisierten 4x4 Toyota Land Cruisern (oder gleichwertig) mit erfahrenem Wüstenfahrer statt."
+        },
+        {
+          "question": "Wie verläuft die Rückroute an Tag 3?",
+          "answer": "Statt über Zagora zurückzufahren, durchqueren Sie westwärts die trockene Salzpfanne des Iriqui-Sees bis Foum Zguid und fahren dann nordwärts über Taznakht und den Hohen Atlas zurück nach Marrakesch."
+        },
+        {
+          "question": "Wie ist das Camp in Erg Chegaga ausgestattet?",
+          "answer": "Standardcamps verfügen über private Nomadenzelte mit richtigen Betten, sauberer Bettwäsche und Gemeinschaftsbädern. Luxus-Upgrades bieten eigenes Bad mit heißer Dusche, WC und Solarstrom."
+        },
+        {
+          "question": "Wann ist die beste Reisezeit für Erg Chegaga?",
+          "answer": "Von Oktober bis Mai herrschen die angenehmsten Temperaturen mit sonnigen 20°C–28°C tagsüber und klaren, kühlen Nächten. Im Juli und August wird es in der tiefen Wüste extrem heiß."
+        }
+      ]
+    },
+    "es": {
+      "title": "Tour al Desierto de Erg Chegaga 3 Días desde Marrakech en 4x4 (2026)",
+      "metaDescription": "Desde 340€ por pers. Expedición en 4x4 de 3 días a las dunas salvajes de Erg Chegaga desde Marrakech. Valle del Draa, Zagora y lago Iriqui.",
+      "lead": "Esta expedición de tres días te aleja de las rutas asfaltadas hasta Erg Chegaga, el sistema de dunas más grande y salvaje de Marruecos. A diferencia de Merzouga, donde la carretera llega junto a la arena, Erg Chegaga se encuentra a 60 km por pistas del desierto y solo es accesible en 4x4.",
+      "price": {
+        "label": "Desde 340 € por persona",
+        "note": "Incluye transporte privado en 4x4 Land Cruiser con chófer-guía experto en el desierto, 1 noche en hotel/riad en Zagora, 1 noche en campamento en Chegaga, paseos en dromedario, cenas y desayunos desde el día 2. Campamento superior bajo petición."
+      },
+      "imageAlt": "Sombras y luces sobre las dunas remotas de Erg Chegaga en una expedición de 3 días desde Marrakech",
+      "highlights": [
+        "Cruce del Alto Atlas por Tizi n'Tichka y visita a la Kasbah Ait Ben Haddou",
+        "Recorrido completo por el palmeral del valle del Draa hasta Zagora",
+        "Travesía de 60 km fuera de carretera en 4x4 por llanuras pedregosas y pistas de arena hacia Erg Chegaga",
+        "Paseo en dromedario al atardecer y noche en un campamento remoto sin aglomeraciones",
+        "Cruce por las salinas secas del lago Iriqui y parada en Taznakht en la ruta de regreso"
+      ],
+      "faqs": [
+        {
+          "question": "¿Qué diferencia hay entre Erg Chegaga y Merzouga (Erg Chebbi)?",
+          "answer": "A Merzouga se llega por carretera asfaltada y cuenta con numerosos hoteles y campamentos al borde de la arena. Erg Chegaga es más amplio y salvaje, requiere 60 km de pista en 4x4 por pleno desierto y ofrece mucha más tranquilidad."
+        },
+        {
+          "question": "¿Está garantizado el vehículo 4x4 para este viaje?",
+          "answer": "Sí. Los minibuses no pueden cruzar las pistas de arena y piedra entre M'Hamid, Erg Chegaga y el lago Iriqui. Todas las expediciones a Chegaga se realizan exclusivamente en 4x4 Toyota Land Cruiser (o similar) con aire acondicionado y conductor experto."
+        },
+        {
+          "question": "¿Cómo es la ruta de regreso el día 3?",
+          "answer": "En lugar de volver por Zagora, conduces hacia el oeste cruzando el lecho seco del lago Iriqui hasta Foum Zguid y subes hacia el norte por Taznakht y el Alto Atlas, completando un circuito circular."
+        },
+        {
+          "question": "¿Qué instalaciones tiene el campamento de Chegaga?",
+          "answer": "Los campamentos estándar ofrecen jaimas privadas con camas reales, ropa de cama limpia y baños compartidos. Las opciones de lujo incluyen ducha de agua caliente privada, inodoro y enchufes con energía solar."
+        },
+        {
+          "question": "¿Cuál es la mejor época para visitar Erg Chegaga?",
+          "answer": "De octubre a mayo ofrece el clima más agradable, con días soleados de 20°C a 28°C y noches frescas. Julio y agosto son extremadamente calurosos en el desierto profundo."
+        }
+      ]
+    }
   }
 }

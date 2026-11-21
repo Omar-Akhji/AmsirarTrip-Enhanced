@@ -68,5 +68,127 @@
     "description": "Explore Morocco's northern heritage from Tangier to Marrakech on this 7-day private journey through the Rif Mountains, Chefchaouen, and Fes.",
     "price": 690,
     "currency": "EUR"
+  },
+  "translations": {
+    "fr": {
+      "title": "Circuit Nord du Maroc 7 Jours de Tanger à Marrakech (2026)",
+      "metaDescription": "Dès 690€ par pers. Circuit de 7 jours de Tanger à Marrakech via Chefchaouen, Volubilis, la médina de Fès, les forêts de cèdres d'Azrou et la ville rouge.",
+      "lead": "Ce voyage de sept jours est conçu pour les voyageurs qui arrivent à Tanger (en ferry depuis l'Espagne ou en avion) et souhaitent descendre vers le sud jusqu'à Marrakech. Depuis le cap Spartel où l'Atlantique rencontre la Méditerranée, vous explorez la médina de Tanger avant de rejoindre les montagnes du Rif par Tétouan pour passer la nuit dans la ville bleue de Chefchaouen.",
+      "price": {
+        "label": "À partir de 690 € par personne",
+        "note": "Inclut un véhicule privé climatisé avec chauffeur-guide multilingue, 6 nuits en riads et hôtels de charme (Tanger, Chefchaouen, 2 nuits à Fès, 2 nuits à Marrakech), les guides locaux agréés à Fès et Marrakech, les transferts d'arrivée/départ et les petits-déjeuners dès le jour 2."
+      },
+      "imageAlt": "Ruelle bleue ensoleillée de la médina de Chefchaouen lors d'un circuit de 7 jours de Tanger à Marrakech",
+      "highlights": [
+        "Visite du cap Spartel, des grottes d'Hercule et de la kasbah historique de Tanger",
+        "Promenade dans la médina UNESCO de Tétouan et les ruelles bleues de Chefchaouen",
+        "Découverte des mosaïques romaines de Volubilis et des portes de Meknès",
+        "Visite guidée d'une journée dans Fès el-Bali avec un guide local agréé",
+        "Observation des macaques de Barbarie dans les forêts de cèdres d'Azrou (Moyen Atlas)",
+        "Final à Marrakech avec visite guidée privée du palais de la Bahia, des tombeaux Saadiens et de Jemaa el-Fna"
+      ],
+      "faqs": [
+        {
+          "question": "Pouvez-vous venir nous chercher directement au port des ferries à Tanger ?",
+          "answer": "Oui. Que vous arriviez par ferry rapide depuis Tarifa au port de Tanger-Ville, au port de Tanger Med ou à l'aéroport de Tanger (TNG), votre chauffeur vous accueille juste après les douanes avec une pancarte à votre nom."
+        },
+        {
+          "question": "Est-ce un bon itinéraire si nous arrivons d'Espagne ?",
+          "answer": "Oui. C'est le tracé nord-sud le plus logique à travers le Maroc : traverser le détroit de Gibraltar en ferry, découvrir le Nord et les villes impériales, puis repartir directement en avion de Marrakech sans revenir sur vos pas."
+        },
+        {
+          "question": "Quelle est la durée des trajets quotidiens ?",
+          "answer": "La plupart des étapes durent entre 3 heures et 4 h 30 sur de bonnes routes et autoroutes. La seule longue journée de route est le jour 5 (de Fès à Marrakech, environ 7 h), coupée par des pauses à Ifrane et dans la forêt de cèdres d'Azrou."
+        },
+        {
+          "question": "Des guides locaux sont-ils inclus à Fès et Marrakech ?",
+          "answer": "Oui. Des guides officiels agréés conduisent les visites à pied à Fès et à Marrakech pour vous faire découvrir l'histoire de chaque monument et vous orienter facilement dans les médinas."
+        },
+        {
+          "question": "Pouvons-nous ajouter une nuit dans le Sahara à cet itinéraire ?",
+          "answer": "Oui. Si vous disposez de 8 ou 9 jours, nous pouvons passer par la vallée du Ziz jusqu'à Merzouga après Fès pour une balade à dromadaire et une nuit en bivouac avant de continuer vers Marrakech."
+        }
+      ]
+    },
+    "de": {
+      "title": "7-Tage Nordmarokko Rundreise von Tanger nach Marrakesch (2026)",
+      "metaDescription": "Ab 690€ p.P. 7-tägige Rundreise von Tanger nach Marrakesch über Chefchaouen, Volubilis, Fès und den Mittleren Atlas.",
+      "lead": "Diese siebentägige Reise richtet sich an Reisende, die in Tanger ankommen (per Fähre aus Spanien oder per Flug) und quer durchs Land bis nach Marrakesch reisen möchten. Vom Cap Spartel, wo Atlantik und Mittelmeer aufeinandertreffen, erkunden Sie die Altstadt von Tanger und fahren über Tétouan ins Rif-Gebirge nach Chefchaouen.",
+      "price": {
+        "label": "Ab 690 € pro Person",
+        "note": "Inklusive privatem, klimatisiertem Fahrzeug mit mehrsprachigem Fahrer-Guide, 6 Nächten in Boutique-Riads und Hotels (Tanger, Chefchaouen, 2 Nächte Fès, 2 Nächte Marrakesch), lizenzierten Stadtführern in Fès und Marrakesch, Ankunfts-/Abreisetransfers sowie Frühstück ab Tag 2."
+      },
+      "imageAlt": "Sonnige blaue Gasse in der Medina von Chefchaouen auf der 7-tägigen Rundreise von Tanger nach Marrakesch",
+      "highlights": [
+        "Besuch von Cap Spartel, den Herkulesgrotten und der historischen Kasbah in Tanger",
+        "Spaziergang durch die UNESCO-Medina von Tétouan und die blauen Gassen von Chefchaouen",
+        "Erkundung der römischen Mosaike von Volubilis und der Stadttore von Meknès",
+        "Ganztägige Führung durch Fès el-Bali mit einem lizenzierten lokalen Experten",
+        "Beobachtung wilder Berberaffen in den Zedernwäldern von Azrou im Mittleren Atlas",
+        "Abschluss in Marrakesch mit privater Führung durch Bahia-Palast, Saadier-Gräber und Jemaa el-Fna"
+      ],
+      "faqs": [
+        {
+          "question": "Können Sie uns direkt am Fährhafen in Tanger abholen?",
+          "answer": "Ja. Ob Sie mit der Schnellfähre aus Tarifa am Stadthafen Tanger, in Tanger Med oder am Flughafen Tanger (TNG) ankommen: Ihr Fahrer erwartet Sie direkt hinter dem Zoll mit einem Namensschild."
+        },
+        {
+          "question": "Eignet sich diese Route für die Anreise aus Spanien?",
+          "answer": "Ja. Es ist die sinnvollste Nord-Süd-Verbindung durch Marokko: Sie überqueren die Straße von Gibraltar per Fähre, entdecken den Norden sowie die Königsstädte und fliegen ohne Rückfahrt direkt ab Marrakesch heim."
+        },
+        {
+          "question": "Wie lang sind die täglichen Fahrtzeiten?",
+          "answer": "Die meisten Etappen dauern 3 bis 4,5 Stunden auf guten Fern- und Bergstraßen. Der einzige längere Fahrtag ist Tag 5 (Fès nach Marrakesch, ca. 7 Stunden) mit Pausen in Ifrane und im Zedernwald von Azrou."
+        },
+        {
+          "question": "Sind lokale Stadtführer in Fès und Marrakesch inbegriffen?",
+          "answer": "Ja. Lizenzierte Stadtführer begleiten Sie auf Rundgängen in Fès und Marrakesch, vermitteln geschichtliche Hintergründe und führen Sie sicher durch die Medinas."
+        },
+        {
+          "question": "Können wir eine Nacht in der Sahara in diese Reise einbauen?",
+          "answer": "Ja. Wenn Sie 8 oder 9 Tage Zeit haben, führen wir die Route ab Fès durch das Ziz-Tal nach Merzouga zu einem Kamelritt und einer Übernachtung im Wüstencamp, bevor es weiter nach Marrakesch geht."
+        }
+      ]
+    },
+    "es": {
+      "title": "Tour del Norte de Marruecos 7 Días de Tánger a Marrakech (2026)",
+      "metaDescription": "Desde 690€ por pers. Viaje de 7 días de Tánger a Marrakech pasando por Chefchaouen, ruinas romanas de Volúbilis, Fez y el Medio Atlas.",
+      "lead": "Este viaje por tierra de siete días está pensado para quienes llegan a Tánger (en ferry desde España o en avión) y desean recorrer el país hacia el sur hasta Marrakech. Empezando donde el Atlántico se une con el Mediterráneo en el cabo Espartel, visitas la medina de Tánger antes de adentrarte en el Rif pasando por Tetuán para dormir en la ciudad azul de Chefchaouen.",
+      "price": {
+        "label": "Desde 690 € por persona",
+        "note": "Incluye vehículo privado con aire acondicionado y chófer-guía multilingüe, 6 noches en riads y hoteles con encanto (Tánger, Chefchaouen, 2 noches en Fez, 2 noches en Marrakech), guías locales oficiales en Fez y Marrakech, traslados de llegada y salida, y desayunos desde el día 2."
+      },
+      "imageAlt": "Callejón azul soleado en la medina de Chefchaouen durante la ruta de 7 días de Tánger a Marrakech",
+      "highlights": [
+        "Visita al cabo Espartel, las cuevas de Hércules y la alcazaba histórica de Tánger",
+        "Paseo por la medina UNESCO de Tetuán y los callejones azules de Chefchaouen",
+        "Recorrido por los mosaicos romanos de Volúbilis y las puertas monumentales de Meknes",
+        "Visita guiada a pie de día completo en Fez el-Bali con guía local titulado",
+        "Avistamiento de macacos de Berbería en los bosques de cedros de Azrou en el Medio Atlas",
+        "Cierre en Marrakech con visita guiada privada al Palacio Bahía, las Tumbas Saadíes y Jemaa el-Fna"
+      ],
+      "faqs": [
+        {
+          "question": "¿Podéis recogernos directamente en el puerto del ferry en Tánger?",
+          "answer": "Sí. Tanto si llegas en ferry rápido desde Tarifa al puerto de Tánger Ciudad, como a Tánger Med o al aeropuerto de Tánger (TNG), tu chófer te esperará justo a la salida de aduanas con un cartel a tu nombre."
+        },
+        {
+          "question": "¿Es una buena ruta si venimos desde España?",
+          "answer": "Sí. Es el recorrido norte-sur más lógico por Marruecos: cruzas el estrecho de Gibraltar en ferry, conoces el norte y las ciudades imperiales y vuelves en avión directamente desde Marrakech sin deshacer camino."
+        },
+        {
+          "question": "¿Cuánto duran los trayectos diarios?",
+          "answer": "La mayoría de las etapas duran entre 3 y 4,5 horas por buenas carreteras y vías panorámicas de montaña. El único día largo en ruta es el día 5 (de Fez a Marrakech, unas 7 horas), repartido con paradas en Ifrane y el bosque de cedros de Azrou."
+        },
+        {
+          "question": "¿Se incluyen guías locales en Fez y Marrakech?",
+          "answer": "Sí. Guías oficiales titulados dirigen las visitas a pie en ambas ciudades para aportarte contexto histórico y moverte sin dificultad por las medinas."
+        },
+        {
+          "question": "¿Podemos añadir una noche en el desierto del Sáhara a este itinerario?",
+          "answer": "Sí. Si dispones de 8 o 9 días, podemos desviarnos desde Fez por el valle del Ziz hacia Merzouga para dar un paseo en dromedario y dormir en un campamento antes de continuar hasta Marrakech."
+        }
+      ]
+    }
   }
 }

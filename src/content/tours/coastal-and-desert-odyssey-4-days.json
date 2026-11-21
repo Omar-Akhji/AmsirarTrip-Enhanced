@@ -64,5 +64,115 @@
     "description": "Experience the best of Morocco's coast, Anti-Atlas valleys, and Sahara desert on this 4-day odyssey from Agadir to Marrakech.",
     "price": 395,
     "currency": "EUR"
+  },
+  "translations": {
+    "fr": {
+      "title": "Circuit Désert d'Agadir à Marrakech 4 Jours | Merzouga & Taroudant (2026)",
+      "metaDescription": "Dès 395€ par pers. Circuit privé de 4 jours d'Agadir à Marrakech. Traversée de l'Anti-Atlas, safran de Taliouine, dunes de Merzouga et kasbahs du Sud.",
+      "lead": "Ce circuit terrestre de quatre jours relie la côte atlantique d'Agadir et Taghazout aux dunes sahariennes de Merzouga avant de rejoindre Marrakech. C'est l'option idéale si vous terminez un séjour balnéaire sur la côte et souhaitez découvrir le désert sans prendre l'avion ni revenir sur vos pas.",
+      "price": {
+        "label": "À partir de 395 € par personne",
+        "note": "Inclut le transport privé climatisé d'Agadir à Marrakech, le chauffeur-guide agréé, 2 nuits en riads/hôtels de charme (vallée du Dadès et Ouarzazate), 1 nuit en bivouac à l'Erg Chebbi, les balades à dromadaire, les dîners et les petits-déjeuners dès le jour 2."
+      },
+      "imageAlt": "Randonnée à dos de dromadaire dans les dunes dorées de Merzouga lors d'un circuit de 4 jours d'Agadir à Marrakech",
+      "highlights": [
+        "Départ d'Agadir ou Taghazout et passage par les remparts anciens de Taroudant (la « Petite Marrakech »)",
+        "Traversée de l'Anti-Atlas et des plaines du safran de Taliouine",
+        "Marche entre les falaises calcaires de 300 mètres des gorges du Todra",
+        "Balades à dromadaire au coucher et au lever du soleil dans les dunes de l'Erg Chebbi",
+        "Nuit en bivouac saharien avec musique berbère, dîner et ciel étoilé",
+        "Visite du ksar d'Aït Ben Haddou (UNESCO) avant le passage du Haut Atlas vers Marrakech"
+      ],
+      "faqs": [
+        {
+          "question": "Pouvez-vous nous récupérer à notre hôtel ou surf camp à Taghazout ?",
+          "answer": "Oui. Votre chauffeur privé vient vous chercher directement à votre hôtel, resort ou villa à Agadir, Taghazout ou Tamraght vers 7 h 30 le premier jour."
+        },
+        {
+          "question": "Est-ce un moyen pratique de voyager d'Agadir à Marrakech ?",
+          "answer": "Oui. Plutôt que de prendre un simple transfert par autoroute ou un vol intérieur, cet itinéraire transforme votre trajet en un grand voyage dans le Sud marocain par Taroudant, l'Anti-Atlas, le Sahara et le Haut Atlas."
+        },
+        {
+          "question": "Quel est l'état des routes entre Agadir et Merzouga ?",
+          "answer": "Tout le parcours emprunte des routes goudronnées bien entretenues. Nos 4x4 et minibus récents climatisés assurent un trajet confortable à travers cols et plaines désertiques avec des pauses régulières."
+        },
+        {
+          "question": "Où nous déposez-vous à Marrakech ?",
+          "answer": "Nous vous déposons directement à votre hôtel à Marrakech, au point d'accès le plus proche de votre riad en médina, ou à l'aéroport Marrakech-Ménara (RAK) en fin d'après-midi le jour 4."
+        }
+      ]
+    },
+    "de": {
+      "title": "4-Tage Wüstentour von Agadir nach Marrakesch | Merzouga (2026)",
+      "metaDescription": "Ab 395€ p.P. 4-tägige Reiseroute von Agadir über Merzouga nach Marrakesch. Taroudant, Safranfelder von Taliouine, Erg Chebbi und Hoher Atlas.",
+      "lead": "Diese viertägige Überlandroute verbindet die Atlantikküste um Agadir und Taghazout mit den Saharadünen von Merzouga und endet in Marrakesch. Ideal, wenn Sie Ihren Strandurlaub an der Küste ausklingen lassen und die Wüste ohne Inlandsflug oder Umweg erleben möchten.",
+      "price": {
+        "label": "Ab 395 € pro Person",
+        "note": "Inklusive privatem, klimatisiertem Transport von Agadir nach Marrakesch, lizenziertem Fahrer-Guide, 2 Nächten in Boutique-Riads/Hotels (Dades-Tal und Ouarzazate), 1 Nacht im Erg-Chebbi-Wüstencamp, Kamelritten, Abendessen und Frühstück ab Tag 2."
+      },
+      "imageAlt": "Kamelritt durch die goldenen Dünen von Merzouga auf der 4-tägigen Wüstentour von Agadir nach Marrakesch",
+      "highlights": [
+        "Start in Agadir oder Taghazout vorbei an den Lehmmauern von Taroudant („Klein-Marrakesch“)",
+        "Fahrt durch den Anti-Atlas und die Safranregion um Taliouine",
+        "Spaziergang zwischen den 300 Meter hohen Kalksteinwänden der Todra-Schlucht",
+        "Kamelritte zu Sonnenuntergang und Sonnenaufgang in den Dünen von Erg Chebbi",
+        "Übernachtung im Saharacamp mit Berbermusik, Abendessen und Sternenhimmel",
+        "Besuch der UNESCO-Kasbah Ait Ben Haddou vor der Überquerung des Hohen Atlas nach Marrakesch"
+      ],
+      "faqs": [
+        {
+          "question": "Holen Sie uns auch vom Surfcamp oder Hotel in Taghazout ab?",
+          "answer": "Ja. Ihr privater Fahrer holt Sie am ersten Tag gegen 7:30 Uhr direkt an Ihrem Hotel, Resort oder Ihrer Villa in Agadir, Taghazout oder Tamraght ab."
+        },
+        {
+          "question": "Ist das eine sinnvolle Verbindung zwischen Agadir und Marrakesch?",
+          "answer": "Ja. Statt eines reinen Autobahntransfers oder Inlandsflugs macht diese Route die Fahrt zu einer vollwertigen Südmarokko-Reise durch Taroudant, den Anti-Atlas, die Sahara und den Hohen Atlas."
+        },
+        {
+          "question": "Wie sind die Straßenverhältnisse zwischen Agadir und Merzouga?",
+          "answer": "Die gesamte Strecke verläuft auf gut ausgebauten Asphaltstraßen. Unsere modernen, klimatisierten 4x4-Fahrzeuge und Minivans sorgen mit regelmäßigen Pausen für eine angenehme Fahrt über Pässe und Wüstenebenen."
+        },
+        {
+          "question": "Wo setzen Sie uns in Marrakesch ab?",
+          "answer": "Wir bringen Sie am späten Nachmittag von Tag 4 direkt zu Ihrem Hotel in Marrakesch, zum nächstgelegenen Zufahrtspunkt Ihres Riads in der Medina oder zum Flughafen Marrakesch-Menara (RAK)."
+        }
+      ]
+    },
+    "es": {
+      "title": "Tour al Desierto de Agadir a Marrakech 4 Días | Merzouga y Taroudant (2026)",
+      "metaDescription": "Desde 395€ por pers. Tour privado de 4 días desde Agadir hasta Marrakech pasando por el desierto de Merzouga, Taroudant, Taliouine y valle del Draa.",
+      "lead": "Esta ruta terrestre de cuatro días une la costa atlántica de Agadir y Taghazout con las dunas del Sáhara en Merzouga y finaliza en Marrakech. Es una opción ideal si acabas unos días de playa en la costa y quieres conocer el desierto sin coger vuelos ni volver sobre tus pasos.",
+      "price": {
+        "label": "Desde 395 € por persona",
+        "note": "Incluye transporte privado con aire acondicionado de Agadir a Marrakech, conductor-guía titulado, 2 noches en riads/hoteles con encanto (valle del Dadès y Ouarzazate), 1 noche en campamento de Erg Chebbi, paseos en dromedario, cenas y desayunos desde el día 2."
+      },
+      "imageAlt": "Paseo en dromedario por las dunas doradas de Merzouga en una ruta de 4 días de Agadir a Marrakech",
+      "highlights": [
+        "Salida desde Agadir o Taghazout y visita a las antiguas murallas de Taroudant («la pequeña Marrakech»)",
+        "Travesía por las montañas del Anti-Atlas y las llanuras del azafrán de Taliouine",
+        "Caminata entre las paredes de piedra caliza de 300 metros de las gargantas del Todra",
+        "Paseos en dromedario al atardecer y al amanecer en Erg Chebbi, Merzouga",
+        "Noche en campamento del Sáhara con música bereber, cena y cielo estrellado",
+        "Visita a la Kasbah Ait Ben Haddou (UNESCO) antes de cruzar el Alto Atlas hacia Marrakech"
+      ],
+      "faqs": [
+        {
+          "question": "¿Podéis recogernos en nuestro hotel o surf camp en Taghazout?",
+          "answer": "Sí. Tu chófer privado te recogerá directamente en tu hotel, resort o villa en Agadir, Taghazout o Tamraght sobre las 7:30 de la mañana del día 1."
+        },
+        {
+          "question": "¿Es una forma práctica de viajar de Agadir a Marrakech?",
+          "answer": "Sí. En lugar de hacer un traslado directo por autopista o tomar un vuelo interno, esta ruta convierte el desplazamiento en un viaje completo por el sur de Marruecos atravesando Taroudant, el Anti-Atlas, el Sáhara y el Alto Atlas."
+        },
+        {
+          "question": "¿En qué estado están las carreteras entre Agadir y Merzouga?",
+          "answer": "Todo el trayecto discurre por carreteras asfaltadas en buen estado. Nuestros 4x4 y monovolúmenes modernos con aire acondicionado garantizan un viaje cómodo con paradas periódicas."
+        },
+        {
+          "question": "¿Dónde nos dejáis en Marrakech?",
+          "answer": "Te dejamos directamente en tu hotel de Marrakech, en el punto accesible en vehículo más cercano a tu riad en la medina, o en el aeropuerto de Marrakech-Menara (RAK) a última hora de la tarde del día 4."
+        }
+      ]
+    }
   }
 }

@@ -72,5 +72,127 @@
     "description": "Three-day private tour from Marrakech to the Erg Chebbi dunes in Merzouga, with stops at Ait Ben Haddou, Dades Valley, and Todra Gorges.",
     "price": 295,
     "currency": "EUR"
+  },
+  "translations": {
+    "fr": {
+      "title": "Circuit Désert Marrakech Merzouga 3 Jours | Erg Chebbi (2026)",
+      "metaDescription": "Dès 295€ par pers. Circuit 3 jours dans le désert de Marrakech à Merzouga (4x4 privé ou groupe). Balade en dromadaire à Erg Chebbi et nuit en bivouac de luxe.",
+      "lead": "Ce circuit de trois jours relie Marrakech aux hautes dunes orangées de l'Erg Chebbi à Merzouga. Vous traversez le Haut Atlas en véhicule privé climatisé par le col du Tizi n'Tichka (2 260 m), avec arrêts au ksar en terre d'Aït Ben Haddou et à Ouarzazate avant la première nuit dans la vallée du Dadès. Le deuxième jour, la route passe par Tinghir jusqu'aux gorges du Todra, puis rejoint Merzouga pour une balade à dromadaire au coucher du soleil et une nuit au bivouac. Le troisième jour ramène à Marrakech par Alnif, la vallée du Drâa et le Haut Atlas.",
+      "price": {
+        "label": "À partir de 295 € par personne",
+        "note": "Inclut le transport privé climatisé, le chauffeur-guide agréé, 1 nuit en riad/hôtel dans la vallée du Dadès, 1 nuit en bivouac dans le désert, les dîners, les petits-déjeuners à partir du jour 2 et les balades à dromadaire. Bivouac de luxe avec salle de bain privative disponible sur demande."
+      },
+      "imageAlt": "Caravane de dromadaires traversant les dunes dorées de l'Erg Chebbi au coucher du soleil lors d'un circuit désert de 3 jours depuis Marrakech",
+      "highlights": [
+        "Traversée du Haut Atlas par le col du Tizi n'Tichka (2 260 m)",
+        "Visite du ksar d'Aït Ben Haddou, classé à l'UNESCO, et passage par Ouarzazate",
+        "Balade entre les falaises calcaires de 300 mètres des gorges du Todra",
+        "Balades à dromadaire au coucher et au lever du soleil dans les dunes de l'Erg Chebbi",
+        "Nuit en bivouac dans le Sahara avec dîner, musique autour du feu et ciel étoilé",
+        "Trajet en 4x4 ou minibus moderne climatisé avec chauffeur local agréé"
+      ],
+      "faqs": [
+        {
+          "question": "Ce circuit est-il privé ou partagé ?",
+          "answer": "La plupart des voyageurs réservent ce circuit en formule privée, ce qui permet de s'arrêter librement pour les photos, un café ou une pause. Nous proposons aussi des départs en petit groupe partagé à certaines dates."
+        },
+        {
+          "question": "Combien de route y a-t-il entre Marrakech et Merzouga ?",
+          "answer": "L'aller-retour représente environ 1 120 km. Répartir le trajet sur trois jours garde un rythme confortable : environ 310 km le jour 1 jusqu'à la vallée du Dadès, 250 km le jour 2 jusqu'à Merzouga, puis le retour le jour 3 par la vallée du Drâa et Ouarzazate."
+        },
+        {
+          "question": "Comment sont les campements dans le désert ?",
+          "answer": "Les bivouacs standard offrent des tentes privées avec de vrais lits et des sanitaires partagés. Les bivouacs de luxe proposent des tentes plus spacieuses avec douche chaude privative, toilettes et prises électriques. Les deux formules incluent le dîner, le petit-déjeuner et la musique autour du feu."
+        },
+        {
+          "question": "Peut-on terminer le circuit à Fès au lieu de revenir à Marrakech ?",
+          "answer": "Oui. Les deux premiers jours restent identiques. Le troisième jour, au lieu de prendre la direction d'Ouarzazate, votre chauffeur remonte vers le nord par la vallée du Ziz, Midelt et la forêt de cèdres d'Azrou pour vous déposer à Fès en début de soirée."
+        },
+        {
+          "question": "Proposez-vous des repas végétariens, véganes ou sans gluten ?",
+          "answer": "Oui. Les riads et campements préparent régulièrement des tajines de légumes, du couscous et des salades fraîches. Indiquez vos besoins alimentaires lors de la réservation afin que nous prévenions les cuisines à l'avance."
+        }
+      ]
+    },
+    "de": {
+      "title": "3-Tage Wüstentour von Marrakesch nach Merzouga | Erg Chebbi (2026)",
+      "metaDescription": "Ab 295€ p.P. 3-tägige Wüstentour von Marrakesch nach Merzouga (privat im 4x4 oder Kleingruppe). Kamelritt in Erg Chebbi und Übernachtung im Wüstencamp.",
+      "lead": "Diese dreitägige Route verbindet Marrakesch mit den hohen Dünen des Erg Chebbi bei Merzouga. Sie fahren im privaten, klimatisierten Fahrzeug über den Tizi-n'Tichka-Pass (2.260 m) im Hohen Atlas, halten am Lehmdorf Ait Ben Haddou und in Ouarzazate und verbringen die erste Nacht im Dades-Tal. Am zweiten Tag geht es über Tinghir in die Todra-Schlucht und weiter nach Merzouga zum Kamelritt bei Sonnenuntergang und einer Nacht im Wüstencamp. Am dritten Tag kehren Sie über Alnif, das Draa-Tal und den Hohen Atlas nach Marrakesch zurück.",
+      "price": {
+        "label": "Ab 295 € pro Person",
+        "note": "Inklusive privatem, klimatisiertem Fahrzeug, lizenziertem Fahrer-Guide, 1 Nacht im Riad/Hotel im Dades-Tal, 1 Nacht im Wüstencamp, Abendessen, Frühstück ab Tag 2 und Kamelritten. Upgrades auf ein Luxuscamp mit eigenem Bad sind auf Anfrage möglich."
+      },
+      "imageAlt": "Kamelkarawane bei Sonnenuntergang in den Dünen von Erg Chebbi auf der 3-tägigen Wüstentour ab Marrakesch",
+      "highlights": [
+        "Überquerung des Hohen Atlas über den Tizi-n'Tichka-Pass (2.260 m)",
+        "Spaziergang durch das UNESCO-Weltkulturerbe Kasbah Ait Ben Haddou und Stopp in Ouarzazate",
+        "Wanderung zwischen den 300 Meter hohen Felswänden der Todra-Schlucht",
+        "Kamelritt zu Sonnenuntergang und Sonnenaufgang in den Dünen von Erg Chebbi",
+        "Übernachtung im Saharacamp mit Abendessen, Lagerfeuermusik und Sternenhimmel",
+        "Fahrt im modernen, klimatisierten 4x4 oder Minivan mit lokalem, lizenziertem Fahrer"
+      ],
+      "faqs": [
+        {
+          "question": "Ist diese Tour privat oder in der Gruppe?",
+          "answer": "Die meisten Gäste buchen diese Tour privat, sodass Sie jederzeit für Fotos, Kaffee oder Pausen anhalten können. An ausgewählten Terminen bieten wir auch Kleingruppen-Abfahrten an."
+        },
+        {
+          "question": "Wie viel Fahrzeit fällt zwischen Marrakesch und Merzouga an?",
+          "answer": "Die gesamte Rundstrecke beträgt rund 1.120 km. Durch die Aufteilung auf drei Tage bleibt das Tempo angenehm: Tag 1 führt rund 310 km bis ins Dades-Tal, Tag 2 rund 250 km bis Merzouga, und Tag 3 kehrt über das Draa-Tal und Ouarzazate zurück."
+        },
+        {
+          "question": "Wie sind die Wüstencamps ausgestattet?",
+          "answer": "Standardcamps bieten private Zelte mit richtigen Betten und Gemeinschaftsbädern. Luxuscamps verfügen über größere Privat-Zelte mit eigener heißer Dusche, WC und Steckdosen. Beide Varianten beinhalten Abendessen, Frühstück und abendliche Musik am Feuer."
+        },
+        {
+          "question": "Kann die Tour in Fès enden statt nach Marrakesch zurückzukehren?",
+          "answer": "Ja. Tag 1 und Tag 2 bleiben gleich. Am dritten Tag fährt Ihr Fahrer statt Richtung Westen nach Norden durch das Ziz-Tal, Midelt und den Zedernwald von Azrou und setzt Sie am frühen Abend in Fès ab."
+        },
+        {
+          "question": "Berücksichtigen Sie vegetarische, vegane oder glutenfreie Ernährung?",
+          "answer": "Ja. Riads und Wüstencamps bereiten regelmäßig Gemüsetajines, Couscous und frische Salate zu. Teilen Sie uns Ihre Ernährungswünsche bei der Buchung mit, damit wir die Küchen rechtzeitig informieren."
+        }
+      ]
+    },
+    "es": {
+      "title": "Tour al Desierto de Marrakech a Merzouga 3 Días | Erg Chebbi (2026)",
+      "metaDescription": "Desde 295€ por pers. Tour de 3 días al desierto de Marrakech a Merzouga (4x4 privado o grupo). Paseo en camello en Erg Chebbi y noche en campamento de lujo.",
+      "lead": "Este recorrido de tres días conecta Marrakech con las altas dunas anaranjadas de Erg Chebbi en Merzouga. Viajarás en vehículo privado con aire acondicionado por el puerto de Tizi n'Tichka (2.260 m) en el Alto Atlas, con paradas en la alcazaba de Ait Ben Haddou y Ouarzazate antes de pasar la primera noche en el valle del Dadès. El segundo día continúa por Tinghir hasta las gargantas del Todra y Merzouga para un paseo en dromedario al atardecer y noche en campamento. El tercer día regresa a Marrakech por Alnif, el valle del Draa y el Alto Atlas.",
+      "price": {
+        "label": "Desde 295 € por persona",
+        "note": "Incluye transporte privado con aire acondicionado, conductor-guía titulado, 1 noche en riad/hotel en el valle del Dadès, 1 noche en campamento del desierto, cenas, desayunos desde el día 2 y paseos en dromedario. Campamento superior con baño privado disponible bajo petición."
+      },
+      "imageAlt": "Caravana de dromedarios cruzando las dunas doradas de Erg Chebbi al atardecer en el tour de 3 días desde Marrakech",
+      "highlights": [
+        "Cruce del Alto Atlas por el puerto de Tizi n'Tichka (2.260 m)",
+        "Recorrido por la Kasbah Ait Ben Haddou, Patrimonio de la UNESCO, y parada en Ouarzazate",
+        "Caminata por el cañón de 300 metros de altura de las gargantas del Todra",
+        "Paseos en dromedario al atardecer y al amanecer por las dunas de Erg Chebbi",
+        "Noche en campamento del Sáhara con cena, música junto al fuego y cielo estrellado",
+        "Viaje en 4x4 o monovolumen moderno con aire acondicionado y conductor local titulado"
+      ],
+      "faqs": [
+        {
+          "question": "¿Este tour es privado o compartido?",
+          "answer": "La mayoría de viajeros reservan este tour en privado, lo que permite detenerse cuando se desee para fotos, café o descansos. También organizamos salidas compartidas en grupos pequeños en fechas concretas."
+        },
+        {
+          "question": "¿Cuánta carretera hay entre Marrakech y Merzouga?",
+          "answer": "El recorrido completo suma unos 1.120 km. Repartirlo en tres días mantiene un ritmo llevadero: el día 1 cubre unos 310 km hasta el valle del Dadès, el día 2 unos 250 km hasta Merzouga y el día 3 regresa por el valle del Draa y Ouarzazate."
+        },
+        {
+          "question": "¿Cómo son los campamentos del desierto?",
+          "answer": "Los campamentos estándar ofrecen jaimas privadas con camas reales y baños compartidos. Los campamentos superiores cuentan con jaimas más amplias con ducha de agua caliente privada, inodoro y enchufes. Ambas opciones incluyen cena, desayuno y música junto al fuego."
+        },
+        {
+          "question": "¿Podemos terminar el tour en Fez en lugar de volver a Marrakech?",
+          "answer": "Sí. Los días 1 y 2 son idénticos. El día 3, en lugar de girar al oeste hacia Ouarzazate, el conductor toma la ruta norte por el valle del Ziz, Midelt y el bosque de cedros de Azrou para dejarte en Fez a primera hora de la tarde."
+        },
+        {
+          "question": "¿Se adaptan a dietas vegetarianas, veganas o sin gluten?",
+          "answer": "Sí. Tanto los riads como los campamentos preparan tajines de verduras, cuscús y ensaladas frescas. Indícanos tus necesidades alimentarias al reservar para avisar a las cocinas con antelación."
+        }
+      ]
+    }
   }
 }

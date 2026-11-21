@@ -262,7 +262,16 @@
       "fromCasablanca": "From Casablanca",
       "fromAgadir": "From Agadir",
       "fromTangier": "From Tangier"
-    }
+    },
+    "kickerHighlights": "Trip Highlights",
+    "kickerIncluded": "Included Services",
+    "kickerExcluded": "Out-of-Pocket Costs",
+    "kickerGoodToKnow": "Practical Travel Advice",
+    "kickerPricing": "Rates & Reservations",
+    "kickerFaq": "Common Questions",
+    "privateVehicleLabel": "Personal Driver & 4x4",
+    "sharedDeparturesLabel": "Group departures",
+    "sharedCtaLabel": "Inquire via WhatsApp"
   },
   "excursion": {
     "404": {
@@ -296,7 +305,15 @@
       "priceLabel": "Starting price",
       "faqTitle": "Frequently Asked Questions",
       "kickerAbout": "About This Excursion",
-      "kickerSchedule": "Schedule & Stops"
+      "kickerSchedule": "Schedule & Stops",
+      "pickupLabel": "Pickup Window",
+      "elevationLabel": "Elevation / Setting",
+      "kickerHighlights": "Trip Highlights",
+      "kickerIncluded": "Included Services",
+      "kickerExcluded": "Out-of-Pocket Costs",
+      "kickerGoodToKnow": "Practical Travel Advice",
+      "kickerPricing": "Rates & Reservations",
+      "kickerFaq": "Common Questions"
     },
     "stats": {
       "routes": "Signature excursions",
@@ -306,13 +323,13 @@
       "support": "On-trip support",
       "supportDesc": "Direct hotel pickup and drop-off in Marrakech."
     },
-    "card": { "category": "Full Day" },
+    "card": { "category": "Full Day", "priceFrom": "From €{price} / person" },
     "exploreLink": "View details",
     "sidebar": {
       "alt": "Amsirar airport transfer vehicle",
       "title": "Airport Transfer Services in Morocco",
       "mainBrand": "Amsirar Tourist Transport",
-      "subBrand": "Transport Touristique",
+      "subBrand": "Tourist Transport",
       "intro": "We provide licensed private airport transfers between major Moroccan airports (Marrakech RAK, Casablanca CMN, Agadir AGA, Fes FEZ) and city riads or regional destinations.",
       "details": "Your driver meets you in the arrival hall with a name board, assists with luggage, and drives directly to your accommodation in an air-conditioned vehicle at agreed fixed rates.",
       "items": [
@@ -1652,6 +1669,8 @@
     "loadAriaPrefix": "Load interactive route map:",
     "viewStopsPrefix": "View",
     "viewStopsSuffix": "Route Stops & Schedule",
-    "openGoogleMaps": "Open in Google Maps"
+    "openGoogleMaps": "Open in Google Maps",
+    "kicker": "Google Maps Route",
+    "titleSuffix": "Route Map"
   }
 }

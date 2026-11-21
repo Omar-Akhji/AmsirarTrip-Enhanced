@@ -130,5 +130,352 @@
     "description": "Day trip from Marrakech to the Ourika Valley with hotel pickup, an argan cooperative stop, a guided hike to the Setti Fatma waterfalls and time for a riverside lunch.",
     "price": 30,
     "currency": "EUR"
+  },
+  "translations": {
+    "fr": {
+      "location": "Vallée de l'Ourika et Setti Fatma, Maroc",
+      "metrics": {
+        "distance": "~65 km de Marrakech",
+        "duration": "Environ 8 heures",
+        "pickup": "09:00 à 09:30",
+        "elevation": "Setti Fatma, ~1 500 m"
+      },
+      "overview": [
+        "La vallée de l'Ourika suit le cours de la rivière du même nom jusque dans le Haut Atlas, dès 30 km au sud de Marrakech. La route se termine à 65 km de la ville à Setti Fatma, un village perché vers 1 500 mètres d'altitude d'où l'on accède à une série de sept cascades dans une gorge latérale.",
+        "Sur le trajet, vous faites halte dans une coopérative féminine d'huile d'argan puis à des points de vue sur les cultures en terrasses et les villages en pisé accrochés aux pentes. Si vous voyagez un lundi, vous pouvez aussi parcourir le souk hebdomadaire de Tnine Ourika, où les habitants des montagnes viennent échanger leurs produits.",
+        "À Setti Fatma, un guide local vous accompagne jusqu'aux premières cascades, une marche de 45 minutes à 1 heure avec quelques passages sur les rochers. Le déjeuner se prend au bord de la rivière, où les tables sont installées pratiquement dans l'eau. C'est la plus courte de nos excursions de montagne, idéale pour voir l'Atlas sans long trajet."
+      ],
+      "program": [
+        {
+          "time": "09:00 à 09:30",
+          "title": "Prise en charge à Marrakech",
+          "location": "Votre hôtel ou riad",
+          "description": "Votre chauffeur vous récupère à votre hôtel ou à l'accès carrossable le plus proche en médina, puis traverse la plaine du Haouz vers le sud face aux montagnes."
+        },
+        {
+          "time": "10:00 à 10:40",
+          "title": "Coopérative d'argan ou souk du lundi",
+          "location": "Tnine Ourika et basse vallée",
+          "description": "Visite d'une coopérative féminine d'huile d'argan avec dégustation de thé et pain. Le lundi, arrêt supplémentaire possible au marché hebdomadaire de Tnine Ourika."
+        },
+        {
+          "time": "10:40 à 11:30",
+          "title": "Remontée de la vallée avec arrêts photos",
+          "location": "Vallée de l'Ourika",
+          "description": "La route longe la rivière entre noyers et champs en terrasses, avec arrêts devant les villages de terre et de pierre construits à flanc de montagne."
+        },
+        {
+          "time": "11:30 à 13:00",
+          "title": "Marche guidée vers les cascades de Setti Fatma",
+          "location": "Setti Fatma, ~1 500 m",
+          "description": "Rencontre avec un guide local, traversée de la rivière sur une passerelle et montée aux premières cascades (45 minutes à 1 heure aller sur sentier rocailleux avec quelques pas d'escalade facile). Les cascades supérieures demandent davantage d'effort et restent optionnelles."
+        },
+        {
+          "time": "13:00 à 14:30",
+          "title": "Déjeuner au bord de la rivière",
+          "location": "Berge de Setti Fatma",
+          "description": "Repas dans un restaurant au bord de l'oued avec tables ombragées les pieds au frais : tajines, salades et thé à la menthe."
+        },
+        {
+          "time": "15:00 à 16:30",
+          "title": "Trajet retour vers Marrakech",
+          "location": "De Setti Fatma à Marrakech",
+          "description": "Descente de la vallée vers Marrakech et dépose à votre hébergement vers 16:30."
+        }
+      ],
+      "includes": [
+        "Prise en charge et retour à votre hôtel ou riad à Marrakech",
+        "Transport aller-retour en véhicule climatisé",
+        "Chauffeur parlant français, anglais, espagnol ou allemand",
+        "Guide local pour la randonnée aux cascades de Setti Fatma",
+        "Arrêt dans une coopérative d'huile d'argan",
+        "Eau en bouteille à bord du véhicule"
+      ],
+      "excludes": [
+        "Déjeuner et boissons",
+        "Pourboires pour votre guide et votre chauffeur"
+      ],
+      "goodToKnow": [
+        "Portez des chaussures à bonne adhérence : le sentier traverse des rochers mouillés et demande parfois de s'aider des mains. Les sandales ne conviennent pas.",
+        "Partez un lundi si vous souhaitez découvrir le marché rural de Tnine Ourika.",
+        "Après de fortes pluies ou la fonte des neiges, le débit monte vite ; par sécurité, le guide peut alors raccourcir le parcours.",
+        "Il fait 5 à 10 degrés de moins dans la vallée qu'à Marrakech, ce qui en fait une escapade idéale en été.",
+        "Prévoyez des dirhams en espèces pour le déjeuner et les pourboires : les restaurants de Setti Fatma prennent rarement la carte bancaire."
+      ],
+      "seo": {
+        "title": "Excursion dans la vallée de l'Ourika depuis Marrakech | Cascades de Setti Fatma",
+        "metaDescription": "Excursion dans la vallée de l'Ourika depuis Marrakech : marche guidée aux cascades de Setti Fatma, coopérative d'argan, souk du lundi et déjeuner au bord de l'eau. Dès 30 €.",
+        "lead": "L'escapade montagnarde la plus proche de Marrakech : remontez la vallée de l'Ourika, visitez une coopérative d'argan, marchez vers les cascades de Setti Fatma avec un guide local et déjeunez au bord de l'eau.",
+        "price": {
+          "label": "À partir de 30 € par personne",
+          "note": "Inclut la prise en charge et le retour à l'hôtel, le transport aller-retour climatisé, un guide local aux cascades, la visite de la coopérative d'argan et l'eau en bouteille. Déjeuner sur place."
+        },
+        "imageAlt": "Rivière de l'Ourika longeant les terrasses de restaurants à Setti Fatma dans le Haut Atlas",
+        "highlights": [
+          "Randonnée avec un guide local jusqu'aux cascades de Setti Fatma",
+          "Déjeuner au bord de l'eau sur des tables installées au ras de la rivière",
+          "Fabrication artisanale d'huile d'argan dans une coopérative de femmes",
+          "Arrêt au souk hebdomadaire de Tnine Ourika pour les départs du lundi",
+          "Panoramas sur les cultures en terrasses et villages berbères en pisé",
+          "À environ 1 heure de route seulement de Marrakech"
+        ],
+        "faqs": [
+          {
+            "question": "À quelle distance se trouve la vallée de l'Ourika de Marrakech ?",
+            "answer": "Setti Fatma, au bout de la route de la vallée de l'Ourika, se situe à environ 65 km de Marrakech. Le trajet prend 1 h à 1 h 30 par sens et l'excursion complète dure environ 8 heures."
+          },
+          {
+            "question": "Quelle est la difficulté de la marche aux cascades de Setti Fatma ?",
+            "answer": "Atteindre la première cascade demande 45 minutes à 1 heure aller-retour sur sentier pierreux avec quelques courts passages où l'on pose les mains. La plupart des marcheurs y parviennent aisément ; les cascades plus hautes sont optionnelles."
+          },
+          {
+            "question": "Quel jour a lieu le marché de l'Ourika ?",
+            "answer": "Le souk hebdomadaire de Tnine Ourika se tient le lundi. Choisissez un départ le lundi si vous souhaitez l'inclure."
+          },
+          {
+            "question": "La vallée de l'Ourika convient-elle aux enfants ?",
+            "answer": "Oui, pour des enfants ayant le pied sûr. Le guide peut s'arrêter aux cascades inférieures, et les tables au bord de l'eau plaisent beaucoup aux familles."
+          },
+          {
+            "question": "Vallée de l'Ourika ou Imlil : que choisir ?",
+            "answer": "L'Ourika est plus courte, plus proche et centrée sur les cascades et le déjeuner au bord de l'eau. Imlil est plus haut, plus calme et offre une vraie randonnée de montagne face au Toubkal. Choisissez l'Ourika pour une sortie plus douce, Imlil pour marcher davantage."
+          }
+        ]
+      },
+      "jsonLd": {
+        "name": "Excursion d'une journée dans la vallée de l'Ourika depuis Marrakech",
+        "description": "Excursion d'une journée de Marrakech à la vallée de l'Ourika avec prise en charge à l'hôtel, arrêt dans une coopérative d'argan, marche guidée aux cascades de Setti Fatma et déjeuner au bord de la rivière."
+      }
+    },
+    "de": {
+      "location": "Ourika-Tal und Setti Fatma, Marokko",
+      "metrics": {
+        "distance": "~65 km ab Marrakesch",
+        "duration": "Etwa 8 Stunden",
+        "pickup": "09:00–09:30",
+        "elevation": "Setti Fatma, ca. 1.500 m"
+      },
+      "overview": [
+        "Das Ourika-Tal folgt dem Fluss Ourika in den Hohen Atlas und beginnt schon rund 30 km südlich von Marrakesch. Die Straße endet nach 65 km in Setti Fatma, einem Dorf auf etwa 1.500 Metern Höhe, oberhalb dessen sich sieben Wasserfälle durch eine Seitenschlucht ziehen.",
+        "Auf dem Weg hinauf halten Sie an einer Frauen-Arganöl-Kooperative sowie an Aussichtspunkten über Terrassenfelder und Lehmdörfer an den Hängen. Wenn Sie an einem Montag reisen, lässt sich auch der traditionelle Wochenmarkt in Tnine Ourika besuchen, auf dem die Bewohner der umliegenden Bergdörfer handeln.",
+        "In Setti Fatma führt Sie ein lokaler Guide hinauf zu den ersten Wasserfällen – eine 45- bis 60-minütige Wanderung über felsige Pfade. Zu Mittag essen Sie direkt am Flussufer, wo Tische fast im Wasser stehen. Dies ist unser kürzester Bergausflug und ideal, wenn Sie den Hohen Atlas ohne lange Anfahrt erleben möchten."
+      ],
+      "program": [
+        {
+          "time": "09:00–09:30",
+          "title": "Abholung in Marrakesch",
+          "location": "Ihr Hotel oder Riad",
+          "description": "Ihr Fahrer holt Sie am Hotel oder am nächstgelegenen befahrbaren Tor der Medina ab und fährt südwärts über die Haouz-Ebene in Richtung Berge."
+        },
+        {
+          "time": "10:00–10:40",
+          "title": "Argan-Kooperative oder Montagsmarkt",
+          "location": "Tnine Ourika und unteres Tal",
+          "description": "Besuch einer Frauenkooperative zur Arganölherstellung mit Tee und Brot zur Kostprobe. Montags zusätzlich kurzer Stopp auf dem Wochenmarkt von Tnine Ourika möglich."
+        },
+        {
+          "time": "10:40–11:30",
+          "title": "Fahrt durch das Tal mit Fotostopps",
+          "location": "Ourika-Tal",
+          "description": "Die Straße folgt dem Fluss zwischen Walnussbäumen und Terrassenfeldern mit Stopps an Aussichtspunkten auf Lehm- und Steindörfer."
+        },
+        {
+          "time": "11:30–13:00",
+          "title": "Geführte Wanderung zu den Setti-Fatma-Wasserfällen",
+          "location": "Setti Fatma, ca. 1.500 m",
+          "description": "Treffen mit dem lokalen Guide, Flussüberquerung über einen Steg und Aufstieg zu den ersten Wasserfällen (45–60 Minuten je Strecke über felsige Pfade mit kurzen Kletterpassagen). Die höheren Fälle bleiben optional."
+        },
+        {
+          "time": "13:00–14:30",
+          "title": "Mittagessen am Flussufer",
+          "location": "Flussufer in Setti Fatma",
+          "description": "Mittagessen in einem Restaurant am Fluss mit Tischen direkt über dem Wasser im Schatten der Bäume: Tajine, Salate und Minztee."
+        },
+        {
+          "time": "15:00–16:30",
+          "title": "Rückfahrt nach Marrakesch",
+          "location": "Setti Fatma nach Marrakesch",
+          "description": "Fahrt zurück aus dem Tal. Gegen 16:30 werden Sie an Ihrer Unterkunft in Marrakesch abgesetzt."
+        }
+      ],
+      "includes": [
+        "Abholung und Rückbringung an Ihrem Hotel oder Riad in Marrakesch",
+        "Hin- und Rückfahrt im klimatisierten Fahrzeug",
+        "Fahrer mit Deutsch-, Englisch-, Französisch- oder Spanischkenntnissen",
+        "Lokaler Guide für die Wanderung zu den Wasserfällen in Setti Fatma",
+        "Besuch einer Arganöl-Kooperative",
+        "Flaschenwasser im Fahrzeug"
+      ],
+      "excludes": [
+        "Mittagessen und Getränke",
+        "Trinkgelder für Guide und Fahrer"
+      ],
+      "goodToKnow": [
+        "Tragen Sie Schuhe mit gutem Profil. Der Pfad zu den Wasserfällen führt über feuchte Steine und kurze Kraxelstellen; Sandalen sind ungeeignet.",
+        "Reisen Sie montags, wenn Sie den Wochenmarkt in Tnine Ourika erleben möchten.",
+        "Nach starkem Regen oder während der Schneeschmelze steigt der Fluss rasch an; aus Sicherheitsgründen kann der Guide den Weg dann verkürzen.",
+        "Im Tal ist es 5 bis 10 Grad kühler als in Marrakesch – besonders im Sommer eine willkommene Abkühlung.",
+        "Nehmen Sie Dirham in bar für das Mittagessen und Trinkgelder mit; Restaurants in Setti Fatma akzeptieren selten Karten."
+      ],
+      "seo": {
+        "title": "Tagesausflug ins Ourika-Tal ab Marrakesch | Setti-Fatma-Wasserfälle",
+        "metaDescription": "Tagesausflug ins Ourika-Tal ab Marrakesch: geführte Wanderung zu den Setti-Fatma-Wasserfällen, Argan-Kooperative, Montagsmarkt und Mittagessen am Fluss. Ab 30 €.",
+        "lead": "Der kürzeste Atlas-Ausflug ab Marrakesch: Fahren Sie ins Ourika-Tal, besuchen Sie eine Argankooperative, wandern Sie mit lokalem Guide zu den Setti-Fatma-Wasserfällen und essen Sie direkt am Fluss zu Mittag.",
+        "price": {
+          "label": "Ab 30 € pro Person",
+          "note": "Inklusive Hotelabholung und -rückbringung, klimatisiertem Transfer, lokalem Guide für die Wasserfall-Wanderung, Stopp an der Argankooperative und Flaschenwasser. Mittagessen vor Ort zahlbar."
+        },
+        "imageAlt": "Der Ourika-Fluss zwischen Terrassenrestaurants in Setti Fatma im Hohen Atlas",
+        "highlights": [
+          "Geführte Wanderung zu den Wasserfällen von Setti Fatma",
+          "Mittagessen in einem Flussrestaurant mit Tischen über dem Wasser",
+          "Handgepresstes Arganöl in einer Frauenkooperative erleben",
+          "Montags-Abfahrten halten am traditionellen Wochenmarkt in Tnine Ourika",
+          "Ausblicke auf Terrassenfelder und Lehmdörfer entlang des Tals",
+          "Nur etwa 1 Stunde Fahrt ab Marrakesch pro Strecke"
+        ],
+        "faqs": [
+          {
+            "question": "Wie weit ist das Ourika-Tal von Marrakesch entfernt?",
+            "answer": "Setti Fatma am Ende der Talstraße liegt rund 65 km von Marrakesch entfernt. Die Fahrt dauert 1 bis 1,5 Stunden pro Strecke, der gesamte Tagesausflug etwa 8 Stunden."
+          },
+          {
+            "question": "Wie schwer ist die Wanderung zu den Wasserfällen von Setti Fatma?",
+            "answer": "Bis zum ersten Wasserfall dauert der felsige Weg 45 bis 60 Minuten pro Strecke mit einzelnen leichten Kraxelpassagen. Mit durchschnittlicher Fitness gut machbar; die oberen Fälle erfordern mehr Klettern und sind optional."
+          },
+          {
+            "question": "An welchem Tag findet der Ourika-Markt statt?",
+            "answer": "Der Wochenmarkt in Tnine Ourika findet immer montags statt. Buchen Sie eine Abfahrt am Montag, wenn Sie ihn besuchen möchten."
+          },
+          {
+            "question": "Eignet sich das Ourika-Tal für Kinder?",
+            "answer": "Ja, für trittsichere Kinder. Der Guide kann an den unteren Fällen pausieren, und die Restaurants direkt am Fluss sind bei Familien sehr beliebt."
+          },
+          {
+            "question": "Ourika-Tal oder Imlil – was passt besser?",
+            "answer": "Ourika ist kürzer, näher und auf Wasserfälle sowie ein Mittagessen am Fluss ausgerichtet. Imlil liegt höher, ruhiger und bietet eine längere Bergwanderung mit Blick auf den Toubkal. Ourika für einen leichteren Tag, Imlil für mehr Wandern."
+          }
+        ]
+      },
+      "jsonLd": {
+        "name": "Tagesausflug ins Ourika-Tal ab Marrakesch",
+        "description": "Tagesausflug ab Marrakesch ins Ourika-Tal mit Hotelabholung, Stopp an einer Argan-Kooperative, geführter Wanderung zu den Setti-Fatma-Wasserfällen und Mittagessen am Fluss."
+      }
+    },
+    "es": {
+      "location": "Valle de Ourika y Setti Fatma, Marruecos",
+      "metrics": {
+        "distance": "~65 km desde Marrakech",
+        "duration": "Unas 8 horas",
+        "pickup": "09:00 a 09:30",
+        "elevation": "Setti Fatma, ~1.500 m"
+      },
+      "overview": [
+        "El valle de Ourika sigue el curso del río Ourika adentrándose en el Alto Atlas desde unos 30 km al sur de Marrakech. La carretera termina a 65 km de la ciudad en Setti Fatma, una aldea a unos 1.500 metros de altitud con siete cascadas escalonadas en una garganta lateral.",
+        "De subida paramos en una cooperativa femenina de aceite de argán y en miradores sobre bancales de cultivo y pueblos de adobe en las laderas. Si viajas en lunes, también podrás recorrer el zoco semanal de Tnine Ourika, punto de encuentro para los aldeanos de la montaña.",
+        "En Setti Fatma un guía local te acompaña hasta las primeras cascadas, en un paseo de 45 minutos a 1 hora con algún tramo sobre rocas. El almuerzo es en un restaurante junto al río donde las mesas están casi dentro del agua. Es nuestra excursión de montaña más corta e ideal para ver el Atlas sin largos desplazamientos."
+      ],
+      "program": [
+        {
+          "time": "09:00 a 09:30",
+          "title": "Recogida en Marrakech",
+          "location": "Tu hotel o riad",
+          "description": "Tu conductor te recoge en tu hotel o en el acceso rodado más cercano en la medina y cruza hacia el sur la llanura de Haouz rumbo a la cordillera."
+        },
+        {
+          "time": "10:00 a 10:40",
+          "title": "Cooperativa de argán o zoco del lunes",
+          "location": "Tnine Ourika y valle bajo",
+          "description": "Visita a una cooperativa femenina de argán para ver la extracción manual y degustar té y pan. Los lunes también se puede parar en el mercado semanal de Tnine Ourika."
+        },
+        {
+          "time": "10:40 a 11:30",
+          "title": "Subida por el valle con paradas fotográficas",
+          "location": "Valle de Ourika",
+          "description": "La carretera sigue el río entre nogales y campos en terrazas, deteniéndose ante aldeas tradicionales construidas en tierra y piedra."
+        },
+        {
+          "time": "11:30 a 13:00",
+          "title": "Caminata guiada a las cascadas de Setti Fatma",
+          "location": "Setti Fatma, ~1.500 m",
+          "description": "Encuentro con el guía local y cruce del río por una pasarela para subir hasta las primeras cascadas (45 a 60 minutos por sentido sobre rocas). Los saltos superiores requieren trepar más y son opcionales."
+        },
+        {
+          "time": "13:00 a 14:30",
+          "title": "Almuerzo junto al río",
+          "location": "Orilla de Setti Fatma",
+          "description": "Comida en un restaurante a la orilla del río, con mesas bajo los árboles sobre el agua: tajín, ensaladas y té de menta."
+        },
+        {
+          "time": "15:00 a 16:30",
+          "title": "Regreso por carretera a Marrakech",
+          "location": "De Setti Fatma a Marrakech",
+          "description": "Regreso valle abajo hasta tu alojamiento en Marrakech sobre las 16:30."
+        }
+      ],
+      "includes": [
+        "Recogida y regreso a tu hotel o riad en Marrakech",
+        "Transporte ida y vuelta en vehículo con aire acondicionado",
+        "Conductor que habla español, inglés, francés o alemán",
+        "Guía local para la ruta a las cascadas en Setti Fatma",
+        "Parada en una cooperativa de aceite de argán",
+        "Agua embotellada en el vehículo"
+      ],
+      "excludes": [
+        "Almuerzo y bebidas",
+        "Propinas para el guía y el conductor"
+      ],
+      "goodToKnow": [
+        "Lleva calzado con buen agarre: el sendero cruza rocas mojadas y tiene breves tramos donde usar las manos. No se recomiendan sandalias.",
+        "Elige salir un lunes si quieres visitar el zoco rural de Tnine Ourika.",
+        "Tras lluvias intensas o deshielo el río sube rápido; por seguridad, el guía puede acortar el recorrido esos días.",
+        "En el valle hace entre 5 y 10 grados menos que en Marrakech, perfecto para refrescarse en verano.",
+        "Lleva dírhams en efectivo para la comida y propinas; los restaurantes de Setti Fatma rara vez aceptan tarjeta."
+      ],
+      "seo": {
+        "title": "Excursión al valle de Ourika desde Marrakech | Cascadas de Setti Fatma",
+        "metaDescription": "Excursión al valle de Ourika desde Marrakech: ruta guiada a las cascadas de Setti Fatma, cooperativa de argán, zoco del lunes y almuerzo junto al río. Desde 30 €.",
+        "lead": "La escapada al Atlas más cercana a Marrakech: sube por el valle de Ourika, visita una cooperativa de argán, camina a las cascadas de Setti Fatma con guía local y almuerza junto al río.",
+        "price": {
+          "label": "Desde 30 € por persona",
+          "note": "Incluye recogida y regreso al hotel, transporte ida y vuelta con aire acondicionado, guía local en las cascadas, parada en cooperativa de argán y agua embotellada. El almuerzo se paga allí."
+        },
+        "imageAlt": "El río Ourika pasando junto a restaurantes a la orilla en Setti Fatma en el Alto Atlas",
+        "highlights": [
+          "Ruta a pie con guía local hasta las cascadas de Setti Fatma",
+          "Almuerzo en restaurante ribereño con mesas sobre el agua",
+          "Extracción artesanal de aceite de argán en una cooperativa femenina",
+          "Las salidas de los lunes visitan el zoco semanal de Tnine Ourika",
+          "Vistas de bancales agrícolas y aldeas bereberes de tierra en el valle",
+          "A solo aproximadamente 1 hora por trayecto desde Marrakech"
+        ],
+        "faqs": [
+          {
+            "question": "¿A qué distancia está el valle de Ourika de Marrakech?",
+            "answer": "Setti Fatma, al final de la carretera del valle, está a unos 65 km de Marrakech. El trayecto dura entre 1 y 1,5 horas por sentido y el día completo unas 8 horas."
+          },
+          {
+            "question": "¿Qué dificultad tiene la subida a las cascadas de Setti Fatma?",
+            "answer": "Llegar a la primera cascada lleva de 45 minutos a 1 hora por sentido por sendero rocoso con cortos pasos de trepada. La mayoría de viajeros con forma física normal lo completan sin problema; las cascadas altas son opcionales."
+          },
+          {
+            "question": "¿Qué día se celebra el mercado de Ourika?",
+            "answer": "El zoco semanal de Tnine Ourika se celebra los lunes. Reserva tu salida en lunes si quieres visitarlo."
+          },
+          {
+            "question": "¿Es recomendable el valle de Ourika para ir con niños?",
+            "answer": "Sí, si los niños caminan con soltura. El guía puede quedarse en los primeros saltos, y comer con las mesas junto al río encanta a las familias."
+          },
+          {
+            "question": "¿Valle de Ourika o Imlil: cuál elegir?",
+            "answer": "Ourika es más corto, cercano y centrado en cascadas y comida junto al río. Imlil es más alto, tranquilo y ofrece una caminata más larga con vistas hacia el Toubkal. Elige Ourika para un día más suave e Imlil para caminar más."
+          }
+        ]
+      },
+      "jsonLd": {
+        "name": "Excursión de un día al valle de Ourika desde Marrakech",
+        "description": "Excursión desde Marrakech al valle de Ourika con recogida en hotel, parada en cooperativa de argán, caminata guiada a las cascadas de Setti Fatma y almuerzo junto al río."
+      }
+    }
   }
 }

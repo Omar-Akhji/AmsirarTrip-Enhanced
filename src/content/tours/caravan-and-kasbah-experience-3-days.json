@@ -68,5 +68,127 @@
     "description": "Travel from Fes to Marrakech through Middle Atlas cedar forests, Erg Chebbi sand dunes, Todra Gorges, and Ait Ben Haddou on a private 3-day expedition.",
     "price": 310,
     "currency": "EUR"
+  },
+  "translations": {
+    "fr": {
+      "title": "Circuit Désert de Fès à Marrakech 3 Jours | Erg Chebbi & Atlas (2026)",
+      "metaDescription": "Dès 310€ par pers. Circuit désert de 3 jours reliant Fès à Marrakech via les dunes de Merzouga. Bivouac sous les étoiles, gorges du Todra et Aït Ben Haddou.",
+      "lead": "Cet itinéraire direct de trois jours relie Fès à Marrakech à travers le Sahara, en vous évitant de revenir sur vos pas. En quittant Fès le matin, vous traversez le Moyen Atlas par Ifrane et les forêts de cèdres d'Azrou avant de descendre la vallée du Ziz bordée de palmiers jusqu'à Merzouga pour une balade à dromadaire au coucher du soleil et une nuit au campement. Les deux derniers jours mettent le cap à l'ouest par les gorges du Todra, la vallée du Dadès et le ksar d'Aït Ben Haddou avant de franchir le Haut Atlas jusqu'à Marrakech.",
+      "price": {
+        "label": "À partir de 310 € par personne",
+        "note": "Inclut le transfert privé climatisé de Fès à Marrakech, le chauffeur-guide agréé, 1 nuit en bivouac à Merzouga, 1 nuit en hôtel/riad dans la vallée du Dadès, les balades à dromadaire, les dîners et les petits-déjeuners à partir du jour 2."
+      },
+      "imageAlt": "Caravane de dromadaires traversant les dunes dorées de l'Erg Chebbi lors d'un circuit de 3 jours de Fès à Marrakech",
+      "highlights": [
+        "Traversée du Moyen Atlas via Ifrane et la forêt de cèdres d'Azrou",
+        "Observation des macaques de Barbarie en liberté dans les cèdres",
+        "Route à travers l'oasis verdoyante de la vallée du Ziz vers le Sahara",
+        "Balades à dromadaire au coucher et au lever du soleil dans l'Erg Chebbi",
+        "Nuit en bivouac avec tajines marocains et musique autour du feu",
+        "Marche dans les gorges du Todra et découverte d'Aït Ben Haddou avant Marrakech"
+      ],
+      "faqs": [
+        {
+          "question": "S'agit-il d'un trajet aller simple direct de Fès à Marrakech ?",
+          "answer": "Oui. Nous venons vous chercher à votre hébergement à Fès le jour 1 et vous déposons à votre hôtel ou riad à Marrakech le jour 3."
+        },
+        {
+          "question": "Quelle est la durée du trajet le jour 1 entre Fès et Merzouga ?",
+          "answer": "L'étape couvre environ 470 km (soit 7 h 30 à 8 h). La route est ponctuée d'arrêts à Ifrane, dans la forêt de cèdres d'Azrou, à Midelt pour le déjeuner et aux belvédères sur la vallée du Ziz avant l'arrivée aux dunes en fin d'après-midi."
+        },
+        {
+          "question": "Que deviennent nos grandes valises pendant la balade à dromadaire ?",
+          "answer": "Vos bagages principaux restent en sécurité dans votre véhicule privé ou sont acheminés directement au bivouac par un 4x4 d'assistance. Il suffit d'emporter un petit sac à dos sur le dromadaire."
+        },
+        {
+          "question": "Quelle est la différence entre les camps standard et de luxe ?",
+          "answer": "Les camps standard proposent des tentes privées équipées avec sanitaires partagés. Les camps de luxe offrent des tentes spacieuses avec douche chaude privative, toilettes et prises électriques."
+        },
+        {
+          "question": "Pouvez-vous adapter les repas à des régimes particuliers ?",
+          "answer": "Oui. Des menus végétariens, véganes ou sans gluten sont facilement prévus au riad comme au bivouac si vous les signalez lors de la réservation."
+        }
+      ]
+    },
+    "de": {
+      "title": "3-Tage Wüstentour von Fès nach Marrakesch | Erg Chebbi & Atlas (2026)",
+      "metaDescription": "Ab 310€ p.P. 3-Tage Wüstentrip von Fès nach Marrakesch über Merzouga. Kamelritt in Erg Chebbi, Todra-Schlucht und Kasbah Ait Ben Haddou.",
+      "lead": "Diese dreitägige Direktroute verbindet Fès über die Sahara mit Marrakesch, ohne dass Sie denselben Weg zurückfahren müssen. Morgens verlassen Sie Fès, überqueren den Mittleren Atlas über das Bergstädtchen Ifrane und die Zedernwälder von Azrou und folgen dem palmenreichen Ziz-Tal bis Merzouga zum Kamelritt bei Sonnenuntergang und einer Nacht im Wüstencamp. An den letzten beiden Tagen fahren Sie westwärts durch die Todra-Schlucht, das Dades-Tal und Kasbah Ait Ben Haddou über den Hohen Atlas nach Marrakesch.",
+      "price": {
+        "label": "Ab 310 € pro Person",
+        "note": "Inklusive privatem, klimatisiertem One-Way-Transport von Fès nach Marrakesch, lizenziertem Fahrer-Guide, 1 Nacht im Wüstencamp bei Merzouga, 1 Nacht im Hotel/Riad im Dades-Tal, Kamelritten, Abendessen sowie Frühstück ab Tag 2."
+      },
+      "imageAlt": "Kamelkarawane in den goldenen Dünen von Erg Chebbi auf der 3-tägigen Wüstentour von Fès nach Marrakesch",
+      "highlights": [
+        "Fahrt durch den Mittleren Atlas über Ifrane und den Zedernwald von Azrou",
+        "Beobachtung wilder Berberaffen in ihrem natürlichen Lebensraum",
+        "Panoramafahrt durch die Palmenoase des Ziz-Tals Richtung Sahara",
+        "Kamelritte zu Sonnenuntergang und Sonnenaufgang in den Dünen von Erg Chebbi",
+        "Übernachtung im Wüstencamp mit marokkanischer Tajine und Lagerfeuermusik",
+        "Spaziergang durch die Todra-Schlucht und Besuch von Ait Ben Haddou vor Marrakesch"
+      ],
+      "faqs": [
+        {
+          "question": "Ist dies eine direkte Einwegtour von Fès nach Marrakesch?",
+          "answer": "Ja. Wir holen Sie an Tag 1 an Ihrer Unterkunft in Fès ab und bringen Sie an Tag 3 zu Ihrem Hotel oder Riad in Marrakesch."
+        },
+        {
+          "question": "Wie lange dauert die Fahrt an Tag 1 von Fès nach Merzouga?",
+          "answer": "Die Strecke beträgt rund 470 km (etwa 7,5 bis 8 Stunden). Regelmäßige Stopps in Ifrane, im Zedernwald von Azrou, zum Mittagessen in Midelt und an Aussichtspunkten über das Ziz-Tal lockern die Fahrt auf, bevor Sie am späten Nachmittag die Dünen erreichen."
+        },
+        {
+          "question": "Was passiert während des Kamelritts mit unseren großen Koffern?",
+          "answer": "Ihr Hauptgepäck bleibt sicher im verschlossenen Privatfahrzeug oder wird per 4x4 direkt ins Camp gebracht. Auf dem Kamel benötigen Sie nur einen kleinen Tagesrucksack."
+        },
+        {
+          "question": "Worin unterscheiden sich Standard- und Luxuscamp?",
+          "answer": "Standardcamps bieten eingerichtete Privatzelte mit Gemeinschaftsbädern. Luxuscamps verfügen über geräumige Zelte mit eigener heißer Dusche, WC und Stromanschlüssen."
+        },
+        {
+          "question": "Können besondere Ernährungswünsche berücksichtigt werden?",
+          "answer": "Ja. Vegetarische, vegane oder glutenfreie Gerichte lassen sich sowohl im Riad als auch im Wüstencamp problemlos einrichten, wenn Sie uns dies bei der Buchung mitteilen."
+        }
+      ]
+    },
+    "es": {
+      "title": "Tour al Desierto de Fez a Marrakech 3 Días | Erg Chebbi y Atlas (2026)",
+      "metaDescription": "Desde 310€ por pers. Tour de 3 días desde Fez a Marrakech pasando por el desierto de Merzouga. Campamento en el Sáhara, gargantas del Todra y Ait Ben Haddou.",
+      "lead": "Esta ruta directa de tres días conecta Fez con Marrakech a través del desierto del Sáhara sin tener que deshacer el camino. Saliendo de Fez por la mañana, cruzas el Medio Atlas por Ifrane y los bosques de cedros de Azrou antes de descender el valle del Ziz hasta Merzouga para un paseo en dromedario al atardecer y noche en campamento. Los dos últimos días avanzan hacia el oeste por las gargantas del Todra, el valle del Dadès y la Kasbah Ait Ben Haddou hasta cruzar el Alto Atlas rumbo a Marrakech.",
+      "price": {
+        "label": "Desde 310 € por persona",
+        "note": "Incluye traslado privado solo de ida con aire acondicionado de Fez a Marrakech, conductor-guía titulado, 1 noche en campamento de Merzouga, 1 noche en hotel/riad en el valle del Dadès, paseos en dromedario, cenas y desayunos desde el día 2."
+      },
+      "imageAlt": "Caravana de dromedarios atravesando las dunas doradas de Erg Chebbi en el tour de 3 días de Fez a Marrakech",
+      "highlights": [
+        "Cruce del Medio Atlas pasando por Ifrane y el bosque de cedros de Azrou",
+        "Avistamiento de macacos de Berbería en libertad entre los cedros",
+        "Ruta panorámica por el palmeral del valle del Ziz camino al Sáhara",
+        "Paseos en dromedario al atardecer y al amanecer por Erg Chebbi",
+        "Noche en campamento del desierto con tajines marroquíes y música junto al fuego",
+        "Paseo por las gargantas del Todra y visita a Ait Ben Haddou antes de llegar a Marrakech"
+      ],
+      "faqs": [
+        {
+          "question": "¿Es un viaje directo de ida de Fez a Marrakech?",
+          "answer": "Sí. Te recogemos en tu alojamiento en Fez el día 1 y te dejamos en tu hotel o riad en Marrakech el día 3."
+        },
+        {
+          "question": "¿Cuánto dura el trayecto del día 1 de Fez a Merzouga?",
+          "answer": "Cubre unos 470 km (entre 7,5 y 8 horas). El viaje se hace ameno con paradas en Ifrane, el bosque de cedros de Azrou, almuerzo en Midelt y miradores del valle del Ziz antes de llegar a las dunas a última hora de la tarde."
+        },
+        {
+          "question": "¿Qué ocurre con nuestras maletas grandes durante el paseo en dromedario?",
+          "answer": "El equipaje principal permanece cerrado bajo llave en el vehículo privado o se traslada en 4x4 directamente al campamento. Solo necesitas llevar una mochila pequeña en el dromedario."
+        },
+        {
+          "question": "¿Qué diferencia hay entre el campamento estándar y el de lujo?",
+          "answer": "Los campamentos estándar disponen de jaimas privadas amuebladas con baños compartidos. Los de lujo cuentan con jaimas más amplias con ducha caliente privada, inodoro y enchufes."
+        },
+        {
+          "question": "¿Atendéis dietas especiales?",
+          "answer": "Sí. Podemos preparar menús vegetarianos, veganos o sin gluten tanto en el riad como en el campamento si nos avisas al reservar."
+        }
+      ]
+    }
   }
 }

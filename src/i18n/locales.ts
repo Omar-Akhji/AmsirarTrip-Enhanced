@@ -17,6 +17,14 @@ export function isLocale(code: string): code is Locale {
   return (LOCALES as readonly string[]).includes(code);
 }
 
+export const NON_DEFAULT_LOCALES = ["fr", "de", "es"] as const;
+
+export type NonDefaultLocale = (typeof NON_DEFAULT_LOCALES)[number];
+
+export function isNonDefaultLocale(code: string): code is NonDefaultLocale {
+  return (NON_DEFAULT_LOCALES as readonly string[]).includes(code);
+}
+
 export const LANGUAGES: readonly Language[] = languagesData.map((item) => {
   if (!isLocale(item.code)) {
     throw new Error(`Invalid locale code in languages.json: ${item.code}`);

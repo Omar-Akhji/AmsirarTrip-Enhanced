@@ -9,8 +9,8 @@ interface Props {
   readonly routeMap: RouteMapData;
 }
 
-const { routeMap, kicker = "Google Maps Route" } = Astro.props;
 const t = useTranslations(Astro.locals.locale);
+const { routeMap, kicker = t("routeMap.kicker") } = Astro.props;
 ---
 
 <article

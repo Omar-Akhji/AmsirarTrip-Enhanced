@@ -12,23 +12,6 @@ const locale = Astro.locals.locale;
 const t = useTranslations(locale);
 const excursions = await getExcursionsData();
 
-const formatExcursionPrice = (price: number): string => {
-  switch (locale) {
-    case "fr": {
-      return `À partir de ${price} € / pers.`;
-    }
-    case "es": {
-      return `Desde ${price} € / pers.`;
-    }
-    case "de": {
-      return `Ab ${price} € / Pers.`;
-    }
-    default: {
-      return `From €${price} / person`;
-    }
-  }
-};
-
 const excursionsGridTitle = splitTitleAccent(t("excursion.blog.lgTitle"));
 const excursionsFaqTitle = splitTitleAccent(t("excursion.faq.title"));
 
@@ -133,7 +116,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
               tagline={
                 excursion.price === undefined ?
                   t(excursion.tagline)
-                : formatExcursionPrice(excursion.price)
+                : t("excursion.card.priceFrom", { price: excursion.price })
               }
               title={t(excursion.title)}
               tourTypeBadge={t("tours.bothAvailable")}

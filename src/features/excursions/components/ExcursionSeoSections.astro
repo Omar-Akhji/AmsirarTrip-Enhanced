@@ -6,17 +6,31 @@ import RouteIcon from "@/shared/ui/icons/RouteIcon.astro";
 import HighlightsList from "@/shared/ui/widgets/HighlightsList.astro";
 
 interface Props {
+  readonly distanceLabel: string;
+  readonly durationLabel: string;
+  readonly elevationLabel: string;
   readonly highlights: readonly string[];
+  readonly highlightsKicker?: string | undefined;
   readonly highlightsTitle: string;
   readonly metrics: {
     readonly distance: string;
     readonly duration: string;
-    readonly pickup: string;
     readonly elevation: string;
+    readonly pickup: string;
   };
+  readonly pickupLabel: string;
 }
 
-const { metrics, highlights, highlightsTitle } = Astro.props;
+const {
+  metrics,
+  highlights,
+  highlightsTitle,
+  highlightsKicker,
+  distanceLabel,
+  durationLabel,
+  pickupLabel,
+  elevationLabel,
+} = Astro.props;
 ---
 
 <div
@@ -31,7 +45,7 @@ const { metrics, highlights, highlightsTitle } = Astro.props;
           class="col-start-1 row-start-1 row-span-2 size-5 shrink-0 self-center text-orange-600"
         />
         <span class="col-start-2 row-start-1 font-mono text-xs font-semibold tracking-wider text-stone-500 uppercase dark:text-mist-400">
-          Distance
+          {distanceLabel}
         </span>
       </dt>
       <dd class="m-0 col-start-2 row-start-2 font-mono text-xs/snug sm:text-sm font-bold text-stone-900 dark:text-mist-100">
@@ -46,7 +60,7 @@ const { metrics, highlights, highlightsTitle } = Astro.props;
           class="col-start-1 row-start-1 row-span-2 size-5 shrink-0 self-center text-orange-600"
         />
         <span class="col-start-2 row-start-1 font-mono text-xs font-semibold tracking-wider text-stone-500 uppercase dark:text-mist-400">
-          Duration
+          {durationLabel}
         </span>
       </dt>
       <dd class="m-0 col-start-2 row-start-2 font-mono text-xs/snug sm:text-sm font-bold text-stone-900 dark:text-mist-100">
@@ -61,7 +75,7 @@ const { metrics, highlights, highlightsTitle } = Astro.props;
           class="col-start-1 row-start-1 row-span-2 size-5 shrink-0 self-center text-orange-600"
         />
         <span class="col-start-2 row-start-1 font-mono text-xs font-semibold tracking-wider text-stone-500 uppercase dark:text-mist-400">
-          Pickup Window
+          {pickupLabel}
         </span>
       </dt>
       <dd class="m-0 col-start-2 row-start-2 font-mono text-xs/snug sm:text-sm font-bold text-stone-900 dark:text-mist-100">
@@ -76,7 +90,7 @@ const { metrics, highlights, highlightsTitle } = Astro.props;
           class="col-start-1 row-start-1 row-span-2 size-5 shrink-0 self-center text-orange-600"
         />
         <span class="col-start-2 row-start-1 font-mono text-xs font-semibold tracking-wider text-stone-500 uppercase dark:text-mist-400">
-          Elevation / Setting
+          {elevationLabel}
         </span>
       </dt>
       <dd class="m-0 col-start-2 row-start-2 font-mono text-xs/snug sm:text-sm font-bold text-stone-900 dark:text-mist-100">
@@ -90,4 +104,5 @@ const { metrics, highlights, highlightsTitle } = Astro.props;
   highlights={highlights}
   highlightsTitle={highlightsTitle}
   idPrefix="excursion"
+  kicker={highlightsKicker}
 />

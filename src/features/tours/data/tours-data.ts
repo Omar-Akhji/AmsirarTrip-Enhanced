@@ -1,5 +1,25 @@
 import type { Tour } from "../types";
-import { getCollection } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
+import { isNonDefaultLocale } from "@/i18n/locales";
+
+export interface LocalizedTourSeo {
+  readonly faqs: readonly { readonly answer: string; readonly question: string }[];
+  readonly highlights: readonly string[];
+  readonly imageAlt: string;
+  readonly lead: string;
+  readonly metaDescription: string;
+  readonly price: { readonly label: string; readonly note: string };
+  readonly title: string;
+}
+
+export function getLocalizedTourSeo(
+  tour: CollectionEntry<"tours">["data"],
+  locale: string,
+): LocalizedTourSeo {
+  return isNonDefaultLocale(locale) ?
+      tour.translations[locale]
+    : { ...tour.seo, imageAlt: tour.seo.imageAlt ?? tour.seo.title };
+}
 
 let cachedToursPromise: Promise<Tour[]> | undefined;
 

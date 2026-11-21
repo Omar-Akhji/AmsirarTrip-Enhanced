@@ -1,4 +1,12 @@
 import type { RouteMapData, RouteWaypoint } from "../types";
+import { DEFAULT_LOCALE } from "@/i18n/locales";
+import { useTranslations } from "@/i18n/utils";
+import {
+  EXCURSIONS_I18N,
+  TOURS_I18N,
+  type LocalizedRouteConfig,
+  type NonDefaultLocale,
+} from "./routes-i18n";
 
 export const MOROCCO_COORDINATES: Record<string, [number, number]> = {
   marrakech: [31.6295, -7.9811],
@@ -893,19 +901,44 @@ function buildGoogleMapsUrls(configWaypoints: TourRouteConfig["waypoints"]): {
   return { embedUrl, appUrl };
 }
 
+const NON_DEFAULT_LOCALES: readonly NonDefaultLocale[] = ["fr", "de", "es"];
+
+function getNonDefaultLocale(locale: string): NonDefaultLocale | undefined {
+  return NON_DEFAULT_LOCALES.find((candidate) => candidate === locale);
+}
+
+function formatDayOrTime(dayOrTime: string, locale: string, dayLabel: string): string {
+  if (locale === DEFAULT_LOCALE) return dayOrTime;
+  if (dayOrTime.startsWith("Day ")) {
+    return `${dayLabel}${dayOrTime.slice(3)}`;
+  }
+  const timeMatch = /^(\d{1,2}):(\d{2})\s+(AM|PM)$/i.exec(dayOrTime);
+  if (!timeMatch) return dayOrTime;
+  const rawHour = Number(timeMatch[1]);
+  const minutes = timeMatch[2] ?? "00";
+  const period = (timeMatch[3] ?? "").toUpperCase();
+  let hour24 = rawHour % 12;
+  if (period === "PM") {
+    hour24 += 12;
+  }
+  return `${String(hour24).padStart(2, "0")}:${minutes}`;
+}
+
 function buildRouteMap(
   normalizedKey: string,
   config: TourRouteConfig,
   title: string,
+  titleSuffix: string,
+  distance: string,
   cities: Pick<RouteMapData, "startCity" | "endCity">,
   waypoints: RouteWaypoint[],
 ): RouteMapData {
   const { embedUrl, appUrl } = buildGoogleMapsUrls(config.waypoints);
   return {
     id: `map-${normalizedKey}`,
-    title: `${title} - Route Map`,
+    title: `${title} - ${titleSuffix}`,
     ...cities,
-    distance: config.distance,
+    distance,
     waypoints,
     routeCoordinates: waypoints.map((w) => [w.lat, w.lng] as [number, number]),
     googleMapsEmbedUrl: embedUrl,
@@ -913,10 +946,23 @@ function buildRouteMap(
   };
 }
 
-const toWaypoints = (config: TourRouteConfig): RouteWaypoint[] =>
-  config.waypoints.map(({ key, ...wp }) => {
+const toWaypoints = (
+  config: TourRouteConfig,
+  localized: LocalizedRouteConfig | undefined,
+  locale: string,
+  dayLabel: string,
+): RouteWaypoint[] =>
+  config.waypoints.map(({ key, ...wp }, index) => {
     const [lat, lng] = MOROCCO_COORDINATES[key] ?? MARRAKECH_DEFAULT;
-    return { ...wp, lat, lng };
+    const translated = localized?.waypoints[index];
+    return {
+      ...wp,
+      name: translated?.name ?? wp.name,
+      description: translated?.description ?? wp.description,
+      dayOrTime: formatDayOrTime(wp.dayOrTime, locale, dayLabel),
+      lat,
+      lng,
+    };
   });
 
 export function getTourRouteMap(
@@ -924,16 +970,23 @@ export function getTourRouteMap(
   startLocation: string,
   endLocation: string,
   title: string,
+  locale: string = DEFAULT_LOCALE,
 ): RouteMapData | undefined {
   const normalizedKey = tourKey.toLowerCase().trim();
   const config = TOURS_CONFIG[normalizedKey];
   if (!config) return undefined;
 
-  const waypoints = toWaypoints(config);
+  const t = useTranslations(locale);
+  const nonDefaultLocale = getNonDefaultLocale(locale);
+  const localized = nonDefaultLocale ? TOURS_I18N[normalizedKey]?.[nonDefaultLocale] : undefined;
+  const waypoints = toWaypoints(config, localized, locale, t("tours.day"));
+
   return buildRouteMap(
     normalizedKey,
     config,
     title,
+    t("routeMap.titleSuffix"),
+    localized?.distance ?? config.distance,
     { startCity: startLocation, endCity: endLocation },
     waypoints,
   );
@@ -943,17 +996,26 @@ export function getExcursionRouteMap(
   excursionKey: string,
   _locationName: string,
   title: string,
+  locale: string = DEFAULT_LOCALE,
 ): RouteMapData | undefined {
   const normalizedKey = excursionKey.toLowerCase().trim();
   const config = EXCURSIONS_CONFIG[normalizedKey];
   if (!config) return undefined;
 
-  const waypoints = toWaypoints(config);
+  const t = useTranslations(locale);
+  const nonDefaultLocale = getNonDefaultLocale(locale);
+  const localized =
+    nonDefaultLocale ? EXCURSIONS_I18N[normalizedKey]?.[nonDefaultLocale] : undefined;
+  const waypoints = toWaypoints(config, localized, locale, t("tours.day"));
+  const marrakechName = t("tours.cities.marrakech");
+
   return buildRouteMap(
     normalizedKey,
     config,
     title,
-    { startCity: "Marrakech", endCity: waypoints.at(-1)?.name ?? "Marrakech" },
+    t("routeMap.titleSuffix"),
+    localized?.distance ?? config.distance,
+    { startCity: marrakechName, endCity: waypoints.at(-1)?.name ?? marrakechName },
     waypoints,
   );
 }

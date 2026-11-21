@@ -12,6 +12,7 @@ interface Props {
   readonly endCity: string;
   readonly endLabel: string;
   readonly highlights: readonly string[];
+  readonly highlightsKicker?: string | undefined;
   readonly highlightsTitle: string;
   readonly startCity: string;
   readonly startLabel: string;
@@ -28,6 +29,7 @@ const {
   endLabel,
   endCity,
   highlightsTitle,
+  highlightsKicker,
   highlights,
   tourTypeLabel,
   tourTypeValue = "Private & Shared",
@@ -112,4 +114,5 @@ const {
   highlights={highlights}
   highlightsTitle={highlightsTitle}
   idPrefix="tour"
+  kicker={highlightsKicker}
 />

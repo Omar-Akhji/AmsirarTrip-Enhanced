@@ -68,5 +68,127 @@
     "description": "Six-day private route from Casablanca to Marrakech via Rabat, Chefchaouen, the Fes medina, Erg Chebbi desert, and Ait Ben Haddou.",
     "price": 590,
     "currency": "EUR"
+  },
+  "translations": {
+    "fr": {
+      "title": "Circuit Maroc 6 Jours depuis Casablanca | Chefchaouen, Fès & Désert (2026)",
+      "metaDescription": "Dès 590€ par pers. Circuit de 6 jours depuis Casablanca jusqu'à Marrakech. Chefchaouen, médina de Fès, dunes de Merzouga et gorges du Dadès.",
+      "lead": "Ce circuit de six jours relie la côte atlantique du Maroc, les montagnes du Rif, deux capitales impériales et le désert du Sahara. Au départ de Casablanca après un arrêt à la mosquée Hassan II face à l'océan, vous montez vers le nord via Rabat jusqu'aux ruelles bleues de Chefchaouen. La route passe ensuite par les ruines romaines de Volubilis et les portes monumentales de Meknès pour rejoindre Fès et sa médina, puis traverse le Moyen Atlas et la vallée du Ziz jusqu'à Merzouga avant de revenir à l'ouest par les gorges du Todra, le Dadès et Aït Ben Haddou jusqu'à Marrakech.",
+      "price": {
+        "label": "À partir de 590 € par personne",
+        "note": "Inclut un véhicule privé climatisé avec chauffeur-guide, 4 nuits en riads/hôtels de charme (1 nuit à Chefchaouen, 2 nuits à Fès, 1 nuit dans la vallée du Dadès), 1 nuit en bivouac à l'Erg Chebbi, un guide agréé à la journée à Fès, les balades à dromadaire, les dîners dans le désert et le Dadès, et les petits-déjeuners à partir du jour 2."
+      },
+      "imageAlt": "Itinéraire au Maroc de Casablanca à Marrakech passant par Chefchaouen, Fès et les dunes de l'Erg Chebbi",
+      "highlights": [
+        "Visite de la mosquée Hassan II à Casablanca et de la kasbah des Oudayas à Rabat",
+        "Découverte des ruelles bleues et places de montagne de Chefchaouen",
+        "Visite des mosaïques romaines de Volubilis et de la ville impériale de Meknès",
+        "Visite guidée à pied d'une journée dans l'ancienne médina de Fès",
+        "Balade à dromadaire au coucher du soleil et nuit en bivouac à l'Erg Chebbi",
+        "Traversée des gorges du Todra, de la vallée du Dadès et du ksar d'Aït Ben Haddou jusqu'à Marrakech"
+      ],
+      "faqs": [
+        {
+          "question": "Pouvez-vous nous récupérer directement à l'aéroport de Casablanca (CMN) ?",
+          "answer": "Oui. Votre chauffeur vous attend dans le hall des arrivées de l'aéroport Mohammed V avec une pancarte à votre nom, ou vous retrouve à votre hôtel à Casablanca à l'heure convenue."
+        },
+        {
+          "question": "Un guide local est-il inclus à Fès ?",
+          "answer": "Oui. Comme Fès el-Bali compte plus de 9 000 ruelles, un guide historique agréé vous accompagne toute la journée pour vous orienter et replacer chaque monument dans son contexte."
+        },
+        {
+          "question": "Quel jour comporte le plus long trajet en voiture ?",
+          "answer": "Le jour 4 (de Fès à Merzouga) est la plus longue étape, avec environ 7 heures de route rythmées par des arrêts à Ifrane, dans la forêt de cèdres d'Azrou, à Midelt pour le déjeuner et aux points de vue sur la vallée du Ziz."
+        },
+        {
+          "question": "Quels hébergements sont inclus ?",
+          "answer": "Vous séjournez 1 nuit à Chefchaouen, 2 nuits à Fès, 1 nuit en bivouac dans le désert de Merzouga et 1 nuit dans la vallée du Dadès. Des campements de luxe avec salle de bain privative et climatisation sont disponibles en option."
+        },
+        {
+          "question": "Pouvons-nous personnaliser cet itinéraire ?",
+          "answer": "Oui. S'agissant d'un circuit privé, nous pouvons facilement ajouter une nuit à Essaouira en fin de séjour ou adapter le rythme à vos horaires de vol."
+        }
+      ]
+    },
+    "de": {
+      "title": "6-Tage Marokko Rundreise ab Casablanca | Chefchaouen, Fès & Wüste (2026)",
+      "metaDescription": "Ab 590€ p.P. 6-tägige Marokko-Rundreise von Casablanca nach Marrakesch. Chefchaouen, Fès-Medina, Sahara-Dünen in Merzouga und Dades-Schlucht.",
+      "lead": "Diese sechstägige Route verbindet Marokkos Atlantikküste, das Rif-Gebirge, zwei Königsstädte und die Sahara. Nach dem Start in Casablanca an der Hassan-II.-Moschee fahren Sie nordwärts über Rabat in die blau getünchten Gassen von Chefchaouen. Weiter geht es über die römischen Ruinen von Volubilis und die Stadttore von Meknès nach Fès zu einer ganztägigen Medina-Führung, dann über den Mittleren Atlas und das Ziz-Tal nach Merzouga und schließlich über Todra-Schlucht, Dades-Tal und Ait Ben Haddou nach Marrakesch.",
+      "price": {
+        "label": "Ab 590 € pro Person",
+        "note": "Inklusive privatem, klimatisiertem Fahrzeug mit Fahrer-Guide, 4 Nächten in Boutique-Riads/Hotels (1 Nacht Chefchaouen, 2 Nächte Fès, 1 Nacht Dades-Tal), 1 Nacht im Erg-Chebbi-Wüstencamp, lizenziertem Tagesguide in Fès, Kamelritten, Abendessen in der Wüste und im Dades-Tal sowie Frühstück ab Tag 2."
+      },
+      "imageAlt": "Marokko-Rundreise von Casablanca über die blaue Medina von Chefchaouen, Fès und Erg Chebbi nach Marrakesch",
+      "highlights": [
+        "Besuch der Hassan-II.-Moschee in Casablanca und der Kasbah des Oudaias in Rabat",
+        "Erkundung der blauen Gassen und Bergplätze von Chefchaouen",
+        "Spaziergang durch die römischen Mosaike von Volubilis und die Königsstadt Meknès",
+        "Ganztägiger geführter Rundgang durch die Altstadt von Fès",
+        "Kamelritt zum Sonnenuntergang und Übernachtung im Camp in den Dünen von Erg Chebbi",
+        "Fahrt durch die Todra-Schlucht, das Dades-Tal und Ait Ben Haddou bis Marrakesch"
+      ],
+      "faqs": [
+        {
+          "question": "Können Sie uns direkt am Flughafen Casablanca (CMN) abholen?",
+          "answer": "Ja. Ihr Fahrer erwartet Sie mit einem Namensschild in der Ankunftshalle des Flughafens Mohammed V oder holt Sie zur gewünschten Zeit von Ihrem Hotel in Casablanca ab."
+        },
+        {
+          "question": "Ist in Fès ein lokaler Guide inbegriffen?",
+          "answer": "Ja. Da Fès el-Bali über mehr als 9.000 schmale Gassen verfügt, begleitet Sie ein lizenzierter Stadtführer den ganzen Tag, damit Sie sich zurechtfinden und die Hintergründe der Bauwerke kennenlernen."
+        },
+        {
+          "question": "Welcher Tag hat die längste Fahrstrecke?",
+          "answer": "Tag 4 (Fès nach Merzouga) ist mit rund 7 Stunden Fahrzeit die längste Etappe, unterbrochen durch Stopps in Ifrane, im Zedernwald von Azrou, zum Mittagessen in Midelt und an Aussichtspunkten über das Ziz-Tal."
+        },
+        {
+          "question": "Welche Unterkünfte sind enthalten?",
+          "answer": "Sie übernachten 1 Nacht in Chefchaouen, 2 Nächte in Fès, 1 Nacht im Wüstencamp bei Merzouga und 1 Nacht im Dades-Tal. Upgrades auf ein Luxuscamp mit eigenem Bad und Klimaanlage sind verfügbar."
+        },
+        {
+          "question": "Lässt sich diese Route anpassen?",
+          "answer": "Ja. Da es sich um eine Privattour handelt, können wir am Ende problemlos eine Nacht in Essaouira ergänzen oder das Tempo an Ihre Flugzeiten anpassen."
+        }
+      ]
+    },
+    "es": {
+      "title": "Tour por Marruecos 6 Días desde Casablanca | Chefchaouen, Fez y Desierto (2026)",
+      "metaDescription": "Desde 590€ por pers. Tour de 6 días por Marruecos desde Casablanca hasta Marrakech. Chefchaouen, medina de Fez, dunas de Merzouga y gargantas del Dades.",
+      "lead": "Esta ruta de seis días une la costa atlántica de Marruecos, las montañas del Rif, dos capitales imperiales y el desierto del Sáhara. Desde Casablanca y la mezquita Hassan II frente al océano, avanzas hacia el norte por Rabat hasta las calles azules de Chefchaouen. Luego pasas por las ruinas romanas de Volúbilis y las puertas de Meknes rumbo a Fez para recorrer su medina con guía, cruzas el Medio Atlas y el valle del Ziz hasta Merzouga y finalizas hacia el oeste por las gargantas del Todra, el valle del Dadès y Ait Ben Haddou hasta Marrakech.",
+      "price": {
+        "label": "Desde 590 € por persona",
+        "note": "Incluye vehículo privado con aire acondicionado y chófer-guía, 4 noches en riads/hoteles con encanto (1 noche en Chefchaouen, 2 en Fez, 1 en el valle del Dadès), 1 noche en campamento en Erg Chebbi, guía oficial de día completo en Fez, paseos en dromedario, cenas en el desierto y el Dadès, y desayunos desde el día 2."
+      },
+      "imageAlt": "Ruta por Marruecos desde Casablanca pasando por Chefchaouen, Fez imperial, las dunas de Erg Chebbi y Marrakech",
+      "highlights": [
+        "Visita a la mezquita Hassan II en Casablanca y la alcazaba de los Udayas en Rabat",
+        "Paseo por los callejones azules y plazas de montaña de Chefchaouen",
+        "Recorrido por los mosaicos romanos de Volúbilis y la ciudad imperial de Meknes",
+        "Visita guiada a pie de día completo por la antigua medina de Fez",
+        "Paseo en dromedario al atardecer y noche en campamento entre las dunas de Erg Chebbi",
+        "Ruta por las gargantas del Todra, el valle del Dadès y la Kasbah Ait Ben Haddou hasta Marrakech"
+      ],
+      "faqs": [
+        {
+          "question": "¿Podéis recogernos directamente en el aeropuerto de Casablanca (CMN)?",
+          "answer": "Sí. Tu chófer te esperará en la sala de llegadas del aeropuerto Mohammed V con un cartel con tu nombre, o te recogerá en tu hotel de Casablanca a la hora acordada."
+        },
+        {
+          "question": "¿Está incluido el guía local en Fez?",
+          "answer": "Sí. Dado que Fez el-Bali tiene más de 9.000 callejones estrechos, un guía histórico titulado te acompaña durante toda la jornada para no perderte y conocer el contexto de cada monumento."
+        },
+        {
+          "question": "¿Qué día tiene el trayecto en coche más largo?",
+          "answer": "El día 4 (de Fez a Merzouga) es la etapa más larga, con unas 7 horas de conducción amenizadas con paradas en Ifrane, el bosque de monos de Azrou, almuerzo en Midelt y miradores sobre el valle del Ziz."
+        },
+        {
+          "question": "¿Qué alojamientos están incluidos?",
+          "answer": "Te alojas 1 noche en Chefchaouen, 2 noches en Fez, 1 noche en campamento en Merzouga y 1 noche en el valle del Dadès. Disponemos de campamentos superiores con baño privado y climatización."
+        },
+        {
+          "question": "¿Podemos personalizar esta ruta?",
+          "answer": "Sí. Al ser un tour privado, podemos añadir fácilmente una noche en Essaouira al final o ajustar el ritmo a los horarios de tus vuelos."
+        }
+      ]
+    }
   }
 }

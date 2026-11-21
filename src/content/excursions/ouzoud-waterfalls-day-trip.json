@@ -133,5 +133,352 @@
     "description": "Full-day trip from Marrakech to the Ouzoud Waterfalls with hotel pickup, a local guide, a walk to the base of the falls and time to see the Barbary macaques.",
     "price": 35,
     "currency": "EUR"
+  },
+  "translations": {
+    "fr": {
+      "location": "Cascades d'Ouzoud, Tanaghmeilt, province d'Azilal, Maroc",
+      "metrics": {
+        "distance": "~150 km de Marrakech",
+        "duration": "Environ 10 heures",
+        "pickup": "08:00 à 08:30",
+        "elevation": "Contreforts du Moyen Atlas"
+      },
+      "overview": [
+        "Les cascades d'Ouzoud se trouvent à environ 150 km au nord-est de Marrakech, près du village de Tanaghmeilt dans la province d'Azilal. La rivière chute d'environ 110 mètres sur la roche rouge en plusieurs paliers avant de rejoindre les gorges de l'oued El Abid. Ouzoud signifie « olive » en amazigh, et les sentiers vers les chutes traversent toujours des oliveraies et passent devant de petits moulins à eau.",
+        "Le trajet dure 2 h 30 à 3 heures par sens à travers la plaine du Haouz et les premiers reliefs du Moyen Atlas, avec une pause café en chemin. En haut des chutes, vous retrouvez un guide local qui vous accompagne le long des belvédères, à travers les oliveraies où vivent des macaques de Barbarie en liberté, puis jusqu'au bassin au pied des cascades.",
+        "En bas, vous pouvez embarquer sur une petite barque en bois à fond plat pour approcher les embruns, puis déjeuner sur une terrasse face aux chutes. La remontée se fait tranquillement avec de nombreux arrêts. Vous êtes de retour à votre hôtel ou riad à Marrakech en début de soirée."
+      ],
+      "program": [
+        {
+          "time": "08:00 à 08:30",
+          "title": "Prise en charge à Marrakech",
+          "location": "Votre hôtel ou riad",
+          "description": "Votre chauffeur vous récupère à votre hôtel ou à la porte accessible en véhicule la plus proche si vous logez en médina. Vous quittez Marrakech vers le nord-est à travers les terres agricoles de la plaine du Haouz."
+        },
+        {
+          "time": "09:45 à 10:05",
+          "title": "Pause café et détente",
+          "location": "Café en bord de route",
+          "description": "Un arrêt de 20 minutes pour un café, un thé à la menthe et les toilettes avant que la route ne monte vers les collines de la province d'Azilal."
+        },
+        {
+          "time": "10:45 à 12:30",
+          "title": "Descente guidée vers les cascades",
+          "location": "Tanaghmeilt, sommet des chutes",
+          "description": "Rencontre avec votre guide local en haut des cascades. Le sentier descend à travers les oliveraies devant d'anciens moulins à eau, avec des arrêts aux points de vue qui dévoilent toute la hauteur des chutes. Les macaques de Barbarie sont souvent visibles dans les arbres."
+        },
+        {
+          "time": "12:30 à 13:15",
+          "title": "Pied des chutes et balade en barque",
+          "location": "Bassin sous la cascade principale",
+          "description": "En bas des gorges, vous pouvez faire une promenade optionnelle en barque en bois près des embruns de la grande chute. Les bateliers demandent un petit supplément en espèces."
+        },
+        {
+          "time": "13:15 à 14:45",
+          "title": "Déjeuner face aux cascades",
+          "location": "Restaurant en terrasse dans les gorges",
+          "description": "Déjeuner sur l'une des terrasses familiales installées face aux chutes : tajine, grillades, salades et jus d'orange frais. Après le repas, le sentier remonte tranquillement par l'autre versant des gorges."
+        },
+        {
+          "time": "15:30 à 18:30",
+          "title": "Trajet retour vers Marrakech",
+          "location": "D'Ouzoud à Marrakech",
+          "description": "Vous retrouvez votre chauffeur à Tanaghmeilt pour le retour. Dépose à votre hébergement à Marrakech entre 18:00 et 18:30 selon la circulation."
+        }
+      ],
+      "includes": [
+        "Prise en charge et retour à votre hôtel ou riad à Marrakech",
+        "Transport aller-retour en véhicule climatisé",
+        "Chauffeur parlant français, anglais, espagnol ou allemand",
+        "Guide local pour la promenade autour des cascades",
+        "Eau en bouteille à bord du véhicule"
+      ],
+      "excludes": [
+        "Déjeuner et boissons",
+        "Balade optionnelle en barque au pied des chutes (à régler en espèces sur place)",
+        "Pourboires pour votre guide et votre chauffeur"
+      ],
+      "goodToKnow": [
+        "Portez des chaussures fermées avec une bonne semelle : les marches près du bassin sont souvent humides à cause des embruns.",
+        "Les macaques sont sauvages. Observez-les à distance et ne les nourrissez pas.",
+        "La marche dure environ 2 heures avec arrêts et inclut la remontée. Dites-le-nous lors de la réservation si vous préférez un parcours plus court limité aux belvédères du haut.",
+        "Prévoyez des dirhams en espèces pour le déjeuner, la barque et les petits achats : la carte bancaire est rarement acceptée sur place.",
+        "Le débit est le plus fort de février à mai. En fin d'été, les chutes sont plus calmes mais les bassins sont plus agréables pour se baigner."
+      ],
+      "seo": {
+        "title": "Excursion aux cascades d'Ouzoud depuis Marrakech | Balade guidée & Déjeuner",
+        "metaDescription": "Excursion aux cascades d'Ouzoud depuis Marrakech : prise en charge à l'hôtel, marche guidée vers les chutes de 110 m, macaques de Barbarie, barque et déjeuner face aux cascades. Dès 35 €.",
+        "lead": "Une journée complète au départ de Marrakech vers les cascades d'Ouzoud (110 m) dans les contreforts du Moyen Atlas, avec guide local, promenade dans les oliveraies peuplées de macaques sauvages et déjeuner face aux chutes.",
+        "price": {
+          "label": "À partir de 35 € par personne",
+          "note": "Inclut la prise en charge et le retour à l'hôtel, le transport aller-retour climatisé, un guide local aux chutes et de l'eau en bouteille. Le déjeuner et la barque se règlent sur place."
+        },
+        "imageAlt": "Cascades d'Ouzoud se déversant sur la roche rouge dans une gorge verdoyante près de Tanaghmeilt, province d'Azilal",
+        "highlights": [
+          "Descente à pied jusqu'aux cascades d'Ouzoud (110 m) avec un guide local",
+          "Observation de macaques de Barbarie sauvages dans les oliveraies des gorges",
+          "Passage devant les anciens moulins à eau toujours en place sur le sentier",
+          "Balade en barque en bois au plus près des embruns de la cascade principale",
+          "Déjeuner sur une terrasse ombragée face aux chutes",
+          "Prise en charge à votre hôtel à Marrakech et transport aller-retour climatisé"
+        ],
+        "faqs": [
+          {
+            "question": "À quelle distance se trouve Ouzoud de Marrakech et combien de temps dure la route ?",
+            "answer": "Ouzoud est à environ 150 km au nord-est de Marrakech. Le trajet prend 2 h 30 à 3 heures par sens avec une courte pause café. La journée complète dure environ 10 heures."
+          },
+          {
+            "question": "La marche aux cascades d'Ouzoud est-elle difficile ?",
+            "answer": "C'est une marche facile à modérée d'environ 2 heures avec arrêts. La descente est douce et la remontée suit régulièrement des marches et des sentiers en terre. Sur demande, le guide peut rester sur les belvédères supérieurs proches du village."
+          },
+          {
+            "question": "Vais-je voir des singes à Ouzoud ?",
+            "answer": "Des macaques de Barbarie sauvages vivent dans les arbres autour des chutes et sont observés lors de la plupart des visites, sans garantie absolue. Merci de ne pas les nourrir."
+          },
+          {
+            "question": "Peut-on se baigner aux cascades d'Ouzoud ?",
+            "answer": "La baignade est possible dans les bassins calmes au pied de la chute principale, surtout en été. Emportez un maillot et une petite serviette si vous souhaitez vous baigner ; l'eau reste fraîche toute l'année."
+          },
+          {
+            "question": "Quelle est la meilleure période pour visiter Ouzoud ?",
+            "answer": "De février à mai, le débit est puissant et les collines sont vertes. L'été est plus animé et plus chaud, idéal pour se baigner. L'excursion a lieu toute l'année."
+          }
+        ]
+      },
+      "jsonLd": {
+        "name": "Excursion d'une journée aux cascades d'Ouzoud depuis Marrakech",
+        "description": "Excursion d'une journée de Marrakech aux cascades d'Ouzoud avec prise en charge à l'hôtel, guide local, descente au pied des chutes et observation des macaques de Barbarie."
+      }
+    },
+    "de": {
+      "location": "Ouzoud-Wasserfälle, Tanaghmeilt, Provinz Azilal, Marokko",
+      "metrics": {
+        "distance": "~150 km ab Marrakesch",
+        "duration": "Etwa 10 Stunden",
+        "pickup": "08:00–08:30",
+        "elevation": "Ausläufer des Mittleren Atlas"
+      },
+      "overview": [
+        "Die Ouzoud-Wasserfälle liegen etwa 150 km nordöstlich von Marrakesch neben dem Dorf Tanaghmeilt in der Provinz Azilal. Der Fluss stürzt über mehrere Stufen rund 110 Meter über roten Fels in die Schlucht des Oued El Abid. Ouzoud bedeutet auf Tamazight „Olive“, und die Pfade hinab führen noch heute durch Olivenhaine an kleinen Wassermühlen vorbei.",
+        "Die Fahrt dauert je Richtung 2,5 bis 3 Stunden über die Haouz-Ebene und hinauf in die Ausläufer des Mittleren Atlas, inklusive einer Kaffeepause unterwegs. Oben an den Fällen treffen Sie einen lokalen Guide, der Sie über Aussichtspunkte und durch die Haine mit wilden Berbermakaken bis hinunter ans Becken führt.",
+        "Unten können Sie eine kurze Fahrt auf einem flachen Holzboot nahe an die Gischt unternehmen und anschließend auf einer Terrasse gegenüber den Fällen zu Mittag essen. Der Rückweg hinauf erfolgt gemächlich mit Pausen. Am frühen Abend sind Sie zurück an Ihrem Hotel oder Riad in Marrakesch."
+      ],
+      "program": [
+        {
+          "time": "08:00–08:30",
+          "title": "Abholung in Marrakesch",
+          "location": "Ihr Hotel oder Riad",
+          "description": "Ihr Fahrer holt Sie am Hotel oder – bei Unterkünften in der Medina – am nächstgelegenen befahrbaren Stadttor ab. Sie verlassen Marrakesch nordostwärts über die flache Haouz-Ebene."
+        },
+        {
+          "time": "09:45–10:05",
+          "title": "Kaffee- und Rastpause",
+          "location": "Straßencafé an der Strecke",
+          "description": "Eine 20-minütige Pause für Kaffee, Minztee und Toiletten, bevor die Straße in die Hügel der Provinz Azilal ansteigt."
+        },
+        {
+          "time": "10:45–12:30",
+          "title": "Geführter Abstieg zu den Fällen",
+          "location": "Tanaghmeilt, oberhalb der Fälle",
+          "description": "Treffen mit Ihrem lokalen Guide am oberen Rand der Wasserfälle. Der Weg führt durch Olivenhaine vorbei an alten Wassermühlen zu Aussichtspunkten auf die volle Fallhöhe. Entlang dieses Abschnitts sieht man häufig Berbermakaken in den Bäumen."
+        },
+        {
+          "time": "12:30–13:15",
+          "title": "Becken am Fuß der Fälle & Bootsfahrt",
+          "location": "Becken unter dem Hauptfall",
+          "description": "Unten können Sie optional eine kurze Fahrt auf einem flachen Holzboot bis nahe an die Gischt des Hauptwasserfalls unternehmen. Die Bootsführer erheben vor Ort einen kleinen Barbetrag."
+        },
+        {
+          "time": "13:15–14:45",
+          "title": "Mittagessen mit Blick auf die Wasserfälle",
+          "location": "Terrassenrestaurant in der Schlucht",
+          "description": "Mittagessen auf einer der Familienterrassen am Hang gegenüber den Kaskaden mit Tajine, Gegrilltem, Salaten und frischem Orangensaft. Danach geht es auf der anderen Schluchtseite gemächlich wieder bergauf."
+        },
+        {
+          "time": "15:30–18:30",
+          "title": "Rückfahrt nach Marrakesch",
+          "location": "Ouzoud nach Marrakesch",
+          "description": "Sie treffen Ihren Fahrer wieder in Tanaghmeilt zur Rückfahrt. Je nach Verkehr erreichen Sie Ihre Unterkunft in Marrakesch zwischen 18:00 und 18:30."
+        }
+      ],
+      "includes": [
+        "Abholung und Rückbringung an Ihrem Hotel oder Riad in Marrakesch",
+        "Hin- und Rückfahrt im klimatisierten Fahrzeug",
+        "Fahrer mit Deutsch-, Englisch-, Französisch- oder Spanischkenntnissen",
+        "Lokaler Guide für den Rundgang an den Wasserfällen",
+        "Flaschenwasser im Fahrzeug"
+      ],
+      "excludes": [
+        "Mittagessen und Getränke",
+        "Optionale Bootsfahrt am Fuß der Wasserfälle (Barzahlung vor Ort)",
+        "Trinkgelder für Guide und Fahrer"
+      ],
+      "goodToKnow": [
+        "Tragen Sie geschlossene Schuhe mit griffiger Sohle: Die Stufen nahe dem Becken sind oft feucht durch die Gischt.",
+        "Die Makaken leben wild. Beobachten Sie sie aus Abstand und füttern Sie sie nicht.",
+        "Der Rundweg dauert mit Pausen etwa 2 Stunden und beinhaltet den Wiederaufstieg. Geben Sie uns bei der Buchung Bescheid, falls Sie lieber nur die oberen Aussichtspunkte besuchen möchten.",
+        "Nehmen Sie Dirham in Bargeld für Mittagessen, Bootsfahrt und kleine Einkäufe mit; Kartenzahlung wird an den Fällen selten akzeptiert.",
+        "Von Februar bis Mai führen die Fälle am meisten Wasser. Im Spätsommer ist der Fluss ruhiger, dafür laden die Becken eher zum Schwimmen ein."
+      ],
+      "seo": {
+        "title": "Tagesausflug zu den Ouzoud-Wasserfällen ab Marrakesch | Führung & Mittagessen",
+        "metaDescription": "Tagesausflug zu den Ouzoud-Wasserfällen ab Marrakesch: Hotelabholung, geführter Weg zu den 110 m hohen Fällen, Berberaffen, Bootstour und Mittagessen mit Blick auf die Kaskaden. Ab 35 €.",
+        "lead": "Ein ganzer Tag ab Marrakesch zu den 110 Meter hohen Ouzoud-Wasserfällen am Rand des Mittleren Atlas, mit lokalem Guide, einem Spaziergang durch Olivenhaine voller wilder Makaken und Mittagessen gegenüber den Kaskaden.",
+        "price": {
+          "label": "Ab 35 € pro Person",
+          "note": "Inklusive Hotelabholung und -rückbringung, klimatisiertem Hin- und Rücktransfer, lokalem Guide an den Fällen und Flaschenwasser. Mittagessen und Bootsfahrt werden vor Ort bezahlt."
+        },
+        "imageAlt": "Ouzoud-Wasserfälle, die über roten Fels in eine grüne Schlucht bei Tanaghmeilt in der Provinz Azilal stürzen",
+        "highlights": [
+          "Geführter Abstieg zu den 110 Meter hohen Ouzoud-Wasserfällen",
+          "Wilde Berbermakaken in den Olivenhainen oberhalb der Schlucht beobachten",
+          "Vorbei an alten Wassermühlen entlang des historischen Pfads",
+          "Optionale Fahrt im flachen Holzboot nahe an die Gischt des Hauptfalls",
+          "Mittagessen auf einer Terrasse mit direktem Blick auf die Kaskaden",
+          "Hotelabholung in Marrakesch und klimatisierter Transfer in beide Richtungen"
+        ],
+        "faqs": [
+          {
+            "question": "Wie weit ist Ouzoud von Marrakesch entfernt und wie lange dauert die Fahrt?",
+            "answer": "Ouzoud liegt rund 150 km nordöstlich von Marrakesch. Die Fahrt dauert je Richtung 2,5 bis 3 Stunden inklusive einer kurzen Kaffeepause. Der gesamte Ausflug dauert rund 10 Stunden."
+          },
+          {
+            "question": "Wie anstrengend ist die Wanderung an den Ouzoud-Wasserfällen?",
+            "answer": "Es ist ein leichter bis moderater Rundgang von etwa 2 Stunden mit Stopps. Der Abstieg ist sanft, der Rückweg führt gleichmäßig über Stufen und Naturpfade hinauf. Auf Wunsch bleibt der Guide mit Ihnen bei den oberen Aussichtspunkten nahe dem Dorf."
+          },
+          {
+            "question": "Sieht man in Ouzoud Affen?",
+            "answer": "Wilde Berbermakaken leben in den Bäumen rund um die Fälle und sind auf den meisten Ausflügen zu sehen, auch wenn Sichtungen nie garantiert werden können. Bitte füttern Sie die Tiere nicht."
+          },
+          {
+            "question": "Kann man an den Ouzoud-Wasserfällen schwimmen?",
+            "answer": "In den ruhigeren Becken unterhalb des Hauptfalls ist Baden vor allem im Sommer möglich. Bringen Sie Badekleidung und ein kleines Handtuch mit; das Wasser bleibt ganzjährig kühl."
+          },
+          {
+            "question": "Wann ist die beste Reisezeit für Ouzoud?",
+            "answer": "Von Februar bis Mai haben die Fälle am meisten Wasser und die Hügel sind grün. Im Sommer ist es wärmer und belebter, aber ideal zum Schwimmen. Der Ausflug findet ganzjährig statt."
+          }
+        ]
+      },
+      "jsonLd": {
+        "name": "Tagesausflug zu den Ouzoud-Wasserfällen ab Marrakesch",
+        "description": "Ganztägiger Ausflug von Marrakesch zu den Ouzoud-Wasserfällen mit Hotelabholung, lokalem Guide, Abstieg an den Fuß der Fälle und Zeit zur Beobachtung der Berbermakaken."
+      }
+    },
+    "es": {
+      "location": "Cascadas de Ouzoud, Tanaghmeilt, provincia de Azilal, Marruecos",
+      "metrics": {
+        "distance": "~150 km desde Marrakech",
+        "duration": "Unas 10 horas",
+        "pickup": "08:00 a 08:30",
+        "elevation": "Estribaciones del Medio Atlas"
+      },
+      "overview": [
+        "Las cascadas de Ouzoud se encuentran a unos 150 km al noreste de Marrakech, junto a la aldea de Tanaghmeilt, en la provincia de Azilal. El río cae unos 110 metros sobre roca rojiza en varios saltos antes de seguir por la garganta de El Abid. Ouzoud significa «oliva» en amazigh, y los senderos hacia las cataratas siguen atravesando olivares y antiguos molinos de agua.",
+        "El trayecto dura entre 2,5 y 3 horas por sentido cruzando la llanura de Haouz hacia las estribaciones del Medio Atlas, con una parada para tomar café. Arriba te espera un guía local para bajar por los miradores, entre olivares donde viven macacos de Berbería en libertad, hasta la poza inferior.",
+        "Abajo puedes dar un paseo opcional en barca de madera plana cerca de la espuma y luego almorzar en una terraza frente a las cascadas. La subida de regreso es gradual y con paradas. Volverás a tu hotel o riad en Marrakech a primera hora de la tarde."
+      ],
+      "program": [
+        {
+          "time": "08:00 a 08:30",
+          "title": "Recogida en Marrakech",
+          "location": "Tu hotel o riad",
+          "description": "Tu conductor te recoge en el hotel o en la puerta accesible más cercana si te alojas dentro de la medina. Salida hacia el noreste atravesando los campos agrícolas de la llanura de Haouz."
+        },
+        {
+          "time": "09:45 a 10:05",
+          "title": "Parada para café y descanso",
+          "location": "Cafetería en ruta",
+          "description": "Pausa de 20 minutos para tomar café o té de menta e ir al baño antes de empezar el ascenso hacia las colinas de Azilal."
+        },
+        {
+          "time": "10:45 a 12:30",
+          "title": "Caminata guiada hacia las cascadas",
+          "location": "Tanaghmeilt, parte alta de las cataratas",
+          "description": "Encuentro con tu guía local en la parte superior. El sendero desciende entre olivares y viejos molinos con paradas en miradores que muestran toda la altura de los saltos. Es habitual ver macacos de Berbería en los árboles."
+        },
+        {
+          "time": "12:30 a 13:15",
+          "title": "Base de las cascadas y paseo en barca",
+          "location": "Poza bajo la caída principal",
+          "description": "En el fondo puedes subir de forma opcional a una barca plana de madera que se acerca a la cortina de agua principal. Los barqueros cobran una pequeña tarifa en efectivo."
+        },
+        {
+          "time": "13:15 a 14:45",
+          "title": "Almuerzo frente a las cascadas",
+          "location": "Restaurante con terraza en la garganta",
+          "description": "Comida en una terraza familiar orientada a las cataratas: tajín, carnes a la brasa, ensaladas y zumo de naranja natural. Tras comer, el camino sube con calma por la ladera opuesta."
+        },
+        {
+          "time": "15:30 a 18:30",
+          "title": "Regreso por carretera a Marrakech",
+          "location": "De Ouzoud a Marrakech",
+          "description": "Reencuentro con tu conductor en Tanaghmeilt para iniciar la vuelta. Llegada a tu alojamiento en Marrakech entre las 18:00 y las 18:30 según el tráfico."
+        }
+      ],
+      "includes": [
+        "Recogida y regreso a tu hotel o riad en Marrakech",
+        "Transporte de ida y vuelta en vehículo con aire acondicionado",
+        "Conductor que habla español, inglés, francés o alemán",
+        "Guía local para recorrer los senderos de las cascadas",
+        "Agua embotellada en el vehículo"
+      ],
+      "excludes": [
+        "Almuerzo y bebidas",
+        "Paseo opcional en barca en la base (pago en efectivo en el lugar)",
+        "Propinas para el guía y el conductor"
+      ],
+      "goodToKnow": [
+        "Lleva calzado cerrado con buena suela: los escalones cercanos a la poza suelen estar húmedos por la bruma.",
+        "Los macacos son animales salvajes. Obsérvalos a distancia y no les des comida.",
+        "El paseo dura unas 2 horas con paradas e incluye la subida de vuelta. Avísanos al reservar si prefieres una ruta más corta solo por los miradores altos.",
+        "Lleva dírhams en efectivo para la comida, la barca y pequeñas compras; casi ningún local acepta tarjeta.",
+        "El caudal alcanza su máximo entre febrero y mayo. A finales de verano baja el volumen pero el agua es más agradable para bañarse."
+      ],
+      "seo": {
+        "title": "Excursión a las cascadas de Ouzoud desde Marrakech | Ruta guiada y almuerzo",
+        "metaDescription": "Excursión a las cascadas de Ouzoud desde Marrakech: recogida en hotel, caminata guiada a los saltos de 110 m, macacos de Berbería, barca y almuerzo frente al agua. Desde 35 €.",
+        "lead": "Una jornada completa desde Marrakech a las cascadas de Ouzoud (110 m) en el Medio Atlas, con guía local, paseo entre olivares con macacos salvajes y almuerzo frente a los saltos de agua.",
+        "price": {
+          "label": "Desde 35 € por persona",
+          "note": "Incluye recogida y regreso al hotel, transporte ida y vuelta con aire acondicionado, guía local en las cascadas y agua embotellada. El almuerzo y la barca se abonan allí."
+        },
+        "imageAlt": "Cascadas de Ouzoud cayendo sobre roca rojiza en un desfiladero verde junto a Tanaghmeilt, provincia de Azilal",
+        "highlights": [
+          "Bajada guiada hasta las cascadas de Ouzoud de 110 metros de altura",
+          "Observación de macacos de Berbería salvajes en los olivares del cañón",
+          "Paso junto a antiguos molinos de agua tradicionales en el sendero",
+          "Paseo opcional en barca de madera cerca de la espuma del salto principal",
+          "Almuerzo en terraza con vistas directas a las cascadas",
+          "Recogida en tu hotel de Marrakech y traslado ida y vuelta con aire acondicionado"
+        ],
+        "faqs": [
+          {
+            "question": "¿A qué distancia está Ouzoud de Marrakech y cuánto dura el viaje?",
+            "answer": "Ouzoud está a unos 150 km al noreste de Marrakech. El trayecto dura entre 2,5 y 3 horas por sentido con una breve parada para café. La excursión completa dura unas 10 horas."
+          },
+          {
+            "question": "¿Qué dificultad tiene la caminata en las cascadas de Ouzoud?",
+            "answer": "Es un paseo fácil a moderado de unas 2 horas con paradas. La bajada es suave y la subida se hace por escalones y senderos de tierra a ritmo tranquilo. Si lo prefieres, el guía puede limitarse a los miradores altos cerca del pueblo."
+          },
+          {
+            "question": "¿Veré monos en Ouzoud?",
+            "answer": "Viven macacos de Berbería en libertad en los árboles alrededor de las cataratas y se ven en casi todas las visitas, aunque no está garantizado. Por favor, no los alimentes."
+          },
+          {
+            "question": "¿Se puede nadar en las cascadas de Ouzoud?",
+            "answer": "Es posible bañarse en las pozas tranquilas debajo del salto principal, sobre todo en verano. Lleva bañador y toalla pequeña si piensas darte un baño; el agua está fría todo el año."
+          },
+          {
+            "question": "¿Cuál es la mejor época para visitar Ouzoud?",
+            "answer": "Entre febrero y mayo el caudal es más fuerte y las colinas están verdes. En verano hay más ambiente y calor, ideal para bañarse. La excursión opera todo el año."
+          }
+        ]
+      },
+      "jsonLd": {
+        "name": "Excursión de un día a las cascadas de Ouzoud desde Marrakech",
+        "description": "Excursión de día completo desde Marrakech a las cascadas de Ouzoud con recogida en hotel, guía local, bajada hasta la base de las cataratas y tiempo para ver macacos de Berbería."
+      }
+    }
   }
 }

@@ -7,6 +7,7 @@ import PricingCard from "@/shared/ui/widgets/PricingCard.astro";
 import TripInfoSections from "@/shared/ui/widgets/TripInfoSections.astro";
 import type { ImageMetadata } from "astro";
 import type { CollectionEntry } from "astro:content";
+import { getLocalizedExcursionContent } from "../data/excursions-data";
 import ExcursionProgram from "./ExcursionProgram.astro";
 import ExcursionSeoSections from "./ExcursionSeoSections.astro";
 
@@ -20,29 +21,20 @@ interface Props {
 
 const { excursion, excursionKey, imageSrc, locale, slug = "" } = Astro.props;
 const t = useTranslations(locale);
-const isEnglish = locale === "en";
+const localized = excursion ? getLocalizedExcursionContent(excursion, locale) : undefined;
 
 const excursionSlug = slug.length > 0 ? slug : excursionKey;
 const transitionName = `trip-image-excursions-${excursionSlug}`;
 
-const fallbackHighlights: readonly string[] = [
-  t(`${excursionKey}.highlights.0`),
-  t(`${excursionKey}.highlights.1`),
-  t(`${excursionKey}.highlights.2`),
-  t(`${excursionKey}.highlights.3`),
-].filter((item): item is string => typeof item === "string" && item.length > 0);
+const fallbackHighlights = parseStringArray(t.raw(`${excursionKey}.highlights`));
 
 const highlights =
-  isEnglish && excursion?.seo?.highlights && excursion.seo.highlights.length > 0 ?
-    excursion.seo.highlights
-  : fallbackHighlights.length > 0 ? fallbackHighlights
-  : (excursion?.seo?.highlights ?? []);
+  localized && localized.seo.highlights.length > 0 ? localized.seo.highlights : fallbackHighlights;
 
 const sidebarItems = parseStringArray(t.raw("excursion.sidebar.items"));
 
-const title = isEnglish && excursion?.seo?.title ? excursion.seo.title : t(`${excursionKey}.title`);
-const lead =
-  isEnglish && excursion?.seo?.lead ? excursion.seo.lead : t("excursion.detailsSubtitle");
+const title = localized?.seo.title ?? t(`${excursionKey}.title`);
+const lead = localized?.seo.lead ?? t("excursion.detailsSubtitle");
 
 const heroSubtitle = t(
   excursion?.i18nKeyPrefix && t.has(`excursion.list.${excursion.i18nKeyPrefix}.tagline`) ?
@@ -52,34 +44,39 @@ const heroSubtitle = t(
 
 const distanceLabel = t(`${excursionKey}.distanceValue`);
 const durationLabel = t(`${excursionKey}.durationLabel`);
-const altText = excursion?.seo?.imageAlt ?? t(`${excursionKey}.alt`);
+const altText = localized?.seo.imageAlt ?? t(`${excursionKey}.alt`);
 
-const metrics = excursion?.metrics ?? {
+const metrics = localized?.metrics ?? {
   distance: distanceLabel,
   duration: durationLabel,
   pickup: "08:00 AM hotel pickup in Marrakech",
   elevation: "Atlas foothills",
 };
 
-const price = excursion?.seo?.price ?? {
-  label: "From €25 / person",
-  note: "Small-group or private transfer with licensed English-speaking driver.",
+const price = localized?.seo.price ?? {
+  label: t("excursion.card.priceFrom", { price: 25 }),
+  note: t("tours.priceNote"),
 };
 
 const overviewParagraphs: readonly string[] =
-  isEnglish && excursion?.overview && excursion.overview.length > 0 ?
-    excursion.overview
+  localized && localized.overview.length > 0 ?
+    localized.overview
   : [t(`${excursionKey}.overview`)].filter(
       (p): p is string => typeof p === "string" && p.length > 0,
     );
 
-const program = excursion?.program ?? [];
-const faqs = excursion?.seo?.faqs ?? [];
-const includes = excursion?.includes ?? [];
-const excludes = excursion?.excludes ?? [];
-const goodToKnow = excursion?.goodToKnow ?? [];
+const program = localized?.program ?? [];
+const faqs = localized?.seo.faqs ?? [];
+const includes = localized?.includes ?? [];
+const excludes = localized?.excludes ?? [];
+const goodToKnow = localized?.goodToKnow ?? [];
 
-const routeMap = getExcursionRouteMap(excursionKey, excursion?.location ?? "Morocco", title);
+const routeMap = getExcursionRouteMap(
+  excursionKey,
+  localized?.location ?? "Morocco",
+  title,
+  locale,
+);
 ---
 
 <TripLayout
@@ -90,7 +87,7 @@ const routeMap = getExcursionRouteMap(excursionKey, excursion?.location ?? "Moro
   ]}
   hasUnderline={true}
   headingId="excursion-title"
-  imageAlt={`${altText} : Morocco excursion destination`}
+  imageAlt={altText}
   imageSrc={imageSrc}
   lead={lead}
   pageSubtitle={heroSubtitle}
@@ -116,9 +113,14 @@ const routeMap = getExcursionRouteMap(excursionKey, excursion?.location ?? "Moro
 >
   <Fragment slot="content">
     <ExcursionSeoSections
+      distanceLabel={t("excursion.common.distanceLabel")}
+      durationLabel={t("excursion.common.durationLabel")}
+      elevationLabel={t("excursion.common.elevationLabel")}
       highlights={highlights}
+      highlightsKicker={t("excursion.common.kickerHighlights")}
       highlightsTitle={t("excursion.common.highlights")}
       metrics={metrics}
+      pickupLabel={t("excursion.common.pickupLabel")}
     />
 
     <section
@@ -155,17 +157,21 @@ const routeMap = getExcursionRouteMap(excursionKey, excursion?.location ?? "Moro
     )}
 
     <TripInfoSections
+      excludedKicker={t("excursion.common.kickerExcluded")}
       excludedTitle={t("excursion.common.excluded")}
       excludes={excludes}
       goodToKnow={goodToKnow}
+      goodToKnowKicker={t("excursion.common.kickerGoodToKnow")}
       goodToKnowTitle={t("excursion.common.goodToKnow")}
       idPrefix="excursion"
+      includedKicker={t("excursion.common.kickerIncluded")}
       includedTitle={t("excursion.common.included")}
       includes={includes}
     />
 
     <PricingCard
       idPrefix="excursion"
+      kicker={t("excursion.common.kickerPricing")}
       price={price}
       priceLabel={t("excursion.common.priceLabel")}
       pricingTitle={t("excursion.common.pricingTitle")}
@@ -174,6 +180,7 @@ const routeMap = getExcursionRouteMap(excursionKey, excursion?.location ?? "Moro
 
     {faqs.length > 0 && (
       <FaqAccordion
+        categoryLabel={t("excursion.common.kickerFaq")}
         faqs={faqs}
         faqTitle={t("excursion.common.faqTitle")}
         idPrefix="excursion"

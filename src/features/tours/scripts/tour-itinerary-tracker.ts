@@ -37,7 +37,7 @@ export function initTourItineraryTracker(): () => void {
   const stages: StageMetadata[] = stageElements.map((el, index) => {
     const rawNumber = el.dataset["stageNumber"];
     const stageNumber = rawNumber ? Number(rawNumber) : index + 1;
-    const ordinalLabel = el.dataset["stageOrdinal"] ?? `Day ${stageNumber}`;
+    const ordinalLabel = el.dataset["stageOrdinal"] ?? String(stageNumber);
     const title = el.dataset["stageTitle"] ?? "";
     const route = el.dataset["stageRoute"] ?? title;
     const node = el.querySelector<HTMLElement>(".stage-node") ?? el;
@@ -80,7 +80,9 @@ export function initTourItineraryTracker(): () => void {
     container.style.setProperty("--itinerary-trigger-offset", `${getStickyTriggerOffset()}px`);
 
     if (stickyHeading) {
-      stickyHeading.textContent = activeStage.ordinalLabel.toUpperCase();
+      stickyHeading.textContent = activeStage.ordinalLabel.toLocaleUpperCase(
+        document.documentElement.lang || "en",
+      );
     }
 
     if (stickyCounterCurrent) {

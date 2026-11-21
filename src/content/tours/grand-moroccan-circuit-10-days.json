@@ -68,5 +68,127 @@
     "description": "Traverse Sahara dunes, imperial cities, Atlas peaks, and coastal capitals in an epic 10-day private adventure across Morocco.",
     "price": 980,
     "currency": "EUR"
+  },
+  "translations": {
+    "fr": {
+      "title": "Grand Tour du Maroc 10 Jours | Marrakech, Fès, Sahara & Chefchaouen (2026)",
+      "metaDescription": "Dès 980€ par pers. Le grand circuit complet de 10 jours au Maroc. Villes impériales, désert du Sahara à Erg Chebbi, Chefchaouen et côte atlantique.",
+      "lead": "Cet itinéraire de dix jours réunit en un seul voyage le Haut Atlas, le désert du Sahara, les quatre villes impériales (Marrakech, Fès, Meknès et Rabat), la ville bleue de Chefchaouen et la côte atlantique.",
+      "price": {
+        "label": "À partir de 980 € par personne",
+        "note": "Inclut le transport privé climatisé pendant 10 jours, le chauffeur-guide agréé, 8 nuits en riads et hôtels de charme, 1 nuit en bivouac à l'Erg Chebbi (standard ou luxe sur demande), les guides agréés à Marrakech et Fès, les balades à dromadaire, les dîners dans le Dadès et le désert, et les petits-déjeuners à partir du jour 2."
+      },
+      "imageAlt": "Grand circuit au Maroc réunissant les dunes du Sahara, les médinas impériales, le Haut Atlas et Chefchaouen",
+      "highlights": [
+        "Visite guidée à pied de Marrakech : palais de la Bahia, Koutoubia et souks historiques",
+        "Traversée du Haut Atlas par le Tizi n'Tichka (2 260 m) et visite d'Aït Ben Haddou",
+        "Balades à dromadaire au coucher et au lever du soleil dans l'Erg Chebbi à Merzouga",
+        "Visite guidée d'une journée complète dans la médina médiévale de Fès el-Bali",
+        "Temps libre dans les ruelles bleues et sur les hauteurs de Chefchaouen",
+        "Découverte de Volubilis, Meknès, la tour Hassan à Rabat et la mosquée Hassan II à Casablanca"
+      ],
+      "faqs": [
+        {
+          "question": "Pourquoi le circuit commence-t-il à Marrakech et se termine-t-il à Casablanca ?",
+          "answer": "L'aéroport Mohammed V de Casablanca (CMN) concentre la majorité des vols long-courriers, ce qui offre une sortie pratique sans revenir jusqu'à Marrakech. Nous pouvons toutefois inverser l'itinéraire ou boucler sur Marrakech selon vos vols."
+        },
+        {
+          "question": "Des guides locaux sont-ils inclus dans les villes impériales ?",
+          "answer": "Oui. Des guides officiels agréés assurent les visites guidées à pied à Marrakech et à Fès pour circuler aisément dans les souks et découvrir l'histoire de chaque site."
+        },
+        {
+          "question": "Le rythme de conduite est-il fatigant sur 10 jours ?",
+          "answer": "Non. Nous avons prévu deux nuits consécutives à Marrakech, Fès et Chefchaouen afin d'éviter de refaire vos bagages chaque matin. Les véhicules sont récents, climatisés et pourvus d'eau en bouteille."
+        },
+        {
+          "question": "Pouvons-nous choisir le niveau de confort des hôtels ?",
+          "answer": "Oui. Nous proposons trois gammes d'hébergement : Tradition (riads authentiques), Confort Supérieur (riads de charme et hôtels 4 étoiles) et Luxe VIP (établissements 5 étoiles et tentes de luxe avec salle de bain privative)."
+        },
+        {
+          "question": "Quelle quantité de bagages pouvons-nous emporter ?",
+          "answer": "Le véhicule étant exclusivement réservé à votre groupe, le coffre accueille sans difficulté vos grandes valises et bagages cabine."
+        }
+      ]
+    },
+    "de": {
+      "title": "10-Tage Marokko Große Rundreise | Marrakesch, Fès, Sahara & Chefchaouen (2026)",
+      "metaDescription": "Ab 980€ p.P. 10-tägige Marokko-Erlebnisreise. Hoher Atlas, Merzouga-Sahara, Königsstädte Fès & Meknès, blaue Stadt Chefchaouen und Casablanca.",
+      "lead": "Diese zehntägige Reiseroute verbindet den Hohen Atlas, die Sahara, alle vier Königsstädte (Marrakesch, Fès, Meknès und Rabat), das blaue Bergstädtchen Chefchaouen und die Atlantikküste in einer durchgehenden Rundreise.",
+      "price": {
+        "label": "Ab 980 € pro Person",
+        "note": "Inklusive privatem, klimatisiertem Fahrzeug für 10 Tage, lizenziertem Fahrer-Guide, 8 Nächten in Boutique-Riads und Hotels, 1 Nacht im Erg-Chebbi-Wüstencamp (Standard oder Luxus-Upgrade), lizenzierten Stadtführern in Marrakesch und Fès, Kamelritten, Abendessen im Dades-Tal und in der Wüste sowie Frühstück ab Tag 2."
+      },
+      "imageAlt": "Große Marokko-Rundreise mit Sahara-Dünen, Königsstädten, Hohen Atlas-Pässen und Chefchaouen",
+      "highlights": [
+        "Geführter Stadtrundgang in Marrakesch mit Bahia-Palast, Koutoubia-Moschee und Souks",
+        "Überquerung des Hohen Atlas am Tizi-n'Tichka-Pass (2.260 m) und Besuch von Ait Ben Haddou",
+        "Kamelritte zu Sonnenuntergang und Sonnenaufgang in den Dünen von Erg Chebbi bei Merzouga",
+        "Ganztägiger geführter Rundgang durch die mittelalterliche Medina von Fès el-Bali",
+        "Freie Zeit für die blauen Gassen und Aussichtspunkte von Chefchaouen",
+        "Besichtigung von Volubilis, Meknès, Hassan-Turm in Rabat und Hassan-II.-Moschee in Casablanca"
+      ],
+      "faqs": [
+        {
+          "question": "Warum beginnt die Reise in Marrakesch und endet in Casablanca?",
+          "answer": "Der Flughafen Mohammed V in Casablanca (CMN) bedient die meisten Langstreckenflüge und ermöglicht eine bequeme Abreise ohne Rückfahrt nach Marrakesch. Auf Wunsch führen wir die Route auch umgekehrt oder als Rundkurs zurück nach Marrakesch durch."
+        },
+        {
+          "question": "Sind in den Königsstädten lokale Stadtführer enthalten?",
+          "answer": "Ja. Staatlich lizenzierte Stadtführer begleiten Sie auf eigenen Rundgängen sowohl in Marrakesch als auch in Fès, damit Sie sich sicher in den Souks bewegen und die Geschichte der Bauwerke kennenlernen."
+        },
+        {
+          "question": "Sind die Fahrtstrecken über 10 Tage anstrengend?",
+          "answer": "Nein. Wir planen bewusst je zwei Übernachtungen in Marrakesch, Fès und Chefchaouen ein, sodass Sie nicht jeden Morgen Koffer packen müssen. Die Fahrzeuge sind modern, klimatisiert und mit Trinkwasser ausgestattet."
+        },
+        {
+          "question": "Können wir die Hotelkategorie wählen?",
+          "answer": "Ja. Wir bieten drei Kategorien: Authentisch (traditionelle Riads), Komfort (Boutique-Riads und 4-Sterne-Hotels) sowie Luxus VIP (5-Sterne-Häuser und Luxuszelte mit eigenem Bad)."
+        },
+        {
+          "question": "Wie viel Gepäck können wir mitnehmen?",
+          "answer": "Da das Fahrzeug privat für Ihre Gruppe bereitsteht, bietet der Kofferraum reichlich Platz für große Koffer und Handgepäck."
+        }
+      ]
+    },
+    "es": {
+      "title": "Gran Circuito por Marruecos 10 Días | Marrakech, Fez, Sáhara y Chefchaouen (2026)",
+      "metaDescription": "Desde 980€ por pers. Gran circuito de 10 días por Marruecos. Montañas del Atlas, dunas de Merzouga, ciudades imperiales, Chefchaouen y Casablanca.",
+      "lead": "Esta ruta de diez días enlaza el Alto Atlas, el desierto del Sáhara, las cuatro ciudades imperiales (Marrakech, Fez, Meknes y Rabat), el pueblo azul de Chefchaouen y la costa atlántica en un solo recorrido continuo.",
+      "price": {
+        "label": "Desde 980 € por persona",
+        "note": "Incluye transporte privado con aire acondicionado durante 10 días, conductor-guía titulado, 8 noches en riads y hoteles con encanto, 1 noche en campamento en Erg Chebbi (opción estándar o superior), guías locales en Marrakech y Fez, paseos en dromedario, cenas en el Dadès y el desierto, y desayunos desde el día 2."
+      },
+      "imageAlt": "Gran circuito por Marruecos con dunas del Sáhara, medinas imperiales, puertos del Atlas y Chefchaouen",
+      "highlights": [
+        "Visita guiada a pie en Marrakech por el Palacio Bahía, la Koutoubia y los zocos",
+        "Cruce del Alto Atlas por el puerto de Tizi n'Tichka (2.260 m) y Kasbah Ait Ben Haddou",
+        "Paseos en dromedario al atardecer y al amanecer en Erg Chebbi, Merzouga",
+        "Visita guiada de día completo por la medina medieval de Fez el-Bali",
+        "Tiempo libre para recorrer los callejones azules y miradores de Chefchaouen",
+        "Paradas en Volúbilis, Meknes, la torre Hassan en Rabat y la mezquita Hassan II en Casablanca"
+      ],
+      "faqs": [
+        {
+          "question": "¿Por qué empieza el tour en Marrakech y termina en Casablanca?",
+          "answer": "El aeropuerto Mohammed V de Casablanca (CMN) concentra la mayoría de vuelos internacionales de larga distancia, lo que facilita la salida sin regresar a Marrakech. También podemos hacer la ruta en sentido inverso o cerrar el circuito en Marrakech según tus vuelos."
+        },
+        {
+          "question": "¿Se incluyen guías locales en las ciudades imperiales?",
+          "answer": "Sí. Guías oficiales titulados dirigen las visitas a pie en Marrakech y Fez para moverse cómodamente por los zocos y conocer la historia de cada monumento."
+        },
+        {
+          "question": "¿Es cansado el ritmo de conducción durante 10 días?",
+          "answer": "No. Incluimos estancias de dos noches en Marrakech, Fez y Chefchaouen para evitar deshacer el equipaje cada mañana. Los vehículos son modernos, climatizados y disponen de agua embotellada."
+        },
+        {
+          "question": "¿Podemos elegir la categoría del alojamiento?",
+          "answer": "Sí. Ofrecemos tres niveles: Tradicional (riads con encanto), Confort Superior (riads boutique y hoteles de 4 estrellas) y Lujo VIP (hoteles de 5 estrellas y jaimas de lujo con baño privado)."
+        },
+        {
+          "question": "¿Cuánto equipaje podemos llevar?",
+          "answer": "Al ser un vehículo privado para tu grupo, hay espacio suficiente en el maletero para maletas grandes y equipaje de mano."
+        }
+      ]
+    }
   }
 }

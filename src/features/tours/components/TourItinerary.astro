@@ -12,6 +12,12 @@ const getOrdinalSuffix = (number_: number): string => {
   return number_ + (index === 3 && k !== 13 ? "rd" : "th");
 };
 
+const formatDayHeading = (dayNumber: number): string => {
+  if (locale === "en") return `${getOrdinalSuffix(dayNumber)} ${dayLabel}`;
+  if (locale === "de") return `${dayNumber}. ${dayLabel}`;
+  return `${dayLabel} ${dayNumber}`;
+};
+
 export interface ItineraryDay {
   accommodation?: string | undefined;
   activities?: string | undefined;
@@ -26,14 +32,18 @@ export interface Props {
   accommodationLabel: string;
   activitiesLabel: string;
   arrivalLabel: string;
+  dayLabel: string;
   days: readonly ItineraryDay[];
   defaultTitle?: string | undefined;
   kicker?: string | undefined;
+  locale: string;
   mealsLabel: string;
 }
 
 const {
   days,
+  dayLabel,
+  locale,
   accommodationLabel,
   mealsLabel,
   activitiesLabel,
@@ -44,7 +54,7 @@ const {
 
 const initialDay = days[0];
 const initialDayTitle =
-  initialDay ? `${getOrdinalSuffix(initialDay.number).toUpperCase()} DAY` : defaultTitle;
+  initialDay ? formatDayHeading(initialDay.number).toLocaleUpperCase(locale) : defaultTitle;
 
 const DAY_DELAYS = [
   "animate-delay-0",
@@ -174,7 +184,7 @@ const DAY_DELAYS = [
             data-animate="step-unfold"
             data-itinerary-stage
             data-stage-number={day.number}
-            data-stage-ordinal={`${getOrdinalSuffix(day.number)} Day`}
+            data-stage-ordinal={formatDayHeading(day.number)}
             data-stage-route={day.title.replaceAll("➜", "→")}
             data-stage-title={day.title}
           >
