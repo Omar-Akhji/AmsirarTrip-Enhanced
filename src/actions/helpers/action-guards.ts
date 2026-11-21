@@ -1,4 +1,5 @@
 import { checkRateLimit } from "../../lib/api-utils";
+import { env } from "../../lib/env";
 import { logSecurityEvent } from "../../services/logger";
 import { verifyTurnstile, type TurnstileAction } from "../../services/turnstile";
 
@@ -39,7 +40,12 @@ export async function verifyCaptcha(
   ip: string,
   expectedAction: TurnstileAction,
 ): Promise<boolean> {
-  const isValid = await verifyTurnstile({ expectedAction, remoteip: ip, token });
+  const isValid = await verifyTurnstile({
+    expectedAction,
+    remoteip: ip,
+    secret: env.TURNSTILE_SECRET_KEY,
+    token,
+  });
   if (!isValid) {
     logSecurityEvent("CAPTCHA_FAILED", ip, `${expectedAction}-action`);
     return false;
