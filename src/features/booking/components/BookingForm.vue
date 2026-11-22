@@ -2,6 +2,7 @@
 import { computed, useTemplateRef } from "vue";
 import { actions } from "astro:actions";
 import type { BookingFormCopy } from "@/lib/form-copy";
+import type { FormState } from "@/lib/form-types";
 import { useActionForm } from "@/lib/hooks/use-action-form";
 import type { TurnstileInstance } from "@/lib/turnstile-client";
 import FormSubmitButton from "@/shared/ui/widgets/FormSubmitButton.vue";
@@ -10,10 +11,11 @@ import BookingPersonalFields from "./BookingPersonalFields.vue";
 import BookingTripDetails from "./BookingTripDetails.vue";
 
 interface Props {
+  actionUrl?: string;
   copy: BookingFormCopy;
   excursionId?: string;
   excursionTitle?: string;
-  fullWidth?: boolean;
+  initialState?: FormState | null;
   locale: string;
   tourDuration?: number | null;
   tourId?: string;
@@ -21,16 +23,18 @@ interface Props {
 }
 
 const {
+  actionUrl,
   copy,
+  excursionTitle = "",
+  initialState = null,
   locale,
-  tourTitle,
   tourDuration = null,
-  excursionTitle,
-  fullWidth,
+  tourTitle = "",
 } = defineProps<Props>();
 
 const recaptchaRef = useTemplateRef<TurnstileInstance>("recaptchaRef");
-const selectedTour = computed(() => tourTitle ?? excursionTitle ?? "");
+const statusRegionRef = useTemplateRef<HTMLElement>("statusRegionRef");
+const selectedTour = computed(() => tourTitle || excursionTitle);
 
 const { feedback, formKey, handleSubmit, isMounted, isSubmitting, state } = useActionForm({
   action: actions.booking,
@@ -41,8 +45,10 @@ const { feedback, formKey, handleSubmit, isMounted, isSubmitting, state } = useA
     success: copy.success,
     validationError: copy.validationError,
   }),
+  initialState,
   recaptchaRef,
   requiredTrimmedFields: ["fullName", "email"],
+  statusRef: statusRegionRef,
 });
 </script>
 
@@ -51,10 +57,9 @@ const { feedback, formKey, handleSubmit, isMounted, isSubmitting, state } = useA
     id="booking"
     aria-labelledby="booking-heading"
     class="relative isolate overflow-x-clip border-bs border-stone-200 bg-stone-50 py-12 sm:py-16 lg:py-24 dark:border-white/10 dark:bg-surface-base"
-    :class="[fullWidth ? 'booking-form-fullwidth' : '']"
   >
     <div
-      class="booking-form-inner mx-auto px-2 inline-full max-inline-7xl sm:px-6 lg:px-8 2xl:max-inline-360 3xl:max-inline-420"
+      class="mx-auto px-2 inline-full max-inline-7xl sm:px-6 lg:px-8 2xl:max-inline-360 3xl:max-inline-420"
     >
       <div class="grid grid-cols-1 items-stretch gap-8 lg:grid-cols-golden lg:gap-6 xl:gap-8">
         <div
@@ -79,9 +84,11 @@ const { feedback, formKey, handleSubmit, isMounted, isSubmitting, state } = useA
             </div>
 
             <form
+              :action="actionUrl"
               class="flex flex-col gap-5"
               data-form="booking"
               :data-hydrated="isMounted"
+              method="POST"
               toolname="submit_booking_request"
               tooldescription="Submits a booking reservation request for a specific tour or excursion"
               @submit.prevent="handleSubmit"
@@ -101,6 +108,12 @@ const { feedback, formKey, handleSubmit, isMounted, isSubmitting, state } = useA
                 />
               </div>
 
+              <input
+                type="hidden"
+                name="language"
+                toolparamdescription="The current language/locale code of the user"
+                :value="locale"
+              />
               <div
                 v-if="selectedTour"
                 class="hidden"
@@ -117,12 +130,6 @@ const { feedback, formKey, handleSubmit, isMounted, isSubmitting, state } = useA
                   name="duration"
                   toolparamdescription="The duration in days of the selected tour"
                   :value="tourDuration"
-                />
-                <input
-                  type="hidden"
-                  name="language"
-                  toolparamdescription="The current language/locale code of the user"
-                  :value="locale"
                 />
                 <input
                   type="hidden"
@@ -145,6 +152,7 @@ const { feedback, formKey, handleSubmit, isMounted, isSubmitting, state } = useA
               >
                 <BookingPersonalFields
                   :copy="copy"
+                  :locale="locale"
                   :state="state"
                 />
                 <BookingTripDetails
@@ -152,6 +160,26 @@ const { feedback, formKey, handleSubmit, isMounted, isSubmitting, state } = useA
                   :locale="locale"
                   :state="state"
                 />
+              </div>
+
+              <div
+                ref="statusRegionRef"
+                aria-live="polite"
+                class="outline-none"
+                role="status"
+                tabindex="-1"
+              >
+                <p
+                  v-if="state"
+                  class="rounded-xl border px-4 py-3 font-sans text-sm font-medium"
+                  :class="
+                    state.success ?
+                      'border-emerald-500/30 bg-emerald-50 text-emerald-900 dark:border-emerald-400/30 dark:bg-emerald-950/40 dark:text-emerald-200'
+                    : 'border-red-500/30 bg-red-50 text-red-900 dark:border-red-400/30 dark:bg-red-950/40 dark:text-red-200'
+                  "
+                >
+                  {{ state.message }}
+                </p>
               </div>
 
               <div class="flex flex-col gap-5 pbs-3 sm:flex-row sm:items-center sm:justify-between">

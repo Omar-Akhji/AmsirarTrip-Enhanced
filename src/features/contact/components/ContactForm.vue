@@ -2,6 +2,7 @@
 import { useTemplateRef } from "vue";
 import { actions } from "astro:actions";
 import type { ContactFormCopy } from "@/lib/form-copy";
+import type { FormState } from "@/lib/form-types";
 import { useActionForm } from "@/lib/hooks/use-action-form";
 import type { TurnstileInstance } from "@/lib/turnstile-client";
 import FormSubmitButton from "@/shared/ui/widgets/FormSubmitButton.vue";
@@ -9,13 +10,16 @@ import Turnstile from "@/shared/ui/widgets/Turnstile.vue";
 import ContactFormFields from "./ContactFormFields.vue";
 
 interface Props {
+  actionUrl?: string;
   copy: ContactFormCopy;
+  initialState?: FormState | null;
   locale: string;
 }
 
-const { copy, locale } = defineProps<Props>();
+const { actionUrl, copy, initialState = null, locale } = defineProps<Props>();
 
 const recaptchaRef = useTemplateRef<TurnstileInstance>("recaptchaRef");
+const statusRegionRef = useTemplateRef<HTMLElement>("statusRegionRef");
 
 const { feedback, formKey, handleSubmit, isMounted, isSubmitting, state } = useActionForm({
   action: actions.contact,
@@ -26,8 +30,10 @@ const { feedback, formKey, handleSubmit, isMounted, isSubmitting, state } = useA
     success: copy.success,
     validationError: copy.validationError,
   }),
+  initialState,
   recaptchaRef,
   requiredTrimmedFields: ["name", "email"],
+  statusRef: statusRegionRef,
 });
 </script>
 
@@ -55,9 +61,11 @@ const { feedback, formKey, handleSubmit, isMounted, isSubmitting, state } = useA
         </div>
 
         <form
+          :action="actionUrl"
           class="flex flex-col gap-5"
           data-form="contact"
           :data-hydrated="isMounted"
+          method="POST"
           toolname="submit_custom_tour_request"
           tooldescription="Submits a custom private Morocco tour and itinerary request for planning"
           @submit.prevent="handleSubmit"
@@ -88,8 +96,29 @@ const { feedback, formKey, handleSubmit, isMounted, isSubmitting, state } = useA
           >
             <ContactFormFields
               :copy="copy"
+              :locale="locale"
               :state="state"
             />
+          </div>
+
+          <div
+            ref="statusRegionRef"
+            aria-live="polite"
+            class="outline-none"
+            role="status"
+            tabindex="-1"
+          >
+            <p
+              v-if="state"
+              class="rounded-xl border px-4 py-3 font-sans text-sm font-medium"
+              :class="
+                state.success ?
+                  'border-emerald-500/30 bg-emerald-50 text-emerald-900 dark:border-emerald-400/30 dark:bg-emerald-950/40 dark:text-emerald-200'
+                : 'border-red-500/30 bg-red-50 text-red-900 dark:border-red-400/30 dark:bg-red-950/40 dark:text-red-200'
+              "
+            >
+              {{ state.message }}
+            </p>
           </div>
 
           <div class="flex flex-col gap-5 pbs-3 sm:flex-row sm:items-center sm:justify-between">

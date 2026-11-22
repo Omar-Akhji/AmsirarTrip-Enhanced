@@ -1,7 +1,9 @@
 ---
 import { getEntry } from "astro:content";
 import { getRelativeLocaleUrl } from "astro:i18n";
+import { actions } from "astro:actions";
 import BookingForm from "../../../features/booking/components/BookingForm.vue";
+import { toInitialFormState } from "../../../actions/helpers/form-helpers";
 import BookingSidebar from "../../../features/booking/components/BookingSidebar.astro";
 import TourLayout from "../../../features/tours/components/TourLayout.astro";
 import { getLocalizedTourSeo, getToursData } from "../../../features/tours/data/tours-data";
@@ -19,8 +21,10 @@ import TripCard from "../../../shared/ui/widgets/TripCard.astro";
 const { slug } = Astro.params;
 const locale = Astro.locals.locale;
 
-const tourEntry =
-  slug ? await getEntry({ collection: "tours", id: slug.toLowerCase() }) : undefined;
+const [tourEntry, allTours] = await Promise.all([
+  slug ? getEntry({ collection: "tours", id: slug.toLowerCase() }) : undefined,
+  getToursData(),
+]);
 
 if (!tourEntry) {
   Astro.cache.set(false);
@@ -70,11 +74,13 @@ const tourDescription =
     t(`${tour.tourKey}.overview`)
   : fallbackDescription;
 
+const site = Astro.site ?? "https://amsirartrip.com";
 const tourJsonLd = generateTourJsonLd({
   name: tourName,
   description: tourDescription,
+  inLanguage: locale,
   provider: "Amsirar Trip",
-  image: `https://amsirartrip.com${tour.image.src}`,
+  image: new URL(tour.image.src, site).href,
   price: tour.jsonLd.price,
   currency: tour.jsonLd.currency,
   duration: tour.duration,
@@ -82,11 +88,11 @@ const tourJsonLd = generateTourJsonLd({
     start: t(`tours.cities.${tour.startLocation.toLowerCase()}`),
     end: t(`tours.cities.${tour.endLocation.toLowerCase()}`),
   },
-  url: new URL(Astro.url.pathname, Astro.site ?? "https://amsirartrip.com").href,
+  url: new URL(Astro.url.pathname, site).href,
   itinerary,
 });
 
-const faqJsonLd = generateFaqJsonLd([...localizedSeo.faqs]);
+const faqJsonLd = generateFaqJsonLd([...localizedSeo.faqs], locale);
 const tourTitleClean = isEnglish ? localizedSeo.title : t(`${tour.tourKey}.title`);
 
 const breadcrumbJsonLd = generateBreadcrumbJsonLd([
@@ -95,7 +101,6 @@ const breadcrumbJsonLd = generateBreadcrumbJsonLd([
   { name: tourTitleClean, url: Astro.url.pathname },
 ]);
 
-const allTours = await getToursData();
 const currentStart = tour.startLocation.toLowerCase();
 const relatedTours = allTours
   .filter((item) => item.id !== tour.bookingId)
@@ -105,6 +110,11 @@ const relatedTours = allTours
     return aSame - bSame;
   })
   .slice(0, 3);
+const bookingActionResult = Astro.getActionResult(actions.booking);
+if (bookingActionResult) {
+  Astro.cache.set(false);
+}
+const initialBookingState = toInitialFormState(bookingActionResult, t("booking.errors.generic"));
 ---
 
 <Layout
@@ -136,9 +146,10 @@ const relatedTours = allTours
   >
     <div data-animate="card-fan-rise">
       <BookingForm
-        client:visible
+        actionUrl={actions.booking.toString()}
+        client:visible={{ rootMargin: "200px" }}
         copy={getBookingFormCopy(t)}
-        fullWidth
+        initialState={initialBookingState}
         locale={locale}
         tourDuration={tour.durationDays}
         tourId={tour.bookingId.toString()}
@@ -181,7 +192,7 @@ const relatedTours = allTours
             {relatedTours.map((item) => (
               <div class="flex size-full">
                 <TripCard
-                  badge={`${item.duration} ${t("tours.days")}`}
+                  badge={t("ui.durationDays", { count: item.duration })}
                   description={t(item.description)}
                   end={t(item.end)}
                   endLabel={t("tours.endLabelShort")}

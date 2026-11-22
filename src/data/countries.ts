@@ -255,7 +255,7 @@ export const ALL_COUNTRIES: readonly CountryCallingCode[] = RAW_COUNTRIES.map(
     code,
     name,
     dialCode,
-    searchText: `${name.toLowerCase()} ${dialCode}`,
+    searchText: `${name.toLowerCase()} ${code.toLowerCase()} ${dialCode}`,
   }),
 );
 
@@ -268,5 +268,55 @@ export const DEFAULT_COUNTRY: CountryCallingCode = ALL_COUNTRIES[0] ?? {
   code: "US",
   name: "United States",
   dialCode: "+1",
-  searchText: "united states +1",
+  searchText: "united states us +1",
 };
+
+const PINNED_MARKET_COUNT = 17;
+const localizedCountriesCache = new Map<string, readonly CountryCallingCode[]>();
+
+export function getLocalizedCountries(locale = "en"): readonly CountryCallingCode[] {
+  const normalizedLocale = locale.trim().toLowerCase() || "en";
+  const cached = localizedCountriesCache.get(normalizedLocale);
+  if (cached) return cached;
+
+  let displayNames: Intl.DisplayNames | null = null;
+  let collator: Intl.Collator | null = null;
+  try {
+    displayNames = new Intl.DisplayNames([normalizedLocale], { type: "region" });
+    collator = new Intl.Collator(normalizedLocale, { sensitivity: "base" });
+  } catch {
+    displayNames = null;
+    collator = null;
+  }
+
+  const translateCountry = ([code, englishName, dialCode]: readonly [
+    string,
+    string,
+    string,
+  ]): CountryCallingCode => {
+    let localizedName = englishName;
+    if (displayNames) {
+      try {
+        localizedName = displayNames.of(code) ?? englishName;
+      } catch {
+        localizedName = englishName;
+      }
+    }
+    return {
+      code,
+      dialCode,
+      name: localizedName,
+      searchText: `${localizedName.toLowerCase()} ${englishName.toLowerCase()} ${code.toLowerCase()} ${dialCode}`,
+    };
+  };
+
+  const pinned = RAW_COUNTRIES.slice(0, PINNED_MARKET_COUNT).map((entry) =>
+    translateCountry(entry),
+  );
+  const rest = RAW_COUNTRIES.slice(PINNED_MARKET_COUNT).map((entry) => translateCountry(entry));
+  const sortedRest = collator ? rest.toSorted((a, b) => collator.compare(a.name, b.name)) : rest;
+
+  const list = [...pinned, ...sortedRest];
+  localizedCountriesCache.set(normalizedLocale, list);
+  return list;
+}

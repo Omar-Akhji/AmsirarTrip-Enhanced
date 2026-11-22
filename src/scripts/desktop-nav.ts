@@ -22,6 +22,11 @@ function setIndicator(targetLink: HTMLAnchorElement | null, immediate = false): 
   const links = [...nav.querySelectorAll<HTMLAnchorElement>("a.desktop-nav-link")];
   const target = targetLink ?? currentActiveLink;
 
+  // Batch DOM geometry reads before mutating indicator attributes/styles.
+  const hasTarget = target !== null && target.offsetWidth > 0;
+  const targetX = hasTarget ? target.offsetLeft : 0;
+  const targetWidth = hasTarget ? target.offsetWidth : 0;
+
   for (const link of links) {
     if (target && link === target) {
       link.dataset["indicator"] = "true";
@@ -30,7 +35,7 @@ function setIndicator(targetLink: HTMLAnchorElement | null, immediate = false): 
     }
   }
 
-  if (!target || target.offsetWidth === 0) {
+  if (!hasTarget) {
     delete indicator.dataset["visible"];
     delete indicator.dataset["immediate"];
     lastIndicatorVisible = false;
@@ -38,8 +43,6 @@ function setIndicator(targetLink: HTMLAnchorElement | null, immediate = false): 
   }
 
   const prefersReducedMotion = globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const targetX = target.offsetLeft;
-  const targetWidth = target.offsetWidth;
 
   const isAlreadyAtTarget =
     lastIndicatorVisible
@@ -105,25 +108,26 @@ function setupDesktopNav(): void {
 }
 
 if (typeof window !== "undefined" && !SUPPORTS_NATIVE_ANCHOR) {
-  if (document.readyState === "complete" || document.readyState === "interactive") {
-    setupDesktopNav();
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setupDesktopNav, { once: true });
   } else {
-    document.addEventListener("DOMContentLoaded", setupDesktopNav);
+    setupDesktopNav();
   }
 
-  document.addEventListener("astro:page-load", () => {
-    setupDesktopNav();
-  });
-
   let resizeTimer: number | null = null;
-  window.addEventListener(
-    "resize",
+  const onResize = () => {
+    if (resizeTimer !== null) cancelAnimationFrame(resizeTimer);
+    resizeTimer = requestAnimationFrame(() => {
+      setupDesktopNav();
+    });
+  };
+  window.addEventListener("resize", onResize, { passive: true });
+  globalThis.addEventListener(
+    "pagehide",
     () => {
       if (resizeTimer !== null) cancelAnimationFrame(resizeTimer);
-      resizeTimer = requestAnimationFrame(() => {
-        setupDesktopNav();
-      });
+      window.removeEventListener("resize", onResize);
     },
-    { passive: true },
+    { once: true },
   );
 }

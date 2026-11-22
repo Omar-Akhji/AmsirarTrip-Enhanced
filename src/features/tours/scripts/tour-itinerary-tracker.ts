@@ -14,27 +14,19 @@ interface StageMetadata {
   readonly title: string;
 }
 
+interface StickyUiElements {
+  readonly container: HTMLElement;
+  readonly routeGroups: readonly HTMLElement[];
+  readonly stages: readonly StageMetadata[];
+  readonly stickyCounterCurrent: HTMLElement | null;
+  readonly stickyHeading: HTMLElement | null;
+  readonly stickyProgress: HTMLElement | null;
+}
+
 const NOOP = (): void => undefined;
 
-export function initTourItineraryTracker(): () => void {
-  const container = document.querySelector<HTMLElement>("tour-itinerary-tracker");
-  if (!container) return NOOP;
-
-  const stickyHeader = container.querySelector<HTMLElement>("[data-itinerary-header]");
-  const stickyHeading = container.querySelector<HTMLElement>("[data-sticky-heading]");
-  const stickyCounterCurrent = container.querySelector<HTMLElement>(
-    "[data-sticky-counter-current]",
-  );
-  const stickyProgress = container.querySelector<HTMLElement>("[data-sticky-progress]");
-  const timelineTrack = container.querySelector<HTMLElement>("[data-timeline-track]");
-  const timelineFill = container.querySelector<HTMLElement>("[data-timeline-progress-fill]");
-  const routeGroups = [...container.querySelectorAll<HTMLElement>("[data-sticky-route-group]")];
-
-  const stageElements = [...container.querySelectorAll<HTMLElement>("[data-itinerary-stage]")];
-  const totalStages = stageElements.length;
-  if (totalStages === 0) return NOOP;
-
-  const stages: StageMetadata[] = stageElements.map((el, index) => {
+function collectItineraryStages(container: HTMLElement): StageMetadata[] {
+  return [...container.querySelectorAll<HTMLElement>("[data-itinerary-stage]")].map((el, index) => {
     const rawNumber = el.dataset["stageNumber"];
     const stageNumber = rawNumber ? Number(rawNumber) : index + 1;
     const ordinalLabel = el.dataset["stageOrdinal"] ?? String(stageNumber);
@@ -44,90 +36,147 @@ export function initTourItineraryTracker(): () => void {
 
     return { element: el, node, stageNumber, ordinalLabel, title, route };
   });
+}
+
+function measureStickyTriggerOffset(stickyHeader: HTMLElement | null): number {
+  if (!stickyHeader) return 160;
+  const stickyTop = Number(globalThis.getComputedStyle(stickyHeader).top.replace("px", "")) || 80;
+  return Math.round(stickyTop + stickyHeader.offsetHeight);
+}
+
+function computeNextActiveIndex(stages: readonly StageMetadata[], triggerLine: number): number {
+  let nextActiveIndex = 0;
+  for (const [i, stage] of stages.entries()) {
+    const rect = stage.node.getBoundingClientRect();
+    if (rect.top + rect.height / 2 <= triggerLine + 4) {
+      nextActiveIndex = i;
+    } else {
+      break;
+    }
+  }
+  return nextActiveIndex;
+}
+
+function writeActiveStageState(ui: StickyUiElements, index: number, triggerOffset: number): void {
+  const { container, routeGroups, stages, stickyCounterCurrent, stickyHeading, stickyProgress } =
+    ui;
+  const activeStage = stages[index];
+  if (!activeStage) return;
+
+  for (const [i, stage] of stages.entries()) {
+    if (i === index) {
+      stage.element.dataset["active"] = "true";
+      delete stage.element.dataset["passed"];
+    } else if (i < index) {
+      delete stage.element.dataset["active"];
+      stage.element.dataset["passed"] = "true";
+    } else {
+      delete stage.element.dataset["active"];
+      delete stage.element.dataset["passed"];
+    }
+  }
+
+  for (const [i, group] of routeGroups.entries()) {
+    group.classList.toggle("hidden", i !== index);
+  }
+
+  container.style.setProperty("--itinerary-trigger-offset", `${triggerOffset}px`);
+
+  if (stickyHeading) {
+    stickyHeading.textContent = activeStage.ordinalLabel.toLocaleUpperCase(
+      document.documentElement.lang || "en",
+    );
+  }
+
+  if (stickyCounterCurrent) {
+    stickyCounterCurrent.textContent = String(activeStage.stageNumber).padStart(2, "0");
+  }
+
+  if (stickyProgress) {
+    stickyProgress.style.width = `${(activeStage.stageNumber / stages.length) * 100}%`;
+  }
+}
+
+function computeFallbackTimelineRatio(
+  stages: readonly StageMetadata[],
+  nextActiveIndex: number,
+  trackRect: DOMRect,
+  triggerLine: number,
+): number {
+  let fillOffset = 0;
+  if (nextActiveIndex >= stages.length - 1) {
+    const last = stages.at(-1);
+    if (last) {
+      const rect = last.node.getBoundingClientRect();
+      fillOffset = rect.top + rect.height / 2 - trackRect.top;
+    }
+  } else {
+    const currentStage = stages[nextActiveIndex];
+    const nextStage = stages[nextActiveIndex + 1];
+    if (currentStage && nextStage) {
+      const curRect = currentStage.node.getBoundingClientRect();
+      const nextRect = nextStage.node.getBoundingClientRect();
+      const currentY = curRect.top + curRect.height / 2 - trackRect.top;
+      const nextY = nextRect.top + nextRect.height / 2 - trackRect.top;
+      const currentViewportY = curRect.top + curRect.height / 2;
+      const stageDistance = nextRect.top + nextRect.height / 2 - currentViewportY;
+      const t =
+        stageDistance > 0 ?
+          Math.max(0, Math.min(1, (triggerLine - currentViewportY) / stageDistance))
+        : 0;
+      fillOffset = currentY + t * (nextY - currentY);
+    }
+  }
+  return Math.max(0, Math.min(1, fillOffset / trackRect.height));
+}
+
+export function initTourItineraryTracker(): () => void {
+  const container = document.querySelector<HTMLElement>("tour-itinerary-tracker");
+  if (!container) return NOOP;
+
+  const stages = collectItineraryStages(container);
+  if (stages.length === 0) return NOOP;
+
+  const stickyHeader = container.querySelector<HTMLElement>("[data-itinerary-header]");
+  const timelineTrack = container.querySelector<HTMLElement>("[data-timeline-track]");
+  const timelineFill = container.querySelector<HTMLElement>("[data-timeline-progress-fill]");
+
+  const ui: StickyUiElements = {
+    container,
+    routeGroups: [...container.querySelectorAll<HTMLElement>("[data-sticky-route-group]")],
+    stages,
+    stickyCounterCurrent: container.querySelector<HTMLElement>("[data-sticky-counter-current]"),
+    stickyHeading: container.querySelector<HTMLElement>("[data-sticky-heading]"),
+    stickyProgress: container.querySelector<HTMLElement>("[data-sticky-progress]"),
+  };
 
   let activeIndex = -1;
-
-  const getStickyTriggerOffset = (): number => {
-    if (!stickyHeader) return 160;
-    const stickyTop = Number(globalThis.getComputedStyle(stickyHeader).top.replace("px", "")) || 80;
-    return Math.round(stickyTop + stickyHeader.offsetHeight);
-  };
+  let cachedTriggerOffset = 160;
+  let observer: IntersectionObserver | null = null;
 
   const getTriggerLine = (): number =>
     stickyHeader ? stickyHeader.getBoundingClientRect().bottom : 160;
 
-  const syncActiveStage = (index: number): void => {
-    const activeStage = stages[index];
-    if (!activeStage) return;
-
-    for (const [i, stage] of stages.entries()) {
-      if (i === index) {
-        stage.element.dataset["active"] = "true";
-        delete stage.element.dataset["passed"];
-      } else if (i < index) {
-        delete stage.element.dataset["active"];
-        stage.element.dataset["passed"] = "true";
-      } else {
-        delete stage.element.dataset["active"];
-        delete stage.element.dataset["passed"];
-      }
-    }
-
-    for (const [i, group] of routeGroups.entries()) {
-      group.classList.toggle("hidden", i !== index);
-    }
-
-    container.style.setProperty("--itinerary-trigger-offset", `${getStickyTriggerOffset()}px`);
-
-    if (stickyHeading) {
-      stickyHeading.textContent = activeStage.ordinalLabel.toLocaleUpperCase(
-        document.documentElement.lang || "en",
-      );
-    }
-
-    if (stickyCounterCurrent) {
-      stickyCounterCurrent.textContent = String(activeStage.stageNumber).padStart(2, "0");
-    }
-
-    if (stickyProgress) {
-      stickyProgress.style.width = `${(activeStage.stageNumber / totalStages) * 100}%`;
-    }
-  };
-
   const evaluateActiveStage = (): number => {
-    const triggerLine = getTriggerLine();
-    let nextActiveIndex = 0;
-
-    for (const [i, stage] of stages.entries()) {
-      const rect = stage.node.getBoundingClientRect();
-      if (rect.top + rect.height / 2 <= triggerLine + 4) {
-        nextActiveIndex = i;
-      } else {
-        break;
-      }
-    }
-
+    const nextActiveIndex = computeNextActiveIndex(stages, getTriggerLine());
     if (nextActiveIndex !== activeIndex) {
       activeIndex = nextActiveIndex;
-      syncActiveStage(nextActiveIndex);
+      writeActiveStageState(ui, nextActiveIndex, cachedTriggerOffset);
     }
-
     return nextActiveIndex;
   };
 
-  let observer: IntersectionObserver | null = null;
-
   const bindObserver = (): void => {
     observer?.disconnect();
-    const triggerOffset = getStickyTriggerOffset();
-    container.style.setProperty("--itinerary-trigger-offset", `${triggerOffset}px`);
+    cachedTriggerOffset = measureStickyTriggerOffset(stickyHeader);
+    container.style.setProperty("--itinerary-trigger-offset", `${cachedTriggerOffset}px`);
 
     if (typeof IntersectionObserver === "undefined") return;
     observer = new IntersectionObserver(
       () => {
         evaluateActiveStage();
       },
-      { rootMargin: `-${triggerOffset}px 0px 0px 0px`, threshold: [0, 0.5, 1] },
+      { rootMargin: `-${cachedTriggerOffset}px 0px 0px 0px`, threshold: [0, 0.5, 1] },
     );
     for (const stage of stages) {
       observer.observe(stage.node);
@@ -158,39 +207,26 @@ export function initTourItineraryTracker(): () => void {
   let rafId: number | null = null;
   const updateFallbackFill = (): void => {
     rafId = null;
-    const currentIdx = evaluateActiveStage();
-    if (!timelineTrack || !timelineFill || timelineTrack.offsetHeight <= 0) return;
-
+    // Batch all geometry reads before performing stage and progress-fill DOM writes.
     const triggerLine = getTriggerLine();
-    const trackRect = timelineTrack.getBoundingClientRect();
-    let fillOffset = 0;
+    const nextActiveIndex = computeNextActiveIndex(stages, triggerLine);
+    const trackHeight = timelineTrack?.offsetHeight ?? 0;
+    const trackRect =
+      timelineTrack && timelineFill && trackHeight > 0 ?
+        timelineTrack.getBoundingClientRect()
+      : null;
 
-    if (currentIdx >= totalStages - 1) {
-      const last = stages.at(-1);
-      if (last) {
-        const rect = last.node.getBoundingClientRect();
-        fillOffset = rect.top + rect.height / 2 - trackRect.top;
-      }
-    } else {
-      const currentStage = stages[currentIdx];
-      const nextStage = stages[currentIdx + 1];
-      if (currentStage && nextStage) {
-        const curRect = currentStage.node.getBoundingClientRect();
-        const nextRect = nextStage.node.getBoundingClientRect();
-        const currentY = curRect.top + curRect.height / 2 - trackRect.top;
-        const nextY = nextRect.top + nextRect.height / 2 - trackRect.top;
-        const currentViewportY = curRect.top + curRect.height / 2;
-        const stageDistance = nextRect.top + nextRect.height / 2 - currentViewportY;
-        const t =
-          stageDistance > 0 ?
-            Math.max(0, Math.min(1, (triggerLine - currentViewportY) / stageDistance))
-          : 0;
-        fillOffset = currentY + t * (nextY - currentY);
-      }
+    const ratio =
+      trackRect ? computeFallbackTimelineRatio(stages, nextActiveIndex, trackRect, triggerLine) : 0;
+
+    if (nextActiveIndex !== activeIndex) {
+      activeIndex = nextActiveIndex;
+      writeActiveStageState(ui, nextActiveIndex, cachedTriggerOffset);
     }
 
-    const ratio = Math.max(0, Math.min(1, fillOffset / trackRect.height));
-    timelineFill.style.scale = `1 ${ratio.toFixed(4)}`;
+    if (timelineFill && trackRect) {
+      timelineFill.style.scale = `1 ${ratio.toFixed(4)}`;
+    }
   };
 
   const scheduleFallback = (): void => {
@@ -222,15 +258,18 @@ function setup(): void {
 }
 
 if (typeof document !== "undefined") {
-  document.addEventListener("astro:page-load", setup);
-  document.addEventListener("astro:before-swap", () => {
-    if (!cleanupTracker) return;
-    cleanupTracker();
-    cleanupTracker = null;
-  });
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", setup, { once: true });
   } else {
     setup();
   }
+  globalThis.addEventListener(
+    "pagehide",
+    () => {
+      if (!cleanupTracker) return;
+      cleanupTracker();
+      cleanupTracker = null;
+    },
+    { once: true },
+  );
 }

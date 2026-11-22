@@ -1,7 +1,9 @@
 // eslint.config.mjs
+import css from "@eslint/css";
 import js from "@eslint/js";
 import eslintConfigPrettier from "eslint-config-prettier";
 import eslintPluginAstro from "eslint-plugin-astro";
+import baselineJs from "eslint-plugin-baseline-js";
 import betterTailwindcss from "eslint-plugin-better-tailwindcss";
 import nounsanitized from "eslint-plugin-no-unsanitized";
 import perfectionist from "eslint-plugin-perfectionist";
@@ -12,8 +14,11 @@ import eslintPluginVue from "eslint-plugin-vue";
 import pluginVueA11y from "eslint-plugin-vuejs-accessibility";
 import { defineConfig } from "eslint/config";
 import globals from "globals";
+import { tailwind4 } from "tailwind-csstree";
 import tseslint from "typescript-eslint";
 import vueParser from "vue-eslint-parser";
+
+const CODE_FILES = ["**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx,astro,vue}"];
 
 export default defineConfig(
   // ─── 1. Global Ignores (Must be first) ────────────────────────────────────
@@ -52,32 +57,45 @@ export default defineConfig(
   },
 
   // ─── 2. Base JS & Type-Aware Strict TypeScript ────────────────────────────
-  js.configs.recommended,
-  ...tseslint.configs.strictTypeChecked,
-  ...tseslint.configs.stylisticTypeChecked,
+  {
+    files: CODE_FILES,
+    extends: [
+      js.configs.recommended,
+      ...tseslint.configs.strictTypeChecked,
+      ...tseslint.configs.stylisticTypeChecked,
+      eslintPluginUnicorn.configs.recommended,
+      regexpPlugin.configs["flat/recommended"],
+      securityPlugin.configs.recommended,
+      nounsanitized.configs.recommended,
+    ],
+  },
 
-  // ─── 3. Astro, Vue, Accessibility, Unicorn, Regex & Security Presets ──────
-  ...eslintPluginAstro.configs["flat/recommended"],
-  ...eslintPluginAstro.configs["flat/jsx-a11y-strict"],
-  ...eslintPluginVue.configs["flat/recommended"],
-  ...pluginVueA11y.configs["flat/recommended"],
-  eslintPluginUnicorn.configs.recommended,
-  regexpPlugin.configs["flat/recommended"],
-  securityPlugin.configs.recommended,
-  nounsanitized.configs.recommended,
+  // ─── 3. Astro, Vue & Accessibility Presets ────────────────────────────────
+  {
+    files: ["**/*.astro", "**/*.astro/*.js", "**/*.astro/*.ts"],
+    extends: [
+      ...eslintPluginAstro.configs["flat/recommended"],
+      ...eslintPluginAstro.configs["flat/jsx-a11y-strict"],
+    ],
+  },
+  {
+    files: ["**/*.vue"],
+    extends: [
+      ...eslintPluginVue.configs["flat/recommended"],
+      ...pluginVueA11y.configs["flat/recommended"],
+    ],
+  },
 
   // ─── 4. Linter Options ────────────────────────────────────────────────────
   { linterOptions: { reportUnusedDisableDirectives: "error" } },
 
   // ─── 5. Global Language Options & Shared Strict Rules ─────────────────────
   {
+    files: CODE_FILES,
     languageOptions: {
-      globals: { ...globals.browser, ...globals.node, ...globals.es2024 },
+      globals: { ...globals.browser, ...globals.node, ...globals.es2025 },
       parserOptions: {
-        projectService: {
-          allowDefaultProject: ["*.config.ts", "*.config.js"],
-          defaultProject: "tsconfig.json",
-        },
+        projectService: { allowDefaultProject: ["*.config.js"], defaultProject: "tsconfig.json" },
         tsconfigRootDir: import.meta.dirname,
         extraFileExtensions: [".astro", ".vue"],
       },
@@ -148,7 +166,6 @@ export default defineConfig(
       "better-tailwindcss/enforce-consistent-line-wrapping": "off",
       "better-tailwindcss/no-unnecessary-whitespace": "off",
       "better-tailwindcss/no-conflicting-classes": "error",
-      "astro/jsx-a11y/no-redundant-roles": ["error", { ul: ["list"], ol: ["list"] }],
       "better-tailwindcss/no-unknown-classes": [
         "warn",
         {
@@ -167,6 +184,24 @@ export default defineConfig(
             "content",
             "thumbnail",
             "dark",
+            "desktop-nav",
+            "desktop-nav-indicator",
+            "desktop-nav-link",
+            "desktop-nav-label",
+            "tactile-switch-channel",
+            "tactile-switch-thumb",
+            "scroll-progress-bar",
+            "folder-back-plate",
+            "folder-front-pocket",
+            "scroll-stack-inner",
+            "scroll-stack-card",
+            "stage-node",
+            "hub-filter-btn",
+            "itinerary-stages-list",
+            "route-map-wrapper",
+            "map-facade",
+            "load-route-map-btn",
+            "map-iframe-container",
           ],
         },
       ],
@@ -278,6 +313,7 @@ export default defineConfig(
       "unicorn/relative-url-style": "off",
 
       // Strict Astro rules scoped specifically to .astro files
+      "astro/jsx-a11y/no-redundant-roles": ["error", { ul: ["list"], ol: ["list"] }],
       "astro/no-set-html-directive": "error",
       "astro/no-unused-css-selector": "warn",
       "astro/prefer-class-list-directive": "warn",
@@ -291,7 +327,6 @@ export default defineConfig(
       "astro/missing-client-only-directive-value": "error",
       "astro/no-conflict-set-directives": "error",
       "astro/no-unused-define-vars-in-style": "error",
-      "astro/valid-compile": "error",
       "astro/no-deprecated-astro-canonicalurl": "error",
       "astro/no-deprecated-astro-fetchcontent": "error",
       "astro/no-deprecated-astro-resolve": "error",
@@ -362,13 +397,7 @@ export default defineConfig(
   },
   { files: ["src/services/logger.ts", "scripts/**/*.ts"], rules: { "no-console": "off" } },
   {
-    files: [
-      "src/actions/**/*.ts",
-      "src/pages/api/**/*.ts",
-      "src/content.config.ts",
-      "*.config.ts",
-      "*.config.mjs",
-    ],
+    files: ["src/content.config.ts", "*.config.ts", "*.config.mjs"],
     rules: {
       "no-undef": "off",
       "@typescript-eslint/explicit-module-boundary-types": "off",
@@ -407,6 +436,68 @@ export default defineConfig(
     rules: { "@typescript-eslint/explicit-module-boundary-types": "off" },
   },
 
-  // ─── 11. Prettier — MUST be last ──────────────────────────────────────────
-  eslintConfigPrettier,
+  // ─── 11. Client Baseline Enforcement & CSS Linting ────────────────────────
+  {
+    files: [
+      "src/scripts/**/*.ts",
+      "src/features/**/scripts/**/*.ts",
+      "src/lib/hooks/**/*.ts",
+      "src/**/*.vue",
+    ],
+    plugins: { "baseline-js": baselineJs },
+    rules: {
+      "baseline-js/use-baseline": [
+        "error",
+        {
+          available: "widely",
+          // Autonomous custom elements are guarded with typeof customElements checks and widely supported in evergreen engines.
+          ignoreFeatures: ["autonomous-custom-elements"],
+          includeJsBuiltins: { preset: "type-aware" },
+          includeWebApis: { preset: "type-aware" },
+        },
+      ],
+    },
+  },
+  {
+    files: ["src/styles/**/*.css"],
+    plugins: { css },
+    language: "css/css",
+    languageOptions: { customSyntax: tailwind4, tolerant: true },
+    rules: {
+      "css/no-duplicate-imports": "error",
+      "css/no-duplicate-keyframe-selectors": "error",
+      "css/no-empty-blocks": "error",
+      "css/no-important": "error",
+      "css/prefer-logical-properties": "warn",
+      "css/use-baseline": [
+        "warn",
+        {
+          allowAtRules: ["starting-style", "view-transition"],
+          allowFunctions: ["anchor", "anchor-size"],
+          allowProperties: [
+            "accent-color",
+            "anchor-name",
+            "anchor-scope",
+            "animation-range",
+            "interpolate-size",
+            "view-timeline",
+            "view-timeline-inset",
+            "view-transition-name",
+          ],
+          allowPropertyValues: { "text-wrap": ["balance", "pretty"] },
+          allowSelectors: [
+            "picker",
+            "selection",
+            "view-transition-group",
+            "view-transition-new",
+            "view-transition-old",
+          ],
+          available: "widely",
+        },
+      ],
+    },
+  },
+
+  // ─── 12. Prettier — MUST be last ──────────────────────────────────────────
+  { ...eslintConfigPrettier, files: CODE_FILES },
 );

@@ -47,6 +47,25 @@ export function getOptionalFormString(formData: FormData, key: string): string |
   return trimmed.length > 0 ? trimmed : undefined;
 }
 
+export function resolveSubmittedPhone(formData: FormData): string {
+  const full = getFormString(formData, "phone").trim();
+  if (full.length > 0) return full;
+
+  const countryCode = getFormString(formData, "phoneCountryCode").trim();
+  const national = getFormString(formData, "phoneNational").trim();
+  if (national.length === 0) return "";
+  return countryCode.length > 0 ? `${countryCode}${national}` : national;
+}
+
+export function resolveTurnstileToken(formData: FormData): string {
+  const token = getFormString(formData, "recaptchaToken").trim();
+  return token.length > 0 ? token : getFormString(formData, "cf-turnstile-response").trim();
+}
+
+export function resolveContactTopic(formData: FormData): string | undefined {
+  return getOptionalFormString(formData, "topicCustom") ?? getOptionalFormString(formData, "topic");
+}
+
 export function extractZodErrors(
   issues: readonly {
     readonly path: readonly (string | number | symbol)[];
@@ -70,4 +89,19 @@ export function createErrorResponse(
 ): FormState {
   logger.error(`${context} error`, error);
   return { success: false, message: genericMessage };
+}
+
+export function toInitialFormState(
+  result:
+    | {
+        readonly data?: FormState | undefined;
+        readonly error?: { readonly message?: string | undefined } | undefined;
+      }
+    | undefined,
+  fallbackError: string,
+): FormState | null {
+  if (!result) return null;
+  if (result.data) return result.data;
+  const msg = result.error?.message;
+  return { success: false, message: msg && msg.length > 0 ? msg : fallbackError };
 }

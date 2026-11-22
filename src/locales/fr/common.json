@@ -32,6 +32,7 @@
     "contact": "Contact",
     "toggleMenu": "Basculer le menu de navigation",
     "mainAria": "Navigation principale",
+    "mobileAria": "Navigation mobile",
     "skipToContent": "Aller au contenu principal",
     "whatsappCta": "Contactez-nous sur WhatsApp",
     "themeToggle": "Changer le thème",
@@ -1680,12 +1681,62 @@
   "routeMap": {
     "interactiveMap": "Carte d'itinéraire interactive",
     "stops": "Étapes",
+    "stopsCount_one": "{count} Étape",
+    "stopsCount_many": "{count} Étapes",
+    "stopsCount_other": "{count} Étapes",
     "exploreBtn": "Explorer la carte",
     "loadAriaPrefix": "Charger la carte d'itinéraire interactive :",
     "viewStopsPrefix": "Voir les",
     "viewStopsSuffix": "étapes et horaires",
+    "viewStopsSchedule_one": "Voir {count} étape et horaire",
+    "viewStopsSchedule_many": "Voir les {count} étapes et horaires",
+    "viewStopsSchedule_other": "Voir les {count} étapes et horaires",
     "openGoogleMaps": "Ouvrir dans Google Maps",
     "kicker": "Itinéraire Google Maps",
     "titleSuffix": "Carte d'itinéraire"
+  },
+  "hero": {
+    "carouselAria": "Carrousel principal Amsirar Trip",
+    "previewsAria": "Aperçus des destinations",
+    "goToSlide": "{title} — Aller à la diapositive {index}",
+    "pauseAutoplay": "Mettre en pause le diaporama",
+    "playAutoplay": "Lancer le diaporama",
+    "slides": {
+      "sahara": {
+        "title": "Circuits & Voyages",
+        "type": "Bivouac & Aventure",
+        "description": "Spécialiste des voyages et circuits au Maroc, excursions dans le désert du Sahara et visites des villes impériales.",
+        "thumbType": "Circuits & Voyages",
+        "thumbTitle": "Bivouac & Aventure"
+      },
+      "atlas": {
+        "title": "L'aventure vous attend",
+        "type": "Au-delà des dunes",
+        "description": "Spécialiste des voyages et circuits au Maroc, excursions dans le désert du Sahara et visites des villes impériales.",
+        "thumbType": "Dunes du Sahara",
+        "thumbTitle": "L'aventure vous attend"
+      },
+      "imperial": {
+        "title": "Préparez vos valises",
+        "type": "Le Maroc vous appelle",
+        "description": "Spécialiste des voyages et circuits au Maroc, excursions dans le désert du Sahara et visites des villes impériales.",
+        "thumbType": "Villes Impériales",
+        "thumbTitle": "Le Maroc vous appelle"
+      }
+    }
+  },
+  "ui": {
+    "breadcrumb": "Fil d'Ariane",
+    "legalNavAria": "Confidentialité et conditions",
+    "ratingFiveStars": "Noté 5 étoiles sur 5",
+    "ourikaCollageAlt": "Terrasses verdoyantes et villages de montagne de la vallée de l'Ourika",
+    "atlasCollageAlt": "Architecture marocaine traditionnelle et voyage dans l'Atlas",
+    "contactMapAria": "Carte interactive montrant l'emplacement de l'agence Amsirar Trip à Marrakech",
+    "contactMapTitle": "Emplacement de l'agence Amsirar Trip - Marrakech, Maroc",
+    "itineraryKicker": "Programme quotidien",
+    "itineraryDefaultTitle": "Itinéraire jour par jour",
+    "durationDays_one": "{count} Jour",
+    "durationDays_many": "{count} Jours",
+    "durationDays_other": "{count} Jours"
   }
 }

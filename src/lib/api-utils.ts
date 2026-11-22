@@ -1,3 +1,4 @@
+import { timingSafeEqual } from "node:crypto";
 import { isIP } from "node:net";
 
 const MAX_TRACKED_KEYS = 10_000;
@@ -40,15 +41,35 @@ export interface RateLimitResult {
   readonly remaining: number;
 }
 
+export interface ExtractClientIpOptions {
+  readonly clientAddress?: string | undefined;
+  readonly isCloudflareVerified?: boolean | undefined;
+  readonly request: Request;
+}
+
+export interface CheckRateLimitOptions {
+  readonly identifier: string;
+  readonly maxRequests?: number | undefined;
+  readonly windowMs?: number | undefined;
+}
+
+/** Compares an incoming origin verification header against the configured secret in constant time. */
+export function isValidOriginSecret(provided: string | null, expected: string): boolean {
+  if (!provided || !expected) return false;
+  const a = Buffer.from(provided, "utf8");
+  const b = Buffer.from(expected, "utf8");
+  return a.length === b.length && timingSafeEqual(a, b);
+}
+
 /**
  * Extracts client IP. Trusts `cf-connecting-ip` ONLY when the request was authenticated via
  * Cloudflare (`isCloudflareVerified === true`); otherwise falls back strictly to `clientAddress`.
  */
-export function extractClientIp(
-  request: Request,
-  clientAddress?: string,
+export function extractClientIp({
+  clientAddress,
   isCloudflareVerified = false,
-): string {
+  request,
+}: ExtractClientIpOptions): string {
   if (isCloudflareVerified) {
     const cfIp = request.headers.get("cf-connecting-ip")?.trim();
     if (cfIp && isIP(cfIp) !== 0) {
@@ -59,11 +80,11 @@ export function extractClientIp(
   return fallback && isIP(fallback) !== 0 ? fallback : "unknown";
 }
 
-export function checkRateLimit(
-  identifier: string,
+export function checkRateLimit({
+  identifier,
   maxRequests = 5,
   windowMs = 60_000,
-): RateLimitResult {
+}: CheckRateLimitOptions): RateLimitResult {
   const now = Date.now();
   const isUnidentified = identifier.endsWith(":unknown") || identifier === "unknown";
 

@@ -12,17 +12,17 @@ interface Props {
 const { tagline, title, type, description, isH1 = false } = Astro.props;
 ---
 
-<div class="content absolute max-md:top-[calc((100dvh-var(--thumb-bottom)-var(--thumb-height)+3.75rem+env(safe-area-inset-top,0px))/2)] max-md:-translate-y-1/2 left-4 sm:left-8 md:left-[5%] lg:left-[max(7%,calc(50%-35.625rem))] 2xl:left-[max(7%,calc(50%-40rem))] 3xl:left-[max(8%,calc(50%-45rem))] z-10 box-border max-w-[calc(100vw-2rem)] text-white text-shadow-sm text-shadow-black/40 md:top-[clamp(4.75rem,10.5vh,6.75rem)] lg:top-[clamp(5.25rem,12vh,7.75rem)] xl:top-[clamp(5.75rem,13.5vh,8.5rem)] 2xl:top-[clamp(6.5rem,14.5vh,9.25rem)] 3xl:top-[clamp(7.5rem,15.5vh,10.5rem)]">
+<div class="content absolute max-md:top-[calc((100dvh-var(--thumb-bottom)-var(--thumb-height)+3.75rem+env(safe-area-inset-top,0px))/2)] max-md:-translate-y-1/2 inset-s-4 sm:inset-s-8 md:inset-s-[5%] lg:inset-s-[max(7%,calc(50%-35.625rem))] 2xl:inset-s-[max(7%,calc(50%-40rem))] 3xl:inset-s-[max(8%,calc(50%-45rem))] z-10 box-border max-w-[calc(100vw-2rem)] text-white text-shadow-sm text-shadow-black/40 md:top-[clamp(4.75rem,10.5vh,6.75rem)] lg:top-[clamp(5.25rem,12vh,7.75rem)] xl:top-[clamp(5.75rem,13.5vh,8.5rem)] 2xl:top-[clamp(6.5rem,14.5vh,9.25rem)] 3xl:top-[clamp(7.5rem,15.5vh,10.5rem)]">
   {tagline && (
-    <div class="tagline mb-3 inline-flex items-center justify-start gap-2 whitespace-nowrap text-shadow-xs text-shadow-black/80 sm:mb-3 sm:gap-2.5 md:mb-4 md:gap-3 text-[0.7rem] xs:text-xs font-bold uppercase tracking-[0.16em] sm:tracking-[0.2em] md:tracking-[0.25em] text-orange-300">
+    <div class="mbe-3 inline-flex items-center justify-start gap-2 whitespace-nowrap text-shadow-xs text-shadow-black/80 sm:mbe-3 sm:gap-2.5 md:mbe-4 md:gap-3 text-[0.7rem] xs:text-xs font-bold uppercase tracking-[0.16em] sm:tracking-[0.2em] md:tracking-[0.25em] text-orange-300">
       <span
         aria-hidden="true"
-        class="tagline-line inline-block h-[1.5px] w-5 shrink-0 bg-orange-400/60 xs:w-6 sm:w-8 md:w-12"
+        class="inline-block h-[1.5px] w-5 shrink-0 bg-orange-400/60 xs:w-6 sm:w-8 md:w-12"
       ></span>
       <span class="truncate max-w-[70vw] sm:max-w-none">{tagline}</span>
       <span
         aria-hidden="true"
-        class="tagline-line inline-block h-[1.5px] w-5 shrink-0 bg-orange-400/60 xs:w-6 sm:w-8 md:w-12"
+        class="inline-block h-[1.5px] w-5 shrink-0 bg-orange-400/60 xs:w-6 sm:w-8 md:w-12"
       ></span>
     </div>
   )}
@@ -30,7 +30,7 @@ const { tagline, title, type, description, isH1 = false } = Astro.props;
   <BlurText
     as={isH1 ? "h1" : "h2"}
     blur={4}
-    class="title m-0 text-white max-sm:text-balance sm:whitespace-nowrap text-left text-shadow-md text-shadow-black/50 text-[clamp(1.85rem,7.5vw,2.4rem)] xs:text-[clamp(2.1rem,7vw,2.75rem)] font-extrabold uppercase leading-[1.08] tracking-tight sm:text-[clamp(2.4rem,4.8vw,3.2rem)] sm:leading-[1.1] md:text-[clamp(2.6rem,4vw,3.8rem)] md:leading-[1.12] lg:text-[clamp(3rem,4.2vw,4.6rem)] 2xl:text-[clamp(3.5rem,4.2vw,5.2rem)] 3xl:text-[clamp(4rem,4vw,6rem)]"
+    class="m-0 text-white max-sm:text-balance sm:whitespace-nowrap text-start text-shadow-md text-shadow-black/50 text-[clamp(1.85rem,7.5vw,2.4rem)] xs:text-[clamp(2.1rem,7vw,2.75rem)] font-extrabold uppercase leading-[1.08] tracking-tight sm:text-[clamp(2.4rem,4.8vw,3.2rem)] sm:leading-[1.1] md:text-[clamp(2.6rem,4vw,3.8rem)] md:leading-[1.12] lg:text-[clamp(3rem,4.2vw,4.6rem)] 2xl:text-[clamp(3.5rem,4.2vw,5.2rem)] 3xl:text-[clamp(4rem,4vw,6rem)]"
     delay={150}
     direction="bottom"
     distance={24}
@@ -41,7 +41,7 @@ const { tagline, title, type, description, isH1 = false } = Astro.props;
   <BlurText
     as="div"
     blur={4}
-    class="type m-0 mt-2 xs:mt-2.5 sm:mt-3 md:mt-3.5 max-sm:text-balance sm:whitespace-nowrap text-left text-shadow-md text-shadow-black/45 text-[clamp(1.65rem,6.8vw,2.2rem)] xs:text-[clamp(1.9rem,6.5vw,2.5rem)] font-extrabold uppercase leading-[1.1] tracking-tight text-orange-600 sm:text-[clamp(2.1rem,4.5vw,2.9rem)] md:text-[clamp(2.4rem,3.8vw,3.6rem)] md:leading-[1.12] lg:text-[clamp(2.8rem,4vw,4.4rem)] 2xl:text-[clamp(3.2rem,4vw,5rem)] 3xl:text-[clamp(3.6rem,3.8vw,5.6rem)]"
+    class="m-0 mbs-2 xs:mbs-2.5 sm:mbs-3 md:mbs-3.5 max-sm:text-balance sm:whitespace-nowrap text-start text-shadow-md text-shadow-black/45 text-[clamp(1.65rem,6.8vw,2.2rem)] xs:text-[clamp(1.9rem,6.5vw,2.5rem)] font-extrabold uppercase leading-[1.1] tracking-tight text-orange-600 sm:text-[clamp(2.1rem,4.5vw,2.9rem)] md:text-[clamp(2.4rem,3.8vw,3.6rem)] md:leading-[1.12] lg:text-[clamp(2.8rem,4vw,4.4rem)] 2xl:text-[clamp(3.2rem,4vw,5rem)] 3xl:text-[clamp(3.6rem,3.8vw,5.6rem)]"
     delay={260}
     direction="bottom"
     distance={20}
@@ -52,7 +52,7 @@ const { tagline, title, type, description, isH1 = false } = Astro.props;
   <BlurText
     as="p"
     blur={3}
-    class="description border-s-2 border-orange-600 ps-3.5 sm:ps-4 py-0.5 mt-4 xs:mt-5 sm:mt-5 md:mt-6 lg:mt-7 text-left text-shadow-md text-shadow-black/85 text-[clamp(0.875rem,0.8rem+0.42vw,1.1rem)] font-normal leading-relaxed text-pretty text-slate-100/95 max-w-[min(100%,44ch)] sm:max-w-[46ch] sm:leading-[1.62] md:max-w-[50ch] md:leading-[1.68] lg:max-w-[54ch] lg:leading-[1.72] xl:max-w-[58ch] 2xl:max-w-[62ch]"
+    class="border-s-2 border-orange-600 ps-3.5 sm:ps-4 py-0.5 mbs-4 xs:mbs-5 sm:mbs-5 md:mbs-6 lg:mbs-7 text-start text-shadow-md text-shadow-black/85 text-[clamp(0.875rem,0.8rem+0.42vw,1.1rem)] font-normal leading-relaxed text-pretty text-slate-100/95 max-w-[min(100%,44ch)] sm:max-w-[46ch] sm:leading-[1.62] md:max-w-[50ch] md:leading-[1.68] lg:max-w-[54ch] lg:leading-[1.72] xl:max-w-[58ch] 2xl:max-w-[62ch]"
     delay={360}
     direction="bottom"
     distance={18}

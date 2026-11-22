@@ -1,6 +1,7 @@
 ---
+import { createHash } from "node:crypto";
+import { Font } from "astro:assets";
 import "../styles/global.css";
-import { ClientRouter } from "astro:transitions";
 import { generateOrganizationJsonLd, generateWebsiteJsonLd } from "../lib/structured-data";
 import Footer from "./Footer.astro";
 import Navbar from "./Navbar.astro";
@@ -8,7 +9,14 @@ import CookieConsent from "../shared/ui/widgets/CookieConsent.astro";
 import ScrollProgressBar from "../shared/ui/feedback/ScrollProgressBar.astro";
 import JsonLd from "../shared/ui/primitives/JsonLd.astro";
 import { WHATSAPP_LINK } from "../lib/constants/contact";
-import { LOCALES, DEFAULT_LOCALE, OG_LOCALE_MAP, isLocale, type Locale } from "../i18n/locales";
+import {
+  DEFAULT_LOCALE,
+  getLocaleDirection,
+  isLocale,
+  LOCALES,
+  OG_LOCALE_MAP,
+  type Locale,
+} from "../i18n/locales";
 import { getLocalizedPath, stripLocaleFromPath, useTranslations } from "../i18n/utils";
 import WhatsappIcon from "../shared/ui/icons/WhatsappIcon.astro";
 
@@ -18,23 +26,31 @@ interface Props {
   imageAlt?: string | undefined;
   noindex?: boolean | undefined;
   preloadImage?: boolean | undefined;
+  preloadImageSizes?: string | undefined;
+  preloadImageSrcSet?: string | undefined;
   title?: string | undefined;
 }
 
 const {
-  title = "Amsirar Trip | Morocco Tours & Desert Adventures",
-  description = "Private Sahara desert tours, High Atlas mountain treks, and day excursions across Morocco with licensed local guides.",
+  title: rawTitle,
+  description: rawDescription,
   noindex = false,
   image = "/images/hero/marrakech-medina.webp",
   imageAlt,
   preloadImage,
+  preloadImageSizes,
+  preloadImageSrcSet,
 } = Astro.props;
-
-const pageTitle = title.includes("Amsirar Trip") ? title : `${title} | Amsirar Trip`;
 
 const locale: Locale =
   Astro.locals.locale
   ?? (Astro.currentLocale && isLocale(Astro.currentLocale) ? Astro.currentLocale : DEFAULT_LOCALE);
+const dir = getLocaleDirection(locale);
+const t = useTranslations(locale);
+const title = rawTitle ?? t("home.meta.title");
+const description = rawDescription ?? t("home.meta.description");
+const pageTitle = title.includes("Amsirar Trip") ? title : `${title} | Amsirar Trip`;
+
 const site = Astro.site ?? Astro.url;
 const pathname = Astro.url.pathname;
 
@@ -46,64 +62,75 @@ const shouldPreload = Boolean(preloadImage);
 const defaultOgImage = new URL(preloadImageHref, site).href;
 const resolvedImageAlt = imageAlt ?? pageTitle;
 const currentOgLocale = OG_LOCALE_MAP[locale] ?? locale;
-const t = useTranslations(locale);
+
+const THEME_INIT_SCRIPT = [
+  "try {",
+  '  const stored = localStorage.getItem("amsirar-theme");',
+  "  const isDark =",
+  '    stored ? stored === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;',
+  '  document.documentElement.classList.toggle("dark", isDark);',
+  '  document.documentElement.style.colorScheme = isDark ? "dark" : "light";',
+  "} catch {",
+  "  // localStorage unavailable",
+  "}",
+].join("\n");
+const THEME_INIT_HASH: `sha256-${string}` = `sha256-${createHash("sha256")
+  .update(THEME_INIT_SCRIPT)
+  .digest("base64")}`;
+Astro.csp?.insertScriptHash(THEME_INIT_HASH);
+
+const SPECULATION_RULES_SCRIPT = JSON.stringify({
+  prerender: [{ source: "document", where: { selector_matches: "a" }, eagerness: "moderate" }],
+  prefetch: [{ source: "document", where: { selector_matches: "a" }, eagerness: "moderate" }],
+});
+if (import.meta.env.DEV) {
+  const SPECULATION_RULES_HASH: `sha256-${string}` = `sha256-${createHash("sha256")
+    .update(SPECULATION_RULES_SCRIPT)
+    .digest("base64")}`;
+  Astro.csp?.insertScriptHash(SPECULATION_RULES_HASH);
+  Astro.csp?.insertScriptHash("sha256-IU3B3AEAItf6Fb2EWGXsdXMld1XIzaKnQSqlrM/orqM=");
+  Astro.csp?.insertScriptHash("sha256-0O7iB6zr9x0r6X6eWYITC9V5q+yWCGAoFvcysBGbY9Q=");
+  Astro.csp?.insertScriptHash("sha256-2mkrkPfKG5HdF6qWOVbV6XM8cT+fSqsoBXayDHqg3hg=");
+  Astro.csp?.insertStyleResource({ resource: "'unsafe-inline'", kind: "element" });
+}
 ---
 
 <!doctype html>
 <html
   class="inline-full min-block-full overflow-x-clip scrollbar-none [-ms-overflow-style:none] bg-(--pattern-bg-color) bg-(image:--pattern-bg-image) bg-repeat bg-size-(--pattern-bg-size) [&::-webkit-scrollbar]:hidden [&::-webkit-scrollbar]:size-0 [&::-webkit-scrollbar]:bg-transparent"
+  dir={dir}
   itemscope
   itemtype="https://schema.org/WebPage"
   lang={locale}
 >
   <head>
     <meta charset="utf-8" />
-    {/* Inline render-blocking theme init to prevent dark-mode FOUC; Astro 7 hashes this via SHA-256 CSP. */}
-    {/* eslint-disable astro/no-unsafe-inline-scripts */}
-    <script is:inline>
-      try {
-        const stored = localStorage.getItem("amsirar-theme");
-        const isDark =
-          stored ? stored === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
-        document.documentElement.classList.toggle("dark", isDark);
-        document.documentElement.style.colorScheme = isDark ? "dark" : "light";
-      } catch {
-        // localStorage unavailable
-      }
-    </script>
-    {/* eslint-enable astro/no-unsafe-inline-scripts */}
+    {/* Inline render-blocking theme init to prevent dark-mode FOUC; Astro 7 hashes this via Astro.csp. */}
+    {/* eslint-disable astro/no-set-html-directive, astro/no-unsafe-inline-scripts -- static compile-time theme & dev speculationrules scripts hashed above */}
+    <script
+      is:inline
+      set:html={THEME_INIT_SCRIPT}
+    />
+    {import.meta.env.DEV && (
+      <script
+        is:inline
+        set:html={SPECULATION_RULES_SCRIPT}
+        type="speculationrules"
+      />
+    )}
+    {/* eslint-enable astro/no-set-html-directive, astro/no-unsafe-inline-scripts */}
     <script src="../scripts/theme.ts"></script>
-    <!--
-      ClientRouter (View Transitions) inline scripts are automatically hashed
-      by Astro 7's native SHA-256 `security.csp` configuration.
-    -->
-    <ClientRouter fallback="animate" />
 
     <meta
       content={locale}
       name="app-locale"
     />
-    <link
-      as="font"
-      crossorigin="anonymous"
-      href="/fonts/Montserrat-VariableFont_wght.woff2"
-      rel="preload"
-      type="font/woff2"
+    <Font
+      cssVariable="--font-montserrat"
+      preload
     />
-    <link
-      as="font"
-      crossorigin="anonymous"
-      href="/fonts/JetBrainsMono-Variable.woff2"
-      rel="preload"
-      type="font/woff2"
-    />
-    <link
-      as="font"
-      crossorigin="anonymous"
-      href="/fonts/Yellowtail-Regular.woff2"
-      rel="preload"
-      type="font/woff2"
-    />
+    <Font cssVariable="--font-jetbrains-mono" />
+    <Font cssVariable="--font-yellowtail" />
     <meta
       content="width=device-width, initial-scale=1.0"
       name="viewport"
@@ -316,7 +343,9 @@ const t = useTranslations(locale);
       <link
         as="image"
         fetchpriority="high"
-        href={preloadImageHref}
+        href={preloadImageSrcSet ? undefined : preloadImageHref}
+        imagesizes={preloadImageSizes}
+        imagesrcset={preloadImageSrcSet}
         rel="preload"
         type="image/webp"
       />
@@ -333,20 +362,12 @@ const t = useTranslations(locale);
   </head>
 
   <body class="flex flex-col inline-full min-block-full overflow-x-clip font-sans text-base leading-[1.6] text-ink bg-(--pattern-bg-color) bg-(image:--pattern-bg-image) bg-repeat bg-size-(--pattern-bg-size) antialiased font-features-['kern'_1,'liga'_1] selection:bg-[color-mix(in_oklch,var(--color-orange)_20%,transparent)] selection:text-inherit [&::-webkit-scrollbar]:hidden [&::-webkit-scrollbar]:size-0 [&::-webkit-scrollbar]:bg-transparent">
-    <div
-      aria-hidden="true"
-      class="fixed top-0 inset-s-0 z-100000 h-0.75 w-full pointer-events-none opacity-0 origin-left scale-x-0 bg-linear-to-r from-orange via-amber-orange to-orange shadow-[0_0_12px_rgba(241,93,48,0.7),0_0_6px_rgba(247,136,72,0.5)] transition-[scale,opacity] duration-200 ease-out"
-      id="page-progress-bar"
-      transition:persist="page-progress-bar"
-    ></div>
-    <script src="../scripts/transitions.ts"></script>
     <script src="../scripts/scroll-animate.ts"></script>
     <script src="../scripts/webmcp-tools.ts"></script>
     <Navbar />
     <main
       class="relative isolate block flex-[1_0_auto] inline-full min-h-dvh overflow-x-clip focus:outline-hidden"
       id="main-content"
-      transition:animate="fade"
     >
       <div id="page-content">
         <slot />
@@ -364,7 +385,6 @@ const t = useTranslations(locale);
       rel="noopener noreferrer"
       target="_blank"
       title={t("nav.whatsappCta")}
-      transition:persist="whatsapp-cta"
     >
       <span class="relative flex size-6 shrink-0 items-center justify-center">
         <span
@@ -376,3 +396,11 @@ const t = useTranslations(locale);
     </a>
   </body>
 </html>
+
+<style>
+  @media (prefers-reduced-motion: no-preference) {
+    @view-transition {
+      navigation: auto;
+    }
+  }
+</style>

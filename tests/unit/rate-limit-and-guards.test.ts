@@ -8,15 +8,24 @@ void describe("extractClientIp", () => {
     const request = new Request("https://amsirartrip.com/contact", {
       headers: { "cf-connecting-ip": "198.51.100.99" },
     });
-    assert.equal(extractClientIp(request, "203.0.113.10", false), "203.0.113.10");
-    assert.equal(extractClientIp(request, "invalid-ip", false), "unknown");
+    assert.equal(
+      extractClientIp({ clientAddress: "203.0.113.10", isCloudflareVerified: false, request }),
+      "203.0.113.10",
+    );
+    assert.equal(
+      extractClientIp({ clientAddress: "invalid-ip", isCloudflareVerified: false, request }),
+      "unknown",
+    );
   });
 
   void it("trusts valid cf-connecting-ip when isCloudflareVerified is true", () => {
     const request = new Request("https://amsirartrip.com/contact", {
       headers: { "cf-connecting-ip": "198.51.100.42" },
     });
-    assert.equal(extractClientIp(request, "203.0.113.10", true), "198.51.100.42");
+    assert.equal(
+      extractClientIp({ clientAddress: "203.0.113.10", isCloudflareVerified: true, request }),
+      "198.51.100.42",
+    );
   });
 });
 
@@ -26,24 +35,45 @@ void describe("checkRateLimit", () => {
   });
 
   void it("allows requests within quota and blocks after exceeding maxRequests", () => {
-    const key = "booking:198.51.100.7";
-    assert.deepEqual(checkRateLimit(key, 2, 10_000), { allowed: true, remaining: 1 });
-    assert.deepEqual(checkRateLimit(key, 2, 10_000), { allowed: true, remaining: 0 });
-    assert.deepEqual(checkRateLimit(key, 2, 10_000), { allowed: false, remaining: 0 });
+    const identifier = "booking:198.51.100.7";
+    assert.deepEqual(checkRateLimit({ identifier, maxRequests: 2, windowMs: 10_000 }), {
+      allowed: true,
+      remaining: 1,
+    });
+    assert.deepEqual(checkRateLimit({ identifier, maxRequests: 2, windowMs: 10_000 }), {
+      allowed: true,
+      remaining: 0,
+    });
+    assert.deepEqual(checkRateLimit({ identifier, maxRequests: 2, windowMs: 10_000 }), {
+      allowed: false,
+      remaining: 0,
+    });
   });
 
   void it("blocks repeated violators on the third violation while exempting unknown keys", () => {
-    const key = "contact:198.51.100.8";
-    assert.equal(checkRateLimit(key, 1, 10_000).allowed, true);
-    assert.equal(checkRateLimit(key, 1, 10_000).blocked, undefined);
-    assert.equal(checkRateLimit(key, 1, 10_000).blocked, undefined);
-    const blocked = checkRateLimit(key, 1, 10_000);
+    const identifier = "contact:198.51.100.8";
+    assert.equal(checkRateLimit({ identifier, maxRequests: 1, windowMs: 10_000 }).allowed, true);
+    assert.equal(
+      checkRateLimit({ identifier, maxRequests: 1, windowMs: 10_000 }).blocked,
+      undefined,
+    );
+    assert.equal(
+      checkRateLimit({ identifier, maxRequests: 1, windowMs: 10_000 }).blocked,
+      undefined,
+    );
+    const blocked = checkRateLimit({ identifier, maxRequests: 1, windowMs: 10_000 });
     assert.deepEqual(blocked, { allowed: false, remaining: 0, blocked: true, newlyBlocked: true });
 
     const unknownKey = "contact:unknown";
-    assert.equal(checkRateLimit(unknownKey, 1, 10_000).allowed, true);
+    assert.equal(
+      checkRateLimit({ identifier: unknownKey, maxRequests: 1, windowMs: 10_000 }).allowed,
+      true,
+    );
     for (let i = 0; i < 4; i++) {
-      assert.equal(checkRateLimit(unknownKey, 1, 10_000).blocked, undefined);
+      assert.equal(
+        checkRateLimit({ identifier: unknownKey, maxRequests: 1, windowMs: 10_000 }).blocked,
+        undefined,
+      );
     }
   });
 });

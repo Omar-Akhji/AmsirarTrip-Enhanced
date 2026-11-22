@@ -35,10 +35,11 @@ function createRevealObserver(): IntersectionObserver {
 function animateCounter(el: HTMLElement): void {
   const countToAttr = el.dataset["countTo"];
   const text = el.textContent;
-  const numberMatches = text ? text.matchAll(/\d+/g).toArray() : [];
-  if (!countToAttr && numberMatches.length !== 1) return;
+  const match = text ? /\d+/.exec(text) : null;
+  const hasMultipleNumbers =
+    match !== null && /\d+/.test(text.slice(match.index + match[0].length));
+  if (!countToAttr && (match === null || hasMultipleNumbers)) return;
 
-  const match = numberMatches[0];
   const targetVal = Number(countToAttr ?? match?.[0]);
   if (Number.isNaN(targetVal)) return;
 
@@ -107,7 +108,9 @@ function startObserving(): void {
 
 function init(): void {
   cleanup();
-  document.documentElement.classList.add("scroll-init");
+  if (!getReducedMotionPreference()) {
+    document.documentElement.classList.add("scroll-init");
+  }
   startObserving();
 }
 
@@ -119,5 +122,14 @@ function cleanup(): void {
   document.documentElement.classList.remove("scroll-init");
 }
 
-document.addEventListener("astro:page-load", init);
-document.addEventListener("astro:before-preparation", cleanup);
+if (
+  "prerendering" in document
+  && (document as Document & { prerendering?: boolean }).prerendering
+) {
+  document.addEventListener("prerenderingchange", init, { once: true });
+} else if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", init, { once: true });
+} else {
+  init();
+}
+globalThis.addEventListener("pagehide", cleanup, { once: true });

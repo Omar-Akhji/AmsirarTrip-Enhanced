@@ -6,57 +6,18 @@
 @import "./animations.css";
 
 /* ==========================================================================
-   2. Fonts (Variable-First Architecture for Zero-CLS & Minimal Requests)
-   ========================================================================== */
-
-@font-face {
-  font-family: Montserrat;
-  src: url("/fonts/Montserrat-VariableFont_wght.woff2") format("woff2");
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* Fallback Font Metric Overrides for Zero-CLS Swap */
-@font-face {
-  font-family: Montserrat-Fallback;
-  src: local("Arial");
-  ascent-override: 96.8%;
-  descent-override: 25.1%;
-  line-gap-override: 0%;
-  size-adjust: 100%;
-}
-
-@font-face {
-  font-family: Yellowtail;
-  src: url("/fonts/Yellowtail-Regular.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "JetBrains Mono";
-  src: url("/fonts/JetBrainsMono-Variable.woff2") format("woff2");
-  font-weight: 100 800;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* ==========================================================================
-   3. Theme tokens (Tailwind CSS v4 configuration)
+   2. Theme tokens (Tailwind CSS v4 configuration; fonts loaded via Astro Fonts API)
    Everything here becomes a Tailwind utility (bg-canvas, text-ink, rounded-md…).
    Warm-tinted OKLCH: hue 65 = sandy neutrals, hue 33 = terracotta.
    ========================================================================== */
 
-@theme {
-  /* Typography */
-  --font-sans:
-    "Montserrat", "Montserrat-Fallback", system-ui, -apple-system, blinkmacsystemfont, "Segoe UI",
-    roboto, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
-  --font-brand: "Yellowtail", cursive;
+@theme inline {
+  --font-sans: var(--font-montserrat);
+  --font-mono: var(--font-jetbrains-mono);
+  --font-brand: var(--font-yellowtail);
+}
 
+@theme {
   /* Base Neutral & Surface */
   --color-white: #fafafa;
 
@@ -182,6 +143,21 @@
   grid-template-columns: minmax(min(16rem, 100%), 1fr) minmax(0, 1.618fr);
 }
 
+/* Skip below-the-fold layout/paint work on tall static sections until scrolled near */
+@utility cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 36rem;
+}
+
+@layer components {
+  @media (prefers-contrast: more) {
+    :where(a, button, input, select, textarea, summary):focus-visible {
+      outline: 2px solid var(--color-orange);
+      outline-offset: 2px;
+    }
+  }
+}
+
 /* Compositor stagger delay utility for CSS reveal keyframes */
 @utility animate-delay-* {
   animation-delay: calc(--value(integer) * 1ms);
@@ -225,7 +201,7 @@
   }
 
   [id] {
-    scroll-margin-top: 5.5rem;
+    scroll-margin-block-start: 5.5rem;
   }
 
   /* Branded text selection */
@@ -259,7 +235,7 @@
   }
 
   hgroup p {
-    font-family: var(--font-mono, "JetBrains Mono", ui-monospace, monospace);
+    font-family: var(--font-mono, ui-monospace, monospace);
   }
 
   /* Enforce vertical digit alignment across prices, tables, timers, and badges */
@@ -292,6 +268,11 @@
   #tours-grid:has(input[value="tangier"]:checked) .tour-card-item:not([data-departure="tangier"]) {
     display: none;
   }
+
+  #tours-grid:has(input[name="departure-filter"]:not([value="all"]):checked)
+    .tour-card-item:not(.is-visible) {
+    opacity: 1;
+  }
 }
 
 /* ==========================================================================
@@ -305,7 +286,7 @@ html:has(dialog:modal) {
 
 /* Ensure all buttons, role=button triggers, and mono controls use JetBrains Mono + tabular digits */
 :is(button, [type="button"], [type="submit"], [type="reset"], [role="button"], .font-mono) {
-  font-family: var(--font-mono, "JetBrains Mono", ui-monospace, monospace);
+  font-family: var(--font-mono, ui-monospace, monospace);
   font-variant-numeric: tabular-nums;
 }
 

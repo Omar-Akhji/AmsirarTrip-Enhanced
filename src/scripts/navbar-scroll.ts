@@ -24,5 +24,11 @@ function initNavbarScroll(): void {
 }
 
 initNavbarScroll();
-document.addEventListener("astro:page-load", initNavbarScroll);
-document.addEventListener("astro:after-swap", initNavbarScroll);
+globalThis.addEventListener(
+  "pagehide",
+  () => {
+    activeObserver?.disconnect();
+    activeObserver = null;
+  },
+  { once: true },
+);

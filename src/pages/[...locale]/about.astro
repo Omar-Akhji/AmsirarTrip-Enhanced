@@ -20,6 +20,7 @@ const breadcrumbJsonLd = generateBreadcrumbJsonLd([
 const aboutPageJsonLd = generateAboutPageJsonLd({
   name: title,
   description,
+  inLanguage: locale,
   url: Astro.url.pathname,
 });
 ---

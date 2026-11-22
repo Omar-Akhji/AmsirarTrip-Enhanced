@@ -10,13 +10,16 @@ import { z } from "astro/zod";
 
 const trimmedString = z
   .string()
-  .optional()
-  .transform((value) => value?.trim() ?? "");
+  .transform((value) => value.trim())
+  .prefault("");
 
 const serverEnvSchema = z.object({
   GMAIL_PASS: trimmedString,
   GMAIL_USER: trimmedString,
-  LOG_DIR: trimmedString.transform((value) => value || "./logs"),
+  LOG_DIR: z
+    .string()
+    .transform((value) => value.trim() || "./logs")
+    .default("./logs"),
   MAIL_TO: trimmedString,
   ORIGIN_VERIFY_SECRET: trimmedString,
   TURNSTILE_SECRET_KEY: trimmedString,

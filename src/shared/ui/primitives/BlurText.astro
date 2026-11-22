@@ -7,6 +7,7 @@ export interface Props {
   delay?: number;
   direction?: "top" | "bottom";
   distance?: number;
+  locale?: string;
   stagger?: number;
   stepDuration?: number;
   style?: string;
@@ -25,9 +26,39 @@ const {
   blur = 10,
   distance = 50,
   stagger = 0.045,
+  locale = Astro.locals.locale ?? "en",
 } = Astro.props;
 
-const tokens: string[] = animateBy === "letters" ? [...text] : text.split(" ");
+function segmentText(input: string, mode: "words" | "letters", lang: string): string[] {
+  if (typeof Intl !== "undefined" && typeof Intl.Segmenter === "function") {
+    if (mode === "letters") {
+      const segmenter = new Intl.Segmenter(lang, { granularity: "grapheme" });
+      return [...segmenter.segment(input)].map((item) => item.segment);
+    }
+
+    const segmenter = new Intl.Segmenter(lang, { granularity: "word" });
+    const words: string[] = [];
+    let current = "";
+    for (const part of segmenter.segment(input)) {
+      if (/^\s+$/.test(part.segment)) {
+        if (current.length > 0) {
+          words.push(current);
+          current = "";
+        }
+      } else {
+        current += part.segment;
+      }
+    }
+    if (current.length > 0) {
+      words.push(current);
+    }
+    return words;
+  }
+
+  return mode === "letters" ? [...input] : input.split(" ");
+}
+
+const tokens = segmentText(text, animateBy, locale);
 const initialY = direction === "top" ? -distance : distance;
 const rootStyle = [
   styleProp,
@@ -38,12 +69,12 @@ const rootStyle = [
 ---
 
 <Tag
-  class:list={["blur-text-root", className]}
+  class:list={[className]}
   style={rootStyle}
 >
   <span
     aria-hidden="true"
-    class="blur-text-tokens inline"
+    class="inline"
   >
     {tokens.map((token: string, idx: number) => (
       <span

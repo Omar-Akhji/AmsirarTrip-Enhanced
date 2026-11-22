@@ -30,7 +30,7 @@ const { routeMap, kicker = t("routeMap.kicker") } = Astro.props;
       <div class="mbe-2.5 flex size-12 items-center justify-center rounded-full border border-orange-500/20 bg-orange-500/10 text-orange-600 shadow-2xs dark:text-orange-400">
         <svg
           aria-hidden="true"
-          class="size-6 text-current solar solar-streets-map-point-broken"
+          class="size-6 text-current"
           fill="none"
           stroke-width="1.5"
           viewBox="0 0 24 24"
@@ -61,7 +61,8 @@ const { routeMap, kicker = t("routeMap.kicker") } = Astro.props;
       </div>
 
       <p class="font-mono text-xs text-stone-500 dark:text-mist-400 mbe-3.5">
-        {t("routeMap.interactiveMap")} · {routeMap.waypoints.length} {t("routeMap.stops")}
+        {t("routeMap.interactiveMap")} ·{" "}
+        {t("routeMap.stopsCount", { count: routeMap.waypoints.length })}
       </p>
 
       <ActionPill
@@ -97,7 +98,7 @@ const { routeMap, kicker = t("routeMap.kicker") } = Astro.props;
           ></circle>
           <path d="M12 2v3m0 14v3M2 12h3m14 0h3"></path>
         </svg>
-        {t("routeMap.viewStopsPrefix")} {routeMap.waypoints.length} {t("routeMap.viewStopsSuffix")}
+        {t("routeMap.viewStopsSchedule", { count: routeMap.waypoints.length })}
       </span>
       <span class="font-mono text-xs text-stone-400 transition-transform duration-200 motion-reduce:transition-none group-open:rotate-180 dark:text-mist-400">
         ▼

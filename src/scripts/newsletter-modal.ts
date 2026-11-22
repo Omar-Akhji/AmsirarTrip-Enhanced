@@ -4,103 +4,89 @@ import { hasCaptcha, TURNSTILE_SITE_KEY } from "@/lib/client-env";
 import { getTurnstileApi, loadTurnstileApi } from "@/lib/turnstile-client";
 
 const AUTO_CLOSE_DELAY_MS = 4000;
+const SUBMIT_TIMEOUT_MS = 20_000;
+
+type NewsletterStatusKey =
+  | "footer.newsletterSuccess"
+  | "footer.newsletterRateLimited"
+  | "footer.newsletterCaptchaError"
+  | "footer.newsletterFailure";
+
+interface NewsletterElements {
+  readonly dialog: HTMLDialogElement;
+  readonly form: HTMLFormElement;
+  readonly statusEl: HTMLOutputElement;
+  readonly submitBtn: HTMLButtonElement;
+  readonly submitLabel: HTMLElement;
+  readonly turnstileSlot: HTMLElement | null;
+  readonly turnstileWrap: HTMLElement;
+}
+
+interface NewsletterConfig {
+  readonly labels: { readonly sending: string; readonly subscribe: string };
+  readonly messages: Record<NewsletterStatusKey, string>;
+}
 
 function resolveDocumentLanguage(): Locale {
   const lang = document.documentElement.lang;
   return isLocale(lang) ? lang : "en";
 }
 
-function setupNewsletterModal(): void {
-  type NewsletterStatusKey =
-    | "footer.newsletterSuccess"
-    | "footer.newsletterRateLimited"
-    | "footer.newsletterCaptchaError"
-    | "footer.newsletterFailure";
+function readNewsletterConfig(form: HTMLFormElement): NewsletterConfig {
+  return {
+    labels: {
+      subscribe: form.dataset["labelSubscribe"] ?? "Subscribe",
+      sending: form.dataset["labelSending"] ?? "Sending...",
+    },
+    messages: {
+      "footer.newsletterSuccess": form.dataset["msgSuccess"] ?? "",
+      "footer.newsletterRateLimited": form.dataset["msgRateLimited"] ?? "",
+      "footer.newsletterCaptchaError": form.dataset["msgCaptcha"] ?? "",
+      "footer.newsletterFailure": form.dataset["msgFailure"] ?? "",
+    },
+  };
+}
 
-  type SubmitState = "idle" | "submitting" | "success";
-
+function queryNewsletterElements(): NewsletterElements | null {
   const dialog = document.querySelector<HTMLDialogElement>("#newsletter-dialog");
   const form = dialog?.querySelector<HTMLFormElement>("[data-newsletter-form]");
   const statusEl = form?.querySelector<HTMLOutputElement>("[data-newsletter-status]");
   const submitBtn = form?.querySelector<HTMLButtonElement>("[data-newsletter-submit]");
   const submitLabel = form?.querySelector<HTMLElement>("[data-newsletter-submit-label]");
   const turnstileWrap = form?.querySelector<HTMLElement>("[data-newsletter-turnstile-wrap]");
-  const turnstileSlot = form?.querySelector<HTMLElement>("[data-newsletter-turnstile-slot]");
+  const turnstileSlot =
+    form?.querySelector<HTMLElement>("[data-newsletter-turnstile-slot]") ?? null;
 
-  if (
-    !dialog
-    || !form
-    || !statusEl
-    || !submitBtn
-    || !submitLabel
-    || !turnstileWrap
-    || dialog.dataset["newsletterInit"] === "true"
-  ) {
-    return;
-  }
+  return dialog && form && statusEl && submitBtn && submitLabel && turnstileWrap ?
+      { dialog, form, statusEl, submitBtn, submitLabel, turnstileSlot, turnstileWrap }
+    : null;
+}
 
-  dialog.dataset["newsletterInit"] = "true";
-
-  const labels = {
-    subscribe: form.dataset["labelSubscribe"] ?? "Subscribe",
-    sending: form.dataset["labelSending"] ?? "Sending...",
-  };
-
-  const messages: Record<NewsletterStatusKey, string> = {
-    "footer.newsletterSuccess": form.dataset["msgSuccess"] ?? "",
-    "footer.newsletterRateLimited": form.dataset["msgRateLimited"] ?? "",
-    "footer.newsletterCaptchaError": form.dataset["msgCaptcha"] ?? "",
-    "footer.newsletterFailure": form.dataset["msgFailure"] ?? "",
-  };
-
+function createTurnstileController(elements: NewsletterElements) {
+  const { dialog, turnstileSlot, turnstileWrap } = elements;
   let widgetId: string | null = null;
   let renderPromise: Promise<void> | null = null;
-  let autoCloseTimer: ReturnType<typeof setTimeout> | null = null;
-  let currentState: SubmitState = "idle";
-
-  const clearAutoClose = (): void => {
-    if (autoCloseTimer !== null) {
-      clearTimeout(autoCloseTimer);
-      autoCloseTimer = null;
-    }
-  };
 
   const setCaptchaError = (hasError: boolean): void => {
     turnstileWrap.dataset["captchaError"] = hasError ? "true" : "false";
   };
 
-  const showErrorStatus = (message: string): void => {
-    statusEl.textContent = message;
-    statusEl.classList.remove("hidden");
-  };
-
-  const clearStatus = (): void => {
-    statusEl.textContent = "";
-    statusEl.classList.add("hidden");
-  };
-
-  const setSubmitState = (nextState: SubmitState): void => {
-    currentState = nextState;
-    submitBtn.dataset["state"] = nextState;
-    submitBtn.disabled = nextState !== "idle";
-    submitBtn.setAttribute("aria-busy", nextState === "submitting" ? "true" : "false");
-
-    if (nextState === "submitting") {
-      submitLabel.textContent = labels.sending;
-    } else if (nextState === "success") {
-      submitLabel.textContent = messages["footer.newsletterSuccess"];
-    } else {
-      submitLabel.textContent = labels.subscribe;
-    }
-  };
-
-  const resetCaptcha = (): void => {
+  const reset = (): void => {
     if (widgetId) {
       getTurnstileApi()?.reset(widgetId);
     }
   };
 
-  const ensureTurnstileRendered = async (): Promise<void> => {
+  const getToken = (): string => (widgetId ? (getTurnstileApi()?.getResponse(widgetId) ?? "") : "");
+
+  const remove = (): void => {
+    if (widgetId) {
+      getTurnstileApi()?.remove(widgetId);
+      widgetId = null;
+    }
+  };
+
+  const ensureRendered = async (): Promise<void> => {
     if (!hasCaptcha || !TURNSTILE_SITE_KEY || !turnstileSlot || widgetId !== null) return;
     if (renderPromise) return renderPromise;
 
@@ -134,80 +120,52 @@ function setupNewsletterModal(): void {
     }
   };
 
-  const handleSubmit = async (): Promise<void> => {
-    if (currentState !== "idle" || !form.reportValidity()) return;
+  return { ensureRendered, getToken, remove, reset, setCaptchaError };
+}
 
-    const formData = new FormData(form);
-    const nameValue = formData.get("name");
-    const emailValue = formData.get("email");
-    const name = typeof nameValue === "string" ? nameValue.trim() : "";
-    const email = typeof emailValue === "string" ? emailValue.trim() : "";
-
-    if (!email || name.length < 2) {
-      showErrorStatus(messages["footer.newsletterFailure"]);
-      return;
-    }
-
-    await ensureTurnstileRendered();
-    const recaptchaToken = widgetId ? (getTurnstileApi()?.getResponse(widgetId) ?? "") : "";
-    if (!recaptchaToken) {
-      setCaptchaError(true);
-      showErrorStatus(messages["footer.newsletterCaptchaError"]);
-      return;
-    }
-
-    setCaptchaError(false);
-    clearStatus();
-    setSubmitState("submitting");
-
-    try {
-      const { data, error } = await actions.newsletter({
-        name,
-        email,
-        recaptchaToken,
-        language: resolveDocumentLanguage(),
-      });
-
-      if (error || !data.ok) {
-        resetCaptcha();
-        const key: NewsletterStatusKey = error ? "footer.newsletterFailure" : data.statusKey;
-        setCaptchaError(key === "footer.newsletterCaptchaError");
-        showErrorStatus(messages[key]);
-        setSubmitState("idle");
-        return;
-      }
-
-      form.reset();
-      resetCaptcha();
-      clearStatus();
-      setSubmitState("success");
-
-      clearAutoClose();
-      autoCloseTimer = setTimeout(() => {
-        autoCloseTimer = null;
-        dialog.close();
-      }, AUTO_CLOSE_DELAY_MS);
-    } catch {
-      resetCaptcha();
-      showErrorStatus(messages["footer.newsletterFailure"]);
-      setSubmitState("idle");
-    }
-  };
-
-  const controller = new AbortController();
-  const { signal } = controller;
-
-  const openObserver = new MutationObserver(() => {
-    if (dialog.open) {
-      void ensureTurnstileRendered();
-    }
+async function submitWithTimeout(formData: FormData, signal: AbortSignal) {
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  const timeoutPromise = new Promise<never>((_, reject) => {
+    const onAbort = (): void => {
+      reject(new DOMException("Aborted", "AbortError"));
+    };
+    signal.addEventListener("abort", onAbort, { once: true });
+    timer = setTimeout(() => {
+      signal.removeEventListener("abort", onAbort);
+      reject(new Error("Request timed out"));
+    }, SUBMIT_TIMEOUT_MS);
   });
-  openObserver.observe(dialog, { attributes: true, attributeFilter: ["open"] });
 
-  if (dialog.open) {
-    void ensureTurnstileRendered();
+  try {
+    return await Promise.race([actions.newsletter(formData), timeoutPromise]);
+  } finally {
+    clearTimeout(timer);
   }
+}
 
+interface NewsletterEventBindings {
+  readonly abortPendingSubmit: () => void;
+  readonly clearAutoClose: () => void;
+  readonly clearStatus: () => void;
+  readonly dialog: HTMLDialogElement;
+  readonly form: HTMLFormElement;
+  readonly onSubmit: () => Promise<void>;
+  readonly resetToIdle: () => void;
+  readonly signal: AbortSignal;
+  readonly turnstile: ReturnType<typeof createTurnstileController>;
+}
+
+function bindNewsletterEvents({
+  abortPendingSubmit,
+  clearAutoClose,
+  clearStatus,
+  dialog,
+  form,
+  onSubmit,
+  resetToIdle,
+  signal,
+  turnstile,
+}: NewsletterEventBindings): void {
   // Fallback for browsers without native Invoker Commands (Safari < 26.2)
   if (!("commandForElement" in HTMLButtonElement.prototype)) {
     document.addEventListener(
@@ -238,12 +196,11 @@ function setupNewsletterModal(): void {
   dialog.addEventListener(
     "close",
     () => {
+      abortPendingSubmit();
       clearAutoClose();
       clearStatus();
-      setCaptchaError(false);
-      if (currentState !== "idle") {
-        setSubmitState("idle");
-      }
+      turnstile.setCaptchaError(false);
+      resetToIdle();
     },
     { signal },
   );
@@ -252,26 +209,180 @@ function setupNewsletterModal(): void {
     "submit",
     (event) => {
       event.preventDefault();
-      void handleSubmit();
+      void onSubmit();
     },
     { signal },
   );
+}
 
-  document.addEventListener(
-    "astro:before-swap",
+function setupNewsletterModal(): void {
+  type SubmitState = "idle" | "submitting" | "success";
+  const elements = queryNewsletterElements();
+  if (!elements || elements.dialog.dataset["newsletterInit"] === "true") return;
+
+  const { dialog, form, statusEl, submitBtn, submitLabel } = elements;
+  dialog.dataset["newsletterInit"] = "true";
+
+  const { labels, messages } = readNewsletterConfig(form);
+  const turnstile = createTurnstileController(elements);
+
+  let autoCloseTimer: ReturnType<typeof setTimeout> | null = null;
+  let currentState: SubmitState = "idle";
+  let submitController: AbortController | null = null;
+
+  const clearAutoClose = (): void => {
+    if (autoCloseTimer !== null) {
+      clearTimeout(autoCloseTimer);
+      autoCloseTimer = null;
+    }
+  };
+
+  const abortPendingSubmit = (): void => {
+    submitController?.abort();
+    submitController = null;
+  };
+
+  const showErrorStatus = (message: string): void => {
+    statusEl.textContent = message;
+    statusEl.classList.remove("hidden", "text-emerald-300");
+    statusEl.classList.add("text-red-400");
+  };
+
+  const clearStatus = (): void => {
+    statusEl.textContent = "";
+    statusEl.classList.remove("text-emerald-300");
+    statusEl.classList.add("hidden", "text-red-400");
+  };
+
+  const setSubmitState = (nextState: SubmitState): void => {
+    currentState = nextState;
+    submitBtn.dataset["state"] = nextState;
+    submitBtn.disabled = nextState !== "idle";
+    submitBtn.setAttribute("aria-busy", nextState === "submitting" ? "true" : "false");
+
+    if (nextState === "submitting") {
+      submitLabel.textContent = labels.sending;
+    } else if (nextState === "success") {
+      submitLabel.textContent = messages["footer.newsletterSuccess"];
+    } else {
+      submitLabel.textContent = labels.subscribe;
+    }
+  };
+
+  const handleSubmit = async (): Promise<void> => {
+    if (currentState !== "idle" || !form.reportValidity()) return;
+
+    const formData = new FormData(form);
+    const nameValue = formData.get("name");
+    const emailValue = formData.get("email");
+    const name = typeof nameValue === "string" ? nameValue.trim() : "";
+    const email = typeof emailValue === "string" ? emailValue.trim() : "";
+
+    if (!email || name.length < 2) {
+      showErrorStatus(messages["footer.newsletterFailure"]);
+      return;
+    }
+
+    await turnstile.ensureRendered();
+    const recaptchaToken = turnstile.getToken();
+    if (!recaptchaToken) {
+      turnstile.setCaptchaError(true);
+      showErrorStatus(messages["footer.newsletterCaptchaError"]);
+      return;
+    }
+
+    formData.set("name", name);
+    formData.set("email", email);
+    formData.set("recaptchaToken", recaptchaToken);
+    formData.set("language", resolveDocumentLanguage());
+
+    turnstile.setCaptchaError(false);
+    clearStatus();
+    setSubmitState("submitting");
+
+    abortPendingSubmit();
+    const activeSubmit = new AbortController();
+    submitController = activeSubmit;
+
+    try {
+      const { data, error } = await submitWithTimeout(formData, activeSubmit.signal);
+      if (activeSubmit.signal.aborted || !dialog.isConnected) return;
+
+      if (error || !data.ok) {
+        turnstile.reset();
+        const key: NewsletterStatusKey = error ? "footer.newsletterFailure" : data.statusKey;
+        turnstile.setCaptchaError(key === "footer.newsletterCaptchaError");
+        showErrorStatus(messages[key]);
+        setSubmitState("idle");
+        return;
+      }
+
+      form.reset();
+      turnstile.reset();
+      clearStatus();
+      setSubmitState("success");
+
+      clearAutoClose();
+      autoCloseTimer = setTimeout(() => {
+        autoCloseTimer = null;
+        dialog.close();
+      }, AUTO_CLOSE_DELAY_MS);
+    } catch {
+      if (activeSubmit.signal.aborted || !dialog.isConnected) return;
+      turnstile.reset();
+      showErrorStatus(messages["footer.newsletterFailure"]);
+      setSubmitState("idle");
+    } finally {
+      if (submitController === activeSubmit) {
+        submitController = null;
+      }
+    }
+  };
+
+  const lifecycleController = new AbortController();
+  const { signal } = lifecycleController;
+
+  const openObserver = new MutationObserver(() => {
+    if (dialog.open) {
+      void turnstile.ensureRendered();
+    }
+  });
+  openObserver.observe(dialog, { attributes: true, attributeFilter: ["open"] });
+
+  if (dialog.open) {
+    void turnstile.ensureRendered();
+  }
+
+  bindNewsletterEvents({
+    abortPendingSubmit,
+    clearAutoClose,
+    clearStatus,
+    dialog,
+    form,
+    onSubmit: handleSubmit,
+    resetToIdle: () => {
+      if (currentState !== "idle") setSubmitState("idle");
+    },
+    signal,
+    turnstile,
+  });
+
+  globalThis.addEventListener(
+    "pagehide",
     () => {
+      abortPendingSubmit();
       clearAutoClose();
       openObserver.disconnect();
-      controller.abort();
-      if (widgetId) {
-        getTurnstileApi()?.remove(widgetId);
-        widgetId = null;
-      }
+      lifecycleController.abort();
+      turnstile.remove();
       delete dialog.dataset["newsletterInit"];
     },
     { once: true },
   );
 }
 
-setupNewsletterModal();
-document.addEventListener("astro:page-load", setupNewsletterModal);
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", setupNewsletterModal, { once: true });
+} else {
+  setupNewsletterModal();
+}

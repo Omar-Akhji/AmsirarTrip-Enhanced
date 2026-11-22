@@ -46,10 +46,10 @@ const t = useTranslations(locale);
         </p>
         {agencyProfile.contact.phones.map((phone) => (
           <a
-            class="mbs-1 block font-mono text-xs text-white tabular-nums sm:text-sm pointer-fine:hover:text-orange-300 active:text-orange-300"
+            class="mbs-1 inline-flex min-h-6 items-center py-0.5 font-mono text-xs text-white tabular-nums sm:text-sm pointer-fine:hover:text-orange-300 active:text-orange-300"
             href={`tel:${phone.value}`}
           >
-            {phone.display}
+            <bdi dir="ltr">{phone.display}</bdi>
           </a>
         ))}
       </div>
@@ -66,10 +66,10 @@ const t = useTranslations(locale);
         </p>
         {agencyProfile.contact.emails.map((email) => (
           <a
-            class="mbs-1 block font-mono text-xs wrap-anywhere text-white sm:text-sm pointer-fine:hover:text-orange-300 active:text-orange-300"
+            class="mbs-1 inline-flex min-h-6 items-center py-0.5 font-mono text-xs wrap-anywhere text-white sm:text-sm pointer-fine:hover:text-orange-300 active:text-orange-300"
             href={`mailto:${email}`}
           >
-            {email}
+            <bdi dir="ltr">{email}</bdi>
           </a>
         ))}
       </div>

@@ -7,6 +7,9 @@ class VideoShowcaseElement extends HTMLElement {
     const button = this.querySelector<HTMLButtonElement>("[data-video-toggle]");
     if (!video || !button) return;
 
+    this.dataset["js"] = "ready";
+    video.controls = false;
+    this.observer?.disconnect();
     this.controller?.abort();
     this.controller = new AbortController();
     const { signal } = this.controller;
@@ -64,7 +67,11 @@ class VideoShowcaseElement extends HTMLElement {
             .then(() => {
               setState("playing");
             })
-            .catch(() => {
+            .catch((error: unknown) => {
+              if (error instanceof DOMException && error.name === "AbortError") {
+                if (this.dataset["state"] === "buffering") setState("idle");
+                return;
+              }
               setState("error");
             });
         } else {
@@ -93,6 +100,6 @@ class VideoShowcaseElement extends HTMLElement {
   }
 }
 
-if (!customElements.get("video-showcase")) {
+if (typeof customElements !== "undefined" && !customElements.get("video-showcase")) {
   customElements.define("video-showcase", VideoShowcaseElement);
 }

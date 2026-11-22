@@ -59,25 +59,29 @@ export interface ExcursionItem {
 
 let cachedExcursionsPromise: Promise<ExcursionItem[]> | undefined;
 
+function mapExcursionsEntries(entries: readonly CollectionEntry<"excursions">[]): ExcursionItem[] {
+  return entries
+    .map((entry) => {
+      const { bookingId, image, i18nKeyPrefix, jsonLd } = entry.data;
+      return {
+        id: bookingId,
+        image,
+        title: `excursion.list.${i18nKeyPrefix}.title`,
+        alt: `excursion.list.${i18nKeyPrefix}.alt`,
+        description: `excursion.list.${i18nKeyPrefix}.description`,
+        tagline: `excursion.list.${i18nKeyPrefix}.tagline`,
+        duration: `excursion.list.${i18nKeyPrefix}.duration`,
+        price: jsonLd.price,
+        route: `/excursions/${entry.id}`,
+      } satisfies ExcursionItem;
+    })
+    .toSorted((a, b) => a.id - b.id);
+}
+
 async function loadExcursions(): Promise<ExcursionItem[]> {
   try {
     const entries = await getCollection("excursions");
-    return entries
-      .map((entry) => {
-        const { bookingId, image, i18nKeyPrefix, jsonLd } = entry.data;
-        return {
-          id: bookingId,
-          image,
-          title: `excursion.list.${i18nKeyPrefix}.title`,
-          alt: `excursion.list.${i18nKeyPrefix}.alt`,
-          description: `excursion.list.${i18nKeyPrefix}.description`,
-          tagline: `excursion.list.${i18nKeyPrefix}.tagline`,
-          duration: `excursion.list.${i18nKeyPrefix}.duration`,
-          price: jsonLd.price,
-          route: `/excursions/${entry.id}`,
-        } satisfies ExcursionItem;
-      })
-      .toSorted((a, b) => a.id - b.id);
+    return mapExcursionsEntries(entries);
   } catch (error: unknown) {
     cachedExcursionsPromise = undefined;
     throw error;
@@ -85,7 +89,12 @@ async function loadExcursions(): Promise<ExcursionItem[]> {
 }
 
 /** Derives UI-ready excursion data from Astro Content Collections (memoized in production). */
-export async function getExcursionsData(): Promise<ExcursionItem[]> {
+export async function getExcursionsData(
+  preloadedEntries?: readonly CollectionEntry<"excursions">[],
+): Promise<ExcursionItem[]> {
+  if (preloadedEntries) {
+    return mapExcursionsEntries(preloadedEntries);
+  }
   if (!import.meta.env.PROD) {
     return loadExcursions();
   }

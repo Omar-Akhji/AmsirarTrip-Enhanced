@@ -78,6 +78,7 @@ export function toggleTheme(origin?: Point): Theme {
   const next: Theme = current === "dark" ? "light" : "dark";
   const reducedMotion = globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  // eslint-disable-next-line baseline-js/use-baseline -- feature-checked progressive enhancement
   if (reducedMotion || typeof document.startViewTransition !== "function") {
     if (reducedMotion) {
       setTheme(next);
@@ -97,10 +98,12 @@ export function toggleTheme(origin?: Point): Theme {
   const root = document.documentElement;
   root.classList.add("theme-transition");
 
+  // eslint-disable-next-line baseline-js/use-baseline -- guarded above via typeof document.startViewTransition === "function"
   const transition = document.startViewTransition(() => {
     setTheme(next);
   });
 
+  // eslint-disable-next-line baseline-js/use-baseline -- guarded ViewTransition API
   void transition.ready
     .then(() => {
       root.animate(
@@ -116,6 +119,7 @@ export function toggleTheme(origin?: Point): Theme {
       // Transition skipped or aborted; theme state is already applied.
     });
 
+  // eslint-disable-next-line baseline-js/use-baseline -- guarded ViewTransition API
   void transition.finished.finally(() => {
     root.classList.remove("theme-transition");
   });
@@ -168,23 +172,6 @@ function initThemeListeners(): void {
     }
   });
 }
-
-document.addEventListener("astro:before-swap", (e: Event) => {
-  if (!("newDocument" in e) || !(e.newDocument instanceof Document)) return;
-
-  const isDark = getPreferredTheme() === "dark";
-  e.newDocument.documentElement.classList.toggle("dark", isDark);
-  e.newDocument.documentElement.style.colorScheme = isDark ? "dark" : "light";
-});
-
-document.addEventListener("astro:after-swap", () => {
-  applyTheme(getPreferredTheme());
-});
-
-document.addEventListener("astro:page-load", () => {
-  applyTheme(getPreferredTheme());
-  initThemeListeners();
-});
 
 applyTheme(getPreferredTheme());
 initThemeListeners();

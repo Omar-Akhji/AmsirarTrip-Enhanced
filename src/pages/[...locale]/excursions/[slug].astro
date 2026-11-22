@@ -1,7 +1,9 @@
 ---
 import { getEntry } from "astro:content";
 import { getRelativeLocaleUrl } from "astro:i18n";
+import { actions } from "astro:actions";
 import BookingForm from "../../../features/booking/components/BookingForm.vue";
+import { toInitialFormState } from "../../../actions/helpers/form-helpers";
 import BookingSidebar from "../../../features/booking/components/BookingSidebar.astro";
 import ExcursionLayout from "../../../features/excursions/components/ExcursionLayout.astro";
 import { getLocalizedExcursionContent } from "../../../features/excursions/data/excursions-data";
@@ -46,21 +48,23 @@ const itinerary = localized.program.map((stage, index) => ({
 const excursionName = localized.jsonLd.name;
 const excursionDescription = localized.seo.lead || localized.jsonLd.description;
 
+const site = Astro.site ?? "https://amsirartrip.com";
 const excursionJsonLd = generateExcursionJsonLd({
   name: excursionName,
   description: excursionDescription,
+  inLanguage: locale,
   provider: "Amsirar Trip",
-  image: `https://amsirartrip.com${excursion.image.src}`,
+  image: new URL(excursion.image.src, site).href,
   price: excursion.jsonLd.price,
   currency: excursion.jsonLd.currency,
   duration: excursion.duration,
   location: { point: localized.location },
-  url: new URL(Astro.url.pathname, Astro.site ?? "https://amsirartrip.com").href,
+  url: new URL(Astro.url.pathname, site).href,
   itinerary,
 });
 
 const faqJsonLd =
-  localized.seo.faqs.length > 0 ? generateFaqJsonLd([...localized.seo.faqs]) : undefined;
+  localized.seo.faqs.length > 0 ? generateFaqJsonLd([...localized.seo.faqs], locale) : undefined;
 
 const excursionTitleClean = isEnglish ? localized.seo.title : t(`${keyPrefix}.title`);
 
@@ -69,6 +73,11 @@ const breadcrumbJsonLd = generateBreadcrumbJsonLd([
   { name: t("nav.excursions"), url: getRelativeLocaleUrl(locale, "excursions") },
   { name: excursionTitleClean, url: Astro.url.pathname },
 ]);
+const bookingActionResult = Astro.getActionResult(actions.booking);
+if (bookingActionResult) {
+  Astro.cache.set(false);
+}
+const initialBookingState = toInitialFormState(bookingActionResult, t("booking.errors.generic"));
 ---
 
 <Layout
@@ -100,11 +109,12 @@ const breadcrumbJsonLd = generateBreadcrumbJsonLd([
   >
     <div data-animate="step-unfold">
       <BookingForm
-        client:visible
+        actionUrl={actions.booking.toString()}
+        client:visible={{ rootMargin: "200px" }}
         copy={getBookingFormCopy(t)}
         excursionId={String(excursion.bookingId)}
         excursionTitle={excursionTitleClean}
-        fullWidth
+        initialState={initialBookingState}
         locale={locale}
         tourDuration={1}
       >

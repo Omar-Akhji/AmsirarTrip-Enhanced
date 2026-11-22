@@ -71,12 +71,12 @@ const includes = localized?.includes ?? [];
 const excludes = localized?.excludes ?? [];
 const goodToKnow = localized?.goodToKnow ?? [];
 
-const routeMap = getExcursionRouteMap(
+const routeMap = getExcursionRouteMap({
   excursionKey,
-  localized?.location ?? "Morocco",
-  title,
   locale,
-);
+  locationName: localized?.location ?? "Morocco",
+  title,
+});
 ---
 
 <TripLayout

@@ -39,7 +39,7 @@ const NAV_ITEMS: readonly NavDockItem[] = [
 ---
 
 <nav
-  aria-label={t("nav.mainAria")}
+  aria-label={t("nav.mobileAria", "Mobile Navigation")}
   class:list={[
     "group/dock fixed bottom-4 inset-x-0 mx-auto z-40 w-fit max-w-[calc(100vw-1.5rem)] xs:max-w-[calc(100vw-2rem)] mbe-[env(safe-area-inset-bottom,0)]",
     "flex items-center gap-0.5 xs:gap-1 p-1 xs:p-1.5 overflow-hidden rounded-full border-2 border-stone-200/90 bg-white/95 text-dark-grey shadow-[0_12px_30px_oklch(0%_0_0deg/8%)] backdrop-blur-xl transition-colors duration-200 md:hidden print:hidden",
@@ -47,7 +47,6 @@ const NAV_ITEMS: readonly NavDockItem[] = [
     className,
   ]}
   id="mobile-bottom-nav"
-  transition:name="mobile-bottom-nav"
 >
   {NAV_ITEMS.map((item) => {
     const active = isActive(item.to);
@@ -65,13 +64,14 @@ const NAV_ITEMS: readonly NavDockItem[] = [
               !active,
           },
         ]}
+        data-astro-prefetch
         href={localize(item.to)}
         title={label}
       >
         {active && (
           <span
             class="pointer-events-none absolute inset-0 z-0 rounded-full bg-linear-to-br from-amber-orange to-orange shadow-md shadow-orange/30 motion-reduce:transition-none"
-            transition:name="mobile-nav-indicator"
+            data-mobile-nav-indicator
           />
         )}
         <NavIcon
@@ -79,7 +79,7 @@ const NAV_ITEMS: readonly NavDockItem[] = [
           name={item.icon}
         />
         {active && (
-          <span class="relative z-10 ml-1.5 inline-block whitespace-nowrap text-xs font-semibold tracking-tight motion-reduce:transition-none">
+          <span class="relative z-10 ms-1.5 inline-block whitespace-nowrap text-xs font-semibold tracking-tight motion-reduce:transition-none">
             {label}
           </span>
         )}

@@ -1,7 +1,5 @@
 import type { APIRoute } from "astro";
 
-export const prerender = true;
-
 const AI_AND_SEARCH_AGENTS = [
   "*",
   "Googlebot",

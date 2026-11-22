@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import { useTranslations } from "@/i18n/utils";
 import bg1 from "../../../assets/images/Header/header-1.webp";
 import bg2 from "../../../assets/images/Header/header-2.webp";
 import bg3 from "../../../assets/images/Header/header-3.webp";
@@ -13,132 +14,20 @@ interface Props {
 const { images = [] } = Astro.props;
 
 const locale = Astro.locals.locale;
+const t = useTranslations(locale);
 
-// Default high-resolution Moroccan travel images
 const defaultImages = [images[0] || bg1, images[1] || bg2, images[2] || bg3];
+const slideKeys = ["sahara", "atlas", "imperial"] as const;
 
-// Localized slide content
-const slidesData = {
-  en: [
-    {
-      id: "sahara",
-      title: "Tour Travel",
-      type: "& Adventure Camping",
-      description:
-        "Private Sahara desert trips and Erg Chebbi camps led by licensed Marrakech drivers.",
-      thumbType: "Tour Travel",
-      thumbTitle: "Adventure Camping",
-    },
-    {
-      id: "atlas",
-      title: "Adventure Awaits",
-      type: "Beyond the Dunes",
-      description: "Cross High Atlas passes and Dades gorges at your own pace in a private 4x4.",
-      thumbType: "Sahara Dunes",
-      thumbTitle: "Adventure Awaits",
-    },
-    {
-      id: "imperial",
-      title: "Pack Your Bags",
-      type: "Morocco Calls",
-      description:
-        "Guided routes linking Marrakech, Fes, Chefchaouen, and Morocco's Atlantic coast.",
-      thumbType: "Imperial Cities",
-      thumbTitle: "Morocco Calls",
-    },
-  ],
-  fr: [
-    {
-      id: "sahara",
-      title: "Circuits & Voyages",
-      type: "Bivouac & Aventure",
-      description:
-        "Spécialiste des voyages et circuits au Maroc, excursions dans le désert du Sahara et visites des villes impériales.",
-      thumbType: "Circuits & Voyages",
-      thumbTitle: "Bivouac & Aventure",
-    },
-    {
-      id: "atlas",
-      title: "L'aventure vous attend",
-      type: "Au-delà des dunes",
-      description:
-        "Spécialiste des voyages et circuits au Maroc, excursions dans le désert du Sahara et visites des villes impériales.",
-      thumbType: "Dunes du Sahara",
-      thumbTitle: "L'aventure vous attend",
-    },
-    {
-      id: "imperial",
-      title: "Préparez vos valises",
-      type: "Le Maroc vous appelle",
-      description:
-        "Spécialiste des voyages et circuits au Maroc, excursions dans le désert du Sahara et visites des villes impériales.",
-      thumbType: "Villes Impériales",
-      thumbTitle: "Le Maroc vous appelle",
-    },
-  ],
-  es: [
-    {
-      id: "sahara",
-      title: "Viajes y Circuitos",
-      type: "Aventura y Campamentos",
-      description:
-        "Especialistas en viajes y circuitos por Marruecos, rutas al desierto del Sáhara y excursiones a las ciudades imperiales.",
-      thumbType: "Viajes y Circuitos",
-      thumbTitle: "Aventura y Campamentos",
-    },
-    {
-      id: "atlas",
-      title: "La aventura te espera",
-      type: "Tras las dunas",
-      description:
-        "Especialistas en viajes y circuitos por Marruecos, rutas al desierto del Sáhara y excursiones a las ciudades imperiales.",
-      thumbType: "Dunas del Sáhara",
-      thumbTitle: "La aventura te espera",
-    },
-    {
-      id: "imperial",
-      title: "Haz tus maletas",
-      type: "Marruecos te llama",
-      description:
-        "Especialistas en viajes y circuitos por Marruecos, rutas al desierto del Sáhara y excursiones a las ciudades imperiales.",
-      thumbType: "Ciudades Imperiales",
-      thumbTitle: "Marruecos te llama",
-    },
-  ],
-  de: [
-    {
-      id: "sahara",
-      title: "Reisen & Touren",
-      type: "Abenteuer & Camping",
-      description:
-        "Spezialist für Marokko-Rundreisen, Sahara-Wüstentouren und Ausflüge zu den imperialen Königsstädten.",
-      thumbType: "Reisen & Touren",
-      thumbTitle: "Abenteuer & Camping",
-    },
-    {
-      id: "atlas",
-      title: "Abenteuer wartet",
-      type: "Hinter den Dünen",
-      description:
-        "Spezialist für Marokko-Rundreisen, Sahara-Wüstentouren und Ausflüge zu den imperialen Königsstädten.",
-      thumbType: "Sahara-Dünen",
-      thumbTitle: "Abenteuer wartet",
-    },
-    {
-      id: "imperial",
-      title: "Koffer packen",
-      type: "Marokko ruft",
-      description:
-        "Spezialist für Marokko-Rundreisen, Sahara-Wüstentouren und Ausflüge zu den imperialen Königsstädten.",
-      thumbType: "Königsstädte",
-      thumbTitle: "Marokko ruft",
-    },
-  ],
-};
-
-const currentSlides = (slidesData[locale as keyof typeof slidesData] || slidesData.en).map(
-  (slide, index) => ({ ...slide, image: defaultImages[index] || defaultImages[0] || "" }),
-);
+const currentSlides = slideKeys.map((id, index) => ({
+  id,
+  title: t(`hero.slides.${id}.title`),
+  type: t(`hero.slides.${id}.type`),
+  description: t(`hero.slides.${id}.description`),
+  thumbType: t(`hero.slides.${id}.thumbType`),
+  thumbTitle: t(`hero.slides.${id}.thumbTitle`),
+  image: defaultImages[index] || defaultImages[0] || "",
+}));
 
 const thumbnailCards: SlideCardItem[] = currentSlides.map((slide) => ({
   id: slide.id,
@@ -151,11 +40,12 @@ const thumbnailCards: SlideCardItem[] = currentSlides.map((slide) => ({
 ---
 
 <section
-  aria-label="Amsirar Trip Hero Carousel"
+  aria-label={t("hero.carouselAria")}
   aria-roledescription="carousel"
   class="relative isolate w-full h-dvh max-h-dvh overflow-hidden bg-black text-white"
   id="home-hero-slider-section"
 >
+  <h1 class="sr-only">{t("home.heroTitle")}</h1>
   <div
     class="slider relative size-full overflow-hidden bg-[#050505] font-sans"
     id="home-hero-slider"
@@ -164,6 +54,7 @@ const thumbnailCards: SlideCardItem[] = currentSlides.map((slide) => ({
     <div class="list">
       {currentSlides.map((slide, index) => (
         <div
+          aria-hidden={index === 0 ? "false" : "true"}
           class="item absolute inset-0 size-full"
           data-index={index}
         >
@@ -183,23 +74,70 @@ const thumbnailCards: SlideCardItem[] = currentSlides.map((slide) => ({
               class="size-full object-cover"
               decoding="async"
               fetchpriority={index === 0 ? "high" : "low"}
+              format="webp"
               loading="eager"
+              quality={80}
+              sizes="100vw"
               src={slide.image}
+              widths={[640, 1024, 1536, 1920]}
             />
           }
           <div
             aria-hidden="true"
-            class="slide-overlay pointer-events-none absolute inset-0 z-1 bg-[linear-gradient(to_bottom,rgb(0_0_0/55%)_0%,rgb(0_0_0/15%)_18%,transparent_32%),linear-gradient(to_top,rgb(0_0_0/40%)_0%,transparent_32%)]"
+            class="pointer-events-none absolute inset-0 z-1 bg-[linear-gradient(to_bottom,rgb(0_0_0/55%)_0%,rgb(0_0_0/15%)_18%,transparent_32%),linear-gradient(to_top,rgb(0_0_0/40%)_0%,transparent_32%)]"
           />
           <SliderDetails
             description={slide.description}
-            isH1={index === 0}
+            isH1={false}
             title={slide.title}
             type={slide.type}
           />
         </div>
       ))}
     </div>
+
+    <!-- WCAG 2.2.2 Pause / Play Autoplay Control -->
+    <button
+      aria-label={t("hero.pauseAutoplay")}
+      aria-pressed="false"
+      class="absolute inset-s-4 bottom-20 sm:inset-s-8 sm:bottom-8 z-110 inline-flex size-11 cursor-pointer items-center justify-center rounded-full border border-white/25 bg-black/55 text-white shadow-lg backdrop-blur-md transition-colors hover:border-white/50 hover:bg-black/75 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+      data-label-pause={t("hero.pauseAutoplay")}
+      data-label-play={t("hero.playAutoplay")}
+      data-slider-toggle
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        class="size-5"
+        data-icon-pause
+        fill="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <rect
+          height="14"
+          rx="1.5"
+          width="4"
+          x="6"
+          y="5"
+        />
+        <rect
+          height="14"
+          rx="1.5"
+          width="4"
+          x="14"
+          y="5"
+        />
+      </svg>
+      <svg
+        aria-hidden="true"
+        class="hidden size-5"
+        data-icon-play
+        fill="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path d="M8 5.14v13.72a1 1 0 0 0 1.52.85l11-6.86a1 1 0 0 0 0-1.7l-11-6.86A1 1 0 0 0 8 5.14Z" />
+      </svg>
+    </button>
 
     <!-- Thumbnail Carousel Cards -->
     <SliderCards items={thumbnailCards} />

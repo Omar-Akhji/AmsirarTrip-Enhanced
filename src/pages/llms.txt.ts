@@ -2,12 +2,12 @@ import agencyProfile from "@/data/agency-profile.json";
 import type { APIRoute } from "astro";
 import { getCollection } from "astro:content";
 
-export const prerender = true;
-
 export const GET: APIRoute = async ({ site }) => {
   const baseUrl = site ?? new URL("https://amsirartrip.com");
-  const tours = await getCollection("tours");
-  const excursions = await getCollection("excursions");
+  const [tours, excursions] = await Promise.all([
+    getCollection("tours"),
+    getCollection("excursions"),
+  ]);
 
   const sortedTours = [...tours].toSorted((a, b) => a.data.bookingId - b.data.bookingId);
   const sortedExcursions = [...excursions].toSorted((a, b) => a.data.bookingId - b.data.bookingId);

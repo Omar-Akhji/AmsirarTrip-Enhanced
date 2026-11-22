@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { computed, nextTick, ref, useId, useTemplateRef, watch } from "vue";
+import { computed, nextTick, onMounted, ref, useId, useTemplateRef, watch } from "vue";
 import {
   ALL_COUNTRIES,
   COUNTRIES_BY_DIAL_CODE_LENGTH,
   DEFAULT_COUNTRY,
+  getLocalizedCountries,
   type CountryCallingCode,
 } from "@/data/countries";
 import type { PhoneInputLabels } from "@/lib/form-copy";
@@ -14,6 +15,7 @@ interface Props {
   id?: string;
   initialValue?: string;
   labels?: PhoneInputLabels;
+  locale?: string;
   name?: string;
   placeholder?: string;
   required?: boolean;
@@ -22,6 +24,7 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   id: "phone",
+  locale: "en",
   name: "phone",
   required: true,
   placeholder: "(555) 000-0000",
@@ -40,6 +43,20 @@ const isOpen = ref(false);
 const searchQuery = ref("");
 const selectedCountry = ref<CountryCallingCode>(DEFAULT_COUNTRY);
 const nationalNumber = ref("");
+const isMounted = ref(false);
+
+onMounted(() => {
+  isMounted.value = true;
+});
+
+const localizedCountries = computed(() =>
+  isMounted.value ? getLocalizedCountries(props.locale) : ALL_COUNTRIES,
+);
+const activeCountry = computed(
+  () =>
+    localizedCountries.value.find((c) => c.code === selectedCountry.value.code)
+    ?? selectedCountry.value,
+);
 
 const triggerAriaPrefix = computed(
   () => props.labels?.triggerAriaPrefix ?? "Selected country dial code",
@@ -66,7 +83,8 @@ const fullPhoneNumber = computed(() => {
 
 const filteredCountries = computed(() => {
   const query = searchQuery.value.trim().toLowerCase();
-  return query ? ALL_COUNTRIES.filter((c) => c.searchText.includes(query)) : ALL_COUNTRIES;
+  const countries = localizedCountries.value;
+  return query ? countries.filter((c) => c.searchText.includes(query)) : countries;
 });
 
 function parsePhonePrefix(raw: string): void {
@@ -163,7 +181,7 @@ watch(
         :aria-expanded="isOpen"
         :aria-controls="dropdownId"
         aria-haspopup="listbox"
-        :aria-label="`${selectedCountry.dialCode} - ${triggerAriaPrefix}: ${selectedCountry.name}`"
+        :aria-label="`${activeCountry.dialCode} - ${triggerAriaPrefix}: ${activeCountry.name}`"
       >
         <span class="font-sans text-xs font-semibold text-stone-800 dark:text-mist-100">
           {{ selectedCountry.dialCode }}
@@ -203,6 +221,7 @@ watch(
       <div class="relative flex h-full flex-1 items-center">
         <input
           :id="id"
+          name="phoneNational"
           type="tel"
           :value="nationalNumber"
           :placeholder="placeholder"
@@ -232,6 +251,11 @@ watch(
 
       <input
         type="hidden"
+        name="phoneCountryCode"
+        :value="selectedCountry.dialCode"
+      />
+      <input
+        type="hidden"
         :name="name"
         :value="fullPhoneNumber"
         :toolparamdescription="toolparamdescription"
@@ -251,7 +275,7 @@ watch(
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          class="solar solar-minimalistic-magnifier-broken pointer-events-none absolute inset-s-4.5 top-1/2 size-3.5 -translate-y-1/2 text-stone-400 dark:text-mist-400"
+          class="pointer-events-none absolute inset-s-4.5 top-1/2 size-3.5 -translate-y-1/2 text-stone-400 dark:text-mist-400"
           viewBox="0 0 24 24"
           fill="none"
           stroke-width="1.5"
@@ -269,12 +293,14 @@ watch(
           />
         </svg>
         <input
+          :id="`${dropdownId}-search`"
           ref="searchInputRef"
           v-model="searchQuery"
           type="text"
+          autocomplete="off"
           :aria-label="searchPlaceholder"
           :placeholder="searchPlaceholder"
-          class="h-8.5 w-full rounded-lg border border-stone-200/80 bg-white ps-8 pe-3 font-sans text-xs text-stone-900 placeholder:text-stone-400 focus:border-stone-400 focus:ring-1 focus:ring-stone-400/20 focus:outline-hidden dark:border-white/10 dark:bg-surface-base dark:text-mist-100 dark:placeholder:text-mist-500"
+          class="h-8.5 w-full rounded-lg border border-stone-200/80 bg-white ps-8 pe-3 font-sans text-xs text-stone-900 placeholder:text-stone-400 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/30 focus:outline-hidden dark:border-white/10 dark:bg-surface-base dark:text-mist-100 dark:placeholder:text-mist-500 dark:focus:border-orange-500"
           @keydown="handleSearchKeydown"
         />
       </div>
@@ -285,7 +311,7 @@ watch(
         <div
           ref="listRef"
           role="listbox"
-          :aria-label="`${listboxAriaPrefix}: ${selectedCountry.name}`"
+          :aria-label="`${listboxAriaPrefix}: ${activeCountry.name}`"
           class="max-h-60 divide-y divide-stone-100/60 overflow-x-hidden overflow-y-auto overscroll-y-contain pe-(--scrollbar-space) supports-[-moz-appearance:none]:scrollbar-thin supports-[-moz-appearance:none]:[scrollbar-color:color-mix(in_sRGB,var(--scrollbar-theme,hsl(0deg_0%_75%)),transparent_28%)_transparent] dark:divide-white/5 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-button]:hidden [&::-webkit-scrollbar-button]:size-0 [&::-webkit-scrollbar-thumb]:rounded-[1000px] [&::-webkit-scrollbar-thumb]:bg-[color-mix(in_sRGB,var(--scrollbar-theme,hsl(0deg_0%_75%)),transparent_28%)] [&::-webkit-scrollbar-thumb:hover]:bg-[color-mix(in_sRGB,var(--scrollbar-theme,hsl(0deg_0%_75%)),transparent_12%)] [&::-webkit-scrollbar-track]:my-2.5 [&::-webkit-scrollbar-track]:rounded-[1000px] [&::-webkit-scrollbar-track]:bg-[color-mix(in_sRGB,var(--scrollbar-theme,hsl(0deg_0%_75%)),transparent_82%)] [&::-webkit-scrollbar-track]:bg-clip-padding"
           tabindex="-1"
           @keydown="handleListKeydown"
@@ -296,7 +322,7 @@ watch(
             type="button"
             role="option"
             :aria-selected="country.code === selectedCountry.code"
-            class="flex w-full cursor-pointer items-center justify-between gap-2 rounded-none px-3 py-2 text-start transition-colors hover:bg-stone-100 focus:bg-stone-100 focus:outline-hidden active:bg-stone-200/70 dark:hover:bg-white/5 dark:focus:bg-white/5"
+            class="flex min-h-9 w-full cursor-pointer items-center justify-between gap-2 rounded-none px-3 py-2 text-start transition-colors hover:bg-stone-100 focus:bg-stone-100 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-inset active:bg-stone-200/70 dark:hover:bg-white/5 dark:focus:bg-white/5"
             :class="{
               'bg-stone-100 font-medium text-stone-900 dark:bg-white/10 dark:text-mist-100':
                 country.code === selectedCountry.code,
@@ -308,9 +334,12 @@ watch(
             >
               {{ country.name }}
             </span>
-            <span class="shrink-0 font-sans text-xs font-medium text-stone-600 dark:text-mist-300">
+            <bdi
+              dir="ltr"
+              class="shrink-0 font-sans text-xs font-medium text-stone-600 dark:text-mist-300"
+            >
               {{ country.dialCode }}
-            </span>
+            </bdi>
           </button>
 
           <div

@@ -1,7 +1,6 @@
-/// <reference types="astro/client" />
-
 declare module "*.astro" {
-  const component: (props: Record<string, unknown>) => unknown;
+  import type { AstroComponentFactory } from "astro/runtime/server/index.js";
+  const component: AstroComponentFactory;
   export default component;
 }
 
@@ -24,7 +23,8 @@ declare namespace astroHTML.JSX {
 
 declare namespace App {
   interface Locals {
-    isCloudflareVerified: boolean;
+    isApiRateLimitChecked?: boolean;
+    isCloudflareVerified?: boolean;
     locale: "en" | "fr" | "de" | "es";
   }
 }

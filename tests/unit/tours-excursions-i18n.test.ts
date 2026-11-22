@@ -274,8 +274,20 @@ void describe("localized route maps", () => {
   void it("returns localized tour & excursion route maps while preserving trusted embed URLs", () => {
     for (const locale of NON_DEFAULT_LOCALES) {
       for (let i = 1; i <= 9; i++) {
-        const enMap = getTourRouteMap(`tour${i}`, "Marrakech", "Marrakech", "Title", "en");
-        const locMap = getTourRouteMap(`tour${i}`, "Marrakech", "Marrakech", "Title", locale);
+        const enMap = getTourRouteMap({
+          endLocation: "Marrakech",
+          locale: "en",
+          startLocation: "Marrakech",
+          title: "Title",
+          tourKey: `tour${i}`,
+        });
+        const locMap = getTourRouteMap({
+          endLocation: "Marrakech",
+          locale,
+          startLocation: "Marrakech",
+          title: "Title",
+          tourKey: `tour${i}`,
+        });
         assert.ok(enMap && locMap);
         assert.equal(locMap.waypoints.length, enMap.waypoints.length);
         assert.equal(isTrustedGoogleMapsEmbedUrl(locMap.googleMapsEmbedUrl), true);
@@ -294,8 +306,18 @@ void describe("localized route maps", () => {
       }
 
       for (let i = 1; i <= 6; i++) {
-        const enMap = getExcursionRouteMap(`excursion${i}`, "Morocco", "Title", "en");
-        const locMap = getExcursionRouteMap(`excursion${i}`, "Morocco", "Title", locale);
+        const enMap = getExcursionRouteMap({
+          excursionKey: `excursion${i}`,
+          locale: "en",
+          locationName: "Morocco",
+          title: "Title",
+        });
+        const locMap = getExcursionRouteMap({
+          excursionKey: `excursion${i}`,
+          locale,
+          locationName: "Morocco",
+          title: "Title",
+        });
         assert.ok(enMap && locMap);
         assert.equal(locMap.waypoints.length, enMap.waypoints.length);
         assert.equal(isTrustedGoogleMapsEmbedUrl(locMap.googleMapsEmbedUrl), true);

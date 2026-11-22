@@ -30,11 +30,13 @@ export function getMailer(): Transporter<SMTPPool.SentMessageInfo, SMTPPool.Opti
   return mailer;
 }
 
+export type EmailCategory = "Bookings" | "Contact" | "Newsletter";
+
 export interface TransactionalEmailOptions {
   readonly attachments?:
     readonly NonNullable<SendMailOptions["attachments"]>[number][] | SendMailOptions["attachments"];
   readonly bcc?: string | string[];
-  readonly category: string;
+  readonly category: EmailCategory;
   readonly cc?: string | string[];
   readonly headers?: Record<string, string>;
   readonly html: string;
@@ -59,7 +61,7 @@ export async function sendTransactionalEmail(
     html: options.html,
     cc: options.cc,
     bcc: options.bcc,
-    attachments: options.attachments as SendMailOptions["attachments"],
+    attachments: options.attachments ? [...options.attachments] : undefined,
     headers: options.headers,
   });
 }

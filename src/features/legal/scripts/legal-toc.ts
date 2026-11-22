@@ -46,9 +46,17 @@ export function setupLegalTOC(): void {
 }
 
 if (typeof document !== "undefined") {
-  document.addEventListener("astro:page-load", setupLegalTOC);
-  document.addEventListener("astro:before-swap", () => {
-    activeObserver?.disconnect();
-    activeObserver = null;
-  });
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setupLegalTOC, { once: true });
+  } else {
+    setupLegalTOC();
+  }
+  globalThis.addEventListener(
+    "pagehide",
+    () => {
+      activeObserver?.disconnect();
+      activeObserver = null;
+    },
+    { once: true },
+  );
 }

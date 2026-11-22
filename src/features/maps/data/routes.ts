@@ -965,13 +965,28 @@ const toWaypoints = (
     };
   });
 
-export function getTourRouteMap(
-  tourKey: string,
-  startLocation: string,
-  endLocation: string,
-  title: string,
-  locale: string = DEFAULT_LOCALE,
-): RouteMapData | undefined {
+export interface GetTourRouteMapOptions {
+  readonly endLocation: string;
+  readonly locale?: string;
+  readonly startLocation: string;
+  readonly title: string;
+  readonly tourKey: string;
+}
+
+export interface GetExcursionRouteMapOptions {
+  readonly excursionKey: string;
+  readonly locale?: string;
+  readonly locationName: string;
+  readonly title: string;
+}
+
+export function getTourRouteMap({
+  endLocation,
+  locale = DEFAULT_LOCALE,
+  startLocation,
+  title,
+  tourKey,
+}: GetTourRouteMapOptions): RouteMapData | undefined {
   const normalizedKey = tourKey.toLowerCase().trim();
   const config = TOURS_CONFIG[normalizedKey];
   if (!config) return undefined;
@@ -992,12 +1007,11 @@ export function getTourRouteMap(
   );
 }
 
-export function getExcursionRouteMap(
-  excursionKey: string,
-  _locationName: string,
-  title: string,
-  locale: string = DEFAULT_LOCALE,
-): RouteMapData | undefined {
+export function getExcursionRouteMap({
+  excursionKey,
+  locale = DEFAULT_LOCALE,
+  title,
+}: GetExcursionRouteMapOptions): RouteMapData | undefined {
   const normalizedKey = excursionKey.toLowerCase().trim();
   const config = EXCURSIONS_CONFIG[normalizedKey];
   if (!config) return undefined;

@@ -21,8 +21,9 @@ function initRouteMapFacades(): void {
         const iframe = document.createElement("iframe");
         iframe.src = url;
         iframe.title = title;
-        iframe.className = "size-full border-0";
-        iframe.allowFullscreen = true;
+        iframe.className = "size-full border-0 focus:outline-2 focus:outline-orange-500";
+        iframe.tabIndex = -1;
+        iframe.setAttribute("allowfullscreen", "");
         iframe.loading = "lazy";
         iframe.referrerPolicy = "strict-origin-when-cross-origin";
         iframe.setAttribute(
@@ -32,11 +33,15 @@ function initRouteMapFacades(): void {
 
         container.append(iframe);
         facade?.remove();
+        iframe.focus({ preventScroll: true });
       },
       { once: true },
     );
   }
 }
 
-initRouteMapFacades();
-document.addEventListener("astro:page-load", initRouteMapFacades);
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initRouteMapFacades, { once: true });
+} else {
+  initRouteMapFacades();
+}

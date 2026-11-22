@@ -46,6 +46,14 @@ test.describe("Security Regression Suite (SEC-01..SEC-12)", () => {
     expect(scriptSrc).toBeDefined();
     expect(scriptSrc).not.toContain("'unsafe-inline'");
 
+    const styleSrcElem = csp
+      .split(";")
+      .map((d) => d.trim())
+      .find((d) => d.startsWith("style-src-elem"));
+    if (styleSrcElem) {
+      expect(styleSrcElem).not.toContain("'unsafe-inline'");
+    }
+
     // No nonce leaked into DOM attribute; no Astro version leaked via meta generator
     await expect(page.locator("html")).not.toHaveAttribute("data-csp-nonce");
     await expect(page.locator('meta[name="generator"]')).toHaveCount(0);
@@ -146,6 +154,7 @@ test.describe("Security Regression Suite (SEC-01..SEC-12)", () => {
     page,
   }) => {
     await page.goto("/contact");
+    await page.locator("#location details summary").click();
     const iframe = page.locator("#location details iframe");
     await expect(iframe).toHaveAttribute("referrerpolicy", "strict-origin-when-cross-origin");
     await expect(iframe).toHaveAttribute(
@@ -200,5 +209,55 @@ test.describe("Security Regression Suite (SEC-01..SEC-12)", () => {
       phone: "+33 6 12 34 56 78",
     });
     expect(contact.html).not.toMatch(/target="_blank"(?!\s+rel="noopener noreferrer")/);
+  });
+
+  test("SEC-13: Discovery endpoints serve Access-Control-Allow-Origin: * and Cross-Origin-Resource-Policy: cross-origin", async ({
+    request,
+  }) => {
+    for (const endpoint of ["/robots.txt", "/llms.txt", "/sitemap.xml"]) {
+      const response = await request.get(endpoint);
+      expect(response.status()).toBe(200);
+      expect(response.headers()["access-control-allow-origin"]).toBe("*");
+      expect(response.headers()["cross-origin-resource-policy"]).toBe("cross-origin");
+    }
+  });
+
+  test("SEC-14: No-JS progressive enhancement form POSTs return SSR feedback without HTTP 500", async ({
+    baseURL,
+    browser,
+  }) => {
+    const context = await browser.newContext({
+      ...(baseURL && { baseURL }),
+      javaScriptEnabled: false,
+    });
+    const page = await context.newPage();
+
+    try {
+      const contactResp = await page.goto("/contact", { waitUntil: "domcontentloaded" });
+      expect(contactResp?.status()).toBe(200);
+
+      await page.locator('form[data-form="contact"] input[name="name"]').fill("NoJS Traveler");
+      await page.locator('form[data-form="contact"] input[name="email"]').fill("nojs@example.com");
+      await page.locator('form[data-form="contact"] input[name="phoneNational"]').fill("661172393");
+      await page
+        .locator('form[data-form="contact"] textarea[name="message"]')
+        .fill("Testing progressive enhancement contact submission without client JS.");
+
+      const [postResponse] = await Promise.all([
+        page.waitForResponse(
+          (resp) => resp.request().method() === "POST" && resp.url().includes("/contact"),
+        ),
+        page.locator('form[data-form="contact"] button[type="submit"]').click(),
+      ]);
+      await page.waitForLoadState("domcontentloaded");
+
+      expect(postResponse.status()).toBeLessThan(500);
+      const statusText = await page
+        .locator('form[data-form="contact"] [role="status"]')
+        .innerText();
+      expect(statusText.trim().length).toBeGreaterThan(0);
+    } finally {
+      await context.close();
+    }
   });
 });

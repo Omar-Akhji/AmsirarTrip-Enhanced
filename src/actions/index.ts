@@ -1,10 +1,9 @@
 import { defineAction, type ActionAPIContext } from "astro:actions";
-import { z } from "astro/zod";
-import { DEFAULT_LOCALE, isLocale, LOCALES, type Locale } from "../i18n/locales";
+import { DEFAULT_LOCALE, isLocale, type Locale } from "../i18n/locales";
 import { useTranslations as getTranslations, type TranslationFunction } from "../i18n/utils";
 import { extractClientIp } from "../lib/api-utils";
 import type { FormState } from "../lib/form-types";
-import { getBookingSchema, getContactSchema } from "../lib/schemas";
+import { getBookingSchema, getContactSchema, getNewsletterSchema } from "../lib/schemas";
 import { sendTransactionalEmail } from "../services/email";
 import { logger } from "../services/logger";
 import { enforceRateLimit, isHoneypotTriggered, verifyCaptcha } from "./helpers/action-guards";
@@ -18,6 +17,9 @@ import {
   extractZodErrors,
   getFormString,
   getOptionalFormString,
+  resolveContactTopic,
+  resolveSubmittedPhone,
+  resolveTurnstileToken,
 } from "./helpers/form-helpers";
 
 export type NewsletterStatusKey =
@@ -39,49 +41,69 @@ function resolveActionLocale(rawLanguage: string | undefined, context: ActionAPI
   return DEFAULT_LOCALE;
 }
 
-interface FormActionGuardResult {
+interface ActionGuardResult {
+  readonly blockReason?: "honeypot" | "rateLimit";
   readonly ip: string;
   readonly language: Locale;
-  readonly earlyResponse?: FormState;
   readonly t: TranslationFunction;
 }
 
-function runFormGuards(
-  formData: FormData,
+function runActionGuards(
+  website: string,
+  rawLanguage: string | undefined,
   context: ActionAPIContext,
-  actionName: "booking" | "contact",
-  honeypotMessageKey: "booking.success" | "contact.form.success",
-): FormActionGuardResult {
-  const language = resolveActionLocale(getOptionalFormString(formData, "language"), context);
+  actionName: "booking" | "contact" | "newsletter",
+): ActionGuardResult {
+  const language = resolveActionLocale(rawLanguage, context);
   const t = getTranslations(language);
-  const ip = extractClientIp(
-    context.request,
-    context.clientAddress,
-    context.locals.isCloudflareVerified,
-  );
+  const ip = extractClientIp({
+    clientAddress: context.clientAddress,
+    isCloudflareVerified: context.locals.isCloudflareVerified,
+    request: context.request,
+  });
+  const maxRequests = actionName === "newsletter" ? 5 : 10;
 
-  if (!enforceRateLimit(`${actionName}:${ip}`, ip, `${actionName}-action`, 10).allowed) {
-    return {
+  if (
+    !enforceRateLimit({
+      actionName: `${actionName}-action`,
       ip,
-      language,
-      t,
-      earlyResponse: { success: false, message: t("contact.form.errors.rateLimit") },
-    };
+      key: `${actionName}:${ip}`,
+      maxRequests,
+    }).allowed
+  ) {
+    return { blockReason: "rateLimit", ip, language, t };
   }
 
-  if (isHoneypotTriggered(getFormString(formData, "website"), ip, `${actionName}-action`)) {
-    return { ip, language, t, earlyResponse: { success: true, message: t(honeypotMessageKey) } };
+  if (isHoneypotTriggered({ actionName: `${actionName}-action`, ip, value: website })) {
+    return { blockReason: "honeypot", ip, language, t };
   }
 
   return { ip, language, t };
+}
+
+function getBlockedFormResponse(
+  blockReason: "honeypot" | "rateLimit",
+  t: TranslationFunction,
+  honeypotMessageKey: "booking.success" | "contact.form.success",
+): FormState {
+  return blockReason === "rateLimit" ?
+      { success: false, message: t("contact.form.errors.rateLimit") }
+    : { success: true, message: t(honeypotMessageKey) };
 }
 
 export const server = {
   booking: defineAction({
     accept: "form",
     handler: async (formData: FormData, context: ActionAPIContext): Promise<FormState> => {
-      const guard = runFormGuards(formData, context, "booking", "booking.success");
-      if (guard.earlyResponse) return guard.earlyResponse;
+      const guard = runActionGuards(
+        getFormString(formData, "website"),
+        getOptionalFormString(formData, "language"),
+        context,
+        "booking",
+      );
+      if (guard.blockReason) {
+        return getBlockedFormResponse(guard.blockReason, guard.t, "booking.success");
+      }
       const { ip, language, t } = guard;
 
       try {
@@ -89,13 +111,13 @@ export const server = {
           reservationType: getFormString(formData, "reservationType"),
           fullName: getFormString(formData, "fullName"),
           email: getFormString(formData, "email"),
-          phone: getFormString(formData, "phone"),
+          phone: resolveSubmittedPhone(formData),
           persons: getFormString(formData, "numberOfPeople"),
           date: getFormString(formData, "reservationDate"),
           message: getFormString(formData, "message"),
           language,
           duration: getOptionalFormString(formData, "duration"),
-          recaptchaToken: getFormString(formData, "recaptchaToken"),
+          recaptchaToken: resolveTurnstileToken(formData),
         };
 
         const validationResult = getBookingSchema(t).safeParse(rawData);
@@ -108,7 +130,7 @@ export const server = {
         }
 
         const data = validationResult.data;
-        if (!(await verifyCaptcha(data.recaptchaToken, ip, "booking"))) {
+        if (!(await verifyCaptcha({ expectedAction: "booking", ip, token: data.recaptchaToken }))) {
           return { success: false, message: t("booking.errors.captcha") };
         }
 
@@ -125,18 +147,25 @@ export const server = {
   contact: defineAction({
     accept: "form",
     handler: async (formData: FormData, context: ActionAPIContext): Promise<FormState> => {
-      const guard = runFormGuards(formData, context, "contact", "contact.form.success");
-      if (guard.earlyResponse) return guard.earlyResponse;
+      const guard = runActionGuards(
+        getFormString(formData, "website"),
+        getOptionalFormString(formData, "language"),
+        context,
+        "contact",
+      );
+      if (guard.blockReason) {
+        return getBlockedFormResponse(guard.blockReason, guard.t, "contact.form.success");
+      }
       const { ip, t } = guard;
 
       try {
         const rawData = {
           name: getFormString(formData, "name"),
           email: getFormString(formData, "email"),
-          phone: getFormString(formData, "phone"),
-          topic: getOptionalFormString(formData, "topic"),
+          phone: resolveSubmittedPhone(formData),
+          topic: resolveContactTopic(formData),
           message: getFormString(formData, "message"),
-          recaptchaToken: getFormString(formData, "recaptchaToken"),
+          recaptchaToken: resolveTurnstileToken(formData),
         };
 
         const validationResult = getContactSchema(t).safeParse(rawData);
@@ -149,7 +178,7 @@ export const server = {
         }
 
         const data = validationResult.data;
-        if (!(await verifyCaptcha(data.recaptchaToken, ip, "contact"))) {
+        if (!(await verifyCaptcha({ expectedAction: "contact", ip, token: data.recaptchaToken }))) {
           return { success: false, message: t("contact.form.errors.captcha") };
         }
 
@@ -168,30 +197,47 @@ export const server = {
   }),
 
   newsletter: defineAction({
-    accept: "json",
-    input: z.object({
-      email: z.email().max(254),
-      language: z.enum(LOCALES).optional(),
-      name: z.string().trim().min(2).max(100),
-      recaptchaToken: z.string().trim().min(1).max(2048),
-    }),
-    handler: async (input, context: ActionAPIContext): Promise<NewsletterResult> => {
+    accept: "form",
+    handler: async (formData: FormData, context: ActionAPIContext): Promise<NewsletterResult> => {
       try {
-        const ip = extractClientIp(
-          context.request,
-          context.clientAddress,
-          context.locals.isCloudflareVerified,
+        const guard = runActionGuards(
+          getFormString(formData, "website"),
+          getOptionalFormString(formData, "language"),
+          context,
+          "newsletter",
         );
-
-        if (!enforceRateLimit(`newsletter:${ip}`, ip, "newsletter-action", 5).allowed) {
+        if (guard.blockReason === "rateLimit") {
           return { ok: false, statusKey: "footer.newsletterRateLimited" };
         }
+        if (guard.blockReason === "honeypot") {
+          return { ok: true, statusKey: "footer.newsletterSuccess" };
+        }
 
-        if (!(await verifyCaptcha(input.recaptchaToken, ip, "newsletter"))) {
+        const parsed = getNewsletterSchema(guard.t).safeParse({
+          name: getFormString(formData, "name"),
+          email: getFormString(formData, "email"),
+          language: guard.language,
+          recaptchaToken: resolveTurnstileToken(formData),
+          website: getOptionalFormString(formData, "website"),
+        });
+        if (!parsed.success) {
+          return { ok: false, statusKey: "footer.newsletterFailure" };
+        }
+
+        if (
+          !(await verifyCaptcha({
+            expectedAction: "newsletter",
+            ip: guard.ip,
+            token: parsed.data.recaptchaToken,
+          }))
+        ) {
           return { ok: false, statusKey: "footer.newsletterCaptchaError" };
         }
 
-        const emailContent = buildNewsletterEmail({ name: input.name, email: input.email });
+        const emailContent = buildNewsletterEmail({
+          name: parsed.data.name,
+          email: parsed.data.email,
+        });
         await sendTransactionalEmail({ category: "Newsletter", ...emailContent });
 
         return { ok: true, statusKey: "footer.newsletterSuccess" };

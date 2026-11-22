@@ -32,6 +32,7 @@
     "contact": "Contact",
     "toggleMenu": "Toggle navigation menu",
     "mainAria": "Main Navigation",
+    "mobileAria": "Mobile Navigation",
     "skipToContent": "Skip to main content",
     "whatsappCta": "Contact us on WhatsApp",
     "themeToggle": "Toggle dark mode",
@@ -1665,12 +1666,59 @@
   "routeMap": {
     "interactiveMap": "Interactive Route Map",
     "stops": "Stops",
+    "stopsCount_one": "{count} Stop",
+    "stopsCount_other": "{count} Stops",
     "exploreBtn": "Explore Route Map",
     "loadAriaPrefix": "Load interactive route map:",
     "viewStopsPrefix": "View",
     "viewStopsSuffix": "Route Stops & Schedule",
+    "viewStopsSchedule_one": "View {count} Route Stop & Schedule",
+    "viewStopsSchedule_other": "View {count} Route Stops & Schedule",
     "openGoogleMaps": "Open in Google Maps",
     "kicker": "Google Maps Route",
     "titleSuffix": "Route Map"
+  },
+  "hero": {
+    "carouselAria": "Amsirar Trip Hero Carousel",
+    "previewsAria": "Slider destination previews",
+    "goToSlide": "{title} — Go to slide {index}",
+    "pauseAutoplay": "Pause hero slideshow",
+    "playAutoplay": "Play hero slideshow",
+    "slides": {
+      "sahara": {
+        "title": "Tour Travel",
+        "type": "& Adventure Camping",
+        "description": "Private Sahara desert trips and Erg Chebbi camps led by licensed Marrakech drivers.",
+        "thumbType": "Tour Travel",
+        "thumbTitle": "Adventure Camping"
+      },
+      "atlas": {
+        "title": "Adventure Awaits",
+        "type": "Beyond the Dunes",
+        "description": "Cross High Atlas passes and Dades gorges at your own pace in a private 4x4.",
+        "thumbType": "Sahara Dunes",
+        "thumbTitle": "Adventure Awaits"
+      },
+      "imperial": {
+        "title": "Pack Your Bags",
+        "type": "Morocco Calls",
+        "description": "Guided routes linking Marrakech, Fes, Chefchaouen, and Morocco's Atlantic coast.",
+        "thumbType": "Imperial Cities",
+        "thumbTitle": "Morocco Calls"
+      }
+    }
+  },
+  "ui": {
+    "breadcrumb": "Breadcrumb",
+    "legalNavAria": "Privacy and Terms",
+    "ratingFiveStars": "Rated 5 out of 5 stars",
+    "ourikaCollageAlt": "Ourika Valley green terraces and mountain villages",
+    "atlasCollageAlt": "Traditional Moroccan architecture and Atlas travel",
+    "contactMapAria": "Interactive map showing Amsirar Trip agency location in Marrakech",
+    "contactMapTitle": "Amsirar Trip Agency Location - Marrakech, Morocco",
+    "itineraryKicker": "Daily Schedule",
+    "itineraryDefaultTitle": "Day-by-Day Route Plan",
+    "durationDays_one": "{count} Day",
+    "durationDays_other": "{count} Days"
   }
 }

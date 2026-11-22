@@ -17,25 +17,29 @@ const nameField = (t: ValidationTranslator) =>
   z
     .string()
     .trim()
-    .min(2, { message: t("validations.nameMin") })
-    .max(100, { message: t("validations.nameTooLong") });
+    .min(2, { error: t("validations.nameMin") })
+    .max(100, { error: t("validations.nameTooLong") });
 
 const emailField = (t: ValidationTranslator) =>
   z
-    .email({ message: t("validations.emailInvalid") })
-    .max(254, { message: t("validations.emailInvalid") });
+    .email({ error: t("validations.emailInvalid") })
+    .max(254, { error: t("validations.emailInvalid") });
 
 const phoneField = (t: ValidationTranslator) =>
   z
     .string()
     .trim()
-    .max(25, { message: t("validations.phoneTooLong") })
-    .regex(phoneRegex, { message: t("validations.phoneInvalid") })
-    .refine(hasMinimumDigits, { message: t("validations.phoneInvalid") });
+    .max(25, { error: t("validations.phoneTooLong") })
+    .regex(phoneRegex, { error: t("validations.phoneInvalid") })
+    .refine(hasMinimumDigits, { error: t("validations.phoneInvalid") });
 
 const recaptchaField = (t: ValidationTranslator) =>
   z.object({
-    recaptchaToken: z.string().trim().min(1, t("validations.recaptchaRequired")).max(2048),
+    recaptchaToken: z
+      .string()
+      .trim()
+      .min(1, { error: t("validations.recaptchaRequired") })
+      .max(2048),
   });
 
 const buildContactSchema = (t: ValidationTranslator) =>
@@ -47,26 +51,39 @@ const buildContactSchema = (t: ValidationTranslator) =>
       topic: z
         .string()
         .trim()
-        .max(200, { message: t("validations.topicTooLong") })
+        .max(200, { error: t("validations.topicTooLong") })
         .transform((v) => (v.length > 0 ? v : undefined))
         .optional(),
       message: z
         .string()
         .trim()
-        .min(10, { message: t("validations.messageMin") })
-        .max(1000, { message: t("validations.messageTooLong") }),
+        .min(10, { error: t("validations.messageMin") })
+        .max(1000, { error: t("validations.messageTooLong") }),
     })
     .extend(recaptchaField(t).shape);
 
 export type ContactSchema = ReturnType<typeof buildContactSchema>;
-export const getContactSchema = (t: ValidationTranslator): ContactSchema => buildContactSchema(t);
+const contactSchemaCache = new WeakMap<ValidationTranslator, ContactSchema>();
+export const getContactSchema = (t: ValidationTranslator): ContactSchema => {
+  const cached = contactSchemaCache.get(t);
+  if (cached) return cached;
+  const schema = buildContactSchema(t);
+  contactSchemaCache.set(t, schema);
+  return schema;
+};
 
 const buildNewsletterSchema = (t: ValidationTranslator) =>
   z.object({ name: nameField(t), email: emailField(t) }).extend(recaptchaField(t).shape);
 
 export type NewsletterSchema = ReturnType<typeof buildNewsletterSchema>;
-export const getNewsletterSchema = (t: ValidationTranslator): NewsletterSchema =>
-  buildNewsletterSchema(t);
+const newsletterSchemaCache = new WeakMap<ValidationTranslator, NewsletterSchema>();
+export const getNewsletterSchema = (t: ValidationTranslator): NewsletterSchema => {
+  const cached = newsletterSchemaCache.get(t);
+  if (cached) return cached;
+  const schema = buildNewsletterSchema(t);
+  newsletterSchemaCache.set(t, schema);
+  return schema;
+};
 
 const buildBookingSchema = (t: ValidationTranslator) =>
   z
@@ -74,25 +91,23 @@ const buildBookingSchema = (t: ValidationTranslator) =>
       reservationType: z
         .string()
         .trim()
-        .min(1, { message: t("validations.reservationRequired") })
-        .max(150, { message: t("validations.topicTooLong") }),
+        .min(1, { error: t("validations.reservationRequired") })
+        .max(150, { error: t("validations.topicTooLong") }),
       fullName: nameField(t),
       email: emailField(t),
       phone: phoneField(t),
       persons: z.coerce
         .number()
         .int()
-        .min(1, { message: t("validations.personsMin") })
-        .max(50, { message: t("validations.personsMax") }),
+        .min(1, { error: t("validations.personsMin") })
+        .max(50, { error: t("validations.personsMax") }),
       date: z.iso
-        .date({ message: t("validations.invalidDate") })
-        .refine((value) => value >= getCasablancaTodayIso(), {
-          message: t("validations.datePast"),
-        }),
+        .date({ error: t("validations.invalidDate") })
+        .refine((value) => value >= getCasablancaTodayIso(), { error: t("validations.datePast") }),
       message: z
         .string()
         .trim()
-        .max(1000, { message: t("validations.messageTooLong") })
+        .max(1000, { error: t("validations.messageTooLong") })
         .transform((value) => (value.length > 0 ? value : undefined))
         .optional(),
       language: z.enum(LOCALES).optional(),
@@ -101,4 +116,11 @@ const buildBookingSchema = (t: ValidationTranslator) =>
     .extend(recaptchaField(t).shape);
 
 export type BookingSchema = ReturnType<typeof buildBookingSchema>;
-export const getBookingSchema = (t: ValidationTranslator): BookingSchema => buildBookingSchema(t);
+const bookingSchemaCache = new WeakMap<ValidationTranslator, BookingSchema>();
+export const getBookingSchema = (t: ValidationTranslator): BookingSchema => {
+  const cached = bookingSchemaCache.get(t);
+  if (cached) return cached;
+  const schema = buildBookingSchema(t);
+  bookingSchemaCache.set(t, schema);
+  return schema;
+};

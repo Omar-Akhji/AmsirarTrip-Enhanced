@@ -14,6 +14,7 @@ test.describe("i18n routing & document standards", () => {
 
       const htmlLang = await page.locator("html").getAttribute("lang");
       expect(htmlLang).toBe(locale);
+      expect(await page.locator("html").getAttribute("dir")).toBe("ltr");
 
       // Verify hreflang tags
       const hreflangs = page.locator('link[rel="alternate"][hreflang]');
@@ -115,5 +116,27 @@ test.describe("i18n routing & document standards", () => {
     ]) {
       expect(bodyText).not.toContain(sentinel);
     }
+  });
+
+  test("hero Pause/Play control toggles aria-pressed and RTL mode causes zero horizontal overflow", async ({
+    page,
+  }) => {
+    await page.goto("/", { waitUntil: "domcontentloaded" });
+
+    const pauseBtn = page.locator("[data-slider-toggle]");
+    await expect(pauseBtn).toBeVisible();
+    await expect(pauseBtn).toHaveAttribute("aria-pressed", "false");
+
+    await pauseBtn.click();
+    await expect(pauseBtn).toHaveAttribute("aria-pressed", "true");
+
+    await pauseBtn.press("Enter");
+    await expect(pauseBtn).toHaveAttribute("aria-pressed", "false");
+
+    const hasRtlOverflow = await page.evaluate(() => {
+      document.documentElement.dir = "rtl";
+      return document.documentElement.scrollWidth > document.documentElement.clientWidth;
+    });
+    expect(hasRtlOverflow).toBe(false);
   });
 });

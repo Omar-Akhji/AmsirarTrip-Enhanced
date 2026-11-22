@@ -71,10 +71,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
       <div class="grid grid-cols-1 items-start gap-10 sm:gap-12 lg:grid-cols-golden lg:gap-6 xl:gap-8">
         <!-- Left Column: 3 Images Collage (order-1 on Mobile & Tablet, Left on Desktop) -->
         <div class="order-1 lg:order-1">
-          <div
-            class="animate-delay-200 flex flex-col gap-gap-tight"
-            data-animate="zoom-in"
-          >
+          <div class="flex flex-col gap-gap-tight">
             <!-- Top Landscape Image -->
             <div class="group relative aspect-golden overflow-hidden rounded-2xl border border-stone-200/80 bg-stone-100 shadow-xs dark:border-white/10 dark:bg-surface-card">
               <Image
@@ -82,8 +79,10 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
                 class="size-full object-cover transition-transform duration-700 ease-out-expo pointer-fine:group-hover:scale-103 motion-reduce:transform-none"
                 height={675}
                 loading="eager"
+                sizes="(max-width: 1023px) 95vw, 55vw"
                 src={agafayImg}
                 width={1200}
+                widths={[480, 800, 1200]}
               />
             </div>
 
@@ -91,23 +90,27 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
             <div class="grid grid-cols-2 gap-gap-tight">
               <div class="group relative aspect-golden-portrait overflow-hidden rounded-2xl border border-stone-200/80 bg-stone-100 shadow-xs dark:border-white/10 dark:bg-surface-card">
                 <Image
-                  alt="Ourika Valley green terraces and mountain villages"
+                  alt={t("ui.ourikaCollageAlt")}
                   class="size-full object-cover transition-transform duration-700 ease-out-expo pointer-fine:group-hover:scale-104 motion-reduce:transform-none"
                   height={750}
                   loading="lazy"
+                  sizes="(max-width: 1023px) 46vw, 27vw"
                   src={ourikaImg}
                   width={600}
+                  widths={[320, 600]}
                 />
               </div>
 
               <div class="group relative aspect-golden-portrait overflow-hidden rounded-2xl border border-stone-200/80 bg-stone-100 shadow-xs dark:border-white/10 dark:bg-surface-card">
                 <Image
-                  alt="Traditional Moroccan architecture and Atlas travel"
+                  alt={t("ui.atlasCollageAlt")}
                   class="size-full object-cover transition-transform duration-700 ease-out-expo pointer-fine:group-hover:scale-104 motion-reduce:transform-none"
                   height={852}
                   loading="lazy"
+                  sizes="(max-width: 1023px) 46vw, 27vw"
                   src={aboutImg}
                   width={720}
+                  widths={[320, 600]}
                 />
               </div>
             </div>
@@ -138,7 +141,7 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
               <figure class="relative overflow-hidden rounded-2xl border border-stone-200/90 bg-stone-50/70 p-gutter dark:border-white/10 dark:bg-surface-card/80">
                 <QuoteIcon
                   aria-hidden="true"
-                  class="pointer-events-none absolute top-4 right-4 sm:top-5 sm:right-5 size-5 sm:size-6 text-orange-600/35"
+                  class="pointer-events-none absolute top-4 inset-e-4 sm:top-5 sm:inset-e-5 size-5 sm:size-6 text-orange-600/35"
                 />
                 <blockquote class="relative font-serif italic text-stone-800 dark:text-mist-100 text-lead text-pretty pe-8">
                   "{t("about.conclusionText")}"
@@ -228,6 +231,12 @@ import { DELAY_CLASSES } from "@/shared/ui/primitives/animation-constants";
                     width={96}
                   />
                 </figure>
+                <data
+                  class="sr-only"
+                  value={fact.value}
+                >
+                  {fact.value.toLocaleString(locale)}
+                </data>
                 <div
                   aria-hidden="true"
                   class="font-mono text-4xl font-bold text-orange-200 tabular-nums text-shadow-md"

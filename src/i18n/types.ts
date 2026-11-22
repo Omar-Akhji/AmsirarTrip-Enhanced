@@ -8,4 +8,8 @@ type Leaves<T, P extends string = ""> = {
   : never;
 }[keyof T & string];
 
-export type MessageKey = Leaves<Messages>;
+type PluralCategory = "zero" | "one" | "two" | "few" | "many" | "other";
+
+type WithPluralBase<K extends string> = K extends `${infer Base}_${PluralCategory}` ? Base | K : K;
+
+export type MessageKey = WithPluralBase<Leaves<Messages>>;

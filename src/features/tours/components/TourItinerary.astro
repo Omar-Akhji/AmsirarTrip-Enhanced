@@ -3,6 +3,7 @@ import BicyclingIcon from "@/shared/ui/icons/BicyclingIcon.astro";
 import BuildingsIcon from "@/shared/ui/icons/BuildingsIcon.astro";
 import ClockCircleIcon from "@/shared/ui/icons/ClockCircleIcon.astro";
 import UtensilsIcon from "@/shared/ui/icons/UtensilsIcon.astro";
+import { useTranslations } from "@/i18n/utils";
 
 const getOrdinalSuffix = (number_: number): string => {
   const index = number_ % 10;
@@ -48,9 +49,13 @@ const {
   mealsLabel,
   activitiesLabel,
   arrivalLabel,
-  kicker = "Daily Schedule",
-  defaultTitle = "Day-by-Day Route Plan",
+  kicker: rawKicker,
+  defaultTitle: rawDefaultTitle,
 } = Astro.props as Props;
+
+const t = useTranslations(locale);
+const kicker = rawKicker ?? t("ui.itineraryKicker");
+const defaultTitle = rawDefaultTitle ?? t("ui.itineraryDefaultTitle");
 
 const initialDay = days[0];
 const initialDayTitle =
@@ -159,12 +164,12 @@ const DAY_DELAYS = [
     {/* Continuous Timeline Vertical Track */}
     <div
       aria-hidden="true"
-      class="timeline-track absolute left-0 top-0 bottom-8 w-0.5 bg-stone-200 dark:bg-white/10"
+      class="absolute inset-s-0 top-0 bottom-8 w-0.5 bg-stone-200 dark:bg-white/10"
       data-timeline-track
     >
       {/* Active Progress Fill */}
       <div
-        class="timeline-progress-fill absolute inset-0 h-full w-full origin-top scale-y-0 bg-orange-600/70 will-change-transform"
+        class="absolute inset-0 size-full origin-top scale-y-0 bg-orange-600/70 will-change-transform"
         data-timeline-progress-fill
       ></div>
     </div>
@@ -177,8 +182,8 @@ const DAY_DELAYS = [
         return (
           <li
             class:list={[
-              "itinerary-stage-item group/stage relative pl-6 sm:pl-8 transition-all duration-300",
-              { "pt-8 sm:pt-10": index > 0 },
+              "itinerary-stage-item group/stage relative ps-6 sm:ps-8 transition-all duration-300",
+              { "pbs-8 sm:pbs-10": index > 0 },
               DAY_DELAYS[index] || "animate-delay-0",
             ]}
             data-animate="step-unfold"
@@ -192,7 +197,7 @@ const DAY_DELAYS = [
             {index > 0 && (
               <div
                 aria-hidden="true"
-                class="stage-separator absolute left-6 sm:left-8 right-0 top-0 h-px bg-stone-200/80 dark:bg-white/10"
+                class="absolute inset-s-6 sm:inset-s-8 inset-e-0 top-0 h-px bg-stone-200/80 dark:bg-white/10"
               />
             )}
 
@@ -200,7 +205,7 @@ const DAY_DELAYS = [
             <div
               aria-hidden="true"
               class:list={[
-                "stage-node absolute left-px -translate-1/2  z-10 size-3 rounded-full transition-all duration-300",
+                "stage-node absolute inset-s-px -translate-1/2 rtl:translate-x-1/2 z-10 size-3 rounded-full transition-all duration-300",
                 "bg-stone-300 ring-4 ring-stone-100 shadow-sm shadow-stone-300/30 dark:bg-mist-400 dark:ring-white/10",
                 "group-data-[active=true]/stage:bg-orange-600 group-data-[active=true]/stage:ring-orange-100 group-data-[active=true]/stage:shadow-md group-data-[active=true]/stage:shadow-orange-600/30 dark:group-data-[active=true]/stage:ring-orange-950/60",
                 "group-data-[passed=true]/stage:bg-orange-600 group-data-[passed=true]/stage:ring-orange-100/70",
@@ -297,7 +302,7 @@ const DAY_DELAYS = [
     {/* Horizontal Line separating final stage from Service Coverage */}
     <div
       aria-hidden="true"
-      class="final-stage-separator w-full h-px bg-stone-200/80 dark:bg-white/10 mbs-10 sm:mbs-12"
+      class="w-full h-px bg-stone-200/80 dark:bg-white/10 mbs-10 sm:mbs-12"
     />
   </div>
 </tour-itinerary-tracker>

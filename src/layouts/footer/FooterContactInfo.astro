@@ -39,10 +39,10 @@ const primaryEmail = agencyProfile.contact.emails[0] ?? "amsirare@gmail.com";
           />
         </div>
         <a
-          class="wrap-anywhere text-sm text-zinc-400 transition-colors duration-300 pointer-fine:hover:text-orange-400 active:text-orange-400"
+          class="inline-flex min-h-6 items-center py-0.5 wrap-anywhere text-sm text-zinc-400 transition-colors duration-300 pointer-fine:hover:text-orange-400 active:text-orange-400"
           href={`mailto:${primaryEmail}`}
         >
-          {primaryEmail}
+          <bdi dir="ltr">{primaryEmail}</bdi>
         </a>
       </li>
 
@@ -54,10 +54,10 @@ const primaryEmail = agencyProfile.contact.emails[0] ?? "amsirare@gmail.com";
           />
         </div>
         <a
-          class="text-sm text-zinc-400 transition-colors duration-300 pointer-fine:hover:text-orange-400 active:text-orange-400"
+          class="inline-flex min-h-6 items-center py-0.5 text-sm text-zinc-400 transition-colors duration-300 pointer-fine:hover:text-orange-400 active:text-orange-400"
           href={PHONE_LINK}
         >
-          {PHONE_DISPLAY}
+          <bdi dir="ltr">{PHONE_DISPLAY}</bdi>
         </a>
       </li>
 
@@ -69,10 +69,10 @@ const primaryEmail = agencyProfile.contact.emails[0] ?? "amsirare@gmail.com";
           />
         </div>
         <a
-          class="text-sm text-zinc-400 transition-colors duration-300 pointer-fine:hover:text-orange-400 active:text-orange-400"
+          class="inline-flex min-h-6 items-center py-0.5 text-sm text-zinc-400 transition-colors duration-300 pointer-fine:hover:text-orange-400 active:text-orange-400"
           href={FAX_LINK}
         >
-          {FAX_DISPLAY} ({t("legal.ui.fax")})
+          <bdi dir="ltr">{FAX_DISPLAY}</bdi> ({t("legal.ui.fax")})
         </a>
       </li>
     </ul>

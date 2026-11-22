@@ -55,6 +55,7 @@ const categoryText = badge || tagline || "Morocco Tour";
   {/* Full-card accessible click target */}
   <a
     class="absolute inset-0 z-30 rounded-[2.5rem] focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-orange-600 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-stone-900"
+    data-astro-prefetch
     href={getRelativeLocaleUrl(locale, item.route)}
   >
     <span class="sr-only">
@@ -64,41 +65,24 @@ const categoryText = badge || tagline || "Morocco Tour";
 
   {/* Image Thumbnail with Scoop Category Tab & Hover Reveal Stack */}
   <div class="relative aspect-golden w-full shrink-0 overflow-hidden rounded-3xl bg-stone-100 dark:bg-surface-card">
-    {/* Inverted Scoop Category Badge at Top-Left */}
-    <div class="absolute top-0 left-0 z-20 pointer-events-none inline-flex items-center px-5 py-2 rounded-ee-2xl bg-white dark:bg-surface-card drop-shadow-[4px_4px_6px_rgba(0,0,0,0.12)] before:content-[''] before:absolute before:top-0 before:left-full before:size-4 before:bg-inherit before:[-webkit-mask-image:radial-gradient(circle_at_100%_100%,transparent_16px,#000_17px)] before:mask-[radial-gradient(circle_at_100%_100%,transparent_16px,#000_17px)] after:content-[''] after:absolute after:top-full after:left-0 after:size-4 after:bg-inherit after:[-webkit-mask-image:radial-gradient(circle_at_100%_100%,transparent_16px,#000_17px)] after:mask-[radial-gradient(circle_at_100%_100%,transparent_16px,#000_17px)]">
+    {/* Inverted Scoop Category Badge at Top-Start */}
+    <div class="absolute top-0 inset-s-0 z-20 pointer-events-none inline-flex items-center px-5 py-2 rounded-ee-2xl bg-white dark:bg-surface-card drop-shadow-[4px_4px_6px_rgba(0,0,0,0.12)] before:content-[''] before:absolute before:top-0 before:inset-s-full before:size-4 before:bg-inherit before:[-webkit-mask-image:radial-gradient(circle_at_100%_100%,transparent_16px,#000_17px)] before:mask-[radial-gradient(circle_at_100%_100%,transparent_16px,#000_17px)] rtl:before:scale-x-[-1] after:content-[''] after:absolute after:top-full after:inset-s-0 after:size-4 after:bg-inherit after:[-webkit-mask-image:radial-gradient(circle_at_100%_100%,transparent_16px,#000_17px)] after:mask-[radial-gradient(circle_at_100%_100%,transparent_16px,#000_17px)] rtl:after:scale-x-[-1]">
       <span class="font-mono text-[0.6875rem] font-bold tracking-[0.08em] uppercase text-orange-600 dark:text-yellow">
         {categoryText}
       </span>
     </div>
 
-    {/* Thumbnail Stack (Dual-layer wipe on hover) */}
-    <div class="relative grid size-full overflow-hidden rounded-3xl *:col-start-1 *:row-start-1 *:size-full after:pointer-events-none after:absolute after:inset-0 after:z-10 after:rounded-3xl after:shadow-[inset_0_2px_14px_rgba(0,0,0,0.24)]">
-      {/* Base Layer: Atmospheric tone */}
+    {/* Thumbnail */}
+    <div class="relative size-full overflow-hidden rounded-3xl after:pointer-events-none after:absolute after:inset-0 after:z-10 after:rounded-3xl after:shadow-[inset_0_2px_14px_rgba(0,0,0,0.24)]">
       <Image
         alt={item.imageAlt || item.alt || title || "Morocco Trip"}
-        class="size-full object-cover filter-[brightness(0.92)_saturate(0.9)] motion-reduce:filter-none"
+        class="size-full object-cover brightness-[0.92] saturate-[0.9] transition-[filter,transform] duration-500 ease-out-expo pointer-fine:group-hover:scale-103 pointer-fine:group-hover:brightness-100 pointer-fine:group-hover:saturate-100 motion-reduce:transform-none motion-reduce:filter-none"
         decoding="async"
         height={480}
         loading={priority ? "eager" : "lazy"}
-        sizes="(max-width: 480px) 320px, (max-width: 640px) 480px, (max-width: 1024px) 560px, 640px"
         src={item.image as ImageMetadata}
-        {...(cardTransitionName ? { "transition:name": cardTransitionName } : {})}
+        style={cardTransitionName ? `view-transition-name: ${cardTransitionName}` : undefined}
         width={640}
-        widths={[320, 480, 640]}
-      />
-
-      {/* Reveal Layer: Vibrant color unveil with clip-path on hover */}
-      <Image
-        alt=""
-        aria-hidden="true"
-        class="pointer-events-none size-full object-cover [clip-path:inset(100%_0_0_0_round_24px)] pointer-fine:group-hover:[clip-path:inset(0_0_0_0_round_24px)] transition-[clip-path] duration-500 ease-out-expo motion-reduce:hidden"
-        decoding="async"
-        height={480}
-        loading="lazy"
-        sizes="(max-width: 480px) 320px, (max-width: 640px) 480px, (max-width: 1024px) 560px, 640px"
-        src={item.image as ImageMetadata}
-        width={640}
-        widths={[320, 480, 640]}
       />
     </div>
   </div>

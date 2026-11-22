@@ -1,6 +1,30 @@
 [
-  { "code": "en", "name": "English", "shortName": "EN", "ogLocale": "en_US" },
-  { "code": "fr", "name": "Français", "shortName": "FR", "ogLocale": "fr_FR" },
-  { "code": "de", "name": "Deutsch", "shortName": "DE", "ogLocale": "de_DE" },
-  { "code": "es", "name": "Español", "shortName": "ES", "ogLocale": "es_ES" }
+  {
+    "code": "en",
+    "name": "English",
+    "shortName": "EN",
+    "ogLocale": "en_US",
+    "dir": "ltr"
+  },
+  {
+    "code": "fr",
+    "name": "Français",
+    "shortName": "FR",
+    "ogLocale": "fr_FR",
+    "dir": "ltr"
+  },
+  {
+    "code": "de",
+    "name": "Deutsch",
+    "shortName": "DE",
+    "ogLocale": "de_DE",
+    "dir": "ltr"
+  },
+  {
+    "code": "es",
+    "name": "Español",
+    "shortName": "ES",
+    "ogLocale": "es_ES",
+    "dir": "ltr"
+  }
 ]

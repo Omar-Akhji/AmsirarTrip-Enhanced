@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import { getRelativeLocaleUrl } from "astro:i18n";
+import desertBg from "../assets/images/Tours/Tour1.webp";
 import { DEFAULT_LOCALE, isLocale } from "../i18n/locales";
 import { useTranslations } from "../i18n/utils";
 import Layout from "../layouts/Layout.astro";
@@ -29,10 +30,10 @@ Astro.response.status = 404;
         class="absolute inset-0 size-full object-cover"
         decoding="async"
         fetchpriority="high"
-        height={1280}
         loading="eager"
-        src="/images/hero/merzouga-desert.webp"
-        width={1920}
+        sizes="100vw"
+        src={desertBg}
+        widths={[640, 1280, 1920]}
       />
       <div
         aria-hidden="true"

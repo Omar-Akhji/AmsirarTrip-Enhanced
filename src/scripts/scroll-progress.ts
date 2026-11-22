@@ -2,10 +2,14 @@ const SUPPORTS_SCROLL_TIMELINE =
   typeof CSS !== "undefined" && CSS.supports("animation-timeline", "scroll()");
 
 let ticking = false;
+let progressController: AbortController | null = null;
 
 function updateProgress(): void {
   const bar = document.querySelector<HTMLElement>("#scrollProgressBar");
-  if (!bar) return;
+  if (!bar) {
+    ticking = false;
+    return;
+  }
 
   const doc = document.documentElement;
   const totalHeight = doc.scrollHeight - window.innerHeight;
@@ -34,30 +38,46 @@ function onScroll(): void {
 }
 
 function setupScrollProgress(): void {
+  progressController?.abort();
+  progressController = new AbortController();
+  const { signal } = progressController;
+
   const container = document.querySelector<HTMLElement>("#scrollProgressBarContainer");
-  if (container && !container.dataset["bound"]) {
-    container.dataset["bound"] = "true";
-    container.addEventListener("click", (e: MouseEvent) => {
-      const rect = container.getBoundingClientRect();
-      const clickY = e.clientY - rect.top;
-      const ratio = Math.min(Math.max(clickY / Math.max(1, rect.height), 0), 1);
-      const doc = document.documentElement;
-      const targetScroll = ratio * (doc.scrollHeight - window.innerHeight);
-      const prefersReduced = globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      window.scrollTo({ top: targetScroll, behavior: prefersReduced ? "auto" : "smooth" });
-    });
+  if (container) {
+    container.addEventListener(
+      "click",
+      (e: MouseEvent) => {
+        const rect = container.getBoundingClientRect();
+        const clickY = e.clientY - rect.top;
+        const ratio = Math.min(Math.max(clickY / Math.max(1, rect.height), 0), 1);
+        const doc = document.documentElement;
+        const targetScroll = ratio * (doc.scrollHeight - window.innerHeight);
+        const prefersReduced = globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        window.scrollTo({ top: targetScroll, behavior: prefersReduced ? "auto" : "smooth" });
+      },
+      { signal },
+    );
   }
 
   if (SUPPORTS_SCROLL_TIMELINE) return;
 
   updateProgress();
-
-  window.removeEventListener("scroll", onScroll);
-  window.addEventListener("scroll", onScroll, { passive: true });
-
-  window.removeEventListener("resize", onScroll);
-  window.addEventListener("resize", onScroll, { passive: true });
+  window.addEventListener("scroll", onScroll, { passive: true, signal });
+  window.addEventListener("resize", onScroll, { passive: true, signal });
 }
 
-document.addEventListener("astro:page-load", setupScrollProgress);
-setupScrollProgress();
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", setupScrollProgress, { once: true });
+} else {
+  setupScrollProgress();
+}
+
+globalThis.addEventListener(
+  "pagehide",
+  () => {
+    progressController?.abort();
+    progressController = null;
+    ticking = false;
+  },
+  { once: true },
+);

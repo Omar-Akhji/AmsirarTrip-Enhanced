@@ -1,11 +1,12 @@
 ---
 import type { Language, Locale } from "@/i18n/locales";
-import { getLocalizedPath, useTranslations } from "@/i18n/utils";
-import TranslateIcon from "@/shared/ui/icons/TranslateIcon.astro";
-import ChevronsUpDownBrokenIcon from "@/shared/ui/icons/ChevronsUpDownBrokenIcon.astro";
 import { LANGUAGES } from "@/i18n/locales";
+import { getLocalizedPath, useTranslations } from "@/i18n/utils";
+import ChevronsUpDownBrokenIcon from "@/shared/ui/icons/ChevronsUpDownBrokenIcon.astro";
+import TranslateIcon from "@/shared/ui/icons/TranslateIcon.astro";
 
 interface Props {
+  ariaLabel?: string;
   class?: string;
   id?: string;
   placement?: "left" | "right";
@@ -13,6 +14,7 @@ interface Props {
 }
 
 const {
+  ariaLabel,
   placement = "left",
   size = "md",
   class: className = "",
@@ -24,6 +26,7 @@ const t = useTranslations(locale);
 
 const defaultLanguage: Language = LANGUAGES[0] ?? {
   code: "en",
+  dir: "ltr",
   name: "English",
   shortName: "EN",
   ogLocale: "en_US",
@@ -40,17 +43,16 @@ const anchorName = `--lang-btn-${id}`;
 
 <div class:list={["group/lang-root relative inline-block", className]}>
   <button
-    aria-haspopup="menu"
     aria-label={`${currentLanguage.shortName} — ${t("language")}: ${currentLanguage.name}`}
     class:list={[
-      "group/lang-btn relative inline-flex items-center rounded-full font-medium transition-all duration-200 cursor-pointer select-none active:scale-[0.98]",
+      "group/lang-btn relative inline-flex items-center rounded-full font-medium transition-[color,background-color,border-color,box-shadow] duration-200 cursor-pointer select-none",
       "border border-white/20 bg-black/30 backdrop-blur-md text-white shadow-xs hover:border-white/40 hover:bg-white/15 hover:shadow-md active:border-white/40 active:bg-white/15 active:shadow-md",
       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange/80 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950",
       "group-has-[:popover-open]/lang-root:border-white/45 group-has-[:popover-open]/lang-root:bg-white/20 group-has-[:popover-open]/lang-root:shadow-[0_4px_16px_rgb(0_0_0/0.25)]",
       "group-data-scrolled:border-transparent group-data-scrolled:bg-orange group-data-scrolled:text-white group-data-scrolled:shadow-[0_4px_14px_rgba(241,93,48,0.35)] group-data-scrolled:hover:bg-orange-600 group-data-scrolled:active:bg-orange-600 group-data-scrolled:group-has-[:popover-open]/lang-root:bg-orange-dark",
       {
-        "h-9.5 px-3.5 gap-2 text-xs sm:text-sm": size === "sm",
-        "h-11 px-4 gap-2.5 text-sm": size === "md",
+        "min-h-9.5 px-3.5 py-1.5 gap-2 text-xs sm:text-sm": size === "sm",
+        "min-h-11 px-4 py-2 gap-2.5 text-sm": size === "md",
       },
     ]}
     popovertarget={menuId}
@@ -64,10 +66,10 @@ const anchorName = `--lang-btn-${id}`;
     <ChevronsUpDownBrokenIcon class="size-3.5 shrink-0 text-white/70 transition-transform duration-250 ease-out group-hover/lang-btn:text-white group-active/lang-btn:text-white group-data-scrolled:text-white/90 group-has-[:popover-open]/lang-root:rotate-180" />
   </button>
 
-  <div
-    aria-orientation="vertical"
+  <nav
+    aria-label={ariaLabel ?? t("selectLanguage")}
     class:list={[
-      "fixed top-18 m-0 min-w-50 sm:min-w-55 overflow-hidden border border-white/12 bg-slate-950/95 text-white shadow-[0_20px_45px_-12px_rgba(0,0,0,0.7),0_0_0_1px_rgba(255,255,255,0.06)] backdrop-blur-2xl ring-1 ring-white/10 rounded-2xl p-1.5 opacity-0 -translate-y-2 scale-96 transition-[opacity,transform,display,overlay] duration-250 ease-out-expo transition-discrete motion-reduce:duration-[1ms] open:opacity-100 open:translate-y-0 open:scale-100 starting:open:opacity-0 starting:open:-translate-y-2 starting:open:scale-96 supports-[top:anchor(bottom)]:top-[calc(anchor(bottom)+1.125rem)] supports-[top:anchor(bottom)]:bottom-auto supports-[top:anchor(bottom)]:inset-s-auto supports-[top:anchor(bottom)]:inset-e-auto supports-[top:anchor(bottom)]:m-0 supports-[top:anchor(bottom)]:[position-try-fallbacks:flip-block,flip-inline]",
+      "fixed top-18 m-0 min-w-50 sm:min-w-55 overflow-hidden border border-white/12 bg-slate-950/95 text-white shadow-[0_20px_45px_-12px_rgba(0,0,0,0.7),0_0_0_1px_rgba(255,255,255,0.06)] backdrop-blur-2xl ring-1 ring-white/10 rounded-2xl p-1.5 opacity-0 -translate-y-1.5 transition-[opacity,translate,display,overlay] duration-180 ease-out transition-discrete motion-reduce:transition-none open:opacity-100 open:translate-y-0 starting:open:opacity-0 starting:open:-translate-y-1.5 supports-[top:anchor(bottom)]:top-[calc(anchor(bottom)+1.125rem)] supports-[top:anchor(bottom)]:bottom-auto supports-[top:anchor(bottom)]:inset-s-auto supports-[top:anchor(bottom)]:inset-e-auto supports-[top:anchor(bottom)]:m-0 supports-[top:anchor(bottom)]:[position-try-fallbacks:flip-block,flip-inline]",
       "group-data-scrolled:border-stone-200/90 group-data-scrolled:bg-white/98 group-data-scrolled:text-slate-800 group-data-scrolled:shadow-[0_20px_45px_-10px_rgba(0,0,0,0.18),0_0_0_1px_rgba(0,0,0,0.04)]",
       "group-data-scrolled:dark:border-white/10 group-data-scrolled:dark:bg-[oklch(18%_0.012_245deg/98%)] group-data-scrolled:dark:text-mist-100",
       {
@@ -79,36 +81,34 @@ const anchorName = `--lang-btn-${id}`;
     ]}
     id={menuId}
     popover="auto"
-    role="menu"
     style={`position-anchor: ${anchorName};`}
   >
-    {/* Language List */}
-    <div class="flex flex-col gap-0.5 overflow-hidden rounded-[10px]">
+    <ul class="m-0 flex list-none flex-col gap-0.5 overflow-hidden rounded-[10px] p-0">
       {LANGUAGES.map((lang) => {
         const isCurrent = lang.code === currentLanguage.code;
         return (
-          <a
-            aria-checked={isCurrent}
-            aria-label={lang.name}
-            class:list={[
-              "group/item relative flex items-center gap-2.5 px-3 py-2 rounded-[10px] text-xs sm:text-sm font-medium transition-all duration-150 inline-full select-none cursor-pointer",
-              "outline-none focus-visible:ring-2 focus-visible:ring-orange/80 focus-visible:ring-offset-1 focus-visible:ring-offset-slate-950",
-              {
-                "bg-white/15 text-white font-semibold group-data-scrolled:bg-orange/10 group-data-scrolled:text-orange-950 group-data-scrolled:dark:bg-orange/20 group-data-scrolled:dark:text-orange-400 shadow-xs":
-                  isCurrent,
-                "text-zinc-300 hover:bg-white/10 hover:text-white group-data-scrolled:text-stone-600 group-data-scrolled:hover:bg-stone-100 group-data-scrolled:hover:text-stone-900 group-data-scrolled:dark:text-stone-400 group-data-scrolled:dark:hover:bg-stone-800 group-data-scrolled:dark:hover:text-stone-100":
-                  !isCurrent,
-              },
-            ]}
-            href={getLocalizedHref(lang.code)}
-            hreflang={lang.code}
-            lang={lang.code}
-            role="menuitemradio"
-          >
-            <span class="truncate text-[0.8125rem]">{lang.name}</span>
-          </a>
+          <li>
+            <a
+              aria-current={isCurrent ? "true" : undefined}
+              class:list={[
+                "group/item relative flex min-h-9 items-center gap-2.5 px-3 py-2 rounded-[10px] text-xs sm:text-sm font-medium transition-all duration-150 inline-full select-none cursor-pointer",
+                "outline-none focus-visible:ring-2 focus-visible:ring-orange/80 focus-visible:ring-offset-1 focus-visible:ring-offset-slate-950",
+                {
+                  "bg-white/15 text-white font-semibold group-data-scrolled:bg-orange/10 group-data-scrolled:text-orange-950 group-data-scrolled:dark:bg-orange/20 group-data-scrolled:dark:text-orange-400 shadow-xs":
+                    isCurrent,
+                  "text-zinc-300 hover:bg-white/10 hover:text-white group-data-scrolled:text-stone-600 group-data-scrolled:hover:bg-stone-100 group-data-scrolled:hover:text-stone-900 group-data-scrolled:dark:text-stone-400 group-data-scrolled:dark:hover:bg-stone-800 group-data-scrolled:dark:hover:text-stone-100":
+                    !isCurrent,
+                },
+              ]}
+              href={getLocalizedHref(lang.code)}
+              hreflang={lang.code}
+              lang={lang.code}
+            >
+              <span class="truncate text-[0.8125rem]">{lang.name}</span>
+            </a>
+          </li>
         );
       })}
-    </div>
-  </div>
+    </ul>
+  </nav>
 </div>

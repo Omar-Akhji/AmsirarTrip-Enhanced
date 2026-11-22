@@ -5,6 +5,7 @@ import PhoneInput from "@/shared/ui/widgets/PhoneInput.vue";
 
 interface Props {
   copy: BookingFormCopy;
+  locale?: string;
   state: FormState | null;
 }
 
@@ -146,6 +147,7 @@ defineProps<Props>();
         id="booking-phone"
         name="phone"
         :labels="copy.phoneLabels"
+        :locale="locale"
         :placeholder="copy.phonePlaceholder"
         toolparamdescription="The contact phone/WhatsApp number of the guest"
         :aria-invalid="state?.errors?.['phone'] ? 'true' : 'false'"

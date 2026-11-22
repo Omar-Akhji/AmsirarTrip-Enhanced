@@ -115,7 +115,13 @@ for (let index = 1; index <= duration; index++) {
   }
 }
 
-const routeMap = getTourRouteMap(tourKey, startCity, endCity, dossierTitle, locale);
+const routeMap = getTourRouteMap({
+  endLocation: endCity,
+  locale,
+  startLocation: startCity,
+  title: dossierTitle,
+  tourKey,
+});
 ---
 
 <TripLayout

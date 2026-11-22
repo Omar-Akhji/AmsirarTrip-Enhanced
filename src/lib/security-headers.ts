@@ -20,9 +20,16 @@ const DOCUMENT_SECURITY_HEADERS: readonly SecurityHeader[] = [
   {
     key: "Permissions-Policy",
     value:
-      "autoplay=(), camera=(), microphone=(), geolocation=(), interest-cohort=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()",
+      "autoplay=(), camera=(), microphone=(), geolocation=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()",
   },
 ];
+
+/** Applies a readonly list of HTTP headers onto a Headers instance. */
+export function applySecurityHeaders(headers: Headers, list: readonly SecurityHeader[]): void {
+  for (const { key, value } of list) {
+    headers.set(key, value);
+  }
+}
 
 /** Baseline hardening headers applied to redirects, static assets, and discovery files. */
 export function getBaselineSecurityHeaders(): readonly SecurityHeader[] {

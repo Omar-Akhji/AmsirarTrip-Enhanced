@@ -8,6 +8,8 @@ type Locale = (typeof LOCALES)[number];
 type JsonObject = Record<string, unknown>;
 type LeafType = "string" | "array" | "other";
 
+const PLURAL_SUFFIX_RE = /^(.*?)_(?:zero|one|two|few|many|other)$/;
+
 function isJsonObject(value: unknown): value is JsonObject {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
@@ -47,6 +49,17 @@ function getLeaves(obj: JsonObject, prefix = ""): Map<string, LeafType> {
   return map;
 }
 
+function getPluralBaseKeys(leaves: ReadonlyMap<string, LeafType>): Set<string> {
+  const bases = new Set<string>();
+  for (const key of leaves.keys()) {
+    const match = PLURAL_SUFFIX_RE.exec(key);
+    if (match?.[1] && leaves.has(`${match[1]}_other`)) {
+      bases.add(match[1]);
+    }
+  }
+  return bases;
+}
+
 function scanFiles(dir: string): string[] {
   const results: string[] = [];
   // eslint-disable-next-line security/detect-non-literal-fs-filename -- bounded traversal within src/
@@ -83,24 +96,47 @@ function main(): void {
   }
 
   const enLeaves = getLeaves(enDict);
+  const enPluralBases = getPluralBaseKeys(enLeaves);
   let hasError = false;
 
-  console.log(`[i18n-check] Verifying parity against EN (${enLeaves.size} keys)...`);
+  console.log(
+    `[i18n-check] Verifying parity against EN (${enLeaves.size} keys, ${enPluralBases.size} plural families)...`,
+  );
 
   for (const loc of LOCALES) {
     if (loc === "en") continue;
     const dict = loaded.get(loc);
     if (!dict) continue;
     const targetLeaves = getLeaves(dict);
+    const requiredPluralCategories = new Intl.PluralRules(loc).resolvedOptions().pluralCategories;
 
-    const missing = enLeaves
-      .keys()
-      .filter((k) => !targetLeaves.has(k))
-      .toArray();
-    const extra = targetLeaves
-      .keys()
-      .filter((k) => !enLeaves.has(k))
-      .toArray();
+    const missing: string[] = [];
+    for (const k of enLeaves.keys()) {
+      const pluralMatch = PLURAL_SUFFIX_RE.exec(k);
+      if (pluralMatch?.[1] && enPluralBases.has(pluralMatch[1])) {
+        continue;
+      }
+      if (!targetLeaves.has(k)) {
+        missing.push(k);
+      }
+    }
+
+    for (const base of enPluralBases) {
+      for (const cat of requiredPluralCategories) {
+        const pluralKey = `${base}_${cat}`;
+        if (!targetLeaves.has(pluralKey)) {
+          missing.push(pluralKey);
+        }
+      }
+    }
+
+    const extra: string[] = [];
+    for (const k of targetLeaves.keys()) {
+      if (enLeaves.has(k)) continue;
+      const pluralMatch = PLURAL_SUFFIX_RE.exec(k);
+      if (pluralMatch?.[1] && enPluralBases.has(pluralMatch[1])) continue;
+      extra.push(k);
+    }
 
     if (missing.length > 0) {
       hasError = true;
@@ -144,9 +180,9 @@ function main(): void {
 
   console.log(`[i18n-check] Found ${usedKeys.size} distinct static translation keys in code.`);
 
-  const missingInEn: { key: string; file: string }[] = [];
+  const missingInEn: { file: string; key: string }[] = [];
   for (const [key, file] of usedKeys) {
-    if (!enLeaves.has(key)) {
+    if (!enLeaves.has(key) && !enPluralBases.has(key)) {
       missingInEn.push({ key, file });
     }
   }
@@ -162,12 +198,11 @@ function main(): void {
   }
 
   if (hasError) {
-    console.error("\n❌ [i18n-check] FAILED. Please fix missing or extra keys.");
     process.exitCode = 1;
-    return;
+    console.error("\n[i18n-check] Failed.");
+  } else {
+    console.log("\n✅ [i18n-check] All locale dictionaries and code key references are in sync.");
   }
-
-  console.log("\n✅ [i18n-check] All keys in sync and verified.");
 }
 
 main();

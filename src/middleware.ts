@@ -1,12 +1,13 @@
-import { timingSafeEqual } from "node:crypto";
-import type { MiddlewareHandler } from "astro";
+import type { APIContext } from "astro";
+import { defineMiddleware } from "astro:middleware";
 import { getLocalizedPath } from "./i18n/core";
 import { DEFAULT_LOCALE, isLocale } from "./i18n/locales";
+import { checkRateLimit, extractClientIp, isValidOriginSecret } from "./lib/api-utils";
 import { env } from "./lib/env";
 import {
+  applySecurityHeaders,
   getBaselineSecurityHeaders,
   getSecurityHeaders,
-  type SecurityHeader,
 } from "./lib/security-headers";
 
 const STATIC_PATH_PREFIXES = [
@@ -28,41 +29,37 @@ const DISCOVERY_PATHS = new Set([
   "/sitemap-index.xml",
 ]);
 
-function applyHeaders(headers: Headers, list: readonly SecurityHeader[]): void {
-  for (const { key, value } of list) {
-    headers.set(key, value);
-  }
-}
-
-function isValidOriginSecret(provided: string | null, expected: string): boolean {
-  if (!provided || !expected) return false;
-  const a = Buffer.from(provided, "utf8");
-  const b = Buffer.from(expected, "utf8");
-  return a.length === b.length && timingSafeEqual(a, b);
-}
-
 function createMissingAssetResponse(): Response {
   const notFoundHeaders = new Headers({
     "Cache-Control": "no-store, max-age=0, must-revalidate",
     "Content-Type": "text/plain; charset=utf-8",
   });
-  applyHeaders(notFoundHeaders, getSecurityHeaders());
+  applySecurityHeaders(notFoundHeaders, getSecurityHeaders());
   return new Response("Not Found", { status: 404, headers: notFoundHeaders });
 }
 
 let localhostCachePurged = false;
 
-export const onRequest: MiddlewareHandler = async (context, next) => {
-  // Note: In @astrojs/node standalone mode, static assets and Astro memoryCache hits execute
-  // before middleware. Production origin isolation must therefore also be enforced at ingress
-  // (Cloudflare Tunnel / IP firewall) or a pre-static server wrapper.
+function resolveClientAddress(context: APIContext): string | undefined {
+  try {
+    return context.clientAddress;
+  } catch {
+    return undefined;
+  }
+}
+
+export const onRequest = defineMiddleware(async (context, next) => {
+  if (context.isPrerendered) {
+    return next();
+  }
+
   const configuredOriginSecret = env.ORIGIN_VERIFY_SECRET;
   if (import.meta.env.PROD && configuredOriginSecret.length > 0) {
     const providedSecret = context.request.headers.get("x-origin-verify");
     if (!isValidOriginSecret(providedSecret, configuredOriginSecret)) {
       context.cache.set(false);
       const forbiddenHeaders = new Headers({ "Cache-Control": "no-store" });
-      applyHeaders(forbiddenHeaders, getBaselineSecurityHeaders());
+      applySecurityHeaders(forbiddenHeaders, getBaselineSecurityHeaders());
       return new Response("Forbidden", { status: 403, headers: forbiddenHeaders });
     }
     context.locals.isCloudflareVerified = true;
@@ -72,6 +69,29 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
 
   const requestUrl = new URL(context.request.url);
   const pathname = requestUrl.pathname;
+
+  if (pathname.startsWith("/api/")) {
+    const ip = extractClientIp({
+      clientAddress: resolveClientAddress(context),
+      isCloudflareVerified: context.locals.isCloudflareVerified,
+      request: context.request,
+    });
+    context.locals.isApiRateLimitChecked = true;
+    const rateLimit = checkRateLimit({
+      identifier: `api:${ip}`,
+      maxRequests: 60,
+      windowMs: 60_000,
+    });
+    if (!rateLimit.allowed) {
+      context.cache.set(false);
+      const rateHeaders = new Headers({
+        "Cache-Control": "no-store, max-age=0, must-revalidate",
+        "Retry-After": "60",
+      });
+      applySecurityHeaders(rateHeaders, getBaselineSecurityHeaders());
+      return Response.json({ error: "Too many requests" }, { status: 429, headers: rateHeaders });
+    }
+  }
   const isStaticAsset = STATIC_PATH_PREFIXES.some((prefix) => pathname.startsWith(prefix));
   const isDiscoveryAsset =
     DISCOVERY_PATHS.has(pathname)
@@ -97,7 +117,7 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
 
     const newResponse = new Response(response.body, response);
 
-    applyHeaders(newResponse.headers, getBaselineSecurityHeaders());
+    applySecurityHeaders(newResponse.headers, getBaselineSecurityHeaders());
     if (isDiscoveryAsset) {
       newResponse.headers.set("Access-Control-Allow-Origin", "*");
       newResponse.headers.set("Cross-Origin-Resource-Policy", "cross-origin");
@@ -127,7 +147,7 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
     const canonicalPath = getLocalizedPath(pathname, DEFAULT_LOCALE);
     const redirectResponse = context.redirect(canonicalPath + requestUrl.search, 301);
     const hardenedRedirect = new Response(redirectResponse.body, redirectResponse);
-    applyHeaders(hardenedRedirect.headers, getBaselineSecurityHeaders());
+    applySecurityHeaders(hardenedRedirect.headers, getBaselineSecurityHeaders());
     return hardenedRedirect;
   } else if (isLocale(localeParam)) {
     context.locals.locale = localeParam;
@@ -137,13 +157,18 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
   }
 
   const response = await next();
-  applyHeaders(response.headers, getSecurityHeaders());
+  applySecurityHeaders(response.headers, getSecurityHeaders());
   response.headers.set("Content-Language", context.locals.locale);
 
-  if (!localhostCachePurged && pathname !== "/_image" && requestUrl.hostname === "localhost") {
+  if (
+    !localhostCachePurged
+    && pathname !== "/_image"
+    && requestUrl.hostname === "localhost"
+    && import.meta.env.DEV
+  ) {
     localhostCachePurged = true;
     response.headers.set("Clear-Site-Data", '"cache"');
   }
 
   return response;
-};
+});

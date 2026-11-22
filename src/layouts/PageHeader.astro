@@ -1,5 +1,6 @@
 ---
 import AltArrowRightIcon from "@/shared/ui/icons/AltArrowRightIcon.astro";
+import { useTranslations } from "@/i18n/utils";
 import type { ImageMetadata } from "astro";
 import { Image } from "astro:assets";
 import { getRelativeLocaleUrl } from "astro:i18n";
@@ -27,6 +28,7 @@ const {
 } = Astro.props;
 
 const locale = Astro.locals.locale;
+const t = useTranslations(locale);
 
 let gradientValue =
   "bg-[radial-gradient(circle_at_top,color-mix(in_oklch,var(--color-orange)_15%,transparent),transparent_70%)]";
@@ -58,7 +60,9 @@ if (gradientPosition === "top-right") {
         decoding="async"
         fetchpriority="high"
         loading="eager"
+        sizes="100vw"
         src={bgImage}
+        widths={[640, 1280, 1920]}
       />
 
   : null}
@@ -76,7 +80,7 @@ if (gradientPosition === "top-right") {
     <div class="w-full max-w-4xl space-y-6 text-center">
       {breadcrumbs && breadcrumbs.length > 0 ?
         <nav
-          aria-label="Breadcrumb"
+          aria-label={t("ui.breadcrumb")}
           class="mbe-6 sm:mbe-8 flex items-center justify-center gap-3"
         >
           <ol class="flex list-none flex-wrap items-center gap-2 rounded-full border-[1.5px] border-white/10 bg-white/10 px-6 py-2 shadow-xs ring-1 ring-black/5 backdrop-blur-[20px]">
@@ -99,7 +103,7 @@ if (gradientPosition === "top-right") {
                 {index < breadcrumbs.length - 1 && (
                   <AltArrowRightIcon
                     aria-hidden="true"
-                    class="size-3 text-white/40"
+                    class="size-3 text-white/40 rtl:scale-x-[-1]"
                   />
                 )}
               </li>
@@ -108,7 +112,7 @@ if (gradientPosition === "top-right") {
         </nav>
       : null}
 
-      <hgroup class="space-y-4 sm:space-y-5">
+      <div class="space-y-4 sm:space-y-5">
         {smTitle && !breadcrumbs ?
           <div class="flex items-center justify-center gap-4">
             <span class="bg-orange-400/60 block-px inline-8" />
@@ -129,7 +133,7 @@ if (gradientPosition === "top-right") {
         {hasUnderline ?
           <div
             aria-hidden="true"
-            class="mx-auto mt-3 block-1 inline-20 rounded-none bg-orange-500"
+            class="mx-auto mbs-3 block-1 inline-20 rounded-none bg-orange-500"
           />
         : null}
 
@@ -138,7 +142,7 @@ if (gradientPosition === "top-right") {
             {subtitle}
           </p>
         : null}
-      </hgroup>
+      </div>
       {Astro.slots.has("default") && (
         <div class="flex flex-wrap items-center justify-center gap-4 pbs-2">
           <slot />

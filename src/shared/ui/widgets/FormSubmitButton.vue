@@ -85,7 +85,7 @@ defineProps<Props>();
         viewBox="0 0 24 24"
         fill="none"
         stroke-width="1.5"
-        class="solar solar-danger-circle-broken size-4.5"
+        class="size-4.5"
         aria-hidden="true"
       >
         <path

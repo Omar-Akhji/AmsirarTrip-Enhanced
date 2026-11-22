@@ -32,6 +32,7 @@
     "contact": "Contacto",
     "toggleMenu": "Alternar menú de navegación",
     "mainAria": "Navegación principal",
+    "mobileAria": "Navegación móvil",
     "skipToContent": "Saltar al contenido principal",
     "whatsappCta": "Contáctanos por WhatsApp",
     "themeToggle": "Cambiar el tema",
@@ -1668,12 +1669,62 @@
   "routeMap": {
     "interactiveMap": "Mapa de ruta interactivo",
     "stops": "Paradas",
+    "stopsCount_one": "{count} Parada",
+    "stopsCount_many": "{count} Paradas",
+    "stopsCount_other": "{count} Paradas",
     "exploreBtn": "Explorar mapa",
     "loadAriaPrefix": "Cargar mapa de ruta interactivo:",
     "viewStopsPrefix": "Ver las",
     "viewStopsSuffix": "paradas y horarios",
+    "viewStopsSchedule_one": "Ver {count} parada y horario",
+    "viewStopsSchedule_many": "Ver las {count} paradas y horarios",
+    "viewStopsSchedule_other": "Ver las {count} paradas y horarios",
     "openGoogleMaps": "Abrir en Google Maps",
     "kicker": "Ruta en Google Maps",
     "titleSuffix": "Mapa de ruta"
+  },
+  "hero": {
+    "carouselAria": "Carrusel principal de Amsirar Trip",
+    "previewsAria": "Vistas previas de destinos",
+    "goToSlide": "{title} — Ir a la diapositiva {index}",
+    "pauseAutoplay": "Pausar presentación",
+    "playAutoplay": "Reproducir presentación",
+    "slides": {
+      "sahara": {
+        "title": "Viajes y Circuitos",
+        "type": "Aventura y Campamentos",
+        "description": "Especialistas en viajes y circuitos por Marruecos, rutas al desierto del Sáhara y excursiones a las ciudades imperiales.",
+        "thumbType": "Viajes y Circuitos",
+        "thumbTitle": "Aventura y Campamentos"
+      },
+      "atlas": {
+        "title": "La aventura te espera",
+        "type": "Tras las dunas",
+        "description": "Especialistas en viajes y circuitos por Marruecos, rutas al desierto del Sáhara y excursiones a las ciudades imperiales.",
+        "thumbType": "Dunas del Sáhara",
+        "thumbTitle": "La aventura te espera"
+      },
+      "imperial": {
+        "title": "Haz tus maletas",
+        "type": "Marruecos te llama",
+        "description": "Especialistas en viajes y circuitos por Marruecos, rutas al desierto del Sáhara y excursiones a las ciudades imperiales.",
+        "thumbType": "Ciudades Imperiales",
+        "thumbTitle": "Marruecos te llama"
+      }
+    }
+  },
+  "ui": {
+    "breadcrumb": "Ruta de navegación",
+    "legalNavAria": "Privacidad y condiciones",
+    "ratingFiveStars": "Calificado con 5 de 5 estrellas",
+    "ourikaCollageAlt": "Terrazas verdes y pueblos de montaña del valle de Ourika",
+    "atlasCollageAlt": "Arquitectura tradicional marroquí y viajes por el Atlas",
+    "contactMapAria": "Mapa interactivo que muestra la ubicación de la agencia Amsirar Trip en Marrakech",
+    "contactMapTitle": "Ubicación de la agencia Amsirar Trip - Marrakech, Marruecos",
+    "itineraryKicker": "Programa diario",
+    "itineraryDefaultTitle": "Itinerario día a día",
+    "durationDays_one": "{count} Día",
+    "durationDays_many": "{count} Días",
+    "durationDays_other": "{count} Días"
   }
 }

@@ -48,14 +48,13 @@ const NAV_ITEMS: readonly {
 
 <header class="print:hidden">
   <div
-    class="group fixed inset-s-1/2 top-2 z-50 translate-x-[-50%] rounded-2xl border border-white/10 bg-white/10 px-3 py-2 sm:px-4 text-white shadow-[0_10px_30px_rgba(3,7,18,0.12)] backdrop-blur-xl transition-all duration-200 will-change-auto inline-[calc(100%-2rem)] max-inline-275 dark:border-white/10 dark:bg-white/5 dark:shadow-[0_8px_32px_rgba(0,0,0,0.4)] data-scrolled:bg-white/90 data-scrolled:text-stone-900 data-scrolled:border-stone-200/90 data-scrolled:shadow-[0_12px_30px_rgba(0,0,0,0.08)] dark:data-scrolled:bg-[#0d0e12] dark:data-scrolled:border-white/10 dark:data-scrolled:text-mist-100 dark:data-scrolled:shadow-[0_16px_40px_rgba(0,0,0,0.7)]"
+    class="group fixed inset-s-1/2 top-2 z-50 -translate-x-1/2 rtl:translate-x-1/2 rounded-2xl border border-white/10 bg-white/10 px-3 py-2 sm:px-4 text-white shadow-[0_10px_30px_rgba(3,7,18,0.12)] backdrop-blur-xl transition-all duration-200 will-change-auto inline-[calc(100%-2rem)] max-inline-275 dark:border-white/10 dark:bg-white/5 dark:shadow-[0_8px_32px_rgba(0,0,0,0.4)] data-scrolled:bg-white/90 data-scrolled:text-stone-900 data-scrolled:border-stone-200/90 data-scrolled:shadow-[0_12px_30px_rgba(0,0,0,0.08)] dark:data-scrolled:bg-[#0d0e12] dark:data-scrolled:border-white/10 dark:data-scrolled:text-mist-100 dark:data-scrolled:shadow-[0_16px_40px_rgba(0,0,0,0.7)]"
     id="main-navbar"
-    transition:name="main-navbar"
   >
     <div class="relative flex items-center justify-between gap-2.5 px-1 py-0.5 md:py-1 lg:px-2 lg:py-1">
       <a
         aria-label="Amsirar Trip"
-        class="brand-logo-link flex items-center shrink-0 transition-transform duration-200 hover:opacity-95"
+        class="flex items-center shrink-0 transition-transform duration-200 hover:opacity-95"
         href={localize("/")}
       >
         <svg
@@ -298,7 +297,7 @@ const NAV_ITEMS: readonly {
 
       <nav
         aria-label={t("nav.mainAria")}
-        class="desktop-nav absolute inset-s-1/2 z-10 hidden -translate-x-1/2 items-center gap-1 overflow-hidden rounded-full border-2 border-white/10 bg-white/5 p-1.5 shadow-[0_8px_32px_rgba(0,0,0,0.12)] transition-colors duration-200 group-data-scrolled:border-stone-200/90 group-data-scrolled:bg-stone-100/70 group-data-scrolled:dark:border-white/10 group-data-scrolled:dark:bg-[oklch(18%_0.012_245deg/75%)] md:inline-flex lg:gap-1.5 max-w-fit"
+        class="desktop-nav absolute inset-s-1/2 z-10 hidden -translate-x-1/2 rtl:translate-x-1/2 items-center gap-1 overflow-hidden rounded-full border-2 border-white/10 bg-white/5 p-1.5 shadow-[0_8px_32px_rgba(0,0,0,0.12)] transition-colors duration-200 group-data-scrolled:border-stone-200/90 group-data-scrolled:bg-stone-100/70 group-data-scrolled:dark:border-white/10 group-data-scrolled:dark:bg-[oklch(18%_0.012_245deg/75%)] md:inline-flex lg:gap-1.5 max-w-fit"
         id="desktop-nav"
       >
         <div
@@ -314,6 +313,7 @@ const NAV_ITEMS: readonly {
               aria-current={active ? "page" : undefined}
               aria-label={label}
               class="group/link desktop-nav-link relative z-10 items-center justify-center whitespace-nowrap shrink-0 rounded-full px-3 py-2.5 text-xs font-semibold select-none transition-colors duration-200 lg:inline-flex lg:px-5 lg:py-2 lg:text-sm"
+              data-astro-prefetch
               href={localize(item.to)}
               title={label}
             >

@@ -1,15 +1,16 @@
 <script setup lang="ts">
-import { computed, nextTick, useId, useTemplateRef, ref } from "vue";
+import { computed, nextTick, ref, useId, useTemplateRef } from "vue";
 import type { ContactFormCopy, ContactTopicOption } from "@/lib/form-copy";
 import type { FormState } from "@/lib/form-types";
 import PhoneInput from "@/shared/ui/widgets/PhoneInput.vue";
 
 interface Props {
   copy: ContactFormCopy;
+  locale?: string;
   state: FormState | null;
 }
 
-const { copy, state } = defineProps<Props>();
+const { copy, locale = "en", state } = defineProps<Props>();
 
 const topicPopoverId = `topic-popover-${useId().replaceAll(":", "")}`;
 const topicAnchorName = `--topic-anchor-${topicPopoverId}`;
@@ -206,6 +207,7 @@ function handleListboxKeydown(event: KeyboardEvent): void {
           id="contact-phone"
           name="phone"
           :labels="copy.phoneLabels"
+          :locale="locale"
           :placeholder="copy.phonePlaceholder"
           toolparamdescription="The phone/WhatsApp number of the contact person"
           :aria-invalid="state?.errors?.['phone'] ? 'true' : 'false'"
@@ -312,7 +314,7 @@ function handleListboxKeydown(event: KeyboardEvent): void {
                   type="button"
                   role="option"
                   :aria-selected="selectedTopic === option.label"
-                  class="flex min-h-11 w-full cursor-pointer items-center justify-between gap-2 rounded-none px-3 py-2.5 text-start font-sans text-xs/snug wrap-break-word text-stone-800 transition-colors hover:bg-stone-100 focus:bg-stone-100 focus:outline-hidden active:bg-stone-200/70 aria-selected:bg-stone-100 aria-selected:font-medium aria-selected:text-stone-900 dark:text-mist-200 dark:hover:bg-white/5 dark:focus:bg-white/5 dark:aria-selected:bg-white/10 dark:aria-selected:text-mist-100"
+                  class="flex min-h-11 w-full cursor-pointer items-center justify-between gap-2 rounded-none px-3 py-2.5 text-start font-sans text-xs/snug wrap-break-word text-stone-800 transition-colors hover:bg-stone-100 focus:bg-stone-100 focus:outline-hidden focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-inset active:bg-stone-200/70 aria-selected:bg-stone-100 aria-selected:font-medium aria-selected:text-stone-900 dark:text-mist-200 dark:hover:bg-white/5 dark:focus:bg-white/5 dark:aria-selected:bg-white/10 dark:aria-selected:text-mist-100"
                   @click="chooseTopic(option)"
                 >
                   <span>{{ option.label }}</span>
@@ -324,9 +326,11 @@ function handleListboxKeydown(event: KeyboardEvent): void {
 
         <input
           v-if="isOtherSelected"
+          id="contact-custom-topic"
           ref="customTopicInputRef"
           v-model="customTopic"
           type="text"
+          autocomplete="off"
           :maxlength="120"
           :placeholder="copy.customTopicPlaceholder"
           :aria-label="copy.customTopicPlaceholder"

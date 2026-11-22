@@ -20,6 +20,7 @@ const sortedExcursions = [...excursionsEntries].toSorted(
 const excursionsItemListJsonLd = generateItemListJsonLd({
   name: title,
   description,
+  inLanguage: locale,
   url: Astro.url.pathname,
   items: sortedExcursions.map((entry) => ({
     name: t(`excursion.list.${entry.data.i18nKeyPrefix}.title`),
@@ -47,5 +48,5 @@ const breadcrumbJsonLd = generateBreadcrumbJsonLd([
     data={breadcrumbJsonLd}
     id="excursions-breadcrumb-jsonld"
   />
-  <ExcursionView />
+  <ExcursionView entries={sortedExcursions} />
 </Layout>

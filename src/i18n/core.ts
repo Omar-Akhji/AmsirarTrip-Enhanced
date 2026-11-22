@@ -25,11 +25,41 @@ export interface TranslationFunction {
   raw: (key: string) => unknown;
 }
 
+function createPluralRules(locale: string): Intl.PluralRules | null {
+  try {
+    return new Intl.PluralRules(locale);
+  } catch {
+    return null;
+  }
+}
+
+function createNumberFormat(locale: string): Intl.NumberFormat | null {
+  try {
+    return new Intl.NumberFormat(locale);
+  } catch {
+    return null;
+  }
+}
+
 export function createTranslationHelper(
   lookupFn: (key: string) => unknown,
   fallbackLookupFn?: (key: string) => unknown,
   currentLocale: string = DEFAULT_LOCALE,
 ): TranslationFunction {
+  const pluralRules = createPluralRules(currentLocale);
+  const numberFormat = createNumberFormat(currentLocale);
+
+  function resolvePluralValue(key: string, count: number): unknown {
+    if (!pluralRules) return undefined;
+    const pluralForm = pluralRules.select(count);
+    return (
+      lookupFn(`${key}_${pluralForm}`)
+      ?? lookupFn(`${key}_other`)
+      ?? fallbackLookupFn?.(`${key}_${pluralForm}`)
+      ?? fallbackLookupFn?.(`${key}_other`)
+    );
+  }
+
   function t(
     key: MessageKey | (string & {}),
     values?: string | Record<string, string | number>,
@@ -38,24 +68,10 @@ export function createTranslationHelper(
 
     // Pluralization support: if values is an object with a numeric "count"
     if (values && typeof values === "object" && typeof values["count"] === "number") {
-      try {
-        const pluralForm = new Intl.PluralRules(currentLocale).select(values["count"]);
-        result = lookupFn(`${key}_${pluralForm}`);
-        if (result === undefined && fallbackLookupFn) {
-          result = fallbackLookupFn(`${key}_${pluralForm}`);
-        }
-      } catch {
-        // Fall back to standard key lookup if PluralRules throws
-      }
+      result = resolvePluralValue(key, values["count"]);
     }
 
-    if (result === undefined) {
-      result = lookupFn(key);
-    }
-
-    if (result === undefined && fallbackLookupFn) {
-      result = fallbackLookupFn(key);
-    }
+    result ??= lookupFn(key) ?? fallbackLookupFn?.(key);
 
     if (result === undefined) {
       return typeof values === "string" ? values : key;
@@ -68,7 +84,9 @@ export function createTranslationHelper(
     if (typeof result === "string" && values && typeof values === "object") {
       let text: string = result;
       for (const [k, value] of Object.entries(values)) {
-        text = text.replaceAll(`{${k}}`, () => String(value));
+        const formatted =
+          typeof value === "number" && numberFormat ? numberFormat.format(value) : String(value);
+        text = text.replaceAll(`{${k}}`, () => formatted);
       }
       return text;
     }
@@ -78,11 +96,15 @@ export function createTranslationHelper(
 
   return Object.assign(t, {
     raw(key: string): unknown {
-      const val = lookupFn(key);
-      return val ?? fallbackLookupFn?.(key);
+      return lookupFn(key) ?? fallbackLookupFn?.(key);
     },
     has(key: string): boolean {
-      return lookupFn(key) !== undefined || fallbackLookupFn?.(key) !== undefined;
+      return (
+        lookupFn(key) !== undefined
+        || fallbackLookupFn?.(key) !== undefined
+        || lookupFn(`${key}_other`) !== undefined
+        || fallbackLookupFn?.(`${key}_other`) !== undefined
+      );
     },
   });
 }

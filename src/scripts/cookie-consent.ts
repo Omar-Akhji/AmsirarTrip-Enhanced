@@ -173,39 +173,29 @@ function handleSavePreferences(): void {
 function updateBadgeVisibility(): void {
   const badge = getBadgeButton();
   if (!badge) return;
-  const consent = getCookieConsent();
-  badge.classList.toggle("hidden", !consent);
+  badge.classList.toggle("hidden", !getCookieConsent());
 }
 
-/** Initializes listeners on current page load (and on Astro View Transitions). */
-export function initCookieConsent(): void {
-  const banner = getBannerElement();
-  const modal = getModalElement();
-  if (!banner || !modal || banner.dataset["cookieInit"] === "true") return;
-  banner.dataset["cookieInit"] = "true";
-
+function scheduleInitialBanner(modal: HTMLDialogElement): void {
   if (showBannerTimer !== null) {
     clearTimeout(showBannerTimer);
     showBannerTimer = null;
   }
 
-  const consent = getCookieConsent();
-  if (consent) {
+  if (getCookieConsent()) {
     hideBanner();
-  } else {
-    showBannerTimer = globalThis.setTimeout(() => {
-      showBannerTimer = null;
-      if (!getCookieConsent() && !modal.open) {
-        showBanner();
-      }
-    }, 600);
+    return;
   }
 
-  updateBadgeVisibility();
+  showBannerTimer = globalThis.setTimeout(() => {
+    showBannerTimer = null;
+    if (!getCookieConsent() && !modal.open) {
+      showBanner();
+    }
+  }, 600);
+}
 
-  const controller = new AbortController();
-  const { signal } = controller;
-
+function bindConsentActionButtons(modal: HTMLDialogElement, signal: AbortSignal): void {
   for (const btn of document.querySelectorAll<HTMLElement>("[data-cookie-accept-all]")) {
     btn.addEventListener("click", () => handleConsentSaved(true, true), { signal });
   }
@@ -241,7 +231,9 @@ export function initCookieConsent(): void {
       { signal },
     );
   }
+}
 
+function bindModalDismissHandlers(modal: HTMLDialogElement, signal: AbortSignal): void {
   // Fallback for browsers without native closedby="any" light dismiss (Safari < 26.2)
   if (!("closedBy" in HTMLDialogElement.prototype)) {
     modal.addEventListener(
@@ -267,9 +259,25 @@ export function initCookieConsent(): void {
     },
     { signal },
   );
+}
 
-  document.addEventListener(
-    "astro:before-swap",
+/** Initializes listeners on current page load. */
+export function initCookieConsent(): void {
+  const banner = getBannerElement();
+  const modal = getModalElement();
+  if (!banner || !modal || banner.dataset["cookieInit"] === "true") return;
+  banner.dataset["cookieInit"] = "true";
+
+  scheduleInitialBanner(modal);
+  updateBadgeVisibility();
+
+  const controller = new AbortController();
+  const { signal } = controller;
+  bindConsentActionButtons(modal, signal);
+  bindModalDismissHandlers(modal, signal);
+
+  globalThis.addEventListener(
+    "pagehide",
     () => {
       if (showBannerTimer !== null) {
         clearTimeout(showBannerTimer);
@@ -283,7 +291,11 @@ export function initCookieConsent(): void {
 }
 
 if (typeof window !== "undefined") {
-  document.addEventListener("astro:page-load", initCookieConsent);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initCookieConsent, { once: true });
+  } else {
+    initCookieConsent();
+  }
 
   Object.assign(globalThis, {
     __amsirarCookieConsent: {

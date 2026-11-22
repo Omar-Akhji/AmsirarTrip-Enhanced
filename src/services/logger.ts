@@ -28,8 +28,10 @@ function getLogDir(): string {
 
 function ensureLogDir(logDir: string): void {
   if (ensuredDir === logDir) return;
+  // eslint-disable-next-line security/detect-non-literal-fs-filename -- logDir is constrained to configured LOG_DIR or ./logs
   if (!existsSync(logDir)) {
     try {
+      // eslint-disable-next-line security/detect-non-literal-fs-filename -- logDir is constrained to configured LOG_DIR or ./logs
       mkdirSync(logDir, { recursive: true });
     } catch (error) {
       console.error("[Logger] Failed to create log directory:", error);
@@ -52,6 +54,7 @@ function getStream(level: LogLevel, logDir: string): WriteStream {
   if (existing) return existing;
 
   const filePath = `${logDir}/${today}-${level}.log`;
+  // eslint-disable-next-line security/detect-non-literal-fs-filename -- filePath uses internal ISO date and fixed LogLevel union
   const stream = createWriteStream(filePath, { flags: "a" });
   stream.on("error", (error) => {
     console.error(`[Logger] Stream error for ${level}:`, error);
@@ -157,12 +160,17 @@ export function sanitizeLogString(value: unknown, maxLength = 512): string {
     : "";
 }
 
-export function logSecurityEvent(
-  type: "RATE_LIMIT" | "BLOCKED_IP" | "HONEYPOT" | "CAPTCHA_FAILED" | "SUSPICIOUS",
-  ip: string,
-  details: string,
-  extra?: Record<string, unknown>,
-): void {
+export type SecurityEventType =
+  "RATE_LIMIT" | "BLOCKED_IP" | "HONEYPOT" | "CAPTCHA_FAILED" | "SUSPICIOUS";
+
+export interface SecurityEventOptions {
+  readonly details: string;
+  readonly extra?: Record<string, unknown>;
+  readonly ip: string;
+  readonly type: SecurityEventType;
+}
+
+export function logSecurityEvent({ details, extra, ip, type }: SecurityEventOptions): void {
   logger.security(`Security event: ${type}`, {
     ...extra,
     ip: sanitizeLogString(ip, 64),

@@ -47,12 +47,19 @@ function toWhatsAppDigits(phone: string): string {
   return phone.replaceAll(/\D/g, "").replace(/^0+/, "");
 }
 
-function buildContactActionButtons(
-  safeReplyTo: string,
-  phone: string,
-  subject: string,
-  waMessage: string,
-): ActionButton[] {
+interface ContactActionButtonsOptions {
+  readonly phone: string;
+  readonly safeReplyTo: string;
+  readonly subject: string;
+  readonly waMessage: string;
+}
+
+function buildContactActionButtons({
+  phone,
+  safeReplyTo,
+  subject,
+  waMessage,
+}: ContactActionButtonsOptions): ActionButton[] {
   const waDigits = toWhatsAppDigits(phone);
   const waUrl = waDigits ? `https://wa.me/${waDigits}?text=${encodeURIComponent(waMessage)}` : "";
 
@@ -289,12 +296,12 @@ export function buildBookingEmail(data: BookingEmailInput): PreparedEmail {
   const waGreeting = `Hello ${data.fullName}, thank you for your booking request with Amsirar Trip regarding ${cleanedType}!`;
   const waUrl = waDigits ? `https://wa.me/${waDigits}?text=${encodeURIComponent(waGreeting)}` : "";
 
-  const actionButtons = buildContactActionButtons(
+  const actionButtons = buildContactActionButtons({
+    phone: data.phone,
     safeReplyTo,
-    data.phone,
-    `Re: Your Amsirar Trip Booking - ${cleanedType}`,
-    waGreeting,
-  );
+    subject: `Re: Your Amsirar Trip Booking - ${cleanedType}`,
+    waMessage: waGreeting,
+  });
 
   const phoneHref = `tel:${data.phone.replaceAll(/\s+/g, "")}`;
   const contentHtml = `
@@ -364,12 +371,12 @@ export function buildContactEmail(data: ContactEmailInput): PreparedEmail {
   const waGreeting = `Hello ${data.name}, thank you for reaching out to Amsirar Trip!`;
   const waUrl = waDigits ? `https://wa.me/${waDigits}?text=${encodeURIComponent(waGreeting)}` : "";
 
-  const actionButtons = buildContactActionButtons(
+  const actionButtons = buildContactActionButtons({
+    phone: data.phone,
     safeReplyTo,
-    data.phone,
-    `Re: Your inquiry to Amsirar Trip${safeTopic ? ` - ${safeTopic}` : ""}`,
-    waGreeting,
-  );
+    subject: `Re: Your inquiry to Amsirar Trip${safeTopic ? ` - ${safeTopic}` : ""}`,
+    waMessage: waGreeting,
+  });
 
   const senderRows: DetailRow[] = [
     { label: "Name", value: data.name },

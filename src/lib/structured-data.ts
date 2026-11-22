@@ -44,6 +44,7 @@ type TripItineraryItem = { position: number; name: string; description?: string 
 type TripStructuredData<TLocation> = {
   name: string;
   description: string;
+  inLanguage?: string | undefined;
   provider: string;
   image: string;
   price?: number | undefined;
@@ -74,15 +75,22 @@ function sanitizeForJsonLd(value: string | undefined): string {
 const BASE_URL = "https://amsirartrip.com";
 
 function resolveUrl(raw: string): string {
-  return raw.startsWith("http") ? raw : `${BASE_URL}${raw}`;
+  return new URL(raw, BASE_URL).href;
 }
 
-function buildTripJsonLd<TLocation>(
-  data: TripStructuredData<TLocation>,
-  fallbackItinerary: Record<string, unknown>[],
-  touristType: string[],
-  providerExtras?: Record<string, unknown>,
-) {
+interface BuildTripJsonLdOptions<TLocation> {
+  readonly data: TripStructuredData<TLocation>;
+  readonly fallbackItinerary: Record<string, unknown>[];
+  readonly providerExtras?: Record<string, unknown>;
+  readonly touristType: string[];
+}
+
+function buildTripJsonLd<TLocation>({
+  data,
+  fallbackItinerary,
+  providerExtras,
+  touristType,
+}: BuildTripJsonLdOptions<TLocation>) {
   const itinerary =
     data.itinerary && data.itinerary.length > 0 ?
       data.itinerary.map((item) => ({
@@ -101,6 +109,7 @@ function buildTripJsonLd<TLocation>(
     "@type": "TouristTrip",
     name: sanitizeForJsonLd(data.name),
     description: sanitizeForJsonLd(data.description),
+    ...(data.inLanguage && { inLanguage: data.inLanguage }),
     image: resolveUrl(data.image),
     provider: {
       "@type": "TravelAgency",
@@ -165,23 +174,25 @@ function buildProviderExtras(): Record<string, unknown> {
 }
 
 export function generateTourJsonLd(data: TourStructuredData): Record<string, unknown> {
-  return buildTripJsonLd(
+  return buildTripJsonLd({
     data,
-    [
+    fallbackItinerary: [
       { "@type": "TouristDestination", name: data.location.start },
       { "@type": "TouristDestination", name: data.location.end },
     ],
-    ["Adventure", "Cultural", "Nature"],
-    buildProviderExtras(),
-  );
+    providerExtras: buildProviderExtras(),
+    touristType: ["Adventure", "Cultural", "Nature"],
+  });
 }
 
 export function generateFaqJsonLd(
   faqs: { question: string; answer: string }[],
+  inLanguage?: string,
 ): Record<string, unknown> {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
+    ...(inLanguage && { inLanguage }),
     mainEntity: faqs.map((faq) => ({
       "@type": "Question",
       name: sanitizeForJsonLd(faq.question),
@@ -191,17 +202,18 @@ export function generateFaqJsonLd(
 }
 
 export function generateExcursionJsonLd(data: ExcursionStructuredData): Record<string, unknown> {
-  return buildTripJsonLd(
+  return buildTripJsonLd({
     data,
-    [{ "@type": "TouristDestination", name: data.location.point }],
-    ["Day Trip", "Cultural Experience"],
-    buildProviderExtras(),
-  );
+    fallbackItinerary: [{ "@type": "TouristDestination", name: data.location.point }],
+    providerExtras: buildProviderExtras(),
+    touristType: ["Day Trip", "Cultural Experience"],
+  });
 }
 
 export function generateItemListJsonLd(data: {
   name: string;
   description: string;
+  inLanguage?: string;
   url: string;
   items: { name: string; description: string; url: string; image: string }[];
 }): Record<string, unknown> {
@@ -210,6 +222,7 @@ export function generateItemListJsonLd(data: {
     "@type": "ItemList",
     name: sanitizeForJsonLd(data.name),
     description: sanitizeForJsonLd(data.description),
+    ...(data.inLanguage && { inLanguage: data.inLanguage }),
     url: resolveUrl(data.url),
     numberOfItems: data.items.length,
     itemListElement: data.items.map((item, index) => ({
@@ -374,6 +387,7 @@ export function generateWebsiteJsonLd(): Record<string, unknown> {
 export function generateVideoObjectJsonLd(data: {
   name: string;
   description: string;
+  inLanguage?: string;
   thumbnailUrl: string;
   uploadDate: string;
   contentUrl: string;
@@ -389,7 +403,7 @@ export function generateVideoObjectJsonLd(data: {
     contentUrl: resolveUrl(data.contentUrl),
     embedUrl: BASE_URL,
     ...(data.duration && { duration: data.duration }),
-    inLanguage: ["en", "fr", "de", "es"],
+    inLanguage: data.inLanguage ?? ["en", "fr", "de", "es"],
     publisher: { "@id": `${BASE_URL}/#organization` },
   };
 }
@@ -397,6 +411,7 @@ export function generateVideoObjectJsonLd(data: {
 export function generateContactPageJsonLd(data: {
   name: string;
   description: string;
+  inLanguage?: string;
   url: string;
 }): Record<string, unknown> {
   return {
@@ -404,6 +419,7 @@ export function generateContactPageJsonLd(data: {
     "@type": "ContactPage",
     name: sanitizeForJsonLd(data.name),
     description: sanitizeForJsonLd(data.description),
+    ...(data.inLanguage && { inLanguage: data.inLanguage }),
     url: resolveUrl(data.url),
     mainEntity: { "@id": `${BASE_URL}/#organization` },
   };
@@ -412,6 +428,7 @@ export function generateContactPageJsonLd(data: {
 export function generateAboutPageJsonLd(data: {
   name: string;
   description: string;
+  inLanguage?: string;
   url: string;
 }): Record<string, unknown> {
   return {
@@ -419,6 +436,7 @@ export function generateAboutPageJsonLd(data: {
     "@type": "AboutPage",
     name: sanitizeForJsonLd(data.name),
     description: sanitizeForJsonLd(data.description),
+    ...(data.inLanguage && { inLanguage: data.inLanguage }),
     url: resolveUrl(data.url),
     mainEntity: { "@id": `${BASE_URL}/#organization` },
   };

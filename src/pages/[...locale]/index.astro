@@ -1,4 +1,5 @@
 ---
+import { getImage } from "astro:assets";
 import { getCollection } from "astro:content";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import bg1 from "../../assets/images/Header/header-1.webp";
@@ -25,8 +26,10 @@ const t = useTranslations(locale);
 const title = t("home.meta.title");
 const description = t("home.meta.description");
 const heroImages = [bg1, bg2, bg3];
-
-const toursEntries = await getCollection("tours");
+const [heroPreload, toursEntries] = await Promise.all([
+  getImage({ src: bg1, widths: [640, 1024, 1536, 1920], format: "webp", quality: 80 }),
+  getCollection("tours"),
+]);
 const sortedTours = [...toursEntries]
   .toSorted((a, b) => a.data.bookingId - b.data.bookingId)
   .slice(0, 6);
@@ -34,6 +37,7 @@ const sortedTours = [...toursEntries]
 const featuredToursItemListJsonLd = generateItemListJsonLd({
   name: t("home.featured.title"),
   description,
+  inLanguage: locale,
   url: Astro.url.pathname,
   items: sortedTours.map((entry) => ({
     name: locale === "en" ? entry.data.seo.title : t(`${entry.data.tourKey}.title`),
@@ -53,6 +57,7 @@ const homeBreadcrumbJsonLd = generateBreadcrumbJsonLd([
 const videoJsonLd = generateVideoObjectJsonLd({
   name: t("video.name"),
   description: t("video.description"),
+  inLanguage: locale,
   thumbnailUrl: "/images/hero/marrakech-medina.webp",
   uploadDate: "2026-01-15T09:00:00+01:00",
   contentUrl: "/videos/Morocco-Video.mp4",
@@ -62,8 +67,10 @@ const videoJsonLd = generateVideoObjectJsonLd({
 
 <Layout
   description={description}
-  image={bg1.src}
+  image={heroPreload.src}
   preloadImage={true}
+  preloadImageSizes="100vw"
+  preloadImageSrcSet={heroPreload.srcSet.attribute}
   title={title}
 >
   <JsonLd

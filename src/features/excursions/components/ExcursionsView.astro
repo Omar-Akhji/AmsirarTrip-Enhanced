@@ -1,4 +1,5 @@
 ---
+import type { CollectionEntry } from "astro:content";
 import bgImage from "@/assets/images/Header/header-1.webp";
 import { getExcursionsData } from "@/features/excursions/data/excursions-data";
 import { useTranslations } from "@/i18n/utils";
@@ -8,9 +9,14 @@ import FaqAccordion from "@/shared/ui/widgets/FaqAccordion.astro";
 import StatHighlights from "@/shared/ui/widgets/StatHighlights.astro";
 import TripCard from "@/shared/ui/widgets/TripCard.astro";
 
+interface Props {
+  readonly entries?: readonly CollectionEntry<"excursions">[] | undefined;
+}
+
+const { entries } = Astro.props;
 const locale = Astro.locals.locale;
 const t = useTranslations(locale);
-const excursions = await getExcursionsData();
+const excursions = await getExcursionsData(entries);
 
 const excursionsGridTitle = splitTitleAccent(t("excursion.blog.lgTitle"));
 const excursionsFaqTitle = splitTitleAccent(t("excursion.faq.title"));

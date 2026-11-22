@@ -5,21 +5,31 @@ import { logger } from "@/services/logger";
 
 export function createCollectionApiRoute(collection: keyof DataEntryMap): APIRoute {
   return async ({ cache, clientAddress, locals, request }) => {
-    const ip = extractClientIp(request, clientAddress, locals.isCloudflareVerified);
-    const rateLimit = checkRateLimit(`api:${ip}`, 60, 60_000);
-    if (!rateLimit.allowed) {
-      cache.set(false);
-      return Response.json(
-        { error: "Too many requests" },
-        {
-          status: 429,
-          headers: {
-            "Retry-After": "60",
-            "Cache-Control": "no-store, max-age=0, must-revalidate",
-            "X-Content-Type-Options": "nosniff",
+    if (!locals.isApiRateLimitChecked) {
+      const ip = extractClientIp({
+        clientAddress,
+        isCloudflareVerified: locals.isCloudflareVerified,
+        request,
+      });
+      const rateLimit = checkRateLimit({
+        identifier: `api:${ip}`,
+        maxRequests: 60,
+        windowMs: 60_000,
+      });
+      if (!rateLimit.allowed) {
+        cache.set(false);
+        return Response.json(
+          { error: "Too many requests" },
+          {
+            status: 429,
+            headers: {
+              "Retry-After": "60",
+              "Cache-Control": "no-store, max-age=0, must-revalidate",
+              "X-Content-Type-Options": "nosniff",
+            },
           },
-        },
-      );
+        );
+      }
     }
 
     try {

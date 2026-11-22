@@ -23,30 +23,34 @@ export function getLocalizedTourSeo(
 
 let cachedToursPromise: Promise<Tour[]> | undefined;
 
+function mapToursEntries(entries: readonly CollectionEntry<"tours">[]): Tour[] {
+  return entries
+    .map((entry) => {
+      const { bookingId, tourKey, image, durationDays, startLocation, endLocation } = entry.data;
+      const start = startLocation.toLowerCase();
+      const end = endLocation.toLowerCase();
+
+      return {
+        id: bookingId,
+        image,
+        title: `${tourKey}.title`,
+        author: `tours.cities.${start}`,
+        category: "tours",
+        description: `tours.${tourKey}.description`,
+        duration: durationDays,
+        start: `tours.cities.${start}`,
+        startLocation: start,
+        route: `/tours/${entry.id}`,
+        end: `tours.cities.${end}`,
+      } satisfies Tour;
+    })
+    .toSorted((a, b) => a.id - b.id);
+}
+
 async function loadTours(): Promise<Tour[]> {
   try {
     const entries = await getCollection("tours");
-    return entries
-      .map((entry) => {
-        const { bookingId, tourKey, image, durationDays, startLocation, endLocation } = entry.data;
-        const start = startLocation.toLowerCase();
-        const end = endLocation.toLowerCase();
-
-        return {
-          id: bookingId,
-          image,
-          title: `${tourKey}.title`,
-          author: `tours.cities.${start}`,
-          category: "tours",
-          description: `tours.${tourKey}.description`,
-          duration: durationDays,
-          start: `tours.cities.${start}`,
-          startLocation: start,
-          route: `/tours/${entry.id}`,
-          end: `tours.cities.${end}`,
-        } satisfies Tour;
-      })
-      .toSorted((a, b) => a.id - b.id);
+    return mapToursEntries(entries);
   } catch (error: unknown) {
     cachedToursPromise = undefined;
     throw error;
@@ -54,7 +58,12 @@ async function loadTours(): Promise<Tour[]> {
 }
 
 /** Derives UI-ready tour data from Astro Content Collections (memoized in production). */
-export async function getToursData(): Promise<Tour[]> {
+export async function getToursData(
+  preloadedEntries?: readonly CollectionEntry<"tours">[],
+): Promise<Tour[]> {
+  if (preloadedEntries) {
+    return mapToursEntries(preloadedEntries);
+  }
   if (!import.meta.env.PROD) {
     return loadTours();
   }

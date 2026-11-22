@@ -1,6 +1,6 @@
-import { navigate } from "astro:transitions/client";
 import { getLocalizedPath } from "@/i18n/core";
 import { isLocale } from "@/i18n/locales";
+import { setTheme } from "./theme";
 
 interface ToolDefinition {
   description: string;
@@ -46,7 +46,7 @@ function initWebMCPTools() {
       async (input) => {
         await Promise.resolve();
         const dark = Boolean(input["dark"]);
-        document.documentElement.classList.toggle("dark", dark);
+        setTheme(dark ? "dark" : "light");
         return { success: true, currentTheme: dark ? "dark" : "light" };
       },
     );
@@ -68,12 +68,13 @@ function initWebMCPTools() {
         },
       },
       async (input) => {
+        await Promise.resolve();
         const localeInput = String(input["locale"]).trim();
         if (!isLocale(localeInput)) {
           return { success: false, error: "Unsupported locale" };
         }
         const newPath = getLocalizedPath(globalThis.location.pathname, localeInput);
-        await navigate(newPath);
+        globalThis.location.assign(newPath);
         return { success: true, targetPath: newPath };
       },
     );
@@ -95,15 +96,21 @@ function initWebMCPTools() {
         },
       },
       async (input) => {
+        await Promise.resolve();
         const path = String(input["path"]).trim();
         if (!path.startsWith("/") || path.startsWith("//") || path.includes("\\")) {
           return { success: false, error: "Path must be a valid internal relative path" };
         }
-        const resolved = new URL(path, globalThis.location.origin);
+        let resolved: URL;
+        try {
+          resolved = new URL(path, globalThis.location.origin);
+        } catch {
+          return { success: false, error: "Invalid navigation path" };
+        }
         if (resolved.origin !== globalThis.location.origin) {
           return { success: false, error: "Cross-origin navigation is forbidden" };
         }
-        await navigate(resolved.pathname + resolved.search + resolved.hash);
+        globalThis.location.assign(resolved.pathname + resolved.search + resolved.hash);
         return { success: true, targetPath: resolved.pathname };
       },
     );

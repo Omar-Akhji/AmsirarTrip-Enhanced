@@ -1,6 +1,6 @@
 // astro.config.mjs
 import { fileURLToPath } from "node:url";
-import { defineConfig, envField, memoryCache } from "astro/config";
+import { defineConfig, envField, fontProviders, memoryCache } from "astro/config";
 import node from "@astrojs/node";
 import vue from "@astrojs/vue";
 import compress from "@playform/compress";
@@ -14,14 +14,82 @@ export default defineConfig({
   // ─── 1. Site & Core HTML Optimization ─────────────────────────────────────
   site: "https://amsirartrip.com",
   trailingSlash: "never",
-  compressHTML: true,
+  compressHTML: "jsx",
   markdown: { syntaxHighlight: false },
+
+  fonts: [
+    {
+      name: "Montserrat",
+      cssVariable: "--font-montserrat",
+      provider: fontProviders.local(),
+      weights: ["100 900"],
+      styles: ["normal"],
+      subsets: ["latin"],
+      fallbacks: [
+        "system-ui",
+        "-apple-system",
+        "BlinkMacSystemFont",
+        "Segoe UI",
+        "Roboto",
+        "sans-serif",
+      ],
+      options: {
+        variants: [
+          {
+            src: ["./src/assets/fonts/Montserrat-VariableFont_wght.woff2"],
+            weight: "100 900",
+            style: "normal",
+            display: "swap",
+          },
+        ],
+      },
+    },
+    {
+      name: "JetBrains Mono",
+      cssVariable: "--font-jetbrains-mono",
+      provider: fontProviders.local(),
+      weights: ["100 800"],
+      styles: ["normal"],
+      subsets: ["latin"],
+      fallbacks: ["ui-monospace", "monospace"],
+      options: {
+        variants: [
+          {
+            src: ["./src/assets/fonts/JetBrainsMono-Variable.woff2"],
+            weight: "100 800",
+            style: "normal",
+            display: "swap",
+          },
+        ],
+      },
+    },
+    {
+      name: "Yellowtail",
+      cssVariable: "--font-yellowtail",
+      provider: fontProviders.local(),
+      weights: [400],
+      styles: ["normal"],
+      subsets: ["latin"],
+      fallbacks: ["cursive"],
+      options: {
+        variants: [
+          {
+            src: ["./src/assets/fonts/Yellowtail-Regular.woff2"],
+            weight: "400",
+            style: "normal",
+            display: "swap",
+          },
+        ],
+      },
+    },
+  ],
 
   // ─── 2. Build Options ─────────────────────────────────────────────────────
   build: { inlineStylesheets: "always", format: "directory" },
 
   // ─── 3. Output & Runtime Adapter ──────────────────────────────────────────
   output: "server",
+  session: false,
   adapter: node({ mode: "standalone", bodySizeLimit: 65_536, staticHeaders: true }),
 
   // ─── 4. Integrations ──────────────────────────────────────────────────────
@@ -65,27 +133,31 @@ export default defineConfig({
         "form-action 'self'",
         "upgrade-insecure-requests",
       ],
-      scriptDirective: {
-        hashes: [
-          "sha256-8cJwFQ/hMKYK67ogjGJzARUT7SMEv2Xn64nZOc7RE6I=",
-          "sha256-0O7iB6zr9x0r6X6eWYITC9V5q+yWCGAoFvcysBGbY9Q=",
-          "sha256-2mkrkPfKG5HdF6qWOVbV6XM8cT+fSqsoBXayDHqg3hg=",
-          "sha256-IU3B3AEAItf6Fb2EWGXsdXMld1XIzaKnQSqlrM/orqM=",
+      scriptDirective: { resources: ["'self'", "https://challenges.cloudflare.com"] },
+      styleDirective: {
+        resources: [
+          { resource: "'self'", kind: "element" },
+          { resource: "'unsafe-inline'", kind: "attribute" },
         ],
-        resources: ["'self'", "https://challenges.cloudflare.com"],
       },
-      styleDirective: { resources: ["'self'", "'unsafe-inline'"] },
     },
   },
 
   // ─── 8. Cache & Route Rules (Astro 7+) ────────────────────────────────────
-  cache: { provider: memoryCache() },
+  cache: { provider: memoryCache({ query: { include: [] } }) },
 
   routeRules: {
-    "/": { maxAge: 600, swr: 3600 },
-    "/de": { maxAge: 600, swr: 3600 },
-    "/es": { maxAge: 600, swr: 3600 },
-    "/fr": { maxAge: 600, swr: 3600 },
+    "/robots.txt": { maxAge: 3600, swr: 86_400 },
+    "/llms.txt": { maxAge: 3600, swr: 86_400 },
+    "/llms-full.txt": { maxAge: 3600, swr: 86_400 },
+    "/sitemap.xml": { maxAge: 3600, swr: 86_400 },
+    "/sitemap-index.xml": { maxAge: 3600, swr: 86_400 },
+    ...Object.fromEntries(
+      LOCALES.map((locale) => [
+        locale === DEFAULT_LOCALE ? "/" : `/${locale}`,
+        { maxAge: 600, swr: 3600 },
+      ]),
+    ),
     "/[...locale]/about": { maxAge: 1800, swr: 86_400 },
     "/[...locale]/contact": { maxAge: 300, swr: 1800 },
     "/[...locale]/excursions": { maxAge: 900, swr: 3600 },
@@ -94,7 +166,7 @@ export default defineConfig({
     "/[...locale]/terms-of-service": { maxAge: 86_400, swr: 604_800 },
     "/[...locale]/tours": { maxAge: 900, swr: 3600 },
     "/[...locale]/tours/[slug]": { maxAge: 1800, swr: 86_400 },
-    "/api/[...path]": { maxAge: 900, swr: 3600 },
+    "/api/[...path]": { maxAge: 0 },
     "/_actions/[...path]": { maxAge: 0 },
     "/_image": { maxAge: 0 },
   },
@@ -139,6 +211,7 @@ export default defineConfig({
     },
   },
 
-  // ─── 12. Client Prefetching ───────────────────────────────────────────────
-  prefetch: { defaultStrategy: "viewport", prefetchAll: false },
+  // ─── 12. Client Prefetching & Speculation Rules Prerendering ──────────────
+  prefetch: { defaultStrategy: "hover", prefetchAll: true },
+  experimental: { clientPrerender: true },
 });

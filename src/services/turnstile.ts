@@ -13,7 +13,7 @@ function isDevEnv(metaEnv: { readonly DEV?: boolean } | undefined): boolean {
 
 const turnstileResponseSchema = z.object({
   action: z.string().optional(),
-  challenge_ts: z.string().optional(),
+  challenge_ts: z.iso.datetime({ offset: true }).optional(),
   "error-codes": z.array(z.string()).optional(),
   hostname: z.string().optional(),
   success: z.boolean(),

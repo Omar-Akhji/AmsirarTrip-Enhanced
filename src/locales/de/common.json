@@ -32,6 +32,7 @@
     "contact": "Kontakt",
     "toggleMenu": "Navigationsmenü umschalten",
     "mainAria": "Hauptnavigation",
+    "mobileAria": "Mobile Navigation",
     "skipToContent": "Zum Hauptinhalt springen",
     "whatsappCta": "Kontaktieren Sie uns über WhatsApp",
     "themeToggle": "Farbschema wechseln",
@@ -1677,12 +1678,59 @@
   "routeMap": {
     "interactiveMap": "Interaktive Routenkarte",
     "stops": "Stationen",
+    "stopsCount_one": "{count} Station",
+    "stopsCount_other": "{count} Stationen",
     "exploreBtn": "Routenkarte öffnen",
     "loadAriaPrefix": "Interaktive Routenkarte laden:",
     "viewStopsPrefix": "Route ansehen:",
     "viewStopsSuffix": "Stationen & Zeitplan",
+    "viewStopsSchedule_one": "Route ansehen: {count} Station & Zeitplan",
+    "viewStopsSchedule_other": "Route ansehen: {count} Stationen & Zeitplan",
     "openGoogleMaps": "In Google Maps öffnen",
     "kicker": "Google Maps-Route",
     "titleSuffix": "Routenkarte"
+  },
+  "hero": {
+    "carouselAria": "Amsirar Trip Hauptkarussell",
+    "previewsAria": "Zielvorschauen des Karussells",
+    "goToSlide": "{title} — Zu Folie {index} wechseln",
+    "pauseAutoplay": "Diashow pausieren",
+    "playAutoplay": "Diashow abspielen",
+    "slides": {
+      "sahara": {
+        "title": "Reisen & Touren",
+        "type": "Abenteuer & Camping",
+        "description": "Spezialist für Marokko-Rundreisen, Sahara-Wüstentouren und Ausflüge zu den imperialen Königsstädten.",
+        "thumbType": "Reisen & Touren",
+        "thumbTitle": "Abenteuer & Camping"
+      },
+      "atlas": {
+        "title": "Abenteuer wartet",
+        "type": "Hinter den Dünen",
+        "description": "Spezialist für Marokko-Rundreisen, Sahara-Wüstentouren und Ausflüge zu den imperialen Königsstädten.",
+        "thumbType": "Sahara-Dünen",
+        "thumbTitle": "Abenteuer wartet"
+      },
+      "imperial": {
+        "title": "Koffer packen",
+        "type": "Marokko ruft",
+        "description": "Spezialist für Marokko-Rundreisen, Sahara-Wüstentouren und Ausflüge zu den imperialen Königsstädten.",
+        "thumbType": "Königsstädte",
+        "thumbTitle": "Marokko ruft"
+      }
+    }
+  },
+  "ui": {
+    "breadcrumb": "Brotkrümelnavigation",
+    "legalNavAria": "Datenschutz und Bedingungen",
+    "ratingFiveStars": "Bewertet mit 5 von 5 Sternen",
+    "ourikaCollageAlt": "Grüne Terrassen und Bergdörfer im Ourika-Tal",
+    "atlasCollageAlt": "Traditionelle marokkanische Architektur und Atlas-Reisen",
+    "contactMapAria": "Interaktive Karte mit dem Standort der Agentur Amsirar Trip in Marrakesch",
+    "contactMapTitle": "Standort der Agentur Amsirar Trip - Marrakesch, Marokko",
+    "itineraryKicker": "Tagesprogramm",
+    "itineraryDefaultTitle": "Route Tag für Tag",
+    "durationDays_one": "{count} Tag",
+    "durationDays_other": "{count} Tage"
   }
 }

@@ -26,7 +26,7 @@ test.describe("Booking Form E2E Tests", () => {
     const emailInput = formSection.locator('input[name="email"]');
     const phoneInput = formSection.locator("input#booking-phone");
     const peopleInput = formSection.locator('input[name="numberOfPeople"]');
-    const dateTrigger = formSection.locator("button#reservationDate-trigger");
+    const dateTrigger = formSection.locator("#reservationDate-trigger");
     const messageTextarea = formSection.locator('textarea[name="message"]');
 
     await expect(fullNameInput).toBeVisible();
@@ -45,13 +45,18 @@ test.describe("Booking Form E2E Tests", () => {
     await formSection.locator('input[name="email"]').fill("test@example.com");
     await formSection.locator("input#booking-phone").fill("661172393");
     await formSection.locator('input[name="numberOfPeople"]').fill("2");
-    await formSection.locator("button#reservationDate-trigger").click();
-    const enabledDayBtn = formSection
-      .locator("[role='dialog'] button[aria-pressed]:not([disabled])")
-      .first();
-    await enabledDayBtn.click();
-    await expect(formSection.locator('input[name="reservationDate"]')).not.toHaveValue("");
-    await formSection.locator("button[data-calendar-today]").click();
+
+    // Open the custom date picker and select Today
+    const dateTrigger = formSection.locator("#reservationDate-trigger");
+    await dateTrigger.click();
+
+    const todayBtn = formSection.locator("button[data-calendar-today]");
+    await expect(todayBtn).toBeVisible();
+    await todayBtn.click();
+
+    const hiddenDateInput = formSection.locator("input#reservationDate");
+    await expect(hiddenDateInput).not.toHaveValue("");
+
     await formSection
       .locator('textarea[name="message"]')
       .fill("This is an automated test message for booking.");

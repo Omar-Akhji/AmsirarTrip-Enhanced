@@ -1,0 +1,64 @@
+---
+import { Image } from "astro:assets";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import desertBg from "../assets/images/Tours/Tour1.webp";
+import { DEFAULT_LOCALE, isLocale } from "../i18n/locales";
+import { useTranslations } from "../i18n/utils";
+import Layout from "../layouts/Layout.astro";
+import ActionPill from "../shared/ui/primitives/ActionPill.astro";
+
+interface Props {
+  error?: unknown;
+}
+
+const firstSegment = Astro.url.pathname.split("/", 2)[1];
+const locale =
+  firstSegment && isLocale(firstSegment) ? firstSegment
+  : isLocale(Astro.locals.locale) ? Astro.locals.locale
+  : DEFAULT_LOCALE;
+Astro.locals.locale = locale;
+const t = useTranslations(locale);
+Astro.cache.set(false);
+Astro.response.status = 500;
+---
+
+<Layout
+  description={t("404.description")}
+  noindex={true}
+  title={`500 — ${t("404.title")}`}
+>
+  <div>
+    <section class="relative isolate flex min-h-dvh flex-col items-center justify-center gap-6 overflow-hidden bg-zinc-950 px-4 pbs-28 pbe-24 text-center text-white">
+      <Image
+        alt=""
+        class="absolute inset-0 size-full object-cover"
+        decoding="async"
+        fetchpriority="high"
+        loading="eager"
+        sizes="100vw"
+        src={desertBg}
+        widths={[640, 1280, 1920]}
+      />
+      <div
+        aria-hidden="true"
+        class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,color-mix(in_oklch,var(--color-orange)_30%,transparent),transparent_65%)]"
+      ></div>
+      <div
+        aria-hidden="true"
+        class="pointer-events-none absolute inset-0 bg-linear-to-b from-black/50 via-black/35 to-black/65"
+      ></div>
+      <div class="relative z-10 flex flex-col items-center gap-6">
+        <h1 class="text-6xl font-bold text-orange-600 sm:text-7xl">500</h1>
+        <p class="max-w-md font-mono text-base text-zinc-300 sm:text-lg">
+          {t("contact.form.errors.generic")}
+        </p>
+        <ActionPill
+          as="a"
+          href={getRelativeLocaleUrl(locale, "/")}
+          label={t("404.cta")}
+          variant="light"
+        />
+      </div>
+    </section>
+  </div>
+</Layout>

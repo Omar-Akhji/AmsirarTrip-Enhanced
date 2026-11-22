@@ -168,7 +168,7 @@ const sectionCount = String(current.sections.length).padStart(2, "0");
               {current.sections.map((sec, idx) => (
                 <li>
                   <a
-                    class="group flex items-center rounded-full px-3 py-2 text-slate-600 transition-all duration-150 hover:bg-orange/5 hover:text-orange data-[active=true]:bg-orange/10 data-[active=true]:font-semibold data-[active=true]:text-orange dark:text-mist-300 dark:hover:bg-white/10 dark:hover:text-yellow dark:data-[active=true]:bg-white/10 dark:data-[active=true]:text-yellow"
+                    class="group flex min-h-9 items-center rounded-full px-3 py-2 text-slate-600 transition-all duration-150 hover:bg-orange/5 hover:text-orange data-[active=true]:bg-orange/10 data-[active=true]:font-semibold data-[active=true]:text-orange dark:text-mist-300 dark:hover:bg-white/10 dark:hover:text-yellow dark:data-[active=true]:bg-white/10 dark:data-[active=true]:text-yellow"
                     data-section-id={sec.id}
                     href={`#${sec.id}`}
                   >
@@ -237,10 +237,10 @@ const sectionCount = String(current.sections.length).padStart(2, "0");
                   class="size-4 shrink-0 text-orange-400"
                 />
                 <a
-                  class="transition-colors hover:text-white"
+                  class="inline-flex min-h-6 items-center py-0.5 transition-colors hover:text-white"
                   href={`mailto:${primaryEmail}`}
                 >
-                  {primaryEmail}
+                  <bdi dir="ltr">{primaryEmail}</bdi>
                 </a>
               </div>
               <div class="flex items-start gap-3">
@@ -248,18 +248,18 @@ const sectionCount = String(current.sections.length).padStart(2, "0");
                   aria-hidden="true"
                   class="mbs-0.5 size-4 shrink-0 text-orange-400"
                 />
-                <div class="flex flex-col gap-0.5">
+                <div class="flex flex-col gap-1">
                   <a
-                    class="transition-colors hover:text-white"
+                    class="inline-flex min-h-6 items-center py-0.5 transition-colors hover:text-white"
                     href={PHONE_LINK}
                   >
-                    {PHONE_DISPLAY} ({t("legal.ui.mobile")})
+                    <bdi dir="ltr">{PHONE_DISPLAY}</bdi> ({t("legal.ui.mobile")})
                   </a>
                   <a
-                    class="text-zinc-400 transition-colors hover:text-white"
+                    class="inline-flex min-h-6 items-center py-0.5 text-zinc-400 transition-colors hover:text-white"
                     href={FAX_LINK}
                   >
-                    {FAX_DISPLAY} ({t("legal.ui.fax")})
+                    <bdi dir="ltr">{FAX_DISPLAY}</bdi> ({t("legal.ui.fax")})
                   </a>
                 </div>
               </div>
@@ -322,9 +322,9 @@ const sectionCount = String(current.sections.length).padStart(2, "0");
                       />
                     </div>
                     <div>
-                      <h4 class="text-sm font-bold text-slate-900 dark:text-mist-100">
+                      <h3 class="text-sm font-bold text-slate-900 dark:text-mist-100">
                         {current.cookieCta.title}
-                      </h4>
+                      </h3>
                       <p class="mbs-1 max-w-md text-xs/relaxed text-slate-600 sm:text-sm dark:text-mist-300">
                         {current.cookieCta.desc}
                       </p>
@@ -526,9 +526,9 @@ const sectionCount = String(current.sections.length).padStart(2, "0");
                     />
                   </div>
                   <div>
-                    <h4 class="text-sm font-bold text-slate-900 dark:text-mist-100">
+                    <h3 class="text-sm font-bold text-slate-900 dark:text-mist-100">
                       {sec.callout.title}
-                    </h4>
+                    </h3>
                     <p class="mbs-1 text-xs/relaxed text-slate-700 sm:text-sm dark:text-mist-300">
                       {sec.callout.desc}
                     </p>
@@ -550,12 +550,12 @@ const sectionCount = String(current.sections.length).padStart(2, "0");
                         class="size-4"
                       />
                     </div>
-                    <div class="text-left">
+                    <div class="text-start">
                       <span class="block text-xs font-bold text-slate-900 transition-colors group-hover/contact:text-orange dark:text-mist-100">
                         {t("legal.ui.telephone")}
                       </span>
                       <span class="block font-mono text-[0.6875rem] text-slate-600 dark:text-mist-400">
-                        {PHONE_DISPLAY}
+                        <bdi dir="ltr">{PHONE_DISPLAY}</bdi>
                       </span>
                     </div>
                   </a>
@@ -570,12 +570,12 @@ const sectionCount = String(current.sections.length).padStart(2, "0");
                         class="size-4"
                       />
                     </div>
-                    <div class="text-left">
+                    <div class="text-start">
                       <span class="block text-xs font-bold text-slate-900 transition-colors group-hover/contact:text-orange dark:text-mist-100">
                         {t("legal.ui.emailUs")}
                       </span>
                       <span class="block font-mono text-[0.6875rem] text-slate-600 dark:text-mist-400">
-                        {primaryEmail}
+                        <bdi dir="ltr">{primaryEmail}</bdi>
                       </span>
                     </div>
                   </a>
@@ -592,7 +592,7 @@ const sectionCount = String(current.sections.length).padStart(2, "0");
                         class="size-4"
                       />
                     </div>
-                    <div class="text-left">
+                    <div class="text-start">
                       <span class="block text-xs font-bold text-slate-900 transition-colors group-hover/contact:text-emerald-700 dark:text-mist-100 dark:group-hover/contact:text-emerald-400">
                         WhatsApp
                       </span>

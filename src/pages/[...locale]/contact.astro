@@ -1,6 +1,8 @@
 ---
 import { getRelativeLocaleUrl } from "astro:i18n";
+import { actions } from "astro:actions";
 import ContactForm from "../../features/contact/components/ContactForm.vue";
+import { toInitialFormState } from "../../actions/helpers/form-helpers";
 import ContactInfoSidebar from "../../features/contact/components/ContactInfoSidebar.astro";
 import ContactView from "../../features/contact/components/ContactView.astro";
 import { useTranslations } from "../../i18n/utils";
@@ -23,8 +25,17 @@ const breadcrumbJsonLd = generateBreadcrumbJsonLd([
 const contactPageJsonLd = generateContactPageJsonLd({
   name: title,
   description,
+  inLanguage: locale,
   url: Astro.url.pathname,
 });
+const contactActionResult = Astro.getActionResult(actions.contact);
+if (contactActionResult) {
+  Astro.cache.set(false);
+}
+const initialContactState = toInitialFormState(
+  contactActionResult,
+  t("contact.form.errors.generic"),
+);
 ---
 
 <Layout
@@ -41,8 +52,10 @@ const contactPageJsonLd = generateContactPageJsonLd({
   />
   <ContactView>
     <ContactForm
-      client:visible
+      actionUrl={actions.contact.toString()}
+      client:visible={{ rootMargin: "200px" }}
       copy={getContactFormCopy(t)}
+      initialState={initialContactState}
       locale={locale}
     >
       <ContactInfoSidebar slot="sidebar" />

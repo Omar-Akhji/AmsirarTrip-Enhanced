@@ -8,7 +8,7 @@ const BASE_URL = `http://localhost:${PORT}`;
 
 export default defineConfig({
   testDir: "./tests",
-  testIgnore: ["**/unit/**"],
+  testIgnore: ["**/unit/**", "**/components/**"],
   fullyParallel: true,
   forbidOnly: isCI,
   retries: isCI ? 2 : 0,

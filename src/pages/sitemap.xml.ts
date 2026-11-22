@@ -1,10 +1,10 @@
 import type { APIRoute } from "astro";
 
-export const prerender = true;
-
 import { getCollection } from "astro:content";
-import { DEFAULT_LOCALE, LOCALES } from "@/i18n/locales";
+import { getLocalizedExcursionContent } from "@/features/excursions/data/excursions-data";
+import { getLocalizedTourSeo } from "@/features/tours/data/tours-data";
 import { getLocalizedPath } from "@/i18n/core";
+import { DEFAULT_LOCALE, LOCALES, type Locale } from "@/i18n/locales";
 import { ui } from "@/i18n/ui";
 
 function escapeXml(unsafe: string): string {
@@ -18,17 +18,19 @@ function escapeXml(unsafe: string): string {
 
 interface RouteEntry {
   hasVideo?: boolean;
-  imageCaption?: string;
+  imageCaption?: string | ((locale: Locale) => string);
   imageLoc?: string;
-  imageTitle?: string;
+  imageTitle?: string | ((locale: Locale) => string);
   lastmod: string;
   route: string;
 }
 
 export const GET: APIRoute = async ({ site }) => {
   const baseUrl = site ?? new URL("https://amsirartrip.com");
-  const tours = await getCollection("tours");
-  const excursions = await getCollection("excursions");
+  const [tours, excursions] = await Promise.all([
+    getCollection("tours"),
+    getCollection("excursions"),
+  ]);
   const today = new Date().toISOString().slice(0, 10);
 
   const routes: RouteEntry[] = [
@@ -36,26 +38,23 @@ export const GET: APIRoute = async ({ site }) => {
       route: "",
       lastmod: today,
       imageLoc: new URL("/images/hero/marrakech-medina.webp", baseUrl).href,
-      imageTitle: "Amsirar Trip Marrakech Medina & Sahara Desert Tours",
-      imageCaption:
-        "Licensed Morocco travel operator in Marrakech offering private desert tours and day trips.",
+      imageTitle: (locale) => ui[locale].home.meta.title,
+      imageCaption: (locale) => ui[locale].home.meta.description,
       hasVideo: true,
     },
     {
       route: "/tours",
       lastmod: today,
       imageLoc: new URL("/images/hero/merzouga-desert.webp", baseUrl).href,
-      imageTitle: "Multi-Day Morocco Sahara Desert Tours",
-      imageCaption:
-        "Private Sahara desert tours from Marrakech, Casablanca, and Fes to Erg Chebbi dunes.",
+      imageTitle: (locale) => ui[locale].tours.meta.title,
+      imageCaption: (locale) => ui[locale].tours.meta.description,
     },
     {
       route: "/excursions",
       lastmod: today,
       imageLoc: new URL("/images/hero/ouzoud-falls.webp", baseUrl).href,
-      imageTitle: "Marrakech Day Trips & Atlas Mountain Excursions",
-      imageCaption:
-        "Guided day excursions from Marrakech to Ouzoud Waterfalls, Essaouira, Ourika Valley, and Agafay Desert.",
+      imageTitle: (locale) => ui[locale].excursion.meta.title,
+      imageCaption: (locale) => ui[locale].excursion.meta.description,
     },
     { route: "/about", lastmod: today },
     { route: "/contact", lastmod: today },
@@ -69,8 +68,8 @@ export const GET: APIRoute = async ({ site }) => {
       route: `/tours/${tour.id}`,
       lastmod: today,
       imageLoc: new URL(tour.data.image.src, baseUrl).href,
-      imageTitle: tour.data.seo.title,
-      imageCaption: tour.data.seo.imageAlt ?? tour.data.seo.metaDescription,
+      imageTitle: (locale) => getLocalizedTourSeo(tour.data, locale).title,
+      imageCaption: (locale) => getLocalizedTourSeo(tour.data, locale).imageAlt,
     });
   }
 
@@ -80,8 +79,8 @@ export const GET: APIRoute = async ({ site }) => {
       route: `/excursions/${excursion.id}`,
       lastmod: today,
       imageLoc: new URL(excursion.data.image.src, baseUrl).href,
-      imageTitle: excursion.data.seo.title,
-      imageCaption: excursion.data.seo.imageAlt ?? excursion.data.jsonLd.description,
+      imageTitle: (locale) => getLocalizedExcursionContent(excursion.data, locale).seo.title,
+      imageCaption: (locale) => getLocalizedExcursionContent(excursion.data, locale).seo.imageAlt,
     });
   }
 
@@ -104,13 +103,19 @@ export const GET: APIRoute = async ({ site }) => {
       xml += `    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(xDefaultUrl)}" />\n`;
 
       if (entry.imageLoc) {
+        const resolvedTitle =
+          typeof entry.imageTitle === "function" ? entry.imageTitle(locale) : entry.imageTitle;
+        const resolvedCaption =
+          typeof entry.imageCaption === "function" ?
+            entry.imageCaption(locale)
+          : entry.imageCaption;
         xml += `    <image:image>\n`;
         xml += `      <image:loc>${escapeXml(entry.imageLoc)}</image:loc>\n`;
-        if (entry.imageTitle) {
-          xml += `      <image:title>${escapeXml(entry.imageTitle)}</image:title>\n`;
+        if (resolvedTitle) {
+          xml += `      <image:title>${escapeXml(resolvedTitle)}</image:title>\n`;
         }
-        if (entry.imageCaption) {
-          xml += `      <image:caption>${escapeXml(entry.imageCaption)}</image:caption>\n`;
+        if (resolvedCaption) {
+          xml += `      <image:caption>${escapeXml(resolvedCaption)}</image:caption>\n`;
         }
         xml += `    </image:image>\n`;
       }
