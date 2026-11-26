@@ -92,6 +92,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
       return Response.json({ error: "Too many requests" }, { status: 429, headers: rateHeaders });
     }
   }
+  const isSpeculationRules = pathname === "/speculation.json";
   const isStaticAsset = STATIC_PATH_PREFIXES.some((prefix) => pathname.startsWith(prefix));
   const isDiscoveryAsset =
     DISCOVERY_PATHS.has(pathname)
@@ -102,6 +103,15 @@ export const onRequest = defineMiddleware(async (context, next) => {
   if (isStaticAsset && import.meta.env.PROD) {
     context.cache.set(false);
     return createMissingAssetResponse();
+  }
+
+  if (isSpeculationRules) {
+    context.locals.locale = DEFAULT_LOCALE;
+    const response = await next();
+    const newResponse = new Response(response.body, response);
+    applySecurityHeaders(newResponse.headers, getBaselineSecurityHeaders());
+    newResponse.headers.set("Cross-Origin-Resource-Policy", "same-origin");
+    return newResponse;
   }
 
   if (isDiscoveryAsset || isStaticAsset) {

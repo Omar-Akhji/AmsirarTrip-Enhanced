@@ -17,6 +17,7 @@ const DOCUMENT_SECURITY_HEADERS: readonly SecurityHeader[] = [
   { key: "X-XSS-Protection", value: "0" },
   { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
   { key: "Cross-Origin-Resource-Policy", value: "same-origin" },
+  { key: "Speculation-Rules", value: '"/speculation.json"' },
   {
     key: "Permissions-Policy",
     value:

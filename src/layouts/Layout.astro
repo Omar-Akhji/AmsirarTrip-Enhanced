@@ -79,19 +79,11 @@ const THEME_INIT_HASH: `sha256-${string}` = `sha256-${createHash("sha256")
   .digest("base64")}`;
 Astro.csp?.insertScriptHash(THEME_INIT_HASH);
 
-const SPECULATION_RULES_SCRIPT = JSON.stringify({
-  prerender: [{ source: "document", where: { selector_matches: "a" }, eagerness: "moderate" }],
-  prefetch: [{ source: "document", where: { selector_matches: "a" }, eagerness: "moderate" }],
-});
 if (import.meta.env.DEV) {
-  const SPECULATION_RULES_HASH: `sha256-${string}` = `sha256-${createHash("sha256")
-    .update(SPECULATION_RULES_SCRIPT)
-    .digest("base64")}`;
-  Astro.csp?.insertScriptHash(SPECULATION_RULES_HASH);
   Astro.csp?.insertScriptHash("sha256-IU3B3AEAItf6Fb2EWGXsdXMld1XIzaKnQSqlrM/orqM=");
   Astro.csp?.insertScriptHash("sha256-0O7iB6zr9x0r6X6eWYITC9V5q+yWCGAoFvcysBGbY9Q=");
   Astro.csp?.insertScriptHash("sha256-2mkrkPfKG5HdF6qWOVbV6XM8cT+fSqsoBXayDHqg3hg=");
-  Astro.csp?.insertStyleResource({ resource: "'unsafe-inline'", kind: "element" });
+  Astro.csp?.insertStyleResource("'unsafe-inline'");
 }
 ---
 
@@ -106,18 +98,11 @@ if (import.meta.env.DEV) {
   <head>
     <meta charset="utf-8" />
     {/* Inline render-blocking theme init to prevent dark-mode FOUC; Astro 7 hashes this via Astro.csp. */}
-    {/* eslint-disable astro/no-set-html-directive, astro/no-unsafe-inline-scripts -- static compile-time theme & dev speculationrules scripts hashed above */}
+    {/* eslint-disable astro/no-set-html-directive, astro/no-unsafe-inline-scripts -- static compile-time theme script hashed above */}
     <script
       is:inline
       set:html={THEME_INIT_SCRIPT}
     />
-    {import.meta.env.DEV && (
-      <script
-        is:inline
-        set:html={SPECULATION_RULES_SCRIPT}
-        type="speculationrules"
-      />
-    )}
     {/* eslint-enable astro/no-set-html-directive, astro/no-unsafe-inline-scripts */}
     <script src="../scripts/theme.ts"></script>
 
@@ -396,11 +381,3 @@ if (import.meta.env.DEV) {
     </a>
   </body>
 </html>
-
-<style>
-  @media (prefers-reduced-motion: no-preference) {
-    @view-transition {
-      navigation: auto;
-    }
-  }
-</style>

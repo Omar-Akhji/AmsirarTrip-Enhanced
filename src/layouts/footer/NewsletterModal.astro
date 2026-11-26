@@ -25,6 +25,11 @@ const ssrStatusKey: NewsletterStatusKey =
     newsletterResult.data.statusKey
   : "footer.newsletterFailure";
 const ssrStatusMessage = newsletterResult ? t(ssrStatusKey) : "";
+const ssrButtonState =
+  newsletterResult ?
+    ssrSuccess ? "success"
+    : "error"
+  : "idle";
 ---
 
 <dialog
@@ -222,43 +227,22 @@ const ssrStatusMessage = newsletterResult ? t(ssrStatusKey) : "";
           </div>
         </fieldset>
 
-        <label
-          class="sr-only"
-          for="newsletter-status"
-        >
-          {t("footer.newsletterStatus")}
-        </label>
-        <output
-          aria-live="polite"
-          class:list={[
-            "mbs-4 text-center font-mono text-xs font-medium",
-            {
-              "text-emerald-300": Boolean(newsletterResult && ssrSuccess),
-              "text-red-400": !newsletterResult || !ssrSuccess,
-              hidden: !newsletterResult,
-            },
-          ]}
-          data-newsletter-status
-          for="newsletter-name newsletter-email"
-          id="newsletter-status"
-        >
-          {ssrStatusMessage}
-        </output>
-
         <button
           aria-busy="false"
-          class="group mbs-5 inline-flex min-h-12 cursor-pointer items-center rounded-full border border-stone-200/80 bg-white py-1.5 ps-4 pe-1.5 font-mono text-xs font-semibold tracking-wider text-dark-surface uppercase shadow-lg shadow-black/25 transition-colors duration-200 select-none inline-full hover:border-stone-300 hover:bg-white hover:shadow-xl focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 focus-visible:outline-hidden active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 data-[state=success]:border-emerald-500/40 data-[state=success]:bg-emerald-500/15 data-[state=success]:text-emerald-300 data-[state=success]:opacity-100"
+          class="group mbs-5 inline-flex min-h-12 cursor-pointer items-center rounded-full border border-stone-200/80 bg-white py-1.5 ps-4 pe-1.5 font-mono text-xs font-semibold tracking-wider text-dark-surface uppercase shadow-lg shadow-black/25 transition-colors duration-200 select-none inline-full hover:border-stone-300 hover:bg-white hover:shadow-xl focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 focus-visible:outline-hidden active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 data-[state=success]:border-emerald-500/40 data-[state=success]:bg-emerald-500/15 data-[state=success]:text-emerald-300 data-[state=success]:opacity-100 data-[state=error]:border-red-500/40 data-[state=error]:bg-red-950 data-[state=error]:text-red-50 data-[state=error]:hover:border-red-400/50 data-[state=error]:hover:bg-red-900 data-[state=error]:opacity-100"
           data-newsletter-submit
-          data-state="idle"
+          data-state={ssrButtonState}
           type="submit"
         >
           <span
-            class="flex-1 truncate px-2 text-center group-data-[state=success]:leading-tight group-data-[state=success]:tracking-normal group-data-[state=success]:normal-case group-data-[state=success]:whitespace-normal"
+            aria-live="polite"
+            class="flex-1 truncate px-2 text-center group-data-[state=success]:leading-tight group-data-[state=success]:tracking-normal group-data-[state=success]:normal-case group-data-[state=success]:whitespace-normal group-data-[state=error]:leading-tight group-data-[state=error]:tracking-normal group-data-[state=error]:normal-case group-data-[state=error]:whitespace-normal"
             data-newsletter-submit-label
+            role={newsletterResult ? "status" : undefined}
           >
-            {t("footer.newsletterSubscribe")}
+            {newsletterResult ? ssrStatusMessage : t("footer.newsletterSubscribe")}
           </span>
-          <span class="relative flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-full bg-linear-to-br from-amber-orange to-orange text-white shadow-xs shadow-orange/40 transition-transform duration-300 ease-out group-hover:scale-105 group-active:scale-95 group-data-[state=success]:bg-emerald-500 group-data-[state=success]:bg-none group-data-[state=success]:shadow-emerald-500/40">
+          <span class="relative flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-full bg-linear-to-br from-amber-orange to-orange text-white shadow-xs shadow-orange/40 transition-transform duration-300 ease-out group-hover:scale-105 group-active:scale-95 group-data-[state=success]:bg-emerald-500 group-data-[state=success]:bg-none group-data-[state=success]:shadow-emerald-500/40 group-data-[state=error]:from-red-500 group-data-[state=error]:to-red-600 group-data-[state=error]:shadow-red-500/40">
             <svg
               aria-hidden="true"
               class="hidden size-4.5 group-data-[state=success]:block"
@@ -285,6 +269,34 @@ const ssrStatusMessage = newsletterResult ? t(ssrStatusKey) : "";
 
             <svg
               aria-hidden="true"
+              class="hidden size-4.5 group-data-[state=error]:block"
+              fill="none"
+              height="24"
+              stroke-width="1.5"
+              viewBox="0 0 24 24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12 7V13"
+                stroke="currentColor"
+                stroke-linecap="round"
+              />
+              <path
+                d="M7 3.33782C8.47087 2.48697 10.1786 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 10.1786 2.48697 8.47087 3.33782 7"
+                stroke="currentColor"
+                stroke-linecap="round"
+              />
+              <path
+                d="M12 16H12.0001"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+
+            <svg
+              aria-hidden="true"
               class="hidden size-4.5 animate-spin group-data-[state=submitting]:block"
               fill="none"
               stroke="currentColor"
@@ -298,7 +310,7 @@ const ssrStatusMessage = newsletterResult ? t(ssrStatusKey) : "";
               <path d="M20.3137 11V12.6667C20.3137 17.269 16.5389 21 11.8825 21C11.7543 21 11.6268 20.9972 11.5 20.9916M21.9999 12.6667L20.3137 11L18.6274 12.6667M4.67944 17C5.38086 18.1366 6.34989 19.0942 7.5 19.7872" />
             </svg>
 
-            <span class="relative flex size-full items-center justify-center group-data-[state=submitting]:hidden group-data-[state=success]:hidden">
+            <span class="relative flex size-full items-center justify-center group-data-[state=submitting]:hidden group-data-[state=success]:hidden group-data-[state=error]:hidden">
               <svg
                 aria-hidden="true"
                 class="absolute size-4.5 transition-all duration-300 ease-out group-hover:translate-x-3 group-hover:-translate-y-3 group-hover:opacity-0 rtl:-scale-x-100 rtl:group-hover:-translate-x-3"

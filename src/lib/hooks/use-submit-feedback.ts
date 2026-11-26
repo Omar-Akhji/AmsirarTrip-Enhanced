@@ -24,8 +24,10 @@ export function getFormErrorMessage(state: FormState | null | undefined, fallbac
   return firstFieldError ?? (state.message.length > 0 ? state.message : fallback);
 }
 
-export function useSubmitFeedback(): UseSubmitFeedbackReturn {
-  const feedback = ref<SubmitFeedback | null>(null);
+export function useSubmitFeedback(
+  initialFeedback: SubmitFeedback | null = null,
+): UseSubmitFeedbackReturn {
+  const feedback = ref<SubmitFeedback | null>(initialFeedback);
   let timer: ReturnType<typeof setTimeout> | null = null;
 
   function clearFeedback(): void {

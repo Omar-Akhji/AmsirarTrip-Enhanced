@@ -21,6 +21,66 @@
   [data-mobile-nav-indicator] {
     view-transition-name: mobile-nav-indicator;
   }
+
+  [data-vt-name="trip-image-tours-atlas-and-desert-escape-4-days"] {
+    view-transition-name: trip-image-tours-atlas-and-desert-escape-4-days;
+  }
+
+  [data-vt-name="trip-image-tours-caravan-and-kasbah-experience-3-days"] {
+    view-transition-name: trip-image-tours-caravan-and-kasbah-experience-3-days;
+  }
+
+  [data-vt-name="trip-image-tours-chegaga-wilderness-expedition-3-days"] {
+    view-transition-name: trip-image-tours-chegaga-wilderness-expedition-3-days;
+  }
+
+  [data-vt-name="trip-image-tours-coast-and-cities-explorer-6-days"] {
+    view-transition-name: trip-image-tours-coast-and-cities-explorer-6-days;
+  }
+
+  [data-vt-name="trip-image-tours-coastal-and-desert-odyssey-4-days"] {
+    view-transition-name: trip-image-tours-coastal-and-desert-odyssey-4-days;
+  }
+
+  [data-vt-name="trip-image-tours-grand-moroccan-circuit-10-days"] {
+    view-transition-name: trip-image-tours-grand-moroccan-circuit-10-days;
+  }
+
+  [data-vt-name="trip-image-tours-imperial-cities-and-coastline-5-days"] {
+    view-transition-name: trip-image-tours-imperial-cities-and-coastline-5-days;
+  }
+
+  [data-vt-name="trip-image-tours-merzouga-desert-adventure-3-days"] {
+    view-transition-name: trip-image-tours-merzouga-desert-adventure-3-days;
+  }
+
+  [data-vt-name="trip-image-tours-northern-heritage-trail-7-days"] {
+    view-transition-name: trip-image-tours-northern-heritage-trail-7-days;
+  }
+
+  [data-vt-name="trip-image-excursions-agafay-desert-sunset"] {
+    view-transition-name: trip-image-excursions-agafay-desert-sunset;
+  }
+
+  [data-vt-name="trip-image-excursions-essaouira-coastal-escape"] {
+    view-transition-name: trip-image-excursions-essaouira-coastal-escape;
+  }
+
+  [data-vt-name="trip-image-excursions-imlil-toubkal-adventure"] {
+    view-transition-name: trip-image-excursions-imlil-toubkal-adventure;
+  }
+
+  [data-vt-name="trip-image-excursions-ourika-valley-discovery"] {
+    view-transition-name: trip-image-excursions-ourika-valley-discovery;
+  }
+
+  [data-vt-name="trip-image-excursions-ouzoud-waterfalls-day-trip"] {
+    view-transition-name: trip-image-excursions-ouzoud-waterfalls-day-trip;
+  }
+
+  [data-vt-name="trip-image-excursions-sunrise-hot-air-balloon"] {
+    view-transition-name: trip-image-excursions-sunrise-hot-air-balloon;
+  }
 }
 
 @layer components {
@@ -289,10 +349,134 @@
     }
   }
 
+  [data-blur-preset="title"] {
+    --blur-radius: 4px;
+    --blur-y: 24px;
+    --blur-duration: 0.65s;
+    --blur-delay: 150ms;
+    --blur-stagger: 45ms;
+  }
+
+  [data-blur-preset="type"] {
+    --blur-radius: 4px;
+    --blur-y: 20px;
+    --blur-duration: 0.65s;
+    --blur-delay: 260ms;
+    --blur-stagger: 45ms;
+  }
+
+  [data-blur-preset="description"] {
+    --blur-radius: 3px;
+    --blur-y: 18px;
+    --blur-duration: 0.6s;
+    --blur-delay: 360ms;
+    --blur-stagger: 20ms;
+  }
+
+  .blur-token:nth-child(1) {
+    --token-idx: 0;
+  }
+
+  .blur-token:nth-child(2) {
+    --token-idx: 1;
+  }
+
+  .blur-token:nth-child(3) {
+    --token-idx: 2;
+  }
+
+  .blur-token:nth-child(4) {
+    --token-idx: 3;
+  }
+
+  .blur-token:nth-child(5) {
+    --token-idx: 4;
+  }
+
+  .blur-token:nth-child(6) {
+    --token-idx: 5;
+  }
+
+  .blur-token:nth-child(7) {
+    --token-idx: 6;
+  }
+
+  .blur-token:nth-child(8) {
+    --token-idx: 7;
+  }
+
+  .blur-token:nth-child(9) {
+    --token-idx: 8;
+  }
+
+  .blur-token:nth-child(10) {
+    --token-idx: 9;
+  }
+
+  .blur-token:nth-child(11) {
+    --token-idx: 10;
+  }
+
+  .blur-token:nth-child(12) {
+    --token-idx: 11;
+  }
+
+  .blur-token:nth-child(13) {
+    --token-idx: 12;
+  }
+
+  .blur-token:nth-child(14) {
+    --token-idx: 13;
+  }
+
+  .blur-token:nth-child(15) {
+    --token-idx: 14;
+  }
+
+  .blur-token:nth-child(16) {
+    --token-idx: 15;
+  }
+
+  .blur-token:nth-child(17) {
+    --token-idx: 16;
+  }
+
+  .blur-token:nth-child(18) {
+    --token-idx: 17;
+  }
+
+  .blur-token:nth-child(19) {
+    --token-idx: 18;
+  }
+
+  .blur-token:nth-child(20) {
+    --token-idx: 19;
+  }
+
+  .blur-token:nth-child(21) {
+    --token-idx: 20;
+  }
+
+  .blur-token:nth-child(22) {
+    --token-idx: 21;
+  }
+
+  .blur-token:nth-child(23) {
+    --token-idx: 22;
+  }
+
+  .blur-token:nth-child(24) {
+    --token-idx: 23;
+  }
+
+  .blur-token:nth-child(n + 25) {
+    --token-idx: 24;
+  }
+
   @media (prefers-reduced-motion: no-preference) {
     .slider .list .item:is(:first-child, .is-incoming) .blur-token {
       animation: blurTokenReveal var(--blur-duration, 0.65s) var(--ease-out-expo)
-        var(--token-delay, 0ms) both;
+        calc(var(--blur-delay, 0ms) + var(--token-idx, 0) * var(--blur-stagger, 45ms)) both;
     }
   }
 

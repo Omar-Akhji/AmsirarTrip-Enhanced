@@ -29,6 +29,7 @@ test.describe("Security Regression Suite (SEC-01..SEC-12)", () => {
     expect(headers["referrer-policy"]).toBe("strict-origin-when-cross-origin");
     expect(headers["cross-origin-opener-policy"]).toBe("same-origin");
     expect(headers["cross-origin-resource-policy"]).toBe("same-origin");
+    expect(headers["speculation-rules"]).toBe('"/speculation.json"');
 
     // Hash-based CSP: no unsafe-eval, no wasm-unsafe-eval, no cdn.jsdelivr.net, no script-src unsafe-inline
     expect(csp).toContain("script-src");
@@ -46,6 +47,13 @@ test.describe("Security Regression Suite (SEC-01..SEC-12)", () => {
     expect(scriptSrc).toBeDefined();
     expect(scriptSrc).not.toContain("'unsafe-inline'");
 
+    const styleSrc = csp
+      .split(";")
+      .map((d) => d.trim())
+      .find((d) => d.startsWith("style-src ") || d === "style-src");
+    expect(styleSrc).toBeDefined();
+    expect(styleSrc).not.toContain("'unsafe-inline'");
+
     const styleSrcElem = csp
       .split(";")
       .map((d) => d.trim())
@@ -54,11 +62,62 @@ test.describe("Security Regression Suite (SEC-01..SEC-12)", () => {
       expect(styleSrcElem).not.toContain("'unsafe-inline'");
     }
 
-    // No nonce leaked into DOM attribute; no Astro version leaked via meta generator
+    const styleSrcAttr = csp
+      .split(";")
+      .map((d) => d.trim())
+      .find((d) => d.startsWith("style-src-attr"));
+    if (styleSrcAttr) {
+      expect(styleSrcAttr).not.toContain("'unsafe-inline'");
+    }
+
+    // No nonce leaked into DOM attribute; no Astro version leaked via meta generator;
+    // Speculation Rules are served via HTTP header instead of inline script tags.
     await expect(page.locator("html")).not.toHaveAttribute("data-csp-nonce");
     await expect(page.locator('meta[name="generator"]')).toHaveCount(0);
+    await expect(page.locator('script[type="speculationrules"]')).toHaveCount(0);
+
+    // Hovering an internal link must not inject inline speculationrules or cause CSP violations
+    const internalLink = page.locator('a[href="/tours"]').first();
+    if ((await internalLink.count()) > 0 && (await internalLink.isVisible())) {
+      await internalLink.hover();
+      await expect(page.locator('script[type="speculationrules"]')).toHaveCount(0);
+    }
 
     expect(cspErrors).toEqual([]);
+  });
+
+  test("SEC-15: /speculation.json serves valid application/speculationrules+json without recursive Speculation-Rules header", async ({
+    request,
+  }) => {
+    const response = await request.get("/speculation.json");
+    expect(response.status()).toBe(200);
+    expect(response.headers()["content-type"]).toContain("application/speculationrules+json");
+    expect(response.headers()["cross-origin-resource-policy"]).toBe("same-origin");
+    expect(response.headers()["speculation-rules"]).toBeUndefined();
+
+    const payload: unknown = await response.json();
+    expect(payload).toMatchObject({
+      prerender: [{ source: "document", eagerness: "moderate" }],
+      prefetch: [{ source: "document", eagerness: "moderate" }],
+    });
+  });
+
+  test("SEC-16: Key SSR pages emit zero inline style attributes and zero CSP errors under strict style-src", async ({
+    request,
+  }) => {
+    for (const route of [
+      "/",
+      "/tours",
+      "/tours/merzouga-desert-adventure-3-days",
+      "/excursions",
+      "/contact",
+      "/about",
+    ]) {
+      const response = await request.get(route);
+      expect(response.status()).toBe(200);
+      const html = await response.text();
+      expect(html, `Unexpected inline style attribute on ${route}`).not.toMatch(/\sstyle="/);
+    }
   });
 
   test("SEC-08: Missing static asset returns 404 with no-store and full security headers; /en redirect includes HSTS", async ({

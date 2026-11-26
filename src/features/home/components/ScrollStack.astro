@@ -48,19 +48,20 @@ const stackPositionLength =
   data-base-scale={baseScale}
   data-blur-amount={blurAmount}
   data-dim-amount={dimAmount}
+  data-hold-distance={holdDistance}
+  data-item-distance={itemDistance}
   data-item-scale={itemScale}
   data-item-stack-distance={itemStackDistance}
   data-rotation-amount={rotationAmount}
-  data-stack-position={stackPosition}
+  data-stack-position={stackPositionLength}
   data-tilt-amount={tiltAmount}
   data-window-scroll={useWindowScroll ? "true" : "false"}
-  style={`--stack-position: ${stackPositionLength}; --item-distance: ${itemDistance}px; --item-stack-distance: ${itemStackDistance}px; --hold-distance: ${holdDistance}px;`}
 >
   <div class="scroll-stack-inner relative w-full px-1 sm:px-4">
     <slot />
     <div
       aria-hidden="true"
-      style="height: var(--hold-distance, 200px);"
+      class="h-(--hold-distance,12.5rem)"
     />
   </div>
 </scroll-stack>

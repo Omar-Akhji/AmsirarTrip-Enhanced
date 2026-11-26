@@ -67,16 +67,57 @@ function getStream(level: LogLevel, logDir: string): WriteStream {
   return stream;
 }
 
+const SENSITIVE_KEY_PATTERN =
+  /email|phone|token|captcha|cookie|auth|password|passwd|secret|apikey|api_key|credential|gmail_pass|gmail_user/i;
+const EMAIL_VALUE_PATTERN = /[\w.%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi;
+const AUTH_SCHEME_PATTERN = /\b(Bearer|Basic)\s+[\w.~+/=-]+/gi;
+const COOKIE_HEADER_PATTERN = /\b((?:Set-)?Cookie)\s*:\s*[^\r\n;]+/gi;
+
+export function redactPiiString(value: string): string {
+  return value
+    .replaceAll(EMAIL_VALUE_PATTERN, "[REDACTED_EMAIL]")
+    .replaceAll(AUTH_SCHEME_PATTERN, "$1 [REDACTED]")
+    .replaceAll(COOKIE_HEADER_PATTERN, "$1: [REDACTED]");
+}
+
+function redactLogValue(value: unknown, seen = new WeakSet<object>()): unknown {
+  if (typeof value === "string") {
+    return redactPiiString(value);
+  }
+  if (Array.isArray(value)) {
+    if (seen.has(value)) return "[Circular]";
+    seen.add(value);
+    return value.map((item) => redactLogValue(item, seen));
+  }
+  if (value !== null && typeof value === "object") {
+    if (seen.has(value)) return "[Circular]";
+    seen.add(value);
+    const sanitized: Record<string, unknown> = {};
+    for (const [key, entryValue] of Object.entries(value)) {
+      sanitized[key] =
+        SENSITIVE_KEY_PATTERN.test(key) ? "[REDACTED]" : redactLogValue(entryValue, seen);
+    }
+    return sanitized;
+  }
+  return value;
+}
+
 function safeJsonStringify(value: unknown): string {
   try {
     return JSON.stringify(value);
   } catch {
-    return JSON.stringify(inspect(value, { depth: 3, breakLength: Infinity }));
+    return JSON.stringify(redactPiiString(inspect(value, { depth: 3, breakLength: Infinity })));
   }
 }
 
 function formatLogEntry(level: LogLevel, message: string, meta?: Record<string, unknown>): string {
-  const entry: LogEntry = { ...meta, timestamp: new Date().toISOString(), level, message };
+  const safeMeta = meta ? (redactLogValue(meta) as Record<string, unknown>) : undefined;
+  const entry: LogEntry = {
+    ...safeMeta,
+    timestamp: new Date().toISOString(),
+    level,
+    message: redactPiiString(message),
+  };
   return safeJsonStringify(entry);
 }
 

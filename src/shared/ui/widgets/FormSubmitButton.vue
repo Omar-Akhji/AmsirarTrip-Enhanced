@@ -27,7 +27,12 @@ defineProps<Props>();
   >
     <span
       aria-live="polite"
-      :class="feedback ? 'text-start leading-snug whitespace-normal' : 'truncate'"
+      :role="feedback ? 'status' : undefined"
+      :class="
+        feedback ?
+          'text-start leading-snug tracking-normal whitespace-normal normal-case'
+        : 'truncate'
+      "
     >
       {{
         isSubmitting ? sendingLabel

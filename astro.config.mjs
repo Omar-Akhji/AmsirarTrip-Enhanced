@@ -134,12 +134,7 @@ export default defineConfig({
         "upgrade-insecure-requests",
       ],
       scriptDirective: { resources: ["'self'", "https://challenges.cloudflare.com"] },
-      styleDirective: {
-        resources: [
-          { resource: "'self'", kind: "element" },
-          { resource: "'unsafe-inline'", kind: "attribute" },
-        ],
-      },
+      styleDirective: { resources: ["'self'"] },
     },
   },
 
@@ -152,6 +147,7 @@ export default defineConfig({
     "/llms-full.txt": { maxAge: 3600, swr: 86_400 },
     "/sitemap.xml": { maxAge: 3600, swr: 86_400 },
     "/sitemap-index.xml": { maxAge: 3600, swr: 86_400 },
+    "/speculation.json": { maxAge: 3600, swr: 86_400 },
     ...Object.fromEntries(
       LOCALES.map((locale) => [
         locale === DEFAULT_LOCALE ? "/" : `/${locale}`,
@@ -211,7 +207,6 @@ export default defineConfig({
     },
   },
 
-  // ─── 12. Client Prefetching & Speculation Rules Prerendering ──────────────
+  // ─── 12. Client Prefetching (Speculation Rules delivered via HTTP header) ─
   prefetch: { defaultStrategy: "hover", prefetchAll: true },
-  experimental: { clientPrerender: true },
 });

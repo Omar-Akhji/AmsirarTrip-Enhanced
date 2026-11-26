@@ -13,7 +13,6 @@ interface Props {
 const { copy, locale = "en", state } = defineProps<Props>();
 
 const topicPopoverId = `topic-popover-${useId().replaceAll(":", "")}`;
-const topicAnchorName = `--topic-anchor-${topicPopoverId}`;
 const topicPopoverRef = useTemplateRef<HTMLElement>("topicPopoverRef");
 const customTopicInputRef = useTemplateRef<HTMLInputElement>("customTopicInputRef");
 
@@ -230,7 +229,7 @@ function handleListboxKeydown(event: KeyboardEvent): void {
         >
           {{ copy.topic }}
         </label>
-        <div class="group relative">
+        <div class="group relative [anchor-scope:--contact-topic]">
           <svg
             class="pointer-events-none absolute inset-s-3.5 top-1/2 z-10 size-4.5 -translate-y-1/2 text-stone-400 transition-colors group-focus-within:text-orange-500 group-has-[:popover-open]:text-orange-500 dark:text-stone-500"
             viewBox="0 0 24 24"
@@ -264,8 +263,7 @@ function handleListboxKeydown(event: KeyboardEvent): void {
             popovertargetaction="toggle"
             :aria-controls="topicPopoverId"
             aria-haspopup="listbox"
-            :style="{ anchorName: topicAnchorName }"
-            class="flex h-12 w-full cursor-pointer items-center justify-between gap-2 rounded-xl border border-stone-200/90 bg-stone-50/50 ps-10.5 pe-3.5 text-start font-sans text-sm transition-colors group-has-[:popover-open]:border-orange-500 group-has-[:popover-open]:bg-white group-has-[:popover-open]:ring-2 group-has-[:popover-open]:ring-orange-500/20 hover:bg-stone-100/70 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden dark:border-white/10 dark:bg-white/5 dark:group-has-[:popover-open]:border-orange-500 dark:group-has-[:popover-open]:bg-white/10 dark:hover:bg-white/10 dark:focus:border-orange-500 dark:focus:bg-white/10"
+            class="flex h-12 w-full cursor-pointer items-center justify-between gap-2 rounded-xl border border-stone-200/90 bg-stone-50/50 ps-10.5 pe-3.5 text-start font-sans text-sm transition-colors [anchor-name:--contact-topic] group-has-[:popover-open]:border-orange-500 group-has-[:popover-open]:bg-white group-has-[:popover-open]:ring-2 group-has-[:popover-open]:ring-orange-500/20 hover:bg-stone-100/70 focus:border-orange-500 focus:bg-white focus:ring-2 focus:ring-orange-500/20 focus:outline-hidden dark:border-white/10 dark:bg-white/5 dark:group-has-[:popover-open]:border-orange-500 dark:group-has-[:popover-open]:bg-white/10 dark:hover:bg-white/10 dark:focus:border-orange-500 dark:focus:bg-white/10"
             :class="
               selectedTopic ?
                 'text-stone-900 dark:text-mist-100'
@@ -295,8 +293,7 @@ function handleListboxKeydown(event: KeyboardEvent): void {
             :id="topicPopoverId"
             ref="topicPopoverRef"
             popover="auto"
-            :style="{ positionAnchor: topicAnchorName }"
-            class="fixed inset-0 z-50 m-auto w-[min(24rem,calc(100vw-2rem))] max-w-[calc(100vw-2rem)] overflow-hidden rounded-xl border border-stone-200/90 bg-white p-0 text-stone-900 opacity-0 shadow-xl shadow-stone-900/10 transition-[opacity,transform,display,overlay] transition-discrete duration-200 backdrop:bg-black/20 open:opacity-100 supports-[top:anchor(bottom)]:inset-auto supports-[top:anchor(bottom)]:top-[calc(anchor(bottom)+6px)] supports-[top:anchor(bottom)]:left-[anchor(left)] supports-[top:anchor(bottom)]:m-0 supports-[top:anchor(bottom)]:[position-try-fallbacks:flip-block,flip-inline] supports-[top:anchor(bottom)]:backdrop:bg-transparent supports-[width:anchor-size(width)]:w-[anchor-size(width)] dark:border-white/10 dark:bg-surface-card dark:text-mist-100 dark:shadow-[0_16px_40px_rgba(0,0,0,0.65)] starting:open:opacity-0"
+            class="fixed inset-0 z-50 m-auto w-[min(24rem,calc(100vw-2rem))] max-w-[calc(100vw-2rem)] overflow-hidden rounded-xl border border-stone-200/90 bg-white p-0 text-stone-900 opacity-0 shadow-xl shadow-stone-900/10 transition-[opacity,transform,display,overlay] transition-discrete duration-200 [position-anchor:--contact-topic] backdrop:bg-black/20 open:opacity-100 supports-[top:anchor(bottom)]:inset-auto supports-[top:anchor(bottom)]:top-[calc(anchor(bottom)+6px)] supports-[top:anchor(bottom)]:left-[anchor(left)] supports-[top:anchor(bottom)]:m-0 supports-[top:anchor(bottom)]:[position-try-fallbacks:flip-block,flip-inline] supports-[top:anchor(bottom)]:backdrop:bg-transparent supports-[width:anchor-size(width)]:w-[anchor-size(width)] dark:border-white/10 dark:bg-surface-card dark:text-mist-100 dark:shadow-[0_16px_40px_rgba(0,0,0,0.65)] starting:open:opacity-0"
           >
             <div
               class="flex flex-col px-(--scrollbar-space) py-1 [--scrollbar-space:8px] [--scrollbar-theme:hsl(0deg_0%_75%)]"

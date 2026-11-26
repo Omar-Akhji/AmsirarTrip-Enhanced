@@ -78,11 +78,16 @@ const videoSource = "/videos/Morocco-Video.mp4";
         </div>
 
         <!-- Video Error Fallback -->
-        <div
-          class="hidden items-center justify-center rounded-xl bg-cover bg-center px-8 py-12 text-center block-full group-data-[state=error]/video:flex"
-          style={`background-image: url("${fallbackImage}")`}
-        >
-          <div class="max-w-lg rounded-2xl border border-white/15 bg-slate-950/90 p-8 shadow-2xl backdrop-blur-md">
+        <div class="relative hidden items-center justify-center overflow-hidden rounded-xl px-8 py-12 text-center block-full group-data-[state=error]/video:flex">
+          <img
+            alt=""
+            aria-hidden="true"
+            class="pointer-events-none absolute inset-0 size-full object-cover"
+            decoding="async"
+            loading="lazy"
+            src={fallbackImage}
+          />
+          <div class="relative z-10 max-w-lg rounded-2xl border border-white/15 bg-slate-950/90 p-8 shadow-2xl backdrop-blur-md">
             <div class="mbe-3 inline-flex items-center gap-2 font-mono text-xs text-orange-400">
               <svg
                 aria-hidden="true"

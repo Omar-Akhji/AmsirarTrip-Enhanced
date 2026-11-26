@@ -2,6 +2,8 @@ interface ScrollStackConfig {
   readonly baseScale: number;
   readonly blurAmount: number;
   readonly dimAmount: number;
+  readonly holdDistance: number;
+  readonly itemDistance: number;
   readonly itemScale: number;
   readonly itemStackDistance: number;
   readonly rotationAmount: number;
@@ -24,6 +26,8 @@ function resolveOffset(value: string | number, size: number): number {
 function readScrollStackConfig(element: HTMLElement): ScrollStackConfig {
   return {
     windowed: element.dataset["windowScroll"] !== "false",
+    holdDistance: Number(element.dataset["holdDistance"] ?? "200"),
+    itemDistance: Number(element.dataset["itemDistance"] ?? "100"),
     itemStackDistance: Number(element.dataset["itemStackDistance"] ?? "24"),
     stackPosition: element.dataset["stackPosition"] ?? "84px",
     itemScale: Number(element.dataset["itemScale"] ?? "0.045"),
@@ -33,6 +37,27 @@ function readScrollStackConfig(element: HTMLElement): ScrollStackConfig {
     tiltAmount: Number(element.dataset["tiltAmount"] ?? "2"),
     rotationAmount: Number(element.dataset["rotationAmount"] ?? "1.5"),
   };
+}
+
+function applyScrollStackLayoutVars(
+  element: HTMLElement,
+  slots: readonly HTMLElement[],
+  config: ScrollStackConfig,
+): void {
+  element.style.setProperty("--stack-position", config.stackPosition);
+  element.style.setProperty("--item-distance", `${config.itemDistance}px`);
+  element.style.setProperty("--item-stack-distance", `${config.itemStackDistance}px`);
+  element.style.setProperty("--hold-distance", `${config.holdDistance}px`);
+
+  const total = slots.length;
+  for (const [index, slot] of slots.entries()) {
+    slot.style.top = `calc(var(--stack-position, 84px) + ${index} * var(--item-stack-distance, 24px))`;
+    slot.style.marginBottom = `calc(${Math.max(0, total - 1 - index)} * var(--item-stack-distance, 24px))`;
+    slot.style.zIndex = String(index + 1);
+    if (index > 0) {
+      slot.style.marginTop = `max(1rem, calc(var(--item-distance, 100px) - ${Math.max(1, total - index)} * var(--item-stack-distance, 24px)))`;
+    }
+  }
 }
 
 function computeStackDepths(
@@ -121,6 +146,7 @@ function setupScrollStack(element: HTMLElement): (() => void) | null {
   if (slots.length === 0) return null;
 
   const config = readScrollStackConfig(element);
+  applyScrollStackLayoutVars(element, slots, config);
   const target: EventTarget = config.windowed ? globalThis : element;
   const prefersReduced =
     typeof window !== "undefined"

@@ -38,7 +38,6 @@ export interface UseActionFormOptions {
   readonly initialState?: FormState | null | undefined;
   readonly recaptchaRef: Readonly<ShallowRef<TurnstileInstance | null>>;
   readonly requiredTrimmedFields: readonly string[];
-  readonly statusRef?: Readonly<ShallowRef<HTMLElement | null>>;
 }
 
 export interface UseActionFormReturn {
@@ -53,6 +52,14 @@ export interface UseActionFormReturn {
 
 const DEFAULT_DEBOUNCE_MS = 500;
 const SUBMIT_TIMEOUT_MS = 20_000;
+
+function toInitialFeedback(initialState?: FormState | null): SubmitFeedback | null {
+  if (!initialState) return null;
+  if (initialState.success) {
+    return { kind: "success", message: initialState.message };
+  }
+  return { kind: "error", message: getFormErrorMessage(initialState, initialState.message) };
+}
 
 function toInitialStatus(initialState?: FormState | null): ActionFormStatus {
   if (!initialState) return { status: "idle" };
@@ -90,6 +97,15 @@ async function runActionWithTimeout(
   }
 }
 
+async function focusFirstInvalidField(form?: HTMLFormElement): Promise<void> {
+  await nextTick();
+  const firstError = form?.querySelector<HTMLElement>('[aria-invalid="true"]');
+  if (firstError) {
+    firstError.scrollIntoView({ behavior: "smooth", block: "center" });
+    firstError.focus({ preventScroll: true });
+  }
+}
+
 export function useActionForm(options: UseActionFormOptions): UseActionFormReturn {
   const {
     action,
@@ -98,7 +114,6 @@ export function useActionForm(options: UseActionFormOptions): UseActionFormRetur
     initialState = null,
     recaptchaRef,
     requiredTrimmedFields,
-    statusRef,
   } = options;
 
   const isMounted = ref(false);
@@ -109,7 +124,9 @@ export function useActionForm(options: UseActionFormOptions): UseActionFormRetur
   let debounceTimer: ReturnType<typeof setTimeout> | null = null;
   let activeController: AbortController | null = null;
 
-  const { feedback, showFeedback, clearFeedback } = useSubmitFeedback();
+  const { feedback, showFeedback, clearFeedback } = useSubmitFeedback(
+    toInitialFeedback(initialState),
+  );
 
   onMounted(() => {
     isMounted.value = true;
@@ -128,17 +145,6 @@ export function useActionForm(options: UseActionFormOptions): UseActionFormRetur
     clearDebounce();
   });
 
-  const focusFeedback = async (form?: HTMLFormElement): Promise<void> => {
-    await nextTick();
-    const firstError = form?.querySelector<HTMLElement>('[aria-invalid="true"]');
-    if (firstError) {
-      firstError.scrollIntoView({ behavior: "smooth", block: "center" });
-      firstError.focus({ preventScroll: true });
-      return;
-    }
-    statusRef?.value?.focus({ preventScroll: true });
-  };
-
   const applyError = async (
     message: string,
     errors: Readonly<Record<string, string>> = {},
@@ -155,7 +161,7 @@ export function useActionForm(options: UseActionFormOptions): UseActionFormRetur
     } else {
       showFeedback("error", message);
     }
-    await focusFeedback(form);
+    await focusFirstInvalidField(form);
   };
 
   const handleSubmit = async (event: Event): Promise<void> => {
@@ -220,7 +226,6 @@ export function useActionForm(options: UseActionFormOptions): UseActionFormRetur
           state.value = null;
           formStatus.value = { status: "idle" };
         });
-        await focusFeedback();
         return;
       }
 

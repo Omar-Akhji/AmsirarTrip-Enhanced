@@ -12,7 +12,6 @@ interface Props {
 const props = defineProps<Props>();
 
 const calendarPopoverId = `booking-calendar-${useId().replaceAll(":", "")}`;
-const calendarAnchorName = `--calendar-anchor-${calendarPopoverId}`;
 const calendarPopoverRef = useTemplateRef<HTMLElement>("calendarPopoverRef");
 
 const now = new Date();
@@ -242,7 +241,7 @@ function applyDraftDate(): void {
           >
         </label>
 
-        <div class="group relative block inline-full">
+        <div class="group relative block [anchor-scope:--booking-calendar] inline-full">
           <button
             id="reservationDate-trigger"
             type="button"
@@ -251,8 +250,7 @@ function applyDraftDate(): void {
             :aria-controls="calendarPopoverId"
             aria-haspopup="dialog"
             :aria-describedby="state?.errors?.['date'] ? 'reservationDate-error' : undefined"
-            :style="{ anchorName: calendarAnchorName }"
-            class="flex h-12 cursor-pointer items-center justify-start rounded-xl border border-stone-200/90 bg-stone-50/50 px-4 text-start font-sans text-sm transition-colors inline-full group-has-[:popover-open]:border-orange-500 group-has-[:popover-open]:bg-white group-has-[:popover-open]:ring-2 group-has-[:popover-open]:ring-orange-500/20 focus:outline-hidden focus-visible:border-orange-500 focus-visible:bg-white focus-visible:ring-2 focus-visible:ring-orange-500/20 dark:border-white/10 dark:bg-white/5 dark:group-has-[:popover-open]:border-orange-500 dark:group-has-[:popover-open]:bg-white/10 dark:focus-visible:border-orange-500 dark:focus-visible:bg-white/10 pointer-fine:hover:border-stone-300 pointer-fine:hover:bg-white dark:pointer-fine:hover:border-white/20 dark:pointer-fine:hover:bg-white/10"
+            class="flex h-12 cursor-pointer items-center justify-start rounded-xl border border-stone-200/90 bg-stone-50/50 px-4 text-start font-sans text-sm transition-colors [anchor-name:--booking-calendar] inline-full group-has-[:popover-open]:border-orange-500 group-has-[:popover-open]:bg-white group-has-[:popover-open]:ring-2 group-has-[:popover-open]:ring-orange-500/20 focus:outline-hidden focus-visible:border-orange-500 focus-visible:bg-white focus-visible:ring-2 focus-visible:ring-orange-500/20 dark:border-white/10 dark:bg-white/5 dark:group-has-[:popover-open]:border-orange-500 dark:group-has-[:popover-open]:bg-white/10 dark:focus-visible:border-orange-500 dark:focus-visible:bg-white/10 pointer-fine:hover:border-stone-300 pointer-fine:hover:bg-white dark:pointer-fine:hover:border-white/20 dark:pointer-fine:hover:bg-white/10"
             :class="[
               committedIso ?
                 'text-stone-900 dark:text-mist-100'
@@ -289,8 +287,7 @@ function applyDraftDate(): void {
             popover="auto"
             role="dialog"
             :aria-label="copy.reservationDate"
-            :style="{ positionAnchor: calendarAnchorName }"
-            class="fixed inset-0 z-50 m-auto border-none bg-transparent p-0 opacity-0 outline-hidden transition-[opacity,transform,display,overlay] transition-discrete duration-200 max-inline-[calc(100vw-2rem)] backdrop:bg-black/20 open:opacity-100 supports-[top:anchor(bottom)]:inset-auto supports-[top:anchor(bottom)]:top-[calc(anchor(bottom)+8px)] supports-[top:anchor(bottom)]:left-[anchor(left)] supports-[top:anchor(bottom)]:m-0 supports-[top:anchor(bottom)]:[position-try-fallbacks:flip-block,flip-inline] supports-[top:anchor(bottom)]:backdrop:bg-transparent starting:open:opacity-0"
+            class="fixed inset-0 z-50 m-auto border-none bg-transparent p-0 opacity-0 outline-hidden transition-[opacity,transform,display,overlay] transition-discrete duration-200 [position-anchor:--booking-calendar] max-inline-[calc(100vw-2rem)] backdrop:bg-black/20 open:opacity-100 supports-[top:anchor(bottom)]:inset-auto supports-[top:anchor(bottom)]:top-[calc(anchor(bottom)+8px)] supports-[top:anchor(bottom)]:left-[anchor(left)] supports-[top:anchor(bottom)]:m-0 supports-[top:anchor(bottom)]:[position-try-fallbacks:flip-block,flip-inline] supports-[top:anchor(bottom)]:backdrop:bg-transparent starting:open:opacity-0"
             @toggle="handlePopoverToggle"
           >
             <div

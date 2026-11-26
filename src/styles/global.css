@@ -176,7 +176,6 @@
   :root {
     accent-color: var(--color-orange);
     color-scheme: light;
-    interpolate-size: allow-keywords;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -185,6 +184,13 @@
     --pattern-bg-color: light-dark(#efefef, #0d0e12);
     --pattern-bg-image: url("/patterns/moroccan-geometric.svg");
     --pattern-bg-size: 350px 350px;
+  }
+
+  /* Chromium-only progressive enhancement; Safari and Firefox fall back to instant size changes */
+  @supports (interpolate-size: allow-keywords) {
+    :root {
+      interpolate-size: allow-keywords;
+    }
   }
 
   /* Must stay after :root (same specificity, source order decides) */

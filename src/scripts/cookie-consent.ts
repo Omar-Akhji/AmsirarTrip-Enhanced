@@ -234,7 +234,7 @@ function bindConsentActionButtons(modal: HTMLDialogElement, signal: AbortSignal)
 }
 
 function bindModalDismissHandlers(modal: HTMLDialogElement, signal: AbortSignal): void {
-  // Fallback for browsers without native closedby="any" light dismiss (Safari < 26.2)
+  // Fallback for browsers without native closedby="any" light dismiss (e.g., Safari)
   if (!("closedBy" in HTMLDialogElement.prototype)) {
     modal.addEventListener(
       "click",

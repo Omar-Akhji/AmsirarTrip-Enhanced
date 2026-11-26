@@ -67,6 +67,7 @@ describe("Astro Container API component rendering", () => {
     expect(html).toContain('hreflang="fr"');
     expect(html).not.toContain('role="menu"');
     expect(html).not.toContain('role="menuitemradio"');
+    expect(html).not.toContain("style=");
   });
 
   it("renders PageHeader with localized breadcrumb navigation and valid heading structure", async () => {
@@ -97,6 +98,8 @@ describe("Astro Container API component rendering", () => {
     expect(html).toContain('name="language"');
     expect(html).toContain('value="fr"');
     expect(html).toContain('name="website"');
+    expect(html).not.toContain('id="newsletter-status"');
+    expect(html).toContain("data-newsletter-submit-label");
   });
 });
 

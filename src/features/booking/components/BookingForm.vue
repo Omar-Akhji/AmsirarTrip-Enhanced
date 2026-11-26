@@ -33,7 +33,6 @@ const {
 } = defineProps<Props>();
 
 const recaptchaRef = useTemplateRef<TurnstileInstance>("recaptchaRef");
-const statusRegionRef = useTemplateRef<HTMLElement>("statusRegionRef");
 const selectedTour = computed(() => tourTitle || excursionTitle);
 
 const { feedback, formKey, handleSubmit, isMounted, isSubmitting, state } = useActionForm({
@@ -48,7 +47,6 @@ const { feedback, formKey, handleSubmit, isMounted, isSubmitting, state } = useA
   initialState,
   recaptchaRef,
   requiredTrimmedFields: ["fullName", "email"],
-  statusRef: statusRegionRef,
 });
 </script>
 
@@ -160,26 +158,6 @@ const { feedback, formKey, handleSubmit, isMounted, isSubmitting, state } = useA
                   :locale="locale"
                   :state="state"
                 />
-              </div>
-
-              <div
-                ref="statusRegionRef"
-                aria-live="polite"
-                class="outline-none"
-                role="status"
-                tabindex="-1"
-              >
-                <p
-                  v-if="state"
-                  class="rounded-xl border px-4 py-3 font-sans text-sm font-medium"
-                  :class="
-                    state.success ?
-                      'border-emerald-500/30 bg-emerald-50 text-emerald-900 dark:border-emerald-400/30 dark:bg-emerald-950/40 dark:text-emerald-200'
-                    : 'border-red-500/30 bg-red-50 text-red-900 dark:border-red-400/30 dark:bg-red-950/40 dark:text-red-200'
-                  "
-                >
-                  {{ state.message }}
-                </p>
               </div>
 
               <div class="flex flex-col gap-5 pbs-3 sm:flex-row sm:items-center sm:justify-between">

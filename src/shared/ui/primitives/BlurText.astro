@@ -2,15 +2,9 @@
 export interface Props {
   animateBy?: "words" | "letters";
   as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "div" | "p" | "span";
-  blur?: number;
   class?: string;
-  delay?: number;
-  direction?: "top" | "bottom";
-  distance?: number;
   locale?: string;
-  stagger?: number;
-  stepDuration?: number;
-  style?: string;
+  preset?: "title" | "type" | "description";
   text: string;
 }
 
@@ -18,14 +12,8 @@ const {
   text,
   as: Tag = "p",
   class: className = "",
-  style: styleProp,
   animateBy = "words",
-  direction = "top",
-  delay = 200,
-  stepDuration = 0.7,
-  blur = 10,
-  distance = 50,
-  stagger = 0.045,
+  preset = "title",
   locale = Astro.locals.locale ?? "en",
 } = Astro.props;
 
@@ -59,28 +47,18 @@ function segmentText(input: string, mode: "words" | "letters", lang: string): st
 }
 
 const tokens = segmentText(text, animateBy, locale);
-const initialY = direction === "top" ? -distance : distance;
-const rootStyle = [
-  styleProp,
-  `--blur-radius:${blur}px;--blur-y:${initialY}px;--blur-duration:${stepDuration}s`,
-]
-  .filter(Boolean)
-  .join(";");
 ---
 
 <Tag
   class:list={[className]}
-  style={rootStyle}
+  data-blur-preset={preset}
 >
   <span
     aria-hidden="true"
     class="inline"
   >
     {tokens.map((token: string, idx: number) => (
-      <span
-        class="blur-token inline-block"
-        style={`--token-delay:${delay + Math.round(idx * stagger * 1000)}ms`}
-      >
+      <span class="blur-token inline-block">
         {token === " " ? "\u{A0}" : token}
         {animateBy === "words" && idx < tokens.length - 1 ? "\u{A0}" : ""}
       </span>

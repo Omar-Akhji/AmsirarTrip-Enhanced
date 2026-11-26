@@ -29,18 +29,14 @@ export function isHoneypotTriggered({ actionName, ip, value }: HoneypotCheckOpti
 
   if (import.meta.env.DEV) {
     logSecurityEvent({
-      details: `${actionName} (ignored in dev: "${trimmed.slice(0, 32)}")`,
+      details: `${actionName} (ignored in dev, length: ${trimmed.length})`,
       ip,
       type: "HONEYPOT",
     });
     return false;
   }
 
-  logSecurityEvent({
-    details: `${actionName} (value: "${trimmed.slice(0, 32)}")`,
-    ip,
-    type: "HONEYPOT",
-  });
+  logSecurityEvent({ details: `${actionName} (length: ${trimmed.length})`, ip, type: "HONEYPOT" });
   return true;
 }
 

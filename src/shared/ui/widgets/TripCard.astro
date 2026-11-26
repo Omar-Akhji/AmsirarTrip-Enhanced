@@ -77,11 +77,11 @@ const categoryText = badge || tagline || "Morocco Tour";
       <Image
         alt={item.imageAlt || item.alt || title || "Morocco Trip"}
         class="size-full object-cover brightness-[0.92] saturate-[0.9] transition-[filter,transform] duration-500 ease-out-expo pointer-fine:group-hover:scale-103 pointer-fine:group-hover:brightness-100 pointer-fine:group-hover:saturate-100 motion-reduce:transform-none motion-reduce:filter-none"
+        data-vt-name={cardTransitionName}
         decoding="async"
         height={480}
         loading={priority ? "eager" : "lazy"}
         src={item.image as ImageMetadata}
-        style={cardTransitionName ? `view-transition-name: ${cardTransitionName}` : undefined}
         width={640}
       />
     </div>

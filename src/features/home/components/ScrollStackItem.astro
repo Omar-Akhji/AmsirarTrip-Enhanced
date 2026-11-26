@@ -3,35 +3,24 @@ interface Props {
   class?: string;
   index?: number;
   itemClassName?: string;
-  style?: string | Record<string, string | number>;
   total?: number;
 }
 
-const { itemClassName = "", class: className = "", style = "", index = 0, total = 1 } = Astro.props;
+const { itemClassName = "", class: className = "", index = 0, total = 1 } = Astro.props;
 const resolvedClass = [itemClassName, className].filter(Boolean).join(" ");
-const slotStyle = [
-  `top: calc(var(--stack-position, 84px) + ${index} * var(--item-stack-distance, 24px))`,
-  `margin-bottom: calc(${Math.max(0, total - 1 - index)} * var(--item-stack-distance, 24px))`,
-  `z-index: ${index + 1}`,
-  index > 0 ?
-    `margin-top: max(1rem, calc(var(--item-distance, 100px) - ${Math.max(1, total - index)} * var(--item-stack-distance, 24px)))`
-  : "",
-]
-  .filter(Boolean)
-  .join("; ");
 ---
 
 <div
   class="sticky w-full origin-top will-change-transform"
+  data-stack-index={index}
   data-stack-slot
-  style={slotStyle}
+  data-stack-total={total}
 >
   <div
     class:list={[
       "scroll-stack-card relative box-border h-80 w-full origin-top rounded-2xl overflow-hidden will-change-transform shadow-[0_0_0_1px_rgba(255,255,255,0.08),0_-12px_40px_-16px_rgba(0,0,0,0.5),0_24px_48px_-24px_rgba(0,0,0,0.6)]",
       resolvedClass,
     ]}
-    style={typeof style === "string" ? style : undefined}
   >
     <slot />
     <span

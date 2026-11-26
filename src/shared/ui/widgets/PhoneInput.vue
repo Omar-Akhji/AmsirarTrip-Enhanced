@@ -167,11 +167,10 @@ watch(
 </script>
 
 <template>
-  <div class="relative w-full">
+  <div class="relative w-full [anchor-scope:--phone-anchor]">
     <div
-      class="group flex h-12 w-full items-center rounded-xl border border-stone-200/90 bg-stone-50/50 transition-colors focus-within:border-orange-500 focus-within:bg-white focus-within:ring-2 focus-within:ring-orange-500/20 has-[input:user-invalid]:border-red-400/80 dark:border-white/10 dark:bg-white/5 dark:focus-within:border-orange-500 dark:focus-within:bg-white/10"
+      class="group flex h-12 w-full items-center rounded-xl border border-stone-200/90 bg-stone-50/50 transition-colors [anchor-name:--phone-anchor] focus-within:border-orange-500 focus-within:bg-white focus-within:ring-2 focus-within:ring-orange-500/20 has-[input:user-invalid]:border-red-400/80 dark:border-white/10 dark:bg-white/5 dark:focus-within:border-orange-500 dark:focus-within:bg-white/10"
       :class="{ 'border-red-400 bg-red-50/20': ariaInvalid === 'true' || ariaInvalid === true }"
-      :style="{ anchorName: `--phone-anchor-${dropdownId}` }"
     >
       <button
         type="button"
@@ -266,8 +265,7 @@ watch(
       :id="dropdownId"
       ref="dropdownRef"
       popover="auto"
-      class="fixed inset-0 z-50 m-auto w-[min(24rem,calc(100vw-2rem))] overflow-hidden rounded-xl border border-stone-200/90 bg-white p-0 text-stone-900 opacity-0 shadow-xl shadow-stone-900/10 transition-[opacity,transform,display,overlay] transition-discrete duration-200 backdrop:bg-black/20 open:opacity-100 supports-[top:anchor(bottom)]:inset-auto supports-[top:anchor(bottom)]:top-[calc(anchor(bottom)+6px)] supports-[top:anchor(bottom)]:left-[anchor(left)] supports-[top:anchor(bottom)]:m-0 supports-[top:anchor(bottom)]:[position-try-fallbacks:flip-block] supports-[top:anchor(bottom)]:backdrop:bg-transparent supports-[width:anchor-size(width)]:w-[anchor-size(width)] dark:border-white/10 dark:bg-surface-card dark:text-mist-100 dark:shadow-[0_16px_40px_rgba(0,0,0,0.65)] starting:open:opacity-0"
-      :style="{ positionAnchor: `--phone-anchor-${dropdownId}` }"
+      class="fixed inset-0 z-50 m-auto w-[min(24rem,calc(100vw-2rem))] overflow-hidden rounded-xl border border-stone-200/90 bg-white p-0 text-stone-900 opacity-0 shadow-xl shadow-stone-900/10 transition-[opacity,transform,display,overlay] transition-discrete duration-200 [position-anchor:--phone-anchor] backdrop:bg-black/20 open:opacity-100 supports-[top:anchor(bottom)]:inset-auto supports-[top:anchor(bottom)]:top-[calc(anchor(bottom)+6px)] supports-[top:anchor(bottom)]:left-[anchor(left)] supports-[top:anchor(bottom)]:m-0 supports-[top:anchor(bottom)]:[position-try-fallbacks:flip-block] supports-[top:anchor(bottom)]:backdrop:bg-transparent supports-[width:anchor-size(width)]:w-[anchor-size(width)] dark:border-white/10 dark:bg-surface-card dark:text-mist-100 dark:shadow-[0_16px_40px_rgba(0,0,0,0.65)] starting:open:opacity-0"
       @toggle="handleToggle"
     >
       <div

@@ -75,12 +75,12 @@ const sl = Astro.slots.has("default");
           <Image
             alt={imageAlt}
             class="absolute inset-0 size-full object-cover"
+            data-vt-name={transitionName}
             fetchpriority="high"
             height={600}
             loading="eager"
             sizes="(max-width: 480px) 400px, (max-width: 768px) 600px, 800px"
             src={imageSrc}
-            style={transitionName ? `view-transition-name: ${transitionName}` : undefined}
             width={800}
           />
         </figure>
